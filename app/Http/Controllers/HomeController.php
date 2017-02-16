@@ -1,0 +1,237 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Language;
+use App\library\service;
+
+class HomeController extends Controller
+{
+
+  public function addXxx() {
+
+    return view('addCat');
+
+  }
+
+  public function addXxxSub() {
+
+    $parentId = request()->get('pid');
+    $str = request()->get('description');
+
+    $str = preg_replace('/(\t)+/', ' ', $str);
+    // $str = preg_replace('/(\v|\s)+/', ' ', $str);
+
+    $str = str_replace('o ', '', $str);
+    $str = str_replace('• ', '', $str);
+    $str = str_replace(' ', '', $str);
+
+
+
+    $str = preg_replace('/( \d{1,3})|( -> \d{1,3})/', '', $str);
+    $str = preg_replace('/(\n)+/', '$$$', $str);
+    $str = preg_replace('/(\r)+/', '', $str);
+
+    $strs = explode('$$$', $str);
+
+    if(!is_array($strs)) {
+      $temp = $strs;
+      $strs = array();
+      $strs[] = $temp;
+    }
+
+    echo '<div style="width: 50%; margin: 0 auto;">';
+
+    foreach ($strs as $str) {
+      $_str =  trim($str);
+    
+      if(!empty($_str)) {
+
+        $_value = array(
+          'name' => $_str
+        );
+
+        if(!empty($parentId)) {
+          $_value = array(
+            'parent_id' => $parentId,
+            'name' => $_str
+          );
+        }
+
+        $model = Service::loadModel('Category')->newInstance();
+
+        $model->fill($_value)->save();
+
+        echo '<h3 style="font-size:22px;">['. $_str . '] --> Saved || PID: [<span style="color:blue;">'. $parentId .'</span>] || ID: [<span style="color:red;">' . $model->id . '</span>]</h3><br/>';
+      }
+
+    }
+
+    echo '<br/><a style="font-size:46px;" href="/ac">BACK TO INPUT FORM</a><br/>';
+
+    echo '</div>';
+
+dd('end');
+    // $re = '/[\S]{3,}/';
+
+    // preg_match_all($re, $str, $matches);
+
+    // Print the entire match result
+    dd($matches[0]);
+
+  }
+
+  public function addCat() {
+    exit('!!!');
+        $data = array(
+          'กระโปรงทำงาน',
+          'กระโปรงยีนส์',
+          'กระโปรงสั่น',
+          'กระโปรงยาว',
+          'กระโปรพลีท',
+          'กระโปรเอวสูง',
+          'กระโปรทรงเอ',
+          'กระโปรแฟชั่น',
+        );
+
+        $parentId = 80;
+
+        foreach ($data as $value) {
+
+          $_value = array(
+            'name' => $value
+          );
+
+          if(!empty($parentId)) {
+            $_value = array(
+              'parent_id' => $parentId,
+              'name' => $value
+            );
+          }
+
+          Service::loadModel('Category')->newInstance()->fill($_value)->save();
+        }
+        dd('saved');
+
+  }
+
+  public function lanAdd() {
+dd('ccc');
+      $model = new Language;
+
+      $languages = array(
+      'ภาษากรีก',
+      'ภาษากันนาดา',
+      'ภาษากาลิเชียน',
+      'ภาษากูจาราติ',
+      'ภาษาเกลิกในสก็อต',
+      'ภาษาเกาหลี',
+      'ภาษาเขมร',
+      'ภาษาคอร์สิกา',
+      'ภาษาคาซัค',
+      'ภาษาคาตาลัน',
+      'ภาษาคีร์กิซ',
+      'ภาษาเคิร์ด',
+      'ภาษาโครเอเชีย',
+      'ภาษาจอร์เจีย',
+      'ภาษาจีน',
+      'ภาษาชวา',
+      'ภาษาชิเชวา',
+      'ภาษาเช็ก',
+      'ภาษาโชนา',
+      'ภาษาซามัว',
+      'ภาษาซีบัวโน',
+      'ภาษาซุนดา',
+      'ภาษาซูลู',
+      'ภาษาเซโซโท',
+      'ภาษาเซอร์เบียน',
+      'ภาษาโซซา',
+      'ภาษาโซมาลี',
+      'ภาษาญี่ปุ่น',
+      'ภาษาดัตช์',
+      'ภาษาเดนมาร์ก',
+      'ภาษาตุรกี',
+      'ภาษาเตลูกู',
+      'ภาษาทมิฬ',
+      'ภาษาทาจิก',
+      'ภาษาไทย',
+      'ภาษานอร์เวย์',
+      'ภาษาเนปาล',
+      'ภาษาบอสเนีย',
+      'ภาษาบัลกาเรีย',
+      'ภาษาบาสก์',
+      'ภาษาเบงกาลี',
+      'ภาษาเบลารูเชียน',
+      'ภาษาปัญจาป',
+      'ภาษาเปอร์เซีย',
+      'ภาษาโปรตุเกส',
+      'ภาษาโปแลนด์',
+      'ภาษาฝรั่งเศส',
+      'ภาษาพาชตู',
+      'ภาษาฟริเชียน',
+      'ภาษาฟินแลนด์',
+      'ภาษาฟิลิปปินส์',
+      'ภาษาม้ง',
+      'ภาษามองโกเลีย',
+      'ภาษามัลทีส',
+      'ภาษามาซีโดเนีย',
+      'ภาษามาราฐี',
+      'ภาษามาลากาซี',
+      'ภาษามาลายาลัม',
+      'ภาษามาเลย์',
+      'ภาษาเมารี',
+      'ภาษาเมียนมา (พม่า)', 
+      'ภาษายิดดิช',
+      'ภาษายูเครน',
+      'ภาษาเยอรมัน',
+      'ภาษาโยรูบา',
+      'ภาษารัสเซีย',
+      'ภาษาโรมาเนีย',
+      'ภาษาละติน',
+      'ภาษาลักเซมเบิร์ก',
+      'ภาษาลัทเวีย',
+      'ภาษาลาว',
+      'ภาษาลิทัวเนีย',
+      'ภาษาเวลส์',
+      'ภาษาเวียดนาม',
+      'ภาษาสเปน',
+      'ภาษาสโลวัก',
+      'ภาษาสโลเวเนีย',
+      'ภาษาสวาฮิลี',
+      'ภาษาสวีเดน',
+      'ภาษาสิงหล',
+      'ภาษาสินธุ',
+      'ภาษาอังกฤษ',
+      'ภาษาอัมฮาริก',
+      'ภาษาอัลบาเนีย',
+      'ภาษาอาร์เซอร์ไบจัน',
+      'ภาษาอาร์เมเนีย',
+      'ภาษาอาหรับ',
+      'ภาษาอิกโบ',
+      'ภาษาอิตาลี',
+      'ภาษาอินโดนีเซีย',
+      'ภาษาอุสเบกิสถาน',
+      'ภาษาอูรดูร์',
+      'ภาษาเอสโทเนีย',
+      'ภาษาเอสเปอแรนโต',
+      'ภาษาแอฟริกา',
+      'ภาษาไอซ์แลนดิก',
+      'ภาษาไอริช',
+      'ภาษาฮังการี',
+      'ภาษาฮัวซา',
+      'ภาษาฮาวาย',
+      'ภาษาฮินดี',
+      'ภาษาฮิบรู',
+      'ภาษาเฮติครีโอล',
+      );
+
+      foreach ($languages as $value) {
+          $model->newInstance()->fill(array(
+              'name' => $value
+          ))->save();
+      }
+
+      dd('dddd');
+
+  }
+}

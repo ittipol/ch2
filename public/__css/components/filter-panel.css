@@ -1,0 +1,138 @@
+.filter-panel {
+	position: absolute;
+  right: 15px;
+	width: 250px;
+  background-color: #ffffff;
+  overflow-y: auto; 
+  overflow-x: hidden;
+  z-index: 9998;
+	transition: right .2s ease-out;
+}
+
+.filter-panel-inner {
+  padding-top: 20px;
+}
+
+.filter-panel + .card-list {
+	margin-right: 280px;	
+}
+
+.filter-panel ul {
+	padding: 0;
+}
+
+.filter-panel ul > li {
+	padding: 0;
+  margin: 0;
+  list-style: none;
+  position: relative;
+}
+
+.filter-panel ul > li label { 
+	position: relative;
+  padding: 14px 0 14px 20px;
+  line-height: 22px;
+  display: block;
+  color: #000000;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 400;
+  transition: all .3s ease-in-out;
+}
+
+.filter-panel ul > li label:hover,
+.filter-panel ul > li label.checked { 
+  background-color: #eaeaea;
+}
+
+.filter-panel ul > li label.checked::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 5px;
+  background-color: #304FFE;
+}
+
+.filter-panel ul > li label > input { 
+  display: none;
+}
+
+.filter-panel ul.submenu > li > label { 
+	position: relative;
+  padding: 8px 0 8px 40px;
+  font-size: 13px;
+  line-height: 18px;
+  display: block;
+  color: #000000;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 400;
+  transition: all .3s ease-in-out;
+}
+
+.filter-icon {
+  display: none;
+  cursor: pointer;
+  margin: 0 0 -20px;
+  position: relative;
+  z-index: 100;
+}
+
+.filter-icon img {
+  width: 50px
+}
+
+.filter-panel-trigger {
+  display: none;
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+
+  .filter-panel {
+    position: fixed;
+    top: 60px !important;
+    right: -250px;
+  }
+
+  .filter-panel.is-filter-panel-open {
+    right: 0;
+    background-color: #536DFE;
+  }
+
+  .filter-panel.is-filter-panel-open .filter-panel-inner {
+    padding: 10px;
+  }
+
+  .filter-panel + .card-list {
+    margin-right: 0;  
+  }
+
+  .filter-icon {
+    display: block;
+  }
+
+  .filter-panel h5 {
+    color: #ffffff;
+  }
+
+  .filter-panel ul > li label { 
+    color: #ffffff;
+  }
+
+  .filter-panel ul.submenu > li > label { 
+    color: #ffffff;
+  }
+
+  .filter-panel .line {
+    background-color: #ffffff;
+  }
+
+  .filter-panel ul > li label:hover,
+  .filter-panel ul > li label.checked { 
+    background-color: #3D5AFE;
+  }
+
+}

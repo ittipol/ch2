@@ -1,0 +1,153 @@
+.action-bar {
+	position: fixed;
+	top: 0;
+	left: 0;
+  width: 100%;
+	height: 60px;
+  padding-left: 280px;
+	background-color: #303F9F;
+	z-index: 998;
+  transition: left .2s ease-out;
+}
+
+.action-bar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  padding-left: 280px;
+  display: block;
+  visibility: hidden;
+  opacity: 0;
+  background-color: transparent;
+  z-index: 999;
+}
+
+.action-bar-text {
+  line-height: 60px;
+}
+
+.action-bar-text > a.link {
+  margin: 0 30px;
+  color: #ffffff;
+  font-size: 20px;
+}
+
+/*.action-bar .avatar {
+	display: block;
+	float: left;
+}*/
+
+.action-bar .avatar img {
+	width: 40px;
+	height: 40px;
+	margin-top: 12px;
+	border-radius: 40px;
+	background-color: #ffffff;
+}
+
+.action-bar label[for="search_input"] {
+  position: relative;
+}
+
+.action-bar .search-input {
+  width: 300px;
+  height: 30px;
+  margin-top: 15px;
+  margin-right: 20px;
+  padding: 0;
+  padding-left: 36px;
+  outline: none;
+  position: relative;
+  color: #ffffff;
+  background-color: rgba(255,255,255,.2);
+  border: 0;
+}
+
+.action-bar label[for="search_input"]::after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 4px;
+  width: 30px;
+  height: 30px;
+  background-image: url('../../../images/icons/search.png');
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.nav-trigger {
+  display: none;
+}
+
+ul.action-bar-nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    float: left;
+}
+
+ul.action-bar-nav li {float: left;}
+
+ul.action-bar-nav li a,
+ul.action-bar-nav li label {
+    display: inline-block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 0 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 14px;
+    line-height: 60px;
+    cursor: pointer;
+}
+
+ul.action-bar-nav li.icon {display: none;}
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+
+  .action-bar .search-input {
+    width: 200px;
+  }
+
+  .action-bar-text {
+    display: none;
+  }
+
+  .action-bar-text > a.link {
+    margin: 0;
+  }
+
+	ul.action-bar-nav li {display: none;}
+  ul.action-bar-nav li.icon {
+    float: right;
+    display: inline-block;
+  }
+
+  ul.action-bar-nav.responsive {position: relative;}
+  ul.action-bar-nav.responsive li.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  ul.action-bar-nav.responsive li {
+    float: none;
+    display: inline;
+  }
+  ul.action-bar-nav.responsive li a {
+    display: block;
+    text-align: left;
+  }
+
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 480px) {
+  .action-bar .search-input {
+    width: 250px;
+  }
+}

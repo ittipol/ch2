@@ -1,0 +1,22 @@
+.main-panel {
+	position: relative;
+	left: 0;
+	/*padding-top: 60px;*/
+	padding-left: 280px;
+	overflow-x: hidden;
+	transition: left .2s ease-out;
+}
+
+.main-panel-overlay {
+	position: fixed;
+	top: 60px;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 999;
+	display: block;
+	visibility: hidden;
+	opacity: 0;
+	background-color: rgba(20,27,32,.5);
+	transition: all .2s ease-out;
+}

@@ -1,0 +1,39 @@
+.landing-content {
+	width: 100%;
+	padding: 40px 0;
+}
+
+.landing-content:nth-child(odd) {
+	background-color: #ffffff;
+}
+
+.landing-content:nth-child(even) {
+	background-color: #3F51B5;
+}
+
+.landing-content:nth-child(even) section {
+	float: right !important;
+}
+
+.landing-content:nth-child(even) a.button {
+	background-color: #1A237E !important;
+}
+
+
+.landing-content-inner {
+	margin: 0 auto;
+}
+
+.landing-content .primary-text {
+	font-size: 46px;
+}
+
+.landing-content .primary-text,
+.landing-content .secondary-text {
+	color: #000000;
+}
+
+.landing-content:nth-child(even) .primary-text,
+.landing-content:nth-child(even) .secondary-text {
+	color: #ffffff;
+}

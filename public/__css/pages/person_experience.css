@@ -1,0 +1,20 @@
+.profile-image {
+	width: 150px;
+	height: 150px;
+	text-align: center;
+	background-color: #999;
+	border-radius: 150px;
+	overflow: hidden;
+}
+
+.profile-image > img {
+	height: 100%;
+}
+
+.profile-info {
+	margin-left: 20px;
+}
+
+.profile-info h3 {
+	margin-top: 10px;
+}

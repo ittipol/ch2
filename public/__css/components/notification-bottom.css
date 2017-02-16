@@ -1,0 +1,124 @@
+.notification-bottom {
+	position: fixed;
+	bottom: 0;
+	right: 50px;
+	z-index: 9999;
+	width: 380px;
+	height: 110px;
+	color: #ffffff;
+	background-color: rgb(26,35,126);
+	border-top: 4px solid #303F9F;
+	transition: all .2s ease-out;
+}
+
+.notification-bottom.medium {
+	height: 130px;
+}
+
+.notification-bottom.success {
+	background-color: rgb(240,255,236);
+	border-color: rgb(95,121,82);
+	color: rgb(95,121,82);
+}
+
+.notification-bottom.info {
+	background-color: rgb(222,255,255);
+	border-color: rgb(69,127,170);
+	color: rgb(69,127,170);
+}
+
+.notification-bottom.error {
+	background-color: rgb(255,221,214);
+	border-color: rgb(183,67,69);
+	color: rgb(183,67,69);
+}
+
+.notification-bottom.success .description {
+	color: rgb(155,176,145);
+}
+
+.notification-bottom.info .description {
+	color: rgb(149,184,204);
+}
+
+.notification-bottom.error .description {
+	color: rgb(193,125,124);
+}
+
+.notification-bottom-inner {
+	padding: 10px 20px;
+}
+
+/*.notification-bottom a.button:hover {
+	color: #ffffff;
+}*/
+
+.notification-bottom .close-btn {
+	position: absolute;
+	top: 11px;
+	right: -13px;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 30px;
+	color: #ffffff;
+	font-size: 20px;
+	text-align: center;
+	background-color: rgb(183,67,69);
+	cursor: pointer;
+}
+
+.notification-bottom.success .close-btn {
+	background-color: rgb(95,121,82);
+}
+
+.notification-bottom.info .close-btn {
+	background-color: rgb(69,127,170);
+}
+
+.notification-bottom.error .close-btn {
+	background-color: rgb(183,67,69);
+}
+
+.notification-bottom .message .title {
+	font-size: 18px;
+	line-height: 30px;
+}
+
+.notification-bottom .message .description {
+	font-size: 15px;
+	line-height: 30px;
+}
+
+.notification-bottom .button-group .button {
+	padding: 5px 30px;
+	margin-right: 10px;
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+
+  .notification-bottom {
+  	width: 280px;
+  }
+
+  .notification-bottom .button-group .button {
+  	padding: 5px 20px;
+  }
+
+}
+
+/* Custom, iPhone Retina */ 
+@media only screen and (max-width : 320px) {
+	.notification-bottom {
+		width: 230px;
+	}
+
+	.notification-bottom .message .title {
+		font-size: 15px;
+	}
+
+	.notification-bottom .button-group .button {
+		padding: 5px 8px;
+	}
+}

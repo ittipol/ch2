@@ -1,0 +1,237 @@
+.shop-header {
+	width: 100%;
+	margin: 0;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+	border-bottom: 5px solid #1A237E;
+	background-color: #90949c;
+}
+
+.shop-header .line {
+	background-color: #ffffff;
+}
+
+.shop-default-cover {
+	background-image: url('/images/common/image.svg');
+	background-position: center;
+	background-repeat: repeat;
+	background-size: 200px;
+}
+
+.shop-cover {
+	position: absolute;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.shop-header-overlay {
+	width: 100%;
+	/*background-color: rgba(50,50,50,.8);*/
+	background-color: rgba(20,27,32,.85);
+	margin-top: 265px;
+	position: relative;
+	transition: all .5s ease;
+}
+
+.shop-logo {
+	width: 200px;
+	height: 200px;
+  margin: 45px 0 45px 45px;
+  background-color: #9e9e9e;
+  background-image: url('/images/common/image.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  overflow: hidden;
+  float: left;
+}
+
+.shop-logo > .logo {
+	width: 100%;
+	height: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: auto 100%;
+}
+
+.shop-description {
+	width: 60%;
+	padding: 30px 20px 20px;
+	color: #ffffff;
+	float: left;
+}
+
+.shop-description > p {
+	font-size: 16px;
+}
+
+.shop-header-secondary-info {
+	color: #ffffff;
+	padding: 20px;
+}
+
+/*.working-time-status {
+	font-size: 16px;
+	color: #ffffff;
+	padding: 10px;
+	padding-left: 35px;
+}
+
+.working-time-status::before {
+	content: "";
+	position: absolute;
+	top: 14px;
+	left: 0;
+	width: 14px;
+	height: 14px;
+	border-radius: 14px;
+	margin-left: 10px;
+}
+
+.working-time-status.status-open::before {
+	background-color: rgb(28,156,1);
+	box-shadow: 0 0 10px 2px rgba(28,156,1,.85);
+}
+
+.working-time-status.status-close::before {
+	background-color: red;
+	box-shadow: 0 0 10px 2px rgba(255,0,0,.85);
+}*/
+
+.shop-main-bar {
+	width: 100%;
+	background-color: #CFD8DC;
+	border-bottom: 2px solid #78909C;
+}
+
+.shop-main-bar .btn-group {
+	padding: 10px;
+}
+
+.shop-main-bar .btn-group > .btn {
+	background-color: #ffffff;
+	border: 1px solid #BDBDBD;
+	padding: 6px 20px;
+}
+
+.shop-main-bar .btn-group > .btn:hover {
+	background-color: #dfdfdf;
+}
+
+.shop-content {
+	margin-top: 20px;
+}
+
+.shop-content .shop-notice {
+	color: #fff;
+	border: 1px solid #EF9A9A;
+}
+
+.shop-content .shop-notice .shop-notice-header {
+	padding: 20px 20px 10px;
+	background-color: #E53935;
+}
+
+.shop-content .shop-notice .shop-notice-content {
+	background-color: #E57373;
+}
+
+.shop-content .shop-notice .shop-notice-content .shop-notice-row {
+	padding: 10px 20px;
+	border-top: 1px solid #EF9A9A;
+}
+
+.shop-content .shop-notice .shop-notice-content .shop-notice-row a {
+	color: #D50000;
+}
+
+.shop-notice img {
+	width: 200px;
+}
+
+.shop-notice h3 {
+	margin: 0 0 10px;
+}
+
+.shop-notice p {
+	font-size: 16px;
+}
+
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */ 
+@media only screen and (min-width : 320px) {
+    
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 480px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
+}
+
+/*==========  Non-Mobile First Method  ==========*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+
+	.shop-header-overlay {
+		margin-top: 0;
+	}
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+
+	.shop-logo {
+		margin-bottom: 0;
+	}
+
+	.shop-cover {
+		background-size: 100%;
+	}
+
+	.shop-description {
+		width: 90%;
+		padding: 0 0 20px 45px;
+	}
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+	.shop-cover {
+		background-size: auto 100%;
+	}
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 480px) {
+	.shop-description h2 {
+		font-size: 22px;
+	}
+}
+
+/* Custom, iPhone Retina */ 
+@media only screen and (max-width : 320px) {
+    
+}

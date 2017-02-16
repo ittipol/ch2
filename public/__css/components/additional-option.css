@@ -1,0 +1,96 @@
+.additional-option {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+}
+
+.additional-option.round {
+  width: 35px;
+  height: 35px;
+  border-radius: 35px;
+  background-color: #ffffff;
+}
+
+.additional-option.round:hover {
+	background-color: #dfdfdf;
+}
+
+.additional-option.round.active {
+  background-color: #dfdfdf;
+}
+
+.additional-option .dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 4px;
+  background-color: rgb(90,90,90);
+  margin: 5px auto;
+}
+
+.additional-option.triangle {
+  padding-right: 25px;
+}
+
+.additional-option.triangle::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 18px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 10px 0 10px;
+  border-color: #6980fe transparent transparent transparent;
+}
+
+.additional-option-items {
+  position: absolute;
+  background-color: #ffffff;
+  border: 1px solid #cfcfcf;
+  z-index: 9999;
+  display: none;
+}
+
+.additional-option-items > a {
+  color: #000000 !important;
+  padding: 0 25px !important;
+  line-height: 50px !important;
+  display: block !important;
+}
+
+.additional-option-items > a:hover {
+  background-color: #eaeaea !important;
+}
+
+.additional-option-content {
+  display: none;
+}
+
+.additional-option-items > span {
+  display: block;
+  padding: 10px;
+}
+
+.main-navigation .additional-option {
+  position: absolute;
+  top: 2px;
+  right: 6px;
+  width: 36px;
+  height: 36px;
+  border-radius: 36px;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+}
+
+.main-navigation .additional-option:hover {
+  background-color: #3F51B5;
+}
+
+.main-navigation .additional-option .dot {
+/*  width: 5px;
+  height: 5px;
+  margin: 6px auto;*/
+  background-color: #ffffff;
+}

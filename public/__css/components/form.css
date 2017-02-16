@@ -1,0 +1,451 @@
+input[type="text"],
+input[type="password"] {
+	padding: 10px;
+	width: 80%;
+	border: 1px solid rgb(169,169,169);
+}
+
+textarea {
+	padding: 10px;
+	width: 60%;
+	resize: none;
+}
+
+.select-group select:nth-of-type(n+2) {
+	margin-left: 10px;
+}
+
+select {
+	padding: 10px;
+}
+
+.form-row {
+	margin: 20px 0;
+}
+
+.form-row input[type="checkbox"] {
+	vertical-align: top;
+}
+
+.form-row input[type="checkbox"] + label {
+	width: 90%;
+}
+
+.form-section .form-section-inner .form-row {
+	margin-left: 15px;
+}
+
+.form-section .form-row .sub-form {
+	margin: 0;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #1976D2;
+}
+
+.form-section .form-row .sub-form .form-row {
+	margin: 15px 10px;
+}
+
+.form-section .form-row .sub-form-inner {
+	border-left: 5px solid #1976D2;
+	padding-left: 15px;
+	background-color: #efefef;
+	padding: 15px;
+}
+
+form .title {
+	font-size: 18px;
+	border-bottom: 2px solid #1976D2;
+	position: relative;
+	color: #000000;
+	padding: 10px 10px 10px 0;
+}
+
+form .sub-title {
+	font-size: 20px;
+	border-bottom: 2px solid rgb(66,133,244);
+	margin-bottom: 15px;
+}
+
+form .notice {
+	font-size: 14px;
+	margin-top: 5px;
+	color: #000000;
+} 
+
+form .notice.warning {
+	color: #D50000;
+}
+
+form .notice.info {
+	color: rgb(66,133,244);
+}
+
+form label {
+	font-size: 16px;
+	display: block;
+	font-weight: 100;
+}
+
+form label.required::after {
+	content: "*";
+	color: red;
+}
+
+form input[type="checkbox"]+label {
+	display: inline-block;
+	margin-left: 10px;
+}
+
+form .form-item-group {
+	min-height: 100px;
+	max-height: 550px;
+	border-top: 3px solid #1976D2;
+	padding: 20px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+form .error,
+form .input-error {
+	background-color: #FFCDD2;
+	border-color: #D50000;
+}
+
+.image-panel {
+	width: 200px;
+  display: inline-block;
+  position: relative;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.image-panel input[type="text"] {
+	width: 100%;
+	margin-top: 15px;
+}
+
+label.image-label {
+  width: 200px;
+	height: 200px;
+	position: relative;
+	background-color: #f1f1f1;
+	border: 1px solid #E0E0E0;
+	overflow: hidden;
+  cursor: pointer;
+  margin: 0;
+}
+
+/*.image-panel.description {
+	width: 100%;
+}*/
+
+/*.image-panel.description > label {
+	float: left;
+}*/
+
+.image-panel.description > textarea {
+	/* width: 75%; */
+	height: 100px;
+	/* margin-left: 20px; */
+	/* float: left; */
+	width: 200px;
+	border-color: #E0E0E0;
+	border-top: 0;
+	margin-top: -1px;
+	outline: none;
+}
+
+label.image-label.added {
+	cursor: default;
+}
+
+label.image-label input[type="file"] {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+label.image-label img.preview-image {
+	height: 100%;
+	margin: 0 auto;
+	padding: 0;
+	/*display: block;*/
+	position: absolute;
+	z-index: 99;
+}
+
+label.image-label div.preview-image {
+	width: 100%;
+	height: 100%;
+	background-position: center;
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+	position: relative;
+	z-index: 100;
+}
+
+label.image-label .error-message {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	color: #ffffff;
+	background-color: red;
+	margin: 0;
+	padding: 5px 10px;
+	display: none;
+}
+
+label.image-label a {
+	position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #ffffff;
+  font-size: 14px;
+  text-align: center;
+  background-color: #BDBDBD;
+  width: 20px;
+  line-height: 20px;
+  border-radius: 20px;
+  z-index: 102;
+  display: none;
+}
+
+label.image-label a:hover {
+	background-color: red;
+}
+
+form .input-addon input[type="text"] {
+	width: 150px;
+}
+
+form .input-addon > span {
+	background-color: #ECECEC;
+  padding: 10px 10px;
+  border: 1px solid rgb(169,169,169);
+  display: inline-block;
+}
+
+form .input-addon > span:first-child {
+  margin-right: -5px;
+  width: 100px; 
+}
+
+form .input-addon > span:last-child {
+  margin-left: -5px;
+}
+
+form .input-addon-group {
+	margin-top: 10px;
+}
+
+form .input-addon-group .input-addon:not(:last-child) {
+	margin-right: 10px;
+}
+
+form .input-addon > select:last-child {
+  position: relative;
+  top: 1px;
+  margin-left: -5px;
+	padding: 11px;
+  background-color: #ECECEC;
+}
+
+.image-panel .progress-bar {
+	width: 100%;
+	height: 20px;
+	background-color: #eaeaea;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: 101;
+	display: none;
+}
+
+.image-panel .progress-bar > .status {
+	width: 0;
+	height: 100%;
+	background-color: rgb(3,192,37);
+}
+
+.text-group .text-add {
+	margin-top: 10px;
+	display: inline-block;
+}
+
+/*.text-group .text-input-wrapper:not(:first-child) input[type="text"] {
+	margin-top: 10px;
+}*/
+
+.text-input-wrapper {
+	position: relative;
+}
+
+.text-input-wrapper .error-message {
+	margin: 10px 0 5px;
+}
+
+.text-input-wrapper input {
+	padding-right: 20px;
+}
+
+.text-input-wrapper select {
+	height: 42px;
+}
+
+.text-input-wrapper select + input[type="text"] {
+	border-left: 0;
+}
+
+.text-input-wrapper .button-clear-text {
+	cursor:pointer;
+	color:red;
+	font-weight:bold;
+	font-size: 25px;
+}
+
+.text-input-wrapper .button-clear-text.round {
+  height: 40px;
+  line-height: 40px;
+  width: 40px;
+  background-color: pink;
+  border-radius: 40px;
+  text-align: center;
+  display: block;
+}
+
+.text-input-wrapper input[type="text"] + .button-clear-text {
+  position: relative;
+  top: 4px;
+  right: 30px;
+}
+
+.period-controller > span > a {
+	margin: 0 10px;
+}
+
+.period-separate {
+	margin: 0 10px;
+}
+
+select[name^="OfficeHour"] {
+	font-weight: bold;
+}
+
+select[name^="OfficeHour"].disabled {
+	color: #aaaaaa;
+}
+
+.office-hour span {
+	width: 60px;
+	display: inline-block;
+}
+
+.office-status {
+	width: 14px;
+	height: 14px;
+	border-radius: 14px;
+	margin-left: 10px;
+	background-color: red;
+	border: 1px solid #eaeaea;
+	display: inline-block;
+}
+
+.office-status.active {
+	background-color: rgb(28,156,1);
+}
+
+
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */ 
+@media only screen and (min-width : 320px) {
+    
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 480px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
+}
+
+
+
+/*==========  Non-Mobile First Method  ==========*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+	form .input-addon input[type="text"] {
+		width: 110px;
+	}
+
+	form .input-addon > span:first-child {
+	  width: 100px; 
+	}
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+	.image-panel.description > textarea {
+		width: 65%;
+	}
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 480px) {
+	.image-panel.description {
+		width: 200px;
+	}
+
+	.image-panel.description > textarea {
+		width: 100%;
+		height: 120px;
+		margin-left: 0;
+	}
+
+	form .input-addon-group {
+		margin: 0;
+	}
+
+	form .input-addon input[type="text"] {
+	    width: 50%;
+	}
+
+	.text-input-wrapper select + input[type="text"] {
+		width: 55%;
+	}
+
+	.period-separate {
+		display: block;
+		margin: 10px;
+	}
+
+}
+
+/* Custom */ 
+@media only screen and (max-width : 360px) {
+
+}
+
+/* Custom, iPhone Retina */ 
+@media only screen and (max-width : 320px) {
+
+}

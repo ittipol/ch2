@@ -1,0 +1,118 @@
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */ 
+@media only screen and (min-width : 320px) {
+    
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 480px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
+}
+
+
+
+/*==========  Non-Mobile First Method  ==========*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+  .main-navigation {
+    left: -280px
+  }
+
+  .main-panel {
+    left: 0;
+    padding-left: 0;
+  }
+
+  .action-bar {
+    left: 0;
+    padding-left: 0;
+  }
+
+  .main-navigation.is-main-nav-open {
+    left: 0;
+  }
+
+  .main-panel.is-main-nav-open {
+    left: 280px;
+  }
+  
+  .action-bar.is-main-nav-open {
+    left: 280px;
+  }
+
+  .main-panel-overlay.isvisible {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .action-bar-overlay.isvisible {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .top-header {
+    width: 94%;
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+  
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+  .form-error-messages {
+    background-position: 114% 60%;
+  }
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 480px) {
+  .form-error-messages {
+    background-position: 136% 60%;
+  }
+
+  .top-header {
+    width: 90%;
+  }
+}
+
+/* Custom */ 
+@media only screen and (max-width : 360px) {
+  .form-error-messages {
+    background-position: 151% 60%;
+  }
+}
+
+/* Custom, iPhone Retina */ 
+@media only screen and (max-width : 320px) {
+  .container-header .title {
+    font-size: 18px;
+  }
+
+  form .title {
+    font-size: 16px;
+  }
+
+  form label{
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,125 @@
+.main-navigation {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	width: 280px;
+	/*background-color: #1A237E;*/
+  background-color: #00695C;
+  transition: left .2s ease-out;
+}
+
+.main-navigation nav {
+  height: 100%;
+}
+
+.navigation-top .logo {
+	padding: 20px 20px 10px;
+}
+
+.navigation-top a.logo-link {
+	color: #ffffff;
+	font-size: 20px;
+  text-transform: uppercase;
+}
+
+.navigation-top .account-info {
+  position: relative;
+  margin: 20px 0px 20px 20px;
+  color: #ffffff;
+}
+
+.navigation-top .account-info .avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  background-color: #ffffff;
+}
+
+.navigation-top .account-info .avatar + .account-description {
+  margin-left: 10px;
+}
+
+.navigation-top .account-info .account-description div {
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.navigation-top .account-info .account-description a {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.navigation-top .account-info .account-description a:hover {
+  color: #7986CB;
+}
+
+.navigation-primary-menu {
+  height: 60%;
+  padding-bottom: 8px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.navigation-primary-menu ul {
+	padding: 0;
+}
+
+.navigation-primary-menu ul > li {
+	padding: 0;
+  margin: 0;
+  list-style: none;
+  position: relative;
+}
+
+.navigation-primary-menu ul > li.item {
+  margin: 5px 0;
+}
+
+.navigation-primary-menu ul > li > .submenu-item-row {
+  position: relative;
+}
+
+.navigation-primary-menu ul > li a { 
+	position: relative;
+  padding: 8px 0 8px 20px;
+  /*line-height: 22px;*/
+  display: block;
+  color: #ffffff;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 15px;
+  transition: all .3s ease-in-out;
+}
+
+.navigation-primary-menu ul > li a:hover,
+.navigation-primary-menu ul > li a.active { 
+	color: #ffffff;
+  /*background-color: #00796B;*/
+  background-color: #00695C;
+}
+
+.navigation-primary-menu ul > li a.active::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 5px;
+  background-color: #3F51B5;
+}
+
+.navigation-primary-menu ul.submenu > li > a { 
+	position: relative;
+  padding: 8px 0 8px 40px;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.main-navigation .line {
+  background-color: #ffffff;
+  width: 85%;
+  margin-right: auto;
+  margin-left: auto;
+}

@@ -1,0 +1,44 @@
+.error-page .form-error-messages {
+	margin-top: 40px;
+}
+
+.form-error-messages {
+	/*margin-top: 20px;*/
+	background-color: rgb(233,95,98);
+	background-image: url('/images/common/error.png');
+	background-repeat: no-repeat;
+	background-position: 108% 60%;
+	background-size: 200px;
+}
+
+.form-error-messages .form-error-messages-inner ul {
+	padding-left: 0;
+	margin-bottom: 0;
+	border-top: 1px solid rgb(249,107,111);
+	margin-left: 20px;
+	padding: 20px;
+}
+
+.form-error-messages .error-messages {
+	color: #fff;
+	font-size: 16px;
+  line-height: 24px;
+}
+
+.form-error-messages h2,
+.form-error-messages h3 {
+	color: #fff;
+	margin: 0;
+	padding: 20px;
+	border-bottom: 1px solid rgb(226,87,90);
+}
+
+.error-page .form-error-messages h3 {
+	width: 80%;
+	line-height: 26px;
+	font-size: 17px;
+}
+
+.error-message {
+	color: #D50000;
+}

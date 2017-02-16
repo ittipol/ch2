@@ -1,0 +1,476 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\CustomFormRequest;
+use App\library\service;
+use App\library\url;
+use App\library\message;
+use Redirect;
+
+class ShopController extends Controller
+{
+// เพิ่มสิ่งที่ต้องการสื่อถึงลูกค้า
+
+// วิธีส่งต้องกำหนดได้เอง
+// ไม่เจอครัช ร้านเราใช้ขนส่งเอกชน Kerry Express มารับถึงหน้าบ้านเบย แพงหน่อยแต่บวกค่ารถค่าเวลาต่อแถวก็คุ้มกว่าครับ เอาเวลาไปทำอย่างอื่นได้ตั้งเยอะน้าาาาน้องตะกร้าาา ^_^
+// UPS
+// มีบริการส่งของส่วนตัว
+
+  // ไปรษณีย์ไทย
+  // Nim Express
+  // DHL
+  // UPS
+  // Kerry Express
+  // ระบบขนส่งของทางร้าน
+
+  // ** หน้าเพิ่ม อธิบายการแพคสินค้า
+  // ** หน้าการชำระเงิน
+
+  
+  public function __construct() { 
+    parent::__construct();
+  }
+
+  // public function index() {}
+
+  public function manage() {
+
+    $model = request()->get('shop');
+
+    $model->modelData->loadData();
+
+    $this->data = $model->modelData->build();
+
+    $this->setData('settingUrl',request()->get('shopUrl').'setting');
+    $this->setData('productUrl',request()->get('shopUrl').'product');
+    $this->setData('jobUrl',request()->get('shopUrl').'job');
+    $this->setData('advertisingUrl',request()->get('shopUrl').'advertising');
+
+    return $this->view('pages.shop.manage');
+  }
+
+  public function product() {
+
+    $url = new Url;
+    
+    $page = 1;
+    if(!empty($this->query)) {
+      $page = $this->query['page'];
+    }
+
+    $shopTos = Service::loadModel('ShopRelateTo')
+    ->select('model_id')
+    ->where(array(
+      array('model','like','Product'),
+      array('shop_id','=',request()->get('shopId'))
+    ));
+
+    if($shopTos->exists()) {
+
+      $product = Service::loadModel('Product');
+      $product->paginator->criteria(array(
+        'conditions' => array(
+          'in' => array(
+            array('id',Service::getList($shopTos->get(),'model_id'))
+          )
+        ),
+        'order' => array('id','DESC')
+      ));
+      $product->paginator->setPage($page);
+      $product->paginator->setPagingUrl('shop/'.request()->shopSlug.'/product');
+      $product->paginator->setUrl('shop/'.$this->param['shopSlug'].'/product_edit/{id}','editUrl');
+      $product->paginator->setUrl('product/detail/{id}','detailUrl');
+
+      $this->data = $product->paginator->build();
+    }
+
+    $this->setData('productPostUrl',request()->get('shopUrl').'product_post');
+
+    return $this->view('pages.shop.product');
+  }
+
+  public function job() {
+
+    $url = new Url;
+
+    $page = 1;
+    if(!empty($this->query)) {
+      $page = $this->query['page'];
+    }
+
+    $shopTos = Service::loadModel('ShopRelateTo')
+    ->select('model_id')
+    ->where(array(
+      array('model','like','Job'),
+      array('shop_id','=',request()->get('shopId'))
+    ));
+
+    if($shopTos->exists()) {
+
+      $job = Service::loadModel('Job');
+      $job->paginator->criteria(array(
+        'conditions' => array(
+          'in' => array(
+            array('id',Service::getList($shopTos->get(),'model_id'))
+          )
+        ),
+        'order' => array('id','DESC')
+      ));
+      $job->paginator->setPage($page);
+      $job->paginator->setPagingUrl('shop/'.request()->shopSlug.'/job');
+      $job->paginator->setUrl('shop/'.$this->param['shopSlug'].'/job_edit/{id}','editUrl');
+      $job->paginator->setUrl('job/detail/{id}','detailUrl');
+
+      $this->data = $job->paginator->build();
+    }
+    
+    $this->setData('jobPostUrl',request()->get('shopUrl').'job_post');
+    $this->setData('jobApplyListUrl',request()->get('shopUrl').'job_apply_list');
+    $this->setData('branchUrl',request()->get('shopUrl').'branch');
+    $this->setData('branchAddUrl',request()->get('shopUrl').'branch_add');
+    // $this->setData('departmentAddUrl',request()->get('shopUrl'));
+
+    return $this->view('pages.shop.job');
+  }
+
+  public function branch() {
+
+    $url = new Url;
+
+    $page = 1;
+    if(!empty($this->query)) {
+      $page = $this->query['page'];
+    }
+
+    $shopTos = Service::loadModel('ShopRelateTo')
+    ->select('model_id')
+    ->where(array(
+      array('model','like','branch'),
+      array('shop_id','=',request()->get('shopId'))
+    ));
+
+    if($shopTos->exists()) {
+      $branch = Service::loadModel('Branch');
+      $branch->paginator->criteria(array(
+        'conditions' => array(
+          'in' => array(
+            array('id',Service::getList($shopTos->get(),'model_id'))
+          )
+        ),
+        'order' => array('id','DESC')
+      ));
+      $branch->paginator->setPage($page);
+      $branch->paginator->setPagingUrl('shop/'.request()->shopSlug.'/branch');
+      $branch->paginator->setUrl('shop/'.$this->param['shopSlug'].'/branch_edit/{id}','editUrl');
+      $branch->paginator->setUrl('branch/detail/{id}','detailUrl');
+
+      $this->data = $branch->paginator->build();
+    }
+
+    $this->setData('jobUrl',request()->get('shopUrl').'job');
+    $this->setData('branchAddUrl',request()->get('shopUrl').'branch_add');
+
+    return $this->view('pages.shop.branch');
+  }
+
+  public function advertising() {
+
+    $url = new Url;
+
+    $page = 1;
+    if(!empty($this->query)) {
+      $page = $this->query['page'];
+    }
+
+    $shopTos = Service::loadModel('ShopRelateTo')
+    ->select('model_id')
+    ->where(array(
+      array('model','like','Advertising'),
+      array('shop_id','=',request()->get('shopId'))
+    ));
+
+    if($shopTos->exists()) {
+
+      $advertising = Service::loadModel('Advertising');
+      $advertising->paginator->criteria(array(
+        'conditions' => array(
+          'in' => array(
+            array('id',Service::getList($shopTos->get(),'model_id'))
+          )
+        ),
+        'order' => array('id','DESC')
+      ));
+      $advertising->paginator->setPage($page);
+      $advertising->paginator->setPagingUrl('shop/'.request()->shopSlug.'/advertising');
+      $advertising->paginator->setUrl('shop/'.$this->param['shopSlug'].'/shop_ad_edit/{id}','editUrl');
+      $advertising->paginator->setUrl('shop/'.$this->param['shopSlug'].'/shop_ad_delete/{id}','deleteUrl');
+      $advertising->paginator->setUrl('advertising/detail/{id}','detailUrl');
+
+      $this->data = $advertising->paginator->build();
+
+    }
+
+    $this->setData('advertisingPostUrl',request()->get('shopUrl').'shop_ad_post');
+
+    return $this->view('pages.shop.advertising');
+
+  }
+
+  public function create() {
+
+    $model = Service::loadModel('Shop');
+
+    $this->mergeData($model->formHelper->build());
+
+    return $this->view('pages.shop.form.shop_create');
+  }
+
+  public function creatingSubmit(CustomFormRequest $request) {
+
+    $model = Service::loadModel('Shop');
+
+    if($model->fill($request->all())->save()) {
+
+      $slug = $model->getModelRelationData('Slug',array(
+        'fields' => array('slug'),
+        'first' => true
+      ))->slug;
+
+      Message::display('นำบริษัท ร้านค้า หรือธุรกิจเข้าสู่ชุมชนแล้ว','success');
+      return Redirect::to(route('shop.manage', ['slug' => $slug]));
+    }else{
+
+      switch ($model->errorType) {
+        case 1;
+          $_message = 'คุณได้เพิ่มร้านค้าชื่อว่า '.$model->name.' ไปแล้ว โปรดใช้ชื่ออื่น';
+          return Redirect::back()->withErrors([$_message]);
+          break;
+
+        case 2;
+          $_message = 'มีร้านค้าชื่อ '.$model->name.' นี้แล้ว';
+          return Redirect::back()->withErrors([$_message]);
+          break;
+      }
+
+      return Redirect::back();
+    }
+
+  }
+
+  public function setting() {
+    // brand story เรื่องราว
+    $this->setData('profileImageUrl',request()->get('shopUrl').'profile_image');
+    $this->setData('descriptionUrl',request()->get('shopUrl').'description');
+    $this->setData('addressUrl',request()->get('shopUrl').'address');
+    $this->setData('contactUrl',request()->get('shopUrl').'contact');
+    $this->setData('openHoursUrl',request()->get('shopUrl').'opening_hours');
+
+    return $this->view('pages.shop.setting');
+
+  }
+
+  public function profileImage() {
+
+    $model = request()->get('shop');
+
+    $this->data = $model->formHelper->build();
+
+    $this->setData('profileImage',json_encode($model->getProfileImage()));
+    $this->setData('cover',json_encode($model->getCover()));
+
+    return $this->view('pages.shop.form.profile_image');
+
+  }
+
+  public function profileImageSubmit() {
+
+    $model = request()->get('shop');
+
+    if($model->fill(request()->all())->save()) {
+      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      return Redirect::to('shop/'.request()->shopSlug.'/manage');
+    }else{
+      return Redirect::back();
+    }
+    
+  }
+
+  public function description() {
+
+    $model = request()->get('shop');
+
+    $this->data = $model->formHelper->build();
+
+    return $this->view('pages.shop.form.description');
+
+  }
+
+  public function descriptionSubmit() {
+
+    $model = request()->get('shop');
+
+    if($model->fill(request()->all())->save()) {
+      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      return Redirect::to('shop/'.request()->shopSlug.'/manage');
+    }else{
+      return Redirect::back();
+    }
+
+  }
+
+  public function openingHours() {
+
+    $openHours = '';
+    $sameTime = 0;
+
+    $model = Service::loadModel('OpenHour')->where('shop_id','=',request()->get('shopId'))->first();
+
+    if(!empty($model)) {
+
+      $time = json_decode($model->time,true);
+      $openHours = array();
+      foreach ($time as $day => $value) {
+
+        $_startTime = explode(':', $value['start_time']);
+        $_endTime = explode(':', $value['end_time']);
+
+        $openHours[$day] = array(
+          'open' => $value['open'],
+          'start_time' => array(
+            'hour' => (int)$_startTime[0],
+            'min' => (int)$_startTime[1]
+          ),
+          'end_time' => array(
+            'hour' => (int)$_endTime[0],
+            'min' => (int)$_endTime[1]
+          )
+        );
+      }
+
+      $openHours = json_encode($openHours);
+      $sameTime = $model->same_time;
+    }else{
+      $model = Service::loadModel('OpenHour');
+    }
+
+    $this->data = $model->formHelper->build();
+    $this->setData('openHours',$openHours);
+    $this->setData('sameTime',$sameTime);
+
+    return $this->view('pages.shop.form.open_hours');
+
+  }
+
+  public function openingHoursSubmit() {
+
+    $model = Service::loadModel('OpenHour')->where('shop_id','=',request()->get('shopId'))->first();
+
+    if(empty($model)) {
+      $model = Service::loadModel('OpenHour');
+      $model->shop_id = request()->get('shopId');
+    }
+
+    if($model->fill(request()->all())->save()) {
+      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      return Redirect::to('shop/'.request()->shopSlug.'/manage');
+    }else{
+      return Redirect::back();
+    }
+
+  }
+
+  public function address() {
+
+    $model = request()->get('shop')->getModelRelationData('Address',
+      array(
+        'first' => true
+      )
+    );
+
+    if(empty($model)) {
+      $model = Service::loadModel('Address');
+    }
+
+    $model->formHelper->loadFieldData('Province',array(
+      'key' =>'id',
+      'field' => 'name',
+      'index' => 'provinces',
+      'order' => array(
+        array('top','ASC'),
+        array('id','ASC')
+      )
+    ));
+
+    $this->data = $model->formHelper->build();
+    $this->setData('_geographic',$model->getGeographic());
+
+    return $this->view('pages.shop.form.address');
+
+  }
+
+  public function addressSubmit() {
+
+    $model = request()->get('shop')->getModelRelationData('Address',
+      array(
+        'first' => true
+      )
+    );
+
+    if(empty($model)) {
+      $model = Service::loadModel('Address');
+      $model->model = 'Shop';
+      $model->model_id = request()->get('shopId');
+    }
+
+    if($model->fill(request()->all())->save()) {
+      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      return Redirect::to('shop/'.request()->shopSlug.'/manage');
+    }else{
+      return Redirect::back();
+    }
+
+  }
+
+  public function contact() {
+    
+    $model = request()->get('shop')->getModelRelationData('Contact',
+      array(
+        'first' => true
+      )
+    );
+
+    if(empty($model)) {
+      $model = Service::loadModel('Contact');
+    }
+
+    $this->data = $model->formHelper->build();
+
+    return $this->view('pages.shop.form.contact');
+
+  }
+
+  public function contactSubmit() {
+
+    $model = request()->get('shop')->getModelRelationData('Contact',
+      array(
+        'first' => true
+      )
+    );
+
+    if(empty($model)) {
+      $model = Service::loadModel('Contact');
+      $model->model = 'Shop';
+      $model->model_id = request()->get('shopId');
+    }
+
+    if($model->fill(request()->all())->save()) {
+      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      return Redirect::to('shop/'.request()->shopSlug.'/manage');
+    }else{
+      return Redirect::back();
+    }
+
+  }
+
+}

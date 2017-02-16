@@ -1,0 +1,348 @@
+.detail .line {
+	background-color: #bababa;
+}
+
+.detail .price {
+	color: #2962FF;
+}
+
+.detail-title {
+	/*border-bottom: 1px solid #bababa;*/
+	margin-bottom: 20px;
+}
+
+.detail-title .title {
+	margin-top: 10px;
+	margin-bottom: 0;
+}
+
+.detail-title .sub-title {
+	margin-top: 20px;
+	margin-bottom: 0;
+}
+
+.tag-group {
+	margin-bottom: 10px;
+}
+
+.tag-group .tag-box {
+  color: #222222;
+  font-size: 12px;
+  padding: 6px 10px;
+  margin: 10px 4px 0 0;
+  background-color: #dedede;
+  line-height: 17px;
+  display: inline-block;
+}
+
+.image-gallery .image-gallery-list {
+	padding: 20px 0 0;
+}
+
+.image-gallery .item-info .item-info-row:not(:first-child) {
+	margin-top: 10px;
+}
+
+.image-gallery .image-gallery-list .preview-image {
+	width: 60px;
+	height: 60px;
+	margin: 4px;
+	border: 2px solid #464646;
+	background-color: #fff;
+	text-align: center;
+	cursor: pointer;
+	float: left;
+}
+
+.image-gallery .image-gallery-list .preview-image img {
+	height: 100%;
+}
+
+.image-gallery .image-gallary-display {
+	width: 100%;
+	height: 600px;
+	background-color: #fff;
+	position: relative;
+}
+
+.image-gallery .image-gallary-display .image-gallary-display-inner {
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+}
+
+.image-gallery .image-gallary-display .image-gallary-panel {
+	position: relative;
+	height: 100%;
+	text-align: center;
+	overflow: hidden;
+	z-index: 9;
+}
+
+.image-gallery .image-gallary-display img {
+	height: 100%;
+	position: relative;
+	display: inline-block;
+}
+
+.image-gallery .image-description {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	color: #fff;
+	font-size: 16px;
+	/*background-color: rgba(0,0,0,.6);*/
+	background-color: rgba(47,97,186,.9);
+	overflow: hidden;
+	z-index: 9;
+	display: none;
+	transition: all 250ms ease-out;
+}
+
+.image-gallery .image-description .image-description-inner {
+	padding: 15px;
+}
+
+.image-gallery .image-description .close-image-description-icon {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+	background-image: url(/images/common/close.png);
+	background-repeat: no-repeat;
+	background-size: 60px;
+	background-position: center;
+	background-color: #ececec;
+	z-index: 5;
+	cursor: pointer;
+}
+
+.image-gallery .image-gallary-display .display-image-description-icon {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	padding: 10px 25px;
+	/*background-color: rgba(236,236,236,.7);*/
+	background-color: rgb(47,97,186);
+	color: #fff;
+	display: none;
+	cursor: pointer;
+	z-index: 9;
+}
+
+.detail .item-info p {
+	margin: 0;
+  font-size: 16px;
+}
+
+.detail .item-info h4 {
+	margin: 0;
+	font-size: 24px;
+}
+
+.detail .secondary-title {
+	color: rgb(47,97,186);
+}
+
+.detail .tile-info-group {
+	max-height: 200px;
+	overflow-y: auto; 
+	overflow-x: hidden; 
+}
+
+.detail .tile-info-group .tile-info {
+	padding: 10px;
+	margin-bottom: 10px;
+	position: relative;
+}
+
+.detail .tile-info-group .tile-info.with-icon::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50px;
+	height: 50px;
+	background-color: #BBDEFB;
+	border-radius: 50px;
+}
+
+.detail .tile-info-group .tile-info h4.title-with-icon {
+	font-size: 14px;
+	color: #000;
+	padding-left: 55px;
+}
+
+
+.tabs {
+	margin: 20px 0;
+	border-bottom: 1px solid #bababa;
+}
+
+.tabs span {
+	color: #000;
+	background-color: #ececec;
+	padding: 12px 10px;
+	display: block;
+	position: relative;
+	cursor: pointer;
+}
+
+.tabs .tab:checked + span::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 2px;
+	background-color: #2196F3;
+}
+
+.tabs label {
+	margin-bottom: 0;
+}
+
+.tabs label:nth-child(n+2) {
+	margin-left: -4px;
+}
+
+.tabs label > input[type="radio"] {
+	display: none;
+}
+
+.tab-content {
+
+}
+
+.detail .title-with-icon {
+	position: relative;
+	padding-left: 40px;
+}
+
+.detail h4.title-with-icon {
+	font-size: 18px;
+	line-height: 30px;
+	margin-top: 10px;
+}
+
+.detail .title-with-icon::before {
+	content: "";
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 30px;
+}
+
+.detail .title-with-icon.phone::before {
+	background-image: url(/images/common/phone.png);
+}
+
+.detail .title-with-icon.email::before {
+	background-image: url(/images/common/email.png);
+}
+
+.detail .title-with-icon.location-pin::before {
+	background-image: url(/images/common/location-pin.png);
+}
+
+.detail .title-with-icon.line-app::before {
+	background-image: url(/images/common/line.png);
+}
+
+.detail .title-with-icon.bedroom::before {
+	background-image: url(/images/common/bedroom.png);
+}
+
+.detail .title-with-icon.living_room::before {
+	background-image: url(/images/common/living-room.png);
+}
+
+.detail .title-with-icon.bathroom::before {
+	background-image: url(/images/common/bathroom.png);
+}
+
+.detail .title-with-icon.home_office::before {
+	background-image: url(/images/common/home-office.png);
+}
+
+.detail .title-with-icon.floors::before {
+	background-image: url(/images/common/stair.png);
+}
+
+.detail .title-with-icon.carpark::before {
+	background-image: url(/images/common/carpark.png);
+}
+
+.detail .title-with-icon.tick-green::before {
+	background-image: url(/images/common/tick-green.png);
+}
+
+.detail .title-with-icon.space {
+	line-height: 30px;
+}
+
+.detail .title-with-icon.space::before {
+	background-size: 25px;
+}
+
+/*==========  Non-Mobile First Method  ==========*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+/*	.image-gallery .image-gallary-display {
+		margin: 0 0 20px;
+	}*/
+
+	.image-gallery .image-gallery-list {
+		margin: 0;
+	}
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 480px) {
+	.image-gallery .image-gallery-list .preview-image {
+		margin: 3px;
+	}
+
+	.image-gallery .item-info {
+		padding: 10px 0;
+	}
+
+	.image-gallery .image-gallary-display {
+		height: 300px;
+	}
+
+	.image-gallery .image-gallary-display .display-image-description-icon {
+		top: 0;
+		right: 0;
+		padding: 10px 15px;
+	}
+
+}
+
+/* Custom */ 
+@media only screen and (max-width : 360px) {
+
+}
+
+/* Custom, iPhone Retina */ 
+@media only screen and (max-width : 320px) {
+
+}
