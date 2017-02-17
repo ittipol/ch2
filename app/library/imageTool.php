@@ -131,6 +131,18 @@ class ImageTool {
 		$this->height = $height;
 	}
 
+	function png2jpg() {
+
+    $_image = imagecreatetruecolor(imagesx($this->image), imagesy($this->image));
+    imagefill($_image, 0, 0, imagecolorallocate($_image, 255, 255, 255));
+    imagealphablending($_image, TRUE);
+    imagecopy($_image, $this->image, 0, 0, 0, 0, imagesx($this->image), imagesy($this->image));
+    imagedestroy($this->image);
+
+    $this->image = $_image;
+
+	}
+
 	public function watermark($watermark, $position = 'bottomright') {
 		switch($position) {
 			case 'topleft':

@@ -1,0 +1,65 @@
+.header-wrapper {
+	height: 256px;
+	padding: 115px 16px 0;
+	background-color: #00897B;
+}
+
+.header-wrapper.active {
+	box-shadow: 0 2px 5px rgba(0,0,0,.26);
+  left: 0;
+  right: 0;
+  top: -192px;
+  z-index: 1;
+  position: fixed;
+}
+
+.header-title {
+	margin: 0 auto;
+	color: #fff;
+	line-height: 1.5;
+}
+
+.header-top .header-title {
+	font-size: 56px;
+}
+
+.header-fix {
+	height: 64px;
+	left: 72px;
+	right: 72px;
+	top: 0;
+	z-index: 2;
+	position: fixed;
+	padding-left: 280px;
+	display: none;
+}
+
+.header-fix .header-title {
+	font-size: 18px;
+  line-height: 64px;
+  width: 100%;
+}
+
+header .hamburger-button {
+	position: fixed;
+	top: 0;
+	z-index: 2;
+	width: 64px;
+	line-height: 64px;
+	cursor: pointer;
+	color: #fff;
+}
+
+@media only screen and (min-width: 1200px) {
+
+	header .hamburger-button {
+		display: none;
+	}
+
+}
+
+@media only screen and (max-width : 1200px) {
+  .header-fix {
+    padding-left: 0;
+  }
+}

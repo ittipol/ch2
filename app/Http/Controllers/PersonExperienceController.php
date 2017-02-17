@@ -18,6 +18,10 @@ class PersonExperienceController extends Controller
 
   public function index() {
 
+  }
+
+  public function manage() {
+
     $model = Service::loadModel('PersonExperience');
 
     if(!$model->checkExistByPersonId()) {
@@ -38,7 +42,7 @@ class PersonExperienceController extends Controller
     $this->setData('profile',$profile->modelData->build(true));
     $this->setData('profileImageUrl',$profile->getProfileImageUrl());
 
-    return $this->view('pages.person_experience.main');
+    return $this->view('pages.person_experience.manage');
 
   }
 

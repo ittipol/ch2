@@ -155,9 +155,9 @@ label.image-label {
 	outline: none;
 }
 
-label.image-label.added {
+/*label.image-label.added {
 	cursor: default;
-}
+}*/
 
 label.image-label input[type="file"] {
   opacity: 0;

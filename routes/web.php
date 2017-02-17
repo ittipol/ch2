@@ -56,8 +56,8 @@ Route::get('announcement/create','AnnouncementController@create');
 
 // Experience
 Route::group(['middleware' => 'auth'], function () {
-  Route::get('experience','PersonExperienceController@index')->name('person.experience');
-  Route::post('experience','PersonExperienceController@start')->name('person.experience');
+  Route::get('experience','PersonExperienceController@manage')->name('person.experience.manage');
+  Route::post('experience','PersonExperienceController@start')->name('person.experience.start');
 });
 Route::group(['middleware' => ['auth','person.experience']], function () {
 
@@ -106,6 +106,24 @@ Route::group(['middleware' => ['auth','person.experience']], function () {
 
 });
 
+// Freelance
+// Route::get('freelance','FreelanceController@index')->name('freelance.index');
+// Route::get('freelance/list','FreelanceController@listView')->name('freelance.list');
+Route::get('freelance/detail/{id}','FreelanceController@detail')->name('freelance.detail');
+
+Route::group(['middleware' => ['auth','person.experience']], function () {
+
+  Route::get('person/freelance','FreelanceController@manage')->name('person.freelance.manage');
+
+  Route::get('person/freelance_post','FreelanceController@add')->name('person.freelance.add');
+  Route::post('person/freelance_post','FreelanceController@addingSubmit')->name('person.freelance.add');
+
+  Route::get('person/freelance_edit/{id}','FreelanceController@edit')->name('person.freelance.edit');
+  Route::patch('person/freelance_edit/{id}','FreelanceController@editingSubmit')->name('person.freelance.edit');
+
+  Route::get('person/freelance_delete/{id}','FreelanceController@delete')->name('person.freelance.delete');
+
+});
 
 // community / Shop
 

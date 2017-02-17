@@ -3,9 +3,11 @@ footer {
 	border-top: 1px solid rgb(19,47,99);*/
 	border-top: 1px solid #bababa;
 	margin-top: 150px;
+	padding-left: 280px;
 }
 
 .footer {
+	padding: 0 20px;
 /*	height: 200px;
 	margin-top: 20px;
 	color: #fff;

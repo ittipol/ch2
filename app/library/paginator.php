@@ -103,9 +103,9 @@ class Paginator {
 
   }
 
-  // public function onlyMyData() {
-  //   $this->model = $this->model->where('person_id','=',Session::get('Person.id'));
-  // }
+  public function myData() {
+    $this->model = $this->model->where('person_id','=',Session::get('Person.id'));
+  }
 
   public function getModelData() {
 

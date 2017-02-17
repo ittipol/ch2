@@ -9,6 +9,7 @@ class Images {
 		this.imagesPlaced = [];
 		this.defaultImage = '/images/common/image.svg';
 		this.allowedClick = true;
+		this.inputDisable = [];
 		this.style = style; // default, description
 	}
 
@@ -19,11 +20,9 @@ class Images {
 
 		if((typeof images != 'undefined') && (images != 'null')) {
 			if(typeof images == 'string') {
-				this.imagesPlaced.push(this.index);
 				this.index = this._createUploader(this.index,JSON.parse(images));
 			}else{
 				for (let i = 0; i < Object.keys(images).length; i++) {
-					this.imagesPlaced.push(this.index);
 					this.index = this._createUploader(this.index,images[i]);
 				}
 			}
@@ -49,6 +48,17 @@ class Images {
 	bind(){
 
 		let _this = this;
+
+		$(document).on('click', '.'+this.code+'-image', function(e){
+
+			for (var i = 0; i < _this.inputDisable.length; i++) {
+				if(_this.inputDisable[i] == this.id) {
+					e.preventDefault();
+					return false;
+				}
+			};
+
+		});
 
 		$(document).on('change', '.'+this.code+'-image', function(){
 			_this.preview(this);
@@ -133,7 +143,9 @@ class Images {
 	    cache: false,
 	    processData:false,
 	    beforeSend: function( xhr ) {
-	    	input.remove();
+
+	    	_this.inputDisable.push(input.id);
+
 	    	$(parent).parent().find('.status').css('width','0%');
 	    	parent.parent().find('.progress-bar').css('display','block');
 	    },
@@ -161,15 +173,18 @@ class Images {
 
 	  	if(response.success){
 
-	  		parent.addClass('added');
 	  		parent.find('div.preview-image').fadeIn(450);
 	  		parent.find('a').css('display','block');
 	  		parent.parent().find('.progress-bar').css('display','none');
 
-	  		let key = parent.attr('id').split('_');
+	  		let key = parent.prop('id').split('_');
 
 	  		_this.createAddedImage(parent,key[0],key[1],response.filename);
 
+	  		setTimeout(function(){
+	  			_this.inputDisable.splice(_this.inputDisable.indexOf(input.id),1);
+	  		},350);
+	  		
 	  	}else{
 
 	  		if(typeof response.message == 'object') {
@@ -213,8 +228,8 @@ class Images {
 	  // 	document.getElementById(code+'_textarea_'+index).value = description;
 	  // }
 
-		if(this.imagesPlaced.indexOf(parent.attr('id')) < 0){
-			this.imagesPlaced.push(parent.attr('id'));
+		if(this.imagesPlaced.indexOf(parent.prop('id')) < 0){
+			this.imagesPlaced.push(parent.prop('id'));
 
 			if(this.index < this.limit){
 				this.index = this.createUploader(this.index);
@@ -241,10 +256,10 @@ class Images {
 				this.index = this.createUploader(this.index);
 			}
 
-			this.imagesPlaced.splice(this.imagesPlaced.indexOf($(parent).attr('id')),1);
+			this.imagesPlaced.splice(this.imagesPlaced.indexOf($(parent).prop('id')),1);
 
 			if(input.getAttribute('data-id') != null) {
-				let key = $(parent).attr('id').split('_');
+				let key = $(parent).prop('id').split('_');
 			 	this.createDeletedImage(parent.parent().parent(),key[1],input.getAttribute('data-id'));
 			}
 
@@ -291,16 +306,20 @@ class Images {
 
 	_createUploader(index,image){
 
+		this.imagesPlaced.push(this.code+'_'+this.runningNumber);
+
 		let html = '';
 		html += '<div class="image-panel '+this.style+' clearfix">';
 		html += '<input type="hidden" name="Image['+this.type+'][images]['+index+'][id]" value="'+image.id+'" >';
-		html += '<label id="'+this.code+'_'+this.runningNumber+'" class="image-label added">';
+		html += '<label id="'+this.code+'_'+this.runningNumber+'" class="image-label">';
+		html += '<input id="'+this.code+'_image_'+this.runningNumber+'" class="'+this.code+'-image" type="file">';
 		html +=	'<div class="preview-image" style="background-image:url('+image._url+')"></div>';
 		html += '<a href="javscript:void(0);" class="'+this.code+'-remove-btn" data-id="'+image.id+'" style="display:block;">×</a>';
 		html += '<p class="error-message"></p>';
+		html += '<div class="progress-bar"><div class="status"></div></div>'
 		html += '</label>';
 		if(this.style == 'description'){
-			html += '<textarea name="Image['+this.type+'][images]['+index+'][description]" placeholder="คำอธิบายเี่ยวกับรูปภาพนี้">'+image.description+'</textarea>';
+			html += '<textarea id="'+this.code+'_textarea_'+this.runningNumber+'" name="Image['+this.type+'][images]['+index+'][description]" placeholder="คำอธิบายเี่ยวกับรูปภาพนี้">'+image.description+'</textarea>';
 		}
 		html += '</div>';
 

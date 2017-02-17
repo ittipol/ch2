@@ -5,7 +5,9 @@
 	z-index: 1000;
 	width: 280px;
 	/*background-color: #1A237E;*/
-  background-color: #00695C;
+  /*background-color: #00695C;*/
+  background-color: #fff;
+  border-right: 1px solid #ccc;
   transition: left .2s ease-out;
 }
 

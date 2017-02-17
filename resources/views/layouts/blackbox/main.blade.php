@@ -10,9 +10,11 @@
 </head>
 <body>
 
-  <main>
-    @include('layouts.blackbox.wrapper')
-  </main>
+  <div id="container">
+    @include('layouts.blackbox.components.main-nav')
+    @include('layouts.blackbox.components.content-wrapper')
+  </div>
+  @include('layouts.blackbox.components.footer')
 
   <script type="text/javascript">
 

@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-lg-6 col-sm-12">
         <div class="title">
-          สาขา
+          ฟรีแลนซ์
         </div>
       </div>
     </div>
@@ -17,26 +17,13 @@
 
     <div class="tile-nav small">
       <div class="tile-nav-image">
-        <a href="{{$jobUrl}}">
-          <img src="/images/common/job.png">
+        <a href="{{URL::to('person/freelance_post')}}">
+          <img src="/images/common/plus.png">
         </a>
       </div>
       <div class="tile-nav-info">
-        <a href="{{$jobUrl}}">
-          <h4 class="tile-nav-title">งาน</h4>
-        </a>
-      </div>
-    </div>
-
-    <div class="tile-nav small">
-      <div class="tile-nav-image">
-          <a href="{{$branchAddUrl}}">
-            <img src="/images/common/plus.png">
-          </a>
-      </div>
-      <div class="tile-nav-info">
-        <a href="{{$branchAddUrl}}">
-          <h4 class="tile-nav-title">เพิ่มสาขา</h4>
+        <a href="{{URL::to('person/freelance_post')}}">
+          <h4 class="tile-nav-title">เพิ่มงานฟรีแลนซ์ของคุณ</h4>
         </a>
       </div>
     </div>
@@ -65,7 +52,7 @@
                 <div class="product-title">{{$data['name']}}</div>
               </a>
             </div>
-            
+
             <div class="button-group">
 
               <a href="{{$data['detailUrl']}}">
@@ -100,11 +87,11 @@
   @else
 
     <div class="shop-notice text-center space-top-20">
-      <img class="space-bottom-20" src="/images/common/building.png">
+      <img class="space-bottom-20" src="/images/common/career.png">
       <div>
-        <h3>สาขา</h3>
-        <p>ยังไม่มีสาขา เพิ่มสาขาเพื่อมให้ผู้ทราบถึงสินค้า งานบริการ หรืออื่นๆ ในแต่ละสาขาของคุณ</p>
-        <a href="{{$branchAddUrl}}" class="button">เพิ่มสาขา</a>
+        <h3>ฟรีแลนซ์</h3>
+        <p>ยังไม่มีงานฟรีแลนซ์ เพิ่มฟรีแลนซ์ของคุณ เพื่อให้ผู้คนได้เห็นและจ้างงานฟรีแลนซ์คุณได้</p>
+        <a href="{{URL::to('person/freelance_post')}}" class="button">เพิ่มสาขา</a>
       </div>
     </div>
 

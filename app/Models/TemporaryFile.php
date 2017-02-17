@@ -70,9 +70,16 @@ class TemporaryFile extends Model
     return File::Delete(storage_path($this->temporaryPath).$directoryName.'/'.$filename);
   }
 
+  public function temporaryDirectoryExist($directoryName) {
+    return is_dir($this->temporaryPath.$directoryName);
+  }
+
   public function deleteTemporaryDirectory($directoryName) {
 
-    if(empty($directoryName)) {
+    // if(empty($directoryName)) {
+    //   return false;
+    // }
+    if(!$this->temporaryDirectoryExist($directoryName)) {
       return false;
     }
 

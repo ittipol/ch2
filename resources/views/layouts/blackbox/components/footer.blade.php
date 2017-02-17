@@ -1,7 +1,6 @@
+<footer>
 
-<div class="container-fuild">
-
-  <footer>
+  <div class="container-fuild">
 
     <div class="footer">
 
@@ -9,6 +8,6 @@
 
     </div>
 
-  </footer>
+  </div>
 
-</div>
+</footer>

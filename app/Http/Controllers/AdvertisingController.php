@@ -8,7 +8,6 @@ use App\library\message;
 use App\library\url;
 use Redirect;
 
-
 class AdvertisingController extends Controller
 {
   public function __construct() { 

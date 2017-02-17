@@ -35,7 +35,7 @@
     left: -280px
   }
 
-  .main-panel {
+  .content-wrapper {
     left: 0;
     padding-left: 0;
   }
@@ -49,7 +49,7 @@
     left: 0;
   }
 
-  .main-panel.is-main-nav-open {
+  .content-wrapper.is-main-nav-open {
     left: 280px;
   }
   
@@ -57,7 +57,7 @@
     left: 280px;
   }
 
-  .main-panel-overlay.isvisible {
+  .content-wrapper-overlay.isvisible {
     visibility: visible;
     opacity: 1;
   }

@@ -120,6 +120,7 @@ class ShopController extends Controller
       $job->paginator->setPage($page);
       $job->paginator->setPagingUrl('shop/'.request()->shopSlug.'/job');
       $job->paginator->setUrl('shop/'.$this->param['shopSlug'].'/job_edit/{id}','editUrl');
+      $job->paginator->setUrl('shop/'.$this->param['shopSlug'].'/job_delete/{id}','deleteUrl');
       $job->paginator->setUrl('job/detail/{id}','detailUrl');
 
       $this->data = $job->paginator->build();
@@ -163,6 +164,7 @@ class ShopController extends Controller
       $branch->paginator->setPage($page);
       $branch->paginator->setPagingUrl('shop/'.request()->shopSlug.'/branch');
       $branch->paginator->setUrl('shop/'.$this->param['shopSlug'].'/branch_edit/{id}','editUrl');
+      $branch->paginator->setUrl('shop/'.$this->param['shopSlug'].'/branch_delete/{id}','deleteUrl');
       $branch->paginator->setUrl('branch/detail/{id}','detailUrl');
 
       $this->data = $branch->paginator->build();

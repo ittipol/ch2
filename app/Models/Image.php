@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\library\service;
-use App\library\imageTool;
 use App\library\url;
+use App\library\cache;
 use File;
 use Session;
 
@@ -80,11 +80,8 @@ class Image extends Model
     $temporaryFile = new TemporaryFile;
     $imageType = new ImageType;
 
-    // $directoryName = $model->modelName.'_'.$options['token'].'_'.$options['type'];
-
     $count[$options['type']] = 0;
 
-    // Get Image type
     $imageType = $imageType->where('alias','like',$options['type'])->select('path')->first();
 
     foreach ($images as $image) {
@@ -93,16 +90,7 @@ class Image extends Model
         break;
       }
 
-      if(!empty($image['id'])) {
-        $_image = $this->find($image['id']);
-        
-        if($_image->exists) {
-          $_image->fill($image)->save();
-        }
-
-      }else{
-        $this->handleImage($model,$image,$options);
-      }
+      $this->handleImage($model,$image,$options);
 
     }
 
@@ -158,28 +146,46 @@ class Image extends Model
 
     $temporaryFile = new TemporaryFile;
     $imageType = new ImageType;
-
-    $directoryName = $model->modelName.'_'.$options['token'].'_'.$options['type'];
-
-    $path = $temporaryFile->getFilePath($image['filename'],array(
-      'directoryName' => $directoryName
-    ));
-
-    if(!file_exists($path)){
-      return false;
-    }
-
-    $value = array(
-      'filename' => $image['filename'],
-      'image_type_id' => $imageType->getIdByalias($options['type'])
-    );
-
-    if(!empty($image['description'])) {
-      $value['description'] = $image['description'];
-    }
+    $cache = new Cache;
 
     $imageInstance = $this->newInstance();
-    if(!$imageInstance->fill($model->includeModelAndModelId($value))->save()) {
+
+    if(!empty($image['id'])) {
+      $imageInstance = $imageInstance->where([
+        ['id','=',$image['id']],
+        ['person_id','=',Session::get('Person.id')]
+      ])->first();
+
+      if(empty($imageInstance)) {
+        return false;
+      }
+
+    }
+
+    $path = '';
+    if(!empty($image['filename'])) {
+
+      $path = $temporaryFile->getFilePath($image['filename'],array(
+        'directoryName' => $model->modelName.'_'.$options['token'].'_'.$options['type']
+      ));
+
+      if(!file_exists($path)) {
+        return false;
+      }
+    }
+
+    if(!$imageInstance->exists) { // new record
+      $imageInstance->image_type_id = $imageType->getIdByalias($options['type']);
+      $imageInstance->filename = $image['filename'];
+      $imageInstance->model = $model->modelName;
+      $imageInstance->model_id = $model->id;
+    }
+
+    if(!empty($image['description'])) {
+      $imageInstance->description = $image['description'];
+    }
+
+    if(!$imageInstance->save()) {
       return false;
     }
 
@@ -188,8 +194,8 @@ class Image extends Model
       mkdir($toPath,0777,true);
     }
 
-    if(!$this->moveImage($path,$imageInstance->getImagePath())) {
-      return false;
+    if(!empty($path) && $this->moveImage($path,$imageInstance->getImagePath())) {
+      $cache->deleteCacheDirectory(pathinfo($imageInstance->filename, PATHINFO_FILENAME));
     }
 
     return $imageInstance->id;

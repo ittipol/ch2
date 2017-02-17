@@ -15,6 +15,7 @@ class ProductController extends Controller
     $this->model = Service::loadModel('Product');
   }
 // ข้อความถึงผู้ขาย:
+  // การรับประกัน
   public function index() {
     dd('pd index');
   }

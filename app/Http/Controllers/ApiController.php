@@ -84,9 +84,8 @@ class ApiController extends Controller
 
       $temporaryPath = $tempFile->createTemporyFolder(Input::get('model').'_'.Input::get('imageToken').'_'.Input::get('imageType'));
 
-      // cover don't resize
-
       $imageTool = new ImageTool($image->getRealPath());
+      $imageTool->png2jpg($width,$height);
       $imageTool->resize($width,$height);
       $moved = $imageTool->save($temporaryPath.$filename);
 

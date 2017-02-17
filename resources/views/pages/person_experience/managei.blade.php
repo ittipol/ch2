@@ -29,13 +29,13 @@
 
     <div class="tile-nav small">
       <div class="tile-nav-image">
-        <a href="{{URL::to('freelance/post')}}">
-          <img src="/images/common/megaphone.png">
+        <a href="{{URL::to('person/freelance')}}">
+          <img src="/images/common/career.png">
         </a>
       </div>
       <div class="tile-nav-info">
-        <a href="{{URL::to('freelance/post')}}">
-          <h4 class="tile-nav-title">ลงประกาศรับทำงานฟรีแลนซ์</h4>
+        <a href="{{URL::to('person/freelance')}}">
+          <h4 class="tile-nav-title">ฟรีแลนซ์</h4>
         </a>
       </div>
     </div>

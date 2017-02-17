@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-md-8 col-xs-12">
         <div class="title">
-          ลงประกาศโฆษณา
+          ฟรีแลนซ์
         </div>
       </div>
     </div>
@@ -29,59 +29,43 @@
 
   <div class="form-section">
 
-    @if(!empty($_fieldData['branches']))
     <div class="form-row">
       <?php 
-        echo Form::label('branch', 'เลือกสาขาที่ลงโฆษณานี้ (สามารถเว้นว่างได้)');
+        echo Form::label('branch', 'เลือกประเภทฟรีแลนซ์', array(
+          'class' => 'required'
+        ));
       ?>
       <div class="form-item-group">
         <div class="row">
-            @foreach ($_fieldData['branches'] as $id => $branch)
+            @foreach ($_fieldData['freelanceTypes'] as $id => $freelanceType)
             <div class="col-lg-4 col-md-6 col-sm-6 col-sm-12">
               <label class="box">
                 <?php
-                  echo Form::checkbox('RelateToBranch[branch_id][]', $id);
+                  echo Form::radio('freelance_type_id', $id);
                 ?>
-                <div class="inner"><?php echo $branch; ?></div>
+                <div class="inner"><?php echo $freelanceType; ?></div>
               </label>
             </div>
             @endforeach
         </div>
       </div>
     </div>
-    @endif
 
     <div class="form-row">
       <?php 
-        echo Form::label('name', 'ชื่อโฆษณาหรือหัวข้อโฆษณา', array(
+        echo Form::label('name', 'ชื่องานฟรีแลนซ์ที่รับทำ', array(
           'class' => 'required'
         ));
         echo Form::text('name', null, array(
-          'placeholder' => 'ชื่อโฆษณา หรือหัวข้อโฆษณา',
+          'placeholder' => 'ชื่องานฟรีแลนซ์ที่รับทำ',
           'autocomplete' => 'off'
         ));
       ?>
     </div>
 
     <div class="form-row">
-      <?php
-        echo Form::label('advertising_type_id', 'ประเภทของโฆษณา', array(
-          'class' => 'required'
-        ));
-      ?>
-      @foreach ($_fieldData['advertisingTypes'] as $id => $advertisingType)
-        <label class="box">
-          <?php
-            echo Form::radio('advertising_type_id', $id);
-          ?>
-          <div class="inner">{{$advertisingType}}</div>
-        </label>
-      @endforeach
-    </div>
-
-    <div class="form-row">
       <?php 
-        echo Form::label('description', 'รายละเอียดโฆษณา');
+        echo Form::label('description', 'รายละเอียดข้อตกลง');
         echo Form::textarea('description', null, array(
           'class' => 'ckeditor'
         ));
@@ -90,7 +74,7 @@
 
     <div class="form-row">
       <?php 
-        echo Form::label('_tags', 'แท๊กที่เกี่ยวข้องกับโฆษณานี้');
+        echo Form::label('_tags', 'แท๊กที่เกี่ยวข้องฟรีแลนซ์นี้');
       ?>
       <div id="_tags" class="tag"></div>
     </div>

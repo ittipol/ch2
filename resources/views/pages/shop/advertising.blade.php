@@ -1,15 +1,28 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<div class="top-header-wrapper">
-  <h2 class="top-header">โฆษณา</h2>
-</div>
+<header class="header-wrapper">
+  <div class="container">
+    <div class="header-top">
+      <div class="header-title">โฆษณา</div>
+    </div>
+  </div>
+  <div class="header-fix">
+    <div class="header-title">โฆษณา</div>
+  </div>
+
+  <label class="hamburger-button" for="main_nav_trigger">
+    ☰
+    <input type="checkbox" id="main_nav_trigger" class="nav-trigger">
+  </label>
+
+</header>
 
 <div class="container">
 
   <div class="tile-nav-group space-top-bottom-20 clearfix">
 
-    <div class="tile-nav small">
+    <div class="tile-nav xxs">
       <div class="tile-nav-image">
         <a href="{{$advertisingPostUrl}}">
           <img src="/images/common/megaphone.png">

@@ -59,3 +59,23 @@
   padding: 0;
 }
 
+.tile-nav.xxs {
+	width: auto;
+	height: 40px;
+}
+
+.tile-nav.xxs .tile-nav-image,
+.tile-nav.xxs .tile-nav-info {
+	display: inline-block;
+}
+
+.tile-nav.xxs img {
+	width: 40px;
+	height: 40px;
+	padding: 10px ;
+}
+
+.tile-nav.xxs .tile-nav-info {
+	margin-left: 5px;
+}
+

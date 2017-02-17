@@ -2,6 +2,8 @@
 
 namespace App\library;
 
+use File;
+
 class Cache
 {
   private $cachePath = 'cache/';
@@ -140,6 +142,19 @@ class Cache
     }
 
     return array($width,$height);
+  }
+
+  public function cacheDirectoryExist($directoryName) {
+    return is_dir($this->cachePath.$directoryName);
+  }
+
+  public function deleteCacheDirectory($directoryName) {
+
+    if(!$this->cacheDirectoryExist($directoryName)) {
+      return false;
+    }
+
+    return File::deleteDirectory($this->cachePath.$directoryName);
   }
 
 }
