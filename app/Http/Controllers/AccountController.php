@@ -136,7 +136,8 @@ class AccountController extends Controller
     $model->paginator->myData();
     $model->paginator->criteria(array(
       'order' => array(
-        array('id','DESC')
+        array('name','ASC'),
+        array('created_at','DESC')
       )
     ));
     $model->paginator->setPage($page);

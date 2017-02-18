@@ -7,6 +7,7 @@ use App\library\service;
 use App\library\message;
 use App\library\url;
 use Redirect;
+use Session;
 
 class FreelanceController extends Controller
 {
@@ -15,6 +16,8 @@ class FreelanceController extends Controller
   }
 
   public function detail() {
+
+    $url = new Url;
 
     $model = Service::loadModel('Freelance')->find($this->param['id']);
 
@@ -30,7 +33,16 @@ class FreelanceController extends Controller
       'json' => array('Image')
     ));
 
+    $person = Service::loadModel('Person')->find(Session::get('Person.id'));
+
+    $person->modelData->loadData(array(
+      'models' => array('Address','Contact')
+    ));
+
     $this->data = $model->modelData->build();
+    $this->setData('profile',$person->modelData->build(true));
+    $this->setData('profileImageUrl',$person->getProfileImageUrl());
+    $this->setData('experienceDetailUrl',$url->setAndParseUrl('experience/profile/{id}',array('id' => $person->personExperience->id)));
 
     return $this->view('pages.freelance.detail');
 

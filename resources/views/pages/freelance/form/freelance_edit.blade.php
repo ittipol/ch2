@@ -31,7 +31,7 @@
 
     <div class="form-row">
       <?php 
-        echo Form::label('branch', 'เลือกประเภทฟรีแลนซ์', array(
+        echo Form::label('branch', 'เลือกประเภทงานฟรีแลนซ์', array(
           'class' => 'required'
         ));
       ?>

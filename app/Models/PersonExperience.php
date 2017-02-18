@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use App\library\date;
+// use App\library\date;
 
 class PersonExperience extends Model
 {
   protected $table = 'person_experiences';
   protected $fillable = ['person_id','private_websites','active'];
-  // protected $modelRelations = array('Image','Address','Contact');
   protected $directory = true;
 
   public $formHelper = true;
@@ -99,94 +98,74 @@ class PersonExperience extends Model
     return $this->where('person_id','=',session()->get('Person.id'))->exists();
   }
 
-  // public function getGender($gender = '-') {
+  // public function getProfileImage() {
 
-  //   switch ($gender) {
-  //     case 'm':
-  //       $gender = 'ชาย';
-  //       break;
-      
-  //     case 'f':
-  //       $gender = 'หญิง';
-  //       break;
+  //   $image = Image::select('id','model','model_id','filename','image_type_id')->find($this->profile_image_id);
 
-  //     case '0':
-  //       $gender = 'ไม่ระบุ';
-  //       break;
+  //   if(empty($image)) {
+  //     return null;
   //   }
 
-  //   return $gender;
+  //   return array(
+  //     'id' => $image->id,
+  //     '_url' => $image->getImageUrl()
+  //   );
+  // }
+
+  // public function getProfileImageUrl() {
+
+  //   $image = Image::select('id','model','model_id','filename','image_type_id')->find($this->profile_image_id);
+
+  //   if(empty($image)) {
+  //     return '/images/common/no-img.png';
+  //   }
+
+  //   return $image->getImageUrl();
+  // }
+
+  // public function buildModelData() {
+
+  //   $date = new Date;
+  //   $person = new Person;
+
+  //   $gender = '-';
+  //   if(!empty($this->gender)) {
+  //     $gender = $person->getGender($this->gender);
+  //   }
+
+  //   $birthDate = '-';
+  //   if(!empty($this->birth_date)) {
+  //     $birthDate = $date->covertDateToSting($this->birth_date);
+  //   }
+
+  //   return array(
+  //     'id' => $this->id,
+  //     'name' => $this->name,
+  //     'gender' => $gender,
+  //     'birthDate' => $birthDate
+  //   );
 
   // }
 
-  public function getProfileImage() {
+  // public function buildFormData() {
 
-    $image = Image::select('id','model','model_id','filename','image_type_id')->find($this->profile_image_id);
-
-    if(empty($image)) {
-      return null;
-    }
-
-    return array(
-      'id' => $image->id,
-      '_url' => $image->getImageUrl()
-    );
-  }
-
-  public function getProfileImageUrl() {
-
-    $image = Image::select('id','model','model_id','filename','image_type_id')->find($this->profile_image_id);
-
-    if(empty($image)) {
-      return '/images/common/no-img.png';
-    }
-
-    return $image->getImageUrl();
-  }
-
-  public function buildModelData() {
-
-    $date = new Date;
-    $person = new Person;
-
-    $gender = '-';
-    if(!empty($this->gender)) {
-      $gender = $person->getGender($this->gender);
-    }
-
-    $birthDate = '-';
-    if(!empty($this->birth_date)) {
-      $birthDate = $date->covertDateToSting($this->birth_date);
-    }
-
-    return array(
-      'id' => $this->id,
-      'name' => $this->name,
-      'gender' => $gender,
-      'birthDate' => $birthDate
-    );
-
-  }
-
-  public function buildFormData() {
-
-    $day = null;
-    $month = null;
-    $year = null;
+  //   $day = null;
+  //   $month = null;
+  //   $year = null;
     
-    if(!empty($this->birth_date)) {
-      list($year,$month,$day) = explode('-', $this->birth_date); 
-    }
+  //   if(!empty($this->birth_date)) {
+  //     list($year,$month,$day) = explode('-', $this->birth_date); 
+  //   }
 
-    return array(
-      'name' => $this->name,
-      'gender' => $this->gender,
-      'private_websites' => $this->private_websites,
-      'birth_day' => $day,
-      'birth_month' => $month,
-      'birth_year' => $year,
-    );
+  //   return array(
+  //     'name' => $this->name,
+  //     'gender' => $this->gender,
+  //     'private_websites' => $this->private_websites,
+  //     'birth_day' => $day,
+  //     'birth_month' => $month,
+  //     'birth_year' => $year,
+  //   );
 
-  }
+  // }
 
 }

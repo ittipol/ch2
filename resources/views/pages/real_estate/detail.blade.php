@@ -207,9 +207,26 @@
 
   <div class="line space-top-bottom-20"></div>
 
-  <h4>รายละเอียดอสังหาริมทรัพย์</h4>   
+  <!-- <h4>รายละเอียดอสังหาริมทรัพย์</h4>   
   <div>
     {!!$_modelData['description']!!}
+  </div> -->
+
+  <div class="row">
+
+    <div class="col-sm-12 margin-section section-border-left">
+
+      <div class="space-top-bottom-10 section-inner">
+        
+        <h4>รายละเอียดข้อตกลง</h4>
+        <div>
+          {!!$_modelData['description']!!}
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 
   <div class="line space-top-bottom-20"></div>

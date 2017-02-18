@@ -25,77 +25,123 @@
 
     <div class="row">
 
-      <div class="col-lg-8 col-sm-12">
+      <div class="col-sm-12 image-gallary-display">
+        <div class="image-gallary-display-inner">
 
-        <div class="image-gallary-display">
-          <div class="image-gallary-display-inner">
-            <div class="image-gallary-panel">
-              <img id="image_display">
+          <div class="image-gallary-panel">
+            <img id="image_display">
+          </div>
+
+          <div class="image-description">
+           <div id="image_description" class="image-description-inner"></div>
+           <div class="close-image-description-icon"></div>
+          </div>
+
+          <div class="display-image-description-icon">
+            คำอธิบายรูปนี้
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    @if(!empty($_modelData['Image']))
+    <div class="row">
+      <div class="col-sm-12">
+        <div id="image_gallery_list" class="image-gallery-list clearfix"></div>
+      </div>
+    </div>
+    <div class="line space-top-bottom-20"></div>
+    @endif
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-xs-12">
+      <div class="item-info">
+
+        <div class="item-info-row">
+          <p>ราคา{{$_modelData['_announcementTypeName']}}</p>
+          <h4 class="price">{{$_modelData['_price']}}</h4>
+        </div>
+
+      </div>
+    </div> 
+
+  </div>
+
+  <div class="line space-top-bottom-20"></div>
+
+  <div class="row">
+
+    <div class="col-xs-12">
+
+      <div class="item-info">
+
+        <p>ติดต่อผู้{{$_modelData['_announcementTypeName']}}</p>
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="item-info-row">
+              @if(!empty($_modelData['Contact']['phone_number']))
+              <h4 class="title-with-icon phone">{{$_modelData['Contact']['phone_number']}}</h4>
+              @else
+              <h4 class="title-with-icon phone">-</h4>
+              @endif
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="item-info-row">
+              @if(!empty($_modelData['Contact']['email']))
+              <h4 class="title-with-icon email">{{$_modelData['Contact']['email']}}</h4>
+              @else
+              <h4 class="title-with-icon email">-</h4>
+              @endif
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="item-info-row">
+              @if(!empty($_modelData['Contact']['line']))
+              <h4 class="title-with-icon line-app">{{$_modelData['Contact']['line']}}</h4>
+              @else
+              <h4 class="title-with-icon line-app">-</h4>
+              @endif
             </div>
           </div>
         </div>
 
       </div>
 
-      <div class="col-lg-4 col-sm-12">
+    </div> 
 
-        @if(!empty($_modelData['Image']))
-        <div class="image-gallery-list clearfix">
-          <div id="image_gallery_list" class="image-gallery-list clearfix"></div>
-        </div>
-        <div class="line space-top-bottom-20"></div>
-        @endif
+  </div>
 
-        <div class="item-info">
+  <div class="line space-top-bottom-20"></div>
 
-          <div class="item-info-row">
-            <p>ราคา{{$_modelData['_announcementTypeName']}}</p>
-            <h4 class="price">{{$_modelData['_price']}}</h4>
-          </div>
+  <div class="row">
 
-        </div>
-          
-        <div class="line space-top-bottom-20"></div>
+    <div class="col-sm-12 margin-section section-border-left">
 
-        <div class="item-info">
-
-          <div class="item-info-row">
-            <h4 class="title-with-icon phone">{{$_modelData['Contact']['phone_number']}}</h4>
-          </div>
-
-          <div class="item-info-row">
-            <h4 class="title-with-icon email">{{$_modelData['Contact']['email']}}</h4>
-          </div>
-
-          <div class="item-info-row">
-            <h4 class="title-with-icon line-app">{{$_modelData['Contact']['line']}}</h4>
-          </div>
-
-        </div>
+      <div class="space-top-bottom-10 section-inner">
         
+        <h4>รายละเอียด {{$_modelData['name']}}</h4>  
+        <div>
+          {!!$_modelData['description']!!}
+        </div>
+
       </div>
 
     </div>
 
   </div>
 
-  <div class="line space-top-bottom-20"></div>
-
-  <h4><b>รายละเอียด {{$_modelData['name']}}</b></h4>
-  <div>
-    {!!$_modelData['description']!!}
-  </div>
-
-  <div class="line space-top-bottom-20"></div>
-
-  <h4>สินค้าที่คล้ายกัน</h4>
-  <p>ไม่พบสินค้าที่คล้ายกัน</p>
-
 </div>
 
 <script type="text/javascript">
   $(document).ready(function(){
-    imageGallery = new ImageGallery();
+    imageGallery = new ImageGallery(true);
     imageGallery.load({!!$_modelData['Image']!!});
   });
 </script>

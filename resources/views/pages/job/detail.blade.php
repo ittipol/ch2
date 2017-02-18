@@ -94,23 +94,55 @@
 
   <div class="line space-top-bottom-20"></div>
 
-  <h4>คุณสมบัติผู้สมัคร</h4>   
-  <div>
-    {!!$_modelData['qualification']!!}
+  <div class="row">
+
+    <div class="col-sm-12 margin-section section-border-left">
+
+      <div class="space-top-bottom-10 section-inner">
+        
+        <h4>คุณสมบัติผู้สมัคร</h4>   
+        <div>
+          {!!$_modelData['qualification']!!}
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 
-  <div class="line space-top-bottom-20"></div>
+  <div class="row">
 
-  <h4>รายละเอียดงาน</h4>   
-  <div>
-    {!!$_modelData['description']!!}
+    <div class="col-sm-12 margin-section section-border-left">
+
+      <div class="space-top-bottom-10 section-inner">
+        
+        <h4>รายละเอียดงาน</h4>   
+        <div>
+          {!!$_modelData['description']!!}
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 
-  <div class="line space-top-bottom-20"></div>
+  <div class="row">
 
-  <h4>สวัสดิการ</h4>   
-  <div>
-    {!!$_modelData['benefit']!!}
+    <div class="col-sm-12 margin-section section-border-left">
+
+      <div class="space-top-bottom-10 section-inner">
+        
+        <h4>สวัสดิการ</h4>   
+        <div>
+          {!!$_modelData['benefit']!!}
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 
   <div class="line space-top-bottom-20"></div>

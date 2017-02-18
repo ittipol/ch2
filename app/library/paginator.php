@@ -92,11 +92,11 @@ class Paginator {
       if(is_array(current($options['order']))) {
 
         foreach ($options['order'] as $value) {
-          $this->model = $this->model->orderBy($value[0],$value[1]);
+          $this->model->orderBy($value[0],$value[1]);
         }
 
       }else{
-        $this->model = $this->model->orderBy(current($options['order']),next($options['order']));
+        $this->model->orderBy(current($options['order']),next($options['order']));
       }
       
     }

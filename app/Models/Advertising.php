@@ -36,8 +36,6 @@ class Advertising extends Model
 
     $string = new String;
 
-    // $advertisingType = AdvertisingType::select(array('name'))->find($this->advertising_type_id);
-
     return array(
       'id' => $this->id,
       'name' => $this->name,

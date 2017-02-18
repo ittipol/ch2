@@ -292,6 +292,31 @@
 	background-size: 25px;
 }
 
+.detail .info-section .section:not(:first-child) {
+	border-left: 1px solid #bababa;
+}
+
+.detail .margin-section {
+	margin: 20px;
+}
+
+.detail .margin-section .section-inner {
+	padding: 10px;
+}
+
+.detail .section-full-border-left {
+	border: 1px solid #bababa;
+	border-left-width: 5px;
+}
+
+.detail .section-border-left {
+	border-left: 1px solid #bababa;
+}
+
+.detail .margin-section .line {
+	width: 92%;
+}
+
 /*==========  Non-Mobile First Method  ==========*/
 
 /* Large Devices, Wide Screens */
@@ -333,6 +358,11 @@
 		top: 0;
 		right: 0;
 		padding: 10px 15px;
+	}
+
+	.detail .info-section .section:not(:first-child) {
+		border-top: 1px solid #bababa;
+		border-left: 0;
 	}
 
 }

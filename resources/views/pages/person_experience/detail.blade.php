@@ -97,6 +97,34 @@
     <p>{!!$careerObjective!!}</p>
     @endif
 
+    <div class="row">
+
+      <div class="col-sm-12 margin-section section-border-left">
+
+        <div class="space-top-bottom-10 section-inner">
+          
+          @if(!empty($PersonWorkingExperience))
+
+          <h4>ประสบการณ์การทำงาน</h4>
+          <div class="line"></div>
+          <div class="list-group">
+            @foreach($PersonWorkingExperience as $detail)
+              <div class="list-row row">
+                <div class="col-xs-9">
+                  <h4>{{$detail['message']}}</h4>
+                  <h5>{{$detail['peroid']}}</h5>
+                </div>
+              </div>
+            @endforeach
+          </div>
+          @endif
+
+        </div>
+
+      </div>
+
+    </div>
+
     @if(!empty($PersonWorkingExperience))
     <div class="space-top-50"></div>
     <h4>ประสบการณ์การทำงาน</h4>
@@ -128,7 +156,7 @@
       @endforeach
     </div>
     @endif
-
+    
     @if(!empty($PersonEducation))
     <div class="space-top-50"></div>
     <h4>ประวัติการศึกษา</h4>

@@ -56,7 +56,7 @@
             <div class="button-group">
 
               <a href="{{$data['detailUrl']}}">
-                <div class="button wide-button">แสดง</div>
+                <div class="button wide-button">แสดงรายละเอียด</div>
               </a>
 
               <div class="additional-option">

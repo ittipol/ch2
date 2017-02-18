@@ -233,7 +233,7 @@
 
   $(document).ready(function(){
 
-    const images = new Images('_image_group','photo',10);
+    const images = new Images('_image_group','photo',10,'description');
     images.load({!!$_formData['Image']!!});
 
     const tagging = new Tagging();

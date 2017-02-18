@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\library\string;
+
 class Freelance extends Model
 {
   public $table = 'freelances';
@@ -26,7 +28,22 @@ class Freelance extends Model
     ),
     'messages' => array(
       'name.required' => 'ชื่องานฟรีแลนซ์ที่รับทำห้ามว่าง',
-      'freelance_type_id.required' => 'ประเภทฟรีแลนซ์ห้ามว่าง',
+      'freelance_type_id.required' => 'ประเภทงานฟรีแลนซ์ห้ามว่าง',
     )
   );
+
+  public function buildModelData() {
+
+    $string = new String;
+
+    return array(
+      'id' => $this->id,
+      'name' => $this->name,
+      'description' => !empty($this->description) ? $this->description : '-',
+      '_name_short' => $string->subString($this->name,60),
+      '_freelanceType' => FreelanceType::select(array('name'))->find($this->freelance_type_id)->name
+    );
+    
+  }
+
 }

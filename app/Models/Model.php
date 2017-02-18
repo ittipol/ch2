@@ -271,11 +271,11 @@ class Model extends BaseModel
       if(is_array(current($options['order']))) {
 
         foreach ($options['order'] as $value) {
-          $model = $model->orderBy($value[0],$value[1]);
+          $model->orderBy($value[0],$value[1]);
         }
 
       }else{
-        $model = $model->orderBy(current($options['order']),next($options['order']));
+        $model->orderBy(current($options['order']),next($options['order']));
       }
       
     }
