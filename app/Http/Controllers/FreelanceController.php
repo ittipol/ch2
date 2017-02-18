@@ -14,6 +14,28 @@ class FreelanceController extends Controller
 
   }
 
+  public function detail() {
+
+    $model = Service::loadModel('Freelance')->find($this->param['id']);
+
+    if(empty($model)) {
+      $this->error = array(
+        'message' => 'ขออภัย ไม่พบประกาศนี้ หรือข้อมูลนี้อาจถูกลบแล้ว'
+      );
+      return $this->error();
+    }
+
+    $model->modelData->loadData(array(
+      'models' => array('Image','Tagging'),
+      'json' => array('Image')
+    ));
+
+    $this->data = $model->modelData->build();
+
+    return $this->view('pages.freelance.detail');
+
+  }
+
   public function manage() {
 
     $model = Service::loadModel('Freelance');

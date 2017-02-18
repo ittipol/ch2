@@ -28,7 +28,7 @@
               </div>
             </div>
             <div>
-              <a href="{{$data['detailUrl']}}"><div class="button wide-button">แสดงสินค้านี้</div></a>
+              <a href="{{$data['detailUrl']}}"><div class="button wide-button">แสดงรายละเอียด</div></a>
             </div>
           </div>
         </div>
@@ -41,7 +41,14 @@
 
     @else
 
-    <h3>ไม่พบอสังหาริมทรัพย์</h3>
+    <div class="shop-notice text-center space-top-20">
+      <img class="space-bottom-20" src="/images/common/not-found.png">
+      <div>
+        <h3>ยังไม่มีข้อมูลนี้</h3>
+        <p>ขออภัย ยังไม่มีข้อมูลซื้อ ขายอสังหาริมทรัพย์</p>
+        <a href="{{URL::to('real-estate/post')}}" class="button">เพิ่มข้อมูลซื้อ ขายอสังหาริมทรัพย์</a>
+      </div>
+    </div>
 
     @endif
 

@@ -86,7 +86,7 @@
     '__css/components/error.css',
     '__css/components/tile.css',
     '__css/pages/shop.css',
-    '__css/pages/person_experience.css',
+    '__css/pages/account.css',
     '__css/layouts/detail.css',
     '__css/layouts/blackbox/wrapper.css',
     '__css/layouts/blackbox/components/action-bar.css',

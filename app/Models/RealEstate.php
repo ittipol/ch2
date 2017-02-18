@@ -208,18 +208,8 @@ class RealEstate extends Model
 
   public function buildPaginationData() {
 
-    $imageLib = new Image;
     $currency = new Currency;
     $string = new String;
-
-    $image = $this->getModelRelationData('Image',array(
-      'first' => true
-    ));
-
-    $imageUrl = '/images/common/no-img.png';
-    if(!empty($image)) {
-      $imageUrl = $imageLib->getCacheImageUrl($image,'list');
-    }
 
     return array(
       'id' => $this->id,
@@ -227,7 +217,6 @@ class RealEstate extends Model
       '_name_short' => $string->subString($this->name,45),
       // 'description' => $this->description,
       '_price' => $currency->format($this->price),
-      '_imageUrl' => $imageUrl,
       '_realEstateTypeName' => $this->realEstateType->name
     );
   }

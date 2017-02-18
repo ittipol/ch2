@@ -39,32 +39,54 @@ Route::get('logout',function(){
 });
 
 // Login
-Route::get('login','UserController@login');
-Route::post('login','UserController@auth');
+Route::group(['middleware' => 'guest'], function () {
+  Route::get('login','UserController@login');
+  Route::post('login','UserController@auth');
+});
 
 // Register
 Route::get('register','UserController@registerForm')->middleware('guest');
 Route::post('register','UserController@register')->middleware('guest');
 
 Route::get('safe_image/{file}', 'StaticFileController@serveImages');
+
+// Account
 Route::group(['middleware' => 'auth'], function () {
-  Route::get('avatar', 'StaticFileController@avatar');
+
+  Route::get('account', 'accountController@account')->name('account');
+
+  Route::get('account/profile_edit', 'accountController@profileEdit')->name('account.profile.edit');
+  Route::patch('account/profile_edit','accountController@profileEditingSubmit')->name('account.profile.edit');
+
+  Route::get('account/theme', 'accountController@theme')->name('account.theme.edit');
+  Route::patch('account/theme','PersonExperienceController@themeEditingSubmit')->name('account.theme.edit');
+
+  Route::get('account/item', 'accountController@item')->name('account.item');
+  Route::get('account/real_estate', 'accountController@realEstate')->name('account.real_estate');
+  Route::get('account/shop', 'accountController@shop')->name('account.shop');
+
 });
 
 // Announcement
 Route::get('announcement/create','AnnouncementController@create');
 
 // Experience
+
+Route::get('experience/profile/{id}','PersonExperienceController@detail');
+
 Route::group(['middleware' => 'auth'], function () {
-  Route::get('experience','PersonExperienceController@manage')->name('person.experience.manage');
-  Route::post('experience','PersonExperienceController@start')->name('person.experience.start');
+  Route::get('person/experience','PersonExperienceController@manage')->name('person.experience.manage');
+  Route::post('person/experience','PersonExperienceController@start')->name('person.experience.start');
 });
 Route::group(['middleware' => ['auth','person.experience']], function () {
 
-  Route::get('experience/profile','PersonExperienceController@profile')->name('person.experience.profile');
+  Route::get('experience/profile/edit','PersonExperienceController@profile')->name('experience.profile.edit');
 
-  Route::get('experience/profile_edit','PersonExperienceController@profileEdit');
-  Route::patch('experience/profile_edit','PersonExperienceController@profileEditingSubmit');
+  // Route::get('experience/profile_edit','PersonExperienceController@profileEdit');
+  // Route::patch('experience/profile_edit','PersonExperienceController@profileEditingSubmit');
+
+  Route::get('experience/profile/website_add','PersonExperienceController@websiteAdd');
+  Route::patch('experience/profile/website_add','PersonExperienceController@websiteAddingSubmit');
 
   Route::get('experience/career_objective','PersonExperienceController@careerObjectiveEdit');
   Route::patch('experience/career_objective','PersonExperienceController@careerObjectiveEditingSubmit');
@@ -126,7 +148,6 @@ Route::group(['middleware' => ['auth','person.experience']], function () {
 });
 
 // community / Shop
-
 // Route::get('community/shop_feature','ShopController@feature');
 
 Route::group(['middleware' => ['auth','shop']], function () {
@@ -139,6 +160,8 @@ Route::group(['middleware' => 'auth'], function () {
 });
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
   Route::get('shop/{shopSlug}/manage','ShopController@manage')->name('shop.manage');
+
+  // Route::get('shop/{shopSlug}/order','ShopController@order')->name('shop.order');
 
   Route::get('shop/{shopSlug}/setting','ShopController@setting')->name('shop.setting');
 
@@ -237,8 +260,10 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('item/post','ItemController@add')->name('itme.post');
   Route::post('item/post','ItemController@addingSubmit')->name('itme.post');
 
-  Route::get('item/edit/{id}','ItemController@edit')->name('item.edit');
-  Route::patch('item/edit/{id}','ItemController@editingSubmit')->name('item.edit');
+  Route::get('account/item_edit/{id}','ItemController@edit')->name('account.item.edit');
+  Route::patch('account/item_edit/{id}','ItemController@editingSubmit')->name('account.item.edit');
+
+  Route::get('account/item_delete/{id}','ItemController@delete')->name('account.item.delete');
 });
 
 // Real Estate
@@ -249,10 +274,10 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('real-estate/post','RealEstateController@add');
   Route::post('real-estate/post','RealEstateController@addingSubmit');
 
-  Route::get('real-estate/edit/{id}','RealEstateController@edit');
-  Route::patch('real-estate/edit/{id}',[
-    'uses' => 'RealEstateController@editingSubmit'
-  ]);
+  Route::get('account/real_estate_edit/{id}','RealEstateController@edit');
+  Route::patch('account/real_estate_edit/{id}','RealEstateController@editingSubmit');
+
+  Route::get('account/real_estate_delete/{id}','RealEstateController@delete');
 });
 
 Route::group(['prefix' => 'api/v1', 'middleware' => 'api'], function () {

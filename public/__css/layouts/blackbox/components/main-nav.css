@@ -5,9 +5,9 @@
 	z-index: 1000;
 	width: 280px;
 	/*background-color: #1A237E;*/
-  /*background-color: #00695C;*/
-  background-color: #fff;
-  border-right: 1px solid #ccc;
+  background-color: #00695C;
+  /*background-color: #fff;*/
+  /*border-right: 1px solid #ccc;*/
   transition: left .2s ease-out;
 }
 
@@ -31,14 +31,23 @@
   color: #ffffff;
 }
 
-.navigation-top .account-info .avatar img {
-  width: 40px;
-  height: 40px;
-  border-radius: 40px;
-  background-color: #ffffff;
+.navigation-top .account-info .avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.navigation-top .account-info .avatar .profile-image {
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
 }
 
 .navigation-top .account-info .avatar + .account-description {
+  margin-top: 4px;
   margin-left: 10px;
 }
 

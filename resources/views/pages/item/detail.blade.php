@@ -19,18 +19,6 @@
 
 <div class="detail container">
 
-  <!-- <div class="detail-title">
-    <h4 class="sub-title">ประกาศ{{$_modelData['_announcementTypeName']}}</h4>
-    <h2 class="title">{{$_modelData['name']}}</h2>
-    <div class="tag-group">
-      <a class="tag-box">{{$_modelData['_used']}}</a>
-      <a class="tag-box">{{$_modelData['_categoryName']}}</a>
-      @foreach ($_modelData['Tagging'] as $tagging)
-        <a class="tag-box">{{$tagging['_word']}}</a>
-      @endforeach
-    </div>
-  </div> -->
-
   <h4 class="title-with-icon location-pin">{{$_modelData['Address']['_short_address']}}</h4>
 
   <div class="image-gallery">

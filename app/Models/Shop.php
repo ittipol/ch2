@@ -14,6 +14,7 @@ class Shop extends Model
 
   public $formHelper = true;
   public $modelData = true;
+  public $paginator = true;
 
   public $imageTypes = array(
     'profile-image' => array(
@@ -213,7 +214,7 @@ class Shop extends Model
     $image = Image::select('id','model','model_id','filename','image_type_id')->find($this->profile_image_id);
 
     if(empty($image)) {
-      return '';
+      return '/images/common/no-img.png';
     }
 
     return $image->getImageUrl();
@@ -238,7 +239,7 @@ class Shop extends Model
     $image = Image::select('id','model','model_id','filename','image_type_id')->find($this->cover_image_id);
 
     if(empty($image)) {
-      return '';
+      return '/images/common/no-img.png';
     }
 
     return $image->getImageUrl();
@@ -252,9 +253,33 @@ class Shop extends Model
       'name' => $this->name,
       'description' => $this->description,
       '_short_description' => $string->subString($this->description,500,true),
-      '_logo' => '',
-      '_cover' => '',
+      // 'profileImage' => $this->getProfileImageUrl(),
+      // 'cover' => $this->getCoverUrl()
     );
+  }
+
+  public function buildPaginationData() {
+
+    return array(
+      'name' => $this->name,
+      'profileImage' => $this->getProfileImageUrl(),
+      'cover' => $this->getCoverUrl()
+    );
+
+  }
+
+  public function getRecordForParseUrl() {
+
+    $slugModel = new Slug;
+    $slug = $slugModel->where(array(
+      array('model','like','Shop'),
+      array('model_id','=',$this->id)
+    ))->first()->slug;
+
+    return array(
+      'slug' => $slug
+    );
+
   }
 
 }

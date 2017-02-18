@@ -125,11 +125,11 @@ class Contact extends Model
 
   public function buildModelData() {
 
-    $phoneNumber = '-';
-    $fax = '-';
-    $email = '-';
-    $website = '-';
-    $line = '-';
+    $phoneNumber = '';
+    $fax = '';
+    $email = '';
+    $website = '';
+    $line = '';
 
     if(!empty($this->phone_number)) {
       $phoneNumber = implode(', ',json_decode($this->phone_number,true));        

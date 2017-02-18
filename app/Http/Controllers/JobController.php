@@ -340,11 +340,13 @@ class JobController extends Controller
       return $this->error();
     }
 
-    $profile = $model->person->personExperience;
+    $person = $model->person;
 
-    $profile->modelData->loadData(array(
+    $person->modelData->loadData(array(
       'models' => array('Address','Contact')
     ));
+
+    $profile = $model->person->personExperience;
 
     // Get career objective
     $careerObjective = Service::loadModel('PersonCareerObjective')
@@ -415,6 +417,14 @@ class JobController extends Controller
 
     }
 
+    // relate to branches
+    $total = Service::loadModel('relateToBranch')
+    ->where(array(
+      array('model','like','Job'),
+      array('model_id','=',$model->job_id)
+    ))
+    ->count();
+
     // Get branch
     $branches = Service::loadModel('JobApplyToBranch')
     ->where('person_apply_job_id','=',$this->param['id'])
@@ -427,11 +437,12 @@ class JobController extends Controller
 
     $this->setData('jobName',$model->job->name);
     $this->setData('jobApply',$model->modelData->build(true));
-    $this->setData('profile',$profile->modelData->build(true));
+    $this->setData('profile',$person->modelData->build(true));
+    $this->setData('profileImageUrl',$person->getProfileImageUrl());
     $this->setData('careerObjective',$careerObjective->career_objective);
-    $this->setData('profileImageUrl',$profile->getProfileImageUrl());
     $this->setData('skills',$_skills);
     $this->setData('languageSkills',$_languageSkills);
+    $this->setData('hasBranch',!empty($total) ? true : false);
     $this->setData('branches',$_branches);
 
     return $this->view('pages.job.job_apply_detail');

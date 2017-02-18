@@ -53,10 +53,12 @@ class UserController extends Controller
 
     if(Auth::attempt($data)){
       // Store data
-      $person = Person::find(Auth::user()->id);
+      $person = Person::select(array('id','name','profile_image_id','theme'))->find(Auth::user()->id);
       Session::put('Person.id',$person->id);
       Session::put('Person.name',$person->name);
-      // Session::put('accessPageLevelId',$person->name);
+      Session::put('Person.theme',$person->theme);
+      Session::put('Person.profile_image',$person->getProfileImageUrl());
+      // Session::put('Person.pageAccessLevel',{1-4});
 
       $message = new Message;
       $message->loginSuccess();

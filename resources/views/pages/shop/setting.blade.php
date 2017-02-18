@@ -32,7 +32,7 @@
 
     <div class="list-item">
       <a href="{{$contactUrl}}">
-        <img class="icon" src="/images/common/phone.png" >
+        <img class="icon" src="/images/common/mobile.png" >
         <h4>การติดต่อ</h4>
       </a>
     </div>

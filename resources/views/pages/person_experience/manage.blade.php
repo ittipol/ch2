@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="top-header-wrapper">
-  <h2 class="top-header">โปรไฟล์</h2>
+  <h2 class="top-header">ประวัติการทำงาน</h2>
 </div>
 
 <div class="container">
@@ -12,17 +12,43 @@
   - ทุกคน
   - เฉพาะฉัน
   - ทุกคนที่เป็นสมาชิก Chonburi Square
-  <div class="tile-nav-group space-top-bottom-20 clearfix">
+  <div class="tile-nav-group space-top-20 clearfix">
 
     <div class="tile-nav small">
       <div class="tile-nav-image">
-        <a href="{{URL::to('experience/profile')}}">
+        <a href="{{URL::to('experience/profile/edit')}}">
           <img src="/images/common/resume.png">
         </a>
       </div>
       <div class="tile-nav-info">
-        <a href="{{URL::to('experience/profile')}}">
+        <a href="{{URL::to('experience/profile/edit')}}">
           <h4 class="tile-nav-title">เพิ่มประวัติการทำงานของคุณ</h4>
+        </a>
+      </div>
+    </div>
+
+    <div class="tile-nav small">
+      <div class="tile-nav-image">
+        <a href="{{URL::to('experience/profile/website_add')}}">
+          <img src="/images/common/globe.png">
+        </a>
+      </div>
+      <div class="tile-nav-info">
+        <a href="{{URL::to('experience/profile/website_add')}}">
+          <h4 class="tile-nav-title">เพิ่มเว็บไซต์ส่วนตัว</h4>
+        </a>
+      </div>
+    </div>
+
+    <div class="tile-nav small">
+      <div class="tile-nav-image">
+        <a href="{{URL::to('experience/profile/contact_add')}}">
+          <img src="/images/common/plus.png">
+        </a>
+      </div>
+      <div class="tile-nav-info">
+        <a href="{{URL::to('experience/profile/contact_add')}}">
+          <h4 class="tile-nav-title">เพิ่มข้อมูลการติดต่อ</h4>
         </a>
       </div>
     </div>
@@ -46,12 +72,12 @@
 
   <div class="space-top-bottom-20">
 
-    <h4>โปรไฟล์โดยสรุป</h4>
+    <h4>ประวัติโดยย่อ</h4>
 
     <div class="clearfix">
-      <div class="profile-image pull-left">
+      <div class="account pull-left">
         @if(!empty($profileImageUrl))
-        <img src="{{$profileImageUrl}}">
+        <div class="profile-image" style="background-image:url({{$profileImageUrl}});"></div>
         @endif
       </div>
 
@@ -89,7 +115,7 @@
       
     </div>
 
-    <a href="{{URL::to('experience/profile')}}" class="button">แสดงทั้งหมด</a>
+    <a href="{{$experienceDetailUrl}}" class="button">แสดงประวัติทั้งหมด</a>
 
   </div>
   

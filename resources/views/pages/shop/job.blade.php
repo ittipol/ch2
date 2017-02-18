@@ -88,18 +88,16 @@
                 <div class="button wide-button">แสดงรายละเอียด</div>
               </a>
 
-              <div class="button additional-button">
-                <div class="additional-option">
-                  <div class="dot"></div>
-                  <div class="dot"></div>
-                  <div class="dot"></div>
-                  <div class="additional-option-content">
-                    <a href="{{$data['editUrl']}}">แก้ไข</a>
-                    <a href="{{$data['deleteUrl']}}">ลบ</a>
-                  </div>
+              <div class="additional-option">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="additional-option-content">
+                  <a href="{{$data['editUrl']}}">แก้ไข</a>
+                  <a href="{{$data['deleteUrl']}}">ลบ</a>
                 </div>
               </div>
-            
+          
             </div>
 
           </div>

@@ -50,9 +50,10 @@ class AppServiceProvider extends ServiceProvider
             ->select(array('shop_id'))
             ->where('person_id','=',session()->get('Person.id'));
 
-            if($personToShop->exists()) {
+            // if($personToShop->exists()) {
 
               $url = new Url;
+              $slugModel = Service::loadModel('Slug');
           
               $records = $personToShop->get();
 
@@ -61,7 +62,7 @@ class AppServiceProvider extends ServiceProvider
 
                 $shop = $record->shop;
 
-                $slug = Service::loadModel('Slug')->where(array(
+                $slug = $slugModel->where(array(
                   array('model','like','Shop'),
                   array('model_id','=',$shop->id)
                 ))->first()->slug;
@@ -77,7 +78,7 @@ class AppServiceProvider extends ServiceProvider
 
             view()->share('_shops',$shops);
 
-          }
+          // }
 
         });
     }

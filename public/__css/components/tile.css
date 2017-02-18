@@ -23,6 +23,7 @@
 
 .tile-nav.small {
 	width: 100px;
+	margin-bottom: 20px;
 }
 
 .tile-nav.small .tile-nav-info .tile-nav-title {

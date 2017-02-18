@@ -18,6 +18,7 @@ class Model extends BaseModel
   public $modelAlias;
   protected $storagePath = 'app/public/';
   protected $state = 'create';
+  protected $modelRelations = array();
   protected $modelRelationData = array();
   protected $sortingFields;
   protected $behavior;
@@ -418,6 +419,10 @@ class Model extends BaseModel
 
   public function getImageCache() {
       return $this->imageCache;
+  }
+
+  public function getRecordForParseUrl() {
+      return $this->getAttributes();
   }
 
   public function buildModelData() {

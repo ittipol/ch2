@@ -21,12 +21,12 @@
       @else
 
         <div class="account-info clearfix">
-          <a class="avatar pull-left" href="{{URL::to('user/account')}}">
-            <img src="/avatar" />
+          <a class="avatar pull-left" href="{{URL::to('account')}}">
+            <div class="profile-image" style="background-image:url({{Session::get('Person.profile_image')}});"></div>
           </a>
           <div class="account-description pull-left">
             <div>{{Session::get('Person.name')}}</div>
-            <div><a class="avatar pull-left" href="{{URL::to('user/account')}}">จัดการบัญชี</a></div>
+            <div><a class="pull-left" href="{{URL::to('account')}}">จัดการบัญชี</a></div>
           </div>
           <div class="additional-option">
             <div class="dot"></div>

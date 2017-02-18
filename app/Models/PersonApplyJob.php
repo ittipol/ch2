@@ -44,10 +44,10 @@ class PersonApplyJob extends Model
     $personExperience = $this->person->personExperience;
 
     $imageUrl = '/images/common/no-img.png';
-    if(!empty($personExperience->profile_image_id)) {
+    if(!empty($this->person->profile_image_id)) {
       $image = $image
       ->select(array('model','model_id','filename','image_type_id'))
-      ->find($personExperience->profile_image_id);
+      ->find($this->person->profile_image_id);
 
       $imageUrl = $cache->getCacheImageUrl($image,'list');
 
@@ -56,7 +56,7 @@ class PersonApplyJob extends Model
     return array(
       // 'jobName' => $this->job->name,
       '_jobNameShort' => $string->subString($this->job->name,45),
-      'personName' => $personExperience->name,
+      'personName' => $this->person->name,
       '_imageUrl' => $imageUrl
     );
 

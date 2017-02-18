@@ -2,82 +2,26 @@
 @section('content')
 
 <div class="top-header-wrapper">
-  <h2 class="top-header">โปรไฟล์</h2>
+  <h2 class="top-header">ประวัติการทำงาน</h2>
 </div>
 
 <div class="container">
   
-  <div class="space-top-bottom-20">
-
-    <div class="clearfix">
-      <div class="profile-image pull-left">
-        @if(!empty($profileImageUrl))
-        <img src="{{$profileImageUrl}}">
-        @endif
-      </div>
-
-      <div class="profile-info pull-left">
-        <h3>{{$profile['name']}}</h3>
-
-        <dl>
-          <dt>เพศ</dt>
-          <dd>{{$profile['gender']}}</dd>
-        </dl>
-
-        <dl>
-          <dt>วันเกิด</dt>
-          <dd>{{$profile['birthDate']}}</dd>
-        </dl>
-      </div>
-
-    </div>
-
-    <div class="space-top-bottom-20">
-
-      @if(!empty($profile['Address']['_long_address']))
-      <dl>
-        <dt>ที่อยู่ปัจจุบัน</dt>
-        <dd>{{$profile['Address']['_long_address']}}</dd>
-      </dl>
-      @endif
-
-      @if(!empty($profile['Contact']['phone_number']))
-      <dl>
-        <dt>หมายเลขโทรศัพท์</dt>
-        <dd>{{$profile['Contact']['phone_number']}}</dd>
-      </dl>
-      @endif
-
-      @if(!empty($profile['Contact']['email']))
-      <dl>
-        <dt>อีเมล</dt>
-        <dd>{{$profile['Contact']['email']}}</dd>
-      </dl>
-      @endif
-
-      @if(!empty($profile['Contact']['line']))
-      <dl>
-        <dt>Line ID</dt>
-        <dd>{{$profile['Contact']['line']}}</dd>
-      </dl>
-      @endif
-      
-    </div>
-
-    <a href="{{URL::to('experience/profile_edit')}}" class="button">แก้ไขโปรไฟล์</a>
-
-  </div>
-
-  <div class="line grey space-top-bottom-20"></div>
-  
   <h4>จุดมุ่งหมายในอาชีพ</h4>
-
-  @if(empty($careerObjective))
-  <div class="space-top-bottom-10">ยังไม่มีจุดมุ่งหมายในอาชีพ</div>
-  @else
-  <div class="space-top-bottom-10">มีจุดมุ่งหมายในอาชีพแล้ว</div>
-  @endif
-  <a href="{{URL::to('experience/career_objective')}}" class="button">เพิ่มเติม หรือแก้ไขจุดมุ่งหมายในอาชีพ</a>
+  <div class="clearfix">
+    <div class="tile-nav xs pull-left">
+      <div class="tile-nav-image">
+        <a href="{{URL::to('experience/career_objective')}}">
+          <img src="/images/common/pencil.png">
+        </a>
+      </div>
+    </div>
+    @if(empty($careerObjective))
+    <h4 class="tile-nav-title pull-left">เพิ่มจุดมุ่งหมายในอาชีพ</h4>
+    @else
+    <h4 class="tile-nav-title pull-left">แก้ไข เพิ่มเติมจุดมุ่งหมายในอาชีพ</h4>
+    @endif
+  </div>
 
   @if(!empty($PersonWorkingExperience))
   <div class="line grey space-top-bottom-20"></div>

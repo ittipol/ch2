@@ -20,7 +20,99 @@ class PersonExperienceController extends Controller
 
   }
 
+  public function detail() {
+
+    $person = Service::loadModel('Person')->find(Session::get('Person.id'));
+
+    $person->modelData->loadData(array(
+      'models' => array('Address','Contact')
+    ));
+
+    $profile = $person->personExperience;
+
+    $profile->modelData->loadData(array(
+      'models' => array('Address','Contact')
+    ));
+
+    // Get career objective
+    $careerObjective = Service::loadModel('PersonCareerObjective')
+    ->select(array('id','career_objective'))
+    ->where('person_experience_id','=',$profile->id)
+    ->first();
+
+    // Get skill
+    $skills = Service::loadModel('PersonSkill')->where('person_experience_id','=',$profile->id)->get();
+
+    $_skills = array();
+    foreach ($skills as $skill) {
+      $_skills[] = array(
+        'skill' => $skill->skill
+      );
+    }
+
+    // Get language skill
+    $languageSkills = Service::loadModel('PersonLanguageSkill')->where('person_experience_id','=',$profile->id)->get();
+
+    $_languageSkills = array();
+    foreach ($languageSkills as $languageSkill) {
+      $_languageSkills[] = array(
+        'name' => $languageSkill->language->name,
+        'level' => $languageSkill->languageSkillLevel->name
+      );
+    }
+
+    $models = array(
+      'PersonWorkingExperience' => 'working',
+      'PersonInternship' => 'internship',
+      'PersonEducation' => 'education',
+      'PersonProject' => 'project',
+      'PersonCertificate' => 'certificate'
+    );
+
+    foreach ($models as $_model => $alias) {
+      $experienceDetails = Service::loadModel('PersonExperienceDetail')
+      ->orderBy('start_year','DESC')
+      ->orderBy('start_month','DESC')
+      ->orderBy('start_day','DESC')
+      ->select(array('model','model_id','start_year','start_month','start_day','end_year','end_month','end_day','current'))
+      ->where(array(
+        array('person_experience_id','=',$profile->id),
+        array('model','like',$_model)
+      ))
+      ->get();
+
+      $details = array();
+      foreach ($experienceDetails as $experienceDetail) {
+        
+        $__model = $experienceDetail->{lcfirst($experienceDetail->model)};
+
+        if(empty($__model)) {
+          continue;
+        }
+
+        $details[] = array_merge(
+          $__model->buildModelData(),
+          array(
+            'peroid' => $experienceDetail->getPeriod()
+          )
+        );
+
+      }
+
+      $this->setData($_model,$details);
+
+    }
+
+    $this->setData('profile',$person->modelData->build(true));
+    $this->setData('profileImageUrl',$person->getProfileImageUrl());
+
+    return $this->view('pages.person_experience.detail');
+
+  }
+
   public function manage() {
+
+    $url = new Url;
 
     $model = Service::loadModel('PersonExperience');
 
@@ -28,19 +120,17 @@ class PersonExperienceController extends Controller
       return $this->view('pages.person_experience.start');
     }
 
-    $url = new Url;
+    $person = Service::loadModel('Person')->find(Session::get('Person.id'));
 
-    $profile = $model
-    ->select(array('id','name','gender','birth_date','private_websites','profile_image_id','active'))
-    ->where('person_id','=',Session::get('Person.id'))
-    ->first();
-
-    $profile->modelData->loadData(array(
+    $person->modelData->loadData(array(
       'models' => array('Address','Contact')
     ));
 
-    $this->setData('profile',$profile->modelData->build(true));
-    $this->setData('profileImageUrl',$profile->getProfileImageUrl());
+    $experience = $person->personExperience;
+
+    $this->setData('profile',$person->modelData->build(true));
+    $this->setData('profileImageUrl',$person->getProfileImageUrl());
+    $this->setData('experienceDetailUrl',$url->setAndParseUrl('experience/profile/{id}',array('id' => $experience->id)));
 
     return $this->view('pages.person_experience.manage');
 
@@ -53,13 +143,9 @@ class PersonExperienceController extends Controller
     $model = Service::loadModel('PersonExperience');
 
     $profile = $model
-    ->select(array('id','name','gender','birth_date','private_websites','profile_image_id','active'))
+    ->select(array('id','private_websites','active'))
     ->where('person_id','=',Session::get('Person.id'))
     ->first();
-
-    $profile->modelData->loadData(array(
-      'models' => array('Address','Contact')
-    ));
 
     // Get career objective
     $careerObjective = Service::loadModel('PersonCareerObjective')
@@ -155,9 +241,11 @@ class PersonExperienceController extends Controller
     $model = Service::loadModel('PersonExperience');
 
     if(!$model->checkExistByPersonId()) {
+
+      // $person = Service::loadModel('Person')->find(Session::get('Person.id'));
       
       $model->fill(array(
-        'name' => Session::get('Person.name'),
+        'name' => $person->name,
         'active' => 0
       ))->save();
 
@@ -173,69 +261,97 @@ class PersonExperienceController extends Controller
 
   }
 
-  public function profileEdit() {
+  // public function profileEdit() {
+
+  //   $model = Service::loadModel('PersonExperience')->where('person_id','=',Session::get('Person.id'))->first();
+
+  //   $model->formHelper->loadFieldData('Province',array(
+  //     'key' =>'id',
+  //     'field' => 'name',
+  //     'index' => 'provinces',
+  //     'order' => array(
+  //       array('top','ASC'),
+  //       array('id','ASC')
+  //     )
+  //   ));
+
+  //   $model->formHelper->setData('websiteTypes',json_encode(array(
+  //     array('private-website','เว็บไซต์ส่วนตัว'),
+  //     array('blog','บล็อก'),
+  //     array('company-website','เว็บไซต์บริษัท')
+  //   )));
+
+  //   $date = new Date;
+
+  //   $latestYear = date('Y');
+    
+  //   $day = array();
+  //   $month = array();
+  //   $year = array();
+
+  //   for ($i=1; $i <= 31; $i++) { 
+  //     $day[$i] = $i;
+  //   }
+
+  //   for ($i=1; $i <= 12; $i++) { 
+  //     $month[$i] = $date->getMonthName($i);
+  //   }
+
+  //   for ($i=1957; $i <= $latestYear; $i++) { 
+  //     $year[$i] = $i+543;
+  //   }
+
+  //   $model->formHelper->loadData(array(
+  //     'model' => array(
+  //       'Address','Contact'
+  //     )
+  //   ));
+
+  //   $this->data = $model->formHelper->build();
+  //   $this->setData('profileImage',json_encode($model->getProfileImage()));
+  //   $this->setData('day',$day);
+  //   $this->setData('month',$month);
+  //   $this->setData('year',$year);
+
+  //   return $this->view('pages.person_experience.form.profile_edit');
+
+  // }
+
+  // public function profileEditingSubmit(CustomFormRequest $request) {
+
+  //   $model = Service::loadModel('PersonExperience')->where('person_id','=',Session::get('Person.id'))->first();
+
+  //   if($model->fill($request->all())->save()) {
+  //     Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+  //     return Redirect::to('experience/profile');
+  //   }else{
+  //     return Redirect::back();
+  //   }
+
+  // }
+
+  public function websiteAdd() {
 
     $model = Service::loadModel('PersonExperience')->where('person_id','=',Session::get('Person.id'))->first();
-
-    $model->formHelper->loadFieldData('Province',array(
-      'key' =>'id',
-      'field' => 'name',
-      'index' => 'provinces',
-      'order' => array(
-        array('top','ASC'),
-        array('id','ASC')
-      )
-    ));
-
+  
     $model->formHelper->setData('websiteTypes',json_encode(array(
       array('private-website','เว็บไซต์ส่วนตัว'),
       array('blog','บล็อก'),
       array('company-website','เว็บไซต์บริษัท')
     )));
 
-    $date = new Date;
-
-    $latestYear = date('Y');
-    
-    $day = array();
-    $month = array();
-    $year = array();
-
-    for ($i=1; $i <= 31; $i++) { 
-      $day[$i] = $i;
-    }
-
-    for ($i=1; $i <= 12; $i++) { 
-      $month[$i] = $date->getMonthName($i);
-    }
-
-    for ($i=1957; $i <= $latestYear; $i++) { 
-      $year[$i] = $i+543;
-    }
-
-    $model->formHelper->loadData(array(
-      'model' => array(
-        'Address','Contact'
-      )
-    ));
-
     $this->data = $model->formHelper->build();
-    $this->setData('profileImage',json_encode($model->getProfileImage()));
-    $this->setData('day',$day);
-    $this->setData('month',$month);
-    $this->setData('year',$year);
 
-    return $this->view('pages.person_experience.form.profile_edit');
-
+    return $this->view('pages.person_experience.form.website_add');
   }
 
-  public function profileEditingSubmit(CustomFormRequest $request) {
+  public function websiteAddingSubmit() {
 
     $model = Service::loadModel('PersonExperience')->where('person_id','=',Session::get('Person.id'))->first();
 
-    if($model->fill($request->all())->save()) {
+    if($model->fill(request()->all())->save()) {
       Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('experience/profile');
+      return Redirect::to('person/experience');
     }else{
       return Redirect::back();
     }

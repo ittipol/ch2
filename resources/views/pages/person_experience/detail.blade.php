@@ -4,8 +4,7 @@
 <div class="top-header-wrapper">
   <div class="top-header">
     <div class="detail-title">
-      <h4 class="sub-title">รายละเอียดการสมัครงาน</h4>
-      <h2 class="title">{{$jobName}}</h2>
+      <h4 class="sub-title">ประวัติการทำงาน</h4>
       <div class="tag-group">
       </div>
     </div>
@@ -20,34 +19,7 @@
     </div>
   </div>
 
-  @if(!empty($jobApply['message']))
-    <div>{!!$jobApply['message']!!}</div>
-    <div class="line space-top-bottom-30"></div>
-  @endif
-
-  @if($hasBranch)
-  <div class="row">
-    <dt class="col-sm-3">สาขาที่ผู้สมัครสามารถทำงานได้</dt>
-    <dd class="col-sm-9">
-    @if(!empty($branches))
-      @foreach($branches as $branch)
-
-      <div class="col-lg-4 col-md-4 col-sm-6">
-        <div class="title-with-icon space tick-green">{{$branch}}</div>
-      </div>
-
-      @endforeach
-    @else
-      <div class="col-lg-4 col-md-4 col-sm-6">
-        <div>ไม่ได้ระบุ</div>
-      </div>
-    @endif
-    </dd>
-  </div>
-  <div class="line space-top-bottom-30"></div>
-  @endif
-
-  <h3>ข้อมูลผู้สมัครงาน</h3>
+  <h3>ประวัติการทำงาน</h3>
   <div>โปรไฟล์</div>
 
   <div class="space-top-bottom-20">

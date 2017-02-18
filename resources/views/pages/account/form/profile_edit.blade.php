@@ -92,16 +92,6 @@
         </div>
       </div>
 
-      <div class="form-row">
-        <?php 
-          echo Form::label('websites', 'เว็บไซต์ส่วนตัว');
-        ?>
-        <div id="website_input" class="text-group">
-          <div class="text-group-panel"></div>
-          <a href="javascript:void(0);" class="text-add">เพิ่ม +</a>
-        </div>
-      </div>
-
     </div>
 
     <div class="form-section">
@@ -116,6 +106,7 @@
         ?>
         <div id="phone_number_input" class="text-group">
           <div class="text-group-panel"></div>
+          <a href="javascript:void(0);" class="text-add">เพิ่ม +</a>
         </div>
       </div>
 
@@ -125,6 +116,7 @@
         ?>
         <div id="email_input" class="text-group">
           <div class="text-group-panel"></div>
+          <a href="javascript:void(0);" class="text-add">เพิ่ม +</a>
         </div>
       </div>
 
@@ -134,6 +126,7 @@
         ?>
         <div id="line_id_input" class="text-group">
           <div class="text-group-panel"></div>
+          <a href="javascript:void(0);" class="text-add">เพิ่ม +</a>
         </div>
       </div>
 
@@ -217,11 +210,8 @@
       const images = new Images('_profile_image','profile-image',1);
       images.load('{!!$profileImage!!}');
 
-      const textInputStack = new TextInputStack('website_input','private_websites','เว็บไซต์',{!!$_fieldData['websiteTypes']!!});
-      textInputStack.load({!!$_formData['private_websites']!!});
-
       const phoneNumberInput = new TextInputStack('phone_number_input','Contact[phone_number]','หมายเลขโทรศัพท์');
-      phoneNumberInput.disableCreatingInput();
+      // phoneNumberInput.disableCreatingInput();
       @if(!empty($_formData['Contact']['phone_number']))
         phoneNumberInput.load({!!$_formData['Contact']['phone_number']!!});
       @else
@@ -229,7 +219,7 @@
       @endif
 
       const emailInput = new TextInputStack('email_input','Contact[email]','อีเมล');
-      emailInput.disableCreatingInput();
+      // emailInput.disableCreatingInput();
       @if(!empty($_formData['Contact']['email']))
         emailInput.load({!!$_formData['Contact']['email']!!});
       @else
@@ -237,7 +227,7 @@
       @endif
 
       const lindIdInput = new TextInputStack('line_id_input','Contact[line]','Line ID');
-      lindIdInput.disableCreatingInput();
+      // lindIdInput.disableCreatingInput();
       @if(!empty($_formData['Contact']['line']))
         lindIdInput.load({!!$_formData['Contact']['line']!!});
       @else

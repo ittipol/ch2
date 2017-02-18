@@ -7,8 +7,8 @@ use App\library\date;
 class PersonExperience extends Model
 {
   protected $table = 'person_experiences';
-  protected $fillable = ['person_id','name','gender','birth_date','private_websites','profile_image_id','active'];
-  protected $modelRelations = array('Image','Address','Contact');
+  protected $fillable = ['person_id','private_websites','active'];
+  // protected $modelRelations = array('Image','Address','Contact');
   protected $directory = true;
 
   public $formHelper = true;
@@ -99,25 +99,25 @@ class PersonExperience extends Model
     return $this->where('person_id','=',session()->get('Person.id'))->exists();
   }
 
-  public function getGender($gender = '-') {
+  // public function getGender($gender = '-') {
 
-    switch ($gender) {
-      case 'm':
-        $gender = 'ชาย';
-        break;
+  //   switch ($gender) {
+  //     case 'm':
+  //       $gender = 'ชาย';
+  //       break;
       
-      case 'f':
-        $gender = 'หญิง';
-        break;
+  //     case 'f':
+  //       $gender = 'หญิง';
+  //       break;
 
-      case '0':
-        $gender = 'ไม่ระบุ';
-        break;
-    }
+  //     case '0':
+  //       $gender = 'ไม่ระบุ';
+  //       break;
+  //   }
 
-    return $gender;
+  //   return $gender;
 
-  }
+  // }
 
   public function getProfileImage() {
 
@@ -138,7 +138,7 @@ class PersonExperience extends Model
     $image = Image::select('id','model','model_id','filename','image_type_id')->find($this->profile_image_id);
 
     if(empty($image)) {
-      return '';
+      return '/images/common/no-img.png';
     }
 
     return $image->getImageUrl();
@@ -147,10 +147,11 @@ class PersonExperience extends Model
   public function buildModelData() {
 
     $date = new Date;
+    $person = new Person;
 
     $gender = '-';
     if(!empty($this->gender)) {
-      $gender = $this->getGender($this->gender);
+      $gender = $person->getGender($this->gender);
     }
 
     $birthDate = '-';

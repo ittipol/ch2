@@ -1,0 +1,111 @@
+.account {
+  width: 150px;
+  height: 150px;
+  border-radius: 150px;
+  overflow: hidden;
+  background-color: #aaa;
+}
+
+.account .profile-image {
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+}
+
+.profile-info {
+	margin-left: 20px;
+}
+
+.profile-info h3 {
+	margin-top: 10px;
+}
+
+label.tile-color {
+  width: 100px;
+  height: 100px;
+  background-color: pink;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+label.tile-color.red {
+  background-color: #E53935;
+}
+
+label.tile-color.pink {
+  background-color: #D81B60;
+}
+
+label.tile-color.purple {
+  background-color: #8E24AA;
+}
+
+label.tile-color.deep-purple {
+  background-color: #5E35B1;
+}
+
+label.tile-color.indigo {
+  background-color: #3949AB;
+}
+
+label.tile-color.blue {
+  background-color: #1E88E5;
+}
+
+label.tile-color.light-blue {
+  background-color: #039BE5;
+}
+
+label.tile-color.cyan {
+  background-color: #00ACC1;
+}
+
+label.tile-color.teal {
+  background-color: #00897B;
+}
+
+label.tile-color.green {
+  background-color: #43A047;
+}
+
+label.tile-color.light-green {
+  background-color: #7CB342;
+}
+
+label.tile-color.yellow {
+  background-color: #FDD835;
+}
+
+label.tile-color.amber {
+  background-color: #FFB300;
+}
+
+label.tile-color.orange {
+  background-color: #FB8C00;
+}
+
+label.tile-color.deep-orange {
+  background-color: #F4511E;
+}
+
+label.tile-color.brown {
+  background-color: #6D4C41;
+}
+
+label.tile-color.grey {
+  background-color: #757575;
+}
+
+label.tile-color.blue-grey {
+  background-color: #546E7A;
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 480px) {
+  .profile-info {
+    margin-top: 30px;
+    margin-left: 0;
+  }
+}
