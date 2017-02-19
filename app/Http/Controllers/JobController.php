@@ -19,7 +19,7 @@ class JobController extends Controller
     $model = Service::loadModel('Job');
     
     $page = 1;
-    if(!empty($this->query)) {
+    if(!empty($this->query['page'])) {
       $page = $this->query['page'];
     }
 
@@ -308,7 +308,7 @@ class JobController extends Controller
     $model = Service::loadModel('PersonApplyJob');
 
     $page = 1;
-    if(!empty($this->query)) {
+    if(!empty($this->query['page'])) {
       $page = $this->query['page'];
     }
 

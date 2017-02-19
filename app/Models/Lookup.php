@@ -2,10 +2,15 @@
 
 namespace App\Models;
 
+use App\library\service;
+use App\library\cache;
+
 class Lookup extends Model
 {
   protected $table = 'lookups';
-  protected $fillable = ['model','model_id','keyword','description','keyword_1','keyword_2','keyword_3','address','tags'];
+  protected $fillable = ['model','model_id','name','description','keyword_1','keyword_2','keyword_3','keyword_4','address','tags'];
+
+  public $paginator = true;
 
   //  Lookup Special Format
   // 'keyword' => '{{Department.name|Company.id=>CompanyHasDepartment.company_id,CompanyHasDepartment.department_id=>Department.id}}',
@@ -19,10 +24,6 @@ class Lookup extends Model
   // 
   // Call Method
   // 'address' => '{{__getAddress}}'
-
-  // public function __construct() {  
-  //   parent::__construct();
-  // }
 
   public function __saveRelatedData($model,$options = array()) {
 
@@ -39,17 +40,19 @@ class Lookup extends Model
       $data = array_merge($data,$options['data']);
     }
 
-    // $taggings = $model->getModelRelationData('Tagging');
+    $taggings = $model->getModelRelationData('Tagging',array(
+      'fields' => array('word_id')
+    ));
 
-    // $_words = array();
-    // if(!empty($taggings)){
-    //   foreach ($taggings as $tagging) {
-    //     $_words[] = $tagging->word->word;
-    //   }
-    // }
+    $_words = array();
+    if(!empty($taggings)){
+      foreach ($taggings as $tagging) {
+        $_words[] = $tagging->word->word;
+      }
+    }
 
     if(!empty($_words)){
-      $value['words'] = implode(' ',$_words);
+      $value['tags'] = implode(' ',$_words);
     }
 
     $_addresses = $this->__getAddress($model);
@@ -135,7 +138,7 @@ class Lookup extends Model
             if(!empty($_matches[0])){
 
               if(substr($_matches[0],0,2) == '__'){
-                $_value = $this->{$_matches[0]}($model);
+                $_value = $model->{substr($_matches[0],2)}();
               }elseif(array_key_exists($_matches[0],$options['data'])) {
                 $_value = $options['data'][$_matches[0]];
               }else{
@@ -311,7 +314,7 @@ class Lookup extends Model
 
     $address = $model->getModelRelationData('Address',array(
       'fields' => array(
-        'address','district_id','sub_district_id'
+        'address','province_id','district_id','sub_district_id'
       ),
       'first' => true
     ));
@@ -320,24 +323,44 @@ class Lookup extends Model
       return null;
     }
 
+
     // village
-    $village = new Village;
-    $villages = $village->getData(array(
-      'conditions' => array(
-        ['district_id','=',$address->district->id],
-        ['sub_district_id','=',$address->subDistrict->id]
-      ),
-      'fields' => array('name') 
-    ));
+    // $village = new Village;
+    // $villages = $village->getData(array(
+    //   'conditions' => array(
+    //     ['district_id','=',$address->district->id],
+    //     ['sub_district_id','=',$address->subDistrict->id]
+    //   ),
+    //   'fields' => array('name') 
+    // ));
 
+    $_address = '';
 
-    $address = trim($address->address.' '.$address->subDistrict->name.' '.$address->district->name.' '.$address->subDistrict->zip_code);
-
-    if(!empty($villages)) {
-      foreach ($villages as $village) {
-        $address .= ' '.$village->name;
-      }
+    if(!empty($address->address)) {
+      $_address .= $address->address;
     }
+
+    if(!empty($address->subDistrict)) {
+      $_address .= ' '.$address->subDistrict->name;
+    }
+
+    if(!empty($address->district)) {
+      $_address .= ' '.$address->district->name.' '.$address->district->zip_code;
+    }
+
+    if(!empty($address->province)) {
+      $_address .= ' '.$address->province->name;
+    }
+
+    $address = trim($_address);
+
+    // $address = trim($address->address.' '.$address->subDistrict->name.' '.$address->district->name.' '.$address->district->zip_code);
+
+    // if(!empty($villages)) {
+    //   foreach ($villages as $village) {
+    //     $address .= ' '.$village->name;
+    //   }
+    // }
 
     return $this->_clean($address);
 
@@ -352,6 +375,10 @@ class Lookup extends Model
     $value = strip_tags($value);
     $value = trim(preg_replace('/\s\s+/', ' ', $value));
     return $value;
+  }
+
+  public function buildPaginationData() {
+    return Service::loadModel($this->model)->find($this->model_id)->buildLookupData();
   }
 
 }

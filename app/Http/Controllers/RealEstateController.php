@@ -18,7 +18,7 @@ class RealEstateController extends Controller
     $model = Service::loadModel('RealEstate');
 
     $page = 1;
-    if(!empty($this->query)) {
+    if(!empty($this->query['page'])) {
       $page = $this->query['page'];
     }
 

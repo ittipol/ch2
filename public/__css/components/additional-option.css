@@ -71,7 +71,7 @@
   padding: 10px;
 }
 
-.main-navigation .additional-option {
+.global-nav .additional-option {
   position: absolute;
   top: 2px;
   right: 6px;
@@ -84,11 +84,11 @@
   transition: all .3s ease-in-out;
 }
 
-.main-navigation .additional-option:hover {
+.global-nav .additional-option:hover {
   background-color: #3F51B5;
 }
 
-.main-navigation .additional-option .dot {
+.global-nav .additional-option .dot {
 /*  width: 5px;
   height: 5px;
   margin: 6px auto;*/

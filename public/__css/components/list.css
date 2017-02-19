@@ -3,29 +3,86 @@
 	position: relative;
 }
 
-.list {
-
-}
-
-.list > .list-item {
+.list-item-group > .list-item {
 	padding: 10px;
 	border-bottom: 1px solid #bababa;
 }
 
-.list > .list-item > a {
+.list-item-group > .list-item > a {
 	display: block;
 }
 
-.list > .list-item img {
+.list-item-group > .list-item img {
 	display: inline-block;
 	width: 25px;
 	margin-right: 10px;
 }
 
-.list > .list-item h4 {
+.list-item-group > .list-item h4 {
 	display: inline-block;
 }
 
 .list-description .list-description-item:last-child {
 	margin-bottom: 0;
+}
+
+.lists {
+
+}
+
+.lists .list {
+	margin-top: 50px;
+}
+
+.list .list-content-wrapper .image {
+	width: 250px;
+}
+
+.list .list-content-wrapper .info {
+	width: 65%;
+	margin-left: 20px;
+}
+
+.list .list-content-wrapper .info .title {
+	font-size: 26px;
+	margin-bottom: 10px;
+}
+
+.list .list-content-wrapper .info .description {
+
+}
+
+.list .list-content-wrapper .info .price {
+	font-size: 20px;
+	margin-top: 10px;
+}
+
+.list .list-content-wrapper .list-content {
+	float: left;
+}
+
+.lists .primary-image {
+	width: 250px;
+	height: 250px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: auto 250px;
+}
+
+@media only screen and (max-width : 480px) {
+  
+	.list .list-content-wrapper .image {
+		width: 100%;
+	}
+
+	.lists .primary-image {
+		width: auto;
+	}
+
+	.list .list-content-wrapper .info {
+		width: 100%;
+		margin-top: 40px;
+		margin-left: 0;
+	}
+
 }

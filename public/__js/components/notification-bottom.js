@@ -23,7 +23,7 @@ class NotificationBottom {
       $('#notification_bottom').stop().fadeOut(220)
     });
 
-    $('#main_nav_trigger').on('click',function(){
+    $('#global_nav_trigger').on('click',function(){
       if($(this).is(':checked')) {
         $('#notification_bottom').stop().css({
           bottom: 0,

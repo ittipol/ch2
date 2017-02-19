@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\library\currency;
 use App\library\string;
+use App\library\cache;
+use App\library\url;
 
 class Item extends Model
 {
@@ -19,6 +21,18 @@ class Item extends Model
   public $imageTypes = array(
     'photo' => array(
       'limit' => 10
+    )
+  );
+
+  protected $behavior = array(
+    'Lookup' => array(
+      'format' =>  array(
+        'name' => '{{name}}',
+        'keyword_1' => '{{__getAnnouncementType}} {{__getUsed}}',
+        'keyword_2' => '{{ItemCategory.name|Item.id=>ItemToCategory.item_id,ItemToCategory.item_category_id=>ItemCategory.id}}',
+        'keyword_3' => '{{price}}',
+        // 'description' => '{{description}}'
+      )
     )
   );
 
@@ -66,6 +80,14 @@ class Item extends Model
 
   }
 
+  public function getAnnouncementType() {
+    return $this->announcementType->name;
+  }
+
+  public function getUsed() {
+    return $this->used ? 'สินค้าใหม่' : 'สินค้ามือสอง';
+  }
+
   public function buildModelData() {
 
     $currency = new Currency;
@@ -96,10 +118,38 @@ class Item extends Model
     return array(
       'id' => $this->id,
       'name' => $this->name,
-      '_name_short' => $string->subString($this->name,45),
+      '_short_name' => $string->subString($this->name,45),
       '_price' => $currency->format($this->price)
     );
     
   }
+
+    public function buildLookupData() {
+
+      $currency = new Currency;
+      $string = new String;
+      $cache = new Cache;
+      $url = new url;
+
+      $image = $this->getModelRelationData('Image',array(
+        'first' => true
+      ));
+
+      $_imageUrl = '/images/common/no-img.png';
+      if(!empty($image)) {
+        $_imageUrl = $cache->getCacheImageUrl($image,'list');
+      }
+
+      return array(
+        'name' => $this->name,
+        '_short_name' => $string->subString($this->name,90),
+        'description' => !empty($this->description) ? $this->description : '-',
+        '_short_description' => $string->subString($this->description,250),
+        '_price' => $currency->format($this->price),
+        '_imageUrl' => $_imageUrl,
+        '_detailUrl' => $url->setAndParseUrl('item/detail/{id}',array('id' => $this->id))
+      );
+
+    }
 
 }

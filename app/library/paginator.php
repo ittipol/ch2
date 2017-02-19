@@ -16,19 +16,47 @@ class Paginator {
   private $url;
   private $getImage = true;
   private $model;
+  private $queries = array();
 
   public function __construct($model = null) {
     $this->model = $model;
     $this->total = $model->count();
+    $this->lastPage = (int)ceil($this->total / $this->perPage);
     $this->url = new Url;
+  }
+
+  public function setQuery($name,$value) {
+    $this->queries[$name] = $value;
+  }
+
+  public function parseQuery() {
+
+    $url = $this->pagingUrl;
+
+    $queries = array();
+    foreach ($this->queries as $key => $value) {
+      $queries[] = $key.'='.$value;
+    }
+
+    if(!empty($queries)) {
+      $url .= '?'.implode('&', $queries);
+    }
+
+    return $url;
+
   }
 
   public function setPerPage($perPage) {
     $this->perPage = (int)$perPage;
+    $this->lastPage = (int)ceil($this->total / $this->perPage);
   }
 
   public function setPage($page) {
     $this->page = (int)$page;
+  }
+
+  public function getPage() {
+    return $this->page;
   }
 
   public function setPagingUrl($url) {
@@ -107,8 +135,18 @@ class Paginator {
     $this->model = $this->model->where('person_id','=',Session::get('Person.id'));
   }
 
-  public function getModelData() {
+  public function itemCount() {
+    $offset = ($this->page - 1)  * $this->perPage;
 
+    return $this->model
+    ->take($this->perPage)
+    ->skip($offset)
+    ->count();
+  }
+
+  public function getPaginationData() {
+
+    $this->lastPage = (int)ceil($this->total / $this->perPage);
     $offset = ($this->page - 1)  * $this->perPage;
 
     // $start = $offset + 1;
@@ -152,7 +190,8 @@ class Paginator {
 
   public function next() {
 
-    $pagingUrl = $this->pagingUrl.'?page={n}';
+    $this->setQuery('page','{n}');
+    $pagingUrl = $this->parseQuery();
     
     $next['url'] = str_replace('{n}', $this->page+1, $pagingUrl);
     if(($this->page + 1) > $this->lastPage) {
@@ -164,7 +203,8 @@ class Paginator {
 
   public function prev() {
 
-    $pagingUrl = $this->pagingUrl.'?page={n}';
+    $this->setQuery('page','{n}');
+    $pagingUrl = $this->parseQuery();
 
     $prev['url'] = str_replace('{n}', $this->page-1, $pagingUrl);
     if(($this->page - 1) < 1) {
@@ -177,7 +217,8 @@ class Paginator {
   public function paging() {
 
     $paging = array();
-    $pagingUrl = $this->pagingUrl.'?page={n}';
+    $this->setQuery('page','{n}');
+    $pagingUrl = $this->parseQuery();
 
     $skip = true;
     if(($this->page - 4) < 1){
@@ -273,13 +314,19 @@ class Paginator {
 
   }
 
-  public function build() {
+  public function build($onlyData = false) {
 
-    if(empty($this->model)) {
-      return false;
+    if($onlyData) {
+      return array(
+        'page' => $this->page,
+        'lastPage' => $this->lastPage,
+        'total' => $this->total,
+        'paging' => $this->paging(),
+        'next' => $this->next(),
+        'prev' => $this->prev(),
+        'data' => $this->getPaginationData()
+      );
     }
-
-    $this->lastPage = (int)ceil($this->total / $this->perPage);
 
     return array(
       '_pagination' => array(
@@ -289,7 +336,7 @@ class Paginator {
         'paging' => $this->paging(),
         'next' => $this->next(),
         'prev' => $this->prev(),
-        'data' => $this->getModelData()
+        'data' => $this->getPaginationData()
       )
     );
 

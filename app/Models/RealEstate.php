@@ -22,6 +22,17 @@ class RealEstate extends Model
     )
   );
 
+  protected $behavior = array(
+    'Lookup' => array(
+      'format' =>  array(
+        'name' => '{{name}}',
+        // 'keyword_1' => '{{__getAnnouncementType}} {{__getRealEstateType}}',
+        // 'keyword_2' => '{{ItemCategory.name|Item.id=>ItemToCategory.item_id,ItemToCategory.item_category_id=>ItemCategory.id}}',
+        'keyword_3' => '{{price}}'
+      )
+    )
+  );
+
   protected $validation = array(
     'rules' => array(
       'name' => 'required|max:255',
@@ -80,6 +91,14 @@ class RealEstate extends Model
 
     return parent::fill($attributes);
 
+  }
+
+  public function getAnnouncementType() {
+    return $this->announcementType->name;
+  }
+
+  public function getRealEstateType() {
+    return $this->realEstateType->name;
   }
 
   public function buildModelData() {
@@ -214,7 +233,7 @@ class RealEstate extends Model
     return array(
       'id' => $this->id,
       'name' => $this->name,
-      '_name_short' => $string->subString($this->name,45),
+      '_short_name' => $string->subString($this->name,45),
       // 'description' => $this->description,
       '_price' => $currency->format($this->price),
       '_realEstateTypeName' => $this->realEstateType->name

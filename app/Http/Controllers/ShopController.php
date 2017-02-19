@@ -55,7 +55,7 @@ class ShopController extends Controller
     $url = new Url;
     
     $page = 1;
-    if(!empty($this->query)) {
+    if(!empty($this->query['page'])) {
       $page = $this->query['page'];
     }
 
@@ -95,7 +95,7 @@ class ShopController extends Controller
     $url = new Url;
 
     $page = 1;
-    if(!empty($this->query)) {
+    if(!empty($this->query['page'])) {
       $page = $this->query['page'];
     }
 
@@ -140,7 +140,7 @@ class ShopController extends Controller
     $url = new Url;
 
     $page = 1;
-    if(!empty($this->query)) {
+    if(!empty($this->query['page'])) {
       $page = $this->query['page'];
     }
 
@@ -181,7 +181,7 @@ class ShopController extends Controller
     $url = new Url;
 
     $page = 1;
-    if(!empty($this->query)) {
+    if(!empty($this->query['page'])) {
       $page = $this->query['page'];
     }
 

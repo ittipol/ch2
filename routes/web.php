@@ -50,6 +50,9 @@ Route::post('register','UserController@register')->middleware('guest');
 
 Route::get('safe_image/{file}', 'StaticFileController@serveImages');
 
+// Search
+Route::get('search','SearchController@index')->name('search');
+
 // Account
 Route::group(['middleware' => 'auth'], function () {
 
@@ -71,7 +74,6 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('announcement/create','AnnouncementController@create');
 
 // Experience
-
 Route::get('experience/profile/{id}','PersonExperienceController@detail');
 
 Route::group(['middleware' => 'auth'], function () {

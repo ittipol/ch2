@@ -107,13 +107,13 @@ class ImageGallery {
           'margin-top': (frameheight - imgH) / 2
         });
       }else{
-        let imgW = Math.ceil(imgWidth * (frameheight / imgHeight));
+        // let imgW = Math.ceil(imgWidth * (frameheight / imgHeight));
 
-        $('#image_display').css({
-          'width': imgW,
-          'height': '100%',
-          'margin-top': 0
-        });
+        // $('#image_display').css({
+        //   'width': imgW,
+        //   'height': '100%',
+        //   'margin-top': 0
+        // });
       }
     }else{
 

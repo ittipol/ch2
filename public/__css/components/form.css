@@ -97,12 +97,18 @@ form input[type="checkbox"]+label {
 }
 
 form .form-item-group {
-	min-height: 100px;
-	max-height: 550px;
 	border-top: 3px solid #1976D2;
 	padding: 20px;
+	overflow: hidden;
+}
+
+form .form-item-group-inner {
+	width: 100%;
+	min-height: 120px;
+	max-height: 550px;
 	overflow-y: auto;
 	overflow-x: hidden;
+	padding-right: 17px;
 }
 
 form .error,
@@ -155,7 +161,7 @@ label.image-label img.preview-image {
 	margin: 0 auto;
 	padding: 0;
 	position: absolute;
-	z-index: 99;
+	z-index: 10;
 }
 
 label.image-label div.preview-image {
@@ -165,7 +171,7 @@ label.image-label div.preview-image {
 	background-size: auto 100%;
 	background-repeat: no-repeat;
 	position: relative;
-	z-index: 100;
+	z-index: 11;
 }
 
 label.image-label .error-message {
@@ -190,7 +196,7 @@ label.image-label a {
   width: 20px;
   line-height: 20px;
   border-radius: 20px;
-  z-index: 102;
+  z-index: 12;
   display: none;
 }
 

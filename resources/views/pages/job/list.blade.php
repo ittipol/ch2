@@ -18,7 +18,7 @@
             </div>
             <div class="product-detail">
               <a href="{{$data['detailUrl']}}">
-                <div class="product-title">{{$data['_name_short']}}</div>
+                <div class="product-title">{{$data['_short_name']}}</div>
               </a>
               <div class="price">
                 {{$data['_salary']}}

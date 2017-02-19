@@ -11,9 +11,9 @@
     <div class="header-title">โฆษณา</div>
   </div>
 
-  <label class="hamburger-button" for="main_nav_trigger">
+  <label class="hamburger-button" for="global_nav_trigger">
     ☰
-    <input type="checkbox" id="main_nav_trigger" class="nav-trigger">
+    <input type="checkbox" id="global_nav_trigger" class="nav-trigger">
   </label>
 
 </header>

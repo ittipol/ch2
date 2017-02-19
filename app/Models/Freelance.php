@@ -40,7 +40,7 @@ class Freelance extends Model
       'id' => $this->id,
       'name' => $this->name,
       'description' => !empty($this->description) ? $this->description : '-',
-      '_name_short' => $string->subString($this->name,60),
+      '_short_name' => $string->subString($this->name,60),
       '_freelanceType' => FreelanceType::select(array('name'))->find($this->freelance_type_id)->name
     );
     

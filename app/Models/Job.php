@@ -98,7 +98,7 @@ class Job extends Model
     return array(
       'id' => $this->id,
       'name' => $this->name,
-      '_name_short' => $string->subString($this->name,60),
+      '_short_name' => $string->subString($this->name,60),
       '_salary' => $this->salary
     );
 

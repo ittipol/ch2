@@ -11,9 +11,9 @@
     <div class="header-title">โปรไฟล์</div>
   </div>
 
-  <label class="hamburger-button" for="main_nav_trigger">
+  <label class="hamburger-button" for="global_nav_trigger">
     ☰
-    <input type="checkbox" id="main_nav_trigger" class="nav-trigger">
+    <input type="checkbox" id="global_nav_trigger" class="nav-trigger">
   </label>
 
 </header>
@@ -85,7 +85,7 @@
 
     <div class="col-lg-7 col-sm-12">
 
-      <div class="list">
+      <div class="list-item-group">
 
         <div class="list-item">
           <a href="{{URL::to('account/profile_edit')}}">

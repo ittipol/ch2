@@ -20,7 +20,7 @@ class BranchController extends Controller
     $model = Service::loadModel('Branch');
     
     $page = 1;
-    if(!empty($this->query)) {
+    if(!empty($this->query['page'])) {
       $page = $this->query['page'];
     }
 

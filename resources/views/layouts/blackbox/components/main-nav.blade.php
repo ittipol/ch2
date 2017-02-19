@@ -1,4 +1,4 @@
-<div id="main_navigation" class="main-navigation">
+<div id="global_navigation" class="global-nav">
   <nav>
     <div class="navigation-top">
 

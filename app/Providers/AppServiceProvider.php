@@ -74,11 +74,11 @@ class AppServiceProvider extends ServiceProvider
 
               }
 
-            }
+            // }
 
             view()->share('_shops',$shops);
 
-          // }
+          }
 
         });
     }

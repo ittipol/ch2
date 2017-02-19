@@ -19,7 +19,7 @@ class AdvertisingController extends Controller
   //   $model = Service::loadModel('Advertising');
     
   //   $page = 1;
-  //   if(!empty($this->query)) {
+  //   if(!empty($this->query['page'])) {
   //     $page = $this->query['page'];
   //   }
 

@@ -10,11 +10,13 @@
 </head>
 <body>
 
+  @include('layouts.blackbox.components.global-header')
+  @include('layouts.blackbox.components.search-panel')
+
   <div id="container">
     @include('layouts.blackbox.components.main-nav')
     @include('layouts.blackbox.components.content-wrapper')
   </div>
-  @include('layouts.blackbox.components.footer')
 
   <script type="text/javascript">
 

@@ -44,7 +44,7 @@ class Tagging {
 	  input.setAttribute('name',this.dataName+'['+index+']');
 	  input.setAttribute('id',id+'_name');
 	  input.setAttribute('value',tagName);
-	  $('form').append(input);
+	  $('#'+this.panel).parent().append(input);
 	}
 
 	removeHiddenField(id) {

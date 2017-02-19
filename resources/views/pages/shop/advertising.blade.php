@@ -1,7 +1,7 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<header class="header-wrapper">
+<!-- <header class="header-wrapper">
   <div class="container">
     <div class="header-top">
       <div class="header-title">โฆษณา</div>
@@ -11,12 +11,12 @@
     <div class="header-title">โฆษณา</div>
   </div>
 
-  <label class="hamburger-button" for="main_nav_trigger">
+  <label class="hamburger-button" for="global_nav_trigger">
     ☰
-    <input type="checkbox" id="main_nav_trigger" class="nav-trigger">
+    <input type="checkbox" id="global_nav_trigger" class="nav-trigger">
   </label>
 
-</header>
+</header> -->
 
 <div class="container">
 
@@ -57,7 +57,7 @@
             </div>
             <div class="product-detail">
               <a href="{{$data['detailUrl']}}">
-                <div class="product-title">{{$data['_name_short']}}</div>
+                <div class="product-title">{{$data['_short_name']}}</div>
               </a>
               <div>
                 <div>ประเภทโฆษณา</div>

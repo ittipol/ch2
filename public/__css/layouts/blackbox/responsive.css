@@ -31,7 +31,7 @@
 
 /* Large Devices, Wide Screens */
 @media only screen and (max-width : 1200px) {
-  .main-navigation {
+  .global-nav {
     left: -280px
   }
 
@@ -40,31 +40,18 @@
     padding-left: 0;
   }
 
-  .action-bar {
-    left: 0;
-    padding-left: 0;
-  }
-
-  .main-navigation.is-main-nav-open {
+  .global-nav.is-main-nav-open {
     left: 0;
   }
 
   .content-wrapper.is-main-nav-open {
     left: 280px;
   }
-  
-  .action-bar.is-main-nav-open {
-    left: 280px;
-  }
 
   .content-wrapper-overlay.isvisible {
     visibility: visible;
     opacity: 1;
-  }
-
-  .action-bar-overlay.isvisible {
-    visibility: visible;
-    opacity: 1;
+    /*left: 280px;*/
   }
 
   .top-header {

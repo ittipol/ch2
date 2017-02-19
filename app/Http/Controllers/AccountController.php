@@ -129,14 +129,14 @@ class AccountController extends Controller
     $model = Service::loadModel('Item');
 
     $page = 1;
-    if(!empty($this->query)) {
+    if(!empty($this->query['page'])) {
       $page = $this->query['page'];
     }
 
     $model->paginator->myData();
     $model->paginator->criteria(array(
       'order' => array(
-        array('name','ASC'),
+        // array('name','ASC'),
         array('created_at','DESC')
       )
     ));
@@ -157,7 +157,7 @@ class AccountController extends Controller
     $model = Service::loadModel('RealEstate');
 
     $page = 1;
-    if(!empty($this->query)) {
+    if(!empty($this->query['page'])) {
       $page = $this->query['page'];
     }
 
@@ -191,7 +191,7 @@ class AccountController extends Controller
     ));
 
     $page = 1;
-    if(!empty($this->query)) {
+    if(!empty($this->query['page'])) {
       $page = $this->query['page'];
     }
 

@@ -6,9 +6,9 @@
       <div class="col-lg-3 col-xs-2">
         <ul class="action-bar-nav">
           <li class="icon">
-            <label for="main_nav_trigger">
+            <label for="global_nav_trigger">
               &#9776;
-              <input type="checkbox" id="main_nav_trigger" class="nav-trigger" />
+              <input type="checkbox" id="global_nav_trigger" class="nav-trigger" />
             </label>
           </li>
         </ul>

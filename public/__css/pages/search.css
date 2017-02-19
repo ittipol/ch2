@@ -1,0 +1,34 @@
+input[type="text"].search-box {
+	text-align: left;
+	margin: 0;
+	color: #0071c5;
+	height: 64px;
+	font-size: 24px;
+	font-weight: 200;
+	border: 0;
+	border-bottom: 1px solid #bababa;
+}
+
+input[type="text"].search-box:focus {
+	outline: none;
+}
+
+.button-search {
+	position: relative;
+  top: 6px;
+  left: -10px;
+  display: inline-block;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
+.button-search img {
+	width: 50px;
+	height: 50px;
+	padding: 10px;
+}
+
+.result-count {
+	color: #555;
+}

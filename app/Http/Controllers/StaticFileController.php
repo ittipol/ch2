@@ -6,6 +6,7 @@ use App\library\service;
 use App\library\cache;
 use Auth;
 // use File;
+use Response;
 
 class StaticFileController extends Controller
 {
@@ -17,7 +18,21 @@ class StaticFileController extends Controller
     $path = $cache->getCacheImagePath($filename);
 
     if(!empty($path)) {
-      return response()->download($path, null, [], null);;
+
+      $headers = array(
+        'Cache-Control' => 'no-cache, must-revalidate',
+        // 'Cache-Control' => 'no-store, no-cache, must-revalidate',
+        // 'Cache-Control' => 'pre-check=0, post-check=0, max-age=0',
+        // 'Pragma' => 'no-cache',
+        'Content-Type' => mime_content_type($path),
+        // 'Content-Disposition' => 'inline; filename="'.$image->name.'"',
+        // 'Content-Transfer-Encoding' => 'binary',
+        'Content-length' => filesize($path),
+      );
+
+      return Response::make(file_get_contents($path), 200, $headers);
+
+      // return response()->download($path, null, [], null);
     }
 
     $image = Service::loadModel('Image')
@@ -34,7 +49,21 @@ class StaticFileController extends Controller
     $path = $image->getImagePath();
 
     if(file_exists($path)){
-      return response()->download($path, null, [], null);
+
+      $headers = array(
+        'Cache-Control' => 'no-cache, must-revalidate',
+        // 'Cache-Control' => 'no-store, no-cache, must-revalidate',
+        // 'Cache-Control' => 'pre-check=0, post-check=0, max-age=0',
+        // 'Pragma' => 'no-cache',
+        'Content-Type' => mime_content_type($path),
+        // 'Content-Disposition' => 'inline; filename="'.$image->name.'"',
+        // 'Content-Transfer-Encoding' => 'binary',
+        'Content-length' => filesize($path),
+      );
+
+      return Response::make(file_get_contents($path), 200, $headers);
+
+      // return response()->download($path, null, [], null);
     }
 
     return response()->download($this->noImagePath, null, [], null);

@@ -85,7 +85,7 @@ class Model extends BaseModel
 
         $model->createDirectory();  
 
-        if($model->behavior['Slug']) {
+        if(!empty($model->behavior['Slug'])) {
           $slug = new Slug;
           $slug->__saveRelatedData($model);
         }
@@ -95,7 +95,11 @@ class Model extends BaseModel
       $model->modelRelationsSave();
 
       // look up
-   
+      if(!empty($model->behavior['Lookup'])) {
+        $lookup = new Lookup;
+        $lookup->__saveRelatedData($model);
+      }
+
     });
 
   }
@@ -435,6 +439,20 @@ class Model extends BaseModel
 
   public function buildFormData() {
     return $this->getAttributes();
+  }
+
+  public function buildLookupData() {
+
+    $string = new String;
+
+    return array(
+      'name' => $this->name,
+      '_short_name' => $string->subString($this->name,45),
+      'description' => !empty($this->description) ? $this->description : '-',
+      '_short_description' => $string->subString($this->description,200),
+      '_imageUrl' => '/images/common/no-img.png'
+    );
+
   }
 
   // public function createOrUpdate($value) {

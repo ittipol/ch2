@@ -11,7 +11,7 @@ class Blackbox {
   }
 
   init() {
-    this.mainNavWidth = document.getElementById('main_navigation').offsetWidth;
+    this.mainNavWidth = document.getElementById('global_navigation').offsetWidth;
   }
 
   bind() {
@@ -23,10 +23,10 @@ class Blackbox {
       let w = window.innerWidth;
       let h = window.innerHeight;
 
-      $('.main-navigation').css({
-        // width: this.mainNavWidth,
-        height: h
-      });
+      // $('.global-nav').css({
+      //   // width: this.mainNavWidth,
+      //   height: h
+      // });
 
       // $('.content-wrapper').css({
       //   width: w,
@@ -34,66 +34,72 @@ class Blackbox {
       // });
 
       if(w > 1200) {
-        if($('#main_nav_trigger').is(':checked')) {
-          $('#main_nav_trigger').trigger('click');
+        if($('#global_nav_trigger').is(':checked')) {
+          $('#global_nav_trigger').trigger('click');
         }
 
       }
 
     });
 
-    $('#main_nav_trigger').on('click',function(){
-
-      // if($('#filter_panel_trigger').is(':checked')) {
-      //   $('#filter_panel_trigger').trigger('click');
-      // }
+    $('#global_nav_trigger').on('click',function(){
 
       if($(this).is(':checked')) {
-        $('.main-navigation').addClass('is-main-nav-open');
+        $('.global-nav').addClass('is-main-nav-open');
         $('.content-wrapper').addClass('is-main-nav-open');
-        $('.action-bar').addClass('is-main-nav-open');
         $('.content-wrapper-overlay').addClass('isvisible');
-        $('.action-bar-overlay').addClass('isvisible');
         $('body').css('overflow-y','hidden');
       }else{
-        $('.main-navigation').removeClass('is-main-nav-open');
+        $('.global-nav').removeClass('is-main-nav-open');
         $('.content-wrapper').removeClass('is-main-nav-open');
-        $('.action-bar').removeClass('is-main-nav-open');
         $('.content-wrapper-overlay').removeClass('isvisible');
-        $('.action-bar-overlay').removeClass('isvisible');
+        $('body').css('overflow-y','auto');
+      }
+    });
+
+    $('#search_panel_trigger').on('click',function(){
+      if($(this).is(':checked')) {
+
+        $('#global_search_query_input').focus();
+
+        $('.global-search-panel').addClass('panel-open');
+        $('.content-wrapper-overlay').addClass('isvisible');
+        $('body').css('overflow-y','hidden');
+      }else{
+
+        $('#global_search_query_input').blur().val('');
+
+        $('.global-search-panel').removeClass('panel-open');
+        $('.content-wrapper-overlay').removeClass('isvisible');
         $('body').css('overflow-y','auto');
       }
     });
 
     $('.content-wrapper-overlay').on('click',function(){
-      if($('#main_nav_trigger').is(':checked')) {
-        $('#main_nav_trigger').trigger('click');
+      if($('#global_nav_trigger').is(':checked')) {
+        $('#global_nav_trigger').trigger('click');
+      }
+
+      if($('#search_panel_trigger').is(':checked')) {
+        $('#search_panel_trigger').trigger('click');
       }
     });
 
-    $('.action-bar-overlay').on('click',function(){
-      if($('#main_nav_trigger').is(':checked')) {
-        $('#main_nav_trigger').trigger('click');
+    $('.search-panel-close-button').on('click',function(){
+      if($('#search_panel_trigger').is(':checked')) {
+        $('#search_panel_trigger').trigger('click');
       }
     });
 
-    $(document).scroll(function() {
-    // console.log($(this).scrollTop());
-      
-        if($(this).scrollTop() > 70) {
-          $('.header-top').css('display','none');
-          $('.header-fix').css('display','block');
-        }else{
-          $('.header-top').css('display','block');
-          $('.header-fix').css('display','none');
-        }
+    // $('.action-bar-overlay').on('click',function(){
+    //   if($('#global_nav_trigger').is(':checked')) {
+    //     $('#global_nav_trigger').trigger('click');
+    //   }
+    // });
 
-        // if($(this).scrollTop() > 120) {
-        //   $('.header-wrapper').addClass('active');
-        // }else{
-        //   $('.header-wrapper').removeClass('active');
-        // }
-    });
+    // $(document).scroll(function() {
+    // // console.log($(this).scrollTop());
+    // });
 
 
   }
@@ -102,10 +108,10 @@ class Blackbox {
     let w = window.innerWidth;
     let h = window.innerHeight;
 
-    $('.main-navigation').css({
-      // width: this.mainNavWidth,
-      height: h
-    });
+    // $('.global-nav').css({
+    //   // width: this.mainNavWidth,
+    //   height: h
+    // });
 
     // $('.content-wrapper').css({
     //   width: w,
