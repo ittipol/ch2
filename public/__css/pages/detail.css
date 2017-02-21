@@ -47,11 +47,16 @@
 	width: 60px;
 	height: 60px;
 	margin: 4px;
-	border: 2px solid #464646;
+	padding: 2px;
+	border: 5px solid rgb(208,212,214);
 	background-color: #fff;
 	text-align: center;
 	cursor: pointer;
 	float: left;
+}
+
+.image-gallery .image-gallery-list .preview-image:hover {
+	border-color: #0071c5;
 }
 
 .image-gallery .image-gallery-list .preview-image img {
@@ -113,7 +118,7 @@
 	border-radius: 50px;
 	background-image: url(/images/icons/close-black.png);
 	background-repeat: no-repeat;
-	background-size: 60px;
+	background-size: 25px;
 	background-position: center;
 	background-color: #ececec;
 	z-index: 5;
@@ -122,15 +127,24 @@
 
 .image-gallery .image-gallary-display .display-image-description-icon {
 	position: absolute;
-	top: 10px;
+	bottom: 10px;
 	right: 10px;
-	padding: 10px 25px;
+	/*padding: 10px 25px;*/
 	/*background-color: rgba(236,236,236,.7);*/
 	background-color: rgb(47,97,186);
 	color: #fff;
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
 	display: none;
 	cursor: pointer;
 	z-index: 9;
+}
+
+.image-gallery .image-gallary-display .display-image-description-icon img {
+	height: 50px;
+	width: 50px;
+	padding: 12px;
 }
 
 .detail .item-info p {
@@ -302,6 +316,10 @@
 
 .detail .margin-section .section-inner {
 	padding: 10px;
+}
+
+.detail .margin-section h4 {
+	margin-top: 10px;
 }
 
 .detail .section-full-border-left {

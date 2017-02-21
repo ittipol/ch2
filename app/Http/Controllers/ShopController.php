@@ -272,31 +272,31 @@ class ShopController extends Controller
 
   }
 
-  public function profileImage() {
+  // public function profileImage() {
 
-    $model = request()->get('shop');
+  //   $model = request()->get('shop');
 
-    $this->data = $model->formHelper->build();
+  //   $this->data = $model->formHelper->build();
 
-    $this->setData('profileImage',json_encode($model->getProfileImage()));
-    $this->setData('cover',json_encode($model->getCover()));
+  //   $this->setData('profileImage',json_encode($model->getProfileImage()));
+  //   $this->setData('cover',json_encode($model->getCover()));
 
-    return $this->view('pages.shop.form.profile_image');
+  //   return $this->view('pages.shop.form.profile_image');
 
-  }
+  // }
 
-  public function profileImageSubmit() {
+  // public function profileImageSubmit() {
 
-    $model = request()->get('shop');
+  //   $model = request()->get('shop');
 
-    if($model->fill(request()->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/manage');
-    }else{
-      return Redirect::back();
-    }
+  //   if($model->fill(request()->all())->save()) {
+  //     Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+  //     return Redirect::to('shop/'.request()->shopSlug.'/manage');
+  //   }else{
+  //     return Redirect::back();
+  //   }
     
-  }
+  // }
 
   public function description() {
 

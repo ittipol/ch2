@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\library\service;
 use App\library\url;
+use App\library\string;
 use Route;
 use Auth;
 
@@ -18,18 +19,21 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
       view()->composer('*', function($view){
-          // dd($view);
-// dd(Auth::check());
-                    // dd(session()->all());
-          if(!empty(Route::current()->parameter('shopSlug'))) {
+
+          $string = new String;
+          $url = new Url;
+          
+          $slug = Route::current()->parameter('shopSlug');
+
+          if(!empty($slug)) {
 
             $shopId = Service::loadModel('Slug')
-            ->where('slug','like',Route::current()->parameter('shopSlug'))
+            ->where('slug','like',$slug)
             ->first()
             ->model_id;
 
             $shop = Service::loadModel('Shop')
-            ->select('profile_image_id','cover_image_id')
+            ->select('name','description','profile_image_id','cover_image_id')
             ->find($shopId);
 
             // get desc
@@ -37,8 +41,28 @@ class AppServiceProvider extends ServiceProvider
             // get open hours
             // get address
 
+            view()->share('_shop_id',$shopId);
+            view()->share('_shop_name',$shop->name);
+            view()->share('_shop_short_description',$string->subString($shop->description,250,true));
             view()->share('_shop_profileImage',$shop->getProfileImageUrl());
             view()->share('_shop_cover',$shop->getCoverUrl());
+
+            $personToShop = Service::loadModel('PersonToShop');
+            $person = $personToShop->getData(array(
+              'conditions' => array(
+                ['person_id','=',session()->get('Person.id')],
+                ['shop_id','=',$shopId],
+              ),
+              'fields' => array('role_id'),
+              'first' => true
+            ));
+
+            view()->share('_shop_permission',$person->role->getPermission());
+
+            view()->share('_shop_setting_url',$url->url('shop/'.$slug.'/setting'));
+            view()->share('_shop_product_url',$url->url('shop/'.$slug.'/product'));
+            view()->share('_shop_job_url',$url->url('shop/'.$slug.'/job'));
+            view()->share('_shop_advertising_url',$url->url('shop/'.$slug.'/advertising'));
 
           }
 
@@ -52,7 +76,6 @@ class AppServiceProvider extends ServiceProvider
 
             // if($personToShop->exists()) {
 
-              $url = new Url;
               $slugModel = Service::loadModel('Slug');
           
               $records = $personToShop->get();

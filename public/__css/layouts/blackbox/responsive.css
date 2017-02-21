@@ -54,9 +54,10 @@
     /*left: 280px;*/
   }
 
-  .top-header {
+  /*.top-header {
     width: 94%;
-  }
+  }*/
+
 }
 
 /* Medium Devices, Desktops */
@@ -80,6 +81,7 @@
   .top-header {
     width: 90%;
   }
+
 }
 
 /* Custom */ 

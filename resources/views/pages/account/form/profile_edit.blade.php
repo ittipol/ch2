@@ -52,21 +52,21 @@
           echo Form::label('name', 'เพศ');
         ?>
 
-        <label class="box">
+        <label class="choice-box">
           <?php
             echo Form::radio('gender', 'm', true);
           ?>
           <div class="inner">ชาย</div>
         </label>
 
-        <label class="box">
+        <label class="choice-box">
           <?php
             echo Form::radio('gender', 'f');
           ?>
           <div class="inner">หญิง</div>
         </label>
 
-        <label class="box">
+        <label class="choice-box">
           <?php
             echo Form::radio('gender', '0');
           ?>

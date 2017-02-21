@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-lg-6 col-sm-12">
         <div class="title">
-          สาขา
+          สินค้า
         </div>
       </div>
     </div>

@@ -24,7 +24,7 @@
   <div class="form-section">
 
     <div class="form-row">
-      <label class="box">
+      <label class="choice-box">
         <?php
           echo Form::checkbox('active', 1);
         ?>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="form-row">
-      <label class="box">
+      <label class="choice-box">
         <?php
           echo Form::checkbox('same_time', 1, null, array(
             'id' => 'same_time'

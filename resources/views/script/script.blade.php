@@ -33,7 +33,8 @@
     '__js/components/custom-scroll.js',
     '__js/components/filter.js',
     '__js/components/image-gallery.js',
-    '__js/components/tabs.js'
+    // '__js/components/tabs.js'
+    '__js/components/profile-image.js'
   );
 
   if($combine){
@@ -81,8 +82,9 @@
     '__css/components/additional-option.css',
     '__css/components/custom-scroll.css',
     '__css/components/filter-panel.css',
-    '__css/components/box.css',
+    '__css/components/choice-box.css',
     '__css/components/pagination.css',
+    '__css/components/box.css',
     '__css/components/error.css',
     '__css/components/tile.css',
     '__css/pages/shop.css',

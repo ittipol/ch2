@@ -23,6 +23,12 @@
 
   @if($personApplyJob)
     <h4 class="sign info wide space-bottom-20">สมัครงานนี้แล้ว</h4>
+  @else
+    <div class="row space-bottom-30">
+      <a class="pull-right" href="{{$jobApplyUrl}}">
+        <span class="button">สมัครงานนี้ผ่าน CHONBURI SQUARE</span>
+      </a>
+    </div>
   @endif
 
   <div class="image-gallery">
@@ -42,7 +48,7 @@
           </div>
 
           <div class="display-image-description-icon">
-            คำอธิบายรูปนี้
+            <img src="/images/icons/additional-white.png">
           </div>
 
         </div>
@@ -62,6 +68,30 @@
   </div>
 
   <div class="row">
+
+    <div class="col-xs-4">
+      <div class="item-info">
+
+        <div class="item-info-row">
+          <p>เงินเดือน (บาท)</p>
+          <h4 class="price">{{$_modelData['_salary']}}</h4>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-xs-8">
+      <p>ชื่อบริษัทหรือร้านค้า</p>
+      <h4>{{$shopName}}</h4>
+
+      <p>รูปแบบงาน</p>
+      <h4>{{$_modelData['_employmentTypeName']}}</h4>
+
+    </div>
+
+  </div>
+
+<!--   <div class="row">
     <div class="col-md-6 col-sm-12">
       <div class="item-info">
 
@@ -72,11 +102,11 @@
 
       </div>
     </div> 
-  </div>
+  </div> -->
 
-  <div class="line space-top-bottom-20"></div>
+  <!-- <div class="line space-top-bottom-20"></div> -->
 
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-xs-12">
     <p>ชื่อบริษัทหรือร้านค้า</p>
     <h4>{{$shopName}}</h4>
@@ -90,9 +120,9 @@
         <dd class="col-sm-8">{{$_modelData['_employmentTypeName']}}</dd>
       </dl>
     </div>
-  </div>
+  </div> -->
 
-  <div class="line space-top-bottom-20"></div>
+  <!-- <div class="line space-top-bottom-20"></div> -->
 
   <div class="row">
 
@@ -145,7 +175,7 @@
 
   </div>
 
-  <div class="line space-top-bottom-20"></div>
+  <!-- <div class="line space-top-bottom-20"></div> -->
 
   @if($hasBranchLocation)
   <h4>สาขาที่กำลังเปิดรับสมัครงานนี้</h4>   
@@ -170,10 +200,9 @@
 
   @endif
 
-  <h4>สมัครงานนี้</h4>
+  <h4>สมัครงานนี้ได้ที่</h4>
 
   <div class="text-center space-top-bottom-20">
-
     @if($personApplyJob)
       <h4 class="sign info">สมัครงานนี้แล้ว</h4>
     @else
@@ -190,7 +219,7 @@
     <div class="line"></div>
   </div>
   
-  <div>
+  <div class="space-top-30">
     {!!$_modelData['recruitment_custom_detail']!!}
   </div>
   @endif

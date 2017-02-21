@@ -95,7 +95,7 @@ header .search-button img {
 	top: 0;
 	z-index: 99;
 	position: absolute;
-	background-color: red;
+	background-color: #0071c5;
 
 }
 
@@ -108,7 +108,9 @@ header .search-button img {
 }
 
 @media only screen and (max-width : 1200px) {
+
   .header-fix {
     padding-left: 0;
   }
+  
 }

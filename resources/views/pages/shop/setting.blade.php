@@ -7,14 +7,7 @@
 
 <div class="container">
 
-  <div class="list">
-
-    <div class="list-item">
-      <a href="{{$profileImageUrl}}">
-        <img class="icon" src="/images/common/photo.png" >
-        <h4>รปูภาพโปรไฟล์และหน้าปก</h4>
-      </a>
-    </div>
+  <div class="list-item-group">
 
     <div class="list-item">
       <a href="{{$descriptionUrl}}">

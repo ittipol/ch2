@@ -77,7 +77,7 @@
             foreach ($_fieldData['realEstateTypes'] as $id => $category):
           ?>
             <div class="col-lg-4 col-md-6 col-sm-6 col-sm-12">
-              <label class="box">
+              <label class="choice-box">
                 <?php
                   echo Form::radio('real_estate_type_id', $id);
                 ?>
@@ -289,7 +289,7 @@
                   foreach ($_fieldData['feature'] as $id => $feature):
                 ?>
                   <div class="col-lg-4 col-md-6 col-sm-6 col-sm-12">
-                    <label class="box">
+                    <label class="choice-box">
                       <?php
                         echo Form::checkbox('feature[]', $id);
                       ?>
@@ -314,7 +314,7 @@
                   foreach ($_fieldData['facility'] as $id => $facility):
                 ?>
                   <div class="col-lg-4 col-md-6 col-sm-6 col-sm-12">
-                    <label class="box">
+                    <label class="choice-box">
                       <?php
                         echo Form::checkbox('facility[]', $id);
                       ?>

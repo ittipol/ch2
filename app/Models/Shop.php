@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\library\string;
+use App\library\cache;
+use App\library\url;
 use Session;
 
 class Shop extends Model
@@ -29,11 +31,11 @@ class Shop extends Model
     'Slug' => array(
       'field' => 'name'
     ),
-    // 'Lookup' => array(
-    //   'format' =>  array(
-    //     'keyword' => '{{name}}'
-    //   )
-    // )
+    'Lookup' => array(
+      'format' =>  array(
+        'name' => '{{name}}'
+      )
+    )
   );
 
   protected $validation = array(
@@ -156,6 +158,15 @@ class Shop extends Model
 
   }
 
+  public function getShopName($model) {
+    $shop = $model->getModelRelationData('ShopRelateTo',array(
+      'first' => true,
+      'fields' => array('shop_id')
+    ))->shop;
+
+    return $shop->name;
+  }
+
   public function checkPersonHasShopPermission($id = null) {
 
     if(empty($id)) {
@@ -195,6 +206,20 @@ class Shop extends Model
     return $data;
   }
 
+  public function getRecordForParseUrl() {
+
+    $slugModel = new Slug;
+    $slug = $slugModel->where(array(
+      array('model','like','Shop'),
+      array('model_id','=',$this->id)
+    ))->first()->slug;
+
+    return array(
+      'slug' => $slug
+    );
+
+  }
+
   public function getProfileImage() {
 
     $image = Image::select('id','model','model_id','filename','image_type_id')->find($this->profile_image_id);
@@ -214,7 +239,7 @@ class Shop extends Model
     $image = Image::select('id','model','model_id','filename','image_type_id')->find($this->profile_image_id);
 
     if(empty($image)) {
-      return '/images/common/no-img.png';
+      return '';
     }
 
     return $image->getImageUrl();
@@ -239,7 +264,7 @@ class Shop extends Model
     $image = Image::select('id','model','model_id','filename','image_type_id')->find($this->cover_image_id);
 
     if(empty($image)) {
-      return '/images/common/no-img.png';
+      return '';
     }
 
     return $image->getImageUrl();
@@ -247,12 +272,12 @@ class Shop extends Model
 
   public function buildModelData() {
 
-    $string = new String;
+    // $string = new String;
 
     return array(
       'name' => $this->name,
-      'description' => $this->description,
-      '_short_description' => $string->subString($this->description,500,true),
+      // 'description' => $this->description,
+      // '_short_description' => $string->subString($this->description,250,true),
       // 'profileImage' => $this->getProfileImageUrl(),
       // 'cover' => $this->getCoverUrl()
     );
@@ -260,24 +285,54 @@ class Shop extends Model
 
   public function buildPaginationData() {
 
+    $cache = new Cache;
+
+    $profileImage = $this->getProfileImageUrl();
+    if(empty($profileImage)) {
+      $profileImage = '/images/common/no-img.png';
+    }
+
+    $cover = Image::select('id','model','model_id','filename','image_type_id')->find($this->cover_image_id);
+
+    if(!empty($cover)) {
+      $cover = $cache->getCacheImageUrl($cover,'list');
+    }else{
+      $cover = '/images/common/no-img.png';
+    }
+
     return array(
       'name' => $this->name,
-      'profileImage' => $this->getProfileImageUrl(),
-      'cover' => $this->getCoverUrl()
+      'profileImage' => $profileImage,
+      'cover' => $cover
     );
 
   }
 
-  public function getRecordForParseUrl() {
+  public function buildLookupData() {
 
-    $slugModel = new Slug;
-    $slug = $slugModel->where(array(
-      array('model','like','Shop'),
-      array('model_id','=',$this->id)
-    ))->first()->slug;
+    $string = new String;
+    $cache = new Cache;
+    $url = new url;
+
+    $image = $this->getModelRelationData('Image',array(
+      'first' => true
+    ));
+
+    $_imageUrl = '/images/common/no-img.png';
+    if(!empty($image)) {
+      $_imageUrl = $cache->getCacheImageUrl($image,'list');
+    }
+
+    $slug = $this->getModelRelationData('Slug',array(
+      'fields' => array('slug'),
+      'first' => true
+    ))->slug;
 
     return array(
-      'slug' => $slug
+      '_short_name' => $string->subString($this->name,90),
+      '_short_description' => $string->subString($this->description,250),
+      '_imageUrl' => $_imageUrl,
+      '_detailUrl' => $url->url('shop/'.$slug)
     );
 
   }

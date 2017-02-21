@@ -57,7 +57,7 @@
             foreach ($fieldData['productCategories'] as $id => $category):
           ?>
             <div class="col-lg-4 col-md-6 col-sm-6 col-sm-12">
-              <label class="box">
+              <label class="choice-box">
                 <input type="radio" name="product_category_id" value="<?php echo $id; ?>" >  
                 <div class="inner"><?php echo $category; ?></div>
               </label>

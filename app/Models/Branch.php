@@ -19,6 +19,15 @@ class Branch extends Model
     )
   );
 
+  protected $behavior = array(
+    'Lookup' => array(
+      'format' =>  array(
+        'name' => '{{name}}',
+        'keyword_1' => '{{__Shop|getShopName}}'
+      )
+    )
+  );
+
   protected $validation = array(
     'rules' => array(
       'name' => 'required|max:255',

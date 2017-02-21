@@ -19,7 +19,7 @@
     <div class="row">
 
       <div class="col-lg-4 col-md-4 col-sm-6 col-sm-12">
-        <div class="box">
+        <div class="choice-box">
           <div class="inner">
             <h4>ประกาศขายสินค้า</h4>
             <p>ประกาศขายสินค้า</p>
@@ -29,7 +29,7 @@
       </div>
 
       <div class="col-lg-4 col-md-4 col-sm-6 col-sm-12">
-        <div class="box">
+        <div class="choice-box">
           <div class="inner">
             <h4>ประกาศรับสมัครพนักงาน</h4>
             <p>ประกาศรับสมัครพนักงาน</p>
@@ -39,7 +39,7 @@
       </div>
 
       <div class="col-lg-4 col-md-4 col-sm-6 col-sm-12">
-        <div class="box">
+        <div class="choice-box">
           <div class="inner">
             <h4>โฆษณาเช่า-ขายอสังหาริมทรัพย์</h4>
             <p>โฆษณาเช่า-ขายอสังหาริมทรัพย์</p>
@@ -49,7 +49,7 @@
       </div>
 
       <div class="col-lg-4 col-md-4 col-sm-6 col-sm-12">
-        <div class="box">
+        <div class="choice-box">
           <div class="inner">
             <h4>โฆษณาร้านค้าและการบริการของคุณ</h4>
             <p>โฆษณาร้านค้าและการบริการของคุณ</p>
@@ -59,7 +59,7 @@
       </div>
 
       <div class="col-lg-4 col-md-4 col-sm-6 col-sm-12">
-        <div class="box">
+        <div class="choice-box">
           <div class="inner">
             <h4>เพิ่มร้านค้าของคุณลงในชุมชน</h4>
             <p>คำอธิบาย</p>

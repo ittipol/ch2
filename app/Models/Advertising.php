@@ -15,6 +15,16 @@ class Advertising extends Model
   public $modelData = true;
   public $paginator = true;
 
+  protected $behavior = array(
+    'Lookup' => array(
+      'format' =>  array(
+        'name' => '{{name}}',
+        'keyword_1' => '{{__Shop|getShopName}}'
+        'keyword_2' => '{{AdvertisingType.name|Advertising.advertising_type_id=>AdvertisingType.id}}',
+      )
+    )
+  );
+
   public $imageTypes = array(
     'photo' => array(
       'limit' => 10

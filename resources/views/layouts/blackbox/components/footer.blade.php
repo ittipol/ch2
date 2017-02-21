@@ -4,7 +4,11 @@
 
     <div class="footer">
 
-      <h3>Chonburi Square</h3>
+      <h4>{{date('Y')}} CHONBURI SQUARE</h4>
+
+      <div>
+        <span>ติดต่อเรา</span>
+      </div>
 
     </div>
 

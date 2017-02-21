@@ -25,7 +25,6 @@ class CheckForPersonHasShopPermission
       $pages = array(
         'shop.manage' => true,
         'shop.setting' => true,
-        'shop.edit.profile_image' => 'edit',
         'shop.edit.description' => 'edit',
         'shop.edit.address' => 'edit',
         'shop.edit.contact' => 'edit',

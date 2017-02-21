@@ -5,6 +5,8 @@ namespace App\Models;
 use App\library\service;
 use App\library\url;
 use App\library\cache;
+use App\library\imageTool;
+use App\library\handleImageFile;
 use File;
 use Session;
 
@@ -189,7 +191,8 @@ class Image extends Model
       return false;
     }
 
-    $toPath = $imageInstance->getDirPath().$imageInstance->imageType->path;
+    // $toPath = $imageInstance->getDirPath().$imageInstance->imageType->path;
+    $toPath = $imageInstance->getFullDirPath();
     if(!is_dir($toPath)){
       mkdir($toPath,0777,true);
     }
@@ -209,6 +212,10 @@ class Image extends Model
 
   public function getDirPath() {
     return storage_path($this->storagePath.Service::generateUnderscoreName($this->model)).'/'.$this->model_id.'/';
+  }
+
+  public function getFullDirPath() {
+    return storage_path($this->storagePath.Service::generateUnderscoreName($this->model)).'/'.$this->model_id.'/'.$this->imageType->path.'/';
   }
 
   public function getImagePath($filename = '') {
@@ -310,6 +317,47 @@ class Image extends Model
       'description' => $this->description ? $this->description : '',
       '_url' => $this->getImageUrl()
     );
+
+  }
+
+  public function saveImage($model,$image,$options = array()) {
+
+    $cache = new cache;
+    $imageType = new ImageType;
+    $image = new HandleImageFile($image);
+
+    if(!$this->exists) {
+      $this->image_type_id = $imageType->getIdByalias($options['type']);
+      $this->filename = $filename = $image->getFileName();
+      $this->model = $model->modelName;
+      $this->model_id = $model->id;
+    }
+
+    if(!empty($options['description'])) {
+      $this->description = $options['description'];
+    }
+
+    if(!$this->save()) {
+      return false;
+    }
+
+    list($width,$height) = $image->generateImageSize($options['type']);
+
+    $toPath = $this->getFullDirPath();
+    if(!is_dir($toPath)){
+      mkdir($toPath,0777,true);
+    }
+
+    $imageTool = new ImageTool($image->getRealPath());
+    $imageTool->png2jpg($width,$height);
+    $imageTool->resize($width,$height);
+    $moved = $imageTool->save($this->getImagePath());
+
+    if($moved) {
+      $cache->deleteCacheDirectory(pathinfo($this->filename, PATHINFO_FILENAME));
+    }
+
+    return $this->id;
 
   }
 

@@ -44,7 +44,7 @@
             foreach ($branches as $id => $branch):
           ?>
             <div class="col-lg-4 col-md-6 col-sm-6 col-sm-12">
-              <label class="box">
+              <label class="choice-box">
                 <?php
                   echo Form::checkbox('JobApplyToBranch[branch_id][]', $id);
                 ?>

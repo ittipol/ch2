@@ -4,7 +4,7 @@ class NotificationBottom {
       this.desc = desc;
       this.type = type;
       this.size = size;
-      this.delay = 8000;
+      this.delay = 5000;
       this.alwaysVisible = alwaysVisible;
       this.allowedClose = allowedClose;
   }
@@ -78,6 +78,10 @@ class NotificationBottom {
 
     }
     
+  }
+
+  setDelay(delay) {
+    this.delay = delay;
   }
 
   setVisible(visible) {

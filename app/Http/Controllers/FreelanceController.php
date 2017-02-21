@@ -58,6 +58,11 @@ class FreelanceController extends Controller
     }
 
     $model->paginator->myData();
+    $model->paginator->criteria(array(
+      'order' => array(
+        array('created_at','DESC')
+      )
+    ));
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl('freelance/list');
     $model->paginator->setUrl('freelance/detail/{id}','detailUrl');

@@ -57,3 +57,29 @@ a.button:hover {
   background-color: #ffffff;
   margin: 10px auto;
 }
+
+/*.cover-edit-button input[type="file"] {
+	opacity: 0;
+	position: absolute;
+	z-index: -1;
+}*/
+
+.icon-button-round {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  background-repeat: no-repeat;
+  background-size: 25px;
+  background-position: center;
+  background-color: #ececec;
+  display: block;
+  cursor: pointer;
+}
+
+.icon-button-round.right-icon {
+	background-image: url(/images/icons/right.png);
+}
+
+.icon-button-round.close-icon {
+	background-image: url(/images/icons/close-red.png);
+}

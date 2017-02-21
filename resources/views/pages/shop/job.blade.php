@@ -18,7 +18,7 @@
     <div class="tile-nav small">
       <div class="tile-nav-image">
         <a href="{{$jobPostUrl}}">
-          <img src="/images/common/career.png">
+          <img src="/images/common/plus.png">
         </a>
       </div>
       <div class="tile-nav-info">
@@ -116,7 +116,7 @@
     <div class="shop-notice text-center space-top-20">
       <img class="space-bottom-20" src="/images/common/career.png">
       <div>
-        <h3>ลงประกาศงาน</h3>
+        <h3>ประกาศงาน</h3>
         <p>ยังไม่มีประกาศงานของคุณ เพิ่มประกาศงานของคุณเพื่อค้นหาพนักงานใหม่</p>
         <a href="{{$jobPostUrl}}" class="button">ลงประกาศงาน</a>
       </div>

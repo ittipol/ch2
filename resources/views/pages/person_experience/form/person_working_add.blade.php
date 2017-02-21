@@ -57,7 +57,7 @@
 
       <div class="period-panel" id="period_date">
 
-        <label class="box">
+        <label class="choice-box">
           <?php
             echo Form::checkbox('current', 1, false, array(
               'id' => 'chk_current'

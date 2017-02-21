@@ -167,9 +167,6 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
   Route::get('shop/{shopSlug}/setting','ShopController@setting')->name('shop.setting');
 
-  Route::get('shop/{shopSlug}/profile_image','ShopController@profileImage')->name('shop.edit.profile_image');
-  Route::patch('shop/{shopSlug}/profile_image','ShopController@profileImageSubmit')->name('shop.edit.profile_image');
-
   Route::get('shop/{shopSlug}/description','ShopController@description')->name('shop.edit.description');
   Route::patch('shop/{shopSlug}/description','ShopController@descriptionSubmit')->name('shop.edit.description');
   
@@ -289,7 +286,7 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'api'], function () {
 
 Route::group(['middleware' => 'auth'], function () {
   Route::post('upload_image', 'ApiController@uploadImage');
-  // Route::post('delete_image', 'ApiController@deleteImage');
+  Route::post('upload_profile_image', 'ApiController@uploadProfileImage')->name('Api.upload.profile_image');
 });
 
 // Route::group(['namespace' => 'Admin'], function () {

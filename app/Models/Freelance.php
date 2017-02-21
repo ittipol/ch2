@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\library\string;
+use App\library\cache;
+use App\library\url;
 
 class Freelance extends Model
 {
@@ -21,6 +23,15 @@ class Freelance extends Model
     )
   );
 
+  protected $behavior = array(
+    'Lookup' => array(
+      'format' =>  array(
+        'name' => '{{name}}',
+        'keyword_1' => '{{__getFreelanceType}}'
+      )
+    )
+  );
+
   protected $validation = array(
     'rules' => array(
       'name' => 'required|max:255',
@@ -31,6 +42,14 @@ class Freelance extends Model
       'freelance_type_id.required' => 'ประเภทงานฟรีแลนซ์ห้ามว่าง',
     )
   );
+
+  public function freelanceType() {
+    return $this->hasOne('App\Models\FreelanceType','id','freelance_type_id');
+  }
+
+  public function getFreelanceType() {
+    return $this->freelanceType->name;
+  }
 
   public function buildModelData() {
 
@@ -44,6 +63,32 @@ class Freelance extends Model
       '_freelanceType' => FreelanceType::select(array('name'))->find($this->freelance_type_id)->name
     );
     
+  }
+
+  public function buildLookupData() {
+
+    $string = new String;
+    $cache = new Cache;
+    $url = new url;
+
+    $image = $this->getModelRelationData('Image',array(
+      'first' => true
+    ));
+
+    $_imageUrl = '/images/common/no-img.png';
+    if(!empty($image)) {
+      $_imageUrl = $cache->getCacheImageUrl($image,'list');
+    }
+
+    return array(
+      // 'name' => $this->name,
+      '_short_name' => $string->subString($this->name,90),
+      '_short_description' => $string->subString($this->description,250),
+      '_imageUrl' => $_imageUrl,
+      '_detailUrl' => $url->setAndParseUrl('freelance/detail/{id}',array('id' => $this->id))
+    );
+
+
   }
 
 }

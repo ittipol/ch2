@@ -26,9 +26,9 @@ class RealEstate extends Model
     'Lookup' => array(
       'format' =>  array(
         'name' => '{{name}}',
-        // 'keyword_1' => '{{__getAnnouncementType}} {{__getRealEstateType}}',
-        // 'keyword_2' => '{{ItemCategory.name|Item.id=>ItemToCategory.item_id,ItemToCategory.item_category_id=>ItemCategory.id}}',
-        'keyword_3' => '{{price}}'
+        'keyword_1' => '{{__getAnnouncementType}} {{__getRealEstateType}}',
+        'keyword_2' => '{{__getFacility}} {{__getFeature}}',
+        'keyword_4' => '{{price}}'
       )
     )
   );
@@ -99,6 +99,36 @@ class RealEstate extends Model
 
   public function getRealEstateType() {
     return $this->realEstateType->name;
+  }
+
+  public function getFacility() {
+    $facility = json_decode($this->facility,true);
+
+    $facilities = array();
+    if(!empty($facility)) {
+      $facility = RealEstateFeature::whereIn('id',$facility)->get();
+      $facilities = array();
+      foreach ($facility as $value) {
+        $facilities[] = $value->name;
+      }
+    }
+
+    return implode(' ', $facilities);
+  }
+
+  public function getFeature() {
+    $feature = json_decode($this->feature,true);
+
+    $features = array();
+    if(!empty($feature)) {
+      $feature = RealEstateFeature::whereIn('id',$feature)->get();
+      $features = array();
+      foreach ($feature as $value) {
+        $features[] = $value->name;
+      }
+    }
+
+    return implode(' ', $features);
   }
 
   public function buildModelData() {

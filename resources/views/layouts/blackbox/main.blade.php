@@ -18,6 +18,8 @@
     @include('layouts.blackbox.components.content-wrapper')
   </div>
 
+  @include('layouts.blackbox.components.footer')
+
   <script type="text/javascript">
 
     $(document).ready(function(){

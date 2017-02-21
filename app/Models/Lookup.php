@@ -138,7 +138,17 @@ class Lookup extends Model
             if(!empty($_matches[0])){
 
               if(substr($_matches[0],0,2) == '__'){
-                $_value = $model->{substr($_matches[0],2)}();
+
+                if(strpos($_matches[0], '|')) {
+                  
+                  list($_model,$fx) = explode('|', $_matches[0]);
+
+                  $_value = Service::loadModel(substr($_model,2))->{$fx}($model);
+
+                }else{
+                  $_value = $model->{substr($_matches[0],2)}();
+                }
+              
               }elseif(array_key_exists($_matches[0],$options['data'])) {
                 $_value = $options['data'][$_matches[0]];
               }else{

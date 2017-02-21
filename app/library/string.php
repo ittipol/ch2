@@ -35,5 +35,6 @@ class String
 
     return $string;
 
-  } 
+  }
+  
 }

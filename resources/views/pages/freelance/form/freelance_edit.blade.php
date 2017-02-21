@@ -39,7 +39,7 @@
         <div class="row">
             @foreach ($_fieldData['freelanceTypes'] as $id => $freelanceType)
             <div class="col-lg-4 col-md-6 col-sm-6 col-sm-12">
-              <label class="box">
+              <label class="choice-box">
                 <?php
                   echo Form::radio('freelance_type_id', $id);
                 ?>

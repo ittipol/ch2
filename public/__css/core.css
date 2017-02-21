@@ -116,13 +116,15 @@ a {
 }
 
 .top-header-wrapper {
+	background-color: #fff;
 	border-bottom: 1px solid #1565C0;
 	margin-bottom: 20px;
 }
 
 .top-header {
 	width: 74%;
-	margin: 20px auto 10px;
+	margin: 0 auto;
+	padding: 20px 0 10px;
 }
 
 .container-header {
@@ -152,4 +154,18 @@ a {
 
 .sign.info {
 	background-color: rgb(44,89,169);
+}
+
+/*.bg-cover {
+	width: 100%;
+	height: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}*/
+
+input[type="file"].input-file-hide {
+	opacity: 0;
+	position: absolute;
+	z-index: -1;
 }

@@ -71,7 +71,7 @@
             foreach ($_fieldData['itemCategories'] as $id => $category):
           ?>
             <div class="col-lg-4 col-md-6 col-sm-6 col-sm-12">
-              <label class="box">
+              <label class="choice-box">
                 <?php
                   echo Form::radio('ItemToCategory[item_category_id]', $id);
                 ?> 
@@ -218,7 +218,7 @@
   </div>
 
   <?php
-    echo Form::submit('ลงประกาศ' , array(
+    echo Form::submit('บันทึก' , array(
       'class' => 'button'
     ));
   ?>

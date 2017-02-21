@@ -97,9 +97,9 @@ class Blackbox {
     //   }
     // });
 
-    // $(document).scroll(function() {
-    // // console.log($(this).scrollTop());
-    // });
+    $(document).scroll(function() {
+      console.log($(this).scrollTop());
+    });
 
 
   }

@@ -28,10 +28,10 @@ class Item extends Model
     'Lookup' => array(
       'format' =>  array(
         'name' => '{{name}}',
-        'keyword_1' => '{{__getAnnouncementType}} {{__getUsed}}',
+        'keyword_1' => '{{__getAnnouncementType}}',
         'keyword_2' => '{{ItemCategory.name|Item.id=>ItemToCategory.item_id,ItemToCategory.item_category_id=>ItemCategory.id}}',
-        'keyword_3' => '{{price}}',
-        // 'description' => '{{description}}'
+        'keyword_3' => '{{__getUsed}}',
+        'keyword_4' => '{{price}}',
       )
     )
   );
@@ -124,32 +124,31 @@ class Item extends Model
     
   }
 
-    public function buildLookupData() {
+  public function buildLookupData() {
 
-      $currency = new Currency;
-      $string = new String;
-      $cache = new Cache;
-      $url = new url;
+    $currency = new Currency;
+    $string = new String;
+    $cache = new Cache;
+    $url = new url;
 
-      $image = $this->getModelRelationData('Image',array(
-        'first' => true
-      ));
+    $image = $this->getModelRelationData('Image',array(
+      'first' => true
+    ));
 
-      $_imageUrl = '/images/common/no-img.png';
-      if(!empty($image)) {
-        $_imageUrl = $cache->getCacheImageUrl($image,'list');
-      }
-
-      return array(
-        'name' => $this->name,
-        '_short_name' => $string->subString($this->name,90),
-        'description' => !empty($this->description) ? $this->description : '-',
-        '_short_description' => $string->subString($this->description,250),
-        '_price' => $currency->format($this->price),
-        '_imageUrl' => $_imageUrl,
-        '_detailUrl' => $url->setAndParseUrl('item/detail/{id}',array('id' => $this->id))
-      );
-
+    $_imageUrl = '/images/common/no-img.png';
+    if(!empty($image)) {
+      $_imageUrl = $cache->getCacheImageUrl($image,'list');
     }
+
+    return array(
+      // 'name' => $this->name,
+      '_short_name' => $string->subString($this->name,90),
+      '_short_description' => $string->subString($this->description,250),
+      '_price' => $currency->format($this->price),
+      '_imageUrl' => $_imageUrl,
+      '_detailUrl' => $url->setAndParseUrl('item/detail/{id}',array('id' => $this->id))
+    );
+
+  }
 
 }

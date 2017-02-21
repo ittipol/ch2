@@ -38,7 +38,7 @@
     </div>
 
     <div class="form-row">
-      <label class="box">
+      <label class="choice-box">
         <?php
           echo Form::checkbox('graduated', 1);
         ?>

@@ -7,6 +7,7 @@ use App\library\imageTool;
 use App\library\handleImageFile;
 use Input;
 use Session;
+use Schema;
 
 class ApiController extends Controller
 { 
@@ -50,15 +51,7 @@ class ApiController extends Controller
     }
 
     if(empty(Input::file('image'))) {
-      $result = array(
-        'success' => false,
-        'message' => array(
-          'type' => 'error',
-          'title' => 'เกิดข้อผิดพลาด กรุณารีเฟรช แล้วลองอีกครั้ง'
-        )
-      );
-
-      return response()->json($result);
+      return $this->generalError();
     }
 
     $image = new HandleImageFile(Input::file('image'));
@@ -103,6 +96,94 @@ class ApiController extends Controller
     }
 
     return response()->json($result);
+  }
+
+  public function uploadProfileImage() {
+
+    if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+      exit('Error!!!');  //trygetRealPath detect AJAX request, simply exist if no Ajax
+    }
+
+    $result = array(
+      'success' => false,
+    );
+
+    $acceptModels = array(
+      'Shop',
+      'Person'
+    );
+
+    $acceptType = array(
+      'cover',
+      'profile-image'
+    );
+
+    if(!in_array(Input::get('model'), $acceptModels) || !in_array(Input::get('imageType'), $acceptType)) {
+      return $this->generalError();
+    }
+
+    $model = Service::loadModel(Input::get('model'))->find(Input::get('model_id'));
+
+    // Check permission
+    $permission = true;
+    switch (Input::get('model')) {
+      case 'Shop':
+        $permission = $model->checkPersonHasShopPermission();
+        break;
+    }
+
+    if(!$permission) {
+      return $this->generalError();
+    }
+
+    switch (Input::get('imageType')) {
+      case 'profile-image':
+        $field = 'profile_image_id';
+        break;
+      
+      case 'cover':
+        $field = 'cover_image_id';
+        break;
+    }
+
+    if(!Schema::hasColumn($model->getTable(), $field)) {
+      return $this->generalError();
+    }
+
+    $imageModel = Service::loadModel('Image')->find($model->{$field});
+
+    if(empty($imageModel)) {
+      $imageModel = Service::loadModel('Image');
+    }
+
+    $imageId = $imageModel->saveImage($model,Input::file('image'),array(
+      'type' => Input::get('imageType')
+    ));
+
+    $model->{$field} = $imageId;
+
+    if($model->save()) {
+      $result = array(
+        'success' => true
+      );
+    };
+
+    return response()->json($result);
+
+  }
+
+  private function generalError() {
+
+    $result = array(
+      'success' => false,
+      'message' => array(
+        'type' => 'error',
+        'title' => 'เกิดข้อผิดพลาด กรุณารีเฟรช แล้วลองอีกครั้ง'
+      )
+    );
+
+    return response()->json($result);
+
   }
 
 }

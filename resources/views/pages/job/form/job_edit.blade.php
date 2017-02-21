@@ -38,7 +38,7 @@
         <div class="row">
             @foreach ($_fieldData['branches'] as $id => $branch)
             <div class="col-lg-4 col-md-6 col-sm-6 col-sm-12">
-              <label class="box">
+              <label class="choice-box">
                 <?php
                   echo Form::checkbox('RelateToBranch[branch_id][]', $id);
                 ?>
@@ -83,7 +83,7 @@
         ));
       ?>
       @foreach ($_fieldData['employmentTypes'] as $id => $employmentType)
-        <label class="box">
+        <label class="choice-box">
           <?php
             echo Form::radio('employment_type_id', $id);
           ?>
@@ -148,12 +148,12 @@
 
     <div class="form-row">
 
-      <label class="box">
+      <label class="choice-box">
         <input type="checkbox" checked disabled >
         <div class="inner">รับสมัครผ่านชุมชน CHONBURI SQUARE</div>
       </label>
       <br>
-      <label class="box">
+      <label class="choice-box">
         <?php
           echo Form::checkbox('recruitment_custom', 1, null, array(
             'id' => 'recruitment_custom'

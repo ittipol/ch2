@@ -57,12 +57,18 @@ class HandleImageFile
 
   public function generateImageSize($imageType,$originalWidth = null,$originalHeight = null){
 
+    $accepteType = array('photo','profile-image');
+
     if(empty($originalWidth)) {
       $originalWidth = $this->width; 
     }
 
     if(empty($originalHeight)) {
       $originalHeight = $this->height; 
+    }
+
+    if(!in_array($imageType, $accepteType)) {
+      return array($originalWidth,$originalHeight);
     }
 
     $ratio = abs($originalWidth/$originalHeight);

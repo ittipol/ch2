@@ -1,0 +1,143 @@
+.choice-box {
+	position: relative;
+	height: 400px;
+}
+
+.choice-box .inner {
+	padding: 20px;
+}
+
+.choice-box a.button {
+	padding: 6px 25px;
+	color: #fff;
+	background-color: #0288D1;
+}
+
+label.choice-box {
+	height: auto;
+	display: inline-block;
+}
+
+.form-item-group label.choice-box {
+	display: block;
+	background-color: #ececec;
+	margin-bottom: 20px;
+}
+
+label.choice-box input[type="radio"],
+label.choice-box input[type="checkbox"] {
+	display: none;
+}
+
+label.choice-box input[type="radio"] + .inner,
+label.choice-box input[type="checkbox"] + .inner {
+	color: #000;
+	padding: 20px 0 20px 40px;
+	cursor: pointer;
+}
+
+.form-item-group label.choice-box input[type="radio"]:checked + .inner,
+.form-item-group label.choice-box input[type="checkbox"]:checked + .inner {
+	background-color: #A5D6A7;
+}
+
+label.choice-box input[type="radio"] + .inner::before {
+	content: "";
+	position: absolute;
+	top: 22px;
+	left: 10px;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 0 2px rgba(28,156,1,.85)
+}
+
+label.choice-box input[type="radio"]:checked + .inner::before {
+	content: "";
+	position: absolute;
+	top: 22px;
+	left: 10px;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 0 2px rgba(28,156,1,.85);
+}
+
+label.choice-box input[type="radio"]:checked + .inner::after {
+	content: "";
+	position: absolute;
+	top: 26px;
+	left: 14px;
+	width: 12px;
+	height: 12px;
+	background-color: rgb(28,156,1);
+	border-radius: 12px;
+}
+
+label.choice-box input[type="checkbox"] + .inner::before {
+	content: "";
+	position: absolute;
+	top: 22px;
+	left: 10px;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 0 2px rgba(28,156,1,.85)
+}
+
+label.choice-box input[type="checkbox"]:checked + .inner::before {
+	content: "";
+	position: absolute;
+	top: 22px;
+	left: 10px;
+  width: 20px;
+  height: 20px;
+  box-shadow: 0 0 0 2px rgba(28,156,1,.85)
+}
+
+label.choice-box input[type="checkbox"]:checked + .inner::after {
+	content: "";
+	position: absolute;
+	top: 22px;
+	left: 10px;
+	width: 20px;
+	height: 20px;
+	background-color: #fff;
+	background-image: url(/images/common/tick-green2.png);
+	background-size: 20px;
+	background-repeat: no-repeat;
+}
+
+.btn-group label.btn {
+  padding: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  overflow: hidden;
+}
+
+.btn-group label:first-child {
+	border-radius: 6px 0 0 6px;
+}
+
+.btn-group label:last-child {
+	border-radius: 0 6px 6px 0;
+}
+
+
+.btn-group label.btn input[type="radio"],
+.btn-group label.btn input[type="checkbox"] {
+	display: none;
+}
+
+.btn-group input[type="radio"] + .inner,
+.btn-group input[type="checkbox"] + .inner {
+	padding: 10px 15px;
+}
+
+.btn-group input[type="radio"]:checked + .inner,
+.btn-group input[type="checkbox"]:checked + .inner {
+	color: #ffffff;
+	background-color: #1976D2;
+}

@@ -42,7 +42,7 @@
           </div>
 
           <div class="display-image-description-icon">
-            คำอธิบายรูปนี้
+            <img src="/images/icons/additional-white.png">
           </div>
 
         </div>

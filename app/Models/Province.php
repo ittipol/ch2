@@ -4,6 +4,6 @@ namespace App\Models;
 
 class Province extends Model
 {
-  public $table = 'provinces';
+  protected $table = 'provinces';
   protected $fillable = ['name'];
 }

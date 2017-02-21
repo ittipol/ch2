@@ -38,7 +38,7 @@
         <div class="row">
             @foreach ($_fieldData['branches'] as $id => $branch)
             <div class="col-lg-4 col-md-6 col-sm-6 col-sm-12">
-              <label class="box">
+              <label class="choice-box">
                 <?php
                   echo Form::checkbox('RelateToBranch[branch_id][]', $id);
                 ?>
@@ -70,7 +70,7 @@
         ));
       ?>
       @foreach ($_fieldData['advertisingTypes'] as $id => $advertisingType)
-        <label class="box">
+        <label class="choice-box">
           <?php
             echo Form::radio('advertising_type_id', $id);
           ?>

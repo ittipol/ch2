@@ -77,7 +77,7 @@ class Images {
 			let _this = this;
 
 			let parent = $(input).parent();
-			let CSRF_TOKEN = $('input[name="_token"]').val();    
+			// let CSRF_TOKEN = $('input[name="_token"]').val();
 			let proceed = true;
 
 			if(!window.File && window.FileReader && window.FileList && window.Blob){ //if browser doesn't supports File API
@@ -115,7 +115,7 @@ class Images {
 			if(proceed) {
 
 				let formData = new FormData();
-				formData.append('_token', CSRF_TOKEN);  
+				formData.append('_token', $('input[name="_token"]').val());  
 				formData.append('model', $('input[name="_model"]').val());
 				formData.append('imageToken', this.code);
 				formData.append('imageType', this.type);

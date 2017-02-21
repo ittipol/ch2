@@ -52,6 +52,7 @@ class BranchController extends Controller
 
     $shop = $model->getModelRelationData('ShopRelateTo',array(
       'first' => true,
+      'fields' => array('shop_id')
     ))->shop;
 
     // Get Branches
@@ -78,7 +79,7 @@ class BranchController extends Controller
     ));
 
     $this->data = $model->modelData->build();
-    $this->setData('jobs',$jobs->paginator->getModelData());
+    $this->setData('jobs',$jobs->paginator->getPaginationData());
     $this->setData('shopName',$shop->name);
 
     return $this->view('pages.branch.detail');
@@ -102,6 +103,7 @@ class BranchController extends Controller
     $this->data = $model->formHelper->build();
 
     return $this->view('pages.branch.form.branch_add');
+    
   }
 
   public function addingSubmit(CustomFormRequest $request) {

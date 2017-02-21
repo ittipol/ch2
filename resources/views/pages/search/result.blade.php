@@ -8,7 +8,7 @@
   ?>
 
   <div class="row">
-    <div class="col-sm-12 space-top-50">
+    <div class="col-sm-12 space-top-50 search-box-panel">
       <input type="text" id="search_query_input" name="search_query" value="{{$q}}" placeholder="ค้นหา" autocomplete="off" class="search-box">
       <button class="button-search">
         <img src="/images/icons/search-black.png">

@@ -17,11 +17,13 @@ class Paginator {
   private $getImage = true;
   private $model;
   private $queries = array();
+  private $onlyMyData = false;
+  private $criteriaData = array();
 
   public function __construct($model = null) {
     $this->model = $model;
-    $this->total = $model->count();
-    $this->lastPage = (int)ceil($this->total / $this->perPage);
+    // $this->total = $model->count();
+    // $this->lastPage = (int)ceil($this->total / $this->perPage);
     $this->url = new Url;
   }
 
@@ -48,7 +50,6 @@ class Paginator {
 
   public function setPerPage($perPage) {
     $this->perPage = (int)$perPage;
-    $this->lastPage = (int)ceil($this->total / $this->perPage);
   }
 
   public function setPage($page) {
@@ -75,70 +76,100 @@ class Paginator {
     $this->getImage = false;
   }
 
+  public function getTotal() {
+    return $this->model->count();
+  }
+
+  public function getLastPage() {
+    return (int)ceil($this->getTotal() / $this->perPage);
+  }
+
   public function criteria($options = array()) {
+    $this->criteriaData = $options;
+  }
 
-    if(!empty($options['conditions']['in'])) {
+  private function condition($model) {
 
-      foreach ($options['conditions']['in'] as $condition) {
+    // $model = $this->model->newInstance();
+    $criteria = $this->criteriaData;
+
+    if(!empty($criteria['conditions']['in'])) {
+
+      foreach ($criteria['conditions']['in'] as $condition) {
 
         if(empty($condition[1])) {
           continue;
         }
 
-        $this->model = $this->model->whereIn($condition[0],$condition[1]);
+        $model = $model->whereIn($condition[0],$condition[1]);
       }
 
-      unset($options['conditions']['in']);
+      unset($criteria['conditions']['in']);
 
     }
 
-    if(!empty($options['conditions']['or'])) {
+    if(!empty($criteria['conditions']['or'])) {
 
-      $arrLen = count($options['conditions']['or']);
+      $arrLen = count($criteria['conditions']['or']);
       for ($i=0; $i < $arrLen; $i++) {
-        $this->model = $this->model->orWhere(
-          $options['conditions']['or'][$i][0],
-          $options['conditions']['or'][$i][1],
-          $options['conditions']['or'][$i][2]
+        $model = $model->orWhere(
+          $criteria['conditions']['or'][$i][0],
+          $criteria['conditions']['or'][$i][1],
+          $criteria['conditions']['or'][$i][2]
         );
       }
 
-      unset($options['conditions']['or']);
+      unset($criteria['conditions']['or']);
 
     }
 
-    if(!empty($options['conditions'])){
-      $this->model = $this->model->where($options['conditions']);
+    if(!empty($criteria['conditions'])){
+      $model = $model->where($criteria['conditions']);
     }
 
-    if(!empty($options['fields'])){
-      $model = $model->select($options['fields']);
+    if($this->onlyMyData) {
+      $model = $model->where('person_id','=',Session::get('Person.id'));
     }
 
-    if(!empty($options['order'])){
+    if(!empty($criteria['fields'])){
+      $model = $model->select($criteria['fields']);
+    }
 
-      if(is_array(current($options['order']))) {
+    return $model;
 
-        foreach ($options['order'] as $value) {
-          $this->model->orderBy($value[0],$value[1]);
+  }
+
+  public function order($model) {
+
+    if(!empty($this->criteriaData['order'])){
+
+      if(is_array(current($this->criteriaData['order']))) {
+
+        foreach ($this->criteriaData['order'] as $value) {
+          $model->orderBy($value[0],$value[1]);
         }
 
       }else{
-        $this->model->orderBy(current($options['order']),next($options['order']));
+        $model->orderBy(current($this->criteriaData['order']),next($this->criteriaData['order']));
       }
       
     }
 
+    return $model;
+
   }
 
   public function myData() {
-    $this->model = $this->model->where('person_id','=',Session::get('Person.id'));
+    $this->onlyMyData = true;
   }
 
   public function itemCount() {
+
     $offset = ($this->page - 1)  * $this->perPage;
 
-    return $this->model
+    // $model = $this->condition($this->model->newInstance());
+
+    return $this->condition($this->model->newInstance())
     ->take($this->perPage)
     ->skip($offset)
     ->count();
@@ -146,13 +177,18 @@ class Paginator {
 
   public function getPaginationData() {
 
-    $this->lastPage = (int)ceil($this->total / $this->perPage);
+    // $total = $this->getTotal();
+    // $this->lastPage = (int)ceil($total / $this->perPage);
+
     $offset = ($this->page - 1)  * $this->perPage;
 
     // $start = $offset + 1;
     // $end = min(($offset + $this->perPage), $this->total);
 
-    $records = $this->model
+    $model = $this->condition($this->model->newInstance());
+    $model = $this->order($model);
+
+    $records = $model
     ->take($this->perPage)
     ->skip($offset)
     ->get();
@@ -319,8 +355,8 @@ class Paginator {
     if($onlyData) {
       return array(
         'page' => $this->page,
-        'lastPage' => $this->lastPage,
-        'total' => $this->total,
+        'lastPage' => $this->getLastPage(),
+        'total' => $this->getTotal(),
         'paging' => $this->paging(),
         'next' => $this->next(),
         'prev' => $this->prev(),
@@ -331,8 +367,8 @@ class Paginator {
     return array(
       '_pagination' => array(
         'page' => $this->page,
-        'lastPage' => $this->lastPage,
-        'total' => $this->total,
+        'lastPage' => $this->getLastPage(),
+        'total' => $this->getTotal(),
         'paging' => $this->paging(),
         'next' => $this->next(),
         'prev' => $this->prev(),

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\library\string;
+use App\library\cache;
+use App\library\url;
 
 class Job extends Model
 {
@@ -21,15 +23,17 @@ class Job extends Model
     )
   );
 
-  // protected $behavior = array(
-  //   'Lookup' => array(
-  //     'format' =>  array(
-  //       'keyword' => '{{name}} {{salary}} {{nationality}} {{educational_level}}',
-  //       'keyword_1' => '{{EmploymentType.name|Job.employment_type_id=>EmploymentType.id}}',
-  //       'description' => '{{description}}'
-  //     )
-  //   )
-  // );
+  protected $behavior = array(
+    'Lookup' => array(
+      'format' =>  array(
+        'name' => '{{name}}',
+        'keyword_1' => '{{__Shop|getShopName}}',
+        'keyword_2' => '{{EmploymentType.name|Job.employment_type_id=>EmploymentType.id}}',
+        // 'keyword_3' => '{{__getRelatedBranch}}',
+        'keyword_4' => '{{salary}}',
+      )
+    )
+  );
 
   protected $validation = array(
     'rules' => array(
@@ -58,6 +62,11 @@ class Job extends Model
         's' => '1',
         'c' => !empty($attributes['recruitment_custom']) ? '1' : '0'
       ));
+
+      if(empty($attributes['recruitment_custom'])) {
+        $attributes['recruitment_custom_detail'] = null;
+      }
+
       unset($attributes['recruitment_custom']);
 
     }
@@ -65,25 +74,23 @@ class Job extends Model
     return parent::fill($attributes);
   }
 
-  public function buildPaginationData() {
+  public function getSalary() {
 
-    $string = new String;
+    $salary = $this->salary;
+    $salary = trim($salary);
+    $salary = str_replace(',', '', $salary);
 
-    $this->salary = trim($this->salary);
-    $this->salary = str_replace(',', '', $this->salary);
-
-    preg_match_all('/[0-9]+/', $this->salary, $matches);
+    preg_match_all('/[0-9]+/', $salary, $matches);
 
     $numbers = array();
     foreach ($matches[0] as $key => $match) {
-      $this->salary = str_replace($match, number_format($match, 0, '.', ','), $this->salary);
+      $salary = str_replace($match, number_format($match, 0, '.', ','), $salary);
     }
 
-    $_salary = substr($this->salary, -3);
-
+    $_salary = substr($salary, -3);
     $addBaht = true;
-    for ($i=0; $i < strlen($_salary); $i++) { 
-
+    for ($i=0; $i < 3; $i++) { 
+      
       if((ord($_salary[$i]) < 48) || (ord($_salary[$i]) > 57)) {
         $addBaht = false;
         break;
@@ -92,14 +99,45 @@ class Job extends Model
     }
 
     if($addBaht) {
-      $this->salary .= ' บาท';
+      $salary .= ' บาท';
     }
+
+    return $salary;
+
+  }
+
+  public function getRelatedBranch() {
+
+    $branchIds = $this->getModelRelationData('RelateToBranch',array(
+      'list' => 'branch_id',
+      'fields' => array('branch_id'),
+    ));
+
+    $branches = array();
+    if(!empty($branchIds)){
+      $branches = Branch::select(array('name'))
+      ->whereIn('id',$branchIds)
+      ->get();
+    }
+
+    $branchNames = array();
+    foreach ($branches as $branch) {
+      $branchNames[] = $branch->name;
+    }
+
+    return implode(' ', $branchNames);
+
+  }
+
+  public function buildPaginationData() {
+
+    $string = new String;
 
     return array(
       'id' => $this->id,
       'name' => $this->name,
       '_short_name' => $string->subString($this->name,60),
-      '_salary' => $this->salary
+      '_salary' => $this->getSalary()
     );
 
   }
@@ -143,6 +181,31 @@ class Job extends Model
       '_recruitment_custom' => $recruitment['c'],
       'recruitment_custom_detail' => $this->recruitment_custom_detail,
       '_employmentTypeName' => $this->employmentType->name,
+    );
+
+  }
+
+  public function buildLookupData() {
+
+    $string = new String;
+    $cache = new Cache;
+    $url = new url;
+
+    $image = $this->getModelRelationData('Image',array(
+      'first' => true
+    ));
+
+    $_imageUrl = '/images/common/no-img.png';
+    if(!empty($image)) {
+      $_imageUrl = $cache->getCacheImageUrl($image,'list');
+    }
+
+    return array(
+      '_short_name' => $string->subString($this->name,90),
+      '_short_description' => $string->subString($this->description,250),
+      '_salary' => $this->getSalary(),
+      '_detailUrl' => $url->setAndParseUrl('job/detail/{id}',array('id' => $this->id)),
+      '_imageUrl' => $_imageUrl,
     );
 
   }
