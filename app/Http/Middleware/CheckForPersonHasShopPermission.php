@@ -148,7 +148,7 @@ class CheckForPersonHasShopPermission
       // page level
       // who can access in this page?
       // admin = 1, can access all page
-      // if(level <= pageLevel)
+      // if(level <= accessLevel)
       // have 4 levels
       // just concept
 

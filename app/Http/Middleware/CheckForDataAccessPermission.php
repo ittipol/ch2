@@ -3,13 +3,13 @@
 namespace App\Http\Middleware;
 
 use App\Models\DataAccessPermission;
-use App\Models\PageLevel;
+use App\Models\AccessLevel;
 use App\library\service;
 use Closure;
 use Route;
 use Auth;
 
-class CheckForPagePermission
+class CheckForDataAccessPermission
 {
     /**
      * Handle an incoming request.
@@ -34,6 +34,9 @@ class CheckForPagePermission
         'freelance.detail' => array(
           'modelName' => 'Freelance'
         ),
+        'person_experience.detail' => array(
+          'modelName' => 'PersonExperience'
+        ),
       );
 
       $name = Route::currentRouteName();
@@ -48,9 +51,8 @@ class CheckForPagePermission
         ['model_id','=',$request->id]
       ])->first();
 
-
       $hasPermission = true;
-      switch ($pageAccessPermission->page_level_id) {
+      switch (AccessLevel::find($pageAccessPermission->page_level_id)->level) {
         case 1:
           // only me can see
           $model = Service::loadModel($pages[$name]['modelName'])->select(array('person_id'))->find($request->id);

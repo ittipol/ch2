@@ -259,13 +259,13 @@ class PersonExperienceController extends Controller
       );
     }
 
-    $pageLevels = Service::loadModel('PageLevel')->getLevel();
+    $accessLevels = Service::loadModel('AccessLevel')->getLevel();
 
     $this->setData('profile',$profile->modelData->build(true));
     $this->setData('careerObjective',$careerObjective->career_objective);
     $this->setData('skills',$_skills);
     $this->setData('languageSkills',$_languageSkills);
-    $this->setData('pageLevels',$pageLevels);
+    $this->setData('accessLevels',$accessLevels);
     $this->setData('_formData',$_formData);
 
     return $this->view('pages.person_experience.profile');

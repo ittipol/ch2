@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-class PageLevel extends Model
+class AccessLevel extends Model
 {
-  protected $table = 'page_levels';
+  protected $table = 'access_levels';
   protected $fillable = ['level','name','active'];
   public $timestamps  = false;
 
@@ -14,7 +14,7 @@ class PageLevel extends Model
 
   public function getLevel() {
 
-    $pageLevels = $this->getData(array(
+    $accessLevels = $this->getData(array(
       'conditions' => array(
         array('active','=','1')
       ),
@@ -26,7 +26,7 @@ class PageLevel extends Model
     ));
 
     $levels = array();
-    foreach ($pageLevels as $value) {
+    foreach ($accessLevels as $value) {
       $levels[$value['id']] = $value['name'];
     }
 

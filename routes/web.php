@@ -75,7 +75,7 @@ Route::get('announcement/create','AnnouncementController@create');
 
 // Experience
 Route::get('experience/profile/list','PersonExperienceController@listView')->name('person_experience.list');
-Route::get('experience/profile/{id}','PersonExperienceController@detail')->name('person_experience.detail');
+Route::get('experience/profile/{id}','PersonExperienceController@detail')->name('person_experience.detail')->middleware('data.access.permission');
 
 Route::group(['middleware' => 'auth'], function () {
   Route::get('person/experience','PersonExperienceController@manage')->name('person_experience.manage');
@@ -255,7 +255,7 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
 // Person Post Item
 Route::get('item/list','ItemController@listView')->name('item.list');
-Route::get('item/detail/{id}','ItemController@detail')->name('item.detail')->middleware('page.permission');
+Route::get('item/detail/{id}','ItemController@detail')->name('item.detail');
 
 Route::group(['middleware' => 'auth'], function () {
   Route::get('item/post','ItemController@add')->name('item.post');

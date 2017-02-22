@@ -29,7 +29,7 @@ class ItemController extends Controller
     $model->paginator->setPagingUrl('item/list');
     $model->paginator->setUrl('item/detail/{id}','detailUrl');
 
-    $this->data = $model->paginator->buildPermissionData();
+    $this->data = $model->paginator->build();
 
     return $this->view('pages.item.list');
   }
