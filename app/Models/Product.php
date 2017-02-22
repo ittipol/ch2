@@ -31,16 +31,17 @@ class Product extends Model
     )
   );
 
-  // protected $behavior = array(
-  //   'Slug' => array(
-  //     'field' => 'name'
-  //   ),
-  //   'Lookup' => array(
-  //     'format' =>  array(
-  //       'keyword' => '{{name}}'
-  //     )
-  //   )
-  // );
+  protected $behavior = array(
+    // 'Slug' => array(
+    //   'field' => 'name'
+    // ),
+    // 'Lookup' => array(
+    //   'format' =>  array(
+    //     'keyword' => '{{name}}'
+    //   )
+    // ),
+    'dataAccessPermission' => true
+  );
 
   public function __construct() {  
     parent::__construct();

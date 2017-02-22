@@ -346,7 +346,7 @@ class Images {
 	}
 
 	checkImageSize(size) {
-		// 1MB
+		// 2MB
 		let maxSize = 2097152;
 
 		let allowed = false;

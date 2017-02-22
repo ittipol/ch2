@@ -155,13 +155,6 @@ class AdvertisingController extends Controller
 
     $model = Service::loadModel('Advertising')->find($this->param['id']);
 
-    if(empty($model)) {
-      $this->error = array(
-        'message' => 'ขออภัย ไม่สามารถแก้ไขข้อมูลนี้ได้ หรือข้อมูลนี้อาจถูกลบแล้ว'
-      );
-      return $this->error();
-    }
-
     $model->formHelper->loadData(array(
       'models' => array('Image','Tagging'),
       'json' => array('Image','Tagging')
@@ -196,13 +189,6 @@ class AdvertisingController extends Controller
   public function editingSubmit(CustomFormRequest $request) {
 
     $model = Service::loadModel('Advertising')->find($this->param['id']);
-
-    if(empty($model)) {
-      $this->error = array(
-        'message' => 'ขออภัย ไม่สามารถแก้ไขข้อมูลนี้ได้ หรือข้อมูลนี้อาจถูกลบแล้ว'
-      );
-      return $this->error();
-    }
 
     if($model->fill($request->all())->save()) {
       Message::display('ข้อมูลถูกบันทึกแล้ว','success');

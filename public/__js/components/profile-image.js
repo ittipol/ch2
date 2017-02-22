@@ -43,8 +43,6 @@ class ProfileImage {
 
 	setElem(buttonId,PanelId,acceptBtn,cancelBtn) {
 
-		// document.getElementById(PanelId).style.backgroundColor = '#fff';
-		// document.getElementById(PanelId).setAttribute('class','preview-image-panel');
 		document.getElementById(PanelId).setAttribute('id',this.code+'_image_panel');
 
 		document.getElementById(buttonId).append(this.createInputFile(this.code));
@@ -73,19 +71,35 @@ class ProfileImage {
 			  alert("Your browser does not support new File API! Please upgrade.");
 				proceed = false;
 			}else{
-			  // let fileSize = input.files[0].size;
+			  let fileSize = input.files[0].size;
 			  // let mimeType = input.files[0].type;
 
 			  let reader = new FileReader();
 
 			  reader.onload = function (e) {
-			  	$('#'+_this.code+'_image_panel').css('background-image', 'url(' + e.target.result + ')');
-			  	$('#'+_this.code+'_image_panel').addClass('display-preview');
+
+			  	if(_this.checkImageSize(fileSize)) {
+			  		$('#'+_this.code+'_image_panel').css('background-image', 'url(' + e.target.result + ')');
+			  		$('#'+_this.code+'_image_panel').addClass('display-preview');
+			  	}else{
+
+			  		const notificationBottom = new NotificationBottom('ขออภัย ไม่รองรับรูปภาพที่คุณกำลังอัพโหลด','รูปภาพอาจจะมีขนาดใหญ่กว่าที่รองรับ กรุณาลองอีกครั้งด้วยรูปภาพอื่นที่มีขนาดเล็กลง','error');
+			  		notificationBottom.setDelay(10000);
+			  		notificationBottom.load();
+
+			  		_this.removePreview();
+			  	}
+
+			  	
 			  }
 
 			  this.file = input.files[0];
 
 			  reader.readAsDataURL(input.files[0]);
+
+			  if(!this.checkImageSize(fileSize)) {
+			  	proceed = false;
+			  }
 
 			}
 
@@ -210,6 +224,19 @@ class ProfileImage {
 
 		return inputFile
 
+	}
+
+	checkImageSize(size) {
+		// 2MB
+		let maxSize = 2097152;
+
+		let allowed = false;
+
+		if(size <= maxSize){
+			allowed = true;
+		}
+
+		return allowed;
 	}
 
 }

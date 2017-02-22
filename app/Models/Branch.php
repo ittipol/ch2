@@ -25,7 +25,8 @@ class Branch extends Model
         'name' => '{{name}}',
         'keyword_1' => '{{__Shop|getShopName}}'
       )
-    )
+    ),
+    'dataAccessPermission' => true
   );
 
   protected $validation = array(

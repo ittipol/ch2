@@ -55,5 +55,7 @@ class Kernel extends HttpKernel
         'person.experience' => \App\Http\Middleware\CheckForPersonExperience::class,
         'person.shop.permission' => \App\Http\Middleware\CheckForPersonHasShopPermission::class,
         'shop' => \App\Http\Middleware\CheckForShopSlug::class,
+        'page.permission' => \App\Http\Middleware\CheckForPagePermission::class,
+        'editing.permission' => \App\Http\Middleware\CheckForEditingPermission::class,
     ];
 }

@@ -118,13 +118,6 @@ class RealEstateController extends Controller
 
     $model = Service::loadModel('RealEstate')->find($this->param['id']);
 
-    if(empty($model) || ($model->person_id != session()->get('Person.id'))) {
-      $this->error = array(
-        'message' => 'ขออภัย ไม่สามารถแก้ไขข้อมูลนี้ได้ หรือข้อมูลนี้อาจถูกลบแล้ว'
-      );
-      return $this->error();
-    }
-
     $model->formHelper->loadFieldData('Province',array(
       'key' =>'id',
       'field' => 'name',
@@ -178,13 +171,6 @@ class RealEstateController extends Controller
   public function editingSubmit(CustomFormRequest $request) {
 
     $model = Service::loadModel('RealEstate')->find($this->param['id']);
-
-    if(empty($model) || ($model->person_id != session()->get('Person.id'))) {
-      $this->error = array(
-        'message' => 'ขออภัย ไม่สามารถแก้ไขข้อมูลนี้ได้ หรือข้อมูลนี้อาจถูกลบแล้ว'
-      );
-      return $this->error();
-    }
 
     if($model->fill($request->all())->save()) {
       Message::display('ข้อมูลถูกบันทึกแล้ว','success');

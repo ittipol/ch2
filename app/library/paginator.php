@@ -4,6 +4,7 @@ namespace App\library;
 
 use App\library\cache;
 use Session;
+use Auth;
 
 class Paginator {
 
@@ -175,7 +176,153 @@ class Paginator {
     ->count();
   }
 
+  public function getPermissionPaginationData() {
+
+    $cache = new Cache;
+
+    $offset = ($this->page - 1)  * $this->perPage;
+
+    $model = $this->condition($this->model->newInstance());
+    $model = $this->order($model);
+
+    $records = $model
+    ->join('data_access_permissions', 'data_access_permissions.model_id', '=', $this->model->getTable().'.id')
+    ->join('page_levels', 'page_levels.id', '=', 'data_access_permissions.page_level_id')
+    ->where('data_access_permissions.model','like',$this->model->modelName)
+    ->Where(function ($query) {
+      $query = $this->getAccessPermision($query);
+    })    
+    // ->select('data_access_permissions.*')
+    ->take($this->perPage)
+    ->skip($offset)
+    ->get();
+
+    $data = array();
+    foreach ($records as $record) {
+
+      $_data = array();
+      if($this->getImage) {
+
+        $image = $record->getModelRelationData('Image',array(
+          'first' => true
+        ));
+
+        $_data['_imageUrl'] = '/images/common/no-img.png';
+        if(!empty($image)) {
+          $_data['_imageUrl'] = $cache->getCacheImageUrl($image,'list');
+        }
+
+      }
+
+      $data[] = array_merge(
+        $_data,
+        $record->buildPaginationData(),
+        $this->parseUrl($record->getRecordForParseUrl())
+      );
+
+    }
+
+    return $data;
+
+  }
+
+  public function getLookupPaginationData() {
+
+    $cache = new Cache;
+
+    $offset = ($this->page - 1)  * $this->perPage;
+
+    $model = $this->condition($this->model->newInstance());
+    $model = $this->order($model);
+$model = $this->model->newInstance();
+    $records = $model
+    ->join('data_access_permissions',function($join) {
+      $join->on('data_access_permissions.model_id', '=', $this->model->getTable().'.model_id')
+           ->on('data_access_permissions.model', '=',$this->model->getTable().'.model');
+    })
+    ->join('page_levels', 'page_levels.id', '=', 'data_access_permissions.page_level_id')
+    ->Where(function ($query) {
+      $query = $this->getAccessPermision($query);
+    })    
+    // ->select('data_access_permissions.*')
+    // ->take($this->perPage)
+    // ->skip($offset)
+    ->get();
+dd($records);
+    $data = array();
+    foreach ($records as $record) {
+
+      $_data = array();
+      if($this->getImage) {
+
+        $image = $record->getModelRelationData('Image',array(
+          'first' => true
+        ));
+
+        $_data['_imageUrl'] = '/images/common/no-img.png';
+        if(!empty($image)) {
+          $_data['_imageUrl'] = $cache->getCacheImageUrl($image,'list');
+        }
+
+      }
+
+      $data[] = array_merge(
+        $_data,
+        $record->buildPaginationData(),
+        $this->parseUrl($record->getRecordForParseUrl())
+      );
+
+    }
+
+    return $data;
+
+  }
+
+  public function getAccessPermision($query) {
+
+    $table = $this->model->getTable();
+
+    // All person can access
+    $query->orWhere('page_levels.level','=',99);
+
+    if(Auth::check()) {
+      // All member can access
+      $query->orWhere('page_levels.level','=',5);
+    }
+
+    // Only person, you follow
+    // <-- Code here -->
+    // $query->orWhere(function($query) use($table,$personIds) {
+    //   $query->where('page_levels.level', '=', 2)
+    //         ->whereIn($table.'.person_id', $personIds);
+    // })
+
+    // mine
+    if($this->model->modelName != 'Lookup') {
+      $query->orWhere(function($query) use($table) {
+        $query->where('page_levels.level', '=', 1)
+              ->where($table.'.person_id', '=', session()->get('Person.id'));
+      });
+    }
+    
+    // $query->orWhere('page_levels.level','=',99)
+    //       ->orWhere('page_levels.level','=',5)
+    //       ->orWhere(function($query) use($table,$personIds) {
+    //         $query->where('page_levels.level', '=', 2)
+    //               ->whereIn($table.'.person_id', $personIds);
+    //       })
+    //       ->orWhere(function($query) use($table) {
+    //         $query->where('page_levels.level', '=', 1)
+    //               ->where($table.'.person_id', '=', session()->get('Person.id'));
+    //       });
+
+    return $query;
+
+  }
+
   public function getPaginationData() {
+
+    $cache = new Cache;
 
     // $total = $this->getTotal();
     // $this->lastPage = (int)ceil($total / $this->perPage);
@@ -192,8 +339,6 @@ class Paginator {
     ->take($this->perPage)
     ->skip($offset)
     ->get();
-
-    $cache = new Cache;
 
     $data = array();
     foreach ($records as $record) {
@@ -352,29 +497,46 @@ class Paginator {
 
   public function build($onlyData = false) {
 
+    $data = array(
+      'page' => $this->page,
+      'lastPage' => $this->getLastPage(),
+      'total' => $this->getTotal(),
+      'paging' => $this->paging(),
+      'next' => $this->next(),
+      'prev' => $this->prev(),
+      'data' => $this->getPaginationData()
+    );
+
     if($onlyData) {
-      return array(
-        'page' => $this->page,
-        'lastPage' => $this->getLastPage(),
-        'total' => $this->getTotal(),
-        'paging' => $this->paging(),
-        'next' => $this->next(),
-        'prev' => $this->prev(),
-        'data' => $this->getPaginationData()
-      );
+      return $data;
     }
 
     return array(
-      '_pagination' => array(
-        'page' => $this->page,
-        'lastPage' => $this->getLastPage(),
-        'total' => $this->getTotal(),
-        'paging' => $this->paging(),
-        'next' => $this->next(),
-        'prev' => $this->prev(),
-        'data' => $this->getPaginationData()
-      )
+      '_pagination' => $data
     );
+
+  }
+
+  public function buildPermissionData($onlyData = false) {
+    
+    $data = array(
+      'page' => $this->page,
+      'lastPage' => $this->getLastPage(),
+      'total' => $this->getTotal(),
+      'paging' => $this->paging(),
+      'next' => $this->next(),
+      'prev' => $this->prev(),
+      'data' => $this->getPermissionPaginationData()
+    );
+
+    if($onlyData) {
+      return $data;
+    }
+
+    return array(
+      '_pagination' => $data
+    );
+
 
   }
 

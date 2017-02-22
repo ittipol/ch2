@@ -30,7 +30,8 @@ class RealEstate extends Model
         'keyword_2' => '{{__getFacility}} {{__getFeature}}',
         'keyword_4' => '{{price}}'
       )
-    )
+    ),
+    'dataAccessPermission' => true
   );
 
   protected $validation = array(

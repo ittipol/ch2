@@ -6,6 +6,36 @@
 </div>
 
 <div class="container">
+
+  <?php 
+    echo Form::model($_formData, [
+      'id' => 'main_form',
+      'method' => 'PATCH',
+      'enctype' => 'multipart/form-data'
+    ]);
+  ?>
+
+  <h4>ใครบ้างที่สามารถเห็นประวัติการทำงานของคุณได้</h4>
+  <div class="input-group clearfix">
+    <div class="input-item">
+      <?php
+        echo Form::select('page_level_id', $pageLevels);
+      ?>
+    </div>
+    <div class="input-item">
+    <?php
+      echo Form::submit('บันทึก' , array(
+        'class' => 'button'
+      ));
+    ?>
+  </div>
+  </div>
+
+  <?php
+    echo Form::close();
+  ?>
+
+  <div class="line grey space-top-bottom-20"></div>
   
   <h4>จุดมุ่งหมายในอาชีพ</h4>
   <div class="clearfix">
@@ -17,9 +47,9 @@
       </div>
     </div>
     @if(empty($careerObjective))
-    <h4 class="tile-nav-title pull-left">เพิ่มจุดมุ่งหมายในอาชีพ</h4>
+    <a href="{{URL::to('experience/career_objective')}}" class="tile-nav-title pull-left">เพิ่มจุดมุ่งหมายในอาชีพ</a>
     @else
-    <h4 class="tile-nav-title pull-left">แก้ไข เพิ่มเติมจุดมุ่งหมายในอาชีพ</h4>
+    <a href="{{URL::to('experience/career_objective')}}" class="tile-nav-title pull-left">แก้ไข เพิ่มเติมจุดมุ่งหมายในอาชีพ</a>
     @endif
   </div>
 

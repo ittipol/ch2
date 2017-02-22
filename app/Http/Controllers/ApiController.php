@@ -61,7 +61,7 @@ class ApiController extends Controller
     );
 
     if($image->checkFileSize() && $image->checkFileType()) {
-      
+    
       $tempFile = Service::loadModel('TemporaryFile');
 
       if(!$tempFile->checkExistSpecifiedTemporaryRecord(Input::get('model'),Input::get('imageToken'))) {
@@ -72,7 +72,7 @@ class ApiController extends Controller
       }
 
       $filename = $image->getFileName();
-
+  
       list($width,$height) = $image->generateImageSize(Input::get('imageType'));
 
       $temporaryPath = $tempFile->createTemporyFolder(Input::get('model').'_'.Input::get('imageToken').'_'.Input::get('imageType'));

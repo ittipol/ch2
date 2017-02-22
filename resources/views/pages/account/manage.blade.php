@@ -111,7 +111,7 @@
         <div class="list-item">
           <a href="{{URL::to('person/freelance')}}">
             <img class="icon" src="/images/common/career.png" >
-            <h4>จัดการงานฟรีแลนซ์ที่ประกาศ</h4>
+            <h4>งานฟรีแลนซ์ที่ประกาศ</h4>
           </a>
         </div>
 

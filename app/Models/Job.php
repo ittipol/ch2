@@ -32,7 +32,8 @@ class Job extends Model
         // 'keyword_3' => '{{__getRelatedBranch}}',
         'keyword_4' => '{{salary}}',
       )
-    )
+    ),
+    'dataAccessPermission' => true
   );
 
   protected $validation = array(

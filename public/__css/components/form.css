@@ -344,6 +344,13 @@ select[name^="OfficeHour"].disabled {
 	background-color: rgb(28,156,1);
 }
 
+.input-group .input-item {
+	float: left;
+}
+
+.input-group .input-item:not(:first-child) {
+	margin-left: 10px;
+}
 
 /*==========  Mobile First Method  ==========*/
 
@@ -426,6 +433,11 @@ select[name^="OfficeHour"].disabled {
 	.period-separate {
 		display: block;
 		margin: 10px;
+	}
+
+	.input-group .input-item:not(:first-child) {
+		margin-top: 10px;
+		margin-left: 0;
 	}
 
 }

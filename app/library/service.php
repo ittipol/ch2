@@ -33,38 +33,38 @@ class Service
     return $ipaddress;
   }
 
-  public static function generateUnderscoreName($modelName) {
+  // public static function generateUnderscoreName($modelName) {
 
-    $alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $len = strlen($modelName);
+  //   $alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  //   $len = strlen($modelName);
 
-    $parts = array();
-    $loop = true;
-    $index = 0;
-    $len = strlen($modelName);
-    $modelName = lcfirst($modelName);
+  //   $parts = array();
+  //   $loop = true;
+  //   $index = 0;
+  //   $len = strlen($modelName);
+  //   $modelName = lcfirst($modelName);
 
-    while($loop) {
+  //   while($loop) {
 
-      if(strpos($alpha, $modelName[$index])) {
-        $parts[] = substr($modelName, 0, $index);
-        $modelName = lcfirst(substr($modelName, $index));
-        $len = strlen($modelName);
-        $index = 0;
-      }
+  //     if(strpos($alpha, $modelName[$index])) {
+  //       $parts[] = substr($modelName, 0, $index);
+  //       $modelName = lcfirst(substr($modelName, $index));
+  //       $len = strlen($modelName);
+  //       $index = 0;
+  //     }
 
-      $index++;
+  //     $index++;
 
-      if(($index+1) > $len) {
-        $parts[] = $modelName;
-        $loop = false;
-      }
+  //     if(($index+1) > $len) {
+  //       $parts[] = $modelName;
+  //       $loop = false;
+  //     }
 
-    }
+  //   }
 
-    return implode('_', $parts);
+  //   return implode('_', $parts);
 
-  }
+  // }
 
   public static function getList($records,$field) {
 

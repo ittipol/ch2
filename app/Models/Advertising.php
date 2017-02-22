@@ -22,7 +22,8 @@ class Advertising extends Model
         'keyword_1' => '{{__Shop|getShopName}}'
         'keyword_2' => '{{AdvertisingType.name|Advertising.advertising_type_id=>AdvertisingType.id}}',
       )
-    )
+    ),
+    'dataAccessPermission' => true
   );
 
   public $imageTypes = array(

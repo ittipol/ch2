@@ -42,7 +42,7 @@ dd($request->all());
       ))->name;
 
       Message::display('ข้อมูลถูกเพิ่มแล้ว','success');
-      return Redirect::to('product/'.$slugName);
+      return Redirect::to('shop/'.request()->shopSlug.'/product');
     }else{
       return Redirect::back();
     }
@@ -52,20 +52,6 @@ dd($request->all());
   public function edit($productId) {
 
     $model = $this->model->find($productId);
-
-    if(empty($model) || ($model->person_id != session()->get('Person.id'))) {
-      $this->error = array(
-        'message' => 'ขออภัย ไม่สามารถแก้ไขข้อมูลนี้ได้ หรือข้อมูลนี้อาจถูกลบแล้ว'
-      );
-      return $this->error();
-    }
-
-    // if($model->person_id != Session::get('Person.id')) {
-    //   $this->error = array(
-    //     'message' => 'คุณไม่สามารถแก้ไขประกาศขายนี้ได้'
-    //   );
-    //   return $this->error();
-    // }
 
     $this->formHelper->setModel($model);
     $this->formHelper->loadFormData();
@@ -80,13 +66,8 @@ dd($request->all());
     $product = $this->model->find($productId);
 
     if($product->fill($request->all())->save()) {
-
-      $slugName = $product->getModelRelationData('Slug',array(
-        'fields' => 'name'
-      ))->name;
-
       Message::display('ข้อมูลถูกเพิ่มแล้ว','success');
-      return Redirect::to('product/'.$slugName);
+      return Redirect::to('shop/'.request()->shopSlug.'/product');
     }else{
       return Redirect::back();
     }

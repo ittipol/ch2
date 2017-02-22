@@ -34,7 +34,8 @@ class Shop extends Model
     'Lookup' => array(
       'format' =>  array(
         'name' => '{{name}}'
-      )
+      ),
+      'active' => 1
     )
   );
 

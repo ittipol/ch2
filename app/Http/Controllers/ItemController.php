@@ -22,11 +22,14 @@ class ItemController extends Controller
       $page = $this->query['page'];
     }
 
+    $model->paginator->criteria(array(
+      'fields' => array('items.*')
+    ));
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl('item/list');
     $model->paginator->setUrl('item/detail/{id}','detailUrl');
 
-    $this->data = $model->paginator->build();
+    $this->data = $model->paginator->buildPermissionData();
 
     return $this->view('pages.item.list');
   }
@@ -101,13 +104,6 @@ class ItemController extends Controller
 
     $model = Service::loadModel('Item')->find($this->param['id']);
 
-    if(empty($model) || ($model->person_id != session()->get('Person.id'))) {
-      $this->error = array(
-        'message' => 'ขออภัย ไม่สามารถแก้ไขข้อมูลนี้ได้ หรือข้อมูลนี้อาจถูกลบแล้ว'
-      );
-      return $this->error();
-    }
-
     $model->formHelper->loadFieldData('Province',array(
       'key' =>'id',
       'field' => 'name',
@@ -147,13 +143,6 @@ class ItemController extends Controller
   public function editingSubmit(CustomFormRequest $request) {
 
     $model = Service::loadModel('Item')->find($this->param['id']);
-
-    if(empty($model) || ($model->person_id != session()->get('Person.id'))) {
-      $this->error = array(
-        'message' => 'ขออภัย ไม่สามารถแก้ไขข้อมูลนี้ได้ หรือข้อมูลนี้อาจถูกลบแล้ว'
-      );
-      return $this->error();
-    }
 
     if($model->fill($request->all())->save()) {
       Message::display('ข้อมูลถูกบันทึกแล้ว','success');

@@ -72,7 +72,7 @@
 
 .image-gallery .image-gallary-display .image-gallary-display-inner {
 	height: 100%;
-	overflow: hidden;
+	/*overflow: hidden;*/
 	position: relative;
 }
 
@@ -116,7 +116,7 @@
 	width: 50px;
 	height: 50px;
 	border-radius: 50px;
-	background-image: url(/images/icons/close-black.png);
+	background-image: url(/images/icons/close-blue.png);
 	background-repeat: no-repeat;
 	background-size: 25px;
 	background-position: center;
@@ -127,15 +127,15 @@
 
 .image-gallery .image-gallary-display .display-image-description-icon {
 	position: absolute;
-	bottom: 10px;
-	right: 10px;
+	bottom: 9px;
+	right: 9px;
 	/*padding: 10px 25px;*/
 	/*background-color: rgba(236,236,236,.7);*/
 	background-color: rgb(47,97,186);
 	color: #fff;
-	width: 50px;
-	height: 50px;
-	border-radius: 50px;
+	width: 51px;
+	height: 51px;
+	border-radius: 51px;
 	display: none;
 	cursor: pointer;
 	z-index: 9;

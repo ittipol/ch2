@@ -51,40 +51,40 @@ class SearchController extends Controller
       $taggingWord = '';
 
       foreach ($words[0] as $word) {
-        // $_q = str_replace($word, '', $_q);
+
         $word = str_replace(array('\'','"'), '', $word);
         $word = str_replace('+', ' ', $word);
 
         if(mb_strlen($word) < 3) {
-          array_push($and,array('name','like','%'.$word.'%'));
+          array_push($and,array('lookups.name','like','%'.$word.'%'));
           continue;
         }
 
         if($isAddress && preg_match($reZipcode, $word, $matches)) {
           $isAddress = false;
-          array_push($or,array('address','like','%'.$word.'%'));
+          array_push($or,array('lookups.address','like','%'.$word.'%'));
           continue;
         }
 
         if($province->where('name','like',$word)->exists() || $district->where('name','like',$word)->exists() || $subDistrict->where('name','like',$word)->exists()) {
           $isAddress = true;
-          array_push($or,array('address','like','%'.$word.'%'));
+          array_push($or,array('lookups.address','like','%'.$word.'%'));
           continue;
         }
 
         if($wordModel->where('word','like',$word)->exists()) {
-          array_push($or,array('name','like','%'.$word.'%'));
-          array_push($or,array('tags','like','%'.$word.'%'));
+          array_push($or,array('lookups.lookup.name','like','%'.$word.'%'));
+          array_push($or,array('lookups.tags','like','%'.$word.'%'));
           continue;
         }else{
-          array_push($or,array('name','like','%'.$word.'%'));
+          array_push($or,array('lookups.name','like','%'.$word.'%'));
           // array_push($or,array('keyword_1','like','%'.$word.'%'));
           // array_push($or,array('keyword_2','like','%'.$word.'%'));
           // array_push($or,array('keyword_3','like','%'.$word.'%'));
           // array_push($or,array('keyword_4','like','%'.$word.'%'));
         }
 
-        array_push($or,array('keyword_1','like','%'.$word.'%'));
+        array_push($or,array('lookups.keyword_1','like','%'.$word.'%'));
         
       }
 
@@ -95,6 +95,10 @@ class SearchController extends Controller
       if(!empty($or)) {
         $conditions = array_merge($conditions,array('or'=>$or));
       }
+
+      $conditions = array_merge($conditions,array(
+        array('lookups.active','=',1)
+      ));
 
       if(!empty($conditions)) {
 
@@ -109,6 +113,8 @@ class SearchController extends Controller
         $lookup->paginator->setPerPage(20);
         $lookup->paginator->setPagingUrl('search');
         $lookup->paginator->setQuery('search_query',$q);
+
+        dd($lookup->paginator->getLookupPaginationData());
 
         $this->setData('results',$lookup->paginator->getPaginationData());
         $this->setData('_pagination',array(

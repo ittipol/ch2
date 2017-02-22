@@ -31,10 +31,12 @@ class Model extends BaseModel
   public $modelData = false;
   public $paginator = false;
   
-  public function __construct(array $attributes = []) { 
+  public function __construct(array $attributes = []) {
+
+    $string = new String;
     
     $this->modelName = class_basename(get_class($this));
-    $this->modelAlias = Service::generateUnderscoreName($this->modelName);
+    $this->modelAlias = $string->generateUnderscoreName($this->modelName);
     $this->directoryPath = $this->storagePath.$this->modelAlias.'/';
 
     if($this->formHelper) {
@@ -100,6 +102,11 @@ class Model extends BaseModel
         $lookup->__saveRelatedData($model);
       }
 
+      if(!empty($model->behavior['dataAccessPermission'])) {
+        $pageAccessPermission = new DataAccessPermission;
+        $pageAccessPermission->__saveRelatedData($model);
+      }
+      
     });
 
   }
@@ -227,6 +234,25 @@ class Model extends BaseModel
   public function getData($options = array()) {
 
     $model = $this;
+
+    // if(!empty($options['joins'])) {
+
+    //   if(is_array(current($options['joins']))) {
+
+    //     foreach ($options['order'] as $value) {
+    //       $model->join($value[0], $value[1], $value[2], $value[3]);
+    //     }
+
+    //   }else{
+    //     $model->join(
+    //       current($options['join']), 
+    //       next($options['join']), 
+    //       next($options['join']), 
+    //       next($options['join'])
+    //     );
+    //   }
+
+    // }
 
     if(!empty($options['conditions']['in'])) {
 

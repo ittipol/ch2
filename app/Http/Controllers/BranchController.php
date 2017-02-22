@@ -124,13 +124,6 @@ class BranchController extends Controller
 
     $model = Service::loadModel('Branch')->find($this->param['id']);
 
-    if(empty($model)) {
-      $this->error = array(
-        'message' => 'ขออภัย ไม่สามารถแก้ไขข้อมูลนี้ได้ หรือข้อมูลนี้อาจถูกลบแล้ว'
-      );
-      return $this->error();
-    }
-
     $model->formHelper->loadFieldData('Province',array(
       'key' =>'id',
       'field' => 'name',
@@ -154,13 +147,6 @@ class BranchController extends Controller
   public function editingSubmit(CustomFormRequest $request) {
 
     $model = Service::loadModel('Branch')->find($this->param['id']);
-
-    if(empty($model) || ($model->person_id != session()->get('Person.id'))) {
-      $this->error = array(
-        'message' => 'ขออภัย ไม่สามารถแก้ไขข้อมูลนี้ได้ หรือข้อมูลนี้อาจถูกลบแล้ว'
-      );
-      return $this->error();
-    }
 
     if($model->fill($request->all())->save()) {
 

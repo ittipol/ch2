@@ -17,22 +17,32 @@
 	background-color: rgba(236,236,236,.7);
 }
 
-.card .image {
+.card .card-info {
+	margin-top: 20px;
+}
+
+.card .image-tile {
 	width: 100%;
 	text-align: center;
 	margin-bottom: 10px;
 }
 
-.card .image .product-image {
+.card .image-tile .card-image {
 	width: 100%;
 	height: 250px;
+	margin: 0 auto;
 	background-position: center;
 	background-size: auto;
 	background-repeat: no-repeat;
 }
 
-.card .product-title {
-	text-transform: uppercase;
+.card .image-tile .card-image.round {
+	width: 250px;
+	border-radius: 250px;
+}
+
+.card .card-title {
+	/*text-transform: uppercase;
   text-decoration: none;
   font-weight: bold;
   font-size: 12px;
@@ -40,17 +50,50 @@
   cursor: pointer;
   font-style: normal;
   height: 36px;
+  overflow: hidden;*/
+
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  color: #0071c5;
+  cursor: pointer;
+  height: 50px;
+  line-height: 24px;
   overflow: hidden;
 }
 
+.card .card-name {
+	font-weight: bold;
+	font-size: 16px;
+	color: #0071c5;
+	cursor: pointer;
+	height: 24px;
+	line-height: 24px;
+	overflow: hidden;
+}
+
 .card .price {
-	text-decoration: none;
+	/*text-decoration: none;
 	font-size: 18px;
 	line-height: 20px;
 	color: #333 !important;
 	font-weight: bold;
 	clear: left;
+	font-style: normal;*/
+
+	text-decoration: none;
+	font-size: 18px;
+	line-height: 20px;
+	color: #333;
+	font-weight: bold;
+	clear: left;
 	font-style: normal;
+	margin-top: 10px;
+}
+
+.card .card-desciption {
+	height: 80px;
 }
 
 .card .info h4 {

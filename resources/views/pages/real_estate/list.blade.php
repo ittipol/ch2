@@ -14,14 +14,14 @@
 
             <div class="overlay-top-info text-center">{{$data['_realEstateTypeName']}}</div>
 
-            <div class="image">
+            <div class="image-tile">
               <a href="{{$data['detailUrl']}}">
-                <div class="product-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+                <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
               </a>
             </div>
-            <div class="product-detail">
+            <div class="card-info">
               <a href="{{$data['detailUrl']}}">
-                <div class="product-title">{{$data['_short_name']}}</div>
+                <div class="card-title">{{$data['_short_name']}}</div>
               </a>
               <div class="price">
                 {{$data['_price']}}

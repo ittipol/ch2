@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-// use App\library\date;
+use App\library\string;
+use App\library\cache;
 
 class PersonExperience extends Model
 {
@@ -12,6 +13,7 @@ class PersonExperience extends Model
 
   public $formHelper = true;
   public $modelData = true;
+  public $paginator = true;
   
   public $imageTypes = array(
     'profile-image' => array(
@@ -26,6 +28,16 @@ class PersonExperience extends Model
     'messages' => array(
       'name.required' => 'ชื่อห้ามว่าง'
     )
+  );
+
+  protected $behavior = array(
+    // 'Lookup' => array(
+    //   'format' =>  array(
+    //     'name' => '{{name}}',
+    //   ),
+    //   'active' => 0
+    // ),
+    'dataAccessPermission' => true
   );
 
   public static function boot() {
@@ -98,74 +110,36 @@ class PersonExperience extends Model
     return $this->where('person_id','=',session()->get('Person.id'))->exists();
   }
 
-  // public function getProfileImage() {
+  public function buildPaginationData() {
 
-  //   $image = Image::select('id','model','model_id','filename','image_type_id')->find($this->profile_image_id);
+    $image = new Image;
+    $string = new String;
+    $cache = new Cache;
 
-  //   if(empty($image)) {
-  //     return null;
-  //   }
+    $person = Person::find($this->person_id);
 
-  //   return array(
-  //     'id' => $image->id,
-  //     '_url' => $image->getImageUrl()
-  //   );
-  // }
+    $imageUrl = '/images/common/no-img.png';
+    if(!empty($person->profile_image_id)) {
+      $image = $image
+      ->select(array('model','model_id','filename','image_type_id'))
+      ->find($person->profile_image_id);
 
-  // public function getProfileImageUrl() {
+      $imageUrl = $cache->getCacheImageUrl($image,'list');
 
-  //   $image = Image::select('id','model','model_id','filename','image_type_id')->find($this->profile_image_id);
+    }
 
-  //   if(empty($image)) {
-  //     return '/images/common/no-img.png';
-  //   }
+    $personCareerObjective = PersonCareerObjective::select('career_objective')
+    ->where('person_experience_id','=',$this->id)
+    ->first();
 
-  //   return $image->getImageUrl();
-  // }
-
-  // public function buildModelData() {
-
-  //   $date = new Date;
-  //   $person = new Person;
-
-  //   $gender = '-';
-  //   if(!empty($this->gender)) {
-  //     $gender = $person->getGender($this->gender);
-  //   }
-
-  //   $birthDate = '-';
-  //   if(!empty($this->birth_date)) {
-  //     $birthDate = $date->covertDateToSting($this->birth_date);
-  //   }
-
-  //   return array(
-  //     'id' => $this->id,
-  //     'name' => $this->name,
-  //     'gender' => $gender,
-  //     'birthDate' => $birthDate
-  //   );
-
-  // }
-
-  // public function buildFormData() {
-
-  //   $day = null;
-  //   $month = null;
-  //   $year = null;
+    return array(
+      'id' => $this->id,
+      'name' => $person->name,
+      // '_short_name' => $string->subString($person->name,45),
+      'careerObjective' => !empty($personCareerObjective->career_objective) ? $string->subString($personCareerObjective->career_objective,150,true) : '-',
+      '_imageUrl' => $imageUrl
+    );
     
-  //   if(!empty($this->birth_date)) {
-  //     list($year,$month,$day) = explode('-', $this->birth_date); 
-  //   }
-
-  //   return array(
-  //     'name' => $this->name,
-  //     'gender' => $this->gender,
-  //     'private_websites' => $this->private_websites,
-  //     'birth_day' => $day,
-  //     'birth_month' => $month,
-  //     'birth_year' => $year,
-  //   );
-
-  // }
+  }
 
 }

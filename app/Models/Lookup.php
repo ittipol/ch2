@@ -8,7 +8,7 @@ use App\library\cache;
 class Lookup extends Model
 {
   protected $table = 'lookups';
-  protected $fillable = ['model','model_id','name','description','keyword_1','keyword_2','keyword_3','keyword_4','address','tags'];
+  protected $fillable = ['model','model_id','name','description','keyword_1','keyword_2','keyword_3','keyword_4','address','tags','active'];
 
   public $paginator = true;
 
@@ -80,6 +80,11 @@ class Lookup extends Model
         'first' => true
       )
     );
+
+    $value['active'] =  1;
+    if(isset($behavior['active'])) {
+      $value['active'] =  $behavior['active'];
+    }
 
     if(($model->state == 'update') && !empty($lookup)){
       return $lookup

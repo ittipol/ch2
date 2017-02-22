@@ -13,20 +13,14 @@
           <div class="card">
             <div class="image-tile">
               <a href="{{$data['detailUrl']}}">
-                <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+                <div class="card-image round" style="background-image:url({{$data['_imageUrl']}});"></div>
               </a>
             </div>
             <div class="card-info">
               <a href="{{$data['detailUrl']}}">
-                <div class="card-title">{{$data['_short_name']}}</div>
+                <div class="card-title text-center">{{$data['name']}}</div>
               </a>
-              <div class="price">
-                {{$data['_price']}}
-              </div>
             </div>
-            <!-- <div>
-              <a href="{{$data['detailUrl']}}"><div class="button wide-button">แสดงรายละเอียด</div></a>
-            </div> -->
           </div>
         </div>
 

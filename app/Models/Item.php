@@ -33,7 +33,8 @@ class Item extends Model
         'keyword_3' => '{{__getUsed}}',
         'keyword_4' => '{{price}}',
       )
-    )
+    ),
+    'dataAccessPermission' => true
   );
 
   protected $validation = array(

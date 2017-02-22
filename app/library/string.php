@@ -36,5 +36,51 @@ class String
     return $string;
 
   }
+
+  public function generateModelNameWithoutUnderScore($modelName) {
+
+    $parts = explode('_', $modelName);
+
+    $modelName = array();
+    foreach ($parts as $part) {
+      $modelName[] = ucfirst($part);
+    };
+
+    return implode('', $modelName);
+
+  }
+
+  public static function generateUnderscoreName($modelName) {
+
+    $alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $len = strlen($modelName);
+
+    $parts = array();
+    $loop = true;
+    $index = 0;
+    $len = strlen($modelName);
+    $modelName = lcfirst($modelName);
+
+    while($loop) {
+
+      if(strpos($alpha, $modelName[$index]) > -1) {
+        $parts[] = substr($modelName, 0, $index);
+        $modelName = lcfirst(substr($modelName, $index));
+        $len = strlen($modelName);
+        $index = 0;
+      }
+
+      $index++;
+
+      if(($index+1) > $len) {
+        $parts[] = $modelName;
+        $loop = false;
+      }
+
+    }
+
+    return implode('_', $parts);
+
+  }
   
 }

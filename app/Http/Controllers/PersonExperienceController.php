@@ -16,8 +16,26 @@ class PersonExperienceController extends Controller
     parent::__construct();
   }
 
-  public function index() {
+  public function listView() {
 
+    $model = Service::loadModel('PersonExperience');
+    
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
+
+    $model->paginator->criteria(array(
+      'fields' => array('person_experiences.*')
+    ));
+    $model->paginator->disableGetImage();
+    $model->paginator->setPage($page);
+    $model->paginator->setPagingUrl('experience/profile/list');
+    $model->paginator->setUrl('experience/profile/{id}','detailUrl');
+
+    $this->data = $model->paginator->buildPermissionData();
+
+    return $this->view('pages.person_experience.list');
   }
 
   public function detail() {
@@ -226,11 +244,29 @@ class PersonExperienceController extends Controller
 
     }
 
+    // Get page permission
+    $pagePermission = $profile->getModelRelationData('DataAccessPermission',
+      array(
+        'first' => true,
+        'fields' => array('page_level_id')
+      )
+    );
+
+    $_formData = array();
+    if(!empty($pagePermission)) {
+      $_formData = array(
+        'page_level_id' => $pagePermission->page_level_id
+      );
+    }
+
+    $pageLevels = Service::loadModel('PageLevel')->getLevel();
+
     $this->setData('profile',$profile->modelData->build(true));
     $this->setData('careerObjective',$careerObjective->career_objective);
-    $this->setData('profileImageUrl',$profile->getProfileImageUrl());
     $this->setData('skills',$_skills);
     $this->setData('languageSkills',$_languageSkills);
+    $this->setData('pageLevels',$pageLevels);
+    $this->setData('_formData',$_formData);
 
     return $this->view('pages.person_experience.profile');
 
@@ -330,6 +366,26 @@ class PersonExperienceController extends Controller
 
   // }
 
+  public function profileEditingSubmit() {
+
+    $model = Service::loadModel('PersonExperience')->where('person_id','=',Session::get('Person.id'))->first();
+
+    $saved = Service::loadModel('DataAccessPermission')->__saveRelatedData($model,array(
+      'value' => array(
+        'page_level_id' => request()->get('page_level_id')
+      )
+    ));
+
+    if($saved) {
+      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      return Redirect::to('experience/profile/edit');
+    }else{
+      Message::display('เกิดข้อผิดพลาด ไม่สามารถบันทึกได้','error');
+      return Redirect::to('experience/profile/edit');
+    }
+
+  }
+
   public function websiteAdd() {
 
     $model = Service::loadModel('PersonExperience')->where('person_id','=',Session::get('Person.id'))->first();
@@ -381,7 +437,7 @@ class PersonExperienceController extends Controller
 
     if($model->fill(request()->all())->save()) {
       Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('experience/profile');
+      return Redirect::to('experience/profile/edit');
     }else{
       return Redirect::back();
     }

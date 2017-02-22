@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\library\service;
+use App\library\string;
 use App\library\url;
 use App\library\cache;
 use App\library\imageTool;
@@ -211,11 +212,17 @@ class Image extends Model
   }
 
   public function getDirPath() {
-    return storage_path($this->storagePath.Service::generateUnderscoreName($this->model)).'/'.$this->model_id.'/';
+
+    $string = new String;
+
+    return storage_path($this->storagePath.$string->generateUnderscoreName($this->model)).'/'.$this->model_id.'/';
   }
 
   public function getFullDirPath() {
-    return storage_path($this->storagePath.Service::generateUnderscoreName($this->model)).'/'.$this->model_id.'/'.$this->imageType->path.'/';
+    
+    $string = new String;
+
+    return storage_path($this->storagePath.$string->generateUnderscoreName($this->model)).'/'.$this->model_id.'/'.$this->imageType->path.'/';
   }
 
   public function getImagePath($filename = '') {

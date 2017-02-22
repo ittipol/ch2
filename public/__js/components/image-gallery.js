@@ -38,11 +38,11 @@ class ImageGallery {
       _this.setImageDescription(_this.images[$(this).data('id')]['description']);
 
     });
-
-    $('.display-image-description-icon').on('click',function(){
-      $(this).css('display','none');
+  
+    $(document).on('click','.open-description',function(){
+      $('.display-image-description-icon').css('display','none');
       $('.image-description').css('top','0');
-    });
+    });  
 
     $('.close-image-description-icon').on('click',function(){
       $('.image-description').css('top','100%');

@@ -20,7 +20,7 @@ class CheckForShopSlug
     public function handle($request, Closure $next)
     {
         if(empty($request->shopSlug)) {
-          return redirect('home');
+          return redirect('/');
         }
         
         $url = new Url;
