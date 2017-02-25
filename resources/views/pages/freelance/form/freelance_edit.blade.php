@@ -36,17 +36,19 @@
         ));
       ?>
       <div class="form-item-group">
-        <div class="row">
-            @foreach ($_fieldData['freelanceTypes'] as $id => $freelanceType)
-            <div class="col-lg-4 col-md-6 col-sm-6 col-sm-12">
-              <label class="choice-box">
-                <?php
-                  echo Form::radio('freelance_type_id', $id);
-                ?>
-                <div class="inner"><?php echo $freelanceType; ?></div>
-              </label>
-            </div>
-            @endforeach
+        <div class="form-item-group-inner">
+          <div class="row">
+              @foreach ($_fieldData['freelanceTypes'] as $id => $freelanceType)
+              <div class="col-lg-4 col-md-6 col-sm-6 col-sm-12">
+                <label class="choice-box">
+                  <?php
+                    echo Form::radio('freelance_type_id', $id);
+                  ?>
+                  <div class="inner"><?php echo $freelanceType; ?></div>
+                </label>
+              </div>
+              @endforeach
+          </div>
         </div>
       </div>
     </div>

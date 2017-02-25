@@ -47,24 +47,23 @@
         echo Form::label('product_category_id', 'หมวดหมู่หลักสินค้า', array(
           'class' => 'required'
         ));
-        // echo Form::select('product_category_id', $fieldData['productCategories'] ,null, array(
-        //   'id' => 'district'
-        // ));
       ?>
       <div class="form-item-group">
-        <div class="row">
-          <?php 
-            foreach ($fieldData['productCategories'] as $id => $category):
-          ?>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-sm-12">
-              <label class="choice-box">
-                <input type="radio" name="product_category_id" value="<?php echo $id; ?>" >  
-                <div class="inner"><?php echo $category; ?></div>
-              </label>
-            </div>
-          <?php
-            endforeach;
-          ?>
+        <div class="form-item-group-inner">
+          <div class="row">
+            <?php 
+              foreach ($fieldData['productCategories'] as $id => $category):
+            ?>
+              <div class="col-lg-4 col-md-6 col-sm-6 col-sm-12">
+                <label class="choice-box">
+                  <input type="radio" name="product_category_id" value="<?php echo $id; ?>" >  
+                  <div class="inner"><?php echo $category; ?></div>
+                </label>
+              </div>
+            <?php
+              endforeach;
+            ?>
+          </div>
         </div>
       </div>
     </div>

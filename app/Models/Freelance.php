@@ -30,7 +30,10 @@ class Freelance extends Model
         'keyword_1' => '{{__getFreelanceType}}'
       )
     ),
-    'dataAccessPermission' => true
+    'DataAccessPermission' => array(
+      'owner' => 'Person',
+      'defaultAccessLevel' => 99
+    )
   );
 
   protected $validation = array(

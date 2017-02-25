@@ -20,12 +20,10 @@
               <a href="{{$data['detailUrl']}}">
                 <div class="card-title">{{$data['_short_name']}}</div>
               </a>
-              <div class="price">
+              <div class="card-sub-info">
+                <h5>เงินเดือน</h5>
                 {{$data['_salary']}}
               </div>
-            </div>
-            <div>
-              <a href="{{$data['detailUrl']}}"><div class="button wide-button">แสดง</div></a>
             </div>
           </div>
         </div>
@@ -37,7 +35,14 @@
 
     @else
 
-    <h3>ไม่พบสินค้า</h3>
+    <div class="list-empty-message text-center space-top-20">
+      <img class="space-bottom-20" src="/images/common/not-found.png">
+      <div>
+        <h3>ยังไม่มีข้อมูลตำแหน่งงาน</h3>
+        <p>ขออภัย ยังไม่มีข้อมูลตำแหน่งงาน</p>
+        <a href="{{URL::to('community/shop_create')}}" class="button">สร้างร้านค้าของคุณในชุมชน เพื่อเพิ่มตำแหน่งของคุณ</a>
+      </div>
+    </div>
 
     @endif
 

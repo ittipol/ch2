@@ -1,5 +1,13 @@
 @extends('layouts.default.main')
 @section('content')
+
+<style type="text/css">
+
+  body {
+    background-color: #333;
+  }
+
+</style>
   
   <?php 
     echo Form::open(['id' => 'main_form','method' => 'post', 'enctype' => 'multipart/form-data']);

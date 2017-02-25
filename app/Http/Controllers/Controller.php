@@ -28,10 +28,8 @@ class Controller extends BaseController
   protected $error;
 
   public function __construct() { 
-
     $this->query = request()->query();
     $this->param = Route::current()->parameters();
-
   }
 
   protected function error() {

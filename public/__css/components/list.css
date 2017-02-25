@@ -69,6 +69,11 @@
 	background-size: auto 250px;
 }
 
+.list-empty-message img {
+	width: 200px;
+	height: 200px;
+}
+
 @media only screen and (max-width : 480px) {
   
 	.list .list-content-wrapper .image {

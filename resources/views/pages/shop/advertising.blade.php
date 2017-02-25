@@ -42,7 +42,7 @@
               <a href="{{$data['detailUrl']}}">
                 <div class="card-title">{{$data['_short_name']}}</div>
               </a>
-              <div>
+              <div class="card-sub-info">
                 <div>ประเภทโฆษณา</div>
                 {{$data['_advertisingType']}}
               </div>
@@ -50,8 +50,8 @@
 
             <div class="button-group">
 
-              <a href="{{$data['detailUrl']}}">
-                <div class="button wide-button">แสดง</div>
+              <a href="{{$data['editUrl']}}">
+                <div class="button wide-button">แก้ไข</div>
               </a>
 
               <div class="additional-option">
@@ -79,7 +79,7 @@
 
   @else
 
-    <div class="shop-notice text-center space-top-20">
+    <div class="list-empty-message text-center space-top-20">
       <img class="space-bottom-20" src="/images/common/megaphone.png">
       <div>
         <h3>โฆษณา</h3>

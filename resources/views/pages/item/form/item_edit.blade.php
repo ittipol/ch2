@@ -66,21 +66,23 @@
         ));
       ?>
       <div class="form-item-group">
-        <div class="row">
-          <?php 
-            foreach ($_fieldData['itemCategories'] as $id => $category):
-          ?>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-sm-12">
-              <label class="choice-box">
-                <?php
-                  echo Form::radio('ItemToCategory[item_category_id]', $id);
-                ?> 
-                <div class="inner"><?php echo $category; ?></div>
-              </label>
-            </div>
-          <?php
-            endforeach;
-          ?>
+        <div class="form-item-group-inner">
+          <div class="row">
+            <?php 
+              foreach ($_fieldData['itemCategories'] as $id => $category):
+            ?>
+              <div class="col-lg-4 col-md-6 col-sm-6 col-sm-12">
+                <label class="choice-box">
+                  <?php
+                    echo Form::radio('ItemToCategory[item_category_id]', $id);
+                  ?> 
+                  <div class="inner"><?php echo $category; ?></div>
+                </label>
+              </div>
+            <?php
+              endforeach;
+            ?>
+          </div>
         </div>
       </div>
     </div>

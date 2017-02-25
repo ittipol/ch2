@@ -84,7 +84,7 @@
 
   @else
 
-    <div class="shop-notice text-center space-top-20">
+    <div class="list-empty-message text-center space-top-20">
       <img class="space-bottom-20" src="/images/common/career.png">
       <div>
         <h3>ฟรีแลนซ์</h3>

@@ -104,6 +104,7 @@ class SearchController extends Controller
 
         $lookup->paginator->criteria(array(
           'conditions' => $conditions,
+          'fields' => array('lookups.*'),
           'order' => array(
             array('created_at','DESC')
           )
@@ -114,16 +115,14 @@ class SearchController extends Controller
         $lookup->paginator->setPagingUrl('search');
         $lookup->paginator->setQuery('search_query',$q);
 
-        dd($lookup->paginator->getLookupPaginationData());
-
-        $this->setData('results',$lookup->paginator->getPaginationData());
+        $this->setData('results',$lookup->paginator->getLookupPaginationData());
         $this->setData('_pagination',array(
           'page' => $lookup->paginator->getPage(),
           'paging' => $lookup->paginator->paging(),
           'next' => $lookup->paginator->next(),
           'prev' => $lookup->paginator->prev()
         ));
-        $this->setData('count',$lookup->paginator->itemCount());
+        $this->setData('count',$lookup->paginator->getCount());
 
       }
 

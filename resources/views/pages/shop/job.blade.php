@@ -77,7 +77,7 @@
               <a href="{{$data['detailUrl']}}">
                 <div class="card-title">{{$data['_short_name']}}</div>
               </a>
-              <div class="price">
+              <div class="card-sub-info">
                 {{$data['_salary']}}
               </div>
             </div>
@@ -113,7 +113,7 @@
 
   @else
 
-    <div class="shop-notice text-center space-top-20">
+    <div class="list-empty-message text-center space-top-20">
       <img class="space-bottom-20" src="/images/common/career.png">
       <div>
         <h3>ประกาศงาน</h3>

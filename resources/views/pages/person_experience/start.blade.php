@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="container">
-  <div class="shop-notice text-center space-top-40">
+  <div class="list-empty-message text-center space-top-40">
     <img class="space-bottom-20" src="/images/common/career.png">
     <div>
       <h3>ประสบการณ์การทำงานของคุณ</h3>

@@ -40,7 +40,10 @@ class Product extends Model
     //     'keyword' => '{{name}}'
     //   )
     // ),
-    'dataAccessPermission' => true
+    'DataAccessPermission' => array(
+      'owner' => 'Shop',
+      'defaultAccessLevel' => 99
+    )
   );
 
   public function __construct() {  

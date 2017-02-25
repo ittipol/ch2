@@ -21,13 +21,12 @@
                 <div class="card-title">{{$data['_short_name']}}</div>
               </a>
               <div class="card-sub-info">
-                <h5>ราคา</h5>
-                {{$data['_price']}}
+                <div>ประเภทโฆษณา</div>
+                {{$data['_advertisingType']}}
               </div>
             </div>
           </div>
         </div>
-
         @endforeach
 
       </div>
@@ -39,9 +38,9 @@
     <div class="list-empty-message text-center space-top-20">
       <img class="space-bottom-20" src="/images/common/not-found.png">
       <div>
-        <h3>ยังไม่มีข้อมูลซื้อ ขายสินค้า</h3>
-        <p>ขออภัย ยังไม่มีข้อมูลซื้อ ขายสินค้า</p>
-        <a href="{{URL::to('item/post')}}" class="button">เพิ่มข้อมูลซื้อ ขายสินค้า</a>
+        <h3>ยังไม่มีข้อมูลตำแหน่งงาน</h3>
+        <p>ขออภัย ยังไม่มีข้อมูลตำแหน่งงาน</p>
+        <a href="{{URL::to('community/shop_create')}}" class="button">สร้างร้านค้าของคุณในชุมชน เพื่อเพิ่มตำแหน่งของคุณ</a>
       </div>
     </div>
 

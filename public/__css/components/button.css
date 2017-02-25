@@ -10,6 +10,13 @@
 	display: inline-block;
 }
 
+.button > img {
+	width: 25px;
+	height: 25px;
+	margin-right: 10px;
+	margin-left: -5px;
+}
+
 a.button:hover {
 	color: #ffffff;
 }

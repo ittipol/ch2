@@ -37,10 +37,6 @@
            <div class="close-image-description-icon"></div>
           </div>
 
-          <!-- <div class="display-image-description-icon">
-            <img src="/images/icons/additional-white.png">
-          </div> -->
-
           <div class="display-image-description-icon additional-option icon">
             <img src="/images/icons/additional-white.png">
             <div class="additional-option-content">
@@ -116,71 +112,6 @@
     </div>
 
   </div>
-
-  <!-- <div class="line space-top-bottom-20"></div> -->
-
-  <!-- <div class="row">
-
-    <div class="col-xs-12">
-      <div class="item-info">
-
-        <div class="item-info-row">
-          <p>ราคา{{$_modelData['_announcementTypeName']}}</p>
-          <h4 class="price">{{$_modelData['_price']}}</h4>
-        </div>
-
-      </div>
-    </div> 
-
-  </div> -->
-
-  <!-- <div class="line space-top-bottom-20"></div> -->
-
-  <!-- <div class="row">
-
-    <div class="col-xs-12">
-
-      <div class="item-info">
-
-        <p>ติดต่อผู้{{$_modelData['_announcementTypeName']}}</p>
-
-        <div class="row">
-          <div class="col-md-3">
-            <div class="item-info-row">
-              @if(!empty($_modelData['Contact']['phone_number']))
-              <h4 class="title-with-icon phone">{{$_modelData['Contact']['phone_number']}}</h4>
-              @else
-              <h4 class="title-with-icon phone">-</h4>
-              @endif
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="item-info-row">
-              @if(!empty($_modelData['Contact']['email']))
-              <h4 class="title-with-icon email">{{$_modelData['Contact']['email']}}</h4>
-              @else
-              <h4 class="title-with-icon email">-</h4>
-              @endif
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="item-info-row">
-              @if(!empty($_modelData['Contact']['line']))
-              <h4 class="title-with-icon line-app">{{$_modelData['Contact']['line']}}</h4>
-              @else
-              <h4 class="title-with-icon line-app">-</h4>
-              @endif
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div> 
-
-  </div> -->
-
-  <!-- <div class="line space-top-bottom-20"></div> -->
 
   <div class="row">
 

@@ -201,7 +201,7 @@ class ShopController extends Controller
             array('id',Service::getList($shopTos->get(),'model_id'))
           )
         ),
-        'order' => array('id','DESC')
+        'order' => array('created_at','DESC')
       ));
       $advertising->paginator->setPage($page);
       $advertising->paginator->setPagingUrl('shop/'.request()->shopSlug.'/advertising');

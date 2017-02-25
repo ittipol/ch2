@@ -198,7 +198,7 @@ Route::get('product','ProductController@index');
 Route::get('product/{product_slug}','ProductController@detail');
 
 // Job
-Route::get('job/list','JobController@listView')->name('job.list');;
+Route::get('job/list','JobController@listView')->name('job.list');
 Route::get('job/detail/{id}','JobController@detail')->name('job.detail');
 
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
@@ -239,6 +239,7 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 });
 
 // Advertising
+Route::get('advertising/list','AdvertisingController@listView')->name('advertising.list');
 Route::get('advertising/detail/{id}','AdvertisingController@detail')->name('advertising.detail');
 
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {

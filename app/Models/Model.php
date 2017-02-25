@@ -11,6 +11,7 @@ use App\library\modelData;
 use App\library\paginator;
 use Session;
 use Schema;
+use Route;
 
 class Model extends BaseModel
 {
@@ -30,6 +31,8 @@ class Model extends BaseModel
   public $formHelper = false;
   public $modelData = false;
   public $paginator = false;
+
+  public $param;
   
   public function __construct(array $attributes = []) {
 
@@ -50,6 +53,8 @@ class Model extends BaseModel
     if($this->paginator) {
       $this->paginator = new Paginator($this);
     }
+
+    $this->param = Route::current()->parameters();
 
     parent::__construct($attributes);
     
@@ -96,13 +101,12 @@ class Model extends BaseModel
 
       $model->modelRelationsSave();
 
-      // look up
       if(!empty($model->behavior['Lookup'])) {
         $lookup = new Lookup;
         $lookup->__saveRelatedData($model);
       }
 
-      if(!empty($model->behavior['dataAccessPermission'])) {
+      if(!empty($model->behavior['DataAccessPermission'])) {
         $pageAccessPermission = new DataAccessPermission;
         $pageAccessPermission->__saveRelatedData($model);
       }
@@ -152,6 +156,10 @@ class Model extends BaseModel
         $this->modelRelationData[$modelName] = $attributes[$modelName];
         unset($attributes[$modelName]);
       }
+    }
+
+    if(!empty($this->behavior['DataAccessPermission']) && !empty($attributes['DataAccessPermission'])) {
+      $this->behavior['DataAccessPermission']['value'] = $attributes['DataAccessPermission'];
     }
 
     if(!empty($attributes)) {
@@ -271,14 +279,19 @@ class Model extends BaseModel
 
     if(!empty($options['conditions']['or'])) {
 
-      $arrLen = count($options['conditions']['or']);
-      for ($i=0; $i < $arrLen; $i++) {
-        $model = $model->orWhere(
-          $options['conditions']['or'][$i][0],
-          $options['conditions']['or'][$i][1],
-          $options['conditions']['or'][$i][2]
-        );
-      }
+      $conditions = $criteria['conditions']['or'];
+
+      $model = $model->where(function($query) use($conditions) {
+
+        foreach ($conditions as $condition) {
+          $query->orWhere(
+            $condition[0],
+            $condition[1],
+            $condition[2]
+          );
+        }
+
+      });
 
       unset($options['conditions']['or']);
 

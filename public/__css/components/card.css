@@ -4,8 +4,9 @@
 
 .card {
 	margin-top: 40px;
-	/*margin-bottom: 20px;*/
 	position: relative;
+	border-top: 5px solid #0071c5;
+	padding-top: 20px;
 }
 
 .card .overlay-top-info {
@@ -73,23 +74,19 @@
 	overflow: hidden;
 }
 
-.card .price {
-	/*text-decoration: none;
-	font-size: 18px;
-	line-height: 20px;
-	color: #333 !important;
-	font-weight: bold;
-	clear: left;
-	font-style: normal;*/
-
+.card .card-sub-info {
 	text-decoration: none;
-	font-size: 18px;
+	font-size: 15px;
 	line-height: 20px;
 	color: #333;
 	font-weight: bold;
 	clear: left;
 	font-style: normal;
 	margin-top: 10px;
+}
+
+.card .card-sub-info > h5 {
+	margin: 0 0 5px;
 }
 
 .card .card-desciption {

@@ -89,7 +89,7 @@
 
   @else
 
-    <div class="shop-notice text-center space-top-20">
+    <div class="list-empty-message text-center space-top-20">
       <img class="space-bottom-20" src="/images/common/tag.png">
       <div>
         <h3>สินค้า</h3>

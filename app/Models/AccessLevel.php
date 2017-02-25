@@ -12,6 +12,10 @@ class AccessLevel extends Model
     return $this->select('id')->where('level','=',$level)->first()->id;
   }
 
+  public function getlevelByAlias($alias) {
+    return $this->select('level')->where('alias','like',$alias)->first()->level;
+  }
+
   public function getLevel() {
 
     $accessLevels = $this->getData(array(

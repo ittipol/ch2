@@ -8,23 +8,22 @@ use Auth;
 
 class Paginator {
 
+  private $model;
   private $total;
   private $page = 1;
   private $lastPage;
   private $perPage = 24;
+  private $count;
   private $pagingUrl;
   private $urls = array();
   private $url;
-  private $getImage = true;
-  private $model;
-  private $queries = array();
   private $onlyMyData = false;
+  private $getImage = true;
+  private $queries = array();
   private $criteriaData = array();
 
   public function __construct($model = null) {
     $this->model = $model;
-    // $this->total = $model->count();
-    // $this->lastPage = (int)ceil($this->total / $this->perPage);
     $this->url = new Url;
   }
 
@@ -91,7 +90,6 @@ class Paginator {
 
   private function condition($model) {
 
-    // $model = $this->model->newInstance();
     $criteria = $this->criteriaData;
 
     if(!empty($criteria['conditions']['in'])) {
@@ -111,14 +109,28 @@ class Paginator {
 
     if(!empty($criteria['conditions']['or'])) {
 
-      $arrLen = count($criteria['conditions']['or']);
-      for ($i=0; $i < $arrLen; $i++) {
-        $model = $model->orWhere(
-          $criteria['conditions']['or'][$i][0],
-          $criteria['conditions']['or'][$i][1],
-          $criteria['conditions']['or'][$i][2]
-        );
-      }
+      $conditions = $criteria['conditions']['or'];
+
+      $model = $model->where(function($query) use($conditions) {
+
+        foreach ($conditions as $condition) {
+          $query->orWhere(
+            $condition[0],
+            $condition[1],
+            $condition[2]
+          );
+        }
+
+      });
+
+      // $arrLen = count($criteria['conditions']['or']);
+      // for ($i=0; $i < $arrLen; $i++) {
+      //   $model = $model->orWhere(
+      //     $criteria['conditions']['or'][$i][0],
+      //     $criteria['conditions']['or'][$i][1],
+      //     $criteria['conditions']['or'][$i][2]
+      //   );
+      // }
 
       unset($criteria['conditions']['or']);
 
@@ -164,16 +176,15 @@ class Paginator {
     $this->onlyMyData = true;
   }
 
-  public function itemCount() {
+  // public function itemCount() {
 
-    $offset = ($this->page - 1)  * $this->perPage;
+  //   $offset = ($this->page - 1)  * $this->perPage;
 
-    // $model = $this->condition($this->model->newInstance());
+  //   return $this->condition($this->model->newInstance())->count();
+  // }
 
-    return $this->condition($this->model->newInstance())
-    ->take($this->perPage)
-    ->skip($offset)
-    ->count();
+  public function getCount() {
+    return $this->count;
   }
 
   public function getPermissionPaginationData() {
@@ -187,7 +198,7 @@ class Paginator {
 
     $records = $model
     ->join('data_access_permissions', 'data_access_permissions.model_id', '=', $this->model->getTable().'.id')
-    ->join('page_levels', 'page_levels.id', '=', 'data_access_permissions.page_level_id')
+    ->join('access_levels', 'access_levels.id', '=', 'data_access_permissions.page_level_id')
     ->where('data_access_permissions.model','like',$this->model->modelName)
     ->Where(function ($query) {
       $query = $this->getAccessPermision($query);
@@ -232,23 +243,27 @@ class Paginator {
 
     $offset = ($this->page - 1)  * $this->perPage;
 
-    $model = $this->condition($this->model->newInstance());
-    $model = $this->order($model);
-$model = $this->model->newInstance();
-    $records = $model
+    $model = $this->model->newInstance()
     ->join('data_access_permissions',function($join) {
       $join->on('data_access_permissions.model_id', '=', $this->model->getTable().'.model_id')
            ->on('data_access_permissions.model', '=',$this->model->getTable().'.model');
     })
-    ->join('page_levels', 'page_levels.id', '=', 'data_access_permissions.page_level_id')
-    ->Where(function ($query) {
+    ->join('access_levels', 'access_levels.id', '=', 'data_access_permissions.page_level_id')
+    ->where(function ($query) {
       $query = $this->getAccessPermision($query);
-    })    
-    // ->select('data_access_permissions.*')
-    // ->take($this->perPage)
-    // ->skip($offset)
+    });
+
+    $model = $this->condition($model);
+
+    $this->count = $model->count();
+
+    $model = $this->order($model);
+
+    $records = $model
+    ->take($this->perPage)
+    ->skip($offset)
     ->get();
-dd($records);
+
     $data = array();
     foreach ($records as $record) {
 
@@ -283,36 +298,35 @@ dd($records);
     $table = $this->model->getTable();
 
     // All person can access
-    $query->orWhere('page_levels.level','=',99);
+    $query->orWhere('access_levels.level','=',99);
 
     if(Auth::check()) {
       // All member can access
-      $query->orWhere('page_levels.level','=',5);
+      $query->orWhere('access_levels.level','=',9);
     }
 
     // Only person, you follow
     // <-- Code here -->
     // $query->orWhere(function($query) use($table,$personIds) {
-    //   $query->where('page_levels.level', '=', 2)
+    //   $query->where('access_levels.level', '=', 5)
     //         ->whereIn($table.'.person_id', $personIds);
     // })
 
-    // mine
-    if($this->model->modelName != 'Lookup') {
-      $query->orWhere(function($query) use($table) {
-        $query->where('page_levels.level', '=', 1)
-              ->where($table.'.person_id', '=', session()->get('Person.id'));
-      });
-    }
-    
-    // $query->orWhere('page_levels.level','=',99)
-    //       ->orWhere('page_levels.level','=',5)
+    // only me can access
+    $query->orWhere(function($query) {
+      $query->where('access_levels.level', '=', 1)
+            ->where('data_access_permissions.owner', 'like', 'Person')
+            ->where('data_access_permissions.owner_id', '=', session()->get('Person.id'));
+    });
+
+    // $query->orWhere('access_levels.level','=',99)
+    //       ->orWhere('access_levels.level','=',5)
     //       ->orWhere(function($query) use($table,$personIds) {
-    //         $query->where('page_levels.level', '=', 2)
+    //         $query->where('access_levels.level', '=', 2)
     //               ->whereIn($table.'.person_id', $personIds);
     //       })
     //       ->orWhere(function($query) use($table) {
-    //         $query->where('page_levels.level', '=', 1)
+    //         $query->where('access_levels.level', '=', 1)
     //               ->where($table.'.person_id', '=', session()->get('Person.id'));
     //       });
 
@@ -324,13 +338,7 @@ dd($records);
 
     $cache = new Cache;
 
-    // $total = $this->getTotal();
-    // $this->lastPage = (int)ceil($total / $this->perPage);
-
     $offset = ($this->page - 1)  * $this->perPage;
-
-    // $start = $offset + 1;
-    // $end = min(($offset + $this->perPage), $this->total);
 
     $model = $this->condition($this->model->newInstance());
     $model = $this->order($model);

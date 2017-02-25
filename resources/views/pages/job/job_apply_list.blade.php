@@ -40,7 +40,12 @@
 
     @else
 
-    <h3>ไม่พบสินค้า</h3>
+    <div class="list-empty-message text-center space-top-20">
+      <img class="space-bottom-20" src="/images/common/resume.png">
+      <div>
+        <h3>ยังไม่มีรายชื่อผู้ที่สมัครงานของคุณ</h3>
+      </div>
+    </div>
 
     @endif
 

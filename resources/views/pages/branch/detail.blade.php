@@ -32,8 +32,11 @@
            <div class="close-image-description-icon"></div>
           </div>
 
-          <div class="display-image-description-icon">
+          <div class="display-image-description-icon additional-option icon">
             <img src="/images/icons/additional-white.png">
+            <div class="additional-option-content">
+              <a class="open-description">แสดงคำอธิบายรูปภาพ</a>
+            </div>
           </div>
 
         </div>
@@ -63,8 +66,19 @@
 
   <div class="row">
 
-    <div class="col-xs-12">
+    <div class="col-xs-4">
+      <div class="item-info">
 
+        <div class="item-info-row">
+          <p>ชื่อสาขา</p>
+          <h4>{{$_modelData['name']}}</h4>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-xs-8">
+      
       <div class="item-info">
 
         <p>ติดต่อสาขา</p>
@@ -101,11 +115,9 @@
 
       </div>
 
-    </div> 
+    </div>
 
   </div>
-
-  <div class="line space-top-bottom-20"></div>
 
   <h4>ตำแหน่งบนแผนที่</h4>
   <div id="map"></div>
@@ -132,17 +144,12 @@
               <a href="{{$data['detailUrl']}}">
                 <div class="card-title">{{$data['_short_name']}}</div>
               </a>
-              <div class="price">
+              <div class="card-sub-info">
+                <h5>เงินเดือน</h5>
                 {{$data['_salary']}}
               </div>
             </div>
-            <div>
-  
-              <a href="{{$data['detailUrl']}}">
-                <div class="button wide-button">แสดง</div>
-              </a>
-      
-            </div>
+   
           </div>
         </div>
 

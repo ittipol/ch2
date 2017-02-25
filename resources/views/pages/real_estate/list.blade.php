@@ -12,8 +12,6 @@
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
           <div class="card">
 
-            <div class="overlay-top-info text-center">{{$data['_realEstateTypeName']}}</div>
-
             <div class="image-tile">
               <a href="{{$data['detailUrl']}}">
                 <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
@@ -23,13 +21,16 @@
               <a href="{{$data['detailUrl']}}">
                 <div class="card-title">{{$data['_short_name']}}</div>
               </a>
-              <div class="price">
+              <div class="card-sub-info">
+                <h5>ราคา</h5>
                 {{$data['_price']}}
               </div>
+              <div class="card-sub-info">
+                <h5>ประเภทอสังหาริมทรัพย์</h5>
+                {{$data['_realEstateTypeName']}}
+              </div>
             </div>
-            <div>
-              <a href="{{$data['detailUrl']}}"><div class="button wide-button">แสดงรายละเอียด</div></a>
-            </div>
+
           </div>
         </div>
 
@@ -41,10 +42,10 @@
 
     @else
 
-    <div class="shop-notice text-center space-top-20">
+    <div class="list-empty-message text-center space-top-20">
       <img class="space-bottom-20" src="/images/common/not-found.png">
       <div>
-        <h3>ยังไม่มีข้อมูลนี้</h3>
+        <h3>ยังไม่มีข้อมูลซื้อ ขายอสังหาริมทรัพย์</h3>
         <p>ขออภัย ยังไม่มีข้อมูลซื้อ ขายอสังหาริมทรัพย์</p>
         <a href="{{URL::to('real-estate/post')}}" class="button">เพิ่มข้อมูลซื้อ ขายอสังหาริมทรัพย์</a>
       </div>

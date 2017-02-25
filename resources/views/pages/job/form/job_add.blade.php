@@ -31,17 +31,19 @@
         echo Form::label('branch', 'เลือกสาขาที่เปิดรับสมัครงานนี้ (สามารถเว้นว่างได้)');
       ?>
       <div class="form-item-group">
-        <div class="row">
-            @foreach ($_fieldData['branches'] as $id => $branch)
-            <div class="col-lg-4 col-md-6 col-sm-6 col-sm-12">
-              <label class="choice-box">
-                <?php
-                  echo Form::checkbox('RelateToBranch[branch_id][]', $id);
-                ?>
-                <div class="inner"><?php echo $branch; ?></div>
-              </label>
-            </div>
-            @endforeach
+        <div class="form-item-group-inner">
+          <div class="row">
+              @foreach ($_fieldData['branches'] as $id => $branch)
+              <div class="col-lg-4 col-md-6 col-sm-6 col-sm-12">
+                <label class="choice-box">
+                  <?php
+                    echo Form::checkbox('RelateToBranch[branch_id][]', $id);
+                  ?>
+                  <div class="inner"><?php echo $branch; ?></div>
+                </label>
+              </div>
+              @endforeach
+          </div>
         </div>
       </div>
     </div>

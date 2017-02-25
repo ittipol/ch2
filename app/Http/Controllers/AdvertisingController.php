@@ -14,23 +14,26 @@ class AdvertisingController extends Controller
     parent::__construct();
   }
 
-  // public function listView() {
+  public function listView() {
 
-  //   $model = Service::loadModel('Advertising');
+    $model = Service::loadModel('Advertising');
     
-  //   $page = 1;
-  //   if(!empty($this->query['page'])) {
-  //     $page = $this->query['page'];
-  //   }
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
 
-  //   $model->paginator->setPage($page);
-  //   $model->paginator->setPagingUrl('advertising/list');
-  //   $model->paginator->setUrl('advertising/detail/{id}','detailUrl');
+    $model->paginator->criteria(array(
+      'order' => array('created_at','DESC')
+    ));
+    $model->paginator->setPage($page);
+    $model->paginator->setPagingUrl('advertising/list');
+    $model->paginator->setUrl('advertising/detail/{id}','detailUrl');
 
-  //   $this->data = $model->paginator->build();
+    $this->data = $model->paginator->build();
 
-  //   return $this->view('pages.dvertising.list');
-  // }
+    return $this->view('pages.advertising.list');
+  }
 
   public function detail() {
 

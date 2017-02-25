@@ -23,6 +23,9 @@ class JobController extends Controller
       $page = $this->query['page'];
     }
 
+    $model->paginator->criteria(array(
+      'order' => array('create_at','DESC')
+    ));
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl('job/list');
     $model->paginator->setUrl('job/detail/{id}','detailUrl');

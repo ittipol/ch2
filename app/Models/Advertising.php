@@ -19,11 +19,14 @@ class Advertising extends Model
     'Lookup' => array(
       'format' =>  array(
         'name' => '{{name}}',
-        'keyword_1' => '{{__Shop|getShopName}}'
+        'keyword_1' => '{{__Shop|getShopName}}',
         'keyword_2' => '{{AdvertisingType.name|Advertising.advertising_type_id=>AdvertisingType.id}}',
       )
     ),
-    'dataAccessPermission' => true
+    'DataAccessPermission' => array(
+      'owner' => 'Shop',
+      'defaultAccessLevel' => 99
+    )
   );
 
   public $imageTypes = array(

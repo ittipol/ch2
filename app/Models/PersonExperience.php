@@ -37,7 +37,10 @@ class PersonExperience extends Model
     //   ),
     //   'active' => 0
     // ),
-    'dataAccessPermission' => true
+    'DataAccessPermission' => array(
+      'owner' => 'Person',
+      'defaultAccessLevel' => 99
+    )
   );
 
   public static function boot() {

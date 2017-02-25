@@ -63,7 +63,7 @@ class CheckForDataAccessPermission
 
           break;
         
-        case 5:
+        case 9:
           
           if(!Auth::check()) {
             $hasPermission = false;

@@ -39,3 +39,8 @@ input[type="text"].search-box:focus {
 .result-count {
 	color: #555;
 }
+
+.search-results .not-found-image {
+	width: 250px;
+	height: 250px;
+}

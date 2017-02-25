@@ -33,7 +33,10 @@ class Job extends Model
         'keyword_4' => '{{salary}}',
       )
     ),
-    'dataAccessPermission' => true
+    'DataAccessPermission' => array(
+      'owner' => 'Shop',
+      'defaultAccessLevel' => 99
+    )
   );
 
   protected $validation = array(

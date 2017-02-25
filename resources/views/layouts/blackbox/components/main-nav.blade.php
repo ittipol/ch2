@@ -33,7 +33,7 @@
             <div class="dot"></div>
             <div class="dot"></div>
             <div class="additional-option-content">
-              <a href="">แก้ไขโปรไฟล์</a>
+              <a href="{{URL::to('account/profile_edit')}}">แก้ไขโปรไฟล์</a>
               <a href="{{URL::to('logout')}}">ออกจากระบบ</a>
             </div>
           </div>

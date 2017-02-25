@@ -64,9 +64,7 @@
       <div class="form-item-group">
         <div class="form-item-group-inner">
           <div class="row">
-          <?php 
-            foreach ($_fieldData['itemCategories'] as $id => $category):
-          ?>
+            @foreach ($_fieldData['itemCategories'] as $id => $category)
             <div class="col-lg-4 col-md-6 col-sm-6 col-sm-12">
               <label class="choice-box">
                 <?php
@@ -75,9 +73,7 @@
                 <div class="inner"><?php echo $category; ?></div>
               </label>
             </div>
-          <?php
-            endforeach;
-          ?>
+            @endforeach
           </div>
         </div>
       </div>

@@ -34,7 +34,10 @@ class Item extends Model
         'keyword_4' => '{{price}}',
       )
     ),
-    'dataAccessPermission' => true
+    'DataAccessPermission' => array(
+      'owner' => 'Person',
+      'defaultAccessLevel' => 99
+    )
   );
 
   protected $validation = array(

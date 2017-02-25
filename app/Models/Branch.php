@@ -26,7 +26,10 @@ class Branch extends Model
         'keyword_1' => '{{__Shop|getShopName}}'
       )
     ),
-    'dataAccessPermission' => true
+    'DataAccessPermission' => array(
+      'owner' => 'Shop',
+      'defaultAccessLevel' => 99
+    )
   );
 
   protected $validation = array(
