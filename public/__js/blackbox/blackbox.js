@@ -1,7 +1,7 @@
 class Blackbox {
 
   constructor() {
-    this.mainNavWidth = 280;
+    // this.mainNavWidth = 280;
   }
 
   load(){
@@ -11,7 +11,7 @@ class Blackbox {
   }
 
   init() {
-    this.mainNavWidth = document.getElementById('global_navigation').offsetWidth;
+    // this.mainNavWidth = document.getElementById('global_navigation').offsetWidth;
   }
 
   bind() {
@@ -98,7 +98,7 @@ class Blackbox {
     // });
 
     $(document).scroll(function() {
-      console.log($(this).scrollTop());
+      // console.log($(this).scrollTop());
     });
 
 
@@ -115,6 +115,11 @@ class Blackbox {
 
     // $('.content-wrapper').css({
     //   width: w,
+    //   height: h
+    // });
+
+    // $('#container').css({
+    //   width: (w-17),
     //   height: h
     // });
 

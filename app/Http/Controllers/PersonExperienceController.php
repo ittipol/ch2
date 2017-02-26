@@ -186,7 +186,7 @@ class PersonExperienceController extends Controller
 
     // Get language skill
     $languageSkills = Service::loadModel('PersonLanguageSkill')->where('person_experience_id','=',$profile->id)->get();
-   
+
     $url->clearUrls();
     $url->setUrl('experience/language_skill_edit/{id}','editUrl');
     $url->setUrl('experience/language_skill_delete/{id}','deleteUrl');
@@ -359,7 +359,7 @@ class PersonExperienceController extends Controller
 
   //   if($model->fill($request->all())->save()) {
   //     Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-  //     return Redirect::to('experience/profile');
+  //     return Redirect::to('experience/profile/edit');
   //   }else{
   //     return Redirect::back();
   //   }

@@ -1,9 +1,9 @@
 .content-wrapper {
 	position: relative;
 	left: 0;
-	/*padding-top: 60px;*/
 	padding-left: 280px;
-	overflow-x: hidden;
+	height: 100%;
+	/*overflow-x: hidden;*/
 	transition: left .2s ease-out;
 }
 

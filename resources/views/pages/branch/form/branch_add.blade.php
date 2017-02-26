@@ -163,7 +163,7 @@
     const map = new Map();
     map.initialize();
 
-    const phoneNumberInput = new TextInputStack('phone_number_input','Contact[phone_number]','หมายเลขโทรศัพท์');
+    const phoneNumberInput = new TextInputList('phone_number_input','Contact[phone_number]','หมายเลขโทรศัพท์');
     phoneNumberInput.disableCreatingInput();
     @if(!empty($_oldInput['Contact']['phone_number']))
       phoneNumberInput.load({!!$_oldInput['Contact']['phone_number']!!});
@@ -171,7 +171,7 @@
       phoneNumberInput.load();
     @endif
 
-    const emailInput = new TextInputStack('email_input','Contact[email]','อีเมล');
+    const emailInput = new TextInputList('email_input','Contact[email]','อีเมล');
     emailInput.disableCreatingInput();
     @if(!empty($_oldInput['Contact']['email']))
       emailInput.load({!!$_oldInput['Contact']['email']!!});

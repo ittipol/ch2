@@ -13,6 +13,8 @@
 
 //
 
+Route::get('cp','HomeController@catPath');
+
 Route::get('ac','HomeController@addXxx');
 Route::post('ac','HomeController@addXxxSub');
 
@@ -100,10 +102,10 @@ Route::group(['middleware' => ['auth','person.experience']], function () {
   Route::get('experience/working_edit/{id}','PersonWorkingExperienceController@edit');
   Route::patch('experience/working_edit/{id}','PersonWorkingExperienceController@editingSubmit');
 
-  Route::get('experience/internship_add','PersonInternshipController@add');
-  Route::post('experience/internship_add','PersonInternshipController@addingSubmit');
-  Route::get('experience/internship_edit/{id}','PersonInternshipController@edit');
-  Route::patch('experience/internship_edit/{id}','PersonInternshipController@editingSubmit');
+  Route::get('experience/internship_add','PersonInternshipController@add')->name('person_experience.internship.add');
+  Route::post('experience/internship_add','PersonInternshipController@addingSubmit')->name('person_experience.internship.add');
+  Route::get('experience/internship_edit/{id}','PersonInternshipController@edit')->name('person_experience.internship.edit');
+  Route::patch('experience/internship_edit/{id}','PersonInternshipController@editingSubmit')->name('person_experience.internship.edit');
 
   Route::get('experience/education_add','PersonEducationController@add');
   Route::post('experience/education_add','PersonEducationController@addingSubmit');
@@ -183,9 +185,11 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 });
 
 // PRODUCT
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
 
-  Route::get('shop/{shopSlug}/product','ShopController@product');
+  Route::get('shop/{shopSlug}/product','ShopController@product')->name('shop.product');
+
+  Route::get('shop/{shopSlug}/product/{id}','ProductController@menu')->name('shop.product.menu');
 
   Route::get('shop/{shopSlug}/product_post','ProductController@add')->name('shop.product.add');
   Route::post('shop/{shopSlug}/product_post','ProductController@addingSubmit')->name('shop.product.add');
@@ -193,9 +197,12 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('shop/{shopSlug}/product_edit/{id}','ProductController@edit')->name('shop.product.edit');
   Route::patch('shop/{shopSlug}/product_edit/{id}','ProductController@editingSubmit')->name('shop.product.edit');
 
+  Route::get('shop/{shopSlug}/product_specification_edit/{id}','ProductController@specificationEdit')->name('shop.product_specification.edit');
+  Route::patch('shop/{shopSlug}/product_specification_edit/{id}','ProductController@specificationEditingSubmit')->name('shop.product_specification.edit');
+
 });
-Route::get('product','ProductController@index');
-Route::get('product/{product_slug}','ProductController@detail');
+// Route::get('product','ProductController@index');
+// Route::get('product/{product_slug}','ProductController@detail');
 
 // Job
 Route::get('job/list','JobController@listView')->name('job.list');

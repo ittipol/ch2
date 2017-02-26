@@ -21,7 +21,7 @@ class Contact extends Model
           if(empty($value['value'])) {
             continue;
           }
-          $phoneNumber[] = $value['value'];
+          $phoneNumber[] = trim($value['value']);
         }
 
         $attributes['phone_number'] = null;
@@ -38,7 +38,7 @@ class Contact extends Model
           if(empty($value['value'])) {
             continue;
           }
-          $fax[] = $value['value'];
+          $fax[] = trim($value['value']);
         }
 
         $attributes['fax'] = null;
@@ -55,7 +55,7 @@ class Contact extends Model
           if(empty($value['value'])) {
             continue;
           }
-          $email[] = $value['value'];
+          $email[] = trim($value['value']);
         }
 
         $attributes['email'] = null;
@@ -72,7 +72,7 @@ class Contact extends Model
           if(empty($value['value'])) {
             continue;
           }
-          $website[] = $value['value'];
+          $website[] = trim($value['value']);
         }
 
         $attributes['website'] = null;
@@ -89,7 +89,7 @@ class Contact extends Model
           if(empty($value['value'])) {
             continue;
           }
-          $line[] = $value['value'];
+          $line[] = trim($value['value']);
         }
 
         $attributes['line'] = null;

@@ -210,7 +210,7 @@
       const images = new Images('_profile_image','profile-image',1);
       images.load('{!!$profileImage!!}');
 
-      const phoneNumberInput = new TextInputStack('phone_number_input','Contact[phone_number]','หมายเลขโทรศัพท์');
+      const phoneNumberInput = new TextInputList('phone_number_input','Contact[phone_number]','หมายเลขโทรศัพท์');
       // phoneNumberInput.disableCreatingInput();
       @if(!empty($_formData['Contact']['phone_number']))
         phoneNumberInput.load({!!$_formData['Contact']['phone_number']!!});
@@ -218,7 +218,7 @@
         phoneNumberInput.load();
       @endif
 
-      const emailInput = new TextInputStack('email_input','Contact[email]','อีเมล');
+      const emailInput = new TextInputList('email_input','Contact[email]','อีเมล');
       // emailInput.disableCreatingInput();
       @if(!empty($_formData['Contact']['email']))
         emailInput.load({!!$_formData['Contact']['email']!!});
@@ -226,7 +226,7 @@
         emailInput.load();
       @endif
 
-      const lindIdInput = new TextInputStack('line_id_input','Contact[line]','Line ID');
+      const lindIdInput = new TextInputList('line_id_input','Contact[line]','Line ID');
       // lindIdInput.disableCreatingInput();
       @if(!empty($_formData['Contact']['line']))
         lindIdInput.load({!!$_formData['Contact']['line']!!});

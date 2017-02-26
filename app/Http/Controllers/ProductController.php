@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
 use App\library\message;
+use App\library\cache;
 use Redirect;
 use Session;
 
@@ -12,16 +13,48 @@ class ProductController extends Controller
 {
   public function __construct() { 
     parent::__construct();
-    $this->model = Service::loadModel('Product');
   }
 // ข้อความถึงผู้ขาย:
   // การรับประกัน
-  public function index() {
-    dd('pd index');
-  }
+  // public function index() {
+  //   dd('pd index');
+  // }
 
   public function detail() {
     dd('pd detail');
+  }
+
+  public function menu() {
+
+    // ผู้ให้บริการขนส่ง
+    // ไปรษณีย์ไทย
+    // Nim Express
+    // DHL
+    // UPS
+    // Kerry Express
+    // ระบบขนส่งของทางร้าน
+
+    $cache = new Cache;
+
+    $model = Service::loadModel('Product')->find($this->param['id']);
+
+    $image = $model->getModelRelationData('Image',array(
+      'first' => true
+    ));
+
+    $imageUrl = '/images/common/no-img.png';
+    if(!empty($image)) {
+      $imageUrl = $cache->getCacheImageUrl($image,'list');
+    }
+
+    $this->data = $model->modelData->build();
+    $this->setData('imageUrl',$imageUrl);
+
+    $this->setData('productEditUrl',request()->get('shopUrl').'product_edit/'.$model->id);
+    $this->setData('productSpecificationEditUrl',request()->get('shopUrl').'product_specification_edit/'.$model->id);
+
+    return $this->view('pages.product.menu');
+
   }
 
   public function add() {
@@ -34,40 +67,85 @@ class ProductController extends Controller
   }
 
   public function addingSubmit(CustomFormRequest $request) {
-dd($request->all());
-    if($this->model->fill($request->all())->save()) {
 
-      $slugName = $this->model->getModelRelationData('Slug',array(
-        'fields' => 'name'
-      ))->name;
+    $model = Service::loadModel('Product');
 
+    $request->request->add(['ShopRelateTo' => array('shop_id' => request()->get('shop')->id)]);
+
+    if($model->fill($request->all())->save()) {
       Message::display('ข้อมูลถูกเพิ่มแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/product');
+      return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
     }else{
       return Redirect::back();
     }
 
   }
 
-  public function edit($productId) {
+  public function edit() {
 
-    $model = $this->model->find($productId);
+    $model = Service::loadModel('Product')->find($this->param['id']);
 
-    $this->formHelper->setModel($model);
-    $this->formHelper->loadFormData();
-    $this->formHelper->district();
-    
-    return $this->view('pages.product.form.edit.product');
+    $model->formHelper->loadData(array(
+      'json' => array('Image','Tagging')
+    ));
+
+    $this->data = $model->formHelper->build();
+
+    return $this->view('pages.product.form.product_edit');
 
   }
 
-  public function editingSubmit(CustomFormRequest $request,$productId) {
+  public function editingSubmit(CustomFormRequest $request) {
 
-    $product = $this->model->find($productId);
+    $model = Service::loadModel('Product')->find($this->param['id']);
 
-    if($product->fill($request->all())->save()) {
-      Message::display('ข้อมูลถูกเพิ่มแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/product');
+    if($model->fill($request->all())->save()) {
+      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
+    }else{
+      return Redirect::back();
+    }
+  }
+
+  public function specificationEdit() {
+
+    $model = Service::loadModel('Product')->find($this->param['id']);
+
+    $model->formHelper->loadData(array(
+      'json' => array('Image','Tagging')
+    ));
+
+    $model->formHelper->loadFieldData('WeightUnit',array(
+      'key' =>'id',
+      'field' => 'name',
+      'index' => 'weigthUnits',
+      'order' => array(
+        array('id','ASC')
+      )
+    ));
+
+    $model->formHelper->loadFieldData('LengthUnit',array(
+      'key' =>'id',
+      'field' => 'name',
+      'index' => 'lengthUnits',
+      'order' => array(
+        array('id','ASC')
+      )
+    ));
+
+    $this->data = $model->formHelper->build();
+
+    return $this->view('pages.product.form.specification_edit');
+
+  }
+
+  public function specificationEditingSubmit(CustomFormRequest $request) {
+
+    $model = Service::loadModel('Product')->find($this->param['id']);
+
+    if($model->fill($request->all())->save()) {
+      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
     }else{
       return Redirect::back();
     }

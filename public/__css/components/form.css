@@ -270,10 +270,6 @@ form .input-addon > select:last-child {
 	position: relative;
 }
 
-.text-input-wrapper .error-message {
-	margin: 10px 0 5px;
-}
-
 .text-input-wrapper input {
 	padding-right: 20px;
 }
@@ -286,15 +282,8 @@ form .input-addon > select:last-child {
 	border-left: 0;
 }
 
-.text-input-wrapper .button-clear-text {
-	cursor:pointer;
-	color:red;
-	font-weight:bold;
-	font-size: 25px;
-}
-
 .text-input-wrapper .button-clear-text.round {
-  height: 40px;
+  /*height: 40px;*/
   line-height: 40px;
   width: 40px;
   background-color: pink;
@@ -307,6 +296,37 @@ form .input-addon > select:last-child {
   position: relative;
   top: 4px;
   right: 30px;
+}
+
+
+.text-input-group-wrapper > input[type="text"] {
+	width: 40%;
+	margin-right: 5px;
+}
+
+.text-input-group-wrapper .button-clear-text {
+	position: relative;
+	top: 4px;
+	right: 0;
+  line-height: 40px;
+  width: 40px;
+  /*background-color: pink;*/
+  /*border-radius: 40px;*/
+  text-align: center;
+  display: inline-block;
+}
+
+.text-input-wrapper .error-message,
+.text-input-group-wrapper .error-message {
+	margin: 10px 0 5px;
+}
+
+.text-input-wrapper .button-clear-text,
+.text-input-group-wrapper .button-clear-text {
+	cursor:pointer;
+	color:red;
+	font-weight:bold;
+	font-size: 25px;
 }
 
 .period-controller > span > a {
@@ -350,6 +370,11 @@ select[name^="OfficeHour"].disabled {
 
 .input-group .input-item:not(:first-child) {
 	margin-left: 10px;
+}
+
+.input-field-group > input[type="text"] {
+	width: 26%;
+	margin-right: 10px;
 }
 
 /*==========  Mobile First Method  ==========*/

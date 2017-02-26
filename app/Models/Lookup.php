@@ -25,6 +25,20 @@ class Lookup extends Model
   // Call Method
   // 'address' => '{{__getAddress}}'
 
+  public static function boot() {
+
+    parent::boot();
+
+    Lookup::saving(function($lookup){
+
+      if(!$lookup->exists && empty($lookup->active)){
+        $lookup->active = 1;
+      }
+
+    });
+
+  }
+
   public function __saveRelatedData($model,$options = array()) {
 
     $behavior = $model->getBehavior('Lookup');
@@ -81,7 +95,7 @@ class Lookup extends Model
       )
     );
 
-    $value['active'] =  1;
+    // $value['active'] =  1;
     if(isset($behavior['active'])) {
       $value['active'] =  $behavior['active'];
     }

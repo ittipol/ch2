@@ -40,7 +40,7 @@ class PersonSkillController extends Controller
     }
 
     Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-    return Redirect::to('experience/profile');
+    return Redirect::to('experience/profile/edit');
 
   }
 
@@ -74,7 +74,7 @@ class PersonSkillController extends Controller
 
     if($model->fill(request()->all())->save()) {
       Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('experience/profile');
+      return Redirect::to('experience/profile/edit');
     }else{
       return Redirect::back();
     }

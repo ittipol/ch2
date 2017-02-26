@@ -1,4 +1,4 @@
-class TextInputStack {
+class TextInputList {
 
   constructor(panel = '_text_input_panel',textInputName = '_text_input_data',placeholder = '',options = []) {
     this.panel = panel;

@@ -5,17 +5,46 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use App\library\service;
 use Request;
-use Session;
+use Route;
+// use Session;
 
 class CustomFormRequest extends FormRequest
 {
   private $model;
   private $validation;
+  private $hasError = false;
+
+  private $pages = array(
+    'shop.product.add' => array(
+      'modelName' => 'Product'
+    ),
+    'shop.product.edit' => array(
+      'modelName' => 'Product'
+    ),
+    'shop.product_specification.edit' => array(
+      'modelName' => 'Product'
+    ),
+    'person_experience.internship.add' => array(
+      'modelName' => 'PersonInternship'
+    ),
+    'person_experience.internship.edit' => array(
+      'modelName' => 'PersonInternship'
+    )
+  );
 
   public function __construct() {
-    $data = Request::all();
-    $this->model = service::loadModel($data['_model']);
-    $this->validation = $this->model->getValidation();
+
+    $name = Route::currentRouteName();
+
+    if(empty($name) || empty($this->pages[$name])) {
+      $this->hasError = true;
+    }
+
+    // $model = service::loadModel($this->pages[$name]['modelName']);
+    // $this->validation = $model->getValidation();
+
+    // $this->model = service::loadModel(Request::get('_model'));
+    // $this->validation = $this->model->getValidation();
   }
 
   /**
@@ -25,7 +54,7 @@ class CustomFormRequest extends FormRequest
    */
   public function authorize()
   {
-    return true;
+    return !$this->hasError;
     // return Auth::check();
   }
 
@@ -40,30 +69,37 @@ class CustomFormRequest extends FormRequest
 
   public function rules()
   {
-    $data = Request::all();
+    if($this->hasError) {
+      return array();
+    }
+
+    $name = Route::currentRouteName();
+
+    $model = service::loadModel($this->pages[$name]['modelName']);
+    $this->validation = $model->getValidation();
 
     $rules = array();
     if(!empty($this->validation['rules'])){
       foreach ($this->validation['rules'] as $key => $value) {
 
-        if(!empty($this->validation['except'][$key])) {
+        if(!empty($this->validation['excepts'][$name]) && in_array($key, $this->validation['excepts'][$name])) {
 
-          $skip = false;
-          foreach ($this->validation['except'][$key] as $_key => $_value) {
-            if(!empty($data[$_key]) && ($data[$_key] == $_value)) {
-              $skip = true;
-            }
+          if(!empty(Request::get($key))) {
+            $this->hasError = true;
           }
 
-          if($skip) {
-            continue;
+          if($this->hasError) {
+            break;
           }
+
+          continue;
         }
         
         $rules[$key] = $value;
+
       }
     }
-    
+ 
     return $rules;
   }
 }

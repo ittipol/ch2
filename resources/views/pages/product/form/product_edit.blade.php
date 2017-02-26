@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-md-8 col-xs-12">
         <div class="title">
-          สินค้า
+          ข้อมูลทั้วไปของสินค้า
         </div>
       </div>
     </div>
@@ -16,7 +16,11 @@
   @include('components.form_error') 
 
   <?php 
-    echo Form::open(['id' => 'main_form','method' => 'post', 'enctype' => 'multipart/form-data']);
+    echo Form::model($_formData, [
+      'id' => 'main_form',
+      'method' => 'PATCH',
+      'enctype' => 'multipart/form-data'
+    ]);
   ?>
 
   <?php
@@ -48,18 +52,6 @@
 
     <div class="form-row">
       <?php 
-        echo Form::label('price', 'ราคาสินค้า', array(
-          'class' => 'required'
-        ));
-        echo Form::text('price', null, array(
-          'placeholder' => 'ราคาสินค้า',
-          'autocomplete' => 'off'
-        ));
-      ?>
-    </div>
-
-    <div class="form-row">
-      <?php 
         echo Form::label('_tags', 'แท๊กที่เกี่ยวข้องกับงานนี้');
       ?>
       <div id="_tags" class="tag"></div>
@@ -80,7 +72,7 @@
   </div>
 
   <?php
-    echo Form::submit('เพิ่มสินค้า', array(
+    echo Form::submit('บันทึก', array(
       'class' => 'button'
     ));
   ?>
@@ -96,13 +88,10 @@
   $(document).ready(function(){
 
     const images = new Images('_image_group','photo',10,'description');
-    images.load();
+    images.load({!!$_formData['Image']!!});
 
     const tagging = new Tagging();
-    tagging.load();
-    @if(!empty($_oldInput['Tagging']))
-      tagging.setTags('{!!$_oldInput['Tagging']!!}');
-    @endif
+    tagging.load({!!$_formData['Tagging']!!});
     
     const form = new Form();
     form.load();

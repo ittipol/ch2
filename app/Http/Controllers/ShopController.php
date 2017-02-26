@@ -17,13 +17,6 @@ class ShopController extends Controller
 // UPS
 // มีบริการส่งของส่วนตัว
 
-  // ไปรษณีย์ไทย
-  // Nim Express
-  // DHL
-  // UPS
-  // Kerry Express
-  // ระบบขนส่งของทางร้าน
-
   // ** หน้าเพิ่ม อธิบายการแพคสินค้า
   // ** หน้าการชำระเงิน
 
@@ -79,7 +72,9 @@ class ShopController extends Controller
       ));
       $product->paginator->setPage($page);
       $product->paginator->setPagingUrl('shop/'.request()->shopSlug.'/product');
-      $product->paginator->setUrl('shop/'.$this->param['shopSlug'].'/product_edit/{id}','editUrl');
+      // $product->paginator->setUrl('shop/'.$this->param['shopSlug'].'/product_edit/{id}','editUrl');
+      $product->paginator->setUrl('shop/'.$this->param['shopSlug'].'/product/{id}','menuUrl');
+      $product->paginator->setUrl('shop/'.$this->param['shopSlug'].'/product_delete/{id}','deleteUrl');
       $product->paginator->setUrl('product/detail/{id}','detailUrl');
 
       $this->data = $product->paginator->build();

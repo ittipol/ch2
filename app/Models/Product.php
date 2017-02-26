@@ -5,8 +5,8 @@ namespace App\Models;
 class Product extends Model
 {
   protected $table = 'products';
-  protected $fillable = ['name','description','sku','quantity','stock_status_id','price','weight','weight_id','length','length_id','width','height','person_id'];
-  protected $modelRelations = array('Image','Address','Tagging');
+  protected $fillable = ['name','description','sku','quantity','stock_status_id','price','weight','weight_id','length','length_id','width','height','specifications','person_id'];
+  protected $modelRelations = array('Image','Tagging','ShopRelateTo');
   protected $directory = true;
 
   public $formHelper = true;
@@ -23,11 +23,24 @@ class Product extends Model
     'rules' => array(
       'name' => 'required|max:255',
       'price' => 'required|regex:/^[\d,]*(\.\d{1,2})?$/',
+      'length' => 'numeric',
+      'width' => 'numeric',
+      'height' => 'numeric',
+      'weight' => 'numeric'
     ),
     'messages' => array(
       'name.required' => 'ชื่อห้ามว่าง',
       'price.required' => 'จำนวนราคาห้ามว่าง',
       'price.regex' => 'จำนวนราคาไม่ถูกต้อง',
+      'length.numeric' => 'ความยาวไม่ถูกต้อง',
+      'width.numeric' => 'ความกว้างไม่ถูกต้อง',
+      'height.numeric' => 'ความสูงไม่ถูกต้อง',
+      'weight.numeric' => 'น้ำหนักไม่ถูกต้อง',
+    ),
+    'excepts' => array(
+      'shop.product.add' => array('length','width','height'),
+      'shop.product.edit' => array('price'),
+      'shop.product_specification.edit' => array('name','price')
     )
   );
 
@@ -35,11 +48,11 @@ class Product extends Model
     // 'Slug' => array(
     //   'field' => 'name'
     // ),
-    // 'Lookup' => array(
-    //   'format' =>  array(
-    //     'keyword' => '{{name}}'
-    //   )
-    // ),
+    'Lookup' => array(
+      'format' =>  array(
+        'name' => '{{name}}'
+      )
+    ),
     'DataAccessPermission' => array(
       'owner' => 'Shop',
       'defaultAccessLevel' => 99
@@ -54,10 +67,62 @@ class Product extends Model
 
     parent::boot();
 
-    Product::saved(function($model){
-      $lookup = new Lookup;
-      $lookup->__saveRelatedData($model);
+    Product::saving(function($product){
+
+      if(!$product->exists){
+        $product->active = 0;
+        $product->quantity = 0;
+      }
+
     });
+
+  }
+
+  public function fill(array $attributes) {
+
+    if(!empty($attributes)) {
+      
+      if(empty($attributes['width'])) {
+        unset($attributes['width']);
+      }
+
+      if(empty($attributes['length'])) {
+        unset($attributes['length']);
+      }
+
+      if(empty($attributes['height'])) {
+        unset($attributes['height']);
+      }
+
+      if(empty($attributes['weight'])) {
+        unset($attributes['weight']);
+      }
+
+      if(!empty($attributes['specifications'])) {
+
+        $specifications = array();
+        foreach ($attributes['specifications'] as $value) {
+
+          if(empty($value['title']) || empty($value['value'])) {
+            continue;
+          }
+
+          $specifications[] = array(
+            'title' => trim($value['title']),
+            'value' => trim($value['value'])
+          );
+        }
+
+        $attributes['specifications'] = '';
+        if(!empty($specifications)) {
+          $attributes['specifications'] = json_encode($specifications);
+        }
+
+      }
+
+    }
+
+    return parent::fill($attributes);
 
   }
 

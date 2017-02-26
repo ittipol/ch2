@@ -54,7 +54,7 @@
 
     $(document).ready(function(){
 
-      const textInputStack = new TextInputStack('website_input','private_websites','เว็บไซต์',{!!$_fieldData['websiteTypes']!!});
+      const textInputStack = new TextInputList('website_input','private_websites','เว็บไซต์',{!!$_fieldData['websiteTypes']!!});
       textInputStack.load({!!$_formData['private_websites']!!});
       
       const form = new Form();

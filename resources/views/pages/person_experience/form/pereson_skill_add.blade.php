@@ -50,7 +50,7 @@
 <script type="text/javascript">
 
   $(document).ready(function(){
-    const textInputStack = new TextInputStack('skills_input','skills','ทักษะและความสามารถ');
+    const textInputStack = new TextInputList('skills_input','skills','ทักษะและความสามารถ');
     textInputStack.load();
     textInputStack.enableCheckingEmpty();
   });

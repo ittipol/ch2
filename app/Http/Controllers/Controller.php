@@ -11,7 +11,6 @@ use App\library\service;
 use App\library\entity;
 use Session;
 use Route;
-// use Request;
 
 class Controller extends BaseController
 {

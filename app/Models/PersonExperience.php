@@ -87,8 +87,8 @@ class PersonExperience extends Model
           }
 
           $websites[] = array(
-            'type' => $value['type'],
-            'name' => $value['value']
+            'type' => trim($value['type']),
+            'name' => trim($value['value'])
           );
         }
 

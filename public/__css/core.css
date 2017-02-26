@@ -127,6 +127,16 @@ a {
 	padding: 20px 0 10px;
 }
 
+.top-header > img {
+	/*border: 1px solid #aaa;*/
+	margin-bottom: 10px;
+}
+
+.top-header > img + h2 {
+	display: inline-block;
+	margin-left: 20px;
+}
+
 .container-header {
 	margin: 20px 0 0;
 }

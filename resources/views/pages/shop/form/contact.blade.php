@@ -100,7 +100,7 @@
 
   $(document).ready(function(){
 
-    const phoneNumberInput = new TextInputStack('phone_number_input','phone_number','หมายเลขโทรศัพท์');
+    const phoneNumberInput = new TextInputList('phone_number_input','phone_number','หมายเลขโทรศัพท์');
     phoneNumberInput.enableCheckingEmpty();
     phoneNumberInput.setDataInputAtLease(1);
     phoneNumberInput.dataCheck('tel');
@@ -110,28 +110,28 @@
       phoneNumberInput.load();
     @endif
 
-    const faxInput = new TextInputStack('fax_input','fax','แฟกซ์');
+    const faxInput = new TextInputList('fax_input','fax','แฟกซ์');
     @if(!empty($_formData['fax']))
       faxInput.load({!!$_formData['fax']!!});
     @else
       faxInput.load();
     @endif
 
-    const emailInput = new TextInputStack('email_input','email','อีเมล');
+    const emailInput = new TextInputList('email_input','email','อีเมล');
     @if(!empty($_formData['email']))
       emailInput.load({!!$_formData['email']!!});
     @else
       emailInput.load();
     @endif
 
-    const websiteInput = new TextInputStack('website_input','website','เว็บไซต์');
+    const websiteInput = new TextInputList('website_input','website','เว็บไซต์');
     @if(!empty($_oldInput['website']))
       websiteInput.load({!!$_oldInput['website']!!});
     @else
       websiteInput.load();
     @endif
 
-    const lindIdInput = new TextInputStack('line_id_input','line','Line ID');
+    const lindIdInput = new TextInputList('line_id_input','line','Line ID');
     @if(!empty($_oldInput['line']))
       lindIdInput.load({!!$_oldInput['line']!!});
     @else

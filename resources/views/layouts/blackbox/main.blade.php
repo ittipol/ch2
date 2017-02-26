@@ -13,8 +13,8 @@
   @include('layouts.blackbox.components.global-header')
   @include('layouts.blackbox.components.search-panel')
 
+  @include('layouts.blackbox.components.global-nav')
   <div id="container">
-    @include('layouts.blackbox.components.main-nav')
     @include('layouts.blackbox.components.content-wrapper')
   </div>
 

@@ -508,15 +508,15 @@
     const tagging = new Tagging();
     tagging.load({!!$_formData['Tagging']!!});
 
-    const phoneNumberInput = new TextInputStack('phone_number_input','Contact[phone_number]','หมายเลขโทรศัพท์');
+    const phoneNumberInput = new TextInputList('phone_number_input','Contact[phone_number]','หมายเลขโทรศัพท์');
     phoneNumberInput.disableCreatingInput();
     phoneNumberInput.load({!!$_formData['Contact']['phone_number']!!});
 
-    const emailInput = new TextInputStack('email_input','Contact[email]','อีเมล');
+    const emailInput = new TextInputList('email_input','Contact[email]','อีเมล');
     emailInput.disableCreatingInput();
     emailInput.load({!!$_formData['Contact']['email']!!});
 
-    const lindIdInput = new TextInputStack('line_id_input','Contact[line]','Line ID');
+    const lindIdInput = new TextInputList('line_id_input','Contact[line]','Line ID');
     lindIdInput.disableCreatingInput();
     lindIdInput.load({!!$_formData['Contact']['line']!!});
     

@@ -22,6 +22,11 @@
 	display: inline-block;
 }
 
+.list-item-group > .list-item > p {
+	margin-left: 40px;
+}
+
+
 .list-description .list-description-item:last-child {
 	margin-bottom: 0;
 }

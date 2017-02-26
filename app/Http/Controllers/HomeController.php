@@ -8,6 +8,67 @@ use App\library\service;
 class HomeController extends Controller
 {
 
+  public function catPath() {
+exit;
+    // ini_set('max_execution_time', 20000);
+
+    $page = 23;
+    $perPage = 100;
+    $total = Service::loadModel('Category')->count();
+
+    $count = 1;
+
+    do {
+
+      $offset = ($page - 1)  * $perPage;
+
+      $records = Service::loadModel('Category')
+      ->take($perPage)
+      ->skip($offset)
+      ->get();
+
+      foreach ($records as $record) {
+        $categoryId = $record->id;
+
+        $ids = array();
+        $ids[] = $categoryId;
+
+        $data = Service::loadModel('Category')->find($categoryId);
+
+        while (!empty($data->parent_id)) {
+          $ids[] = $data->parent_id;
+          $data = Service::loadModel('Category')->find($data->parent_id);
+        }
+
+        $level = count($ids)-1;
+
+        for ($i=0; $i < count($ids); $i++) { 
+          $value = array(
+            'category_id' => $categoryId,
+            'path_id' => $ids[$i],
+            'level' => $level--
+          );
+
+          $model = Service::loadModel('CategoryPath')->newInstance();
+          $model->fill($value)->save();
+        }
+
+      }
+
+      $page++;
+
+      if($count++ > 10) {
+        break;
+      }
+
+    } while (($offset + $perPage) < $total);
+
+    var_dump($page);
+
+    dd('done');
+
+  }
+
   public function addXxx() {
 
     return view('addCat');

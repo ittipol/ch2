@@ -84,10 +84,6 @@
       let html = '';
       html += '<div class="text-input-wrapper">';
 
-      if(this.index > 1){
-        html += '<span class="button-clear-text round" style="visibility: visible;">×</span>';
-      }
-
       html += '<div>';
       html += '<h5>ภาษา</h5>'
       html += '<select name="'+this.selectName+'['+this.runningNumber+'][language]">';
@@ -105,6 +101,10 @@
       };
       html += '</select>';
       html += '</div>';
+
+      if(this.index > 1){
+        html += '<span class="button-clear-text round space-top-20">×</span>';
+      }
 
       html += '<div class="line grey space-top-bottom-20"></div>';
 

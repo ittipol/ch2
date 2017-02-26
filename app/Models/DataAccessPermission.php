@@ -12,6 +12,20 @@ class DataAccessPermission extends Model
     return $this->hasOne('App\Models\Item','id','model_id');
   }
 
+  // public static function boot() {
+
+  //   parent::boot();
+
+  //   DataAccessPermission::saving(function($dataAccessPermission){
+
+  //     if(empty($dataAccessPermission->page_level_id)){
+  //       $dataAccessPermission->page_level_id = 4;
+  //     }
+
+  //   });
+
+  // }
+
   public function __saveRelatedData($model,$options = array()) {
 
     $behavior = $model->getBehavior('DataAccessPermission');
@@ -29,16 +43,23 @@ class DataAccessPermission extends Model
     );
 
     if(!empty($permission)){
+
+      if(empty($behavior['value']['page_level_id'])) {
+        return true;
+      }
+
+      $value['page_level_id'] = $behavior['value']['page_level_id'];
+
       return $permission
-      ->fill($options['value'])
+      ->fill($value)
       ->save();
     }else{
 
-      $options['value']['owner'] = $behavior['owner'];
+      $value['owner'] = $behavior['owner'];
 
       switch ($behavior['owner']) {
         case 'Person':
-            $options['value']['owner_id'] = session()->get('Person.id');
+            $value['owner_id'] = session()->get('Person.id');
           break;
         
         case 'Shop':
@@ -55,7 +76,7 @@ class DataAccessPermission extends Model
             ['model','like','Shop']
           ])->first()->model_id;
 
-          $options['value']['owner_id'] = $shopId;
+          $value['owner_id'] = $shopId;
           break;
       }
 
@@ -64,9 +85,9 @@ class DataAccessPermission extends Model
         $level = $behavior['value']['page_level_id'];
       }
       
-      $options['value']['page_level_id'] = $level;
+      $value['page_level_id'] = $level;
 
-      return $this->fill($model->includeModelAndModelId($options['value']))->save();
+      return $this->fill($model->includeModelAndModelId($value))->save();
     }
 
   }

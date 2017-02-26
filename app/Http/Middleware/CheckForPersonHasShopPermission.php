@@ -69,13 +69,7 @@ class CheckForPersonHasShopPermission
           'permission' => 'edit',
           'modelName' => 'Branch'
         ),
-        'shop.product' => array(
-          'permission' => true
-        ),
-        'shop.product.add' => array(
-          'permission' => 'add'
-        ),
-        'shop.product.edit' => array(
+        'shop.product.menu' => array(
           'permission' => 'edit',
           'modelName' => 'Product'
         ),
@@ -88,6 +82,20 @@ class CheckForPersonHasShopPermission
         'shop.advertising.edit' => array(
           'permission' => 'edit',
           'modelName' => 'Advertising'
+        ),
+        'shop.product' => array(
+          'permission' => true
+        ),
+        'shop.product.add' => array(
+          'permission' => 'add'
+        ),
+        'shop.product.edit' => array(
+          'permission' => 'edit',
+          'modelName' => 'Product'
+        ),
+        'shop.product_specification.edit' => array(
+          'permission' => 'edit',
+          'modelName' => 'Product'
         ),
       );
 

@@ -65,17 +65,25 @@
                 <div class="card-title">{{$data['name']}}</div>
               </a>
             </div>
-            <div>
-    
-              <a href="{{$data['editUrl']}}">
-                <div class="button half-button">แก้ไข</div>
-              </a>
- 
+
+            <div class="button-group">
+
               <a href="{{$data['detailUrl']}}">
-                <div class="button half-button">แสดง</div>
+                <div class="button wide-button">แสดงรายละเอียด</div>
               </a>
-      
+
+              <div class="additional-option">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="additional-option-content">
+                  <a href="{{$data['menuUrl']}}">ไปยังหน้าจัดการสินค้านี้</a>
+                  <a href="{{$data['deleteUrl']}}">ลบ</a>
+                </div>
+              </div>
+            
             </div>
+
           </div>
         </div>
 
