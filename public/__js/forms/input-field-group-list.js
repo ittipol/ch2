@@ -34,41 +34,28 @@ class InputFieldGroupList {
 	}
 
 	setData(data = []) {
-		console.log(data);
-	}
 
-	wrapper(inputFieldHtml = '') {
+		for (var i = 0; i < data.length; i++) {
 
-		if(inputFieldHtml == '') {
-			return false;
+			let html = '';
+			for (var j = 0; j < this.fields.length; j++) {
+				html += this.getHtml(this.fields[j],data[i][this.fields[j][1]]);
+			}
+
+			$('#'+this.panel+' .text-group-panel').append(this.wrapper(html,true));
+			this.runningNumber++;
+			this.index++;
+
 		}
-
-		let html = '<div class="text-input-group-wrapper">';
-		html += '<p class="error-message"></p>';
-		html += inputFieldHtml;
-		if(this.index > 1){
-		  html += '<span class="button-clear-text" style="visibility: visible;">×</span>';
-		}
-		html += '</div>';
-
-		return html;
 
 	}
 
 	createInput() {
 
-		let len = this.fields.length;
-
 		let html = '';
-		for (var i = 0; i < len; i++) {
+		for (var i = 0; i < this.fields.length; i++) {
 
-			switch(this.fields[i][0]) {
-
-				case 'text':
-					html += this.createTextInput(this.fields[i][1],this.fields[i][2]);
-				break;
-
-			}
+			html += this.getHtml(this.fields[i])
 
 		}
 
@@ -78,8 +65,41 @@ class InputFieldGroupList {
 
 	}
 
+	getHtml(field,data = '') {
+
+		let html = '';
+		switch(field[0]) {
+
+			case 'text':
+				html += this.createTextInput(field[1],field[2],data);
+			break;
+
+		}
+
+		return html;
+
+	}
+
 	createTextInput(name,placeholder,value = '') {
 		return '<input type="text" name="'+this.inputName+'['+this.runningNumber+']['+name+']" placeholder="'+placeholder+'" autocomplete="off" value="'+value+'">';
+	}
+
+	wrapper(inputFieldHtml = '',hasValue = false) {
+
+		if(inputFieldHtml == '') {
+			return false;
+		}
+
+		let html = '<div class="text-input-group-wrapper">';
+		html += '<p class="error-message"></p>';
+		html += inputFieldHtml;
+		if((this.index > 1) || hasValue){
+		  html += '<span class="button-clear-text" style="visibility: visible;">×</span>';
+		}
+		html += '</div>';
+
+		return html;
+
 	}
 
 	setField(fieldType,name,placeholder = '',value = '') {

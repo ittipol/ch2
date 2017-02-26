@@ -5,7 +5,7 @@ namespace App\Models;
 class Product extends Model
 {
   protected $table = 'products';
-  protected $fillable = ['name','description','sku','quantity','stock_status_id','price','weight','weight_id','length','length_id','width','height','specifications','person_id'];
+  protected $fillable = ['name','description','sku','quantity','stock_status_id','price','weight','weight_unit_id','length','length_unit_id','width','height','specifications','person_id'];
   protected $modelRelations = array('Image','Tagging','ShopRelateTo');
   protected $directory = true;
 
@@ -70,8 +70,10 @@ class Product extends Model
     Product::saving(function($product){
 
       if(!$product->exists){
+        // $product->stock_status_id
         $product->active = 0;
         $product->quantity = 0;
+        $product->minimum = 1;
       }
 
     });
@@ -81,7 +83,7 @@ class Product extends Model
   public function fill(array $attributes) {
 
     if(!empty($attributes)) {
-      
+   
       if(empty($attributes['width'])) {
         unset($attributes['width']);
       }
@@ -117,7 +119,7 @@ class Product extends Model
         if(!empty($specifications)) {
           $attributes['specifications'] = json_encode($specifications);
         }
-
+   
       }
 
     }

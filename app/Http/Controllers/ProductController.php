@@ -52,6 +52,7 @@ class ProductController extends Controller
 
     $this->setData('productEditUrl',request()->get('shopUrl').'product_edit/'.$model->id);
     $this->setData('productSpecificationEditUrl',request()->get('shopUrl').'product_specification_edit/'.$model->id);
+    $this->setData('productCategoryEditUrl',request()->get('shopUrl').'product_category_edit/'.$model->id);
 
     return $this->view('pages.product.menu');
 
@@ -111,10 +112,6 @@ class ProductController extends Controller
 
     $model = Service::loadModel('Product')->find($this->param['id']);
 
-    $model->formHelper->loadData(array(
-      'json' => array('Image','Tagging')
-    ));
-
     $model->formHelper->loadFieldData('WeightUnit',array(
       'key' =>'id',
       'field' => 'name',
@@ -149,6 +146,21 @@ class ProductController extends Controller
     }else{
       return Redirect::back();
     }
+
+  }
+
+  public function categoryEdit() {
+
+    $model = Service::loadModel('Product')->find($this->param['id']);
+
+    $this->data = $model->formHelper->build();
+
+    return $this->view('pages.product.form.category_edit');
+
+  }
+
+  public function categoryEditingSubmit(CustomFormRequest $request) {
+
   }
 
 }

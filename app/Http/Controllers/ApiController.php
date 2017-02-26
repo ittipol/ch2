@@ -44,6 +44,49 @@ class ApiController extends Controller
     return response()->json($subDistricts);
   }
 
+  public function GetCategory($parentId = null) {
+
+    if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+      // exit('Error!!!');  //trygetRealPath detect AJAX request, simply exist if no Ajax
+      $this->error = array(
+        'message' => 'ขออภัย ไม่อนุญาตให้เข้าถึงหน้านี้ได้'
+      );
+      return $this->error();
+    }
+
+    $category = Service::loadModel('Category');
+
+    // if(empty($parentId)) {
+    //   // $records = $category->whereNull('parent_id')->get();
+    //   $records = $category->where('parent_id','=',null)->get();
+    // }else{
+    //   $records = $category->where('parent_id','=',$parentId)->get();
+    // }
+
+    $records = $category
+    ->where('parent_id','=',$parentId)
+    ->get();
+    
+    $categories = array();
+    foreach ($records as $record) {
+
+      // check has sub category
+      // $category->where('parent_id','=',$parentId)->count();
+
+      $categories[] = array(
+        'id' => $record->id,
+        'name' => $record->name
+      );
+    }
+
+    $result = array(
+      'success' => true,
+      'categories' => $categories
+    );
+
+    return response()->json($result);
+  }
+
   public function uploadImage() {
 
     if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {

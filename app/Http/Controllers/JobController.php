@@ -302,6 +302,9 @@ class JobController extends Controller
     }
 
     $model->paginator->disableGetImage();
+    // or with ShopRelateTo
+    // PersonApplyJob.job_id = ShopRelateTo.model_id
+    // AND ShopRelateTo.shop_id = {shop_id}
     $model->paginator->criteria(array(
       'conditions' => array(
         array('shop_id','=',request()->get('shopId'))

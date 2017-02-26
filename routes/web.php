@@ -200,6 +200,9 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::get('shop/{shopSlug}/product_specification_edit/{id}','ProductController@specificationEdit')->name('shop.product_specification.edit');
   Route::patch('shop/{shopSlug}/product_specification_edit/{id}','ProductController@specificationEditingSubmit')->name('shop.product_specification.edit');
 
+  Route::get('shop/{shopSlug}/product_category_edit/{id}','ProductController@categoryEdit')->name('shop.product_category.edit');
+  Route::patch('shop/{shopSlug}/product_category_edit/{id}','ProductController@categoryEditingSubmit')->name('shop.product_category.edit');
+
 });
 // Route::get('product','ProductController@index');
 // Route::get('product/{product_slug}','ProductController@detail');
@@ -292,6 +295,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['prefix' => 'api/v1', 'middleware' => 'api'], function () {
   Route::get('get_district/{provinceId}', 'ApiController@GetDistrict');
   Route::get('get_sub_district/{districtId}', 'ApiController@GetSubDistrict');
+  Route::get('get_category/{parentId?}', 'ApiController@GetCategory');
 });
 
 Route::group(['middleware' => 'auth'], function () {

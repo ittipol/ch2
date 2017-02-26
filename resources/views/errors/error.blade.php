@@ -1,4 +1,4 @@
-@extends('layouts.blackbox.main')
+@extends('layouts.default.main')
 @section('content')
   <div class="container error-page">
     <div class="row">
@@ -13,7 +13,7 @@
         <div class="line space-top-bottom-20"></div>
       </div>
       <div class="col-lg-12">
-        <a class="button pull-right" href="{{URL::to('/')}}">หน้าแรก</a>
+        <a class="button pull-right" href="{{URL::to('/')}}">เข้าสู่หน้าแรก</a>
       </div>
     </div>
   </div>

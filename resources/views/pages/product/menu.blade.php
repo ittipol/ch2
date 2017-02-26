@@ -27,7 +27,7 @@
     </div>
 
     <div class="list-item">
-      <a href="">
+      <a href="{{$productCategoryEditUrl}}">
         <img class="icon" src="/images/common/pencil.png" >
         <h4>ประเภทสินค้า</h4>
       </a>
