@@ -2,9 +2,9 @@
 <html>
 <head>
   <!-- Meta data -->
-  @include('script.meta') 
+  @include('scripts.meta') 
   <!-- CSS & JS -->
-  @include('script.script')
+  @include('scripts.script')
   <!-- Title  -->
   <title>Chonburi Square</title>
 </head>

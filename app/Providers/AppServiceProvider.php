@@ -20,6 +20,21 @@ class AppServiceProvider extends ServiceProvider
     {
       view()->composer('*', function($view){
 
+        $pass = false;
+
+        $ignorePage = array(
+          'errors.error',
+          'scripts.meta',
+          'scripts.script',
+          'layouts.default.main'
+        );
+
+        if(in_array($view->getName(), $ignorePage)) {
+          $pass = true;
+        }
+
+        if(!$pass) {
+
           $string = new String;
           $url = new Url;
           
@@ -103,7 +118,9 @@ class AppServiceProvider extends ServiceProvider
 
           }
 
-        });
+        }
+
+      });
     }
 
     /**
