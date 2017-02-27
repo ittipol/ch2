@@ -31,9 +31,7 @@
 	margin-bottom: 0;
 }
 
-.lists {
-
-}
+/*.lists {}*/
 
 .lists .list {
 	margin-top: 50px;
@@ -81,51 +79,69 @@
 
 .product-category-list {
 	position: relative;
-	/*height: 600px;*/
 	min-height: 350px;
 	overflow-y: auto; 
 	overflow-x: hidden;
 }
 
-.product-category-list a {
+/*.product-category-list a {
 	cursor: pointer;
-}
-
-/*.product-category-list > .list-item-group{
-	position: relative;
-	transition: left .5s ease-out;
 }*/
 
+.product-category-list .product-category-list-item:first-child {
+	border-top: 1px solid #bababa;
+}
+
 .product-category-list .product-category-list-item {
+	padding: 0;
 	position: relative;
+	cursor: pointer;
 }
 
 .product-category-list .product-category-list-item:hover {
 	background-color: #ececec;
 }
 
+.product-category-list .product-category-list-item.has-next:after{
+	content: "";
+	position: absolute;
+	top: 6px;
+	right: 10px;
+	width: 25px;
+	height: 25px;
+	background-image: url(/images/icons/next.png);
+	background-size: 25px;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.product-category-list .product-category-list-item.has-next.selected:after{
+	background-image: url(/images/icons/next-white.png);
+}
+
 .product-category-list .product-category-list-item.selected {
 	background-color: #0D47A1;
-	box-shadow: 0 2px 5px rgba(0,0,0,.26);
+	/*box-shadow: 0 2px 5px rgba(0,0,0,.26);*/
 }
 
 .product-category-list .product-category-list-item h4 {
 	width: 90%;
+	padding-left: 15px;
 }
 
 .product-category-list .product-category-list-item.selected h4 {
 	color: #fff;
 }
 
-.product-category-list .product-category-list-item > .icon-pos-right {
+/*.product-category-list .product-category-list-item > .icon-pos-right {
 	position: absolute;
-	top: 17px;
+	top: 6px;
 	right: 10px;
-}
+}*/
 
 .product-category-list .product-category-list-item > .icon-pos-left {
 	position: absolute;
-	top: 17px;
+	top: 6px;
 	left: 10px;
 }
 
@@ -136,6 +152,18 @@
 .product-category-list .product-category-list-item.back-button h4 {
 	color: #fff;
 	margin-left: 40px;
+}
+
+.category-select {
+	line-height: 40px;
+	font-size: 20px;
+	padding: 20px 0;
+}
+
+.category-select > span {
+	color: #fff;
+  background-color: #0D47A1;
+  padding: 10px 15px;
 }
 
 @media only screen and (max-width : 480px) {

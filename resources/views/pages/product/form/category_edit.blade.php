@@ -35,6 +35,9 @@
       <?php 
         echo Form::label('category', 'เลือกประเภทสินค้า');
       ?>
+      <div class="line"></div>
+      <h4>ประเภทสินค้าที่เลือก</h4>
+      <div id="category_selected" class="category-select">-</div>
       <div id="category_panel" class="product-category-list"></div>
 
     </div>

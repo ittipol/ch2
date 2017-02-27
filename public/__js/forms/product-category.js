@@ -2,7 +2,9 @@ class ProductCategory {
 
   constructor(panel) {
     this.panel = panel;
+    this.selectedElem;
     this.selectedCat;
+    this.catPathName = [];
     this.prevId = [];
     this.currId;
     this.currListGroup;
@@ -19,7 +21,7 @@ class ProductCategory {
 
     let _this = this;
 
-    $(document).on('click','.nav-next',function(){
+    $(document).on('click','.has-next',function(){
 
       if(!_this.allowedClick) {
         return false;
@@ -29,27 +31,40 @@ class ProductCategory {
 
       _this.selectedCat = $(this).data('id');
 
-      console.log('selected:'+_this.selectedCat);
-
-      if($(this).data('next')) {
-
-        if(_this.level > 0) {
-          _this.prevId.push(_this.currId);
-          console.log('Stack:'+_this.prevId);
-        }
-
-        _this.currId = $(this).data('id');
-
-        _this.level++;
-        _this.getCategory($(this).data('id'));
-      }else{
-        $(this).parent().addClass('selected');
-        
-        setTimeout(function(){
-          _this.allowedClick = true;
-        },500);
-
+      if(_this.level > 0) {
+        _this.prevId.push(_this.currId);
       }
+
+      _this.addCatPath($(this).data('name'));
+
+      _this.currId = $(this).data('id');
+
+      _this.level++;
+      _this.getCategory($(this).data('id'));
+
+    });
+
+    $(document).on('click','.has-end',function(){
+
+      if(!_this.allowedClick) {
+        return false;
+      }
+
+      _this.allowedClick = false;
+
+      _this.selectedCat = $(this).data('id');
+      _this.addCatPath($(this).data('name'));
+
+      if(typeof _this.selectedElem != 'undefined') {
+       $( _this.selectedElem).removeClass('selected');
+      }
+
+      $(this).addClass('selected');
+      _this.selectedElem = $(this);
+      
+      setTimeout(function(){
+        _this.allowedClick = true;
+      },400);
 
     });
 
@@ -62,7 +77,6 @@ class ProductCategory {
       _this.allowedClick = false;
 
       if(--_this.level > 0) {
-        // _this.level--;
         _this.currId = _this.prevId.pop();
         _this.getCategory(_this.currId);
       }else{
@@ -70,17 +84,36 @@ class ProductCategory {
         _this.getCategory();
       }
 
-      // if((_this.level-1) == 0) {
-      //   _this.level = 0;
-      //   _this.getCategory();
-      // }else{
-      //   _this.level--;
-      //   _this.currId = _this.prevId.pop();
-      //   _this.getCategory(_this.currId);
-      // }
-
     });
 
+  }
+
+  addCatPath(name) {
+
+    if(this.catPathName.length > this.level) {
+      this.catPathName.splice(this.level,this.catPathName.length - this.level);
+    }
+
+    this.catPathName.push(name);
+
+    let path = '';
+    for (var i = 0; i < this.catPathName.length; i++) {
+
+      if(i > 0) {
+        path += ' / ';
+      }
+
+      if(i == (this.catPathName.length-1)) {
+        path += '<span>'+this.catPathName[i]+'</span>';
+      }else{
+        path += this.catPathName[i];
+      }
+
+      
+      
+    };
+
+    $('#category_selected').html(path);
   }
 
   getCategory(parentId = ''){
@@ -96,7 +129,14 @@ class ProductCategory {
       beforeSend: function( xhr ) {
 
         if(typeof _this.currListGroup != 'undefined') {
-          $(_this.currListGroup).fadeOut(220);
+
+          let currListGroup = $(_this.currListGroup);
+          currListGroup.fadeOut(220);
+
+          setTimeout(function(){
+            currListGroup.remove();
+          },220);
+
         }
       }
     });
@@ -107,7 +147,7 @@ class ProductCategory {
 
       setTimeout(function(){
         _this.allowedClick = true;
-      },500);
+      },400);
 
     });
 
@@ -128,52 +168,60 @@ class ProductCategory {
 
     this.currListGroup = listGroup;
 
-    let html = '';
-
     if(this.level > 0) {
-      html += this.createBackBtn();
+      listGroup.append(this.createBackBtn());
     }
 
     for (var i = 0; i < categories.length; i++) {
-      html += this.createList(categories[i]['id'],categories[i]['name'],categories[i]['s']);
+      listGroup.append(this.createList(categories[i]['id'],categories[i]['name'],categories[i]['s']));
     };
 
-    $('#'+this.panel).html($(listGroup).html(html));
+    $('#'+this.panel).append(listGroup);
     $(listGroup).fadeIn(220);
 
   }
 
   createList(id,name,next) {
 
-    let html = '';
-    html += '<div class="list-item product-category-list-item">';
+    let list = document.createElement('div');
 
-    if(next) {
-      html += '<img class="icon-pos-right" src="/images/icons/next.png" />'
-    }else{
+    let cssClass = 'list-item product-category-list-item'; 
 
+    if(this.selectedCat == id) {
+      cssClass += ' selected';
+      this.selectedElem = list;
     }
 
-    html += '<a class="nav-next" data-next="'+next+'" data-id="'+id+'">';
-    html += '<h4>'+name+'</h4>';
-    html += '</a>';
-    html += '</div>';
+    if(next) {
+      cssClass += ' has-next';
+    }else{
+      cssClass += ' has-end';
+    }
 
-    return html;
+    list.setAttribute('class',cssClass);
+    list.setAttribute('data-id',id);
+    list.setAttribute('data-name',name);
+
+    list.innerHTML = '<h4>'+name+'</h4>';
+
+    return list;
 
   }
 
   createBackBtn() {
 
+    let btn = document.createElement('div');
+    btn.setAttribute('class','list-item product-category-list-item back-button');
+
     let html = '';
-    html += '<div class="list-item product-category-list-item back-button" data-back="true">';
     html += '<img class="icon-pos-left" src="/images/icons/back-white.png" />'
     html += '<a>';
     html += '<h4>กลับ</h4>';
     html += '</a>';
-    html += '</div>';
 
-    return html;
+    btn.innerHTML = html;
+
+    return btn;
 
   }
 
