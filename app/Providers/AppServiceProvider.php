@@ -26,18 +26,25 @@ class AppServiceProvider extends ServiceProvider
           'errors.error',
           'scripts.meta',
           'scripts.script',
-          'layouts.default.main'
+          // 'pages.user.login',
+          // 'pages.user.register',
+          'layouts.default.main',
+          'layouts.blackbox.main',
+          'layouts.blackbox.components.global-nav',
+          'layouts.blackbox.components.global-header',
+          'layouts.blackbox.components.search-panel',
+          'layouts.blackbox.components.footer'
         );
 
         if(in_array($view->getName(), $ignorePage)) {
           $pass = true;
         }
 
-        if(!$pass) {
+        if(!$pass && !empty(Route::current()->parameter('shopSlug'))) {
 
           $string = new String;
           $url = new Url;
-          
+
           $slug = Route::current()->parameter('shopSlug');
 
           if(!empty($slug)) {
@@ -81,42 +88,43 @@ class AppServiceProvider extends ServiceProvider
 
           }
 
-          if(Auth::check()){
+        }
 
-            // $person = Service::loadModel('Person')->find(Auth::user()->id);
+      });
 
-            $personToShop = Service::loadModel('PersonToShop')
-            ->select(array('shop_id'))
-            ->where('person_id','=',session()->get('Person.id'));
+      view()->composer('layouts.blackbox.components.global-nav', function($view){
 
-            // if($personToShop->exists()) {
+        if(Auth::check()){
 
-              $slugModel = Service::loadModel('Slug');
-          
-              $records = $personToShop->get();
+          $url = new Url;
 
-              $shops = array();
-              foreach ($records as $record) {
+          // $person = Service::loadModel('Person')->find(Auth::user()->id);
 
-                $shop = $record->shop;
+          $records = Service::loadModel('PersonToShop')
+          ->select(array('shop_id'))
+          ->where('person_id','=',session()->get('Person.id'))
+          ->get();
 
-                $slug = $slugModel->where(array(
-                  array('model','like','Shop'),
-                  array('model_id','=',$shop->id)
-                ))->first()->slug;
+          $slugModel = Service::loadModel('Slug');
 
-                $shops[] = array(
-                  'name' => $shop->name,
-                  'url' => $url->url('shop/'.$slug)
-                );
+          $shops = array();
+          foreach ($records as $record) {
 
-              }
+            $shop = $record->shop;
 
-            // }
+            $slug = $slugModel->where(array(
+              array('model','like','Shop'),
+              array('model_id','=',$shop->id)
+            ))->first()->slug;
 
-            view()->share('_shops',$shops);
+            $shops[] = array(
+              'name' => $shop->name,
+              'url' => $url->url('shop/'.$slug)
+            );
 
           }
+
+          $view->with('_shops',$shops);
 
         }
 

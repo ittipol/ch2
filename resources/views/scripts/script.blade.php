@@ -20,6 +20,7 @@
     '__js/forms/form.js',
     '__js/forms/images.js',
     '__js/forms/open-hours.js',
+    '__js/forms/product-category.js',
     // '__js/forms/district.js',
     // '__js/forms/province.js',
     '__js/forms/address.js',

@@ -25,7 +25,19 @@ class CheckForShopSlug
         
         $url = new Url;
 
-        $id = Slug::where('slug','like',$request->shopSlug)->select('model_id')->first()->model_id;
+        // $id = Slug::where('slug','like',$request->shopSlug)->select('model_id')->first()->model_id;
+
+        $slug = Slug::where('slug','like',$request->shopSlug)->select('model_id')->first();
+
+        if(empty($slug)) {
+          return response(view('errors.error',array(
+            'error'=>array(
+              'message'=>'ไม่พบร้านค้านี้'
+            ))
+          ));
+        }
+
+        $id = $slug->model_id;
         $shop = Shop::find($id);
 
         // if($request->session()->has('Shop.'.$id.'.id')) {       
