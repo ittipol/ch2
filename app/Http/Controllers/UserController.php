@@ -20,14 +20,14 @@ use Redirect;
 class UserController extends Controller
 {
 
-  public function account(){
+  // public function account(){
 
 
-  }
+  // }
 
-  public function profile(){
+  // public function profile(){
       
-  }
+  // }
 
   public function login() {
 
@@ -44,11 +44,11 @@ class UserController extends Controller
 
   }
 
-  public function auth(LoginRequest $request) { 
+  public function auth() { 
 
     $data = [
-      'email' =>  $request->input('email'),
-      'password'  =>  $request->input('password')
+      'email' =>  request()->input('email'),
+      'password'  =>  request()->input('password')
     ];
 
     if(Auth::attempt($data)){
@@ -64,10 +64,14 @@ class UserController extends Controller
       $message->loginSuccess();
       return Redirect::intended('/');
     }else{
-      // $message = new Message;
-      // $message->loginFail();
-      return Redirect::back()->withErrors(['อีเมล  หรือ รหัสผ่านไม่ถูก']);
-      // return Redirect::back();
+
+      $message = 'อีเมล หรือ รหัสผ่านไม่ถูก';
+
+      if(empty(request()->input('email')) && empty(request()->input('password'))) {
+        $message = 'กรุณใส่อีเมล และ รหัสผ่าน';
+      }
+
+      return Redirect::back()->withErrors([$message]);
     }
 
   }

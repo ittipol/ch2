@@ -1,4 +1,4 @@
-<?php if(!empty($errors->all())): ?>
+@if(!empty($errors->all()))
   <div class="form-error-messages">
     <div class="form-error-messages-inner">
       <h3>พบข้อผิดพลาด!!!</h3>
@@ -9,4 +9,4 @@
       </ul>
     </div>
   </div>
-<?php endif; ?>
+@endif

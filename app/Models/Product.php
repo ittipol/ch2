@@ -6,7 +6,7 @@ class Product extends Model
 {
   protected $table = 'products';
   protected $fillable = ['name','description','sku','quantity','stock_status_id','price','weight','weight_unit_id','length','length_unit_id','width','height','specifications','person_id'];
-  protected $modelRelations = array('Image','Tagging','ShopRelateTo');
+  protected $modelRelations = array('Image','Tagging','ProductToCategory','ShopRelateTo');
   protected $directory = true;
 
   public $formHelper = true;
@@ -38,9 +38,10 @@ class Product extends Model
       'weight.numeric' => 'น้ำหนักไม่ถูกต้อง',
     ),
     'excepts' => array(
-      'shop.product.add' => array('length','width','height'),
+      'shop.product.add' => array('length','width','height','weight'),
       'shop.product.edit' => array('price'),
-      'shop.product_specification.edit' => array('name','price')
+      'shop.product_specification.edit' => array('name','price'),
+      'shop.product_category.edit' => array('name','price','length','width','height','weight'),
     )
   );
 

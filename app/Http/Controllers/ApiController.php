@@ -15,7 +15,11 @@ class ApiController extends Controller
   public function GetDistrict($provinceId = null) {
 
     if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
-      exit('Error!!!');  //trygetRealPath detect AJAX request, simply exist if no Ajax
+      // exit('Error!!!');  //trygetRealPath detect AJAX request, simply exist if no Ajax
+      $this->error = array(
+        'message' => 'ขออภัย ไม่อนุญาตให้เข้าถึงหน้านี้ได้'
+      );
+      return $this->error();
     }
 
     $records = Service::loadModel('District')->where('province_id', '=', $provinceId)->get(); 
@@ -31,7 +35,10 @@ class ApiController extends Controller
   public function GetSubDistrict($districtId = null) {
 
     if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
-      exit('Error!!!');  //trygetRealPath detect AJAX request, simply exist if no Ajax
+      $this->error = array(
+        'message' => 'ขออภัย ไม่อนุญาตให้เข้าถึงหน้านี้ได้'
+      );
+      return $this->error();
     }
 
     $records = Service::loadModel('SubDistrict')->where('district_id', '=', $districtId)->get(); 
@@ -46,21 +53,14 @@ class ApiController extends Controller
 
   public function GetCategory($parentId = null) {
 
-    // if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
-    //   $this->error = array(
-    //     'message' => 'ขออภัย ไม่อนุญาตให้เข้าถึงหน้านี้ได้'
-    //   );
-    //   return $this->error();
-    // }
+    if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+      $this->error = array(
+        'message' => 'ขออภัย ไม่อนุญาตให้เข้าถึงหน้านี้ได้'
+      );
+      return $this->error();
+    }
 
     $category = Service::loadModel('Category');
-
-    // if(empty($parentId)) {
-    //   // $records = $category->whereNull('parent_id')->get();
-    //   $records = $category->where('parent_id','=',null)->get();
-    // }else{
-    //   $records = $category->where('parent_id','=',$parentId)->get();
-    // }
 
     $records = $category
     ->where('parent_id','=',$parentId)
@@ -72,15 +72,15 @@ class ApiController extends Controller
       // check has sub category
       $subCat = $category->where('parent_id','=',$record->id)->first();
 
-      $next = false;
+      $hasChild = false;
       if(!empty($subCat)) {
-        $next = true;
+        $hasChild = true;
       }
 
       $categories[] = array(
         'id' => $record->id,
         'name' => $record->name,
-        's' => $next
+        'hasChild' => $hasChild
       );
     }
 
@@ -95,7 +95,10 @@ class ApiController extends Controller
   public function uploadImage() {
 
     if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
-      exit('Error!!!');  //trygetRealPath detect AJAX request, simply exist if no Ajax
+      $this->error = array(
+        'message' => 'ขออภัย ไม่อนุญาตให้เข้าถึงหน้านี้ได้'
+      );
+      return $this->error();
     }
 
     if(empty(Input::file('image'))) {
@@ -149,7 +152,10 @@ class ApiController extends Controller
   public function uploadProfileImage() {
 
     if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
-      exit('Error!!!');  //trygetRealPath detect AJAX request, simply exist if no Ajax
+      $this->error = array(
+        'message' => 'ขออภัย ไม่อนุญาตให้เข้าถึงหน้านี้ได้'
+      );
+      return $this->error();
     }
 
     $result = array(

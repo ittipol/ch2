@@ -153,13 +153,54 @@ class ProductController extends Controller
 
     $model = Service::loadModel('Product')->find($this->param['id']);
 
+    $productToCategory = Service::loadModel('ProductToCategory')
+    ->where('product_id','=',$this->param['id'])
+    ->select('category_id')
+    ->first();
+
+    $categoryId = null;
+    $categoryPaths = array();
+    if(!empty($productToCategory)) {
+
+      $categoryId = $productToCategory->category_id;
+      
+      $paths = Service::loadModel('CategoryPath')->where('category_id','=',$categoryId)->get();
+
+      foreach ($paths as $path) {
+
+        $subCat = $path->path->where('parent_id','=',$path->path->id)->first();
+
+        $hasChild = false;
+        if(!empty($subCat)) {
+          $hasChild = true;
+        }
+
+        $categoryPaths[] = array(
+          'id' => $path->path->id,
+          'name' => $path->path->name,
+          'hasChild' => $hasChild
+        );
+      }
+    }
+
     $this->data = $model->formHelper->build();
+    $this->setData('categoryId',$categoryId);
+    $this->setData('categoryPaths',json_encode($categoryPaths));
 
     return $this->view('pages.product.form.category_edit');
 
   }
 
   public function categoryEditingSubmit(CustomFormRequest $request) {
+
+    $model = Service::loadModel('Product')->find($this->param['id']);
+
+    if($model->fill($request->all())->save()) {
+      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
+    }else{
+      return Redirect::back();
+    }
 
   }
 

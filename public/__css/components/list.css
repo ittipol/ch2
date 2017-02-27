@@ -154,13 +154,13 @@
 	margin-left: 40px;
 }
 
-.category-select {
+.category-name {
 	line-height: 40px;
 	font-size: 20px;
 	padding: 20px 0;
 }
 
-.category-select > span {
+.category-name > span {
 	color: #fff;
   background-color: #0D47A1;
   padding: 10px 15px;

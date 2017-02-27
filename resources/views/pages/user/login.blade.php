@@ -7,11 +7,17 @@
 	<div class="login-form-inner">
 		<h3><a class="logo" href="{{URL::to('/')}}">CHONBURI SQUARE</a></h3>
 
-		<?php if(!empty($errors->all())): ?>
-			<?php foreach ($errors->all() as $message) { ?>
-				<h4 class="error-message"><?php echo $message; ?></h4>
-			<?php	} ?>
-		<?php endif; ?>
+    @if(!empty($errors->all()))
+    <div class="form-error-messages space-bottom-20">
+      <div class="form-error-messages-inner">
+        <ul>
+          <?php foreach ($errors->all() as $message) { ?>
+            <li class="error-messages"><?php echo $message; ?></li>
+          <?php } ?>
+        </ul>
+      </div>
+    </div>
+    @endif
 
 		<div class="login-form-main">
 

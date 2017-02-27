@@ -1,7 +1,8 @@
 class ProductCategory {
 
-  constructor(panel) {
+  constructor(panel,displayPanel) {
     this.panel = panel;
+    this.displayPanel = displayPanel;
     this.selectedElem;
     this.selectedCat;
     this.catPathName = [];
@@ -13,7 +14,11 @@ class ProductCategory {
   }
 
   load() {
-    this.getCategory();
+
+    if(this.level == 0) {
+      this.getCategory();
+    }
+
     this.bind();
   }
 
@@ -86,6 +91,57 @@ class ProductCategory {
 
     });
 
+    $('#main_form').on('submit',function(){
+
+      if((typeof _this.selectedCat != 'undefined') && (_this.selectedCat != '')) {
+        let hidden = document.createElement('input');
+        hidden.setAttribute('type','hidden');
+        hidden.setAttribute('name','ProductToCategory[category_id]');
+        hidden.setAttribute('value',_this.selectedCat);
+
+        $(this).append(hidden);
+      }
+
+    });
+
+  }
+
+  setCatId(categoryId) {
+    if(typeof categoryId != 'undefined') {
+      this.selectedCat = categoryId;
+    }
+  }
+
+  setCatPath(categoryPaths) {
+
+    for (var i = 0; i < categoryPaths.length; i++) {
+      if(this.level > 0) {
+        this.prevId.push(this.currId);
+      }
+
+      this.addCatPath(categoryPaths[i]['name']);
+      this.currId = categoryPaths[i]['id'];
+
+      this.level++;
+
+      if(i == (categoryPaths.length-1)) {
+
+        if(categoryPaths[i]['hasChild']) {
+          this.getCategory(categoryPaths[i]['id']);
+        }else{
+          if(--this.level > 0) {
+            this.currId = this.prevId.pop();
+            this.getCategory(this.currId);
+          }else{
+            this.level = 0;
+            this.getCategory();
+          }
+        }
+        
+      }
+      
+    }
+
   }
 
   addCatPath(name) {
@@ -108,12 +164,10 @@ class ProductCategory {
       }else{
         path += this.catPathName[i];
       }
-
-      
       
     };
 
-    $('#category_selected').html(path);
+    $('#'+this.displayPanel).html(path);
   }
 
   getCategory(parentId = ''){
@@ -173,7 +227,7 @@ class ProductCategory {
     }
 
     for (var i = 0; i < categories.length; i++) {
-      listGroup.append(this.createList(categories[i]['id'],categories[i]['name'],categories[i]['s']));
+      listGroup.append(this.createList(categories[i]['id'],categories[i]['name'],categories[i]['hasChild']));
     };
 
     $('#'+this.panel).append(listGroup);

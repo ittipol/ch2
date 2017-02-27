@@ -24,6 +24,9 @@ class CustomFormRequest extends FormRequest
     'shop.product_specification.edit' => array(
       'modelName' => 'Product'
     ),
+    'shop.product_category.edit' => array(
+      'modelName' => 'Product'
+    ),
     'person_experience.internship.add' => array(
       'modelName' => 'PersonInternship'
     ),

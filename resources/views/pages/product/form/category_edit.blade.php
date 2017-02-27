@@ -35,9 +35,9 @@
       <?php 
         echo Form::label('category', 'เลือกประเภทสินค้า');
       ?>
-      <div class="line"></div>
+      <div class="line space-bottom-20"></div>
       <h4>ประเภทสินค้าที่เลือก</h4>
-      <div id="category_selected" class="category-select">-</div>
+      <div id="category_selected" class="category-name">-</div>
       <div id="category_panel" class="product-category-list"></div>
 
     </div>
@@ -60,7 +60,9 @@
 
   $(document).ready(function(){
 
-    const productCategory = new ProductCategory('category_panel');
+    const productCategory = new ProductCategory('category_panel','category_selected');
+    productCategory.setCatId({{$categoryId}});
+    productCategory.setCatPath({!!$categoryPaths!!});
     productCategory.load();
 
     const form = new Form();
