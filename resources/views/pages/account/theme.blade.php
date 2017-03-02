@@ -4,11 +4,11 @@
 <header class="header-wrapper">
   <div class="container">
     <div class="header-top">
-      <div class="header-title">โฆษณา</div>
+      <div class="header-title">ธีม</div>
     </div>
   </div>
   <div class="header-fix">
-    <div class="header-title">โฆษณา</div>
+    <div class="header-title">ธีม</div>
   </div>
 
   <label class="hamburger-button" for="global_nav_trigger">

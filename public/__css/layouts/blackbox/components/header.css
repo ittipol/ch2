@@ -50,6 +50,23 @@ header .hamburger-button {
 	color: #fff;
 }
 
+header .cart-button {
+	position: absolute;
+	top: 0;
+	right: 64px;
+	z-index: 2;
+	width: 64px;
+	line-height: 64px;
+	cursor: pointer;
+}
+
+header .cart-button .badge {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background-color: #D50000;
+}
+
 header .search-button {
 	position: absolute;
 	top: 0;
@@ -60,11 +77,11 @@ header .search-button {
 	cursor: pointer;
 }
 
-header .search-trigger {
+header .header-button input[type="checkbox"] {
 	display: none;
 }
 
-header .search-button img {
+header img.icon-header {
 	width: 50px;
 	height: 50px;
 	padding: 10px;
@@ -80,18 +97,20 @@ header .search-button img {
 	position: fixed;
 	top: 0;
 	left: 0;
-	right: 0;
+	/*right: 0;*/
+	width: 100%;
 	height: 64px;
 	box-shadow: 0 2px 5px rgba(0,0,0,.26);
 	background-color: #0071c5;
 	z-index: 90;
 	padding: 0 15px;
+	transition: left .2s ease-out;
 }
 
 .global-header .nav-fixed-top {
 	height: 64px;
 	left: 72px;
-	right: 72px;
+	right: 136px;
 	top: 0;
 	z-index: 99;
 	position: absolute;

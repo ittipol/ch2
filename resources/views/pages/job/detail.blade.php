@@ -9,7 +9,7 @@
       <h4 class="sub-title">ประกาศงาน</h4>
       <h2 class="title">{{$_modelData['name']}}</h2>
       <div class="tag-group">
-        <a class="tag-box">{{$shopName}}</a>
+        <a class="tag-box">{{$shop['name']}}</a>
         <a class="tag-box">{{$_modelData['_employmentTypeName']}}</a>
         @foreach ($_modelData['Tagging'] as $tagging)
           <a class="tag-box">{{$tagging['_word']}}</a>
@@ -71,6 +71,31 @@
 
   </div>
 
+  <div class="content-box content-box-bg" style="background-image:url({{$shopCoverUrl}})">
+    <div class="content-box-inner">
+      <div class="row">
+
+        <div class="col-md-6 col-sm-12">
+          <div class="content-box-panel overlay-bg">
+            <div>
+              <h5>บริษัทหรือร้านค้า</h5>
+              <h3>
+                <a href="{{URL::to($shopUrl)}}">{{$shop['name']}}</a>
+              </h3>
+              <div class="line space-top-bottom-20"></div>
+              <p>{{$shop['_short_description']}}</p>
+            </div>
+
+            <a href="{{URL::to($shopUrl)}}" class="button wide-button">ไปยังร้านค้านี้</a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12"></div>
+
+      </div>
+    </div>
+  </div>
+
   <div class="row">
 
     <div class="col-xs-4">
@@ -85,8 +110,6 @@
     </div>
 
     <div class="col-xs-8">
-      <p>ชื่อบริษัทหรือร้านค้า</p>
-      <h4>{{$shopName}}</h4>
 
       <p>รูปแบบงาน</p>
       <h4>{{$_modelData['_employmentTypeName']}}</h4>

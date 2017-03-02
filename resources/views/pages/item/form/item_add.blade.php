@@ -28,18 +28,14 @@
         ));
       ?>
       <div class="btn-group">
-        <?php 
-          foreach ($_fieldData['announcementTypes'] as $id => $type):
-        ?>
+        @foreach ($_fieldData['announcementTypes'] as $id => $type)
           <label class="btn">
             <?php
               echo Form::radio('announcement_type_id', $id, ($defaultAnnouncementType == $id) ? true : false);
             ?>
             <div class="inner">{{$type}}</div>
           </label>
-        <?php
-          endforeach;
-        ?>
+        @endforeach
       </div>
     </div>
 

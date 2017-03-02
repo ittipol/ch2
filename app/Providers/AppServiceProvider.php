@@ -5,7 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\library\service;
 use App\library\url;
+use App\library\cache;
 use App\library\string;
+use App\library\currency;
 use Route;
 use Auth;
 
@@ -32,7 +34,8 @@ class AppServiceProvider extends ServiceProvider
           'layouts.blackbox.main',
           'layouts.blackbox.components.global-nav',
           'layouts.blackbox.components.global-header',
-          'layouts.blackbox.components.search-panel',
+          'layouts.blackbox.components.global-search',
+          'layouts.blackbox.components.global-cart',
           'layouts.blackbox.components.footer'
         );
 
@@ -129,6 +132,15 @@ class AppServiceProvider extends ServiceProvider
         }
 
       });
+
+      view()->composer('layouts.blackbox.components.global-header', function($view){
+        $view->with('_product_total',Service::loadModel('Cart')->productCount());
+      });
+
+      view()->composer('layouts.blackbox.components.global-cart', function($view){
+        $view->with('_products',Service::loadModel('Cart')->getProducts());
+      });
+
     }
 
     /**

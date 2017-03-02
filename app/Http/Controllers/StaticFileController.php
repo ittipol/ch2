@@ -20,14 +20,11 @@ class StaticFileController extends Controller
     if(!empty($path)) {
 
       $headers = array(
+        'Pragma' => 'no-cache',
         'Cache-Control' => 'no-cache, must-revalidate',
-        // 'Cache-Control' => 'no-store, no-cache, must-revalidate',
-        // 'Cache-Control' => 'pre-check=0, post-check=0, max-age=0',
-        // 'Pragma' => 'no-cache',
+        'Cache-Control' => 'pre-check=0, post-check=0, max-age=0',
         'Content-Type' => mime_content_type($path),
-        // 'Content-Disposition' => 'inline; filename="'.$image->name.'"',
-        // 'Content-Transfer-Encoding' => 'binary',
-        'Content-length' => filesize($path),
+        // 'Content-length' => filesize($path),
       );
 
       return Response::make(file_get_contents($path), 200, $headers);
@@ -51,14 +48,11 @@ class StaticFileController extends Controller
     if(file_exists($path)){
 
       $headers = array(
+        'Pragma' => 'no-cache',
         'Cache-Control' => 'no-cache, must-revalidate',
-        // 'Cache-Control' => 'no-store, no-cache, must-revalidate',
-        // 'Cache-Control' => 'pre-check=0, post-check=0, max-age=0',
-        // 'Pragma' => 'no-cache',
+        'Cache-Control' => 'pre-check=0, post-check=0, max-age=0',
         'Content-Type' => mime_content_type($path),
-        // 'Content-Disposition' => 'inline; filename="'.$image->name.'"',
-        // 'Content-Transfer-Encoding' => 'binary',
-        'Content-length' => filesize($path),
+        // 'Content-length' => filesize($path),
       );
 
       return Response::make(file_get_contents($path), 200, $headers);

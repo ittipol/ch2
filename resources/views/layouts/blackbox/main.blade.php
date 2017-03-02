@@ -11,9 +11,11 @@
 <body>
 
   @include('layouts.blackbox.components.global-header')
-  @include('layouts.blackbox.components.search-panel')
 
+  @include('layouts.blackbox.components.global-search')
   @include('layouts.blackbox.components.global-nav')
+  @include('layouts.blackbox.components.global-cart')
+
   <div id="container">
     @include('layouts.blackbox.components.content-wrapper')
   </div>

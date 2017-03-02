@@ -34,7 +34,6 @@ class District {
     let request = $.ajax({
       url: "/api/v1/get_sub_district/"+districtId,
       type: "get",
-      // data: {_token:CSRF_TOKEN},
       dataType:'json'
     });
 

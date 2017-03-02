@@ -23,7 +23,7 @@
   transition: .4s;
 }
 
-.slider.office-hour {
+.slider.custom-color {
   background-color: red;
 }
 
@@ -43,7 +43,7 @@ input:checked + .slider {
   background-color: #2196F3;
 }
 
-input:checked + .slider.office-hour {
+input:checked + .slider.custom-color {
   background-color: rgb(28,156,1);
 }
 

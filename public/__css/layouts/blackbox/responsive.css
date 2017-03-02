@@ -31,6 +31,7 @@
 
 /* Large Devices, Wide Screens */
 @media only screen and (max-width : 1200px) {
+
   .global-nav {
     left: -280px
   }
@@ -38,6 +39,10 @@
   .content-wrapper {
     left: 0;
     padding-left: 0;
+  }
+
+  .header-fixed-top.is-main-nav-open {
+    left: 280px;
   }
 
   .global-nav.is-main-nav-open {
@@ -51,12 +56,11 @@
   .content-wrapper-overlay.isvisible {
     visibility: visible;
     opacity: 1;
-    /*left: 280px;*/
   }
 
-  /*.top-header {
-    width: 94%;
-  }*/
+  .shop-top-fixed-top.is-main-nav-open {
+    left: 280px;
+  }
 
 }
 
@@ -80,6 +84,10 @@
 
   .top-header {
     width: 90%;
+  }
+
+  .breadcrumb > li {
+    font-size: 12px;
   }
 
 }

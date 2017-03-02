@@ -75,6 +75,13 @@
 
     <div class="form-row">
       <?php 
+        echo Form::label('length', 'หน่วยของขนาดสินค้า');
+        echo Form::select('length_unit_id', $_fieldData['lengthUnits']);
+      ?>
+    </div>
+
+    <div class="form-row">
+      <?php 
         echo Form::label('weight', 'น้ำหนักสินค้า');
       ?>
       <div class="input-field-group">
@@ -83,7 +90,7 @@
           'placeholder' => 'น้ำหนักสินค้า',
           'autocomplete' => 'off'
         ));
-        echo Form::select('weight_unit_id', $_fieldData['weigthUnits']);
+        echo Form::select('weight_unit_id', $_fieldData['weightUnits']);
       ?>
       </div>
     </div>

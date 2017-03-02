@@ -52,9 +52,14 @@
 
     <div class="form-row">
       <?php 
-        echo Form::label('_tags', 'แท๊กที่เกี่ยวข้องกับงานนี้');
+        echo Form::label('product_unit', 'หน่วยสินค้า', array(
+          'class' => 'required'
+        ));
+        echo Form::text('product_unit', null, array(
+          'placeholder' => 'หน่วยสินค้า (ชิ้น, ตัว, เครื่อง, หลัง)',
+          'autocomplete' => 'off'
+        ));
       ?>
-      <div id="_tags" class="tag"></div>
     </div>
 
   </div>
@@ -67,6 +72,21 @@
 
     <div class="form-row">
       <div id="_image_group"></div>
+    </div>
+
+  </div>
+
+  <div class="form-section">
+
+    <div class="title">
+      แท๊ก
+    </div>
+
+    <div class="form-row">
+      <?php 
+        echo Form::label('_tags', 'แท๊กที่เกี่ยวข้องกับสินค้านี้');
+      ?>
+      <div id="_tags" class="tag"></div>
     </div>
 
   </div>

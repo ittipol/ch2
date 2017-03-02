@@ -102,7 +102,7 @@ class ApiController extends Controller
     }
 
     if(empty(Input::file('image'))) {
-      return $this->generalError();
+      return $this->getGeneralError();
     }
 
     $image = new HandleImageFile(Input::file('image'));
@@ -173,7 +173,7 @@ class ApiController extends Controller
     );
 
     if(!in_array(Input::get('model'), $acceptModels) || !in_array(Input::get('imageType'), $acceptType)) {
-      return $this->generalError();
+      return $this->getGeneralError();
     }
 
     $model = Service::loadModel(Input::get('model'))->find(Input::get('model_id'));
@@ -187,7 +187,7 @@ class ApiController extends Controller
     }
 
     if(!$permission) {
-      return $this->generalError();
+      return $this->getGeneralError();
     }
 
     switch (Input::get('imageType')) {
@@ -201,7 +201,7 @@ class ApiController extends Controller
     }
 
     if(!Schema::hasColumn($model->getTable(), $field)) {
-      return $this->generalError();
+      return $this->getGeneralError();
     }
 
     $imageModel = Service::loadModel('Image')->find($model->{$field});
@@ -226,7 +226,86 @@ class ApiController extends Controller
 
   }
 
-  private function generalError() {
+  public function addTocart() {
+
+    if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+      $this->error = array(
+        'message' => 'ขออภัย ไม่อนุญาตให้เข้าถึงหน้านี้ได้'
+      );
+      return $this->error();
+    }
+
+    $productModel = Service::loadModel('Product');
+
+    $productId = Input::get('productId');
+    $quantity = Input::get('quantity');
+
+    // check product is active
+    $product = $productModel->where([
+      ['id','=',$productId],
+      ['active','=',1]
+    ])
+    ->select('minimum')
+    ->first();
+
+    if(empty($product) || ($product->minimum > $quantity)) {
+      $this->getGeneralError();
+    }
+
+    $data = array(
+      'productId' => $productId,
+      'quantity' => $quantity
+    );
+
+    Session::put('carts.'.$productId, $data);
+
+    $carts = session()->get('carts');
+
+    $count = 0;
+    if(!empty($carts)) {
+      foreach ($carts as $cart) {
+
+        $product = $productModel->where([
+          ['id','=',$cart['productId']],
+          ['active','=',1]
+        ])
+        ->select('id')
+        ->first();
+
+        if(empty($product)) {
+          continue;
+        }
+
+        $count += $cart['quantity'];
+        
+      }
+    }
+
+    $result = array(
+      'success' => true
+    );
+
+    return response()->json($result);
+
+  }
+
+  public function cartUpdate() {
+    $result = array(
+      'html' => view('layouts.blackbox.components.global-cart-product-list',array(
+        '_products' => Service::loadModel('Cart')->getProducts()
+      ))->render()
+    );
+    return response()->json($result);
+  }
+
+  public function productCount() {
+    $result = array(
+      'total' => Service::loadModel('Cart')->productCount()
+    );
+    return response()->json($result);
+  }
+
+  private function getGeneralError() {
 
     $result = array(
       'success' => false,

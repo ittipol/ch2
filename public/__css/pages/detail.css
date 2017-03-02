@@ -131,7 +131,8 @@
 	right: 9px;
 	/*padding: 10px 25px;*/
 	/*background-color: rgba(236,236,236,.7);*/
-	background-color: rgb(47,97,186);
+	/*background-color: rgb(47,97,186);*/
+	background-color: #1E88E5;
 	color: #fff;
 	width: 51px;
 	height: 51px;
@@ -155,6 +156,10 @@
 .detail .item-info h4 {
 	margin: 5px 0 0;
 	font-size: 20px;
+}
+
+.detail .item-info .item-info-row:nth-child(2n) {
+	margin-top: 15px;
 }
 
 .detail .secondary-title {
@@ -335,6 +340,55 @@
 	width: 92%;
 }
 
+.item-info .sub-info-text {
+	font-size: 15px;
+	color: #999;
+}
+
+.content-box {
+	margin: 20px 0;
+	color: #fff;
+	background-color: #0071c5;
+}
+
+/*.content-box .content-box-inner {
+	padding: 20px;
+}*/
+
+.content-box .content-box-panel {
+	padding: 20px;
+}
+
+.content-box .content-box-panel.overlay-bg {
+	background-color: rgba(20,27,32,.85);
+}
+
+.content-box.content-box-bg {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.content-box .line {
+	background-color: #fff;
+}
+
+.content-box a {
+	color: #fff;
+}
+
+.content-box .button {
+	background-color: #00aeef;
+}
+
+.quantity-box .quantity-text-input {
+	width: 49%;
+}
+
+.quantity-box .add-to-cart-button {
+	width: 49%;
+}
+
 /*==========  Non-Mobile First Method  ==========*/
 
 /* Large Devices, Wide Screens */
@@ -360,6 +414,7 @@
 
 /* Extra Small Devices, Phones */ 
 @media only screen and (max-width : 480px) {
+	
 	.image-gallery .image-gallery-list .preview-image {
 		margin: 3px;
 	}
@@ -372,15 +427,13 @@
 		height: 300px;
 	}
 
-	.image-gallery .image-gallary-display .display-image-description-icon {
-		top: 0;
-		right: 0;
-		padding: 10px 15px;
-	}
-
 	.detail .info-section .section:not(:first-child) {
 		border-top: 1px solid #bababa;
 		border-left: 0;
+	}
+
+	.quantity-box {
+		margin-top: 20px;
 	}
 
 }

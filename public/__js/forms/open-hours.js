@@ -161,7 +161,7 @@ class OpenHour {
 		html += '<label>'+day+'</label> ';   
 		html += '<label id="'+code+'_'+index+'_switch" class="switch '+code+'-office-switch-btn">';
 		html += '<input id="'+code+'_'+index+'_open" type="checkbox" name="openHours['+index+'][open]" value="1" checked>';
-		html += '<div class="slider round office-hour"></div>';
+		html += '<div class="slider round custom-color"></div>';
 		html += '</label>';
 		html += '<span>เวลาเปิด</span>';
 		html += '<select id="'+code+'_'+index+'_start_hour" name="openHours['+index+'][start_time][hour]"></select>';

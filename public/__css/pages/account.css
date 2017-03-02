@@ -14,12 +14,17 @@
   background-size: auto 100%;
 }
 
-.profile-info {
+/*.profile-info {
 	margin-left: 20px;
-}
+}*/
 
 .profile-info h3 {
 	margin-top: 10px;
+}
+
+.profile-contact-info {
+  padding: 20px;
+  /*margin-left: -30px;*/
 }
 
 label.tile-color {
@@ -104,8 +109,8 @@ label.tile-color.blue-grey {
 
 /* Extra Small Devices, Phones */ 
 @media only screen and (max-width : 480px) {
-  .profile-info {
+/*  .profile-info {
     margin-top: 30px;
     margin-left: 0;
-  }
+  }*/
 }

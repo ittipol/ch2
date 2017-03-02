@@ -18,6 +18,11 @@ class Cache
       'height' => 100,
       'fx' => '',
     ),
+    'xsm' => array(
+      'width' => 150,
+      'height' => 150,
+      'fx' => '',
+    ),
     // 'md' => array(
     //   'width' => 250,
     //   'height' => 250,

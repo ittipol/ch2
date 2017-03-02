@@ -23,12 +23,12 @@
       ?>
     </div>
     <div class="input-item">
-    <?php
-      echo Form::submit('บันทึก' , array(
-        'class' => 'button'
-      ));
-    ?>
-  </div>
+      <?php
+        echo Form::submit('บันทึก' , array(
+          'class' => 'button'
+        ));
+      ?>
+    </div>
   </div>
 
   <?php

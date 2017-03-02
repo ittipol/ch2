@@ -44,6 +44,7 @@
 	width: 100%;
 	background-color: #fff;
 	box-shadow: 0 2px 5px rgba(0,0,0,.26);
+	transition: left .2s ease-out;
 }
 
 .shop-top-haeder-wrapper {
@@ -228,6 +229,15 @@
 		margin-top: 0;
 	}
 
+	.shop-top-header .shop-info .shop-description {
+		margin: 15px 0 0;
+	}
+
+	.shop-top-header .shop-info {
+		width: 90%;
+		margin: 0 auto;
+	}
+
 }
 
 /* Medium Devices, Desktops */
@@ -268,10 +278,6 @@
 
 	.shop-top-haeder-wrapper .shop-overlap-panel {
 		width: 100%;
-	}
-
-	.shop-top-header .shop-info .shop-description {
-		margin: 15px 0 0;
 	}
 
 }

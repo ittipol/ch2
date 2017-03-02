@@ -273,12 +273,12 @@ class Shop extends Model
 
   public function buildModelData() {
 
-    // $string = new String;
+    $string = new String;
 
     return array(
       'name' => $this->name,
-      // 'description' => $this->description,
-      // '_short_description' => $string->subString($this->description,250,true),
+      'description' => $this->description,
+      '_short_description' => $string->subString($this->description,250,true),
       // 'profileImage' => $this->getProfileImageUrl(),
       // 'cover' => $this->getCoverUrl()
     );

@@ -3,7 +3,6 @@
 }
 
 .form-error-messages {
-	/*margin-top: 20px;*/
 	background-color: rgb(233,95,98);
 	background-image: url('/images/common/error.png');
 	background-repeat: no-repeat;
@@ -37,6 +36,10 @@
 	width: 80%;
 	line-height: 26px;
 	font-size: 17px;
+}
+
+.form-error-messages h4 {
+
 }
 
 .error-message {

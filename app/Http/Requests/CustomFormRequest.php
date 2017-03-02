@@ -15,16 +15,40 @@ class CustomFormRequest extends FormRequest
   private $hasError = false;
 
   private $pages = array(
+    'item.post' => array(
+      'modelName' => 'Item'
+    ),
+    'real_estate.post' => array(
+      'modelName' => 'RealEstate'
+    ),
+    'shop.create' => array(
+      'modelName' => 'Shop'
+    ),
+    'shop.job.add' => array(
+      'modelName' => 'Job'
+    ),
     'shop.product.add' => array(
       'modelName' => 'Product'
     ),
     'shop.product.edit' => array(
       'modelName' => 'Product'
     ),
+    'shop.product_status.edit' => array(
+      'modelName' => 'Product'
+    ),
     'shop.product_specification.edit' => array(
       'modelName' => 'Product'
     ),
     'shop.product_category.edit' => array(
+      'modelName' => 'Product'
+    ),
+    'shop.product_stock.edit' => array(
+      'modelName' => 'Product'
+    ),
+    'shop.product_price.edit' => array(
+      'modelName' => 'Product'
+    ),
+    'shop.product_notification.edit' => array(
       'modelName' => 'Product'
     ),
     'person_experience.internship.add' => array(
@@ -39,12 +63,19 @@ class CustomFormRequest extends FormRequest
 
     $name = Route::currentRouteName();
 
-    if(empty($name) || empty($this->pages[$name])) {
-      $this->hasError = true;
+    $this->hasError = true;
+    if(!empty($name) && !empty($this->pages[$name])) {
+      $this->hasError = false;
+      $model = service::loadModel($this->pages[$name]['modelName']);
+      $this->validation = $model->getValidation();
     }
 
-    // $model = service::loadModel($this->pages[$name]['modelName']);
-    // $this->validation = $model->getValidation();
+    // if(empty($name) || empty($this->pages[$name])) {
+    //   $this->hasError = true;
+    // }else{
+    //   $model = service::loadModel($this->pages[$name]['modelName']);
+    //   $this->validation = $model->getValidation();
+    // }
 
     // $this->model = service::loadModel(Request::get('_model'));
     // $this->validation = $this->model->getValidation();
@@ -78,8 +109,8 @@ class CustomFormRequest extends FormRequest
 
     $name = Route::currentRouteName();
 
-    $model = service::loadModel($this->pages[$name]['modelName']);
-    $this->validation = $model->getValidation();
+    // $model = service::loadModel($this->pages[$name]['modelName']);
+    // $this->validation = $model->getValidation();
 
     $rules = array();
     if(!empty($this->validation['rules'])){

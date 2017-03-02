@@ -113,7 +113,6 @@ class Images {
 			}
 
 			if(proceed) {
-
 				let formData = new FormData();
 				formData.append('_token', $('input[name="_token"]').val());  
 				formData.append('model', $('input[name="_model"]').val());
@@ -197,7 +196,6 @@ class Images {
 	  });
 
 	  request.fail(function (jqXHR, textStatus, errorThrown){
-
 	    console.error(
 	        "The following error occurred: "+
 	        textStatus, errorThrown

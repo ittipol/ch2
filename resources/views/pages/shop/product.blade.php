@@ -64,6 +64,23 @@
               <a href="{{$data['detailUrl']}}">
                 <div class="card-title">{{$data['name']}}</div>
               </a>
+              <div class="card-sub-info">
+
+                <div class="card-sub-info-row">
+                  <h5>จำนวนสินค้าคงเหลือ</h5>
+                  @if($data['unlimited_quantity'])
+                  {{$data['_unlimited_quantity']}}
+                  @else
+                  {{$data['quantity']}}
+                  @endif
+                </div>
+
+                <div class="card-sub-info-row">
+                  <h5>สถานะการขาย</h5>
+                  {{$data['_active']}}
+                </div>
+
+              </div>
             </div>
 
             <div class="button-group">

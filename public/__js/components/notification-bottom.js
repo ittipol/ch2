@@ -1,4 +1,5 @@
 class NotificationBottom {
+  
   constructor(title = '',desc = '',type = 'info',size = 'small',alwaysVisible = false,allowedClose = true) {
       this.title = title;
       this.desc = desc;

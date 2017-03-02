@@ -101,8 +101,10 @@ class AdvertisingController extends Controller
       }
     }
 
-    $this->setData('shopName',$shop->name);
-    // $this->setData('shopAddress',$shop->modelData->loadAddress());
+    $this->setData('shop',$shop->modelData->build(true));
+    $this->setData('shopImageUrl',$shop->getProfileImageUrl());
+    $this->setData('shopCoverUrl',$shop->getCoverUrl());
+    $this->setData('shopUrl','shop/'.$slug);
     $this->setData('branchLocations',json_encode($branchLocations));
     $this->setData('hasBranchLocation',$hasBranchLocation);
 

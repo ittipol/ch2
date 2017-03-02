@@ -42,15 +42,15 @@ class Filter {
       }
     });
 
-    $('#filter_panel_trigger').on('click',function(){
-      if($(this).is(':checked')) {
-        $('#filter_panel').addClass('is-filter-panel-open');
-        $('.main-panel-overlay').addClass('isvisible');
-      }else{
-        $('#filter_panel').removeClass('is-filter-panel-open');
-        $('.main-panel-overlay').removeClass('isvisible');
-      }
-    }); 
+    // $('#filter_panel_trigger').on('click',function(){
+    //   if($(this).is(':checked')) {
+    //     $('#filter_panel').addClass('is-filter-panel-opened');
+    //     $('.main-panel-overlay').addClass('isvisible');
+    //   }else{
+    //     $('#filter_panel').removeClass('is-filter-panel-opened');
+    //     $('.main-panel-overlay').removeClass('isvisible');
+    //   }
+    // }); 
 
     $(".nano").on("update", function(event, vals){ 
        // console.log("pos=" + vals.position + ", direction=" + vals.direction + "\n" )

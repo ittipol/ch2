@@ -22,13 +22,13 @@ Route::get('cat','HomeController@addCat');
 // Route::get('lan','HomeController@lanAdd');
 
 Route::get('/',function(){
-  // dd(session()->all());
+  dd(session()->all());
 
   // foreach (session()->get('Shop') as $key => $value) {
   //   dd($value);
   // }
 
-  return view('pages.announcement.create');
+  // return view('pages.announcement.create');
 
 });
 
@@ -153,6 +153,8 @@ Route::group(['middleware' => ['auth','person.experience']], function () {
 
 });
 
+Route::get('cart','CartController@index')->name('cart');
+
 // community / Shop
 // Route::get('community/shop_feature','ShopController@feature');
 
@@ -161,8 +163,8 @@ Route::group(['middleware' => ['auth','shop']], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-  Route::get('community/shop_create','ShopController@create');
-  Route::post('community/shop_create','ShopController@creatingSubmit');
+  Route::get('community/shop_create','ShopController@create')->name('shop.create');
+  Route::post('community/shop_create','ShopController@creatingSubmit')->name('shop.create');
 });
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
   Route::get('shop/{shopSlug}/manage','ShopController@manage')->name('shop.manage');
@@ -185,6 +187,9 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 });
 
 // PRODUCT
+Route::get('product/list','ProductController@index')->name('product.list');
+Route::get('product/detail/{id}','ProductController@detail')->name('product.detail');
+
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
 
   Route::get('shop/{shopSlug}/product','ShopController@product')->name('shop.product');
@@ -197,15 +202,25 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::get('shop/{shopSlug}/product_edit/{id}','ProductController@edit')->name('shop.product.edit');
   Route::patch('shop/{shopSlug}/product_edit/{id}','ProductController@editingSubmit')->name('shop.product.edit');
 
+  Route::get('shop/{shopSlug}/product_status_edit/{id}','ProductController@statusEdit')->name('shop.product_status.edit');
+  Route::patch('shop/{shopSlug}/product_status_edit/{id}','ProductController@statusEditingSubmit')->name('shop.product_status.edit');
+
   Route::get('shop/{shopSlug}/product_specification_edit/{id}','ProductController@specificationEdit')->name('shop.product_specification.edit');
   Route::patch('shop/{shopSlug}/product_specification_edit/{id}','ProductController@specificationEditingSubmit')->name('shop.product_specification.edit');
 
   Route::get('shop/{shopSlug}/product_category_edit/{id}','ProductController@categoryEdit')->name('shop.product_category.edit');
   Route::patch('shop/{shopSlug}/product_category_edit/{id}','ProductController@categoryEditingSubmit')->name('shop.product_category.edit');
 
+  Route::get('shop/{shopSlug}/product_stock_edit/{id}','ProductController@stockEdit')->name('shop.product_stock.edit');
+  Route::patch('shop/{shopSlug}/product_stock_edit/{id}','ProductController@stockEditingSubmit')->name('shop.product_stock.edit');
+
+  Route::get('shop/{shopSlug}/product_price_edit/{id}','ProductController@priceEdit')->name('shop.product_price.edit');
+  Route::patch('shop/{shopSlug}/product_price_edit/{id}','ProductController@priceEditingSubmit')->name('shop.product_price.edit');
+
+  Route::get('shop/{shopSlug}/product_notification_edit/{id}','ProductController@notificationEdit')->name('shop.product_notification.edit');
+  Route::patch('shop/{shopSlug}/product_notification_edit/{id}','ProductController@notificationEditingSubmit')->name('shop.product_notification.edit');
+
 });
-// Route::get('product','ProductController@index');
-// Route::get('product/{product_slug}','ProductController@detail');
 
 // Job
 Route::get('job/list','JobController@listView')->name('job.list');
@@ -283,8 +298,8 @@ Route::get('real-estate/list','RealEstateController@listView');
 Route::get('real-estate/detail/{id}','RealEstateController@detail')->name('real_estate.detail');
 
 Route::group(['middleware' => 'auth'], function () {
-  Route::get('real-estate/post','RealEstateController@add');
-  Route::post('real-estate/post','RealEstateController@addingSubmit');
+  Route::get('real-estate/post','RealEstateController@add')->name('real_estate.post');
+  Route::post('real-estate/post','RealEstateController@addingSubmit')->name('real_estate.post');
 
   Route::get('account/real_estate_edit/{id}','RealEstateController@edit')->name('real_estate.edit')->middleware('editing.permission');
   Route::patch('account/real_estate_edit/{id}','RealEstateController@editingSubmit')->name('real_estate.edit')->middleware('editing.permission');
@@ -302,6 +317,10 @@ Route::group(['middleware' => 'auth'], function () {
   Route::post('upload_image', 'ApiController@uploadImage');
   Route::post('upload_profile_image', 'ApiController@uploadProfileImage')->name('Api.upload.profile_image');
 });
+
+Route::post('add_to_cart', 'ApiController@addTocart');
+Route::get('cart_update', 'ApiController@cartUpdate');
+Route::get('product_count', 'ApiController@productCount');
 
 // Route::group(['namespace' => 'Admin'], function () {
 //     // Controllers Within The "App\Http\Controllers\Admin" Namespace

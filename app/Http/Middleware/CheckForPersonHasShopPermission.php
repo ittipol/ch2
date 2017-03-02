@@ -93,11 +93,27 @@ class CheckForPersonHasShopPermission
           'permission' => 'edit',
           'modelName' => 'Product'
         ),
+        'shop.product_status.edit' => array(
+          'permission' => 'edit',
+          'modelName' => 'Product'
+        ),
         'shop.product_specification.edit' => array(
           'permission' => 'edit',
           'modelName' => 'Product'
         ),
         'shop.product_category.edit' => array(
+          'permission' => 'edit',
+          'modelName' => 'Product'
+        ),
+        'shop.product_stock.edit' => array(
+          'permission' => 'edit',
+          'modelName' => 'Product'
+        ),
+        'shop.product_price.edit' => array(
+          'permission' => 'edit',
+          'modelName' => 'Product'
+        ),
+        'shop.product_notification.edit' => array(
           'permission' => 'edit',
           'modelName' => 'Product'
         ),

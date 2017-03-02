@@ -1,5 +1,5 @@
 .button {
-	color: #ffffff;
+	color: #fff;
 	text-decoration: none !important;
 	/*background-color: #3F51B5;*/
 	/*background-color: #2979FF;*/
@@ -8,6 +8,7 @@
 	margin-bottom: 5px;
 	border: 0;
 	display: inline-block;
+	cursor: pointer;
 }
 
 .button > img {
@@ -18,7 +19,7 @@
 }
 
 a.button:hover {
-	color: #ffffff;
+	color: #fff;
 }
 
 .button.warning {
@@ -60,7 +61,7 @@ a.button:hover {
   width: 6px;
   height: 6px;
   border-radius: 6px;
-  background-color: #ffffff;
+  background-color: #fff;
   margin: 10px auto;
 }
 

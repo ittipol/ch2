@@ -97,12 +97,12 @@
     right: -250px;
   }
 
-  .filter-panel.is-filter-panel-open {
+  .filter-panel.is-filter-panel-opened {
     right: 0;
     background-color: #536DFE;
   }
 
-  .filter-panel.is-filter-panel-open .filter-panel-inner {
+  .filter-panel.is-filter-panel-opened .filter-panel-inner {
     padding: 10px;
   }
 

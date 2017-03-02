@@ -391,17 +391,6 @@ class Model extends BaseModel
 
   }
 
-  // public function getList($records,$field) {
-   
-  //   $lists = array();
-  //   foreach ($records as $record) {
-  //     $lists[] = $record->{$field};
-  //   }
-
-  //   return $lists;
-
-  // }
-
   public function deleteByModelNameAndModelId($model,$modelId) {
 
     if(!$this->checkHasFieldModelAndModelId()) {

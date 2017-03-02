@@ -1,0 +1,13 @@
+/*.success-messages {
+	background-color: rgb(240,255,236);
+	background-image: url('/images/common/error.png');
+	background-repeat: no-repeat;
+	background-position: 108% 60%;
+	background-size: 200px;
+}
+
+.success-messages h3 {
+	width: 80%;
+	line-height: 26px;
+	font-size: 17px;
+}*/

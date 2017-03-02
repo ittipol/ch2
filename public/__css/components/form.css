@@ -426,9 +426,9 @@ select[name^="OfficeHour"].disabled {
 
 /* Small Devices, Tablets */
 @media only screen and (max-width : 768px) {
-	.image-panel.description > textarea {
+/*	.image-panel.description > textarea {
 		width: 65%;
-	}
+	}*/
 }
 
 /* Extra Small Devices, Phones */ 

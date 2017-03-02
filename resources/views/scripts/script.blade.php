@@ -30,13 +30,15 @@
     '__js/forms/period-date.js',
     '__js/forms/real-estate.js',
     '__js/forms/job.js',
+    '__js/forms/product.js',
     '__js/components/notification-bottom.js',
     '__js/components/additional-option.js',
     '__js/components/custom-scroll.js',
     '__js/components/filter.js',
     '__js/components/image-gallery.js',
     // '__js/components/tabs.js'
-    '__js/components/profile-image.js'
+    '__js/components/profile-image.js',
+    '__js/components/cart.js'
   );
 
   if($combine){
@@ -83,12 +85,13 @@
     '__css/components/switch.css',
     '__css/components/additional-option.css',
     '__css/components/custom-scroll.css',
-    '__css/components/filter-panel.css',
+    // '__css/components/filter-panel.css',
     '__css/components/choice-box.css',
     '__css/components/pagination.css',
     '__css/components/box.css',
-    '__css/components/error.css',
     '__css/components/tile.css',
+    '__css/components/message.css',
+    '__css/components/error.css',
     '__css/pages/shop.css',
     '__css/pages/account.css',
     '__css/pages/detail.css',
@@ -97,7 +100,8 @@
     '__css/layouts/blackbox/components/action-bar.css',
     '__css/layouts/blackbox/components/main-nav.css',
     '__css/layouts/blackbox/components/content-wrapper.css',
-    '__css/layouts/blackbox/components/search-panel.css',
+    '__css/layouts/blackbox/components/global-search-panel.css',
+    '__css/layouts/blackbox/components/global-cart-panel.css',
     '__css/layouts/blackbox/components/header.css',
     '__css/layouts/blackbox/components/footer.css',
     '__css/layouts/blackbox/responsive.css'

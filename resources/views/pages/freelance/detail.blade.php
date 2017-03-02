@@ -59,16 +59,7 @@
 
   </div>
   
-  <div class="row">
-    <div class="list-description col-md-6 col-sm-12">
-      <dl class="list-description-item row">
-        <dt class="col-sm-4">ประเภทงานฟรีแลนซ์</dt>
-        <dd class="col-sm-8">{{$_modelData['_freelanceType']}}</dd>
-      </dl>
-    </div>
-  </div>
-
-  <div class="line space-top-bottom-20"></div>
+  <!-- <div class="line space-top-bottom-20"></div>
 
   <div class="row">
 
@@ -115,6 +106,84 @@
 
     </div>
 
+  </div> -->
+
+  <div class="content-box">
+    <div class="content-box-inner">
+      <div class="row">
+
+        <div class="col-md-6 col-sm-12">
+          <div class="content-box-panel overlay-bg">
+            <h5>ฟรีแลนซ์</h5>
+
+            <div class="row">
+
+              <div class="col-sm-12">
+                <div class="account elem-center">
+                  @if(!empty($profileImageUrl))
+                  <div class="profile-image" style="background-image:url({{$profileImageUrl}});"></div>
+                  @endif
+                </div>
+              </div>
+
+              <div class="col-sm-12">
+                <div class="profile-info text-center space-top-20">
+                  <h3><a href="{{$experienceDetailUrl}}">{{$profile['name']}}</a></h3>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="line space-top-bottom-20"></div>
+
+            <a href="{{$experienceDetailUrl}}" class="button wide-button">แสดงประวัติการทำงานฟรีแลนซ์</a>
+
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+
+          <div class="profile-contact-info">
+
+            <h4>ติดต่อฟรีแลนซ์</h4>
+            <div class="line space-top-bottom-10"></div>
+
+            @if(!empty($profile['Contact']['phone_number']))
+            <dl>
+              <dt>หมายเลขโทรศัพท์</dt>
+              <dd>{{$profile['Contact']['phone_number']}}</dd>
+            </dl>
+            @endif
+
+            @if(!empty($profile['Contact']['email']))
+            <dl>
+              <dt>อีเมล</dt>
+              <dd>{{$profile['Contact']['email']}}</dd>
+            </dl>
+            @endif
+
+            @if(!empty($profile['Contact']['line']))
+            <dl>
+              <dt>Line ID</dt>
+              <dd>{{$profile['Contact']['line']}}</dd>
+            </dl>
+            @endif
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="list-description col-md-6 col-sm-12">
+      <dl class="list-description-item row">
+        <dt class="col-sm-4">ประเภทงานฟรีแลนซ์</dt>
+        <dd class="col-sm-8">{{$_modelData['_freelanceType']}}</dd>
+      </dl>
+    </div>
   </div>
 
   <div class="row">

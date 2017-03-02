@@ -85,6 +85,10 @@
 	margin-top: 10px;
 }
 
+.card .card-sub-info .card-sub-info-row:not(:first-child) {
+	margin-top: 10px;
+}
+
 .card .card-sub-info > h5 {
 	margin: 0 0 5px;
 }
