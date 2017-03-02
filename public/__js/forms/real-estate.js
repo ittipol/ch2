@@ -9,21 +9,21 @@ class RealEstate {
 
     let _this = this;
 
-    $('.home-area').on('keydown',function(e){
+    // $('.home-area').on('keydown',function(e){
 
-      if(((e.keyCode < 96) || (e.keyCode > 105)) && ((e.keyCode < 48) || (e.keyCode > 57)) && (e.keyCode != 8) && (e.keyCode != 110) && (e.keyCode != 190)) {
-        e.preventDefault();
-        return false;
-      }
+    //   if(((e.keyCode < 96) || (e.keyCode > 105)) && ((e.keyCode < 48) || (e.keyCode > 57)) && (e.keyCode != 8) && (e.keyCode != 110) && (e.keyCode != 190)) {
+    //     e.preventDefault();
+    //     return false;
+    //   }
 
-    });
+    // });
 
     $('.land-area').on('keydown',function(e){
 
-      if(((e.keyCode < 96) || (e.keyCode > 105)) && ((e.keyCode < 48) || (e.keyCode > 57)) && (e.keyCode != 8) && (e.keyCode != 110) && (e.keyCode != 190)) {
-        e.preventDefault();
-        return false;
-      }
+      // if(((e.keyCode < 96) || (e.keyCode > 105)) && ((e.keyCode < 48) || (e.keyCode > 57)) && (e.keyCode != 8) && (e.keyCode != 110) && (e.keyCode != 190)) {
+      //   e.preventDefault();
+      //   return false;
+      // }
       
       let obj = this;
 

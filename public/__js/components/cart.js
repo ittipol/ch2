@@ -4,6 +4,7 @@ class Cart {
 		this.token = token;
 		this.productId = productId;
 		this.minimumOrder = minimumOrder;
+		this.allowedClick = true;
 	}
 
 	load() {
@@ -45,6 +46,12 @@ class Cart {
 
 	addToCart(quantity) {
 
+		if(!this.allowedClick) {
+      return false;
+    }
+
+    this.allowedClick = false;
+
 		let _this = this;
 
 		let request = $.ajax({
@@ -55,6 +62,10 @@ class Cart {
 	    contentType: false,
 	    cache: false,
 	    processData:false,
+	    beforeSend: function( xhr ) {
+	    	$('#loading_icon').addClass('display');
+	    	$('.global-overlay').addClass('isvisible');
+	    }
 	  });
 
 		request.done(function (response, textStatus, jqXHR){
@@ -66,10 +77,21 @@ class Cart {
 		  	// update item in global cart
 		  	_this.cartUpdate();
 
-		  	const notificationBottom = new NotificationBottom('สินค้า '+quantity+' ชิ้น ได้ถูกเพิ่มเข้าไปยังตะกร้าสินค้าของคุณ','','success');
-		  	notificationBottom.setDelay(5000);
-		  	notificationBottom.load();
+		  	setTimeout(function(){
+
+		  		const notificationBottom = new NotificationBottom('สินค้า '+quantity+' ชิ้น ได้ถูกเพิ่มเข้าไปยังตะกร้าสินค้าของคุณ','','success');
+		  		notificationBottom.setDelay(5000);
+		  		notificationBottom.load();
+
+		  		$('#loading_icon').removeClass('display');
+		  	  $('.global-overlay').removeClass('isvisible');
+		  	},2000);
+		  	
 		  }
+
+		  setTimeout(function(){
+		    _this.allowedClick = true;
+		  },400);
 
 		});
 

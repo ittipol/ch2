@@ -114,7 +114,7 @@
     @if($_modelData['active'])
       <div class="col-md-6 col-xs-12 quantity-box">
         <div class="clearfix">
-          <input id="product_quantity" class="quantity-text-input pull-left" type="text" name="quantity" value="{{$_modelData['minimum']}}" role="number" />
+          <input id="product_quantity" class="quantity-text-input pull-left" type="text" name="quantity" value="{{$_modelData['minimum']}}" placeholder="จำนวนสินค้าที่สั่งซื้อ" role="number" />
           <a id="add_to_cart_button" class="button add-to-cart-button pull-right">ใส่ตระกร้า</a>
         </div>
       </div>
@@ -174,7 +174,6 @@
 
     const cart = new Cart('{{ csrf_token() }}',{{$_modelData['id']}},{{$_modelData['minimum']}});
     cart.load();
-
 
   });
 </script>

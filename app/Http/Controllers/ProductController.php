@@ -26,23 +26,23 @@ class ProductController extends Controller
 
   public function listView() {
 
-    // $model = Service::loadModel('Product');
+    $model = Service::loadModel('Product');
     
-    // $page = 1;
-    // if(!empty($this->query['page'])) {
-    //   $page = $this->query['page'];
-    // }
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
 
-    // $model->paginator->criteria(array(
-    //   'fields' => array('items.*')
-    // ));
-    // $model->paginator->setPage($page);
-    // $model->paginator->setPagingUrl('product/list');
-    // $model->paginator->setUrl('product/detail/{id}','detailUrl');
+    $model->paginator->criteria(array(
+      'fields' => array('products.*')
+    ));
+    $model->paginator->setPage($page);
+    $model->paginator->setPagingUrl('product/list');
+    $model->paginator->setUrl('product/detail/{id}','detailUrl');
 
-    // $this->data = $model->paginator->buildPermissionData();
+    $this->data = $model->paginator->build();
 
-    // return $this->view('pages.product.list');
+    return $this->view('pages.product.list');
 
   }
 

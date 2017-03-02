@@ -19,17 +19,23 @@
   <div id="container">
     @include('layouts.blackbox.components.content-wrapper')
   </div>
+  <div id="loading_icon" class="loading"></div>
+  <div class="global-overlay"></div>
 
   @include('layouts.blackbox.components.footer')
 
   <script type="text/javascript">
 
     $(document).ready(function(){
+
       const additionalOption = new AdditionalOption();
       additionalOption.load();
 
       const blackbox = new Blackbox;
       blackbox.load();
+
+      const inputField = new InputField;
+      inputField.load();
 
       setTimeout(function(){
         $(".nano").nanoScroller();

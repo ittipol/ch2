@@ -15,6 +15,9 @@ class CustomFormRequest extends FormRequest
   private $hasError = false;
 
   private $pages = array(
+    'account.profile.edit' => array(
+      'modelName' => 'Person'
+    ),
     'item.post' => array(
       'modelName' => 'Item'
     ),

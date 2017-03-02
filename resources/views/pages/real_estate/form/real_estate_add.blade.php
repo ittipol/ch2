@@ -106,7 +106,8 @@
                 echo Form::text('home_area[sqm]', null, array(
                   'class' => 'home-area',
                   'placeholder' => 'พื้นที่ใช้สอย',
-                  'autocomplete' => 'off'
+                  'autocomplete' => 'off',
+                  'role' => 'number'
                 ));
               ?>
               <span>ตารางเมตร</span>
@@ -124,7 +125,8 @@
                   'id' => 'rai',
                   'class' => 'land-area',
                   'placeholder' => 'ไร่',
-                  'autocomplete' => 'off'
+                  'autocomplete' => 'off',
+                  'role' => 'number'
                 ));
               ?>
               <span>ไร่</span>
@@ -136,7 +138,8 @@
                   'id' => 'ngan',
                   'class' => 'land-area',
                   'placeholder' => 'งาน',
-                  'autocomplete' => 'off'
+                  'autocomplete' => 'off',
+                  'role' => 'number'
                 ));
               ?>
               <span>งาน</span>
@@ -148,7 +151,8 @@
                   'id' => 'wa',
                   'class' => 'land-area',
                   'placeholder' => 'ตารางวา',
-                  'autocomplete' => 'off'
+                  'autocomplete' => 'off',
+                  'role' => 'number'
                 ));
               ?>
               <span>ตารางวา</span>

@@ -100,7 +100,7 @@ class ImageGallery {
 
       let diff = Math.abs(frameWidth - imgWidth);
 
-      if(diff < 500) {
+      if(diff < 400) {
 
       }else if(diff < 1000) {
 

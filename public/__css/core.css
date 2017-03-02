@@ -127,6 +127,25 @@ a {
 	line-height: 22px !important;
 }
 
+.global-overlay {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 98;
+	display: block;
+	visibility: hidden;
+	opacity: 0;
+	background-color: rgba(20,27,32,.5);
+	transition: all .2s ease-out;
+}
+
+.global-overlay.isvisible {
+  visibility: visible;
+  opacity: 1;
+}
+
 .top-header-wrapper {
 	background-color: #fff;
 	

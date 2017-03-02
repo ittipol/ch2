@@ -283,13 +283,13 @@ class Product extends Model
       'name' => $this->name,
       'description' => !empty($this->description) ? $this->description : '-',
       'sku' => $this->sku,
-      'specifications' => $specifications,
+      '_price' => $currency->format($this->price),
       'quantity' => $this->quantity,
-      // 'unlimited_quantity' => $this->unlimited_quantity,
-      // '_unlimited_quantity' => $this->unlimited_quantity ? 'ไม่จำกัดจำนวน' : '',
+      'unlimited_quantity' => $this->unlimited_quantity,
+      '_unlimited_quantity' => $this->unlimited_quantity ? 'ไม่จำกัดจำนวน' : '',
       'minimum' => $this->minimum,
       'product_unit' => $this->product_unit,
-      '_price' => $currency->format($this->price),
+      'specifications' => $specifications,
       'active' => $this->active,
       '_active' => $this->active ? 'เปิดการขายสินค้า' : 'ปิดการขาย',
       '_categoryName' => !empty($categoryName) ? $categoryName : '-',
@@ -302,6 +302,7 @@ class Product extends Model
   public function buildPaginationData() {
 
     $string = new String;
+    $currency = new Currency;
 
     // $categoryName = $this->getCategory();
     // $categoryPathName = $this->getCategoryPathName();
@@ -311,6 +312,7 @@ class Product extends Model
       'name' => $this->name,
       '_short_name' => $string->subString($this->name,45),
       'sku' => !empty($this->sku) ? $this->sku : '-',
+      '_price' => $currency->format($this->price),
       'quantity' => $this->quantity,
       'unlimited_quantity' => $this->unlimited_quantity,
       '_unlimited_quantity' => $this->unlimited_quantity ? 'ไม่จำกัดจำนวน' : '',

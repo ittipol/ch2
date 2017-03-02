@@ -7,15 +7,6 @@
       <div class="header-title">โปรไฟล์</div>
     </div>
   </div>
-  <div class="header-fix">
-    <div class="header-title">โปรไฟล์</div>
-  </div>
-
-  <label class="hamburger-button" for="global_nav_trigger">
-    ☰
-    <input type="checkbox" id="global_nav_trigger" class="nav-trigger">
-  </label>
-
 </header>
 
 <div class="container">
@@ -24,7 +15,7 @@
 
     <div class="row">
 
-    <div class="col-lg-5 col-sm-12">
+    <div class="col-md-5 col-sm-12">
 
       <div class="clearfix">
         <div class="account pull-left">
@@ -83,7 +74,7 @@
 
     </div>
 
-    <div class="col-lg-7 col-sm-12">
+    <div class="col-md-7 col-sm-12">
 
       <div class="list-item-group">
 
