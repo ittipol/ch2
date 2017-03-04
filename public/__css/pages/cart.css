@@ -26,7 +26,22 @@
 }*/
 
 .cart .product-info .product-info-container {
+	position: relative;
+}
 
+.cart .cart-quantity-update-button {
+	position: absolute;
+	top: 3px;
+	right: 60px;
+	width: 35px;
+	height: 35px;
+	border: 0;
+	background-color: transparent;
+	outline: none;
+}
+
+.cart .cart-quantity-update-button img {
+	width: 100%;
 }
 
 .cart .product-title {

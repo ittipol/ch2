@@ -158,7 +158,7 @@
 	font-size: 20px;
 }
 
-.detail .item-info .item-info-row:nth-child(n+1) {
+.detail .item-info .item-info-row:nth-child(n+2) {
 	margin-top: 15px;
 }
 

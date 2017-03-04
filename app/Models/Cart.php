@@ -17,6 +17,7 @@ class Cart extends Model
     // check product is active
     $product = Product::where([
       ['id','=',$productId],
+      ['quantity','!=',0],
       ['active','=',1]
     ])
     ->select('id','minimum')
@@ -57,8 +58,6 @@ class Cart extends Model
 
   }
 
-  // public function updateProduct($id, $quantity) {}
-
   public function deleteProduct($id) {
 
     $cart = Cart::where([
@@ -82,6 +81,7 @@ class Cart extends Model
     // check product is active
     $product = Product::where([
       ['id','=',$id],
+      ['quantity','!=',0],
       ['active','=',1]
     ])
     ->select('id','minimum')
@@ -118,6 +118,7 @@ class Cart extends Model
 
     $product = Product::where([
       ['id','=',$productId],
+      ['quantity','!=',0],
       ['active','=',1]
     ])
     ->select('id','name','price','minimum','product_unit')
@@ -200,20 +201,27 @@ class Cart extends Model
   public function getSummary(){
 
     $summaries = array(
-      'subTotal',
-      'total'
+      'getSubTotal',
+      'getTotal'
     );
 
     $_summaries = array();
     foreach ($summaries as $summary) {
-      // $this->{$subTotal}();
+      $this->{$summary}();
 
       // $_summaries[] = array(
       //   'name' => $summary;
       // );
-
     }
 
+  }
+
+  public function getSubTotal() {
+    
+  }
+
+  public function getTotal() {
+    
   }
 
   public function getProducts() {

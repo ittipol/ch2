@@ -111,7 +111,11 @@
       </div>
     </div>
 
-    @if($_modelData['active'])
+    @if($_modelData['active'] && ($_modelData['quantity'] == 0))
+      <div class="col-md-6 col-xs-12 quantity-box">
+        <h4 class="error-message">{{$_modelData['message_out_of_order']}}</h4>
+      </div>
+    @elseif($_modelData['active'])
       <div class="col-md-6 col-xs-12 quantity-box">
         <div class="clearfix">
           <input id="product_quantity" class="quantity-text-input pull-left" type="text" name="quantity" value="{{$_modelData['minimum']}}" autocomplete="off" placeholder="จำนวนสินค้าที่สั่งซื้อ" role="number" />

@@ -40,9 +40,9 @@ class GlobalCart {
 
 					$(this).val(_this.tempQuantity);
 
-					const notificationBottom = new NotificationBottom('จำนวนสินค้าไม่ถูกต้อง','','error');
-					notificationBottom.setDelay(5000);
-					notificationBottom.load();
+					// const notificationBottom = new NotificationBottom('จำนวนสินค้าไม่ถูกต้อง','','error');
+					// notificationBottom.setDelay(5000);
+					// notificationBottom.load();
 
 				}else if(minimum > quantity){
 
@@ -199,7 +199,11 @@ class GlobalCart {
 	    	if(response.empty) {
 
 	    		setTimeout(function(){
+
+	    			$('#cart_panel').html(response.html);
+
 	    			_this.cartUpdate();
+
 	    			$('#loading_icon').removeClass('display');
 	    			$('.global-overlay').removeClass('isvisible');
 	    		},200);
@@ -209,7 +213,11 @@ class GlobalCart {
 	    		$('#_shop_'+response.shopId).fadeOut(200);
 
 	    		setTimeout(function(){
-	    			_this.cartUpdate();
+
+	    			if(typeof $(obj).data('global-cart') == 'undefined') {
+	    				_this.cartUpdate();
+	    			}
+	    			
 	    			$('#_shop_'+response.shopId).remove();
 	    			$('#loading_icon').removeClass('display');
 	    			$('.global-overlay').removeClass('isvisible');

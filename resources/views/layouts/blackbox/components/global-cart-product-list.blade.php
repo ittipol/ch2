@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <a class="delete-product-button" data-id="{{$product['id']}}" role="button">×</a>
+    <a class="delete-product-button" data-id="{{$product['id']}}" data-global-cart="1" role="button">×</a>
 
   </div>
   @endforeach
@@ -28,10 +28,10 @@
 
 @else
   
-  <div class="cart-empty">
-    <img class="elem-center" src="/images/icons/bag-blue.png">
-    <h4 class="text-center">ยังไม่มีสินค้าในตระกร้าสินค้าของคุณ</h4>
-    <a href="{{URL::to('product/list')}}" class="button wide-button space-top-20">เลือกซื้อสินค้า</a>
+  <div class="cart-empty text-center">
+    <img src="/images/icons/bag-blue.png">
+    <h4>ยังไม่มีสินค้าในตระกร้าสินค้าของคุณ</h4>
+    <a href="{{URL::to('product/list')}}" class="button half-button space-top-20">เลือกซื้อสินค้า</a>
   </div>
 
 @endif

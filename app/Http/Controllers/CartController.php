@@ -59,7 +59,7 @@ class CartController extends Controller
     ->first()
     ->shop_id;
 
-    // delete cart
+    // Delete
     $success = $cartModel->deleteProduct($productId);
 
     if(!$success) {
@@ -72,20 +72,29 @@ class CartController extends Controller
     // after deleting check cart empty
     $total = $cartModel->hasProducts();
 
+    $dataMerge = array();
     if($total) { // not empty
-      $totalShopProduct = $cartModel::where([
-        ['person_id','=',session()->get('Person.id')],
-        ['shop_id','=',$shopId]
-      ])->exists();
+
+      $dataMerge = array(
+        'totalShopProductEmpty' => !$cartModel::where([
+          ['person_id','=',session()->get('Person.id')],
+          ['shop_id','=',$shopId]
+        ])->exists()
+      );
+
+    }else{ // is empty
+
+      $dataMerge = array(
+        'html' => view('pages.cart.cart_empty')->render()
+      );
+
     }
 
-    $result = array(
+    $result = array_merge(array(
       'success' => true,
       'empty' => !$total,
-      'totalShopProductEmpty' => !$totalShopProduct,
       'shopId' => $shopId,
-      // 'total' => 
-    );
+    ),$dataMerge);
 
     return response()->json($result);
 
