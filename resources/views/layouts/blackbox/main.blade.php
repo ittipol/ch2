@@ -34,6 +34,9 @@
       const blackbox = new Blackbox;
       blackbox.load();
 
+      const globalCart = new GlobalCart('{{ csrf_token() }}');
+      globalCart.load();
+
       const inputField = new InputField;
       inputField.load();
 

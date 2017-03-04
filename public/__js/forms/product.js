@@ -1,18 +1,13 @@
 class Product {
-
-  constructor() {
-    this.quantity;
+  
+  constructor(token,productId,minimumOrder) {
+    this.token = token;
+    this.productId = productId;
+    this.minimumOrder = minimumOrder;
+    this.allowedClick = true;
   }
 
   load() {
-
-    this.quantity = $('#quantity_input_box').val();
-
-    if($('#unlimited_quantity_chkbox').is(':checked')) {
-      $('#quantity_input_box').prop('disabled','disabled');
-      $('#quantity_input_box').val('ไม่จำกัดจำนวน');
-    }
-
     this.bind();
   }
 
@@ -20,18 +15,25 @@ class Product {
 
     let _this = this;
 
-    $('#unlimited_quantity_chkbox').on('click',function(){
-      
-      if($(this).is(':checked')) {
-        $('#quantity_input_box').prop('disabled','disabled');
-        $('#quantity_input_box').val('ไม่จำกัดจำนวน');
+    // For Product detail page
+    $('#add_to_cart_button').on('click',function(){
+
+      let quantity = $('#product_quantity').val();
+
+      if(_this.minimumOrder > quantity) {
+
+        const notificationBottom = new NotificationBottom('ไม่สามารถสั่งซื้อได้','จำนวนการสั่งซื้อของคุณน้อยกว่าจำนวนการสั่งซื้อขั้นต่ำของสินค้านี้','error');
+        notificationBottom.setDelay(5000);
+        notificationBottom.load();
+
       }else{
-        $('#quantity_input_box').prop('disabled', false);
-        $('#quantity_input_box').val(_this.quantity);
+
+        const cart = new GlobalCart(_this.token);
+        cart.cartAdd(_this.productId,quantity);
       }
 
     });
-
+  
   }
 
 }

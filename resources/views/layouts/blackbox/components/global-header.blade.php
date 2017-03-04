@@ -12,7 +12,7 @@
     <label class="header-button cart-button" for="cart_panel_trigger">
       <img class="icon-header" src="/images/icons/bag-white.png" />
       <input type="checkbox" id="cart_panel_trigger" class="cart-trigger">
-      <span id="cart_item_count" class="badge badge-default">{{$_product_total}}</span>
+      <span id="cart_product_count" class="badge badge-default">{{$_product_total}}</span>
     </label>
 
     <label class="header-button search-button" for="search_panel_trigger">

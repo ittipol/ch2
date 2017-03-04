@@ -8,7 +8,7 @@ use App\library\string;
 class Product extends Model
 {
   protected $table = 'products';
-  protected $fillable = ['name','description','product_model','sku','quantity','quantity_available','unlimited_quantity','minimum','product_unit','price','weight','weight_unit_id','length','length_unit_id','width','height','specifications','message_out_of_order','active','person_id'];
+  protected $fillable = ['name','description','product_model','sku','quantity','quantity_available','minimum','product_unit','price','weight','weight_unit_id','length','length_unit_id','width','height','specifications','message_out_of_order','active','person_id'];
   protected $modelRelations = array('Image','Tagging','ProductToCategory','ShopRelateTo');
   protected $directory = true;
 
@@ -141,12 +141,12 @@ class Product extends Model
    
       }
 
-      if(!empty($attributes['unlimited_quantity'])) {
-        $attributes['quantity'] = 0;
+      // if(!empty($attributes['unlimited_quantity'])) {
+      //   $attributes['quantity'] = 0;
 
-      }elseif(isset($attributes['quantity'])){
-        $attributes['unlimited_quantity'] = 0;
-      }
+      // }elseif(isset($attributes['quantity'])){
+      //   $attributes['unlimited_quantity'] = 0;
+      // }
 
       if(isset($attributes['quantity']) && ($attributes['quantity'] === '')) {
         unset($attributes['quantity']);
@@ -285,8 +285,8 @@ class Product extends Model
       'sku' => $this->sku,
       '_price' => $currency->format($this->price),
       'quantity' => $this->quantity,
-      'unlimited_quantity' => $this->unlimited_quantity,
-      '_unlimited_quantity' => $this->unlimited_quantity ? 'ไม่จำกัดจำนวน' : '',
+      // 'unlimited_quantity' => $this->unlimited_quantity,
+      // '_unlimited_quantity' => $this->unlimited_quantity ? 'ไม่จำกัดจำนวน' : '',
       'minimum' => $this->minimum,
       'product_unit' => $this->product_unit,
       'specifications' => $specifications,
@@ -314,8 +314,8 @@ class Product extends Model
       'sku' => !empty($this->sku) ? $this->sku : '-',
       '_price' => $currency->format($this->price),
       'quantity' => $this->quantity,
-      'unlimited_quantity' => $this->unlimited_quantity,
-      '_unlimited_quantity' => $this->unlimited_quantity ? 'ไม่จำกัดจำนวน' : '',
+      // 'unlimited_quantity' => $this->unlimited_quantity,
+      // '_unlimited_quantity' => $this->unlimited_quantity ? 'ไม่จำกัดจำนวน' : '',
       // 'active' => $this->active,
       '_active' => $this->active ? 'เปิดการขายสินค้า' : 'ปิดการขายสินค้า',
       // '_categoryName' => !empty($categoryName) ? $categoryName : '-',

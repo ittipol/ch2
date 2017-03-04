@@ -17,6 +17,11 @@ class InputField {
 			
 		});
 
+		$(document).on('click','a[role="button"]',function(e){
+			document.onselectstart = function() { return false; };
+			event.target.ondragstart = function() { return false; };
+		});
+
 	}
 
 }

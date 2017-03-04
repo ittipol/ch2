@@ -58,55 +58,6 @@
     @endif
 
   </div>
-  
-  <!-- <div class="line space-top-bottom-20"></div>
-
-  <div class="row">
-
-    <div class="col-lg-5 col-sm-12 margin-section">
-
-      <h4>ข้อมูลฟรีแลนซ์</h4>
-
-      <div class="clearfix">
-        <div class="account pull-left">
-          @if(!empty($profileImageUrl))
-          <div class="profile-image" style="background-image:url({{$profileImageUrl}});"></div>
-          @endif
-        </div>
-
-        <div class="profile-info pull-left">
-          <h3>{{$profile['name']}}</h3>
-
-          @if(!empty($profile['Contact']['phone_number']))
-          <dl>
-            <dt>หมายเลขโทรศัพท์</dt>
-            <dd>{{$profile['Contact']['phone_number']}}</dd>
-          </dl>
-          @endif
-
-          @if(!empty($profile['Contact']['email']))
-          <dl>
-            <dt>อีเมล</dt>
-            <dd>{{$profile['Contact']['email']}}</dd>
-          </dl>
-          @endif
-
-          @if(!empty($profile['Contact']['line']))
-          <dl>
-            <dt>Line ID</dt>
-            <dd>{{$profile['Contact']['line']}}</dd>
-          </dl>
-          @endif
-
-        </div>
-
-      </div>
-
-      <a href="{{$experienceDetailUrl}}" class="button">แสดงข้อมูลฟรีแลนซ์ทั้งหมด</a>
-
-    </div>
-
-  </div> -->
 
   <div class="content-box">
     <div class="content-box-inner">
@@ -119,9 +70,9 @@
             <div class="row">
 
               <div class="col-sm-12">
-                <div class="account elem-center">
+                <div class="image-frame elem-center">
                   @if(!empty($profileImageUrl))
-                  <div class="profile-image" style="background-image:url({{$profileImageUrl}});"></div>
+                  <div class="content-box-main-image" style="background-image:url({{$profileImageUrl}});"></div>
                   @endif
                 </div>
               </div>

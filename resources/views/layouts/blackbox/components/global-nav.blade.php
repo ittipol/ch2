@@ -18,6 +18,16 @@
         </div>
         <div class="line space-top-bottom-10"></div>
 
+        <div class="account-info">
+          <div>คุณยังไม่ได้เป็นสมาชิก</div>
+          <div class="account-description">
+            <a href="{{URL::to('register')}}">
+              <h4>สมัครสมาชิก</h4>
+            </a>
+          </div>
+        </div>
+        <div class="line space-top-bottom-10"></div>
+
       @else
 
         <div class="account-info clearfix">

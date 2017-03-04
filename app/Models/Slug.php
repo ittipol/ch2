@@ -71,6 +71,4 @@ class Slug extends Model
     )->exists();
   }
 
-  public function setUpdatedAt($value) {}
-
 }

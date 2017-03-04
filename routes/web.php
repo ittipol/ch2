@@ -22,7 +22,9 @@ Route::get('cat','HomeController@addCat');
 // Route::get('lan','HomeController@lanAdd');
 
 Route::get('/',function(){
-  dd(session()->all());
+  dd(session()->get('carts'));
+
+  // dd(\Cookie::get('carts'));
 
   // foreach (session()->get('Shop') as $key => $value) {
   //   dd($value);
@@ -87,9 +89,6 @@ Route::group(['middleware' => ['auth','person.experience']], function () {
 
   Route::get('experience/profile/edit','PersonExperienceController@profile')->name('person_experience.profile');
   Route::patch('experience/profile/edit','PersonExperienceController@profileEditingSubmit')->name('person_experience.profile.edit');
-
-  // Route::get('experience/profile_edit','PersonExperienceController@profileEdit');
-  // Route::patch('experience/profile_edit','PersonExperienceController@profileEditingSubmit');
 
   Route::get('experience/profile/website_add','PersonExperienceController@websiteAdd');
   Route::patch('experience/profile/website_add','PersonExperienceController@websiteAddingSubmit');
@@ -318,9 +317,12 @@ Route::group(['middleware' => 'auth'], function () {
   Route::post('upload_profile_image', 'ApiController@uploadProfileImage')->name('Api.upload.profile_image');
 });
 
-Route::post('add_to_cart', 'ApiController@addTocart');
+Route::post('cart_add', 'ApiController@cartAdd');
+Route::post('cart_delete', 'CartController@cartDelete');
 Route::get('cart_update', 'ApiController@cartUpdate');
 Route::get('product_count', 'ApiController@productCount');
+
+Route::post('update_quantity', 'CartController@cartUpdateQuantity');
 
 // Route::group(['namespace' => 'Admin'], function () {
 //     // Controllers Within The "App\Http\Controllers\Admin" Namespace

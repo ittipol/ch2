@@ -68,11 +68,7 @@
 
                 <div class="card-sub-info-row">
                   <h5>จำนวนสินค้าคงเหลือ</h5>
-                  @if($data['unlimited_quantity'])
-                  {{$data['_unlimited_quantity']}}
-                  @else
                   {{$data['quantity']}}
-                  @endif
                 </div>
 
                 <div class="card-sub-info-row">

@@ -36,20 +36,19 @@
     left: -280px
   }
 
-  .content-wrapper {
-    left: 0;
-    padding-left: 0;
-  }
-
-  .header-fixed-top.is-main-nav-open {
-    left: 280px;
-  }
-
   .global-nav.is-main-nav-open {
     left: 0;
   }
 
+  .content-wrapper {
+    padding-left: 0;
+  }
+
   .content-wrapper.is-main-nav-open {
+    left: 280px;
+  }
+
+  .header-fixed-top.is-main-nav-open {
     left: 280px;
   }
 

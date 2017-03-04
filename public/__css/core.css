@@ -121,6 +121,7 @@ a {
 
 .elem-center {
 	margin: 0 auto !important;
+	display: block;
 }
 
 .line-height-22 {

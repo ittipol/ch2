@@ -1,9 +1,5 @@
-html, body {
+body {
 	margin: 0; 
-	height: 100%; 
-	/*overflow-x: hidden;*/
-}
-
-.wrapper {
-	display: block;
+	height: 100%;
+	overflow-x: hidden;
 }

@@ -94,23 +94,13 @@
       <?php 
         echo Form::label('quantity', 'จำนวนสินค้า');
       ?>
-      <label class="choice-box">
-        <?php
-          echo Form::checkbox('unlimited_quantity', 1, false, array(
-            'id' => 'unlimited_quantity_chkbox'
-          ));
-        ?>
-        <div class="inner">ไม่จำกัดจำนวน</div>
-      </label>
-      <div>
-        <?php
-          echo Form::text('quantity', null, array(
-            'placeholder' => 'จำนวนสินค้า',
-            'autocomplete' => 'off',
-            'id' => 'quantity_input_box'
-          ));
-        ?>
-      </div>
+      <?php
+        echo Form::text('quantity', null, array(
+          'placeholder' => 'จำนวนสินค้า',
+          'autocomplete' => 'off',
+          'id' => 'quantity_input_box'
+        ));
+      ?>
     </div>
 
     <div class="form-row">
@@ -208,9 +198,6 @@
     @if(!empty($_oldInput['Tagging']))
       tagging.setTags('{!!$_oldInput['Tagging']!!}');
     @endif
-
-    const product = new Product();
-    product.load();
 
     const form = new Form();
     form.load();

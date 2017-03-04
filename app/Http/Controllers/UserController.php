@@ -31,6 +31,37 @@ class UserController extends Controller
 
   public function login() {
 
+    // $carts = session()->get('carts');
+    // $cartModel = Service::loadModel('Cart');
+
+    // if(!empty($carts)) {
+
+    //   foreach ($carts as $cart) {
+        
+    //     // Get session id
+    //     // add find exists product in cart DB
+
+    //     // First: check product exists in cart
+    //     $record = $cartModel->where([
+    //       ['product_id','=',$cart['productId']],
+    //       ['person_id','=',1]
+    //     ])->first();
+
+    //     if(!empty($record)) {
+    //       // Get quantity
+    //       $record->increment('quantity', 5);
+    //       dd('xxx');
+    //     }else{
+    //       //
+    //     }
+
+    //     dd($record);
+
+
+    //   }
+
+    // }
+
     $this->data = array(
       'header' => false,
       'footer' => false,

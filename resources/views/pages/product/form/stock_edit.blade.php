@@ -39,26 +39,16 @@
         จำนวนคงเหลือปัจจุบัน: {{$_formData['quantity']}} {{$_formData['product_unit']}}
       </h4>
 
-      <label class="choice-box">
-        <?php
-          echo Form::checkbox('unlimited_quantity', 1, null, array(
-            'id' => 'unlimited_quantity_chkbox'
-          ));
-        ?>
-        <div class="inner">ไม่จำกัดจำนวน</div>
-      </label>
-      <div>
-        <?php
-          echo Form::label('name', 'จำนวนสินค้าหลังปรับ', array(
-            'class' => 'required'
-          ));
-          echo Form::text('quantity', '', array(
-            'placeholder' => 'จำนวนสินค้า',
-            'autocomplete' => 'off',
-            'id' => 'quantity_input_box'
-          ));
-        ?>
-      </div>
+      <?php
+        echo Form::label('name', 'จำนวนสินค้าหลังปรับ', array(
+          'class' => 'required'
+        ));
+        echo Form::text('quantity', '', array(
+          'placeholder' => 'จำนวนสินค้า',
+          'autocomplete' => 'off',
+          'id' => 'quantity_input_box'
+        ));
+      ?>
 
     </div>
 
@@ -79,9 +69,6 @@
 <script type="text/javascript">
 
   $(document).ready(function(){
-
-    const product = new Product();
-    product.load();
 
     const form = new Form();
     form.load();

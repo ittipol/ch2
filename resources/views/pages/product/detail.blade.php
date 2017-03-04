@@ -114,7 +114,7 @@
     @if($_modelData['active'])
       <div class="col-md-6 col-xs-12 quantity-box">
         <div class="clearfix">
-          <input id="product_quantity" class="quantity-text-input pull-left" type="text" name="quantity" value="{{$_modelData['minimum']}}" placeholder="จำนวนสินค้าที่สั่งซื้อ" role="number" />
+          <input id="product_quantity" class="quantity-text-input pull-left" type="text" name="quantity" value="{{$_modelData['minimum']}}" autocomplete="off" placeholder="จำนวนสินค้าที่สั่งซื้อ" role="number" />
           <a id="add_to_cart_button" class="button add-to-cart-button pull-right">ใส่ตระกร้า</a>
         </div>
       </div>
@@ -172,8 +172,8 @@
     const imageGallery = new ImageGallery(true);
     imageGallery.load({!!$_modelData['Image']!!});
 
-    const cart = new Cart('{{ csrf_token() }}',{{$_modelData['id']}},{{$_modelData['minimum']}});
-    cart.load();
+    const product = new Product('{{ csrf_token() }}',{{$_modelData['id']}},{{$_modelData['minimum']}});
+    product.load();
 
   });
 </script>

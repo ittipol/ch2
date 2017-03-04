@@ -43,12 +43,12 @@
     </div>
   @endif
 
-  @if(!$_modelData['unlimited_quantity'] && ($_modelData['quantity'] == 0))
+  @if($_modelData['quantity'] == 0)
   <div class="alert alert-danger">
     <h4>สินค้าหมด</h4>
     สินค้านี้จะไม่สามารถสั่งซื้อได้จนกว่าจะเพิ่มจำนวนสินค้า <a href="{{$productStockEditUrl}}">ไปยังหน้าปรับสินค้า</a>
   </div>
-  @elseif(!$_modelData['unlimited_quantity'] && ($_modelData['quantity'] < 11))
+  @elseif(false && $_modelData['quantity'] < 11)
   <div class="alert alert-warning">
     <h4>สินค้าใกล้หมด</h4>
     โปรดเพิ่มจำนวนสินค้าของคุณ เพื่อให้ลูกค้าสามารถสั่งซื้อสินค้านี้ได้ <a href="{{$productStockEditUrl}}">ไปยังหน้าปรับสินค้า</a>
@@ -97,11 +97,7 @@
         <h4>จำนวนสินค้า</h4>
       </a>
       <div class="list-item-group-info">
-        @if($_modelData['unlimited_quantity'])
-        <h5><b>จำนวนคงเหลือปัจจุบัน</b>: {{$_modelData['_unlimited_quantity']}}</h5>
-        @else
-        <h5><b>จำนวนคงเหลือปัจจุบัน</b>: {{$_modelData['quantity']}}</h5>
-        @endif
+        <h5><b>จำนวนคงเหลือปัจจุบัน</b>: {{$_modelData['quantity']}} {{$_modelData['product_unit']}}</h5>
       </div>
     </div>
 

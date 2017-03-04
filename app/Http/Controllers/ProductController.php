@@ -299,7 +299,6 @@ class ProductController extends Controller
 
     $this->setData('_formData',array(
       'quantity' => $model->quantity,
-      'unlimited_quantity' => $model->unlimited_quantity,
       'product_unit' => $model->product_unit
     ));
 

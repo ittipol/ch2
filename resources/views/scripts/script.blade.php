@@ -39,7 +39,8 @@
     '__js/components/image-gallery.js',
     // '__js/components/tabs.js'
     '__js/components/profile-image.js',
-    '__js/components/cart.js'
+    '__js/components/cart.js',
+    '__js/components/global-cart.js'
   );
 
   if($combine){
@@ -98,6 +99,7 @@
     '__css/pages/account.css',
     '__css/pages/detail.css',
     '__css/pages/search.css',
+    '__css/pages/cart.css',
     '__css/layouts/blackbox/wrapper.css',
     '__css/layouts/blackbox/components/action-bar.css',
     '__css/layouts/blackbox/components/main-nav.css',

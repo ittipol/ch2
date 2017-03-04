@@ -6,8 +6,9 @@ use App\library\service;
 use App\library\imageTool;
 use App\library\handleImageFile;
 use Input;
-use Session;
+// use Session;
 use Schema;
+use Cookie;
 
 class ApiController extends Controller
 { 
@@ -226,7 +227,7 @@ class ApiController extends Controller
 
   }
 
-  public function addTocart() {
+  public function cartAdd() {
 
     if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
       $this->error = array(
@@ -235,54 +236,41 @@ class ApiController extends Controller
       return $this->error();
     }
 
-    $productModel = Service::loadModel('Product');
+    $success = Service::loadModel('Cart')->addProduct(Input::get('productId'),Input::get('quantity'));
 
-    $productId = Input::get('productId');
-    $quantity = Input::get('quantity');
+    // $value = array(
+    //   'session_id' => session()->getId(),
+    //   'productId' => $productId,
+    //   'quantity' => $quantity
+    // );
 
-    // check product is active
-    $product = $productModel->where([
-      ['id','=',$productId],
-      ['active','=',1]
-    ])
-    ->select('minimum')
-    ->first();
+    // if(Auth::check()) {
+    //   $value['person_id'] = session()->get('Person.id');
+    // }
 
-    if(empty($product) || ($product->minimum > $quantity)) {
-      $this->getGeneralError();
-    }
+    // if(session()->has('carts.'.$productId)) {
+    //   $data = session()->get('carts.'.$productId);
+    //   $data['quantity'] += $quantity;
+    // }else{
+    //   $data = array(
+    //     'productId' => $productId,
+    //     'quantity' => $quantity
+    //   );
+    // }
 
-    $data = array(
-      'productId' => $productId,
-      'quantity' => $quantity
-    );
+    // session()->put('carts.'.$productId, $data);
 
-    Session::put('carts.'.$productId, $data);
+    // $data = array(
+    //   'productId' => $productId,
+    //   'quantity' => $quantity
+    // );
 
-    $carts = session()->get('carts');
+    // session()->put('carts', serialize($data));
 
-    $count = 0;
-    if(!empty($carts)) {
-      foreach ($carts as $cart) {
-
-        $product = $productModel->where([
-          ['id','=',$cart['productId']],
-          ['active','=',1]
-        ])
-        ->select('id')
-        ->first();
-
-        if(empty($product)) {
-          continue;
-        }
-
-        $count += $cart['quantity'];
-        
-      }
-    }
+    // Cookie::queue('carts'.$productId, $data, 1440);
 
     $result = array(
-      'success' => true
+      'success' => $success
     );
 
     return response()->json($result);
@@ -290,6 +278,14 @@ class ApiController extends Controller
   }
 
   public function cartUpdate() {
+
+    if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+      $this->error = array(
+        'message' => 'ขออภัย ไม่อนุญาตให้เข้าถึงหน้านี้ได้'
+      );
+      return $this->error();
+    }
+
     $result = array(
       'html' => view('layouts.blackbox.components.global-cart-product-list',array(
         '_products' => Service::loadModel('Cart')->getProducts()
@@ -299,6 +295,14 @@ class ApiController extends Controller
   }
 
   public function productCount() {
+
+    if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+      $this->error = array(
+        'message' => 'ขออภัย ไม่อนุญาตให้เข้าถึงหน้านี้ได้'
+      );
+      return $this->error();
+    }
+
     $result = array(
       'total' => Service::loadModel('Cart')->productCount()
     );

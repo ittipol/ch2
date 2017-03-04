@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\library\service;
 use App\library\string;
 use App\library\cache;
 
@@ -111,6 +112,87 @@ class PersonExperience extends Model
 
   public function checkExistByPersonId() {
     return $this->where('person_id','=',session()->get('Person.id'))->exists();
+  }
+
+  public function getPersonExperience() {
+
+    $data = array();
+
+    // Get career objective
+    $careerObjective = Service::loadModel('PersonCareerObjective')
+    ->select(array('id','career_objective'))
+    ->where('person_experience_id','=',$this->id)
+    ->first();
+
+    // Get skill
+    $skills = Service::loadModel('PersonSkill')->where('person_experience_id','=',$this->id)->get();
+
+    $_skills = array();
+    foreach ($skills as $skill) {
+      $_skills[] = array(
+        'skill' => $skill->skill
+      );
+    }
+
+    // Get language skill
+    $languageSkills = Service::loadModel('PersonLanguageSkill')->where('person_experience_id','=',$this->id)->get();
+
+    $_languageSkills = array();
+    foreach ($languageSkills as $languageSkill) {
+      $_languageSkills[] = array(
+        'name' => $languageSkill->language->name,
+        'level' => $languageSkill->languageSkillLevel->name
+      );
+    }
+
+    $models = array(
+      'PersonWorkingExperience' => 'working',
+      'PersonInternship' => 'internship',
+      'PersonEducation' => 'education',
+      'PersonProject' => 'project',
+      'PersonCertificate' => 'certificate'
+    );
+
+    foreach ($models as $_model => $alias) {
+      $experienceDetails = Service::loadModel('PersonExperienceDetail')
+      ->orderBy('start_year','DESC')
+      ->orderBy('start_month','DESC')
+      ->orderBy('start_day','DESC')
+      ->select(array('model','model_id','start_year','start_month','start_day','end_year','end_month','end_day','current'))
+      ->where(array(
+        array('person_experience_id','=',$this->id),
+        array('model','like',$_model)
+      ))
+      ->get();
+
+      $details = array();
+      foreach ($experienceDetails as $experienceDetail) {
+        
+        $__model = $experienceDetail->{lcfirst($experienceDetail->model)};
+
+        if(empty($__model)) {
+          continue;
+        }
+
+        $details[] = array_merge(
+          $__model->buildModelData(),
+          array(
+            'peroid' => $experienceDetail->getPeriod()
+          )
+        );
+
+      }
+
+      $data[$_model] = $details;
+
+    }
+
+    $data['careerObjective'] = $careerObjective->career_objective;
+    $data['skills'] = $_skills;
+    $data['languageSkills'] = $_languageSkills;
+
+    return $data;
+
   }
 
   public function buildPaginationData() {
