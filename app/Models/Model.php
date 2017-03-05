@@ -314,11 +314,11 @@ class Model extends BaseModel
       if(is_array(current($options['order']))) {
 
         foreach ($options['order'] as $value) {
-          $model->orderBy($value[0],$value[1]);
+          $model = $model->orderBy($value[0],$value[1]);
         }
 
       }else{
-        $model->orderBy(current($options['order']),next($options['order']));
+        $model = $model->orderBy(current($options['order']),next($options['order']));
       }
       
     }

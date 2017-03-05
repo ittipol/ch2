@@ -45,3 +45,7 @@
 .error-message {
 	color: #D50000;
 }
+
+.form-error-messages .error-message-group {
+	padding: 20px;
+}

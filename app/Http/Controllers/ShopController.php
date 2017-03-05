@@ -35,10 +35,68 @@ class ShopController extends Controller
 
     $this->data = $model->modelData->build();
 
+    $totalProduct = Service::loadModel('ShopRelateTo')
+    ->where([
+      ['shop_id','=',request()->get('shopId')],
+      ['model','like','Product']
+    ])->count();
+
+    $product = Service::loadModel('Product');
+    $product->paginator->setPerPage(5);
+    $product->paginator->criteria(array(
+      'order' => array('created_at','DESC')
+    ));
+    $product->paginator->setUrl('product/detail/{id}','detailUrl');
+
+    $totalJob = Service::loadModel('ShopRelateTo')
+    ->where([
+      ['shop_id','=',request()->get('shopId')],
+      ['model','like','Job']
+    ])->count();
+
+    $job = Service::loadModel('Job');
+    $job->paginator->setPerPage(5);
+    $job->paginator->criteria(array(
+      'order' => array('created_at','DESC')
+    ));
+    $job->paginator->setUrl('job/detail/{id}','detailUrl');
+
+    $totalAdvertising = Service::loadModel('ShopRelateTo')
+    ->where([
+      ['shop_id','=',request()->get('shopId')],
+      ['model','like','Advertising']
+    ])->count();
+
+    $advertising = Service::loadModel('Advertising');
+    $advertising->paginator->setPerPage(3);
+    $advertising->paginator->criteria(array(
+      'order' => array('created_at','DESC')
+    ));
+    $advertising->paginator->setUrl('advertising/detail/{id}','detailUrl');
+
+    $item = Service::loadModel('Item');
+    $item->paginator->setPerPage(3);
+    $item->paginator->criteria(array(
+      'order' => array('created_at','DESC')
+    ));
+    $item->paginator->setUrl('item/detail/{id}','detailUrl');
+
+    $this->setData('totalProduct',$totalProduct);
+    $this->setData('totalJob',$totalJob);
+    $this->setData('totalAdvertising',$totalAdvertising);
+
+    $this->setData('products',$product->paginator->getPaginationData());
+    $this->setData('jobs',$job->paginator->getPaginationData());
+    $this->setData('advertisings',$advertising->paginator->getPaginationData());
+
+    $this->setData('productPostUrl',request()->get('shopUrl').'product_post');
+    $this->setData('jobPostUrl',request()->get('shopUrl').'job_post');
+    $this->setData('productPostUrl',request()->get('shopUrl').'shop_ad_post');
+
     $this->setData('settingUrl',request()->get('shopUrl').'setting');
-    $this->setData('productUrl',request()->get('shopUrl').'product');
-    $this->setData('jobUrl',request()->get('shopUrl').'job');
-    $this->setData('advertisingUrl',request()->get('shopUrl').'advertising');
+    // $this->setData('productUrl',request()->get('shopUrl').'product');
+    // $this->setData('jobUrl',request()->get('shopUrl').'job');
+    // $this->setData('advertisingUrl',request()->get('shopUrl').'advertising');
 
     return $this->view('pages.shop.manage');
   }

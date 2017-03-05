@@ -169,6 +169,36 @@
   padding: 10px 15px;
 }
 
+.list-item-group {
+	/*border-top: 3px solid #1976D2;*/
+	padding: 10px;
+}
+
+.list-item-group > label.list-box {
+	border-bottom: 1px solid #bababa;
+	margin: 0;
+	cursor: pointer;
+}
+
+.list-item-group > label.list-box > h4 {
+	margin: 0;
+	padding: 10px;
+}
+
+.list-item-group > label.list-box > h4:hover {
+	background-color: #ececec;
+}
+
+.list-item-group > label.list-box > input[type="radio"]:checked + h4 {
+	color: #fff;
+	background-color: #0D47A1;
+}
+
+label.list-box > input[type="radio"],
+label.list-box > input[type="checkbox"] {
+	display: none;
+}
+
 @media only screen and (max-width : 480px) {
   
 	.list .list-content-wrapper .image {

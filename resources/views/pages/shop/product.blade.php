@@ -1,6 +1,8 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
+@include('pages.shop.layouts.top_nav')
+
 <div class="container">
 
   <div class="container-header">
@@ -81,8 +83,8 @@
 
             <div class="button-group">
 
-              <a href="{{$data['detailUrl']}}">
-                <div class="button wide-button">แสดงรายละเอียด</div>
+              <a href="{{$data['menuUrl']}}">
+                <div class="button wide-button">จัดการสินค้านี้</div>
               </a>
 
               <div class="additional-option">
@@ -90,7 +92,7 @@
                 <div class="dot"></div>
                 <div class="dot"></div>
                 <div class="additional-option-content">
-                  <a href="{{$data['menuUrl']}}">ไปยังหน้าจัดการสินค้านี้</a>
+                  <a href="{{$data['detailUrl']}}">แสดงสินค้านี้</a>
                   <a href="{{$data['deleteUrl']}}">ลบ</a>
                 </div>
               </div>

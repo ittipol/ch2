@@ -61,7 +61,7 @@
         <div class="form-item-group-inner">
           <div class="row">
             @foreach ($_fieldData['itemCategories'] as $id => $category)
-            <div class="col-lg-4 col-md-6 col-sm-6 col-sm-12">
+            <div class="col-lg-4 col-sm-6 col-sm-12">
               <label class="choice-box">
                 <?php
                   echo Form::radio('ItemToCategory[item_category_id]', $id);
@@ -122,14 +122,6 @@
       ?>
       <div id="_tags" class="tag"></div>
 
-    </div>
-
-    <div class="form-row">
-      แบนเนอร์
-      เพื่อเพิ่มจุดเด่นให้กับสินค้าของคุณ
-      แบบเนอร์จะแสดงบนสุดของหน้ารายละเอียดสินค้า
-      ความละเอียดของแบนเนอร์ที่แนะนำ 1920 x 1080
-      แบนเนอร์จะไม่แสดงเมื่อถูกเปิดด้วยโทรศัทพ์มือถือ
     </div>
 
     <div class="form-row">

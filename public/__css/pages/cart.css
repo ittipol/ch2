@@ -1,3 +1,7 @@
+.cart .product-list-table {
+	/*border: 1px solid #ececec;*/
+}
+
 .cart .product-image img {
 	width: 100px;
 	height: 100px;
@@ -5,12 +9,21 @@
 
 .cart .shop-info {
 	color: #fff;
-	background-color: #0071c5;
-	padding: 15px;
+  background-color: #0071c5;
+  margin: 0;
+  padding: 15px;
+
+	/*color: #000;
+  background-color: #ececec;
+  margin: 0;
+  padding: 15px;*/
 }
 
 .cart > .product-list-table .product-list-table-row {
 	position: relative;
+	background-color: #f8f8f8;
+	padding: 10px;
+	margin-top: 10px;
 }
 
 .cart > .product-list-table > .product-list-wrapper .product-list-table-row {
@@ -29,10 +42,19 @@
 	position: relative;
 }
 
+.cart .quantity-text-input-panel {
+	position: relative;
+	width: 80%;
+}
+
+.cart .quantity-text-input {
+	width: 100%;
+}
+
 .cart .cart-quantity-update-button {
 	position: absolute;
 	top: 3px;
-	right: 60px;
+	right: 0;
 	width: 35px;
 	height: 35px;
 	border: 0;
@@ -74,9 +96,22 @@
 }
 
 .cart .cart-summary {
-	margin-top: 20px;
+	/*margin-top: 20px;
 	padding-top: 20px;
-	border-top: 1px solid #0071c5;
+	border-top: 1px solid #0071c5;*/
+
+	margin-top: 20px;
+	padding: 20px;
+}
+
+.cart .cart-check-out {
+	margin-top: 20px;
+	padding: 20px 40px;
+	background-color: #ececec;
+}
+
+.cart .cart-summary .amount {
+	font-weight: bold;
 }
 
 @media only screen and (max-width : 992px) {
@@ -86,13 +121,13 @@
 }
 
 @media only screen and (max-width : 768px) {
-  .cart .quantity-text-input {
+  .cart .quantity-text-input-panel {
   	width: 30%;
   }
 }
 
 @media only screen and (max-width : 480px) {
-	.cart .quantity-text-input {
+	.cart .quantity-text-input-panel {
 		width: 60%;
 	}
 }

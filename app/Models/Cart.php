@@ -154,128 +154,93 @@ class Cart extends Model
 
   }
 
+  public function getCarts($shopId = null) {
+
+    $carts = null;
+
+    if(Auth::check()) {
+
+      if(empty($shopId)) {
+        $carts = $this->where('person_id','=',session()->get('Person.id'))->get();
+      }else{
+        $carts = $this->where([
+          ['person_id','=',session()->get('Person.id')],
+          ['shop_id','=',$shopId]
+        ])->get();
+      }
+      
+    }else{
+      // Form SESSION
+    }
+
+    return $carts;
+
+  }
+
   public function getProductSummary() {
 
-    $carts = $this->where('person_id','=',session()->get('Person.id'))->get();
+    $carts = $this->getCarts();
 
     $data = array();
     if(!empty($carts)) {
-
       foreach ($carts as $cart) {
-
-        $data[$cart->shop_id][] = array(
-          'productId' => $cart->product_id,
-          'quantity' => $cart->quantity
+        $data[] = array(
+          'shop' => array(
+            'id' => $cart->shop_id,
+            'name' => Shop::select('name')->find($cart->shop_id)->name
+          ),
+          'products' => $this->getProducts($cart->shop_id),
+          'summaries' => $this->getSummary($cart->shop_id)
         );
-
       }
-
     }
 
-    $_data = array();
-    foreach ($data as $shopId => $carts) {
+    // $data = array();
+    // if(!empty($carts)) {
 
-      $_products = array();
-      foreach ($carts as $cart) {
-        $_products[] = $this->getProductInfo($cart['productId'],$cart['quantity']);
-      }
+    //   foreach ($carts as $cart) {
 
-      // find shop info
-      $shopName = Shop::select('name')->find($shopId)->name;
+    //     $data[$cart->shop_id][] = array(
+    //       'productId' => $cart->product_id,
+    //       'quantity' => $cart->quantity
+    //     );
 
-      $_data[] = array(
-        'shop' => array(
-          'id' => $shopId,
-          'name' => $shopName
-        ),
-        'products' => $_products,
-        'summary' => $this->getSummary()
-      );
+    //   }
 
-    }
-
-    return $_data;
-
-  }
-
-  public function getSummary(){
-
-    $summaries = array(
-      'getSubTotal',
-      'getTotal'
-    );
-
-    $_summaries = array();
-    foreach ($summaries as $summary) {
-      $this->{$summary}();
-
-      // $_summaries[] = array(
-      //   'name' => $summary;
-      // );
-    }
-
-  }
-
-  public function getSubTotal() {
-    
-  }
-
-  public function getTotal() {
-    
-  }
-
-  public function getProducts() {
-
-    // $url = new Url;
-    // $cache = new Cache;
-    // $currency = new Currency;
-
-    // if(Auth::check()) {
-    // Get From DB
-    // }else{
-    // Get From Session
     // }
 
-    $carts = $this->where('person_id','=',session()->get('Person.id'))->get();
+    // $_data = array();
+    // foreach ($data as $shopId => $carts) {
+
+    //   $_products = array();
+    //   foreach ($carts as $cart) {
+    //     $_products[] = $this->getProductInfo($cart['productId'],$cart['quantity']);
+    //   }
+
+    //   $_data[] = array(
+    //     'shop' => array(
+    //       'id' => $shopId,
+    //       'name' => Shop::select('name')->find($shopId)->name
+    //     ),
+    //     'products' => $_products,
+    //     'summaries' => $this->getSummary($shopId)
+    //   );
+
+    // }
+
+    return $data;
+
+  }
+
+  public function getProducts($shopId = null) {
+
+    $carts = $this->getCarts($shopId);
 
     $products = array();
     if(!empty($carts)) {
 
       foreach ($carts as $cart) {
-
         $products[] = $this->getProductInfo($cart->product_id,$cart->quantity);
-        // $product = Product::where([
-        //   ['id','=',$cart->product_id],
-        //   ['active','=',1]
-        // ])
-        // ->select('id','name','price')
-        // ->first();
-
-        // if(empty($product)) {
-        //   continue;
-        // }
-
-        // $image = $product->getModelRelationData('Image',array(
-        //   'fields' => array('id','model','model_id','filename','image_type_id'),
-        //   'first' => true
-        // ));
-
-        // $imageUrl = '/images/common/no-img.png';
-        // if(!empty($image)) {
-        //   $imageUrl = $cache->getCacheImageUrl($image,'sm');
-        // }
-
-        // $products[] = array(
-        //   'id' => $product->id,
-        //   'name' => $product->name,
-        //   'price' => $currency->format($product->price),
-        //   'quantity' => $cart->quantity,
-        //   'total' => $currency->format($product->price * $cart['quantity']),
-        //   'imageUrl' => $imageUrl,
-        //   'minimum' => $product->minimum,
-        //   'productDetailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id' => $product->id))
-        // );
-
       }
 
     }
@@ -284,18 +249,100 @@ class Cart extends Model
 
   }
 
+  public function getSummary($shopId = null){
+
+    $summaries = array(
+      'subTotal' => 'getSubTotal',
+      'total' => 'getTotal'
+    );
+
+    $_summaries = array();
+    foreach ($summaries as $alias => $fx) {
+      $_summaries[$alias] = array(
+        'value' => $this->{$fx}($shopId)
+      );
+    }
+
+    return $_summaries;
+
+  }
+
+  public function getSubTotal($shopId = null) {
+
+    $currency = new Currency;
+
+    if(!empty($shopId)) {
+      $carts = $this->where([
+        ['person_id','=',session()->get('Person.id')],
+        ['shop_id','=',$shopId]
+      ])->get();
+    }else{
+      $carts = $this->where('person_id','=',session()->get('Person.id'))->get();
+    }
+
+    $subTotal = 0;
+    if(!empty($carts)) {
+
+      foreach ($carts as $cart) {
+
+        $product = Product::where([
+          ['id','=',$cart->product_id],
+          ['active','=',1]
+        ])
+        ->select('price')
+        ->first();
+
+        $subTotal += ($product->price * $cart->quantity);
+
+      }
+
+    }
+
+    return $currency->format($subTotal);
+
+  }
+
+  public function getTotal($shopId = null) {
+
+    $currency = new Currency;
+
+    if(!empty($shopId)) {
+      $carts = $this->where([
+        ['person_id','=',session()->get('Person.id')],
+        ['shop_id','=',$shopId]
+      ])->get();
+    }else{
+      $carts = $this->where('person_id','=',session()->get('Person.id'))->get();
+    }
+
+    $total = 0;
+    if(!empty($carts)) {
+
+      foreach ($carts as $cart) {
+
+        $product = Product::where([
+          ['id','=',$cart->product_id],
+          ['active','=',1]
+        ])
+        ->select('price')
+        ->first();
+
+        // Plus Tax
+        // 
+
+        $total += ($product->price * $cart->quantity);
+
+      }
+
+    }
+
+    return $currency->format($total);
+
+  }
+
   public function productCount() {
 
-    // if(Auth::check()) {
-    // Get From DB
-    // }else{
-    // Get From Session
-    // }
-
-    // test for session
-    // $carts = session()->get('carts');
-
-    $carts = $this->where('person_id','=',session()->get('Person.id'))->get();
+    $carts = $this->getCarts();
 
     $count = 0;
     if(!empty($carts)) {
@@ -322,7 +369,31 @@ class Cart extends Model
   }
 
   public function hasProducts() {
-    return $this->where('person_id','=',session()->get('Person.id'))->exists();
+    if(Auth::check()) {
+      return $this->where('person_id','=',session()->get('Person.id'))->exists();
+    }else {
+      // Check from SESSION
+    }
+  }
+
+  public function getProductTotal($productId,$quantity) {
+
+    $currency = new Currency;
+
+    $price = Product::select('price')
+    ->find($productId)->price;
+
+    return $currency->format($price * $quantity);
+  }
+
+  public function getShopId($productId) {
+    return $this->where([
+      ['product_id','=',$productId],
+      ['person_id','=',session()->get('Person.id')]
+    ])
+    ->select('shop_id')
+    ->first()
+    ->shop_id;
   }
 
   public function setUpdatedAt($value) {}

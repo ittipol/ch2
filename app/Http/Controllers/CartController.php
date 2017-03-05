@@ -14,7 +14,7 @@ class CartController extends Controller
 
     $cart = Service::loadModel('Cart');
 
-    $this->setData('summaries',$cart->getProductSummary());
+    $this->setData('data',$cart->getProductSummary());
 
     return $this->view('pages.cart.cart');
 
@@ -26,12 +26,17 @@ class CartController extends Controller
       exit();
     }
 
-    $success = Service::loadModel('Cart')->updateQuantity(Input::get('productId'),Input::get('quantity'));
+    $cartModel = Service::loadModel('Cart');
 
-    // Get Summary after update 
+    $productId = Input::get('productId');
+    $quantity = Input::get('quantity');
+
+    $success = $cartModel->updateQuantity($productId,$quantity);
 
     $result = array(
-      'success' => $success
+      'success' => $success,
+      'productTotal' => $cartModel->getProductTotal($productId,$quantity),
+      'summaries' => $cartModel->getSummary($cartModel->getShopId($productId))
     );
 
     return response()->json($result);
@@ -47,17 +52,10 @@ class CartController extends Controller
       return $this->error();
     }
 
-    $productId = Input::get('productId');
-
     $cartModel = Service::loadModel('Cart');
 
-    $shopId = $cartModel::where([
-      ['person_id','=',session()->get('Person.id')],
-      ['product_id','=',$productId]
-    ])
-    ->select('shop_id')
-    ->first()
-    ->shop_id;
+    $productId = Input::get('productId');
+    $shopId = $cartModel->getShopId($productId);
 
     // Delete
     $success = $cartModel->deleteProduct($productId);
@@ -93,7 +91,6 @@ class CartController extends Controller
     $result = array_merge(array(
       'success' => true,
       'empty' => !$total,
-      'shopId' => $shopId,
     ),$dataMerge);
 
     return response()->json($result);

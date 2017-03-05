@@ -1,7 +1,7 @@
 @extends('layouts.default.main')
 @section('content')
 
-<div class="bg-overlay"></div>
+<!-- <div class="bg-overlay"></div> -->
 
 <div class="login-form">
 	<div class="login-form-inner">
@@ -10,11 +10,11 @@
     @if(!empty($errors->all()))
     <div class="form-error-messages space-bottom-20">
       <div class="form-error-messages-inner">
-        <ul>
+        <div class="error-message-group">
           <?php foreach ($errors->all() as $message) { ?>
-            <li class="error-messages"><?php echo $message; ?></li>
+            <div class="error-messages"><?php echo $message; ?></div>
           <?php } ?>
-        </ul>
+        </div>
       </div>
     </div>
     @endif
@@ -74,6 +74,8 @@
       init() {
 
         let w = window.innerWidth;
+
+        $('body').css('height',window.innerHeight);
 
         if(w > 992) {
 

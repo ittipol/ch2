@@ -60,14 +60,16 @@
           <li class="item">
             <a href="{{URL::to('/')}}">หน้าแรก</a>
           </li>
-          <li class="item">
-            <a href="{{URL::to('/')}}">Wiki ชลบุรี</a>
-          </li>
-          <li class="item">
-            <a href="{{URL::to('experience')}}">เพิ่มประวัติการทำงาน</a>
-          </li>
 
           @if (Auth::check())
+
+            <li class="item">
+              <a href="{{URL::to('person/experience')}}">ประวัติการทำงาน</a>
+            </li>
+
+            <li class="item">
+              <a href="{{URL::to('person/freelance')}}">ฟรีแลนซ์</a>
+            </li>
 
             <li class="line space-top-bottom-10"></li>
 
@@ -122,6 +124,19 @@
             </li>
 
             <li class="line space-top-bottom-10"></li>
+
+            <li class="item">
+              <a href="{{URL::to('product')}}">สินค้าในร้านค้า</a>
+            </li>
+            <li class="item">
+              <a href="{{URL::to('job')}}">ประกาศงานจากบริษัทและร้านค้า</a>
+            </li>
+            <li class="item">
+              <a href="{{URL::to('advertising')}}">ประกาศโฆษณาจากบริษัทและร้านค้า</a>
+            </li>
+
+            <li class="line space-top-bottom-10"></li>
+
             <li class="item">
               <a href="javascript:void(0)">ประกาศ</a>
               <div class="additional-option">
@@ -135,7 +150,7 @@
               <ul class="submenu">
                 <li class="submenu-item">
                   <a href="{{URL::to('product/add')}}">ประกาศซื้อ-เช่า-ขายสินค้า</a>
-                  <a href="{{URL::to('real-estate/add')}}">โฆษณาซื้อ-เช่า-ขายอสังหาริมทรัพย์</a>
+                  <a href="{{URL::to('real-estate/add')}}">ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</a>
                 </li>
               </ul>
             </li>
@@ -147,9 +162,6 @@
               <a href="{{URL::to('entity/create')}}">งานที่คุณกำลังค้นหา</a>
             </li>
             <li class="line space-top-bottom-10"></li>
-            <li class="item">
-              <a href="{{URL::to('entity/create')}}">ตั้งค่า</a>
-            </li>
             <li class="item">
               <a href="{{URL::to('entity/create')}}">ข้อเสนอแนะ</a>
             </li>

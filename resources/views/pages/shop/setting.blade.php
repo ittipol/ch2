@@ -1,6 +1,8 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
+@include('pages.shop.layouts.top_nav')
+
 <div class="top-header-wrapper">
   <h2 class="top-header">ตั้งค่า</h2>
 </div>

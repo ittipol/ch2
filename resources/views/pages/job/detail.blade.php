@@ -3,17 +3,19 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 
-<div class="top-header-wrapper">
-  <div class="top-header">
-    <div class="detail-title">
-      <h4 class="sub-title">ประกาศงาน</h4>
-      <h2 class="title">{{$_modelData['name']}}</h2>
-      <div class="tag-group">
-        <a class="tag-box">{{$shop['name']}}</a>
-        <a class="tag-box">{{$_modelData['_employmentTypeName']}}</a>
-        @foreach ($_modelData['Tagging'] as $tagging)
-          <a class="tag-box">{{$tagging['_word']}}</a>
-        @endforeach
+<div class="top-header-wrapper top-header-border">
+  <div class="container">
+    <div class="top-header">
+      <div class="detail-title">
+        <h4 class="sub-title">ประกาศงาน</h4>
+        <h2 class="title">{{$_modelData['name']}}</h2>
+        <div class="tag-group">
+          <a class="tag-box">{{$shop['name']}}</a>
+          <a class="tag-box">{{$_modelData['_employmentTypeName']}}</a>
+          @foreach ($_modelData['Tagging'] as $tagging)
+            <a class="tag-box">{{$tagging['_word']}}</a>
+          @endforeach
+        </div>
       </div>
     </div>
   </div>

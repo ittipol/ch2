@@ -37,13 +37,7 @@ class GlobalCart {
 				let minimum = $(this).data('minimum');
 
 				if((quantity == '') || (quantity == 0)) {
-
 					$(this).val(_this.tempQuantity);
-
-					// const notificationBottom = new NotificationBottom('จำนวนสินค้าไม่ถูกต้อง','','error');
-					// notificationBottom.setDelay(5000);
-					// notificationBottom.load();
-
 				}else if(minimum > quantity){
 
 					$(this).val(_this.tempQuantity);
@@ -87,6 +81,13 @@ class GlobalCart {
 	    	_this.productCountUpdate();
 	    	// update product in global cart
 	    	_this.cartUpdate();
+	    	// update in cart page
+	    	$('#_product_'+productId).find('.product-total-amount').text(response.productTotal);
+
+	    	let parent = $('#_product_'+productId).parent().parent();
+
+	    	parent.find('.sub-total').text(response.summaries.subTotal.value);
+	    	parent.find('.total-amount').text(response.summaries.total.value);
 
 	    	setTimeout(function(){
 	    		const notificationBottom = new NotificationBottom('สินค้า '+quantity+' ชิ้น ได้ถูกบันทึกไปยังตะกร้าสินค้าของคุณ','','success');
@@ -167,6 +168,8 @@ class GlobalCart {
 
 	cartDelete(productId,obj) {
 
+		this.allowedInput = false;
+
 		let _this = this;
 
 	  let request = $.ajax({
@@ -210,7 +213,7 @@ class GlobalCart {
 
 	    	}else if(response.totalShopProductEmpty) {
 
-	    		$('#_shop_'+response.shopId).fadeOut(200);
+	    		let parent = $('#_product_'+productId).parent().parent();
 
 	    		setTimeout(function(){
 
@@ -218,7 +221,7 @@ class GlobalCart {
 	    				_this.cartUpdate();
 	    			}
 	    			
-	    			$('#_shop_'+response.shopId).remove();
+	    			parent.remove();
 	    			$('#loading_icon').removeClass('display');
 	    			$('.global-overlay').removeClass('isvisible');
 	    		},200);
@@ -234,6 +237,10 @@ class GlobalCart {
 	    	}
 
 	    }
+
+	    setTimeout(function(){
+	      _this.allowedInput = true;
+	    },400);
 
 	  });
 

@@ -39,7 +39,6 @@
     '__js/components/image-gallery.js',
     // '__js/components/tabs.js'
     '__js/components/profile-image.js',
-    '__js/components/cart.js',
     '__js/components/global-cart.js'
   );
 
@@ -95,6 +94,7 @@
     '__css/components/tile.css',
     '__css/components/message.css',
     '__css/components/error.css',
+    '__css/pages/home.css',
     '__css/pages/shop.css',
     '__css/pages/account.css',
     '__css/pages/detail.css',

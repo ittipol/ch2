@@ -20,8 +20,9 @@ label.choice-box {
 
 .form-item-group label.choice-box {
 	display: block;
-	background-color: #ececec;
-	margin-bottom: 20px;
+	/*background-color: #ececec;*/
+	margin-bottom: 0;
+	border-bottom: 1px solid #bababa;
 }
 
 label.choice-box input[type="radio"],
@@ -38,7 +39,7 @@ label.choice-box input[type="checkbox"] + .inner {
 
 .form-item-group label.choice-box input[type="radio"]:checked + .inner,
 .form-item-group label.choice-box input[type="checkbox"]:checked + .inner {
-	background-color: #A5D6A7;
+	/*background-color: #A5D6A7;*/
 }
 
 label.choice-box input[type="radio"] + .inner::before {

@@ -1,6 +1,8 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
+@include('pages.shop.layouts.top_nav')
+
 <div class="container">
 
   <div class="tile-nav-group space-top-bottom-20 clearfix">

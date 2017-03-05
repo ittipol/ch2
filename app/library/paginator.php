@@ -123,15 +123,6 @@ class Paginator {
 
       });
 
-      // $arrLen = count($criteria['conditions']['or']);
-      // for ($i=0; $i < $arrLen; $i++) {
-      //   $model = $model->orWhere(
-      //     $criteria['conditions']['or'][$i][0],
-      //     $criteria['conditions']['or'][$i][1],
-      //     $criteria['conditions']['or'][$i][2]
-      //   );
-      // }
-
       unset($criteria['conditions']['or']);
 
     }
@@ -159,11 +150,11 @@ class Paginator {
       if(is_array(current($this->criteriaData['order']))) {
 
         foreach ($this->criteriaData['order'] as $value) {
-          $model->orderBy($value[0],$value[1]);
+          $model = $model->orderBy($value[0],$value[1]);
         }
 
       }else{
-        $model->orderBy(current($this->criteriaData['order']),next($this->criteriaData['order']));
+        $model = $model->orderBy(current($this->criteriaData['order']),next($this->criteriaData['order']));
       }
       
     }
@@ -341,7 +332,7 @@ class Paginator {
     $offset = ($this->page - 1)  * $this->perPage;
 
     $model = $this->condition($this->model->newInstance());
-    $model = $this->order($model);
+    $model = $this->order($this->model);
 
     $records = $model
     ->take($this->perPage)

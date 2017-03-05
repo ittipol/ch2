@@ -15,16 +15,16 @@
 
   <div id="cart_panel" class="product-list-table">
 
-    @if(!empty($summaries))
+    @if(!empty($data))
 
-      @foreach($summaries as $summary)
+      @foreach($data as $value)
 
-        <div id="_shop_{{$summary['shop']['id']}}">
+        <div id="_shop_{{$value['shop']['id']}}">
 
-          <h4 class="shop-info">{{$summary['shop']['name']}}</h4>
+          <h5 class="shop-info">{{$value['shop']['name']}}</h5>
 
           <div class="product-list-wrapper">
-            @foreach($summary['products'] as $product)
+            @foreach($value['products'] as $product)
             <div id="_product_{{$product['id']}}" class="product-list-table-row clearfix">
 
               <div class="product-image pull-left">
@@ -46,18 +46,20 @@
                 </div>
 
                 <div class="col-md-4 col-xs-12 product-info-container">
-                  <input 
-                  class="quantity-text-input cart-summary-quantity-input" 
-                  type="text" name="quantity" 
-                  value="{{$product['quantity']}}"
-                  autocomplete="off"
-                  placeholder="จำนวนสินค้าที่สั่งซื้อ" 
-                  role="number"
-                  data-id="{{$product['id']}}"
-                  data-minimum="{{$product['minimum']}}" />
-                  <button class="cart-quantity-update-button">
-                    <img src="/images/icons/edit-blue.png">
-                  </button>
+                  <div class="quantity-text-input-panel">
+                    <input 
+                    class="quantity-text-input cart-summary-quantity-input" 
+                    type="text" name="quantity" 
+                    value="{{$product['quantity']}}"
+                    autocomplete="off"
+                    placeholder="จำนวนสินค้าที่สั่งซื้อ" 
+                    role="number"
+                    data-id="{{$product['id']}}"
+                    data-minimum="{{$product['minimum']}}" />
+                    <button class="cart-quantity-update-button">
+                      <img src="/images/icons/edit-blue.png">
+                    </button>
+                  </div>
                 </div>
 
                 <div class="col-md-2 col-xs-12 product-info-container">
@@ -73,17 +75,27 @@
           </div>
 
           <div class="cart-summary clearfix">
-            <!-- สรุปการสั่งซื้อ -->
-            <div class="sub-total pull-right">
-              sub total
+
+            <div class="pull-right">
+              <!-- สรุปการสั่งซื้อ -->
+              <div class="text-right">
+                มูลค่าสินค้า: <span class="sub-total amount">{{$value['summaries']['subTotal']['value']}}</span>
+              </div>
+              <div class="text-right">
+                ยอดสุทธิ: <span class="total-amount amount">{{$value['summaries']['total']['value']}}</span>
+              </div>
+
             </div>
-            <div class="save-total"></div>
-            <div class="total-amount"></div>
+
           </div>
 
         </div>
 
       @endforeach
+
+      <div class="cart-check-out text-right">
+        <a href="{{URL::to('checkout')}}" class="button">ชำระเงิน</a>
+      </div>
 
     @else
 

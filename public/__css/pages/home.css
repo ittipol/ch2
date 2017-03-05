@@ -1,0 +1,115 @@
+.banner {
+	position: relative;
+	height: 500px;
+	background-color: #ccc;
+	background-image: url(/images/login-bg.jpg);
+	background-size: cover;
+	background-position: bottom center;
+	margin-bottom: 40px;
+}
+
+.banner .banner-overlay-message {
+	position: absolute;
+	top: 100px;
+}
+
+.banner .banner-primary-title {
+	color: #fff;
+	font-size: 40px;
+	width: 60%;
+}
+
+.banner .banner-description {
+	color: #fff;
+	font-size: 18px;
+}
+
+/*.main-navigation-wrapper {
+	background-color: #0071c5;
+}
+
+nav.main-navigation {
+	width: 100%;
+	min-width: 1020px;
+	max-width: 1220px;
+	margin: 0 auto;
+	padding-top: 10px;
+}
+
+nav.main-navigation .main-navigation-item {
+	text-align: center;
+	cursor: pointer;
+	line-height: 40px;
+	color: #fff;
+	padding: 0 5px;
+	display: inline-block;
+}
+
+nav.main-navigation .main-navigation-item:hover {
+	color: #0071c5;
+	background-color: #fff;
+}*/
+
+.content-panel {
+	background-color: #F2F3F7;
+	border-top: 5px solid #0071c5;
+}
+
+.content-panel .image-section {
+	position: relative;
+	height: 150px;
+	text-align: center;
+}
+
+.content-panel .image-section > img.icon {
+	position: relative;
+	top: 50%;
+	width: 80px;
+	height: 80px;
+	padding: 10px;
+	margin-top: -40px;
+}
+
+.content-panel .content-section {
+	padding: 20px 20px 0;
+}
+
+.content-panel .content-section .primary-image-tile {
+	/*width: 250px;*/
+	height: 250px;
+	background-position: center;
+	background-size: auto;
+	background-repeat: no-repeat;
+}
+
+.content-panel .info-box {
+	border: 1px solid #ccc;
+	background-color: #fff;
+	padding: 20px;
+	margin-bottom: 20px;
+}
+
+.site-map {
+	/*padding: 20px;*/
+	margin-bottom: 20px;
+}
+
+.site-map .site-map-title {
+	/*padding-bottom: 5px;*/
+	/*border-bottom: 3px solid #0071c5;*/
+}
+
+.site-map .site-map-content {
+	margin-bottom: 20px;
+}
+
+.site-map .site-map-link {
+	margin-bottom: 3px;
+}
+
+@media only screen and (max-width : 480px) {
+  .banner .banner-primary-title {
+  	font-size: 35px;
+  	width: 90%;
+  }
+}

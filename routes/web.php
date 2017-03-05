@@ -21,7 +21,7 @@ Route::post('ac','HomeController@addXxxSub');
 Route::get('cat','HomeController@addCat');
 // Route::get('lan','HomeController@lanAdd');
 
-Route::get('/',function(){
+Route::get('/debug',function(){
   dd(session()->get('carts'));
 
   // dd(\Cookie::get('carts'));
@@ -35,6 +35,8 @@ Route::get('/',function(){
 });
 
 // 
+
+Route::get('/','HomeController@index');
 
 Route::get('logout',function(){
   Auth::logout();
@@ -152,7 +154,13 @@ Route::group(['middleware' => ['auth','person.experience']], function () {
 
 });
 
+// Cart
 Route::get('cart','CartController@index')->name('cart');
+
+// Checkout
+Route::group(['middleware' => 'auth'], function () {
+  Route::get('checkout','CheckoutController@checkout')->name('checkout');
+});
 
 // community / Shop
 // Route::get('community/shop_feature','ShopController@feature');
