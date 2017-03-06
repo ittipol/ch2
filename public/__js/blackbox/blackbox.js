@@ -3,12 +3,8 @@ class Blackbox {
   constructor() {}
 
   load(){
-    // this.init();
     this.bind();
-    // this.setLayout();
   }
-
-  init() {}
 
   bind() {
 

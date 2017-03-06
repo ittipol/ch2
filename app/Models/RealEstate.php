@@ -40,7 +40,6 @@ class RealEstate extends Model
   protected $validation = array(
     'rules' => array(
       'name' => 'required|max:255',
-      // 'price' => 'required|regex:/^[\d,]*(\.\d{1,2})?$/|max:255',
       'price' => 'required|regex:/^[0-9,]*(\.[0-9]{1,2})?$/|max:255',
       'Contact.phone_number' => 'required|max:255',
       'real_estate_type_id' => 'required' 

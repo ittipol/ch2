@@ -33,9 +33,9 @@ a {
 	text-decoration: none !important;
 }
 
-/*a:visited {
+a.button:visited {
 	color: #fff;
-}*/
+}
 
 .line {
 	width: 100%;
@@ -228,4 +228,12 @@ a {
 */
 #map.map-small {
 	height: 250px;
+}
+
+/*.elem-visible {
+	display: block;
+}*/
+
+.hide-element {
+	display: none;
 }

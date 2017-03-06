@@ -6,10 +6,14 @@
     <div class="top-header">
       <div class="row">
         <div class="col-md-4 col-sm-12">
-          <img class="header-primary-image" src="{{$imageUrl}}">
+          <a href="{{URL::to($productDetailUrl)}}">
+            <img class="header-primary-image" src="{{$imageUrl}}">
+          </a>
         </div>
         <div class="header-info col-md-8 col-sm-12">
-          <h2>{{$_modelData['name']}}</h2>
+          <a href="{{URL::to($productDetailUrl)}}">
+            <h2>{{$_modelData['name']}}</h2>
+          </a>
           <h4>{{$_modelData['_price']}}</h4>
           <div class="line"></div>
           <div class="space-top-20">
@@ -29,14 +33,21 @@
 
 <div class="container">
 
+  @if(Session::has('product_added'))
+    <div class="alert alert-info">
+      <h4><strong>โปรดตรวจสอบและเพิ่มข้อมูลสินค้าให้ครบถ้วนก่อนการขายสินค้านี้</strong></h4> 
+      ข้อมูลบางส่วนที่จำเป็นของสินค้านี้อาจยังไม่ได้ถูกเพิ่ม โปรดตรวจสอบและเพิ่มข้อมูลของสินค้าก่อนการขายสินค้า
+    </div>
+  @endif
+
   @if($_modelData['active'])
     <div class="alert alert-success">
-      <h4><b>สถานะการขาย</b>: {{$_modelData['_active']}}</h4> 
+      <h4><strong>สถานะการขาย</strong>: {{$_modelData['_active']}}</h4> 
       สามารถสั่งซื้อสินค้านี้ได้แล้ว
     </div>
   @else
     <div class="alert alert-danger">
-      <h4><b>สถานะการขาย</b>: {{$_modelData['_active']}}</h4>
+      <h4><strong>สถานะการขาย</strong>: {{$_modelData['_active']}}</h4>
       <p>ไม่สามารถสั่งซื้อสินค้านี้ได้เมื่ออยู่ในสถานะ "ปิดการขาย"</p>
       <br/>
       <p>เปิดการขายสินค้านี้โดยไปยังหน้า "สถานะสินค้า" และเลือก "เปิดการขายสินค้านี้" <a href="{{$productStatusUrl}}">ไปยังหน้าสถานะสินค้า</a></p>
@@ -111,9 +122,26 @@
     <div class="list-item">
       <a href="">
         <img class="icon" src="/images/common/pencil.png" >
-        <h4>โปรโมชั่นของสินค้า</h4>
+        <h4>โปรโมชั่นส่วนลด</h4>
       </a>
     </div>
+
+    <div class="list-item">
+      <a href="{{$productShippingUrl}}">
+        <img class="icon" src="/images/common/pencil.png" >
+        <h4>การคำนวณขนส่งสินค้า</h4>
+      </a>
+      <div class="list-item-group-info">
+        <h5><b>วิธีการคำนวณค่าขนส่ง</b>: {{$_modelData['_shipping_calculate_from']}}</h5>
+      </div>
+    </div>
+
+    <!-- <div class="list-item">
+      <a href="">
+        <img class="icon" src="/images/common/pencil.png" >
+        <h4>โปรโมชั่นของสินค้า</h4>
+      </a>
+    </div> -->
 
     <div class="list-item">
       <a href="{{$productNotificationEditUrl}}">

@@ -117,6 +117,10 @@ class CheckForPersonHasShopPermission
           'permission' => 'edit',
           'modelName' => 'Product'
         ),
+        'shop.product_shipping.edit' => array(
+          'permission' => 'edit',
+          'modelName' => 'Product'
+        ),
       );
 
       if(empty($name) || empty($pages[$name])) {

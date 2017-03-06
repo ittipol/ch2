@@ -54,6 +54,9 @@ class CustomFormRequest extends FormRequest
     'shop.product_notification.edit' => array(
       'modelName' => 'Product'
     ),
+    'shop.product_shipping.edit' => array(
+      'modelName' => 'ProductShipping'
+    ),
     'person_experience.internship.add' => array(
       'modelName' => 'PersonInternship'
     ),
@@ -111,6 +114,7 @@ class CustomFormRequest extends FormRequest
     }
 
     $name = Route::currentRouteName();
+    $data = request()->all();
 
     // $model = service::loadModel($this->pages[$name]['modelName']);
     // $this->validation = $model->getValidation();
@@ -129,6 +133,10 @@ class CustomFormRequest extends FormRequest
             break;
           }
 
+          continue;
+        }
+
+        if(!empty($this->validation['conditions'][$key]) && (!isset($data[$this->validation['conditions'][$key]['field']]) || !($data[$this->validation['conditions'][$key]['field']] == $this->validation['conditions'][$key]['value']))) {
           continue;
         }
         

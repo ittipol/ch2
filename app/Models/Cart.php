@@ -181,52 +181,28 @@ class Cart extends Model
 
     $carts = $this->getCarts();
 
-    $data = array();
+    $shopIds = array();
     if(!empty($carts)) {
       foreach ($carts as $cart) {
-        $data[] = array(
-          'shop' => array(
-            'id' => $cart->shop_id,
-            'name' => Shop::select('name')->find($cart->shop_id)->name
-          ),
-          'products' => $this->getProducts($cart->shop_id),
-          'summaries' => $this->getSummary($cart->shop_id)
-        );
+        if(!in_array($cart->shop_id, $shopIds)) {
+          $shopIds[] = $cart->shop_id;
+        }
       }
     }
 
-    // $data = array();
-    // if(!empty($carts)) {
-
-    //   foreach ($carts as $cart) {
-
-    //     $data[$cart->shop_id][] = array(
-    //       'productId' => $cart->product_id,
-    //       'quantity' => $cart->quantity
-    //     );
-
-    //   }
-
-    // }
-
-    // $_data = array();
-    // foreach ($data as $shopId => $carts) {
-
-    //   $_products = array();
-    //   foreach ($carts as $cart) {
-    //     $_products[] = $this->getProductInfo($cart['productId'],$cart['quantity']);
-    //   }
-
-    //   $_data[] = array(
-    //     'shop' => array(
-    //       'id' => $shopId,
-    //       'name' => Shop::select('name')->find($shopId)->name
-    //     ),
-    //     'products' => $_products,
-    //     'summaries' => $this->getSummary($shopId)
-    //   );
-
-    // }
+    $data = array();
+    if(!empty($shopIds)) {
+      foreach ($shopIds as $shopId) {
+        $data[] = array(
+          'shop' => array(
+            'id' => $shopId,
+            'name' => Shop::select('name')->find($shopId)->name
+          ),
+          'products' => $this->getProducts($shopId),
+          'summaries' => $this->getSummary($shopId)
+        );
+      }
+    }
 
     return $data;
 

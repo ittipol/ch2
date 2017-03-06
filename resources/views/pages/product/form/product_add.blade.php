@@ -156,7 +156,7 @@
 
   </div>
 
-  <div class="form-section">
+<!--   <div class="form-section">
 
     <div class="form-row">
 
@@ -169,7 +169,7 @@
 
     </div>
 
-  </div>
+  </div> -->
 
   <?php
     echo Form::submit('เพิ่มสินค้า', array(

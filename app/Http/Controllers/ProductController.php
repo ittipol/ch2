@@ -33,9 +33,9 @@ class ProductController extends Controller
       $page = $this->query['page'];
     }
 
-    $model->paginator->criteria(array(
-      'fields' => array('products.*')
-    ));
+    // $model->paginator->criteria(array(
+    //   'fields' => array('products.*')
+    // ));
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl('product/list');
     $model->paginator->setUrl('product/detail/{id}','detailUrl');
@@ -117,12 +117,14 @@ class ProductController extends Controller
     $this->setData('imageUrl',$imageUrl);
     // $this->setData('categoryPathName',$model->getCategoryPathName());
 
+    $this->setData('productDetailUrl','product/detail/'.$model->id);
     $this->setData('productEditUrl',request()->get('shopUrl').'product_edit/'.$model->id);
     $this->setData('productStatusUrl',request()->get('shopUrl').'product_status_edit/'.$model->id);
     $this->setData('productSpecificationEditUrl',request()->get('shopUrl').'product_specification_edit/'.$model->id);
     $this->setData('productCategoryEditUrl',request()->get('shopUrl').'product_category_edit/'.$model->id);
     $this->setData('productStockEditUrl',request()->get('shopUrl').'product_stock_edit/'.$model->id);
     $this->setData('productPriceEditUrl',request()->get('shopUrl').'product_price_edit/'.$model->id);
+    $this->setData('productShippingUrl',request()->get('shopUrl').'product_shipping_edit/'.$model->id);
     $this->setData('productNotificationEditUrl',request()->get('shopUrl').'product_notification_edit/'.$model->id);
 
     return $this->view('pages.product.menu');
@@ -145,6 +147,9 @@ class ProductController extends Controller
     $request->request->add(['ShopRelateTo' => array('shop_id' => request()->get('shop')->id)]);
 
     if($model->fill($request->all())->save()) {
+
+      session()->flash('product_added', true);
+
       Message::display('ข้อมูลถูกเพิ่มแล้ว','success');
       return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
     }else{
@@ -347,6 +352,72 @@ class ProductController extends Controller
 
   }
 
+  public function shippingEdit() {
+
+    $product = Service::loadModel('Product')->find($this->param['id']);
+
+    $model = $product->getRalatedData('ProductShipping',array(
+      'first' => true
+    ));
+
+    if(empty($model)) {
+      $model = Service::loadModel('ProductShipping');
+    }
+
+    $this->setData('_formModel',array(
+      'modelName' => $model->modelName,
+    ));
+
+    $this->setData('_formData', array_merge($model->formHelper->getFormData(),array(
+      'shipping_calculate_from' => $product->shipping_calculate_from
+    )));
+
+    $model->formHelper->loadFieldData('ShippingCostCalCulateType',array(
+      'key' =>'id',
+      'field' => 'name',
+      'index' => 'ShippingCalTypes'
+    ));
+
+    $model->formHelper->loadFieldData('shippingAmountCondition',array(
+      'key' =>'id',
+      'field' => 'name',
+      'index' => 'shippingAmountConditions'
+    ));
+
+    $model->formHelper->setData('conditionTypes',array(
+      '>' => 'มากกว่า',
+      '=' => 'เท่ากับ',
+      '<' => 'น้อยกว่า',
+    ));
+
+    $this->setData('_fieldData',$model->formHelper->getFieldData());
+
+    return $this->view('pages.product.form.shipping_edit');
+
+  }
+
+  public function shippingEditingSubmit(CustomFormRequest $request) {
+
+    $product = Service::loadModel('Product')->find($this->param['id']);
+
+    $model = $product->getRalatedData('ProductShipping',array(
+      'first' => true
+    ));
+
+    if(empty($model)) {
+      $model = Service::loadModel('ProductShipping');
+      $model->product_id = $product->id;
+    }
+
+    if($model->fill($request->all())->save()) {
+      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      return Redirect::to('shop/'.request()->shopSlug.'/product/'.$product->id);
+    }else{
+      return Redirect::back();
+    }
+
+  }
+
   public function notificationEdit() {
     
     $model = Service::loadModel('Product')->find($this->param['id']);
@@ -376,9 +447,7 @@ class ProductController extends Controller
 
   }
 
-  private function _save($attributes = array()) {
-
-    $model = Service::loadModel('Product')->find($this->param['id']);
+  private function _save($model,$attributes = array()) {
 
     if($model->fill($attributes)->save()) {
       Message::display('ข้อมูลถูกบันทึกแล้ว','success');
@@ -388,8 +457,5 @@ class ProductController extends Controller
     }
 
   }
-
-  // shpping
-  // การให้บริการการขนส่ง
 
 }

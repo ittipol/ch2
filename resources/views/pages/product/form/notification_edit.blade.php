@@ -26,7 +26,7 @@
   <?php
     echo Form::hidden('_model', $_formModel['modelName']);
   ?>
-
+  
   <div class="form-section">
 
     <div class="title">
@@ -46,6 +46,10 @@
         ));
       ?>
 
+    </div>
+
+    <div class="form-row">
+      แสดงจำนวนสินค้าเมื่อสินค้าน้อยกว่า ... ชิ้น
     </div>
 
   </div>

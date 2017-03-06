@@ -8,7 +8,7 @@ use App\library\string;
 class Product extends Model
 {
   protected $table = 'products';
-  protected $fillable = ['name','description','product_model','sku','quantity','quantity_available','minimum','product_unit','price','weight','weight_unit_id','length','length_unit_id','width','height','specifications','message_out_of_order','active','person_id'];
+  protected $fillable = ['name','description','product_model','sku','quantity','quantity_available','minimum','product_unit','price','weight','weight_unit_id','length','length_unit_id','width','height','specifications','message_out_of_order','shipping_calculate_from','active','person_id'];
   protected $modelRelations = array('Image','Tagging','ProductToCategory','ShopRelateTo');
   protected $directory = true;
 
@@ -31,7 +31,7 @@ class Product extends Model
       'length' => 'numeric',
       'width' => 'numeric',
       'height' => 'numeric',
-      'weight' => 'numeric'
+      'weight' => 'numeric',
     ),
     'messages' => array(
       'name.required' => 'ชื่อสินค้าห้ามว่าง',
@@ -93,6 +93,7 @@ class Product extends Model
         if(empty($product->active)) {
           $product->active = 0;
         }
+        $product->shipping_calculate_from = 1;
       }
 
     });
@@ -278,6 +279,11 @@ class Product extends Model
       );
     }
 
+    $shippingCalculateFrom = 'คำนวนค่าส่งสินค้าด้วยระบบ';
+    if($this->shipping_calculate_from == 1) {
+      $shippingCalculateFrom = 'คำนวนค่าส่งสินค้าจากผู้ขาย';
+    }
+
     return array(
       'id' => $this->id,
       'name' => $this->name,
@@ -289,6 +295,7 @@ class Product extends Model
       'minimum' => $this->minimum,
       'product_unit' => $this->product_unit,
       'specifications' => $specifications,
+      '_shipping_calculate_from' => $shippingCalculateFrom,
       'active' => $this->active,
       '_active' => $this->active ? 'เปิดการขายสินค้า' : 'ปิดการขาย',
       '_categoryName' => !empty($categoryName) ? $categoryName : '-',

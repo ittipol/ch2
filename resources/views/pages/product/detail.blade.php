@@ -116,7 +116,15 @@
         <h4 class="error-message">{{$_modelData['message_out_of_order']}}</h4>
       </div>
     @elseif($_modelData['active'])
-      <div class="col-md-6 col-xs-12 quantity-box">
+
+        <div class="col-md-6 col-xs-12 quantity-box">
+
+          @if($_modelData['quantity'] < 11)
+            <h5 class="text-warning">เหลือเพียง {{$_modelData['quantity']}} {{$_modelData['product_unit']}}</h5>
+          @else
+            <h5 class="text-success">มีสินค้า</h5>
+          @endif
+
         <div class="clearfix">
           <input id="product_quantity" class="quantity-text-input pull-left" type="text" name="quantity" value="{{$_modelData['minimum']}}" autocomplete="off" placeholder="จำนวนสินค้าที่สั่งซื้อ" role="number" />
           <a id="add_to_cart_button" class="button add-to-cart-button pull-right">ใส่ตระกร้า</a>
