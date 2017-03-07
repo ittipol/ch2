@@ -2,12 +2,7 @@
 
 namespace App\Models;
 
-class shippingAmountCondition extends Model
+class ShippingAmountCondition extends Model
 {
   protected $table = 'shipping_amount_conditions';
-
-  // public function calShipping() {
-    
-  // }
-
 }

@@ -133,6 +133,15 @@
       </a>
       <div class="list-item-group-info">
         <h5><b>วิธีการคำนวณค่าขนส่ง</b>: {{$_modelData['_shipping_calculate_from']}}</h5>
+        @if($_modelData['shipping_calculate_from'] == 2)
+        <h5>
+          <b>ค่าใช้จ่ายในการจัดส่งสินค้า</b>: 
+          {{$_modelData['shippingCost']}}
+          @if(!empty($_modelData['shippingCostAppendText']))
+            / {{$_modelData['shippingCostAppendText']}}
+          @endif
+        </h5>
+        @endif
       </div>
     </div>
 

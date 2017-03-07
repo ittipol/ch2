@@ -2,14 +2,22 @@
 
 namespace App\Models;
 
+use App\library\currency;
+
 class ProductShipping extends Model
 {
   protected $table = 'product_shippings';
-  protected $fillable = ['product_id','free_shipping','shipping_amount','shipping_amount_condition_id','free_shipping_with_condition','shipping_calculate_type_id','shipping_condition','free_shipping_amount'];
+  protected $fillable = ['product_id','free_shipping','shipping_amount','shipping_amount_condition_id','free_shipping_with_condition','shipping_calculate_type_id','free_shipping_operator_sign','free_shipping_amount'];
   public $timestamps  = false;
 
   public $formHelper = true;
   public $modelData = true;
+
+  public $operatorSigns = array(
+    '>' => 'มากกว่า',
+    '=' => 'เท่ากับ',
+    '<' => 'น้อยกว่า'
+  );
 
   protected $validation = array(
     'rules' => array(
@@ -33,6 +41,14 @@ class ProductShipping extends Model
       )
     )
   );
+
+  public function shippingAmountCondition() {
+    return $this->hasOne('App\Models\ShippingAmountCondition','id','shipping_amount_condition_id');
+  }
+
+  public function shippingCostCalCulateType() {
+    return $this->hasOne('App\Models\ShippingCostCalCulateType','id','shipping_calculate_type_id');
+  }
 
   public static function boot() {
 
@@ -60,7 +76,7 @@ class ProductShipping extends Model
 
       if(empty($productShipping->free_shipping_with_condition)) {
         $productShipping->shipping_calculate_type_id = null;
-        $productShipping->shipping_condition = NULL;
+        $productShipping->free_shipping_operator_sign = NULL;
         $productShipping->free_shipping_amount = NULL;
       }
 
@@ -83,6 +99,193 @@ class ProductShipping extends Model
     }
 
     return parent::fill($attributes);
+
+  }
+
+  public function parseOperatorSigntoName($operatorSign) {
+    return $this->operatorSigns[$operatorSign];
+  }
+
+  public function getFreeShippingWithConditionText($product) {
+
+    $currency = new Currency;
+
+    $text = 'จัดส่งฟรีเมื่อ%s%s%s';
+
+    switch ($this->shipping_calculate_type_id) {
+      case 1: // by weight
+        $amount = ' '.$this->free_shipping_amount.' กรัม';
+        break;
+      
+      case 2: // product amount
+        $amount = ' '.$this->free_shipping_amount.' '.$product->product_unit;
+        break;
+
+      case 3: // product price
+        $amount = ' '.$currency->format($this->free_shipping_amount);
+        break;
+
+    }
+
+    return sprintf($text,
+      $this->shippingCostCalCulateType->name,
+      $this->parseOperatorSigntoName($this->free_shipping_operator_sign),
+      $amount
+    );
+
+  }
+
+  public function getShippingCost($product,$quantity) {
+
+    $total = 0;
+    if(!$this->free_shipping) {
+
+      if(!$this->checkFreeShippingCondition($product,$quantity)) {
+
+        switch ($this->shipping_amount_condition_id) {
+          case 1:
+            $total = $this->shipping_amount * $quantity;
+            break;
+
+          case 2:
+            $total = $this->shipping_amount;
+            break;
+
+        }
+
+      }
+
+    }
+
+    return $total;
+
+  }
+
+
+  public function checkFreeShippingCondition($product,$quantity) {
+
+    switch ($this->shipping_calculate_type_id) {
+      case 1: // by weight
+        // $productValue = $product->weightToGram();
+        break;
+      
+      case 2: // product amount
+        $productValue = $quantity;
+        break;
+
+      case 3: // product price
+        dd('rpice');
+        break;
+
+    }
+
+    return $this->checkHasFreeShippingCondition(
+      $this->free_shipping_amount,
+      $productValue,
+      $this->free_shipping_operator_sign
+    );
+
+  }
+
+  public function checkHasFreeShippingCondition($freeShippingAmount,$productValue,$operatorSign) {
+
+    $hasFreeShipping = false;
+    switch ($operatorSign) {
+      case '>':
+
+        if($productValue > $freeShippingAmount) {
+          $hasFreeShipping = true;
+        }
+
+        break;
+      
+      case '=':
+
+        if($productValue == $freeShippingAmount) {
+          $hasFreeShipping = true;
+        }
+
+        break;
+
+      case '<':
+  
+        if($productValue < $freeShippingAmount) {
+          $hasFreeShipping = true;
+        }
+
+        break;
+    }
+
+    return $hasFreeShipping;
+
+  }
+
+  public function getShippingCostText($format = false) {
+
+    $currency = new Currency;
+
+    $shippingCost = 'จัดส่งฟรี';
+    if(!$this->free_shipping) {
+
+      $shippingCost = $this->shipping_amount;
+
+      if($format) {
+        $shippingCost = $currency->format($shippingCost);
+      }
+
+    }
+
+    return $shippingCost;
+
+  }
+
+  public function getProductPriceWithShippingCost($price,$quantity) {
+
+    $total = $price * $quantity;
+
+    if(!$this->free_shipping) {
+
+      switch ($this->shipping_amount_condition_id) {
+        case 1:
+          $total = ($price + $this->shipping_amount) * $quantity;
+          break;
+        
+        case 2:
+          $total = ($price * $quantity) + $this->shipping_amount;
+          break;
+      }
+
+    }
+
+    return $total;
+
+  }
+
+  public function buildModelData() {
+
+    $shippingCost = '';
+    $shippingAmountCondition = '';
+    $freeShippingMessage = '';
+
+    $shippingCost = $this->getShippingCostText(true);
+
+    if(!empty($this->shipping_amount_condition_id)) {
+      $shippingAmountCondition = $this->shippingAmountCondition->name;
+    }
+
+    if(!empty($this->free_shipping_with_condition)) {
+      $freeShippingMessage = $this->getFreeShippingWithConditionText($this);
+    }
+
+    return array(
+      'free_shipping' => $this->free_shipping,
+      // '_message' => $message,
+      'shipping_calculate_from' => $this->shipping_calculate_from,
+      '_shipping_calculate_from' => $shippingCalculateFrom,
+      'shippingCost' => $shippingCost,
+      'shippingCostAppendText' => $shippingAmountCondition,
+      'freeShippingMessage' => $freeShippingMessage,
+    );
 
   }
 

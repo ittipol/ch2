@@ -237,3 +237,7 @@ a.button:visited {
 .hide-element {
 	display: none;
 }
+
+.text-emphasize {
+	color: #0071c5;
+}

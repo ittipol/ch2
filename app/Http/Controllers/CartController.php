@@ -31,13 +31,19 @@ class CartController extends Controller
     $productId = Input::get('productId');
     $quantity = Input::get('quantity');
 
-    $success = $cartModel->updateQuantity($productId,$quantity);
+    $updated = $cartModel->updateQuantity($productId,$quantity);
 
-    $result = array(
-      'success' => $success,
-      'productTotal' => $cartModel->getProductTotal($productId,$quantity),
-      'summaries' => $cartModel->getSummary($cartModel->getShopId($productId))
-    );
+    if($updated['hasError']) {
+      $result = $updated;
+    }else{
+      $product = $cartModel->getProduct($productId);
+
+      $result = array(
+        'success' => $updated,
+        'productTotal' => $cartModel->getProductTotal($product,$quantity,true),
+        'summaries' => $cartModel->getSummary($cartModel->getShopId($productId))
+      );
+    }
 
     return response()->json($result);
 
@@ -73,11 +79,19 @@ class CartController extends Controller
     $dataMerge = array();
     if($total) { // not empty
 
+      $totalShopProductEmpty = $cartModel::where([
+        ['person_id','=',session()->get('Person.id')],
+        ['shop_id','=',$shopId]
+      ])->exists();
+
+      $summaries = array();
+      if($totalShopProductEmpty) {
+        $summaries = $cartModel->getSummary($shopId);
+      }
+
       $dataMerge = array(
-        'totalShopProductEmpty' => !$cartModel::where([
-          ['person_id','=',session()->get('Person.id')],
-          ['shop_id','=',$shopId]
-        ])->exists()
+        'totalShopProductEmpty' => !$totalShopProductEmpty,
+        'summaries' => $summaries
       );
 
     }else{ // is empty

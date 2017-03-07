@@ -1,22 +1,42 @@
 @if(!empty($_products))
 
   @foreach($_products as $product)
-  <div class="product-list-table-row clearfix">
+  <div class="product-list-table-row">
 
-    <div class="product-image pull-left">
-      <a href="{{$product['productDetailUrl']}}">
-        <img src="{{$product['imageUrl']}}">
-      </a>
-    </div>
+    @if(!empty($product['hasError']))
+      <p class="product-list-message error-message">
+        {{$product['errorMessage']}}
+        <a href="{{URL::to('cart')}}">แก้ไชจำนวนการสั่งซื้อ</a>
+      </p>
+      <div class="product-list-overlay"></div>
+    @endif
 
-    <div class="product-info pull-left">
-      <h4 class="product-title">
-        <a href="{{$product['productDetailUrl']}}">{{$product['name']}}</a>
-      </h4>
-      <div class="line grey space-bottom-5"></div>
-      <div>
-        <span class="price">{{$product['price']}}</span> x {{$product['quantity']}}
+    <div class="clearfix">
+
+      <div class="product-image pull-left">
+        <a href="{{$product['productDetailUrl']}}">
+          <img src="{{$product['imageUrl']}}">
+        </a>
       </div>
+
+      <div class="product-info pull-left">
+        <h4 class="product-title">
+          <a href="{{$product['productDetailUrl']}}">{{$product['name']}}</a>
+        </h4>
+        <div class="line grey space-bottom-5"></div>
+        <div>
+          ราคาสินค้ารวม: <span class="price">{{$product['price']}}</span> x {{$product['quantity']}}
+        </div>
+        @if($product['shipping_calculate_from'] == 2)
+        <div>
+          ค่าจัดส่งสินค้า: <span class="price">{{$product['shippingCost']}}</span>
+        </div>
+        @endif
+        <div>
+          มูลค่าสินค้า: <span class="price">{{$product['total']}}</span>
+        </div>
+      </div>
+
     </div>
 
     <a class="delete-product-button" data-id="{{$product['id']}}" data-global-cart="1" role="button">×</a>

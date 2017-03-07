@@ -100,13 +100,25 @@
 
         <div class="item-info-row">
           <p>ราคา</p>
-          <h4 class="price">{{$_modelData['_price']}}<span class="sub-info-text"> / {{$_modelData['product_unit']}}</span></h4>
+          <h4 class="emphasize">{{$_modelData['_price']}}<span class="sub-info-text"> / {{$_modelData['product_unit']}}</span></h4>
         </div>
 
         <div class="item-info-row">
           <p>จำนวนการสั่งซื้อขั้นต่ำ</p>
-          <h4 class="price">{{$_modelData['minimum']}}<span class="sub-info-text"> {{$_modelData['product_unit']}} / การสั่งซื้อ</span></h4>
+          <h4 class="emphasize">{{$_modelData['minimum']}}<span class="sub-info-text"> {{$_modelData['product_unit']}} / การสั่งซื้อ</span></h4>
         </div>
+
+        @if($_modelData['shipping_calculate_from'] == 2)
+        <div class="item-info-row">
+          <p>ค่าจัดส่งสินค้า</p>
+          <h4 class="emphasize">{{$_modelData['shippingCost']}}
+            @if(!empty($_modelData['shippingCostAppendText']))
+              <span class="sub-info-text"> / {{$_modelData['shippingCostAppendText']}}</span>
+            @endif
+          </h4>
+          <p class="emphasize-green space-top-10">{{$_modelData['freeShippingMessage']}}</p>
+        </div>
+        @endif
 
       </div>
     </div>
@@ -117,13 +129,13 @@
       </div>
     @elseif($_modelData['active'])
 
-        <div class="col-md-6 col-xs-12 quantity-box">
+      <div class="col-md-6 col-xs-12 quantity-box">
 
-          @if($_modelData['quantity'] < 11)
-            <h5 class="text-warning">เหลือเพียง {{$_modelData['quantity']}} {{$_modelData['product_unit']}}</h5>
-          @else
-            <h5 class="text-success">มีสินค้า</h5>
-          @endif
+        @if($_modelData['quantity'] < 11)
+          <h5 class="text-warning">เหลือเพียง {{$_modelData['quantity']}} {{$_modelData['product_unit']}}</h5>
+        @else
+          <h5 class="text-success">มีสินค้า</h5>
+        @endif
 
         <div class="clearfix">
           <input id="product_quantity" class="quantity-text-input pull-left" type="text" name="quantity" value="{{$_modelData['minimum']}}" autocomplete="off" placeholder="จำนวนสินค้าที่สั่งซื้อ" role="number" />

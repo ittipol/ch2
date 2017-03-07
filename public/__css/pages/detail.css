@@ -6,6 +6,14 @@
 	color: #0071c5;
 }
 
+.detail .emphasize {
+	color: #0071c5;
+}
+
+.detail .emphasize-green {
+	color: #088921;
+}
+
 .detail-title {
 	/*border-bottom: 1px solid #bababa;*/
 	margin-bottom: 20px;

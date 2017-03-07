@@ -14,17 +14,12 @@ class Cart extends Model
 
   public function addProduct($productId, $quantity) {
 
-    // check product is active
-    $product = Product::where([
-      ['id','=',$productId],
-      ['quantity','!=',0],
-      ['active','=',1]
-    ])
-    ->select('id','minimum')
-    ->first();
+    $product = $this->getProduct($productId);
 
-    if(empty($product) || ($product->minimum > $quantity)) {
-      return false;
+    $error = $this->checkProductError($product,$quantity);
+
+    if($error['hasError']) {
+      return $error;
     }
 
     $cart = Cart::where([
@@ -41,7 +36,6 @@ class Cart extends Model
     if(!empty($cart)) {
       // update quantity
       $saved = $cart->increment('quantity', $quantity);
-
     }else{
 
       $value = array(
@@ -57,6 +51,32 @@ class Cart extends Model
     return $saved;
 
   }
+
+  public function updateQuantity($id, $quantity) {
+
+    $product = $this->getProduct($id);
+
+    $error = $this->checkProductError($product,$quantity);
+
+    if($error['hasError']) {
+      return $error;
+    }
+
+    $cart = Cart::where([
+      ['person_id','=',session()->get('Person.id')],
+      ['product_id','=',$id]
+    ])->first();
+
+    $saved = false;
+    if(!empty($cart)) {
+      $cart->quantity = $quantity;
+      $saved = $cart->save();
+    }
+
+    return $saved;
+
+  }
+
 
   public function deleteProduct($id) {
 
@@ -76,53 +96,22 @@ class Cart extends Model
 
   }
 
-  public function updateQuantity($id, $quantity) {
-
-    // check product is active
-    $product = Product::where([
-      ['id','=',$id],
-      ['quantity','!=',0],
+  public function getProduct($productId) {
+    return Product::where([
+      ['id','=',$productId],
+      // ['quantity','!=',0],
       ['active','=',1]
     ])
-    ->select('id','minimum')
+    ->select('id','name','price','minimum','product_unit','shipping_calculate_from','quantity')
     ->first();
-
-    if(empty($product)) {
-      return false;
-    }
-
-    if(empty($quantity) || ($product->minimum > $quantity)) {
-      $quantity = $product->minimum;
-    }
-
-    $cart = Cart::where([
-      ['person_id','=',session()->get('Person.id')],
-      ['product_id','=',$id]
-    ])->first();
-
-    $saved = false;
-    if(!empty($cart)) {
-      $cart->quantity = $quantity;
-      $saved = $cart->save();
-    }
-
-    return $saved;
-
   }
 
   public function getProductInfo($productId,$quantity) {
 
     $url = new Url;
     $cache = new Cache;
-    $currency = new Currency;
 
-    $product = Product::where([
-      ['id','=',$productId],
-      ['quantity','!=',0],
-      ['active','=',1]
-    ])
-    ->select('id','name','price','minimum','product_unit')
-    ->first();
+    $product = $this->getProduct($productId);
 
     if(empty($product)) {
       continue;
@@ -138,42 +127,190 @@ class Cart extends Model
       $imageUrl = $cache->getCacheImageUrl($image,'sm');
     }
 
-    $_products = array(
+    return array_merge(array(
       'id' => $product->id,
       'name' => $product->name,
-      'price' => $currency->format($product->price),
-      'quantity' => $quantity,
-      'total' => $currency->format($product->price * $quantity),
       'minimum' => $product->minimum,
+      'quantity' => $quantity,
       'product_unit' => $product->product_unit,
+      'shipping_calculate_from' => $product->shipping_calculate_from,
+      'price' => $this->price,
+      'subTotal' => $this->getProductSubTotal($product,$quantity,true),
+      'shippingCost' => $this->getProductShippingCost($product,$quantity,true),
+      'total' => $this->getProductTotal($product,$quantity,true),
       'imageUrl' => $imageUrl,
-      'productDetailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id' => $product->id))
-    );
-
-    return $_products;
+      'productDetailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id' => $product->id)),
+    ),$this->checkProductError($product,$quantity));
 
   }
 
-  public function getCarts($shopId = null) {
+  // private function getProductPrice($product,$quantity,$format = false) {
 
-    $carts = null;
+  //   $currency = new Currency;
 
-    if(Auth::check()) {
+  //   $error = $this->checkProductError($product,$quantity);
 
-      if(empty($shopId)) {
-        $carts = $this->where('person_id','=',session()->get('Person.id'))->get();
-      }else{
-        $carts = $this->where([
-          ['person_id','=',session()->get('Person.id')],
-          ['shop_id','=',$shopId]
-        ])->get();
-      }
-      
-    }else{
-      // Form SESSION
+  //   $price = $product->price;
+  //   $subTotal = 0;
+  //   $shippingCost = 0;
+  //   $total = 0;
+
+  //   if(!$error['hasError']) {
+
+  //     $subTotal = $product->price * $quantity;
+  //     $total = $subTotal;
+
+  //     if($product->shipping_calculate_from == 2) {
+
+  //       $shipping = $product->getRalatedData('ProductShipping',array(
+  //         'first' => true
+  //       ));
+
+  //       $shippingCost = $shipping->getShippingCost($product,$quantity);
+  //       $total = $total + $shippingCost;
+
+  //     }
+
+  //   }
+
+  //   if($format) {
+  //     $price = $currency->format($price);
+  //     $subTotal = $currency->format($subTotal);
+  //     $shippingCost = $currency->format($shippingCost);
+  //     $total = $currency->format($total);
+  //   }
+
+  //   return array(
+  //     'price' => $price,
+  //     'subTotal' => $subTotal,
+  //     'shippingCost' => $shippingCost,
+  //     'total' => $total
+  //   );
+
+  // }
+
+  public function getProductSubTotal($product,$quantity,$format = false) {
+
+    $currency = new Currency;
+
+    $error = $this->checkProductError($product,$quantity);
+
+    $subTotal = 0;
+
+    if(!$error['hasError']) {
+      $subTotal = $product->price * $quantity;
     }
 
-    return $carts;
+    if($format) {
+      $subTotal = $currency->format($subTotal);
+    }
+
+    return $subTotal;
+
+  }
+
+  public function getProductTotal($product,$quantity,$format = false) {
+
+    $currency = new Currency;
+
+    $error = $this->checkProductError($product,$quantity);
+
+    $total = 0;
+
+    if(!$error['hasError']) {
+
+      $subTotal = $product->price * $quantity;
+      $total = $subTotal;
+
+      if($product->shipping_calculate_from == 2) {
+
+        $shipping = $product->getRalatedData('ProductShipping',array(
+          'first' => true
+        ));
+
+        $shippingCost = $shipping->getShippingCost($product,$quantity);
+        $total = $total + $shippingCost;
+
+      }
+
+    }
+
+    if($format) {
+      $total = $currency->format($total);
+    }
+
+    return $total;
+
+  }
+
+  public function getProductShippingCost($product,$quantity,$format = false) {
+
+    $currency = new Currency;
+
+    $error = $this->checkProductError($product,$quantity);
+
+    $shippingCost = 0;
+
+    if(!$error['hasError']) {
+
+      if($product->shipping_calculate_from == 2) {
+
+        $shipping = $product->getRalatedData('ProductShipping',array(
+          'first' => true
+        ));
+
+        $shippingCost = $shipping->getShippingCost($product,$quantity);
+
+      }
+
+    }
+
+    if($format) {
+      $shippingCost = $currency->format($shippingCost);
+    }
+
+    return $shippingCost;
+
+  }
+
+  public function checkProductError($product,$quantity) {
+
+    // error message
+    // The current quantity of goods less than the minimum purchase amount, can not buy.
+
+    $error = array(
+      'hasError' => false,
+      'errorType' => false,
+      'errorMessage' => ''
+    );
+
+    if(empty($product)) {
+      $error = array(
+        'hasError' => true,
+        'errorType' => 1,
+        'errorMessage' => 'ไม่พบสินค้า'
+      );
+    }elseif($product->quantity == 0) {
+      $error = array(
+        'hasError' => true,
+        'errorType' => 2,
+        'errorMessage' => 'สินค้าหมด'
+      );
+    }elseif($quantity > $product->quantity) {
+      $error = array(
+        'hasError' => true,
+        'errorType' => 3,
+        'errorMessage' => 'ไม่สามารถสั่งซื้อสินค้านี้ได้ สินค้ามีจำนวนน้อยกว่าจำนวนที่คุณสั่งซื้อ'
+      );
+    }elseif($product->minimum > $quantity) {
+      $error = array(
+        'hasError' => true,
+        'errorType' => 4,
+        'errorMessage' => 'ไม่สามารถสั่งซื้อสินค้านี้ได้ จำนวนสินค้าที่คุณสั่งซื้อน้อยกว่าจำนวนสั่งซื้อขั้นต่ำ โปรดแก้ไขจำนวนการสั่งซื้อสินค้านี้'
+      );
+    }
+
+    return $error;
 
   }
 
@@ -208,6 +345,85 @@ class Cart extends Model
 
   }
 
+  public function getSummary($shopId = null){
+
+    $summaries = array(
+      'subTotal' => 'getSummarySubTotal',
+      'shippingCost' => 'getSummaryShippingCost',
+      'total' => 'getSummaryTotal'
+    );
+
+    $_summaries = array();
+    foreach ($summaries as $alias => $fx) {
+      $_summaries[$alias] = array(
+        'value' => $this->{$fx}($shopId)
+      );
+    }
+
+    return $_summaries;
+
+  }
+
+  public function getSummarySubTotal($shopId = null) {
+
+    $currency = new Currency;
+
+    $carts = $this->getCarts($shopId);
+
+    $subTotal = 0;
+    if(!empty($carts)) {
+
+      foreach ($carts as $cart) {
+        $product = $product = $this->getProduct($cart->product_id);
+        $subTotal += $this->getProductSubTotal($product,$cart->quantity);
+      }
+
+    }
+
+    return $currency->format($subTotal);
+
+  }
+
+  public function getSummaryShippingCost($shopId = null) {
+
+    $currency = new Currency;
+
+    $carts = $this->getCarts($shopId);
+
+    $shippingCost = 0;
+    if(!empty($carts)) {
+
+      foreach ($carts as $cart) {
+        $product = $product = $this->getProduct($cart->product_id);
+        $shippingCost += $this->getProductShippingCost($product,$cart->quantity);
+      }
+
+    }
+
+    return $currency->format($shippingCost);
+
+  }
+
+  public function getSummaryTotal($shopId = null) {
+
+    $currency = new Currency;
+
+    $carts = $this->getCarts($shopId);
+
+    $total = 0;
+    if(!empty($carts)) {
+
+      foreach ($carts as $cart) {
+        $product = $product = $this->getProduct($cart->product_id);
+        $total += $this->getProductTotal($product,$cart->quantity);
+      }
+
+    }
+
+    return $currency->format($total);
+
+  }
+
   public function getProducts($shopId = null) {
 
     $carts = $this->getCarts($shopId);
@@ -222,97 +438,6 @@ class Cart extends Model
     }
 
     return $products;
-
-  }
-
-  public function getSummary($shopId = null){
-
-    $summaries = array(
-      'subTotal' => 'getSubTotal',
-      'total' => 'getTotal'
-    );
-
-    $_summaries = array();
-    foreach ($summaries as $alias => $fx) {
-      $_summaries[$alias] = array(
-        'value' => $this->{$fx}($shopId)
-      );
-    }
-
-    return $_summaries;
-
-  }
-
-  public function getSubTotal($shopId = null) {
-
-    $currency = new Currency;
-
-    if(!empty($shopId)) {
-      $carts = $this->where([
-        ['person_id','=',session()->get('Person.id')],
-        ['shop_id','=',$shopId]
-      ])->get();
-    }else{
-      $carts = $this->where('person_id','=',session()->get('Person.id'))->get();
-    }
-
-    $subTotal = 0;
-    if(!empty($carts)) {
-
-      foreach ($carts as $cart) {
-
-        $product = Product::where([
-          ['id','=',$cart->product_id],
-          ['active','=',1]
-        ])
-        ->select('price')
-        ->first();
-
-        $subTotal += ($product->price * $cart->quantity);
-
-      }
-
-    }
-
-    return $currency->format($subTotal);
-
-  }
-
-  public function getTotal($shopId = null) {
-
-    $currency = new Currency;
-
-    if(!empty($shopId)) {
-      $carts = $this->where([
-        ['person_id','=',session()->get('Person.id')],
-        ['shop_id','=',$shopId]
-      ])->get();
-    }else{
-      $carts = $this->where('person_id','=',session()->get('Person.id'))->get();
-    }
-
-    $total = 0;
-    if(!empty($carts)) {
-
-      foreach ($carts as $cart) {
-
-        $product = Product::where([
-          ['id','=',$cart->product_id],
-          ['active','=',1]
-        ])
-        ->select('price')
-        ->first();
-
-        // Plus Tax
-        // 
-
-        $total += ($product->price * $cart->quantity);
-
-      }
-
-    }
-
-    return $currency->format($total);
 
   }
 
@@ -352,14 +477,27 @@ class Cart extends Model
     }
   }
 
-  public function getProductTotal($productId,$quantity) {
+  public function getCarts($shopId = null) {
 
-    $currency = new Currency;
+    $carts = null;
 
-    $price = Product::select('price')
-    ->find($productId)->price;
+    if(Auth::check()) {
 
-    return $currency->format($price * $quantity);
+      if(empty($shopId)) {
+        $carts = $this->where('person_id','=',session()->get('Person.id'))->get();
+      }else{
+        $carts = $this->where([
+          ['person_id','=',session()->get('Person.id')],
+          ['shop_id','=',$shopId]
+        ])->get();
+      }
+      
+    }else{
+      // Form SESSION
+    }
+
+    return $carts;
+
   }
 
   public function getShopId($productId) {

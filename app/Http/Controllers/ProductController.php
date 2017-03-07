@@ -33,9 +33,10 @@ class ProductController extends Controller
       $page = $this->query['page'];
     }
 
-    // $model->paginator->criteria(array(
-    //   'fields' => array('products.*')
-    // ));
+    $model->paginator->criteria(array(
+      // 'fields' => array('products.*')
+      'order' => array('created_at','DESC')
+    ));
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl('product/list');
     $model->paginator->setUrl('product/detail/{id}','detailUrl');
@@ -67,10 +68,6 @@ class ProductController extends Controller
       'fields' => array('shop_id')
     ))->shop;
 
-    // $shop->modelData->loadData(array(
-    //   'models' => array('Address','Contact')
-    // ));
-
     // Get Slug
     $slug = $shop->getModelRelationData('Slug',array(
       'first' => true,
@@ -78,6 +75,17 @@ class ProductController extends Controller
     ))->slug;
 
     $this->data = $model->modelData->build();
+
+    // if($model->shipping_calculate_from == 2) {
+
+    //   $shipping = $model->getRalatedData('ProductShipping',array(
+    //     'first' => true
+    //   ));
+
+
+    //   $this->setData('shipping',$shipping->modelData->build(true));
+
+    // }
 
     $this->setData('shop',$shop->modelData->build(true));
     $this->setData('shopImageUrl',$shop->getProfileImageUrl());
@@ -384,11 +392,7 @@ class ProductController extends Controller
       'index' => 'shippingAmountConditions'
     ));
 
-    $model->formHelper->setData('conditionTypes',array(
-      '>' => 'มากกว่า',
-      '=' => 'เท่ากับ',
-      '<' => 'น้อยกว่า',
-    ));
+    $model->formHelper->setData('operatorSigns',Service::loadModel('ProductShipping')->operatorSigns);
 
     $this->setData('_fieldData',$model->formHelper->getFieldData());
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\library\currency;
 use App\library\string;
+use App\library\measurement;
 
 class Product extends Model
 {
@@ -142,13 +143,6 @@ class Product extends Model
    
       }
 
-      // if(!empty($attributes['unlimited_quantity'])) {
-      //   $attributes['quantity'] = 0;
-
-      // }elseif(isset($attributes['quantity'])){
-      //   $attributes['unlimited_quantity'] = 0;
-      // }
-
       if(isset($attributes['quantity']) && ($attributes['quantity'] === '')) {
         unset($attributes['quantity']);
       }
@@ -211,7 +205,7 @@ class Product extends Model
 
   }
 
-  function getCategoryPathName() {
+  public function getCategoryPathName() {
 
     $paths = $this->getCategoryPaths();
 
@@ -229,6 +223,16 @@ class Product extends Model
 
     return $pathName;
 
+  }
+
+  public function weightToGram($weight = null) {
+
+    if(empty($weight)) {
+      $weight = $this->weight;
+    }
+
+    $measurement = new Measurement;
+    return $measurement->convertToGram($this->weightUnit->unit,$this->weight);
   }
 
   public function buildModelData() {
@@ -284,6 +288,26 @@ class Product extends Model
       $shippingCalculateFrom = 'คำนวนค่าส่งสินค้าจากผู้ขาย';
     }
 
+    $shipping = $this->getRalatedData('ProductShipping',array(
+      'first' => true
+    ));
+
+    $shippingCost = '';
+    $shippingAmountCondition = '';
+    $freeShippingMessage = '';
+    if(!empty($shipping)) {
+      $shippingCost = $shipping->getShippingCostText(true);
+
+      if(!empty($shipping->shipping_amount_condition_id)) {
+        $shippingAmountCondition = $shipping->shippingAmountCondition->name;
+      }
+
+      if(!empty($shipping->free_shipping_with_condition)) {
+        $freeShippingMessage = $shipping->getFreeShippingWithConditionText($this);
+      }
+
+    }
+
     return array(
       'id' => $this->id,
       'name' => $this->name,
@@ -295,7 +319,11 @@ class Product extends Model
       'minimum' => $this->minimum,
       'product_unit' => $this->product_unit,
       'specifications' => $specifications,
+      'shipping_calculate_from' => $this->shipping_calculate_from,
       '_shipping_calculate_from' => $shippingCalculateFrom,
+      'shippingCost' => $shippingCost,
+      'shippingCostAppendText' => $shippingAmountCondition,
+      'freeShippingMessage' => $freeShippingMessage,
       'active' => $this->active,
       '_active' => $this->active ? 'เปิดการขายสินค้า' : 'ปิดการขาย',
       '_categoryName' => !empty($categoryName) ? $categoryName : '-',

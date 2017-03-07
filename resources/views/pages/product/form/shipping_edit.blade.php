@@ -44,6 +44,8 @@
         <div class="inner">คำนวนค่าส่งสินค้าจากผู้ขาย</div>
       </label>
 
+      <div>จะเป็นการคำนวณค่าส่งสินค้าด้วยตัวผู้ขายเองหลังจากที่ลูกค้าได้สั่งซื้อสินค้าเข้ามาแล้ว</div>
+
       <label class="choice-box">
         <?php
           echo Form::radio('shipping_calculate_from', 2, null, array(
@@ -52,6 +54,8 @@
         ?>
         <div class="inner">คำนวนค่าส่งสินค้าด้วยระบบ</div>
       </label>
+
+      <div>จะเป็นการใช้ระบบคำนวณและแสดงค่าส่งสินค้าทันทีเมื่อเพิ่มสินค้าลงในตระกร้าสินค้า</div>
 
     </div>
 
@@ -90,7 +94,7 @@
       <div class="form-row">
 
         <?php
-          echo Form::label('shipping_amount', 'ค่าขนส่งสินค้า', array(
+          echo Form::label('shipping_amount', 'ค่าขนส่งสินค้า (บาท)', array(
             'class' => 'required'
           ));
           echo Form::text('shipping_amount', null, array(
@@ -131,7 +135,7 @@
 
             <div class="form-row">
 
-              <h5>เงื่อนไขการคิดคำนวณ</h5>
+              <h5>ต้องการคำนวณจาก</h5>
               <p class="error-product-weight-message error-message hide-element">* โปรดตรวจสอบให้แน่ใจว่าได้กรอกน้ำหนักสินค้าแล้ว</p>
               <?php
                 echo Form::select('shipping_calculate_type_id', $_fieldData['ShippingCalTypes'], null, array(
@@ -140,8 +144,8 @@
               ?>
               <h5>เงื่อนไข</h5>
               <?php
-                echo Form::select('shipping_condition', $_fieldData['conditionTypes'], null, array(
-                  'id' => 'shipping_condition'
+                echo Form::select('free_shipping_operator_sign', $_fieldData['operatorSigns'], null, array(
+                  'id' => 'free_shipping_operator_sign'
                 ));
               ?>
               <h5>จำนวน (ชึ้นอยู่กับเงื่อนไขที่เลือก)</h5>
@@ -153,7 +157,7 @@
                 <p>ให้กรอกจำนวนสินค้า</p>
                 <br/>
                 <strong>เมื่อกำหนดตามราคาสินค้า</strong>
-                <p>ให้กรอกราคาสินค้า</p>
+                <p>ให้กรอกราคาสินค้า (บาท)</p>
               </div>
               <?php
                 echo Form::text('free_shipping_amount', null, array(
@@ -174,22 +178,6 @@
     </div>
 
   </div>
-
-  <!--     <div class="form-row">
-
-        <div class="title">
-          จำนวนสินค้า
-        </div>
-
-        <?php
-          echo Form::label('name', 'เลือกรูปแบบการคำนวณค่าขนส่ง', array(
-            'class' => 'required'
-          ));
-          echo Form::select('birth_month', $_fieldData['ShippingCalTypes']);
-        ?>
-
-      </div> -->
-
 
   <?php
     echo Form::submit('บันทึก', array(
@@ -224,9 +212,8 @@
       }
 
       if(!$('#free_shipping_with_condition').is(':checked')) {
-        shipping_condition
         $('#shipping_calculate_type').prop('disabled', true);
-        $('#shipping_condition').prop('disabled', true);
+        $('#free_shipping_operator_sign').prop('disabled', true);
         $('#free_shipping_amount').prop('disabled', true);
       }
 
@@ -257,13 +244,12 @@
 
       $('#free_shipping_with_condition').on('click',function(){
         if(!$(this).is(':checked')) {
-          shipping_condition
           $('#shipping_calculate_type').prop('disabled', true);
-          $('#shipping_condition').prop('disabled', true);
+          $('#free_shipping_operator_sign').prop('disabled', true);
           $('#free_shipping_amount').prop('disabled', true);
         }else{
           $('#shipping_calculate_type').prop('disabled', false);
-          $('#shipping_condition').prop('disabled', false);
+          $('#free_shipping_operator_sign').prop('disabled', false);
           $('#free_shipping_amount').prop('disabled', false);
         }
       });

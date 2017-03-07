@@ -98,27 +98,10 @@ class ImageGallery {
 
     if((imgHeight > frameheight) || (imgWidth > frameWidth)) {
 
-      let diff = Math.abs(frameWidth - imgWidth);
+      // let diff = Math.abs(frameWidth - imgWidth);
 
-      if(diff < 400) {
+      // if(diff < 400) {
 
-      }else if(diff < 1000) {
-
-        // let imgH = Math.ceil(imgHeight * (frameWidth / imgWidth));
-        let imgW = Math.ceil(imgWidth * (frameheight / imgHeight));
-
-        if(imgW > frameWidth) {
-
-          $('#image_display').css({
-            'height': '100%',
-            'margin-left': -((imgW - frameWidth) / 2)
-          });
-
-        }
-
-      }
-
-      // if(Math.abs(imgHeight - imgWidth) > 350) {
       //   let imgH = Math.ceil(imgHeight * (frameWidth / imgWidth));
 
       //   $('#image_display').css({
@@ -126,15 +109,40 @@ class ImageGallery {
       //     'height': imgH,
       //     'margin-top': (frameheight - imgH) / 2
       //   });
-      // }else{
-      //   // let imgW = Math.ceil(imgWidth * (frameheight / imgHeight));
 
-      //   // $('#image_display').css({
-      //   //   'width': imgW,
-      //   //   'height': '100%',
-      //   //   'margin-top': 0
-      //   // });
+      // }else if(diff < 1000) {
+
+      //   // let imgH = Math.ceil(imgHeight * (frameWidth / imgWidth));
+      //   let imgW = Math.ceil(imgWidth * (frameheight / imgHeight));
+
+      //   if(imgW > frameWidth) {
+
+      //     $('#image_display').css({
+      //       'height': '100%',
+      //       'margin-left': -((imgW - frameWidth) / 2)
+      //     });
+
+      //   }
+
       // }
+
+      if(Math.abs(imgHeight - imgWidth) > 350) {
+        let imgH = Math.ceil(imgHeight * (frameWidth / imgWidth));
+
+        $('#image_display').css({
+          'width': '100%',
+          'height': imgH,
+          'margin-top': (frameheight - imgH) / 2
+        });
+      }else{
+        // let imgW = Math.ceil(imgWidth * (frameheight / imgHeight));
+
+        // $('#image_display').css({
+        //   'width': imgW,
+        //   'height': '100%',
+        //   'margin-top': 0
+        // });
+      }
 
     }else{
 

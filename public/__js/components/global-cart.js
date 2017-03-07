@@ -27,6 +27,7 @@ class GlobalCart {
 			}
 
 			_this.requestUpdateQuantity = true;
+
 		})
 
 		$(document).on('blur','.cart .cart-summary-quantity-input',function(){
@@ -75,18 +76,30 @@ class GlobalCart {
 
 	  request.done(function (response, textStatus, jqXHR){
 
-	    if(response.success) {
+	  	if(response.hasError) {
 
+	  		setTimeout(function(){
+	  			const notificationBottom = new NotificationBottom(response.errorMessage,'','error');
+	  			notificationBottom.setDelay(5000);
+	  			notificationBottom.load();
+
+	  			$('#loading_icon').removeClass('display');
+	  		  $('.global-overlay').removeClass('isvisible');
+	  		},1000);
+
+	  	}else if(response.success) {
 	    	// update product count
 	    	_this.productCountUpdate();
 	    	// update product in global cart
 	    	_this.cartUpdate();
 	    	// update in cart page
 	    	$('#_product_'+productId).find('.product-total-amount').text(response.productTotal);
+	    	$('#_product_'+productId).find('.error-message').remove();
 
 	    	let parent = $('#_product_'+productId).parent().parent();
 
 	    	parent.find('.sub-total').text(response.summaries.subTotal.value);
+	    	parent.find('.shipping-cost').text(response.summaries.shippingCost.value);
 	    	parent.find('.total-amount').text(response.summaries.total.value);
 
 	    	setTimeout(function(){
@@ -133,7 +146,18 @@ class GlobalCart {
 
 		request.done(function (response, textStatus, jqXHR){
 
-		  if(response.success) {
+			if(response.hasError) {
+
+				setTimeout(function(){
+					const notificationBottom = new NotificationBottom(response.errorMessage,'','error');
+					notificationBottom.setDelay(5000);
+					notificationBottom.load();
+
+					$('#loading_icon').removeClass('display');
+				  $('.global-overlay').removeClass('isvisible');
+				},1000);
+
+			}else if(response.success) {
 
 		  	// update product count
 		  	_this.productCountUpdate();
@@ -227,6 +251,12 @@ class GlobalCart {
 	    		},200);
 
 	    	}else{
+
+	    		let parent = $('#_product_'+productId).parent().parent();
+
+	    		parent.find('.sub-total').text(response.summaries.subTotal.value);
+	    		parent.find('.shipping-cost').text(response.summaries.shippingCost.value);
+	    		parent.find('.total-amount').text(response.summaries.total.value);
 
 	    		setTimeout(function(){
 	    			$(obj).parent().remove();	

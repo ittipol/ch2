@@ -236,42 +236,20 @@ class ApiController extends Controller
       return $this->error();
     }
 
-    $success = Service::loadModel('Cart')->addProduct(Input::get('productId'),Input::get('quantity'));
+    $cartModel = Service::loadModel('Cart');
 
-    // $value = array(
-    //   'session_id' => session()->getId(),
-    //   'productId' => $productId,
-    //   'quantity' => $quantity
-    // );
+    $productId = Input::get('productId');
+    $quantity = Input::get('quantity');
 
-    // if(Auth::check()) {
-    //   $value['person_id'] = session()->get('Person.id');
-    // }
+    $saved = $cartModel->addProduct($productId,$quantity);
 
-    // if(session()->has('carts.'.$productId)) {
-    //   $data = session()->get('carts.'.$productId);
-    //   $data['quantity'] += $quantity;
-    // }else{
-    //   $data = array(
-    //     'productId' => $productId,
-    //     'quantity' => $quantity
-    //   );
-    // }
-
-    // session()->put('carts.'.$productId, $data);
-
-    // $data = array(
-    //   'productId' => $productId,
-    //   'quantity' => $quantity
-    // );
-
-    // session()->put('carts', serialize($data));
-
-    // Cookie::queue('carts'.$productId, $data, 1440);
-
-    $result = array(
-      'success' => $success
-    );
+    if($saved['hasError']) {
+      $result = $saved;
+    }else{
+      $result = array(
+        'success' => $saved
+      );
+    }
 
     return response()->json($result);
 

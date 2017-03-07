@@ -101,8 +101,6 @@ class AppServiceProvider extends ServiceProvider
 
           $url = new Url;
 
-          // $person = Service::loadModel('Person')->find(Auth::user()->id);
-
           $records = Service::loadModel('PersonToShop')
           ->select(array('shop_id'))
           ->where('person_id','=',session()->get('Person.id'))
