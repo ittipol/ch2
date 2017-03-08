@@ -284,6 +284,25 @@ class ShopController extends Controller
 
     $model = Service::loadModel('Shop');
 
+    if($model->where([
+        ['name','like',$request->get('name')],
+        ['person_id','=',session()->get('Person.id')]
+      ])
+      ->exists()) {
+
+      $_message = 'คุณได้เพิ่มบริษัทหรือร้านค้าชื่อว่า '.$request->get('name').' ไปแล้ว โปรดใช้ชื่ออื่น';
+      return Redirect::back()->withErrors([$_message]);
+
+    }elseif($model->where([
+        ['name','like',$request->get('name')],
+      ])
+      ->exists()) {
+      
+      $_message = 'มีบริษัทหรือร้านค้าชื่อ '.$request->get('name').' นี้แล้ว';
+      return Redirect::back()->withErrors([$_message]);
+
+    }
+
     if($model->fill($request->all())->save()) {
 
       $slug = $model->getModelRelationData('Slug',array(
@@ -291,22 +310,9 @@ class ShopController extends Controller
         'first' => true
       ))->slug;
 
-      Message::display('นำบริษัท ร้านค้า หรือธุรกิจเข้าสู่ชุมชนแล้ว','success');
+      Message::display('บริษัท ร้านค้า หรือธุรกิจถูกเพิ่มเข้าสู่ชุมชนแล้ว','success');
       return Redirect::to(route('shop.manage', ['slug' => $slug]));
     }else{
-
-      switch ($model->errorType) {
-        case 1;
-          $_message = 'คุณได้เพิ่มร้านค้าชื่อว่า '.$model->name.' ไปแล้ว โปรดใช้ชื่ออื่น';
-          return Redirect::back()->withErrors([$_message]);
-          break;
-
-        case 2;
-          $_message = 'มีร้านค้าชื่อ '.$model->name.' นี้แล้ว';
-          return Redirect::back()->withErrors([$_message]);
-          break;
-      }
-
       return Redirect::back();
     }
 

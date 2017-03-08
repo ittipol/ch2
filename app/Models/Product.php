@@ -308,6 +308,14 @@ class Product extends Model
 
     }
 
+    $promotion = $this->getPromotion();
+
+    $hasPromotion = false;
+    if(!empty($promotion)) {
+      $hasPromotion = true;
+      $promotion = $promotion->buildModelData();
+    }
+
     return array(
       'id' => $this->id,
       'name' => $this->name,
@@ -328,7 +336,9 @@ class Product extends Model
       '_active' => $this->active ? 'เปิดการขายสินค้า' : 'ปิดการขาย',
       '_categoryName' => !empty($categoryName) ? $categoryName : '-',
       '_categoryPathName' => !empty($categoryPathName) ? $categoryPathName : '-',
-      '_categoryPaths' => $this->getCategoryPaths()
+      '_categoryPaths' => $this->getCategoryPaths(),
+      'promotion' => $promotion,
+      'hasPromotion' => $hasPromotion
     );
 
   }
@@ -338,8 +348,13 @@ class Product extends Model
     $string = new String;
     $currency = new Currency;
 
-    // $categoryName = $this->getCategory();
-    // $categoryPathName = $this->getCategoryPathName();
+    $promotion = $this->getPromotion();
+
+    $hasPromotion = false;
+    if(!empty($promotion)) {
+      $hasPromotion = true;
+      $promotion = $promotion->buildModelData();
+    }
 
     return array(
       'id' => $this->id,
@@ -348,14 +363,38 @@ class Product extends Model
       'sku' => !empty($this->sku) ? $this->sku : '-',
       '_price' => $currency->format($this->price),
       'quantity' => $this->quantity,
-      // 'unlimited_quantity' => $this->unlimited_quantity,
-      // '_unlimited_quantity' => $this->unlimited_quantity ? 'ไม่จำกัดจำนวน' : '',
-      // 'active' => $this->active,
       '_active' => $this->active ? 'เปิดการขายสินค้า' : 'ปิดการขายสินค้า',
-      // '_categoryName' => !empty($categoryName) ? $categoryName : '-',
-      // '_categoryPaths' => !empty($categoryPathName) ? $categoryPathName : '-',
+      'promotion' => $promotion,
+      'hasPromotion' => $hasPromotion
     );
     
+  }
+
+  public function getPrice($format = false) {
+
+    $currency = new Currency;
+
+    if($format) {
+      return $currency->format($this->price);
+    }
+
+    return $this->price;
+
+  }
+
+  public function getPromotion() {
+
+    $today = date('Y-m-d');
+
+    return $this->getRalatedData('ProductSalePromotion',array(
+      'conditions' => array(
+        array('date_start','<=',$today),
+        array('date_end','>=',$today),
+      ),
+      'order' => array('date_start','ASC'),
+      'first' => true
+    ));
+
   }
 
 }

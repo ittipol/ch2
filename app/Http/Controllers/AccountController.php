@@ -42,7 +42,7 @@ class AccountController extends Controller
 
     $date = new Date;
 
-    $latestYear = date('Y');
+    $currentYear = date('Y');
     
     $day = array();
     $month = array();
@@ -56,7 +56,7 @@ class AccountController extends Controller
       $month[$i] = $date->getMonthName($i);
     }
 
-    for ($i=1957; $i <= $latestYear; $i++) { 
+    for ($i=1957; $i <= $currentYear; $i++) { 
       $year[$i] = $i+543;
     }
 

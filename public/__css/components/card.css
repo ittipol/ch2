@@ -43,16 +43,6 @@
 }
 
 .card .card-title {
-	/*text-transform: uppercase;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 12px;
-  color: #333;
-  cursor: pointer;
-  font-style: normal;
-  height: 36px;
-  overflow: hidden;*/
-
   text-transform: uppercase;
   text-decoration: none;
   font-weight: bold;
@@ -121,6 +111,41 @@
   font-style: normal;
   height: 36px;
   overflow: hidden;
+}
+
+.card .product-price-section {
+	height: 44px;
+}
+
+.card .product-price {
+	color: #0071c5;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.card .product-price-discount-tag{
+	padding: 4px 8px;
+  font-size: 18px;
+  white-space: nowrap;
+  background-color: #FFCDD2;
+  color: #D50000;
+}
+
+.card .origin-price {
+	text-decoration: line-through;
+	font-size: 12px;
+	color: #999;
+}
+
+.card .message-tag {
+	position: absolute;
+  top: 20px;
+  right: 0;
+  padding: 6px 15px;
+  background-color: #0071c5;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 20px 0 0 20px;
 }
 
 .card .button-group {

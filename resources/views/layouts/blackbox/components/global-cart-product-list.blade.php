@@ -25,15 +25,15 @@
         </h4>
         <div class="line grey space-bottom-5"></div>
         <div>
-          ราคาสินค้ารวม: <span class="price">{{$product['price']}}</span> x {{$product['quantity']}}
+          ราคาสินค้ารวม: <span class="text-emphasize">{{$product['price']}}</span> x {{$product['quantity']}}
         </div>
         @if($product['shipping_calculate_from'] == 2)
         <div>
-          ค่าจัดส่งสินค้า: <span class="price">{{$product['shippingCost']}}</span>
+          ค่าจัดส่งสินค้า: <span class="text-emphasize">{{$product['shippingCost']}}</span>
         </div>
         @endif
         <div>
-          มูลค่าสินค้า: <span class="price">{{$product['total']}}</span>
+          มูลค่าสินค้า: <span class="text-emphasize">{{$product['total']}}</span>
         </div>
       </div>
 
@@ -44,7 +44,8 @@
   </div>
   @endforeach
 
-  <a href="{{URL::to('cart')}}" class="button wide-button space-top-20">ไปยังตระกร้าสินค้า</a>
+  <a href="{{URL::to('product/list')}}" class="button half-button space-top-20">เลือกซื้อสินค้า</a>
+  <a href="{{URL::to('cart')}}" class="button half-button space-top-20">ไปยังตระกร้าสินค้า</a>
 
 @else
   

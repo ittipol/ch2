@@ -34,8 +34,6 @@
 	margin-bottom: 0;
 }
 
-/*.lists {}*/
-
 .lists .list {
 	margin-top: 50px;
 }
@@ -54,9 +52,9 @@
 	margin-bottom: 10px;
 }
 
-.list .list-content-wrapper .info .description {
+/*.list .list-content-wrapper .info .description {
 
-}
+}*/
 
 .list .list-content-wrapper .info .price {
 	font-size: 20px;
@@ -78,6 +76,7 @@
 .list-empty-message img {
 	width: 200px;
 	height: 200px;
+	padding: 20px;
 }
 
 .product-category-list {
@@ -86,10 +85,6 @@
 	overflow-y: auto; 
 	overflow-x: hidden;
 }
-
-/*.product-category-list a {
-	cursor: pointer;
-}*/
 
 .product-category-list .product-category-list-item:first-child {
 	border-top: 1px solid #bababa;
@@ -124,7 +119,6 @@
 
 .product-category-list .product-category-list-item.selected {
 	background-color: #0D47A1;
-	/*box-shadow: 0 2px 5px rgba(0,0,0,.26);*/
 }
 
 .product-category-list .product-category-list-item h4 {
@@ -135,12 +129,6 @@
 .product-category-list .product-category-list-item.selected h4 {
 	color: #fff;
 }
-
-/*.product-category-list .product-category-list-item > .icon-pos-right {
-	position: absolute;
-	top: 6px;
-	right: 10px;
-}*/
 
 .product-category-list .product-category-list-item > .icon-pos-left {
 	position: absolute;
@@ -170,7 +158,6 @@
 }
 
 .list-item-group {
-	/*border-top: 3px solid #1976D2;*/
 	padding: 10px;
 }
 
@@ -197,6 +184,47 @@
 label.list-box > input[type="radio"],
 label.list-box > input[type="checkbox"] {
 	display: none;
+}
+
+.list-box {
+	padding: 15px;
+	background-color: #F2F3F7;
+	position: relative;
+	border-bottom: 4px solid #ccc;
+}
+
+.list-box:not(:first-child) {
+	margin-top: 20px;
+}
+
+.list-box .primary-image {
+	width: 100px;
+	height: 100px;
+	background-color: rgb(49,175,145);
+	border-radius: 100px;
+	padding: 20px;
+	margin: 10px 0;
+}
+
+.list-box.active {
+	background-color: #607D8B;
+	color: #fff; 
+}
+
+.list-box .additional-option {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	width: 35px;
+	height: 35px;
+	padding-top: 3px;
+	border-radius: 35px;
+	background-color: #455A64;
+}
+
+.list-box .additional-option .dot {
+	background-color: #fff;
+	margin: 4px auto;
 }
 
 @media only screen and (max-width : 480px) {

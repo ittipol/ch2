@@ -101,17 +101,19 @@
             <?php 
               echo Form::label('name', 'พื้นที่ใช้สอย');
             ?>
-            <span class="input-addon">
-              <?php
-                echo Form::text('home_area[sqm]', null, array(
-                  'class' => 'home-area',
-                  'placeholder' => 'พื้นที่ใช้สอย',
-                  'autocomplete' => 'off',
-                  'role' => 'number'
-                ));
-              ?>
-              <span>ตารางเมตร</span>
-            </span>
+            <div class="input-addon-group">
+              <span class="input-addon">
+                <?php
+                  echo Form::text('home_area[sqm]', null, array(
+                    'class' => 'home-area',
+                    'placeholder' => 'พื้นที่ใช้สอย',
+                    'autocomplete' => 'off',
+                    'role' => 'number'
+                  ));
+                ?>
+                <span>ตารางเมตร</span>
+              </span>
+            </div>
           </div>
 
           <div class="form-row">
@@ -119,58 +121,64 @@
               echo Form::label('name', 'พื้นที่ที่ดิน');
             ?>
 
-            <span class="input-addon">
-              <?php
-                echo Form::text('land_area[rai]', null, array(
-                  'id' => 'rai',
-                  'class' => 'land-area',
-                  'placeholder' => 'ไร่',
-                  'autocomplete' => 'off',
-                  'role' => 'number'
-                ));
-              ?>
-              <span>ไร่</span>
-            </span>
+            <div class="input-addon-group">
+              <span class="input-addon">
+                <?php
+                  echo Form::text('land_area[rai]', null, array(
+                    'id' => 'rai',
+                    'class' => 'land-area',
+                    'placeholder' => 'ไร่',
+                    'autocomplete' => 'off',
+                    'role' => 'number'
+                  ));
+                ?>
+                <span>ไร่</span>
+              </span>
 
-            <span class="input-addon">
-              <?php
-                echo Form::text('land_area[ngan]', null, array(
-                  'id' => 'ngan',
-                  'class' => 'land-area',
-                  'placeholder' => 'งาน',
-                  'autocomplete' => 'off',
-                  'role' => 'number'
-                ));
-              ?>
-              <span>งาน</span>
-            </span>
+              <span class="input-addon">
+                <?php
+                  echo Form::text('land_area[ngan]', null, array(
+                    'id' => 'ngan',
+                    'class' => 'land-area',
+                    'placeholder' => 'งาน',
+                    'autocomplete' => 'off',
+                    'role' => 'number'
+                  ));
+                ?>
+                <span>งาน</span>
+              </span>
 
-            <span class="input-addon">
-              <?php
-                echo Form::text('land_area[wa]', null, array(
-                  'id' => 'wa',
-                  'class' => 'land-area',
-                  'placeholder' => 'ตารางวา',
-                  'autocomplete' => 'off',
-                  'role' => 'number'
-                ));
-              ?>
-              <span>ตารางวา</span>
-            </span>
+              <span class="input-addon">
+                <?php
+                  echo Form::text('land_area[wa]', null, array(
+                    'id' => 'wa',
+                    'class' => 'land-area',
+                    'placeholder' => 'ตารางวา',
+                    'autocomplete' => 'off',
+                    'role' => 'number'
+                  ));
+                ?>
+                <span>ตารางวา</span>
+              </span>
+
+            </div>
 
             <div class="line space-top-bottom-10"></div>
 
-            <span class="input-addon">
-              <?php
-                echo Form::text('land_area[sqm]', null, array(
-                  'id' => 'sqm',
-                  'class' => 'land-area',
-                  'placeholder' => 'ตารางเมตร',
-                  'autocomplete' => 'off'
-                ));
-              ?>
-              <span>ตารางเมตร</span>
-            </span>
+            <div class="input-addon-group">
+              <span class="input-addon">
+                <?php
+                  echo Form::text('land_area[sqm]', null, array(
+                    'id' => 'sqm',
+                    'class' => 'land-area',
+                    'placeholder' => 'ตารางเมตร',
+                    'autocomplete' => 'off',
+                    'role' => 'number'
+                  ));
+                ?>
+                <span>ตารางเมตร</span>
+              </span>
+            </div>
 
           </div>
 
@@ -186,7 +194,8 @@
                   echo Form::text('indoor[bedroom]', 0, array(
                     'class' => 'indoor',
                     'placeholder' => 'ห้องนอน',
-                    'autocomplete' => 'off'
+                    'autocomplete' => 'off',
+                    'role' => 'number'
                   ));
                 ?>
               </span>
@@ -197,7 +206,8 @@
                   echo Form::text('indoor[bathroom]', 0, array(
                     'class' => 'indoor',
                     'placeholder' => 'ห้องน้ำ',
-                    'autocomplete' => 'off'
+                    'autocomplete' => 'off',
+                    'role' => 'number'
                   ));
                 ?>
               </span>
@@ -208,7 +218,8 @@
                   echo Form::text('indoor[living_room]', 0, array(
                     'class' => 'indoor',
                     'placeholder' => 'ห้องนั่งเล่น',
-                    'autocomplete' => 'off'
+                    'autocomplete' => 'off',
+                    'role' => 'number'
                   ));
                 ?>
               </span>
@@ -221,7 +232,8 @@
                   echo Form::text('indoor[home_office]', 0, array(
                     'class' => 'indoor',
                     'placeholder' => 'ห้องทำงาน',
-                    'autocomplete' => 'off'
+                    'autocomplete' => 'off',
+                    'role' => 'number'
                   ));
                 ?>
               </span>
@@ -232,7 +244,8 @@
                   echo Form::text('indoor[floors]', 0, array(
                     'class' => 'indoor',
                     'placeholder' => 'จำนวนชั้น',
-                    'autocomplete' => 'off'
+                    'autocomplete' => 'off',
+                    'role' => 'number'
                   ));
                 ?>
               </span>
@@ -243,7 +256,8 @@
                   echo Form::text('indoor[carpark]', 0, array(
                     'class' => 'indoor',
                     'placeholder' => 'ที่จอดรถ',
-                    'autocomplete' => 'off'
+                    'autocomplete' => 'off',
+                    'role' => 'number'
                   ));
                 ?>
               </span>

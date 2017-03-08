@@ -42,17 +42,6 @@ class CheckForEditingPermission
 
       $model = Service::loadModel($pages[$name]['modelName'])->select(array('id','person_id'))->find($request->id);
 
-      // Get checking
-      // switch ($pages[$name]['checking']) {
-      //   case 1:
-      //     $condition = (empty($model) || ($model->person_id != session()->get('Person.id')));
-      //     break;
-        
-      //   case 2:
-      //     $condition = (empty($model));
-      //     break;
-      // }
-
       if(empty($model) || ($model->person_id != session()->get('Person.id'))) {
         return response(view('errors.error',array(
           'error'=>array(

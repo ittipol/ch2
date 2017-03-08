@@ -11,20 +11,36 @@
 
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
           <div class="card">
+
+            @if($data['hasPromotion'])
+              <div class="message-tag sale-promotion">สินค้าโปรโมชั่น</div>
+            @endif
+            
             <div class="image-tile">
               <a href="{{$data['detailUrl']}}">
                 <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
               </a>
             </div>
+            
             <div class="card-info">
               <a href="{{$data['detailUrl']}}">
-                <div class="card-title">{{$data['_short_name']}}</div>
+                <div class="card-title">{{$data['name']}}</div>
               </a>
               <div class="card-sub-info">
-                <h5>ราคา</h5>
-                {{$data['_price']}}
+
+                <div class="card-sub-info-row product-price-section">
+                  @if($data['hasPromotion'])
+                    <span class="product-price">{{$data['promotion']['_reduced_price']}}</span>
+                    <span class="product-price-discount-tag">{{$data['promotion']['percentDiscount']}}</span>
+                    <h5 class="origin-price">{{$data['_price']}}</h5>
+                  @else
+                    <span class="product-price">{{$data['_price']}}</span>
+                  @endif
+                </div>
+
               </div>
             </div>
+
           </div>
         </div>
 

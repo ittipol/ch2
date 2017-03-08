@@ -15,14 +15,22 @@ class ProductController extends Controller
     parent::__construct();
   }
 // ข้อความถึงผู้ขาย:
-  // การรับประกัน
-  // public function index() {
-  //   dd('pd index');
-  // }
+  // การรับประกันสินค้า
 
   // wholesale
   // ราคา
   // กำหนดช่วงราคา
+
+  private function _save($model,$attributes = array()) {
+
+    if($model->fill($attributes)->save()) {
+      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
+    }else{
+      return Redirect::back();
+    }
+
+  }
 
   public function listView() {
 
@@ -76,17 +84,6 @@ class ProductController extends Controller
 
     $this->data = $model->modelData->build();
 
-    // if($model->shipping_calculate_from == 2) {
-
-    //   $shipping = $model->getRalatedData('ProductShipping',array(
-    //     'first' => true
-    //   ));
-
-
-    //   $this->setData('shipping',$shipping->modelData->build(true));
-
-    // }
-
     $this->setData('shop',$shop->modelData->build(true));
     $this->setData('shopImageUrl',$shop->getProfileImageUrl());
     $this->setData('shopCoverUrl',$shop->getCoverUrl());
@@ -121,9 +118,7 @@ class ProductController extends Controller
 
     $this->data = $model->modelData->build();
 
-    // $this->setData('name',$model->name);
     $this->setData('imageUrl',$imageUrl);
-    // $this->setData('categoryPathName',$model->getCategoryPathName());
 
     $this->setData('productDetailUrl','product/detail/'.$model->id);
     $this->setData('productEditUrl',request()->get('shopUrl').'product_edit/'.$model->id);
@@ -134,6 +129,7 @@ class ProductController extends Controller
     $this->setData('productPriceEditUrl',request()->get('shopUrl').'product_price_edit/'.$model->id);
     $this->setData('productShippingUrl',request()->get('shopUrl').'product_shipping_edit/'.$model->id);
     $this->setData('productNotificationEditUrl',request()->get('shopUrl').'product_notification_edit/'.$model->id);
+    $this->setData('productSalePromotionUrl',request()->get('shopUrl').'product_sale_promotion/'.$model->id);
 
     return $this->view('pages.product.menu');
 
@@ -182,14 +178,16 @@ class ProductController extends Controller
 
   public function editingSubmit(CustomFormRequest $request) {
 
-    $model = Service::loadModel('Product')->find($this->param['id']);
+    return $this->_save(Service::loadModel('Product')->find($this->param['id']),$request->all());
 
-    if($model->fill($request->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
-    }else{
-      return Redirect::back();
-    }
+    // $model = Service::loadModel('Product')->find($this->param['id']);
+
+    // if($model->fill($request->all())->save()) {
+    //   Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+    //   return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
+    // }else{
+    //   return Redirect::back();
+    // }
   }
 
   public function statusEdit() {
@@ -210,14 +208,16 @@ class ProductController extends Controller
 
   public function statusEditingSubmit(CustomFormRequest $request) {
 
-    $model = Service::loadModel('Product')->find($this->param['id']);
+    return $this->_save(Service::loadModel('Product')->find($this->param['id']),$request->all());
 
-    if($model->fill($request->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
-    }else{
-      return Redirect::back();
-    }
+    // $model = Service::loadModel('Product')->find($this->param['id']);
+
+    // if($model->fill($request->all())->save()) {
+    //   Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+    //   return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
+    // }else{
+    //   return Redirect::back();
+    // }
 
   }
 
@@ -251,14 +251,16 @@ class ProductController extends Controller
 
   public function specificationEditingSubmit(CustomFormRequest $request) {
 
-    $model = Service::loadModel('Product')->find($this->param['id']);
+    return $this->_save(Service::loadModel('Product')->find($this->param['id']),$request->all());
 
-    if($model->fill($request->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
-    }else{
-      return Redirect::back();
-    }
+    // $model = Service::loadModel('Product')->find($this->param['id']);
+
+    // if($model->fill($request->all())->save()) {
+    //   Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+    //   return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
+    // }else{
+    //   return Redirect::back();
+    // }
 
   }
 
@@ -291,14 +293,16 @@ class ProductController extends Controller
 
   public function categoryEditingSubmit(CustomFormRequest $request) {
 
-    $model = Service::loadModel('Product')->find($this->param['id']);
+    return $this->_save(Service::loadModel('Product')->find($this->param['id']),$request->all());
 
-    if($model->fill($request->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
-    }else{
-      return Redirect::back();
-    }
+    // $model = Service::loadModel('Product')->find($this->param['id']);
+
+    // if($model->fill($request->all())->save()) {
+    //   Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+    //   return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
+    // }else{
+    //   return Redirect::back();
+    // }
 
   }
 
@@ -321,14 +325,16 @@ class ProductController extends Controller
 
   public function stockEditingSubmit(CustomFormRequest $request) {
 
-    $model = Service::loadModel('Product')->find($this->param['id']);
+    return $this->_save(Service::loadModel('Product')->find($this->param['id']),$request->all());
 
-    if($model->fill($request->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
-    }else{
-      return Redirect::back();
-    }
+    // $model = Service::loadModel('Product')->find($this->param['id']);
+
+    // if($model->fill($request->all())->save()) {
+    //   Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+    //   return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
+    // }else{
+    //   return Redirect::back();
+    // }
   }
 
   public function priceEdit() {
@@ -349,14 +355,16 @@ class ProductController extends Controller
 
   public function priceEditingSubmit(CustomFormRequest $request) {
 
-    $model = Service::loadModel('Product')->find($this->param['id']);
+    return $this->_save(Service::loadModel('Product')->find($this->param['id']),$request->all());
 
-    if($model->fill($request->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
-    }else{
-      return Redirect::back();
-    }
+    // $model = Service::loadModel('Product')->find($this->param['id']);
+
+    // if($model->fill($request->all())->save()) {
+    //   Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+    //   return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
+    // }else{
+    //   return Redirect::back();
+    // }
 
   }
 
@@ -440,25 +448,53 @@ class ProductController extends Controller
  
   public function notificationEditingSubmit(CustomFormRequest $request) {
 
-    $model = Service::loadModel('Product')->find($this->param['id']);
+    return $this->_save(Service::loadModel('Product')->find($this->param['id']),$request->all());
 
-    if($model->fill($request->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
-    }else{
-      return Redirect::back();
-    }
+    // $model = Service::loadModel('Product')->find($this->param['id']);
+
+    // if($model->fill($request->all())->save()) {
+    //   Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+    //   return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
+    // }else{
+    //   return Redirect::back();
+    // }
 
   }
 
-  private function _save($model,$attributes = array()) {
+  public function salePromotion() {
+    
+    $model = Service::loadModel('Product')->find($this->param['id']);
 
-    if($model->fill($attributes)->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
-    }else{
-      return Redirect::back();
+    $promotion = $model->getPromotion();
+
+    $_salePromotions = array();
+    if(!empty($promotion)) {
+      $_salePromotions[] = array(
+        'active' => true,
+        'data' => $promotion->buildModelData()
+      );
     }
+
+    $salePromotions = $model->getRalatedData('ProductSalePromotion',array(
+      'conditions' => array(
+        array('date_start','>',date('Y-m-d')),
+      ),
+      'order' => array('date_start','ASC'),
+    ));
+
+    foreach ($salePromotions as $salePromotion) {
+      $_salePromotions[] = array(
+        'active' => false,
+        'remainingDays' => $salePromotion->calRemainingDays(),
+        'data' => $salePromotion->buildModelData(),
+      );
+    }
+
+    $this->setData('salePromotions',$_salePromotions);
+    $this->setData('price',$model->getPrice(true));
+    $this->setData('productDiscountAdd',request()->get('shopUrl').'product_discount/add/product_id:'.$model->id);
+
+    return $this->view('pages.product.sale_promotion');
 
   }
 

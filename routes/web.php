@@ -230,6 +230,11 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::get('shop/{shopSlug}/product_notification_edit/{id}','ProductController@notificationEdit')->name('shop.product_notification.edit');
   Route::patch('shop/{shopSlug}/product_notification_edit/{id}','ProductController@notificationEditingSubmit')->name('shop.product_notification.edit');
 
+  Route::get('shop/{shopSlug}/product_sale_promotion/{id}','ProductController@salePromotion')->name('shop.product_sale_promotion');
+
+  Route::get('shop/{shopSlug}/product_discount/add/product_id:{product_id}','ProductDiscountController@add')->name('shop.product_discount.add');
+  Route::post('shop/{shopSlug}/product_discount/add/product_id:{product_id}','ProductDiscountController@addingSubmit')->name('shop.product_discount.add');
+
 });
 
 // Job

@@ -1,21 +1,46 @@
+.detail {
+	position: relative;
+}
+
 .detail .line {
 	background-color: #bababa;
 }
 
-.detail .price {
+.detail .text-emphasize {
 	color: #0071c5;
+	font-size: 20px;
 }
 
-.detail .emphasize {
-	color: #0071c5;
-}
-
-.detail .emphasize-green {
+.detail .text-emphasize-green {
 	color: #088921;
+}
+.detail .origin-price {
+	text-decoration: line-through;
+	font-size: 12px;
+	color: #999;
+}
+
+.detail .product-price-discount-tag {
+	padding: 4px 8px;
+	font-size: 18px;
+	white-space: nowrap;
+	background-color: #FFCDD2;
+	color: #D50000;
+}
+
+.detail .message-tag {
+	position: absolute;
+	top: 20px;
+	right: 0;
+	padding: 6px 15px;
+	background-color: #0071c5;
+	color: #fff;
+	font-size: 14px;
+	border-radius: 20px 0 0 20px;
+	z-index: 9;
 }
 
 .detail-title {
-	/*border-bottom: 1px solid #bababa;*/
 	margin-bottom: 20px;
 }
 
@@ -27,6 +52,10 @@
 .detail-title .sub-title {
 	margin-top: 20px;
 	margin-bottom: 0;
+}
+
+.detail .detail-info-section {
+	margin-top: 20px;
 }
 
 .tag-group {
@@ -80,7 +109,6 @@
 
 .image-gallery .image-gallary-display .image-gallary-display-inner {
 	height: 100%;
-	/*overflow: hidden;*/
 	position: relative;
 }
 
@@ -89,7 +117,7 @@
 	height: 100%;
 	text-align: center;
 	overflow: hidden;
-	z-index: 9;
+	z-index: 2;
 }
 
 .image-gallery .image-gallary-display img {
@@ -108,7 +136,7 @@
 	/*background-color: rgba(0,0,0,.6);*/
 	background-color: rgba(47,97,186,.9);
 	overflow: hidden;
-	z-index: 9;
+	z-index: 5;
 	display: none;
 	transition: all 250ms ease-out;
 }

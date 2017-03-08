@@ -96,35 +96,48 @@ class ImageGallery {
     let frameWidth = Math.ceil($('.image-gallary-panel').width());
     let frameheight = Math.ceil($('.image-gallary-panel').height());
 
-    if((imgHeight > frameheight) || (imgWidth > frameWidth)) {
+    if((imgHeight > frameheight) && (imgWidth > frameWidth)) {
 
       // let diff = Math.abs(frameWidth - imgWidth);
 
-      // if(diff < 400) {
+      let diffW = Math.abs(frameWidth - imgWidth);
+      let diffH = Math.abs(frameheight - imgHeight);
 
-      //   let imgH = Math.ceil(imgHeight * (frameWidth / imgWidth));
+      let diff = Math.abs(diffW - diffH);
 
-      //   $('#image_display').css({
-      //     'width': '100%',
-      //     'height': imgH,
-      //     'margin-top': (frameheight - imgH) / 2
-      //   });
+      if(diff < 200) {
 
-      // }else if(diff < 1000) {
+        let imgW = Math.ceil(imgWidth * (frameheight / imgHeight));
 
-      //   // let imgH = Math.ceil(imgHeight * (frameWidth / imgWidth));
-      //   let imgW = Math.ceil(imgWidth * (frameheight / imgHeight));
+        $('#image_display').css({
+          'height': '100%',
+          'margin-left': -((imgW - frameWidth) / 2)
+        });
 
-      //   if(imgW > frameWidth) {
+      }else if(diff < 400) {
 
-      //     $('#image_display').css({
-      //       'height': '100%',
-      //       'margin-left': -((imgW - frameWidth) / 2)
-      //     });
+        let imgH = Math.ceil(imgHeight * (frameWidth / imgWidth));
 
-      //   }
+        $('#image_display').css({
+          'width': '100%',
+          'height': imgH,
+          'margin-top': (frameheight - imgH) / 2
+        });
 
-      // }
+      }else if(diff < 1000) {
+
+        let imgW = Math.ceil(imgWidth * (frameheight / imgHeight));
+
+        if(imgW > frameWidth) {
+
+          $('#image_display').css({
+            'height': '100%',
+            'margin-left': -((imgW - frameWidth) / 2)
+          });
+
+        }
+
+      }
 
       if(Math.abs(imgHeight - imgWidth) > 350) {
         let imgH = Math.ceil(imgHeight * (frameWidth / imgWidth));
@@ -135,13 +148,13 @@ class ImageGallery {
           'margin-top': (frameheight - imgH) / 2
         });
       }else{
-        // let imgW = Math.ceil(imgWidth * (frameheight / imgHeight));
+        let imgW = Math.ceil(imgWidth * (frameheight / imgHeight));
 
-        // $('#image_display').css({
-        //   'width': imgW,
-        //   'height': '100%',
-        //   'margin-top': 0
-        // });
+        $('#image_display').css({
+          'width': imgW,
+          'height': '100%',
+          'margin-top': 0
+        });
       }
 
     }else{

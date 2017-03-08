@@ -22,14 +22,14 @@ class ItemController extends Controller
       $page = $this->query['page'];
     }
 
-    $model->paginator->criteria(array(
-      'fields' => array('items.*')
-    ));
+    // $model->paginator->criteria(array(
+    //   'fields' => array('items.*')
+    // ));
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl('item/list');
     $model->paginator->setUrl('item/detail/{id}','detailUrl');
 
-    $this->data = $model->paginator->buildPermissionData();
+    $this->data = $model->paginator->build();
 
     return $this->view('pages.item.list');
   }

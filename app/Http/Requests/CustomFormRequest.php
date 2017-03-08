@@ -62,6 +62,9 @@ class CustomFormRequest extends FormRequest
     ),
     'person_experience.internship.edit' => array(
       'modelName' => 'PersonInternship'
+    ),
+    'shop.product_discount.add' => array(
+      'modelName' => 'ProductDiscount'
     )
   );
 

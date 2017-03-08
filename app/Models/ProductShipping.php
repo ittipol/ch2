@@ -112,19 +112,26 @@ class ProductShipping extends Model
 
     $text = 'จัดส่งฟรีเมื่อ%s%s%s';
 
+    $amount = '';
     switch ($this->shipping_calculate_type_id) {
-      case 1: // by weight
-        $amount = ' '.$this->free_shipping_amount.' กรัม';
+      case 1:
+        if(!empty($product->weight)) {
+          $amount = ' '.$this->free_shipping_amount.' '.$product->weightUnit->name;
+        }
         break;
       
-      case 2: // product amount
+      case 2:
         $amount = ' '.$this->free_shipping_amount.' '.$product->product_unit;
         break;
 
-      case 3: // product price
+      case 3:
         $amount = ' '.$currency->format($this->free_shipping_amount);
         break;
 
+    }
+
+    if(empty($amount)) {
+      return '';
     }
 
     return sprintf($text,
@@ -161,22 +168,29 @@ class ProductShipping extends Model
 
   }
 
-
   public function checkFreeShippingCondition($product,$quantity) {
 
+    $productValue = null;
+
     switch ($this->shipping_calculate_type_id) {
-      case 1: // by weight
-        // $productValue = $product->weightToGram();
+      case 1:
+          if(!empty($product->weight)) {
+            $productValue = $product->weight * $quantity;
+          }
         break;
       
-      case 2: // product amount
-        $productValue = $quantity;
+      case 2:
+          $productValue = $quantity;
         break;
 
-      case 3: // product price
-        dd('rpice');
+      case 3: 
+          $productValue = $product->price * $quantity;
         break;
 
+    }
+
+    if(empty($productValue)) {
+      return false;
     }
 
     return $this->checkHasFreeShippingCondition(
@@ -279,7 +293,6 @@ class ProductShipping extends Model
 
     return array(
       'free_shipping' => $this->free_shipping,
-      // '_message' => $message,
       'shipping_calculate_from' => $this->shipping_calculate_from,
       '_shipping_calculate_from' => $shippingCalculateFrom,
       'shippingCost' => $shippingCost,

@@ -120,9 +120,9 @@
     </div>
 
     <div class="list-item">
-      <a href="">
+      <a href="{{$productSalePromotionUrl}}">
         <img class="icon" src="/images/common/pencil.png" >
-        <h4>โปรโมชั่นส่วนลด</h4>
+        <h4>โปรโมชั่นการขาย</h4>
       </a>
     </div>
 
@@ -144,13 +144,6 @@
         @endif
       </div>
     </div>
-
-    <!-- <div class="list-item">
-      <a href="">
-        <img class="icon" src="/images/common/pencil.png" >
-        <h4>โปรโมชั่นของสินค้า</h4>
-      </a>
-    </div> -->
 
     <div class="list-item">
       <a href="{{$productNotificationEditUrl}}">

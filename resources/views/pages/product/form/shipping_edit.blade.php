@@ -136,7 +136,7 @@
             <div class="form-row">
 
               <h5>ต้องการคำนวณจาก</h5>
-              <p class="error-product-weight-message error-message hide-element">* โปรดตรวจสอบให้แน่ใจว่าได้กรอกน้ำหนักสินค้าแล้ว</p>
+              <p class="error-product-weight-message error-message hide-element">* โปรดตรวจสอบให้แน่ใจว่าได้กรอกน้ำหนักของสินค้าและหน่วยน้ำหนักของสินค้าแล้ว</p>
               <?php
                 echo Form::select('shipping_calculate_type_id', $_fieldData['ShippingCalTypes'], null, array(
                   'id' => 'shipping_calculate_type'
@@ -151,7 +151,7 @@
               <h5>จำนวน (ชึ้นอยู่กับเงื่อนไขที่เลือก)</h5>
               <div class="alert alert-info" role="alert">
                 <strong>เมื่อกำหนดตามน้ำหนักสินค้า</strong>
-                <p>ให้กรอกน้ำหนักสินค้าหน่วยเป็น <strong>กรัม</strong> หรือ <strong>มิลลิลิตร</strong></p>
+                <p>ให้กรอกน้ำหนักสินค้า โดยหน่วยของสินค้าขึ้นอยู่กับหน่วยที่คุณเลือกในหน้าข้อมูลจำเพาะ</p>
                 <br/>
                 <strong>เมื่อกำหนดตามจำนวนสินค้า</strong>
                 <p>ให้กรอกจำนวนสินค้า</p>
@@ -232,7 +232,6 @@
       $('#shipping_system').on('change',function(){
         $('.shipping-form').css('display','block');
       });
-      
 
       $('#free_shipping').on('change',function(){
         $('.shipping-cost-data').css('display','none');
@@ -243,14 +242,14 @@
       });
 
       $('#free_shipping_with_condition').on('click',function(){
-        if(!$(this).is(':checked')) {
-          $('#shipping_calculate_type').prop('disabled', true);
-          $('#free_shipping_operator_sign').prop('disabled', true);
-          $('#free_shipping_amount').prop('disabled', true);
-        }else{
+        if($(this).is(':checked')) {
           $('#shipping_calculate_type').prop('disabled', false);
           $('#free_shipping_operator_sign').prop('disabled', false);
           $('#free_shipping_amount').prop('disabled', false);
+        }else{
+          $('#shipping_calculate_type').prop('disabled', true);
+          $('#free_shipping_operator_sign').prop('disabled', true);
+          $('#free_shipping_amount').prop('disabled', true);
         }
       });
 

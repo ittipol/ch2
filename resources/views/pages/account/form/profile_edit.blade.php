@@ -78,7 +78,7 @@
       <div class="form-row">
         <div class="select-group">
           <?php 
-            echo Form::label('', 'วันเกิด');
+            echo Form::label('birth_date', 'วันเกิด');
             echo Form::select('birth_day', $day, null, array(
               'id' => 'birth_day'
             ));

@@ -121,14 +121,20 @@ class CheckForPersonHasShopPermission
           'permission' => 'edit',
           'modelName' => 'Product'
         ),
+        'shop.product_sale_promotion' => array(
+          'permission' => true
+        ),
+        'shop.product_discount.add' => array(
+          'permission' => 'add',
+          'check' => array(
+            'modelName' => 'Product',
+            'param' => 'product_id'
+          )
+        ),
       );
 
       if(empty($name) || empty($pages[$name])) {
-        return response(view('errors.error',array(
-          'error'=>array(
-            'message'=>'ไม่อนุญาตให้เข้าถึงหน้านี้ได้'
-          ))
-        ));
+        return $this->errorPage('ไม่อนุญาตให้เข้าถึงหน้านี้ได้');
       }
 
       $personToShop = new PersonToShop;
@@ -142,21 +148,13 @@ class CheckForPersonHasShopPermission
       ));
 
       if(empty($person)) {
-        return response(view('errors.error',array(
-          'error'=>array(
-            'message'=>'ไม่อนุญาตให้แก้ไขร้านค้านี้ได้'
-          ))
-        ));
+        return $this->errorPage('ไม่อนุญาตให้แก้ไขร้านค้านี้ได้');
       }
 
       $permissions = $person->role->getPermission();
 
       if(!$pages[$name]['permission'] && empty($permissions[$pages[$name]['permission']])) {
-        return response(view('errors.error',array(
-          'error'=>array(
-            'message'=>'ไม่อนุญาตให้แก้ไขร้านค้านี้ได้'
-          ))
-        ));
+        return $this->errorPage('ไม่อนุญาตให้แก้ไขร้านค้านี้ได้');
       }
 
       if((!empty($pages[$name]['modelName'])) && ($pages[$name]['permission'] == 'edit')) {
@@ -165,14 +163,21 @@ class CheckForPersonHasShopPermission
           return redirect('home');
         }
 
+        $relatedData = Service::loadModel('ShopRelateTo')
+        ->select('shop_id')
+        ->where([
+          ['model','like',$pages[$name]['modelName']],
+          ['model_id','=',$request->id]
+        ])->exists();
+
+        if(empty($relatedData)) {
+          return $this->errorPage('ไม่พบข้อมูลนี้ในร้านค้า');
+        }
+
         $model = Service::loadModel($pages[$name]['modelName'])->select('id')->find($request->id);
 
         if(empty($model)) {
-          return response(view('errors.error',array(
-            'error'=>array(
-              'message'=>'ขออภัย ไม่สามารถแก้ไขข้อมูลนี้ได้ หรือข้อมูลนี้อาจถูกลบแล้ว'
-            ))
-          ));
+          return $this->errorPage('ขออภัย ไม่สามารถแก้ไขข้อมูลนี้ได้ หรือข้อมูลนี้อาจถูกลบแล้ว');
         }
 
       }
@@ -186,4 +191,13 @@ class CheckForPersonHasShopPermission
 
       return $next($request);
     }
+
+    private function errorPage($message) {
+      return response(view('errors.error',array(
+        'error' => array(
+          'message' => $message
+        ))
+      ));
+    }
+
 }

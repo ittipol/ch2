@@ -21,7 +21,7 @@ class PersonInternshipController extends Controller
     }
 
     $this->data = $model->formHelper->build();
-    $this->setData('latestYear',date('Y'));
+    $this->setData('currentYear',date('Y'));
     $this->setData('month',json_encode($month));
 
     return $this->view('pages.person_experience.form.person_internship_add');
@@ -69,7 +69,7 @@ class PersonInternshipController extends Controller
     $model->formHelper->setFormData('period',json_encode($period->getAttributes()));
     
     $this->data = $model->formHelper->build();
-    $this->setData('latestYear',date('Y'));
+    $this->setData('currentYear',date('Y'));
     $this->setData('month',json_encode($month));
 
     return $this->view('pages.person_experience.form.person_internship_edit');

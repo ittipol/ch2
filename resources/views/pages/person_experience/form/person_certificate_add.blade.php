@@ -104,7 +104,7 @@
 
     CKEDITOR.instances['description'].config.height = '600px';
 
-    const periodDate = new PeriodDate('period_date',{{$latestYear}},{!!$month!!});
+    const periodDate = new PeriodDate('period_date',{{$currentYear}},{!!$month!!});
     periodDate.load();
 
     const images = new Images('_image_group','photo',5);

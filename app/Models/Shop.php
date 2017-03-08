@@ -61,25 +61,6 @@ class Shop extends Model
 
     Shop::saving(function($model){
 
-      if(!$model->exists){
-
-        if($model->where([
-            ['name','like',$model->name],
-            ['person_id','=',Session::get('Person.id')]
-          ])
-          ->exists()) {
-          $model->errorType = 1;
-          return false;
-        }elseif($model->where([
-            ['name','like',$model->name],
-          ])
-          ->exists()) {
-          $model->errorType = 2;
-          return false;
-        }
-
-      }
-
       $image = new Image;
 
       if(!empty($model->modelRelationData['Image']['profile-image']['delete'])) {

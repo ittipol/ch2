@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2017 at 06:39 PM
+-- Generation Time: Mar 08, 2017 at 06:27 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -216,7 +216,9 @@ INSERT INTO `addresses` (`id`, `model`, `model_id`, `address`, `province_id`, `d
 (146, 'Item', 71, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-02-23 11:57:58', '2017-02-23 11:57:58'),
 (147, 'Item', 72, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-02-23 12:02:38', '2017-02-23 12:02:38'),
 (148, 'Item', 73, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-02-23 12:09:10', '2017-02-23 12:09:10'),
-(149, 'Branch', 61, '', 9, 146, 1, NULL, '13.309720005747401', '100.91121554374695', 1, '2017-02-23 14:13:49', '2017-02-23 14:13:49');
+(149, 'Branch', 61, '', 9, 146, 1, NULL, '13.309720005747401', '100.91121554374695', 1, '2017-02-23 14:13:49', '2017-02-23 14:13:49'),
+(150, 'RealEstate', 76, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-03-01 20:41:15', '2017-03-01 20:41:15'),
+(151, 'Item', 74, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-03-01 21:58:54', '2017-03-01 21:58:54');
 
 -- --------------------------------------------------------
 
@@ -370,6 +372,31 @@ INSERT INTO `branches` (`id`, `name`, `description`, `person_id`, `created_at`, 
 (59, 'xxx', '', 1, '2017-02-20 15:35:17', '2017-02-20 15:35:17'),
 (60, 'ชายหาด 1', '', 1, '2017-02-20 15:36:03', '2017-02-20 15:36:03'),
 (61, 'ศรีราขา 1', '', 1, '2017-02-23 14:13:48', '2017-02-23 14:13:48');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `carts`
+--
+
+CREATE TABLE `carts` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `person_id` int(11) UNSIGNED DEFAULT NULL,
+  `session_id` varchar(64) DEFAULT NULL,
+  `shop_id` int(11) UNSIGNED NOT NULL,
+  `product_id` int(11) UNSIGNED NOT NULL,
+  `quantity` int(7) UNSIGNED NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`id`, `person_id`, `session_id`, `shop_id`, `product_id`, `quantity`, `created_at`, `updated_at`) VALUES
+(27, 1, NULL, 3, 13, 2, '2017-03-07 18:59:56', '2017-03-07 23:56:19'),
+(29, 1, NULL, 21, 9, 1, '2017-03-08 00:06:11', '2017-03-08 00:06:11');
 
 -- --------------------------------------------------------
 
@@ -667,7 +694,7 @@ INSERT INTO `categories` (`id`, `parent_id`, `name`, `description`, `active`) VA
 (275, 270, 'คริกเก็ต', NULL, 1),
 (276, 270, 'เบสบอล', NULL, 1),
 (277, 270, 'แฮนด์บอล', NULL, 1),
-(278, 194, 'อุปกรณ์กีฬากีฬาที่ใช้แร็กเก็ต', NULL, 1),
+(278, 194, 'อุปกรณ์กีฬาที่ใช้แร็กเก็ต', NULL, 1),
 (279, 278, 'เทนนิส', NULL, 1),
 (280, 278, 'แบดมินตัน', NULL, 1),
 (281, 278, 'สควอช', NULL, 1),
@@ -675,7 +702,7 @@ INSERT INTO `categories` (`id`, `parent_id`, `name`, `description`, `active`) VA
 (283, 282, 'นวมต่อยมวย', NULL, 1),
 (284, 282, 'กระสอบทราย', NULL, 1),
 (285, 282, 'เป้าชกมวย', NULL, 1),
-(286, 194, 'อุปกรณ์สำหรับปั่นจักรยาน', NULL, 1),
+(286, 194, 'อุปกรณ์สำหรับกีฬาปั่นจักรยาน', NULL, 1),
 (287, 286, 'หมวกจักรยาน', NULL, 1),
 (288, 286, 'แว่นตาปั่นจักรยาน', NULL, 1),
 (289, 286, 'ขวดน้ำ', NULL, 1),
@@ -2055,7 +2082,7 @@ INSERT INTO `categories` (`id`, `parent_id`, `name`, `description`, `active`) VA
 (1662, 1649, 'ตะขอผ้าและราวแขวนผ้า8', NULL, 1),
 (1663, 1662, 'ตะขอแขวนผ้า9', NULL, 1),
 (1664, 1662, 'ราวแขวนผ้า0', NULL, 1),
-(1665, 1260, 'โถงทางเดิน1', NULL, 1),
+(1665, 1260, 'โถงทางเดิน', NULL, 1),
 (1666, 1665, 'ชั้นวางและตู้เก็บของ', NULL, 1),
 (1667, 1665, 'ชั้นวางของแบบติดผนัง', NULL, 1),
 (1668, 1665, 'กล่องเก็บของและตะกร้า', NULL, 1),
@@ -2159,7 +2186,7 @@ INSERT INTO `categories` (`id`, `parent_id`, `name`, `description`, `active`) VA
 (1766, 1765, 'ที่วางกระถางต้นไม้', NULL, 1),
 (1767, 1765, 'รถเข็นย้ายต้นไม้', NULL, 1),
 (1768, 1763, 'อุปกรณ์เสริมสำหรับการเพาะปลูก6', NULL, 1),
-(1769, 1763, 'บัวรดน้ำ7', NULL, 1),
+(1769, 1763, 'บัวรดน้ำ', NULL, 1),
 (1770, 1744, 'แผ่นพื้นสำหรับปูนอกอาคาร', NULL, 1),
 (1771, 1744, 'บาร์บีคิวและอุปกรณ์ทำอาหารภายนอกอาคาร', NULL, 1),
 (1772, 1771, 'เตาบาร์บีคิวแบบใช้แก๊ส', NULL, 1),
@@ -2176,11 +2203,11 @@ INSERT INTO `categories` (`id`, `parent_id`, `name`, `description`, `active`) VA
 (1783, 1780, 'หญ้าเทียมแต่งบ้าน', NULL, 1),
 (1784, 1780, 'บล็อกปูถนน', NULL, 1),
 (1785, NULL, 'น้ำยาและผลิตภัณฑ์ทำความสะอาด', NULL, 1),
-(1786, 1785, 'ผลิตภัณฑ์สำหรับขัดและเคลือบ6', NULL, 1),
-(1787, 1785, 'ผลิตภัณฑ์ดูแลเครื่องหนัง7', NULL, 1),
-(1788, 1785, 'ผลิตภัณฑ์น้ำยาทำความสะอาดพื้นผิว0', NULL, 1),
-(1789, 1785, 'ผลิตภัณฑ์ทำความสะอาดเสื้อผ้าและเครื่องแต่งกาย8', NULL, 1),
-(1790, 1785, 'ผลิตภัณฑ์น้ำยาล้างภาชนะ9', NULL, 1),
+(1786, 1785, 'ผลิตภัณฑ์สำหรับขัดและเคลือบ', NULL, 1),
+(1787, 1785, 'ผลิตภัณฑ์ดูแลเครื่องหนัง', NULL, 1),
+(1788, 1785, 'ผลิตภัณฑ์น้ำยาทำความสะอาดพื้นผิว', NULL, 1),
+(1789, 1785, 'ผลิตภัณฑ์ทำความสะอาดเสื้อผ้าและเครื่องแต่งกาย', NULL, 1),
+(1790, 1785, 'ผลิตภัณฑ์น้ำยาล้างภาชนะ', NULL, 1),
 (1791, 1785, 'ผลิตภัณฑ์ทำความสะอาดห้องน้ำและสุขภัณฑ์', NULL, 1),
 (1792, NULL, 'อุปกรณ์ในสำนักงานและเครื่องเขียน', NULL, 1),
 (1793, 1792, 'โต๊ะทำงาน', NULL, 1),
@@ -2777,7 +2804,7 @@ INSERT INTO `categories` (`id`, `parent_id`, `name`, `description`, `active`) VA
 (2384, NULL, 'สินค้าทางการเกษตร', NULL, 1),
 (2385, 2384, 'ผัก', NULL, 1),
 (2386, 2384, 'ผลไม้', NULL, 1),
-(2387, NULL, 'อาหารสด', NULL, 1),
+(2387, NULL, 'อาหารสดและเครื่องปรุงอาหาร', NULL, 1),
 (2388, 2387, 'เนื้อหมู ไก่ ปลา อาหารทะเลสด', NULL, 1),
 (2389, NULL, 'ผลิตภัณฑ์อาหาร', NULL, 1),
 (2390, 2389, 'อาหารแช่เย็นและอาหารแช่แข็ง', NULL, 1),
@@ -2899,9 +2926,9 @@ INSERT INTO `categories` (`id`, `parent_id`, `name`, `description`, `active`) VA
 (2506, 1631, 'แผ่นรองนั่งฝาชักโครก', NULL, 1),
 (2507, 1631, 'แผ่นยางกันลื่นในอ่างอาบน้ำ', NULL, 1),
 (2508, 1605, 'อุปกรณ์อาบน้ำ', NULL, 1),
-(2509, 2508, 'ฝักบัวและที่แขวน', NULL, 1),
-(2510, 2508, 'ขันน้ำ', NULL, 1);
+(2509, 2508, 'ฝักบัวและที่แขวน', NULL, 1);
 INSERT INTO `categories` (`id`, `parent_id`, `name`, `description`, `active`) VALUES
+(2510, 2508, 'ขันน้ำ', NULL, 1),
 (2511, 1605, 'อ่างอาบน้ำ', NULL, 1),
 (2512, 1645, 'ผ้าเช็ดเท้า', NULL, 1),
 (2513, 1605, 'ผ้าเช็ดตัวและเสื้อคลุมอาบน้ำ', NULL, 1),
@@ -2917,7 +2944,10 @@ INSERT INTO `categories` (`id`, `parent_id`, `name`, `description`, `active`) VA
 (2523, 1648, 'แปรงขัดพื้นและผนังห้องน้ำ', NULL, 1),
 (2524, 1648, 'แผ่นใยขัดสุขภัณฑ์', NULL, 1),
 (2525, 1648, 'แปรงขัดสุขภัณฑ์', NULL, 1),
-(2526, 1648, 'ที่ปั๊มส้วม', NULL, 1);
+(2526, 1648, 'ที่ปั๊มส้วม', NULL, 1),
+(2527, 493, 'จักรยานและอุปกรณ์จักรยาน', NULL, 1),
+(2528, 2527, 'จักรยาน', NULL, 1),
+(2529, 2527, 'อุปกรณ์จักรยาน', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -11597,7 +11627,11 @@ INSERT INTO `contacts` (`id`, `model`, `model_id`, `phone_number`, `fax`, `email
 (136, 'Item', 71, NULL, NULL, NULL, NULL, NULL, 1, '2017-02-23 11:57:59', '2017-02-23 11:57:59'),
 (137, 'Item', 72, NULL, NULL, NULL, NULL, NULL, 1, '2017-02-23 12:02:38', '2017-02-23 12:02:38'),
 (138, 'Item', 73, NULL, NULL, NULL, NULL, NULL, 1, '2017-02-23 12:09:11', '2017-02-23 12:09:11'),
-(139, 'Branch', 61, NULL, NULL, NULL, NULL, NULL, 1, '2017-02-23 14:13:49', '2017-02-23 14:13:49');
+(139, 'Branch', 61, NULL, NULL, NULL, NULL, NULL, 1, '2017-02-23 14:13:49', '2017-02-23 14:13:49'),
+(140, 'RealEstate', 76, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-01 20:41:15', '2017-03-01 20:41:15'),
+(141, 'Item', 74, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-01 21:58:54', '2017-03-01 21:58:54'),
+(142, 'Shop', 21, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-02 06:04:19', '2017-03-02 06:04:19'),
+(143, 'Shop', 22, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-08 17:09:52', '2017-03-08 17:09:52');
 
 -- --------------------------------------------------------
 
@@ -11630,7 +11664,20 @@ INSERT INTO `data_access_permissions` (`id`, `model`, `model_id`, `page_level_id
 (9, 'Branch', 61, 4, 'Shop', 1),
 (10, 'Product', 1, 4, 'Shop', 3),
 (11, 'Product', 2, 4, 'Shop', 3),
-(12, 'Product', 5, 4, 'Shop', 3);
+(12, 'Product', 5, 4, 'Shop', 3),
+(13, 'Product', 3, 4, 'Shop', 3),
+(14, 'Product', 6, 4, 'Shop', 3),
+(15, 'Product', 7, 4, 'Shop', 3),
+(16, 'RealEstate', 76, 4, 'Person', 1),
+(17, 'Item', 74, 4, 'Person', 1),
+(18, 'Product', 8, 4, 'Shop', 3),
+(19, 'Product', 9, 4, 'Shop', 21),
+(20, 'Job', 43, 4, 'Shop', 3),
+(21, 'Product', 10, 4, 'Shop', 3),
+(22, 'Product', 4, 4, 'Shop', 3),
+(23, 'Product', 11, 4, 'Shop', 3),
+(24, 'Product', 12, 4, 'Shop', 3),
+(25, 'Product', 13, 4, 'Shop', 3);
 
 -- --------------------------------------------------------
 
@@ -12786,7 +12833,24 @@ INSERT INTO `images` (`id`, `model`, `model_id`, `path`, `filename`, `descriptio
 (142, 'Person', 1, NULL, '14878363425675017082515541104030.png', NULL, 2, 1, '2017-02-23 14:52:25', '2017-02-23 14:52:25'),
 (143, 'Product', 2, NULL, '1488023355697243809109253023103.jpg', NULL, 1, 1, '2017-02-25 18:49:17', '2017-02-25 18:49:17'),
 (144, 'Product', 3, NULL, '14880840710685636614507930286018.png', NULL, 1, 1, '2017-02-26 11:47:12', '2017-02-26 11:47:12'),
-(145, 'Product', 5, NULL, '148808491131547998992979241263833.jpg', NULL, 1, 1, '2017-02-26 11:55:15', '2017-02-26 11:55:15');
+(145, 'Product', 5, NULL, '148808491131547998992979241263833.jpg', NULL, 1, 1, '2017-02-26 11:55:15', '2017-02-26 11:55:15'),
+(146, 'Product', 6, NULL, '1488290352150009867036631758911.jpeg', NULL, 1, 1, '2017-02-28 20:59:26', '2017-02-28 20:59:26'),
+(147, 'Product', 7, NULL, '14883022913741650655730114239704.png', NULL, 1, 1, '2017-03-01 00:18:29', '2017-03-01 00:18:29'),
+(148, 'Product', 1, NULL, '14883459112467137258185329824238.jpg', ' PlayStation®4 Console （HDD 1TB）x1　*ลาย Final Fantasy XV Luna\r\n(DUALSHOCK®4) wireless controller  x1 *ลาย Final Fantasy XV Luna\r\nPS4™ เกมส์ FINAL FANTASY XV Blu-ray Disc™ ชุดปกติ  x1\r\nPS4™ Theme Final Fantasy XV x1\r\n\r\nหูฟัง โมโน x1\r\n\r\nสายเพาเวอร์  x1  \r\n                                                            \r\nสาย HDMI® x1\r\n\r\nสาย USB x1\r\n\r\nคู่มือ', 1, 1, '2017-03-01 12:25:32', '2017-03-04 21:35:23'),
+(149, 'Item', 74, NULL, '14883803102314628753966992291566.jpg', NULL, 1, 1, '2017-03-01 21:58:54', '2017-03-01 21:58:54'),
+(150, 'Product', 8, NULL, '1488407707324109478166252421218.jpg', NULL, 1, 1, '2017-03-02 05:35:54', '2017-03-02 05:35:54'),
+(151, 'Product', 8, NULL, '1488407710533902080439165790410.png', NULL, 1, 1, '2017-03-02 05:35:54', '2017-03-02 05:35:54'),
+(152, 'Product', 9, NULL, '148840949832626220607455191263833.jpg', NULL, 1, 1, '2017-03-02 06:05:06', '2017-03-02 06:05:06'),
+(153, 'Shop', 21, NULL, '14884095863859403712788086505722.jpg', NULL, 3, 1, '2017-03-02 06:06:26', '2017-03-02 06:06:26'),
+(154, 'Shop', 21, NULL, '1488409981109764947070663121218.jpg', NULL, 2, 1, '2017-03-02 06:13:01', '2017-03-02 06:13:01'),
+(155, 'Job', 43, NULL, '14884283612934177147769005166510.JPG', NULL, 1, 1, '2017-03-02 11:20:28', '2017-03-02 11:20:28'),
+(156, 'Product', 10, NULL, '1488432715074547298211781429614.jpg', NULL, 1, 1, '2017-03-02 12:34:34', '2017-03-02 12:34:34'),
+(157, 'Product', 10, NULL, '1488432720940585762095447327366.jpg', NULL, 1, 1, '2017-03-02 12:34:34', '2017-03-02 12:34:34'),
+(158, 'Product', 8, NULL, '1488469382629133133803399058181.png', NULL, 1, 1, '2017-03-02 22:43:05', '2017-03-02 22:43:05'),
+(159, 'Person', 1, NULL, '1488552277328221661646828742806.jpg', NULL, 2, 1, '2017-03-03 21:44:40', '2017-03-03 21:44:40'),
+(160, 'Product', 11, NULL, '1488771574366512400379638563982.jpg', NULL, 1, 1, '2017-03-06 10:41:20', '2017-03-06 10:41:20'),
+(161, 'Product', 12, NULL, '1488771705512246331766655928805.jpg', NULL, 1, 1, '2017-03-06 10:42:15', '2017-03-06 10:42:15'),
+(162, 'Product', 13, NULL, '1488817066449365487579401658181.png', NULL, 1, 1, '2017-03-06 23:18:23', '2017-03-06 23:18:23');
 
 -- --------------------------------------------------------
 
@@ -12907,7 +12971,8 @@ INSERT INTO `items` (`id`, `announcement_type_id`, `name`, `announcement_detail`
 (70, 2, 'xxx', NULL, '', 1111, 1, 1, '2017-02-23 11:57:54', '2017-02-23 11:57:54'),
 (71, 2, 'xxx', NULL, '', 1111, 1, 1, '2017-02-23 11:57:58', '2017-02-23 11:57:58'),
 (72, 2, 'xxx', NULL, '', 1111, 1, 1, '2017-02-23 12:02:38', '2017-02-23 12:02:38'),
-(73, 2, 'xxx', NULL, '', 1111, 1, 1, '2017-02-23 12:09:10', '2017-02-23 12:09:10');
+(73, 2, 'xxx', NULL, '', 1111, 1, 1, '2017-02-23 12:09:10', '2017-02-23 12:09:10'),
+(74, 2, 'xxx', NULL, '', 1200, 1, 1, '2017-03-01 21:58:53', '2017-03-01 21:58:53');
 
 -- --------------------------------------------------------
 
@@ -12969,6 +13034,13 @@ CREATE TABLE `item_to_categories` (
   `item_id` int(11) UNSIGNED NOT NULL,
   `item_category_id` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `item_to_categories`
+--
+
+INSERT INTO `item_to_categories` (`item_id`, `item_category_id`) VALUES
+(74, 13);
 
 -- --------------------------------------------------------
 
@@ -13037,7 +13109,8 @@ INSERT INTO `jobs` (`id`, `employment_type_id`, `name`, `salary`, `description`,
 (39, 1, '222', '111', '', '', '', '{"s":"1","c":"0"}', NULL, 1, '2017-02-23 12:03:09', '2017-02-23 12:03:09'),
 (40, 1, '222', '111', '', '', '', '{"s":"1","c":"0"}', NULL, 1, '2017-02-23 12:03:18', '2017-02-23 12:03:18'),
 (41, 1, '222', '111', '', '', '', '{"s":"1","c":"0"}', NULL, 1, '2017-02-23 12:03:59', '2017-02-23 12:03:59'),
-(42, 1, '222', '111', '', '', '', '{"s":"1","c":"0"}', NULL, 1, '2017-02-23 12:09:08', '2017-02-23 12:09:08');
+(42, 1, '222', '111', '', '', '', '{"s":"1","c":"0"}', NULL, 1, '2017-02-23 12:09:08', '2017-02-23 12:09:08'),
+(43, 1, 'PHP Dev', '18500', '', '', '', '{"s":"1","c":"0"}', NULL, 1, '2017-03-02 11:20:28', '2017-03-02 11:20:28');
 
 -- --------------------------------------------------------
 
@@ -13315,7 +13388,23 @@ INSERT INTO `lookups` (`id`, `model`, `model_id`, `name`, `keyword_1`, `keyword_
 (72, 'Item', 73, 'xxx', 'ขาย', 'เสื้อผ้าและเครื่องแต่งกายสุภาพบุรุษ', 'สินค้าใหม่', '1111', NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-02-23 12:09:11', '2017-02-23 12:09:11'),
 (73, 'Branch', 61, 'ศรีราขา 1', 'V has come too', NULL, NULL, NULL, NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-02-23 14:13:49', '2017-02-23 14:13:49'),
 (74, 'Product', 5, 'FFXV', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-02-26 11:55:15', '2017-02-26 11:55:15'),
-(75, 'Product', 2, 'Playstation 4 Slim 2TB', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-02-26 12:05:37', '2017-02-26 12:05:37');
+(75, 'Product', 2, 'Playstation 4 Slim 2TB', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-02-26 12:05:37', '2017-02-26 12:05:37'),
+(76, 'Product', 3, 'Mainboard', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-02-28 11:03:25', '2017-02-28 11:03:25'),
+(77, 'Product', 6, 'ABC', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-02-28 20:59:26', '2017-02-28 20:59:26'),
+(78, 'Product', 7, 'Fitbit Flex 2', NULL, NULL, NULL, NULL, NULL, NULL, 'smart watch tracking fitbit', 1, '2017-03-01 00:18:30', '2017-03-01 11:49:07'),
+(79, 'Product', 1, 'Playstation 4 500 GB', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-01 12:25:32', '2017-03-01 12:25:32'),
+(80, 'RealEstate', 76, 'xxx', 'ขาย บ้านเดี่ยว', 'คลับเฮ้าส์ ฟิตเนส ห้องมุม สวนและวิวสวนธรรมชาติ', NULL, '102000000', NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-03-01 20:41:15', '2017-03-01 20:41:15'),
+(81, 'Item', 74, 'xxx', 'ขาย', 'เกมและเครื่องเกม', 'สินค้าใหม่', '1200', NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-03-01 21:58:54', '2017-03-01 21:58:54'),
+(82, 'Product', 8, 'Xbox One', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-02 05:35:55', '2017-03-02 05:35:55'),
+(83, 'Shop', 21, 'Gamer Shop', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-02 06:04:19', '2017-03-02 06:04:19'),
+(84, 'Product', 9, 'Final Fantasy XV', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-02 06:05:06', '2017-03-02 06:05:06'),
+(85, 'Job', 43, 'PHP Dev', 'a team', 'พนักงานประจำ', NULL, '18500', NULL, NULL, NULL, 1, '2017-03-02 11:20:29', '2017-03-02 11:20:29'),
+(86, 'Product', 10, 'Nike LunarEpic Flyknit Men''s Running Shoe (สีดำ) size 9.5"', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-02 12:34:35', '2017-03-03 18:39:14'),
+(87, 'Product', 4, 'Mainboard', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-04 21:39:07', '2017-03-04 21:39:07'),
+(88, 'Product', 11, 'PS4 controller camp color', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-06 10:41:21', '2017-03-06 10:41:21'),
+(89, 'Product', 12, 'Guitar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-06 10:42:16', '2017-03-06 10:42:16'),
+(90, 'Product', 13, 'XBOX ONE ELITE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-06 23:18:23', '2017-03-06 23:18:23'),
+(91, 'Shop', 22, 'ABC SHop', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-08 17:09:52', '2017-03-08 17:09:52');
 
 -- --------------------------------------------------------
 
@@ -13362,7 +13451,7 @@ CREATE TABLE `people` (
 --
 
 INSERT INTO `people` (`id`, `user_id`, `name`, `gender`, `birth_date`, `profile_image_id`, `cover_image_id`, `theme`, `created_at`, `updated_at`) VALUES
-(1, 1, 'อัญรินทร์ เรืองปิติสิทธิ์', 'm', '1957-01-01', 142, NULL, 1, '2016-12-08 12:57:33', '2017-02-23 14:52:26'),
+(1, 1, 'Noctis Lucis Caelum', 'm', '2007-09-05', 159, NULL, 1, '2016-12-08 12:57:33', '2017-03-04 14:02:54'),
 (11, 11, 'ABC DEF', NULL, NULL, 0, NULL, NULL, '2017-01-22 13:18:36', '2017-01-22 13:18:36');
 
 -- --------------------------------------------------------
@@ -13385,11 +13474,7 @@ CREATE TABLE `person_apply_jobs` (
 --
 
 INSERT INTO `person_apply_jobs` (`id`, `person_id`, `job_id`, `shop_id`, `message`, `created_at`) VALUES
-(1, 1, 1, 3, '<p>เรียน HR หรือ แผนกที่เกี่ยวข้อง</p>\r\n\r\n<p>ผม นาย ...</p>\r\n\r\n<p>ด้วยความเคารพ</p>', '2017-02-12 18:44:45'),
-(2, 1, 3, 3, '', '2017-02-13 11:08:36'),
-(3, 1, 4, 3, '', '2017-02-17 00:53:56'),
-(4, 1, 5, 3, '', '2017-02-18 20:24:23'),
-(5, 1, 6, 3, '<p>no!!!</p>', '2017-02-18 20:38:26');
+(1, 1, 5, 3, '', '2017-03-04 21:52:58');
 
 -- --------------------------------------------------------
 
@@ -13623,7 +13708,9 @@ CREATE TABLE `person_to_shops` (
 --
 
 INSERT INTO `person_to_shops` (`shop_id`, `person_id`, `role_id`, `created_at`) VALUES
-(3, 1, 1, '2017-02-27 00:35:43');
+(3, 1, 1, '2017-02-27 09:30:44'),
+(21, 1, 1, '2017-03-02 06:04:19'),
+(22, 1, 1, '2017-03-08 17:09:52');
 
 -- --------------------------------------------------------
 
@@ -13662,8 +13749,8 @@ CREATE TABLE `products` (
   `product_model` varchar(255) DEFAULT NULL,
   `sku` varchar(255) DEFAULT NULL,
   `quantity` int(7) UNSIGNED NOT NULL,
+  `product_unit` varchar(255) NOT NULL,
   `minimum` int(7) UNSIGNED NOT NULL,
-  `stock_status_id` int(11) UNSIGNED DEFAULT NULL,
   `price` decimal(15,2) NOT NULL,
   `weight` decimal(15,8) DEFAULT NULL,
   `weight_unit_id` int(11) UNSIGNED DEFAULT NULL,
@@ -13672,6 +13759,8 @@ CREATE TABLE `products` (
   `width` decimal(15,8) DEFAULT NULL,
   `height` decimal(15,8) DEFAULT NULL,
   `specifications` text,
+  `message_out_of_order` varchar(255) DEFAULT NULL,
+  `shipping_calculate_from` tinyint(1) DEFAULT NULL,
   `active` tinyint(1) NOT NULL,
   `person_id` int(11) UNSIGNED NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -13682,12 +13771,102 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `description`, `product_model`, `sku`, `quantity`, `minimum`, `stock_status_id`, `price`, `weight`, `weight_unit_id`, `length`, `length_unit_id`, `width`, `height`, `specifications`, `active`, `person_id`, `created_at`, `updated_at`) VALUES
-(1, 'Playstation 4 500 GB', '', NULL, NULL, 0, 0, NULL, '12000.00', NULL, NULL, NULL, NULL, NULL, NULL, '', 0, 1, '2017-02-25 18:09:14', '2017-02-25 18:27:24'),
-(2, 'Playstation 4 Slim 2TB', '', NULL, '', 0, 0, NULL, '12000.00', '250.00000000', 2, NULL, NULL, NULL, NULL, '[{"title":"VVV","value":"aaa"}]', 0, 1, '2017-02-25 18:49:17', '2017-02-26 19:38:52'),
-(3, 'Mainboard', '', NULL, NULL, 0, 2, NULL, '9990.00', NULL, NULL, NULL, NULL, NULL, NULL, '', 0, 1, '2017-02-26 11:47:12', '2017-02-26 23:39:12'),
-(4, 'Mainboard', '', NULL, NULL, 0, 1, NULL, '9990.00', NULL, NULL, NULL, NULL, NULL, NULL, '', 0, 1, '2017-02-26 11:49:26', '2017-02-26 23:39:06'),
-(5, 'FFXV', '', NULL, NULL, 0, 0, NULL, '1450.00', NULL, NULL, NULL, NULL, NULL, NULL, '', 0, 1, '2017-02-26 11:55:15', '2017-02-26 11:55:15');
+INSERT INTO `products` (`id`, `name`, `description`, `product_model`, `sku`, `quantity`, `product_unit`, `minimum`, `price`, `weight`, `weight_unit_id`, `length`, `length_unit_id`, `width`, `height`, `specifications`, `message_out_of_order`, `shipping_calculate_from`, `active`, `person_id`, `created_at`, `updated_at`) VALUES
+(1, 'Playstation 4 500 GB', '', NULL, NULL, 5, 'เครื่อง', 0, '12000.00', NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, 0, 0, 1, '2017-02-25 18:09:14', '2017-03-04 21:32:28'),
+(2, 'Playstation 4 Slim 2TB', '', NULL, '', 100, '', 1, '12000.00', '250.00000000', 2, NULL, NULL, NULL, NULL, '[{"title":"VVV","value":"aaa"}]', NULL, 0, 1, 1, '2017-02-25 18:49:17', '2017-03-04 15:32:59'),
+(3, 'Mainboard', '', NULL, NULL, 5, '', 2, '9990.00', NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, 0, 1, 1, '2017-02-26 11:47:12', '2017-03-04 15:32:49'),
+(4, 'Mainboard', '', NULL, NULL, 100, '', 1, '9990.00', NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, 0, 1, 1, '2017-02-26 11:49:26', '2017-03-04 21:39:13'),
+(5, 'FFXV', '<p>The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there&#39;s no limit to what you can achieve.&nbsp;<br />\r\n<br />\r\nThe Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it&#39;s designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data.&nbsp;<br />\r\n<br />\r\nOffering accurate, brilliant color performance, the Cinema HD delivers up to 16.7 million colors across a wide gamut allowing you to see subtle nuances between colors from soft pastels to rich jewel tones. A wide viewing angle ensures uniform color from edge to edge. Apple&#39;s ColorSync technology allows you to create custom profiles to maintain consistent color onscreen and in print. The result: You can confidently use this display in all your color-critical applications.&nbsp;<br />\r\n<br />\r\nHoused in a new aluminum design, the display has a very thin bezel that enhances visual accuracy. Each display features two FireWire 400 ports and two USB 2.0 ports, making attachment of desktop peripherals, such as iSight, iPod, digital and still cameras, hard drives, printers and scanners, even more accessible and convenient. Taking advantage of the much thinner and lighter footprint of an LCD, the new displays support the VESA (Video Electronics Standards Association) mounting interface standard. Customers with the optional Cinema Display VESA Mount Adapter kit gain the flexibility to mount their display in locations most appropriate for their work environment.&nbsp;<br />\r\n<br />\r\nThe Cinema HD features a single cable design with elegant breakout for the USB 2.0, FireWire 400 and a pure digital connection using the industry standard Digital Video Interface (DVI) interface. The DVI connection allows for a direct pure-digital connection.</p>\r\n\r\n<h3>Features:</h3>\r\n\r\n<p>Unrivaled display performance</p>\r\n\r\n<ul>\r\n	<li>30-inch (viewable) active-matrix liquid crystal display provides breathtaking image quality and vivid, richly saturated color.</li>\r\n	<li>Support for 2560-by-1600 pixel resolution for display of high definition still and video imagery.</li>\r\n	<li>Wide-format design for simultaneous display of two full pages of text and graphics.</li>\r\n	<li>Industry standard DVI connector for direct attachment to Mac- and Windows-based desktops and notebooks</li>\r\n	<li>Incredibly wide (170 degree) horizontal and vertical viewing angle for maximum visibility and color performance.</li>\r\n	<li>Lightning-fast pixel response for full-motion digital video playback.</li>\r\n	<li>Support for 16.7 million saturated colors, for use in all graphics-intensive applications.</li>\r\n</ul>\r\n\r\n<p>Simple setup and operation</p>\r\n\r\n<ul>\r\n	<li>Single cable with elegant breakout for connection to DVI, USB and FireWire ports</li>\r\n	<li>Built-in two-port USB 2.0 hub for easy connection of desktop peripheral devices.</li>\r\n	<li>Two FireWire 400 ports to support iSight and other desktop peripherals</li>\r\n</ul>\r\n\r\n<p>Sleek, elegant design</p>\r\n\r\n<ul>\r\n	<li>Huge virtual workspace, very small footprint.</li>\r\n	<li>Narrow Bezel design to minimize visual impact of using dual displays</li>\r\n	<li>Unique hinge design for effortless adjustment</li>\r\n	<li>Support for VESA mounting solutions (Apple Cinema Display VESA Mount Adapter sold separately)</li>\r\n</ul>\r\n\r\n<h3>Technical specifications</h3>\r\n\r\n<p><strong>Screen size (diagonal viewable image size)</strong></p>\r\n\r\n<ul>\r\n	<li>Apple Cinema HD Display: 30 inches (29.7-inch viewable)</li>\r\n</ul>\r\n\r\n<p><strong>Screen type</strong></p>\r\n\r\n<ul>\r\n	<li>Thin film transistor (TFT) active-matrix liquid crystal display (AMLCD)</li>\r\n</ul>\r\n\r\n<p><strong>Resolutions</strong></p>\r\n\r\n<ul>\r\n	<li>2560 x 1600 pixels (optimum resolution)</li>\r\n	<li>2048 x 1280</li>\r\n	<li>1920 x 1200</li>\r\n	<li>1280 x 800</li>\r\n	<li>1024 x 640</li>\r\n</ul>\r\n\r\n<p><strong>Display colors (maximum)</strong></p>\r\n\r\n<ul>\r\n	<li>16.7 million</li>\r\n</ul>\r\n\r\n<p><strong>Viewing angle (typical)</strong></p>\r\n\r\n<ul>\r\n	<li>170&deg; horizontal; 170&deg; vertical</li>\r\n</ul>\r\n\r\n<p><strong>Brightness (typical)</strong></p>\r\n\r\n<ul>\r\n	<li>30-inch Cinema HD Display: 400 cd/m2</li>\r\n</ul>\r\n\r\n<p><strong>Contrast ratio (typical)</strong></p>\r\n\r\n<ul>\r\n	<li>700:1</li>\r\n</ul>\r\n\r\n<p><strong>Response time (typical)</strong></p>\r\n\r\n<ul>\r\n	<li>16 ms</li>\r\n</ul>\r\n\r\n<p><strong>Pixel pitch</strong></p>\r\n\r\n<ul>\r\n	<li>30-inch Cinema HD Display: 0.250 mm</li>\r\n</ul>\r\n\r\n<p><strong>Screen treatment</strong></p>\r\n\r\n<ul>\r\n	<li>Antiglare hardcoat</li>\r\n</ul>\r\n\r\n<p><strong>User controls (hardware and software)</strong></p>\r\n\r\n<ul>\r\n	<li>Display Power,</li>\r\n	<li>System sleep, wake</li>\r\n	<li>Brightness</li>\r\n	<li>Monitor tilt</li>\r\n</ul>\r\n\r\n<p><strong>Connectors and cables</strong><br />\r\nCable</p>\r\n\r\n<ul>\r\n	<li>DVI (Digital Visual Interface)</li>\r\n	<li>FireWire 400</li>\r\n	<li>USB 2.0</li>\r\n	<li>DC power (24 V)</li>\r\n</ul>\r\n\r\n<p>Connectors</p>\r\n\r\n<ul>\r\n	<li>Two-port, self-powered USB 2.0 hub</li>\r\n	<li>Two FireWire 400 ports</li>\r\n	<li>Kensington security port</li>\r\n</ul>\r\n\r\n<p><strong>VESA mount adapter</strong><br />\r\nRequires optional Cinema Display VESA Mount Adapter (M9649G/A)</p>\r\n\r\n<ul>\r\n	<li>Compatible with VESA FDMI (MIS-D, 100, C) compliant mounting solutions</li>\r\n</ul>\r\n\r\n<p><strong>Electrical requirements</strong></p>\r\n\r\n<ul>\r\n	<li>Input voltage: 100-240 VAC 50-60Hz</li>\r\n	<li>Maximum power when operating: 150W</li>\r\n	<li>Energy saver mode: 3W or less</li>\r\n</ul>\r\n\r\n<p><strong>Environmental requirements</strong></p>\r\n\r\n<ul>\r\n	<li>Operating temperature: 50&deg; to 95&deg; F (10&deg; to 35&deg; C)</li>\r\n	<li>Storage temperature: -40&deg; to 116&deg; F (-40&deg; to 47&deg; C)</li>\r\n	<li>Operating humidity: 20% to 80% noncondensing</li>\r\n	<li>Maximum operating altitude: 10,000 feet</li>\r\n</ul>\r\n\r\n<p><strong>Agency approvals</strong></p>\r\n\r\n<ul>\r\n	<li>FCC Part 15 Class B</li>\r\n	<li>EN55022 Class B</li>\r\n	<li>EN55024</li>\r\n	<li>VCCI Class B</li>\r\n	<li>AS/NZS 3548 Class B</li>\r\n	<li>CNS 13438 Class B</li>\r\n	<li>ICES-003 Class B</li>\r\n	<li>ISO 13406 part 2</li>\r\n	<li>MPR II</li>\r\n	<li>IEC 60950</li>\r\n	<li>UL 60950</li>\r\n	<li>CSA 60950</li>\r\n	<li>EN60950</li>\r\n	<li>ENERGY STAR</li>\r\n	<li>TCO &#39;03</li>\r\n</ul>\r\n\r\n<p><strong>Size and weight</strong><br />\r\n30-inch Apple Cinema HD Display</p>\r\n\r\n<ul>\r\n	<li>Height: 21.3 inches (54.3 cm)</li>\r\n	<li>Width: 27.2 inches (68.8 cm)</li>\r\n	<li>Depth: 8.46 inches (21.5 cm)</li>\r\n	<li>Weight: 27.5 pounds (12.5 kg)</li>\r\n</ul>\r\n\r\n<p><strong>System Requirements</strong></p>\r\n\r\n<ul>\r\n	<li>Mac Pro, all graphic options</li>\r\n	<li>MacBook Pro</li>\r\n	<li>Power Mac G5 (PCI-X) with ATI Radeon 9650 or better or NVIDIA GeForce 6800 GT DDL or better</li>\r\n	<li>Power Mac G5 (PCI Express), all graphics options</li>\r\n	<li>PowerBook G4 with dual-link DVI support</li>\r\n	<li>Windows PC and graphics card that supports DVI ports with dual-link digital bandwidth and VESA DDC standard for plug-and-play setup</li>\r\n</ul>', 'Umbrella it-gtech-600w', 'GT188ELAA4912JANTH-9080528', 0, 'แผ่น', 0, '1450.00', '500.15000000', 2, '15.00000000', 1, '10.00000000', '15.00000000', '[{"title":"HDMI","value":"2"},{"title":"D-SUB","value":"1"}]', NULL, 0, 0, 1, '2017-02-26 11:55:15', '2017-03-01 19:57:19'),
+(6, 'ABC', '', NULL, '', 0, 'ตัว', 1, '1690.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, 1, '2017-02-28 20:59:26', '2017-03-01 12:15:06'),
+(7, 'Fitbit Flex 2', '', NULL, '', 120, 'เรือน', 2, '3000.00', NULL, 1, NULL, NULL, NULL, NULL, '[{"title":"aaa","value":"xxx"}]', 'สินค้า 2 - 3', 0, 1, 1, '2017-03-01 00:18:29', '2017-03-02 17:43:28'),
+(8, 'Xbox One', '', '', '', 25, 'เครื่อง', 1, '18500.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, '2017-03-02 05:35:54', '2017-03-07 14:10:37'),
+(9, 'Final Fantasy XV', '', '', '', 100, 'แผ่น', 1, '1590.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ขออภัยหมด สินค้ากำลังถูกสั่งเพิ่ม', 2, 1, 1, '2017-03-02 06:05:06', '2017-03-07 14:40:06'),
+(10, 'Nike LunarEpic Flyknit Men''s Running Shoe (สีดำ) size 9.5"', '<p>&nbsp;</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:40px; letter-spacing:-1px; line-height:1.1; margin-bottom:4px; padding-bottom:12px; padding-top:0px; text-transform:uppercase">REVOLUTIONARY RIDE. EPIC RUN.</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Built for the future of running and those who dare to lead it, the Nike LunarEpic Flyknit Men&#39;s Running Shoe delivers an impeccably smooth ride and a virtually unnoticeable, second-skin fit.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">VANISHING FIT</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">The mid-rise Flyknit upper is designed to act like a natural extension of your leg, leaving only the fantastic sensation of cushioning underfoot. The near-seamless, one-piece construction is woven more openly in areas where your foot and ankle need greater stretch and breathability, and tighter in areas that demand more strength and support.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">FLUID FEEL</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">The soft, contoured Lunarlon midsole has precision-lasered cuts on the sides that collapse during footstrike, delivering a perfectly smooth transition from heel to toe.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">SUPERB SOFTNESS</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">The pressure-mapped outsole features Lunarlon pods in key areas to provide targeted cushioning. Laser cuts on the pods help absorb impact while dispersing it more evenly across your foot.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">MORE DETAILS</span></p>\r\n\r\n<ul>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Flywire integrates with the laces for a dynamic, supportive fit</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Skin-like overlay on the heel for added structure</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Fused foam midsole for enhanced durability without the use of glues or cements</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Laser-cut outsole provides great multi-surface traction</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">We recommend you wear this shoe with running socks&mdash;height of the sock is up to your personal preference</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Comes with two sets of sockliners, 4mm and 6mm, so you can fine-tune for an optimal fit</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Weight: 8.3 ounces (men&#39;s size 10)</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Offset: 10mm</li>\r\n</ul>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">FLYKNIT ORIGINS</span></p>\r\n\r\n<p><span style="color:#666666; font-family:Helvetica,ArialMT,sans-serif; font-size:12px">Nike Flyknit technology was inspired by feedback from runners seeking a shoe with the snug (and virtually unnoticed) fit of a sock. Nike embarked on a four-year mission with teams of programmers, engineers and designers to create the technology needed to make the knit upper with static properties for structure and durability. Then the precise placement of support, flexibility and breathability&mdash;all in one layer&mdash;was refined. The result is a featherweight, formfitting and virtually seamless upper.</span></p>', '', '', 100, 'คู่', 1, '7500.00', '300.00000000', 2, NULL, 1, NULL, NULL, '', NULL, 2, 1, 1, '2017-03-02 12:34:34', '2017-03-08 00:26:21'),
+(11, 'PS4 controller camp color', '', '', '', 10, 'ชิ้น', 1, '1590.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, '2017-03-06 10:41:20', '2017-03-08 12:43:12'),
+(12, 'Guitar', '', '', '', 2, 'ชิ้น', 1, '3500.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, '2017-03-06 10:42:15', '2017-03-07 18:32:20'),
+(13, 'XBOX ONE ELITE', '', '', '', 20, 'เครื่อง', 1, '20000.00', NULL, 2, NULL, 1, NULL, NULL, '', NULL, 2, 1, 1, '2017-03-06 23:18:23', '2017-03-07 23:51:26');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_discounts`
+--
+
+CREATE TABLE `product_discounts` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `product_id` int(11) UNSIGNED NOT NULL,
+  `reduced_price` decimal(15,2) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `product_discounts`
+--
+
+INSERT INTO `product_discounts` (`id`, `product_id`, `reduced_price`, `created_at`, `updated_at`) VALUES
+(1, 11, '541.00', '2017-03-08 18:09:25', '2017-03-08 18:09:25'),
+(2, 11, '1090.00', '2017-03-08 18:18:48', '2017-03-08 18:18:48'),
+(4, 11, '1090.00', '2017-03-08 18:23:11', '2017-03-08 18:23:11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_sale_promotions`
+--
+
+CREATE TABLE `product_sale_promotions` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `product_id` int(11) UNSIGNED NOT NULL,
+  `sale_promotion_target_group_id` int(11) NOT NULL,
+  `sale_promotion_type_id` int(11) UNSIGNED NOT NULL,
+  `model` varchar(255) NOT NULL,
+  `model_id` int(11) UNSIGNED NOT NULL,
+  `date_start` date NOT NULL,
+  `date_end` date NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `product_sale_promotions`
+--
+
+INSERT INTO `product_sale_promotions` (`id`, `product_id`, `sale_promotion_target_group_id`, `sale_promotion_type_id`, `model`, `model_id`, `date_start`, `date_end`, `created_at`, `updated_at`) VALUES
+(1, 11, 1, 1, 'ProductDiscount', 1, '2017-03-08', '2017-03-16', '2017-03-08 18:09:25', '2017-03-08 18:09:25'),
+(2, 11, 1, 1, 'ProductDiscount', 2, '2017-03-09', '2017-03-10', '2017-03-08 18:18:48', '2017-03-08 18:18:48'),
+(4, 11, 1, 1, 'ProductDiscount', 4, '2017-03-14', '2017-03-18', '2017-03-08 18:23:11', '2017-03-08 18:23:11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_shippings`
+--
+
+CREATE TABLE `product_shippings` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `product_id` int(11) UNSIGNED DEFAULT NULL,
+  `free_shipping` tinyint(1) DEFAULT NULL,
+  `shipping_amount` decimal(15,2) DEFAULT NULL,
+  `shipping_amount_condition_id` int(11) UNSIGNED DEFAULT NULL,
+  `free_shipping_with_condition` tinyint(1) DEFAULT NULL,
+  `shipping_calculate_type_id` int(11) UNSIGNED DEFAULT NULL,
+  `free_shipping_operator_sign` varchar(5) DEFAULT NULL,
+  `free_shipping_amount` decimal(15,2) DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `product_shippings`
+--
+
+INSERT INTO `product_shippings` (`id`, `product_id`, `free_shipping`, `shipping_amount`, `shipping_amount_condition_id`, `free_shipping_with_condition`, `shipping_calculate_type_id`, `free_shipping_operator_sign`, `free_shipping_amount`, `created_at`) VALUES
+(1, 11, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-06 21:58:38'),
+(2, 13, 0, '100.00', 1, 1, 3, '>', '20000.00', '2017-03-07 09:54:52'),
+(3, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-07 14:10:37'),
+(4, 9, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-07 14:40:06'),
+(5, 12, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-07 18:15:01'),
+(6, 10, 0, '250.00', 1, 1, 1, '<', '2000.00', '2017-03-08 00:18:44');
 
 -- --------------------------------------------------------
 
@@ -13699,6 +13878,23 @@ CREATE TABLE `product_to_categories` (
   `product_id` int(11) UNSIGNED NOT NULL,
   `category_id` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `product_to_categories`
+--
+
+INSERT INTO `product_to_categories` (`product_id`, `category_id`) VALUES
+(2, 774),
+(3, 706),
+(5, 796),
+(6, 939),
+(7, 700),
+(8, 776),
+(9, 796),
+(10, 217),
+(11, 788),
+(12, 940),
+(13, 776);
 
 -- --------------------------------------------------------
 
@@ -13899,7 +14095,8 @@ INSERT INTO `real_estates` (`id`, `announcement_type_id`, `real_estate_type_id`,
 (72, 2, 5, 'xxx', '', 1222222, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:10:01', '2017-02-20 14:10:01'),
 (73, 2, 5, 'xxx', '', 1222222, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:10:10', '2017-02-20 14:10:10'),
 (74, 2, 5, 'xxx', '', 1222222, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:12:21', '2017-02-20 14:12:21'),
-(75, 2, 5, 'อาคารพาณิชย์ อนุสาวรีย์ชัยสมรภูมิ ถนนราชวิถี เขตราชเทวี กรุงเทพมหานคร', '<p>อาคารพาณิชย์ 4.5 ชั้น 5 นอน 5 น้ำ 43 ตร.ว. อนุสาวรีย์ชัยสมรภูมิ ถ.ราชวิถี แขวงถนนพญาไท เขตราชเทวี กรุงเทพมหานคร<br />\r\nอาคารพาณิชย์ 2 คูหา บริเวณอนุสาวรีย์ชัยสมรภูมิ(ฝั่งเกาะนางพญา) ซอยราชวิถี 11 (เลิศปัญญา) ทำเลการค้า ติดสถานีรถไฟฟ้าอนุสาวรีย์ชัยสมรภูมิ เข้า-ออก ถนนราชวิถี, ถนนพญาไท, ถนนพหลโยธิน, ทางด่วนศรีรัช, ถนนรางน้ำ, ใกล้เซ็นเตอร์วัน, วิคตอรี่พอยท์, รพ.ราชวิถี, รพ.พระมงกุฎเกล้า, เซ็นจูรี่มอลล์, ภัตตาคารพงหลี, รพ.พญาไท 2, คิงพาวเวอร์รางน้ำ</p>', 50000000, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","36","39","41"]', '["1","18","19","23"]', '0', 1, '2017-02-20 14:16:12', '2017-02-20 14:16:12');
+(75, 2, 5, 'อาคารพาณิชย์ อนุสาวรีย์ชัยสมรภูมิ ถนนราชวิถี เขตราชเทวี กรุงเทพมหานคร', '<p>อาคารพาณิชย์ 4.5 ชั้น 5 นอน 5 น้ำ 43 ตร.ว. อนุสาวรีย์ชัยสมรภูมิ ถ.ราชวิถี แขวงถนนพญาไท เขตราชเทวี กรุงเทพมหานคร<br />\r\nอาคารพาณิชย์ 2 คูหา บริเวณอนุสาวรีย์ชัยสมรภูมิ(ฝั่งเกาะนางพญา) ซอยราชวิถี 11 (เลิศปัญญา) ทำเลการค้า ติดสถานีรถไฟฟ้าอนุสาวรีย์ชัยสมรภูมิ เข้า-ออก ถนนราชวิถี, ถนนพญาไท, ถนนพหลโยธิน, ทางด่วนศรีรัช, ถนนรางน้ำ, ใกล้เซ็นเตอร์วัน, วิคตอรี่พอยท์, รพ.ราชวิถี, รพ.พระมงกุฎเกล้า, เซ็นจูรี่มอลล์, ภัตตาคารพงหลี, รพ.พญาไท 2, คิงพาวเวอร์รางน้ำ</p>', 50000000, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","36","39","41"]', '["1","18","19","23"]', '0', 1, '2017-02-20 14:16:12', '2017-02-20 14:16:12'),
+(76, 2, 1, 'xxx', '', 102000000, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["28","29"]', '["7","11"]', '0', 1, '2017-03-01 20:41:14', '2017-03-01 20:41:14');
 
 -- --------------------------------------------------------
 
@@ -14081,7 +14278,8 @@ INSERT INTO `relate_to_branches` (`model`, `model_id`, `branch_id`) VALUES
 ('Job', 39, 10),
 ('Job', 40, 10),
 ('Job', 41, 10),
-('Job', 42, 10);
+('Job', 42, 10),
+('Job', 43, 10);
 
 -- --------------------------------------------------------
 
@@ -14110,6 +14308,85 @@ INSERT INTO `roles` (`id`, `name`, `alias`, `adding_permission`, `editing_permis
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sale_promotion_target_groups`
+--
+
+CREATE TABLE `sale_promotion_target_groups` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `alias` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `sale_promotion_target_groups`
+--
+
+INSERT INTO `sale_promotion_target_groups` (`id`, `name`, `alias`) VALUES
+(1, 'การส่งเสริมการขายที่มุ่งสู่ผู้บริโภค', 'consumer'),
+(2, 'การส่งเสริมการขายที่มุ่งสู่คนกลาง', 'trade'),
+(3, 'การส่งเสริมการขายที่มุ่งสู่พนักงานขาย', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sale_promotion_types`
+--
+
+CREATE TABLE `sale_promotion_types` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `alias` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `sale_promotion_types`
+--
+
+INSERT INTO `sale_promotion_types` (`id`, `name`, `alias`) VALUES
+(1, 'ลดราคาสินค้า', 'discount');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shipping_amount_conditions`
+--
+
+CREATE TABLE `shipping_amount_conditions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `shipping_amount_conditions`
+--
+
+INSERT INTO `shipping_amount_conditions` (`id`, `name`) VALUES
+(1, 'ต่อสินค้า 1 ชิ้น'),
+(2, 'ต่อการสั่งซื้อสินค้า');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shipping_cost_calculate_types`
+--
+
+CREATE TABLE `shipping_cost_calculate_types` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `shipping_cost_calculate_types`
+--
+
+INSERT INTO `shipping_cost_calculate_types` (`id`, `name`) VALUES
+(1, 'น้ำหนักสินค้า'),
+(2, 'จำนวนสินค้า'),
+(3, 'ราคาสินค้า');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `shops`
 --
 
@@ -14132,7 +14409,7 @@ CREATE TABLE `shops` (
 INSERT INTO `shops` (`id`, `name`, `description`, `brand_story`, `profile_image_id`, `cover_image_id`, `person_id`, `created_at`, `updated_at`) VALUES
 (1, 'V has come too', '', NULL, 0, 0, 1, '2017-01-28 17:25:21', '2017-01-28 17:25:21'),
 (2, 'aqw', '', NULL, 0, 0, 1, '2017-01-28 17:26:47', '2017-01-28 17:26:47'),
-(3, 'a team', '<p>Lorem Ipsum คือ เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 เมื่อเครื่องพิมพ์โนเนมเครื่องหนึ่งนำรางตัวพิมพ์มาสลับสับตำแหน่งตัวอักษรเพื่อทำหนังสือตัวอย่าง Lorem Ipsum อยู่ยงคงกระพันมาไม่ใช่แค่เพียงห้าศตวรรษ แต่อยู่มาจนถึงยุคที่พลิกโฉมเข้าสู่งานเรียงพิมพ์ด้วยวิธีทางอิเล็กทรอนิกส์ และยังคงสภาพเดิมไว้อย่างไม่มีการเปลี่ยนแปลง มันได้รับความนิยมมากขึ้นในยุค ค.ศ. 1960 เมื่อแผ่น Letraset วางจำหน่ายโดยมีข้อความบนนั้นเป็น Lorem Ipsum และล่าสุดกว่านั้น คือเมื่อซอฟท์แวร์การทำสื่อสิ่งพิมพ์ (Desktop Publishing) อย่าง Aldus PageMaker ได้รวมเอา Lorem Ipsum เวอร์ชั่นต่างๆ เข้าไว้ในซอฟท์แวร์ด้วย</p>', '<p>bbbb</p>', 121, 122, 1, '2017-01-28 17:30:45', '2017-02-21 18:15:50'),
+(3, 'Nike Retail Shop', '<p>Lorem Ipsum คือ เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 เมื่อเครื่องพิมพ์โนเนมเครื่องหนึ่งนำรางตัวพิมพ์มาสลับสับตำแหน่งตัวอักษรเพื่อทำหนังสือตัวอย่าง Lorem Ipsum อยู่ยงคงกระพันมาไม่ใช่แค่เพียงห้าศตวรรษ แต่อยู่มาจนถึงยุคที่พลิกโฉมเข้าสู่งานเรียงพิมพ์ด้วยวิธีทางอิเล็กทรอนิกส์ และยังคงสภาพเดิมไว้อย่างไม่มีการเปลี่ยนแปลง มันได้รับความนิยมมากขึ้นในยุค ค.ศ. 1960 เมื่อแผ่น Letraset วางจำหน่ายโดยมีข้อความบนนั้นเป็น Lorem Ipsum และล่าสุดกว่านั้น คือเมื่อซอฟท์แวร์การทำสื่อสิ่งพิมพ์ (Desktop Publishing) อย่าง Aldus PageMaker ได้รวมเอา Lorem Ipsum เวอร์ชั่นต่างๆ เข้าไว้ในซอฟท์แวร์ด้วย</p>', '<p>bbbb</p>', 121, 122, 1, '2017-01-28 17:30:45', '2017-03-02 12:57:05'),
 (13, 'ร้านค้า 1', NULL, NULL, 128, 127, 1, '2017-02-14 11:20:13', '2017-02-21 16:49:41'),
 (14, 'ร้านค้าทอสอบ 2', NULL, NULL, NULL, 129, 1, '2017-02-14 11:24:03', '2017-02-21 18:04:20'),
 (15, 'ร้านค้า 3', NULL, NULL, 140, 139, 1, '2017-02-14 11:24:26', '2017-02-23 00:14:50'),
@@ -14140,7 +14417,9 @@ INSERT INTO `shops` (`id`, `name`, `description`, `brand_story`, `profile_image_
 (17, 'xxxx', NULL, NULL, NULL, NULL, 1, '2017-02-14 11:25:45', '2017-02-14 11:25:45'),
 (18, 'aaa', NULL, NULL, NULL, NULL, 1, '2017-02-14 11:27:39', '2017-02-14 11:27:39'),
 (19, 'เสื้อผ้านำเข้าหลัง ม. บรูพา', NULL, NULL, NULL, NULL, 1, '2017-02-20 15:40:05', '2017-02-20 15:40:05'),
-(20, 'ปัง ปั่น ปิง', '<p>ตรงกันข้ามกับความเชื่อที่นิยมกัน Lorem Ipsum ไม่ได้เป็นเพียงแค่ชุดตัวอักษรที่สุ่มขึ้นมามั่วๆ แต่หากมีที่มาจากวรรณกรรมละตินคลาสสิกชิ้นหนึ่งในยุค 45 ปีก่อนคริสตศักราช ทำให้มันมีอายุถึงกว่า 2000 ปีเลยทีเดียว ริชาร์ด แมคคลินท็อค ศาสตราจารย์ชาวละติน จากวิทยาลัยแฮมพ์เด็น-ซิดนีย์ ในรัฐเวอร์จิเนียร์ นำคำภาษาละตินคำว่า consectetur ซึ่งหาคำแปลไม่ได้จาก Lorem Ipsum ตอนหนึ่งมาค้นเพิ่มเติม โดยตรวจเทียบกับแหล่งอ้างอิงต่างๆ ในวรรณกรรมคลาสสิก และค้นพบแหล่งข้อมูลที่ไร้ข้อกังขาว่า Lorem Ipsum นั้นมาจากตอนที่ 1.10.32 และ 1.10.33 ของเรื่อง &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) ของ ซิเซโร ที่แต่งไว้เมื่อ 45 ปีก่อนคริสตศักราช หนังสือเล่มนี้เป็นเรื่องราวที่ว่าด้วยทฤษฎีแห่งจริยศาสตร์ ซึ่งเป็นที่นิยมมากในยุคเรเนสซองส์ บรรทัดแรกของ Lorem Ipsum &quot;Lorem ipsum dolor sit amet..&quot; ก็มาจากบรรทัดหนึ่งในตอนที่ 1.10.32 นั่นเอง</p>', '', 130, 131, 1, '2017-02-20 15:40:47', '2017-02-21 20:59:43');
+(20, 'ปัง ปั่น ปิง', '<p>ตรงกันข้ามกับความเชื่อที่นิยมกัน Lorem Ipsum ไม่ได้เป็นเพียงแค่ชุดตัวอักษรที่สุ่มขึ้นมามั่วๆ แต่หากมีที่มาจากวรรณกรรมละตินคลาสสิกชิ้นหนึ่งในยุค 45 ปีก่อนคริสตศักราช ทำให้มันมีอายุถึงกว่า 2000 ปีเลยทีเดียว ริชาร์ด แมคคลินท็อค ศาสตราจารย์ชาวละติน จากวิทยาลัยแฮมพ์เด็น-ซิดนีย์ ในรัฐเวอร์จิเนียร์ นำคำภาษาละตินคำว่า consectetur ซึ่งหาคำแปลไม่ได้จาก Lorem Ipsum ตอนหนึ่งมาค้นเพิ่มเติม โดยตรวจเทียบกับแหล่งอ้างอิงต่างๆ ในวรรณกรรมคลาสสิก และค้นพบแหล่งข้อมูลที่ไร้ข้อกังขาว่า Lorem Ipsum นั้นมาจากตอนที่ 1.10.32 และ 1.10.33 ของเรื่อง &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) ของ ซิเซโร ที่แต่งไว้เมื่อ 45 ปีก่อนคริสตศักราช หนังสือเล่มนี้เป็นเรื่องราวที่ว่าด้วยทฤษฎีแห่งจริยศาสตร์ ซึ่งเป็นที่นิยมมากในยุคเรเนสซองส์ บรรทัดแรกของ Lorem Ipsum &quot;Lorem ipsum dolor sit amet..&quot; ก็มาจากบรรทัดหนึ่งในตอนที่ 1.10.32 นั่นเอง</p>', '', 130, 131, 1, '2017-02-20 15:40:47', '2017-02-21 20:59:43'),
+(21, 'Gamer Shop', NULL, NULL, 154, 153, 1, '2017-03-02 06:04:18', '2017-03-02 06:13:01'),
+(22, 'ABC SHop', NULL, NULL, NULL, NULL, 1, '2017-03-08 17:09:51', '2017-03-08 17:09:51');
 
 -- --------------------------------------------------------
 
@@ -14260,11 +14539,20 @@ INSERT INTO `shop_relate_to` (`shop_id`, `model`, `model_id`) VALUES
 (3, 'Job', 40),
 (3, 'Job', 41),
 (3, 'Job', 42),
+(3, 'Job', 43),
 (3, 'Product', 1),
 (3, 'Product', 2),
 (3, 'Product', 3),
 (3, 'Product', 4),
-(3, 'Product', 5);
+(3, 'Product', 5),
+(3, 'Product', 6),
+(3, 'Product', 7),
+(3, 'Product', 8),
+(3, 'Product', 10),
+(3, 'Product', 11),
+(3, 'Product', 12),
+(3, 'Product', 13),
+(21, 'Product', 9);
 
 -- --------------------------------------------------------
 
@@ -14294,7 +14582,9 @@ INSERT INTO `slugs` (`id`, `model`, `model_id`, `slug`) VALUES
 (8, 'Shop', 17, 'xxxx-17'),
 (9, 'Shop', 18, 'aaa-18'),
 (10, 'Shop', 19, 'เสื้อผ้านำเข้าหลัง-ม.-บรูพา-19'),
-(11, 'Shop', 20, 'ปัง-ปั่น-ปิง-20');
+(11, 'Shop', 20, 'ปัง-ปั่น-ปิง-20'),
+(12, 'Shop', 21, 'Gamer-Shop-21'),
+(13, 'Shop', 22, 'ABC-SHop-22');
 
 -- --------------------------------------------------------
 
@@ -14313,9 +14603,7 @@ CREATE TABLE `stock_statuses` (
 
 INSERT INTO `stock_statuses` (`id`, `name`) VALUES
 (1, 'มีสินค้า'),
-(2, 'สินค้าหมด'),
-(3, 'สั่งจองล่วงหน้า'),
-(4, 'ขายเฉพาะหน้าร้าน');
+(2, 'สินค้าหมด');
 
 -- --------------------------------------------------------
 
@@ -14552,7 +14840,10 @@ INSERT INTO `taggings` (`id`, `model`, `model_id`, `word_id`, `created_at`) VALU
 (109, 'Freelance', 8, 82, '2017-02-20 15:51:32'),
 (110, 'Freelance', 8, 83, '2017-02-20 15:51:32'),
 (111, 'Freelance', 8, 84, '2017-02-20 15:51:32'),
-(112, 'Freelance', 8, 85, '2017-02-20 15:51:32');
+(112, 'Freelance', 8, 85, '2017-02-20 15:51:32'),
+(113, 'Product', 7, 86, '2017-03-01 11:49:07'),
+(114, 'Product', 7, 87, '2017-03-01 11:49:07'),
+(115, 'Product', 7, 75, '2017-03-01 11:49:07');
 
 -- --------------------------------------------------------
 
@@ -14762,7 +15053,12 @@ INSERT INTO `temporary_files` (`id`, `model`, `token`, `person_id`, `created_at`
 (270, 'Item', '39SZaB4p', 1, '2017-02-22 13:52:55'),
 (271, 'Item', 'Tg41T8yq', 1, '2017-02-22 13:53:10'),
 (272, 'Item', '0ReTtDns', 1, '2017-02-22 13:53:34'),
-(274, 'Product', 'ZKYT2wzR', 1, '2017-02-25 19:22:40');
+(274, 'Product', 'ZKYT2wzR', 1, '2017-02-25 19:22:40'),
+(275, 'Product', 'ax7f3mRt', 1, '2017-02-28 20:51:00'),
+(276, 'Product', 'UE2n5aEN', 1, '2017-03-01 00:14:00'),
+(277, 'Product', 'OeDWRNVQ', 1, '2017-03-01 12:25:00'),
+(278, 'Product', 'gsiFTgyu', 1, '2017-03-02 05:30:47'),
+(279, 'Product', 'gQFlB0X3', 1, '2017-03-02 05:33:24');
 
 -- --------------------------------------------------------
 
@@ -14786,7 +15082,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `receive_email`, `remember_token`, `api_token`, `created_at`, `updated_at`) VALUES
-(1, '1', '$2y$10$JzjB5lnDBSuvrCk5BeGdYOKlkrilHaRILTNaLuo6k9o0PcfKWZRc6', NULL, '4MsNGcWrjXEQCuBa9U6HCkJxJUAKSRc33ER9Tg56Bx2WZXUXdRSagilLZBaj', '', '2016-12-08 12:57:33', '2017-02-14 10:33:12'),
+(1, '1', '$2y$10$JzjB5lnDBSuvrCk5BeGdYOKlkrilHaRILTNaLuo6k9o0PcfKWZRc6', NULL, 'ygUEv5yMKCayG3GEz6ZVMl8ztJ10GrexyASehEkzObUiBGR2oRGeXflP4qht', '', '2016-12-08 12:57:33', '2017-03-04 21:51:58'),
 (11, 'ab@mail.com', '$2y$10$92fIYHxW4m9qw/lrzJ3TH.n6MumrWkwjWtOzaGjvzBKiIwpe77wtm', NULL, NULL, 'xXGR0NYUXnVsle49PGjShVRLLhhvYhRo4q936znHMSra46HXxHYGEocKb3zpJ', '2017-01-22 13:18:36', '2017-01-22 13:18:36');
 
 -- --------------------------------------------------------
@@ -15508,7 +15804,10 @@ CREATE TABLE `weight_units` (
 
 INSERT INTO `weight_units` (`id`, `name`, `unit`) VALUES
 (1, 'กิโลกรัม', 'kg'),
-(2, 'กรัม', 'g');
+(2, 'กรัม', 'g'),
+(3, 'ลิตร', 'L'),
+(4, 'มิลลิลิตร', 'ml'),
+(5, 'ออนซ์', 'oz');
 
 -- --------------------------------------------------------
 
@@ -15611,7 +15910,9 @@ INSERT INTO `words` (`id`, `word`, `created_at`) VALUES
 (82, 'graphic', '2017-02-20 15:49:43'),
 (83, 'ออกแบบ', '2017-02-20 15:49:43'),
 (84, 'logo', '2017-02-20 15:49:43'),
-(85, 'สินค้า', '2017-02-20 15:49:43');
+(85, 'สินค้า', '2017-02-20 15:49:43'),
+(86, 'smart watch', '2017-03-01 11:49:07'),
+(87, 'tracking', '2017-03-01 11:49:07');
 
 --
 -- Indexes for dumped tables
@@ -15651,6 +15952,12 @@ ALTER TABLE `announcement_types`
 -- Indexes for table `branches`
 --
 ALTER TABLE `branches`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `carts`
+--
+ALTER TABLE `carts`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -15867,6 +16174,24 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `product_discounts`
+--
+ALTER TABLE `product_discounts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_sale_promotions`
+--
+ALTER TABLE `product_sale_promotions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_shippings`
+--
+ALTER TABLE `product_shippings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `product_to_categories`
 --
 ALTER TABLE `product_to_categories`
@@ -15913,6 +16238,30 @@ ALTER TABLE `relate_to_branches`
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sale_promotion_target_groups`
+--
+ALTER TABLE `sale_promotion_target_groups`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sale_promotion_types`
+--
+ALTER TABLE `sale_promotion_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `shipping_amount_conditions`
+--
+ALTER TABLE `shipping_amount_conditions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `shipping_cost_calculate_types`
+--
+ALTER TABLE `shipping_cost_calculate_types`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -15994,7 +16343,7 @@ ALTER TABLE `access_levels`
 -- AUTO_INCREMENT for table `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
 --
 -- AUTO_INCREMENT for table `advertisings`
 --
@@ -16016,20 +16365,25 @@ ALTER TABLE `announcement_types`
 ALTER TABLE `branches`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 --
+-- AUTO_INCREMENT for table `carts`
+--
+ALTER TABLE `carts`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+--
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2527;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2530;
 --
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 --
 -- AUTO_INCREMENT for table `data_access_permissions`
 --
 ALTER TABLE `data_access_permissions`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `districts`
 --
@@ -16059,7 +16413,7 @@ ALTER TABLE `freelance_types`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
 --
 -- AUTO_INCREMENT for table `image_types`
 --
@@ -16069,7 +16423,7 @@ ALTER TABLE `image_types`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 --
 -- AUTO_INCREMENT for table `item_categories`
 --
@@ -16079,7 +16433,7 @@ ALTER TABLE `item_categories`
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT for table `languages`
 --
@@ -16099,7 +16453,7 @@ ALTER TABLE `length_units`
 -- AUTO_INCREMENT for table `lookups`
 --
 ALTER TABLE `lookups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 --
 -- AUTO_INCREMENT for table `open_hours`
 --
@@ -16114,7 +16468,7 @@ ALTER TABLE `people`
 -- AUTO_INCREMENT for table `person_apply_jobs`
 --
 ALTER TABLE `person_apply_jobs`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `person_career_objectives`
 --
@@ -16169,7 +16523,22 @@ ALTER TABLE `person_working_experiences`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+--
+-- AUTO_INCREMENT for table `product_discounts`
+--
+ALTER TABLE `product_discounts`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `product_sale_promotions`
+--
+ALTER TABLE `product_sale_promotions`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `product_shippings`
+--
+ALTER TABLE `product_shippings`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `provinces`
 --
@@ -16179,7 +16548,7 @@ ALTER TABLE `provinces`
 -- AUTO_INCREMENT for table `real_estates`
 --
 ALTER TABLE `real_estates`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 --
 -- AUTO_INCREMENT for table `real_estate_features`
 --
@@ -16201,20 +16570,40 @@ ALTER TABLE `real_estate_types`
 ALTER TABLE `roles`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT for table `sale_promotion_target_groups`
+--
+ALTER TABLE `sale_promotion_target_groups`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `sale_promotion_types`
+--
+ALTER TABLE `sale_promotion_types`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `shipping_amount_conditions`
+--
+ALTER TABLE `shipping_amount_conditions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `shipping_cost_calculate_types`
+--
+ALTER TABLE `shipping_cost_calculate_types`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `shops`
 --
 ALTER TABLE `shops`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `slugs`
 --
 ALTER TABLE `slugs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `stock_statuses`
 --
 ALTER TABLE `stock_statuses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `sub_districts`
 --
@@ -16224,12 +16613,12 @@ ALTER TABLE `sub_districts`
 -- AUTO_INCREMENT for table `taggings`
 --
 ALTER TABLE `taggings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 --
 -- AUTO_INCREMENT for table `temporary_files`
 --
 ALTER TABLE `temporary_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=275;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=280;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -16244,12 +16633,12 @@ ALTER TABLE `villages`
 -- AUTO_INCREMENT for table `weight_units`
 --
 ALTER TABLE `weight_units`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `words`
 --
 ALTER TABLE `words`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

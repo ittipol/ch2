@@ -33,7 +33,7 @@
 
     <div class="row">
 
-      <div class="col-md-6 col-xs-12">
+      <div class="col-md-4 col-xs-12">
         <div class="box">
           <div class="box-inner">
             <h3>สินค้า</h3>
@@ -80,7 +80,7 @@
         </div>
       </div>
 
-      <div class="col-md-6 col-xs-12">
+      <div class="col-md-4 col-xs-12">
         <div class="box">
           <div class="box-inner">
             <h3>ประกาศงาน</h3>
@@ -124,7 +124,7 @@
         </div>
       </div>
 
-      <div class="col-md-6 col-xs-12">
+      <div class="col-md-4 col-xs-12">
         <div class="box">
           <div class="box-inner">
             <h3>โฆษณา</h3>
@@ -168,7 +168,8 @@
         </div>
       </div>
 
-      <div class="col-md-6 col-xs-12">
+      @if(!empty($_modelData['Address']))
+      <div class="col-xs-12">
         <div class="box">
           <div class="box-inner">
             <h3>ที่อยู่และการติดต่อ</h3>
@@ -193,6 +194,7 @@
           </div>
         </div>
       </div>
+      @endif
 
     </div>
 
@@ -202,9 +204,13 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
+
+    @if(!empty($_modelData['Address']['_geographic']))
     const map = new Map(false,false,false);
     map.initialize();
     map.setLocation({!!$_modelData['Address']['_geographic']!!});
+    @endif
+
   });
 </script>
 

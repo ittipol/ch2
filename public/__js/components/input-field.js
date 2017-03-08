@@ -1,6 +1,8 @@
 class InputField {
 
-	constructor() {}
+	constructor() {
+		this.oldInput = '';
+	}
 
 	load() {
 		this.bind();
@@ -8,12 +10,22 @@ class InputField {
 
 	bind() {
 
-		$('input[role="number"]').on('keydown',function(e){
+		let _this = this;
+		$('input[role="number"]').on('keyup',function(){
 
-			if(((e.keyCode < 96) || (e.keyCode > 105)) && ((e.keyCode < 48) || (e.keyCode > 57)) && (e.keyCode != 8) && (e.keyCode != 110) && (e.keyCode != 190)) {
-			  e.preventDefault();
+			if($(this).val() == '') {
+				_this.oldInput = '';
+				return false;
+			}
+
+			const regex = /^(\d+|\d+.\d+)$/g;
+
+			if($(this).val().match(regex) == null) {
+			  $(this).val(_this.oldInput);
 			  return false;
 			}
+
+			_this.oldInput = $(this).val();
 			
 		});
 

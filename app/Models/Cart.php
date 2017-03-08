@@ -102,7 +102,7 @@ class Cart extends Model
       // ['quantity','!=',0],
       ['active','=',1]
     ])
-    ->select('id','name','price','minimum','product_unit','shipping_calculate_from','quantity')
+    ->select('id','name','price','minimum','product_unit','shipping_calculate_from','quantity','weight')
     ->first();
   }
 
@@ -134,7 +134,7 @@ class Cart extends Model
       'quantity' => $quantity,
       'product_unit' => $product->product_unit,
       'shipping_calculate_from' => $product->shipping_calculate_from,
-      'price' => $this->price,
+      'price' => $this->getPrice($product,true),
       'subTotal' => $this->getProductSubTotal($product,$quantity,true),
       'shippingCost' => $this->getProductShippingCost($product,$quantity,true),
       'total' => $this->getProductTotal($product,$quantity,true),
@@ -142,6 +142,18 @@ class Cart extends Model
       'productDetailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id' => $product->id)),
     ),$this->checkProductError($product,$quantity));
 
+  }
+
+  public function getPrice($product,$format = false) {
+    $currency = new Currency;
+
+    $price = $product->price;
+
+    if($format) {
+      $price = $currency->format($price);
+    }
+
+    return $price;
   }
 
   // private function getProductPrice($product,$quantity,$format = false) {

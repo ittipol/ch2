@@ -19,7 +19,7 @@
   </div>
 </div>
 
-<div class="detail container">
+<div class="container">
 
   @if(!empty($_modelData['_categoryPaths']))
   <ol class="breadcrumb">
@@ -27,6 +27,16 @@
     <li class="breadcrumb-item">{{$path['name']}}</li>
     @endforeach
   </ol>
+  @endif
+
+</div>
+
+<div class="container">
+
+  <div class="detail">
+
+  @if($_modelData['hasPromotion'])
+    <div class="message-tag sale-promotion">สินค้าโปรโมชั่น</div>
   @endif
 
   <div class="image-gallery">
@@ -100,23 +110,29 @@
 
         <div class="item-info-row">
           <p>ราคา</p>
-          <h4 class="emphasize">{{$_modelData['_price']}}<span class="sub-info-text"> / {{$_modelData['product_unit']}}</span></h4>
+          @if($_modelData['hasPromotion'])
+            <span class="text-emphasize">{{$_modelData['promotion']['_reduced_price']}}<span class="sub-info-text"> / {{$_modelData['product_unit']}}</span></span>
+            <span class="product-price-discount-tag">{{$_modelData['promotion']['percentDiscount']}}</span>
+            <h5 class="origin-price">{{$_modelData['_price']}}</h5>
+          @else
+            <span class="text-emphasize">{{$_modelData['_price']}}<span class="sub-info-text"> / {{$_modelData['product_unit']}}</span></span>
+          @endif
         </div>
 
         <div class="item-info-row">
           <p>จำนวนการสั่งซื้อขั้นต่ำ</p>
-          <h4 class="emphasize">{{$_modelData['minimum']}}<span class="sub-info-text"> {{$_modelData['product_unit']}} / การสั่งซื้อ</span></h4>
+          <h4 class="text-emphasize">{{$_modelData['minimum']}}<span class="sub-info-text"> {{$_modelData['product_unit']}} / การสั่งซื้อ</span></h4>
         </div>
 
         @if($_modelData['shipping_calculate_from'] == 2)
         <div class="item-info-row">
           <p>ค่าจัดส่งสินค้า</p>
-          <h4 class="emphasize">{{$_modelData['shippingCost']}}
+          <h4 class="text-emphasize">{{$_modelData['shippingCost']}}
             @if(!empty($_modelData['shippingCostAppendText']))
               <span class="sub-info-text"> / {{$_modelData['shippingCostAppendText']}}</span>
             @endif
           </h4>
-          <p class="emphasize-green space-top-10">{{$_modelData['freeShippingMessage']}}</p>
+          <p class="text-emphasize-green space-top-10">{{$_modelData['freeShippingMessage']}}</p>
         </div>
         @endif
 
@@ -151,25 +167,20 @@
     
   </div>
 
-  <div class="row">
+  <div class="row detail-info-section">
+    <div class="col-xs-12">
 
-    <div class="col-sm-12 margin-section section-border-left">
-
-      <div class="space-top-bottom-10 section-inner">
-        
-        <h4>รายละเอียด {{$_modelData['name']}}</h4>  
-        <div>
-          {!!$_modelData['description']!!}
-        </div>
-
+      <h4>รายละเอียด {{$_modelData['name']}}</h4>
+      <div class="line"></div> 
+      <div>
+        {!!$_modelData['description']!!}
       </div>
 
     </div>
-
   </div>
 
   @if(!empty($_modelData['specifications']))
-  <div class="row">
+  <div class="row detail-info-section">
     <div class="col-xs-12">
 
       <h4>ข้อมูลจำเพาะของ {{$_modelData['name']}}</h4>  
@@ -188,6 +199,7 @@
   </div>
   @endif
 
+</div>
 </div>
 
 <script type="text/javascript">
