@@ -14,7 +14,12 @@
           <a href="{{URL::to($productDetailUrl)}}">
             <h2>{{$_modelData['name']}}</h2>
           </a>
-          <h4>{{$_modelData['_price']}}</h4>
+          @if($_modelData['hasPromotion'])
+            <h4>{{$_modelData['promotion']['_reduced_price']}}</h4>
+            <h5 class="text-line-through">{{$_modelData['_price']}}</h5>
+          @else
+            <h4>{{$_modelData['_price']}}</h4>
+          @endif
           <div class="line"></div>
           <div class="space-top-20">
             @if(!empty($_modelData['_categoryPaths']))

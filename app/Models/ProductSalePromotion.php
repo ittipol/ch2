@@ -13,6 +13,29 @@ class ProductSalePromotion extends Model
     return $this->hasOne('App\Models\ProductDiscount','id','model_id');
   }
 
+
+
+  public function fill(array $attributes) {
+
+    if(!empty($attributes)) {
+
+      unset($attributes['promotion_start_day']);
+      unset($attributes['promotion_start_month']);
+      unset($attributes['promotion_start_year']);
+      unset($attributes['promotion_start_hour']);
+      unset($attributes['promotion_start_min']);
+      unset($attributes['promotion_end_day']);
+      unset($attributes['promotion_end_month']);
+      unset($attributes['promotion_end_year']);
+      unset($attributes['promotion_end_hour']);
+      unset($attributes['promotion_end_min']);
+
+    }
+
+    return parent::fill($attributes);
+
+  }
+
   public function __saveRelatedData($model,$options = array()) {
 
     $productSalePromotion = $model->getModelRelationData('ProductSalePromotion',
@@ -69,15 +92,27 @@ class ProductSalePromotion extends Model
 
   }
 
+  public function getActivePromotion($productId,$salePromotionTypeId = null) {
+
+    $now = date('Y-m-d H:i:s');
+
+    return $this->where([
+      ['product_id','=',$productId],
+      ['sale_promotion_type_id','=',1],
+      ['date_start','<=',$now],
+      ['date_end','>=',$now]
+    ])->first();
+  }
+
   public function buildModelData() {
 
     $date = new Date;
 
-    return array_merge(array(
+    return array(
       // 'sale_promotion_type_id' => $this->sale_promotion_type_id,
-      '_date_start' => $date->covertDateToSting($this->date_start),
-      '_date_end' => $date->covertDateToSting($this->date_end),
-    ),$this->{lcfirst($this->model)}->buildModelData());
+      '_date_start' => $date->covertDateTimeToSting($this->date_start),
+      '_date_end' => $date->covertDateTimeToSting($this->date_end),
+    );
 
   }
 

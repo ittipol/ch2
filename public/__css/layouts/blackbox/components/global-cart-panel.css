@@ -61,6 +61,12 @@
 .global-cart-panel .product-info .product-title {
 	font-size: 16px;
 	line-height: 20px;
+	font-weight: bold;
+}
+
+.global-cart-panel .product-price {
+	color: #0071c5;
+	font-weight: bold;
 }
 
 /*.global-cart-panel .product-info .price {

@@ -21,8 +21,6 @@
     '__js/forms/images.js',
     '__js/forms/open-hours.js',
     '__js/forms/product-category.js',
-    // '__js/forms/district.js',
-    // '__js/forms/province.js',
     '__js/forms/address.js',
     '__js/forms/tagging.js',
     '__js/forms/text-input-list.js',
@@ -31,6 +29,7 @@
     '__js/forms/real-estate.js',
     '__js/forms/job.js',
     '__js/forms/product.js',
+    '__js/forms/product-discount.js',
     '__js/components/input-field.js',
     '__js/components/notification-bottom.js',
     '__js/components/additional-option.js',
@@ -39,7 +38,7 @@
     '__js/components/image-gallery.js',
     // '__js/components/tabs.js'
     '__js/components/profile-image.js',
-    '__js/components/global-cart.js'
+    '__js/components/global-cart.js',
   );
 
   if($combine){

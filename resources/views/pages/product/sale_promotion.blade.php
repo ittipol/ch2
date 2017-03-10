@@ -27,7 +27,7 @@
       </div>
       <div class="tile-nav-info">
         <a href="{{$productDiscountAdd}}">
-          <h4 class="tile-nav-title">เพิ่มโปรโมชั่นส่วนลด</h4>
+          <h4 class="tile-nav-title">เพิ่มโปรโมชั่นลดราคาสินค้า</h4>
         </a>
       </div>
     </div>
@@ -53,29 +53,35 @@
             <h4>ราคาสินค้าปกติ: {{$price}}</h4>
             <h4>ราคาสินค้าหลังลดราคา: {{$salePromotion['data']['_reduced_price']}}</h4>
           </div>
+
+          <h5>ประเภทโปรโมชั่น: {{$salePromotion['data']['salePromotionType']}}</h5>
+          <h5>ระยะเวลา: {{$salePromotion['data']['_date_start']}} - {{$salePromotion['data']['_date_end']}}</h5>
+
+        </div>
       @else
         <div class="list-box">
-          <h4 class="space-bottom-20">โปรโมชั่นจะทำงานในอีก {{$salePromotion['remainingDays']}}</h4>
-          <div class="text-center space-bottom-20">
+          <h4>โปรโมชั่นจะทำงานในอีก {{$salePromotion['remainingDays']}}</h4>
+          <div class="text-center space-top-bottom-30">
             <h4>ราคาสินค้าปกติ: {{$price}}</h4>
             <h4>ราคาสินค้าหลังลดราคา: {{$salePromotion['data']['_reduced_price']}}</h4>
           </div>
-      @endif
-        <h5>ประเภทโปรโมชั่น: {{$salePromotion['data']['salePromotionType']}}</h5>
-        <h5>ระยะเวลา: {{$salePromotion['data']['_date_start']}} - {{$salePromotion['data']['_date_end']}}</h5>
 
-        <div class="additional-option">
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="additional-option-content">
-            <a href="">แก้ไข</a>
-            <a href="">ลบ</a>
+          <h5>ประเภทโปรโมชั่น: {{$salePromotion['data']['salePromotionType']}}</h5>
+          <h5>ระยะเวลา: {{$salePromotion['data']['_date_start']}} - {{$salePromotion['data']['_date_end']}}</h5>
+
+          <div class="additional-option">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="additional-option-content">
+              <a href="{{$salePromotion['editUrl']}}">แก้ไข</a>
+              <a href="{{$salePromotion['deleteUrl']}}">ลบ</a>
+            </div>
           </div>
+
         </div>
-
-      </div>
-
+      @endif
+        
     @endforeach
 
   @else

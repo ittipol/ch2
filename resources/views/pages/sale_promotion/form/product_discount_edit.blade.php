@@ -4,7 +4,7 @@
 <div class="top-header-wrapper top-header-border">
   <div class="container">
     <div class="top-header">
-      <h2>เพิ่มโปรโมชั่นลดราคา</h2>
+      <h2>โปรโมชั่นลดราคา</h2>
     </div>
   </div>
 </div>
@@ -14,7 +14,11 @@
   @include('components.form_error') 
 
   <?php 
-    echo Form::open(['id' => 'main_form','method' => 'post', 'enctype' => 'multipart/form-data']);
+    echo Form::model($_formData, [
+      'id' => 'main_form',
+      'method' => 'PATCH',
+      'enctype' => 'multipart/form-data'
+    ]);
   ?>
 
   <?php
@@ -28,7 +32,14 @@
     </div>
 
     <div class="form-row">
+
       <div class="message-box">
+
+        <h4>ราคาสินค้าหลังลดราคาที่กำหนดไว้</h4>
+        <p><strong>{{$reducedPriceWithFormat}}</strong></p>
+
+        <div class="line"></div>
+
         <h4>
           ราคาสินค้าปกติ: {{$priceWithFormat}}
         </h4>
@@ -101,17 +112,27 @@
     </div>
 
     <div class="form-row">
+
+      <div class="message-box space-bottom-20">
+        <h4>ระยะเวลาโปรโมชั่นที่กำหนดไว้</h4>
+        <p>วันที่เริ่มต้นโปรโมชั่น: <strong>{{$productSalePromotion['_date_start']}}</strong></p>
+        <p>ถึงวันที่ (วันสุดท้ายของโปรโมชั่น): <strong>{{$productSalePromotion['_date_end']}}</strong></p>
+      </div>
+
       <div class="select-group">
         <?php 
           echo Form::label('', 'วันที่เริ่มต้นโปรโมชั่น');
-          echo Form::select('promotion_start_day', $day, $currentDay, array(
-            'id' => 'promotion_start_day'
+          echo Form::select('promotion_start_day', $day, null, array(
+            'id' => 'promotion_start_day',
+            'class' => 'promotion_period'
           ));
-          echo Form::select('promotion_start_month', $month, $currentMonth, array(
-            'id' => 'promotion_start_month'
+          echo Form::select('promotion_start_month', $month, null, array(
+            'id' => 'promotion_start_month',
+            'class' => 'promotion_period'
           ));
-          echo Form::select('promotion_start_year', $year, $currentYear, array(
-            'id' => 'promotion_start_year'
+          echo Form::select('promotion_start_year', $year, null, array(
+            'id' => 'promotion_start_year',
+            'class' => 'promotion_period'
           ));
         ?>
       </div>
@@ -120,10 +141,12 @@
         <?php 
           echo Form::label('', 'เวลา');
           echo Form::select('promotion_start_hour', $hours, null, array(
-            'id' => 'promotion_start_hour'
+            'id' => 'promotion_start_hour',
+            'class' => 'promotion_period'
           ));
           echo Form::select('promotion_start_min', $mins, null, array(
-            'id' => 'promotion_start_min'
+            'id' => 'promotion_start_min',
+            'class' => 'promotion_period'
           ));
         ?>
       </div>
@@ -133,14 +156,17 @@
       <div class="select-group">
         <?php 
           echo Form::label('', 'ถึงวันที่ (วันสุดท้ายของโปรโมชั่น)');
-          echo Form::select('promotion_end_day', $day, $currentDay, array(
-            'id' => 'promotion_end_day'
+          echo Form::select('promotion_end_day', $day, null, array(
+            'id' => 'promotion_end_day',
+            'class' => 'promotion_period'
           ));
-          echo Form::select('promotion_end_month', $month, $currentMonth, array(
-            'id' => 'promotion_end_month'
+          echo Form::select('promotion_end_month', $month, null, array(
+            'id' => 'promotion_end_month',
+            'class' => 'promotion_period'
           ));
-          echo Form::select('promotion_end_year', $year, $currentYear, array(
-            'id' => 'promotion_end_year'
+          echo Form::select('promotion_end_year', $year, null, array(
+            'id' => 'promotion_end_year',
+            'class' => 'promotion_period'
           ));
         ?>
       </div>
@@ -148,11 +174,13 @@
       <div class="select-group">
         <?php 
           echo Form::label('', 'เวลา');
-          echo Form::select('promotion_end_hour', $hours, 23, array(
-            'id' => 'promotion_end_hour'
+          echo Form::select('promotion_end_hour', $hours, null, array(
+            'id' => 'promotion_end_hour',
+            'class' => 'promotion_period'
           ));
-          echo Form::select('promotion_end_min', $mins, 59, array(
-            'id' => 'promotion_end_min'
+          echo Form::select('promotion_end_min', $mins, null, array(
+            'id' => 'promotion_end_min',
+            'class' => 'promotion_period'
           ));
         ?>
       </div>
@@ -174,7 +202,42 @@
 
 <script type="text/javascript">
 
+  class SalePromotionPeriod {
+
+    constructor() {
+      this.hasChange = false;
+    }
+
+    load() {
+      this.bind();
+    }
+
+    bind() {
+
+      let _this = this;
+
+      $('select.promotion_period').on('change',function(){
+        _this.hasChange = true;
+      });
+
+      $('#main_form').on('submit',function(){
+
+        var input = document.createElement("input");
+        input.setAttribute('type', 'hidden');
+        input.setAttribute('name', 'salePromotionPeriodChanged');
+        input.setAttribute('value', _this.hasChange);
+        this.appendChild(input);
+
+      });
+
+    }
+
+  }
+
   $(document).ready(function(){
+
+    const salePromotionPeriod = new SalePromotionPeriod();
+    salePromotionPeriod.load();
 
     const productDiscount = new ProductDiscount({{$price}});
     productDiscount.load();

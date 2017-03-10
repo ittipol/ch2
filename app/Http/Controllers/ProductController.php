@@ -6,6 +6,7 @@ use App\Http\Requests\CustomFormRequest;
 use App\library\service;
 use App\library\message;
 use App\library\cache;
+use App\library\url;
 use Redirect;
 use Session;
 
@@ -462,6 +463,8 @@ class ProductController extends Controller
   }
 
   public function salePromotion() {
+
+    $url = new Url;
     
     $model = Service::loadModel('Product')->find($this->param['id']);
 
@@ -471,23 +474,33 @@ class ProductController extends Controller
     if(!empty($promotion)) {
       $_salePromotions[] = array(
         'active' => true,
-        'data' => $promotion->buildModelData()
+        'data' => $promotion
       );
     }
 
     $salePromotions = $model->getRalatedData('ProductSalePromotion',array(
       'conditions' => array(
-        array('date_start','>',date('Y-m-d')),
+        array('date_start','>',date('Y-m-d H:i:s')),
       ),
       'order' => array('date_start','ASC'),
     ));
 
-    foreach ($salePromotions as $salePromotion) {
-      $_salePromotions[] = array(
-        'active' => false,
-        'remainingDays' => $salePromotion->calRemainingDays(),
-        'data' => $salePromotion->buildModelData(),
-      );
+    if(!empty($salePromotions)) {
+      foreach ($salePromotions as $salePromotion) {
+        $_salePromotions[] = array(
+          'active' => false,
+          'remainingDays' => $salePromotion->calRemainingDays(),
+          'data' => array_merge($salePromotion->buildModelData(),$salePromotion->{lcfirst($salePromotion->model)}->buildModelData()),
+          'editUrl' => $url->setAndParseUrl(request()->get('shopUrl').'product_discount/edit/{id}/product_id:{product_id}',array(
+            'id' => $salePromotion->model_id,
+            'product_id' => $model->id
+          )),
+          'deleteUrl' => $url->setAndParseUrl(request()->get('shopUrl').'product_discount/delete/{id}/product_id:{product_id}',array(
+            'id' => $salePromotion->model_id,
+            'product_id' => $model->id
+          )),
+        );
+      }
     }
 
     $this->setData('salePromotions',$_salePromotions);

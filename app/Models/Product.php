@@ -225,15 +225,15 @@ class Product extends Model
 
   }
 
-  public function weightToGram($weight = null) {
+  // public function weightToGram($weight = null) {
 
-    if(empty($weight)) {
-      $weight = $this->weight;
-    }
+  //   if(empty($weight)) {
+  //     $weight = $this->weight;
+  //   }
 
-    $measurement = new Measurement;
-    return $measurement->convertToGram($this->weightUnit->unit,$this->weight);
-  }
+  //   $measurement = new Measurement;
+  //   return $measurement->convertToGram($this->weightUnit->unit,$this->weight);
+  // }
 
   public function buildModelData() {
 
@@ -308,12 +308,11 @@ class Product extends Model
 
     }
 
+    $hasPromotion = true;
     $promotion = $this->getPromotion();
 
-    $hasPromotion = false;
-    if(!empty($promotion)) {
-      $hasPromotion = true;
-      $promotion = $promotion->buildModelData();
+    if(empty($promotion)) {
+      $hasPromotion = false;
     }
 
     return array(
@@ -348,12 +347,11 @@ class Product extends Model
     $string = new String;
     $currency = new Currency;
 
+    $hasPromotion = true;
     $promotion = $this->getPromotion();
 
-    $hasPromotion = false;
-    if(!empty($promotion)) {
-      $hasPromotion = true;
-      $promotion = $promotion->buildModelData();
+    if(empty($promotion)) {
+      $hasPromotion = false;
     }
 
     return array(
@@ -382,18 +380,26 @@ class Product extends Model
 
   }
 
-  public function getPromotion() {
+  public function getPromotion($salePromotionTypeAlias = null) {
 
-    $today = date('Y-m-d');
+    $now = date('Y-m-d H:i:s');
 
-    return $this->getRalatedData('ProductSalePromotion',array(
+    $promotion = $this->getRalatedData('ProductSalePromotion',array(
       'conditions' => array(
-        array('date_start','<=',$today),
-        array('date_end','>=',$today),
+        array('sale_promotion_type_id','=',1),
+        array('date_start','<=',$now),
+        array('date_end','>=',$now)
       ),
+      'fields' => array('model','model_id','date_start','date_end'),
       'order' => array('date_start','ASC'),
       'first' => true
     ));
+
+    if(empty($promotion)) {
+      return null;
+    }
+
+    return array_merge($promotion->buildModelData(),$promotion->{lcfirst($promotion->model)}->buildModelData());
 
   }
 

@@ -184,7 +184,16 @@ class ProductShipping extends Model
         break;
 
       case 3: 
-          $productValue = $product->price * $quantity;
+
+          $promotion = $product->getPromotion();
+
+          $price = $product->price;
+
+          if(!empty($product->promotion)) {
+            $price = $product->promotion['reduced_price'];
+          }
+
+          $productValue = $price * $quantity;
         break;
 
     }

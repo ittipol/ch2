@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\library\date;
+
 class PersonProject extends Model
 {
   protected $table = 'person_projects';
@@ -23,8 +25,8 @@ class PersonProject extends Model
 
     if(!empty($attributes)) {
 
-      $personExperienceDetail = new PersonExperienceDetail;
-      $attributes['PersonExperienceDetail'] = $personExperienceDetail->setPeriodData($attributes);
+      $date = new Date;
+      $attributes['PersonExperienceDetail'] = $date->setPeriodData($attributes);
       unset($attributes['date_start']);
       unset($attributes['date_end']);
       unset($attributes['current']);

@@ -69,39 +69,6 @@ class PersonExperienceDetail extends Model
 
   }
 
-  public function setPeriodData($attributes) {
-
-    $data = array();
-
-    $data = array(
-      'start_year' => null,
-      'start_month' => null,
-      'start_day' => null,
-      'end_year' => null,
-      'end_month' => null,
-      'end_day' => null,
-      'current' => null,
-    );
-
-    if(!empty($attributes['date_start'])) {
-      foreach ($attributes['date_start'] as $key => $value) {
-        $data['start_'.$key] = $value;
-      }
-    }
-
-    if(empty($attributes['current']) && !empty($attributes['date_end'])) {
-      foreach ($attributes['date_end'] as $key => $value) {
-        $data['end_'.$key] = $value;
-      }
-    }
-    elseif(!empty($attributes['current'])) {
-      $data['current'] = $attributes['current'];
-    }
-
-    return $data;
-
-  }
-
   public function getPeriod() {
 
     $date = new Date;

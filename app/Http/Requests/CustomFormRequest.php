@@ -65,6 +65,9 @@ class CustomFormRequest extends FormRequest
     ),
     'shop.product_discount.add' => array(
       'modelName' => 'ProductDiscount'
+    ),
+    'shop.product_discount.edit' => array(
+      'modelName' => 'ProductDiscount'
     )
   );
 
@@ -119,6 +122,12 @@ class CustomFormRequest extends FormRequest
     $name = Route::currentRouteName();
     $data = request()->all();
 
+    // $rules = $this->validation['rules'];
+
+    // if(!empty($this->validation['action'][$this->method()])) {
+    //   $rules = $this->validation['action'][$this->method()];
+    // }
+
     // $model = service::loadModel($this->pages[$name]['modelName']);
     // $this->validation = $model->getValidation();
 
@@ -128,13 +137,13 @@ class CustomFormRequest extends FormRequest
 
         if(!empty($this->validation['excepts'][$name]) && in_array($key, $this->validation['excepts'][$name])) {
 
-          if(!empty(Request::get($key))) {
-            $this->hasError = true;
-          }
+          // if(!empty(Request::get($key))) {
+          //   $this->hasError = true;
+          // }
 
-          if($this->hasError) {
-            break;
-          }
+          // if($this->hasError) {
+          //   break;
+          // }
 
           continue;
         }

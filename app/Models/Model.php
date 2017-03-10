@@ -54,7 +54,7 @@ class Model extends BaseModel
       $this->paginator = new Paginator($this);
     }
 
-    $this->param = Route::current()->parameters();
+    // $this->param = Route::current()->parameters();
 
     parent::__construct($attributes);
     

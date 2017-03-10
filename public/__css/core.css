@@ -237,3 +237,7 @@ a.button:visited {
 .hide-element {
 	display: none;
 }
+
+.text-line-through {
+	text-decoration: line-through;
+}

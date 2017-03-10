@@ -235,6 +235,9 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::get('shop/{shopSlug}/product_discount/add/product_id:{product_id}','ProductDiscountController@add')->name('shop.product_discount.add');
   Route::post('shop/{shopSlug}/product_discount/add/product_id:{product_id}','ProductDiscountController@addingSubmit')->name('shop.product_discount.add');
 
+  Route::get('shop/{shopSlug}/product_discount/edit/{id}/product_id:{product_id}','ProductDiscountController@edit')->name('shop.product_discount.edit');
+  Route::patch('shop/{shopSlug}/product_discount/edit/{id}/product_id:{product_id}','ProductDiscountController@editingSubmit')->name('shop.product_discount.edit');
+
 });
 
 // Job

@@ -119,6 +119,10 @@
 	font-weight: bold;
 }
 
+.cart .total-amount {
+	color: #0071c5;
+}
+
 @media only screen and (max-width : 992px) {
   .cart .product-info .product-info-container {
   	margin-bottom: 5px;
