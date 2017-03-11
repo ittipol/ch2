@@ -12,8 +12,8 @@
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
           <div class="card">
 
-            @if($data['hasPromotion'])
-              <div class="message-tag sale-promotion">สินค้าโปรโมชั่น</div>
+            @if(!empty($data['flag']))
+              <div class="flag sale-promotion">{{$data['flag']}}</div>
             @endif
             
             <div class="image-tile">
@@ -29,7 +29,7 @@
               <div class="card-sub-info">
 
                 <div class="card-sub-info-row product-price-section">
-                  @if($data['hasPromotion'])
+                  @if(!empty($data['promotion']))
                     <span class="product-price">{{$data['promotion']['_reduced_price']}}</span>
                     <span class="product-price-discount-tag">{{$data['promotion']['percentDiscount']}}</span>
                     <h5 class="origin-price">{{$data['_price']}}</h5>

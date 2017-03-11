@@ -22,30 +22,51 @@ class Cart extends Model
       return $error;
     }
 
-    $cart = Cart::where([
-      ['person_id','=',session()->get('Person.id')],
-      ['product_id','=',$productId]
-    ])->first();
-
     // find shop id
     $shop = $product->getModelRelationData('ShopRelateTo',array(
       'first' => true,
       'fields' => array('shop_id')
     ))->shop;
 
-    if(!empty($cart)) {
-      // update quantity
-      $saved = $cart->increment('quantity', $quantity);
+    if(Auth::check()) {
+
+      $cart = Cart::where([
+        ['person_id','=',session()->get('Person.id')],
+        ['product_id','=',$productId]
+      ])
+      ->select('id')
+      ->first();
+
+      if(!empty($cart)) {
+        // update quantity
+        $saved = $cart->increment('quantity', $quantity);
+      }else{
+
+        $value = array(
+          'person_id' => session()->get('Person.id'),
+          'shop_id' => $shop->id,
+          'product_id' => $productId,
+          'quantity' => $quantity
+        );
+
+        $saved = Cart::fill($value)->save();
+      }
+
     }else{
 
-      $value = array(
-        'person_id' => session()->get('Person.id'),
-        'shop_id' => $shop->id,
-        'product_id' => $productId,
-        'quantity' => $quantity
-      );
-
-      $saved = Cart::fill($value)->save();
+      if(session()->has('cart.'.$productId)) {
+        $product = session()->get('cart.'.$productId);
+        $product['quantity'] += $quantity;
+        session()->put('cart.'.$productId,$product);
+      }else{
+        session()->put('cart.'.$productId,array(
+          'shopId' => $shop->id,
+          'productId' => $productId,
+          'quantity' => $quantity
+        ));
+      }
+      
+      $saved = true;
     }
 
     return $saved;
@@ -62,34 +83,51 @@ class Cart extends Model
       return $error;
     }
 
-    $cart = Cart::where([
-      ['person_id','=',session()->get('Person.id')],
-      ['product_id','=',$id]
-    ])->first();
+    if(Auth::check()) {
 
-    $saved = false;
-    if(!empty($cart)) {
-      $cart->quantity = $quantity;
-      $saved = $cart->save();
+      $cart = Cart::where([
+        ['person_id','=',session()->get('Person.id')],
+        ['product_id','=',$id]
+      ])->first();
+
+      $updated = false;
+      if(!empty($cart)) {
+        $cart['quantity'] = $quantity;
+        $updated = $cart->save();
+      }
+
+    }else{
+
+      $product = session()->get('cart.'.$id);
+      $product['quantity'] = $quantity;
+      session()->put('cart.'.$id,$product);
+
+      $updated = true;
+
     }
 
-    return $saved;
+    return $updated;
 
   }
 
 
   public function deleteProduct($id) {
 
-    $cart = Cart::where([
-      ['person_id','=',session()->get('Person.id')],
-      ['product_id','=',$id]
-    ])
-    ->select('id')
-    ->first();
+    if(Auth::check()) {
+      $cart = Cart::where([
+        ['person_id','=',session()->get('Person.id')],
+        ['product_id','=',$id]
+      ])
+      ->select('id')
+      ->first();
 
-    $success = false;
-    if(!empty($cart)) {
-      $success = $cart->delete();
+      $success = false;
+      if(!empty($cart)) {
+        $success = $cart->delete();
+      }
+    }else{
+      session()->forget('cart.'.$id);
+      $success = true;
     }
 
     return $success;
@@ -132,7 +170,7 @@ class Cart extends Model
       $error = array(
         'hasError' => true,
         'errorType' => 5,
-        'errorMessage' => 'ไม่สามารถสั่งซื้อสินค้านี้ได้ จำนวนสินค้าที่คุณสั่งซื้อน้อยกว่าจำนวนสั่งซื้อขั้นต่ำ โปรดแก้ไขจำนวนการสั่งซื้อสินค้านี้'
+        'errorMessage' => 'ไม่สามารถสั่งซื้อสินค้านี้ได้ จำนวนสินค้าที่คุณสั่งซื้อน้อยกว่าจำนวนสั่งซื้อขั้นต่ำ'
       );
     }
 
@@ -332,13 +370,13 @@ class Cart extends Model
 
   public function getProductSummary() {
 
-    $carts = $this->getCarts();
+    $products = $this->getCart();
 
     $shopIds = array();
-    if(!empty($carts)) {
-      foreach ($carts as $cart) {
-        if(!in_array($cart->shop_id, $shopIds)) {
-          $shopIds[] = $cart->shop_id;
+    if(!empty($products)) {
+      foreach ($products as $cart) {
+        if(!in_array($cart['shopId'], $shopIds)) {
+          $shopIds[] = $cart['shopId'];
         }
       }
     }
@@ -385,15 +423,15 @@ class Cart extends Model
 
     $currency = new Currency;
 
-    $carts = $this->getCarts($shopId);
+    $carts = $this->getCart($shopId);
 
     $savingPrice = 0;
     if(!empty($carts)) {
 
       foreach ($carts as $cart) {
-        $product = $product = $this->getProduct($cart->product_id);
+        $product = $product = $this->getProduct($cart['productId']);
 
-        $result = $this->getSavingPrice($product,$cart->quantity);
+        $result = $this->getSavingPrice($product,$cart['quantity']);
 
         if(empty($result)) {
           continue;
@@ -412,15 +450,15 @@ class Cart extends Model
 
     $currency = new Currency;
 
-    $carts = $this->getCarts($shopId);
+    $carts = $this->getCart($shopId);
 
     $subTotal = 0;
     if(!empty($carts)) {
 
       foreach ($carts as $cart) {
-        $product = $product = $this->getProduct($cart->product_id);
+        $product = $product = $this->getProduct($cart['productId']);
 
-        $result = $this->getProductSubTotal($product,$cart->quantity);
+        $result = $this->getProductSubTotal($product,$cart['quantity']);
 
         if(empty($result)) {
           continue;
@@ -439,15 +477,15 @@ class Cart extends Model
 
     $currency = new Currency;
 
-    $carts = $this->getCarts($shopId);
+    $carts = $this->getCart($shopId);
 
     $shippingCost = 0;
     if(!empty($carts)) {
 
       foreach ($carts as $cart) {
-        $product = $product = $this->getProduct($cart->product_id);
+        $product = $product = $this->getProduct($cart['productId']);
 
-        $result = $this->getProductShippingCost($product,$cart->quantity);
+        $result = $this->getProductShippingCost($product,$cart['quantity']);
 
         if(empty($result)) {
           continue;
@@ -466,15 +504,15 @@ class Cart extends Model
 
     $currency = new Currency;
 
-    $carts = $this->getCarts($shopId);
+    $carts = $this->getCart($shopId);
 
     $total = 0;
     if(!empty($carts)) {
 
       foreach ($carts as $cart) {
-        $product = $product = $this->getProduct($cart->product_id);
+        $product = $product = $this->getProduct($cart['productId']);
 
-        $result = $this->getProductTotal($product,$cart->quantity);
+        $result = $this->getProductTotal($product,$cart['quantity']);
 
         if(empty($result)) {
           continue;
@@ -491,14 +529,14 @@ class Cart extends Model
 
   public function getProducts($shopId = null) {
 
-    $carts = $this->getCarts($shopId);
+    $carts = $this->getCart($shopId);
 
     $products = array();
     if(!empty($carts)) {
 
       foreach ($carts as $cart) {
 
-        $product = $this->getProductInfo($cart->product_id,$cart->quantity);
+        $product = $this->getProductInfo($cart['productId'],$cart['quantity']);
 
         if(!empty($product)) {
           $products[] = $product;
@@ -514,15 +552,15 @@ class Cart extends Model
 
   public function productCount() {
 
-    $carts = $this->getCarts();
+    $carts = $this->getCart();
 
     $count = 0;
     if(!empty($carts)) {
       foreach ($carts as $cart) {
 
-        $product = $this->getProduct($cart->product_id);
+        $product = $this->getProduct($cart['productId']);
 
-        $error = $this->checkProductError($product,$cart->quantity);
+        $error = $this->checkProductError($product,$cart['quantity']);
 
         if($error['hasError']) {
           continue;
@@ -541,41 +579,75 @@ class Cart extends Model
     if(Auth::check()) {
       return $this->where('person_id','=',session()->get('Person.id'))->exists();
     }else {
-      // Check from SESSION
+      return count(session()->get('cart')) ? true : false;
     }
   }
 
-  public function getCarts($shopId = null) {
+  public function getCart($shopId = null) {
 
-    $carts = null;
+    $products = null;
 
     if(Auth::check()) {
 
       if(empty($shopId)) {
-        $carts = $this->where('person_id','=',session()->get('Person.id'))->get();
+        $_products = $this
+        ->where('person_id','=',session()->get('Person.id'))
+        ->select('product_id','quantity','shop_id')
+        ->get();
       }else{
-        $carts = $this->where([
+        $_products = $this->where([
           ['person_id','=',session()->get('Person.id')],
           ['shop_id','=',$shopId]
-        ])->get();
+        ])
+        ->select('product_id','quantity','shop_id')
+        ->get();
       }
       
+      foreach ($_products as $product) {
+        $products[] = array(
+          'shopId' => $product->shop_id,
+          'productId' => $product->product_id,
+          'quantity' => $product->quantity
+        );
+      }
+
     }else{
-      // Form SESSION
+
+      if(empty($shopId)) {
+        $products = session()->get('cart');
+      }else{
+        $_products = session()->get('cart');
+
+        foreach ($_products as $product) {
+          if($product['shopId'] == $shopId) {
+            $products[] = $product;
+          }
+        }
+      }
+
     }
 
-    return $carts;
+    return $products;
 
   }
 
   public function getShopId($productId) {
-    return $this->where([
-      ['product_id','=',$productId],
-      ['person_id','=',session()->get('Person.id')]
+    // return $this->where([
+    //   ['product_id','=',$productId],
+    //   ['person_id','=',session()->get('Person.id')]
+    // ])
+    // ->select('shop_id')
+    // ->first()
+    // ->shop_id;
+
+    return ShopRelateTo::where([
+      ['model','like','Product'],
+      ['model_id','=',$productId]
     ])
     ->select('shop_id')
     ->first()
     ->shop_id;
+
   }
 
   public function setUpdatedAt($value) {}

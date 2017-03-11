@@ -44,6 +44,35 @@ class Address extends Model
     
   }
 
+  public function getAddress() {
+
+    $address = array();
+
+
+    if(!empty($this->address)) {
+      $address[] = $this->address;
+    }
+
+    if(!empty($this->subDistrict->name)) {
+      $address[] = $this->subDistrict->name;
+    }
+
+    if(!empty($this->district->name)) {
+      $address[] = $this->district->name;
+    }
+
+    if(!empty($this->province->name)) {
+      $address[] = $this->province->name;
+    }
+
+    if(!empty($this->district->zip_code)) {
+      $address[] = $this->district->zip_code;
+    }    
+
+    return implode(' ', $address);
+
+  }
+
   public function buildModelData() {
     
     $geographic = array();

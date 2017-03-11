@@ -8,9 +8,15 @@ class CheckoutController extends Controller
 {
   public function checkout() {
     
-    $cart = Service::loadModel('Cart');
+    $address = Service::loadModel('Address')->where([
+      ['model','like','Person'],
+      ['model_id','=',session()->get('Person.id')]
+    ])
+    ->first()
+    ->getAddress();
 
-    $this->setData('data',$cart->getProductSummary());
+    $this->setData('data',Service::loadModel('Cart')->getProductSummary());
+    $this->setData('address',$address);
 
     return $this->view('pages.checkout.checkout');
 

@@ -100,6 +100,10 @@
   padding: 10px;
 }
 
+.additional-option-items input[type="file"] {
+  display: none;
+}
+
 .global-nav .additional-option {
   position: absolute;
   top: 2px;

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\library\currency;
+use App\library\measurement;
 
 class ProductShipping extends Model
 {
@@ -109,6 +110,7 @@ class ProductShipping extends Model
   public function getFreeShippingWithConditionText($product) {
 
     $currency = new Currency;
+    $measurement = new Measurement;
 
     $text = 'จัดส่งฟรีเมื่อ%s%s%s';
 
@@ -116,7 +118,7 @@ class ProductShipping extends Model
     switch ($this->shipping_calculate_type_id) {
       case 1:
         if(!empty($product->weight)) {
-          $amount = ' '.$this->free_shipping_amount.' '.$product->weightUnit->name;
+          $amount = ' '.$measurement->format($this->free_shipping_amount).' '.$product->weightUnit->name;
         }
         break;
       

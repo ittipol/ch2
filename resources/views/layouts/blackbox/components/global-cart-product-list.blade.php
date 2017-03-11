@@ -27,7 +27,7 @@
         </h4>
         <div class="line grey space-bottom-5"></div>
         <div>
-          ราคาสินค้ารวม: <span class="product-price">{{$product['price']}}</span> x {{$product['quantity']}}
+          ราคาสินค้า: <span class="product-price">{{$product['price']}}</span> x {{$product['quantity']}}
         </div>
         @if($product['shipping_calculate_from'] == 2)
         <div>

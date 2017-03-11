@@ -5,7 +5,7 @@ namespace App\library;
 class Date
 {
 
-  public function getToday($time = true, $timestamp = false) {
+  public function today($time = true, $timestamp = false) {
 
     $today = date('Y-m-d 00:00:00');
     if(!$time) {
@@ -20,7 +20,7 @@ class Date
 
   }
 
-  public function getNow($time = true, $timestamp = false) {
+  public function now($time = true, $timestamp = false) {
 
     $now = date('Y-m-d H:i:s');
     if(!$time) {

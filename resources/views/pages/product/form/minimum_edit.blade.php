@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-md-8 col-xs-12">
         <div class="title">
-          จำนวนสินค้า
+          การสั่งซื้อขั้นต่ำ
         </div>
       </div>
     </div>
@@ -30,25 +30,22 @@
   <div class="form-section">
 
     <div class="title">
-      ปรับจำนวนสินค้า
+      จำนวนการสั่งซื้อขั้นต่ำ
     </div>
 
     <div class="form-row">
 
-      <h4>
-        จำนวนคงเหลือปัจจุบัน: {{$_formData['quantity']}} {{$_formData['product_unit']}}
-      </h4>
-
-      <?php
-        echo Form::label('name', 'จำนวนสินค้าหลังปรับ', array(
-          'class' => 'required'
-        ));
-        echo Form::text('quantity', '', array(
-          'placeholder' => 'จำนวนสินค้า',
-          'autocomplete' => 'off',
-          'id' => 'quantity_input_box'
-        ));
-      ?>
+      <div class="form-row">
+        <?php 
+          echo Form::label('minimum', 'จำนวนการซื้อขั้นต่ำต่อการสั่งซื้อ', array(
+            'class' => 'required'
+          ));
+          echo Form::text('minimum', 1, array(
+            'placeholder' => 'จำนวนการซื้อขั้นต่ำต่อการสั่งซื้อ',
+            'autocomplete' => 'off'
+          ));
+        ?>
+      </div>
 
     </div>
 

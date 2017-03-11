@@ -1,9 +1,13 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<div class="top-header-wrapper">
-  <div class="top-header">
-    <h2>ลงประกาศ ซื้อ ขาย สินค้า</h2>
+<div class="container">
+  <div class="container-header">
+    <div class="row">
+      <div class="col-lg-6 col-sm-12">
+        <div class="title">ลงประกาศ ซื้อ ขาย สินค้า</div>
+      </div>
+    </div>
   </div>
 </div>
 

@@ -332,7 +332,7 @@ class Paginator {
     $offset = ($this->page - 1)  * $this->perPage;
 
     $model = $this->condition($this->model->newInstance());
-    $model = $this->order($this->model);
+    $model = $this->order($model);
 
     $records = $model
     ->take($this->perPage)

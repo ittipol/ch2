@@ -91,7 +91,7 @@ class ProductDiscountController extends Controller
 
     $model = Service::loadModel('ProductDiscount');
 
-    $today = $date->getToday();
+    $today = $date->today();
     $todayTs = strtotime($today);
 
     $dateStartInput = $request->get('date_start');
@@ -105,31 +105,33 @@ class ProductDiscountController extends Controller
     }
 
     // Get Promotion dates
-    $promotionDates = Service::loadModel('ProductSalePromotion')
-    ->where('date_start','>=',$today)
-    ->where(function($query) use($dateEndInput) {
-      $query->where('date_end','<=',$dateEndInput)
-            ->orWhere('date_start','<=',$dateEndInput);
-    })
-    ->orderBy('date_start','ASC')
-    ->select('date_start','date_end')
-    ->get();
+    // $promotionDates = Service::loadModel('ProductSalePromotion')
+    // ->where('date_start','>=',$today)
+    // ->where(function($query) use($dateEndInput) {
+    //   $query->where('date_end','<=',$dateEndInput)
+    //         ->orWhere('date_start','<=',$dateEndInput);
+    // })
+    // ->where('model','like',$model->modelName)
+    // ->where('model_id','=',$model->id)
+    // ->orderBy('date_start','ASC')
+    // ->select('date_start','date_end')
+    // ->get();
 
-    $hasError = false;
-    foreach ($promotionDates as $promotionDate) {
+    // $hasError = false;
+    // foreach ($promotionDates as $promotionDate) {
 
-      $dateStartTs = strtotime($promotionDate->date_start);
-      $dateEndTs = strtotime($promotionDate->date_end);
+    //   $dateStartTs = strtotime($promotionDate->date_start);
+    //   $dateEndTs = strtotime($promotionDate->date_end);
 
-      if(($dateStartTs <= $dateStartInputTs) && ($dateEndTs >= $dateStartInputTs) || ($dateStartTs <= $dateEndInputTs) && ($dateEndTs >= $dateEndInputTs)) {
-        $hasError = true;
-      }
+    //   if(($dateStartTs <= $dateStartInputTs) && ($dateEndTs >= $dateStartInputTs) || ($dateStartTs <= $dateEndInputTs) && ($dateEndTs >= $dateEndInputTs)) {
+    //     $hasError = true;
+    //   }
 
-      if($hasError) {
-        return Redirect::back()->withErrors(['ไม่สามารถกำหนดระยะเวลานี้ได้ ระยะเวลาโปรโมชั่นที่กำหนดนั้นถูกกำหนดแล้ว']);
-      }
+    //   if($hasError) {
+    //     return Redirect::back()->withErrors(['ไม่สามารถกำหนดระยะเวลานี้ได้ ระยะเวลาโปรโมชั่นที่กำหนดนั้นถูกกำหนดแล้ว']);
+    //   }
 
-    }
+    // }
 
     $price = Service::loadModel('Product')
     ->select('price')
@@ -274,7 +276,7 @@ class ProductDiscountController extends Controller
 
     $model = Service::loadModel('ProductDiscount')->find($this->param['id']);
 
-    $today = $date->getToday();
+    $today = $date->today();
     $todayTs = strtotime($today);
 
     $dateStartInput = $request->get('date_start');
@@ -289,13 +291,14 @@ class ProductDiscountController extends Controller
 
     if(filter_var($request->get('salePromotionPeriodChanged'), FILTER_VALIDATE_BOOLEAN)) {
 
-      // Get Promotion dates
       $promotionDates = Service::loadModel('ProductSalePromotion')
       ->where('date_start','>=',$today)
       ->where(function($query) use($dateEndInput) {
         $query->where('date_end','<=',$dateEndInput)
               ->orWhere('date_start','<=',$dateEndInput);
       })
+      ->where('model','like',$model->modelName)
+      ->where('model_id','=',$model->id)
       ->orderBy('date_start','ASC')
       ->select('date_start','date_end')
       ->get();

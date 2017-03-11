@@ -35,8 +35,8 @@
 
   <div class="detail">
 
-  @if($_modelData['hasPromotion'])
-    <div class="message-tag sale-promotion">สินค้าโปรโมชั่น</div>
+  @if(!empty($_modelData['flag']))
+    <div class="flag sale-promotion">{{$_modelData['flag']}}</div>
   @endif
 
   <div class="image-gallery">
@@ -110,7 +110,7 @@
 
         <div class="item-info-row">
           <p>ราคา</p>
-          @if($_modelData['hasPromotion'])
+          @if(!empty($_modelData['promotion']))
             <span class="text-emphasize">{{$_modelData['promotion']['_reduced_price']}}<span class="sub-info-text"> / {{$_modelData['product_unit']}}</span></span>
             <span class="product-price-discount-tag">{{$_modelData['promotion']['percentDiscount']}}</span>
             <h5 class="origin-price">{{$_modelData['_price']}}</h5>
@@ -208,7 +208,7 @@
     const imageGallery = new ImageGallery(true);
     imageGallery.load({!!$_modelData['Image']!!});
 
-    const product = new Product('{{ csrf_token() }}',{{$_modelData['id']}},{{$_modelData['minimum']}});
+    const product = new Product('{{ csrf_token() }}',{{$_modelData['id']}});
     product.load();
 
   });

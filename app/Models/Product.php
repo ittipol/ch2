@@ -4,12 +4,12 @@ namespace App\Models;
 
 use App\library\currency;
 use App\library\string;
-use App\library\measurement;
+use App\library\date;
 
 class Product extends Model
 {
   protected $table = 'products';
-  protected $fillable = ['name','description','product_model','sku','quantity','quantity_available','minimum','product_unit','price','weight','weight_unit_id','length','length_unit_id','width','height','specifications','message_out_of_order','shipping_calculate_from','active','person_id'];
+  protected $fillable = ['name','description','product_model','sku','quantity','quantity_available','minimum','product_unit','price','weight','weight_unit_id','length','length_unit_id','width','height','specifications','message_out_of_order','shipping_calculate_from','flag_message_from','flag_message','active','person_id'];
   protected $modelRelations = array('Image','Tagging','ProductToCategory','ShopRelateTo');
   protected $directory = true;
 
@@ -28,6 +28,7 @@ class Product extends Model
       'name' => 'required|max:255',
       'price' => 'required|regex:/^[\d,]*(\.\d{1,2})?$/',
       'quantity' => 'numeric',
+      'minimum' => 'required|numeric',
       'product_unit' => 'required|max:255',
       'length' => 'numeric',
       'width' => 'numeric',
@@ -39,6 +40,8 @@ class Product extends Model
       'price.required' => 'จำนวนราคาห้ามว่าง',
       'price.regex' => 'จำนวนราคาไม่ถูกต้อง',
       'quantity.numeric' => 'โปรดกรอกจำนวนสินค้าด้วยตัวเลข',
+      'minimum.required' => 'จำนวนการซื้อขั้นต่ำห้ามว่าง',
+      'minimum.numeric' => 'โปรดกรอกจำนวนการซื้อขั้นต่ำด้วยตัวเลข',
       'product_unit.required' => 'หน่วยสินค้าห้ามว่าง',
       'length.numeric' => 'ความยาวไม่ถูกต้อง',
       'width.numeric' => 'ความกว้างไม่ถูกต้อง',
@@ -47,13 +50,14 @@ class Product extends Model
     ),
     'excepts' => array(
       'shop.product.add' => array('length','width','height','weight'),
-      'shop.product.edit' => array('price'),
-      'shop.product_status.edit' => array('name','price','quantity','product_unit','length','width','height','weight'),
-      'shop.product_specification.edit' => array('name','price','product_unit'),
-      'shop.product_category.edit' => array('name','price','quantity','product_unit','length','width','height','weight'),
-      'shop.product_stock.edit' => array('name','price','product_unit','length','width','height','weight'),
-      'shop.product_price.edit' => array('name','quantity','product_unit','length','width','height','weight'),
-      'shop.product_notification.edit' => array('name','price','quantity','product_unit','length','width','height','weight'),
+      'shop.product.edit' => array('price','minimum'),
+      'shop.product_status.edit' => array('name','price','minimum','quantity','product_unit','length','width','height','weight'),
+      'shop.product_specification.edit' => array('name','minimum','price','product_unit'),
+      'shop.product_category.edit' => array('name','price','minimum','quantity','product_unit','length','width','height','weight'),
+      'shop.product_minimum.edit' => array('name','price','quantity','product_unit','length','width','height','weight'),
+      'shop.product_stock.edit' => array('name','price','minimum','product_unit','length','width','height','weight'),
+      'shop.product_price.edit' => array('name','quantity','minimum','product_unit','length','width','height','weight'),
+      'shop.product_notification.edit' => array('name','price','minimum','quantity','product_unit','length','width','height','weight'),
     )
   );
 
@@ -94,7 +98,10 @@ class Product extends Model
         if(empty($product->active)) {
           $product->active = 0;
         }
+        // 1 = seller (person)
+        // 2 = system
         $product->shipping_calculate_from = 1;
+        $product->flag_message_from = 2;
       }
 
     });
@@ -154,6 +161,18 @@ class Product extends Model
     }
 
     return parent::fill($attributes);
+
+  }
+
+  public function getPrice($format = false) {
+
+    $currency = new Currency;
+
+    if($format) {
+      return $currency->format($this->price);
+    }
+
+    return $this->price;
 
   }
 
@@ -308,13 +327,6 @@ class Product extends Model
 
     }
 
-    $hasPromotion = true;
-    $promotion = $this->getPromotion();
-
-    if(empty($promotion)) {
-      $hasPromotion = false;
-    }
-
     return array(
       'id' => $this->id,
       'name' => $this->name,
@@ -336,8 +348,8 @@ class Product extends Model
       '_categoryName' => !empty($categoryName) ? $categoryName : '-',
       '_categoryPathName' => !empty($categoryPathName) ? $categoryPathName : '-',
       '_categoryPaths' => $this->getCategoryPaths(),
-      'promotion' => $promotion,
-      'hasPromotion' => $hasPromotion
+      'promotion' => $this->getPromotion(),
+      'flag' => $this->getFlag(),
     );
 
   }
@@ -347,13 +359,6 @@ class Product extends Model
     $string = new String;
     $currency = new Currency;
 
-    $hasPromotion = true;
-    $promotion = $this->getPromotion();
-
-    if(empty($promotion)) {
-      $hasPromotion = false;
-    }
-
     return array(
       'id' => $this->id,
       'name' => $this->name,
@@ -362,21 +367,66 @@ class Product extends Model
       '_price' => $currency->format($this->price),
       'quantity' => $this->quantity,
       '_active' => $this->active ? 'เปิดการขายสินค้า' : 'ปิดการขายสินค้า',
-      'promotion' => $promotion,
-      'hasPromotion' => $hasPromotion
+      'promotion' => $this->getPromotion(),
+      'flag' => $this->getFlag(),
     );
     
   }
 
-  public function getPrice($format = false) {
+  public function getFlag() {
 
-    $currency = new Currency;
+    $flagMessage = '';
+    switch ($this->flag_message_from) {
+      case 1:
+        
+        $flagMessage = $this->flag_message;
 
-    if($format) {
-      return $currency->format($this->price);
+        break;
+      
+      case 2:
+
+          if($this->isNewItem()) {
+            $flagMessage = 'สินค้ามาใหม่';
+          }elseif($this->hasPromotion()){
+            $flagMessage = 'สินค้าโปรโมชั่น';
+          }
+
+        break;
     }
 
-    return $this->price;
+    return $flagMessage;
+
+  }
+
+  public function isNewItem() {
+    $date = new Date;
+    $diff = $date->now(true,true) - strtotime($this->created_at->format('Y-m-d H:i:s'));
+
+    if($diff > 604800) {
+      return false;
+    }
+
+    return true;
+  }
+
+  public function hasPromotion() {
+
+    $now = date('Y-m-d H:i:s');
+
+    $promotion = $this->getRalatedData('ProductSalePromotion',array(
+      'conditions' => array(
+        array('sale_promotion_type_id','=',1),
+        array('date_start','<=',$now),
+        array('date_end','>=',$now)
+      ),
+      'fields' => array('id')
+    ));
+
+    if(empty($promotion)) {
+      return false;
+    }
+
+    return true;
 
   }
 

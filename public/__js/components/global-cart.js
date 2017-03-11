@@ -237,7 +237,8 @@ class GlobalCart {
 
 	    	}else if(response.totalShopProductEmpty) {
 
-	    		let parent = $('#_product_'+productId).parent().parent();
+	    		// let parent = $('#_product_'+productId).parent().parent();
+	    		let parent = $('#'+$('#_product_'+productId).data('id'));
 
 	    		setTimeout(function(){
 
@@ -252,8 +253,9 @@ class GlobalCart {
 
 	    	}else{
 
-	    		let parent = $('#_product_'+productId).parent().parent();
-
+	    		// let parent = $('#_product_'+productId).parent().parent();
+	    		let parent = $('#'+$('#_product_'+productId).data('id'));
+	    
 	    		parent.find('.sub-total').text(response.summaries.subTotal.value);
 	    		parent.find('.shipping-cost').text(response.summaries.shippingCost.value);
 	    		parent.find('.total-amount').text(response.summaries.total.value);

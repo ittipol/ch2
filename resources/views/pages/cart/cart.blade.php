@@ -27,7 +27,7 @@
 
             <div class="product-list-wrapper">
               @foreach($value['products'] as $product)
-              <div id="_product_{{$product['id']}}" class="product-list-table-row">
+              <div id="_product_{{$product['id']}}" class="product-list-table-row" data-id="_shop_{{$value['shop']['id']}}">
 
                 @if(!empty($product['hasError']))
                   <p class="error-message">
@@ -109,7 +109,7 @@
         @endforeach
 
         <div class="cart-check-out text-right">
-          <a href="{{URL::to('checkout')}}" class="button">ชำระเงิน</a>
+          <a href="{{URL::to('checkout')}}" class="button">ดำเนินการสั่งซื้อสินค้า</a>
         </div>
 
       @else

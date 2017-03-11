@@ -48,6 +48,9 @@ class CustomFormRequest extends FormRequest
     'shop.product_stock.edit' => array(
       'modelName' => 'Product'
     ),
+    'shop.product_minimum.edit' => array(
+      'modelName' => 'Product'
+    ),
     'shop.product_price.edit' => array(
       'modelName' => 'Product'
     ),

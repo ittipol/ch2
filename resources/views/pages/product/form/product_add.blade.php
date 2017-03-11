@@ -105,7 +105,9 @@
 
     <div class="form-row">
       <?php 
-        echo Form::label('minimum', 'จำนวนการซื้อขั้นต่ำต่อการสั่งซื้อ');
+        echo Form::label('minimum', 'จำนวนการซื้อขั้นต่ำต่อการสั่งซื้อ', array(
+          'class' => 'required'
+        ));
         echo Form::text('minimum', 1, array(
           'placeholder' => 'จำนวนการซื้อขั้นต่ำต่อการสั่งซื้อ',
           'autocomplete' => 'off'

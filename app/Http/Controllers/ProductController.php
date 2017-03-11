@@ -126,6 +126,7 @@ class ProductController extends Controller
     $this->setData('productStatusUrl',request()->get('shopUrl').'product_status_edit/'.$model->id);
     $this->setData('productSpecificationEditUrl',request()->get('shopUrl').'product_specification_edit/'.$model->id);
     $this->setData('productCategoryEditUrl',request()->get('shopUrl').'product_category_edit/'.$model->id);
+    $this->setData('productMinimumEditUrl',request()->get('shopUrl').'product_minimum_edit/'.$model->id);
     $this->setData('productStockEditUrl',request()->get('shopUrl').'product_stock_edit/'.$model->id);
     $this->setData('productPriceEditUrl',request()->get('shopUrl').'product_price_edit/'.$model->id);
     $this->setData('productShippingUrl',request()->get('shopUrl').'product_shipping_edit/'.$model->id);
@@ -178,17 +179,7 @@ class ProductController extends Controller
   }
 
   public function editingSubmit(CustomFormRequest $request) {
-
     return $this->_save(Service::loadModel('Product')->find($this->param['id']),$request->all());
-
-    // $model = Service::loadModel('Product')->find($this->param['id']);
-
-    // if($model->fill($request->all())->save()) {
-    //   Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-    //   return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
-    // }else{
-    //   return Redirect::back();
-    // }
   }
 
   public function statusEdit() {
@@ -208,18 +199,7 @@ class ProductController extends Controller
   }
 
   public function statusEditingSubmit(CustomFormRequest $request) {
-
     return $this->_save(Service::loadModel('Product')->find($this->param['id']),$request->all());
-
-    // $model = Service::loadModel('Product')->find($this->param['id']);
-
-    // if($model->fill($request->all())->save()) {
-    //   Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-    //   return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
-    // }else{
-    //   return Redirect::back();
-    // }
-
   }
 
   public function specificationEdit() {
@@ -251,18 +231,7 @@ class ProductController extends Controller
   }
 
   public function specificationEditingSubmit(CustomFormRequest $request) {
-
     return $this->_save(Service::loadModel('Product')->find($this->param['id']),$request->all());
-
-    // $model = Service::loadModel('Product')->find($this->param['id']);
-
-    // if($model->fill($request->all())->save()) {
-    //   Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-    //   return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
-    // }else{
-    //   return Redirect::back();
-    // }
-
   }
 
   public function categoryEdit() {
@@ -293,18 +262,25 @@ class ProductController extends Controller
   }
 
   public function categoryEditingSubmit(CustomFormRequest $request) {
-
     return $this->_save(Service::loadModel('Product')->find($this->param['id']),$request->all());
+  }
 
-    // $model = Service::loadModel('Product')->find($this->param['id']);
+  public function minimumEdit() {
+    $model = Service::loadModel('Product')->find($this->param['id']);
 
-    // if($model->fill($request->all())->save()) {
-    //   Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-    //   return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
-    // }else{
-    //   return Redirect::back();
-    // }
+    $this->setData('_formModel',array(
+      'modelName' => $model->modelName,
+    ));
 
+    $this->setData('_formData',array(
+      'minimum' => $model->minimum,
+    ));
+
+    return $this->view('pages.product.form.minimum_edit');
+  }
+
+  public function minimumEditingSubmit(CustomFormRequest $request) {
+    return $this->_save(Service::loadModel('Product')->find($this->param['id']),$request->all());
   }
 
   public function stockEdit() {
@@ -325,17 +301,7 @@ class ProductController extends Controller
   }
 
   public function stockEditingSubmit(CustomFormRequest $request) {
-
     return $this->_save(Service::loadModel('Product')->find($this->param['id']),$request->all());
-
-    // $model = Service::loadModel('Product')->find($this->param['id']);
-
-    // if($model->fill($request->all())->save()) {
-    //   Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-    //   return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
-    // }else{
-    //   return Redirect::back();
-    // }
   }
 
   public function priceEdit() {

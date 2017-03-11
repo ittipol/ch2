@@ -5,7 +5,7 @@
   <div class="container">
     <div class="top-header">
       <div class="detail-title">
-        <h2 class="title">ตะกร้าสินค้า</h2>
+        <h2 class="title">สั่งซื้อสินค้า</h2>
       </div>
     </div>
   </div>
@@ -13,91 +13,106 @@
 
 <div class="container">
 
-  <div class="cart">
+  <div id="cart_panel" class="checkout">
 
-    <div id="cart_panel" class="product-list-table">
+    @if(!empty($data))
 
-      @if(!empty($data))
+      @foreach($data as $value)
 
-        @foreach($data as $value)
+        <div id="_shop_{{$value['shop']['id']}}" class="checkout-wrapper">
 
-          <div id="_shop_{{$value['shop']['id']}}">
+          <!-- <div class="row">
+            <div class="col-sm-6 col-sm-12">
+              <h5 class="shop-info">{{$value['shop']['name']}}</h5>
+            </div>
+          </div> -->
 
-            <h5 class="shop-info">{{$value['shop']['name']}}</h5>
+          <div class="row">
 
-            <div class="product-list-wrapper">
-              @foreach($value['products'] as $product)
-              <div id="_product_{{$product['id']}}" class="product-list-table-row">
+            <div class="col-sm-6 col-sm-12">
 
-                @if(!empty($product['hasError']))
-                  <p class="error-message">
-                    {{$product['errorMessage']}}
-                  </p>
-                @endif
+              <h5 class="shop-info">{{$value['shop']['name']}}</h5>
 
-                <div class="product-list-box clearfix">
+              <div class="checkout-list">
+                @foreach($value['products'] as $product)
+                <div id="_product_{{$product['id']}}" class="checkout-list-table-row" data-id="_shop_{{$value['shop']['id']}}">
 
-                  <div class="product-image pull-left">
-                    <a href="{{$product['productDetailUrl']}}">
-                      <img src="{{$product['imageUrl']}}">
-                    </a>
-                  </div>
+                  @if(!empty($product['hasError']))
+                    <p class="error-message">
+                      {{$product['errorMessage']}}
+                    </p>
+                  @endif
 
-                  <div class="col-md-10 col-xs-8 product-info">
+                  <div class="product-list-box clearfix">
 
-                    <div class="col-md-4 col-xs-12 product-info-container">
+                    <div class="product-image pull-left">
                       <a href="{{$product['productDetailUrl']}}">
-                        <h4 class="product-title">{{$product['name']}}</h4>
+                        <img src="{{$product['imageUrl']}}">
                       </a>
                     </div>
 
-                    <div class="col-md-2 col-xs-12 product-info-container">
-                      <div class="product-price">{{$product['price']}}</div>
-                    </div>
+                    <div class="col-md-7 col-xs-7 product-info">
 
-                    <div class="col-md-4 col-xs-12 product-info-container">
-                      <div class="quantity-text-input-panel">
-                        <input 
-                        class="quantity-text-input cart-summary-quantity-input" 
-                        type="text" name="quantity" 
-                        value="{{$product['quantity']}}"
-                        autocomplete="off"
-                        placeholder="จำนวนสินค้าที่สั่งซื้อ" 
-                        role="number"
-                        data-id="{{$product['id']}}"
-                        data-minimum="{{$product['minimum']}}" />
-                        <button class="cart-quantity-update-button">
-                          <img src="/images/icons/edit-blue.png">
-                        </button>
+                      <a href="{{$product['productDetailUrl']}}">
+                        <h4 class="product-title">{{$product['name']}}</h4>
+                      </a>
+
+                      <div>
+                        ราคาสินค้ารวม: <span class="product-price">{{$product['price']}}</span> x {{$product['quantity']}}
                       </div>
-                    </div>
+                      @if($product['shipping_calculate_from'] == 2)
+                      <div>
+                        ค่าจัดส่งสินค้า: <span class="product-price">{{$product['shippingCost']}}</span>
+                      </div>
+                      @endif
+                      <div>
+                        มูลค่าสินค้า: <span class="product-price">{{$product['total']}}</span>
+                      </div>
 
-                    <div class="col-md-2 col-xs-12 product-info-container">
-                      <div class="product-total-amount">{{$product['total']}}</div>
                     </div>
 
                   </div>
 
-                  <a class="delete-product-button" data-id="{{$product['id']}}" role="button">×</a>
-
                 </div>
-
+                @endforeach
               </div>
-              @endforeach
+
             </div>
 
-            <div class="cart-summary clearfix">
+            <div class="col-sm-6 col-sm-12">
 
-              <div class="pull-right">
-                <!-- สรุปการสั่งซื้อ -->
-                <div class="text-right">
-                  <h5>มูลค่าสินค้า: <span class="sub-total amount">{{$value['summaries']['subTotal']['value']}}</span></h5>
+              <div class="checkout-content-right">
+
+                <div class="checkout-summary clearfix">
+
+                  <div class="pull-right">
+                
+                    <div class="text-right">
+                      <h5>มูลค่าสินค้า: <span class="sub-total amount">{{$value['summaries']['subTotal']['value']}}</span></h5>
+                    </div>
+                    <div class="text-right">
+                      <h5>ค่าจัดส่งสินค้า: <span class="shipping-cost amount">{{$value['summaries']['shippingCost']['value']}}</span></h5>
+                    </div>
+                    <div class="text-right">
+                      <h4>ยอดสุทธิ: <span class="total-amount amount product-price">{{$value['summaries']['total']['value']}}</span></h4>
+                    </div>
+
+                  </div>
+
                 </div>
-                <div class="text-right">
-                  <h5>ค่าจัดส่งสินค้า: <span class="shipping-cost amount">{{$value['summaries']['shippingCost']['value']}}</span></h5>
-                </div>
-                <div class="text-right">
-                  <h4>ยอดสุทธิ: <span class="total-amount amount">{{$value['summaries']['total']['value']}}</span></h4>
+
+                <div class="checkout-input">
+
+                  <div class="address-input">
+                    <h5>ที่อยู่สำหรับการจัดส่ง</h5>
+                    <input type="text" name="address" value="{{$address}}">
+                  </div>
+
+                  <div class="message-input">
+                    <h5>ข้อความถึงผู้ขาย</h5>
+                    <textarea></textarea>
+                  </div>
+
                 </div>
 
               </div>
@@ -106,19 +121,19 @@
 
           </div>
 
-        @endforeach
-
-        <div class="cart-check-out text-right">
-          <a href="{{URL::to('checkout')}}" class="button">ชำระเงิน</a>
         </div>
 
-      @else
+      @endforeach
 
-        @include('pages.cart.cart_empty')
+      <div class="cart-check-out text-right">
+        <a href="{{URL::to('checkout')}}" class="button">ดำเนินการสั่งซื้อสินค้า</a>
+      </div>
 
-      @endif
+    @else
 
-    </div>
+      @include('pages.cart.cart_empty')
+
+    @endif
 
   </div>
 

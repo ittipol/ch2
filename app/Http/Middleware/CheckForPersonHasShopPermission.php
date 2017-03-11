@@ -109,6 +109,10 @@ class CheckForPersonHasShopPermission
           'permission' => 'edit',
           'modelName' => 'Product'
         ),
+        'shop.product_minimum.edit' => array(
+          'permission' => 'edit',
+          'modelName' => 'Product'
+        ),
         'shop.product_price.edit' => array(
           'permission' => 'edit',
           'modelName' => 'Product'
@@ -167,6 +171,7 @@ class CheckForPersonHasShopPermission
         return $this->errorPage('ไม่อนุญาตให้แก้ไขร้านค้านี้ได้');
       }
 
+      $checked = false;
       if(!empty($pages[$name]['check']) && !empty($request->{$pages[$name]['check']['param']})) {
 
         $relatedData = Service::loadModel('ShopRelateTo')
@@ -181,6 +186,8 @@ class CheckForPersonHasShopPermission
           return $this->errorPage('เกิดข้อผิดพลาด ไม่สามารถทำงานต่อได้');
         }
 
+        $checked = true;
+
       }
 
       if((!empty($pages[$name]['modelName'])) && ($pages[$name]['permission'] == 'edit')) {
@@ -189,17 +196,21 @@ class CheckForPersonHasShopPermission
           return redirect('home');
         }
 
-        // $relatedData = Service::loadModel('ShopRelateTo')
-        // ->select('shop_id')
-        // ->where([
-        //   ['model','like',$pages[$name]['modelName']],
-        //   ['model_id','=',$request->id],
-        //   ['shop_id','=',$shopId],
-        // ])->exists();
+        if(!$checked) {
 
-        // if(!$relatedData) {
-        //   return $this->errorPage('ไม่พบข้อมูลนี้ในร้านค้า');
-        // }
+          $relatedData = Service::loadModel('ShopRelateTo')
+          ->select('shop_id')
+          ->where([
+            ['model','like',$pages[$name]['modelName']],
+            ['model_id','=',$request->id],
+            ['shop_id','=',$shopId],
+          ])->exists();
+
+          if(!$relatedData) {
+            return $this->errorPage('ไม่พบข้อมูลนี้ในร้านค้า');
+          }
+          
+        }
 
         $model = Service::loadModel($pages[$name]['modelName'])->select('id')->find($request->id);
 

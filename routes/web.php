@@ -22,7 +22,8 @@ Route::get('cat','HomeController@addCat');
 // Route::get('lan','HomeController@lanAdd');
 
 Route::get('/debug',function(){
-  dd(session()->get('carts'));
+  // session()->forget('cart');
+  dd(session()->all());
 
   // dd(\Cookie::get('carts'));
 
@@ -217,6 +218,9 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
   Route::get('shop/{shopSlug}/product_category_edit/{id}','ProductController@categoryEdit')->name('shop.product_category.edit');
   Route::patch('shop/{shopSlug}/product_category_edit/{id}','ProductController@categoryEditingSubmit')->name('shop.product_category.edit');
+
+  Route::get('shop/{shopSlug}/product_minimum_edit/{id}','ProductController@minimumEdit')->name('shop.product_minimum.edit');
+  Route::patch('shop/{shopSlug}/product_minimum_edit/{id}','ProductController@minimumEditingSubmit')->name('shop.product_minimum.edit');
 
   Route::get('shop/{shopSlug}/product_stock_edit/{id}','ProductController@stockEdit')->name('shop.product_stock.edit');
   Route::patch('shop/{shopSlug}/product_stock_edit/{id}','ProductController@stockEditingSubmit')->name('shop.product_stock.edit');

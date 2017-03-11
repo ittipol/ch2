@@ -14,7 +14,7 @@
           <a href="{{URL::to($productDetailUrl)}}">
             <h2>{{$_modelData['name']}}</h2>
           </a>
-          @if($_modelData['hasPromotion'])
+          @if(!empty($_modelData['promotion']))
             <h4>{{$_modelData['promotion']['_reduced_price']}}</h4>
             <h5 class="text-line-through">{{$_modelData['_price']}}</h5>
           @else
@@ -108,6 +108,16 @@
     </div>
 
     <div class="list-item">
+      <a href="{{$productMinimumEditUrl}}">
+        <img class="icon" src="/images/common/pencil.png" >
+        <h4>การสั่งซื้อขั้นต่ำ</h4>
+      </a>
+      <div class="list-item-group-info">
+        <h5><b>จำนวนการซื้อขั้นต่ำ</b>: {{$_modelData['minimum']}} {{$_modelData['product_unit']}} / การสั่งซื้อ</h5>
+      </div>
+    </div>
+
+    <div class="list-item">
       <a href="{{$productStockEditUrl}}">
         <img class="icon" src="/images/common/pencil.png" >
         <h4>จำนวนสินค้า</h4>
@@ -157,7 +167,7 @@
       </a>
     </div>
 
-    <div class="list-item">
+<!--     <div class="list-item">
       <a href="">
         <img class="icon" src="/images/common/pencil.png" >
         <h4>การรับประกันสินค้า</h4>
@@ -189,9 +199,9 @@
     <div class="list-item">
       <a href="">
         <img class="icon" src="/images/common/pencil.png" >
-        <h4>รายละเอียดการจ่ายเงินสินค้าสินค้า</h4>
+        <h4>รายละเอียดการจ่ายเงินสินค้า</h4>
       </a>
-    </div>
+    </div> -->
 
   </div>
 
