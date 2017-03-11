@@ -21,4 +21,25 @@ class CheckoutController extends Controller
     return $this->view('pages.checkout.checkout');
 
   }
+
+  public function checkoutSubmit() {
+    
+    $checkouts = request()->all();
+
+    // Get cart
+    $products = Service::loadModel('Cart')->getCart();
+
+    $shopIds = array();
+    if(!empty($products)) {
+      foreach ($products as $cart) {
+        if(!in_array($cart['shopId'], $shopIds)) {
+          $shopIds[] = $cart['shopId'];
+        }
+      }
+    }
+dd($products);
+    // check address not empty
+    dd($checkouts);
+  }
+
 }

@@ -34,6 +34,16 @@ class InputField {
 			event.target.ondragstart = function() { return false; };
 		});
 
+		$('label.choice-box input[type="checkbox"]').on('click',function(){
+			document.onselectstart = function() { return false; };
+			event.target.ondragstart = function() { return false; };
+		});
+
+		$('label.choice-box input[type="radio"]').on('click',function(){
+			document.onselectstart = function() { return false; };
+			event.target.ondragstart = function() { return false; };
+		});
+
 	}
 
 }

@@ -161,6 +161,7 @@ Route::get('cart','CartController@index')->name('cart');
 // Checkout
 Route::group(['middleware' => 'auth'], function () {
   Route::get('checkout','CheckoutController@checkout')->name('checkout');
+  Route::post('checkout','CheckoutController@checkoutSubmit')->name('checkout');
 });
 
 // community / Shop

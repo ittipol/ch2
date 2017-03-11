@@ -1,28 +1,29 @@
-.choice-box {
-	position: relative;
-	height: 400px;
+.form-item-group label.choice-box {
+	display: block;
+	margin-bottom: 0;
+	border-bottom: 1px solid #bababa;
 }
 
-.choice-box .inner {
+label.choice-box {
+	position: relative;
+	/*height: 400px;*/
+}
+
+label.choice-box .inner {
 	padding: 20px;
 }
 
-.choice-box a.button {
+label.choice-box a.button {
 	padding: 6px 25px;
 	color: #fff;
 	background-color: #0288D1;
 }
 
 label.choice-box {
-	height: auto;
+	/*height: auto;*/
+	margin: 0;
+	padding-bottom: 0;
 	display: inline-block;
-}
-
-.form-item-group label.choice-box {
-	display: block;
-	/*background-color: #ececec;*/
-	margin-bottom: 0;
-	border-bottom: 1px solid #bababa;
 }
 
 label.choice-box input[type="radio"],
@@ -33,7 +34,7 @@ label.choice-box input[type="checkbox"] {
 label.choice-box input[type="radio"] + .inner,
 label.choice-box input[type="checkbox"] + .inner {
 	color: #000;
-	padding: 20px 0 20px 40px;
+	padding: 22px 0 20px 40px;
 	cursor: pointer;
 }
 

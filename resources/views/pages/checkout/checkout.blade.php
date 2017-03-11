@@ -17,21 +17,32 @@
 
     @if(!empty($data))
 
+      @include('components.form_error') 
+
+      <?php 
+        echo Form::open(['id' => 'main_form','method' => 'post', 'enctype' => 'multipart/form-data']);
+      ?>
+
       @foreach($data as $value)
 
         <div id="_shop_{{$value['shop']['id']}}" class="checkout-wrapper">
 
-          <!-- <div class="row">
+          <label class="choice-box">
+            <?php
+              echo Form::checkbox('shop['.$value['shop']['id'].'][checkout]', 1, true);
+            ?>
+            <div class="inner">สั่งซื้อสินค้าในร้าน <strong>{{$value['shop']['name']}}</strong></div>
+          </label>
+
+          <div class="row">
             <div class="col-sm-6 col-sm-12">
               <h5 class="shop-info">{{$value['shop']['name']}}</h5>
             </div>
-          </div> -->
+          </div>
 
           <div class="row">
 
             <div class="col-sm-6 col-sm-12">
-
-              <h5 class="shop-info">{{$value['shop']['name']}}</h5>
 
               <div class="checkout-list">
                 @foreach($value['products'] as $product)
@@ -51,7 +62,7 @@
                       </a>
                     </div>
 
-                    <div class="col-md-7 col-xs-7 product-info">
+                    <div class="col-xs-8 product-info">
 
                       <a href="{{$product['productDetailUrl']}}">
                         <h4 class="product-title">{{$product['name']}}</h4>
@@ -104,13 +115,13 @@
                 <div class="checkout-input">
 
                   <div class="address-input">
-                    <h5>ที่อยู่สำหรับการจัดส่ง</h5>
-                    <input type="text" name="address" value="{{$address}}">
+                    <h5 class="required">ที่อยู่สำหรับการจัดส่ง</h5>
+                    <input type="text" name="shop[{{$value['shop']['id']}}][address]" value="{{$address}}">
                   </div>
 
                   <div class="message-input">
                     <h5>ข้อความถึงผู้ขาย</h5>
-                    <textarea></textarea>
+                    <textarea name="shop[{{$value['shop']['id']}}][message]"></textarea>
                   </div>
 
                 </div>
@@ -126,8 +137,16 @@
       @endforeach
 
       <div class="cart-check-out text-right">
-        <a href="{{URL::to('checkout')}}" class="button">ดำเนินการสั่งซื้อสินค้า</a>
+      <?php
+        echo Form::submit('สั่งซื้อสินค้า' , array(
+          'class' => 'button'
+        ));
+      ?>
       </div>
+
+      <?php
+        echo Form::close();
+      ?>
 
     @else
 
