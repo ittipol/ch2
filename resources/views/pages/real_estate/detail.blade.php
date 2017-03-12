@@ -71,11 +71,11 @@
 
         <div class="item-info-row">
           <p>ราคา{{$_modelData['_announcementTypeName']}}</p>
-          <h4 class="price">{{$_modelData['_price']}}</h4>
+          <h4 class="text-emphasize">{{$_modelData['_price']}}</h4>
         </div>
 
       </div>
-    </div> 
+    </div>
 
   </div>
 

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2017 at 06:27 PM
+-- Generation Time: Mar 12, 2017 at 06:27 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -395,8 +395,9 @@ CREATE TABLE `carts` (
 --
 
 INSERT INTO `carts` (`id`, `person_id`, `session_id`, `shop_id`, `product_id`, `quantity`, `created_at`, `updated_at`) VALUES
-(27, 1, NULL, 3, 13, 2, '2017-03-07 18:59:56', '2017-03-07 23:56:19'),
-(29, 1, NULL, 21, 9, 1, '2017-03-08 00:06:11', '2017-03-08 00:06:11');
+(56, 1, NULL, 3, 11, 4, '2017-03-11 17:05:16', '2017-03-11 17:05:16'),
+(57, 1, NULL, 3, 7, 2, '2017-03-11 17:05:36', '2017-03-11 17:05:36'),
+(58, 1, NULL, 3, 10, 1, '2017-03-11 17:05:45', '2017-03-11 17:05:45');
 
 -- --------------------------------------------------------
 
@@ -11677,7 +11678,8 @@ INSERT INTO `data_access_permissions` (`id`, `model`, `model_id`, `page_level_id
 (22, 'Product', 4, 4, 'Shop', 3),
 (23, 'Product', 11, 4, 'Shop', 3),
 (24, 'Product', 12, 4, 'Shop', 3),
-(25, 'Product', 13, 4, 'Shop', 3);
+(25, 'Product', 13, 4, 'Shop', 3),
+(26, 'Product', 14, 4, 'Shop', 3);
 
 -- --------------------------------------------------------
 
@@ -12850,7 +12852,8 @@ INSERT INTO `images` (`id`, `model`, `model_id`, `path`, `filename`, `descriptio
 (159, 'Person', 1, NULL, '1488552277328221661646828742806.jpg', NULL, 2, 1, '2017-03-03 21:44:40', '2017-03-03 21:44:40'),
 (160, 'Product', 11, NULL, '1488771574366512400379638563982.jpg', NULL, 1, 1, '2017-03-06 10:41:20', '2017-03-06 10:41:20'),
 (161, 'Product', 12, NULL, '1488771705512246331766655928805.jpg', NULL, 1, 1, '2017-03-06 10:42:15', '2017-03-06 10:42:15'),
-(162, 'Product', 13, NULL, '1488817066449365487579401658181.png', NULL, 1, 1, '2017-03-06 23:18:23', '2017-03-06 23:18:23');
+(162, 'Product', 13, NULL, '1488817066449365487579401658181.png', NULL, 1, 1, '2017-03-06 23:18:23', '2017-03-06 23:18:23'),
+(163, 'Product', 14, NULL, '1489138650661302776329684422526.jpg', NULL, 1, 1, '2017-03-10 16:37:33', '2017-03-10 16:37:33');
 
 -- --------------------------------------------------------
 
@@ -12887,7 +12890,7 @@ CREATE TABLE `items` (
   `name` varchar(255) NOT NULL,
   `announcement_detail` text,
   `description` text,
-  `price` int(11) NOT NULL,
+  `price` decimal(15,2) NOT NULL,
   `used` tinyint(1) NOT NULL,
   `person_id` int(11) UNSIGNED NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -12899,80 +12902,80 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`id`, `announcement_type_id`, `name`, `announcement_detail`, `description`, `price`, `used`, `person_id`, `created_at`, `updated_at`) VALUES
-(1, 2, 'nnnn', NULL, '', 1111, 1, 1, '2017-02-05 20:42:43', '2017-02-05 20:42:43'),
-(2, 2, 'xxx', NULL, '', 111, 1, 1, '2017-02-06 02:17:22', '2017-02-06 02:17:22'),
-(3, 2, 'GGG', NULL, '', 100, 1, 1, '2017-02-07 15:33:00', '2017-02-07 15:33:00'),
-(4, 2, 'xcxx', NULL, '', 111, 1, 1, '2017-02-07 15:39:36', '2017-02-07 15:39:36'),
-(5, 2, 'xcxx', NULL, '', 111, 1, 1, '2017-02-07 15:39:42', '2017-02-07 15:39:42'),
-(6, 2, 'xcxx', NULL, '', 111, 1, 1, '2017-02-07 15:39:56', '2017-02-07 15:39:56'),
-(7, 2, 'xcxx', NULL, '', 111, 1, 1, '2017-02-07 15:40:49', '2017-02-07 15:40:49'),
-(8, 2, 'xcxx', NULL, '', 111, 1, 1, '2017-02-07 15:40:57', '2017-02-07 15:40:57'),
-(9, 2, 'xcxx', NULL, '', 111, 1, 1, '2017-02-07 15:41:40', '2017-02-07 15:41:40'),
-(10, 2, 'xcxx', NULL, '', 111, 1, 1, '2017-02-07 15:41:51', '2017-02-07 15:41:51'),
-(11, 2, 'xcxx', NULL, '', 111, 1, 1, '2017-02-07 15:41:55', '2017-02-07 15:41:55'),
-(12, 2, 'bbb', NULL, '', 1200, 1, 1, '2017-02-13 05:38:59', '2017-02-13 05:38:59'),
-(13, 2, 'bbb', NULL, '', 1200, 1, 1, '2017-02-13 05:39:45', '2017-02-13 05:39:45'),
-(14, 2, 'bbb', NULL, '', 1200, 1, 1, '2017-02-13 05:40:06', '2017-02-13 05:40:06'),
-(15, 2, 'bbb', NULL, '', 1200, 1, 1, '2017-02-13 05:42:14', '2017-02-13 05:42:14'),
-(16, 2, 'bbb', NULL, '', 1200, 1, 1, '2017-02-13 05:42:20', '2017-02-13 05:42:20'),
-(17, 2, 'bbb', NULL, '', 1200, 1, 1, '2017-02-13 05:42:31', '2017-02-13 05:42:31'),
-(18, 2, 'bbb', NULL, '', 1200, 1, 1, '2017-02-13 05:42:43', '2017-02-13 05:42:43'),
-(19, 2, 'bbb', NULL, '', 1200, 1, 1, '2017-02-13 05:43:45', '2017-02-13 05:43:45'),
-(20, 2, 'bbb', NULL, '', 1200, 1, 1, '2017-02-13 05:45:25', '2017-02-13 05:45:25'),
-(21, 2, 'bbb', NULL, '', 1200, 1, 1, '2017-02-13 05:45:32', '2017-02-13 05:45:32'),
-(22, 2, 'bbb', NULL, '', 1200, 1, 1, '2017-02-13 05:45:40', '2017-02-13 05:45:40'),
-(23, 2, 'bbb', NULL, '', 1200, 1, 1, '2017-02-13 05:49:49', '2017-02-13 05:49:49'),
-(24, 2, 'gggg', NULL, '', 11, 1, 1, '2017-02-13 05:52:25', '2017-02-13 05:52:25'),
-(25, 2, 'CPU I7 3.0 Ghz', NULL, '<h2>Technical Specifications</h2>\r\n\r\n<h3>Essentials</h3>\r\n\r\n<p>Processor Number</p>\r\n\r\n<p>i7-7920HQ</p>\r\n\r\n<p>Status</p>\r\n\r\n<p>Launched</p>\r\n\r\n<p>Launch Date</p>\r\n\r\n<p>Q1&#39;17</p>\r\n\r\n<p>Lithography</p>\r\n\r\n<p>14 nm</p>\r\n\r\n<h3>Performance</h3>\r\n\r\n<p># of Cores</p>\r\n\r\n<p>4</p>\r\n\r\n<p># of Threads</p>\r\n\r\n<p>8</p>\r\n\r\n<p>Processor Base Frequency</p>\r\n\r\n<p>3.10 GHz</p>\r\n\r\n<p>Max Turbo Frequency</p>\r\n\r\n<p>4.10 GHz</p>\r\n\r\n<p>Cache</p>\r\n\r\n<p>8 MB</p>\r\n\r\n<p>Bus Speed</p>\r\n\r\n<p>8 GT/s DMI3</p>\r\n\r\n<p>TDP</p>\r\n\r\n<p>45 W</p>\r\n\r\n<p>Configurable TDP-down</p>\r\n\r\n<p>35 W</p>\r\n\r\n<h3>Supplemental Information</h3>\r\n\r\n<p>Embedded Options Available</p>\r\n\r\n<p>No</p>\r\n\r\n<p>Conflict Free</p>\r\n\r\n<p>Yes</p>\r\n\r\n<h3>Memory Specifications</h3>\r\n\r\n<p>Max Memory Size (dependent on memory type)</p>\r\n\r\n<p>64 GB</p>\r\n\r\n<p>Memory Types</p>\r\n\r\n<p>DDR4-2400, LPDDR3-2133, DDR3L-1600</p>\r\n\r\n<p>Max # of Memory Channels</p>\r\n\r\n<p>2</p>\r\n\r\n<p>Max Memory Bandwidth</p>\r\n\r\n<p>34.1 GB/s</p>\r\n\r\n<p>ECC Memory Supported&nbsp;&Dagger;</p>\r\n\r\n<p>No</p>\r\n\r\n<h3>Graphics Specifications</h3>\r\n\r\n<p>Processor Graphics&nbsp;&Dagger;</p>\r\n\r\n<p>Intel&reg; HD Graphics 630</p>\r\n\r\n<p>Graphics Base Frequency</p>\r\n\r\n<p>350.00 MHz</p>\r\n\r\n<p>Graphics Max Dynamic Frequency</p>\r\n\r\n<p>1.10 GHz</p>\r\n\r\n<p>Graphics Video Max Memory</p>\r\n\r\n<p>64 GB</p>\r\n\r\n<p>Graphics Output</p>\r\n\r\n<p>eDP/DP/HDMI/DVI</p>\r\n\r\n<p>4K Support</p>\r\n\r\n<p>Yes, at 60Hz</p>\r\n\r\n<p>Max Resolution (HDMI 1.4)&Dagger;</p>\r\n\r\n<p>4096x2304@30Hz</p>\r\n\r\n<p>Max Resolution (DP)&Dagger;</p>\r\n\r\n<p>4096x2304@60Hz</p>\r\n\r\n<p>DirectX* Support</p>\r\n\r\n<p>12</p>\r\n\r\n<p>OpenGL* Support</p>\r\n\r\n<p>4.4</p>\r\n\r\n<p>Intel&reg; Quick Sync Video</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Clear Video HD Technology</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p># of Displays Supported&nbsp;&Dagger;</p>\r\n\r\n<p>3</p>\r\n\r\n<p>Device ID</p>\r\n\r\n<p>0x591B</p>\r\n\r\n<h3>Expansion Options</h3>\r\n\r\n<p>PCI Express Revision</p>\r\n\r\n<p>3.0</p>\r\n\r\n<p>PCI Express Configurations&nbsp;&Dagger;</p>\r\n\r\n<p>Up to 1x16, 2x8, 1x8+2x4</p>\r\n\r\n<p>Max # of PCI Express Lanes</p>\r\n\r\n<p>16</p>\r\n\r\n<h3>Package Specifications</h3>\r\n\r\n<p>Max CPU Configuration</p>\r\n\r\n<p>1</p>\r\n\r\n<p>TJUNCTION</p>\r\n\r\n<p>100&deg;C</p>\r\n\r\n<p>Package Size</p>\r\n\r\n<p>42mm x 28mm</p>\r\n\r\n<h3>Advanced Technologies</h3>\r\n\r\n<p>Intel&reg; Speed Shift Technology</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Turbo Boost Technology&nbsp;&Dagger;</p>\r\n\r\n<p>2.0</p>\r\n\r\n<p>Intel&reg; vPro Technology&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Hyper-Threading Technology&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Virtualization Technology (VT-x)&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Virtualization Technology for Directed I/O (VT-d)&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; VT-x with Extended Page Tables (EPT)&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; TSX-NI</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; 64&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Instruction Set</p>\r\n\r\n<p>64-bit</p>\r\n\r\n<p>Instruction Set Extensions</p>\r\n\r\n<p>SSE4.1/4.2, AVX 2.0</p>\r\n\r\n<p>Idle States</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Enhanced Intel SpeedStep&reg; Technology</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Thermal Monitoring Technologies</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Flex Memory Access</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Identity Protection Technology&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Stable Image Platform Program (SIPP)</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Smart Response Technology</p>\r\n\r\n<p>Yes</p>\r\n\r\n<h3>Intel&reg; Data Protection Technology</h3>\r\n\r\n<p>Intel&reg; AES New Instructions</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Secure Key</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Software Guard Extensions (Intel&reg; SGX)</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Memory Protection Extensions (Intel&reg; MPX)</p>\r\n\r\n<p>Yes</p>\r\n\r\n<h3>Intel&reg; Platform Protection Technology</h3>\r\n\r\n<p>Trusted Execution Technology&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Execute Disable Bit&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>', 10000, 1, 1, '2017-02-13 05:55:28', '2017-02-19 00:17:54'),
-(26, 2, 'xxx', NULL, '', 111, 1, 1, '2017-02-13 07:30:09', '2017-02-13 07:30:09'),
-(27, 2, 'xxxxx', NULL, '', 11222, 1, 1, '2017-02-13 07:38:23', '2017-02-13 07:38:23'),
-(28, 2, 'xxxx', NULL, '', 12000, 1, 1, '2017-02-18 22:00:46', '2017-02-18 22:00:46'),
-(29, 2, 'xxxx', NULL, '', 1210, 1, 1, '2017-02-18 22:06:49', '2017-02-18 22:06:49'),
-(30, 2, 'xxxx', NULL, '', 1111, 1, 1, '2017-02-18 22:08:05', '2017-02-18 22:08:05'),
-(31, 2, 'xxxx', NULL, '', 12000, 1, 1, '2017-02-19 08:39:58', '2017-02-19 08:39:58'),
-(32, 2, 'xxxx', NULL, '', 12000, 1, 1, '2017-02-19 08:40:31', '2017-02-19 08:40:31'),
-(33, 2, 'hhhhhhh aaaaaaaaa', NULL, '', 12000, 1, 1, '2017-02-19 08:45:00', '2017-02-19 08:45:00'),
-(34, 2, 'hhhhhhh aaaaaaaaa', NULL, '', 12000, 1, 1, '2017-02-19 08:45:17', '2017-02-19 08:45:17'),
-(35, 2, 'hhhhhhh aaaaaaaaa', NULL, '', 12000, 1, 1, '2017-02-19 08:45:37', '2017-02-19 08:45:37'),
-(36, 2, 'hhhhhhh aaaaaaaaa', NULL, '', 12000, 1, 1, '2017-02-19 08:46:38', '2017-02-19 08:46:38'),
-(37, 2, 'hhhhhhh aaaaaaaaa', NULL, '', 12000, 1, 1, '2017-02-19 08:46:49', '2017-02-19 08:46:49'),
-(38, 2, 'Canon 17-85 mm IS มีกันสั่น USM มอเตอร์โฟกัสเร็วไว เมาส์ท้ายเลนส์ทำด้วยโลหะ ที่ 85 MM ถ่ายคน เบรอฉากหลังได้ มีฟิวเตอร์ฮูดกันกระแทกกันแสงให้', NULL, '<p>เลนส์ซูมคุณภาพ CANON มีกันสั่น เมาส์ท้ายเลนส์ทำด้วยโลหะแข็งแรง<br />\r\nขายเลนส์ CANON EF-S 17-85 MM F/4-5.6 IS USM&nbsp;<br />\r\nเลนส์ซูมคุณภาพ ให้มุมกว้าง 17 มม ซูมได้ยาวถึง 85 มม ในเลนส์ตัวเดียว&nbsp;<br />\r\nดีกว่าเลนส์ KIT 18-55 MM ที่มุมกว้างน้อยกว่า และยังซูมได้แค่ 55 มม&nbsp;<br />\r\nเลนส์ CANON 17-85 MM ตัวนี้ มีมอเตอร์ USM โฟกัสเร็วไว ในขณะที่ 18-55&nbsp;<br />\r\nไม่มี USM มอเตอร์ ตัวเลนส์มี IS กันภาพสั่นไหว และที่สำคัญเมาส์ท้ายเลนส์&nbsp;<br />\r\nCANON 17-85 MM ตัวนี้ ทำด้วยโลหะ แข็งแรงทนทาน ดีกว่า เลนส์ KIT&nbsp;<br />\r\n18-55 mm ที่ติดมากับกล้อง ตัวเลนส์สภาพสวย มี HOOD บังแสงมาให้ด้วย&nbsp;<br />\r\nซื้อเลนส์ใหม่ ก็ต้องซื้อ ฮูดเพิ่มนะครับไม่มีแถมให้ เลนส์ตัวนี้ ที่ช่วง 85 มม&nbsp;<br />\r\nนำไปถ่ายภาพ กีฬา หรือภาพ คน เบรอฉากหลังได้&nbsp;<br />\r\n*** พิเศษ คุณสามารถนำ เลนส์ KIT 18-55 หรือเลนส์ช่วงอื่นๆ มาแลกซื้อ&nbsp;<br />\r\nCANON 17-85 MM IS USM เมาส์โลหะตัวนี้ได้ ***&nbsp;<br />\r\nโทรสอบถามเพิ่มเติม นัดหมายนำกล้องมาทดสอบเลนส์ก่อนซื้อได้ครับ&nbsp;<br />\r\nพิเศษ มีฟิวเตอร์ UV ปิดหน้าเลนส์ให้ด้วยครับ ในราคานี้ ประหยัดไปก็ร่วม 1 พันแล้ว</p>', 12000, 1, 1, '2017-02-19 08:47:18', '2017-02-19 08:52:06'),
-(39, 2, 'xxxx', NULL, '', 12000, 1, 1, '2017-02-19 10:34:41', '2017-02-19 10:34:41'),
-(40, 2, 'xxxx', NULL, '', 12000, 1, 1, '2017-02-19 10:36:13', '2017-02-19 10:36:13'),
-(41, 2, 'xxxx', NULL, '', 12000, 1, 1, '2017-02-19 10:37:22', '2017-02-19 10:37:22'),
-(42, 2, 'xxxx', NULL, '', 12000, 1, 1, '2017-02-19 10:37:45', '2017-02-19 10:37:45'),
-(43, 2, 'xxxx', NULL, '', 12000, 1, 1, '2017-02-19 10:38:32', '2017-02-19 10:38:32'),
-(44, 2, 'xxxx', NULL, '', 12000, 1, 1, '2017-02-19 10:38:39', '2017-02-19 10:38:39'),
-(45, 2, 'xxxx', NULL, '', 12000, 1, 1, '2017-02-19 10:41:13', '2017-02-19 10:41:13'),
-(46, 2, 'สินค้าขายดี Samsung Galaxy J7 2016 เครื่องใหม่มือ1 ประกันศูนย์', NULL, '<p>&raquo; Samsung Galaxy J7 2016&nbsp;<br />\r\n&raquo; อุปกรณ์ / แท้ครบยกกล่อง&nbsp;<br />\r\n&raquo; ประกันศูนย์ซัมซุง สามารถใช้บริการ ส่งเคลมได้ที่ศูนย์ Samsung&nbsp;<br />\r\n&raquo; สาขาเซียร์รังสิต /พันธุ์ทิพย์ประตูน้ำ / ฟอร์จูน / มาบุญครอง&nbsp;<br />\r\n&raquo; ฟรีค่าซ่อมศูนย์ 1 ปี / ฟรีค่าอะไหล่ 3 เดือน&nbsp;<br />\r\n-----------------------------------------------------------<br />\r\n&raquo; อุปกรณ์ที่จะได้รับ&nbsp;<br />\r\n&raquo; เครื่อง + ที่ชาร์ทแท้ + หูฟัง + คู่มือ + ใบรับประกันสินค้า<br />\r\n&raquo; สภาพเครื่อง &raquo; สินค้าใหม่ มือ1 ประกันศูนย์ ไม่ผ่านการใช้งาน<br />\r\n------------------------------------------------------------<br />\r\n&raquo; มีบริการจัดส่งถึงมือ ในเขตกรุงเทพ ปริมณฑล<br />\r\n&raquo; ลูกค้า สามารถ มารับสินค้าเองได้ที่บ้าน สุขาภิบาล5 ซอย70<br />\r\n&raquo; ลูกค้า สามารถ ไปรับสินค้าได้ที่ร้าน ( 3Buddy มาบุณครอง ชั้น4 )<br />\r\n&raquo; ลูกค้า ต่างจังหวัด มีบริการส่งด่วน EMS (จ่ายเงินปลายทาง)<br />\r\n&raquo; ยินดี รับบัตรเครดิต ทุกธนาคาร&nbsp;<br />\r\n-----------------------------------------------------------<br />\r\n&raquo;&raquo;&raquo; โทรติดต่อ&nbsp;กดเพื่อดูเบอร์โทร xxxxxx560&nbsp;( ดอน )<br />\r\n&raquo;&raquo;&raquo; Home Office &raquo; 020371671<br />\r\n&raquo;&raquo;&raquo;&nbsp;กดเพื่อดู Line: xxxxx&nbsp;&raquo; @doctorit ( ใส่ @ ด้านหน้าด้วยนะครับ )<br />\r\n&raquo;&raquo;&raquo; ติดตามสินค้าอื่นๆได้ที่ facebook ดร มือสอง / เพจ Doctor It<br />\r\n-----------------------------------------------------------<br />\r\nหมายเหตุ.. ลูกค้าทุกท่าน สามารถโทรมาสอบถาม เพิ่มเติม&nbsp;<br />\r\nเกี่ยวกับตัวสินค้า ได้ตลอดนะครับ ไม่ต้องเกรงใจ ยินดีให้บริการครับ</p>', 6890, 1, 1, '2017-02-19 10:51:50', '2017-02-19 10:53:22'),
-(47, 2, 'สินค้าขายดี Samsung Galaxy J7 2016 เครื่องใหม่มือ1 ประกันศูนย์', NULL, '', 6890, 1, 1, '2017-02-19 10:52:12', '2017-02-19 10:52:12'),
-(48, 2, 'fuji x pro 1 lens 35 f1.4', NULL, '', 15000, 1, 1, '2017-02-19 14:54:10', '2017-02-19 14:54:10'),
-(49, 2, 'HP Workstation Z400 (Xeon-W3680 3.33 GHz) ครบชุด', NULL, '<p>Workstation Z400<br />\r\nIntel Xeon W3680 3.33 GHz/LGA 1366<br />\r\nRAM DDR3 ECC 8 GB (4x2GB)<br />\r\nHDD SATA 500 GB<br />\r\nDVD-ROM<br />\r\nVGA Quadro FX580 1 GB/128 Bit<br />\r\nLCD 22&quot; HP รุ่น LA2205wg<br />\r\nMouse, Keyboard USB<br />\r\nLicense Win 7 Pro<br />\r\nการรับประกัน สินค้ามือสอง รับประกัน 3 เดือน<br />\r\nราคา ครบชุด 14,900 บาท เฉพาะเครื่อง 12,900 บาท<br />\r\nชมสินค้าเชิญที่ร้าน nicetechno computer เซียร์รังสิต ชั้น 3 (โซนด้านหลัง) ห้อง T-03<br />\r\nติดต่อสอบถาม&nbsp;กดเพื่อดูเบอร์โทร xxxxxx579&nbsp;(คุณตา) ,&nbsp;กดเพื่อดูเบอร์โทร xxxxxx798&nbsp;(คุณเก่ง), 02-9927269 (เบอร์ร้าน)<br />\r\nการจัดส่ง<br />\r\nรังสิต ลำลูกกา คลอง 1-4 สายไหม ส่งให้ฟรี<br />\r\nในเขตกรุงเทพ ปริมณฑณ สั่งของก่อน 11.00 น. ส่งของภายในวันนั้นๆครับ คิดค่าส่งตามระยะทาง หรือตามตกลงครับ<br />\r\nต่างจังหวัดส่งทาง logispost และขนส่งเอกชน เช่น Kerry, SDS, NTC, IT Transport, เชาวลิน ทรานสปอร์ต ครับ<br />\r\nชมสินค้าเพิ่มเติมได้ที่<br />\r\nWebsite: www.nicetechnocomputer.com<br />\r\nFacebook: www.facebook.com/NicetechnoComputer<br />\r\nYoutube: www.youtube.com/watch?v=oSo8c8LiMtw</p>', 39999, 1, 1, '2017-02-19 14:55:11', '2017-02-19 14:55:11'),
-(50, 2, 'Fish Oil 1000mg', NULL, '', 520, 1, 1, '2017-02-19 14:58:13', '2017-02-19 14:58:13'),
-(51, 2, 'Batman', NULL, '', 1999, 1, 1, '2017-02-19 14:59:28', '2017-02-19 14:59:28'),
-(52, 2, 'Batman', NULL, '', 1999, 1, 1, '2017-02-19 15:00:02', '2017-02-19 15:00:02'),
-(53, 2, 'Batman', NULL, '', 1999, 1, 1, '2017-02-19 15:00:13', '2017-02-19 15:00:13'),
-(54, 2, 'Batman', NULL, '', 1999, 1, 1, '2017-02-19 15:00:32', '2017-02-19 15:00:32'),
-(55, 2, 'Batman', NULL, '', 1999, 1, 1, '2017-02-19 15:00:48', '2017-02-19 15:00:48'),
-(56, 2, 'FFXV', NULL, '<p><em>Final Fantasy XV</em>&nbsp;(originally titled&nbsp;<em>Final Fantasy Versus XIII</em>), an&nbsp;action role-playing video game&nbsp;released on November 2016, is the fifteenth main installment in the&nbsp;<em>Final Fantasy</em>&nbsp;series, and is thematically connected to&nbsp;<em>Fabula Nova Crystallis Final Fantasy</em>, a subseries of games linked by a common mythos which includes&nbsp;<em>Final Fantasy XIII</em>&nbsp;and&nbsp;<em>Final Fantasy Type-0</em>. The world and main characters were created by&nbsp;Tetsuya Nomura, the game&#39;s original director. Nomura also designed the main characters: other character designers involved with the game included Roberto Ferrari and Yusaku Nakaaki.</p>\r\n\r\n<p>The story revolves around a conflict between Lucis, the last free kingdom in the world, and the expansionist empire of Niflheim. The main protagonist is Noctis Lucis Caelum, sole heir to the throne of Lucis. On his journey, he is accompanied by three companions: Gladiolus Amicitia, a brother-figure from a noble family sworn to Noctis&#39;s protection; Ignis Scientia, Noctis&#39;s strategist; and Prompto Argentum, a friend of Noctis from a lower-class family. A key character is Lunafreya Nox Fleuret, Noctis&#39;s fianc&eacute;e through an arranged marriage. Other characters include Noctis&#39;s father Regis, the king of Lucis; Cor Leonis, a famous warrior of Lucis; Gentiana, Lunafreya&#39;s companion and attendant; Cindy, who with her grandfather Cid acts as mechanic for Noctis&#39; car; and Iris, Gladiolus&#39;s sister. Characters from Niflheim serve as the game&#39;s main antagonists, including emperor Iedolas Aldercapt, his chancellor Ardyn Izunia, supreme commander and Lunafreya&#39;s brother Ravus Nox Fleuret, head researcher Verstael Besithia, and mercenary dragoon Aranea Highwind.</p>\r\n\r\n<p>During the game&#39;s&nbsp;prolonged development, during which it changed its name and prospective platforms, multiple concepts went through revisions and some elements were cut entirely, including characters and story scenes. Conversely, some characters and concepts were retained throughout development, such as the dragoon Aranea and the game&#39;s thematic relation to&nbsp;<em>Fabula Nova Crystallis</em>. Additional media and merchandise based upon the world and characters of&nbsp;<em>XV</em>&nbsp;have been produced, with its expanded media being dubbed the &quot;<em>Final Fantasy XV</em>&nbsp;Universe&quot;: these include the anime&nbsp;<em>Brotherhood: Final Fantasy XV</em>&nbsp;and the CGI film&nbsp;<em>Kingsglaive: Final Fantasy XV</em>.</p>', 1590, 1, 1, '2017-02-19 19:39:00', '2017-02-19 19:39:00'),
-(57, 2, 'Final Fantasy VII Remake', NULL, '', 2350, 1, 1, '2017-02-19 20:04:13', '2017-02-19 20:04:13'),
-(58, 2, 'Fibit Flex', NULL, '<h2>Set a goal&nbsp;and go.</h2>\r\n\r\n<p>Stay focused on your goals and get motivated to be more active with Flex&mdash;a slim, stylish device that tracks all-day activity like steps taken, distance traveled, calories burned and active minutes.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h2>See your day in a whole new light.</h2>\r\n\r\n<p>Flex lets you see how every day is stacking up with LEDs that light up like a scoreboard as you get 20% closer to completing your step, calorie or distance goal.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h2>Step. Sleep. Wake. Repeat.</h2>\r\n\r\n<p>Fitbit Flex automatically tracks how long and how well you sleep&mdash;no tapping necessary&mdash;so you can monitor your sleep trends without interrupting your nighttime routine. It also includes a silent, vibrating alarm to make your wake-up call more peaceful.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h2>Wear Flex your way,&nbsp;every day.</h2>\r\n\r\n<p>Style your Flex tracker with bright accessory bands from Fitbit. To change bands, simply pop the slim Flex tracker out of your wristband and slip it into the accessory that fits your personality</p>', 1500, 0, 1, '2017-02-19 20:18:00', '2017-02-19 21:40:03'),
-(59, 2, 'PS4 SLIM : Ultimate Holiday Pack [500GB] + DUALSHOCK 4 + PS4 Bag', NULL, '<p><strong>Important Made in USA Origin Disclaimer:</strong>&nbsp;For certain items sold by Walmart on Walmart.com, the displayed country of origin information may not be accurate or consistent with manufacturer information. For updated, accurate country of origin data, it is recommended that you rely on product packaging or manufacturer information.</p>\r\n\r\n<p>We&#39;re bringing you the Supreme Party Edition - an all-new value bundle with Guitar Hero Live software, 2 guitar controllers, and GHTV Bonus Content! Grab a friend and take the stage together in the groundbreaking GH Live mode, rock out to hundreds of songs now featured in GHTV, and enjoy extra content in the GHTV store. It&#39;s About to Get Real. Guitar Hero Live is here. FreeStyleGames have reinvented the legendary Guitar Hero franchise, with two innovative new gameplay modes and an all-new guitar controller. GH Live mode puts you onstage, looking out: you get a heart-stopping first-person perspective as a real crowd reacts to the notes you play. Or switch over to GHTV - a playable music video network, where you can play along in real time, discover new music, and challenge friends around the world.</p>\r\n\r\n<ul>\r\n	<li>GH LIVE - YOU are the rock star. Playing music in front of a real crowd is like no other experience. With the new GH Live first-person view, YOU&#39;LL take center stage like never before.</li>\r\n	<li>Rock real crowds with real reactions - Feel the rush of performing in a REAL band, in front of REAL crowds who react in REAL time to your performance. You&#39;ll either win the crowd or lose them. Plus, your band mates will also let you know if you&#39;re rocking out or need to pick it up. Fight the stage fright and bring down the house.</li>\r\n	<li>Awesome music, epic venues - In GH Live, you&#39;ll take the stage in a variety of venues. Experience it all from the intimacy of a small club or the main stage of a massive outdoor festival.</li>\r\n	<li>GHTV - All playable. All the time. GHTV is a continuous broadcast of music videos where you and your guitar controller are the star. Hundreds of videos are available, spanning all different genres of music.</li>\r\n	<li>Play what you want - Turning on GHTV is similar to turning on your regular TV. Pick a channel and dive right in. Don&#39;t like what&#39;s on? Just switch over to another channel and play a new song. You&#39;ll earn in-game currency in GHTV that you can use to play songs on demand or to acquire a ton of different items in the game like custom note highways, player cards and more.</li>\r\n	<li>Rock with your friends - GHTV makes it more fun to play with your friends than ever. While one person is playing, everyone else can watch the videos. Plus, GHTV delivers exciting competition, no matter your skill level. Compete in your living room or online with people from all over the world, playing at similar progression levels and difficulty as you. Check out the leaderboards to see how you stack up against fellow rock stars around the world.</li>\r\n	<li>Level up and earn rewards - Level up to unlock more content and achieve Hero status. Along the way you&#39;ll earn the use of new Hero Powers and you can level up your guitar controller. Hero Powers, similar to Star Power back in the day, can be used to gain a competitive edge and achieve new high scores.</li>\r\n	<li>Premium Content - Premium Shows include anything from new music videos in GHTV to live concert footage that you can play along to. Get access to this content by leveling up and completing challenges, or use real currency to play instantly.</li>\r\n	<li>Customize your experience - In GHTV you will have access to unique personalization items. Customize your note highway and player card to show off your style.</li>\r\n	<li>The Guitar Controller - Easier to play, harder to master. The guitar controller was redesigned for the best gameplay across all skill levels. The new 2x3 button layout makes it easier to play with only three buttons, or, on veteran, it starts mirrors what it&#39;s like to play chord shapes with all six buttons, making the game easier for beginners and harder for experts.</li>\r\n	<li>Direct access to GHTV - The GHTV button lets you jump straight into GHTV from anywhere in the game.</li>\r\n	<li>Take on Vocals! - Offering even more ways to play together, Guitar Hero Live adds another layer of social gameplay to your living room with vocals, letting singers take the stage. Vocalists will be able to accompany the Guitarist with their very own lyrics highway at the top of the screen. All you need is a USB mic and you&#39;re ready to rock out.</li>\r\n	<li>ESRB Rating: TEEN with Lyrics</li>\r\n</ul>', 15750, 0, 1, '2017-02-19 21:02:48', '2017-02-21 23:27:15'),
-(60, 2, 'DUALSHOCK 4 Camo Color มี 2 สีให้เลือก', NULL, '<p>The&nbsp;DualShock&reg;4 Wireless Controller&nbsp;for PlayStation&reg;4 defines the next generation of play, combining revolutionary new features with intuitive, precision controls. Improved analog sticks and trigger buttons allow for unparalleled accuracy with every move while innovative new technologies such as the multi-touch, clickable touch pad, integrated light bar, and internal speaker offer exciting new ways to experience and interact with your games. And with the addition of the Share button, celebrate and upload your greatest gaming moments on PlayStation&reg;4 with the touch of a button.<br />\r\n<br />\r\nPrecision Control:<br />\r\nThe feel, shape, and sensitivity of the DualShock&reg;4&rsquo;s analog sticks and trigger buttons have been enhanced to offer players absolute control for all games on PlayStation&reg;4.<br />\r\n<br />\r\nSharing at your Fingertips:<br />\r\nThe addition of the Share button makes sharing your greatest gaming moments as easy as a push of a button. Upload gameplay videos and screenshots directly from your system or live-stream your gameplay, all without disturbing the game in progress.<br />\r\n<br />\r\nNew ways to Play:<br />\r\nRevolutionary features like the touch pad, integrated light bar, and built-in speaker offer exciting new ways to experience and interact with your games and its 3.5mm audio jack offers a practical personal audio&nbsp;</p>', 2000, 0, 3, '2017-02-19 21:06:58', '2017-02-22 17:22:27'),
-(61, 2, 'YAMAHA SE700E (Made inJapan)ปี1985', NULL, '<p>ขายกีต้าร์YAMAHA SE700E<br />\r\nMade in Japan ปี1985&#39; สภาพสวยสดเดิมๆนำเข้าจากญี่ปุ่นปีเก่า เสียงดีมาก น่าสะสมหายากแล้ว (ขาย10,800฿) รวมส่งด่วนEms เซ็ท อัพ ปรับแอ็คชั่นเปลี่ยนสายใหม่พร้อมใช้งาน ราคาขายในญี่ปุ่น80,000เยน หรือราว33,000฿ไทย สนใจต่อรองกันได้ครับผม<br />\r\nสเป็คคร่าวๆ<br />\r\nRelease date October 1985<br />\r\nDiscontinued years 1985<br />\r\nPrice at launch 80,000 yen<br />\r\nMain Specifications<br />\r\nBody / neck structure<br />\r\nBolt-o Scale 648mm<br />\r\nFingerboard Ebony<br />\r\nBody Alder<br />\r\nNeck Maple<br />\r\nPeg Die-cast with a torque adjustment, black chrome<br />\r\nBridge Rockin&#39;Magic<br />\r\nPickup Single bobbin (Supinekkusu) &times; 2, open backing Han (Supinekkusu) &times; 1<br />\r\nPickup switch 5P selector SW<br />\r\nControl 1 volume, 1 tone<br />\r\n(by sound system)<br />\r\nString Light gauge<br />\r\nWeight 3.9kg<br />\r\nColor Red<br />\r\nเพื่อป้องกันการก็อบรูปสินค้าของผม ไปหลอกขาย</p>', 18000, 1, 2, '2017-02-22 14:10:12', '2017-02-22 17:21:44'),
-(62, 2, 'ALESIS D4 โมดูลกลองไฟฟ้า ต่อทริกกลอง แป้นไฟฟ้า เวทีแสดงสด แห่นาค แตรวง ซาวด์กลองแน่นปึ๊กที่สุดแล้ว ใหม่ๆทุกตัวจากญี่ปุ่น ที่ร้านโทไคมิวสิค', NULL, '<p>ดูของทางเวปก่อนที่ &gt;&gt; WWW.TOKAIMUSIC.COM&nbsp;<br />\r\nร้านโทไค มิวสิค จำหน่ายเครื่องดนตรีแบรนด์คุณภาพ!! ทั้งใหม่และมือสอง นำเข้า จากญี่ปุ่น!!!จำนวนมาก!!ทุกเดือน!! อาทิ..<br />\r\nซาวด์คาราโอเกะ กลองไฟฟ้า ริทึ่มบอก ซีเควนเซอร์ คีย์บอร์ดไฟฟ้า กีต้าร์ไฟฟ้า มัลติเอฟเฟค ตู้แอมป์กีต้าร์<br />\r\nมิกเซอร์ เครื่อง MD อุปกรณ์PA อีควอไลเซอร์ คอมเพรสเซ่อร์ ครอสโอเว่อร์ ลำโพงสตูดิโอ ดิจิตอลมิกเซอร์ ฯลฯ</p>', 11000, 1, 1, '2017-02-22 14:17:43', '2017-02-22 14:17:43'),
-(63, 2, 'xxxxxxxxx', NULL, '', 12000, 1, 1, '2017-02-23 10:25:17', '2017-02-23 10:25:17'),
-(64, 2, 'xxxxxxxxx', NULL, '', 12000, 1, 1, '2017-02-23 10:41:25', '2017-02-23 10:41:25'),
-(65, 2, 'xxxxxxxxx', NULL, '', 12000, 1, 1, '2017-02-23 10:41:41', '2017-02-23 10:41:41'),
-(66, 2, 'xxx', NULL, '', 1111, 1, 1, '2017-02-23 11:53:42', '2017-02-23 11:53:42'),
-(67, 2, 'xxx', NULL, '', 1111, 1, 1, '2017-02-23 11:55:05', '2017-02-23 11:55:05'),
-(68, 2, 'xxx', NULL, '', 1111, 1, 1, '2017-02-23 11:57:27', '2017-02-23 11:57:27'),
-(69, 2, 'xxx', NULL, '', 1111, 1, 1, '2017-02-23 11:57:39', '2017-02-23 11:57:39'),
-(70, 2, 'xxx', NULL, '', 1111, 1, 1, '2017-02-23 11:57:54', '2017-02-23 11:57:54'),
-(71, 2, 'xxx', NULL, '', 1111, 1, 1, '2017-02-23 11:57:58', '2017-02-23 11:57:58'),
-(72, 2, 'xxx', NULL, '', 1111, 1, 1, '2017-02-23 12:02:38', '2017-02-23 12:02:38'),
-(73, 2, 'xxx', NULL, '', 1111, 1, 1, '2017-02-23 12:09:10', '2017-02-23 12:09:10'),
-(74, 2, 'xxx', NULL, '', 1200, 1, 1, '2017-03-01 21:58:53', '2017-03-01 21:58:53');
+(1, 2, 'nnnn', NULL, '', '1111.00', 1, 1, '2017-02-05 20:42:43', '2017-02-05 20:42:43'),
+(2, 2, 'xxx', NULL, '', '111.00', 1, 1, '2017-02-06 02:17:22', '2017-02-06 02:17:22'),
+(3, 2, 'GGG', NULL, '', '100.00', 1, 1, '2017-02-07 15:33:00', '2017-02-07 15:33:00'),
+(4, 2, 'xcxx', NULL, '', '111.00', 1, 1, '2017-02-07 15:39:36', '2017-02-07 15:39:36'),
+(5, 2, 'xcxx', NULL, '', '111.00', 1, 1, '2017-02-07 15:39:42', '2017-02-07 15:39:42'),
+(6, 2, 'xcxx', NULL, '', '111.00', 1, 1, '2017-02-07 15:39:56', '2017-02-07 15:39:56'),
+(7, 2, 'xcxx', NULL, '', '111.00', 1, 1, '2017-02-07 15:40:49', '2017-02-07 15:40:49'),
+(8, 2, 'xcxx', NULL, '', '111.00', 1, 1, '2017-02-07 15:40:57', '2017-02-07 15:40:57'),
+(9, 2, 'xcxx', NULL, '', '111.00', 1, 1, '2017-02-07 15:41:40', '2017-02-07 15:41:40'),
+(10, 2, 'xcxx', NULL, '', '111.00', 1, 1, '2017-02-07 15:41:51', '2017-02-07 15:41:51'),
+(11, 2, 'xcxx', NULL, '', '111.00', 1, 1, '2017-02-07 15:41:55', '2017-02-07 15:41:55'),
+(12, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:38:59', '2017-02-13 05:38:59'),
+(13, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:39:45', '2017-02-13 05:39:45'),
+(14, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:40:06', '2017-02-13 05:40:06'),
+(15, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:42:14', '2017-02-13 05:42:14'),
+(16, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:42:20', '2017-02-13 05:42:20'),
+(17, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:42:31', '2017-02-13 05:42:31'),
+(18, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:42:43', '2017-02-13 05:42:43'),
+(19, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:43:45', '2017-02-13 05:43:45'),
+(20, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:45:25', '2017-02-13 05:45:25'),
+(21, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:45:32', '2017-02-13 05:45:32'),
+(22, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:45:40', '2017-02-13 05:45:40'),
+(23, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:49:49', '2017-02-13 05:49:49'),
+(24, 2, 'gggg', NULL, '', '11.00', 1, 1, '2017-02-13 05:52:25', '2017-02-13 05:52:25'),
+(25, 2, 'CPU I7 3.0 Ghz', NULL, '<h2>Technical Specifications</h2>\r\n\r\n<h3>Essentials</h3>\r\n\r\n<p>Processor Number</p>\r\n\r\n<p>i7-7920HQ</p>\r\n\r\n<p>Status</p>\r\n\r\n<p>Launched</p>\r\n\r\n<p>Launch Date</p>\r\n\r\n<p>Q1&#39;17</p>\r\n\r\n<p>Lithography</p>\r\n\r\n<p>14 nm</p>\r\n\r\n<h3>Performance</h3>\r\n\r\n<p># of Cores</p>\r\n\r\n<p>4</p>\r\n\r\n<p># of Threads</p>\r\n\r\n<p>8</p>\r\n\r\n<p>Processor Base Frequency</p>\r\n\r\n<p>3.10 GHz</p>\r\n\r\n<p>Max Turbo Frequency</p>\r\n\r\n<p>4.10 GHz</p>\r\n\r\n<p>Cache</p>\r\n\r\n<p>8 MB</p>\r\n\r\n<p>Bus Speed</p>\r\n\r\n<p>8 GT/s DMI3</p>\r\n\r\n<p>TDP</p>\r\n\r\n<p>45 W</p>\r\n\r\n<p>Configurable TDP-down</p>\r\n\r\n<p>35 W</p>\r\n\r\n<h3>Supplemental Information</h3>\r\n\r\n<p>Embedded Options Available</p>\r\n\r\n<p>No</p>\r\n\r\n<p>Conflict Free</p>\r\n\r\n<p>Yes</p>\r\n\r\n<h3>Memory Specifications</h3>\r\n\r\n<p>Max Memory Size (dependent on memory type)</p>\r\n\r\n<p>64 GB</p>\r\n\r\n<p>Memory Types</p>\r\n\r\n<p>DDR4-2400, LPDDR3-2133, DDR3L-1600</p>\r\n\r\n<p>Max # of Memory Channels</p>\r\n\r\n<p>2</p>\r\n\r\n<p>Max Memory Bandwidth</p>\r\n\r\n<p>34.1 GB/s</p>\r\n\r\n<p>ECC Memory Supported&nbsp;&Dagger;</p>\r\n\r\n<p>No</p>\r\n\r\n<h3>Graphics Specifications</h3>\r\n\r\n<p>Processor Graphics&nbsp;&Dagger;</p>\r\n\r\n<p>Intel&reg; HD Graphics 630</p>\r\n\r\n<p>Graphics Base Frequency</p>\r\n\r\n<p>350.00 MHz</p>\r\n\r\n<p>Graphics Max Dynamic Frequency</p>\r\n\r\n<p>1.10 GHz</p>\r\n\r\n<p>Graphics Video Max Memory</p>\r\n\r\n<p>64 GB</p>\r\n\r\n<p>Graphics Output</p>\r\n\r\n<p>eDP/DP/HDMI/DVI</p>\r\n\r\n<p>4K Support</p>\r\n\r\n<p>Yes, at 60Hz</p>\r\n\r\n<p>Max Resolution (HDMI 1.4)&Dagger;</p>\r\n\r\n<p>4096x2304@30Hz</p>\r\n\r\n<p>Max Resolution (DP)&Dagger;</p>\r\n\r\n<p>4096x2304@60Hz</p>\r\n\r\n<p>DirectX* Support</p>\r\n\r\n<p>12</p>\r\n\r\n<p>OpenGL* Support</p>\r\n\r\n<p>4.4</p>\r\n\r\n<p>Intel&reg; Quick Sync Video</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Clear Video HD Technology</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p># of Displays Supported&nbsp;&Dagger;</p>\r\n\r\n<p>3</p>\r\n\r\n<p>Device ID</p>\r\n\r\n<p>0x591B</p>\r\n\r\n<h3>Expansion Options</h3>\r\n\r\n<p>PCI Express Revision</p>\r\n\r\n<p>3.0</p>\r\n\r\n<p>PCI Express Configurations&nbsp;&Dagger;</p>\r\n\r\n<p>Up to 1x16, 2x8, 1x8+2x4</p>\r\n\r\n<p>Max # of PCI Express Lanes</p>\r\n\r\n<p>16</p>\r\n\r\n<h3>Package Specifications</h3>\r\n\r\n<p>Max CPU Configuration</p>\r\n\r\n<p>1</p>\r\n\r\n<p>TJUNCTION</p>\r\n\r\n<p>100&deg;C</p>\r\n\r\n<p>Package Size</p>\r\n\r\n<p>42mm x 28mm</p>\r\n\r\n<h3>Advanced Technologies</h3>\r\n\r\n<p>Intel&reg; Speed Shift Technology</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Turbo Boost Technology&nbsp;&Dagger;</p>\r\n\r\n<p>2.0</p>\r\n\r\n<p>Intel&reg; vPro Technology&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Hyper-Threading Technology&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Virtualization Technology (VT-x)&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Virtualization Technology for Directed I/O (VT-d)&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; VT-x with Extended Page Tables (EPT)&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; TSX-NI</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; 64&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Instruction Set</p>\r\n\r\n<p>64-bit</p>\r\n\r\n<p>Instruction Set Extensions</p>\r\n\r\n<p>SSE4.1/4.2, AVX 2.0</p>\r\n\r\n<p>Idle States</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Enhanced Intel SpeedStep&reg; Technology</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Thermal Monitoring Technologies</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Flex Memory Access</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Identity Protection Technology&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Stable Image Platform Program (SIPP)</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Smart Response Technology</p>\r\n\r\n<p>Yes</p>\r\n\r\n<h3>Intel&reg; Data Protection Technology</h3>\r\n\r\n<p>Intel&reg; AES New Instructions</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Secure Key</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Software Guard Extensions (Intel&reg; SGX)</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Memory Protection Extensions (Intel&reg; MPX)</p>\r\n\r\n<p>Yes</p>\r\n\r\n<h3>Intel&reg; Platform Protection Technology</h3>\r\n\r\n<p>Trusted Execution Technology&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Execute Disable Bit&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>', '10000.00', 1, 1, '2017-02-13 05:55:28', '2017-02-19 00:17:54'),
+(26, 2, 'xxx', NULL, '', '111.00', 1, 1, '2017-02-13 07:30:09', '2017-02-13 07:30:09'),
+(27, 2, 'xxxxx', NULL, '', '11222.00', 1, 1, '2017-02-13 07:38:23', '2017-02-13 07:38:23'),
+(28, 2, 'xxxx', NULL, '', '12000.00', 1, 1, '2017-02-18 22:00:46', '2017-02-18 22:00:46'),
+(29, 2, 'xxxx', NULL, '', '1210.00', 1, 1, '2017-02-18 22:06:49', '2017-02-18 22:06:49'),
+(30, 2, 'xxxx', NULL, '', '1111.00', 1, 1, '2017-02-18 22:08:05', '2017-02-18 22:08:05'),
+(31, 2, 'xxxx', NULL, '', '12000.00', 1, 1, '2017-02-19 08:39:58', '2017-02-19 08:39:58'),
+(32, 2, 'xxxx', NULL, '', '12000.00', 1, 1, '2017-02-19 08:40:31', '2017-02-19 08:40:31'),
+(33, 2, 'hhhhhhh aaaaaaaaa', NULL, '', '12000.00', 1, 1, '2017-02-19 08:45:00', '2017-02-19 08:45:00'),
+(34, 2, 'hhhhhhh aaaaaaaaa', NULL, '', '12000.00', 1, 1, '2017-02-19 08:45:17', '2017-02-19 08:45:17'),
+(35, 2, 'hhhhhhh aaaaaaaaa', NULL, '', '12000.00', 1, 1, '2017-02-19 08:45:37', '2017-02-19 08:45:37'),
+(36, 2, 'hhhhhhh aaaaaaaaa', NULL, '', '12000.00', 1, 1, '2017-02-19 08:46:38', '2017-02-19 08:46:38'),
+(37, 2, 'hhhhhhh aaaaaaaaa', NULL, '', '12000.00', 1, 1, '2017-02-19 08:46:49', '2017-02-19 08:46:49'),
+(38, 2, 'Canon 17-85 mm IS มีกันสั่น USM มอเตอร์โฟกัสเร็วไว เมาส์ท้ายเลนส์ทำด้วยโลหะ ที่ 85 MM ถ่ายคน เบรอฉากหลังได้ มีฟิวเตอร์ฮูดกันกระแทกกันแสงให้', NULL, '<p>เลนส์ซูมคุณภาพ CANON มีกันสั่น เมาส์ท้ายเลนส์ทำด้วยโลหะแข็งแรง<br />\r\nขายเลนส์ CANON EF-S 17-85 MM F/4-5.6 IS USM&nbsp;<br />\r\nเลนส์ซูมคุณภาพ ให้มุมกว้าง 17 มม ซูมได้ยาวถึง 85 มม ในเลนส์ตัวเดียว&nbsp;<br />\r\nดีกว่าเลนส์ KIT 18-55 MM ที่มุมกว้างน้อยกว่า และยังซูมได้แค่ 55 มม&nbsp;<br />\r\nเลนส์ CANON 17-85 MM ตัวนี้ มีมอเตอร์ USM โฟกัสเร็วไว ในขณะที่ 18-55&nbsp;<br />\r\nไม่มี USM มอเตอร์ ตัวเลนส์มี IS กันภาพสั่นไหว และที่สำคัญเมาส์ท้ายเลนส์&nbsp;<br />\r\nCANON 17-85 MM ตัวนี้ ทำด้วยโลหะ แข็งแรงทนทาน ดีกว่า เลนส์ KIT&nbsp;<br />\r\n18-55 mm ที่ติดมากับกล้อง ตัวเลนส์สภาพสวย มี HOOD บังแสงมาให้ด้วย&nbsp;<br />\r\nซื้อเลนส์ใหม่ ก็ต้องซื้อ ฮูดเพิ่มนะครับไม่มีแถมให้ เลนส์ตัวนี้ ที่ช่วง 85 มม&nbsp;<br />\r\nนำไปถ่ายภาพ กีฬา หรือภาพ คน เบรอฉากหลังได้&nbsp;<br />\r\n*** พิเศษ คุณสามารถนำ เลนส์ KIT 18-55 หรือเลนส์ช่วงอื่นๆ มาแลกซื้อ&nbsp;<br />\r\nCANON 17-85 MM IS USM เมาส์โลหะตัวนี้ได้ ***&nbsp;<br />\r\nโทรสอบถามเพิ่มเติม นัดหมายนำกล้องมาทดสอบเลนส์ก่อนซื้อได้ครับ&nbsp;<br />\r\nพิเศษ มีฟิวเตอร์ UV ปิดหน้าเลนส์ให้ด้วยครับ ในราคานี้ ประหยัดไปก็ร่วม 1 พันแล้ว</p>', '12000.00', 1, 1, '2017-02-19 08:47:18', '2017-02-19 08:52:06'),
+(39, 2, 'xxxx', NULL, '', '12000.00', 1, 1, '2017-02-19 10:34:41', '2017-02-19 10:34:41'),
+(40, 2, 'xxxx', NULL, '', '12000.00', 1, 1, '2017-02-19 10:36:13', '2017-02-19 10:36:13'),
+(41, 2, 'xxxx', NULL, '', '12000.00', 1, 1, '2017-02-19 10:37:22', '2017-02-19 10:37:22'),
+(42, 2, 'xxxx', NULL, '', '12000.00', 1, 1, '2017-02-19 10:37:45', '2017-02-19 10:37:45'),
+(43, 2, 'xxxx', NULL, '', '12000.00', 1, 1, '2017-02-19 10:38:32', '2017-02-19 10:38:32'),
+(44, 2, 'xxxx', NULL, '', '12000.00', 1, 1, '2017-02-19 10:38:39', '2017-02-19 10:38:39'),
+(45, 2, 'xxxx', NULL, '', '12000.00', 1, 1, '2017-02-19 10:41:13', '2017-02-19 10:41:13'),
+(46, 2, 'สินค้าขายดี Samsung Galaxy J7 2016 เครื่องใหม่มือ1 ประกันศูนย์', NULL, '<p>&raquo; Samsung Galaxy J7 2016&nbsp;<br />\r\n&raquo; อุปกรณ์ / แท้ครบยกกล่อง&nbsp;<br />\r\n&raquo; ประกันศูนย์ซัมซุง สามารถใช้บริการ ส่งเคลมได้ที่ศูนย์ Samsung&nbsp;<br />\r\n&raquo; สาขาเซียร์รังสิต /พันธุ์ทิพย์ประตูน้ำ / ฟอร์จูน / มาบุญครอง&nbsp;<br />\r\n&raquo; ฟรีค่าซ่อมศูนย์ 1 ปี / ฟรีค่าอะไหล่ 3 เดือน&nbsp;<br />\r\n-----------------------------------------------------------<br />\r\n&raquo; อุปกรณ์ที่จะได้รับ&nbsp;<br />\r\n&raquo; เครื่อง + ที่ชาร์ทแท้ + หูฟัง + คู่มือ + ใบรับประกันสินค้า<br />\r\n&raquo; สภาพเครื่อง &raquo; สินค้าใหม่ มือ1 ประกันศูนย์ ไม่ผ่านการใช้งาน<br />\r\n------------------------------------------------------------<br />\r\n&raquo; มีบริการจัดส่งถึงมือ ในเขตกรุงเทพ ปริมณฑล<br />\r\n&raquo; ลูกค้า สามารถ มารับสินค้าเองได้ที่บ้าน สุขาภิบาล5 ซอย70<br />\r\n&raquo; ลูกค้า สามารถ ไปรับสินค้าได้ที่ร้าน ( 3Buddy มาบุณครอง ชั้น4 )<br />\r\n&raquo; ลูกค้า ต่างจังหวัด มีบริการส่งด่วน EMS (จ่ายเงินปลายทาง)<br />\r\n&raquo; ยินดี รับบัตรเครดิต ทุกธนาคาร&nbsp;<br />\r\n-----------------------------------------------------------<br />\r\n&raquo;&raquo;&raquo; โทรติดต่อ&nbsp;กดเพื่อดูเบอร์โทร xxxxxx560&nbsp;( ดอน )<br />\r\n&raquo;&raquo;&raquo; Home Office &raquo; 020371671<br />\r\n&raquo;&raquo;&raquo;&nbsp;กดเพื่อดู Line: xxxxx&nbsp;&raquo; @doctorit ( ใส่ @ ด้านหน้าด้วยนะครับ )<br />\r\n&raquo;&raquo;&raquo; ติดตามสินค้าอื่นๆได้ที่ facebook ดร มือสอง / เพจ Doctor It<br />\r\n-----------------------------------------------------------<br />\r\nหมายเหตุ.. ลูกค้าทุกท่าน สามารถโทรมาสอบถาม เพิ่มเติม&nbsp;<br />\r\nเกี่ยวกับตัวสินค้า ได้ตลอดนะครับ ไม่ต้องเกรงใจ ยินดีให้บริการครับ</p>', '6890.00', 1, 1, '2017-02-19 10:51:50', '2017-02-19 10:53:22'),
+(47, 2, 'สินค้าขายดี Samsung Galaxy J7 2016 เครื่องใหม่มือ1 ประกันศูนย์', NULL, '', '6890.00', 1, 1, '2017-02-19 10:52:12', '2017-02-19 10:52:12'),
+(48, 2, 'fuji x pro 1 lens 35 f1.4', NULL, '', '15000.00', 1, 1, '2017-02-19 14:54:10', '2017-02-19 14:54:10'),
+(49, 2, 'HP Workstation Z400 (Xeon-W3680 3.33 GHz) ครบชุด', NULL, '<p>Workstation Z400<br />\r\nIntel Xeon W3680 3.33 GHz/LGA 1366<br />\r\nRAM DDR3 ECC 8 GB (4x2GB)<br />\r\nHDD SATA 500 GB<br />\r\nDVD-ROM<br />\r\nVGA Quadro FX580 1 GB/128 Bit<br />\r\nLCD 22&quot; HP รุ่น LA2205wg<br />\r\nMouse, Keyboard USB<br />\r\nLicense Win 7 Pro<br />\r\nการรับประกัน สินค้ามือสอง รับประกัน 3 เดือน<br />\r\nราคา ครบชุด 14,900 บาท เฉพาะเครื่อง 12,900 บาท<br />\r\nชมสินค้าเชิญที่ร้าน nicetechno computer เซียร์รังสิต ชั้น 3 (โซนด้านหลัง) ห้อง T-03<br />\r\nติดต่อสอบถาม&nbsp;กดเพื่อดูเบอร์โทร xxxxxx579&nbsp;(คุณตา) ,&nbsp;กดเพื่อดูเบอร์โทร xxxxxx798&nbsp;(คุณเก่ง), 02-9927269 (เบอร์ร้าน)<br />\r\nการจัดส่ง<br />\r\nรังสิต ลำลูกกา คลอง 1-4 สายไหม ส่งให้ฟรี<br />\r\nในเขตกรุงเทพ ปริมณฑณ สั่งของก่อน 11.00 น. ส่งของภายในวันนั้นๆครับ คิดค่าส่งตามระยะทาง หรือตามตกลงครับ<br />\r\nต่างจังหวัดส่งทาง logispost และขนส่งเอกชน เช่น Kerry, SDS, NTC, IT Transport, เชาวลิน ทรานสปอร์ต ครับ<br />\r\nชมสินค้าเพิ่มเติมได้ที่<br />\r\nWebsite: www.nicetechnocomputer.com<br />\r\nFacebook: www.facebook.com/NicetechnoComputer<br />\r\nYoutube: www.youtube.com/watch?v=oSo8c8LiMtw</p>', '39999.00', 1, 1, '2017-02-19 14:55:11', '2017-02-19 14:55:11'),
+(50, 2, 'Fish Oil 1000mg', NULL, '', '520.00', 1, 1, '2017-02-19 14:58:13', '2017-02-19 14:58:13'),
+(51, 2, 'Batman', NULL, '', '1999.00', 1, 1, '2017-02-19 14:59:28', '2017-02-19 14:59:28'),
+(52, 2, 'Batman', NULL, '', '1999.00', 1, 1, '2017-02-19 15:00:02', '2017-02-19 15:00:02'),
+(53, 2, 'Batman', NULL, '', '1999.00', 1, 1, '2017-02-19 15:00:13', '2017-02-19 15:00:13'),
+(54, 2, 'Batman', NULL, '', '1999.00', 1, 1, '2017-02-19 15:00:32', '2017-02-19 15:00:32'),
+(55, 2, 'Batman', NULL, '', '1999.00', 1, 1, '2017-02-19 15:00:48', '2017-02-19 15:00:48'),
+(56, 2, 'FFXV', NULL, '<p><em>Final Fantasy XV</em>&nbsp;(originally titled&nbsp;<em>Final Fantasy Versus XIII</em>), an&nbsp;action role-playing video game&nbsp;released on November 2016, is the fifteenth main installment in the&nbsp;<em>Final Fantasy</em>&nbsp;series, and is thematically connected to&nbsp;<em>Fabula Nova Crystallis Final Fantasy</em>, a subseries of games linked by a common mythos which includes&nbsp;<em>Final Fantasy XIII</em>&nbsp;and&nbsp;<em>Final Fantasy Type-0</em>. The world and main characters were created by&nbsp;Tetsuya Nomura, the game&#39;s original director. Nomura also designed the main characters: other character designers involved with the game included Roberto Ferrari and Yusaku Nakaaki.</p>\r\n\r\n<p>The story revolves around a conflict between Lucis, the last free kingdom in the world, and the expansionist empire of Niflheim. The main protagonist is Noctis Lucis Caelum, sole heir to the throne of Lucis. On his journey, he is accompanied by three companions: Gladiolus Amicitia, a brother-figure from a noble family sworn to Noctis&#39;s protection; Ignis Scientia, Noctis&#39;s strategist; and Prompto Argentum, a friend of Noctis from a lower-class family. A key character is Lunafreya Nox Fleuret, Noctis&#39;s fianc&eacute;e through an arranged marriage. Other characters include Noctis&#39;s father Regis, the king of Lucis; Cor Leonis, a famous warrior of Lucis; Gentiana, Lunafreya&#39;s companion and attendant; Cindy, who with her grandfather Cid acts as mechanic for Noctis&#39; car; and Iris, Gladiolus&#39;s sister. Characters from Niflheim serve as the game&#39;s main antagonists, including emperor Iedolas Aldercapt, his chancellor Ardyn Izunia, supreme commander and Lunafreya&#39;s brother Ravus Nox Fleuret, head researcher Verstael Besithia, and mercenary dragoon Aranea Highwind.</p>\r\n\r\n<p>During the game&#39;s&nbsp;prolonged development, during which it changed its name and prospective platforms, multiple concepts went through revisions and some elements were cut entirely, including characters and story scenes. Conversely, some characters and concepts were retained throughout development, such as the dragoon Aranea and the game&#39;s thematic relation to&nbsp;<em>Fabula Nova Crystallis</em>. Additional media and merchandise based upon the world and characters of&nbsp;<em>XV</em>&nbsp;have been produced, with its expanded media being dubbed the &quot;<em>Final Fantasy XV</em>&nbsp;Universe&quot;: these include the anime&nbsp;<em>Brotherhood: Final Fantasy XV</em>&nbsp;and the CGI film&nbsp;<em>Kingsglaive: Final Fantasy XV</em>.</p>', '1590.00', 1, 1, '2017-02-19 19:39:00', '2017-02-19 19:39:00'),
+(57, 2, 'Final Fantasy VII Remake', NULL, '', '2350.00', 1, 1, '2017-02-19 20:04:13', '2017-02-19 20:04:13'),
+(58, 2, 'Fibit Flex', NULL, '<h2>Set a goal&nbsp;and go.</h2>\r\n\r\n<p>Stay focused on your goals and get motivated to be more active with Flex&mdash;a slim, stylish device that tracks all-day activity like steps taken, distance traveled, calories burned and active minutes.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h2>See your day in a whole new light.</h2>\r\n\r\n<p>Flex lets you see how every day is stacking up with LEDs that light up like a scoreboard as you get 20% closer to completing your step, calorie or distance goal.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h2>Step. Sleep. Wake. Repeat.</h2>\r\n\r\n<p>Fitbit Flex automatically tracks how long and how well you sleep&mdash;no tapping necessary&mdash;so you can monitor your sleep trends without interrupting your nighttime routine. It also includes a silent, vibrating alarm to make your wake-up call more peaceful.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h2>Wear Flex your way,&nbsp;every day.</h2>\r\n\r\n<p>Style your Flex tracker with bright accessory bands from Fitbit. To change bands, simply pop the slim Flex tracker out of your wristband and slip it into the accessory that fits your personality</p>', '1500.00', 0, 1, '2017-02-19 20:18:00', '2017-02-19 21:40:03'),
+(59, 2, 'PS4 SLIM : Ultimate Holiday Pack [500GB] + DUALSHOCK 4 + PS4 Bag', NULL, '<p><strong>Important Made in USA Origin Disclaimer:</strong>&nbsp;For certain items sold by Walmart on Walmart.com, the displayed country of origin information may not be accurate or consistent with manufacturer information. For updated, accurate country of origin data, it is recommended that you rely on product packaging or manufacturer information.</p>\r\n\r\n<p>We&#39;re bringing you the Supreme Party Edition - an all-new value bundle with Guitar Hero Live software, 2 guitar controllers, and GHTV Bonus Content! Grab a friend and take the stage together in the groundbreaking GH Live mode, rock out to hundreds of songs now featured in GHTV, and enjoy extra content in the GHTV store. It&#39;s About to Get Real. Guitar Hero Live is here. FreeStyleGames have reinvented the legendary Guitar Hero franchise, with two innovative new gameplay modes and an all-new guitar controller. GH Live mode puts you onstage, looking out: you get a heart-stopping first-person perspective as a real crowd reacts to the notes you play. Or switch over to GHTV - a playable music video network, where you can play along in real time, discover new music, and challenge friends around the world.</p>\r\n\r\n<ul>\r\n	<li>GH LIVE - YOU are the rock star. Playing music in front of a real crowd is like no other experience. With the new GH Live first-person view, YOU&#39;LL take center stage like never before.</li>\r\n	<li>Rock real crowds with real reactions - Feel the rush of performing in a REAL band, in front of REAL crowds who react in REAL time to your performance. You&#39;ll either win the crowd or lose them. Plus, your band mates will also let you know if you&#39;re rocking out or need to pick it up. Fight the stage fright and bring down the house.</li>\r\n	<li>Awesome music, epic venues - In GH Live, you&#39;ll take the stage in a variety of venues. Experience it all from the intimacy of a small club or the main stage of a massive outdoor festival.</li>\r\n	<li>GHTV - All playable. All the time. GHTV is a continuous broadcast of music videos where you and your guitar controller are the star. Hundreds of videos are available, spanning all different genres of music.</li>\r\n	<li>Play what you want - Turning on GHTV is similar to turning on your regular TV. Pick a channel and dive right in. Don&#39;t like what&#39;s on? Just switch over to another channel and play a new song. You&#39;ll earn in-game currency in GHTV that you can use to play songs on demand or to acquire a ton of different items in the game like custom note highways, player cards and more.</li>\r\n	<li>Rock with your friends - GHTV makes it more fun to play with your friends than ever. While one person is playing, everyone else can watch the videos. Plus, GHTV delivers exciting competition, no matter your skill level. Compete in your living room or online with people from all over the world, playing at similar progression levels and difficulty as you. Check out the leaderboards to see how you stack up against fellow rock stars around the world.</li>\r\n	<li>Level up and earn rewards - Level up to unlock more content and achieve Hero status. Along the way you&#39;ll earn the use of new Hero Powers and you can level up your guitar controller. Hero Powers, similar to Star Power back in the day, can be used to gain a competitive edge and achieve new high scores.</li>\r\n	<li>Premium Content - Premium Shows include anything from new music videos in GHTV to live concert footage that you can play along to. Get access to this content by leveling up and completing challenges, or use real currency to play instantly.</li>\r\n	<li>Customize your experience - In GHTV you will have access to unique personalization items. Customize your note highway and player card to show off your style.</li>\r\n	<li>The Guitar Controller - Easier to play, harder to master. The guitar controller was redesigned for the best gameplay across all skill levels. The new 2x3 button layout makes it easier to play with only three buttons, or, on veteran, it starts mirrors what it&#39;s like to play chord shapes with all six buttons, making the game easier for beginners and harder for experts.</li>\r\n	<li>Direct access to GHTV - The GHTV button lets you jump straight into GHTV from anywhere in the game.</li>\r\n	<li>Take on Vocals! - Offering even more ways to play together, Guitar Hero Live adds another layer of social gameplay to your living room with vocals, letting singers take the stage. Vocalists will be able to accompany the Guitarist with their very own lyrics highway at the top of the screen. All you need is a USB mic and you&#39;re ready to rock out.</li>\r\n	<li>ESRB Rating: TEEN with Lyrics</li>\r\n</ul>', '15750.00', 0, 1, '2017-02-19 21:02:48', '2017-02-21 23:27:15'),
+(60, 2, 'DUALSHOCK 4 Camo Color มี 2 สีให้เลือก', NULL, '<p>The&nbsp;DualShock&reg;4 Wireless Controller&nbsp;for PlayStation&reg;4 defines the next generation of play, combining revolutionary new features with intuitive, precision controls. Improved analog sticks and trigger buttons allow for unparalleled accuracy with every move while innovative new technologies such as the multi-touch, clickable touch pad, integrated light bar, and internal speaker offer exciting new ways to experience and interact with your games. And with the addition of the Share button, celebrate and upload your greatest gaming moments on PlayStation&reg;4 with the touch of a button.<br />\r\n<br />\r\nPrecision Control:<br />\r\nThe feel, shape, and sensitivity of the DualShock&reg;4&rsquo;s analog sticks and trigger buttons have been enhanced to offer players absolute control for all games on PlayStation&reg;4.<br />\r\n<br />\r\nSharing at your Fingertips:<br />\r\nThe addition of the Share button makes sharing your greatest gaming moments as easy as a push of a button. Upload gameplay videos and screenshots directly from your system or live-stream your gameplay, all without disturbing the game in progress.<br />\r\n<br />\r\nNew ways to Play:<br />\r\nRevolutionary features like the touch pad, integrated light bar, and built-in speaker offer exciting new ways to experience and interact with your games and its 3.5mm audio jack offers a practical personal audio&nbsp;</p>', '2000.00', 0, 3, '2017-02-19 21:06:58', '2017-02-22 17:22:27'),
+(61, 2, 'YAMAHA SE700E (Made inJapan)ปี1985', NULL, '<p>ขายกีต้าร์YAMAHA SE700E<br />\r\nMade in Japan ปี1985&#39; สภาพสวยสดเดิมๆนำเข้าจากญี่ปุ่นปีเก่า เสียงดีมาก น่าสะสมหายากแล้ว (ขาย10,800฿) รวมส่งด่วนEms เซ็ท อัพ ปรับแอ็คชั่นเปลี่ยนสายใหม่พร้อมใช้งาน ราคาขายในญี่ปุ่น80,000เยน หรือราว33,000฿ไทย สนใจต่อรองกันได้ครับผม<br />\r\nสเป็คคร่าวๆ<br />\r\nRelease date October 1985<br />\r\nDiscontinued years 1985<br />\r\nPrice at launch 80,000 yen<br />\r\nMain Specifications<br />\r\nBody / neck structure<br />\r\nBolt-o Scale 648mm<br />\r\nFingerboard Ebony<br />\r\nBody Alder<br />\r\nNeck Maple<br />\r\nPeg Die-cast with a torque adjustment, black chrome<br />\r\nBridge Rockin&#39;Magic<br />\r\nPickup Single bobbin (Supinekkusu) &times; 2, open backing Han (Supinekkusu) &times; 1<br />\r\nPickup switch 5P selector SW<br />\r\nControl 1 volume, 1 tone<br />\r\n(by sound system)<br />\r\nString Light gauge<br />\r\nWeight 3.9kg<br />\r\nColor Red<br />\r\nเพื่อป้องกันการก็อบรูปสินค้าของผม ไปหลอกขาย</p>', '18000.00', 1, 2, '2017-02-22 14:10:12', '2017-02-22 17:21:44'),
+(62, 2, 'ALESIS D4 โมดูลกลองไฟฟ้า ต่อทริกกลอง แป้นไฟฟ้า เวทีแสดงสด แห่นาค แตรวง ซาวด์กลองแน่นปึ๊กที่สุดแล้ว ใหม่ๆทุกตัวจากญี่ปุ่น ที่ร้านโทไคมิวสิค', NULL, '<p>ดูของทางเวปก่อนที่ &gt;&gt; WWW.TOKAIMUSIC.COM&nbsp;<br />\r\nร้านโทไค มิวสิค จำหน่ายเครื่องดนตรีแบรนด์คุณภาพ!! ทั้งใหม่และมือสอง นำเข้า จากญี่ปุ่น!!!จำนวนมาก!!ทุกเดือน!! อาทิ..<br />\r\nซาวด์คาราโอเกะ กลองไฟฟ้า ริทึ่มบอก ซีเควนเซอร์ คีย์บอร์ดไฟฟ้า กีต้าร์ไฟฟ้า มัลติเอฟเฟค ตู้แอมป์กีต้าร์<br />\r\nมิกเซอร์ เครื่อง MD อุปกรณ์PA อีควอไลเซอร์ คอมเพรสเซ่อร์ ครอสโอเว่อร์ ลำโพงสตูดิโอ ดิจิตอลมิกเซอร์ ฯลฯ</p>', '11000.00', 1, 1, '2017-02-22 14:17:43', '2017-02-22 14:17:43'),
+(63, 2, 'xxxxxxxxx', NULL, '', '12000.00', 1, 1, '2017-02-23 10:25:17', '2017-02-23 10:25:17'),
+(64, 2, 'xxxxxxxxx', NULL, '', '12000.00', 1, 1, '2017-02-23 10:41:25', '2017-02-23 10:41:25'),
+(65, 2, 'xxxxxxxxx', NULL, '', '12000.00', 1, 1, '2017-02-23 10:41:41', '2017-02-23 10:41:41'),
+(66, 2, 'xxx', NULL, '', '1111.00', 1, 1, '2017-02-23 11:53:42', '2017-02-23 11:53:42'),
+(67, 2, 'xxx', NULL, '', '1111.00', 1, 1, '2017-02-23 11:55:05', '2017-02-23 11:55:05'),
+(68, 2, 'xxx', NULL, '', '1111.00', 1, 1, '2017-02-23 11:57:27', '2017-02-23 11:57:27'),
+(69, 2, 'xxx', NULL, '', '1111.00', 1, 1, '2017-02-23 11:57:39', '2017-02-23 11:57:39'),
+(70, 2, 'xxx', NULL, '', '1111.00', 1, 1, '2017-02-23 11:57:54', '2017-02-23 11:57:54'),
+(71, 2, 'xxx', NULL, '', '1111.00', 1, 1, '2017-02-23 11:57:58', '2017-02-23 11:57:58'),
+(72, 2, 'xxx', NULL, '', '1111.00', 1, 1, '2017-02-23 12:02:38', '2017-02-23 12:02:38'),
+(73, 2, 'xxx', NULL, '', '1111.00', 1, 1, '2017-02-23 12:09:10', '2017-02-23 12:09:10'),
+(74, 2, 'xxx', NULL, '', '1200.00', 1, 1, '2017-03-01 21:58:53', '2017-03-01 21:58:53');
 
 -- --------------------------------------------------------
 
@@ -13404,7 +13407,8 @@ INSERT INTO `lookups` (`id`, `model`, `model_id`, `name`, `keyword_1`, `keyword_
 (88, 'Product', 11, 'PS4 controller camp color', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-06 10:41:21', '2017-03-06 10:41:21'),
 (89, 'Product', 12, 'Guitar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-06 10:42:16', '2017-03-06 10:42:16'),
 (90, 'Product', 13, 'XBOX ONE ELITE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-06 23:18:23', '2017-03-06 23:18:23'),
-(91, 'Shop', 22, 'ABC SHop', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-08 17:09:52', '2017-03-08 17:09:52');
+(91, 'Shop', 22, 'ABC SHop', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-08 17:09:52', '2017-03-08 17:09:52'),
+(92, 'Product', 14, 'Harry Potter', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-10 16:37:33', '2017-03-10 16:37:33');
 
 -- --------------------------------------------------------
 
@@ -13426,6 +13430,100 @@ CREATE TABLE `open_hours` (
 
 INSERT INTO `open_hours` (`id`, `shop_id`, `time`, `same_time`, `active`) VALUES
 (1, 3, '{"1":{"open":0,"start_time":"00:00:00","end_time":"00:00:00"},"2":{"open":"1","start_time":"10:30:00","end_time":"20:00:00"},"3":{"open":"1","start_time":"10:30:00","end_time":"20:00:00"},"4":{"open":"1","start_time":"0:00:00","end_time":"0:00:00"},"5":{"open":"1","start_time":"10:30:00","end_time":"20:00:00"},"6":{"open":"1","start_time":"10:30:00","end_time":"20:00:00"},"7":{"open":0,"start_time":"00:00:00","end_time":"00:00:00"}}', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `invoice_prefix` varchar(32) NOT NULL,
+  `invoice_number` int(11) UNSIGNED NOT NULL,
+  `shop_id` int(11) UNSIGNED NOT NULL,
+  `person_id` int(11) UNSIGNED NOT NULL,
+  `person_name` varchar(255) NOT NULL,
+  `shipping_address` varchar(255) NOT NULL,
+  `message_to_seller` text NOT NULL,
+  `order_status_id` int(11) UNSIGNED NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `invoice_prefix`, `invoice_number`, `shop_id`, `person_id`, `person_name`, `shipping_address`, `message_to_seller`, `order_status_id`, `created_at`, `updated_at`) VALUES
+(1, 'INV', 1, 21, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', '', 1, '2017-03-13 00:03:41', '2017-03-13 00:04:11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_products`
+--
+
+CREATE TABLE `order_products` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `order_id` int(11) UNSIGNED NOT NULL,
+  `product_id` int(11) UNSIGNED NOT NULL,
+  `product_name` varchar(255) NOT NULL,
+  `price` decimal(15,2) NOT NULL,
+  `quantity` int(7) UNSIGNED NOT NULL,
+  `free_shipping` tinyint(1) DEFAULT NULL,
+  `shippng_cost` decimal(15,2) DEFAULT NULL,
+  `product_shipping_amount_type_id` int(11) UNSIGNED DEFAULT NULL,
+  `tax` decimal(15,2) DEFAULT NULL,
+  `total` decimal(15,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `order_products`
+--
+
+INSERT INTO `order_products` (`id`, `order_id`, `product_id`, `product_name`, `price`, `quantity`, `free_shipping`, `shippng_cost`, `product_shipping_amount_type_id`, `tax`, `total`) VALUES
+(1, 1, 9, 'Final Fantasy XV JP', '1590.00', 1, 1, NULL, NULL, NULL, '1590.00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_statuses`
+--
+
+CREATE TABLE `order_statuses` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `order_statuses`
+--
+
+INSERT INTO `order_statuses` (`id`, `name`) VALUES
+(1, 'รอการยืนยันการสั่งซื้อจากผู้ขาย');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_totals`
+--
+
+CREATE TABLE `order_totals` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `order_id` int(11) UNSIGNED NOT NULL,
+  `alias` varchar(255) NOT NULL,
+  `value` decimal(15,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `order_totals`
+--
+
+INSERT INTO `order_totals` (`id`, `order_id`, `alias`, `value`) VALUES
+(1, 1, 'subTotal', '1590.00'),
+(2, 1, 'shippingCost', '0.00'),
+(3, 1, 'total', '1590.00');
 
 -- --------------------------------------------------------
 
@@ -13761,6 +13859,8 @@ CREATE TABLE `products` (
   `specifications` text,
   `message_out_of_order` varchar(255) DEFAULT NULL,
   `shipping_calculate_from` tinyint(1) DEFAULT NULL,
+  `flag_message_from` tinyint(1) NOT NULL,
+  `flag_message` varchar(255) DEFAULT NULL,
   `active` tinyint(1) NOT NULL,
   `person_id` int(11) UNSIGNED NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -13771,20 +13871,21 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `description`, `product_model`, `sku`, `quantity`, `product_unit`, `minimum`, `price`, `weight`, `weight_unit_id`, `length`, `length_unit_id`, `width`, `height`, `specifications`, `message_out_of_order`, `shipping_calculate_from`, `active`, `person_id`, `created_at`, `updated_at`) VALUES
-(1, 'Playstation 4 500 GB', '', NULL, NULL, 5, 'เครื่อง', 0, '12000.00', NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, 0, 0, 1, '2017-02-25 18:09:14', '2017-03-04 21:32:28'),
-(2, 'Playstation 4 Slim 2TB', '', NULL, '', 100, '', 1, '12000.00', '250.00000000', 2, NULL, NULL, NULL, NULL, '[{"title":"VVV","value":"aaa"}]', NULL, 0, 1, 1, '2017-02-25 18:49:17', '2017-03-04 15:32:59'),
-(3, 'Mainboard', '', NULL, NULL, 5, '', 2, '9990.00', NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, 0, 1, 1, '2017-02-26 11:47:12', '2017-03-04 15:32:49'),
-(4, 'Mainboard', '', NULL, NULL, 100, '', 1, '9990.00', NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, 0, 1, 1, '2017-02-26 11:49:26', '2017-03-04 21:39:13'),
-(5, 'FFXV', '<p>The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there&#39;s no limit to what you can achieve.&nbsp;<br />\r\n<br />\r\nThe Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it&#39;s designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data.&nbsp;<br />\r\n<br />\r\nOffering accurate, brilliant color performance, the Cinema HD delivers up to 16.7 million colors across a wide gamut allowing you to see subtle nuances between colors from soft pastels to rich jewel tones. A wide viewing angle ensures uniform color from edge to edge. Apple&#39;s ColorSync technology allows you to create custom profiles to maintain consistent color onscreen and in print. The result: You can confidently use this display in all your color-critical applications.&nbsp;<br />\r\n<br />\r\nHoused in a new aluminum design, the display has a very thin bezel that enhances visual accuracy. Each display features two FireWire 400 ports and two USB 2.0 ports, making attachment of desktop peripherals, such as iSight, iPod, digital and still cameras, hard drives, printers and scanners, even more accessible and convenient. Taking advantage of the much thinner and lighter footprint of an LCD, the new displays support the VESA (Video Electronics Standards Association) mounting interface standard. Customers with the optional Cinema Display VESA Mount Adapter kit gain the flexibility to mount their display in locations most appropriate for their work environment.&nbsp;<br />\r\n<br />\r\nThe Cinema HD features a single cable design with elegant breakout for the USB 2.0, FireWire 400 and a pure digital connection using the industry standard Digital Video Interface (DVI) interface. The DVI connection allows for a direct pure-digital connection.</p>\r\n\r\n<h3>Features:</h3>\r\n\r\n<p>Unrivaled display performance</p>\r\n\r\n<ul>\r\n	<li>30-inch (viewable) active-matrix liquid crystal display provides breathtaking image quality and vivid, richly saturated color.</li>\r\n	<li>Support for 2560-by-1600 pixel resolution for display of high definition still and video imagery.</li>\r\n	<li>Wide-format design for simultaneous display of two full pages of text and graphics.</li>\r\n	<li>Industry standard DVI connector for direct attachment to Mac- and Windows-based desktops and notebooks</li>\r\n	<li>Incredibly wide (170 degree) horizontal and vertical viewing angle for maximum visibility and color performance.</li>\r\n	<li>Lightning-fast pixel response for full-motion digital video playback.</li>\r\n	<li>Support for 16.7 million saturated colors, for use in all graphics-intensive applications.</li>\r\n</ul>\r\n\r\n<p>Simple setup and operation</p>\r\n\r\n<ul>\r\n	<li>Single cable with elegant breakout for connection to DVI, USB and FireWire ports</li>\r\n	<li>Built-in two-port USB 2.0 hub for easy connection of desktop peripheral devices.</li>\r\n	<li>Two FireWire 400 ports to support iSight and other desktop peripherals</li>\r\n</ul>\r\n\r\n<p>Sleek, elegant design</p>\r\n\r\n<ul>\r\n	<li>Huge virtual workspace, very small footprint.</li>\r\n	<li>Narrow Bezel design to minimize visual impact of using dual displays</li>\r\n	<li>Unique hinge design for effortless adjustment</li>\r\n	<li>Support for VESA mounting solutions (Apple Cinema Display VESA Mount Adapter sold separately)</li>\r\n</ul>\r\n\r\n<h3>Technical specifications</h3>\r\n\r\n<p><strong>Screen size (diagonal viewable image size)</strong></p>\r\n\r\n<ul>\r\n	<li>Apple Cinema HD Display: 30 inches (29.7-inch viewable)</li>\r\n</ul>\r\n\r\n<p><strong>Screen type</strong></p>\r\n\r\n<ul>\r\n	<li>Thin film transistor (TFT) active-matrix liquid crystal display (AMLCD)</li>\r\n</ul>\r\n\r\n<p><strong>Resolutions</strong></p>\r\n\r\n<ul>\r\n	<li>2560 x 1600 pixels (optimum resolution)</li>\r\n	<li>2048 x 1280</li>\r\n	<li>1920 x 1200</li>\r\n	<li>1280 x 800</li>\r\n	<li>1024 x 640</li>\r\n</ul>\r\n\r\n<p><strong>Display colors (maximum)</strong></p>\r\n\r\n<ul>\r\n	<li>16.7 million</li>\r\n</ul>\r\n\r\n<p><strong>Viewing angle (typical)</strong></p>\r\n\r\n<ul>\r\n	<li>170&deg; horizontal; 170&deg; vertical</li>\r\n</ul>\r\n\r\n<p><strong>Brightness (typical)</strong></p>\r\n\r\n<ul>\r\n	<li>30-inch Cinema HD Display: 400 cd/m2</li>\r\n</ul>\r\n\r\n<p><strong>Contrast ratio (typical)</strong></p>\r\n\r\n<ul>\r\n	<li>700:1</li>\r\n</ul>\r\n\r\n<p><strong>Response time (typical)</strong></p>\r\n\r\n<ul>\r\n	<li>16 ms</li>\r\n</ul>\r\n\r\n<p><strong>Pixel pitch</strong></p>\r\n\r\n<ul>\r\n	<li>30-inch Cinema HD Display: 0.250 mm</li>\r\n</ul>\r\n\r\n<p><strong>Screen treatment</strong></p>\r\n\r\n<ul>\r\n	<li>Antiglare hardcoat</li>\r\n</ul>\r\n\r\n<p><strong>User controls (hardware and software)</strong></p>\r\n\r\n<ul>\r\n	<li>Display Power,</li>\r\n	<li>System sleep, wake</li>\r\n	<li>Brightness</li>\r\n	<li>Monitor tilt</li>\r\n</ul>\r\n\r\n<p><strong>Connectors and cables</strong><br />\r\nCable</p>\r\n\r\n<ul>\r\n	<li>DVI (Digital Visual Interface)</li>\r\n	<li>FireWire 400</li>\r\n	<li>USB 2.0</li>\r\n	<li>DC power (24 V)</li>\r\n</ul>\r\n\r\n<p>Connectors</p>\r\n\r\n<ul>\r\n	<li>Two-port, self-powered USB 2.0 hub</li>\r\n	<li>Two FireWire 400 ports</li>\r\n	<li>Kensington security port</li>\r\n</ul>\r\n\r\n<p><strong>VESA mount adapter</strong><br />\r\nRequires optional Cinema Display VESA Mount Adapter (M9649G/A)</p>\r\n\r\n<ul>\r\n	<li>Compatible with VESA FDMI (MIS-D, 100, C) compliant mounting solutions</li>\r\n</ul>\r\n\r\n<p><strong>Electrical requirements</strong></p>\r\n\r\n<ul>\r\n	<li>Input voltage: 100-240 VAC 50-60Hz</li>\r\n	<li>Maximum power when operating: 150W</li>\r\n	<li>Energy saver mode: 3W or less</li>\r\n</ul>\r\n\r\n<p><strong>Environmental requirements</strong></p>\r\n\r\n<ul>\r\n	<li>Operating temperature: 50&deg; to 95&deg; F (10&deg; to 35&deg; C)</li>\r\n	<li>Storage temperature: -40&deg; to 116&deg; F (-40&deg; to 47&deg; C)</li>\r\n	<li>Operating humidity: 20% to 80% noncondensing</li>\r\n	<li>Maximum operating altitude: 10,000 feet</li>\r\n</ul>\r\n\r\n<p><strong>Agency approvals</strong></p>\r\n\r\n<ul>\r\n	<li>FCC Part 15 Class B</li>\r\n	<li>EN55022 Class B</li>\r\n	<li>EN55024</li>\r\n	<li>VCCI Class B</li>\r\n	<li>AS/NZS 3548 Class B</li>\r\n	<li>CNS 13438 Class B</li>\r\n	<li>ICES-003 Class B</li>\r\n	<li>ISO 13406 part 2</li>\r\n	<li>MPR II</li>\r\n	<li>IEC 60950</li>\r\n	<li>UL 60950</li>\r\n	<li>CSA 60950</li>\r\n	<li>EN60950</li>\r\n	<li>ENERGY STAR</li>\r\n	<li>TCO &#39;03</li>\r\n</ul>\r\n\r\n<p><strong>Size and weight</strong><br />\r\n30-inch Apple Cinema HD Display</p>\r\n\r\n<ul>\r\n	<li>Height: 21.3 inches (54.3 cm)</li>\r\n	<li>Width: 27.2 inches (68.8 cm)</li>\r\n	<li>Depth: 8.46 inches (21.5 cm)</li>\r\n	<li>Weight: 27.5 pounds (12.5 kg)</li>\r\n</ul>\r\n\r\n<p><strong>System Requirements</strong></p>\r\n\r\n<ul>\r\n	<li>Mac Pro, all graphic options</li>\r\n	<li>MacBook Pro</li>\r\n	<li>Power Mac G5 (PCI-X) with ATI Radeon 9650 or better or NVIDIA GeForce 6800 GT DDL or better</li>\r\n	<li>Power Mac G5 (PCI Express), all graphics options</li>\r\n	<li>PowerBook G4 with dual-link DVI support</li>\r\n	<li>Windows PC and graphics card that supports DVI ports with dual-link digital bandwidth and VESA DDC standard for plug-and-play setup</li>\r\n</ul>', 'Umbrella it-gtech-600w', 'GT188ELAA4912JANTH-9080528', 0, 'แผ่น', 0, '1450.00', '500.15000000', 2, '15.00000000', 1, '10.00000000', '15.00000000', '[{"title":"HDMI","value":"2"},{"title":"D-SUB","value":"1"}]', NULL, 0, 0, 1, '2017-02-26 11:55:15', '2017-03-01 19:57:19'),
-(6, 'ABC', '', NULL, '', 0, 'ตัว', 1, '1690.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, 1, '2017-02-28 20:59:26', '2017-03-01 12:15:06'),
-(7, 'Fitbit Flex 2', '', NULL, '', 120, 'เรือน', 2, '3000.00', NULL, 1, NULL, NULL, NULL, NULL, '[{"title":"aaa","value":"xxx"}]', 'สินค้า 2 - 3', 0, 1, 1, '2017-03-01 00:18:29', '2017-03-02 17:43:28'),
-(8, 'Xbox One', '', '', '', 25, 'เครื่อง', 1, '18500.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, '2017-03-02 05:35:54', '2017-03-07 14:10:37'),
-(9, 'Final Fantasy XV', '', '', '', 100, 'แผ่น', 1, '1590.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ขออภัยหมด สินค้ากำลังถูกสั่งเพิ่ม', 2, 1, 1, '2017-03-02 06:05:06', '2017-03-07 14:40:06'),
-(10, 'Nike LunarEpic Flyknit Men''s Running Shoe (สีดำ) size 9.5"', '<p>&nbsp;</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:40px; letter-spacing:-1px; line-height:1.1; margin-bottom:4px; padding-bottom:12px; padding-top:0px; text-transform:uppercase">REVOLUTIONARY RIDE. EPIC RUN.</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Built for the future of running and those who dare to lead it, the Nike LunarEpic Flyknit Men&#39;s Running Shoe delivers an impeccably smooth ride and a virtually unnoticeable, second-skin fit.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">VANISHING FIT</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">The mid-rise Flyknit upper is designed to act like a natural extension of your leg, leaving only the fantastic sensation of cushioning underfoot. The near-seamless, one-piece construction is woven more openly in areas where your foot and ankle need greater stretch and breathability, and tighter in areas that demand more strength and support.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">FLUID FEEL</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">The soft, contoured Lunarlon midsole has precision-lasered cuts on the sides that collapse during footstrike, delivering a perfectly smooth transition from heel to toe.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">SUPERB SOFTNESS</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">The pressure-mapped outsole features Lunarlon pods in key areas to provide targeted cushioning. Laser cuts on the pods help absorb impact while dispersing it more evenly across your foot.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">MORE DETAILS</span></p>\r\n\r\n<ul>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Flywire integrates with the laces for a dynamic, supportive fit</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Skin-like overlay on the heel for added structure</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Fused foam midsole for enhanced durability without the use of glues or cements</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Laser-cut outsole provides great multi-surface traction</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">We recommend you wear this shoe with running socks&mdash;height of the sock is up to your personal preference</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Comes with two sets of sockliners, 4mm and 6mm, so you can fine-tune for an optimal fit</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Weight: 8.3 ounces (men&#39;s size 10)</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Offset: 10mm</li>\r\n</ul>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">FLYKNIT ORIGINS</span></p>\r\n\r\n<p><span style="color:#666666; font-family:Helvetica,ArialMT,sans-serif; font-size:12px">Nike Flyknit technology was inspired by feedback from runners seeking a shoe with the snug (and virtually unnoticed) fit of a sock. Nike embarked on a four-year mission with teams of programmers, engineers and designers to create the technology needed to make the knit upper with static properties for structure and durability. Then the precise placement of support, flexibility and breathability&mdash;all in one layer&mdash;was refined. The result is a featherweight, formfitting and virtually seamless upper.</span></p>', '', '', 100, 'คู่', 1, '7500.00', '300.00000000', 2, NULL, 1, NULL, NULL, '', NULL, 2, 1, 1, '2017-03-02 12:34:34', '2017-03-08 00:26:21'),
-(11, 'PS4 controller camp color', '', '', '', 10, 'ชิ้น', 1, '1590.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, '2017-03-06 10:41:20', '2017-03-08 12:43:12'),
-(12, 'Guitar', '', '', '', 2, 'ชิ้น', 1, '3500.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, '2017-03-06 10:42:15', '2017-03-07 18:32:20'),
-(13, 'XBOX ONE ELITE', '', '', '', 20, 'เครื่อง', 1, '20000.00', NULL, 2, NULL, 1, NULL, NULL, '', NULL, 2, 1, 1, '2017-03-06 23:18:23', '2017-03-07 23:51:26');
+INSERT INTO `products` (`id`, `name`, `description`, `product_model`, `sku`, `quantity`, `product_unit`, `minimum`, `price`, `weight`, `weight_unit_id`, `length`, `length_unit_id`, `width`, `height`, `specifications`, `message_out_of_order`, `shipping_calculate_from`, `flag_message_from`, `flag_message`, `active`, `person_id`, `created_at`, `updated_at`) VALUES
+(1, 'Playstation 4 500 GB', '', NULL, NULL, 29, 'เครื่อง', 0, '12000.00', NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, 0, 0, '', 0, 1, '2017-02-25 18:09:14', '2017-03-12 10:26:44'),
+(2, 'Playstation 4 Slim 2TB', '', NULL, '', 124, '', 1, '12000.00', '250.00000000', 2, NULL, NULL, NULL, NULL, '[{"title":"VVV","value":"aaa"}]', NULL, 0, 0, '', 1, 1, '2017-02-25 18:49:17', '2017-03-12 10:26:44'),
+(3, 'Mainboard', '', NULL, NULL, 29, '', 2, '9990.00', NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, 0, 0, '', 1, 1, '2017-02-26 11:47:12', '2017-03-12 10:26:44'),
+(4, 'Mainboard', '', NULL, NULL, 124, '', 1, '9990.00', NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, 0, 0, '', 1, 1, '2017-02-26 11:49:26', '2017-03-12 10:26:44'),
+(5, 'FFXV', '<p>The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there&#39;s no limit to what you can achieve.&nbsp;<br />\r\n<br />\r\nThe Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it&#39;s designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data.&nbsp;<br />\r\n<br />\r\nOffering accurate, brilliant color performance, the Cinema HD delivers up to 16.7 million colors across a wide gamut allowing you to see subtle nuances between colors from soft pastels to rich jewel tones. A wide viewing angle ensures uniform color from edge to edge. Apple&#39;s ColorSync technology allows you to create custom profiles to maintain consistent color onscreen and in print. The result: You can confidently use this display in all your color-critical applications.&nbsp;<br />\r\n<br />\r\nHoused in a new aluminum design, the display has a very thin bezel that enhances visual accuracy. Each display features two FireWire 400 ports and two USB 2.0 ports, making attachment of desktop peripherals, such as iSight, iPod, digital and still cameras, hard drives, printers and scanners, even more accessible and convenient. Taking advantage of the much thinner and lighter footprint of an LCD, the new displays support the VESA (Video Electronics Standards Association) mounting interface standard. Customers with the optional Cinema Display VESA Mount Adapter kit gain the flexibility to mount their display in locations most appropriate for their work environment.&nbsp;<br />\r\n<br />\r\nThe Cinema HD features a single cable design with elegant breakout for the USB 2.0, FireWire 400 and a pure digital connection using the industry standard Digital Video Interface (DVI) interface. The DVI connection allows for a direct pure-digital connection.</p>\r\n\r\n<h3>Features:</h3>\r\n\r\n<p>Unrivaled display performance</p>\r\n\r\n<ul>\r\n	<li>30-inch (viewable) active-matrix liquid crystal display provides breathtaking image quality and vivid, richly saturated color.</li>\r\n	<li>Support for 2560-by-1600 pixel resolution for display of high definition still and video imagery.</li>\r\n	<li>Wide-format design for simultaneous display of two full pages of text and graphics.</li>\r\n	<li>Industry standard DVI connector for direct attachment to Mac- and Windows-based desktops and notebooks</li>\r\n	<li>Incredibly wide (170 degree) horizontal and vertical viewing angle for maximum visibility and color performance.</li>\r\n	<li>Lightning-fast pixel response for full-motion digital video playback.</li>\r\n	<li>Support for 16.7 million saturated colors, for use in all graphics-intensive applications.</li>\r\n</ul>\r\n\r\n<p>Simple setup and operation</p>\r\n\r\n<ul>\r\n	<li>Single cable with elegant breakout for connection to DVI, USB and FireWire ports</li>\r\n	<li>Built-in two-port USB 2.0 hub for easy connection of desktop peripheral devices.</li>\r\n	<li>Two FireWire 400 ports to support iSight and other desktop peripherals</li>\r\n</ul>\r\n\r\n<p>Sleek, elegant design</p>\r\n\r\n<ul>\r\n	<li>Huge virtual workspace, very small footprint.</li>\r\n	<li>Narrow Bezel design to minimize visual impact of using dual displays</li>\r\n	<li>Unique hinge design for effortless adjustment</li>\r\n	<li>Support for VESA mounting solutions (Apple Cinema Display VESA Mount Adapter sold separately)</li>\r\n</ul>\r\n\r\n<h3>Technical specifications</h3>\r\n\r\n<p><strong>Screen size (diagonal viewable image size)</strong></p>\r\n\r\n<ul>\r\n	<li>Apple Cinema HD Display: 30 inches (29.7-inch viewable)</li>\r\n</ul>\r\n\r\n<p><strong>Screen type</strong></p>\r\n\r\n<ul>\r\n	<li>Thin film transistor (TFT) active-matrix liquid crystal display (AMLCD)</li>\r\n</ul>\r\n\r\n<p><strong>Resolutions</strong></p>\r\n\r\n<ul>\r\n	<li>2560 x 1600 pixels (optimum resolution)</li>\r\n	<li>2048 x 1280</li>\r\n	<li>1920 x 1200</li>\r\n	<li>1280 x 800</li>\r\n	<li>1024 x 640</li>\r\n</ul>\r\n\r\n<p><strong>Display colors (maximum)</strong></p>\r\n\r\n<ul>\r\n	<li>16.7 million</li>\r\n</ul>\r\n\r\n<p><strong>Viewing angle (typical)</strong></p>\r\n\r\n<ul>\r\n	<li>170&deg; horizontal; 170&deg; vertical</li>\r\n</ul>\r\n\r\n<p><strong>Brightness (typical)</strong></p>\r\n\r\n<ul>\r\n	<li>30-inch Cinema HD Display: 400 cd/m2</li>\r\n</ul>\r\n\r\n<p><strong>Contrast ratio (typical)</strong></p>\r\n\r\n<ul>\r\n	<li>700:1</li>\r\n</ul>\r\n\r\n<p><strong>Response time (typical)</strong></p>\r\n\r\n<ul>\r\n	<li>16 ms</li>\r\n</ul>\r\n\r\n<p><strong>Pixel pitch</strong></p>\r\n\r\n<ul>\r\n	<li>30-inch Cinema HD Display: 0.250 mm</li>\r\n</ul>\r\n\r\n<p><strong>Screen treatment</strong></p>\r\n\r\n<ul>\r\n	<li>Antiglare hardcoat</li>\r\n</ul>\r\n\r\n<p><strong>User controls (hardware and software)</strong></p>\r\n\r\n<ul>\r\n	<li>Display Power,</li>\r\n	<li>System sleep, wake</li>\r\n	<li>Brightness</li>\r\n	<li>Monitor tilt</li>\r\n</ul>\r\n\r\n<p><strong>Connectors and cables</strong><br />\r\nCable</p>\r\n\r\n<ul>\r\n	<li>DVI (Digital Visual Interface)</li>\r\n	<li>FireWire 400</li>\r\n	<li>USB 2.0</li>\r\n	<li>DC power (24 V)</li>\r\n</ul>\r\n\r\n<p>Connectors</p>\r\n\r\n<ul>\r\n	<li>Two-port, self-powered USB 2.0 hub</li>\r\n	<li>Two FireWire 400 ports</li>\r\n	<li>Kensington security port</li>\r\n</ul>\r\n\r\n<p><strong>VESA mount adapter</strong><br />\r\nRequires optional Cinema Display VESA Mount Adapter (M9649G/A)</p>\r\n\r\n<ul>\r\n	<li>Compatible with VESA FDMI (MIS-D, 100, C) compliant mounting solutions</li>\r\n</ul>\r\n\r\n<p><strong>Electrical requirements</strong></p>\r\n\r\n<ul>\r\n	<li>Input voltage: 100-240 VAC 50-60Hz</li>\r\n	<li>Maximum power when operating: 150W</li>\r\n	<li>Energy saver mode: 3W or less</li>\r\n</ul>\r\n\r\n<p><strong>Environmental requirements</strong></p>\r\n\r\n<ul>\r\n	<li>Operating temperature: 50&deg; to 95&deg; F (10&deg; to 35&deg; C)</li>\r\n	<li>Storage temperature: -40&deg; to 116&deg; F (-40&deg; to 47&deg; C)</li>\r\n	<li>Operating humidity: 20% to 80% noncondensing</li>\r\n	<li>Maximum operating altitude: 10,000 feet</li>\r\n</ul>\r\n\r\n<p><strong>Agency approvals</strong></p>\r\n\r\n<ul>\r\n	<li>FCC Part 15 Class B</li>\r\n	<li>EN55022 Class B</li>\r\n	<li>EN55024</li>\r\n	<li>VCCI Class B</li>\r\n	<li>AS/NZS 3548 Class B</li>\r\n	<li>CNS 13438 Class B</li>\r\n	<li>ICES-003 Class B</li>\r\n	<li>ISO 13406 part 2</li>\r\n	<li>MPR II</li>\r\n	<li>IEC 60950</li>\r\n	<li>UL 60950</li>\r\n	<li>CSA 60950</li>\r\n	<li>EN60950</li>\r\n	<li>ENERGY STAR</li>\r\n	<li>TCO &#39;03</li>\r\n</ul>\r\n\r\n<p><strong>Size and weight</strong><br />\r\n30-inch Apple Cinema HD Display</p>\r\n\r\n<ul>\r\n	<li>Height: 21.3 inches (54.3 cm)</li>\r\n	<li>Width: 27.2 inches (68.8 cm)</li>\r\n	<li>Depth: 8.46 inches (21.5 cm)</li>\r\n	<li>Weight: 27.5 pounds (12.5 kg)</li>\r\n</ul>\r\n\r\n<p><strong>System Requirements</strong></p>\r\n\r\n<ul>\r\n	<li>Mac Pro, all graphic options</li>\r\n	<li>MacBook Pro</li>\r\n	<li>Power Mac G5 (PCI-X) with ATI Radeon 9650 or better or NVIDIA GeForce 6800 GT DDL or better</li>\r\n	<li>Power Mac G5 (PCI Express), all graphics options</li>\r\n	<li>PowerBook G4 with dual-link DVI support</li>\r\n	<li>Windows PC and graphics card that supports DVI ports with dual-link digital bandwidth and VESA DDC standard for plug-and-play setup</li>\r\n</ul>', 'Umbrella it-gtech-600w', 'GT188ELAA4912JANTH-9080528', 24, 'แผ่น', 0, '1450.00', '500.15000000', 2, '15.00000000', 1, '10.00000000', '15.00000000', '[{"title":"HDMI","value":"2"},{"title":"D-SUB","value":"1"}]', NULL, 0, 0, '', 0, 1, '2017-02-26 11:55:15', '2017-03-12 10:26:44'),
+(6, 'ABC', '', NULL, '', 24, 'ตัว', 1, '1690.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, '', 1, 1, '2017-02-28 20:59:26', '2017-03-12 10:26:44'),
+(7, 'Fitbit Flex 2', '', NULL, '', 86, 'เรือน', 2, '3000.00', NULL, 1, NULL, NULL, NULL, NULL, '[{"title":"aaa","value":"xxx"}]', 'สินค้า 2 - 3', 0, 0, '', 1, 1, '2017-03-01 00:18:29', '2017-03-12 20:30:37'),
+(8, 'Xbox One', '', '', '', 49, 'เครื่อง', 1, '18500.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '', 1, 1, '2017-03-02 05:35:54', '2017-03-12 10:26:44'),
+(9, 'Final Fantasy XV JP', '', '', '', 51, 'แผ่น', 1, '1590.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ขออภัยหมด สินค้ากำลังถูกสั่งเพิ่ม', 2, 0, '', 1, 1, '2017-03-02 06:05:06', '2017-03-13 00:03:41'),
+(10, 'Nike LunarEpic Flyknit Men''s Running Shoe (สีดำ) size 9.5"', '<p>&nbsp;</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:40px; letter-spacing:-1px; line-height:1.1; margin-bottom:4px; padding-bottom:12px; padding-top:0px; text-transform:uppercase">REVOLUTIONARY RIDE. EPIC RUN.</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Built for the future of running and those who dare to lead it, the Nike LunarEpic Flyknit Men&#39;s Running Shoe delivers an impeccably smooth ride and a virtually unnoticeable, second-skin fit.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">VANISHING FIT</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">The mid-rise Flyknit upper is designed to act like a natural extension of your leg, leaving only the fantastic sensation of cushioning underfoot. The near-seamless, one-piece construction is woven more openly in areas where your foot and ankle need greater stretch and breathability, and tighter in areas that demand more strength and support.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">FLUID FEEL</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">The soft, contoured Lunarlon midsole has precision-lasered cuts on the sides that collapse during footstrike, delivering a perfectly smooth transition from heel to toe.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">SUPERB SOFTNESS</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">The pressure-mapped outsole features Lunarlon pods in key areas to provide targeted cushioning. Laser cuts on the pods help absorb impact while dispersing it more evenly across your foot.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">MORE DETAILS</span></p>\r\n\r\n<ul>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Flywire integrates with the laces for a dynamic, supportive fit</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Skin-like overlay on the heel for added structure</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Fused foam midsole for enhanced durability without the use of glues or cements</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Laser-cut outsole provides great multi-surface traction</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">We recommend you wear this shoe with running socks&mdash;height of the sock is up to your personal preference</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Comes with two sets of sockliners, 4mm and 6mm, so you can fine-tune for an optimal fit</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Weight: 8.3 ounces (men&#39;s size 10)</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Offset: 10mm</li>\r\n</ul>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">FLYKNIT ORIGINS</span></p>\r\n\r\n<p><span style="color:#666666; font-family:Helvetica,ArialMT,sans-serif; font-size:12px">Nike Flyknit technology was inspired by feedback from runners seeking a shoe with the snug (and virtually unnoticed) fit of a sock. Nike embarked on a four-year mission with teams of programmers, engineers and designers to create the technology needed to make the knit upper with static properties for structure and durability. Then the precise placement of support, flexibility and breathability&mdash;all in one layer&mdash;was refined. The result is a featherweight, formfitting and virtually seamless upper.</span></p>', '', '', 51, 'คู่', 1, '7500.00', '300.00000000', 2, NULL, 1, NULL, NULL, '', NULL, 2, 2, '', 1, 1, '2017-03-02 12:34:34', '2017-03-12 20:30:37'),
+(11, 'PS4 controller camp color', '', '', '', 335, 'ชิ้น', 4, '1590.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 2, '', 1, 1, '2017-03-06 10:41:20', '2017-03-12 20:30:37'),
+(12, 'Guitar', '', '', '', 26, 'ชิ้น', 1, '3500.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '', 1, 1, '2017-03-06 10:42:15', '2017-03-12 10:26:44'),
+(13, 'XBOX ONE ELITE', '', '', '', 44, 'เครื่อง', 1, '20000.00', NULL, 2, NULL, 1, NULL, NULL, '', NULL, 2, 0, '', 0, 1, '2017-03-06 23:18:23', '2017-03-12 10:26:44'),
+(14, 'Harry Potter', '', '', '', 28, 'เล่ม', 1, '2500.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 2, NULL, 1, 1, '2017-03-10 16:37:33', '2017-03-12 10:26:44');
 
 -- --------------------------------------------------------
 
@@ -13805,9 +13906,13 @@ CREATE TABLE `product_discounts` (
 --
 
 INSERT INTO `product_discounts` (`id`, `product_id`, `reduced_price`, `created_at`, `updated_at`) VALUES
-(1, 11, '541.00', '2017-03-08 18:09:25', '2017-03-08 18:09:25'),
-(2, 11, '1090.00', '2017-03-08 18:18:48', '2017-03-08 18:18:48'),
-(4, 11, '1090.00', '2017-03-08 18:23:11', '2017-03-08 18:23:11');
+(1, 11, '1000.00', '2017-03-09 15:29:06', '2017-03-09 18:27:07'),
+(2, 11, '541.00', '2017-03-09 15:39:13', '2017-03-09 15:39:13'),
+(3, 11, '90.00', '2017-03-09 15:41:12', '2017-03-10 10:45:23'),
+(4, 11, '1431.00', '2017-03-10 11:12:37', '2017-03-10 11:12:37'),
+(5, 10, '6000.00', '2017-03-10 17:02:14', '2017-03-10 17:04:42'),
+(6, 8, '15725.00', '2017-03-10 17:21:28', '2017-03-10 17:21:28'),
+(7, 14, '500.00', '2017-03-10 21:13:04', '2017-03-10 21:13:04');
 
 -- --------------------------------------------------------
 
@@ -13822,8 +13927,8 @@ CREATE TABLE `product_sale_promotions` (
   `sale_promotion_type_id` int(11) UNSIGNED NOT NULL,
   `model` varchar(255) NOT NULL,
   `model_id` int(11) UNSIGNED NOT NULL,
-  `date_start` date NOT NULL,
-  `date_end` date NOT NULL,
+  `date_start` datetime NOT NULL,
+  `date_end` datetime NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -13833,9 +13938,13 @@ CREATE TABLE `product_sale_promotions` (
 --
 
 INSERT INTO `product_sale_promotions` (`id`, `product_id`, `sale_promotion_target_group_id`, `sale_promotion_type_id`, `model`, `model_id`, `date_start`, `date_end`, `created_at`, `updated_at`) VALUES
-(1, 11, 1, 1, 'ProductDiscount', 1, '2017-03-08', '2017-03-16', '2017-03-08 18:09:25', '2017-03-08 18:09:25'),
-(2, 11, 1, 1, 'ProductDiscount', 2, '2017-03-09', '2017-03-10', '2017-03-08 18:18:48', '2017-03-08 18:18:48'),
-(4, 11, 1, 1, 'ProductDiscount', 4, '2017-03-14', '2017-03-18', '2017-03-08 18:23:11', '2017-03-08 18:23:11');
+(1, 11, 1, 1, 'ProductDiscount', 1, '2017-03-09 00:00:00', '2017-03-09 23:59:59', '2017-03-09 15:29:07', '2017-03-09 15:29:07'),
+(2, 11, 1, 1, 'ProductDiscount', 2, '2017-03-10 00:00:00', '2017-03-12 23:59:59', '2017-03-09 15:39:13', '2017-03-09 15:39:13'),
+(3, 11, 1, 1, 'ProductDiscount', 3, '2017-08-01 00:00:00', '2017-08-10 23:59:59', '2017-03-09 15:41:12', '2017-03-10 10:45:41'),
+(4, 11, 1, 1, 'ProductDiscount', 4, '2017-04-01 10:00:00', '2017-04-04 23:59:59', '2017-03-10 11:12:37', '2017-03-10 11:12:37'),
+(5, 10, 1, 1, 'ProductDiscount', 5, '2017-03-10 00:00:00', '2017-03-10 23:59:59', '2017-03-10 17:02:14', '2017-03-10 17:04:42'),
+(6, 8, 1, 1, 'ProductDiscount', 6, '2017-03-11 00:00:00', '2017-03-11 23:59:59', '2017-03-10 17:21:28', '2017-03-10 17:21:28'),
+(7, 14, 1, 1, 'ProductDiscount', 7, '2017-03-11 08:00:00', '2017-03-11 23:59:59', '2017-03-10 21:13:04', '2017-03-10 21:13:04');
 
 -- --------------------------------------------------------
 
@@ -13847,7 +13956,7 @@ CREATE TABLE `product_shippings` (
   `id` int(11) UNSIGNED NOT NULL,
   `product_id` int(11) UNSIGNED DEFAULT NULL,
   `free_shipping` tinyint(1) DEFAULT NULL,
-  `shipping_amount` decimal(15,2) DEFAULT NULL,
+  `shipping_cost` decimal(15,2) DEFAULT NULL,
   `shipping_amount_condition_id` int(11) UNSIGNED DEFAULT NULL,
   `free_shipping_with_condition` tinyint(1) DEFAULT NULL,
   `shipping_calculate_type_id` int(11) UNSIGNED DEFAULT NULL,
@@ -13860,13 +13969,33 @@ CREATE TABLE `product_shippings` (
 -- Dumping data for table `product_shippings`
 --
 
-INSERT INTO `product_shippings` (`id`, `product_id`, `free_shipping`, `shipping_amount`, `shipping_amount_condition_id`, `free_shipping_with_condition`, `shipping_calculate_type_id`, `free_shipping_operator_sign`, `free_shipping_amount`, `created_at`) VALUES
-(1, 11, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-06 21:58:38'),
+INSERT INTO `product_shippings` (`id`, `product_id`, `free_shipping`, `shipping_cost`, `shipping_amount_condition_id`, `free_shipping_with_condition`, `shipping_calculate_type_id`, `free_shipping_operator_sign`, `free_shipping_amount`, `created_at`) VALUES
+(1, 11, 0, '20.00', 1, 1, 3, '<', '150.00', '2017-03-06 21:58:38'),
 (2, 13, 0, '100.00', 1, 1, 3, '>', '20000.00', '2017-03-07 09:54:52'),
 (3, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-07 14:10:37'),
 (4, 9, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-07 14:40:06'),
 (5, 12, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-07 18:15:01'),
-(6, 10, 0, '250.00', 1, 1, 1, '<', '2000.00', '2017-03-08 00:18:44');
+(6, 10, 0, '250.00', 1, 1, 1, '<', '2000.00', '2017-03-08 00:18:44'),
+(7, 14, 0, '999.00', 1, 1, 2, '>', '1.00', '2017-03-11 19:53:33');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_shipping_amount_types`
+--
+
+CREATE TABLE `product_shipping_amount_types` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `product_shipping_amount_types`
+--
+
+INSERT INTO `product_shipping_amount_types` (`id`, `name`) VALUES
+(1, 'ต่อสินค้า 1 ชิ้น'),
+(2, 'ต่อการสั่งซื้อสินค้า');
 
 -- --------------------------------------------------------
 
@@ -13894,7 +14023,8 @@ INSERT INTO `product_to_categories` (`product_id`, `category_id`) VALUES
 (10, 217),
 (11, 788),
 (12, 940),
-(13, 776);
+(13, 776),
+(14, 2223);
 
 -- --------------------------------------------------------
 
@@ -14003,7 +14133,7 @@ CREATE TABLE `real_estates` (
   `real_estate_type_id` int(11) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` text,
-  `price` int(11) NOT NULL,
+  `price` decimal(15,2) NOT NULL,
   `home_area` text,
   `land_area` text,
   `indoor` text NOT NULL,
@@ -14021,82 +14151,82 @@ CREATE TABLE `real_estates` (
 --
 
 INSERT INTO `real_estates` (`id`, `announcement_type_id`, `real_estate_type_id`, `name`, `description`, `price`, `home_area`, `land_area`, `indoor`, `furniture`, `facility`, `feature`, `need_broker`, `person_id`, `created_at`, `updated_at`) VALUES
-(1, 2, 2, 'เจ้าของขายเอง สตูดิโอวิวสระ Q Asoke', '<p>ห้องสตูดิโด วิวสระ ชั้น 15<br />\r\nพื้นที่ 30.57 ห้องใหม่ยังไม่เคยอยู่<br />\r\nตกแต่งพร้อมเฟอร์นิเจอร์พร้อมเข้าอยู่<br />\r\nห้องมุมนี้มีชั้นละ 1 ห้องเท่านั้นๆ</p>', 6000000, '{"sqm":"31"}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["25","26","27","29","31","33","35","41"]', '["19","22"]', '0', 1, '2017-01-27 21:30:21', '2017-01-27 21:30:21'),
-(2, 2, 1, 'aaa', '', 10000, '{"sqm":"30"}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["40","41"]', '["10","14"]', '0', 1, '2017-01-27 23:09:04', '2017-01-27 23:09:04'),
-(3, 2, 1, '**ขายบ้าน** Casa seaside rayong 3 ห้องนอน 3 ห้องน้ำ (ปลอดค่าส่วนกลาง 1 ปี)', '<p>** พื้นที่ใช้สอย 129 ตรม. 60 ตรว.<br />\r\n<br />\r\n** สถานที่ใกล้เคียง**<br />\r\n+++ ถนนเรียบหาดแม่รำพึง ต.ตะพง อ.เมือง จ.ระยอง<br />\r\n+++ ห่างจากตลาดเพเพียง 9 กม.<br />\r\n+++ แบบบ้านเป็น Modern Breeze<br />\r\n<br />\r\n*** สนใจติดต่อ *** 081-6661866</p>', 5500000, '{"sqm":"129"}', '{"rai":"","ngan":"","wa":"60","sqm":"240"}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 'e', 'null', 'null', '0', 1, '2017-01-29 09:50:07', '2017-01-29 09:50:07'),
-(4, 2, 1, 'aaa', '', 100, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', 'null', 'null', '0', 1, '2017-01-29 09:55:45', '2017-01-29 09:55:45'),
-(5, 2, 2, 'xxxx', '', 10000, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', 'null', 'null', '0', 1, '2017-01-29 10:01:29', '2017-01-29 10:01:29'),
-(6, 2, 1, 'xzxxx', '', 1200, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', 'null', 'null', '0', 1, '2017-01-29 10:06:13', '2017-01-29 10:06:13'),
-(7, 2, 5, 'xxxx', '', 1111, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', 'null', 'null', '0', 1, '2017-01-29 10:23:46', '2017-01-29 10:23:46'),
-(8, 2, 4, 'xxx', '', 1200, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', 'null', 'null', '0', 1, '2017-01-29 10:30:24', '2017-01-29 10:30:24'),
-(9, 2, 1, 'Home111', '', 20000000, '{"sqm":"100"}', '{"rai":"10","ngan":"","wa":"","sqm":"16000"}', '{"bedroom":"1","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["28","31","35","38"]', '["11","14","17"]', '0', 1, '2017-01-31 17:42:35', '2017-01-31 17:42:35'),
-(10, 3, 5, 'TEST 123', '<p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>', 99999, '{"sqm":"1"}', '{"rai":"2","ngan":"3","wa":"4","sqm":"4416"}', '{"bedroom":"5","bathroom":"6","living_room":"7","home_office":"8","floors":"9","carpark":"10"}', 'e', '["28","29","30"]', '["1","2","3"]', '0', 1, '2017-01-31 19:36:27', '2017-01-31 20:54:24'),
-(11, 2, 1, 'hhhhh', '', 1200, '{"sqm":"1000"}', '{"rai":"","ngan":"","wa":"","sqm":"150"}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-01 09:07:32', '2017-02-01 09:07:32'),
-(12, 2, 1, 'Dev 123', '', 100000, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-01 09:31:52', '2017-02-01 19:15:01'),
-(13, 2, 1, 'eee', '', 10000, '{"sqm":"100"}', '{"rai":"","ngan":"","wa":"","sqm":"120"}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-01 09:32:31', '2017-02-01 09:32:31'),
-(14, 2, 1, 'xxx', '', 1000, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:43:07', '2017-02-03 16:43:07'),
-(15, 2, 1, 'xxx', '', 1000, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:43:15', '2017-02-03 16:43:15'),
-(16, 2, 1, 'xxx', '', 1000, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:43:23', '2017-02-03 16:43:23'),
-(17, 2, 1, 'xxx', '', 1000, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:44:53', '2017-02-03 16:44:53'),
-(18, 2, 1, 'xxx', '', 1000, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:46:12', '2017-02-03 16:46:12'),
-(19, 2, 1, 'xxx', '', 1000, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:47:38', '2017-02-03 16:47:38'),
-(20, 2, 1, 'xxx', '', 1000, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:47:50', '2017-02-03 16:47:50'),
-(21, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:52:50', '2017-02-03 16:52:50'),
-(22, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:53:38', '2017-02-03 16:53:38'),
-(23, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:53:42', '2017-02-03 16:53:42'),
-(24, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:53:50', '2017-02-03 16:53:50'),
-(25, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:56:41', '2017-02-03 16:56:41'),
-(26, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:58:09', '2017-02-03 16:58:09'),
-(27, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:59:11', '2017-02-03 16:59:11'),
-(28, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:59:28', '2017-02-03 16:59:28'),
-(29, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:01:42', '2017-02-03 17:01:42'),
-(30, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:02:08', '2017-02-03 17:02:08'),
-(31, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:03:08', '2017-02-03 17:03:08'),
-(32, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:03:14', '2017-02-03 17:03:14'),
-(33, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:03:51', '2017-02-03 17:03:51'),
-(34, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:05:33', '2017-02-03 17:05:33'),
-(35, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:09:30', '2017-02-03 17:09:30'),
-(36, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:11:08', '2017-02-03 17:11:08'),
-(37, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:11:20', '2017-02-03 17:11:20'),
-(38, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:12:23', '2017-02-03 17:12:23'),
-(39, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:12:40', '2017-02-03 17:12:40'),
-(40, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:17:31', '2017-02-03 17:17:31'),
-(41, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:18:11', '2017-02-03 17:18:11'),
-(42, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:18:21', '2017-02-03 17:18:21'),
-(43, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:22:06', '2017-02-03 17:22:06'),
-(44, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:22:27', '2017-02-03 17:22:27'),
-(45, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:22:43', '2017-02-03 17:22:43'),
-(46, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:23:03', '2017-02-03 17:23:03'),
-(47, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:23:58', '2017-02-03 17:23:58'),
-(48, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:24:14', '2017-02-03 17:24:14'),
-(49, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:25:32', '2017-02-03 17:25:32'),
-(50, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:25:52', '2017-02-03 17:25:52'),
-(51, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:26:49', '2017-02-03 17:26:49'),
-(52, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:27:00', '2017-02-03 17:27:00'),
-(53, 2, 2, 'aaaa', '', 1, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:27:50', '2017-02-03 17:27:50'),
-(54, 2, 1, 'abc', '', 1200000, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:29:11', '2017-02-03 17:29:11'),
-(55, 2, 1, 'aaa', '', 12000, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 20:20:52', '2017-02-03 20:20:52'),
-(56, 2, 1, 'Homeee', '', 120000000, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-13 10:11:20', '2017-02-13 10:11:20'),
-(57, 2, 1, 'xxx', '', 111, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-15 14:54:22', '2017-02-15 14:54:22'),
-(58, 2, 2, 'xxxxx', '', 1200000, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["41","44","45"]', '["13","14","17"]', '0', 1, '2017-02-18 22:11:53', '2017-02-18 22:11:53'),
-(59, 2, 2, 'xxxx', '<p>-รับเขียนบทความทุกแนว ตามความต้องการลูกค้า เนื่องจากมีความสนใจอ่านหนังสือ และการหาข้อมูล ในหลายๆหัวข้อด้วยกัน ด้วยประสบการณ์เขียนหลากหลายแนว ทำให้สามารถ เขียนได้หลากหลายแนวครับ<br />\r\n- หรือ ต้องการให้ เขียน content สำหรับ การขาย , คำเชิญชวน , บทความให้ความรู้ , คำโฆษณา , บทความบนเว็ปไซต์ ฯลฯ<br />\r\n- เขียนรีวิว สินค้า ผลิตภัณฑ์ และบริการ หรือ เชียร์อัพสินค้า , บทความเชิญชวน ให้สนใจ เลือกซื้อสินค้า หรือบริการ<br />\r\n<br />\r\n- ความยาวของบทความ ตั้งแต่ 500-700 คำ (โดยนับจาก ตัวนับคำ Microsoft Word)<br />\r\n- บทความทุกบทความ เขียนใหม่ 100% ไม่มีการ Copy แน่นอน คุณจะได้บทความที่ไม่ซ้ำใครอย่างแน่นอน&nbsp;<br />\r\n- บทความที่คุณได้ ทุกบทความ สามารถใช้ทำ SEO ได้ อย่างแน่นอน เพราะเราเขียนแบบมี pattern ตามหลัก SEO<br />\r\n- ลูกค้าสามารถกำหนด Keyword ในการเขียนบทความ สำหรับทำ SEO ตามที่ลูกค้าต้องการได้</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>- ทำงานด้านการตลาด ออนไลน์ (Online Marketing) มา 7 ปี<br />\r\n- รับงานเขียนบทความมาแล้วมากมายหลากหลายธุรกิจ<br />\r\n- ประสบการณ์การเขียนหนังสือ ebook มาแล้วหลายเล่ม<br />\r\n- ให้บริการทำการตลาด ออนไลน์ ทุกรูปแบบ ครบวงจร<br />\r\n- ให้บริการ ทำ SEO มายาวนานกว่า 7 ปี<br />\r\n- Freelance Writer<br />\r\n- เรามีทีมนักเขียน จำนวนมาก บทความเยอะไม่มีปัญหา</p>', 50000000, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["28","29","30"]', '["8","11","14"]', '0', 1, '2017-02-19 00:40:31', '2017-02-19 00:40:31'),
-(60, 1, 6, 'ขายคอนโดเซ็นทริคซีน รัชวิภาตกแต่งพร้อมอยู่ ห้องสวย วิวเมือง ใกล้สถานีรถไฟฟ้าสายสีม่วง ขึ้นลงทางด่วนสะดวกสบาย', '', 4500000, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["36","37","38"]', '["3","6","8","10"]', '0', 1, '2017-02-20 14:03:25', '2017-02-20 14:03:25'),
-(61, 2, 1, 'คอนโดใกล้รถไฟฟ้าสีม่วง,คอนโดสายสีม่วง', '', 1200000, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["37","39"]', '["17","18","20"]', '0', 1, '2017-02-20 14:04:29', '2017-02-20 14:04:29'),
-(62, 2, 5, 'xxx', '', 1222222, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:05:26', '2017-02-20 14:05:26'),
-(63, 2, 5, 'xxx', '', 1222222, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:05:52', '2017-02-20 14:05:52'),
-(64, 2, 5, 'xxx', '', 1222222, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:05:56', '2017-02-20 14:05:56'),
-(65, 2, 5, 'xxx', '', 1222222, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:06:05', '2017-02-20 14:06:05'),
-(66, 2, 5, 'xxx', '', 1222222, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:06:15', '2017-02-20 14:06:15'),
-(67, 2, 5, 'xxx', '', 1222222, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:06:31', '2017-02-20 14:06:31'),
-(68, 2, 5, 'xxx', '', 1222222, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:06:45', '2017-02-20 14:06:45'),
-(69, 2, 5, 'xxx', '', 1222222, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:07:45', '2017-02-20 14:07:45'),
-(70, 2, 5, 'xxx', '', 1222222, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:08:57', '2017-02-20 14:08:57'),
-(71, 2, 5, 'xxx', '', 1222222, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:09:07', '2017-02-20 14:09:07'),
-(72, 2, 5, 'xxx', '', 1222222, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:10:01', '2017-02-20 14:10:01'),
-(73, 2, 5, 'xxx', '', 1222222, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:10:10', '2017-02-20 14:10:10'),
-(74, 2, 5, 'xxx', '', 1222222, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:12:21', '2017-02-20 14:12:21'),
-(75, 2, 5, 'อาคารพาณิชย์ อนุสาวรีย์ชัยสมรภูมิ ถนนราชวิถี เขตราชเทวี กรุงเทพมหานคร', '<p>อาคารพาณิชย์ 4.5 ชั้น 5 นอน 5 น้ำ 43 ตร.ว. อนุสาวรีย์ชัยสมรภูมิ ถ.ราชวิถี แขวงถนนพญาไท เขตราชเทวี กรุงเทพมหานคร<br />\r\nอาคารพาณิชย์ 2 คูหา บริเวณอนุสาวรีย์ชัยสมรภูมิ(ฝั่งเกาะนางพญา) ซอยราชวิถี 11 (เลิศปัญญา) ทำเลการค้า ติดสถานีรถไฟฟ้าอนุสาวรีย์ชัยสมรภูมิ เข้า-ออก ถนนราชวิถี, ถนนพญาไท, ถนนพหลโยธิน, ทางด่วนศรีรัช, ถนนรางน้ำ, ใกล้เซ็นเตอร์วัน, วิคตอรี่พอยท์, รพ.ราชวิถี, รพ.พระมงกุฎเกล้า, เซ็นจูรี่มอลล์, ภัตตาคารพงหลี, รพ.พญาไท 2, คิงพาวเวอร์รางน้ำ</p>', 50000000, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","36","39","41"]', '["1","18","19","23"]', '0', 1, '2017-02-20 14:16:12', '2017-02-20 14:16:12'),
-(76, 2, 1, 'xxx', '', 102000000, '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["28","29"]', '["7","11"]', '0', 1, '2017-03-01 20:41:14', '2017-03-01 20:41:14');
+(1, 2, 2, 'เจ้าของขายเอง สตูดิโอวิวสระ Q Asoke', '<p>ห้องสตูดิโด วิวสระ ชั้น 15<br />\r\nพื้นที่ 30.57 ห้องใหม่ยังไม่เคยอยู่<br />\r\nตกแต่งพร้อมเฟอร์นิเจอร์พร้อมเข้าอยู่<br />\r\nห้องมุมนี้มีชั้นละ 1 ห้องเท่านั้นๆ</p>', '6000000.00', '{"sqm":"31"}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["25","26","27","29","31","33","35","41"]', '["19","22"]', '0', 1, '2017-01-27 21:30:21', '2017-01-27 21:30:21'),
+(2, 2, 1, 'aaa', '', '10000.00', '{"sqm":"30"}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["40","41"]', '["10","14"]', '0', 1, '2017-01-27 23:09:04', '2017-01-27 23:09:04'),
+(3, 2, 1, '**ขายบ้าน** Casa seaside rayong 3 ห้องนอน 3 ห้องน้ำ (ปลอดค่าส่วนกลาง 1 ปี)', '<p>** พื้นที่ใช้สอย 129 ตรม. 60 ตรว.<br />\r\n<br />\r\n** สถานที่ใกล้เคียง**<br />\r\n+++ ถนนเรียบหาดแม่รำพึง ต.ตะพง อ.เมือง จ.ระยอง<br />\r\n+++ ห่างจากตลาดเพเพียง 9 กม.<br />\r\n+++ แบบบ้านเป็น Modern Breeze<br />\r\n<br />\r\n*** สนใจติดต่อ *** 081-6661866</p>', '5500000.00', '{"sqm":"129"}', '{"rai":"","ngan":"","wa":"60","sqm":"240"}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 'e', 'null', 'null', '0', 1, '2017-01-29 09:50:07', '2017-01-29 09:50:07'),
+(4, 2, 1, 'aaa', '', '100.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', 'null', 'null', '0', 1, '2017-01-29 09:55:45', '2017-01-29 09:55:45'),
+(5, 2, 2, 'xxxx', '', '10000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', 'null', 'null', '0', 1, '2017-01-29 10:01:29', '2017-01-29 10:01:29'),
+(6, 2, 1, 'xzxxx', '', '1200.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', 'null', 'null', '0', 1, '2017-01-29 10:06:13', '2017-01-29 10:06:13'),
+(7, 2, 5, 'xxxx', '', '1111.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', 'null', 'null', '0', 1, '2017-01-29 10:23:46', '2017-01-29 10:23:46'),
+(8, 2, 4, 'xxx', '', '1200.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', 'null', 'null', '0', 1, '2017-01-29 10:30:24', '2017-01-29 10:30:24'),
+(9, 2, 1, 'Home111', '', '20000000.00', '{"sqm":"100"}', '{"rai":"10","ngan":"","wa":"","sqm":"16000"}', '{"bedroom":"1","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["28","31","35","38"]', '["11","14","17"]', '0', 1, '2017-01-31 17:42:35', '2017-01-31 17:42:35'),
+(10, 3, 5, 'TEST 123', '<p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>', '99999.00', '{"sqm":"1"}', '{"rai":"2","ngan":"3","wa":"4","sqm":"4416"}', '{"bedroom":"5","bathroom":"6","living_room":"7","home_office":"8","floors":"9","carpark":"10"}', 'e', '["28","29","30"]', '["1","2","3"]', '0', 1, '2017-01-31 19:36:27', '2017-01-31 20:54:24'),
+(11, 2, 1, 'hhhhh', '', '1200.00', '{"sqm":"1000"}', '{"rai":"","ngan":"","wa":"","sqm":"150"}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-01 09:07:32', '2017-02-01 09:07:32'),
+(12, 2, 1, 'Dev 123', '', '100000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-01 09:31:52', '2017-02-01 19:15:01'),
+(13, 2, 1, 'eee', '', '10000.00', '{"sqm":"100"}', '{"rai":"","ngan":"","wa":"","sqm":"120"}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-01 09:32:31', '2017-02-01 09:32:31'),
+(14, 2, 1, 'xxx', '', '1000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:43:07', '2017-02-03 16:43:07'),
+(15, 2, 1, 'xxx', '', '1000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:43:15', '2017-02-03 16:43:15'),
+(16, 2, 1, 'xxx', '', '1000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:43:23', '2017-02-03 16:43:23'),
+(17, 2, 1, 'xxx', '', '1000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:44:53', '2017-02-03 16:44:53'),
+(18, 2, 1, 'xxx', '', '1000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:46:12', '2017-02-03 16:46:12'),
+(19, 2, 1, 'xxx', '', '1000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:47:38', '2017-02-03 16:47:38'),
+(20, 2, 1, 'xxx', '', '1000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:47:50', '2017-02-03 16:47:50'),
+(21, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:52:50', '2017-02-03 16:52:50'),
+(22, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:53:38', '2017-02-03 16:53:38'),
+(23, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:53:42', '2017-02-03 16:53:42'),
+(24, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:53:50', '2017-02-03 16:53:50'),
+(25, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:56:41', '2017-02-03 16:56:41'),
+(26, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:58:09', '2017-02-03 16:58:09'),
+(27, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:59:11', '2017-02-03 16:59:11'),
+(28, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:59:28', '2017-02-03 16:59:28'),
+(29, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:01:42', '2017-02-03 17:01:42'),
+(30, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:02:08', '2017-02-03 17:02:08'),
+(31, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:03:08', '2017-02-03 17:03:08'),
+(32, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:03:14', '2017-02-03 17:03:14'),
+(33, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:03:51', '2017-02-03 17:03:51'),
+(34, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:05:33', '2017-02-03 17:05:33'),
+(35, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:09:30', '2017-02-03 17:09:30'),
+(36, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:11:08', '2017-02-03 17:11:08'),
+(37, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:11:20', '2017-02-03 17:11:20'),
+(38, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:12:23', '2017-02-03 17:12:23'),
+(39, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:12:40', '2017-02-03 17:12:40'),
+(40, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:17:31', '2017-02-03 17:17:31'),
+(41, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:18:11', '2017-02-03 17:18:11'),
+(42, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:18:21', '2017-02-03 17:18:21'),
+(43, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:22:06', '2017-02-03 17:22:06'),
+(44, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:22:27', '2017-02-03 17:22:27'),
+(45, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:22:43', '2017-02-03 17:22:43'),
+(46, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:23:03', '2017-02-03 17:23:03'),
+(47, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:23:58', '2017-02-03 17:23:58'),
+(48, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:24:14', '2017-02-03 17:24:14'),
+(49, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:25:32', '2017-02-03 17:25:32'),
+(50, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:25:52', '2017-02-03 17:25:52'),
+(51, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:26:49', '2017-02-03 17:26:49'),
+(52, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:27:00', '2017-02-03 17:27:00'),
+(53, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:27:50', '2017-02-03 17:27:50'),
+(54, 2, 1, 'abc', '', '1200000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:29:11', '2017-02-03 17:29:11'),
+(55, 2, 1, 'aaa', '', '12000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 20:20:52', '2017-02-03 20:20:52'),
+(56, 2, 1, 'Homeee', '', '120000000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-13 10:11:20', '2017-02-13 10:11:20'),
+(57, 2, 1, 'xxx', '', '111.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-15 14:54:22', '2017-02-15 14:54:22'),
+(58, 2, 2, 'xxxxx', '', '1200000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["41","44","45"]', '["13","14","17"]', '0', 1, '2017-02-18 22:11:53', '2017-02-18 22:11:53'),
+(59, 2, 2, 'xxxx', '<p>-รับเขียนบทความทุกแนว ตามความต้องการลูกค้า เนื่องจากมีความสนใจอ่านหนังสือ และการหาข้อมูล ในหลายๆหัวข้อด้วยกัน ด้วยประสบการณ์เขียนหลากหลายแนว ทำให้สามารถ เขียนได้หลากหลายแนวครับ<br />\r\n- หรือ ต้องการให้ เขียน content สำหรับ การขาย , คำเชิญชวน , บทความให้ความรู้ , คำโฆษณา , บทความบนเว็ปไซต์ ฯลฯ<br />\r\n- เขียนรีวิว สินค้า ผลิตภัณฑ์ และบริการ หรือ เชียร์อัพสินค้า , บทความเชิญชวน ให้สนใจ เลือกซื้อสินค้า หรือบริการ<br />\r\n<br />\r\n- ความยาวของบทความ ตั้งแต่ 500-700 คำ (โดยนับจาก ตัวนับคำ Microsoft Word)<br />\r\n- บทความทุกบทความ เขียนใหม่ 100% ไม่มีการ Copy แน่นอน คุณจะได้บทความที่ไม่ซ้ำใครอย่างแน่นอน&nbsp;<br />\r\n- บทความที่คุณได้ ทุกบทความ สามารถใช้ทำ SEO ได้ อย่างแน่นอน เพราะเราเขียนแบบมี pattern ตามหลัก SEO<br />\r\n- ลูกค้าสามารถกำหนด Keyword ในการเขียนบทความ สำหรับทำ SEO ตามที่ลูกค้าต้องการได้</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>- ทำงานด้านการตลาด ออนไลน์ (Online Marketing) มา 7 ปี<br />\r\n- รับงานเขียนบทความมาแล้วมากมายหลากหลายธุรกิจ<br />\r\n- ประสบการณ์การเขียนหนังสือ ebook มาแล้วหลายเล่ม<br />\r\n- ให้บริการทำการตลาด ออนไลน์ ทุกรูปแบบ ครบวงจร<br />\r\n- ให้บริการ ทำ SEO มายาวนานกว่า 7 ปี<br />\r\n- Freelance Writer<br />\r\n- เรามีทีมนักเขียน จำนวนมาก บทความเยอะไม่มีปัญหา</p>', '50000000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["28","29","30"]', '["8","11","14"]', '0', 1, '2017-02-19 00:40:31', '2017-02-19 00:40:31'),
+(60, 1, 6, 'ขายคอนโดเซ็นทริคซีน รัชวิภาตกแต่งพร้อมอยู่ ห้องสวย วิวเมือง ใกล้สถานีรถไฟฟ้าสายสีม่วง ขึ้นลงทางด่วนสะดวกสบาย', '', '4500000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["36","37","38"]', '["3","6","8","10"]', '0', 1, '2017-02-20 14:03:25', '2017-02-20 14:03:25'),
+(61, 2, 1, 'คอนโดใกล้รถไฟฟ้าสีม่วง,คอนโดสายสีม่วง', '', '1200000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["37","39"]', '["17","18","20"]', '0', 1, '2017-02-20 14:04:29', '2017-02-20 14:04:29'),
+(62, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:05:26', '2017-02-20 14:05:26'),
+(63, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:05:52', '2017-02-20 14:05:52'),
+(64, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:05:56', '2017-02-20 14:05:56'),
+(65, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:06:05', '2017-02-20 14:06:05'),
+(66, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:06:15', '2017-02-20 14:06:15'),
+(67, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:06:31', '2017-02-20 14:06:31'),
+(68, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:06:45', '2017-02-20 14:06:45'),
+(69, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:07:45', '2017-02-20 14:07:45'),
+(70, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:08:57', '2017-02-20 14:08:57'),
+(71, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:09:07', '2017-02-20 14:09:07'),
+(72, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:10:01', '2017-02-20 14:10:01'),
+(73, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:10:10', '2017-02-20 14:10:10'),
+(74, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:12:21', '2017-02-20 14:12:21'),
+(75, 2, 5, 'อาคารพาณิชย์ อนุสาวรีย์ชัยสมรภูมิ ถนนราชวิถี เขตราชเทวี กรุงเทพมหานคร', '<p>อาคารพาณิชย์ 4.5 ชั้น 5 นอน 5 น้ำ 43 ตร.ว. อนุสาวรีย์ชัยสมรภูมิ ถ.ราชวิถี แขวงถนนพญาไท เขตราชเทวี กรุงเทพมหานคร<br />\r\nอาคารพาณิชย์ 2 คูหา บริเวณอนุสาวรีย์ชัยสมรภูมิ(ฝั่งเกาะนางพญา) ซอยราชวิถี 11 (เลิศปัญญา) ทำเลการค้า ติดสถานีรถไฟฟ้าอนุสาวรีย์ชัยสมรภูมิ เข้า-ออก ถนนราชวิถี, ถนนพญาไท, ถนนพหลโยธิน, ทางด่วนศรีรัช, ถนนรางน้ำ, ใกล้เซ็นเตอร์วัน, วิคตอรี่พอยท์, รพ.ราชวิถี, รพ.พระมงกุฎเกล้า, เซ็นจูรี่มอลล์, ภัตตาคารพงหลี, รพ.พญาไท 2, คิงพาวเวอร์รางน้ำ</p>', '50000000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","36","39","41"]', '["1","18","19","23"]', '0', 1, '2017-02-20 14:16:12', '2017-02-20 14:16:12'),
+(76, 2, 1, 'xxx', '', '102000000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["28","29"]', '["7","11"]', '0', 1, '2017-03-01 20:41:14', '2017-03-01 20:41:14');
 
 -- --------------------------------------------------------
 
@@ -14348,25 +14478,6 @@ INSERT INTO `sale_promotion_types` (`id`, `name`, `alias`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `shipping_amount_conditions`
---
-
-CREATE TABLE `shipping_amount_conditions` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `shipping_amount_conditions`
---
-
-INSERT INTO `shipping_amount_conditions` (`id`, `name`) VALUES
-(1, 'ต่อสินค้า 1 ชิ้น'),
-(2, 'ต่อการสั่งซื้อสินค้า');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `shipping_cost_calculate_types`
 --
 
@@ -14552,6 +14663,7 @@ INSERT INTO `shop_relate_to` (`shop_id`, `model`, `model_id`) VALUES
 (3, 'Product', 11),
 (3, 'Product', 12),
 (3, 'Product', 13),
+(3, 'Product', 14),
 (21, 'Product', 9);
 
 -- --------------------------------------------------------
@@ -15058,7 +15170,8 @@ INSERT INTO `temporary_files` (`id`, `model`, `token`, `person_id`, `created_at`
 (276, 'Product', 'UE2n5aEN', 1, '2017-03-01 00:14:00'),
 (277, 'Product', 'OeDWRNVQ', 1, '2017-03-01 12:25:00'),
 (278, 'Product', 'gsiFTgyu', 1, '2017-03-02 05:30:47'),
-(279, 'Product', 'gQFlB0X3', 1, '2017-03-02 05:33:24');
+(279, 'Product', 'gQFlB0X3', 1, '2017-03-02 05:33:24'),
+(280, 'Product', 'skAHeg7f', 1, '2017-03-10 16:33:55');
 
 -- --------------------------------------------------------
 
@@ -15082,7 +15195,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `receive_email`, `remember_token`, `api_token`, `created_at`, `updated_at`) VALUES
-(1, '1', '$2y$10$JzjB5lnDBSuvrCk5BeGdYOKlkrilHaRILTNaLuo6k9o0PcfKWZRc6', NULL, 'ygUEv5yMKCayG3GEz6ZVMl8ztJ10GrexyASehEkzObUiBGR2oRGeXflP4qht', '', '2016-12-08 12:57:33', '2017-03-04 21:51:58'),
+(1, '1', '$2y$10$JzjB5lnDBSuvrCk5BeGdYOKlkrilHaRILTNaLuo6k9o0PcfKWZRc6', NULL, 'tyueVpKD2XLSLhmzyILQgM0tmcFOAEyP7Nm96I5weETwvzNdh26jnUC1TERs', '', '2016-12-08 12:57:33', '2017-03-10 20:44:19'),
 (11, 'ab@mail.com', '$2y$10$92fIYHxW4m9qw/lrzJ3TH.n6MumrWkwjWtOzaGjvzBKiIwpe77wtm', NULL, NULL, 'xXGR0NYUXnVsle49PGjShVRLLhhvYhRo4q936znHMSra46HXxHYGEocKb3zpJ', '2017-01-22 13:18:36', '2017-01-22 13:18:36');
 
 -- --------------------------------------------------------
@@ -16089,6 +16202,30 @@ ALTER TABLE `open_hours`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order_products`
+--
+ALTER TABLE `order_products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order_statuses`
+--
+ALTER TABLE `order_statuses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order_totals`
+--
+ALTER TABLE `order_totals`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `people`
 --
 ALTER TABLE `people`
@@ -16192,6 +16329,12 @@ ALTER TABLE `product_shippings`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `product_shipping_amount_types`
+--
+ALTER TABLE `product_shipping_amount_types`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `product_to_categories`
 --
 ALTER TABLE `product_to_categories`
@@ -16250,12 +16393,6 @@ ALTER TABLE `sale_promotion_target_groups`
 -- Indexes for table `sale_promotion_types`
 --
 ALTER TABLE `sale_promotion_types`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `shipping_amount_conditions`
---
-ALTER TABLE `shipping_amount_conditions`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -16368,7 +16505,7 @@ ALTER TABLE `branches`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 --
 -- AUTO_INCREMENT for table `categories`
 --
@@ -16383,7 +16520,7 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT for table `data_access_permissions`
 --
 ALTER TABLE `data_access_permissions`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `districts`
 --
@@ -16413,7 +16550,7 @@ ALTER TABLE `freelance_types`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
 --
 -- AUTO_INCREMENT for table `image_types`
 --
@@ -16453,12 +16590,32 @@ ALTER TABLE `length_units`
 -- AUTO_INCREMENT for table `lookups`
 --
 ALTER TABLE `lookups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 --
 -- AUTO_INCREMENT for table `open_hours`
 --
 ALTER TABLE `open_hours`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `order_products`
+--
+ALTER TABLE `order_products`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `order_statuses`
+--
+ALTER TABLE `order_statuses`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `order_totals`
+--
+ALTER TABLE `order_totals`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `people`
 --
@@ -16523,22 +16680,27 @@ ALTER TABLE `person_working_experiences`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `product_discounts`
 --
 ALTER TABLE `product_discounts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `product_sale_promotions`
 --
 ALTER TABLE `product_sale_promotions`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `product_shippings`
 --
 ALTER TABLE `product_shippings`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `product_shipping_amount_types`
+--
+ALTER TABLE `product_shipping_amount_types`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `provinces`
 --
@@ -16580,11 +16742,6 @@ ALTER TABLE `sale_promotion_target_groups`
 ALTER TABLE `sale_promotion_types`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `shipping_amount_conditions`
---
-ALTER TABLE `shipping_amount_conditions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
 -- AUTO_INCREMENT for table `shipping_cost_calculate_types`
 --
 ALTER TABLE `shipping_cost_calculate_types`
@@ -16618,7 +16775,7 @@ ALTER TABLE `taggings`
 -- AUTO_INCREMENT for table `temporary_files`
 --
 ALTER TABLE `temporary_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=280;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=281;
 --
 -- AUTO_INCREMENT for table `users`
 --

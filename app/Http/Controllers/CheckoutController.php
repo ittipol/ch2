@@ -65,21 +65,18 @@ class CheckoutController extends Controller
         $checkoutProducts[$cartProduct['shopId']][] = array(
           'productId' => $cartProduct['productId'],
           'quantity' => $cartProduct['quantity'],
-          // 'name' => $_product->name,
-          // 'price' => $cartModel->getPrice($_product),
-          // 'savingPrice' => $cartModel->getSavingPrice($_product,$cartProduct['quantity']),
-          // 'subTotal' => $cartModel->getProductSubTotal($_product,$cartProduct['quantity']),
-          // 'shippingCost' => $cartModel->getProductShippingCost($_product,$cartProduct['quantity']),
-          // 'total' => $cartModel->getProductTotal($_product,$cartProduct['quantity']),
         );
 
       }
     }
 
     if(empty($checkoutProducts)) {
-      Message::display('ไม่พบร้านค้าที่ต้องการสั่งซื้อสินค้า กรุณาเลือกร้านค้าที่ต้องการสั่งซื้อสินค้าแล้วสั่งซื้ออีกครั้ง','error');
+      Message::display('ไม่ได้เลือกร้านค้าที่ต้องการสั่งซื้อสินค้า กรุณาเลือกร้านค้าที่ต้องการสั่งซื้อสินค้าแล้วสั่งซื้ออีกครั้ง','error');
       return Redirect::back();
     }
+
+    //
+    $cartModel->disableCheckingError();
 
     $personId = session()->get('Person.id');
     $personName = session()->get('Person.name');
@@ -97,40 +94,77 @@ class CheckoutController extends Controller
         'person_name' => $personName,
         'shipping_address' => $shops[$shopId]['shipping_address'],
         'message_to_seller' => $shops[$shopId]['message'],
+        'order_status_id' => 1
       ))
       ->save();
 
-      // order products
-      $orderProduct = Service::loadModel('OrderProduct');
-// newInstance()
+      
+      $orderProductModel = Service::loadModel('OrderProduct');
+      $orderTotalModel = Service::loadModel('OrderTotal');
+
       foreach ($products as $product) {
 
         $_product = $productModel
-          // ->select('id','name','quantity','minimum','active')
-          ->select('id','name','price','minimum','product_unit','shipping_calculate_from','quantity','weight','active')
-          ->find($cartProduct['productId']);
+        ->select('id','name','price','shipping_calculate_from','quantity','weight')
+        ->find($product['productId']);
 
+        $shipping = array();
         if($_product->shipping_calculate_from == 2) {
-          
+          $productShipping = $_product->getRalatedData('ProductShipping',array(
+            'first' => true
+          ));
+
+          $shipping = array(
+            'free_shipping' => $productShipping->free_shipping,
+            'shippng_cost' => $productShipping->shipping_cost,
+            'product_shipping_amount_type_id' => $productShipping->product_shipping_amount_type_id
+          );
+
         }
 
-        // $value = array(
-        //   'order_id' => $order->id,
-        //   'product_id' => $product['productId'],
-        //   'product_name',
-        //   'price',
-        //   'quantity',
-        //   'shippng_cost'
-        // );
+        $value = array_merge(array(
+          'order_id' => $order->id,
+          'product_id' => $product['productId'],
+          'product_name' => $_product->name,
+          'price' => $_product->getPrice(),
+          'quantity' => $product['quantity'],
+          'total' => $cartModel->getProductTotal($_product,$product['quantity']),
+        ),$shipping);
 
-        dd($product);
+        $orderProductModel
+        ->newInstance()
+        ->fill($value)
+        ->save();
 
       }
 
+      $totals = $cartModel->getSummary($shopId);
+
+      foreach ($totals as $alias => $value) {
+
+        $orderTotalModel
+        ->newInstance()
+        ->fill(array(
+          'order_id' => $order->id,
+          'alias' => $alias,
+          'value' => $value['value'],
+        ))
+        ->save();
+
+      }
+
+      // delete products in cart
+      $cartModel->where([
+        ['shop_id','=',$shopId],
+        ['person_id','=',$personId]
+      ])->delete();
+
     }
 
-    dd('done');
-    dd('passed');
+    session()->flash('checkout-success',true);
+
+    // Message::display('ลงประกาศเรียบร้อยแล้ว','success');
+    return Redirect::to('checkout/success');
 
   }
 
@@ -145,6 +179,16 @@ class CheckoutController extends Controller
         ->increment('quantity',$product['quantity']);
       }
     }
+  }
+
+  public function success() {
+
+    if(!session()->has('checkout-success')) {
+      return Redirect::to('account/order');
+    }
+
+    return $this->view('pages.checkout.success');
+
   }
 
   private function errorMessage($error) {

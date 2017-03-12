@@ -364,7 +364,7 @@ class ProductController extends Controller
     $model->formHelper->loadFieldData('shippingAmountCondition',array(
       'key' =>'id',
       'field' => 'name',
-      'index' => 'shippingAmountConditions'
+      'index' => 'productShippingAmountTypes'
     ));
 
     $model->formHelper->setData('operatorSigns',Service::loadModel('ProductShipping')->operatorSigns);
@@ -470,7 +470,7 @@ class ProductController extends Controller
     }
 
     $this->setData('salePromotions',$_salePromotions);
-    $this->setData('price',$model->getPrice(true));
+    $this->setData('originalPrice',$model->getOriginalPrice(true));
     $this->setData('productDiscountAdd',request()->get('shopUrl').'product_discount/add/product_id:'.$model->id);
 
     return $this->view('pages.product.sale_promotion');

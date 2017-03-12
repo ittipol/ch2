@@ -75,6 +75,8 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('account/real_estate', 'accountController@realEstate')->name('account.real_estate');
   Route::get('account/shop', 'accountController@shop')->name('account.shop');
 
+  Route::get('account/order', 'accountController@order')->name('account.order');
+
 });
 
 // Announcement
@@ -162,6 +164,9 @@ Route::get('cart','CartController@index')->name('cart');
 Route::group(['middleware' => 'auth'], function () {
   Route::get('checkout','CheckoutController@checkout')->name('checkout');
   Route::post('checkout','CheckoutController@checkoutSubmit')->name('checkout');
+
+  Route::get('checkout/success','CheckoutController@success')->name('checkout.success');
+
 });
 
 // community / Shop

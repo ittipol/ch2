@@ -164,7 +164,7 @@ class Product extends Model
 
   }
 
-  public function getPrice($format = false) {
+  public function getOriginalPrice($format = false) {
 
     $currency = new Currency;
 
@@ -173,6 +173,26 @@ class Product extends Model
     }
 
     return $this->price;
+
+  }
+
+  public function getPrice($format = false) {
+
+    $currency = new Currency;
+
+    $promotion = $this->getPromotion();
+
+    $price = $this->price;
+
+    if(!empty($promotion)) {
+      $price = $promotion['reduced_price'];
+    }
+
+    if($format) {
+      $price = $currency->format($price);
+    }
+
+    return $price;
 
   }
 
@@ -317,7 +337,7 @@ class Product extends Model
     if(!empty($shipping)) {
       $shippingCost = $shipping->getShippingCostText(true);
 
-      if(!empty($shipping->shipping_amount_condition_id)) {
+      if(!empty($shipping->product_shipping_amount_type_id)) {
         $shippingAmountCondition = $shipping->shippingAmountCondition->name;
       }
 

@@ -7,30 +7,11 @@
       <div class="row">
         <div class="col-lg-6 col-sm-12">
           <div class="title">
-            อสังหาทรัพย์ที่ประกาศ
+            รายการสั่งซื้อสินค้า
           </div>
         </div>
       </div>
     </div>
-
-    <div class="tile-nav-group space-top-bottom-20 clearfix">
-
-      <div class="tile-nav small">
-        <div class="tile-nav-image">
-          <a href="{{URL::to('real-estate/post')}}">
-            <img src="/images/common/plus.png">
-          </a>
-        </div>
-        <div class="tile-nav-info">
-          <a href="{{URL::to('item/post')}}">
-            <h4 class="tile-nav-title">เพิ่มประกาศอสังหาทรัพย์</h4>
-          </a>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="line"></div>
 
     @if(!empty($_pagination['data']))
 
@@ -50,21 +31,14 @@
               </div>
               <div class="card-info">
                 <a href="{{$data['detailUrl']}}">
-                  <div class="card-title">{{$data['_short_name']}}</div>
+                  <div class="card-title">{{$data['id']}}</div>
                 </a>
-                <div class="card-sub-info">
-                  {{$data['_price']}}
-                </div>
-                <div class="card-sub-info">
-                  <h5>ประเภทอสังหาริมทรัพย์</h5>
-                  {{$data['_realEstateTypeName']}}
-                </div>
               </div>
               
               <div class="button-group">
 
-                <a href="{{$data['editUrl']}}">
-                  <div class="button wide-button">แก้ไข</div>
+                <a href="{{$data['detailUrl']}}">
+                  <div class="button wide-button">แสดงรายละเอียด</div>
                 </a>
 
                 <div class="additional-option">
@@ -72,7 +46,7 @@
                   <div class="dot"></div>
                   <div class="dot"></div>
                   <div class="additional-option-content">
-                    <a href="{{$data['detailUrl']}}">แสดงรายละเอียด</a>
+                    <a href="{{$data['editUrl']}}">แก้ไข</a>
                     <a href="{{$data['deleteUrl']}}">ลบ</a>
                   </div>
                 </div>
@@ -95,9 +69,8 @@
     <div class="list-empty-message text-center space-top-20">
       <img class="space-bottom-20" src="/images/common/not-found.png">
       <div>
-        <h3>ยังไม่มีประกาศนี้</h3>
-        <p>ขออภัย ยังไม่มีประกาศซื้อ ขายอสังหาริมทรัพย์ของคุณ</p>
-        <a href="{{URL::to('real-estate/post')}}" class="button">เพิ่มประกาศซื้อ ขายอสังหาริมทรัพย์ของคุณ</a>
+        <h3>ยังไม่มีรายการสั่งซื้อสินค้า</h3>
+        <a href="{{URL::to('product/list')}}" class="button">เลือกซื้อสินค้า</a>
       </div>
     </div>
 

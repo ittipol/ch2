@@ -217,4 +217,29 @@ class AccountController extends Controller
 
   }
 
+  public function order() {
+
+    $model = Service::loadModel('Order');
+
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
+
+    $model->paginator->criteria(array(
+      'conditions' => array(
+        array('person_id','=',session()->get('Person.id'))
+      ),
+      'order' => array('id','DESC')
+    ));
+    $model->paginator->setPage($page);
+    $model->paginator->setPagingUrl('item/list');
+    $model->paginator->setUrl('item/detail/{id}','detailUrl');
+
+    $this->data = $model->paginator->build();
+
+    return $this->view('pages.account.order');
+
+  }
+
 }

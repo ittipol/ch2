@@ -8,7 +8,7 @@ use App\library\measurement;
 class ProductShipping extends Model
 {
   protected $table = 'product_shippings';
-  protected $fillable = ['product_id','free_shipping','shipping_cost','shipping_amount_condition_id','free_shipping_with_condition','shipping_calculate_type_id','free_shipping_operator_sign','free_shipping_amount'];
+  protected $fillable = ['product_id','free_shipping','shipping_cost','product_shipping_amount_type_id','free_shipping_with_condition','shipping_calculate_type_id','free_shipping_operator_sign','free_shipping_amount'];
   public $timestamps  = false;
 
   public $formHelper = true;
@@ -44,7 +44,7 @@ class ProductShipping extends Model
   );
 
   public function shippingAmountCondition() {
-    return $this->hasOne('App\Models\ShippingAmountCondition','id','shipping_amount_condition_id');
+    return $this->hasOne('App\Models\ShippingAmountCondition','id','product_shipping_amount_type_id');
   }
 
   public function shippingCostCalCulateType() {
@@ -66,13 +66,13 @@ class ProductShipping extends Model
       if($productShipping->modelRelationData['Product']['shipping_calculate_from'] == 1) {
         $productShipping->free_shipping = null;
         $productShipping->shipping_cost = null;
-        $productShipping->shipping_amount_condition_id = null;
+        $productShipping->product_shipping_amount_type_id = null;
         $productShipping->free_shipping_with_condition = null;
       }
 
       if($productShipping->free_shipping == 1) {
         $productShipping->shipping_cost = null;
-        $productShipping->shipping_amount_condition_id = null;
+        $productShipping->product_shipping_amount_type_id = null;
       }
 
       if(empty($productShipping->free_shipping_with_condition)) {
@@ -151,7 +151,7 @@ class ProductShipping extends Model
 
       if(!$this->checkFreeShippingCondition($product,$quantity)) {
 
-        switch ($this->shipping_amount_condition_id) {
+        switch ($this->product_shipping_amount_type_id) {
           case 1:
             $total = $this->shipping_cost * $quantity;
             break;
@@ -270,7 +270,7 @@ class ProductShipping extends Model
 
     if(!$this->free_shipping) {
 
-      switch ($this->shipping_amount_condition_id) {
+      switch ($this->product_shipping_amount_type_id) {
         case 1:
           $total = ($price + $this->shipping_amount) * $quantity;
           break;
@@ -294,7 +294,7 @@ class ProductShipping extends Model
 
     $shippingCost = $this->getShippingCostText(true);
 
-    if(!empty($this->shipping_amount_condition_id)) {
+    if(!empty($this->product_shipping_amount_type_id)) {
       $shippingAmountCondition = $this->shippingAmountCondition->name;
     }
 

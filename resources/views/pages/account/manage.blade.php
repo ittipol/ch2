@@ -91,7 +91,7 @@
         <div class="list-item">
           <a href="{{URL::to('account/shop')}}">
             <img class="icon" src="/images/common/shop.png" >
-            <h4>ร้านค้าของคุณในชุมชน</h4>
+            <h4>บริษัทหรือร้านค้าของคุณ</h4>
           </a>
         </div>
 
@@ -108,6 +108,14 @@
             <h4>อสังหาทรัพย์ที่ประกาศ</h4>
           </a>
         </div>
+
+        <div class="list-item">
+          <a href="{{URL::to('account/order')}}">
+            <img class="icon" src="/images/common/bag.png" >
+            <h4>รายการสั่งซื้อสินค้า</h4>
+          </a>
+        </div>
+
 
         <div class="list-item">
           <a href="{{URL::to('account/notification')}}">

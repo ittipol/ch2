@@ -111,7 +111,7 @@
           echo Form::label('shipping_cost', 'ประเภทการคิดค่าขนส่งสินค้า', array(
             'class' => 'required'
           ));
-          echo Form::select('shipping_amount_condition_id', $_fieldData['shippingAmountConditions']);
+          echo Form::select('product_shipping_amount_type_id', $_fieldData['productShippingAmountTypes']);
         ?>
 
       </div>

@@ -12,6 +12,8 @@ class Cart extends Model
   protected $table = 'carts';
   protected $fillable = ['person_id','shop_id','product_id','quantity'];
 
+  private $checkError = true;
+
   public function addProduct($productId, $quantity) {
 
     $product = $this->getProduct($productId);
@@ -142,6 +144,10 @@ class Cart extends Model
       'errorMessage' => ''
     );
 
+    if(!$this->checkError) {
+      return $error;
+    }
+
     if(empty($product)) {
       $error = array(
         'hasError' => true,
@@ -242,6 +248,12 @@ class Cart extends Model
 
     if(!empty($product->promotion)) {
       $price = $product->promotion['reduced_price'];
+    }else{
+      $promotion = $product->getPromotion();
+
+      if(!empty($promotion)) {
+        $price = $promotion['reduced_price'];
+      }
     }
 
     if($format) {
@@ -261,9 +273,7 @@ class Cart extends Model
 
     if(!$error['hasError']) {
 
-      if(!empty($product->promotion)) {
-        $savingPrice = ($product->price - $product->promotion['reduced_price']) * $quantity;
-      }
+      $savingPrice = ($product->price - $this->getPrice($product)) * $quantity;
 
     }
 
@@ -283,15 +293,7 @@ class Cart extends Model
     $subTotal = 0;
 
     if(!$error['hasError']) {
-
-      $price = $product->price;
-
-      if(!empty($product->promotion)) {
-        $price = $product->promotion['reduced_price'];
-      }
-
-      $subTotal = $price * $quantity;
-
+      $subTotal = $this->getPrice($product) * $quantity;
     }
 
     if($format) {
@@ -312,13 +314,7 @@ class Cart extends Model
 
     if(!$error['hasError']) {
 
-      $price = $product->price;
-
-      if(!empty($product->promotion)) {
-        $price = $product->promotion['reduced_price'];
-      }
-
-      $total = $price * $quantity;
+      $total = $this->getPrice($product) * $quantity;
 
       if($product->shipping_calculate_from == 2) {
 
@@ -393,7 +389,7 @@ class Cart extends Model
             'name' => Shop::select('name')->find($shopId)->name
           ),
           'products' => $this->getProducts($shopId),
-          'summaries' => $this->getSummary($shopId)
+          'summaries' => $this->getSummary($shopId,true)
         );
       }
     }
@@ -402,7 +398,7 @@ class Cart extends Model
 
   }
 
-  public function getSummary($shopId = null){
+  public function getSummary($shopId = null,$format = false){
 
     $summaries = array(
       'subTotal' => 'getSummarySubTotal',
@@ -414,7 +410,7 @@ class Cart extends Model
     $_summaries = array();
     foreach ($summaries as $alias => $fx) {
       $_summaries[$alias] = array(
-        'value' => $this->{$fx}($shopId)
+        'value' => $this->{$fx}($shopId,$format)
       );
     }
 
@@ -422,7 +418,7 @@ class Cart extends Model
 
   }
 
-  public function getSummarySavingPrice($shopId = null) {
+  public function getSummarySavingPrice($shopId = null,$format = false) {
 
     $currency = new Currency;
 
@@ -445,11 +441,15 @@ class Cart extends Model
 
     }
 
-    return $currency->format($savingPrice);
+    if($format) {
+      return $currency->format($savingPrice);
+    }
+
+    return $savingPrice;
 
   }
 
-  public function getSummarySubTotal($shopId = null) {
+  public function getSummarySubTotal($shopId = null,$format = false) {
 
     $currency = new Currency;
 
@@ -472,11 +472,15 @@ class Cart extends Model
 
     }
 
-    return $currency->format($subTotal);
+    if($format) {
+      return $currency->format($subTotal);
+    }
+
+    return $subTotal;
 
   }
 
-  public function getSummaryShippingCost($shopId = null) {
+  public function getSummaryShippingCost($shopId = null,$format = false) {
 
     $currency = new Currency;
 
@@ -499,11 +503,15 @@ class Cart extends Model
 
     }
 
-    return $currency->format($shippingCost);
+    if($format) {
+      return $currency->format($shippingCost);
+    }
+
+    return $shippingCost;
 
   }
 
-  public function getSummaryTotal($shopId = null) {
+  public function getSummaryTotal($shopId = null,$format = false) {
 
     $currency = new Currency;
 
@@ -526,7 +534,11 @@ class Cart extends Model
 
     }
 
-    return $currency->format($total);
+    if($format) {
+      return $currency->format($total);
+    }
+
+    return $total;
 
   }
 
@@ -651,6 +663,14 @@ class Cart extends Model
     ->first()
     ->shop_id;
 
+  }
+
+  public function enableCheckingError() {
+    $this->checkError = true;
+  }
+
+  public function disableCheckingError() {
+    $this->checkError = false;
   }
 
   public function setUpdatedAt($value) {}

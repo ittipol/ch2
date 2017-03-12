@@ -50,7 +50,7 @@
           <h4>โปรโมชั่นนี้กำลังถูกใช้งาน</h4>
           <div class="text-center space-bottom-20">
             <img class="primary-image" src="/images/common/tick.png">
-            <h4>ราคาสินค้าปกติ: {{$price}}</h4>
+            <h4>ราคาสินค้าปกติ: {{$originalPrice}}</h4>
             <h4>ราคาสินค้าหลังลดราคา: {{$salePromotion['data']['_reduced_price']}}</h4>
           </div>
 
@@ -62,7 +62,7 @@
         <div class="list-box">
           <h4>โปรโมชั่นจะทำงานในอีก {{$salePromotion['remainingDays']}}</h4>
           <div class="text-center space-top-bottom-30">
-            <h4>ราคาสินค้าปกติ: {{$price}}</h4>
+            <h4>ราคาสินค้าปกติ: {{$originalPrice}}</h4>
             <h4>ราคาสินค้าหลังลดราคา: {{$salePromotion['data']['_reduced_price']}}</h4>
           </div>
 

@@ -55,3 +55,20 @@
 .checkout .checkout-input {
 	padding: 15px 5px 0;
 }
+
+.checkout-success {
+	margin: 50px 30px;
+}
+
+.checkout-success img.primary-image {
+	width: 100px;
+	height: 100px;
+	background-color: rgb(49,175,145);
+	border-radius: 100px;
+	padding: 20px;
+	margin: 10px 0;
+}
+
+.checkout-success .checkout-success-message {
+	margin-top: 30px;
+}
