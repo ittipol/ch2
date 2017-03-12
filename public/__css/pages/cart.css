@@ -2,11 +2,13 @@
 	/*border: 1px solid #ececec;*/
 }
 
-.cart .error-message {
-	padding: 10px;
-	font-weight: bold;
-	background-color: #FFCDD2;
-	margin-bottom: 10px;
+.cart .product-error-message {
+	color: #D50000;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding: 5px 10px 5px;
+  background-color: #FFEBEE;
+  border-bottom: 2px solid #D50000;
 }
 
 .cart .product-image img {

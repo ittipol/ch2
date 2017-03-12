@@ -94,10 +94,10 @@
       <div class="form-row">
 
         <?php
-          echo Form::label('shipping_amount', 'ค่าขนส่งสินค้า (บาท)', array(
+          echo Form::label('shipping_cost', 'ค่าขนส่งสินค้า (บาท)', array(
             'class' => 'required'
           ));
-          echo Form::text('shipping_amount', null, array(
+          echo Form::text('shipping_cost', null, array(
             'placeholder' => 'ค่าขนส่งสินค้า',
             'autocomplete' => 'off'
           ));
@@ -108,7 +108,7 @@
       <div class="form-row">
 
         <?php
-          echo Form::label('shipping_amount', 'ประเภทการคิดค่าขนส่งสินค้า', array(
+          echo Form::label('shipping_cost', 'ประเภทการคิดค่าขนส่งสินค้า', array(
             'class' => 'required'
           ));
           echo Form::select('shipping_amount_condition_id', $_fieldData['shippingAmountConditions']);

@@ -48,11 +48,7 @@
                 @foreach($value['products'] as $product)
                 <div id="_product_{{$product['id']}}" class="checkout-list-table-row" data-id="_shop_{{$value['shop']['id']}}">
 
-                  @if(!empty($product['hasError']))
-                    <p class="error-message">
-                      {{$product['errorMessage']}}
-                    </p>
-                  @endif
+
 
                   <div class="product-list-box clearfix">
 
@@ -65,8 +61,15 @@
                     <div class="col-xs-8 product-info">
 
                       <a href="{{$product['productDetailUrl']}}">
-                        <h4 class="product-title">{{$product['name']}}</h4>
+                        <h4 class="product-title">{{$product['name']}}</h4>                      
                       </a>
+
+
+                      @if(!empty($product['hasError']))
+                        <p class="product-error-message">
+                          {{$product['errorMessage']}}
+                        </p>
+                      @endif
 
                       <div>
                         ราคาสินค้ารวม: <span class="product-price">{{$product['price']}}</span> x {{$product['quantity']}}
@@ -116,7 +119,7 @@
 
                   <div class="address-input">
                     <h5 class="required">ที่อยู่สำหรับการจัดส่ง</h5>
-                    <input type="text" name="shop[{{$value['shop']['id']}}][address]" value="{{$address}}">
+                    <input type="text" name="shop[{{$value['shop']['id']}}][shipping_address]" value="{{$shippingAddress}}">
                   </div>
 
                   <div class="message-input">
@@ -137,11 +140,15 @@
       @endforeach
 
       <div class="cart-check-out text-right">
-      <?php
-        echo Form::submit('สั่งซื้อสินค้า' , array(
-          'class' => 'button'
-        ));
-      ?>
+
+        <p class="error-message text-bold">* สินค้าบางรายการอาจยังไม่ได้รวมค่าจัดส่ง</p>
+        <p class="error-message text-bold">* โปรดรอการยืนยันคำสั่งซื้อจากผู้ขายก่อนการชำระเงิน</p>
+
+        <?php
+          echo Form::submit('สั่งซื้อสินค้า' , array(
+            'class' => 'button'
+          ));
+        ?>
       </div>
 
       <?php

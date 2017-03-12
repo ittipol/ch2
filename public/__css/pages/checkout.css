@@ -4,6 +4,18 @@
 	border-bottom: 1px solid #1565C0;
 }
 
+.checkout .product-list-box {
+	position: relative;
+}
+
+.checkout .product-error-message {
+	color: #D50000;
+	font-weight: bold;
+/*	padding: 10px;
+	background-color: #FFCDD2;
+	margin-bottom: 0;*/
+}
+
 .checkout .shop-info {
 /*	color: #fff;
 	background-color: #0071c5;
@@ -24,10 +36,6 @@
 
 .checkout .checkout-list-table-row {
 	margin: 20px 0;
-}
-
-.checkout .checkout-content-right {
-	/*background-color: #F2F3F7;*/
 }
 
 .checkout .checkout-summary {

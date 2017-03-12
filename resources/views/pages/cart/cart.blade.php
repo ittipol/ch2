@@ -30,7 +30,7 @@
               <div id="_product_{{$product['id']}}" class="product-list-table-row" data-id="_shop_{{$value['shop']['id']}}">
 
                 @if(!empty($product['hasError']))
-                  <p class="error-message">
+                  <p class="product-error-message">
                     {{$product['errorMessage']}}
                   </p>
                 @endif

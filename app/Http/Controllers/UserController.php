@@ -72,9 +72,7 @@ class UserController extends Controller
           $cart = $cartModel->where([
             ['person_id','=',$person->id],
             ['product_id','=',$product['productId']]
-          ])
-          ->select('id')
-          ->first();
+          ])->first();
 
           if(!empty($cart)) {
             $cart->increment('quantity', $product['quantity']);

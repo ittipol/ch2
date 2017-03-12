@@ -253,18 +253,18 @@ class Cart extends Model
 
   public function getSavingPrice($product,$quantity,$format = false) {
 
-    $error = $this->checkProductError($product,$quantity);
-
-    if($error['hasError']) {
-      return false;
-    }
-
     $currency = new Currency;
+
+    $error = $this->checkProductError($product,$quantity);
 
     $savingPrice = 0;
 
-    if(!empty($product->promotion)) {
-      $savingPrice = ($product->price - $product->promotion['reduced_price']) * $quantity;
+    if(!$error['hasError']) {
+
+      if(!empty($product->promotion)) {
+        $savingPrice = ($product->price - $product->promotion['reduced_price']) * $quantity;
+      }
+
     }
 
     if($format) {
@@ -276,21 +276,23 @@ class Cart extends Model
 
   public function getProductSubTotal($product,$quantity,$format = false) {
 
-    $error = $this->checkProductError($product,$quantity);
-
-    if($error['hasError']) {
-      return false;
-    }
-
     $currency = new Currency;
 
-    $price = $product->price;
+    $error = $this->checkProductError($product,$quantity);
 
-    if(!empty($product->promotion)) {
-      $price = $product->promotion['reduced_price'];
+    $subTotal = 0;
+
+    if(!$error['hasError']) {
+
+      $price = $product->price;
+
+      if(!empty($product->promotion)) {
+        $price = $product->promotion['reduced_price'];
+      }
+
+      $subTotal = $price * $quantity;
+
     }
-
-    $subTotal = $price * $quantity;
 
     if($format) {
       $subTotal = $currency->format($subTotal);
@@ -302,31 +304,32 @@ class Cart extends Model
 
   public function getProductTotal($product,$quantity,$format = false) {
 
-    $error = $this->checkProductError($product,$quantity);
-
-    if($error['hasError']) {
-      return false;
-    }
-
     $currency = new Currency;
 
-    $price = $product->price;
+    $error = $this->checkProductError($product,$quantity);
 
-    if(!empty($product->promotion)) {
-      $price = $product->promotion['reduced_price'];
-    }
+    $total = 0;
 
-    $total = $price * $quantity;
-    // $total = $subTotal;
+    if(!$error['hasError']) {
 
-    if($product->shipping_calculate_from == 2) {
+      $price = $product->price;
 
-      $shipping = $product->getRalatedData('ProductShipping',array(
-        'first' => true
-      ));
+      if(!empty($product->promotion)) {
+        $price = $product->promotion['reduced_price'];
+      }
 
-      $shippingCost = $shipping->getShippingCost($product,$quantity);
-      $total = $total + $shippingCost;
+      $total = $price * $quantity;
+
+      if($product->shipping_calculate_from == 2) {
+
+        $shipping = $product->getRalatedData('ProductShipping',array(
+          'first' => true
+        ));
+
+        $shippingCost = $shipping->getShippingCost($product,$quantity);
+        $total = $total + $shippingCost;
+
+      }
 
     }
 

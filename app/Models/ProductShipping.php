@@ -8,7 +8,7 @@ use App\library\measurement;
 class ProductShipping extends Model
 {
   protected $table = 'product_shippings';
-  protected $fillable = ['product_id','free_shipping','shipping_amount','shipping_amount_condition_id','free_shipping_with_condition','shipping_calculate_type_id','free_shipping_operator_sign','free_shipping_amount'];
+  protected $fillable = ['product_id','free_shipping','shipping_cost','shipping_amount_condition_id','free_shipping_with_condition','shipping_calculate_type_id','free_shipping_operator_sign','free_shipping_amount'];
   public $timestamps  = false;
 
   public $formHelper = true;
@@ -23,20 +23,20 @@ class ProductShipping extends Model
   protected $validation = array(
     'rules' => array(
       'free_shipping_amount' => 'required|numeric',
-      'shipping_amount' => 'required|numeric',
+      'shipping_cost' => 'required|numeric',
     ),
     'messages' => array(
       'free_shipping_amount.required' => 'จำนวนของเงื่อนไขการส่งสินค้าฟรีห้ามว่าง',
       'free_shipping_amount.numeric' => 'จำนวนของเงื่อนไขการส่งสินค้าฟรีไม่ถูกต้อง',
-      'shipping_amount.required' => 'ค่าขนส่งสินค้าต่อสินค้าหนึ่งชิ้นห้ามว่าง',
-      'shipping_amount.numeric' => 'ค่าขนส่งสินค้าต่อสินค้าหนึ่งชิ้นไม่ถูกต้อง'
+      'shipping_cost.required' => 'ค่าขนส่งสินค้าห้ามว่าง',
+      'shipping_cost.numeric' => 'ค่าขนส่งสินค้าไม่ถูกต้อง'
     ),
     'conditions' => array(
       'free_shipping_amount' => array(
         'field' => 'free_shipping_with_condition',
         'value' => 1,
       ),
-      'shipping_amount' => array(
+      'shipping_cost' => array(
         'field' => 'free_shipping',
         'value' => 0,
       )
@@ -65,13 +65,13 @@ class ProductShipping extends Model
 
       if($productShipping->modelRelationData['Product']['shipping_calculate_from'] == 1) {
         $productShipping->free_shipping = null;
-        $productShipping->shipping_amount = null;
+        $productShipping->shipping_cost = null;
         $productShipping->shipping_amount_condition_id = null;
         $productShipping->free_shipping_with_condition = null;
       }
 
       if($productShipping->free_shipping == 1) {
-        $productShipping->shipping_amount = null;
+        $productShipping->shipping_cost = null;
         $productShipping->shipping_amount_condition_id = null;
       }
 
@@ -123,7 +123,7 @@ class ProductShipping extends Model
         break;
       
       case 2:
-        $amount = ' '.$this->free_shipping_amount.' '.$product->product_unit;
+        $amount = ' '.(int)$this->free_shipping_amount.' '.$product->product_unit;
         break;
 
       case 3:
@@ -153,11 +153,11 @@ class ProductShipping extends Model
 
         switch ($this->shipping_amount_condition_id) {
           case 1:
-            $total = $this->shipping_amount * $quantity;
+            $total = $this->shipping_cost * $quantity;
             break;
 
           case 2:
-            $total = $this->shipping_amount;
+            $total = $this->shipping_cost;
             break;
 
         }
@@ -252,7 +252,7 @@ class ProductShipping extends Model
     $shippingCost = 'จัดส่งฟรี';
     if(!$this->free_shipping) {
 
-      $shippingCost = $this->shipping_amount;
+      $shippingCost = $this->shipping_cost;
 
       if($format) {
         $shippingCost = $currency->format($shippingCost);
@@ -276,7 +276,7 @@ class ProductShipping extends Model
           break;
         
         case 2:
-          $total = ($price * $quantity) + $this->shipping_amount;
+          $total = ($price * $quantity) + $this->shipping_cost;
           break;
       }
 
