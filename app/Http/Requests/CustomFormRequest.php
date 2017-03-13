@@ -14,6 +14,9 @@ class CustomFormRequest extends FormRequest
   private $validation;
   private $hasError = false;
 
+  // Need Chenge
+  // Get Page name from DB
+
   private $pages = array(
     'account.profile.edit' => array(
       'modelName' => 'Person'

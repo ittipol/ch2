@@ -53,7 +53,7 @@ class PersonExperienceDetail extends Model
   }
 
   public function __saveRelatedData($model,$options = array()) {
-    $personExperienceDetail = $model->getModelRelationData('PersonExperienceDetail',
+    $personExperienceDetail = $model->getRelatedModelData('PersonExperienceDetail',
       array(
         'first' => true
       )

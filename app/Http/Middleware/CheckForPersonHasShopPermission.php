@@ -23,6 +23,9 @@ class CheckForPersonHasShopPermission
     {
       $name = Route::currentRouteName();
 
+      // Need Chenge
+      // Get Page name from DB
+
       $pages = array(
         'shop.manage' => array(
           'permission' => true

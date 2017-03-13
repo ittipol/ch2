@@ -79,7 +79,7 @@ class FormHelper {
 
   public function loadAddress() {
 
-    $address = $this->model->getModelRelationData('Address',
+    $address = $this->model->getRelatedModelData('Address',
       array(
         'first' => true,
         'fields' => array('address','province_id','district_id','sub_district_id','description','latitude','longitude'),
@@ -97,7 +97,7 @@ class FormHelper {
 
   public function loadImage() {
 
-    $images = $this->model->getModelRelationData('Image',array(
+    $images = $this->model->getRelatedModelData('Image',array(
       'fields' => array('id','model','model_id','filename','description','image_type_id')
     ));
 
@@ -115,7 +115,7 @@ class FormHelper {
   }
 
   public function loadTagging() {
-    $taggings = $this->model->getModelRelationData('Tagging',
+    $taggings = $this->model->getRelatedModelData('Tagging',
       array(
         'fields' => array('word_id')
       )
@@ -135,7 +135,7 @@ class FormHelper {
   }
 
   public function loadContact() {
-    $contact = $this->model->getModelRelationData('Contact',array(
+    $contact = $this->model->getRelatedModelData('Contact',array(
       'first' => true,
       'fields' => array('phone_number','email','line')
     ));

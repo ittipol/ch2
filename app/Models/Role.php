@@ -2,18 +2,27 @@
 
 namespace App\Models;
 
-use Schema;
-
 class Role extends Model
 {
   protected $table = 'roles';
   protected $fillable = ['name','alias'];
 
   public function getPermission() {
-    return array(
-      'add' => $this->adding_permission,
-      'edit' => $this->editing_permission,
-      'delete' => $this->deleting_permission,
-    );
+    $permissions = json_decode($this->permission,true);
+    
+    $_permissions = array();
+    foreach ($permissions as $alias => $permission) {
+      $_permissions[$alias] = $permission;
+    }
+
+    return $_permissions;
   }
+
+  // public function getPermission() {
+  //   return array(
+  //     'add' => $this->adding_permission,
+  //     'edit' => $this->editing_permission,
+  //     'delete' => $this->deleting_permission,
+  //   );
+  // }
 }

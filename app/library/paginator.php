@@ -81,7 +81,10 @@ class Paginator {
   }
 
   public function getLastPage() {
-    return (int)ceil($this->getTotal() / $this->perPage);
+
+    $this->lastPage = (int)ceil($this->getTotal() / $this->perPage);
+
+    return $this->lastPage;
   }
 
   public function criteria($options = array()) {
@@ -189,7 +192,7 @@ class Paginator {
 
     $records = $model
     ->join('data_access_permissions', 'data_access_permissions.model_id', '=', $this->model->getTable().'.id')
-    ->join('access_levels', 'access_levels.id', '=', 'data_access_permissions.page_level_id')
+    ->join('access_levels', 'access_levels.level', '=', 'data_access_permissions.access_level')
     ->where('data_access_permissions.model','like',$this->model->modelName)
     ->Where(function ($query) {
       $query = $this->getAccessPermision($query);
@@ -205,7 +208,7 @@ class Paginator {
       $_data = array();
       if($this->getImage) {
 
-        $image = $record->getModelRelationData('Image',array(
+        $image = $record->getRelatedModelData('Image',array(
           'first' => true
         ));
 
@@ -239,7 +242,7 @@ class Paginator {
       $join->on('data_access_permissions.model_id', '=', $this->model->getTable().'.model_id')
            ->on('data_access_permissions.model', '=',$this->model->getTable().'.model');
     })
-    ->join('access_levels', 'access_levels.id', '=', 'data_access_permissions.page_level_id')
+    ->join('access_levels', 'access_levels.level', '=', 'data_access_permissions.access_level')
     ->where(function ($query) {
       $query = $this->getAccessPermision($query);
     });
@@ -261,7 +264,7 @@ class Paginator {
       $_data = array();
       if($this->getImage) {
 
-        $image = $record->getModelRelationData('Image',array(
+        $image = $record->getRelatedModelData('Image',array(
           'first' => true
         ));
 
@@ -345,7 +348,7 @@ class Paginator {
       $_data = array();
       if($this->getImage) {
 
-        $image = $record->getModelRelationData('Image',array(
+        $image = $record->getRelatedModelData('Image',array(
           'first' => true
         ));
 

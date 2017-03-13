@@ -22,7 +22,7 @@ class AccessLevel extends Model
       'conditions' => array(
         array('active','=','1')
       ),
-      'fields' => array('id','name'),
+      'fields' => array('level','name'),
       'order' => array(
         array('top','ASC'),
         array('level','ASC')
@@ -31,7 +31,7 @@ class AccessLevel extends Model
 
     $levels = array();
     foreach ($accessLevels as $value) {
-      $levels[$value['id']] = $value['name'];
+      $levels[$value['level']] = $value['name'];
     }
 
     return $levels;

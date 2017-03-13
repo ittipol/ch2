@@ -66,7 +66,7 @@
 
   <div class="row">
 
-    <div class="col-xs-12">
+    <div class="col-xs-6">
       <div class="item-info">
 
         <div class="item-info-row">
@@ -77,14 +77,7 @@
       </div>
     </div>
 
-  </div>
-
-  <div class="line space-top-bottom-20"></div>
-
-  <div class="row">
-
-    <div class="col-xs-12">
-
+    <div class="col-xs-6">
       <div class="item-info">
 
         <p>ติดต่อผู้{{$_modelData['_announcementTypeName']}}</p>
@@ -120,8 +113,7 @@
         </div>
 
       </div>
-
-    </div> 
+    </div>
 
   </div>
 
@@ -208,7 +200,7 @@
     </dd>
   </div>
 
-  <div class="line space-top-bottom-20"></div>
+  <!-- <div class="line space-top-bottom-20"></div>
 
   <div class="row">
 
@@ -226,9 +218,19 @@
 
     </div>
 
-  </div>
+  </div> -->
 
-  <div class="line space-top-bottom-20"></div>
+  <div class="row detail-info-section space-bottom-30">
+    <div class="col-xs-12">
+
+      <h4>รายละเอียดอสังหาริมทรัพย์</h4>
+      <div class="line"></div> 
+      <div class="detail-info">
+        {!!$_modelData['description']!!}
+      </div>
+
+    </div>
+  </div>
 
   <h4>ตำแหน่งบนแผนที่</h4>
   <div id="map"></div>

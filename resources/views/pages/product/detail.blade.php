@@ -172,7 +172,7 @@
 
       <h4>รายละเอียด {{$_modelData['name']}}</h4>
       <div class="line"></div> 
-      <div>
+      <div class="detail-info">
         {!!$_modelData['description']!!}
       </div>
 

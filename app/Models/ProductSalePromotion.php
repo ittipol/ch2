@@ -38,7 +38,7 @@ class ProductSalePromotion extends Model
 
   public function __saveRelatedData($model,$options = array()) {
 
-    $productSalePromotion = $model->getModelRelationData('ProductSalePromotion',
+    $productSalePromotion = $model->getRelatedModelData('ProductSalePromotion',
       array(
         'first' => true
       )

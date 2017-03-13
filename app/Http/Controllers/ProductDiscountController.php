@@ -225,7 +225,7 @@ class ProductDiscountController extends Controller
       
     }
 
-    $productSalePromotion = $model->getModelRelationData('ProductSalePromotion',
+    $productSalePromotion = $model->getRelatedModelData('ProductSalePromotion',
       array(
         'first' => true,
         'fields' => array('date_start','date_end')
@@ -360,7 +360,7 @@ class ProductDiscountController extends Controller
     }
 
     if(!$updateDiscount) {
-      $model = $model->getModelRelationData('ProductSalePromotion',array(
+      $model = $model->getRelatedModelData('ProductSalePromotion',array(
         'first' => true
       ));
     }

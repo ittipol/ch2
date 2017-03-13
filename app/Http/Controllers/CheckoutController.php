@@ -115,6 +115,7 @@ class CheckoutController extends Controller
           ));
 
           $shipping = array(
+            'shipping_calculate_from' => $_product->shipping_calculate_from,
             'free_shipping' => $productShipping->free_shipping,
             'shippng_cost' => $productShipping->shipping_cost,
             'product_shipping_amount_type_id' => $productShipping->product_shipping_amount_type_id

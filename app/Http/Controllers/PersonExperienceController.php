@@ -164,17 +164,17 @@ class PersonExperienceController extends Controller
     }
 
     // Get page permission
-    $pagePermission = $profile->getModelRelationData('DataAccessPermission',
+    $pagePermission = $profile->getRelatedModelData('DataAccessPermission',
       array(
         'first' => true,
-        'fields' => array('page_level_id')
+        'fields' => array('access_level')
       )
     );
 
     $_formData = array();
     if(!empty($pagePermission)) {
       $_formData = array(
-        'page_level_id' => $pagePermission->page_level_id
+        'access_level' => $pagePermission->access_level
       );
     }
 
@@ -196,8 +196,6 @@ class PersonExperienceController extends Controller
     $model = Service::loadModel('PersonExperience');
 
     if(!$model->checkExistByPersonId()) {
-
-      // $person = Service::loadModel('Person')->find(Session::get('Person.id'));
       
       $model->fill(array(
         'name' => $person->name,
@@ -222,7 +220,7 @@ class PersonExperienceController extends Controller
 
     $saved = Service::loadModel('DataAccessPermission')->__saveRelatedData($model,array(
       'value' => array(
-        'page_level_id' => request()->get('page_level_id')
+        'access_level' => request()->get('access_level')
       )
     ));
 

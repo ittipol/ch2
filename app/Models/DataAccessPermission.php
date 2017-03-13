@@ -5,26 +5,12 @@ namespace App\Models;
 class DataAccessPermission extends Model
 {
   protected $table = 'data_access_permissions';
-  protected $fillable = ['model','model_id','page_level_id','owner','owner_id'];
+  protected $fillable = ['model','model_id','access_level','owner','owner_id'];
   public $timestamps  = false;
 
   public function item() {
     return $this->hasOne('App\Models\Item','id','model_id');
   }
-
-  // public static function boot() {
-
-  //   parent::boot();
-
-  //   DataAccessPermission::saving(function($dataAccessPermission){
-
-  //     if(empty($dataAccessPermission->page_level_id)){
-  //       $dataAccessPermission->page_level_id = 4;
-  //     }
-
-  //   });
-
-  // }
 
   public function __saveRelatedData($model,$options = array()) {
 
@@ -36,7 +22,7 @@ class DataAccessPermission extends Model
 
     $accessLevel = new AccessLevel;
 
-    $permission = $model->getModelRelationData('DataAccessPermission',
+    $permission = $model->getRelatedModelData('DataAccessPermission',
       array(
         'first' => true
       )
@@ -44,14 +30,14 @@ class DataAccessPermission extends Model
 
     if(!empty($permission)){
 
-      if(empty($behavior['value']['page_level_id'])) {
+      if(empty($options['value']['access_level'])) {
         return true;
       }
 
-      $value['page_level_id'] = $behavior['value']['page_level_id'];
-
       return $permission
-      ->fill($value)
+      ->fill(array(
+        'access_level' => $options['value']['access_level']
+      ))
       ->save();
     }else{
 
@@ -80,12 +66,12 @@ class DataAccessPermission extends Model
           break;
       }
 
-      $level = $accessLevel->getIdByLevel($behavior['defaultAccessLevel']);
-      if(!empty($behavior['value']['page_level_id'])) {
-        $level = $behavior['value']['page_level_id'];
+      $level = $behavior['defaultAccessLevel'];
+      if(!empty($options['value']['access_level'])) {
+        $level = $options['value']['access_level'];
       }
       
-      $value['page_level_id'] = $level;
+      $value['access_level'] = $level;
 
       return $this->fill($model->includeModelAndModelId($value))->save();
     }

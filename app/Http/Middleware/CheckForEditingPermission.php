@@ -22,6 +22,9 @@ class CheckForEditingPermission
         return redirect('home');
       }
 
+      // Need Chenge
+      // Get Page name from DB
+
       $pages = array(
         'item.edit' => array(
           'modelName' => 'Item'

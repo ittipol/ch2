@@ -233,8 +233,8 @@ class AccountController extends Controller
       'order' => array('id','DESC')
     ));
     $model->paginator->setPage($page);
-    $model->paginator->setPagingUrl('item/list');
-    $model->paginator->setUrl('item/detail/{id}','detailUrl');
+    $model->paginator->setPagingUrl('account/order');
+    $model->paginator->setUrl('account/order/{id}','detailUrl');
 
     $this->data = $model->paginator->build();
 

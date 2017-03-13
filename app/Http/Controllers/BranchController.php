@@ -50,13 +50,13 @@ class BranchController extends Controller
       'json' => array('Image')
     ));
 
-    $shop = $model->getModelRelationData('ShopRelateTo',array(
+    $shop = $model->getRelatedModelData('ShopRelateTo',array(
       'first' => true,
       'fields' => array('shop_id')
     ))->shop;
 
     // Get Branches
-    $jobIds = $model->getModelRelationData('RelateToBranch',array(
+    $jobIds = $model->getRelatedModelData('RelateToBranch',array(
       'list' => 'job_id',
       'fields' => array('job_id'),
     ));

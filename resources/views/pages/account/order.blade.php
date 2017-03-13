@@ -24,15 +24,21 @@
           <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
             <div class="card">
 
-              <div class="image-tile">
-                <a href="{{$data['detailUrl']}}">
-                  <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
-                </a>
+              <h4>การสั่งซื้อหมายเลข: {{$data['id']}}</h4>
+
+              <div class="card-sub-info">
+                <h5>ยอดสุทธิ</h5>
+                {{$data['_total']}}
               </div>
-              <div class="card-info">
-                <a href="{{$data['detailUrl']}}">
-                  <div class="card-title">{{$data['id']}}</div>
-                </a>
+
+              <div class="card-sub-info">
+                <h5>สถานะการสั่งซื้อ</h5>
+                {{$data['OrderStatusName']}}
+              </div>
+
+              <div class="card-sub-info">
+                <h5>สั่งซื้อเมื่อ</h5>
+                {{$data['orderedDate']}}
               </div>
               
               <div class="button-group">
@@ -40,16 +46,6 @@
                 <a href="{{$data['detailUrl']}}">
                   <div class="button wide-button">แสดงรายละเอียด</div>
                 </a>
-
-                <div class="additional-option">
-                  <div class="dot"></div>
-                  <div class="dot"></div>
-                  <div class="dot"></div>
-                  <div class="additional-option-content">
-                    <a href="{{$data['editUrl']}}">แก้ไข</a>
-                    <a href="{{$data['deleteUrl']}}">ลบ</a>
-                  </div>
-                </div>
               
               </div>
               
@@ -62,7 +58,7 @@
 
       </div>
 
-      @include('components.pagination') 
+      @include('components.pagination')
 
     @else
 

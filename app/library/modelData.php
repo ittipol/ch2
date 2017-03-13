@@ -69,7 +69,7 @@ class ModelData {
 
       // case 'OfficeHour':
 
-      //   $officeHour = $this->model->getModelRelationData('OfficeHour',array(
+      //   $officeHour = $this->model->getRelatedModelData('OfficeHour',array(
       //     'first' => true,
       //     'fields' => array('same_time','time')
       //   ));
@@ -121,7 +121,7 @@ class ModelData {
 
   public function loadAddress() {
 
-    $address = $this->model->getModelRelationData('Address',
+    $address = $this->model->getRelatedModelData('Address',
       array(
         'first' => true,
         'fields' => array('address','province_id','district_id','sub_district_id','description','latitude','longitude'),
@@ -141,7 +141,7 @@ class ModelData {
 
     $cache = new cache;
 
-    $images = $this->model->getModelRelationData('Image',array(
+    $images = $this->model->getRelatedModelData('Image',array(
       'fields' => array('id','model','model_id','filename','description','image_type_id')
     ));
 
@@ -161,7 +161,7 @@ class ModelData {
   }
 
   public function loadTagging() {
-    $taggings = $this->model->getModelRelationData('Tagging',
+    $taggings = $this->model->getRelatedModelData('Tagging',
       array(
         'fields' => array('word_id')
       )
@@ -181,7 +181,7 @@ class ModelData {
   }
 
   public function loadContact() {
-    $contact = $this->model->getModelRelationData('Contact',array(
+    $contact = $this->model->getRelatedModelData('Contact',array(
       'first' => true,
       'fields' => array('phone_number','email','line')
     ));

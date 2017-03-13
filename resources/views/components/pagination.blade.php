@@ -9,8 +9,12 @@
 
       @foreach($_pagination['paging'] as $paging)
 
-        @if(!empty($paging['url']))
-          <a href="{{$paging['url']}}" class="paging @if($paging['pageNumber'] == $_pagination['page']) selected @endif">
+        @if($paging['pageNumber'] == $_pagination['page'])
+          <a class="paging selected">
+            {{$paging['pageNumber']}}
+          </a>
+        @elseif(!empty($paging['url']))
+          <a href="{{$paging['url']}}" class="paging">
             {{$paging['pageNumber']}}
           </a>
         @else

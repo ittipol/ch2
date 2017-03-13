@@ -25,18 +25,18 @@ class CheckForDataAccessPermission
       }
 
       $pages = array(
-        'item.detail' => array(
-          'modelName' => 'Item'
-        ),
-        'real_estate.detail' => array(
-          'modelName' => 'RealEstate'
-        ),
-        'freelance.detail' => array(
-          'modelName' => 'Freelance'
-        ),
-        'person_experience.detail' => array(
-          'modelName' => 'PersonExperience'
-        ),
+        // 'item.detail' => array(
+        //   'modelName' => 'Item'
+        // ),
+        // 'real_estate.detail' => array(
+        //   'modelName' => 'RealEstate'
+        // ),
+        // 'freelance.detail' => array(
+        //   'modelName' => 'Freelance'
+        // ),
+        // 'person_experience.detail' => array(
+        //   'modelName' => 'PersonExperience'
+        // ),
       );
 
       $name = Route::currentRouteName();
@@ -45,14 +45,24 @@ class CheckForDataAccessPermission
         return $next($request);
       }
 
-      $pageAccessPermission = DataAccessPermission::select('page_level_id')
+      $pageLevel = DataAccessPermission::select('access_level')
       ->where([
         ['model','like',$pages[$name]['modelName']],
         ['model_id','=',$request->id]
-      ])->first();
+      ])
+      ->first()
+      ->access_level;
+
+      if(empty($pageLevel)) {
+        return response(view('errors.error',array(
+          'error'=>array(
+            'message'=>'สิทธิการเข้าถึงหน้าไม่ถูกต้อง'
+          ))
+        ));
+      }
 
       $hasPermission = true;
-      switch (AccessLevel::find($pageAccessPermission->page_level_id)->level) {
+      switch ($pageLevel) {
         case 1:
           // only me can see
           $model = Service::loadModel($pages[$name]['modelName'])->select(array('person_id'))->find($request->id);

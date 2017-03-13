@@ -25,7 +25,7 @@ class Cart extends Model
     }
 
     // find shop id
-    $shop = $product->getModelRelationData('ShopRelateTo',array(
+    $shop = $product->getRelatedModelData('ShopRelateTo',array(
       'first' => true,
       'fields' => array('shop_id')
     ))->shop;
@@ -213,7 +213,7 @@ class Cart extends Model
       return null;
     }
 
-    $image = $product->getModelRelationData('Image',array(
+    $image = $product->getRelatedModelData('Image',array(
       'fields' => array('id','model','model_id','filename','image_type_id'),
       'first' => true
     ));

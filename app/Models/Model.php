@@ -107,8 +107,8 @@ class Model extends BaseModel
       }
 
       if(!empty($model->behavior['DataAccessPermission'])) {
-        $pageAccessPermission = new DataAccessPermission;
-        $pageAccessPermission->__saveRelatedData($model);
+        $dataAccessPermission = new DataAccessPermission;
+        $dataAccessPermission->__saveRelatedData($model,$this->modelRelationData('DataAccessPermission'));
       }
       
     });
@@ -159,7 +159,8 @@ class Model extends BaseModel
     }
 
     if(!empty($this->behavior['DataAccessPermission']) && !empty($attributes['DataAccessPermission'])) {
-      $this->behavior['DataAccessPermission']['value'] = $attributes['DataAccessPermission'];
+      $this->modelRelationData['DataAccessPermission']['value'] = $attributes['DataAccessPermission'];
+      unset($attributes['DataAccessPermission']);
     }
 
     if(!empty($attributes)) {
@@ -186,13 +187,6 @@ class Model extends BaseModel
     if(!is_dir($path)){
       mkdir($path,0777,true);
     }
-
-    // foreach ($this->imageCache as $name) {
-    //   $_path = $path.$name;
-    //   if(!is_dir($_path)){
-    //     mkdir($_path,0777,true);
-    //   }
-    // }
 
   }
 
@@ -368,7 +362,7 @@ class Model extends BaseModel
 
   }
 
-  public function getModelRelationData($modelName,$options = array()) {
+  public function getRelatedModelData($modelName,$options = array()) {
 
     $model = Service::loadModel($modelName);
 
@@ -432,6 +426,16 @@ class Model extends BaseModel
     return $this->modelRelations;
   }
 
+  public function getModelRelationData($modelName) {
+
+    if(empty($this->modelRelationData[$modelName])) {
+      return null;
+    }
+
+    return $this->modelRelationData[$modelName];
+
+  }
+
   public function getBehavior($modelName) {
 
     if(empty($this->behavior[$modelName])) {
@@ -439,6 +443,7 @@ class Model extends BaseModel
     }
 
     return $this->behavior[$modelName];
+
   }
 
   public function getValidation() {

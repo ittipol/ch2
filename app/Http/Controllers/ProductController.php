@@ -72,13 +72,13 @@ class ProductController extends Controller
     ));
 
     // Get Shop Data
-    $shop = $model->getModelRelationData('ShopRelateTo',array(
+    $shop = $model->getRelatedModelData('ShopRelateTo',array(
       'first' => true,
       'fields' => array('shop_id')
     ))->shop;
 
     // Get Slug
-    $slug = $shop->getModelRelationData('Slug',array(
+    $slug = $shop->getRelatedModelData('Slug',array(
       'first' => true,
       'fields' => array('slug')
     ))->slug;
@@ -108,7 +108,7 @@ class ProductController extends Controller
 
     $model = Service::loadModel('Product')->find($this->param['id']);
 
-    $image = $model->getModelRelationData('Image',array(
+    $image = $model->getRelatedModelData('Image',array(
       'first' => true
     ));
 

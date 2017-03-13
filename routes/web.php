@@ -76,6 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('account/shop', 'accountController@shop')->name('account.shop');
 
   Route::get('account/order', 'accountController@order')->name('account.order');
+  Route::get('account/order/{id}', 'OrderController@detail')->name('account.order.detail');
 
 });
 

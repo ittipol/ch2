@@ -19,7 +19,7 @@
   <div class="input-group clearfix">
     <div class="input-item">
       <?php
-        echo Form::select('page_level_id', $accessLevels);
+        echo Form::select('access_level', $accessLevels);
       ?>
     </div>
     <div class="input-item">

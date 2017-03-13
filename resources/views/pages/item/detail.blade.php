@@ -62,7 +62,7 @@
 
   <div class="row">
 
-    <div class="col-xs-4">
+    <div class="col-xs-6">
       <div class="item-info">
 
         <div class="item-info-row">
@@ -73,7 +73,7 @@
       </div>
     </div>
 
-    <div class="col-xs-8">
+    <div class="col-xs-6">
       <div class="item-info">
 
         <p>ติดต่อผู้{{$_modelData['_announcementTypeName']}}</p>
