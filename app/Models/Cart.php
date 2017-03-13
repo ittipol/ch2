@@ -318,7 +318,7 @@ class Cart extends Model
 
       if($product->shipping_calculate_from == 2) {
 
-        $shipping = $product->getRalatedData('ProductShipping',array(
+        $shipping = $product->getRelatedData('ProductShipping',array(
           'first' => true
         ));
 
@@ -349,7 +349,7 @@ class Cart extends Model
 
       if($product->shipping_calculate_from == 2) {
 
-        $shipping = $product->getRalatedData('ProductShipping',array(
+        $shipping = $product->getRelatedData('ProductShipping',array(
           'first' => true
         ));
 

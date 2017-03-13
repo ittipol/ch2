@@ -327,7 +327,7 @@ class Product extends Model
       $shippingCalculateFrom = 'คำนวนค่าส่งสินค้าจากผู้ขาย';
     }
 
-    $shipping = $this->getRalatedData('ProductShipping',array(
+    $shipping = $this->getRelatedData('ProductShipping',array(
       'first' => true
     ));
 
@@ -433,7 +433,7 @@ class Product extends Model
 
     $now = date('Y-m-d H:i:s');
 
-    $promotion = $this->getRalatedData('ProductSalePromotion',array(
+    $promotion = $this->getRelatedData('ProductSalePromotion',array(
       'conditions' => array(
         array('sale_promotion_type_id','=',1),
         array('date_start','<=',$now),
@@ -454,7 +454,7 @@ class Product extends Model
 
     $now = date('Y-m-d H:i:s');
 
-    $promotion = $this->getRalatedData('ProductSalePromotion',array(
+    $promotion = $this->getRelatedData('ProductSalePromotion',array(
       'conditions' => array(
         array('sale_promotion_type_id','=',1),
         array('date_start','<=',$now),

@@ -24,16 +24,22 @@
           <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
             <div class="card">
 
-              <h4>การสั่งซื้อหมายเลข: {{$data['id']}}</h4>
-
-              <div class="card-sub-info">
-                <h5>ยอดสุทธิ</h5>
-                {{$data['_total']}}
-              </div>
+              <h4>การสั่งซื้อหมายเลข</h4>
+              <h4>{{$data['id']}}</h4>
 
               <div class="card-sub-info">
                 <h5>สถานะการสั่งซื้อ</h5>
                 {{$data['OrderStatusName']}}
+              </div>
+
+              <div class="card-sub-info">
+                <h5>จำนวนสินค้าที่สั่งซื้อ</h5>
+                {{$data['countProuduct']}}
+              </div>
+
+              <div class="card-sub-info">
+                <h5>ยอดสุทธิ</h5>
+                {{$data['_total']}}
               </div>
 
               <div class="card-sub-info">

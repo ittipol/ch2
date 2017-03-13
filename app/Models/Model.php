@@ -339,7 +339,7 @@ class Model extends BaseModel
 
   }
 
-  public function getRalatedData($modelName,$options = array()) {
+  public function getRelatedData($modelName,$options = array()) {
 
     $model = Service::loadModel($modelName);
     $field = $this->modelAlias.'_id';

@@ -8,12 +8,21 @@ class OrderController extends Controller
 {
   public function detail() {
 
-    $order = Service::loadModel('Order')->where(
+    $model = Service::loadModel('Order')->where([
       ['id','=',$this->param['id']],
       ['person_id','=',session()->get('Person.id')]
-    );
+    ])->first();
 
-    dd($order);
+    if(empty($model)) {
+      $this->error = array(
+        'message' => 'ขออภัย ไม่พบประกาศนี้ หรือข้อมูลนี้อาจถูกลบแล้ว'
+      );
+      return $this->error();
+    }
+
+    $this->data = $model->modelData->build();
+
+    return $this->view('pages.item.detail');
 
   }
 }

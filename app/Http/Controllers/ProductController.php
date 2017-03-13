@@ -339,7 +339,7 @@ class ProductController extends Controller
 
     $product = Service::loadModel('Product')->find($this->param['id']);
 
-    $model = $product->getRalatedData('ProductShipping',array(
+    $model = $product->getRelatedData('ProductShipping',array(
       'first' => true
     ));
 
@@ -379,7 +379,7 @@ class ProductController extends Controller
 
     $product = Service::loadModel('Product')->find($this->param['id']);
 
-    $model = $product->getRalatedData('ProductShipping',array(
+    $model = $product->getRelatedData('ProductShipping',array(
       'first' => true
     ));
 
@@ -444,7 +444,7 @@ class ProductController extends Controller
       );
     }
 
-    $salePromotions = $model->getRalatedData('ProductSalePromotion',array(
+    $salePromotions = $model->getRelatedData('ProductSalePromotion',array(
       'conditions' => array(
         array('date_start','>',date('Y-m-d H:i:s')),
       ),

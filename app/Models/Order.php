@@ -44,7 +44,33 @@ class Order extends Model
   }
 
   public function countProduct() {
-    // OrderProduct
+    return OrderProduct::where('order_id','=',$this->id)->count();
+  }
+
+  public function countProductQuantity() {
+    $products = $this->getRelatedData('OrderProduct',array(
+      'fields' => array('quantity')
+    ));
+
+    $count = 0;
+    foreach ($products as $product) {
+      $count += $product->quantity;
+    }
+
+    return $count;
+  }
+
+  public function buildModelData() {
+    dd($this->getAttributes());
+
+    return array(
+      'person_name' => $this->person_name,
+      'shipping_address' => $this->shipping_address,
+      'shop_name' => $this->shop->name,
+      'OrderStatusName' => $this->orderStatus->name,
+      'orderedDate' => $date->covertDateToSting($this->created_at->format('Y-m-d'))
+    );
+
   }
 
   public function buildPaginationData() {
@@ -53,7 +79,7 @@ class Order extends Model
     $date = new Date;
 
     // Get Total
-    $total = $this->getRalatedData('OrderTotal',array(
+    $total = $this->getRelatedData('OrderTotal',array(
       'conditions' => array(
         array('alias','like','total')
       ),
@@ -62,6 +88,7 @@ class Order extends Model
 
     return array(
       'id' => $this->id,
+      'countProuduct' => $this->countProductQuantity(),
       '_total' => $currency->format($total->value),
       'OrderStatusName' => $this->orderStatus->name,
       'orderedDate' => $date->covertDateToSting($this->created_at->format('Y-m-d'))
