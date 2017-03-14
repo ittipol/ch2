@@ -159,7 +159,6 @@
                     <h4 class="title">{{$job['name']}}</h4>
                   </a>
                   <div class="secondary-info-section">
-                    <h5>เงินเดือน</h5>
                     <strong>{{$job['_salary']}}</strong>
                   </div>
                 </div>

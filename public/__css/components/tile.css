@@ -1,6 +1,7 @@
 .tile-nav {
 	width: 150px;
 	margin-right: 10px;
+	position: relative;
 }
 
 .tile-nav-group .tile-nav {
@@ -80,3 +81,11 @@
 	margin-left: 5px;
 }
 
+.tile-nav .tile-flag-count {
+	position: absolute;
+	top: 0;
+	right: 0;
+	color: #fff;
+	background-color: #D50000;
+	padding: 5px 10px;
+}

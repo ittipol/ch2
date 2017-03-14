@@ -54,14 +54,13 @@
 	margin-bottom: 0;
 }
 
-.detail .detail-info-section {
+.detail-info-section {
 	margin-top: 20px;
 }
 
-.detail .detail-info-section .detail-info {
+.detail-info-section .detail-info {
 	margin-top: 10px;
 }
-
 
 .tag-group {
 	margin-bottom: 10px;
@@ -416,10 +415,6 @@
 	margin-left: 20px;
 }
 
-/*.content-box .content-box-inner {
-	padding: 20px;
-}*/
-
 .content-box .content-box-panel {
 	padding: 20px;
 }
@@ -452,6 +447,35 @@
 
 .quantity-box .add-to-cart-button {
 	width: 49%;
+}
+
+.detail-group h4 {
+	color: #fff;
+	font-size: 14px;
+	padding: 10px;
+	background-color: #0071c5;
+	margin: 0;
+}
+
+.detail-group .detail-info {
+	margin-top: 10px;
+}
+
+.detail-group .detail-group-info:not(:first-child) {
+	margin-top: 20px;
+}
+
+.detail-group .detail-group-info .title {
+	font-weight: bold;
+}
+
+.detail-group .detail-group-info-section {
+	/*border-top: 5px solid #0071c5;*/
+	padding: 10px;
+}
+
+.detail-group .detail-group-info-section > .detail-group-info:not(:first-child) {
+	/*margin-top: 20px;*/
 }
 
 /*==========  Non-Mobile First Method  ==========*/

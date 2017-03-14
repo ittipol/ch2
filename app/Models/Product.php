@@ -332,13 +332,13 @@ class Product extends Model
     ));
 
     $shippingCost = '';
-    $shippingAmountCondition = '';
+    $productShippingAmountType = '';
     $freeShippingMessage = '';
     if(!empty($shipping)) {
       $shippingCost = $shipping->getShippingCostText(true);
 
       if(!empty($shipping->product_shipping_amount_type_id)) {
-        $shippingAmountCondition = $shipping->shippingAmountCondition->name;
+        $productShippingAmountType = $shipping->productShippingAmountType->name;
       }
 
       if(!empty($shipping->free_shipping_with_condition)) {
@@ -361,7 +361,7 @@ class Product extends Model
       'shipping_calculate_from' => $this->shipping_calculate_from,
       '_shipping_calculate_from' => $shippingCalculateFrom,
       'shippingCost' => $shippingCost,
-      'shippingCostAppendText' => $shippingAmountCondition,
+      'shippingCostAppendText' => $productShippingAmountType,
       'freeShippingMessage' => $freeShippingMessage,
       'active' => $this->active,
       '_active' => $this->active ? 'เปิดการขายสินค้า' : 'ปิดการขาย',

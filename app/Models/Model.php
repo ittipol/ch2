@@ -97,6 +97,11 @@ class Model extends BaseModel
           $slug->__saveRelatedData($model);
         }
 
+        // if(!empty(request()->get('shop'))) {
+        //   $shopRelateTo = new ShopRelateTo;
+        //   dd(request()->get('shop'));
+        // }
+
       }
 
       $model->modelRelationsSave();
@@ -108,7 +113,7 @@ class Model extends BaseModel
 
       if(!empty($model->behavior['DataAccessPermission'])) {
         $dataAccessPermission = new DataAccessPermission;
-        $dataAccessPermission->__saveRelatedData($model,$this->modelRelationData('DataAccessPermission'));
+        $dataAccessPermission->__saveRelatedData($model,$model->getModelRelationData('DataAccessPermission'));
       }
       
     });

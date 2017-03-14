@@ -86,6 +86,9 @@ class CheckForPersonHasShopPermission
           'permission' => 'edit',
           'modelName' => 'Advertising'
         ),
+        'shop.order' => array(
+          'permission' => true
+        ),
         'shop.product' => array(
           'permission' => true
         ),

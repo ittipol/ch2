@@ -85,8 +85,19 @@ nav.main-navigation .main-navigation-item:hover {
 .content-panel .info-box {
 	border: 1px solid #ccc;
 	background-color: #fff;
-	padding: 20px;
+	/*padding: 20px;*/
 	margin-bottom: 20px;
+}
+
+.content-panel .info-box .primary-info-section {
+	padding: 20px;
+	background-color: #0071c5;
+	color: #fff;
+}
+
+.content-panel .info-box .primary-info-section h4 {
+	color: #fff;
+	margin: 0;
 }
 
 .site-map {

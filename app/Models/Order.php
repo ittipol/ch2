@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\library\currency;
+use App\library\cache;
+use App\library\url;
 use App\library\date;
 
 class Order extends Model
@@ -43,6 +45,47 @@ class Order extends Model
 
   }
 
+  public function getOrderProducts() {
+
+    $cache = new Cache;
+    $url = new Url;
+
+    $orderProducts = $this->getRelatedData('OrderProduct');
+  
+    $_orderProducts = array();
+    foreach ($orderProducts as $orderProduct) {
+
+      $image = Product::select('id')->find($orderProduct->product_id)->getRelatedModelData('Image',array(
+        'fields' => array('id','model','model_id','filename','image_type_id'),
+        'first' => true
+      ));
+
+      $imageUrl = '/images/common/no-img.png';
+      if(!empty($image)) {
+        $imageUrl = $cache->getCacheImageUrl($image,'sm');
+      }
+
+      $_orderProducts[] = array_merge($orderProduct->buildModelData(),array(
+        'imageUrl' => $imageUrl,
+        'productDetailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id' => $orderProduct->id))
+      ));
+
+    }
+
+    return $_orderProducts;
+  }
+
+  public function orderOrderTotals() {
+    $orderTotals = $this->getRelatedData('OrderTotal');
+
+    $_orderTotals = array();
+    foreach ($orderTotals as $orderTotal) {
+      $_orderTotals[] = $orderTotal->buildModelData();
+    }
+
+    return $_orderTotals;
+  }
+
   public function countProduct() {
     return OrderProduct::where('order_id','=',$this->id)->count();
   }
@@ -51,6 +94,10 @@ class Order extends Model
     $products = $this->getRelatedData('OrderProduct',array(
       'fields' => array('quantity')
     ));
+
+    if(empty($products)) {
+      return 0;
+    }
 
     $count = 0;
     foreach ($products as $product) {
@@ -61,16 +108,17 @@ class Order extends Model
   }
 
   public function buildModelData() {
-    dd($this->getAttributes());
+
+    $date = new Date;
 
     return array(
+      'id' => $this->id,
       'person_name' => $this->person_name,
       'shipping_address' => $this->shipping_address,
-      'shop_name' => $this->shop->name,
-      'OrderStatusName' => $this->orderStatus->name,
+      'shopName' => $this->shop->name,
+      'orderStatusName' => $this->orderStatus->name,
       'orderedDate' => $date->covertDateToSting($this->created_at->format('Y-m-d'))
     );
-
   }
 
   public function buildPaginationData() {
@@ -86,10 +134,15 @@ class Order extends Model
       'first' => true
     ));
 
+    $_total = 0;
+    if(!empty($total)) {
+      $_total = $total->value;
+    }
+
     return array(
       'id' => $this->id,
       'countProuduct' => $this->countProductQuantity(),
-      '_total' => $currency->format($total->value),
+      '_total' => $currency->format($_total),
       'OrderStatusName' => $this->orderStatus->name,
       'orderedDate' => $date->covertDateToSting($this->created_at->format('Y-m-d'))
     );

@@ -1,15 +1,41 @@
 var socket = io.connect( 'http://localhost:8080' );
 
+let room = 'roomOne';
 
-setInterval(function(){
-	socket.emit( 'send message', { name: 'xxx', message: 'desc', room: 111 } );
-},1000);
+// $( "#btn" ).click( function() {
+// 	var nameVal = $( "#nameInput" ).val();
+// 	var msg = $( "#messageInput" ).val();
+	
+// 	socket.emit( 'push-notification', { name: nameVal, message: msg, room: room } );
+	
+// 	return false;
+// });
 
-socket.on( 'send message', function( data ) {
-	// return here
+// setInterval(function(){
+// 	socket.emit( 'push-notification', { name: 'xxx', message: 'desc', room: room } );
+// },1000);
+
+// socket.on( 'push-notification', function( data ) {
+
+// 	console.log(data);
+
+// 	var actualContent = $( "#messages" ).html();
+// 	var newMsgContent = '<li> <strong>' + data.name + '</strong> : ' + data.message + '</li>';
+// 	var content = newMsgContent + actualContent;
+	
+// 	$( "#messages" ).html( content );
+// });
+
+$( "#btn" ).click( function() {
+	console.log('subscribe');
+	socket.emit('subscribe', room);	
 });
 
-// socket.on('conversation private post', function(data) {
-//     //display data.message
-//     console.log('mmm');
-// });
+setInterval(function(){
+	console.log('x');
+	socket.emit('send', { room: room, message: 'test socket' });
+},1000);
+
+socket.on( 'send', function( data ) {
+	console.log('aaa');
+});

@@ -23,7 +23,7 @@
 
           <div id="_shop_{{$value['shop']['id']}}">
 
-            <h5 class="shop-info">{{$value['shop']['name']}}</h5>
+            <h5 class="shop-name">{{$value['shop']['name']}}</h5>
 
             <div class="product-list-wrapper">
               @foreach($value['products'] as $product)
@@ -47,12 +47,12 @@
 
                     <div class="col-md-4 col-xs-12 product-info-container">
                       <a href="{{$product['productDetailUrl']}}">
-                        <h4 class="product-title">{{$product['name']}}</h4>
+                        <h4 class="product-title product-text">{{$product['name']}}</h4>
                       </a>
                     </div>
 
                     <div class="col-md-2 col-xs-12 product-info-container">
-                      <div class="product-price">{{$product['price']}}</div>
+                      <div class="product-price product-text">{{$product['price']}}</div>
                     </div>
 
                     <div class="col-md-4 col-xs-12 product-info-container">
@@ -73,7 +73,7 @@
                     </div>
 
                     <div class="col-md-2 col-xs-12 product-info-container">
-                      <div class="product-total-amount">{{$product['total']}}</div>
+                      <div class="product-total-amount product-text">{{$product['total']}}</div>
                     </div>
 
                   </div>
@@ -89,15 +89,15 @@
             <div class="cart-summary clearfix">
 
               <div class="pull-right">
-                <!-- สรุปการสั่งซื้อ -->
+
                 <div class="text-right">
-                  <h5>มูลค่าสินค้า: <span class="sub-total amount">{{$value['summaries']['subTotal']['value']}}</span></h5>
+                  <h5 class="sub-total">มูลค่าสินค้า: <span class="amount">{{$value['summaries']['subTotal']['value']}}</span></h5>
                 </div>
                 <div class="text-right">
-                  <h5>ค่าจัดส่งสินค้า: <span class="shipping-cost amount">{{$value['summaries']['shippingCost']['value']}}</span></h5>
+                  <h5 class="shipping-cost">ค่าจัดส่งสินค้า: <span class="amount">{{$value['summaries']['shippingCost']['value']}}</span></h5>
                 </div>
                 <div class="text-right">
-                  <h4>ยอดสุทธิ: <span class="total-amount amount">{{$value['summaries']['total']['value']}}</span></h4>
+                  <h5 class="total-amount">ยอดสุทธิ: <span class="amount">{{$value['summaries']['total']['value']}}</span></h5>
                 </div>
 
               </div>

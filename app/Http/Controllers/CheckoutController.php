@@ -98,7 +98,6 @@ class CheckoutController extends Controller
       ))
       ->save();
 
-      
       $orderProductModel = Service::loadModel('OrderProduct');
       $orderTotalModel = Service::loadModel('OrderTotal');
 
@@ -115,9 +114,8 @@ class CheckoutController extends Controller
           ));
 
           $shipping = array(
-            'shipping_calculate_from' => $_product->shipping_calculate_from,
             'free_shipping' => $productShipping->free_shipping,
-            'shippng_cost' => $productShipping->shipping_cost,
+            'shipping_cost' => $productShipping->shipping_cost,
             'product_shipping_amount_type_id' => $productShipping->product_shipping_amount_type_id
           );
 
@@ -130,6 +128,7 @@ class CheckoutController extends Controller
           'price' => $_product->getPrice(),
           'quantity' => $product['quantity'],
           'total' => $cartModel->getProductTotal($_product,$product['quantity']),
+          'shipping_calculate_from' => $_product->shipping_calculate_from,
         ),$shipping);
 
         $orderProductModel

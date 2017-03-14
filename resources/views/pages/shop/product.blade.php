@@ -30,6 +30,22 @@
       </div>
     </div>
 
+    <div class="tile-nav small">
+
+      <div class="tile-flag-count">{{$countOrder}}</div>
+
+      <div class="tile-nav-image">
+        <a href="{{$orderUrl}}">
+          <img src="/images/common/bag.png">
+        </a>
+      </div>
+      <div class="tile-nav-info">
+        <a href="{{$orderUrl}}">
+          <h4 class="tile-nav-title">รายการสั่งซื้อ</h4>
+        </a>
+      </div>
+    </div>
+
   </div>
 
   <div class="line"></div>

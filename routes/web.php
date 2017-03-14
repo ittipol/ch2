@@ -76,7 +76,6 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('account/shop', 'accountController@shop')->name('account.shop');
 
   Route::get('account/order', 'accountController@order')->name('account.order');
-  Route::get('account/order/{id}', 'OrderController@detail')->name('account.order.detail');
 
 });
 
@@ -167,12 +166,20 @@ Route::group(['middleware' => 'auth'], function () {
   Route::post('checkout','CheckoutController@checkoutSubmit')->name('checkout');
 
   Route::get('checkout/success','CheckoutController@success')->name('checkout.success');
+});
 
+// Order
+Route::group(['middleware' => 'auth'], function () {
+  Route::get('account/order/{id}', 'OrderController@detail')->name('account.order.detail');
+});
+
+Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
+  Route::get('shop/{shopSlug}/order','OrderController@shopOrder')->name('shop.order');
+  Route::get('shop/{shopSlug}/order/{id}','OrderController@shopOrderDetail')->name('shop.order.detail');
 });
 
 // community / Shop
 // Route::get('community/shop_feature','ShopController@feature');
-
 Route::group(['middleware' => ['auth','shop']], function () {
   Route::get('shop/{shopSlug}','ShopController@index')->name('shop.index');
 });
@@ -183,9 +190,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
   Route::get('shop/{shopSlug}/manage','ShopController@manage')->name('shop.manage');
-
-  // Route::get('shop/{shopSlug}/order','ShopController@order')->name('shop.order');
-
+  
   Route::get('shop/{shopSlug}/setting','ShopController@setting')->name('shop.setting');
 
   Route::get('shop/{shopSlug}/description','ShopController@description')->name('shop.edit.description');

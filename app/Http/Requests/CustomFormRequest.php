@@ -81,12 +81,12 @@ class CustomFormRequest extends FormRequest
 
     $name = Route::currentRouteName();
 
-    $this->hasError = true;
-    if(!empty($name) && !empty($this->pages[$name])) {
-      $this->hasError = false;
-      $model = service::loadModel($this->pages[$name]['modelName']);
-      $this->validation = $model->getValidation();
-    }
+    // $this->hasError = true;
+    // if(!empty($name) && !empty($this->pages[$name])) {
+    //   $this->hasError = false;
+    //   $model = service::loadModel($this->pages[$name]['modelName']);
+    //   $this->validation = $model->getValidation();
+    // }
 
     // if(empty($name) || empty($this->pages[$name])) {
     //   $this->hasError = true;
@@ -95,8 +95,8 @@ class CustomFormRequest extends FormRequest
     //   $this->validation = $model->getValidation();
     // }
 
-    // $this->model = service::loadModel(Request::get('_model'));
-    // $this->validation = $this->model->getValidation();
+    $this->model = service::loadModel(Request::get('_model'));
+    $this->validation = $this->model->getValidation();
   }
 
   /**

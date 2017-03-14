@@ -43,8 +43,8 @@ class ProductShipping extends Model
     )
   );
 
-  public function shippingAmountCondition() {
-    return $this->hasOne('App\Models\ShippingAmountCondition','id','product_shipping_amount_type_id');
+  public function productShippingAmountType() {
+    return $this->hasOne('App\Models\ProductShippingAmountType','id','product_shipping_amount_type_id');
   }
 
   public function shippingCostCalCulateType() {
@@ -144,20 +144,20 @@ class ProductShipping extends Model
 
   }
 
-  public function getShippingCost($product,$quantity) {
+  public function calShippingCost($product,$quantity) {
 
-    $total = 0;
+    $cost = 0;
     if(!$this->free_shipping) {
 
       if(!$this->checkFreeShippingCondition($product,$quantity)) {
 
         switch ($this->product_shipping_amount_type_id) {
           case 1:
-            $total = $this->shipping_cost * $quantity;
+            $cost = $this->shipping_cost * $quantity;
             break;
 
           case 2:
-            $total = $this->shipping_cost;
+            $cost = $this->shipping_cost;
             break;
 
         }
@@ -166,7 +166,7 @@ class ProductShipping extends Model
 
     }
 
-    return $total;
+    return $cost;
 
   }
 
@@ -289,13 +289,13 @@ class ProductShipping extends Model
   public function buildModelData() {
 
     $shippingCost = '';
-    $shippingAmountCondition = '';
+    $productShippingAmountType = '';
     $freeShippingMessage = '';
 
     $shippingCost = $this->getShippingCostText(true);
 
     if(!empty($this->product_shipping_amount_type_id)) {
-      $shippingAmountCondition = $this->shippingAmountCondition->name;
+      $productShippingAmountType = $this->productShippingAmountType->name;
     }
 
     if(!empty($this->free_shipping_with_condition)) {
@@ -307,7 +307,7 @@ class ProductShipping extends Model
       'shipping_calculate_from' => $this->shipping_calculate_from,
       '_shipping_calculate_from' => $shippingCalculateFrom,
       'shippingCost' => $shippingCost,
-      'shippingCostAppendText' => $shippingAmountCondition,
+      'shippingCostAppendText' => $productShippingAmountType,
       'freeShippingMessage' => $freeShippingMessage,
     );
 

@@ -167,35 +167,27 @@
     
   </div>
 
-  <div class="row detail-info-section">
-    <div class="col-xs-12">
-
-      <h4>รายละเอียด {{$_modelData['name']}}</h4>
-      <div class="line"></div> 
-      <div class="detail-info">
-        {!!$_modelData['description']!!}
-      </div>
-
+  <div class="detail-info-section">
+    <h4>รายละเอียด {{$_modelData['name']}}</h4>
+    <div class="line"></div> 
+    <div class="detail-info">
+      {!!$_modelData['description']!!}
     </div>
   </div>
 
   @if(!empty($_modelData['specifications']))
-  <div class="row detail-info-section">
-    <div class="col-xs-12">
-
-      <h4>ข้อมูลจำเพาะของ {{$_modelData['name']}}</h4>  
-      <table class="table table-striped  ">
-        <tbody>
-          @foreach($_modelData['specifications'] as $specification)
-            <tr>
-              <td>{{$specification['title']}}</td>
-              <td>{{$specification['value']}}</td>
-            </tr>
-          @endforeach
-        </tbody>
-      </table>
-
-    </div>
+  <div class="detail-info-section">
+    <h4>ข้อมูลจำเพาะของ {{$_modelData['name']}}</h4>  
+    <table class="table table-striped  ">
+      <tbody>
+        @foreach($_modelData['specifications'] as $specification)
+          <tr>
+            <td>{{$specification['title']}}</td>
+            <td>{{$specification['value']}}</td>
+          </tr>
+        @endforeach
+      </tbody>
+    </table>
   </div>
   @endif
 

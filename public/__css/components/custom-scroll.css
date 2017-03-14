@@ -41,8 +41,9 @@
   border-radius         : 5px;
 }
 .nano > .nano-pane > .nano-slider {
-  background: #444;
-  background: #7986CB;
+  /*background: #444;*/
+  /*background: #7986CB;*/
+  background: #E57373;
   position              : relative;
   margin                : 0 1px;
   -moz-border-radius    : 3px;

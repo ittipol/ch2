@@ -5,12 +5,18 @@
 	z-index: 90;
 	width: 280px;
   height: 100%;
-  background-color: #00695C;
+  /*background-color: rgb(204,77,60);*/
+  background-color: rgb(32,66,126);
   transition: left .2s ease-out;
 }
 
 .global-nav nav {
   height: 100%;
+}
+
+.global-nav .navigation-top {
+  background-color: rgb(164,61,51);
+  padding: 20px 0;
 }
 
 .navigation-top .logo {
@@ -82,7 +88,8 @@
 }
 
 .navigation-primary-menu ul > li.item {
-  margin: 5px 0;
+  /*margin: 5px 0;*/
+  /*padding: 5px 0;*/
 }
 
 .navigation-primary-menu ul > li > .submenu-item-row {
@@ -91,7 +98,7 @@
 
 .navigation-primary-menu ul > li a { 
 	position: relative;
-  padding: 8px 0 8px 20px;
+  padding: 10px 0 10px 20px;
   /*line-height: 22px;*/
   display: block;
   color: #ffffff;
@@ -99,14 +106,17 @@
   text-decoration: none;
   font-weight: 400;
   font-size: 15px;
-  transition: all .3s ease-in-out;
+  transition: all .34s ease-in-out;
 }
 
 .navigation-primary-menu ul > li a:hover,
 .navigation-primary-menu ul > li a.active { 
-	color: #ffffff;
+	/*color: #ffffff;*/
   /*background-color: #00796B;*/
-  background-color: #00695C;
+  /*background-color: #00695C;*/
+  /*color: rgb(204,77,60);*/
+  /*background-color: #fff;*/
+  background-color: rgb(164,61,51);
 }
 
 .navigation-primary-menu ul > li a.active::before {

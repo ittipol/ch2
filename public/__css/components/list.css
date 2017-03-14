@@ -52,10 +52,6 @@
 	margin-bottom: 10px;
 }
 
-/*.list .list-content-wrapper .info .description {
-
-}*/
-
 .list .list-content-wrapper .info .price {
 	font-size: 20px;
 	margin-top: 10px;
@@ -225,6 +221,43 @@ label.list-box > input[type="checkbox"] {
 .list-box .additional-option .dot {
 	background-color: #fff;
 	margin: 4px auto;
+}
+
+.list-h .list-h-item {
+	margin-top: 20px;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 10px;
+	position: relative;
+}
+
+.list-h .list-image img {
+	width: 50px;
+	height: 50px;
+	background-color: #009688;
+	border-radius: 50px;
+	padding: 10px;
+}
+
+.list-h .list-content {
+	/*margin: 4px 0;*/
+}
+
+.list-h .primary-info {
+	margin: 2px 0;
+}
+
+.list-h .secondary-info {
+	color: #888;
+	margin: 0;
+}
+
+.list-h .list-h-item .additional-option {
+	width: 45px;
+  height: 45px;
+  padding-top: 6px;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 @media only screen and (max-width : 480px) {

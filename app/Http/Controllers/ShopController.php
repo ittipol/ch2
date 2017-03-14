@@ -110,20 +110,20 @@ class ShopController extends Controller
       $page = $this->query['page'];
     }
 
-    $shopTos = Service::loadModel('ShopRelateTo')
+    $products = Service::loadModel('ShopRelateTo')
     ->select('model_id')
     ->where(array(
       array('model','like','Product'),
       array('shop_id','=',request()->get('shopId'))
     ));
 
-    if($shopTos->exists()) {
+    if($products->exists()) {
 
       $product = Service::loadModel('Product');
       $product->paginator->criteria(array(
         'conditions' => array(
           'in' => array(
-            array('id',Service::getList($shopTos->get(),'model_id'))
+            array('id',Service::getList($products->get(),'model_id'))
           )
         ),
         'order' => array('id','DESC')
@@ -137,7 +137,13 @@ class ShopController extends Controller
       $this->data = $product->paginator->build();
     }
 
+    $this->setData('countOrder',Service::loadModel('Order')->where([
+      ['shop_id','=',request()->get('shopId')],
+      ['order_status_id','=',1]
+    ])->count());
+
     $this->setData('productPostUrl',request()->get('shopUrl').'product_post');
+    $this->setData('orderUrl',request()->get('shopUrl').'order');
 
     return $this->view('pages.shop.product');
   }

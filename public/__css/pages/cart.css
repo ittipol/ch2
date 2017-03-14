@@ -16,12 +16,7 @@
 	height: 100px;
 }
 
-.cart .shop-info {
-	/*color: #fff;
-  background-color: #0071c5;
-  margin: 0;
-  padding: 15px;*/
-
+.cart .shop-name {
   color: #000;
   margin: 0;
   padding: 10px;
@@ -43,10 +38,6 @@
 .cart > .product-list-table > .product-list-wrapper .product-list-table-row:not(:last-child) {
 	border-bottom: 1px solid #ccc;
 }
-
-/*.cart .product-info {
-	margin-left: 20px;
-}*/
 
 .cart .product-list-box {
 	position: relative;
@@ -80,12 +71,7 @@
 	width: 100%;
 }
 
-.cart .product-title {
-	line-height: 24px;
-	margin: 10px 0;
-}
-
-.cart .product-price {
+.cart .product-text {
 	line-height: 24px;
 	margin: 10px 0;
 }
@@ -124,6 +110,10 @@
 }
 
 .cart .total-amount {
+	font-size: 18px;
+}
+
+.cart .total-amount .amount {
 	color: #0071c5;
 }
 

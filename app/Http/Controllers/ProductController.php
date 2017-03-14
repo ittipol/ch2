@@ -150,7 +150,7 @@ class ProductController extends Controller
 
     $model = Service::loadModel('Product');
 
-    $request->request->add(['ShopRelateTo' => array('shop_id' => request()->get('shop')->id)]);
+    $request->request->add(['ShopRelateTo' => array('shop_id' => request()->get('shopId'))]);
 
     if($model->fill($request->all())->save()) {
 
@@ -361,7 +361,7 @@ class ProductController extends Controller
       'index' => 'ShippingCalTypes'
     ));
 
-    $model->formHelper->loadFieldData('shippingAmountCondition',array(
+    $model->formHelper->loadFieldData('ProductShippingAmountType',array(
       'key' =>'id',
       'field' => 'name',
       'index' => 'productShippingAmountTypes'

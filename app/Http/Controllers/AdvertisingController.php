@@ -145,7 +145,7 @@ class AdvertisingController extends Controller
 
     $model = Service::loadModel('Advertising');
 
-    $request->request->add(['ShopRelateTo' => array('shop_id' => request()->get('shop')->id)]);
+    $request->request->add(['ShopRelateTo' => array('shop_id' => request()->get('shopId'))]);
 
     if($model->fill($request->all())->save()) {
       Message::display('ลงประกาศแล้ว','success');

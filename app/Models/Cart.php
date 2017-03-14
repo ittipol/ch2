@@ -322,7 +322,7 @@ class Cart extends Model
           'first' => true
         ));
 
-        $shippingCost = $shipping->getShippingCost($product,$quantity);
+        $shippingCost = $shipping->calShippingCost($product,$quantity);
         $total = $total + $shippingCost;
 
       }
@@ -353,7 +353,7 @@ class Cart extends Model
           'first' => true
         ));
 
-        $shippingCost = $shipping->getShippingCost($product,$quantity);
+        $shippingCost = $shipping->calShippingCost($product,$quantity);
 
       }
 
