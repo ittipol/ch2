@@ -5,7 +5,7 @@
   <div class="container">
     <div class="top-header">
       <div class="detail-title">
-        <h2 class="title">เลขที่การสั่งซื้อ {{$order['id']}}</h2>
+        <h2 class="title">เลขที่การสั่งซื้อ {{$order['invoice_number']}}</h2>
       </div>
     </div>
   </div>
@@ -13,6 +13,23 @@
 
 
 <div class="container">
+
+  @if($order['order_status_id'] == 1)
+  <div class="pin-message space-bottom-30">
+    <div class="pin-message-primary-info">
+      <div>รายการสั่งซื้อนี้ต้องการการยืนยัน</div>
+
+    </div>
+
+    <div class="pin-message-secondary-info">
+
+      <div class="text-right">
+        <a href="{{$orderConfirmUrl}}" class="button">ยืนยันการสั่งซื้อ</a>
+      </div>
+
+    </div>
+  </div>
+  @endif
 
   <div class="row">
 
@@ -50,28 +67,23 @@
 
     <div class="col-md-8 col-sm-12">
 
-      <div class="content-box content-box-bg no-margin" style="background-image:url({{$shopCoverUrl}})">
-        <div class="content-box-inner">
-          <div class="row">
+      <div class="detail-info-section no-margin">
+        <h4>ที่อยู่สำหรับการจัดส่ง</h4>
+        <div class="line"></div> 
+        <div class="detail-info">
+          {{$order['shipping_address']}}
+        </div>
+      </div>
 
-            <div class="col-md-6 col-sm-12">
-              <div class="content-box-panel overlay-bg">
-                <div>
-                  <h5>บริษัทหรือร้านค้า</h5>
-                  <h3>
-                    <a href="{{URL::to($shopUrl)}}">{{$shop['name']}}</a>
-                  </h3>
-                  <div class="line space-top-bottom-20"></div>
-                  <p>{{$shop['_short_description']}}</p>
-                </div>
-
-                <a href="{{URL::to($shopUrl)}}" class="button wide-button">ไปยังร้านค้านี้</a>
-              </div>
-            </div>
-
-            <div class="col-md-6 col-sm-12"></div>
-
-          </div>
+      <div class="detail-info-section">
+        <h4>ข้อความจากผูซื้อ</h4>
+        <div class="line"></div> 
+        <div class="detail-info">
+          @if(!empty($order['message_to_seller']))
+          {{$order['message_to_seller']}}
+          @else
+          ไม่มีข้อความจากผู้ซื้อ
+          @endif
         </div>
       </div>
 
@@ -79,10 +91,10 @@
 
   </div>
 
-  <div class="row">
+<!--   <div class="row">
 
-    <div class="col-md-4 col-sm-12 space-top-30">
-      
+    <div class="col-sm-12">
+
       <div class="detail-info-section no-margin">
         <h4>ที่อยู่สำหรับการจัดส่ง</h4>
         <div class="line"></div> 
@@ -93,18 +105,7 @@
 
     </div>
 
-    <div class="col-md-8 col-sm-12 space-top-30">
-
-      <div class="detail-info-section no-margin">
-          <h4>รายละเอียดและวิธีการชำระเงิน</h4>
-          <div class="line"></div> 
-          <div class="detail-info">
-            ยังไม่มีรายละเอียดและวิธีการชำระเงิน
-          </div>
-      </div>
-
-    </div>
-  </div>
+  </div> -->
 
   <div class="cart space-top-30">
 

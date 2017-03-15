@@ -56,7 +56,7 @@
                     </div>
 
                     <div class="col-md-4 col-xs-12 product-info-container">
-                      <div class="quantity-text-input-panel">
+                      <div class="quantity-input-panel">
                         <input 
                         class="quantity-text-input cart-summary-quantity-input" 
                         type="text" name="quantity" 

@@ -478,6 +478,20 @@
 	/*margin-top: 20px;*/
 }
 
+.pin-message {
+	color: #fff;
+	background-color: #C62828;
+}
+
+.pin-message .pin-message-primary-info {
+	padding: 20px;
+}
+
+.pin-message .pin-message-secondary-info {
+	/*padding: 10px;*/
+	background-color: #E53935;
+}
+
 /*==========  Non-Mobile First Method  ==========*/
 
 /* Large Devices, Wide Screens */

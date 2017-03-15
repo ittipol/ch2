@@ -22,7 +22,8 @@
 }
 
 .notification-bottom.info {
-	background-color: rgb(222,255,255);
+	/*background-color: rgb(222,255,255);*/
+	background-color: #E3F2FD;
 	border-color: rgb(69,127,170);
 	color: rgb(69,127,170);
 }

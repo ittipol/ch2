@@ -178,20 +178,6 @@
 	background-color: rgb(29,66,133);
 }
 
-/*.card .additional-button {
-	width: 45px;
-	position: absolute;
-	top: 0;
-	right: 0;
-	background-color: rgb(29,66,133);
-}
-
-.card .additional-button .additional-option {
-	width: 100%;
-	height: 100%;
-	padding-top: 4px;
-}*/
-
 .card .additional-option .dot {
 	margin: 3px auto;
 	background-color: #fff;

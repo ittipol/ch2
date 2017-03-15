@@ -176,6 +176,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
   Route::get('shop/{shopSlug}/order','OrderController@shopOrder')->name('shop.order');
   Route::get('shop/{shopSlug}/order/{id}','OrderController@shopOrderDetail')->name('shop.order.detail');
+  Route::get('shop/{shopSlug}/order/confirm/{id}','OrderController@shopOrderConfirm')->name('shop.order.confirm');
 });
 
 // community / Shop

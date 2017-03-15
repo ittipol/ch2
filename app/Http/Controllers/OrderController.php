@@ -68,4 +68,47 @@ class OrderController extends Controller
 
   }
 
+  public function shopOrderDetail() {
+
+    $model = Service::loadModel('Order')->where([
+      ['id','=',$this->param['id']],
+      ['shop_id','=',request()->get('shopId')]
+    ])->first();
+
+    $this->setData('order',$model->modelData->build(true));
+    // Get Order Product
+    $this->setData('orderProducts',$model->getOrderProducts());
+    // Get Order Total
+    $this->setData('orderOrderTotals',$model->orderOrderTotals());
+
+    if($model->order_status_id == 1) {
+      $this->setData('orderConfirmUrl',request()->get('shopUrl').'order/confirm/'.$model->id);
+    }
+
+    return $this->view('pages.order.shop_order_detail');
+
+  }
+
+  public function shopOrderConfirm() {
+
+    $model = Service::loadModel('Order')->where([
+      ['id','=',$this->param['id']],
+      ['shop_id','=',request()->get('shopId')]
+    ])->first();
+
+    if($model->order_status_id != 1) {
+      Message::display('สินค้านี้ถูกยืนยันแล้ว','error');
+      return Redirect::to(request()->get('shopUrl').'order');
+    }
+
+    $this->setData('order',$model->modelData->build(true));
+    // Get Order Product
+    $this->setData('orderProducts',$model->getOrderProducts());
+    // Get Order Total
+    $this->setData('orderOrderTotals',$model->orderOrderTotals());
+
+    return $this->view('pages.order.shop_order_confirm');
+
+  }
+
 }

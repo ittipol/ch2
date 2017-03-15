@@ -3,8 +3,14 @@
 
 @include('pages.shop.layouts.top_nav')
 
-<div class="top-header-wrapper">
-  <h2 class="top-header">ตั้งค่า</h2>
+<div class="top-header-wrapper top-header-border">
+  <div class="container">
+    <div class="top-header">
+      <div class="detail-title">
+        <h2 class="title">ตั้งค่า</h2>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="container">

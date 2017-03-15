@@ -47,7 +47,7 @@
 	position: relative;
 }
 
-.cart .quantity-text-input-panel {
+.cart .quantity-input-panel {
 	position: relative;
 	width: 80%;
 }
@@ -101,8 +101,6 @@
 
 .cart .cart-check-out {
 	padding: 0 10px;
-	/*padding: 20px 40px;*/
-	/*background-color: #ececec;*/
 }
 
 .cart .cart-summary .amount {
@@ -117,6 +115,27 @@
 	color: #0071c5;
 }
 
+.shipping-cost-input-section {
+	/*padding: 20px;
+	background-color: #F2F3F7;
+	border-bottom: 1px solid #0071c5;*/
+
+	padding: 10px 20px;
+	background-color: #f8f8f8;
+}
+
+.shipping-cost-input-box {
+	margin: 20px 0;
+	padding: 10px;
+	background-color: #CFD8DC;
+	/*border: 1px solid #ccc;*/
+}
+
+.shipping-cost-input-box h5 {
+	/*height: 32px;*/
+	line-height: 17px;
+}
+
 @media only screen and (max-width : 992px) {
   .cart .product-info .product-info-container {
   	margin-bottom: 5px;
@@ -124,13 +143,13 @@
 }
 
 @media only screen and (max-width : 768px) {
-  .cart .quantity-text-input-panel {
+  .cart .quantity-input-panel {
   	width: 30%;
   }
 }
 
 @media only screen and (max-width : 480px) {
-	.cart .quantity-text-input-panel {
+	.cart .quantity-input-panel {
 		width: 90%;
 	}
 }

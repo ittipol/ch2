@@ -113,10 +113,13 @@ class Order extends Model
 
     return array(
       'id' => $this->id,
+      'invoice_number' => $this->invoice_number,
       'person_name' => $this->person_name,
       'shipping_address' => $this->shipping_address,
       'shopName' => $this->shop->name,
+      'order_status_id' => $this->order_status_id,
       'orderStatusName' => $this->orderStatus->name,
+      'message_to_seller' => $this->message_to_seller,
       'orderedDate' => $date->covertDateToSting($this->created_at->format('Y-m-d'))
     );
   }
@@ -141,7 +144,9 @@ class Order extends Model
 
     return array(
       'id' => $this->id,
-      'countProuduct' => $this->countProductQuantity(),
+      'invoice_number' => $this->invoice_number,
+      'shopName' => $this->shop->name,
+      // 'countProuduct' => $this->countProductQuantity(),
       '_total' => $currency->format($_total),
       'OrderStatusName' => $this->orderStatus->name,
       'orderedDate' => $date->covertDateToSting($this->created_at->format('Y-m-d'))

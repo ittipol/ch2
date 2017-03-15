@@ -5,12 +5,11 @@
   <div class="container">
     <div class="top-header">
       <div class="detail-title">
-        <h2 class="title">เลขที่การสั่งซื้อ {{$order['id']}}</h2>
+        <h2 class="title">ยืนยันการสั่งซื้อเลขที่ {{$order['invoice_number']}}</h2>
       </div>
     </div>
   </div>
 </div>
-
 
 <div class="container">
 
@@ -20,7 +19,7 @@
 
       <div class="detail-group">
         <h4>รายละเอียดการสั่งซื้อ</h4>
-        <!-- <div class="line"></div> -->
+
         <div class="detail-group-info-section">
 
           <div class="detail-group-info">
@@ -50,39 +49,6 @@
 
     <div class="col-md-8 col-sm-12">
 
-      <div class="content-box content-box-bg no-margin" style="background-image:url({{$shopCoverUrl}})">
-        <div class="content-box-inner">
-          <div class="row">
-
-            <div class="col-md-6 col-sm-12">
-              <div class="content-box-panel overlay-bg">
-                <div>
-                  <h5>บริษัทหรือร้านค้า</h5>
-                  <h3>
-                    <a href="{{URL::to($shopUrl)}}">{{$shop['name']}}</a>
-                  </h3>
-                  <div class="line space-top-bottom-20"></div>
-                  <p>{{$shop['_short_description']}}</p>
-                </div>
-
-                <a href="{{URL::to($shopUrl)}}" class="button wide-button">ไปยังร้านค้านี้</a>
-              </div>
-            </div>
-
-            <div class="col-md-6 col-sm-12"></div>
-
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="row">
-
-    <div class="col-md-4 col-sm-12 space-top-30">
-      
       <div class="detail-info-section no-margin">
         <h4>ที่อยู่สำหรับการจัดส่ง</h4>
         <div class="line"></div> 
@@ -93,17 +59,6 @@
 
     </div>
 
-    <div class="col-md-8 col-sm-12 space-top-30">
-
-      <div class="detail-info-section no-margin">
-          <h4>รายละเอียดและวิธีการชำระเงิน</h4>
-          <div class="line"></div> 
-          <div class="detail-info">
-            ยังไม่มีรายละเอียดและวิธีการชำระเงิน
-          </div>
-      </div>
-
-    </div>
   </div>
 
   <div class="cart space-top-30">
@@ -116,12 +71,6 @@
       <div class="product-list-wrapper">
         @foreach($orderProducts as $product)
         <div class="product-list-table-row">
-
-          @if(!empty($product['hasError']))
-            <p class="product-error-message">
-              {{$product['errorMessage']}}
-            </p>
-          @endif
 
           <div class="product-list-box clearfix">
 
@@ -147,7 +96,7 @@
               </div>
 
               <div class="col-md-3 col-xs-12 product-info-container">
-                <div class="product-text">
+                <div class="product-text shipping-cost-input">
                   <h5>ค่าจัดส่งสินค้า</h5>
                   <h4>{{$product['shippingCostText']}}</h4>
                 </div>
@@ -186,20 +135,104 @@
 
   </div>
 
-  <div class="row">
+  <div class="space-top-30">
+    <h4 class="require">ค่าจัดส่งสินค้า</h4>
+    <div class="line"></div>
+    <div class="alert alert-danger space-top-20" role="alert">
+      <p class="error-message">* สินค้าที่คำนวณค่าจัดส่งแล้วจะไม่สามารถแก้ไขค่าจัดส่งได้</p>
+    </div>
 
-    <div class="col-sm-12 space-top-30">
-      
-      <div class="detail-info-section no-margin">
-        <h4>สถานะการสั่งซื้อ</h4>
-        <div class="line"></div> 
-        <div class="detail-info">
-          {{$order['shipping_address']}}
-        </div>
+    <label class="choice-box">
+      <?php
+        echo Form::radio('shipping_cost_chkbox', 2, null);
+      ?> 
+      <div class="inner">กำหนดค่าจัดส่งต่อการสั่งซื้อ</div>
+    </label>
+
+    <div class="shipping-cost-input-section">
+
+      <label class="choice-box">
+        <?php
+          echo Form::checkbox('include', 1, null);
+        ?> 
+        <div class="inner">รวมกับสินค้าที่คิดค่าจัดส่งแล้ว</div>
+      </label>
+
+      <input 
+      class="shipping-cost-input" 
+      type="text" name="quantity" 
+      value=""
+      autocomplete="off"
+      placeholder="กำหนดค่าจัดส่งต่อการสั่งซื้อ" 
+      role="number" />
+
+    </div>
+
+    <label class="choice-box">
+      <?php
+        echo Form::radio('shipping_cost_chkbox', 1, true);
+      ?> 
+      <div class="inner">กำหนดค่าจัดส่งรายสินค้า</div>
+    </label>
+
+    <div class="shipping-cost-input-section">
+      <h4>สินค้าที่ยังไม่ได้คิดค่าจัดส่ง</h4>
+
+      <div class="row">
+
+        @foreach($orderProducts as $product)
+
+          @if($product['shipping_calculate_from'] == 1)
+          <div class="col-md-6 col-xs-12">
+            <div class="shipping-cost-input-box clearfix">
+
+              <div class="text-center pull-left">
+                <img src="{{$product['imageUrl']}}">
+              </div>
+
+              <div class="col-xs-8">
+                <h5><strong>{{$product['product_name']}}</strong></h5>
+
+                <input 
+                class="shipping-cost-input" 
+                type="text" name="quantity" 
+                value=""
+                autocomplete="off"
+                placeholder="ค่าจัดส่งสินค้า" 
+                role="number" />
+
+              </div>
+
+            </div>
+          </div>
+          @endif
+
+        @endforeach
+
       </div>
 
     </div>
 
+  </div>
+
+  <div class="space-top-30">
+    <h4 class="require">รายละเอียดและวิธีการชำระเงิน</h4>
+    <div class="line"></div>
+    <?php 
+      echo Form::textarea('description', null, array(
+        'class' => 'ckeditor'
+      ));
+    ?>
+  </div>
+
+  <div class="space-top-30">
+    <h4 class="require">ข้อความถึงผู้ซื้อ</h4>
+    <div class="line"></div>
+    <?php 
+      echo Form::textarea('description', null, array(
+        'class' => 'ckeditor'
+      ));
+    ?>
   </div>
 
 </div>

@@ -9,9 +9,9 @@
       <input type="checkbox" id="global_nav_trigger" class="nav-trigger">
     </label>
 
-    <label class="header-button notification-button" for="search_panel_trigger">
+    <label class="header-button notification-button" for="notification_panel_trigger">
       <img class="icon-header" src="/images/icons/bell-white.png" />
-      <input type="checkbox" id="search_panel_trigger" class="search-trigger">
+      <input type="checkbox" id="notification_panel_trigger" class="notification-trigger">
     </label>
 
     <label class="header-button cart-button" for="cart_panel_trigger">

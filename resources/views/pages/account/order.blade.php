@@ -31,15 +31,20 @@
 
             <div class="col-md-4 col-xs-12 list-content">
               <a href="{{$data['detailUrl']}}">
-                <h4 class="primary-info">การสั่งซื้อหมายเลข: {{$data['id']}}</h4>
+                <h4 class="primary-info">{{$data['shopName']}}</h4>
               </a>
+              <div class="secondary-info">เลขที่การสั่งซื้อ: {{$data['invoice_number']}}</div>
               <div class="secondary-info">สั่งซื้อเมื่อ: {{$data['orderedDate']}}</div>
-              <div class="secondary-info">ยอดสุทธิ: {{$data['_total']}}</div>
             </div>
 
             <div class="col-md-4 col-xs-12 list-content">
               <h4 class="primary-info">สถานะการสั่งซื้อ</h4>
               <div class="secondary-info">{{$data['OrderStatusName']}}</div>
+            </div>
+
+            <div class="col-md-4 col-xs-12 list-content">
+              <h4 class="primary-info">ยอดสุทธิ</h4>
+              <div class="secondary-info">{{$data['_total']}}</div>
             </div>
 
           </div>
@@ -51,7 +56,7 @@
           <div class="dot"></div>
           <div class="dot"></div>
           <div class="additional-option-content">
-            <a href="{{$data['detailUrl']}}">แสดงสินค้านี้</a>
+            <a href="{{$data['detailUrl']}}">แสดงรายละเอียด</a>
             <a href="">ลบ</a>
           </div>
         </div>
@@ -59,55 +64,6 @@
       </div>
     @endforeach
     </div>
-
-    <!-- <div class="grid-card">
-
-      <div class="row">
-
-        @foreach($_pagination['data'] as $data)
-
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-          <div class="card">
-
-            <h4>การสั่งซื้อหมายเลข</h4>
-            <h4>{{$data['id']}}</h4>
-
-            <div class="card-sub-info">
-              <h5>สถานะการสั่งซื้อ</h5>
-              {{$data['OrderStatusName']}}
-            </div>
-
-            <div class="card-sub-info">
-              <h5>จำนวนสินค้าที่สั่งซื้อ</h5>
-              {{$data['countProuduct']}}
-            </div>
-
-            <div class="card-sub-info">
-              <h5>ยอดสุทธิ</h5>
-              {{$data['_total']}}
-            </div>
-
-            <div class="card-sub-info">
-              <h5>สั่งซื้อเมื่อ</h5>
-              {{$data['orderedDate']}}
-            </div>
-            
-            <div class="button-group">
-
-              <a href="{{$data['detailUrl']}}">
-                <div class="button wide-button">แสดงรายละเอียด</div>
-              </a>
-            
-            </div>
-            
-          </div>
-        </div>
-
-        @endforeach
-
-      </div>
-
-    </div> -->
 
     @include('components.pagination')
 
