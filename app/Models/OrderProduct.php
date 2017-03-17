@@ -48,9 +48,7 @@ class OrderProduct extends Model
       '_price' => $currency->format($this->price),
       'quantity' => $this->quantity,
       'shipping_calculate_from' => $this->shipping_calculate_from,
-      // 'free_shipping' => $this->free_shipping,
-      // 'freeShippingText' => !empty($this->free_shipping) ? 'จัดส่งฟรี' : '',
-      // '_shipping_cost' => $currency->format($this->getOrderShippingCost()),
+      'shipping_cost' => $this->shipping_cost,
       'shippingCostText' => $shippingCostText,
       '_total' => $currency->format($this->total)
     );

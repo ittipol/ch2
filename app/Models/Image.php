@@ -41,6 +41,21 @@ class Image extends Model
     parent::__construct();
   }
 
+  public static function boot() {
+
+    parent::boot();
+
+    Image::deleted(function($model) {
+      // delete image after image record is deleted
+      //getDirPath 
+
+      dd($model);
+
+       // $model->deleteAllRelatedData();
+    });
+
+  }
+
   public function imageType() {
     return $this->hasOne('App\Models\ImageType','id','image_type_id');
   }
@@ -103,6 +118,16 @@ class Image extends Model
     $temporaryFile->deleteTemporaryRecords($model->modelName,$options['token']);
 
   }
+
+  // public function deleteAllImageAndFolder($image) {
+  //   $path = $image->getImagePath();
+
+  //   if(!file_exists($path)){
+  //     continue;
+  //   }
+
+  //   File::Delete($path);
+  // }
 
   public function deleteImages($model,$imageIds) {
 

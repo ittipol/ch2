@@ -183,6 +183,10 @@ class FormHelper {
     return $this->data;
   }
 
+  public function getFieldDataByIndex($index) {
+    return $this->data[$index];
+  }
+
   public function setFormData($index,$value) {
     $this->formData[$index] = $value;
   }

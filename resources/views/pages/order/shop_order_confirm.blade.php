@@ -100,7 +100,7 @@
 
     <label class="choice-box">
       <?php
-        echo Form::radio('shipping_cost_type', 1, null, array(
+        echo Form::radio('shipping_cost_type', 1, !$hasProductNotSetShippingCost, array(
           'id' => 'shipping_cost_order_chkbox'
         ));
       ?> 
@@ -108,6 +108,8 @@
     </label>
 
     <div class="shipping-cost-input-section">
+
+      @if(!$hasAllProductNotSetShippingCost)
 
       <label class="choice-box">
         <?php
@@ -118,6 +120,8 @@
         ?> 
         <div class="inner">ยกเลิกค่าจัดส่งสินค้าที่ได้คิดค่าจัดส่งไว้แล้ว</div>
       </label>
+
+      @endif
 
       <?php
         echo Form::text('shipping_cost_order', null, array(
@@ -131,9 +135,11 @@
 
     </div>
 
+    @if($hasProductNotSetShippingCost)
+
     <label class="choice-box">
       <?php
-        echo Form::radio('shipping_cost_type', 2, true, array(
+        echo Form::radio('shipping_cost_type', 2, $hasProductNotSetShippingCost, array(
           'id' => 'shipping_cost_product_chkbox'
         ));
       ?> 
@@ -147,7 +153,7 @@
 
         @foreach($orderProducts as $product)
 
-          @if($product['shipping_calculate_from'] == 1)
+          @if(($product['shipping_calculate_from'] == 1)  && empty($product['shipping_cost']))
           <div class="col-md-6 col-xs-12">
             <div class="shipping-cost-input-box clearfix">
 
@@ -179,16 +185,32 @@
 
     </div>
 
+    @endif
+
   </div>
 
   <div class="space-top-30">
-    <h4 class="required">รายละเอียดและวิธีการชำระเงิน</h4>
-    <!-- <div class="line"></div> -->
-    <?php 
-      echo Form::textarea('payment_detail', null, array(
-        'class' => 'ckeditor'
-      ));
-    ?>
+    <h4 class="required">วิธีการชำระเงิน</h4>
+    <p class="notice info">กำหนดวิธีการชำระเงินของคุณให้กับการสั่งซื้อนี้</p>
+    <div class="line"></div>
+
+    @if(!empty($paymentMethods))
+
+      @foreach ($paymentMethods as $id => $name)
+      <div>
+        <label class="choice-box">
+          <?php
+            echo Form::checkbox('payment_method[]', $id);
+          ?> 
+          <div class="inner"><?php echo $name; ?></div>
+        </label>
+      </div>
+      @endforeach
+
+    @else
+      <p class="space-top-10">ยังไม่เพิ่มวิธีการชำระเงิน</p>
+    @endif
+
   </div>
 
   <div class="space-top-30">

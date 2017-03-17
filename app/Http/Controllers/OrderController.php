@@ -99,10 +99,25 @@ class OrderController extends Controller
       return Redirect::to(request()->get('shopUrl').'order');
     }
 
+    // Get Payment method
+    $model->formHelper->loadFieldData('PaymentMethod',array(
+      'key' =>'id',
+      'field' => 'name',
+      'index' => 'paymentMethods',
+      'order' => array(
+        array('id','ASC')
+      )
+    ));
+
+    $this->setData('paymentMethods',$model->formHelper->getFieldDataByIndex('paymentMethods'));
+
     $this->setData('order',$model->modelData->build(true));
     $this->setData('orderProducts',$model->getOrderProducts());
     $this->setData('orderTotals',$model->getSummary(true));
     // $this->setData('orderTotals',$model->orderTotals());
+
+    $this->setData('hasProductNotSetShippingCost',$model->checkHasProductNotSetShippingCost());
+    $this->setData('hasAllProductNotSetShippingCost',$model->checkHasAllProductNotSetShippingCost());
 
     return $this->view('pages.order.shop_order_confirm');
 
@@ -120,15 +135,11 @@ class OrderController extends Controller
       return Redirect::to(request()->get('shopUrl').'order');
     }
 
-    // dd(request()->all());
-
     switch (request()->get('shipping_cost_type')) {
       case 1:
 
-      // shipping_cost_order
-
-        // $model->order_shipping_cost = request()->get('shipping_cost_order');
-        // $model->save();
+        $model->order_shipping_cost = request()->get('shipping_cost_order');
+        $model->save();
 
         if(!empty(request()->get('cancel_product_shipping_cost')) && (request()->get('cancel_product_shipping_cost') == 1)) {
 
@@ -147,11 +158,7 @@ class OrderController extends Controller
             $orderProduct->save();
           }
 
-          dd('cccaaa');
-
         }
-
-        dd('saved');
 
         break;
       
@@ -159,7 +166,6 @@ class OrderController extends Controller
 
         $shippingCostProduct = request()->get('shipping_cost_product');
         
-        // Get product has no shipping
         $orderProducts = Service::loadModel('OrderProduct')
         ->where([
           ['order_id','=',$model->id],
@@ -177,14 +183,46 @@ class OrderController extends Controller
           $orderProduct->save();
 
         }
-dd('2 saved');
+
         break;
     }
 
-    // cal summary data
-    // save to order total
+    // cal total data
+    $orderTotalModel = Service::loadModel('OrderTotal');
 
-          dd('passed');
+    $totals = $model->getSummary();
+
+    foreach ($totals as $alias => $total) {
+
+      $orderTotal = $orderTotalModel
+      ->newInstance()
+      ->where([
+        ['order_id','=',$model->id],
+        ['alias','like',$alias]
+      ])
+      ->first();
+
+      $orderTotal->value = $total['value'];
+      $orderTotal->save();
+
+    }
+
+    // Add payment method to order 
+    $paymentMethodToOrderModel = Service::loadModel('PaymentMethodToOrder');
+    if(!empty(request()->get('payment_method'))) {
+      foreach (request()->get('payment_method') as $paymentMethodId) {
+        $paymentMethodToOrderModel
+        ->newInstance()
+        ->fill(array(
+          'payment_method_id' => $paymentMethodId,
+          'order_id' => $model->id
+        ))
+        ->save();
+      }
+    }
+
+    Message::display('การสั่งซื้อถูกยืนยันแล้ว','success');
+    return Redirect::to('shop/'.$this->param['shopSlug'].'/order/'.$model->id);
 
   }
 

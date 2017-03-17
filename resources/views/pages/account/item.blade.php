@@ -58,8 +58,8 @@
             
             <div class="button-group">
 
-              <a href="{{$data['detailUrl']}}">
-                <div class="button wide-button">แสดงรายละเอียด</div>
+              <a href="{{$data['editUrl']}}">
+                <div class="button wide-button">แก้ไข</div>
               </a>
 
               <div class="additional-option">
@@ -67,7 +67,7 @@
                 <div class="dot"></div>
                 <div class="dot"></div>
                 <div class="additional-option-content">
-                  <a href="{{$data['editUrl']}}">แก้ไข</a>
+                  <a href="{{$data['detailUrl']}}">แสดงรายละเอียด</a>
                   <a href="{{$data['deleteUrl']}}" data-modal="1" data-modal-action="delete">ลบ</a>
                 </div>
               </div>

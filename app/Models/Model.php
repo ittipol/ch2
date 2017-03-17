@@ -360,13 +360,18 @@ class Model extends BaseModel
     $model = Service::loadModel($modelName);
     $field = $this->modelAlias.'_id';
 
-    if(!Schema::hasColumn($model->getTable(), $field)) {
+    if(Schema::hasColumn($model->getTable(), $field)) {
+      $conditions = array(
+        [$field,'=',$this->id],
+      );
+    }elseif($model->checkHasFieldModelAndModelId()) {
+      $conditions = array(
+        ['model','like',$this->modelName],
+        ['model_id','=',$this->id],
+      );
+    }else{
       return false;
     }
-
-    $conditions = array(
-      [$field,'=',$this->id],
-    );
 
     if(!empty($options['conditions'])){
       $options['conditions'] = array_merge($options['conditions'],$conditions);
@@ -377,6 +382,29 @@ class Model extends BaseModel
     return $model->getData($options);
 
   }
+
+  // public function getRelatedData($modelName,$options = array()) {
+
+  //   $model = Service::loadModel($modelName);
+  //   $field = $this->modelAlias.'_id';
+
+  //   if(!Schema::hasColumn($model->getTable(), $field)) {
+  //     return false;
+  //   }
+
+  //   $conditions = array(
+  //     [$field,'=',$this->id],
+  //   );
+
+  //   if(!empty($options['conditions'])){
+  //     $options['conditions'] = array_merge($options['conditions'],$conditions);
+  //   }else{
+  //     $options['conditions'] = $conditions;
+  //   }
+
+  //   return $model->getData($options);
+
+  // }
 
   public function getRelatedModelData($modelName,$options = array()) {
 
@@ -403,28 +431,90 @@ class Model extends BaseModel
 
   public function deleteRelatedData($model) {
 
-    $string = new String;
-
     $field = $model->modelAlias.'_id';
 
-    if(!Schema::hasColumn($this->getTable(), $field)) {
+    if(Schema::hasColumn($this->getTable(), $field)) {
+
+      $_model = $this->where($field,'=',$model->id);
+      // return $this->where($field,'=',$model->id)->delete();
+
+    }elseif($this->checkHasFieldModelAndModelId()) {
+
+      $_model = $this->where([
+        ['model','=',$model->modelName],
+        ['model_id','=',$model->id],
+      ]);
+
+      // return $this->where([
+      //   ['model','=',$model->modelName],
+      //   ['model_id','=',$model->id],
+      // ])->delete();
+
+    }else {
       return false;
     }
 
-    $this->where($field,'=',$model->id)->delete();
+    if($_model->exists()) {
+
+      foreach ($_model->get() as $value) {
+        $value->delete();
+      }
+
+      return true;
+
+      // return $_model->delete();
+    }
+
+    return false;
 
   }
 
-  public function deleteRelatedModelData($model) {
+  // public function deleteRelatedData($model) {
 
-    if(!$this->checkHasFieldModelAndModelId()) {
-      return false;
+  //   $string = new String;
+
+  //   $field = $model->modelAlias.'_id';
+
+  //   if(!Schema::hasColumn($this->getTable(), $field)) {
+  //     return false;
+  //   }
+
+  //   return $this->where($field,'=',$model->id)->delete();
+
+  // }
+
+  // public function deleteRelatedModelData($model) {
+
+  //   if(!$this->checkHasFieldModelAndModelId()) {
+  //     return false;
+  //   }
+
+  //   return $this->where([
+  //     ['model','=',$model->modelName],
+  //     ['model_id','=',$model->id],
+  //   ])->delete();
+
+  // }
+
+  public function deleteAllRelatedData($options = array()) {
+
+    $modelRelations = array_merge($this->getModelRelations(),array(
+      'Slug',
+      'Lookup',
+      'DataAccessPermission'
+    ));
+
+    foreach ($modelRelations as $modelName) {
+      $model = Service::loadModel($modelName);
+      $model->deleteRelatedData($this);
+
+      if($modelName == 'Image') {
+
+      }
+
     }
 
-    return $this->where([
-      ['model','=',$model->modelName],
-      ['model_id','=',$model->id],
-    ])->delete();
+    return true;
 
   }
 
@@ -449,33 +539,6 @@ class Model extends BaseModel
       'model' => $this->modelName,
       'model_id' => $this->id
     ));
-
-  }
-
-  public function deleteAllRelatedData($options = array()) {
-
-    $modelRelations = array_merge($this->getModelRelations(),array(
-      'Slug',
-      'Lookup',
-      'DataAccessPermission'
-    ));
-
-    foreach ($modelRelations as $modelName) {
-      $model = Service::loadModel($modelName);
-
-      if($model->deleteRelatedData($this)) {
-
-      }elseif($model->deleteRelatedModelData($this)) {
-
-      }
-
-      if($modelName == 'Image') {
-        // delete related images
-      }
-
-    }
-
-    return true;
 
   }
 

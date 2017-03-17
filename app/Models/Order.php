@@ -11,6 +11,7 @@ class Order extends Model
 {
   protected $table = 'orders';
   protected $fillable = ['invoice_prefix','invoice_number','shop_id','person_id','person_name','shipping_address','payment_detail','message_to_seller','order_status_id','order_shipping_cost'];
+  protected $modelRelations = array('PaymentMethodToOrder');
 
   public $formHelper = true;
   public $modelData = true;
@@ -220,6 +221,36 @@ class Order extends Model
     }
 
     return $total;
+
+  }
+
+  public function checkHasProductNotSetShippingCost() {
+
+    return OrderProduct::where([
+      ['order_id','=',$this->id],
+      ['shipping_calculate_from','=',1],
+      ['shipping_cost','=',null]
+    ])->exists();
+
+  }
+
+  public function checkHasAllProductNotSetShippingCost() {
+
+    $total = OrderProduct::where([
+      ['order_id','=',$this->id]
+    ])->count();
+
+    $totalProductNotSetShippingCost = OrderProduct::where([
+      ['order_id','=',$this->id],
+      ['shipping_calculate_from','=',1],
+      ['shipping_cost','=',null]
+    ])->count();
+
+    if($total == $totalProductNotSetShippingCost) {
+      return true;
+    }
+
+    return false;
 
   }
 
