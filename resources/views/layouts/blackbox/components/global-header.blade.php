@@ -12,6 +12,7 @@
     <label class="header-button notification-button" for="notification_panel_trigger">
       <img class="icon-header" src="/images/icons/bell-white.png" />
       <input type="checkbox" id="notification_panel_trigger" class="notification-trigger">
+      <span id="notification_count" class="badge badge-default">0</span>
     </label>
 
     <label class="header-button cart-button" for="cart_panel_trigger">

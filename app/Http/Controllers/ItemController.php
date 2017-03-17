@@ -153,4 +153,25 @@ class ItemController extends Controller
     
   }
 
+  public function delete() {
+
+    $model = Service::loadModel('Item')->find($this->param['id']);
+
+    if(empty($model)) {
+      $this->error = array(
+        'message' => 'ขออภัย ไม่พบประกาศนี้ หรือข้อมูลนี้อาจถูกลบแล้ว'
+      );
+      return $this->error();
+    }
+
+    if($model->delete()) {
+      Message::display('ข้อมูลถูกลบแล้ว','success');
+      return Redirect::to('account/item');
+    }else{
+      Message::display('ไม่สามารถลบข้อมูลนี้ได้','error');
+      return Redirect::to('account/item');
+    }
+
+  }
+
 }

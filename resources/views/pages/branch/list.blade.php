@@ -1,43 +1,54 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-  <div class="container list">
+<div class="top-header-wrapper top-header-border">
+  <div class="container">
+    <div class="top-header">
+      <div class="detail-title">
+        <h4>{{$shopName}}</h4>
+        <h2 class="title">สาขา</h2>
+      </div>
+    </div>
+  </div>
+</div>
 
-    @if(!empty($_pagination['data']))
+<div class="container list">
 
-      <div class="row">
+  @if(!empty($_pagination['data']))
 
-        @foreach($_pagination['data'] as $data)
+    <div class="row">
 
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-          <div class="card">
-            <div class="image-tile">
-              <a href="{{$data['detailUrl']}}">
-                <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
-              </a>
-            </div>
-            <div class="card-info">
-              <a href="{{$data['detailUrl']}}">
-                <div class="card-title">{{$data['name']}}</div>
-              </a>
-            </div>
-            <div>
-              <a href="{{$data['detailUrl']}}"><div class="button wide-button">แสดง</div></a>
-            </div>
+      @foreach($_pagination['data'] as $data)
+
+      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <div class="card">
+          <div class="image-tile">
+            <a href="{{$data['detailUrl']}}">
+              <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+            </a>
+          </div>
+          <div class="card-info">
+            <a href="{{$data['detailUrl']}}">
+              <div class="card-title">{{$data['name']}}</div>
+            </a>
+          </div>
+          <div>
+            <a href="{{$data['detailUrl']}}"><div class="button wide-button">แสดง</div></a>
           </div>
         </div>
-        @endforeach
-
       </div>
+      @endforeach
 
-      @include('components.pagination') 
+    </div>
 
-    @else
+    @include('components.pagination') 
 
-    <h3>ไม่พบสินค้า</h3>
+  @else
 
-    @endif
+  <h3>ไม่พบสินค้า</h3>
 
-  </div>
+  @endif
+
+</div>
 
 @stop

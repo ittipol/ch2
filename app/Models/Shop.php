@@ -119,11 +119,6 @@ class Shop extends Model
       }
 
     });
-
-    // before delete() method call this
-    // static::deleting(function($user) {
-    //    // do the rest of the cleanup...
-    // });
   
   }
 

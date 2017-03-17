@@ -1,17 +1,18 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<div class="container">
-
-  <div class="container-header">
-    <div class="row">
-      <div class="col-lg-6 col-sm-12">
-        <div class="title">
-          สาขา
-        </div>
+<div class="top-header-wrapper top-header-border">
+  <div class="container">
+    <div class="top-header">
+      <div class="detail-title">
+        <h4></h4>
+        <h2 class="title">สาขา</h2>
       </div>
     </div>
   </div>
+</div>
+
+<div class="container">
 
   <div class="tile-nav-group space-top-bottom-20 clearfix">
 

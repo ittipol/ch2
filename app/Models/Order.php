@@ -10,11 +10,30 @@ use App\library\date;
 class Order extends Model
 {
   protected $table = 'orders';
-  protected $fillable = ['invoice_prefix','invoice_number','shop_id','person_id','person_name','shipping_address','message_to_seller','order_status_id'];
+  protected $fillable = ['invoice_prefix','invoice_number','shop_id','person_id','person_name','shipping_address','payment_detail','message_to_seller','order_status_id','order_shipping_cost'];
 
   public $formHelper = true;
   public $modelData = true;
   public $paginator = true;
+
+  private $Totaltypes = array(
+    'subTotal' => array(
+      'title' => 'มูลค่าสินค้า',
+      'class' => 'sub-total'
+    ),
+    'shippingCost' => array(
+      'title' => 'ค่าจัดส่งสินค้า',
+      'class' => 'shipping-cost'
+    ),
+    'savingPrice' => array(
+      'title' => 'ประหยัด',
+      'class' => 'saving-price'
+    ),
+    'total' => array(
+      'title' => 'ยอดสุทธิ',
+      'class' => 'total-amount'
+    )
+  );
 
   public function orderStatus() {
     return $this->hasOne('App\Models\OrderStatus','id','order_status_id');
@@ -23,7 +42,6 @@ class Order extends Model
   public function shop() {
     return $this->hasOne('App\Models\Shop','id','shop_id');
   }
-
 
   public function getInvoicePrefix() {
     return 'INV';
@@ -75,7 +93,7 @@ class Order extends Model
     return $_orderProducts;
   }
 
-  public function orderOrderTotals() {
+  public function orderTotals() {
     $orderTotals = $this->getRelatedData('OrderTotal');
 
     $_orderTotals = array();
@@ -105,6 +123,104 @@ class Order extends Model
     }
 
     return $count;
+  }
+
+  public function getTitle($alias) {
+
+    if(empty($this->Totaltypes[$alias]['title'])) {
+      return null;
+    }
+
+    return $this->Totaltypes[$alias]['title'];
+  }
+
+  public function getClass($alias) {
+
+    if(empty($this->Totaltypes[$alias]['class'])) {
+      return null;
+    }
+
+    return $this->Totaltypes[$alias]['class'];
+  }
+
+  public function getSummary($format = false) {
+
+    $summaries = array(
+      'subTotal' => 'getOrderSubTotal',
+      'shippingCost' => 'getOrderShippingCost',
+      // 'savingPrice' => 'getOrderSavingPrice',
+      'total' => 'getOrderTotal'
+    );
+
+    $orderProducts = $this->getRelatedData('OrderProduct');
+
+    $_summaries = array();
+    foreach ($summaries as $alias => $fx) {
+      $_summaries[$alias] = array(
+        'value' => $this->{$fx}($orderProducts,$format),
+        'title' => $this->getTitle($alias),
+        'class' => $this->getClass($alias),
+      );
+    }
+
+    return $_summaries;
+
+  }
+
+  public function getOrderSubTotal($orderProducts,$format) {
+
+    $currency = new Currency;
+
+    $subTotal = 0;
+    foreach ($orderProducts as $orderProduct) {
+      $subTotal += $orderProduct->getSubTotal();
+    }
+
+    if($format) {
+      return $currency->format($subTotal);
+    }
+
+    return $subTotal;
+
+  }
+
+  public function getOrderShippingCost($orderProducts,$format) {
+
+    $currency = new Currency;
+
+    $shippingCost = 0;
+
+    if(!empty($this->order_shipping_cost)) {
+      $shippingCost = $this->order_shipping_cost;
+    }
+
+    foreach ($orderProducts as $orderProduct) {
+      $shippingCost += $orderProduct->getOrderShippingCost();
+    }
+
+    if($format) {
+      return $currency->format($shippingCost);
+    }
+
+    return $shippingCost;
+
+  }
+
+  public function getOrderTotal($orderProducts,$format) {
+
+    $currency = new Currency;
+
+    $total = 0;
+    foreach ($orderProducts as $orderProduct) {
+      $total += $orderProduct->getOrderTotal();
+    }
+
+    if($format) {
+      return $currency->format($total);
+    }
+
+    return $total;
+
   }
 
   public function buildModelData() {

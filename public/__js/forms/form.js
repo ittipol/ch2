@@ -28,7 +28,7 @@ class Form {
 				this.appendChild(input);
 			}
 
-			$('input[type="submit"]').prop('disabled','disabled').addClass('disabled');
+			$('#main_form input[type="submit"]').prop('disabled','disabled').addClass('disabled');
 		
 		});
 

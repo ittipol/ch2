@@ -16,6 +16,8 @@
 
     <div class="line space-top-bottom-30"></div>
       
+    @include('components.form_error') 
+      
     <div class="row">
 
       <div class="col-lg-6 col-xs-12">
@@ -52,8 +54,6 @@
         </div>
       </div>
     </div>
-
-    @include('components.form_error') 
 
     <?php 
       echo Form::open(['id' => 'main_form','method' => 'post', 'enctype' => 'multipart/form-data']);

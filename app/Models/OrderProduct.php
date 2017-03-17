@@ -36,27 +36,44 @@ class OrderProduct extends Model
           if($this->free_shipping) {
             $shippingCostText = 'จัดส่งฟรี ('.$currency->format(0).')';
           }else{
-            $shippingCostText = $currency->format($this->calShippingCost());
+            $shippingCostText = $currency->format($this->getOrderShippingCost());
           }
 
         break;
     }
 
     return array(
+      'id' => $this->id,
       'product_name' => $this->product_name,
       '_price' => $currency->format($this->price),
       'quantity' => $this->quantity,
       'shipping_calculate_from' => $this->shipping_calculate_from,
       // 'free_shipping' => $this->free_shipping,
       // 'freeShippingText' => !empty($this->free_shipping) ? 'จัดส่งฟรี' : '',
-      // '_shipping_cost' => $currency->format($this->calShippingCost()),
+      // '_shipping_cost' => $currency->format($this->getOrderShippingCost()),
       'shippingCostText' => $shippingCostText,
       '_total' => $currency->format($this->total)
     );
 
   }
 
-  public function calShippingCost() {
+  public function getSubTotal($format = false) {
+
+    $currency = new Currency;
+
+    $subTotal = $this->price * $this->quantity;
+
+    if($format) {
+      return $currency->format($subTotal);
+    }
+
+    return $subTotal;
+
+  }
+
+  public function getOrderShippingCost($format = false) {
+
+    $currency = new Currency;
 
     $cost = 0;
     switch ($this->product_shipping_amount_type_id) {
@@ -70,7 +87,29 @@ class OrderProduct extends Model
 
     }
 
+    if($format) {
+      return $currency->format($cost);
+    }
+
     return $cost;
+
+  }
+
+  // public function getOrderSavingPrice($format = false) {
+  //
+  // }
+
+  public function getOrderTotal($format = false) {
+    
+    $currency = new Currency;
+
+    $total = $this->getSubTotal() + $this->getOrderShippingCost();
+
+    if($format) {
+      return $currency->format($total);
+    }
+
+    return $total;
 
   }
 

@@ -71,9 +71,9 @@ class Model extends BaseModel
 
         $model->state = 'create';
 
-        if((Schema::hasColumn($model->getTable(), 'ip_address')) && (empty($model->ip_address))) {
-          $model->ip_address = Service::ipAddress();
-        }
+        // if((Schema::hasColumn($model->getTable(), 'ip_address')) && (empty($model->ip_address))) {
+        //   $model->ip_address = Service::ipAddress();
+        // }
 
         if((Schema::hasColumn($model->getTable(), 'person_id')) && (empty($model->person_id))) {
           $model->person_id = Session::get('Person.id');
@@ -116,6 +116,17 @@ class Model extends BaseModel
         $dataAccessPermission->__saveRelatedData($model,$model->getModelRelationData('DataAccessPermission'));
       }
       
+    });
+
+    // before delete() method call this
+    // static::deleting(function($user) {
+    //    // do the rest of the cleanup...
+    // });
+
+    // before delete() method call this
+    parent::deleted(function($model) {
+       // delete all related data
+       $model->deleteAllRelatedData();
     });
 
   }
@@ -242,24 +253,24 @@ class Model extends BaseModel
 
     $model = $this;
 
-    // if(!empty($options['joins'])) {
+    if(!empty($options['joins'])) {
 
-    //   if(is_array(current($options['joins']))) {
+      if(is_array(current($options['joins']))) {
 
-    //     foreach ($options['order'] as $value) {
-    //       $model->join($value[0], $value[1], $value[2], $value[3]);
-    //     }
+        foreach ($options['order'] as $value) {
+          $model = $model->join($value[0], $value[1], $value[2], $value[3]);
+        }
 
-    //   }else{
-    //     $model->join(
-    //       current($options['join']), 
-    //       next($options['join']), 
-    //       next($options['join']), 
-    //       next($options['join'])
-    //     );
-    //   }
+      }else{
+        $model = $model->join(
+          current($options['joins']), 
+          next($options['joins']), 
+          next($options['joins']), 
+          next($options['joins'])
+        );
+      }
 
-    // }
+    }
 
     if(!empty($options['conditions']['in'])) {
 
@@ -390,15 +401,29 @@ class Model extends BaseModel
 
   }
 
-  public function deleteByModelNameAndModelId($model,$modelId) {
+  public function deleteRelatedData($model) {
+
+    $string = new String;
+
+    $field = $model->modelAlias.'_id';
+
+    if(!Schema::hasColumn($this->getTable(), $field)) {
+      return false;
+    }
+
+    $this->where($field,'=',$model->id)->delete();
+
+  }
+
+  public function deleteRelatedModelData($model) {
 
     if(!$this->checkHasFieldModelAndModelId()) {
       return false;
     }
 
     return $this->where([
-      ['model','=',$model],
-      ['model_id','=',$modelId],
+      ['model','=',$model->modelName],
+      ['model_id','=',$model->id],
     ])->delete();
 
   }
@@ -424,6 +449,33 @@ class Model extends BaseModel
       'model' => $this->modelName,
       'model_id' => $this->id
     ));
+
+  }
+
+  public function deleteAllRelatedData($options = array()) {
+
+    $modelRelations = array_merge($this->getModelRelations(),array(
+      'Slug',
+      'Lookup',
+      'DataAccessPermission'
+    ));
+
+    foreach ($modelRelations as $modelName) {
+      $model = Service::loadModel($modelName);
+
+      if($model->deleteRelatedData($this)) {
+
+      }elseif($model->deleteRelatedModelData($this)) {
+
+      }
+
+      if($modelName == 'Image') {
+        // delete related images
+      }
+
+    }
+
+    return true;
 
   }
 

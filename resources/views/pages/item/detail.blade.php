@@ -1,17 +1,19 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<div class="top-header-wrapper">
-  <div class="top-header">
-    <div class="detail-title">
-      <h4 class="sub-title">ประกาศ{{$_modelData['_announcementTypeName']}}</h4>
-      <h2 class="title">{{$_modelData['name']}}</h2>
-      <div class="tag-group">
-        <a class="tag-box">{{$_modelData['_used']}}</a>
-        <a class="tag-box">{{$_modelData['_categoryName']}}</a>
-        @foreach ($_modelData['Tagging'] as $tagging)
-          <a class="tag-box">{{$tagging['_word']}}</a>
-        @endforeach
+<div class="top-header-wrapper top-header-border">
+  <div class="container">
+    <div class="top-header">
+      <div class="detail-title">
+        <h4 class="sub-title">ประกาศ{{$_modelData['_announcementTypeName']}}</h4>
+        <h2 class="title">{{$_modelData['name']}}</h2>
+        <div class="tag-group">
+          <a class="tag-box">{{$_modelData['_used']}}</a>
+          <a class="tag-box">{{$_modelData['_categoryName']}}</a>
+          @foreach ($_modelData['Tagging'] as $tagging)
+            <a class="tag-box">{{$tagging['_word']}}</a>
+          @endforeach
+        </div>
       </div>
     </div>
   </div>
@@ -113,21 +115,12 @@
 
   </div>
 
-  <div class="row">
-
-    <div class="col-sm-12 margin-section section-border-left">
-
-      <div class="space-top-bottom-10 section-inner">
-        
-        <h4>รายละเอียด {{$_modelData['name']}}</h4>  
-        <div>
-          {!!$_modelData['description']!!}
-        </div>
-
-      </div>
-
+  <div class="detail-info-section">
+    <h4>รายละเอียด {{$_modelData['name']}}</h4>
+    <div class="line"></div> 
+    <div class="detail-info">
+      {!!$_modelData['description']!!}
     </div>
-
   </div>
 
 </div>

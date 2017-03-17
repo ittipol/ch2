@@ -13,54 +13,6 @@
 
 <div class="container">
 
-  <div class="row">
-
-    <div class="col-md-4 col-sm-12">
-
-      <div class="detail-group">
-        <h4>รายละเอียดการสั่งซื้อ</h4>
-
-        <div class="detail-group-info-section">
-
-          <div class="detail-group-info">
-            <h5 class="title">ชื้อบริษัทหรือร้านค้าที่ขายสินค้า</h5>
-            <p>{{$order['shopName']}}</p>
-          </div>
-
-          <div class="detail-group-info">
-            <h5 class="title">ชื้อผู้ซื้อ</h5>
-            <p>{{$order['person_name']}}</p>
-          </div>
-
-          <div class="detail-group-info">
-            <h5 class="title">วันที่สั่งซื้อ</h5>
-            <p>{{$order['orderedDate']}}</p>
-          </div>
-
-          <div class="detail-group-info">
-            <h5 class="title">สถานะการสั่งซื้อ</h5>
-            <p>{{$order['orderStatusName']}}</p>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-
-    <div class="col-md-8 col-sm-12">
-
-      <div class="detail-info-section no-margin">
-        <h4>ที่อยู่สำหรับการจัดส่ง</h4>
-        <div class="line"></div> 
-        <div class="detail-info">
-          {{$order['shipping_address']}}
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
   <div class="cart space-top-30">
 
     <div class="product-list-table">
@@ -96,7 +48,7 @@
               </div>
 
               <div class="col-md-3 col-xs-12 product-info-container">
-                <div class="product-text shipping-cost-input">
+                <div class="product-text">
                   <h5>ค่าจัดส่งสินค้า</h5>
                   <h4>{{$product['shippingCostText']}}</h4>
                 </div>
@@ -123,9 +75,9 @@
 
       <div class="pull-right">
 
-        @foreach($orderOrderTotals as $orderOrderTotal)
+        @foreach($orderTotals as $orderTotal)
           <div class="text-right">
-            <h5 class="{{$orderOrderTotal['_class']}}">{{$orderOrderTotal['_title']}}: <span class="amount">{{$orderOrderTotal['_value']}}</span></h5>
+            <h5 class="{{$orderTotal['class']}}">{{$orderTotal['title']}}: <span class="amount">{{$orderTotal['value']}}</span></h5>
           </div>
         @endforeach
 
@@ -134,6 +86,10 @@
     </div>
 
   </div>
+
+  <?php 
+    echo Form::open(['id' => 'main_form','method' => 'post', 'enctype' => 'multipart/form-data']);
+  ?>
 
   <div class="space-top-30">
     <h4 class="require">ค่าจัดส่งสินค้า</h4>
@@ -144,7 +100,9 @@
 
     <label class="choice-box">
       <?php
-        echo Form::radio('shipping_cost_chkbox', 2, null);
+        echo Form::radio('shipping_cost_type', 1, null, array(
+          'id' => 'shipping_cost_order_chkbox'
+        ));
       ?> 
       <div class="inner">กำหนดค่าจัดส่งต่อการสั่งซื้อ</div>
     </label>
@@ -153,24 +111,31 @@
 
       <label class="choice-box">
         <?php
-          echo Form::checkbox('include', 1, null);
+          echo Form::checkbox('cancel_product_shipping_cost', 1, null, array(
+          'id' => 'cancel_product_shipping_cost',
+          'disabled' => 'disabled'
+        ));
         ?> 
-        <div class="inner">รวมกับสินค้าที่คิดค่าจัดส่งแล้ว</div>
+        <div class="inner">ยกเลิกค่าจัดส่งสินค้าที่ได้คิดค่าจัดส่งไว้แล้ว</div>
       </label>
 
-      <input 
-      class="shipping-cost-input" 
-      type="text" name="quantity" 
-      value=""
-      autocomplete="off"
-      placeholder="กำหนดค่าจัดส่งต่อการสั่งซื้อ" 
-      role="number" />
+      <?php
+        echo Form::text('shipping_cost_order', null, array(
+          'class' => 'shipping-cost-input shipping_cost_order_input',
+          'placeholder' => 'กำหนดค่าจัดส่งต่อการสั่งซื้อ',
+          'autocomplete' => 'off',
+          'role' => 'number',
+          'disabled' => 'disabled'
+        ));
+      ?>
 
     </div>
 
     <label class="choice-box">
       <?php
-        echo Form::radio('shipping_cost_chkbox', 1, true);
+        echo Form::radio('shipping_cost_type', 2, true, array(
+          'id' => 'shipping_cost_product_chkbox'
+        ));
       ?> 
       <div class="inner">กำหนดค่าจัดส่งรายสินค้า</div>
     </label>
@@ -193,13 +158,14 @@
               <div class="col-xs-8">
                 <h5><strong>{{$product['product_name']}}</strong></h5>
 
-                <input 
-                class="shipping-cost-input" 
-                type="text" name="quantity" 
-                value=""
-                autocomplete="off"
-                placeholder="ค่าจัดส่งสินค้า" 
-                role="number" />
+                <?php
+                  echo Form::text('shipping_cost_product['.$product['id'].']', null, array(
+                    'class' => 'shipping-cost-input shipping_cost_product_input',
+                    'placeholder' => 'ค่าจัดส่งสินค้า',
+                    'autocomplete' => 'off',
+                    'role' => 'number'
+                  ));
+                ?>
 
               </div>
 
@@ -216,25 +182,90 @@
   </div>
 
   <div class="space-top-30">
-    <h4 class="require">รายละเอียดและวิธีการชำระเงิน</h4>
-    <div class="line"></div>
+    <h4 class="required">รายละเอียดและวิธีการชำระเงิน</h4>
+    <!-- <div class="line"></div> -->
     <?php 
-      echo Form::textarea('description', null, array(
+      echo Form::textarea('payment_detail', null, array(
         'class' => 'ckeditor'
       ));
     ?>
   </div>
 
   <div class="space-top-30">
-    <h4 class="require">ข้อความถึงผู้ซื้อ</h4>
-    <div class="line"></div>
+    <h4>ข้อความถึงผู้ซื้อ</h4>
+    <!-- <div class="line"></div> -->
     <?php 
-      echo Form::textarea('description', null, array(
+      echo Form::textarea('comment', null, array(
         'class' => 'ckeditor'
       ));
     ?>
   </div>
 
+  <?php
+    echo Form::submit('ยืนยันการสั่งซื้อ' , array(
+      'class' => 'button space-top-30'
+    ));
+  ?>
+
+  <?php
+    echo Form::close();
+  ?>
+
 </div>
+
+<script type="text/javascript">
+
+  class ShippingCostInput {
+
+    constructor() {
+
+    }
+
+    load() {
+
+      let _this = this;
+
+      if($('#shipping_cost_order_chkbox').is(':checked')) {
+        $('.shipping_cost_order_input').prop('disabled', false);
+        $('#cancel_product_shipping_cost').prop('disabled', false);
+        $('.shipping_cost_product_input').prop('disabled', true);
+      }
+
+      if($('#shipping_cost_product_chkbox').is(':checked')) {
+        $('.shipping_cost_order_input').prop('disabled', true);
+        $('#cancel_product_shipping_cost').prop('disabled', true).prop('checked',false);
+        $('.shipping_cost_product_input').prop('disabled', false);
+      }
+
+      this.bind();
+
+    }
+
+    bind() {
+
+      let _this = this;
+
+      $('#shipping_cost_order_chkbox').on('change',function(){
+        $('.shipping_cost_order_input').prop('disabled', false);
+        $('#cancel_product_shipping_cost').prop('disabled', false);
+        $('.shipping_cost_product_input').prop('disabled', true);
+      });
+
+      $('#shipping_cost_product_chkbox').on('change',function(){
+        $('.shipping_cost_order_input').prop('disabled', true);
+        $('#cancel_product_shipping_cost').prop('disabled', true).prop('checked',false);
+        $('.shipping_cost_product_input').prop('disabled', false);
+      });
+
+    }
+
+  }
+
+  $(document).ready(function(){
+    const shippingCostInput = new ShippingCostInput();
+    shippingCostInput.load();
+  });
+
+</script>
 
 @stop

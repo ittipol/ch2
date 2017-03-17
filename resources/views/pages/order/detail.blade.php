@@ -174,9 +174,9 @@
 
       <div class="pull-right">
 
-        @foreach($orderOrderTotals as $orderOrderTotal)
+        @foreach($orderTotals as $orderTotal)
           <div class="text-right">
-            <h5 class="{{$orderOrderTotal['_class']}}">{{$orderOrderTotal['_title']}}: <span class="amount">{{$orderOrderTotal['_value']}}</span></h5>
+            <h5 class="{{$orderTotal['_class']}}">{{$orderTotal['_title']}}: <span class="amount">{{$orderTotal['_value']}}</span></h5>
           </div>
         @endforeach
 

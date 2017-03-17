@@ -1,4 +1,4 @@
-@extends('layouts.default.main')
+@extends('layouts.error.main')
 @section('content')
   <div class="container error-page">
     <div class="row">

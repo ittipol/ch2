@@ -3,6 +3,7 @@ class Images {
 		this.panel = panel;
 		this.type = type;
 		this.limit = limit;
+		this.style = style; // default, description
 		this.code = null;
 		this.index = 0;
 		this.runningNumber = 0;
@@ -10,7 +11,6 @@ class Images {
 		this.defaultImage = '/images/common/image.svg';
 		this.allowedClick = true;
 		this.inputDisable = [];
-		this.style = style; // default, description
 	}
 
 	load(images){
@@ -143,10 +143,13 @@ class Images {
 	    processData:false,
 	    beforeSend: function( xhr ) {
 
-	    	_this.inputDisable.push(input.id);
+	    	_this.inputDisable.push(input.id);  
+
+	    	$('#main_form input[type="submit"]').prop('disabled','disabled').addClass('disabled');  	
 
 	    	$(parent).parent().find('.status').css('width','0%');
 	    	parent.parent().find('.progress-bar').css('display','block');
+
 	    },
 	    mimeType:"multipart/form-data",
 	    xhr: function(){
@@ -182,6 +185,11 @@ class Images {
 
 	  		setTimeout(function(){
 	  			_this.inputDisable.splice(_this.inputDisable.indexOf(input.id),1);
+
+	  			if(_this.inputDisable.length == 0) {
+	  				$('#main_form input[type="submit"]').prop('disabled',false).removeClass('disabled');
+	  			}
+
 	  		},350);
 	  		
 	  	}else{

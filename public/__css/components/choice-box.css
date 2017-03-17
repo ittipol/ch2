@@ -112,6 +112,10 @@ label.choice-box input[type="checkbox"]:checked + .inner::after {
 	background-repeat: no-repeat;
 }
 
+label.choice-box input[type="checkbox"]:disabled + .inner::before {
+  box-shadow: 0 0 0 2px #ccc;
+}
+
 .btn-group label.btn {
   padding: 0;
   background-color: #fff;

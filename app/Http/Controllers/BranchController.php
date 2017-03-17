@@ -24,11 +24,21 @@ class BranchController extends Controller
       $page = $this->query['page'];
     }
 
+    $model->paginator->criteria(array(
+      'joins' => array('shop_relate_to', 'shop_relate_to.model_id', '=', $model->getTable().'.id'),
+      'conditions' => array(
+        array('shop_relate_to.model','like','Product'),
+        array('shop_relate_to.shop_id','=',request()->get('shopId'))
+      ),
+      'order' => array('id','DESC')
+    ));
     $model->paginator->setPage($page);
-    $model->paginator->setPagingUrl('branch/list');
-    $model->paginator->setUrl('branch/detail/{id}','detailUrl');
+    $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/branch');
+    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/branch/{id}','detailUrl');
 
     $this->data = $model->paginator->build();
+
+    $this->setData('shopName',request()->get('shop')->name);
 
     return $this->view('pages.branch.list');
 
@@ -50,37 +60,41 @@ class BranchController extends Controller
       'json' => array('Image')
     ));
 
-    $shop = $model->getRelatedModelData('ShopRelateTo',array(
-      'first' => true,
-      'fields' => array('shop_id')
-    ))->shop;
+    $this->data = $model->modelData->build();
 
     // Get Branches
-    $jobIds = $model->getRelatedModelData('RelateToBranch',array(
-      'list' => 'job_id',
-      'fields' => array('job_id'),
+    $jobIds = $model->getRelatedData('RelateToBranch',array(
+      'list' => 'model_id',
+      'fields' => array('model_id'),
     ));
 
-    $conditions = array();
     if(!empty($jobIds)) {
+
       $conditions = array(
         'in' => array(
           array('id',$jobIds)
         )
       );
+      
+      $job = Service::loadModel('Job');
+      $job->paginator->criteria(array(
+        'conditions' => $conditions,
+        'order' => array('id','DESC')
+      ));
+      $job->paginator->setPerPage(12);
+      $job->paginator->setUrl('job/detail/{id}','detailUrl');
+
+      $this->setData('jobs',$job->paginator->getPaginationData());
+
+    }else{
+      $this->setData('jobs',array());
     }
 
-    $jobs = Service::loadModel('Job');
-    $jobs->paginator->setPerPage(12);
-    $jobs->paginator->setUrl('job/detail/{id}','detailUrl');
-    $jobs->paginator->criteria(array(
-      'conditions' => $conditions,
-      'order' => array('id','DESC')
-    ));
-
-    $this->data = $model->modelData->build();
-    $this->setData('jobs',$jobs->paginator->getPaginationData());
-    $this->setData('shopName',$shop->name);
+    $shop = request()->get('shop');
+    $this->setData('shop',$shop->modelData->build(true));
+    $this->setData('shopImageUrl',$shop->getProfileImageUrl());
+    $this->setData('shopCoverUrl',$shop->getCoverUrl());
+    $this->setData('shopUrl',request()->get('shopUrl'));
 
     return $this->view('pages.branch.detail');
 
@@ -107,14 +121,13 @@ class BranchController extends Controller
   }
 
   public function addingSubmit(CustomFormRequest $request) {
-
     $model = Service::loadModel('Branch');
 
     $request->request->add(['ShopRelateTo' => array('shop_id' => request()->get('shopId'))]);
 
     if($model->fill($request->all())->save()) {
       Message::display('สาขา '.$model->name.' ถูกเพิ่มแล้ว','success');
-      return Redirect::to(route('branch.detail', ['id' => $model->id]));
+      return Redirect::to(route('shop.branch.detail', ['id' => $model->id]));
     }else{
       return Redirect::back();
     }
@@ -151,11 +164,15 @@ class BranchController extends Controller
     if($model->fill($request->all())->save()) {
 
       Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to(route('branch.detail', ['id' => $model->id]));
+      return Redirect::to(route('shop.branch.detail', ['id' => $model->id]));
     }else{
       return Redirect::back();
     }
     
+  }
+
+  public function delete() {
+
   }
 
 }

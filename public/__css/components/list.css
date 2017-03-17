@@ -238,12 +238,13 @@ label.list-box > input[type="checkbox"] {
 	padding: 10px;
 }
 
-.list-h .list-content {
-	/*margin: 4px 0;*/
-}
-
 .list-h .primary-info {
 	margin: 2px 0;
+}
+
+.list-h .primary-info.single-info {
+	line-height: 50px;
+	margin: 0;
 }
 
 .list-h .secondary-info {

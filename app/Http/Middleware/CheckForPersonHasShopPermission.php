@@ -50,8 +50,7 @@ class CheckForPersonHasShopPermission
           'permission' => 'edit'
         ),
         'shop.edit.opening_hours' => array(
-          'permission' => 'edit',
-          'modelName' => false
+          'permission' => 'edit'
         ),
         'shop.job' => array(
           'permission' => true
@@ -69,14 +68,20 @@ class CheckForPersonHasShopPermission
         'shop.job.apply_detail' => array(
           'permission' => true
         ),
-        'shop.branch' => array(
+        'shop.branch.manage' => array(
           'permission' => true
         ),
+        'shop.branch.list' => true,
+        'shop.branch.detail' => true,
         'shop.branch.add' => array(
           'permission' => 'add'
         ),
         'shop.branch.edit' => array(
           'permission' => 'edit',
+          'modelName' => 'Branch'
+        ),
+        'shop.branch.delete' => array(
+          'permission' => 'delete',
           'modelName' => 'Branch'
         ),
         'shop.product.menu' => array(
@@ -164,138 +169,104 @@ class CheckForPersonHasShopPermission
             'param' => 'product_id'
           )
         ),
+        'shop.payment_method' => array(
+          'permission' => true
+        ),
+        'shop.payment_method.detail' => true,
+        'shop.payment_method.add' => array(
+          'permission' => 'add',
+          'modelName' => 'PaymentMethod'
+        ),
+        'shop.payment_method.edit' => array(
+          'permission' => 'edit',
+          'modelName' => 'PaymentMethod'
+        ),
+        'shop.payment_method.delete' => array(
+          'permission' => 'delete',
+          'modelName' => 'PaymentMethod'
+        )
       );
 
-      if(empty($name) || empty($pages[$name])) {
+      if(empty($name) || !isset($pages[$name])) {
         return $this->errorPage('ไม่อนุญาตให้เข้าถึงหน้านี้ได้');
       }
 
-      $shopId = Service::loadModel('Slug')
-      ->where('slug','like',$request->shopSlug)
-      ->select('model_id')
-      ->first()
-      ->model_id;
+      if(!empty($pages[$name]['permission'])) {
 
-      $person = Service::loadModel('PersonToShop')->getData(array(
-        'conditions' => array(
-          ['person_id','=',session()->get('Person.id')],
-          ['shop_id','=',$shopId],
-        ),
-        'fields' => array('role_id'),
-        'first' => true
-      ));
+        $shopId = Service::loadModel('Slug')
+        ->where('slug','like',$request->shopSlug)
+        ->select('model_id')
+        ->first()
+        ->model_id;
 
-      if(empty($person)) {
-        return $this->errorPage('ไม่อนุญาตให้แก้ไขร้านค้านี้ได้');
-      }
+        $person = Service::loadModel('PersonToShop')->getData(array(
+          'conditions' => array(
+            ['person_id','=',session()->get('Person.id')],
+            ['shop_id','=',$shopId],
+          ),
+          'fields' => array('role_id'),
+          'first' => true
+        ));
 
-      $permissions = $person->role->getPermission();
-
-      if(!$pages[$name]['permission'] && empty($permissions[$pages[$name]['permission']])) {
-        return $this->errorPage('ไม่อนุญาตให้แก้ไขร้านค้านี้ได้');
-      }
-
-      if(!empty($request->id)) {
-
-        // Get Model
-        $_model = Service::loadModel($pages[$name]['modelName']);
-
-        if(empty($_model)) {
-          return $this->errorPage('ไม่พบข้อมูลนี้');
+        if(empty($person)) {
+          return $this->errorPage('ไม่อนุญาตให้แก้ไขร้านค้านี้ได้');
         }
 
-        $exists = true;
-        if(Schema::hasColumn($_model->getTable(), 'shop_id')) {
-          $exists = $_model->where([
-            ['id','=',$request->id],
-            ['shop_id','=',$shopId]
-          ])->exists();
-        }else{
-          // check by ShopRelateTo model
+        $permissions = $person->role->getPermission();
 
-          // has parent data
-          // like ProductDiscouint has Product is parent
-          // maybe need list of parent data and check here
-          if(!empty($pages[$name]['parent'])) {
-            $exists = Service::loadModel('ShopRelateTo')
-            ->select('shop_id')
-            ->where([
-              ['model','like','Product'],
-              ['model_id','=',$request->product_id],
-              ['shop_id','=',$shopId],
+        // permission check
+        if(($pages[$name]['permission'] !== true) && empty($permissions[$pages[$name]['permission']])) {
+          return $this->errorPage('ไม่อนุญาตให้แก้ไขร้านค้านี้ได้');
+        }
+
+        // data check
+        if(!empty($request->id)) {
+
+          $_model = Service::loadModel($pages[$name]['modelName']);
+
+          if(empty($_model)) {
+            return $this->errorPage('ไม่พบข้อมูลนี้');
+          }
+
+          $exists = true;
+          if(Schema::hasColumn($_model->getTable(), 'shop_id')) {
+            $exists = $_model->where([
+              ['id','=',$request->id],
+              ['shop_id','=',$shopId]
             ])->exists();
           }else{
-            $exists = Service::loadModel('ShopRelateTo')
-            ->select('shop_id')
-            ->where([
-              ['model','like',$pages[$name]['modelName']],
-              ['model_id','=',$request->id],
-              ['shop_id','=',$shopId],
-            ])->exists();
+            // check by ShopRelateTo model
+
+            // has parent data
+            // like ProductDiscouint has Product is parent
+            // maybe need list of parent data and check here
+            if(!empty($pages[$name]['parent'])) {
+              $exists = Service::loadModel('ShopRelateTo')
+              ->select('shop_id')
+              ->where([
+                ['model','like','Product'],
+                ['model_id','=',$request->product_id],
+                ['shop_id','=',$shopId],
+              ])->exists();
+            }else{
+              $exists = Service::loadModel('ShopRelateTo')
+              ->select('shop_id')
+              ->where([
+                ['model','like',$pages[$name]['modelName']],
+                ['model_id','=',$request->id],
+                ['shop_id','=',$shopId],
+              ])->exists();
+            }
+
+          }
+
+          if(!$exists) {
+            return $this->errorPage('ไม่พบข้อมูลนี้');
           }
 
         }
 
-        if(!$exists) {
-          return $this->errorPage('ไม่พบข้อมูลนี้');
-        }
-
       }
-
-
-
-
-
-
-
-      // $checked = false;
-      // if(!empty($pages[$name]['check']) && !empty($request->{$pages[$name]['check']['param']})) {
-
-      //   $relatedData = Service::loadModel('ShopRelateTo')
-      //   ->select('shop_id')
-      //   ->where([
-      //     ['model','like',$pages[$name]['check']['modelName']],
-      //     ['model_id','=',$request->{$pages[$name]['check']['param']}],
-      //     ['shop_id','=',$shopId],
-      //   ])->exists();
-
-      //   if(!$relatedData) {
-      //     return $this->errorPage('เกิดข้อผิดพลาด ไม่สามารถทำงานต่อได้');
-      //   }
-
-      //   $checked = true;
-
-      // }
-
-      // if((!empty($pages[$name]['modelName'])) && ($pages[$name]['permission'] == 'edit')) {
-   
-      //   if(empty($request->id)) {
-      //     return redirect('home');
-      //   }
-
-      //   if(!$checked) {
-
-      //     $relatedData = Service::loadModel('ShopRelateTo')
-      //     ->select('shop_id')
-      //     ->where([
-      //       ['model','like',$pages[$name]['modelName']],
-      //       ['model_id','=',$request->id],
-      //       ['shop_id','=',$shopId],
-      //     ])->exists();
-
-      //     if(!$relatedData) {
-      //       return $this->errorPage('ไม่พบข้อมูลนี้ในร้านค้า');
-      //     }
-          
-      //   }
-
-        // $model = Service::loadModel($pages[$name]['modelName'])->select('id')->find($request->id);
-
-        // if(empty($model)) {
-        //   return $this->errorPage('ขออภัย ไม่สามารถแก้ไขข้อมูลนี้ได้ หรือข้อมูลนี้อาจถูกลบแล้ว');
-        // }
-
-      // }
 
       return $next($request);
     }

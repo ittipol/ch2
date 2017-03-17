@@ -31,7 +31,6 @@
     </div>
 
     <div class="tile-nav small">
-
       <div class="tile-flag-count">{{$countOrder}}</div>
 
       <div class="tile-nav-image">
@@ -42,6 +41,19 @@
       <div class="tile-nav-info">
         <a href="{{$orderUrl}}">
           <h4 class="tile-nav-title">รายการสั่งซื้อ</h4>
+        </a>
+      </div>
+    </div>
+
+    <div class="tile-nav small">
+      <div class="tile-nav-image">
+        <a href="{{$paymentMethodUrl}}">
+          <img src="/images/common/payment.png">
+        </a>
+      </div>
+      <div class="tile-nav-info">
+        <a href="{{$paymentMethodUrl}}">
+          <h4 class="tile-nav-title">วิธีการชำระเงิน</h4>
         </a>
       </div>
     </div>

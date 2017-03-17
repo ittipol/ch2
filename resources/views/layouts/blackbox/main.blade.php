@@ -15,6 +15,7 @@
   @include('layouts.blackbox.components.global-search')
   @include('layouts.blackbox.components.global-nav')
   @include('layouts.blackbox.components.global-cart')
+  @include('layouts.blackbox.components.modal-dialog')
 
   <div id="container">
     @include('layouts.blackbox.components.content-wrapper')
@@ -33,6 +34,9 @@
 
       const blackbox = new Blackbox;
       blackbox.load();
+
+      const modelDialog = new ModelDialog;
+      modelDialog.load();
 
       const globalCart = new GlobalCart('{{ csrf_token() }}');
       globalCart.load();

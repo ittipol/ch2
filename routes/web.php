@@ -176,7 +176,9 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
   Route::get('shop/{shopSlug}/order','OrderController@shopOrder')->name('shop.order');
   Route::get('shop/{shopSlug}/order/{id}','OrderController@shopOrderDetail')->name('shop.order.detail');
+
   Route::get('shop/{shopSlug}/order/confirm/{id}','OrderController@shopOrderConfirm')->name('shop.order.confirm');
+  Route::post('shop/{shopSlug}/order/confirm/{id}','OrderController@shopOrderConfirmSubmit')->name('shop.order.confirm');
 });
 
 // community / Shop
@@ -257,6 +259,24 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
 });
 
+// Payment Method
+Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
+
+  Route::get('shop/{shopSlug}/payment_method','ShopController@paymentMethod')->name('shop.payment_method');
+
+  Route::get('shop/{shopSlug}/payment_method/{id}','PaymentMethodController@detail')->name('shop.payment_method.detail');
+
+  Route::get('shop/{shopSlug}/payment_method/add','PaymentMethodController@add')->name('shop.payment_method.add');
+  Route::post('shop/{shopSlug}/payment_method/add','PaymentMethodController@addingSubmit')->name('shop.payment_method.add');
+
+  Route::get('shop/{shopSlug}/payment_method/edit/{id}','PaymentMethodController@edit')->name('shop.payment_method.edit');
+  Route::patch('shop/{shopSlug}/payment_method/edit/{id}','PaymentMethodController@editingSubmit')->name('shop.payment_method.edit');
+
+  Route::get('shop/{shopSlug}/payment_method/delete/{id}','PaymentMethodController@delete')->name('shop.payment_method.delete');
+
+});
+
+
 // Job
 Route::get('job/list','JobController@listView')->name('job.list');
 Route::get('job/detail/{id}','JobController@detail')->name('job.detail');
@@ -282,20 +302,20 @@ Route::group(['middleware' => ['auth','person.experience']], function () {
 });
 
 // Branch
-Route::get('branch/list','BranchController@listView')->name('branch.list');
-Route::get('branch/detail/{id}','BranchController@detail')->name('branch.detail');
-
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
 
-  Route::get('shop/{shopSlug}/branch','ShopController@branch')->name('shop.branch');
+  Route::get('shop/{shopSlug}/branch/manage','ShopController@branch')->name('shop.branch.manage');
 
-  // Route::get('shop/{shopSlug}/branch_detail/{id}','BranchController@detail')->name('shop.branch.detail');
+  Route::get('shop/{shopSlug}/branch','BranchController@listView')->name('shop.branch.list');
+  Route::get('shop/{shopSlug}/branch/{id}','BranchController@detail')->name('shop.branch.detail');
 
-  Route::get('shop/{shopSlug}/branch_add','BranchController@add')->name('shop.branch.add');
-  Route::post('shop/{shopSlug}/branch_add','BranchController@addingSubmit')->name('shop.branch.add');
+  Route::get('shop/{shopSlug}/branch/add','BranchController@add')->name('shop.branch.add');
+  Route::post('shop/{shopSlug}/branch/add','BranchController@addingSubmit')->name('shop.branch.add');
 
-  Route::get('shop/{shopSlug}/branch_edit/{id}','BranchController@edit')->name('shop.branch.edit');
-  Route::patch('shop/{shopSlug}/branch_edit/{id}','BranchController@editingSubmit')->name('shop.branch.edit');
+  Route::get('shop/{shopSlug}/branch/edit/{id}','BranchController@edit')->name('shop.branch.edit');
+  Route::patch('shop/{shopSlug}/branch/edit/{id}','BranchController@editingSubmit')->name('shop.branch.edit');
+
+  Route::get('shop/{shopSlug}/branch/delete/{id}','BranchController@edit')->name('shop.branch.delete');
 });
 
 // Advertising

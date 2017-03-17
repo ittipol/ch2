@@ -39,6 +39,7 @@
     // '__js/components/tabs.js'
     '__js/components/profile-image.js',
     '__js/components/global-cart.js',
+    '__js/components/modal-dialog.js'
   );
 
   if($combine){
@@ -93,6 +94,7 @@
     '__css/components/tile.css',
     '__css/components/message.css',
     '__css/components/error.css',
+    '__css/components/modal-dialog.css',
     '__css/pages/home.css',
     '__css/pages/shop.css',
     '__css/pages/account.css',

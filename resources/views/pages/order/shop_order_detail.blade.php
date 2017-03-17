@@ -91,22 +91,6 @@
 
   </div>
 
-<!--   <div class="row">
-
-    <div class="col-sm-12">
-
-      <div class="detail-info-section no-margin">
-        <h4>ที่อยู่สำหรับการจัดส่ง</h4>
-        <div class="line"></div> 
-        <div class="detail-info">
-          {{$order['shipping_address']}}
-        </div>
-      </div>
-
-    </div>
-
-  </div> -->
-
   <div class="cart space-top-30">
 
     <div class="product-list-table">
@@ -175,9 +159,9 @@
 
       <div class="pull-right">
 
-        @foreach($orderOrderTotals as $orderOrderTotal)
+        @foreach($orderTotals as $orderTotal)
           <div class="text-right">
-            <h5 class="{{$orderOrderTotal['_class']}}">{{$orderOrderTotal['_title']}}: <span class="amount">{{$orderOrderTotal['_value']}}</span></h5>
+            <h5 class="{{$orderTotal['class']}}">{{$orderTotal['title']}}: <span class="amount">{{$orderTotal['value']}}</span></h5>
           </div>
         @endforeach
 

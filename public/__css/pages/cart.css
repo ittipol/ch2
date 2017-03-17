@@ -116,10 +116,6 @@
 }
 
 .shipping-cost-input-section {
-	/*padding: 20px;
-	background-color: #F2F3F7;
-	border-bottom: 1px solid #0071c5;*/
-
 	padding: 10px 20px;
 	background-color: #f8f8f8;
 }
@@ -128,12 +124,14 @@
 	margin: 20px 0;
 	padding: 10px;
 	background-color: #CFD8DC;
-	/*border: 1px solid #ccc;*/
 }
 
 .shipping-cost-input-box h5 {
-	/*height: 32px;*/
 	line-height: 17px;
+}
+
+.shipping-cost-input-box img {
+	background-color: #fff;
 }
 
 @media only screen and (max-width : 992px) {

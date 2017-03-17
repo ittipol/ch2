@@ -169,23 +169,21 @@
 	position: absolute;
 	bottom: 9px;
 	right: 9px;
-	/*padding: 10px 25px;*/
-	/*background-color: rgba(236,236,236,.7);*/
 	/*background-color: rgb(47,97,186);*/
 	background-color: #1E88E5;
 	color: #fff;
-	width: 51px;
-	height: 51px;
-	border-radius: 51px;
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
 	display: none;
 	cursor: pointer;
 	z-index: 9;
 }
 
 .image-gallery .image-gallary-display .display-image-description-icon img {
-	height: 50px;
-	width: 50px;
-	padding: 12px;
+	height: 40px;
+	width: 40px;
+	padding: 10px;
 }
 
 .detail .item-info p {

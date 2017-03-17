@@ -45,12 +45,12 @@
 
     <div class="tile-nav small">
       <div class="tile-nav-image">
-          <a href="{{$branchUrl}}">
+          <a href="{{$branchManageUrl}}">
             <img src="/images/common/building.png">
           </a>
       </div>
       <div class="tile-nav-info">
-        <a href="{{$branchAddUrl}}">
+        <a href="{{$branchManageUrl}}">
           <h4 class="tile-nav-title">สาขา</h4>
         </a>
       </div>
@@ -86,8 +86,8 @@
             
             <div class="button-group">
 
-              <a href="{{$data['detailUrl']}}">
-                <div class="button wide-button">แสดงรายละเอียด</div>
+              <a href="{{$data['editUrl']}}">
+                <div class="button wide-button">แก้ไข</div>
               </a>
 
               <div class="additional-option">
@@ -95,7 +95,7 @@
                 <div class="dot"></div>
                 <div class="dot"></div>
                 <div class="additional-option-content">
-                  <a href="{{$data['editUrl']}}">แก้ไข</a>
+                  <a href="{{$data['detailUrl']}}">แสดงรายละเอียด</a>
                   <a href="{{$data['deleteUrl']}}">ลบ</a>
                 </div>
               </div>

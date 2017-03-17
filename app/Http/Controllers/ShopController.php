@@ -110,32 +110,22 @@ class ShopController extends Controller
       $page = $this->query['page'];
     }
 
-    $products = Service::loadModel('ShopRelateTo')
-    ->select('model_id')
-    ->where(array(
-      array('model','like','Product'),
-      array('shop_id','=',request()->get('shopId'))
+    $model = Service::loadModel('Product');
+    $model->paginator->criteria(array(
+      'joins' => array('shop_relate_to', 'shop_relate_to.model_id', '=', $model->getTable().'.id'),
+      'conditions' => array(
+        array('shop_relate_to.model','like','Product'),
+        array('shop_relate_to.shop_id','=',request()->get('shopId'))
+      ),
+      'order' => array('id','DESC')
     ));
+    $model->paginator->setPage($page);
+    $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/product');
+    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/product/{id}','menuUrl');
+    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/product_delete/{id}','deleteUrl');
+    $model->paginator->setUrl('product/detail/{id}','detailUrl');
 
-    if($products->exists()) {
-
-      $product = Service::loadModel('Product');
-      $product->paginator->criteria(array(
-        'conditions' => array(
-          'in' => array(
-            array('id',Service::getList($products->get(),'model_id'))
-          )
-        ),
-        'order' => array('id','DESC')
-      ));
-      $product->paginator->setPage($page);
-      $product->paginator->setPagingUrl('shop/'.request()->shopSlug.'/product');
-      $product->paginator->setUrl('shop/'.$this->param['shopSlug'].'/product/{id}','menuUrl');
-      $product->paginator->setUrl('shop/'.$this->param['shopSlug'].'/product_delete/{id}','deleteUrl');
-      $product->paginator->setUrl('product/detail/{id}','detailUrl');
-
-      $this->data = $product->paginator->build();
-    }
+    $this->data = $model->paginator->build();
 
     $this->setData('countOrder',Service::loadModel('Order')->where([
       ['shop_id','=',request()->get('shopId')],
@@ -144,8 +134,40 @@ class ShopController extends Controller
 
     $this->setData('productPostUrl',request()->get('shopUrl').'product_post');
     $this->setData('orderUrl',request()->get('shopUrl').'order');
+    $this->setData('paymentMethodUrl',request()->get('shopUrl').'payment_method');
 
     return $this->view('pages.shop.product');
+  }
+
+  public function paymentMethod() {
+
+    $url = new Url;
+    
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
+
+    $model = Service::loadModel('PaymentMethod');
+    $model->paginator->criteria(array(
+      'joins' => array('shop_relate_to', 'shop_relate_to.model_id', '=', $model->getTable().'.id'),
+      'conditions' => array(
+        array('shop_relate_to.model','like','Product'),
+        array('shop_relate_to.shop_id','=',request()->get('shopId'))
+      ),
+      'order' => array('id','DESC')
+    ));
+    $model->paginator->setPage($page);
+    $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/payment_method');
+    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/payment_method/{id}','detailUrl');
+    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/payment_method/edit/{id}','editUrl');
+    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/payment_method/delete/{id}','deleteUrl');
+
+    $this->data = $model->paginator->build();
+
+    $this->setData('paymentMethidAddUrl',request()->get('shopUrl').'payment_method/add');
+
+    return $this->view('pages.shop.payment_method');
   }
 
   public function job() {
@@ -186,8 +208,7 @@ class ShopController extends Controller
     
     $this->setData('jobPostUrl',request()->get('shopUrl').'job_post');
     $this->setData('jobApplyListUrl',request()->get('shopUrl').'job_apply_list');
-    $this->setData('branchUrl',request()->get('shopUrl').'branch');
-    $this->setData('branchAddUrl',request()->get('shopUrl').'branch_add');
+    $this->setData('branchManageUrl',request()->get('shopUrl').'branch/manage');
     // $this->setData('departmentAddUrl',request()->get('shopUrl'));
 
     return $this->view('pages.shop.job');
@@ -221,15 +242,15 @@ class ShopController extends Controller
       ));
       $branch->paginator->setPage($page);
       $branch->paginator->setPagingUrl('shop/'.request()->shopSlug.'/branch');
-      $branch->paginator->setUrl('shop/'.$this->param['shopSlug'].'/branch_edit/{id}','editUrl');
-      $branch->paginator->setUrl('shop/'.$this->param['shopSlug'].'/branch_delete/{id}','deleteUrl');
-      $branch->paginator->setUrl('branch/detail/{id}','detailUrl');
+      $branch->paginator->setUrl('shop/'.$this->param['shopSlug'].'/branch/{id}','detailUrl');
+      $branch->paginator->setUrl('shop/'.$this->param['shopSlug'].'/branch/edit/{id}','editUrl');
+      $branch->paginator->setUrl('shop/'.$this->param['shopSlug'].'/branch/delete/{id}','deleteUrl');
 
       $this->data = $branch->paginator->build();
     }
 
     $this->setData('jobUrl',request()->get('shopUrl').'job');
-    $this->setData('branchAddUrl',request()->get('shopUrl').'branch_add');
+    $this->setData('branchAddUrl',request()->get('shopUrl').'branch/add');
 
     return $this->view('pages.shop.branch');
   }
@@ -335,32 +356,6 @@ class ShopController extends Controller
     return $this->view('pages.shop.setting');
 
   }
-
-  // public function profileImage() {
-
-  //   $model = request()->get('shop');
-
-  //   $this->data = $model->formHelper->build();
-
-  //   $this->setData('profileImage',json_encode($model->getProfileImage()));
-  //   $this->setData('cover',json_encode($model->getCover()));
-
-  //   return $this->view('pages.shop.form.profile_image');
-
-  // }
-
-  // public function profileImageSubmit() {
-
-  //   $model = request()->get('shop');
-
-  //   if($model->fill(request()->all())->save()) {
-  //     Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-  //     return Redirect::to('shop/'.request()->shopSlug.'/manage');
-  //   }else{
-  //     return Redirect::back();
-  //   }
-    
-  // }
 
   public function description() {
 

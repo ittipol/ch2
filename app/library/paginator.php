@@ -95,6 +95,25 @@ class Paginator {
 
     $criteria = $this->criteriaData;
 
+    if(!empty($criteria['joins'])) {
+
+      if(is_array(current($criteria['joins']))) {
+
+        foreach ($criteria['order'] as $value) {
+          $model = $model->join($value[0], $value[1], $value[2], $value[3]);
+        }
+
+      }else{
+        $model = $model->join(
+          current($criteria['joins']), 
+          next($criteria['joins']), 
+          next($criteria['joins']),
+          next($criteria['joins'])
+        );
+      }
+
+    }
+
     if(!empty($criteria['conditions']['in'])) {
 
       foreach ($criteria['conditions']['in'] as $condition) {

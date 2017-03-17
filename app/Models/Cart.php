@@ -401,10 +401,10 @@ class Cart extends Model
   public function getSummary($shopId = null,$format = false){
 
     $summaries = array(
-      'subTotal' => 'getSummarySubTotal',
-      'shippingCost' => 'getSummaryShippingCost',
-      // 'savingPrice' => 'getSummarySavingPrice',
-      'total' => 'getSummaryTotal'
+      'subTotal' => 'getCartSubTotal',
+      'shippingCost' => 'getCartShippingCost',
+      // 'savingPrice' => 'getCartSavingPrice',
+      'total' => 'getCartTotal'
     );
 
     $_summaries = array();
@@ -418,7 +418,7 @@ class Cart extends Model
 
   }
 
-  public function getSummarySavingPrice($shopId = null,$format = false) {
+  public function getCartSavingPrice($shopId = null,$format = false) {
 
     $currency = new Currency;
 
@@ -449,7 +449,7 @@ class Cart extends Model
 
   }
 
-  public function getSummarySubTotal($shopId = null,$format = false) {
+  public function getCartSubTotal($shopId = null,$format = false) {
 
     $currency = new Currency;
 
@@ -480,7 +480,7 @@ class Cart extends Model
 
   }
 
-  public function getSummaryShippingCost($shopId = null,$format = false) {
+  public function getCartShippingCost($shopId = null,$format = false) {
 
     $currency = new Currency;
 
@@ -511,7 +511,7 @@ class Cart extends Model
 
   }
 
-  public function getSummaryTotal($shopId = null,$format = false) {
+  public function getCartTotal($shopId = null,$format = false) {
 
     $currency = new Currency;
 

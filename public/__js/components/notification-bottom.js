@@ -76,7 +76,6 @@ class NotificationBottom {
       $('#notification_bottom').animate({bottom:80,right:50,opacity:1},500,'swing');
     }else{
       $('#notification_bottom').animate({bottom:80,right:50,opacity:1},500,'swing').delay(this.delay).fadeOut(220);
-
     }
     
   }

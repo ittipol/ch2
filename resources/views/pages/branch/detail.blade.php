@@ -3,11 +3,13 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 
-<div class="top-header-wrapper">
-  <div class="top-header">
-    <div class="detail-title">
-      <h4 class="sub-title">สาขา</h4>
-      <h2 class="title">{{$_modelData['name']}}</h2>
+<div class="top-header-wrapper top-header-border">
+  <div class="container">
+    <div class="top-header">
+      <div class="detail-title">
+        <h4 class="sub-title">สาขา</h4>
+        <h2 class="title">{{$_modelData['name']}}</h2>
+      </div>
     </div>
   </div>
 </div>
@@ -55,10 +57,28 @@
 
   </div>
 
-  <div class="row">
-    <div class="col-xs-12">
-    <p>ชื่อบริษัทหรือร้านค้า</p>
-    <h4>{{$shopName}}</h4>
+  <div class="content-box content-box-bg" style="background-image:url({{$shopCoverUrl}})">
+    <div class="content-box-inner">
+      <div class="row">
+
+        <div class="col-md-6 col-sm-12">
+          <div class="content-box-panel overlay-bg">
+            <div>
+              <h5>บริษัทหรือร้านค้า</h5>
+              <h3>
+                <a href="{{URL::to($shopUrl)}}">{{$shop['name']}}</a>
+              </h3>
+              <div class="line space-top-bottom-20"></div>
+              <p>{{$shop['_short_description']}}</p>
+            </div>
+
+            <a href="{{URL::to($shopUrl)}}" class="button wide-button">ไปยังร้านค้านี้</a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12"></div>
+
+      </div>
     </div>
   </div>
 
@@ -161,7 +181,12 @@
 
   @else
 
-    <div>ไม่พบงานที่กำลังเปิดรับในสาขานี้</div>
+    <div class="list-empty-message text-center space-top-20">
+      <img class="space-bottom-20" src="/images/common/career.png">
+      <div>
+        <p>ไม่พบงานที่กำลังเปิดรับในสาขานี้</p>
+      </div>
+    </div>
 
   @endif
 
