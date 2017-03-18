@@ -47,11 +47,7 @@ class Image extends Model
 
     Image::deleted(function($model) {
       // delete image after image record is deleted
-      //getDirPath 
-
-      dd($model);
-
-       // $model->deleteAllRelatedData();
+      $model->deleteImage();
     });
 
   }
@@ -119,15 +115,23 @@ class Image extends Model
 
   }
 
-  // public function deleteAllImageAndFolder($image) {
-  //   $path = $image->getImagePath();
+  public function deleteImage() {
 
-  //   if(!file_exists($path)){
-  //     continue;
-  //   }
+    $cache = new Cache;
 
-  //   File::Delete($path);
-  // }
+    $path = $this->getImagePath();
+
+    if(!file_exists($path)){
+      continue;
+    }
+
+    if(File::Delete($path)) {
+      $cache->deleteCacheDirectory(pathinfo($this->filename, PATHINFO_FILENAME));
+    }
+
+    return true;
+
+  }
 
   public function deleteImages($model,$imageIds) {
 
@@ -137,24 +141,51 @@ class Image extends Model
       ['model','=',$model->modelName],
       ['model_id','=',$model->id],
       ['person_id','=',Session::get('Person.id')]
-    ]);
+    ])
+    ->get();
 
-    $_images = $images->get();
-
-    foreach ($_images as $image) {
-      
-      $path = $image->getImagePath();
-
-      if(!file_exists($path)){
-        continue;
-      }
-
-      File::Delete($path);
-
+    if(empty($images)) {
+      return false;
     }
 
-    $images->delete();
+    foreach ($images as $image) {
+      $image->delete();
+    }
 
+    return true;
+
+  }
+
+  // public function deleteImages($model,$imageIds) {
+
+  //   $images = $this->newInstance()
+  //   ->whereIn('id',$imageIds)
+  //   ->where([
+  //     ['model','=',$model->modelName],
+  //     ['model_id','=',$model->id],
+  //     ['person_id','=',Session::get('Person.id')]
+  //   ]);
+
+  //   $_images = $images->get();
+
+  //   foreach ($_images as $image) {
+      
+  //     $path = $image->getImagePath();
+
+  //     if(!file_exists($path)){
+  //       continue;
+  //     }
+
+  //     File::Delete($path);
+
+  //   }
+
+  //   $images->delete();
+
+  // }
+
+  public function deleteDirectory($model) {
+    return File::deleteDirectory(storage_path($this->storagePath.$model->modelAlias).'/'.$model->id.'/');
   }
 
   public function addImage($model,$image,$options = array()) {

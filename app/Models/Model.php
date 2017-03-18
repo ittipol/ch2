@@ -436,7 +436,6 @@ class Model extends BaseModel
     if(Schema::hasColumn($this->getTable(), $field)) {
 
       $_model = $this->where($field,'=',$model->id);
-      // return $this->where($field,'=',$model->id)->delete();
 
     }elseif($this->checkHasFieldModelAndModelId()) {
 
@@ -445,27 +444,30 @@ class Model extends BaseModel
         ['model_id','=',$model->id],
       ]);
 
-      // return $this->where([
-      //   ['model','=',$model->modelName],
-      //   ['model_id','=',$model->id],
-      // ])->delete();
-
     }else {
       return false;
     }
 
-    if($_model->exists()) {
+    if(!$_model->exists()) {
+      return false;
+    }
+
+    if(Schema::hasColumn($this->getTable(), 'id')) {
 
       foreach ($_model->get() as $value) {
         $value->delete();
       }
 
-      return true;
+      if($this->modelName == 'Image') {
+        // delete Dir
+        $this->deleteDirectory($model);
+      }
 
-      // return $_model->delete();
+    }else{
+      $_model->delete();
     }
 
-    return false;
+    return true;
 
   }
 
@@ -507,11 +509,6 @@ class Model extends BaseModel
     foreach ($modelRelations as $modelName) {
       $model = Service::loadModel($modelName);
       $model->deleteRelatedData($this);
-
-      if($modelName == 'Image') {
-
-      }
-
     }
 
     return true;
