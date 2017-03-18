@@ -27,7 +27,7 @@ class Address extends Model
 
   public function __saveRelatedData($model,$options = array()) {
 
-    $address = $model->getRelatedModelData('Address',
+    $address = $model->getRelatedData('Address',
       array(
         'first' => true
       )

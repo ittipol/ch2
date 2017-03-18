@@ -227,7 +227,7 @@ class Paginator {
       $_data = array();
       if($this->getImage) {
 
-        $image = $record->getRelatedModelData('Image',array(
+        $image = $record->getRelatedData('Image',array(
           'first' => true
         ));
 
@@ -283,7 +283,7 @@ class Paginator {
       $_data = array();
       if($this->getImage) {
 
-        $image = $record->getRelatedModelData('Image',array(
+        $image = $record->getRelatedData('Image',array(
           'first' => true
         ));
 
@@ -367,7 +367,7 @@ class Paginator {
       $_data = array();
       if($this->getImage) {
 
-        $image = $record->getRelatedModelData('Image',array(
+        $image = $record->getRelatedData('Image',array(
           'first' => true
         ));
 

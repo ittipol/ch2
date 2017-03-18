@@ -490,6 +490,88 @@
 	background-color: #E53935;
 }
 
+.order-progress-bar {
+	margin: 30px 0 0;
+	width: 100%;
+	height: 4px;
+	background-color: #BBDEFB;
+}
+
+.order-progress-bar > .status {
+	position: relative;
+	width: 30%;
+	height: 100%;
+	background-color: #2196F3;
+}
+
+.order-progress-bar > .status::after {
+	content: "";
+	position: absolute;
+	top: -13px;
+	right: -15px;
+	width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	background-color: #2196F3;
+}
+
+.order-status .order-status-box {
+	width: 20%;
+	float: left;
+	/*background-color: #E3F2FD;*/
+	text-align: center;
+}
+
+.order-status .order-status-box.current {
+	background-color: #E3F2FD;
+}
+
+.order-status .order-status-box .image {
+	margin: 20px 0;
+	height: 46px;
+	border-radius: 46px;
+}
+
+.order-status .order-status-box .image > .status-image {
+	width: 46px;
+	height: 46px;
+	margin: 0 auto;
+	background-color: #90CAF9;
+	border: 4px solid #90CAF9;
+	border-radius: 46px;
+	background-size: 60%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.order-status .order-status-box.current .image > .status-image {
+	background-color: #2196F3;
+	border-color: #2196F3;
+	background-image: url(/images/common/_coin.png);
+	background-size: 80%;
+}
+
+.order-status .order-status-box.passed .image > .status-image {
+	background-color: #42A5F5;
+	border-color: #42A5F5;
+	background-image: url(/images/icons/tick.png);
+	background-size: 60%;
+}
+
+/*.order-status .order-status-box .image > img{
+	width: 50px;
+	height: 50px;
+	padding: 6px;
+	border-radius: 50px;
+	background-color: red;
+	border: 4px solid red;
+}
+
+.order-status .order-status-box .image.current > img{
+	background-color: #fff;
+	padding: 4px;
+}*/
+
 /*==========  Non-Mobile First Method  ==========*/
 
 /* Large Devices, Wide Screens */
@@ -533,6 +615,10 @@
 	.detail .info-section .section:not(:first-child) {
 		border-top: 1px solid #bababa;
 		border-left: 0;
+	}
+
+	.order-status .order-status-box {
+		width: 100%;
 	}
 
 }

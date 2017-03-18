@@ -141,7 +141,7 @@ class Shop extends Model
   }
 
   public function getShopName($model) {
-    $shop = $model->getRelatedModelData('ShopRelateTo',array(
+    $shop = $model->getRelatedData('ShopRelateTo',array(
       'first' => true,
       'fields' => array('shop_id')
     ))->shop;
@@ -296,7 +296,7 @@ class Shop extends Model
     $cache = new Cache;
     $url = new url;
 
-    $image = $this->getRelatedModelData('Image',array(
+    $image = $this->getRelatedData('Image',array(
       'first' => true
     ));
 
@@ -305,7 +305,7 @@ class Shop extends Model
       $_imageUrl = $cache->getCacheImageUrl($image,'list');
     }
 
-    $slug = $this->getRelatedModelData('Slug',array(
+    $slug = $this->getRelatedData('Slug',array(
       'fields' => array('slug'),
       'first' => true
     ))->slug;

@@ -24,15 +24,19 @@ class OrderController extends Controller
 
     $shop = $model->shop;
 
-    $slug = $shop->getRelatedModelData('Slug',array(
+    $slug = $shop->getRelatedData('Slug',array(
       'first' => true,
       'fields' => array('slug')
     ))->slug;
+
+    $model->getOrderStatuses();
 
     $this->setData('order',$model->modelData->build(true));
     $this->setData('orderProducts',$model->getOrderProducts());
     $this->setData('orderTotals',$model->getSummary(true));
     // $this->setData('orderTotals',$model->orderTotals());
+
+    $this->setData('orderStatuses',$model->getOrderStatuses());
 
     $this->setData('shop',$shop->modelData->build(true));
     $this->setData('shopImageUrl',$shop->getProfileImageUrl());
@@ -220,6 +224,10 @@ class OrderController extends Controller
         ->save();
       }
     }
+
+    // 
+    $model->order_status_id = 2;
+    $model->save();
 
     Message::display('การสั่งซื้อถูกยืนยันแล้ว','success');
     return Redirect::to('shop/'.$this->param['shopSlug'].'/order/'.$model->id);

@@ -406,28 +406,28 @@ class Model extends BaseModel
 
   // }
 
-  public function getRelatedModelData($modelName,$options = array()) {
+  // public function getRelatedData($modelName,$options = array()) {
 
-    $model = Service::loadModel($modelName);
+  //   $model = Service::loadModel($modelName);
 
-    if(!$model->checkHasFieldModelAndModelId()) {
-      return false;
-    }
+  //   if(!$model->checkHasFieldModelAndModelId()) {
+  //     return false;
+  //   }
 
-    $conditions = array(
-      ['model','like',$this->modelName],
-      ['model_id','=',$this->id],
-    );
+  //   $conditions = array(
+  //     ['model','like',$this->modelName],
+  //     ['model_id','=',$this->id],
+  //   );
 
-    if(!empty($options['conditions'])){
-      $options['conditions'] = array_merge($options['conditions'],$conditions);
-    }else{
-      $options['conditions'] = $conditions;
-    }
+  //   if(!empty($options['conditions'])){
+  //     $options['conditions'] = array_merge($options['conditions'],$conditions);
+  //   }else{
+  //     $options['conditions'] = $conditions;
+  //   }
 
-    return $model->getData($options);
+  //   return $model->getData($options);
 
-  }
+  // }
 
   public function deleteRelatedData($model) {
 

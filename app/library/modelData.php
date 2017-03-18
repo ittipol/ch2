@@ -43,7 +43,7 @@ class ModelData {
 
         $json = in_array($modelName, $options['json']);
 
-        $this->_getRelatedModelData($modelName,$json);
+        $this->_getRelatedData($modelName,$json);
 
       }
 
@@ -51,7 +51,7 @@ class ModelData {
 
   }
 
-  private function _getRelatedModelData($modelName,$json = false) {
+  private function _getRelatedData($modelName,$json = false) {
 
     $data = array();
     switch ($modelName) {
@@ -69,7 +69,7 @@ class ModelData {
 
       // case 'OfficeHour':
 
-      //   $officeHour = $this->model->getRelatedModelData('OfficeHour',array(
+      //   $officeHour = $this->model->getRelatedData('OfficeHour',array(
       //     'first' => true,
       //     'fields' => array('same_time','time')
       //   ));
@@ -121,7 +121,7 @@ class ModelData {
 
   public function loadAddress() {
 
-    $address = $this->model->getRelatedModelData('Address',
+    $address = $this->model->getRelatedData('Address',
       array(
         'first' => true,
         'fields' => array('address','province_id','district_id','sub_district_id','description','latitude','longitude'),
@@ -141,7 +141,7 @@ class ModelData {
 
     $cache = new cache;
 
-    $images = $this->model->getRelatedModelData('Image',array(
+    $images = $this->model->getRelatedData('Image',array(
       'fields' => array('id','model','model_id','filename','description','image_type_id')
     ));
 
@@ -161,7 +161,7 @@ class ModelData {
   }
 
   public function loadTagging() {
-    $taggings = $this->model->getRelatedModelData('Tagging',
+    $taggings = $this->model->getRelatedData('Tagging',
       array(
         'fields' => array('word_id')
       )
@@ -181,7 +181,7 @@ class ModelData {
   }
 
   public function loadContact() {
-    $contact = $this->model->getRelatedModelData('Contact',array(
+    $contact = $this->model->getRelatedData('Contact',array(
       'first' => true,
       'fields' => array('phone_number','email','line')
     ));

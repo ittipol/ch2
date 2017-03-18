@@ -54,7 +54,7 @@ class Lookup extends Model
       $data = array_merge($data,$options['data']);
     }
 
-    $taggings = $model->getRelatedModelData('Tagging',array(
+    $taggings = $model->getRelatedData('Tagging',array(
       'fields' => array('word_id')
     ));
 
@@ -89,7 +89,7 @@ class Lookup extends Model
     }
 
     // Get releated lookup data
-    $lookup = $model->getRelatedModelData($this->modelName,
+    $lookup = $model->getRelatedData($this->modelName,
       array(
         'first' => true
       )
@@ -322,7 +322,7 @@ class Lookup extends Model
   private function __getAddress($model) {
 
     // more than 2 address
-    // $addresses = $model->getRelatedModelData('Address',array(
+    // $addresses = $model->getRelatedData('Address',array(
     //   'fields' => array(
     //     'address','district_id','sub_district_id'
     //   ),
@@ -341,7 +341,7 @@ class Lookup extends Model
     //   $_address = implode(' ', $_address);
     // }
 
-    $address = $model->getRelatedModelData('Address',array(
+    $address = $model->getRelatedData('Address',array(
       'fields' => array(
         'address','province_id','district_id','sub_district_id'
       ),

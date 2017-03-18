@@ -164,7 +164,7 @@ class PersonExperienceController extends Controller
     }
 
     // Get page permission
-    $pagePermission = $profile->getRelatedModelData('DataAccessPermission',
+    $pagePermission = $profile->getRelatedData('DataAccessPermission',
       array(
         'first' => true,
         'fields' => array('access_level')

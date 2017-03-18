@@ -332,7 +332,7 @@ class ShopController extends Controller
 
     if($model->fill($request->all())->save()) {
 
-      $slug = $model->getRelatedModelData('Slug',array(
+      $slug = $model->getRelatedData('Slug',array(
         'fields' => array('slug'),
         'first' => true
       ))->slug;
@@ -443,7 +443,7 @@ class ShopController extends Controller
 
   public function address() {
 
-    $model = request()->get('shop')->getRelatedModelData('Address',
+    $model = request()->get('shop')->getRelatedData('Address',
       array(
         'first' => true
       )
@@ -472,7 +472,7 @@ class ShopController extends Controller
 
   public function addressSubmit() {
 
-    $model = request()->get('shop')->getRelatedModelData('Address',
+    $model = request()->get('shop')->getRelatedData('Address',
       array(
         'first' => true
       )
@@ -495,7 +495,7 @@ class ShopController extends Controller
 
   public function contact() {
     
-    $model = request()->get('shop')->getRelatedModelData('Contact',
+    $model = request()->get('shop')->getRelatedData('Contact',
       array(
         'first' => true
       )
@@ -513,7 +513,7 @@ class ShopController extends Controller
 
   public function contactSubmit() {
 
-    $model = request()->get('shop')->getRelatedModelData('Contact',
+    $model = request()->get('shop')->getRelatedData('Contact',
       array(
         'first' => true
       )

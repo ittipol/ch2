@@ -20,7 +20,7 @@ class Tagging extends Model
     $word = new Word;
     $wordIds = $word->saveSpecial($options['value']);
 
-    $currentTaggings = $model->getRelatedModelData($this->modelName,array(
+    $currentTaggings = $model->getRelatedData($this->modelName,array(
       'fields' => array('id','word_id')
     ));
 

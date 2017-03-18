@@ -11,8 +11,59 @@
   </div>
 </div>
 
-
 <div class="container">
+
+  <div class="row">
+
+    <div class="col-sm-12">
+      
+      <div>
+
+        <div class="order-progress-bar">
+          <div class="status"></div>
+        </div>
+
+        <div class="order-status clearfix">
+          @foreach($orderStatuses as $orderStatus)
+            
+            @if($orderStatus['current'])
+              <div class="order-status-box current">
+            @elseif($orderStatus['passed'])
+              <div class="order-status-box passed">
+            @else
+              <div class="order-status-box">
+            @endif
+
+              <div class="image">
+                <div class="status-image"></div>
+              </div>
+              <h5>{{$orderStatus['name']}}</h5>
+              
+            </div>
+          @endforeach
+        </div>
+
+
+        <!-- <div class="row">
+          <div class="col-sm-12">
+          @foreach($orderStatuses as $orderStatus)
+            <div class="clearfix">
+
+              
+              <div>{{$orderStatus['name']}}</div>
+              
+            </div>
+          @endforeach
+          </div>
+        </div> -->
+
+      </div>
+
+      <div class="line space-top-bottom-20"></div>
+
+    </div>
+
+  </div>
 
   <div class="row">
 
@@ -176,26 +227,10 @@
 
         @foreach($orderTotals as $orderTotal)
           <div class="text-right">
-            <h5 class="{{$orderTotal['_class']}}">{{$orderTotal['_title']}}: <span class="amount">{{$orderTotal['_value']}}</span></h5>
+            <h5 class="{{$orderTotal['class']}}">{{$orderTotal['title']}}: <span class="amount">{{$orderTotal['value']}}</span></h5>
           </div>
         @endforeach
 
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="row">
-
-    <div class="col-sm-12 space-top-30">
-      
-      <div class="detail-info-section no-margin">
-        <h4>สถานะการสั่งซื้อ</h4>
-        <div class="line"></div> 
-        <div class="detail-info">
-          {{$order['shipping_address']}}
-        </div>
       </div>
 
     </div>

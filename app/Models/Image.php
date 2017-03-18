@@ -313,7 +313,7 @@ class Image extends Model
 
     $imageStyle = new ImageStyle;
 
-    $image = $model->getRelatedModelData('Image',array(
+    $image = $model->getRelatedData('Image',array(
       'conditions' => array(
         array('image_style_id','=',$imageStyle->getIdByalias($style))
       ),

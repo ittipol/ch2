@@ -54,17 +54,17 @@ class AdvertisingController extends Controller
     $this->mergeData($model->modelData->build());
 
     // Get Shop Address
-    $shop = $model->getRelatedModelData('ShopRelateTo',array(
+    $shop = $model->getRelatedData('ShopRelateTo',array(
       'first' => true,
     ))->shop;
 
     // Get Slug
-    $slug = $shop->getRelatedModelData('Slug',array(
+    $slug = $shop->getRelatedData('Slug',array(
       'first' => true,
     ))->slug;
 
     // Get Branches
-    $branchIds = $model->getRelatedModelData('RelateToBranch',array(
+    $branchIds = $model->getRelatedData('RelateToBranch',array(
       'list' => 'branch_id',
       'fields' => array('branch_id'),
     ));
@@ -171,7 +171,7 @@ class AdvertisingController extends Controller
       'index' => 'advertisingTypes'
     ));
 
-    $relateToBranch = $model->getRelatedModelData('RelateToBranch',array(
+    $relateToBranch = $model->getRelatedData('RelateToBranch',array(
       'fields' => array('branch_id')
     ));
 

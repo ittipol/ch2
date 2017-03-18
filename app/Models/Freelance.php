@@ -75,7 +75,7 @@ class Freelance extends Model
     $cache = new Cache;
     $url = new url;
 
-    $image = $this->getRelatedModelData('Image',array(
+    $image = $this->getRelatedData('Image',array(
       'first' => true
     ));
 

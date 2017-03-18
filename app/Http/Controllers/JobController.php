@@ -53,15 +53,15 @@ class JobController extends Controller
 
     $this->mergeData($model->modelData->build());
 
-    $shop = $model->getRelatedModelData('ShopRelateTo',array(
+    $shop = $model->getRelatedData('ShopRelateTo',array(
       'first' => true,
     ))->shop;
 
-    $slug = $shop->getRelatedModelData('Slug',array(
+    $slug = $shop->getRelatedData('Slug',array(
       'first' => true,
     ))->slug;
     
-    $branchIds = $model->getRelatedModelData('RelateToBranch',array(
+    $branchIds = $model->getRelatedData('RelateToBranch',array(
       'list' => 'branch_id',
       'fields' => array('branch_id'),
     ));
@@ -168,7 +168,7 @@ class JobController extends Controller
       'index' => 'employmentTypes'
     ));
 
-    $relateToBranch = $model->getRelatedModelData('RelateToBranch',array(
+    $relateToBranch = $model->getRelatedData('RelateToBranch',array(
       'fields' => array('branch_id')
     ));
 
@@ -225,7 +225,7 @@ class JobController extends Controller
       return $this->error();
     }    
 
-    $branchIds = $jobModel->getRelatedModelData('RelateToBranch',array(
+    $branchIds = $jobModel->getRelatedData('RelateToBranch',array(
       'list' => 'branch_id',
       'fields' => array('branch_id'),
     ));

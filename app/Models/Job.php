@@ -112,7 +112,7 @@ class Job extends Model
 
   public function getRelatedBranch() {
 
-    $branchIds = $this->getRelatedModelData('RelateToBranch',array(
+    $branchIds = $this->getRelatedData('RelateToBranch',array(
       'list' => 'branch_id',
       'fields' => array('branch_id'),
     ));
@@ -195,7 +195,7 @@ class Job extends Model
     $cache = new Cache;
     $url = new url;
 
-    $image = $this->getRelatedModelData('Image',array(
+    $image = $this->getRelatedData('Image',array(
       'first' => true
     ));
 

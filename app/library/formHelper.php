@@ -42,13 +42,13 @@ class FormHelper {
 
       $json = in_array($modelName, $options['json']);
 
-      $this->_getRelatedModelData($modelName,$json);
+      $this->_getRelatedData($modelName,$json);
 
     }
 
   }
 
-  private function _getRelatedModelData($modelName,$json = false) {
+  private function _getRelatedData($modelName,$json = false) {
 
     $data = array();
     switch ($modelName) {
@@ -79,7 +79,7 @@ class FormHelper {
 
   public function loadAddress() {
 
-    $address = $this->model->getRelatedModelData('Address',
+    $address = $this->model->getRelatedData('Address',
       array(
         'first' => true,
         'fields' => array('address','province_id','district_id','sub_district_id','description','latitude','longitude'),
@@ -97,7 +97,7 @@ class FormHelper {
 
   public function loadImage() {
 
-    $images = $this->model->getRelatedModelData('Image',array(
+    $images = $this->model->getRelatedData('Image',array(
       'fields' => array('id','model','model_id','filename','description','image_type_id')
     ));
 
@@ -115,7 +115,7 @@ class FormHelper {
   }
 
   public function loadTagging() {
-    $taggings = $this->model->getRelatedModelData('Tagging',
+    $taggings = $this->model->getRelatedData('Tagging',
       array(
         'fields' => array('word_id')
       )
@@ -135,7 +135,7 @@ class FormHelper {
   }
 
   public function loadContact() {
-    $contact = $this->model->getRelatedModelData('Contact',array(
+    $contact = $this->model->getRelatedData('Contact',array(
       'first' => true,
       'fields' => array('phone_number','email','line')
     ));

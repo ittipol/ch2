@@ -74,7 +74,7 @@ class Order extends Model
     $_orderProducts = array();
     foreach ($orderProducts as $orderProduct) {
 
-      $image = Product::select('id')->find($orderProduct->product_id)->getRelatedModelData('Image',array(
+      $image = Product::select('id')->find($orderProduct->product_id)->getRelatedData('Image',array(
         'fields' => array('id','model','model_id','filename','image_type_id'),
         'first' => true
       ));
@@ -103,6 +103,35 @@ class Order extends Model
     }
 
     return $_orderTotals;
+  }
+
+  public function getOrderStatuses() {
+
+    $orderStatusModel = new OrderStatus;
+    $orderStatuses = $orderStatusModel->GetDefaultStatuses(true);
+
+    $passed = true;
+    $current = false;
+    $_orderStatuses = array();
+    foreach ($orderStatuses as $orderStatus) {
+
+      $current = false;
+
+      if($this->order_status_id == $orderStatus['id']) {
+        $current = true;
+        $passed = false;
+      }
+
+      $_orderStatuses[] = array(
+        'id' => $orderStatus['id'],
+        'name' => $orderStatus['name'],
+        'current' => $current,
+        'passed' => $passed
+      );
+    }
+
+    return $_orderStatuses;
+
   }
 
   public function countProduct() {

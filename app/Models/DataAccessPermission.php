@@ -22,7 +22,7 @@ class DataAccessPermission extends Model
 
     $accessLevel = new AccessLevel;
 
-    $permission = $model->getRelatedModelData('DataAccessPermission',
+    $permission = $model->getRelatedData('DataAccessPermission',
       array(
         'first' => true
       )

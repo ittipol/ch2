@@ -152,7 +152,8 @@ class CheckForPersonHasShopPermission
           'modelName' => 'Product'
         ),
         'shop.product_sale_promotion' => array(
-          'permission' => true
+          'permission' => true,
+          'modelName' => 'Product'
         ),
         'shop.product_discount.add' => array(
           'permission' => 'add',
@@ -244,8 +245,8 @@ class CheckForPersonHasShopPermission
               $exists = Service::loadModel('ShopRelateTo')
               ->select('shop_id')
               ->where([
-                ['model','like','Product'],
-                ['model_id','=',$request->product_id],
+                ['model','like',$pages[$name]['parent']['modelName']],
+                ['model_id','=',$request->{$pages[$name]['parent']['param']}],
                 ['shop_id','=',$shopId],
               ])->exists();
             }else{

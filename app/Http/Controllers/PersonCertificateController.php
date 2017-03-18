@@ -59,7 +59,7 @@ class PersonCertificateController extends Controller
     }
 
     // Get Period
-    $period = $model->getRelatedModelData('PersonExperienceDetail',
+    $period = $model->getRelatedData('PersonExperienceDetail',
       array(
         'first' => true,
         'fields' => array('start_year','start_month','start_day','end_year','end_month','end_day','current')
