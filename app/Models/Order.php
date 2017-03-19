@@ -86,7 +86,7 @@ class Order extends Model
 
       $_orderProducts[] = array_merge($orderProduct->buildModelData(),array(
         'imageUrl' => $imageUrl,
-        'productDetailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id' => $orderProduct->id))
+        'productDetailUrl' => $url->setAndParseUrl('product/detail/{product_id}',array('product_id' => $orderProduct->product_id))
       ));
 
     }

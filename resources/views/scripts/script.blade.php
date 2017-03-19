@@ -6,7 +6,7 @@
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCk5a17EumB5aINUjjRhWCvC1AgfxqrDQk&libraries=places"></script> -->
 
 <?php
-  $combine = false;
+  $combine = true;
 ?>
 
 <?php
@@ -58,19 +58,16 @@
   
 ?>
 
-@if($combine){
+@if($combine)
 <script type="text/javascript" src="{{ URL::asset('js/8fcf1793a14f7d35.js') }}"></script>
 @endif
 <script type="text/javascript" src="{{ URL::asset('js/ckeditor/ckeditor.js') }}"></script>
 
-<?php if(!$combine): 
-        foreach ($jsFiles as $js) {
-?>
+@if(!$combine)
+@foreach ($jsFiles as $js) {
   <script type="text/javascript" src="<?php echo '/'.$js; ?>"></script>
-<?php 
-        }
-    endif; 
-?>
+@endforeach
+@endif
 
 
 <?php
@@ -130,18 +127,15 @@
 
 ?>
 
-@if($combine){
+@if($combine)
 <link rel="stylesheet" href="{{ URL::asset('css/a590bf3e950e330b.css') }}" />
 @endif
 
-<?php if(!$combine): 
-        foreach ($cssFiles as $css) {
-?>
+@if(!$combine)
+@foreach ($cssFiles as $css) {
   <link rel="stylesheet" href="<?php echo '/'.$css; ?>" />
-<?php 
-        }
-    endif; 
-?>
+@endforeach
+@endif
 
 <script type="text/javascript">
   CKEDITOR.config.height = '300px';
