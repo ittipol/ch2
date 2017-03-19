@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 17, 2017 at 04:56 PM
+-- Generation Time: Mar 19, 2017 at 05:28 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -244,7 +244,16 @@ INSERT INTO `addresses` (`id`, `model`, `model_id`, `address`, `province_id`, `d
 (178, 'Item', 99, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-03-17 20:50:51', '2017-03-17 20:50:51'),
 (179, 'Item', 100, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-03-17 20:51:52', '2017-03-17 20:51:52'),
 (180, 'Item', 101, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-03-17 20:52:37', '2017-03-17 20:52:37'),
-(181, 'Item', 102, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-03-17 20:53:09', '2017-03-17 20:53:09');
+(181, 'Item', 102, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-03-17 20:53:09', '2017-03-17 20:53:09'),
+(182, 'Item', 89, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-03-18 10:17:40', '2017-03-18 10:17:40'),
+(183, 'Item', 90, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-03-18 10:20:18', '2017-03-18 10:20:18'),
+(184, 'Item', 94, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-03-18 10:29:48', '2017-03-18 10:29:48'),
+(185, 'Item', 103, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-03-18 10:30:16', '2017-03-18 10:30:16'),
+(186, 'Item', 104, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-03-18 10:30:31', '2017-03-18 10:30:31'),
+(187, 'Item', 105, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-03-18 10:32:24', '2017-03-18 10:32:24'),
+(188, 'Item', 106, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-03-18 10:40:52', '2017-03-18 10:40:52'),
+(189, 'Item', 107, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-03-18 10:42:00', '2017-03-18 10:42:00'),
+(190, 'Item', 108, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-03-18 10:46:21', '2017-03-18 10:46:21');
 
 -- --------------------------------------------------------
 
@@ -417,6 +426,14 @@ CREATE TABLE `carts` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`id`, `person_id`, `session_id`, `shop_id`, `product_id`, `quantity`, `created_at`, `updated_at`) VALUES
+(9, 1, NULL, 3, 15, 1, '2017-03-19 21:43:49', '2017-03-19 21:43:49'),
+(10, 1, NULL, 3, 14, 1, '2017-03-19 21:45:37', '2017-03-19 21:45:37');
 
 -- --------------------------------------------------------
 
@@ -11680,7 +11697,30 @@ INSERT INTO `contacts` (`id`, `model`, `model_id`, `phone_number`, `fax`, `email
 (175, 'Item', 99, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-17 20:50:51', '2017-03-17 20:50:51'),
 (176, 'Item', 100, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-17 20:51:52', '2017-03-17 20:51:52'),
 (177, 'Item', 101, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-17 20:52:37', '2017-03-17 20:52:37'),
-(178, 'Item', 102, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-17 20:53:09', '2017-03-17 20:53:09');
+(178, 'Item', 102, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-17 20:53:09', '2017-03-17 20:53:09'),
+(179, 'Item', 87, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-18 10:17:27', '2017-03-18 10:17:27'),
+(180, 'Item', 88, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-18 10:17:39', '2017-03-18 10:17:39'),
+(181, 'Item', 89, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-18 10:17:40', '2017-03-18 10:17:40'),
+(182, 'Item', 90, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-18 10:20:18', '2017-03-18 10:20:18'),
+(183, 'Item', 91, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-18 10:29:38', '2017-03-18 10:29:38'),
+(184, 'Item', 92, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-18 10:29:44', '2017-03-18 10:29:44'),
+(185, 'Item', 93, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-18 10:29:45', '2017-03-18 10:29:45'),
+(186, 'Item', 94, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-18 10:29:48', '2017-03-18 10:29:48'),
+(187, 'Item', 95, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-18 10:30:04', '2017-03-18 10:30:04'),
+(188, 'Item', 96, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-18 10:30:07', '2017-03-18 10:30:07'),
+(189, 'Item', 97, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-18 10:30:09', '2017-03-18 10:30:09'),
+(190, 'Item', 98, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-18 10:30:10', '2017-03-18 10:30:10'),
+(191, 'Item', 99, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-18 10:30:11', '2017-03-18 10:30:11'),
+(192, 'Item', 100, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-18 10:30:12', '2017-03-18 10:30:12'),
+(193, 'Item', 101, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-18 10:30:14', '2017-03-18 10:30:14'),
+(194, 'Item', 102, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-18 10:30:15', '2017-03-18 10:30:15'),
+(195, 'Item', 103, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-18 10:30:16', '2017-03-18 10:30:16'),
+(196, 'Item', 104, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-18 10:30:31', '2017-03-18 10:30:31'),
+(197, 'Item', 105, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-18 10:32:24', '2017-03-18 10:32:24'),
+(198, 'Item', 106, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-18 10:40:52', '2017-03-18 10:40:52'),
+(199, 'Item', 107, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-18 10:42:00', '2017-03-18 10:42:00'),
+(200, 'Item', 108, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-18 10:46:22', '2017-03-18 10:46:22'),
+(201, 'Item', 104, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-19 19:34:10', '2017-03-19 19:34:10');
 
 -- --------------------------------------------------------
 
@@ -11738,7 +11778,18 @@ INSERT INTO `data_access_permissions` (`id`, `model`, `model_id`, `access_level`
 (37, 'Item', 99, 99, 'Person', 1),
 (38, 'Item', 100, 99, 'Person', 1),
 (39, 'Item', 101, 99, 'Person', 1),
-(40, 'Item', 102, 99, 'Person', 1);
+(40, 'Item', 102, 99, 'Person', 1),
+(41, 'Item', 89, 99, 'Person', 1),
+(42, 'Item', 90, 99, 'Person', 1),
+(43, 'Item', 94, 99, 'Person', 1),
+(44, 'Item', 103, 99, 'Person', 1),
+(45, 'Item', 104, 99, 'Person', 1),
+(46, 'Item', 105, 99, 'Person', 1),
+(47, 'Item', 106, 99, 'Person', 1),
+(48, 'Item', 107, 99, 'Person', 1),
+(49, 'Item', 108, 99, 'Person', 1),
+(50, 'Item', 109, 99, 'Person', 1),
+(51, 'Item', 110, 99, 'Person', 1);
 
 -- --------------------------------------------------------
 
@@ -12928,8 +12979,11 @@ INSERT INTO `images` (`id`, `model`, `model_id`, `path`, `filename`, `descriptio
 (180, 'Item', 75, NULL, '1489755513515036026782445572486.jpg', NULL, 1, 1, '2017-03-17 19:58:34', '2017-03-17 19:58:34'),
 (181, 'Item', 81, NULL, '1489756062337731935451843717412.jpeg', NULL, 1, 1, '2017-03-17 20:07:49', '2017-03-17 20:07:49'),
 (182, 'Item', 81, NULL, '1489756067632473994754766618136.png', NULL, 1, 1, '2017-03-17 20:07:49', '2017-03-17 20:07:49'),
-(183, 'Item', 88, NULL, '14897568035201802053233259188761.jpg', NULL, 1, 1, '2017-03-17 20:20:07', '2017-03-17 20:20:07'),
-(192, 'Item', 98, NULL, '14897577949591017671351922188761.jpg', NULL, 1, 1, '2017-03-17 20:36:37', '2017-03-17 20:36:37');
+(192, 'Item', 98, NULL, '14897577949591017671351922188761.jpg', NULL, 1, 1, '2017-03-17 20:36:37', '2017-03-17 20:36:37'),
+(195, 'Item', 91, NULL, '1489807771266231894025425846352.jpg', NULL, 1, 1, '2017-03-18 10:29:38', '2017-03-18 10:29:38'),
+(196, 'Item', 95, NULL, '14898078007178985467985856239704.png', NULL, 1, 1, '2017-03-18 10:30:04', '2017-03-18 10:30:04'),
+(197, 'Item', 104, NULL, '1489926821584119530805618191085.jpg', 'ตรงกันข้ามกับความเชื่อที่นิยมกัน Lorem Ipsum ไม่ได้เป็นเพียงแค่ชุดตัวอักษรที่สุ่มขึ้นมามั่วๆ แต่หากมีที่มาจากวรรณกรรมละตินคลาสสิกชิ้นหนึ่งในยุค 45 ปีก่อนคริสตศักราช ทำให้มันมีอายุถึงกว่า 2000 ปีเลยทีเดียว ริชาร์ด แมคคลินท็อค ศาสตราจารย์ชาวละติน จากวิทยาลัยแฮมพ์เด็น-ซิดนีย์ ในรัฐเวอร์จิเนียร์ นำคำภาษาละตินคำว่า consectetur ซึ่งหาคำแปลไม่ได้จาก Lorem Ipsum ตอนหนึ่งมาค้นเพิ่มเติม โดยตรวจเทียบกับแหล่งอ้างอิงต่างๆ ในวรรณกรรมคลาสสิก และค้นพบแหล่งข้อมูลที่ไร้ข้อกังขาว่า Lorem Ipsum นั้นมาจากตอนที่ 1.10.32 และ 1.10.33 ของเรื่อง "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) ของ ซิเซโร ที่แต่งไว้เมื่อ 45 ปีก่อนคริสตศักราช หนังสือเล่มนี้เป็นเรื่องราวที่ว่าด้วยทฤษฎีแห่งจริยศาสตร์ ซึ่งเป็นที่นิยมมากในยุคเรเนสซองส์ บรรทัดแรกของ Lorem Ipsum "Lorem ipsum dolor sit amet.." ก็มาจากบรรทัดหนึ่งในตอนที่ 1.10.32 นั่นเอง', 1, 1, '2017-03-19 19:34:09', '2017-03-19 19:34:09'),
+(198, 'Item', 104, NULL, '1489926825868798867665672517412.jpeg', 'มีหลักฐานที่เป็นข้อเท็จจริงยืนยันมานานแล้ว ว่าเนื้อหาที่อ่านรู้เรื่องนั้นจะไปกวนสมาธิของคนอ่านให้เขวไปจากส่วนที้เป็น Layout เรานำ Lorem Ipsum มาใช้เพราะความที่มันมีการกระจายของตัวอักษรธรรมดาๆ แบบพอประมาณ ซึ่งเอามาใช้แทนการเขียนว่า ‘ตรงนี้เป็นเนื้อหา, ตรงนี้เป็นเนื้อหา'' ได้ และยังทำให้มองดูเหมือนกับภาษาอังกฤษที่อ่านได้ปกติ ปัจจุบันมีแพ็กเกจของซอฟท์แวร์การทำสื่อสิ่งพิมพ์ และซอฟท์แวร์การสร้างเว็บเพจ (Web Page Editor) หลายตัวที่ใช้ Lorem Ipsum เป็นแบบจำลองเนื้อหาที่เป็นค่าตั้งต้น และเวลาที่เสิร์ชด้วยคำว่า ''lorem ipsum'' ผลการเสิร์ชที่ได้ก็จะไม่พบบรรดาเว็บไซต์ที่ยังคงอยู่ในช่วงเริ่มสร้างด้วย โดยหลายปีที่ผ่านมาก็มีการคิดค้นเวอร์ชั่นต่างๆ ของ Lorem Ipsum ขึ้นมาใช้ บ้างก็เป็นความบังเอิญ บ้างก็เป็นความตั้งใจ (เช่น การแอบแทรกมุกตลก)', 1, 1, '2017-03-19 19:34:09', '2017-03-19 19:34:09');
 
 -- --------------------------------------------------------
 
@@ -13056,7 +13110,22 @@ INSERT INTO `items` (`id`, `announcement_type_id`, `name`, `announcement_detail`
 (77, 2, 'oooooo', NULL, '', '5000.00', 1, 1, '2017-03-17 19:58:42', '2017-03-17 19:58:42'),
 (78, 2, 'oooooo', NULL, '', '5000.00', 1, 1, '2017-03-17 19:58:43', '2017-03-17 19:58:43'),
 (79, 2, 'oooooo', NULL, '', '5000.00', 1, 1, '2017-03-17 19:58:45', '2017-03-17 19:58:45'),
-(86, 2, 'uuuuuuuuuuuuuuuuuuu', NULL, '', '222.00', 1, 1, '2017-03-17 20:15:01', '2017-03-17 20:15:01');
+(86, 2, 'uuuuuuuuuuuuuuuuuuu', NULL, '', '222.00', 1, 1, '2017-03-17 20:15:01', '2017-03-17 20:15:01'),
+(89, 2, 'xxxx', NULL, '', '12222.00', 1, 1, '2017-03-18 10:17:40', '2017-03-18 10:17:40'),
+(91, 2, 'gggggggggg', NULL, '', '5000.00', 1, 1, '2017-03-18 10:29:38', '2017-03-18 10:29:38'),
+(92, 2, 'gggggggggg', NULL, '', '5000.00', 1, 1, '2017-03-18 10:29:44', '2017-03-18 10:29:44'),
+(93, 2, 'gggggggggg', NULL, '', '5000.00', 1, 1, '2017-03-18 10:29:45', '2017-03-18 10:29:45'),
+(94, 2, 'gggggggggg', NULL, '', '5000.00', 1, 1, '2017-03-18 10:29:48', '2017-03-18 10:29:48'),
+(95, 2, 'dddddd', NULL, '', '2000.00', 1, 1, '2017-03-18 10:30:04', '2017-03-18 10:30:04'),
+(96, 2, 'dddddd', NULL, '', '2000.00', 1, 1, '2017-03-18 10:30:07', '2017-03-18 10:30:07'),
+(97, 2, 'dddddd', NULL, '', '2000.00', 1, 1, '2017-03-18 10:30:09', '2017-03-18 10:30:09'),
+(98, 2, 'dddddd', NULL, '', '2000.00', 1, 1, '2017-03-18 10:30:10', '2017-03-18 10:30:10'),
+(99, 2, 'dddddd', NULL, '', '2000.00', 1, 1, '2017-03-18 10:30:11', '2017-03-18 10:30:11'),
+(100, 2, 'dddddd', NULL, '', '2000.00', 1, 1, '2017-03-18 10:30:12', '2017-03-18 10:30:12'),
+(101, 2, 'dddddd', NULL, '', '2000.00', 1, 1, '2017-03-18 10:30:14', '2017-03-18 10:30:14'),
+(102, 2, 'dddddd', NULL, '', '2000.00', 1, 1, '2017-03-18 10:30:15', '2017-03-18 10:30:15'),
+(103, 2, 'dddddd', NULL, '', '2000.00', 1, 1, '2017-03-18 10:30:16', '2017-03-18 10:30:16'),
+(104, 2, 'IP7 32GB', NULL, '<p>Lorem Ipsum คือ เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 เมื่อเครื่องพิมพ์โนเนมเครื่องหนึ่งนำรางตัวพิมพ์มาสลับสับตำแหน่งตัวอักษรเพื่อทำหนังสือตัวอย่าง Lorem Ipsum อยู่ยงคงกระพันมาไม่ใช่แค่เพียงห้าศตวรรษ แต่อยู่มาจนถึงยุคที่พลิกโฉมเข้าสู่งานเรียงพิมพ์ด้วยวิธีทางอิเล็กทรอนิกส์ และยังคงสภาพเดิมไว้อย่างไม่มีการเปลี่ยนแปลง มันได้รับความนิยมมากขึ้นในยุค ค.ศ. 1960 เมื่อแผ่น Letraset วางจำหน่ายโดยมีข้อความบนนั้นเป็น Lorem Ipsum และล่าสุดกว่านั้น คือเมื่อซอฟท์แวร์การทำสื่อสิ่งพิมพ์ (Desktop Publishing) อย่าง Aldus PageMaker ได้รวมเอา Lorem Ipsum เวอร์ชั่นต่างๆ เข้าไว้ในซอฟท์แวร์ด้วย</p>', '35000.00', 0, 1, '2017-03-19 19:34:09', '2017-03-19 19:34:09');
 
 -- --------------------------------------------------------
 
@@ -13140,19 +13209,44 @@ INSERT INTO `item_to_categories` (`item_id`, `item_category_id`) VALUES
 (84, 5),
 (85, 10),
 (86, 10),
+(87, 7),
 (87, 19),
+(88, 7),
 (88, 25),
+(89, 7),
+(90, 1),
+(91, 7),
 (91, 11),
+(92, 7),
 (92, 26),
 (93, 1),
+(93, 7),
+(94, 7),
+(95, 2),
 (95, 28),
 (96, 1),
+(96, 2),
+(97, 2),
 (97, 10),
+(98, 2),
 (98, 10),
+(99, 2),
 (99, 4),
 (100, 1),
+(100, 2),
 (101, 1),
-(102, 8);
+(101, 2),
+(102, 2),
+(102, 8),
+(103, 2),
+(104, 14),
+(104, 25),
+(105, 1),
+(106, 29),
+(107, 26),
+(108, 13),
+(109, 24),
+(110, 2);
 
 -- --------------------------------------------------------
 
@@ -13547,7 +13641,18 @@ INSERT INTO `lookups` (`id`, `model`, `model_id`, `name`, `keyword_1`, `keyword_
 (126, 'Item', 99, 'JJJJJ', 'ขาย', 'อุปกรณ์กีฬาและอุปกรณ์ช่วยออกกำลังกาย', 'สินค้าใหม่', '2222', NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-03-17 20:50:52', '2017-03-17 20:50:52'),
 (127, 'Item', 100, 'uuuu', 'ขาย', 'เสื้อผ้าและเครื่องแต่งกายสุภาพบุรุษ', 'สินค้าใหม่', '1111', NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-03-17 20:51:53', '2017-03-17 20:51:53'),
 (128, 'Item', 101, 'yyyy', 'ขาย', 'เสื้อผ้าและเครื่องแต่งกายสุภาพบุรุษ', 'สินค้าใหม่', '2222', NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-03-17 20:52:37', '2017-03-17 20:52:37'),
-(129, 'Item', 102, 'VBVBB', 'ขาย', 'ชุดและอุปกรณ์สำหรับขับขี่ยานพาหนะ', 'สินค้าใหม่', '3669', NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-03-17 20:53:10', '2017-03-17 20:53:10');
+(129, 'Item', 102, 'VBVBB', 'ขาย', 'ชุดและอุปกรณ์สำหรับขับขี่ยานพาหนะ', 'สินค้าใหม่', '3669', NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-03-17 20:53:10', '2017-03-17 20:53:10'),
+(132, 'Item', 89, 'xxxx', 'ขาย', 'ยานพาหนะ', 'สินค้าใหม่', '12222', NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-03-18 10:17:40', '2017-03-18 10:17:40'),
+(133, 'Item', 90, 'yyyhhhjjj', 'ขาย', 'เสื้อผ้าและเครื่องแต่งกายสุภาพบุรุษ', 'สินค้าใหม่', '333', NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-03-18 10:20:18', '2017-03-18 10:20:18'),
+(137, 'Item', 94, 'gggggggggg', 'ขาย', 'ยานพาหนะ', 'สินค้าใหม่', '5000', NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-03-18 10:29:49', '2017-03-18 10:29:49'),
+(146, 'Item', 103, 'dddddd', 'ขาย', 'เสื้อผ้าและเครื่องแต่งกายสุภาพสตรี', 'สินค้าใหม่', '2000', NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-03-18 10:30:16', '2017-03-18 10:30:16'),
+(147, 'Item', 104, 'kkkkkk', 'ขาย', 'กล้องและอุปกรณ์เสริม', 'สินค้าใหม่', '10000', NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-03-18 10:30:31', '2017-03-18 10:30:31'),
+(148, 'Item', 105, 'axxxxxxxxxxxxxxxxx', 'ขาย', 'เสื้อผ้าและเครื่องแต่งกายสุภาพบุรุษ', 'สินค้าใหม่', '1500', NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-03-18 10:32:24', '2017-03-18 10:32:24'),
+(149, 'Item', 106, 'BVFGB', 'ขาย', 'ขนมนำเข้าจากต่างประเทศ', 'สินค้าใหม่', '3333', NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-03-18 10:40:52', '2017-03-18 10:40:52'),
+(150, 'Item', 107, 'BGBBB', 'ขาย', 'เครื่องเขียนและอุปกรณ์จัดในสำนักงาน', 'สินค้าใหม่', '5000', NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-03-18 10:42:00', '2017-03-18 10:42:00'),
+(151, 'Item', 108, 'BVBBN', 'ขาย', 'เกมและเครื่องเกม', 'สินค้าใหม่', '15000', NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-03-18 10:46:22', '2017-03-18 10:46:22'),
+(152, 'Item', 109, 'ggg', 'ขาย', 'กระเป๋าและอุปกรณ์สำหรับการเดินทาง', 'สินค้าใหม่', '9899', NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-03-18 10:52:17', '2017-03-18 10:52:17'),
+(153, 'Item', 110, 'TYUIIo', 'ขาย', 'เสื้อผ้าและเครื่องแต่งกายสุภาพสตรี', 'สินค้าใหม่', '1200', NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-03-18 11:11:27', '2017-03-18 11:11:27');
 
 -- --------------------------------------------------------
 
@@ -13649,7 +13754,24 @@ INSERT INTO `orders` (`id`, `invoice_prefix`, `invoice_number`, `shop_id`, `pers
 (10, 'INV', 9, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, '1000.00', '2017-03-16 15:54:22', '2017-03-17 19:28:59'),
 (11, 'INV', 10, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, NULL, '2017-03-17 19:34:33', '2017-03-17 19:34:33'),
 (12, 'INV', 11, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, NULL, '2017-03-17 19:39:09', '2017-03-17 19:39:09'),
-(13, 'INV', 12, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, NULL, '2017-03-17 19:43:40', '2017-03-17 19:43:40');
+(13, 'INV', 12, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 5, NULL, '2017-03-17 19:43:40', '2017-03-19 10:40:02'),
+(14, 'INV', 13, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, 'มีหลักฐานที่เป็นข้อเท็จจริงยืนยันมานานแล้ว ว่าเนื้อหาที่อ่านรู้เรื่องนั้นจะไปกวนสมาธิของคนอ่านให้เขวไปจากส่วนที้เป็น Layout เรานำ Lorem Ipsum มาใช้เพราะความที่มันมีการกระจายของตัวอักษรธรรมดาๆ แบบพอประมาณ ซึ่งเอามาใช้แทนการเขียนว่า ‘ตรงนี้เป็นเนื้อหา, ตรงนี้เป็นเนื้อหา'' ได้ และยังทำให้มองดูเหมือนกับภาษาอังกฤษที่อ่านได้ปกติ ปัจจุบันมีแพ็กเกจของซอฟท์แวร์การทำสื่อสิ่งพิมพ์ และซอฟท์แวร์การสร้างเว็บเพจ (Web Page Editor) หลายตัวที่ใช้ Lorem Ipsum เป็นแบบจำลองเนื้อหาที่เป็นค่าตั้งต้น และเวลาที่เสิร์ชด้วยคำว่า ''lorem ipsum'' ผลการเสิร์ชที่ได้ก็จะไม่พบบรรดาเว็บไซต์ที่ยังคงอยู่ในช่วงเริ่มสร้างด้วย โดยหลายปีที่ผ่านมาก็มีการคิดค้นเวอร์ชั่นต่างๆ ของ Lorem Ipsum ขึ้นมาใช้ บ้างก็เป็นความบังเอิญ บ้างก็เป็นความตั้งใจ (เช่น การแอบแทรกมุกตลก)', 3, NULL, '2017-03-19 11:03:59', '2017-03-19 11:22:21'),
+(15, 'INV', 14, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, '100.00', '2017-03-19 15:02:58', '2017-03-19 15:54:27'),
+(16, 'INV', 15, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, '2500.00', '2017-03-19 15:54:40', '2017-03-19 16:17:08');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_histories`
+--
+
+CREATE TABLE `order_histories` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `order_id` int(11) UNSIGNED NOT NULL,
+  `order_status_id` int(11) UNSIGNED NOT NULL,
+  `comment` text NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -13700,7 +13822,10 @@ INSERT INTO `order_products` (`id`, `order_id`, `product_id`, `product_name`, `p
 (21, 11, 11, 'PS4 controller camp color', '1590.00', 4, 1, NULL, NULL, NULL, NULL, '6360.00'),
 (22, 12, 14, 'Harry Potter', '2500.00', 1, 2, 0, '999.00', 1, NULL, '3499.00'),
 (23, 12, 8, 'Xbox One', '18500.00', 1, 2, 0, '500.00', 1, NULL, '19000.00'),
-(24, 13, 11, 'PS4 controller camp color', '1590.00', 4, 1, NULL, NULL, NULL, NULL, '6360.00');
+(24, 13, 11, 'PS4 controller camp color', '1590.00', 4, 1, NULL, NULL, NULL, NULL, '6360.00'),
+(25, 14, 10, 'Nike LunarEpic Flyknit Men''s Running Shoe (สีดำ) size 9.5"', '7500.00', 1, 1, NULL, NULL, NULL, NULL, '7500.00'),
+(26, 15, 13, 'XBOX ONE ELITE', '20000.00', 1, 1, NULL, NULL, NULL, NULL, '20000.00'),
+(27, 16, 14, 'Harry Potter', '2500.00', 1, 1, NULL, NULL, NULL, NULL, '3499.00');
 
 -- --------------------------------------------------------
 
@@ -13710,20 +13835,23 @@ INSERT INTO `order_products` (`id`, `order_id`, `product_id`, `product_name`, `p
 
 CREATE TABLE `order_statuses` (
   `id` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL
+  `name` varchar(255) NOT NULL,
+  `alias` varchar(255) DEFAULT NULL,
+  `sort` tinyint(2) DEFAULT NULL,
+  `default_value` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `order_statuses`
 --
 
-INSERT INTO `order_statuses` (`id`, `name`) VALUES
-(1, 'รอผู้ขายยืนยันการสั่งซื้อ'),
-(2, 'รอลูกค้าชำระเงิน'),
-(3, 'จัดเตรียมและหีบห่อสินค้า'),
-(4, 'จัดส่งสินค้า'),
-(5, 'บิลถูกปิด'),
-(6, 'ยกเลิกการสั่งซื้อ');
+INSERT INTO `order_statuses` (`id`, `name`, `alias`, `sort`, `default_value`) VALUES
+(1, 'รอผู้ขายยืนยันการสั่งซื้อ', 'pending-seller-confirmation', 1, 1),
+(2, 'รอลูกค้าชำระเงิน', 'pending-customer-payment', 2, 1),
+(3, 'จัดเตรียมสินค้า', 'packing', 3, 1),
+(4, 'จัดส่งสินค้า', 'shipment', 4, 1),
+(5, 'บิลถูกปิด', 'complete', 5, 1),
+(6, 'ยกเลิกการสั่งซื้อ', 'canceled', 99, NULL);
 
 -- --------------------------------------------------------
 
@@ -13781,7 +13909,16 @@ INSERT INTO `order_totals` (`id`, `order_id`, `alias`, `value`) VALUES
 (36, 12, 'total', '22499.00'),
 (37, 13, 'subTotal', '6360.00'),
 (38, 13, 'shippingCost', '0.00'),
-(39, 13, 'total', '6360.00');
+(39, 13, 'total', '6360.00'),
+(40, 14, 'subTotal', '7500.00'),
+(41, 14, 'shippingCost', '0.00'),
+(42, 14, 'total', '7500.00'),
+(43, 15, 'subTotal', '20000.00'),
+(44, 15, 'shippingCost', '100.00'),
+(45, 15, 'total', '20000.00'),
+(46, 16, 'subTotal', '2500.00'),
+(47, 16, 'shippingCost', '2500.00'),
+(48, 16, 'total', '2500.00');
 
 -- --------------------------------------------------------
 
@@ -14215,11 +14352,11 @@ INSERT INTO `products` (`id`, `name`, `description`, `product_model`, `sku`, `qu
 (7, 'Fitbit Flex 2', '', NULL, '', 60, 'เรือน', 2, '3000.00', NULL, 1, NULL, NULL, NULL, NULL, '[{"title":"aaa","value":"xxx"}]', 'สินค้า 2 - 3', 0, 0, '', 1, 1, '2017-03-01 00:18:29', '2017-03-15 20:01:33'),
 (8, 'Xbox One', '', '', '', 47, 'เครื่อง', 1, '18500.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 0, '', 1, 1, '2017-03-02 05:35:54', '2017-03-17 19:39:09'),
 (9, 'Final Fantasy XV JP', '', '', '', 45, 'แผ่น', 1, '1590.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ขออภัยหมด สินค้ากำลังถูกสั่งเพิ่ม', 2, 0, '', 1, 1, '2017-03-02 06:05:06', '2017-03-15 11:53:09'),
-(10, 'Nike LunarEpic Flyknit Men''s Running Shoe (สีดำ) size 9.5"', '<p>&nbsp;</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:40px; letter-spacing:-1px; line-height:1.1; margin-bottom:4px; padding-bottom:12px; padding-top:0px; text-transform:uppercase">REVOLUTIONARY RIDE. EPIC RUN.</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Built for the future of running and those who dare to lead it, the Nike LunarEpic Flyknit Men&#39;s Running Shoe delivers an impeccably smooth ride and a virtually unnoticeable, second-skin fit.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">VANISHING FIT</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">The mid-rise Flyknit upper is designed to act like a natural extension of your leg, leaving only the fantastic sensation of cushioning underfoot. The near-seamless, one-piece construction is woven more openly in areas where your foot and ankle need greater stretch and breathability, and tighter in areas that demand more strength and support.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">FLUID FEEL</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">The soft, contoured Lunarlon midsole has precision-lasered cuts on the sides that collapse during footstrike, delivering a perfectly smooth transition from heel to toe.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">SUPERB SOFTNESS</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">The pressure-mapped outsole features Lunarlon pods in key areas to provide targeted cushioning. Laser cuts on the pods help absorb impact while dispersing it more evenly across your foot.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">MORE DETAILS</span></p>\r\n\r\n<ul>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Flywire integrates with the laces for a dynamic, supportive fit</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Skin-like overlay on the heel for added structure</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Fused foam midsole for enhanced durability without the use of glues or cements</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Laser-cut outsole provides great multi-surface traction</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">We recommend you wear this shoe with running socks&mdash;height of the sock is up to your personal preference</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Comes with two sets of sockliners, 4mm and 6mm, so you can fine-tune for an optimal fit</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Weight: 8.3 ounces (men&#39;s size 10)</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Offset: 10mm</li>\r\n</ul>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">FLYKNIT ORIGINS</span></p>\r\n\r\n<p><span style="color:#666666; font-family:Helvetica,ArialMT,sans-serif; font-size:12px">Nike Flyknit technology was inspired by feedback from runners seeking a shoe with the snug (and virtually unnoticed) fit of a sock. Nike embarked on a four-year mission with teams of programmers, engineers and designers to create the technology needed to make the knit upper with static properties for structure and durability. Then the precise placement of support, flexibility and breathability&mdash;all in one layer&mdash;was refined. The result is a featherweight, formfitting and virtually seamless upper.</span></p>', '', '', 45, 'คู่', 1, '7500.00', '300.00000000', 2, NULL, 1, NULL, NULL, '', NULL, 1, 2, '', 1, 1, '2017-03-02 12:34:34', '2017-03-15 20:27:08'),
+(10, 'Nike LunarEpic Flyknit Men''s Running Shoe (สีดำ) size 9.5"', '<p>&nbsp;</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:40px; letter-spacing:-1px; line-height:1.1; margin-bottom:4px; padding-bottom:12px; padding-top:0px; text-transform:uppercase">REVOLUTIONARY RIDE. EPIC RUN.</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Built for the future of running and those who dare to lead it, the Nike LunarEpic Flyknit Men&#39;s Running Shoe delivers an impeccably smooth ride and a virtually unnoticeable, second-skin fit.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">VANISHING FIT</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">The mid-rise Flyknit upper is designed to act like a natural extension of your leg, leaving only the fantastic sensation of cushioning underfoot. The near-seamless, one-piece construction is woven more openly in areas where your foot and ankle need greater stretch and breathability, and tighter in areas that demand more strength and support.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">FLUID FEEL</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">The soft, contoured Lunarlon midsole has precision-lasered cuts on the sides that collapse during footstrike, delivering a perfectly smooth transition from heel to toe.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">SUPERB SOFTNESS</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">The pressure-mapped outsole features Lunarlon pods in key areas to provide targeted cushioning. Laser cuts on the pods help absorb impact while dispersing it more evenly across your foot.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">MORE DETAILS</span></p>\r\n\r\n<ul>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Flywire integrates with the laces for a dynamic, supportive fit</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Skin-like overlay on the heel for added structure</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Fused foam midsole for enhanced durability without the use of glues or cements</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Laser-cut outsole provides great multi-surface traction</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">We recommend you wear this shoe with running socks&mdash;height of the sock is up to your personal preference</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Comes with two sets of sockliners, 4mm and 6mm, so you can fine-tune for an optimal fit</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Weight: 8.3 ounces (men&#39;s size 10)</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Offset: 10mm</li>\r\n</ul>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">FLYKNIT ORIGINS</span></p>\r\n\r\n<p><span style="color:#666666; font-family:Helvetica,ArialMT,sans-serif; font-size:12px">Nike Flyknit technology was inspired by feedback from runners seeking a shoe with the snug (and virtually unnoticed) fit of a sock. Nike embarked on a four-year mission with teams of programmers, engineers and designers to create the technology needed to make the knit upper with static properties for structure and durability. Then the precise placement of support, flexibility and breathability&mdash;all in one layer&mdash;was refined. The result is a featherweight, formfitting and virtually seamless upper.</span></p>', '', '', 44, 'คู่', 1, '7500.00', '300.00000000', 2, NULL, 1, NULL, NULL, '', NULL, 1, 2, '', 1, 1, '2017-03-02 12:34:34', '2017-03-19 11:03:59'),
 (11, 'PS4 controller camp color', '', '', '', 303, 'ชิ้น', 4, '1590.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, '', 1, 1, '2017-03-06 10:41:20', '2017-03-17 19:43:40'),
 (12, 'Guitar', '', '', '', 21, 'ชิ้น', 1, '3500.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '', 1, 1, '2017-03-06 10:42:15', '2017-03-15 20:27:08'),
-(13, 'XBOX ONE ELITE', '', '', '', 43, 'เครื่อง', 1, '20000.00', NULL, 2, NULL, 1, NULL, NULL, '', NULL, 1, 0, '', 1, 1, '2017-03-06 23:18:23', '2017-03-15 20:27:08'),
-(14, 'Harry Potter', '', '', '', 20, 'เล่ม', 1, '2500.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 2, NULL, 1, 1, '2017-03-10 16:37:33', '2017-03-17 19:39:09'),
+(13, 'XBOX ONE ELITE', '', '', '', 42, 'เครื่อง', 1, '20000.00', NULL, 2, NULL, 1, NULL, NULL, '', NULL, 1, 0, '', 1, 1, '2017-03-06 23:18:23', '2017-03-19 15:02:58'),
+(14, 'Harry Potter', '', '', '', 19, 'เล่ม', 1, '2500.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 2, NULL, 1, 1, '2017-03-10 16:37:33', '2017-03-19 15:54:39'),
 (15, 'new item', '', '', '', 197, 'ชิ้น', 1, '1200.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, NULL, 1, 1, '2017-03-14 22:15:35', '2017-03-15 20:02:37');
 
 -- --------------------------------------------------------
@@ -14247,7 +14384,10 @@ INSERT INTO `product_discounts` (`id`, `product_id`, `reduced_price`, `created_a
 (4, 11, '1431.00', '2017-03-10 11:12:37', '2017-03-10 11:12:37'),
 (5, 10, '6000.00', '2017-03-10 17:02:14', '2017-03-10 17:04:42'),
 (6, 8, '15725.00', '2017-03-10 17:21:28', '2017-03-10 17:21:28'),
-(7, 14, '500.00', '2017-03-10 21:13:04', '2017-03-10 21:13:04');
+(7, 14, '500.00', '2017-03-10 21:13:04', '2017-03-10 21:13:04'),
+(8, 15, '1000.00', '2017-03-18 19:23:01', '2017-03-18 19:23:01'),
+(9, 15, '600.00', '2017-03-18 19:23:12', '2017-03-18 19:25:32'),
+(10, 14, '1250.00', '2017-03-19 15:03:16', '2017-03-19 15:03:16');
 
 -- --------------------------------------------------------
 
@@ -14279,7 +14419,10 @@ INSERT INTO `product_sale_promotions` (`id`, `product_id`, `sale_promotion_targe
 (4, 11, 1, 1, 'ProductDiscount', 4, '2017-04-01 10:00:00', '2017-04-04 23:59:59', '2017-03-10 11:12:37', '2017-03-10 11:12:37'),
 (5, 10, 1, 1, 'ProductDiscount', 5, '2017-03-10 00:00:00', '2017-03-10 23:59:59', '2017-03-10 17:02:14', '2017-03-10 17:04:42'),
 (6, 8, 1, 1, 'ProductDiscount', 6, '2017-03-11 00:00:00', '2017-03-11 23:59:59', '2017-03-10 17:21:28', '2017-03-10 17:21:28'),
-(7, 14, 1, 1, 'ProductDiscount', 7, '2017-03-11 08:00:00', '2017-03-11 23:59:59', '2017-03-10 21:13:04', '2017-03-10 21:13:04');
+(7, 14, 1, 1, 'ProductDiscount', 7, '2017-03-11 08:00:00', '2017-03-11 23:59:59', '2017-03-10 21:13:04', '2017-03-10 21:13:04'),
+(8, 15, 1, 1, 'ProductDiscount', 8, '2017-03-18 00:00:00', '2017-03-18 23:59:59', '2017-03-18 19:23:01', '2017-03-18 19:23:01'),
+(9, 15, 1, 1, 'ProductDiscount', 9, '2017-03-25 00:00:00', '2017-03-28 23:59:59', '2017-03-18 19:23:12', '2017-03-18 19:25:32'),
+(10, 14, 1, 1, 'ProductDiscount', 10, '2017-03-20 00:00:00', '2017-03-20 23:59:59', '2017-03-19 15:03:16', '2017-03-19 15:03:16');
 
 -- --------------------------------------------------------
 
@@ -15532,7 +15675,8 @@ INSERT INTO `temporary_files` (`id`, `model`, `token`, `person_id`, `created_at`
 (302, 'Item', 'RnlJUi7a', 1, '2017-03-17 19:58:26'),
 (304, 'Item', 'HgYJgd5F', 1, '2017-03-17 19:59:21'),
 (307, 'Item', 'MmqeJW2q', 1, '2017-03-17 20:25:42'),
-(311, 'Item', 'Z8kj7v3c', 1, '2017-03-17 20:27:57');
+(311, 'Item', 'Z8kj7v3c', 1, '2017-03-17 20:27:57'),
+(321, 'Item', 'So8mKp1j', 1, '2017-03-18 10:52:04');
 
 -- --------------------------------------------------------
 
@@ -16584,6 +16728,12 @@ ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `order_histories`
+--
+ALTER TABLE `order_histories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `order_products`
 --
 ALTER TABLE `order_products`
@@ -16881,7 +17031,7 @@ ALTER TABLE `access_levels`
 -- AUTO_INCREMENT for table `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=191;
 --
 -- AUTO_INCREMENT for table `advertisings`
 --
@@ -16906,7 +17056,7 @@ ALTER TABLE `branches`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `categories`
 --
@@ -16916,12 +17066,12 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=179;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
 --
 -- AUTO_INCREMENT for table `data_access_permissions`
 --
 ALTER TABLE `data_access_permissions`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT for table `districts`
 --
@@ -16951,7 +17101,7 @@ ALTER TABLE `freelance_types`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=199;
 --
 -- AUTO_INCREMENT for table `image_types`
 --
@@ -16961,7 +17111,7 @@ ALTER TABLE `image_types`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 --
 -- AUTO_INCREMENT for table `item_categories`
 --
@@ -16991,7 +17141,7 @@ ALTER TABLE `length_units`
 -- AUTO_INCREMENT for table `lookups`
 --
 ALTER TABLE `lookups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
 --
 -- AUTO_INCREMENT for table `notifications`
 --
@@ -17011,12 +17161,17 @@ ALTER TABLE `open_hours`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT for table `order_histories`
+--
+ALTER TABLE `order_histories`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `order_products`
 --
 ALTER TABLE `order_products`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `order_statuses`
 --
@@ -17026,7 +17181,7 @@ ALTER TABLE `order_statuses`
 -- AUTO_INCREMENT for table `order_totals`
 --
 ALTER TABLE `order_totals`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT for table `pages`
 --
@@ -17111,12 +17266,12 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `product_discounts`
 --
 ALTER TABLE `product_discounts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `product_sale_promotions`
 --
 ALTER TABLE `product_sale_promotions`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `product_shippings`
 --
@@ -17201,7 +17356,7 @@ ALTER TABLE `taggings`
 -- AUTO_INCREMENT for table `temporary_files`
 --
 ALTER TABLE `temporary_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=312;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=322;
 --
 -- AUTO_INCREMENT for table `users`
 --
