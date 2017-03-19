@@ -93,9 +93,7 @@ class OrderProduct extends Model
 
   }
 
-  // public function getOrderSavingPrice($format = false) {
-  //
-  // }
+  // public function getOrderSavingPrice($format = false) {}
 
   public function getOrderTotal($format = false) {
     

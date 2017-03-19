@@ -13,6 +13,8 @@
 
 <div class="container">
 
+  @include('components.form_error') 
+
   <div class="cart space-top-30">
 
     <div class="product-list-table">
@@ -128,7 +130,7 @@
           'class' => 'shipping-cost-input shipping_cost_order_input',
           'placeholder' => 'กำหนดค่าจัดส่งต่อการสั่งซื้อ',
           'autocomplete' => 'off',
-          'role' => 'number',
+          'role' => 'currency',
           'disabled' => 'disabled'
         ));
       ?>
@@ -169,7 +171,7 @@
                     'class' => 'shipping-cost-input shipping_cost_product_input',
                     'placeholder' => 'ค่าจัดส่งสินค้า',
                     'autocomplete' => 'off',
-                    'role' => 'number'
+                    'role' => 'currency'
                   ));
                 ?>
 
@@ -215,7 +217,6 @@
 
   <div class="space-top-30">
     <h4>ข้อความถึงผู้ซื้อ</h4>
-    <!-- <div class="line"></div> -->
     <?php 
       echo Form::textarea('comment', null, array(
         'class' => 'ckeditor'
@@ -286,6 +287,9 @@
   $(document).ready(function(){
     const shippingCostInput = new ShippingCostInput();
     shippingCostInput.load();
+
+    const form = new Form();
+    form.load();
   });
 
 </script>

@@ -92,6 +92,7 @@
     '__css/components/choice-box.css',
     '__css/components/pagination.css',
     '__css/components/box.css',
+    '__css/components/image-gallery.css',
     '__css/components/tile.css',
     '__css/components/message.css',
     '__css/components/error.css',

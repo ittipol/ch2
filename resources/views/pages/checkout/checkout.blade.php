@@ -139,10 +139,13 @@
 
       @endforeach
 
-      <div class="cart-check-out text-right">
+      <div class="text-right">
 
-        <p class="error-message text-bold">* สินค้าบางรายการอาจยังไม่ได้รวมค่าจัดส่ง</p>
-        <p class="error-message text-bold">* โปรดรอการยืนยันคำสั่งซื้อจากผู้ขายก่อนการชำระเงิน</p>
+        <div class="checkout-notice">
+          <p class="error-message text-bold">* รายการสั่งซื้อหรือสินค้าบางรายการอาจยังไม่ได้รวมค่าจัดส่ง</p>
+          <p class="error-message text-bold">* ค่าจัดส่งของการสั่งซื้ออาจมีการเปลี่ยนแปลงหลังจากผู้ขายได้ทำการยืนยันการสั่งซื้อ</p>
+          <p class="error-message text-bold">* โปรดรอการยืนยันการสั่งซื้อจากผู้ขายก่อนการชำระเงิน</p>
+        </div>
 
         <?php
           echo Form::submit('สั่งซื้อสินค้า' , array(

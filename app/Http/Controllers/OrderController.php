@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\library\service;
 use App\library\message;
+use App\library\validation;
 use Redirect;
 
 class OrderController extends Controller
@@ -86,6 +87,9 @@ class OrderController extends Controller
       $this->setData('orderConfirmUrl',request()->get('shopUrl').'order/confirm/'.$model->id);
     }
 
+    $this->setData('orderStatuses',$model->getOrderStatuses());
+    $this->setData('percent',$model->getOrderProgress());
+
     return $this->view('pages.order.shop_order_detail');
 
   }
@@ -138,8 +142,14 @@ class OrderController extends Controller
       return Redirect::to(request()->get('shopUrl').'order');
     }
 
+    $validation = new Validation;
+
     switch (request()->get('shipping_cost_type')) {
       case 1:
+
+        if(!$validation->isCurrency(request()->get('shipping_cost_order'))) {
+          return Redirect::back()->withErrors(['จำนวนค่าจัดส่งสินค้าไม่ถูกต้อง']);
+        }
 
         $model->order_shipping_cost = request()->get('shipping_cost_order');
         $model->save();

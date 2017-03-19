@@ -311,6 +311,7 @@ class Order extends Model
 
   public function buildModelData() {
 
+    $currency = new Currency;
     $date = new Date;
 
     return array(
@@ -322,6 +323,7 @@ class Order extends Model
       'order_status_id' => $this->order_status_id,
       'orderStatusName' => $this->orderStatus->name,
       'message_to_seller' => $this->message_to_seller,
+      '_order_shipping_cost' => $currency->format($this->order_shipping_cost),
       'orderedDate' => $date->covertDateToSting($this->created_at->format('Y-m-d'))
     );
   }

@@ -5,7 +5,8 @@
 	width: 700px;
 	height: 100%;
 	opacity: 1;
-	background-color: rgb(29, 66, 133);
+	/*background-color: rgb(29, 66, 133);*/
+	background-color: rgb(47,97,186);
 	padding: 0;
 	z-index: 90;
 	overflow-y: auto;

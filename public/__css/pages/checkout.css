@@ -72,3 +72,17 @@
 .checkout-success .checkout-success-message {
 	margin-top: 30px;
 }
+
+.checkout .checkout-notice {
+	text-align: right;
+	font-weight: bold;
+	padding: 10px;
+	margin-bottom: 20px;
+	background-color: #FFEBEE;
+}
+
+@media only screen and (max-width : 480px) {
+  .checkout .checkout-notice {
+  	text-align: left;
+  }
+}

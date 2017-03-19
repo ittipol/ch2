@@ -18,18 +18,42 @@
   <div class="pin-message space-bottom-30">
     <div class="pin-message-primary-info">
       <div>รายการสั่งซื้อนี้ต้องการการยืนยัน</div>
-
     </div>
 
     <div class="pin-message-secondary-info">
-
       <div class="text-right">
         <a href="{{$orderConfirmUrl}}" class="button">ยืนยันการสั่งซื้อ</a>
       </div>
-
     </div>
   </div>
   @endif
+
+  <div class="row">
+
+    <div class="col-sm-12">
+      
+      <div class="order-progress-bar">
+        <div class="status"></div>
+      </div>
+
+      <div class="order-status clearfix">
+        @foreach($orderStatuses as $orderStatus)
+          <div class="order-status-box {{$orderStatus['alias']}} {{$orderStatus['position']}}">
+
+            <div class="image">
+              <div class="status-image"></div>
+            </div>
+            <h5>{{$orderStatus['name']}}</h5>
+            
+          </div>
+        @endforeach
+      </div>
+
+      <div class="line space-top-bottom-20"></div>
+
+    </div>
+
+  </div>
 
   <div class="row">
 
@@ -37,7 +61,6 @@
 
       <div class="detail-group">
         <h4>รายละเอียดการสั่งซื้อ</h4>
-        <!-- <div class="line"></div> -->
         <div class="detail-group-info-section">
 
           <div class="detail-group-info">
@@ -171,22 +194,15 @@
 
   </div>
 
-  <div class="row">
-
-    <div class="col-sm-12 space-top-30">
-      
-      <div class="detail-info-section no-margin">
-        <h4>สถานะการสั่งซื้อ</h4>
-        <div class="line"></div> 
-        <div class="detail-info">
-          {{$order['shipping_address']}}
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
 </div>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+    const orderProgressBar = new OrderProgressBar({{$percent}});
+    orderProgressBar.load();
+  });
+
+</script>
 
 @stop
