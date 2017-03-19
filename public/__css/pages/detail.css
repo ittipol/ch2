@@ -499,9 +499,10 @@
 
 .order-progress-bar > .status {
 	position: relative;
-	width: 30%;
+	width: 0;
 	height: 100%;
 	background-color: #2196F3;
+	transition: width .5s ease-in-out;
 }
 
 .order-progress-bar > .status::after {
@@ -518,11 +519,11 @@
 .order-status .order-status-box {
 	width: 20%;
 	float: left;
-	/*background-color: #E3F2FD;*/
 	text-align: center;
 }
 
-.order-status .order-status-box.current {
+.order-status .order-status-box.current,
+.order-status .order-status-box.passed {
 	background-color: #E3F2FD;
 }
 
@@ -544,11 +545,29 @@
 	background-repeat: no-repeat;
 }
 
-.order-status .order-status-box.current .image > .status-image {
+.order-status .order-status-box.pending-seller-confirmation .image > .status-image {
+	background-image: url(/images/icons/checklist-white.png);
+}
+
+.order-status .order-status-box.pending-customer-payment .image > .status-image {
+	background-image: url(/images/icons/payment-white.png);
+}
+
+.order-status .order-status-box.packing .image > .status-image {
+	background-image: url(/images/icons/box-white.png);
+}
+
+.order-status .order-status-box.shipment .image > .status-image {
+	background-image: url(/images/icons/truck.png);
+}
+
+.order-status .order-status-box.complete .image > .status-image {
+	background-image: url(/images/icons/note-white.png);
+}
+
+.order-status .order-status-box .image > .status-image {
 	background-color: #2196F3;
 	border-color: #2196F3;
-	background-image: url(/images/common/_coin.png);
-	background-size: 80%;
 }
 
 .order-status .order-status-box.passed .image > .status-image {
@@ -558,19 +577,6 @@
 	background-size: 60%;
 }
 
-/*.order-status .order-status-box .image > img{
-	width: 50px;
-	height: 50px;
-	padding: 6px;
-	border-radius: 50px;
-	background-color: red;
-	border: 4px solid red;
-}
-
-.order-status .order-status-box .image.current > img{
-	background-color: #fff;
-	padding: 4px;
-}*/
 
 /*==========  Non-Mobile First Method  ==========*/
 

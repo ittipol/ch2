@@ -39,7 +39,8 @@
     // '__js/components/tabs.js'
     '__js/components/profile-image.js',
     '__js/components/global-cart.js',
-    '__js/components/modal-dialog.js'
+    '__js/components/modal-dialog.js',
+    '__js/components/order-progress-bar.js',
   );
 
   if($combine){

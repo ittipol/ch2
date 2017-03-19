@@ -29,14 +29,13 @@ class OrderController extends Controller
       'fields' => array('slug')
     ))->slug;
 
-    $model->getOrderStatuses();
-
     $this->setData('order',$model->modelData->build(true));
     $this->setData('orderProducts',$model->getOrderProducts());
     $this->setData('orderTotals',$model->getSummary(true));
     // $this->setData('orderTotals',$model->orderTotals());
 
     $this->setData('orderStatuses',$model->getOrderStatuses());
+    $this->setData('percent',$model->getOrderProgress());
 
     $this->setData('shop',$shop->modelData->build(true));
     $this->setData('shopImageUrl',$shop->getProfileImageUrl());
@@ -191,11 +190,10 @@ class OrderController extends Controller
         break;
     }
 
-    // cal total data
+    // cal totals
     $orderTotalModel = Service::loadModel('OrderTotal');
 
     $totals = $model->getSummary();
-
     foreach ($totals as $alias => $total) {
 
       $orderTotal = $orderTotalModel
@@ -226,7 +224,7 @@ class OrderController extends Controller
     }
 
     // 
-    $model->order_status_id = 2;
+    $model->order_status_id = Service::loadModel('OrderStatus')->getIdByalias('pending-customer-payment');
     $model->save();
 
     Message::display('การสั่งซื้อถูกยืนยันแล้ว','success');

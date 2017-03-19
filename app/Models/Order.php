@@ -11,7 +11,7 @@ class Order extends Model
 {
   protected $table = 'orders';
   protected $fillable = ['invoice_prefix','invoice_number','shop_id','person_id','person_name','shipping_address','payment_detail','message_to_seller','order_status_id','order_shipping_cost'];
-  protected $modelRelations = array('PaymentMethodToOrder');
+  protected $modelRelations = array('OrderProduct','OrderTotal','PaymentMethodToOrder');
 
   public $formHelper = true;
   public $modelData = true;
@@ -109,28 +109,54 @@ class Order extends Model
 
     $orderStatusModel = new OrderStatus;
     $orderStatuses = $orderStatusModel->GetDefaultStatuses(true);
+    $total = count($orderStatuses);
 
+    $count = 0;
     $passed = true;
-    $current = false;
     $_orderStatuses = array();
     foreach ($orderStatuses as $orderStatus) {
 
-      $current = false;
+      $position = '';
+      $count++;
 
       if($this->order_status_id == $orderStatus['id']) {
-        $current = true;
-        $passed = false;
+
+        if($count == $total) {
+          $position = 'passed';
+        }else{
+          $position = 'current';
+          $passed = false;
+        }
+
+      }elseif($passed) {
+        $position = 'passed';
       }
 
       $_orderStatuses[] = array(
         'id' => $orderStatus['id'],
         'name' => $orderStatus['name'],
-        'current' => $current,
-        'passed' => $passed
+        'alias' => $orderStatus['alias'],
+        'position' => $position
       );
     }
 
     return $_orderStatuses;
+
+  }
+
+  public function getOrderProgress() {
+
+    $orderStatusModel = new OrderStatus;
+    $total = $orderStatusModel->countDefaultStatus();
+    $orderStatus = $orderStatusModel->find($this->order_status_id);
+  
+    if($orderStatus->sort == $total) {
+      $percent = 100;
+    }else{
+      $percent = (($orderStatus->sort * 100) / $total) - 10;
+    }
+
+    return $percent;
 
   }
 

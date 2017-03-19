@@ -17,46 +17,21 @@
 
     <div class="col-sm-12">
       
-      <div>
+      <div class="order-progress-bar">
+        <div class="status"></div>
+      </div>
 
-        <div class="order-progress-bar">
-          <div class="status"></div>
-        </div>
+      <div class="order-status clearfix">
+        @foreach($orderStatuses as $orderStatus)
+          <div class="order-status-box {{$orderStatus['alias']}} {{$orderStatus['position']}}">
 
-        <div class="order-status clearfix">
-          @foreach($orderStatuses as $orderStatus)
+            <div class="image">
+              <div class="status-image"></div>
+            </div>
+            <h5>{{$orderStatus['name']}}</h5>
             
-            @if($orderStatus['current'])
-              <div class="order-status-box current">
-            @elseif($orderStatus['passed'])
-              <div class="order-status-box passed">
-            @else
-              <div class="order-status-box">
-            @endif
-
-              <div class="image">
-                <div class="status-image"></div>
-              </div>
-              <h5>{{$orderStatus['name']}}</h5>
-              
-            </div>
-          @endforeach
-        </div>
-
-
-        <!-- <div class="row">
-          <div class="col-sm-12">
-          @foreach($orderStatuses as $orderStatus)
-            <div class="clearfix">
-
-              
-              <div>{{$orderStatus['name']}}</div>
-              
-            </div>
-          @endforeach
           </div>
-        </div> -->
-
+        @endforeach
       </div>
 
       <div class="line space-top-bottom-20"></div>
@@ -238,5 +213,14 @@
   </div>
 
 </div>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+    const orderProgressBar = new OrderProgressBar({{$percent}});
+    orderProgressBar.load();
+  });
+
+</script>
 
 @stop

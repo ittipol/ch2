@@ -22,14 +22,20 @@ class OrderStatus extends Model
     }
 
     return $_orderstatuses;
+  }
 
+  public function countDefaultStatus() {
+    return $this
+    ->where('default_value','=','1')
+    ->count();
   }
 
   public function buildModelData() {
     return array(
       'id' => $this->id,
       'name' => $this->name,
-      'sort' => $this->sort
+      'sort' => $this->sort,
+      'alias' => $this->alias
     );
 
   }

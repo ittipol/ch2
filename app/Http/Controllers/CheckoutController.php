@@ -75,11 +75,11 @@ class CheckoutController extends Controller
       return Redirect::back();
     }
 
-    //
     $cartModel->disableCheckingError();
 
     $personId = session()->get('Person.id');
     $personName = session()->get('Person.name');
+    $orderStatusId = Service::loadModel('OrderStatus')->getIdByalias('pending-seller-confirmation');
 
     foreach ($checkoutProducts as $shopId => $products) {
 
@@ -94,7 +94,7 @@ class CheckoutController extends Controller
         'person_name' => $personName,
         'shipping_address' => $shops[$shopId]['shipping_address'],
         'message_to_seller' => $shops[$shopId]['message'],
-        'order_status_id' => 1
+        'order_status_id' => $orderStatusId
       ))
       ->save();
 
