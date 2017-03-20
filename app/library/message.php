@@ -11,6 +11,12 @@ class Message
     Session::flash('message.type', $type); 
   }
 
+  public static function displayWithDesc($title = '',$desc = '',$type = 'info') {
+    Session::flash('message.title', $title);
+    Session::flash('message.desc', $desc);
+    Session::flash('message.type', $type); 
+  }
+
   // public function get($name) {
   //   return $this->message[$name];
   // }

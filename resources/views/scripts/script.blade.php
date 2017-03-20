@@ -6,7 +6,7 @@
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCk5a17EumB5aINUjjRhWCvC1AgfxqrDQk&libraries=places"></script> -->
 
 <?php
-  $combine = true;
+  $combine = false;
 ?>
 
 <?php
@@ -64,7 +64,7 @@
 <script type="text/javascript" src="{{ URL::asset('js/ckeditor/ckeditor.js') }}"></script>
 
 @if(!$combine)
-@foreach ($jsFiles as $js) {
+@foreach ($jsFiles as $js)
   <script type="text/javascript" src="<?php echo '/'.$js; ?>"></script>
 @endforeach
 @endif
@@ -132,7 +132,7 @@
 @endif
 
 @if(!$combine)
-@foreach ($cssFiles as $css) {
+@foreach ($cssFiles as $css)
   <link rel="stylesheet" href="<?php echo '/'.$css; ?>" />
 @endforeach
 @endif

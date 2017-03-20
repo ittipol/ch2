@@ -1,13 +1,18 @@
-/*.success-messages {
-	background-color: rgb(240,255,236);
-	background-image: url('/images/common/error.png');
-	background-repeat: no-repeat;
-	background-position: 108% 60%;
-	background-size: 200px;
+.secondary-message-box {
+	padding: 15px;
+	color: #D50000;
+	background-color: #FFEBEE;
 }
 
-.success-messages h3 {
-	width: 80%;
-	line-height: 26px;
-	font-size: 17px;
-}*/
+.secondary-message-box.info {
+	color: #1565C0;
+	background-color: #E3F2FD;
+}
+
+.secondary-message-box h3 {
+	margin: 10px 0;
+}
+
+.secondary-message-box .line {
+	background-color: #EF9A9A;
+}

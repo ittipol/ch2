@@ -36,8 +36,10 @@ class ImageGallery {
 
     $('.preview-image').on('click',function(){
 
-      _this.currentImage = $(this).data('id'); 
+      _this.currentImage = $(this).data('id');
 
+      $('#current_image_description').text(_this.currentImage+1);
+   
       _this.setImage(_this.images[$(this).data('id')]['_url']);
       _this.setImageDescription(_this.images[$(this).data('id')]['description']);
 

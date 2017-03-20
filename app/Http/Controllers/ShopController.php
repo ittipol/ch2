@@ -114,7 +114,7 @@ class ShopController extends Controller
     $model->paginator->criteria(array(
       'joins' => array('shop_relate_to', 'shop_relate_to.model_id', '=', $model->getTable().'.id'),
       'conditions' => array(
-        array('shop_relate_to.model','like','Product'),
+        array('shop_relate_to.model','like',$model->modelName),
         array('shop_relate_to.shop_id','=',request()->get('shopId'))
       ),
       'order' => array('id','DESC')
@@ -152,7 +152,7 @@ class ShopController extends Controller
     $model->paginator->criteria(array(
       'joins' => array('shop_relate_to', 'shop_relate_to.model_id', '=', $model->getTable().'.id'),
       'conditions' => array(
-        array('shop_relate_to.model','like','Product'),
+        array('shop_relate_to.model','like',$model->modelName),
         array('shop_relate_to.shop_id','=',request()->get('shopId'))
       ),
       'order' => array('id','DESC')

@@ -14,18 +14,21 @@
 
 <div class="container">
 
-  @if($order['order_status_id'] == 1)
-  <div class="pin-message space-bottom-30">
-    <div class="pin-message-primary-info">
-      <div>รายการสั่งซื้อนี้ต้องการการยืนยัน</div>
+  @if(!$hasPaymentMethod)
+    <div class="secondary-message-box space-bottom-30">
+      <h3>ไม่พบวิธีการชำระเงินชองคุณ</h3>
+      <p>กรุณาเพิ่มวิธีการชำระเงินของคุณอย่างน้อย 1 วิธี เพื่อใช่ในการกำหนดวิธีการชำระเงินให้กับลูกค้า</p>
+      <a href="{{$PaymentMethodAddUrl}}" class="button">เพิ่มวิธีการชำระเงินชองคุณ</a>
     </div>
+  @endif
 
-    <div class="pin-message-secondary-info">
-      <div class="text-right">
-        <a href="{{$orderConfirmUrl}}" class="button">ยืนยันการสั่งซื้อ</a>
-      </div>
-    </div>
+  @if($order['order_status_id'] == 1)
+  <div class="secondary-message-box info space-bottom-30">
+    <h3>รายการสั่งซื้อนี้ต้องการการยืนยัน</h3>
+    <p>กรุณายืนยันการสั้งซื้อนี้ เพื่อเป็นการยืนยันการสั่งซื้อว่าถูกต้องและสามารถที่จะดำเนินการชำระเงินได้</p>
+    <a href="{{$orderConfirmUrl}}" class="button">ยืนยันการสั่งซื้อ</a>
   </div>
+
   @endif
 
   <div class="row">

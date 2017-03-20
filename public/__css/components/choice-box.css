@@ -38,9 +38,9 @@ label.choice-box input[type="checkbox"] + .inner {
 	cursor: pointer;
 }
 
-.form-item-group label.choice-box input[type="radio"]:checked + .inner,
-.form-item-group label.choice-box input[type="checkbox"]:checked + .inner {
-	/*background-color: #A5D6A7;*/
+label.choice-box input[type="radio"]:disabled + .inner,
+label.choice-box input[type="checkbox"]:disabled + .inner {
+	cursor: default;
 }
 
 label.choice-box input[type="radio"] + .inner::before {
@@ -110,6 +110,10 @@ label.choice-box input[type="checkbox"]:checked + .inner::after {
 	background-image: url(/images/common/tick-green2.png);
 	background-size: 20px;
 	background-repeat: no-repeat;
+}
+
+label.choice-box input[type="checkbox"]:disabled + .inner::after {
+  background-image: url(/images/icons/tick-grey.png);
 }
 
 label.choice-box input[type="checkbox"]:disabled + .inner::before {

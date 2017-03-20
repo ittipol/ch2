@@ -10,7 +10,7 @@ use App\library\date;
 class Order extends Model
 {
   protected $table = 'orders';
-  protected $fillable = ['invoice_prefix','invoice_number','shop_id','person_id','person_name','shipping_address','payment_detail','message_to_seller','order_status_id','order_shipping_cost'];
+  protected $fillable = ['invoice_prefix','invoice_number','shop_id','person_id','person_name','shipping_address','payment_detail','message_to_seller','order_status_id','order_free_shipping','order_shipping_cost'];
   protected $modelRelations = array('OrderProduct','OrderTotal','PaymentMethodToOrder');
 
   public $formHelper = true;
@@ -280,13 +280,18 @@ class Order extends Model
   }
 
   public function checkHasProductNotSetShippingCost() {
-
     return OrderProduct::where([
       ['order_id','=',$this->id],
       ['shipping_calculate_from','=',1],
       ['shipping_cost','=',null]
     ])->exists();
+  }
 
+  public function checkHasProductHasShippingCost() {
+    return OrderProduct::where([
+      ['order_id','=',$this->id],
+      ['shipping_calculate_from','=',2]
+    ])->exists();
   }
 
   public function checkHasAllProductNotSetShippingCost() {

@@ -20,6 +20,8 @@ class OrderProduct extends Model
     $currency = new Currency;
 
     $shippingCostText = '';
+    $productShippingAmountType = '';
+
     switch ($this->shipping_calculate_from) {
       case 1:
 
@@ -33,23 +35,30 @@ class OrderProduct extends Model
       
       case 2:
         
-          if($this->free_shipping) {
-            $shippingCostText = 'จัดส่งฟรี ('.$currency->format(0).')';
-          }else{
-            $shippingCostText = $currency->format($this->getOrderShippingCost());
-          }
+        if($this->free_shipping) {
+          $shippingCostText = 'จัดส่งฟรี ('.$currency->format(0).')';
+        }else{
+          $shippingCostText = $currency->format($this->getOrderShippingCost());
+        }
 
         break;
     }
 
+    if(!empty($this->product_shipping_amount_type_id)) {
+      $productShippingAmountType = $this->productShippingAmountType->name;
+    }
+
     return array(
       'id' => $this->id,
+      'product_id' => $this->product_id,
       'product_name' => $this->product_name,
       '_price' => $currency->format($this->price),
       'quantity' => $this->quantity,
       'shipping_calculate_from' => $this->shipping_calculate_from,
+      'free_shipping' => $this->free_shipping,
       'shipping_cost' => $this->shipping_cost,
       'shippingCostText' => $shippingCostText,
+      'productShippingAmountType' => $productShippingAmountType,
       '_total' => $currency->format($this->total)
     );
 
