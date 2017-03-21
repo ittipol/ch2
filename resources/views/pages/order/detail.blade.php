@@ -13,18 +13,11 @@
 
 <div class="container">
 
-  รายละเอียดการคิดค่าขนส่นของการสั่งซื้อ
-
   @if($order['order_status_id'] == 1)
-  <div class="pin-message space-bottom-30">
-    <div class="pin-message-primary-info">
-      <div>รายการสั่งซื้อนี้ยังไม่ถูกการยืนยันจากผู้ขาย</div>
-    </div>
-    <div class="pin-message-secondary-info">
-      <div>* ค่าจัดส่งของการสั่งซื้ยังไม่ใช่ยอดสุทธิ</div>
-      <div>* ค่าจัดส่งอาจถูกคำนวณโดนผู้ขายในการยืนยันการสั่งซื้อ</div>
-      <div>* โปรดรอการยืนยันการสั่งซื้อจากผู้ขายก่อนการชำระเงิน</div>
-    </div>
+  <div class="secondary-message-box info space-bottom-30">
+    <h3>รายการสั่งซื้อนี้ยังไม่ถูกการยืนยันจากผู้ขาย</h3>
+    <p>*** ค่าจัดส่งของการสั่งซื้อนี้ยังไม่ใช่จำนวนสุทธิที่ต้องชำระ</p>
+    <p>*** โปรดรอการยืนยันการสั่งซื้อจากผู้ขายก่อนการชำระเงิน</p>
   </div>
   @endif
 
@@ -34,6 +27,9 @@
     </div>
   @endif
 
+  <div class="secondary-message-box success space-bottom-30">
+    <h3>ผู้ขายยืนยันการสั่งซื้อแล้ว</h3>
+  </div>
 
   <div>
     <h5>จำนวนเงินที่ต้องชำระ {{$orderTotals['total']['value']}}</h5>

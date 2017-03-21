@@ -139,7 +139,7 @@
         @if($_modelData['shipping_calculate_from'] == 2)
         <div class="item-info-row">
           <p>ค่าจัดส่งสินค้า</p>
-          <h4 class="text-emphasize">{{$_modelData['shippingCost']}}
+          <h4 class="text-emphasize">{{$_modelData['shippingCostText']}}
             @if(!empty($_modelData['shippingCostAppendText']))
               <span class="sub-info-text"> / {{$_modelData['shippingCostAppendText']}}</span>
             @endif

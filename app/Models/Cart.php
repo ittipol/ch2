@@ -14,6 +14,25 @@ class Cart extends Model
 
   private $checkError = true;
 
+  private $Totaltypes = array(
+    'subTotal' => array(
+      'title' => 'มูลค่าสินค้า',
+      'class' => 'sub-total'
+    ),
+    'shippingCost' => array(
+      'title' => 'ค่าจัดส่งสินค้า',
+      'class' => 'shipping-cost'
+    ),
+    'savingPrice' => array(
+      'title' => 'ประหยัด',
+      'class' => 'saving-price'
+    ),
+    'total' => array(
+      'title' => 'ยอดสุทธิ',
+      'class' => 'total-amount'
+    )
+  );
+
   public function addProduct($productId, $quantity) {
 
     $product = $this->getProduct($productId);
@@ -353,14 +372,26 @@ class Cart extends Model
           'first' => true
         ));
 
-        $shippingCost = $shipping->calShippingCost($product,$quantity);
+        $freeShipping = false;
+        $shippingCost = 0;
+        if($shipping->free_shipping || $shipping->checkFreeShippingCondition($product,$quantity)) {
+          $freeShipping = true;
+        }else{
+          $shippingCost = $shipping->calShippingCost($product,$quantity);
+        }
 
       }
 
     }
 
     if($format) {
-      $shippingCost = $currency->format($shippingCost);
+
+      if($freeShipping) {
+        $shippingCost = 'จัดส่งฟรี ('.$currency->format(0).')';
+      }else{
+        $shippingCost = $currency->format($shippingCost);
+      }
+
     }
 
     return $shippingCost;
@@ -403,14 +434,16 @@ class Cart extends Model
     $summaries = array(
       'subTotal' => 'getCartSubTotal',
       'shippingCost' => 'getCartShippingCost',
-      // 'savingPrice' => 'getCartSavingPrice',
+      'savingPrice' => 'getCartSavingPrice',
       'total' => 'getCartTotal'
     );
 
     $_summaries = array();
     foreach ($summaries as $alias => $fx) {
       $_summaries[$alias] = array(
-        'value' => $this->{$fx}($shopId,$format)
+        'value' => $this->{$fx}($shopId,$format),
+        'title' => $this->getTitle($alias),
+        'class' => $this->getClass($alias),
       );
     }
 
@@ -647,14 +680,6 @@ class Cart extends Model
   }
 
   public function getShopId($productId) {
-    // return $this->where([
-    //   ['product_id','=',$productId],
-    //   ['person_id','=',session()->get('Person.id')]
-    // ])
-    // ->select('shop_id')
-    // ->first()
-    // ->shop_id;
-
     return ShopRelateTo::where([
       ['model','like','Product'],
       ['model_id','=',$productId]
@@ -662,7 +687,24 @@ class Cart extends Model
     ->select('shop_id')
     ->first()
     ->shop_id;
+  }
 
+  public function getTitle($alias) {
+
+    if(empty($this->Totaltypes[$alias]['title'])) {
+      return null;
+    }
+
+    return $this->Totaltypes[$alias]['title'];
+  }
+
+  public function getClass($alias) {
+
+    if(empty($this->Totaltypes[$alias]['class'])) {
+      return null;
+    }
+
+    return $this->Totaltypes[$alias]['class'];
   }
 
   public function enableCheckingError() {

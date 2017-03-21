@@ -85,7 +85,7 @@ class CheckoutController extends Controller
 
       $order = Service::loadModel('Order');
 
-      $saved = $order
+      $order
       ->fill(array(
         'invoice_prefix' => $order->getInvoicePrefix(),
         'invoice_number' => $order->getInvoiceNumber($shopId),
@@ -113,11 +113,22 @@ class CheckoutController extends Controller
             'first' => true
           ));
 
-          $shipping = array(
-            'free_shipping' => $productShipping->free_shipping,
-            'shipping_cost' => $productShipping->shipping_cost,
-            'product_shipping_amount_type_id' => $productShipping->product_shipping_amount_type_id
-          );
+          if($productShipping->free_shipping || $productShipping->checkFreeShippingCondition($_product,$product['quantity'])) {
+            $shipping = array(
+              'free_shipping' => 1
+            );
+          }else{
+            $shipping = array(
+              'shipping_cost' => $productShipping->calShippingCost($_product,$product['quantity'])
+            );
+          }
+
+          // $shipping = array(
+          //   // 'free_shipping' => $productShipping->free_shipping,
+          //   // 'shipping_cost' => $productShipping->calShippingCost($_product,$product['quantity'])
+          //   // 'shipping_cost' => $productShipping->shipping_cost,
+          //   // 'product_shipping_amount_type_id' => $productShipping->product_shipping_amount_type_id
+          // );
 
         }
 

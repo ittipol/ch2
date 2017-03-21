@@ -327,27 +327,7 @@ class Product extends Model
       $shippingCalculateFrom = 'คำนวนค่าส่งสินค้าจากผู้ขาย';
     }
 
-    $shipping = $this->getRelatedData('ProductShipping',array(
-      'first' => true
-    ));
-
-    $shippingCost = '';
-    $productShippingAmountType = '';
-    $freeShippingMessage = '';
-    if(!empty($shipping)) {
-      $shippingCost = $shipping->getShippingCostText(true);
-
-      if(!empty($shipping->product_shipping_amount_type_id)) {
-        $productShippingAmountType = $shipping->productShippingAmountType->name;
-      }
-
-      if(!empty($shipping->free_shipping_with_condition)) {
-        $freeShippingMessage = $shipping->getFreeShippingWithConditionText($this);
-      }
-
-    }
-
-    return array(
+    return array_merge(array(
       'id' => $this->id,
       'name' => $this->name,
       'description' => !empty($this->description) ? $this->description : '-',
@@ -360,9 +340,6 @@ class Product extends Model
       'specifications' => $specifications,
       'shipping_calculate_from' => $this->shipping_calculate_from,
       '_shipping_calculate_from' => $shippingCalculateFrom,
-      'shippingCost' => $shippingCost,
-      'shippingCostAppendText' => $productShippingAmountType,
-      'freeShippingMessage' => $freeShippingMessage,
       'active' => $this->active,
       '_active' => $this->active ? 'เปิดการขายสินค้า' : 'ปิดการขาย',
       '_categoryName' => !empty($categoryName) ? $categoryName : '-',
@@ -370,7 +347,7 @@ class Product extends Model
       '_categoryPaths' => $this->getCategoryPaths(),
       'promotion' => $this->getPromotion(),
       'flag' => $this->getFlag(),
-    );
+    ),$this->getShippingCostText());
 
   }
 
@@ -391,6 +368,36 @@ class Product extends Model
       'flag' => $this->getFlag(),
     );
     
+  }
+
+  public function getShippingCostText() {
+
+    $shipping = $this->getRelatedData('ProductShipping',array(
+      'first' => true
+    ));
+
+    $shippingCostText = '';
+    $productShippingAmountType = '';
+    $freeShippingMessage = '';
+    if(!empty($shipping)) {
+      $shippingCostText = $shipping->getShippingCostText(true);
+
+      if(!empty($shipping->product_shipping_amount_type_id)) {
+        $productShippingAmountType = $shipping->productShippingAmountType->name;
+      }
+
+      if(!empty($shipping->free_shipping_with_condition)) {
+        $freeShippingMessage = $shipping->getFreeShippingWithConditionText($this);
+      }
+
+    }
+
+    return array(
+      'shippingCostText' => $shippingCostText,
+      'shippingCostAppendText' => $productShippingAmountType,
+      'freeShippingMessage' => $freeShippingMessage,
+    );
+
   }
 
   public function getFlag() {

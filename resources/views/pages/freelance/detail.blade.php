@@ -25,15 +25,27 @@
     <div class="row">
 
       <div class="col-sm-12 image-gallary-display">
+
+        <div class="image-description">
+         <div class="image-description-inner">
+          <div id="image_description"></div>
+         </div>
+         <div class="close-image-description-icon"></div>
+         <div class="image-description-pagination clearfix">
+            <div id="prev_image_description" class="prev-image-description-icon pull-left"></div>
+            <div class="pull-left">
+              <span id="current_image_description" class="current-page-number"></span>
+              <span>/</span>
+              <span id="total_image_description" class="total-page-number"></span>
+            </div class="pull-left">
+            <div id="next_image_description" class="next-image-description-icon pull-left"></div>
+          </div>
+        </div>
+        
         <div class="image-gallary-display-inner">
 
           <div class="image-gallary-panel">
             <img id="image_display">
-          </div>
-
-          <div class="image-description">
-           <div id="image_description" class="image-description-inner"></div>
-           <div class="close-image-description-icon"></div>
           </div>
 
           <div class="display-image-description-icon additional-option icon">

@@ -94,13 +94,15 @@ class GlobalCart {
 	    	_this.cartUpdate();
 	    	// update in cart page
 	    	$('#_product_'+productId).find('.product-total-amount').text(response.productTotal);
+	    	$('#_product_'+productId).find('.product-shipping-cost-amount').text(response.shippingCostTotal);
 	    	$('#_product_'+productId).find('.error-message').remove();
 
 	    	let parent = $('#_product_'+productId).parent().parent();
 
-	    	parent.find('.sub-total').text(response.summaries.subTotal.value);
-	    	parent.find('.shipping-cost').text(response.summaries.shippingCost.value);
-	    	parent.find('.total-amount').text(response.summaries.total.value);
+	    	parent.find('.sub-total > .amount').text(response.summaries.subTotal.value);
+	    	parent.find('.shipping-cost > .amount').text(response.summaries.shippingCost.value);
+	    	parent.find('.saving-price > .amount').text(response.summaries.savingPrice.value);
+	    	parent.find('.total-amount > .amount').text(response.summaries.total.value);
 
 	    	setTimeout(function(){
 	    		const notificationBottom = new NotificationBottom('สินค้า '+quantity+' ชิ้น ได้ถูกบันทึกไปยังตะกร้าสินค้าของคุณ','','success');
@@ -219,7 +221,6 @@ class GlobalCart {
 	  request.done(function (response, textStatus, jqXHR){
 
 	    if(response.success) {
-
 	    	// update product count
 	    	_this.productCountUpdate();
 
@@ -237,7 +238,6 @@ class GlobalCart {
 
 	    	}else if(response.totalShopProductEmpty) {
 
-	    		// let parent = $('#_product_'+productId).parent().parent();
 	    		let parent = $('#'+$('#_product_'+productId).data('id'));
 
 	    		setTimeout(function(){
@@ -256,9 +256,10 @@ class GlobalCart {
 	    		// let parent = $('#_product_'+productId).parent().parent();
 	    		let parent = $('#'+$('#_product_'+productId).data('id'));
 	    
-	    		parent.find('.sub-total').text(response.summaries.subTotal.value);
-	    		parent.find('.shipping-cost').text(response.summaries.shippingCost.value);
-	    		parent.find('.total-amount').text(response.summaries.total.value);
+	    		parent.find('.sub-total > .amount').text(response.summaries.subTotal.value);
+	    		parent.find('.shipping-cost > .amount').text(response.summaries.shippingCost.value);
+	    		parent.find('.saving-price > .amount').text(response.summaries.savingPrice.value);
+	    		parent.find('.total-amount > .amount').text(response.summaries.total.value);
 
 	    		setTimeout(function(){
 	    			$(obj).parent().remove();	

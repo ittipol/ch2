@@ -366,20 +366,6 @@
 	/*margin-top: 20px;*/
 }
 
-.pin-message {
-	color: #fff;
-	background-color: #C62828;
-}
-
-.pin-message .pin-message-primary-info {
-	padding: 20px;
-}
-
-.pin-message .pin-message-secondary-info {
-	/*padding: 10px;*/
-	background-color: #E53935;
-}
-
 .order-progress-bar {
 	margin: 30px 0 0;
 	width: 100%;

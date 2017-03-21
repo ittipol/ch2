@@ -41,6 +41,7 @@ class CartController extends Controller
       $result = array(
         'success' => $updated,
         'productTotal' => $cartModel->getProductTotal($product,$quantity,true),
+        'shippingCostTotal' => $cartModel->getProductShippingCost($product,$quantity,true),
         'summaries' => $cartModel->getSummary($cartModel->getShopId($productId))
       );
     }

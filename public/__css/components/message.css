@@ -9,6 +9,11 @@
 	background-color: #E3F2FD;
 }
 
+.secondary-message-box.success {
+	color: #2E7D32;
+	background-color: #C8E6C9;
+}
+
 .secondary-message-box h3 {
 	margin: 10px 0;
 }

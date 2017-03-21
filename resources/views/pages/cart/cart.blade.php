@@ -52,7 +52,16 @@
                     </div>
 
                     <div class="col-md-2 col-xs-12 product-info-container">
-                      <div class="product-price product-text">{{$product['price']}}</div>
+                      <div>
+                        ราคาสินค้า:
+                        <br>
+                        <strong><span class="product-price product-text">{{$product['price']}}</span></strong>
+                      </div>
+                      <div>
+                        ค่าจัดส่งสินค้า:
+                        <br>
+                        <strong><span class="product-shipping-cost-amount">{{$product['shippingCost']}}</span></strong>
+                      </div>
                     </div>
 
                     <div class="col-md-4 col-xs-12 product-info-container">
@@ -73,7 +82,11 @@
                     </div>
 
                     <div class="col-md-2 col-xs-12 product-info-container">
-                      <div class="product-total-amount product-text">{{$product['total']}}</div>
+                      <div>
+                        มูลค่าสินค้า:
+                        <br>
+                        <strong><span class="product-total-amount product-text">{{$product['total']}}</span></strong>
+                      </div>
                     </div>
 
                   </div>
@@ -90,15 +103,11 @@
 
               <div class="pull-right">
 
-                <div class="text-right">
-                  <h5 class="sub-total">มูลค่าสินค้า: <span class="amount">{{$value['summaries']['subTotal']['value']}}</span></h5>
-                </div>
-                <div class="text-right">
-                  <h5 class="shipping-cost">ค่าจัดส่งสินค้า: <span class="amount">{{$value['summaries']['shippingCost']['value']}}</span></h5>
-                </div>
-                <div class="text-right">
-                  <h5 class="total-amount">ยอดสุทธิ: <span class="amount">{{$value['summaries']['total']['value']}}</span></h5>
-                </div>
+                @foreach($value['summaries'] as $summary)
+                  <div class="text-right">
+                    <h5 class="{{$summary['class']}}">{{$summary['title']}}: <span class="amount">{{$summary['value']}}</span></h5>
+                  </div>
+                @endforeach
 
               </div>
 

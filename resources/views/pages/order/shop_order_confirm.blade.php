@@ -262,7 +262,7 @@
     </div>
 
   </div>
-
+รายละเอียดการคิดค่าขนส่นของการสั่งซื้อ
   <div class="space-top-30">
     <h4 class="required">วิธีการชำระเงิน</h4>
     <div class="line"></div>
