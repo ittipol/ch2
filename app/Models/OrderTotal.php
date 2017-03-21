@@ -49,13 +49,13 @@ class OrderTotal extends Model
 
   public function buildModelData() {
 
+    $cart = new Cart;
     $currency = new Currency;
 
     return array(
-      'alias' => $this->alias,
-      '_class' => $this->getClass($this->alias),
-      '_title' => $this->getTitle($this->alias),
-      '_value' => $currency->format($this->value),
+      'class' => $cart->getClass($this->alias),
+      'title' => $cart->getTitle($this->alias),
+      'value' => $currency->format($this->value),
     );
 
   }

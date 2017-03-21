@@ -109,6 +109,7 @@ class CheckoutController extends Controller
 
         $shipping = array();
         if($_product->shipping_calculate_from == 2) {
+
           $productShipping = $_product->getRelatedData('ProductShipping',array(
             'first' => true
           ));
@@ -139,7 +140,6 @@ class CheckoutController extends Controller
           'price' => $_product->getPrice(),
           'quantity' => $product['quantity'],
           'total' => $cartModel->getProductTotal($_product,$product['quantity']),
-          'shipping_calculate_from' => $_product->shipping_calculate_from,
         ),$shipping);
 
         $orderProductModel

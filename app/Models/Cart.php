@@ -14,7 +14,7 @@ class Cart extends Model
 
   private $checkError = true;
 
-  private $Totaltypes = array(
+  protected $Totaltypes = array(
     'subTotal' => array(
       'title' => 'มูลค่าสินค้า',
       'class' => 'sub-total'
@@ -362,6 +362,7 @@ class Cart extends Model
 
     $error = $this->checkProductError($product,$quantity);
 
+    $freeShipping = false;
     $shippingCost = 0;
 
     if(!$error['hasError']) {
@@ -372,7 +373,6 @@ class Cart extends Model
           'first' => true
         ));
 
-        $freeShipping = false;
         $shippingCost = 0;
         if($shipping->free_shipping || $shipping->checkFreeShippingCondition($product,$quantity)) {
           $freeShipping = true;

@@ -123,8 +123,6 @@
         </label>
       </div>
 
-      <!-- <div class="line space-bottom-20"></div> -->
-
       <h4>กำหนดค่าจัดส่งของการสั่งซื้อนี้</h4>
       <p class="notice info">เว้นว่างเมื่อไม่ต้องการกำหนดค่าจัดส่งของการสั่งซื้อนี้</p>
       <?php
@@ -140,27 +138,78 @@
 
       <h4>กำหนดค่าจัดส่งของสินค้าแต่ละรายการ</h4>
 
-      <!-- <div class="secondary-message-box">
-        <div>* เมื่อเลือกตัวเลือก "กำหนดค่าจัดส่งของสินค้าแต่ละรายการ" จะเป็นการยกเลิกการกำหนดค่าจัดส่งของสินค้าทุกรายการและจำนวนค่าจัดส่งสินค้าจะถูกปรับเป็น 0</div>
-      </div> -->
-
       <label class="choice-box">
         <?php
           echo Form::checkbox('cancel_product_shipping_cost', 1, null, array(
             'id' => 'cancel_product_shipping_cost'
           ));
         ?> 
-        <div class="inner">ยกเลิกค่าจัดส่งทั้งหมดของสินค้าแต่ละรายการ</div>
+        <div class="inner">ยกเลิกการคิดค่าจัดส่งของสินค้าแต่ละรายการทั้งหมด</div>
       </label>
 
-      @if($checkHasProductHasShippingCost)
-      <h4>รายการสินค้าที่คิดค่าจัดส่งแล้ว</h4>
-      <div class="row">
+      @if($hasProductHasShippingCost)
 
-        @foreach($orderProducts as $orderProduct)
+      <h4>สินค้าที่คิดค่าจัดส่งแล้ว</h4>
+      <div class="product-shipping-cost-input-section">
+        <div class="row">
+          @foreach($orderProducts as $orderProduct)
 
-          @if($orderProduct['shipping_calculate_from'] == 2)
+            @if(($orderProduct['free_shipping'] != null) || ($orderProduct['shipping_cost'] != null))
 
+              <div class="col-md-6 col-xs-12">
+                <div class="shipping-cost-input-box clearfix">
+                  <div>
+                    <h5><strong>{{$orderProduct['product_name']}}</strong></h5>
+                  </div>
+
+                  <div class="clearfix">
+
+                    <div class="text-center pull-left">
+                      <img src="{{$orderProduct['imageUrl']}}">
+                    </div>
+
+                    <div class="col-xs-8">
+
+                      <?php
+                        echo Form::text('products['.$orderProduct['product_id'].'][shipping_cost]', $orderProduct['shipping_cost'], array(
+                          'class' => 'shipping-cost-input shipping_cost_product_input',
+                          'placeholder' => 'ค่าจัดส่งสินค้า',
+                          'autocomplete' => 'off',
+                          // 'role' => 'currency'
+                        ));
+                      ?>
+                      <br/>
+                      <label class="choice-box">
+                        <?php
+                          echo Form::checkbox('products['.$orderProduct['product_id'].'][free_shipping]', 1, $orderProduct['free_shipping'], array(
+                            'class' => 'free_shipping_chkbox'
+                          ));
+                        ?> 
+                        <div class="inner">จัดส่งฟรี</div>
+                      </label>
+
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+
+            @endif
+
+          @endforeach
+        </div>
+      </div>
+      @endif
+
+      @if($hasProductNotSetShippingCost)
+
+      <h4>สินค้ายังไม่ถูกคิดค่าจัดส่ง</h4>
+      <div class="product-shipping-cost-input-section">
+        <div class="row">
+          @foreach($orderProducts as $orderProduct)
+
+            @if(($orderProduct['free_shipping'] == null) && ($orderProduct['shipping_cost'] == null))
             <div class="col-md-6 col-xs-12">
               <div class="shipping-cost-input-box clearfix">
                 <div>
@@ -180,7 +229,7 @@
                         'class' => 'shipping-cost-input shipping_cost_product_input',
                         'placeholder' => 'ค่าจัดส่งสินค้า',
                         'autocomplete' => 'off',
-                        // 'role' => 'currency'
+                        'role' => 'currency'
                       ));
                     ?>
                     <br/>
@@ -199,89 +248,48 @@
 
               </div>
             </div>
+            @endif
 
-          @endif
-
-        @endforeach
-
-      </div>
-      @endif
-
-      @if($checkHasProductNotSetShippingCost)
-      <h4>รายการสินค้ายังไม่ถูกคิดค่าจัดส่ง</h4>
-      <div class="row">
-
-        @foreach($orderProducts as $orderProduct)
-
-          @if(($orderProduct['shipping_calculate_from'] == 1))
-          <div class="col-md-6 col-xs-12">
-            <div class="shipping-cost-input-box clearfix">
-              <div>
-                <h5><strong>{{$orderProduct['product_name']}}</strong></h5>
-              </div>
-
-              <div class="clearfix">
-
-                <div class="text-center pull-left">
-                  <img src="{{$orderProduct['imageUrl']}}">
-                </div>
-
-                <div class="col-xs-8">
-
-                  <?php
-                    echo Form::text('products['.$orderProduct['product_id'].'][shipping_cost]', $orderProduct['shipping_cost'], array(
-                      'class' => 'shipping-cost-input shipping_cost_product_input',
-                      'placeholder' => 'ค่าจัดส่งสินค้า',
-                      'autocomplete' => 'off',
-                      'role' => 'currency'
-                    ));
-                  ?>
-                  <br/>
-                  <label class="choice-box">
-                    <?php
-                      echo Form::checkbox('products['.$orderProduct['product_id'].'][free_shipping]', 1, $orderProduct['free_shipping'], array(
-                        'class' => 'free_shipping_chkbox'
-                      ));
-                    ?> 
-                    <div class="inner">จัดส่งฟรี</div>
-                  </label>
-
-                </div>
-
-              </div>
-
-            </div>
-          </div>
-          @endif
-
-        @endforeach
-
+          @endforeach
+        </div>
       </div>
       @endif
 
     </div>
 
   </div>
-รายละเอียดการคิดค่าขนส่นของการสั่งซื้อ
+
+  <div class="space-top-30">
+    <h4>รายละเอียดค่าจัดส่นสินค้า</h4>
+    <p class="notice info">*** ข้อมูลนี้จะไม่แสดงถ้าหากไม่มีการกรอกรายละเอียด</p>
+    <?php 
+      echo Form::textarea('shipping_cost_detail', null, array(
+        'class' => 'ckeditor'
+      ));
+    ?>
+  </div>
+
   <div class="space-top-30">
     <h4 class="required">วิธีการชำระเงิน</h4>
     <div class="line"></div>
 
     <div class="secondary-message-box info">
-      <h3>กำหนดวิธีการชำระเงินของคุณให้กับการสั่งซื้อนี้</h3>
+      <h3>กำหนดวิธีการชำระเงินของการสั่งซื้อนี้</h3>
       <p>กรุณาเลือกวิธีการชำระเงินอย่างน้อย 1 วิธีให้กับการสั่งซื้อนี้</p>
     </div>
 
-    @foreach ($paymentMethods as $id => $name)
-    <div>
-      <label class="choice-box">
-        <?php
-          echo Form::checkbox('payment_method[]', $id);
-        ?> 
-        <div class="inner"><?php echo $name; ?></div>
-      </label>
+    <div class="payment-method-input-section">
+      @foreach ($paymentMethods as $id => $name)
+      <div>
+        <label class="choice-box">
+          <?php
+            echo Form::checkbox('payment_method[]', $id);
+          ?> 
+          <div class="inner"><?php echo $name; ?></div>
+        </label>
+      </div>
+      @endforeach
     </div>
-    @endforeach
 
   </div>
 
@@ -296,7 +304,7 @@
 
   <div class="secondary-message-box space-top-30">
     <div>* จะไม่สามารถแก้ไขได้หลังจากยืนยันการสั่งซื้อ</div>
-    <div>* โปรดตรวจสอบความถูกต้องก่อนการยืนยันการสั่งซื้</div>
+    <div>* โปรดตรวจสอบความถูกต้องก่อนการยืนยันการสั่งซื้อ</div>
   </div>
 
   <?php
@@ -318,6 +326,17 @@
     constructor() {}
 
     load() {
+
+      if($('#free_order_shipping').is(':checked')) {
+        $('#cancel_product_shipping_cost').prop('disabled', true);
+
+        $('.shipping_cost_order_input').prop('disabled', true);
+        $('.shipping_cost_product_input').prop('disabled', true);
+        $('.free_shipping_chkbox').prop('disabled', true);
+      }else if($('#cancel_product_shipping_cost').is(':checked')) {
+        $('.shipping_cost_product_input').prop('disabled', true);
+        $('.free_shipping_chkbox').prop('disabled', true);
+      }
 
       $('.free_shipping_chkbox').each(function(i, obj) {
         if($(this).is(':checked')) {

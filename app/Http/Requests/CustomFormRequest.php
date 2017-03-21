@@ -106,6 +106,17 @@ class CustomFormRequest extends FormRequest
    */
   public function authorize()
   {
+
+    // if($this->hasError) {
+    //   return redirect()->to($this->getRedirectUrl())
+    //                       ->withInput($request->input())
+    //                       ->withErrors($errors, $this->errorBag());
+
+    //   return redirect()->back()
+    //                       ->withInput($request->input())
+    //                       ->withErrors($errors, $this->errorBag());
+    // }
+
     return !$this->hasError;
     // return Auth::check();
   }

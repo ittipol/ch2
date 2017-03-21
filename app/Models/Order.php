@@ -10,31 +10,31 @@ use App\library\date;
 class Order extends Model
 {
   protected $table = 'orders';
-  protected $fillable = ['invoice_prefix','invoice_number','shop_id','person_id','person_name','shipping_address','payment_detail','message_to_seller','order_status_id','order_free_shipping','order_shipping_cost'];
+  protected $fillable = ['invoice_prefix','invoice_number','shop_id','person_id','person_name','shipping_address','payment_detail','message_to_seller','order_status_id','order_free_shipping','order_shipping_cost','shipping_cost_detail'];
   protected $modelRelations = array('OrderProduct','OrderTotal','PaymentMethodToOrder');
 
   public $formHelper = true;
   public $modelData = true;
   public $paginator = true;
 
-  private $Totaltypes = array(
-    'subTotal' => array(
-      'title' => 'มูลค่าสินค้า',
-      'class' => 'sub-total'
-    ),
-    'shippingCost' => array(
-      'title' => 'ค่าจัดส่งสินค้า',
-      'class' => 'shipping-cost'
-    ),
-    'savingPrice' => array(
-      'title' => 'ประหยัด',
-      'class' => 'saving-price'
-    ),
-    'total' => array(
-      'title' => 'ยอดสุทธิ',
-      'class' => 'total-amount'
-    )
-  );
+  // private $Totaltypes = array(
+  //   'subTotal' => array(
+  //     'title' => 'มูลค่าสินค้า',
+  //     'class' => 'sub-total'
+  //   ),
+  //   'shippingCost' => array(
+  //     'title' => 'ค่าจัดส่งสินค้า',
+  //     'class' => 'shipping-cost'
+  //   ),
+  //   'savingPrice' => array(
+  //     'title' => 'ประหยัด',
+  //     'class' => 'saving-price'
+  //   ),
+  //   'total' => array(
+  //     'title' => 'ยอดสุทธิ',
+  //     'class' => 'total-amount'
+  //   )
+  // );
 
   public function orderStatus() {
     return $this->hasOne('App\Models\OrderStatus','id','order_status_id');
@@ -95,7 +95,11 @@ class Order extends Model
   }
 
   public function orderTotals() {
-    $orderTotals = $this->getRelatedData('OrderTotal');
+    $orderTotals = $this->getRelatedData('OrderTotal',array(
+      'conditions' => array(
+        array('alias','!=','savingPrice')
+      )
+    ));
 
     $_orderTotals = array();
     foreach ($orderTotals as $orderTotal) {
@@ -181,25 +185,27 @@ class Order extends Model
     return $count;
   }
 
-  public function getTitle($alias) {
+  // public function getTitle($alias) {
 
-    if(empty($this->Totaltypes[$alias]['title'])) {
-      return null;
-    }
+  //   if(empty($this->Totaltypes[$alias]['title'])) {
+  //     return null;
+  //   }
 
-    return $this->Totaltypes[$alias]['title'];
-  }
+  //   return $this->Totaltypes[$alias]['title'];
+  // }
 
-  public function getClass($alias) {
+  // public function getClass($alias) {
 
-    if(empty($this->Totaltypes[$alias]['class'])) {
-      return null;
-    }
+  //   if(empty($this->Totaltypes[$alias]['class'])) {
+  //     return null;
+  //   }
 
-    return $this->Totaltypes[$alias]['class'];
-  }
+  //   return $this->Totaltypes[$alias]['class'];
+  // }
 
   public function getSummary($format = false) {
+
+    $cart = new Cart;
 
     $summaries = array(
       'subTotal' => 'getOrderSubTotal',
@@ -214,8 +220,8 @@ class Order extends Model
     foreach ($summaries as $alias => $fx) {
       $_summaries[$alias] = array(
         'value' => $this->{$fx}($orderProducts,$format),
-        'title' => $this->getTitle($alias),
-        'class' => $this->getClass($alias),
+        'title' => $cart->getTitle($alias),
+        'class' => $cart->getClass($alias),
       );
     }
 
@@ -280,31 +286,32 @@ class Order extends Model
   }
 
   public function checkHasProductNotSetShippingCost() {
-    return OrderProduct::where([
-      ['order_id','=',$this->id],
-      ['shipping_calculate_from','=',1],
-      ['shipping_cost','=',null]
-    ])->exists();
+    return OrderProduct::where('order_id','=',$this->id)
+    ->whereNull('free_shipping')
+    ->whereNull('shipping_cost')
+    ->exists();
   }
 
   public function checkHasProductHasShippingCost() {
-    return OrderProduct::where([
-      ['order_id','=',$this->id],
-      ['shipping_calculate_from','=',2]
-    ])->exists();
+    return OrderProduct::where('order_id','=',$this->id)
+    ->where(function($query) {
+      $query->whereNotNull('free_shipping')
+            ->orWhereNotNull('shipping_cost');
+    })
+    ->exists();
   }
 
-  public function checkHasAllProductNotSetShippingCost() {
+  public function checkAllProductsHaveShippingCost() {
 
     $total = OrderProduct::where([
       ['order_id','=',$this->id]
     ])->count();
 
-    $totalProductNotSetShippingCost = OrderProduct::where([
-      ['order_id','=',$this->id],
-      ['shipping_calculate_from','=',1],
-      ['shipping_cost','=',null]
-    ])->count();
+    $totalProductNotSetShippingCost = OrderProduct::where('order_id','=',$this->id)
+    ->where(function($query) {
+      $query->whereNotNull('free_shipping')
+            ->orWhereNotNull('shipping_cost');
+    })->count();
 
     if($total == $totalProductNotSetShippingCost) {
       return true;

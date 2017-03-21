@@ -32,8 +32,8 @@ class OrderController extends Controller
 
     $this->setData('order',$model->modelData->build(true));
     $this->setData('orderProducts',$model->getOrderProducts());
-    $this->setData('orderTotals',$model->getSummary(true));
-    // $this->setData('orderTotals',$model->orderTotals());
+    // $this->setData('orderTotals',$model->getSummary(true));
+    $this->setData('orderTotals',$model->orderTotals());
 
     $this->setData('orderStatuses',$model->getOrderStatuses());
     $this->setData('percent',$model->getOrderProgress());
@@ -86,8 +86,8 @@ class OrderController extends Controller
 
     $this->setData('order',$model->modelData->build(true));
     $this->setData('orderProducts',$model->getOrderProducts());
-    $this->setData('orderTotals',$model->getSummary(true));
-    // $this->setData('orderTotals',$model->orderTotals());
+    // $this->setData('orderTotals',$model->getSummary(true));
+    $this->setData('orderTotals',$model->orderTotals());
 
     if($model->order_status_id == 1) {
       $this->setData('orderConfirmUrl',request()->get('shopUrl').'order/confirm/'.$model->id);
@@ -140,11 +140,11 @@ class OrderController extends Controller
 
     $this->setData('order',$model->modelData->build(true));
     $this->setData('orderProducts',$model->getOrderProducts());
-    $this->setData('orderTotals',$model->getSummary(true));
-    // $this->setData('orderTotals',$model->orderTotals());
+    // $this->setData('orderTotals',$model->getSummary(true));
+    $this->setData('orderTotals',$model->orderTotals());
 
-    $this->setData('checkHasProductNotSetShippingCost',$model->checkHasProductNotSetShippingCost());
-    $this->setData('checkHasProductHasShippingCost',$model->checkHasProductHasShippingCost());
+    $this->setData('hasProductNotSetShippingCost',$model->checkHasProductNotSetShippingCost());
+    $this->setData('hasProductHasShippingCost',$model->checkHasProductHasShippingCost());
 
     $this->setData('paymentMethods',$_paymentMethods);
 
@@ -166,7 +166,10 @@ class OrderController extends Controller
 
     $validation = new Validation;
 
-    // dd(request()->all());
+    // check has payment_method
+    if(empty(request()->get('payment_method'))) {
+      return Redirect::back()->withErrors(['กรุณาเลือกวิธีการชำระเงินอย่างน้อย 1 วิธีให้กับการสั่งซื้อนี้'])->withInput(request()->all());
+    }
 
     if(request()->get('order_shipping') == 2) {
       // free shipping
@@ -179,10 +182,8 @@ class OrderController extends Controller
       ->get();
 
       foreach ($orderProducts as $orderProduct) {
-        $orderProduct->shipping_calculate_from = 1;
         $orderProduct->free_shipping = 1;
         $orderProduct->shipping_cost = null;
-        $orderProduct->product_shipping_amount_type_id = null;
         $orderProduct->save();
       }
 
@@ -193,18 +194,21 @@ class OrderController extends Controller
 
       // Validation
       if(!empty($orderShippingCost) && !$validation->isCurrency($orderShippingCost)) {
-        return Redirect::back()->withErrors(['จำนวนค่าจัดส่งสินค้าไม่ถูกต้อง']);
+        return Redirect::back()->withErrors(['จำนวนค่าจัดส่งสินค้าไม่ถูกต้อง'])->withInput(request()->all());
       }
 
       foreach ($products as $product) {
         if(empty($product['free_shipping']) && empty($product['shipping_cost'])) {
-          return Redirect::back()->withErrors(['พบข้อมูลไม่ครบถ้วน']);
+          return Redirect::back()->withErrors(['พบข้อมูลไม่ครบถ้วน'])->withInput(request()->all());
         }
 
         if(!empty($product['shipping_cost']) && !$validation->isCurrency($product['shipping_cost'])) {
-          return Redirect::back()->withErrors(['จำนวนค่าจัดส่งสินค้าไม่ถูกต้อง']);
+          return Redirect::back()->withErrors(['จำนวนค่าจัดส่งสินค้าไม่ถูกต้อง'])->withInput(request()->all());
         }
       }
+      // ###
+
+      dd(request()->all());
 
       if(!empty($orderShippingCost)) {
         $model->order_free_shipping = null;
@@ -213,16 +217,14 @@ class OrderController extends Controller
       }
 
       if(!empty(request()->get('cancel_product_shipping_cost')) && (request()->get('cancel_product_shipping_cost') == 1)) {
-
+        // cancel all
         $orderProducts = Service::loadModel('OrderProduct')
         ->where('order_id','=',$model->id)
         ->get();
 
         foreach ($orderProducts as $orderProduct) {
-          $orderProduct->shipping_calculate_from = 1;
           $orderProduct->free_shipping = null;
           $orderProduct->shipping_cost = 0;
-          $orderProduct->product_shipping_amount_type_id = null;
           $orderProduct->save();
         
         }
@@ -239,8 +241,7 @@ class OrderController extends Controller
           ])
           ->first();
 
-          $orderProducts->shipping_calculate_from = 1;
-          $orderProducts->product_shipping_amount_type_id = null;
+          $orderProducts->has_shipping_cost = 1;
 
           if(!empty($product['free_shipping'])) {
             $orderProducts->free_shipping = 1;
@@ -260,8 +261,6 @@ class OrderController extends Controller
       }
 
     }
-
-    dd('exit');
 
     // cal totals
     $orderTotalModel = Service::loadModel('OrderTotal');
