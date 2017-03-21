@@ -1,8 +1,6 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
-
 <div class="container">
 
   <div class="container-header">

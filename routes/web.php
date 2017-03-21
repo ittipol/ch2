@@ -171,6 +171,9 @@ Route::group(['middleware' => 'auth'], function () {
 // Order
 Route::group(['middleware' => 'auth'], function () {
   Route::get('account/order/{id}', 'OrderController@detail')->name('account.order.detail');
+  
+  Route::get('order/payment/confirm/{id}', 'orderController@paymentConfirm')->name('account.order.payment_confirm');
+   Route::post('order/payment/confirm/{id}', 'orderController@paymentConfirmSubmit')->name('account.order.payment_confirm');
 });
 
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {

@@ -103,7 +103,7 @@ class Order extends Model
 
     $_orderTotals = array();
     foreach ($orderTotals as $orderTotal) {
-      $_orderTotals[] = $orderTotal->buildModelData();
+      $_orderTotals[$orderTotal->alias] = $orderTotal->buildModelData();
     }
 
     return $_orderTotals;

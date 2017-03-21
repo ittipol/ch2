@@ -5,7 +5,7 @@
   <div class="container">
     <div class="top-header">
       <div class="detail-title">
-        <h2 class="title">เลขที่การสั่งซื้อ {{$order['id']}}</h2>
+        <h2 class="title">เลขที่การสั่งซื้อ {{$order['invoice_number']}}</h2>
       </div>
     </div>
   </div>
@@ -22,19 +22,63 @@
   @endif
 
   @if($order['order_status_id'] == 2)
-    <div>
-      ผู้ขายยืนยันการสั่งซื้อแล้ว
+    <div class="secondary-message-box success">
+      <h3>ผู้ขายยืนยันการสั่งซื้อแล้ว</h3>
+      <p>*** การสั่งซื้อนี้สามารถชำระเงินได้แล้ว</p>
     </div>
+
+    <div class="secondary-message-box info space-bottom-30">
+      <div class="list-empty-message text-center">
+        <img class="space-bottom-20" src="/images/common/payment.png">
+        <div>
+          <h3>จำนวนเงินที่ต้องชำระ {{$orderTotals['total']['value']}}</h3>
+          <p>โปรดชำระเงินตามจำนวนที่ได้ระบุไว้</p>
+          <a href="{{URL::to($paymentConfirmUrl)}}" class="button">ยืนยันการชำระเงิน</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 space-bottom-30">
+
+        <div class="detail-info-section no-margin">
+          <h4>วิธีการชำระเงินของการสั่งซื้อนี้</h4>
+          <div class="line"></div>
+
+          <div class="list-h">
+            @foreach($paymentMethods as $paymentMethod)
+            <div class="list-h-item clearfix">
+
+              <div class="list-image pull-left">
+                <a href="{{$paymentMethod['url']}}">
+                  <img src="/images/icons/payment-white.png">
+                </a>
+              </div>
+
+              <div class="col-md-11 col-xs-8">
+
+                <div class="row">
+
+                  <div class="col-xs-12 list-content">
+                    <a href="{{$paymentMethod['url']}}">
+                      <h4 class="primary-info single-info">{{$paymentMethod['name']}}</h4>
+                    </a>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+            @endforeach
+          </div>
+          
+        </div>
+
+      </div>
+    </div>
+
   @endif
-
-  <div class="secondary-message-box success space-bottom-30">
-    <h3>ผู้ขายยืนยันการสั่งซื้อแล้ว</h3>
-  </div>
-
-  <div>
-    <h5>จำนวนเงินที่ต้องชำระ {{$orderTotals['total']['value']}}</h5>
-    <a href="" class="button">ยืนยันการชำระเงิน</a>
-  </div>
 
   <div class="row">
 
@@ -142,17 +186,6 @@
 
     </div>
 
-    <div class="col-md-8 col-sm-12 space-top-30">
-
-      <div class="detail-info-section no-margin">
-          <h4>รายละเอียดและวิธีการชำระเงิน</h4>
-          <div class="line"></div> 
-          <div class="detail-info">
-            ยังไม่มีรายละเอียดและวิธีการชำระเงิน
-          </div>
-      </div>
-
-    </div>
   </div>
 
   <div class="cart space-top-30">

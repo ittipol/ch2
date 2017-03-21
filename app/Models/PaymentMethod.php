@@ -27,5 +27,30 @@ class PaymentMethod extends Model
       'name.required' => 'ชื่อวิธีการชำระเงินห้ามว่าง',
       'description.required' => 'รายละเอียดวิธีการชำระเงินห้ามว่าง',
     )
-  ); 
+  );
+
+  public function getPaymentMethod($shopId) {
+    return $this
+    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $this->getTable().'.id')
+    ->where([
+      ['shop_relate_to.model','like',$this->modelName],
+      ['shop_relate_to.shop_id','=',$shopId]
+    ])
+    ->select($this->getTable().'.id',$this->getTable().'.name')
+    ->orderBy($this->getTable().'.name','ASC')
+    ->get();
+  }
+
+  public function hasPaymentMethod($shopId) {
+    return $this
+    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $this->getTable().'.id')
+    ->where([
+      ['shop_relate_to.model','like',$this->modelName],
+      ['shop_relate_to.shop_id','=',$shopId]
+    ])
+    ->select($this->getTable().'.id',$this->getTable().'.name')
+    ->orderBy($this->getTable().'.name','ASC')
+    ->exists();
+  }
+
 }

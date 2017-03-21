@@ -4,6 +4,12 @@
 	background-color: #FFEBEE;
 }
 
+.secondary-message-box.desc {
+	padding: 15px;
+	color: #000;
+	background-color: transparent;
+}
+
 .secondary-message-box.info {
 	color: #1565C0;
 	background-color: #E3F2FD;
