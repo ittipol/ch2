@@ -267,7 +267,7 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
   Route::get('shop/{shopSlug}/payment_method','ShopController@paymentMethod')->name('shop.payment_method');
 
-  Route::get('shop/{shopSlug}/payment_method/{id}','PaymentMethodController@detail')->name('shop.payment_method.detail');
+  // Route::get('shop/{shopSlug}/payment_method/{id}','PaymentMethodController@detail')->name('shop.payment_method.detail');
 
   Route::get('shop/{shopSlug}/payment_method/add','PaymentMethodController@add')->name('shop.payment_method.add');
   Route::post('shop/{shopSlug}/payment_method/add','PaymentMethodController@addingSubmit')->name('shop.payment_method.add');
@@ -276,6 +276,25 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::patch('shop/{shopSlug}/payment_method/edit/{id}','PaymentMethodController@editingSubmit')->name('shop.payment_method.edit');
 
   Route::get('shop/{shopSlug}/payment_method/delete/{id}','PaymentMethodController@delete')->name('shop.payment_method.delete');
+
+});
+
+// Shipping Method
+Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
+
+  Route::get('shop/{shopSlug}/shipping_method','ShopController@ShippingMethod')->name('shop.shipping_method');
+
+  // Route::get('shop/{shopSlug}/shipping_method/{id}','ShippingMethodController@detail')->name('shop.shipping_method.detail');
+
+  Route::get('shop/{shopSlug}/shipping_method/add','ShippingMethodController@add')->name('shop.shipping_method.add');
+  Route::post('shop/{shopSlug}/shipping_method/add','ShippingMethodController@addingSubmit')->name('shop.shipping_method.add');
+
+  Route::get('shop/{shopSlug}/shipping_method/edit/{id}','ShippingMethodController@edit')->name('shop.shipping_method.edit');
+  Route::patch('shop/{shopSlug}/shipping_method/edit/{id}','ShippingMethodController@editingSubmit')->name('shop.shipping_method.edit');
+
+  Route::get('shop/{shopSlug}/shipping_method/delete/{id}','ShippingMethodController@delete')->name('shop.shipping_method.delete');
+
+  Route::patch('shop/{shopSlug}/allow_pickup_item','ShopController@allowPickupItem')->name('shop.shipping_method.edit');
 
 });
 

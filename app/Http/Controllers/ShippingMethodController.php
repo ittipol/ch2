@@ -8,55 +8,49 @@ use App\library\message;
 use App\library\url;
 use Redirect;
 
-class PaymentMethodController extends Controller
+class ShippingMethodController extends Controller
 {
-  public function detail() {
-
-    $model = Service::loadModel('PaymentMethod')->find($this->param['id']);
-
-    $model->modelData->loadData(array(
-      'models' => array('Image'),
-      'json' => array('Image')
-    ));
-
-    $this->data = $model->modelData->build();
-
-    $shop = request()->get('shop');
-    $this->setData('shop',$shop->modelData->build(true));
-    $this->setData('shopImageUrl',$shop->getProfileImageUrl());
-    $this->setData('shopCoverUrl',$shop->getCoverUrl());
-    $this->setData('shopUrl',request()->get('shopUrl'));
-
-    return $this->view('pages.payment_method.detail');
-    
-  }
-
   public function add() {
-    $model = Service::loadModel('PaymentMethod');
+    $model = Service::loadModel('ShippingMethod');
+
+    $model->formHelper->loadFieldData('ShippingService',array(
+      'key' =>'id',
+      'field' => 'name',
+      'index' => 'shippingServices',
+      'order' => array(
+        array('id','ASC')
+      )
+    ));
 
     $this->data = $model->formHelper->build();
 
-    return $this->view('pages.payment_method.form.payment_method_add');
+    return $this->view('pages.shipping_method.form.shipping_method_add');
   }
 
   public function addingSubmit(CustomFormRequest $request) {
-    $model = Service::loadModel('PaymentMethod');
+
+    $model = Service::loadModel('ShippingMethod');
 
     $request->request->add(['ShopRelateTo' => array('shop_id' => request()->get('shopId'))]);
 
     if($model->fill($request->all())->save()) {
-      Message::display('วิธีการชำระเงินถูกเพิ่มแล้ว','success');
-      return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
+      Message::display('วิธีการจัดส่งสินค้าถูกเพิ่มแล้ว','success');
+      return Redirect::to(route('shop.shipping_method', ['shopSlug' => request()->shopSlug]));
     }else{
       return Redirect::back();
     }
   }
 
   public function edit() {
-    $model = Service::loadModel('PaymentMethod')->find($this->param['id']);
+    $model = Service::loadModel('ShippingMethod')->find($this->param['id']);
 
-    $model->formHelper->loadData(array(
-      'json' => array('Image')
+    $model->formHelper->loadFieldData('ShippingService',array(
+      'key' =>'id',
+      'field' => 'name',
+      'index' => 'shippingServices',
+      'order' => array(
+        array('id','ASC')
+      )
     ));
 
     $this->data = $model->formHelper->build();
@@ -65,7 +59,7 @@ class PaymentMethodController extends Controller
   }
 
   public function editingSubmit(CustomFormRequest $request) {
-    $model = Service::loadModel('PaymentMethod')->find($this->param['id']);
+    $model = Service::loadModel('ShippingMethod')->find($this->param['id']);
 
     if($model->fill($request->all())->save()) {
 
@@ -78,7 +72,7 @@ class PaymentMethodController extends Controller
 
   public function delete() {
 
-    $model = Service::loadModel('PaymentMethod')->find($this->param['id']);
+    $model = Service::loadModel('ShippingMethod')->find($this->param['id']);
 
     if($model->delete()) {
       Message::display('ข้อมูลถูกลบแล้ว','success');
@@ -89,4 +83,5 @@ class PaymentMethodController extends Controller
     }
 
   }
+  
 }

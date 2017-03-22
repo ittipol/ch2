@@ -1,30 +1,30 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-@include('pages.shop.layouts.top_nav') 
+@include('pages.shop.layouts.top_nav')
 
-<div class="container">
-
-  <div class="container-header">
-    <div class="row">
-      <div class="col-lg-6 col-sm-12">
-        <div class="title">
-          วิธีการชำระเงิน
-        </div>
+<div class="top-header-wrapper top-header-border">
+  <div class="container">
+    <div class="top-header">
+      <div class="detail-title">
+        <h2 class="title">วิธีการชำระเงิน</h2>
       </div>
     </div>
   </div>
+</div>
+
+<div class="container">
 
   <div class="tile-nav-group space-top-bottom-20 clearfix">
 
     <div class="tile-nav small">
       <div class="tile-nav-image">
-          <a href="{{$paymentMethidAddUrl}}">
+          <a href="{{$paymentMethodAddUrl}}">
             <img src="/images/common/payment.png">
           </a>
       </div>
       <div class="tile-nav-info">
-        <a href="{{$paymentMethidAddUrl}}">
+        <a href="{{$paymentMethodAddUrl}}">
           <h4 class="tile-nav-title">เพิ่มวิธีการชำระเงิน</h4>
         </a>
       </div>
@@ -83,7 +83,7 @@
       <div>
         <h3>วิธีการชำระเงิน</h3>
         <p>ยังไม่มีวิธีการชำระเงิน เพิ่มวิธีการชำระเงินของคุณ เพื่อใช่ในการกำหนดวิธีการชำระเงินให้กับลูกค้าในหน้าการยืนยันการสั่งซื้อ</p>
-        <a href="{{$paymentMethidAddUrl}}" class="button">เพิ่มวิธีการชำระเงิน</a>
+        <a href="{{$paymentMethodAddUrl}}" class="button">เพิ่มวิธีการชำระเงิน</a>
       </div>
     </div>
 

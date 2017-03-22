@@ -4,7 +4,7 @@
 	background-color: #FFEBEE;
 }
 
-.secondary-message-box.desc {
+.secondary-message-box.clean {
 	padding: 15px;
 	color: #000;
 	background-color: transparent;
@@ -22,6 +22,10 @@
 
 .secondary-message-box h3 {
 	margin: 10px 0;
+}
+
+.secondary-message-box p {
+	margin: 5px 0;
 }
 
 .secondary-message-box .line {

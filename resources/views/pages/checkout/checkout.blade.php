@@ -48,8 +48,6 @@
                 @foreach($value['products'] as $product)
                 <div id="_product_{{$product['id']}}" class="checkout-list-table-row" data-id="_shop_{{$value['shop']['id']}}">
 
-
-
                   <div class="product-list-box clearfix">
 
                     <div class="product-image pull-left">
@@ -91,29 +89,29 @@
                 @endforeach
               </div>
 
+              <div class="checkout-summary clearfix">
+
+                <div class="pull-right">
+              
+                  <div class="text-right">
+                    <h5>มูลค่าสินค้า: <span class="sub-total amount">{{$value['summaries']['subTotal']['value']}}</span></h5>
+                  </div>
+                  <div class="text-right">
+                    <h5>ค่าจัดส่งสินค้า: <span class="shipping-cost amount">{{$value['summaries']['shippingCost']['value']}}</span></h5>
+                  </div>
+                  <div class="text-right">
+                    <h4>ยอดสุทธิ: <span class="total-amount amount product-price">{{$value['summaries']['total']['value']}}</span></h4>
+                  </div>
+
+                </div>
+
+              </div>
+
             </div>
 
             <div class="col-sm-6 col-sm-12">
 
               <div class="checkout-content-right">
-
-                <div class="checkout-summary clearfix">
-
-                  <div class="pull-right">
-                
-                    <div class="text-right">
-                      <h5>มูลค่าสินค้า: <span class="sub-total amount">{{$value['summaries']['subTotal']['value']}}</span></h5>
-                    </div>
-                    <div class="text-right">
-                      <h5>ค่าจัดส่งสินค้า: <span class="shipping-cost amount">{{$value['summaries']['shippingCost']['value']}}</span></h5>
-                    </div>
-                    <div class="text-right">
-                      <h4>ยอดสุทธิ: <span class="total-amount amount product-price">{{$value['summaries']['total']['value']}}</span></h4>
-                    </div>
-
-                  </div>
-
-                </div>
 
                 <div class="checkout-input">
 
@@ -125,6 +123,24 @@
                   <div class="message-input">
                     <h5>ข้อความถึงผู้ขาย</h5>
                     <textarea name="shop[{{$value['shop']['id']}}][message]"></textarea>
+                  </div>
+
+                  <div class="shipping-method-input">
+                    <h5>เลือกวิธีการจัดส่งสินค้า</h5>
+                    <div class="line space-top-bottom-10"></div>
+                    @foreach($shippingMethods[$value['shop']['id']] as $shippingMethod)
+                      <div>
+                        <label class="choice-box">
+                          <?php
+                            echo Form::radio('ItemToCategory[item_category_id]', $shippingMethod['id'], $shippingMethod['select']);
+                          ?> 
+                          <div class="inner">
+                            <h5>{{$shippingMethod['name']}}</h5>
+                            <p>ผู้ให้บริการ: {{$shippingMethod['shippingService']}}</p>
+                          </div>
+                        </label>
+                      </div>
+                    @endforeach
                   </div>
 
                 </div>

@@ -135,11 +135,14 @@ class ShopController extends Controller
     $this->setData('productPostUrl',request()->get('shopUrl').'product_post');
     $this->setData('orderUrl',request()->get('shopUrl').'order');
     $this->setData('paymentMethodUrl',request()->get('shopUrl').'payment_method');
+    $this->setData('shippingMethodUrl',request()->get('shopUrl').'shipping_method');
 
     return $this->view('pages.shop.product');
   }
 
   public function paymentMethod() {
+
+    $model = Service::loadModel('PaymentMethod');
 
     $url = new Url;
     
@@ -148,7 +151,6 @@ class ShopController extends Controller
       $page = $this->query['page'];
     }
 
-    $model = Service::loadModel('PaymentMethod');
     $model->paginator->criteria(array(
       'joins' => array('shop_relate_to', 'shop_relate_to.model_id', '=', $model->getTable().'.id'),
       'conditions' => array(
@@ -165,9 +167,45 @@ class ShopController extends Controller
 
     $this->data = $model->paginator->build();
 
-    $this->setData('paymentMethidAddUrl',request()->get('shopUrl').'payment_method/add');
+    $this->setData('paymentMethodAddUrl',request()->get('shopUrl').'payment_method/add');
 
     return $this->view('pages.shop.payment_method');
+  }
+
+  public function shippingMethod() {
+    
+    $model = Service::loadModel('ShippingMethod');
+
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
+
+    $model->paginator->criteria(array(
+      'joins' => array('shop_relate_to', 'shop_relate_to.model_id', '=', $model->getTable().'.id'),
+      'conditions' => array(
+        array('shop_relate_to.model','like',$model->modelName),
+        array('shop_relate_to.shop_id','=',request()->get('shopId'))
+      ),
+      'order' => array('id','ASC')
+    ));
+    $model->paginator->setPage($page);
+    $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/shipping_method');
+    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/shipping_method/{id}','detailUrl');
+    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/shipping_method/edit/{id}','editUrl');
+    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/shipping_method/delete/{id}','deleteUrl');
+
+    $this->data = $model->paginator->build();
+
+    $this->setData('_formData',request()->get('shop')->formHelper->build());
+
+    $this->setData('shippingMethodAddUrl',request()->get('shopUrl').'shipping_method/add');
+    $this->setData('allowPickupItemUrl',request()->get('shopUrl').'allow_pickup_item');
+
+    $this->setData('allowPickupItem',request()->get('shop')->customer_can_pickup_item);
+
+    return $this->view('pages.shop.shipping_method');
+
   }
 
   public function job() {
@@ -346,7 +384,7 @@ class ShopController extends Controller
   }
 
   public function setting() {
-    // brand story เรื่องราว
+
     $this->setData('profileImageUrl',request()->get('shopUrl').'profile_image');
     $this->setData('descriptionUrl',request()->get('shopUrl').'description');
     $this->setData('addressUrl',request()->get('shopUrl').'address');
@@ -531,6 +569,26 @@ class ShopController extends Controller
     }else{
       return Redirect::back();
     }
+
+  }
+
+  public function allowPickupItem() {
+
+    $model = request()->get('shop');
+    
+    if($model->customer_can_pickup_item) {
+      $model->customer_can_pickup_item = 0;
+      $model->save();
+
+      Message::display('ลบตัวเลือก "รับสินค้าเอง" แล้ว','success');
+    }else{
+      $model->customer_can_pickup_item = 1;
+      $model->save();
+
+      Message::display('เพิ่มตัวเลือก "รับสินค้าเอง" แล้ว','success');
+    }
+
+    return Redirect::to('shop/'.request()->shopSlug.'/shipping_method');
 
   }
 

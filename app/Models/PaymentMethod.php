@@ -6,7 +6,7 @@ class PaymentMethod extends Model
 {
   public $table = 'payment_methods';
   protected $fillable = ['name','description','person_id'];
-  protected $modelRelations = array('Image','PaymentMethodToOrder','ShopRelateTo');
+  protected $modelRelations = array('PaymentMethodToOrder','ShopRelateTo');
 
   public $formHelper = true;
   public $modelData = true;

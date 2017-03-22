@@ -3,6 +3,8 @@ class ModelDialog {
 	constructor() {
 		this.elem;
 		this.action;
+		this.allowed = false;
+		this.waiting = false;
 	}
 
 	load() {
@@ -15,11 +17,17 @@ class ModelDialog {
 
 		$(document).on('click','[data-modal="1"]',function(e){
 
+			if(_this.waiting) {
+				return true;
+			}
+
 			e.preventDefault();
+
+			// _this.allowed = true;
 
 			_this.elem = this;
 			_this.action = $(this).data('modal-action');
-			_this.title(_this.action);
+			_this.setTitle(_this.action,$(this).data('modal-title'));
 
 			$('.modal-box').addClass('opened');
 			$('.content-wrapper-overlay').addClass('isvisible');
@@ -29,8 +37,14 @@ class ModelDialog {
 
 		$('#modal_dialog_cancel').on('click',function(){
 
+			if(_this.waiting) {
+				return;
+			}
+
 			_this.action = null;
 			_this.elem = null;
+
+			// _this.allowed = false;
 
 			$('.modal-box').removeClass('opened');
 			$('.content-wrapper-overlay').removeClass('isvisible');
@@ -43,34 +57,38 @@ class ModelDialog {
 
 	}
 
-	title(action) {
+	setTitle(action,title) {
 
-		switch(action) {
+		$('#modal_dialog_title').text(title);
 
-			case 'delete':
-				$('#modal_dialog_title').text('ต้องการลบใช่หรือไม่');
-			break;
+		// switch(action) {
 
-			case 'submit':
+		// 	case 'delete':
+		// 		$('#modal_dialog_title').text('ต้องการลบใช่หรือไม่');
+		// 	break;
 
-			break;
+		// 	case 'submit':
+		// 		$('#modal_dialog_title').text('ต้องการลบใช่หรือไม่');
+		// 	break;
 
-		}
+		// }
 
 	}
 
 	actionType(action,elem) {
 
-		switch(action) {
+		if(this.waiting) {
+			return;
+		}
 
-			case 'delete':
-				window.location.href = elem.href;
-			break;
+		this.waiting = true;
 
-			case 'submit':
+		// elem.setAttribute('data-modal','0');
 
-			break;
-
+		if (typeof $(elem).attr('href') !== typeof undefined && $(elem).attr('href') !== false) {
+		  window.location.href = elem.href;
+		}else if($(elem).attr('type') == 'submit') {
+			$(elem).trigger('click');
 		}
 
 	}

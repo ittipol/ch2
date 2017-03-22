@@ -70,7 +70,7 @@
                 <?php
                   echo Form::radio('ItemToCategory[item_category_id]', $id);
                 ?> 
-                <div class="inner"><?php echo $category; ?></div>
+                <div class="inner">{{$category}}</div>
               </label>
             </div>
             @endforeach

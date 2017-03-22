@@ -58,6 +58,19 @@
       </div>
     </div>
 
+    <div class="tile-nav small">
+      <div class="tile-nav-image">
+        <a href="{{$shippingMethodUrl}}">
+          <img src="/images/common/truck.png">
+        </a>
+      </div>
+      <div class="tile-nav-info">
+        <a href="{{$shippingMethodUrl}}">
+          <h4 class="tile-nav-title">วิธีการจัดส่งสินค้า</h4>
+        </a>
+      </div>
+    </div>
+
   </div>
 
   <div class="line"></div>

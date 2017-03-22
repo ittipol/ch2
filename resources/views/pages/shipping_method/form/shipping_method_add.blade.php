@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="title">
-          วิธีการชำระเงิน
+          เพิ่มวิธีการจัดส่งสินค้า
         </div>
       </div>
     </div>
@@ -16,11 +16,7 @@
   @include('components.form_error') 
 
   <?php 
-    echo Form::model($_formData, [
-      'id' => 'main_form',
-      'method' => 'PATCH',
-      'enctype' => 'multipart/form-data'
-    ]);
+    echo Form::open(['id' => 'main_form','method' => 'post', 'enctype' => 'multipart/form-data']);
   ?>
 
   <?php
@@ -31,14 +27,15 @@
 
     <div class="form-row">
       <?php 
-        echo Form::label('name', 'ชื่อวิธีการชำระเงิน', array(
+        echo Form::label('name', 'ชื่อวิธีการจัดส่งสินค้า', array(
           'class' => 'required'
         ));
         echo Form::text('name', null, array(
-          'placeholder' => 'ชื่อวิธีการชำระเงิน',
+          'placeholder' => 'ชื่อวิธีการจัดส่งสินค้า',
           'autocomplete' => 'off'
         ));
       ?>
+      <p class="notice info">เช่น พัสดุธรรมดา, พัสดุส่งพิเศษ</p>
     </div>
 
     <div class="form-row">
@@ -52,9 +49,7 @@
 
     <div class="form-row">
       <?php 
-        echo Form::label('description', 'รายละเอียดวิธีการชำระเงิน', array(
-          'class' => 'required'
-        ));
+        echo Form::label('description', 'รายละเอียดเพิ่มเติม');
         echo Form::textarea('description', null, array(
           'class' => 'ckeditor'
         ));
@@ -63,8 +58,12 @@
 
   </div>
 
+  <div class="secondary-message-box info space-bottom-20">
+    <p>*** เมื่อเพิ่มวิธีการจัดส่งสินค้าแล้ว วิธีการจัดส่งสินค้าจะถูกแสดงเป็นตัวเลือกให้ลูกค้าเลือกในหน้าสั่งซื้อสินค้า</p>
+  </div>
+
   <?php
-    echo Form::submit('บันทึก' , array(
+    echo Form::submit('เพิ่มวิธีการจัดส่งสินค้า' , array(
       'class' => 'button'
     ));
   ?>

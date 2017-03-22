@@ -12,7 +12,7 @@
 </div>
 
 <div class="container">
-ขนส่งของทางร้าน
+
   @if($order['order_status_id'] == 1)
   <div class="secondary-message-box info space-bottom-30">
     <h3>รายการสั่งซื้อนี้ยังไม่ถูกการยืนยันจากผู้ขาย</h3>

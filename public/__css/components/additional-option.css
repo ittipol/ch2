@@ -76,7 +76,8 @@
 }
 
 .additional-option-items > a,
-.additional-option-items > .item-row {
+.additional-option-items > .item-row,
+.additional-option-items > input[type="submit"] {
   color: #000000 !important;
   margin: 0 !important;
   padding: 0 25px !important;
@@ -84,10 +85,13 @@
   display: block !important;
   font-weight: 100;
   cursor: pointer;
+  background-color: #fff;
+  border: 0;
 }
 
 .additional-option-items > a:hover,
-.additional-option-items > .item-row:hover {
+.additional-option-items > .item-row:hover,
+.additional-option-items > input[type="submit"]:hover {
   background-color: #eaeaea !important;
 }
 

@@ -11,7 +11,6 @@ use Schema;
 
 class CheckForPersonHasShopPermission
 {
-
     // private $parents = array(
     //   'ProductDiscount' => array(
     //     'modelName' => 'Product',
@@ -185,7 +184,22 @@ class CheckForPersonHasShopPermission
         'shop.payment_method.delete' => array(
           'permission' => 'delete',
           'modelName' => 'PaymentMethod'
-        )
+        ),
+        'shop.shipping_method' => array(
+          'permission' => true
+        ),
+        'shop.shipping_method.add' => array(
+          'permission' => 'add',
+          'modelName' => 'ShippingMethod'
+        ),
+        'shop.shipping_method.edit' => array(
+          'permission' => 'edit',
+          'modelName' => 'ShippingMethod'
+        ),
+        'shop.shipping_method.delete' => array(
+          'permission' => 'delete',
+          'modelName' => 'ShippingMethod'
+        ),
       );
 
       if(empty($name) || !isset($pages[$name])) {

@@ -31,7 +31,7 @@
           'class' => 'required'
         ));
         echo Form::text('name', null, array(
-          'placeholder' => 'ชื่อสาขา',
+          'placeholder' => 'ชื่อวิธีการชำระเงิน',
           'autocomplete' => 'off'
         ));
       ?>

@@ -17,8 +17,16 @@ class CheckoutController extends Controller
     ->first()
     ->getAddress();
 
+    $productSummaries = Service::loadModel('Cart')->getProductSummary();
+
+    $shippingMethods = array();
+    foreach ($productSummaries as $productSummary) {
+      $shippingMethods[$productSummary['shop']['id']] = Service::loadModel('ShippingMethod')->getShippingMethodChoice($productSummary['shop']['id']);
+    }
+
     $this->setData('data',Service::loadModel('Cart')->getProductSummary());
     $this->setData('shippingAddress',$address);
+    $this->setData('shippingMethods',$shippingMethods);
 
     return $this->view('pages.checkout.checkout');
 

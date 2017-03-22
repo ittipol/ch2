@@ -151,7 +151,7 @@
         @if($_modelData['shipping_calculate_from'] == 2)
         <h5>
           <b>ค่าใช้จ่ายในการจัดส่งสินค้า</b>: 
-          {{$_modelData['shippingCost']}}
+          {{$_modelData['shippingCostText']}}
           @if(!empty($_modelData['shippingCostAppendText']))
             / {{$_modelData['shippingCostAppendText']}}
           @endif

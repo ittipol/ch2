@@ -52,6 +52,26 @@
 	height: 100px;
 }
 
+.checkout .shipping-method-input label.choice-box {
+	width: 100%;
+}
+
+.checkout .shipping-method-input label.choice-box h5 {
+	font-size: 15px;
+	font-weight: bold;
+	margin: 10px 0 5px;
+}
+
+.checkout .shipping-method-input label.choice-box p {
+	color: #555;
+	font-size: 14px;
+	margin: 0 0 5px;
+}
+
+.checkout .shipping-method-input label.choice-box input[type="radio"] + .inner {
+	padding: 10px 0 10px 50px;
+}
+
 .checkout .checkout-input {
 	padding: 15px 5px 0;
 }
