@@ -17,25 +17,6 @@ class Order extends Model
   public $modelData = true;
   public $paginator = true;
 
-  // private $Totaltypes = array(
-  //   'subTotal' => array(
-  //     'title' => 'มูลค่าสินค้า',
-  //     'class' => 'sub-total'
-  //   ),
-  //   'shippingCost' => array(
-  //     'title' => 'ค่าจัดส่งสินค้า',
-  //     'class' => 'shipping-cost'
-  //   ),
-  //   'savingPrice' => array(
-  //     'title' => 'ประหยัด',
-  //     'class' => 'saving-price'
-  //   ),
-  //   'total' => array(
-  //     'title' => 'ยอดสุทธิ',
-  //     'class' => 'total-amount'
-  //   )
-  // );
-
   public function orderStatus() {
     return $this->hasOne('App\Models\OrderStatus','id','order_status_id');
   }
@@ -185,24 +166,6 @@ class Order extends Model
     return $count;
   }
 
-  // public function getTitle($alias) {
-
-  //   if(empty($this->Totaltypes[$alias]['title'])) {
-  //     return null;
-  //   }
-
-  //   return $this->Totaltypes[$alias]['title'];
-  // }
-
-  // public function getClass($alias) {
-
-  //   if(empty($this->Totaltypes[$alias]['class'])) {
-  //     return null;
-  //   }
-
-  //   return $this->Totaltypes[$alias]['class'];
-  // }
-
   public function getSummary($format = false) {
 
     $cart = new Cart;
@@ -321,9 +284,55 @@ class Order extends Model
 
   }
 
-  public function buildModelData() {
+  public function getOrderShippingCostSummary() {
 
     $currency = new Currency;
+
+    $orderProducts = $this->getRelatedData('OrderProduct');
+    
+    if($this->order_status_id == 1) {
+      $orderShippingCost = 'ยังไม่ระบุจากผู้ขาย';
+
+      $productShippingCost = 0;
+      $waitingConfirm = true;
+      foreach ($orderProducts as $orderProduct) {
+
+        if(empty($orderProduct->free_shipping) && empty($orderProduct->shipping_cost)) {
+          continue;
+        }
+
+        $productShippingCost += $orderProduct->getOrderShippingCost();
+        $waitingConfirm = false;
+      }
+
+      if($waitingConfirm) {
+        $productShippingCost = 'ยังไม่ระบุจากผู้ขาย';
+      }else{
+        $productShippingCost = $currency->format($productShippingCost);
+      }
+
+    }else{
+      $orderShippingCost = $currency->format($this->order_shipping_cost);
+
+      $productShippingCost = 0;
+      foreach ($orderProducts as $orderProduct) {
+        $productShippingCost += $orderProduct->getOrderShippingCost();
+      }
+
+      $productShippingCost = $currency->format($productShippingCost);
+
+    }
+
+    return array(
+      'orderShippingCost' => $orderShippingCost,
+      'productsShippingCost' => $productShippingCost
+    );
+
+  }
+
+  public function buildModelData() {
+
+    // $currency = new Currency;
     $date = new Date;
 
     return array(
@@ -335,8 +344,9 @@ class Order extends Model
       'order_status_id' => $this->order_status_id,
       'orderStatusName' => $this->orderStatus->name,
       'message_to_seller' => $this->message_to_seller,
-      '_order_shipping_cost' => $currency->format($this->order_shipping_cost),
-      'orderedDate' => $date->covertDateToSting($this->created_at->format('Y-m-d'))
+      // '_order_shipping_cost' => $currency->format($this->order_shipping_cost),
+      'orderedDate' => $date->covertDateToSting($this->created_at->format('Y-m-d')),
+      'shipping_cost_detail' => $this->shipping_cost_detail
     );
   }
 

@@ -29,11 +29,14 @@
 
     $(document).ready(function(){
 
+      const blackbox = new Blackbox;
+      blackbox.load();
+
       const additionalOption = new AdditionalOption();
       additionalOption.load();
 
-      const blackbox = new Blackbox;
-      blackbox.load();
+      const rightSidePanel = new RightSidePanel();
+      rightSidePanel.load();
 
       const modelDialog = new ModelDialog;
       modelDialog.load();

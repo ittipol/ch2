@@ -5,6 +5,7 @@ class ImageGallery {
     this.displayDescription = displayDescription;
     this.currentImage = 0;
     this.totalImage = 0;
+    this.descriptionOpened = false;
   }
 
   load(images = null) {
@@ -72,19 +73,42 @@ class ImageGallery {
     });
   
     $(document).on('click','.open-description',function(){
-      $('.display-image-description-icon').css('display','none');
-      // $('.image-description').css('top','0');
-      $('.image-description').addClass('opened');
-      $('.content-wrapper-overlay').addClass('isvisible');
-      $('body').css('overflow-y','hidden');
+
+      if(!_this.descriptionOpened) {
+        $('.display-image-description-icon').css('display','none');
+        $('.image-description').addClass('opened');
+        $('.content-wrapper-overlay').addClass('isvisible');
+        $('body').css('overflow-y','hidden');
+
+        _this.descriptionOpened = true;
+      }
+
     });  
 
     $('.close-image-description-icon').on('click',function(){
-      $('.display-image-description-icon').css('display','block');
-      // $('.image-description').css('top','100%');
-      $('.image-description').removeClass('opened');
-      $('.content-wrapper-overlay').removeClass('isvisible');
-      $('body').css('overflow-y','auto');
+
+      if(_this.descriptionOpened) {
+        $('.display-image-description-icon').css('display','block');
+        $('.image-description').removeClass('opened');
+        $('.content-wrapper-overlay').removeClass('isvisible');
+        $('body').css('overflow-y','auto');
+      
+        _this.descriptionOpened = false;
+      }
+
+    });
+
+    $('.content-wrapper-overlay').on('click',function(){
+
+      if(_this.descriptionOpened) {
+        $('.display-image-description-icon').css('display','block');
+        $('.image-description').removeClass('opened');
+        $('.content-wrapper-overlay').removeClass('isvisible');
+        $('body').css('overflow-y','auto');
+
+        _this.descriptionOpened = false;
+      }
+
     });
 
     // $(window).resize(function() {

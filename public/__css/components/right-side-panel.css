@@ -1,0 +1,55 @@
+[data-right-side-panel="1"] {
+	cursor: pointer;
+}
+
+.right-size-panel {
+	position: fixed;
+	top: 0;
+	right: -100%;
+	width: 700px;
+	height: 100%;
+	opacity: 1;
+	background-color: rgb(29, 66, 133);
+	padding: 0;
+	z-index: 90;
+	overflow: hidden;
+	transition: right .15s ease-out;
+}
+
+.right-size-panel.opened {
+	right: 0;
+}
+
+.right-size-panel .right-size-panel-inner {
+	padding: 30px 30px 80px;
+	height: 100%;
+	color: #fff;
+	font-size: 16px;
+	line-height: 25px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.right-size-panel .right-size-panel-close-icon {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	width: 40px;
+	height: 40px;
+	border-radius: 40px;
+	background-image: url(/images/icons/close.png);
+	background-repeat: no-repeat;
+	background-size: 20px;
+	background-position: center;
+	background-color: rgba(255,255,255,.2);
+	z-index: 5;
+	cursor: pointer;
+}
+
+@media only screen and (max-width : 480px) {
+  
+	.right-size-panel {
+		width: 100%;
+	}
+
+}

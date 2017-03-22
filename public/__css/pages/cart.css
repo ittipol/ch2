@@ -97,6 +97,11 @@
 	font-weight: bold;
 }
 
+.cart .shipping-cost-summary {
+	padding: 20px;
+	background-color: #CFD8DC;
+}
+
 .cart .cart-summary {
 	padding: 20px;
 }

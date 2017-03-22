@@ -48,19 +48,6 @@
       ?>
     </div>
 
-    <div class="form-row">
-
-      <?php
-        echo Form::label('', 'รูปภาพ');
-      ?>
-
-      <div class="form-row">
-        <div id="_image_group">
-        </div>
-      </div>
-
-    </div>
-
   </div>
 
   <?php
@@ -78,9 +65,6 @@
 <script type="text/javascript">
 
   $(document).ready(function(){
-    
-    const images = new Images('_image_group','photo',10);
-    images.load();
 
     const form = new Form();
     form.load();

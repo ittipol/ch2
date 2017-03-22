@@ -41,6 +41,7 @@
     '__js/components/global-cart.js',
     '__js/components/modal-dialog.js',
     '__js/components/order-progress-bar.js',
+    '__js/components/right-side-panel.js',
   );
 
   if($combine){
@@ -94,6 +95,7 @@
     '__css/components/message.css',
     '__css/components/error.css',
     '__css/components/modal-dialog.css',
+    '__css/components/right-side-panel.css',
     '__css/pages/home.css',
     '__css/pages/shop.css',
     '__css/pages/account.css',

@@ -21,7 +21,7 @@ class OrderProduct extends Model
     }elseif($this->shipping_cost != null){
       $shippingCostText = $currency->format($this->getOrderShippingCost());
     }else{
-      $shippingCostText = 'ยังไม่ระบุ';
+      $shippingCostText = 'ยังไม่ระบุจากผู้ขาย';
     }
 
     return array(

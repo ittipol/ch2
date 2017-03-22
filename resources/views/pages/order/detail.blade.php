@@ -12,7 +12,7 @@
 </div>
 
 <div class="container">
-
+ขนส่งของทางร้าน
   @if($order['order_status_id'] == 1)
   <div class="secondary-message-box info space-bottom-30">
     <h3>รายการสั่งซื้อนี้ยังไม่ถูกการยืนยันจากผู้ขาย</h3>
@@ -118,7 +118,9 @@
 
           <div class="detail-group-info">
             <h5 class="title">ชื้อบริษัทหรือร้านค้าที่ขายสินค้า</h5>
-            <p>{{$order['shopName']}}</p>
+            <a href="{{URL::to($shopUrl)}}">
+              <p>{{$order['shopName']}}</p>
+            </a>
           </div>
 
           <div class="detail-group-info">
@@ -143,39 +145,6 @@
 
     <div class="col-md-8 col-sm-12">
 
-      <div class="content-box content-box-bg no-margin" style="background-image:url({{$shopCoverUrl}})">
-        <div class="content-box-inner">
-          <div class="row">
-
-            <div class="col-md-6 col-sm-12">
-              <div class="content-box-panel overlay-bg">
-                <div>
-                  <h5>บริษัทหรือร้านค้า</h5>
-                  <h3>
-                    <a href="{{URL::to($shopUrl)}}">{{$shop['name']}}</a>
-                  </h3>
-                  <div class="line space-top-bottom-20"></div>
-                  <p>{{$shop['_short_description']}}</p>
-                </div>
-
-                <a href="{{URL::to($shopUrl)}}" class="button wide-button">ไปยังร้านค้านี้</a>
-              </div>
-            </div>
-
-            <div class="col-md-6 col-sm-12"></div>
-
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="row">
-
-    <div class="col-md-4 col-sm-12 space-top-30">
-      
       <div class="detail-info-section no-margin">
         <h4>ที่อยู่สำหรับการจัดส่ง</h4>
         <div class="line"></div> 
@@ -248,6 +217,25 @@
 
         </div>
         @endforeach
+      </div>
+
+      <div class="shipping-cost-summary">
+        <h4>ค่าจัดส่งสินค้าของการสั่งซื้อนี้</h4>
+        <h5>ค่าจัดส่งต่อการสั่งซื้อ: <strong>{{$orderShippingCosts['orderShippingCost']}}</strong></h5>
+        <h5>ค่าจัดส่งรวมของสินค้าแต่ละรายการ: <strong>{{$orderShippingCosts['productsShippingCost']}}</strong></h5>
+        @if($order['order_status_id'] == 1)
+          <p class="error-message">*** ค่าจัดส่งของการสั่งซื้อนี้ยังไม่ใช่จำนวนสุทธิที่ต้องชำระ</p>
+          <p class="error-message">*** อาจมีการเปลี่ยนแปลงหลังจากรายการสั่งซื้อถูกยืนยันจากผู้ขาย</p>
+        @endif
+        @if(!empty($order['shipping_cost_detail']))
+          <a data-right-side-panel="1" data-right-side-panel-target="#shipping_cost_detail" role="button">แสดงรายละเอียดค่าจัดส่นสินค้า</a>
+          <div id="shipping_cost_detail" class="right-size-panel">
+            <div class="right-size-panel-inner">
+              {!!$order['shipping_cost_detail']!!}
+            </div>
+            <div class="right-size-panel-close-icon"></div>
+          </div>
+        @endif
       </div>
 
     </div>

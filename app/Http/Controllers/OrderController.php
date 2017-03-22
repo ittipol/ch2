@@ -55,10 +55,13 @@ class OrderController extends Controller
 
     $this->setData('orderStatuses',$model->getOrderStatuses());
     $this->setData('percent',$model->getOrderProgress());
-    
-    $this->setData('shop',$shop->modelData->build(true));
-    $this->setData('shopImageUrl',$shop->getProfileImageUrl());
-    $this->setData('shopCoverUrl',$shop->getCoverUrl());
+
+    // Get Shipping cost of this order
+    $this->setData('orderShippingCosts',$model->getOrderShippingCostSummary());
+ 
+    // $this->setData('shop',$shop->modelData->build(true));
+    // $this->setData('shopImageUrl',$shop->getProfileImageUrl());
+    // $this->setData('shopCoverUrl',$shop->getCoverUrl());
     $this->setData('shopUrl','shop/'.$slug);
 
     return $this->view('pages.order.detail');
@@ -399,7 +402,7 @@ class OrderController extends Controller
     }
 
     // shipping cost detail
-    if(empty(request()->get('shipping_cost_detail'))) {
+    if(!empty(request()->get('shipping_cost_detail'))) {
       $model->shipping_cost_detail = request()->get('shipping_cost_detail');
     }
 
