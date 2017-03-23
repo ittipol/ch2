@@ -165,7 +165,8 @@ class CustomFormRequest extends FormRequest
           continue;
         }
 
-        if(!empty($this->validation['conditions'][$key]) && (!isset($data[$this->validation['conditions'][$key]['field']]) || !($data[$this->validation['conditions'][$key]['field']] == $this->validation['conditions'][$key]['value']))) {
+        if(!empty($this->validation['conditions'][$key]) && 
+          (!isset($data[$this->validation['conditions'][$key]['field']]) || !($data[$this->validation['conditions'][$key]['field']] == $this->validation['conditions'][$key]['value']))) {
           continue;
         }
         

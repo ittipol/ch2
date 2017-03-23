@@ -2,7 +2,7 @@ class ModelDialog {
 
 	constructor() {
 		this.elem;
-		this.action;
+		// this.action;
 		this.allowed = false;
 		this.waiting = false;
 	}
@@ -26,8 +26,7 @@ class ModelDialog {
 			// _this.allowed = true;
 
 			_this.elem = this;
-			_this.action = $(this).data('modal-action');
-			_this.setTitle(_this.action,$(this).data('modal-title'));
+			_this.setTitle($(this).data('modal-title'));
 
 			$('.modal-box').addClass('opened');
 			$('.content-wrapper-overlay').addClass('isvisible');
@@ -44,6 +43,8 @@ class ModelDialog {
 			_this.action = null;
 			_this.elem = null;
 
+			_this.waiting = false;
+
 			// _this.allowed = false;
 
 			$('.modal-box').removeClass('opened');
@@ -57,7 +58,7 @@ class ModelDialog {
 
 	}
 
-	setTitle(action,title) {
+	setTitle(title) {
 
 		$('#modal_dialog_title').text(title);
 
@@ -75,7 +76,7 @@ class ModelDialog {
 
 	}
 
-	actionType(action,elem) {
+	actionType(elem) {
 
 		if(this.waiting) {
 			return;

@@ -125,29 +125,54 @@
                     <textarea name="shop[{{$value['shop']['id']}}][message]"></textarea>
                   </div>
 
-                  <div class="shipping-method-input">
-                    <h5>เลือกวิธีการจัดส่งสินค้า</h5>
-                    <div class="line space-top-bottom-10"></div>
-                    @foreach($shippingMethods[$value['shop']['id']] as $shippingMethod)
-                      <div>
-                        <label class="choice-box">
-                          <?php
-                            echo Form::radio('ItemToCategory[item_category_id]', $shippingMethod['id'], $shippingMethod['select']);
-                          ?> 
-                          <div class="inner">
-                            <h5>{{$shippingMethod['name']}}</h5>
-                            <p>ผู้ให้บริการ: {{$shippingMethod['shippingService']}}</p>
-                          </div>
-                        </label>
-                      </div>
-                    @endforeach
-                  </div>
-
                 </div>
 
               </div>
 
             </div>
+
+          </div>
+
+          <div class="shipping-method-input space-top-30">
+            <h5>เลือกวิธีการจัดส่งสินค้า</h5>
+            <!-- <div class="line space-top-bottom-10"></div> -->
+
+            @if(!empty($shippingMethods[$value['shop']['id']]))
+
+              @foreach($shippingMethods[$value['shop']['id']] as $shippingMethod)
+                <div class="shipping-method-choice">
+                  <label class="choice-box">
+                    <?php
+                      echo Form::radio('shop['.$value['shop']['id'].'][shipping_method_id]', $shippingMethod['id'], $shippingMethod['select']);
+                    ?> 
+                    <div class="inner">
+                      <div class="row">
+
+                        <div class="col-md-4 col-xs-12">
+                          <h5>{{$shippingMethod['name']}}</h5>
+                          <p>ผู้ให้บริการ: <strong>{{$shippingMethod['shippingService']}}</strong></p>
+                        </div>
+
+                        <div class="col-md-4 col-xs-12">
+                          <p>รูปแบบการคิดค่าจัดส่ง: <strong>{{$shippingMethod['shippingServiceCostType']}}</strong></p>
+                          <p>ค่าจัดส่ง: <strong>{{$shippingMethod['serviceCostText']}}</strong></p>
+                        </div>
+
+                        <div class="col-md-4 col-xs-12">
+                          <p>ระยะเวลาจัดส่ง: <strong>{{$shippingMethod['shipping_time']}}</strong></p>
+                        </div>
+
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              @endforeach
+
+            @else
+
+              <div>ร้านค้านี้ยังไม่ระบุวิธีการจัดส่งสินค้า</div>
+
+            @endif
 
           </div>
 

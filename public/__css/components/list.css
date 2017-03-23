@@ -240,11 +240,19 @@ label.list-box > input[type="checkbox"] {
 	border-bottom: 1px solid #ccc;
 }
 
+.list-h .list-image {
+	width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  overflow: hidden;
+  display: block;
+}
+
 .list-h .list-image img {
 	width: 50px;
 	height: 50px;
 	background-color: #009688;
-	border-radius: 50px;
+	/*border-radius: 50px;*/
 	padding: 10px;
 }
 

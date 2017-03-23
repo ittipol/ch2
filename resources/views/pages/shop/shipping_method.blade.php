@@ -87,7 +87,7 @@
 
         <div class="list-image pull-left">
           <a href="{{$data['detailUrl']}}">
-            <img src="/images/icons/payment-white.png">
+            <img src="/images/icons/truck-white.png">
           </a>
         </div>
 
@@ -95,10 +95,22 @@
 
           <div class="row">
 
-            <div class="col-xs-12 list-content">
+            <div class="col-md-4 col-xs-12 list-content">
               <a href="{{$data['detailUrl']}}">
-                <h4 class="primary-info single-info">{{$data['name']}}</h4>
+                <h4 class="primary-info">{{$data['name']}}</h4>
               </a>
+              <div class="secondary-info">ผู้ให้บริการการจัดส่ง: {{$data['shippingService']}}</div>
+              <div class="secondary-info">ระยะเวลาจัดส่ง: {{$data['shipping_time']}}</div>
+            </div>
+
+            <div class="col-md-4 col-xs-12 list-content">
+              <h4 class="primary-info">รูปแบบการคิดค่าจัดส่ง</h4>
+              <div class="secondary-info">{{$data['shippingServiceCostType']}}</div>
+            </div>
+
+            <div class="col-md-4 col-xs-12 list-content">
+              <h4 class="primary-info">ค่าบริการ</h4>
+              <div class="secondary-info">{{$data['serviceCostText']}}</div>
             </div>
 
           </div>
@@ -111,7 +123,7 @@
           <div class="dot"></div>
           <div class="additional-option-content">
             <a href="{{$data['editUrl']}}">แก้ไข</a>
-            <a href="{{$data['deleteUrl']}}" data-modal="1" data-modal-action="delete">ลบ</a>
+            <a href="{{$data['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการลบใช่หรือไม่">ลบ</a>
           </div>
         </div>
 

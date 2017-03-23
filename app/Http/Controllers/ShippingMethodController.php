@@ -22,6 +22,15 @@ class ShippingMethodController extends Controller
       )
     ));
 
+    $model->formHelper->loadFieldData('ShippingServiceCostType',array(
+      'key' =>'id',
+      'field' => 'name',
+      'index' => 'shippingServiceCostTypes',
+      'order' => array(
+        array('id','ASC')
+      )
+    ));
+
     $this->data = $model->formHelper->build();
 
     return $this->view('pages.shipping_method.form.shipping_method_add');
@@ -53,18 +62,26 @@ class ShippingMethodController extends Controller
       )
     ));
 
+    $model->formHelper->loadFieldData('ShippingServiceCostType',array(
+      'key' =>'id',
+      'field' => 'name',
+      'index' => 'shippingServiceCostTypes',
+      'order' => array(
+        array('id','ASC')
+      )
+    ));
+
     $this->data = $model->formHelper->build();
 
-    return $this->view('pages.payment_method.form.payment_method_edit');
+    return $this->view('pages.shipping_method.form.shipping_method_edit');
   }
 
   public function editingSubmit(CustomFormRequest $request) {
     $model = Service::loadModel('ShippingMethod')->find($this->param['id']);
 
     if($model->fill($request->all())->save()) {
-
       Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
+      return Redirect::to(route('shop.shipping_method', ['shopSlug' => request()->shopSlug]));
     }else{
       return Redirect::back();
     }

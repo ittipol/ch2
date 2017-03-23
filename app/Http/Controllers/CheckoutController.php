@@ -19,9 +19,10 @@ class CheckoutController extends Controller
 
     $productSummaries = Service::loadModel('Cart')->getProductSummary();
 
+    $shippingMethodModel = Service::loadModel('ShippingMethod');
     $shippingMethods = array();
     foreach ($productSummaries as $productSummary) {
-      $shippingMethods[$productSummary['shop']['id']] = Service::loadModel('ShippingMethod')->getShippingMethodChoice($productSummary['shop']['id']);
+      $shippingMethods[$productSummary['shop']['id']] = $shippingMethodModel->getShippingMethodChoice($productSummary['shop']['id']);
     }
 
     $this->setData('data',Service::loadModel('Cart')->getProductSummary());
@@ -36,12 +37,13 @@ class CheckoutController extends Controller
     
     $productModel = Service::loadModel('Product');
     $cartModel = Service::loadModel('Cart');
+    $shippingMethodModel = Service::loadModel('ShippingMethod');
 
     // form data
     $shops = request()->input('shop');
     // Get cart
     $cartProducts = $cartModel->getCart();
-
+// dd(request()->all());
     $error = false;
     $checkoutProducts = array();
     if(!empty($cartProducts)) {
@@ -67,6 +69,10 @@ class CheckoutController extends Controller
           return Redirect::back()->withErrors($this->errorMessage($error['errorType']));
         }
 
+        if($shippingMethodModel->hasShippingMethodChoice($cartProduct['shopId']) && empty($shops[$cartProduct['shopId']]['shipping_method_id'])) {
+          return Redirect::back()->withErrors('ยังไม่ได้เลือกวิธีการจัดส่งสินค้า');
+        }
+
         // allocate product quantity
         $_product->decrement('quantity',$cartProduct['quantity']);
 
@@ -83,17 +89,25 @@ class CheckoutController extends Controller
       return Redirect::back();
     }
 
+    $createAt = date('Y-m-d H:i:s');
+
     $cartModel->disableCheckingError();
 
     $personId = session()->get('Person.id');
     $personName = session()->get('Person.name');
     $orderStatusId = Service::loadModel('OrderStatus')->getIdByalias('pending-seller-confirmation');
 
+    $order = Service::loadModel('Order');
+    // $orderShipping = Service::loadModel('OrderShipping');
+    $orderProductModel = Service::loadModel('OrderProduct');
+    $orderTotalModel = Service::loadModel('OrderTotal');
+
     foreach ($checkoutProducts as $shopId => $products) {
 
-      $order = Service::loadModel('Order');
+      dd($shippingMethodModel->find($shops[$shopId]['shipping_method_id']));
 
       $order
+      ->newInstance()
       ->fill(array(
         'invoice_prefix' => $order->getInvoicePrefix(),
         'invoice_number' => $order->getInvoiceNumber($shopId),
@@ -106,8 +120,10 @@ class CheckoutController extends Controller
       ))
       ->save();
 
-      $orderProductModel = Service::loadModel('OrderProduct');
-      $orderTotalModel = Service::loadModel('OrderTotal');
+      // order shipping
+      if(!empty($shops[$shopId]['shipping_method_id'])) {
+
+      }
 
       foreach ($products as $product) {
 
@@ -131,13 +147,6 @@ class CheckoutController extends Controller
               'shipping_cost' => $productShipping->calShippingCost($_product,$product['quantity'])
             );
           }
-
-          // $shipping = array(
-          //   // 'free_shipping' => $productShipping->free_shipping,
-          //   // 'shipping_cost' => $productShipping->calShippingCost($_product,$product['quantity'])
-          //   // 'shipping_cost' => $productShipping->shipping_cost,
-          //   // 'product_shipping_amount_type_id' => $productShipping->product_shipping_amount_type_id
-          // );
 
         }
 

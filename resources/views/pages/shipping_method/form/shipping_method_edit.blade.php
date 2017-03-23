@@ -16,7 +16,11 @@
   @include('components.form_error') 
 
   <?php 
-    echo Form::open(['id' => 'main_form','method' => 'post', 'enctype' => 'multipart/form-data']);
+    echo Form::model($_formData, [
+      'id' => 'main_form',
+      'method' => 'PATCH',
+      'enctype' => 'multipart/form-data'
+    ]);
   ?>
 
   <?php
