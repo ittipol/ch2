@@ -115,7 +115,7 @@
 
         <label class="choice-box">
           <?php
-            echo Form::radio('order_shipping', 2, null, array(
+            echo Form::radio('order_shipping', 2, $order['order_free_shipping'], array(
               'id' => 'free_order_shipping'
             ));
           ?> 
@@ -126,7 +126,7 @@
       <h4>กำหนดค่าจัดส่งของการสั่งซื้อนี้</h4>
       <p class="notice info">เว้นว่างเมื่อไม่ต้องการกำหนดค่าจัดส่งของการสั่งซื้อนี้</p>
       <?php
-        echo Form::text('shipping_cost_order_value', null, array(
+        echo Form::text('order_shipping_cost', $order['order_shipping_cost'], array(
           'class' => 'shipping-cost-input shipping_cost_order_input',
           'placeholder' => 'ค่าจัดส่งของการสั่งซื้อนี้',
           'autocomplete' => 'off',

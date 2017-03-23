@@ -50,18 +50,13 @@ class OrderController extends Controller
 
     $this->setData('order',$model->modelData->build(true));
     $this->setData('orderProducts',$model->getOrderProducts());
-    // $this->setData('orderTotals',$model->getSummary(true));
     $this->setData('orderTotals',$model->orderTotals());
-
     $this->setData('orderStatuses',$model->getOrderStatuses());
+    $this->setData('orderShippingMethod',$model->getOrderShippingMethod());
+    $this->setData('orderShippingCosts',$model->getOrderShippingCostSummary());
+
     $this->setData('percent',$model->getOrderProgress());
 
-    // Get Shipping cost of this order
-    $this->setData('orderShippingCosts',$model->getOrderShippingCostSummary());
- 
-    // $this->setData('shop',$shop->modelData->build(true));
-    // $this->setData('shopImageUrl',$shop->getProfileImageUrl());
-    // $this->setData('shopCoverUrl',$shop->getCoverUrl());
     $this->setData('shopUrl','shop/'.$slug);
 
     return $this->view('pages.order.detail');
@@ -186,7 +181,6 @@ class OrderController extends Controller
 
     $this->setData('order',$model->modelData->build(true));
     $this->setData('orderProducts',$model->getOrderProducts());
-    // $this->setData('orderTotals',$model->getSummary(true));
     $this->setData('orderTotals',$model->orderTotals());
 
     if($model->order_status_id == 1) {
@@ -197,7 +191,9 @@ class OrderController extends Controller
       $this->setData('PaymentMethodAddUrl',request()->get('shopUrl').'payment_method');
     }
 
+    $this->setData('orderShippingMethod',$model->getOrderShippingMethod());
     $this->setData('orderStatuses',$model->getOrderStatuses());
+    
     $this->setData('percent',$model->getOrderProgress());
 
     $this->setData('hasPaymentMethod',$hasPaymentMethod);
@@ -219,15 +215,6 @@ class OrderController extends Controller
     }
 
     $paymentMethodModel = Service::loadModel('PaymentMethod');
-    // $paymentMethods = $paymentMethodModel
-    // ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $paymentMethodModel->getTable().'.id')
-    // ->where([
-    //   ['shop_relate_to.model','like',$paymentMethodModel->modelName],
-    //   ['shop_relate_to.shop_id','=',request()->get('shopId')]
-    // ])
-    // ->select($paymentMethodModel->getTable().'.id',$paymentMethodModel->getTable().'.name')
-    // ->orderBy($paymentMethodModel->getTable().'.name','ASC');
-
     if(!$paymentMethodModel->hasPaymentMethod(request()->get('shopId'))) {
       Message::displayWithDesc('ไม่พบวิธีการชำระเงินชองคุณ','กรุณาเพิ่มวิธีการชำระเงินของคุณอย่างน้อย 1 วิธี เพื่อใช่ในการกำหนดวิธีการชำระเงินให้กับลูกค้า','error');
       return Redirect::to('shop/'.request()->shopSlug.'/payment_method/');
@@ -240,8 +227,8 @@ class OrderController extends Controller
 
     $this->setData('order',$model->modelData->build(true));
     $this->setData('orderProducts',$model->getOrderProducts());
-    // $this->setData('orderTotals',$model->getSummary(true));
     $this->setData('orderTotals',$model->orderTotals());
+    $this->setData('orderShippingMethod',$model->getOrderShippingMethod());
 
     $this->setData('hasProductNotSetShippingCost',$model->checkHasProductNotSetShippingCost());
     $this->setData('hasProductHasShippingCost',$model->checkHasProductHasShippingCost());
@@ -289,7 +276,7 @@ class OrderController extends Controller
 
     }else{
 
-      $orderShippingCost = request()->get('shipping_cost_order_value');
+      $orderShippingCost = request()->get('order_shipping_cost');
       $products = request()->get('products');
 
       // Validation

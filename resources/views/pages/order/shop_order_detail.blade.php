@@ -90,7 +90,7 @@
 
     </div>
 
-    <div class="col-md-8 col-sm-12">
+    <div class="col-md-4 col-sm-12">
 
       <div class="detail-info-section no-margin">
         <h4>ที่อยู่สำหรับการจัดส่ง</h4>
@@ -109,6 +109,38 @@
           @else
           ไม่มีข้อความจากผู้ซื้อ
           @endif
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-4 col-sm-12">
+
+      <div class="detail-group">
+        <h4>วิธีการจัดส่งสินค้า</h4>
+        <div class="line"></div>
+        <div class="detail-group-info-section">
+
+          <div class="detail-group-info">
+            <h5 class="title">การจัดส่งสินค้า</h5>
+            <p>{{$orderShippingMethod['shipping_method_name']}}</p>
+          </div>
+
+          <div class="detail-group-info">
+            <h5 class="title">ผู้ให้บริการการจัดส่ง</h5>
+            <p>{{$orderShippingMethod['shipping_service']}}</p>
+          </div>
+
+          <div class="detail-group-info">
+            <h5 class="title">รูปแบบการคิดค่าจัดส่ง</h5>
+            <p>{{$orderShippingMethod['shipping_service_cost_type']}}</p>
+          </div>
+
+          <div class="detail-group-info">
+            <h5 class="title">ระยะเวลาจัดส่ง</h5>
+            <p>{{$orderShippingMethod['shipping_time']}}</p>
+          </div>
+
         </div>
       </div>
 

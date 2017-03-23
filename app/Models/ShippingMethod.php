@@ -71,6 +71,21 @@ class ShippingMethod extends Model
 
   }
 
+  public function getCustomerPickupItemInfo() {
+    return array(
+      'id' => 0,
+      'name' => 'รับสินค้าเอง',
+      'shippingService' => '-',
+      'shipping_time' => '-',
+      'shippingServiceCostType' => '-',
+      'serviceCostText' => '-',
+    );
+  }
+
+  public function getShippingMethodInfo() {
+
+  }
+
   public function getShippingMethodChoice($shopId) {
     $shippingMethods = $this
     ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $this->getTable().'.id')
@@ -129,7 +144,25 @@ class ShippingMethod extends Model
     
   }
 
-  public function getShippingMethod($shopId,$build = false) {
+  public function hasShippingMethod($id,$shopId) {
+
+    if($id == 0) {
+      return Shop::select('customer_can_pickup_item')->find($shopId)->customer_can_pickup_item;
+    }else{
+      return $this
+      ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $this->getTable().'.id')
+      ->where([
+        [$this->getTable().'.id','=',$id],
+        ['shop_relate_to.model','like',$this->modelName],
+        ['shop_relate_to.shop_id','=',$shopId]
+      ])
+      ->select($this->getTable().'.*')
+      ->exists();
+    }
+
+  }
+
+  public function getShippingMethods($shopId,$build = false) {
     $shippingMethods = $this
     ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $this->getTable().'.id')
     ->where([

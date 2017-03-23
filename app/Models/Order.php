@@ -10,7 +10,7 @@ use App\library\date;
 class Order extends Model
 {
   protected $table = 'orders';
-  protected $fillable = ['invoice_prefix','invoice_number','shop_id','person_id','person_name','shipping_address','payment_detail','message_to_seller','order_status_id','shipping_cost_detail'];
+  protected $fillable = ['invoice_prefix','invoice_number','shop_id','person_id','person_name','shipping_address','payment_detail','message_to_seller','order_status_id','order_free_shipping','order_shipping_cost','shipping_cost_detail'];
   protected $modelRelations = array('OrderProduct','OrderTotal','PaymentMethodToOrder');
 
   public $formHelper = true;
@@ -173,7 +173,7 @@ class Order extends Model
     $summaries = array(
       'subTotal' => 'getOrderSubTotal',
       'shippingCost' => 'getOrderShippingCost',
-      // 'savingPrice' => 'getOrderSavingPrice',
+      'savingPrice' => 'getOrderSavingPrice',
       'total' => 'getOrderTotal'
     );
 
@@ -228,6 +228,24 @@ class Order extends Model
     }
 
     return $shippingCost;
+
+  }
+
+  public function getOrderSavingPrice($orderProducts,$format) {
+
+    $currency = new Currency;
+
+    $savingPrice = 0;
+
+    foreach ($orderProducts as $orderProduct) {
+      $savingPrice += $orderProduct->getOrderSavingPrice();
+    }
+
+    if($format) {
+      return $currency->format($savingPrice);
+    }
+
+    return $savingPrice;
 
   }
 
@@ -289,9 +307,15 @@ class Order extends Model
     $currency = new Currency;
 
     $orderProducts = $this->getRelatedData('OrderProduct');
-    
+
     if($this->order_status_id == 1) {
+
       $orderShippingCost = 'ยังไม่ระบุจากผู้ขาย';
+      if($this->order_free_shipping) {
+        $orderShippingCost = 'จัดส่งฟรี';
+      }elseif($this->order_shipping_cost != null) {
+        $orderShippingCost = $currency->format($this->order_shipping_cost);
+      }
 
       $productShippingCost = 0;
       $waitingConfirm = true;
@@ -312,7 +336,12 @@ class Order extends Model
       }
 
     }else{
-      $orderShippingCost = $currency->format($this->order_shipping_cost);
+
+      if($this->order_free_shipping) {
+        $orderShippingCost = 'จัดส่งฟรี';
+      }else {
+        $orderShippingCost = $currency->format($this->order_shipping_cost);
+      }
 
       $productShippingCost = 0;
       foreach ($orderProducts as $orderProduct) {
@@ -330,9 +359,22 @@ class Order extends Model
 
   }
 
+  public function getOrderShippingMethod() {
+
+    $orderShipping = $this->getRelatedData('orderShipping',array(
+      'first' => true
+    ));
+    
+    if(empty($orderShipping)) {
+      return null;
+    }
+
+    return $orderShipping->buildModelData();
+
+  }
+
   public function buildModelData() {
 
-    // $currency = new Currency;
     $date = new Date;
 
     return array(
@@ -342,9 +384,10 @@ class Order extends Model
       'shipping_address' => $this->shipping_address,
       'shopName' => $this->shop->name,
       'order_status_id' => $this->order_status_id,
+      'order_free_shipping' => $this->order_free_shipping,
+      'order_shipping_cost' => $this->order_shipping_cost,
       'orderStatusName' => $this->orderStatus->name,
       'message_to_seller' => $this->message_to_seller,
-      // '_order_shipping_cost' => $currency->format($this->order_shipping_cost),
       'orderedDate' => $date->covertDateToSting($this->created_at->format('Y-m-d')),
       'shipping_cost_detail' => $this->shipping_cost_detail
     );

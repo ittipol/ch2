@@ -8,7 +8,7 @@ use App\library\cache;
 class OrderProduct extends Model
 {
   protected $table = 'order_products';
-  protected $fillable = ['order_id','product_id','product_name','price','quantity','free_shipping','shipping_cost','tax','total'];
+  protected $fillable = ['order_id','product_id','product_name','full_price','price','quantity','free_shipping','shipping_cost','tax','total'];
   public $timestamps  = false;
 
   public function buildModelData() {
@@ -65,7 +65,19 @@ class OrderProduct extends Model
 
   }
 
-  // public function getOrderSavingPrice($format = false) {}
+  public function getOrderSavingPrice($format = false) {
+
+    $currency = new Currency;
+
+    $savingPrice = ($this->full_price - $this->price) * $this->quantity;
+
+    if($format) {
+      return $currency->format($savingPrice);
+    }
+
+    return $savingPrice;
+
+  }
 
   public function getOrderTotal($format = false) {
     

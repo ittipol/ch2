@@ -338,11 +338,11 @@
 }
 
 .detail-group h4 {
-	color: #fff;
+/*	color: #fff;
 	font-size: 14px;
 	padding: 10px;
 	background-color: #0071c5;
-	margin: 0;
+	margin: 0;*/
 }
 
 .detail-group .detail-info {
@@ -434,7 +434,7 @@
 }
 
 .order-status .order-status-box.shipment .image > .status-image {
-	background-image: url(/images/icons/truck.png);
+	background-image: url(/images/icons/truck-white.png);
 }
 
 .order-status .order-status-box.complete .image > .status-image {
