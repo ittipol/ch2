@@ -160,8 +160,10 @@
       <div class="detail-group">
         <h4>วิธีการจัดส่งสินค้า</h4>
         <div class="line"></div>
-        <div class="detail-group-info-section">
 
+        @if(!empty($orderShippingMethod))
+
+        <div class="detail-group-info-section">
           <div class="detail-group-info">
             <h5 class="title">การจัดส่งสินค้า</h5>
             <p>{{$orderShippingMethod['shipping_method_name']}}</p>
@@ -169,20 +171,28 @@
 
           <div class="detail-group-info">
             <h5 class="title">ผู้ให้บริการการจัดส่ง</h5>
-            <p>{{$orderShippingMethod['shipping_service']}}</p>
+            <p>{{$orderShippingMethod['shippingService']}}</p>
           </div>
 
           <div class="detail-group-info">
             <h5 class="title">รูปแบบการคิดค่าจัดส่ง</h5>
-            <p>{{$orderShippingMethod['shipping_service_cost_type']}}</p>
+            <p>{{$orderShippingMethod['shippingServiceCostType']}}</p>
           </div>
 
           <div class="detail-group-info">
             <h5 class="title">ระยะเวลาจัดส่ง</h5>
             <p>{{$orderShippingMethod['shipping_time']}}</p>
           </div>
-
         </div>
+
+        @else
+
+          <div class="detail-info">
+            -
+          </div>
+
+        @endif
+
       </div>
 
     </div>

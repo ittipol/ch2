@@ -41,6 +41,17 @@ class PaymentMethod extends Model
     ->get();
   }
 
+  public function checkPaymentMethodExistById($id,$shopId) {
+    return $this
+    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $this->getTable().'.id')
+    ->where([
+      [$this->getTable().'.id','=',$id],
+      ['shop_relate_to.model','like',$this->modelName],
+      ['shop_relate_to.shop_id','=',$shopId]
+    ])
+    ->exists();
+  }
+
   public function hasPaymentMethod($shopId) {
     return $this
     ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $this->getTable().'.id')
@@ -48,8 +59,6 @@ class PaymentMethod extends Model
       ['shop_relate_to.model','like',$this->modelName],
       ['shop_relate_to.shop_id','=',$shopId]
     ])
-    ->select($this->getTable().'.id',$this->getTable().'.name')
-    ->orderBy($this->getTable().'.name','ASC')
     ->exists();
   }
 

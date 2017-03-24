@@ -135,7 +135,6 @@
 
           <div class="shipping-method-input space-top-30">
             <h5>เลือกวิธีการจัดส่งสินค้า</h5>
-            <!-- <div class="line space-top-bottom-10"></div> -->
 
             @if(!empty($shippingMethods[$value['shop']['id']]))
 
@@ -151,15 +150,22 @@
                         <div class="col-md-4 col-xs-12">
                           <h5>{{$shippingMethod['name']}}</h5>
                           <p>ผู้ให้บริการ: <strong>{{$shippingMethod['shippingService']}}</strong></p>
+                          <p>ระยะเวลาจัดส่ง: <strong>{{$shippingMethod['shipping_time']}}</strong></p>
                         </div>
 
                         <div class="col-md-4 col-xs-12">
                           <p>รูปแบบการคิดค่าจัดส่ง: <strong>{{$shippingMethod['shippingServiceCostType']}}</strong></p>
-                          <p>ค่าจัดส่ง: <strong>{{$shippingMethod['serviceCostText']}}</strong></p>
                         </div>
 
                         <div class="col-md-4 col-xs-12">
-                          <p>ระยะเวลาจัดส่ง: <strong>{{$shippingMethod['shipping_time']}}</strong></p>
+                          <div class="shipping-cost">
+                            @if(empty($shippingMethod['serviceCostText']) || ($shippingMethod['serviceCostText'] == '-'))
+                              -
+                            @else
+                              + {{$shippingMethod['serviceCostText']}}
+                            @endif
+                            
+                          </div>
                         </div>
 
                       </div>

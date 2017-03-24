@@ -94,11 +94,55 @@
   ?>
 
   <div class="space-top-30">
+    <h4>วิธีการจัดส่งสินค้า</h4>
+    <div class="line"></div>
+
+    @if(empty($orderShippingMethod))
+      <div class="secondary-message-box info">
+        <div>*** การสั่งซื้อนี้ยังไม่ได้กำหนดวิธีการจัดส่งสินค้า</div>
+      </div>
+
+      <div class="shipping-method-input">
+        @foreach($shippingMethods as $shippingMethod)
+          <div class="shipping-method-choice">
+            <label class="choice-box">
+              <?php
+                echo Form::radio('shipping_method_id', $shippingMethod['id'], $shippingMethod['select']);
+              ?> 
+              <div class="inner">
+                <div class="row">
+
+                  <div class="col-md-4 col-xs-12">
+                    <h5>{{$shippingMethod['name']}}</h5>
+                    <p>ผู้ให้บริการ: <strong>{{$shippingMethod['shippingService']}}</strong></p>
+                    
+                  </div>
+
+                  <div class="col-md-4 col-xs-12">
+                    <p>ระยะเวลาจัดส่ง: <strong>{{$shippingMethod['shipping_time']}}</strong></p>
+                  </div>
+
+                  <div class="col-md-4 col-xs-12">
+                    <p>รูปแบบการคิดค่าจัดส่ง: <strong>{{$shippingMethod['shippingServiceCostType']}}</strong></p>
+                  </div>
+
+                </div>
+              </div>
+            </label>
+          </div>
+        @endforeach
+      </div>
+
+    @endif
+
+  </div>
+
+  <div class="space-top-30">
     <h4 class="require">ค่าจัดส่งสินค้า</h4>
     <div class="line"></div>
 
-    <div class="secondary-message-box">
-      <div>* เมื่อกำหนดค่าจัดส่งสินค้าทั้งหมดแล้ว ค่าจัดส่งทั้งหมดจะถูกนำมารวมและจะเป็นจำนวนค่าจัดส่งสุทธิที่ลูกค้าต้องชำระ</div>
+    <div class="secondary-message-box info">
+      <div>*** หลังจากกำหนดค่าจัดส่งสินค้าทั้งหมดแล้ว ค่าจัดส่งทั้งหมดจะถูกนำมารวมและจะเป็นจำนวนค่าจัดส่งสุทธิที่ลูกค้าต้องชำระ</div>
     </div>
 
     <div class="shipping-cost-input-section">

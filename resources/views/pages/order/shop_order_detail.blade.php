@@ -58,11 +58,21 @@
   </div>
 
   <div class="row">
+    <div class="col-sm-12">
+      <a href="" class="button">แสดงข้อความจากผูซื้อ</a>
+    </div>
+  </div>
+
+  <div class="line space-top-bottom-20"></div>
+
+  <div class="row">
 
     <div class="col-md-4 col-sm-12">
 
       <div class="detail-group">
         <h4>รายละเอียดการสั่งซื้อ</h4>
+        <div class="line"></div>
+
         <div class="detail-group-info-section">
 
           <div class="detail-group-info">
@@ -100,18 +110,6 @@
         </div>
       </div>
 
-      <div class="detail-info-section">
-        <h4>ข้อความจากผูซื้อ</h4>
-        <div class="line"></div> 
-        <div class="detail-info">
-          @if(!empty($order['message_to_seller']))
-          {{$order['message_to_seller']}}
-          @else
-          ไม่มีข้อความจากผู้ซื้อ
-          @endif
-        </div>
-      </div>
-
     </div>
 
     <div class="col-md-4 col-sm-12">
@@ -119,6 +117,9 @@
       <div class="detail-group">
         <h4>วิธีการจัดส่งสินค้า</h4>
         <div class="line"></div>
+
+        @if(!empty($orderShippingMethod))
+
         <div class="detail-group-info-section">
 
           <div class="detail-group-info">
@@ -142,11 +143,40 @@
           </div>
 
         </div>
+
+        @else
+
+          <div class="detail-info">
+            -
+          </div>
+
+        @endif
+
       </div>
 
     </div>
 
   </div>
+
+  <!-- <div class="row">
+
+    <div class="col-sm-12">
+
+      <div class="detail-info-section">
+        <h4>ข้อความจากผูซื้อ</h4>
+        <div class="line"></div> 
+        <div class="detail-info">
+          @if(!empty($order['message_to_seller']))
+          {{$order['message_to_seller']}}
+          @else
+          ไม่มีข้อความจากผู้ซื้อ
+          @endif
+        </div>
+      </div>
+
+    </div>
+
+  </div> -->
 
   <div class="cart space-top-30">
 

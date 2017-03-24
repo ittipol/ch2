@@ -215,9 +215,20 @@ class OrderController extends Controller
     }
 
     $paymentMethodModel = Service::loadModel('PaymentMethod');
-    if(!$paymentMethodModel->hasPaymentMethod(request()->get('shopId'))) {
-      Message::displayWithDesc('ไม่พบวิธีการชำระเงินชองคุณ','กรุณาเพิ่มวิธีการชำระเงินของคุณอย่างน้อย 1 วิธี เพื่อใช่ในการกำหนดวิธีการชำระเงินให้กับลูกค้า','error');
-      return Redirect::to('shop/'.request()->shopSlug.'/payment_method/');
+    $shippingMethodModel = Service::loadModel('ShippingMethod');
+
+    $paymentMethodNotExist = !$paymentMethodModel->hasPaymentMethod(request()->get('shopId'));
+    $shippingMethodNotExist = !$shippingMethodModel->hasShippingMethod(request()->get('shopId'));
+
+    if($paymentMethodNotExist && $shippingMethodNotExist) {
+      Message::display('ไม่พบวิธีการชำระเงินและวิธีการจัดส่ง กรุณาเพิ่มวิธีการชำระเงินและวิธีการจัดส่งในร้านค้าของคุณ','error');
+      return Redirect::to('shop/'.request()->shopSlug.'/product');
+    }elseif($paymentMethodNotExist) {
+      Message::display('ไม่พบวิธีการชำระเงิน กรุณาเพิ่มวิธีการชำระเงินในร้านค้าของคุณ','error');
+      return Redirect::to('shop/'.request()->shopSlug.'/payment_method');
+    }elseif($shippingMethodNotExist) {
+      Message::display('ไม่พบวิธีการจัดส่ง กรุณาเพิ่มวิธีการจัดส่งในร้านค้าของคุณ','error');
+      return Redirect::to('shop/'.request()->shopSlug.'/shipping_method');
     }
 
     $_paymentMethods = array();
@@ -225,10 +236,15 @@ class OrderController extends Controller
       $_paymentMethods[$paymentMethod['id']] = $paymentMethod['name'];
     }
 
+    $orderShippingMethod = $model->getOrderShippingMethod();
+    if(empty($orderShippingMethod)) {
+      $this->setData('shippingMethods',$shippingMethodModel->getShippingMethodChoice(request()->get('shopId')));
+    }
+
     $this->setData('order',$model->modelData->build(true));
     $this->setData('orderProducts',$model->getOrderProducts());
     $this->setData('orderTotals',$model->orderTotals());
-    $this->setData('orderShippingMethod',$model->getOrderShippingMethod());
+    $this->setData('orderShippingMethod',$orderShippingMethod);
 
     $this->setData('hasProductNotSetShippingCost',$model->checkHasProductNotSetShippingCost());
     $this->setData('hasProductHasShippingCost',$model->checkHasProductHasShippingCost());
@@ -253,16 +269,44 @@ class OrderController extends Controller
 
     $validation = new Validation;
 
-    // check has payment_method
+    $paymentMethodModel = Service::loadModel('PaymentMethod');
+    $shippingMethodModel = Service::loadModel('ShippingMethod');
+
+    // check input payment_method
     if(empty(request()->get('payment_method'))) {
-      return Redirect::back()->withErrors(['กรุณาเลือกวิธีการชำระเงินอย่างน้อย 1 วิธีให้กับการสั่งซื้อนี้'])->withInput(request()->all());
+      return Redirect::back()->withErrors(['กรุณาเลือกวิธีการชำระเงินให้กับการสั่งซื้อนี้'])->withInput(request()->all());
     }
+    // check payment method has exists
+    foreach (request()->get('payment_method') as $id) {
+      if(!$paymentMethodModel->checkPaymentMethodExistById($id,request()->get('shopId'))) {
+        return Redirect::back()->withErrors(['พบวิธีการชำระเงินที่เลือกไม่ถูกต้อง'])->withInput(request()->all());
+      }
+    }
+    // check shipping method has exists
+    if(empty($model->getOrderShippingMethod()) && !$shippingMethodModel->checkShippingMethodExistById(request()->get('shipping_method_id'),request()->get('shopId'))) {
+      return Redirect::back()->withErrors(['พบวิธีการจัดส่งที่เลือกไม่ถูกต้อง'])->withInput(request()->all());
+    }
+    
+    // if(empty($model->getOrderShippingMethod()) && $shippingMethodModel->checkShippingMethodExistById(request()->get('shipping_method_id'),request()->get('shopId'))) {
+    //   // get shipping method
+    //   $shippingMethod = $shippingMethodModel->find(request()->get('shipping_method_id'));
+    //   // save shipping method
+    //   Service::loadModel('OrderShipping')
+    //   ->fill(array(
+    //     'order_id' => $model->id,
+    //     'shipping_method_id' => $shippingMethod->id,
+    //     'shipping_method_name' => $shippingMethod->name,
+    //     'shipping_service_id' => $shippingMethod->shipping_service_id,
+    //     'shipping_service_cost_type_id' => $shippingMethod->shipping_service_cost_type_id,
+    //     'shipping_time' => $shippingMethod->shipping_time
+    //   ))
+    //   ->save();
+    // }
 
     if(request()->get('order_shipping') == 2) {
       // free shipping
       $model->order_free_shipping = 1;
       $model->order_shipping_cost = null;
-      // $model->save();
 
       $orderProducts = Service::loadModel('OrderProduct')
       ->where('order_id','=',$model->id)
@@ -279,11 +323,9 @@ class OrderController extends Controller
       $orderShippingCost = request()->get('order_shipping_cost');
       $products = request()->get('products');
 
-      // Validation
       if(!empty($orderShippingCost) && !$validation->isCurrency($orderShippingCost)) {
         return Redirect::back()->withErrors(['จำนวนค่าจัดส่งสินค้าไม่ถูกต้อง'])->withInput(request()->all());
       }
-      // ###
 
       if(!empty(request()->get('cancel_product_shipping_cost')) && (request()->get('cancel_product_shipping_cost') == 1)) {
         // cancel all
@@ -374,18 +416,32 @@ class OrderController extends Controller
 
     }
 
+    if(empty($model->getOrderShippingMethod())) {
+      // get shipping method
+      $shippingMethod = $shippingMethodModel->find(request()->get('shipping_method_id'));
+      // save shipping method to order
+      Service::loadModel('OrderShipping')
+      ->fill(array(
+        'order_id' => $model->id,
+        'shipping_method_id' => $shippingMethod->id,
+        'shipping_method_name' => $shippingMethod->name,
+        'shipping_service_id' => $shippingMethod->shipping_service_id,
+        'shipping_service_cost_type_id' => $shippingMethod->shipping_service_cost_type_id,
+        'shipping_time' => $shippingMethod->shipping_time
+      ))
+      ->save();
+    }
+
     // Add payment method to order 
     $paymentMethodToOrderModel = Service::loadModel('PaymentMethodToOrder');
-    if(!empty(request()->get('payment_method'))) {
-      foreach (request()->get('payment_method') as $paymentMethodId) {
-        $paymentMethodToOrderModel
-        ->newInstance()
-        ->fill(array(
-          'payment_method_id' => $paymentMethodId,
-          'order_id' => $model->id
-        ))
-        ->save();
-      }
+    foreach (request()->get('payment_method') as $id) {
+      $paymentMethodToOrderModel
+      ->newInstance()
+      ->fill(array(
+        'payment_method_id' => $id,
+        'order_id' => $model->id
+      ))
+      ->save();
     }
 
     // shipping cost detail
@@ -396,7 +452,7 @@ class OrderController extends Controller
     // 
     $model->order_status_id = Service::loadModel('OrderStatus')->getIdByalias('pending-customer-payment');
     $model->save();
-
+dd('pppp');
     Message::display('การสั่งซื้อถูกยืนยันแล้ว','success');
     return Redirect::to('shop/'.$this->param['shopSlug'].'/order/'.$model->id);
 

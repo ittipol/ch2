@@ -93,17 +93,6 @@ class ShippingMethod extends Model
 
   }
 
-  // public function getCustomerPickupItemInfo() {
-  //   return array(
-  //     'id' => 0,
-  //     'name' => 'รับสินค้าเอง',
-  //     'shippingService' => '-',
-  //     'shipping_time' => '-',
-  //     'shippingServiceCostType' => '-',
-  //     'serviceCostText' => '-',
-  //   );
-  // }
-
   public function getShippingMethodChoice($shopId) {
     $shippingMethods = $this
     ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $this->getTable().'.id')
@@ -127,7 +116,7 @@ class ShippingMethod extends Model
     return $_shippingMethods;
   }
 
-  public function hasShippingMethodChoice($shopId) {
+  public function hasShippingMethod($shopId) {
 
     $shippingMethods = $this
     ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $this->getTable().'.id')
@@ -146,7 +135,7 @@ class ShippingMethod extends Model
     
   }
 
-  public function hasShippingMethod($id,$shopId) {
+  public function checkShippingMethodExistById($id,$shopId) {
     return $this
     ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $this->getTable().'.id')
     ->where([
@@ -154,7 +143,6 @@ class ShippingMethod extends Model
       ['shop_relate_to.model','like',$this->modelName],
       ['shop_relate_to.shop_id','=',$shopId]
     ])
-    ->select($this->getTable().'.*')
     ->exists();
   }
 
@@ -233,7 +221,6 @@ class ShippingMethod extends Model
       [$this->getTable().'.special','=',1],
       [$this->getTable().'.special_alias','=',$alias]
     ])
-    ->select($this->getTable().'.*')
     ->exists();
   }
 
@@ -266,12 +253,7 @@ class ShippingMethod extends Model
     if(!empty($this->shippingServiceCostType)) {
       $shippingServiceCostType = $this->shippingServiceCostType->name;
     }
-// dd(array(
-//       'id' => $this->id,
-//       'name' => $this->name,
-//       'shippingService' => $shippingService,
-//       'shippingServiceCostType' => $shippingServiceCostType,
-//     ));
+
     return array(
       'id' => $this->id,
       'name' => $this->name,

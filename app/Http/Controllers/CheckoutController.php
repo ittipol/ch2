@@ -69,11 +69,11 @@ class CheckoutController extends Controller
           return Redirect::back()->withErrors($this->errorMessage($error['errorType']));
         }
 
-        if($shippingMethodModel->hasShippingMethodChoice($cartProduct['shopId'])) {
+        if($shippingMethodModel->hasShippingMethod($cartProduct['shopId'])) {
 
           if(!isset($shops[$cartProduct['shopId']]['shipping_method_id'])) {
             return Redirect::back()->withErrors('ยังไม่ได้เลือกวิธีการจัดส่งสินค้า');
-          }elseif(!$shippingMethodModel->hasShippingMethod($shops[$cartProduct['shopId']]['shipping_method_id'],$cartProduct['shopId'])){
+          }elseif(!$shippingMethodModel->checkShippingMethodExistById($shops[$cartProduct['shopId']]['shipping_method_id'],$cartProduct['shopId'])){
             return Redirect::back()->withErrors('เกิดข้อผิดพลาดในการเลือกวิธีการจัดส่งสินค้า');
           }
          
@@ -210,7 +210,7 @@ class CheckoutController extends Controller
         ->save();
 
       }
-dd('xxxds');
+
       // delete products in cart
       $cartModel->where([
         ['shop_id','=',$shopId],
