@@ -170,15 +170,23 @@
 
                     <div class="col-xs-8">
 
+                      <div class="space-bottom-20">
+                        <div>มูลค่าสินค้า: <strong>{{$orderProduct['_total']}}</strong></div>
+                        <div>จำนวนที่สั่งซื้อ: <strong>{{$orderProduct['quantity']}} {{$orderProduct['product_unit']}}</strong></div>
+                        <div>นำ้หนักรวมสินค้า: <strong>{{$orderProduct['totalWeight']}}</strong></div>
+                      </div>
+
+                      <div>
                       <?php
                         echo Form::text('products['.$orderProduct['product_id'].'][shipping_cost]', $orderProduct['shipping_cost'], array(
                           'class' => 'shipping-cost-input shipping_cost_product_input',
                           'placeholder' => 'ค่าจัดส่งสินค้า',
                           'autocomplete' => 'off',
-                          // 'role' => 'currency'
+                          'role' => 'currency'
                         ));
                       ?>
-                      <br/>
+                      </div>
+                      
                       <label class="choice-box">
                         <?php
                           echo Form::checkbox('products['.$orderProduct['product_id'].'][free_shipping]', 1, $orderProduct['free_shipping'], array(
@@ -224,6 +232,13 @@
 
                   <div class="col-xs-8">
 
+                    <div class="space-bottom-20">
+                      <div>มูลค่าสินค้า: <strong>{{$orderProduct['_total']}}</strong></div>
+                      <div>จำนวนที่สั่งซื้อ: <strong>{{$orderProduct['quantity']}} {{$orderProduct['product_unit']}}</strong></div>
+                      <div>นำ้หนักรวมสินค้า: <strong>{{$orderProduct['totalWeight']}}</strong></div>
+                    </div>
+
+                    <div>
                     <?php
                       echo Form::text('products['.$orderProduct['product_id'].'][shipping_cost]', $orderProduct['shipping_cost'], array(
                         'class' => 'shipping-cost-input shipping_cost_product_input',
@@ -232,7 +247,8 @@
                         'role' => 'currency'
                       ));
                     ?>
-                    <br/>
+                    </div>
+                    
                     <label class="choice-box">
                       <?php
                         echo Form::checkbox('products['.$orderProduct['product_id'].'][free_shipping]', 1, $orderProduct['free_shipping'], array(

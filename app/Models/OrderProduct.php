@@ -11,6 +11,10 @@ class OrderProduct extends Model
   protected $fillable = ['order_id','product_id','product_name','full_price','price','quantity','free_shipping','shipping_cost','tax','total'];
   public $timestamps  = false;
 
+  public function product() {
+    return $this->hasOne('App\Models\Product','id','product_id');
+  }
+
   public function buildModelData() {
 
     $currency = new Currency;
@@ -24,17 +28,25 @@ class OrderProduct extends Model
       $shippingCostText = 'ยังไม่ระบุจากผู้ขาย';
     }
 
+    $product = $this->product;
+
+    $totalWeight = '';
+    if(!empty($product->weight) && !empty($product->weight_unit_id)) {
+      $totalWeight = ($this->quantity * $product->weight).' '.$product->weightUnit->name;
+    }
+
     return array(
       'id' => $this->id,
       'product_id' => $this->product_id,
       'product_name' => $this->product_name,
       '_price' => $currency->format($this->price),
       'quantity' => $this->quantity,
-      'has_shipping_cost' => $this->has_shipping_cost,
+      '_total' => $currency->format($this->total),
+      'totalWeight' => $totalWeight,
+      'product_unit' => $product->product_unit,
       'free_shipping' => $this->free_shipping,
       'shipping_cost' => $this->shipping_cost,
       'shippingCostText' => $shippingCostText,
-      '_total' => $currency->format($this->total)
     );
 
   }

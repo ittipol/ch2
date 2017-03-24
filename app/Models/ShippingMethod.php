@@ -7,7 +7,7 @@ use App\library\currency;
 class ShippingMethod extends Model
 {
   protected $table = 'shipping_methods';
-  protected $fillable = ['name','shipping_service_id','description','shipping_service_cost_type_id','free_service','service_cost','shipping_time','person_id'];
+  protected $fillable = ['name','shipping_service_id','description','shipping_service_cost_type_id','free_service','service_cost','shipping_time','sort','person_id'];
   protected $modelRelations = array('ShopRelateTo');
 
   public $formHelper = true;
@@ -51,6 +51,14 @@ class ShippingMethod extends Model
     // before saving
     ShippingMethod::saving(function($model){
 
+      if($model->state == 'create') {
+
+        if(empty($model->sort)) {
+          $model->sort = 9;
+        }
+
+      }
+
       switch ($model->shipping_service_cost_type_id) {
         case 2:
           $model->free_service = null;
@@ -80,10 +88,6 @@ class ShippingMethod extends Model
       'shippingServiceCostType' => '-',
       'serviceCostText' => '-',
     );
-  }
-
-  public function getShippingMethodInfo() {
-
   }
 
   public function getShippingMethodChoice($shopId) {
@@ -185,10 +189,16 @@ class ShippingMethod extends Model
   }
 
   public function buildModelData() {
+
+    $shippingService = '';
+    if(!empty($this->shippingService)) {
+      $shippingService = $this->shippingService->name;
+    }
+
     return array(
       'id' => $this->id,
       'name' => $this->name,
-      'shippingService' => $this->shippingService->name
+      'shippingService' => $shippingService
     );
   }
 
@@ -211,11 +221,22 @@ class ShippingMethod extends Model
         break;
     }
 
+    $shippingService = '';
+    $shippingServiceCostType = '';
+
+    if(!empty($this->shippingService)) {
+      $shippingService = $this->shippingService->name;
+    }
+
+    if(!empty($this->shippingServiceCostType)) {
+      $shippingServiceCostType = $this->shippingServiceCostType->name;
+    }
+
     return array(
       'id' => $this->id,
       'name' => $this->name,
-      'shippingService' => $this->shippingService->name,
-      'shippingServiceCostType' => $this->shippingServiceCostType->name,
+      'shippingService' => $shippingService,
+      'shippingServiceCostType' => $shippingServiceCostType,
       'serviceCostText' => $serviceCostText,
       'shipping_time' => !empty($this->shipping_time) ? $this->shipping_time : 'ไม่ระบุ'
     );

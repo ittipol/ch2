@@ -200,6 +200,10 @@ class CheckForPersonHasShopPermission
           'permission' => 'delete',
           'modelName' => 'ShippingMethod'
         ),
+        'shop.shipping_method.add_pickingup_item' => array(
+          'permission' => 'add',
+          'modelName' => 'ShippingMethod'
+        )
       );
 
       if(empty($name) || !isset($pages[$name])) {

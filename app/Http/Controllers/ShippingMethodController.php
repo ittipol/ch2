@@ -100,5 +100,29 @@ class ShippingMethodController extends Controller
     }
 
   }
+
+  public function addPickingupItem() {
+
+    $model = Service::loadModel('ShippingMethod');
+
+    $value = array(
+      'name' => 'รับสินค้าเอง', // default name
+      'shipping_service_id' => 0,
+      'shipping_service_cost_type_id' => 0,
+      'sort' => 2,
+      'ShopRelateTo' => array(
+        'shop_id' => request()->get('shopId')
+      )
+    );
+
+    if($model->fill($value)->save()) {
+      Message::display('เพิ่มตัวเลือก "รับสินค้าเอง" แล้ว','success');
+    }else{
+      Message::display('เกิดข้อผิดพลาด ไม่สามารถเพิ่มตัวเลือก "รับสินค้าเอง" ได้','error');
+    }
+
+    return Redirect::to(route('shop.shipping_method', ['shopSlug' => request()->shopSlug]));
+
+  }
   
 }

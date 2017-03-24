@@ -200,7 +200,7 @@ class ShopController extends Controller
     $this->setData('_formData',request()->get('shop')->formHelper->build());
 
     $this->setData('shippingMethodAddUrl',request()->get('shopUrl').'shipping_method/add');
-    $this->setData('allowPickupItemUrl',request()->get('shopUrl').'allow_pickup_item');
+    $this->setData('addPickingupItemUrl',request()->get('shopUrl').'add_pickingup_item');
 
     $this->setData('allowPickupItem',request()->get('shop')->customer_can_pickup_item);
 
@@ -572,24 +572,24 @@ class ShopController extends Controller
 
   }
 
-  public function allowPickupItem() {
+  // public function allowPickupItem() {
 
-    $model = request()->get('shop');
+  //   $model = request()->get('shop');
     
-    if($model->customer_can_pickup_item) {
-      $model->customer_can_pickup_item = 0;
-      $model->save();
+  //   if($model->customer_can_pickup_item) {
+  //     $model->customer_can_pickup_item = 0;
+  //     $model->save();
 
-      Message::display('ลบตัวเลือก "รับสินค้าเอง" แล้ว','success');
-    }else{
-      $model->customer_can_pickup_item = 1;
-      $model->save();
+  //     Message::display('ลบตัวเลือก "รับสินค้าเอง" แล้ว','success');
+  //   }else{
+  //     $model->customer_can_pickup_item = 1;
+  //     $model->save();
 
-      Message::display('เพิ่มตัวเลือก "รับสินค้าเอง" แล้ว','success');
-    }
+  //     Message::display('เพิ่มตัวเลือก "รับสินค้าเอง" แล้ว','success');
+  //   }
 
-    return Redirect::to('shop/'.request()->shopSlug.'/shipping_method');
+  //   return Redirect::to('shop/'.request()->shopSlug.'/shipping_method');
 
-  }
+  // }
 
 }

@@ -53,7 +53,7 @@ class ModelDialog {
 		});
 
 		$('#modal_dialog_agree').on('click',function(){
-			_this.actionType(_this.action,_this.elem);
+			_this.actionType(_this.elem);
 		});
 
 	}

@@ -36,7 +36,7 @@
 
   <?php 
     echo Form::model($_formData, [
-      'url' => $allowPickupItemUrl,
+      'url' => $addPickingupItemUrl,
       'id' => 'main_form',
       'method' => 'PATCH',
       'enctype' => 'multipart/form-data'

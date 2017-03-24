@@ -294,7 +294,7 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
   Route::get('shop/{shopSlug}/shipping_method/delete/{id}','ShippingMethodController@delete')->name('shop.shipping_method.delete');
 
-  Route::patch('shop/{shopSlug}/allow_pickup_item','ShopController@allowPickupItem')->name('shop.shipping_method.edit');
+  Route::patch('shop/{shopSlug}/add_pickingup_item','ShippingMethodController@addPickingupItem')->name('shop.shipping_method.add_pickingup_item');
 
 });
 
