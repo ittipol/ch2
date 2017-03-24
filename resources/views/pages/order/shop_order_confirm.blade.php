@@ -107,7 +107,11 @@
           <div class="shipping-method-choice">
             <label class="choice-box">
               <?php
-                echo Form::radio('shipping_method_id', $shippingMethod['id'], $shippingMethod['select']);
+                echo Form::radio('shipping_method_id', $shippingMethod['id'], $shippingMethod['select'], array(
+                  'class' => 'shipping-method-rdobox',
+                  'data-free-service' => !empty($shippingMethod['free_service']) ? 1 : 0,
+                  'data-service-cost' => isset($shippingMethod['service_cost']) ? $shippingMethod['service_cost'] : ''
+                ));
               ?> 
               <div class="inner">
                 <div class="row">
@@ -171,7 +175,8 @@
       <p class="notice info">เว้นว่างเมื่อไม่ต้องการกำหนดค่าจัดส่งของการสั่งซื้อนี้</p>
       <?php
         echo Form::text('order_shipping_cost', $order['order_shipping_cost'], array(
-          'class' => 'shipping-cost-input shipping_cost_order_input',
+          'class' => 'shipping-cost-input',
+          'id' => 'shipping_cost_order_input',
           'placeholder' => 'ค่าจัดส่งของการสั่งซื้อนี้',
           'autocomplete' => 'off',
           'role' => 'currency'
@@ -223,7 +228,7 @@
                       <div>
                       <?php
                         echo Form::text('products['.$orderProduct['product_id'].'][shipping_cost]', $orderProduct['shipping_cost'], array(
-                          'class' => 'shipping-cost-input shipping_cost_product_input',
+                          'class' => 'shipping-cost-input shipping-cost-product-input',
                           'placeholder' => 'ค่าจัดส่งสินค้า',
                           'autocomplete' => 'off',
                           'role' => 'currency'
@@ -285,7 +290,7 @@
                     <div>
                     <?php
                       echo Form::text('products['.$orderProduct['product_id'].'][shipping_cost]', $orderProduct['shipping_cost'], array(
-                        'class' => 'shipping-cost-input shipping_cost_product_input',
+                        'class' => 'shipping-cost-input shipping-cost-product-input',
                         'placeholder' => 'ค่าจัดส่งสินค้า',
                         'autocomplete' => 'off',
                         'role' => 'currency'
@@ -387,24 +392,32 @@
 
     load() {
 
+      // console.log(typeof $('.shipping-method-rdobox:checked').data('free-service'));
+      // console.log($('.shipping-method-rdobox:checked').data('service-cost'));
+
+      // console.log(typeof undefined);
+
+      this.shippingMethod($('.shipping-method-rdobox:checked').data('free-service'),$('.shipping-method-rdobox:checked').data('service-cost'));
+
       if($('#free_order_shipping').is(':checked')) {
         $('#cancel_product_shipping_cost').prop('disabled', true);
 
-        $('.shipping_cost_order_input').prop('disabled', true);
-        $('.shipping_cost_product_input').prop('disabled', true);
+        $('#shipping_cost_order_input').prop('disabled', true);
+        $('.shipping-cost-product-input').prop('disabled', true);
         $('.free_shipping_chkbox').prop('disabled', true);
       }else if($('#cancel_product_shipping_cost').is(':checked')) {
-        $('.shipping_cost_product_input').prop('disabled', true);
+        $('.shipping-cost-product-input').prop('disabled', true);
         $('.free_shipping_chkbox').prop('disabled', true);
       }
 
       $('.free_shipping_chkbox').each(function(i, obj) {
         if($(this).is(':checked')) {
-          $(this).parent().parent().find('.shipping_cost_product_input').prop('disabled', true);
+          $(this).parent().parent().find('.shipping-cost-product-input').prop('disabled', true);
         }
       });
 
       this.bind();
+
     }
 
     bind() {
@@ -415,8 +428,8 @@
           $('#cancel_product_shipping_cost').prop('disabled', false);
 
           if(!$('#cancel_product_shipping_cost').is(':checked')) {
-            $('.shipping_cost_order_input').prop('disabled', false);
-            $('.shipping_cost_product_input').prop('disabled', false);
+            $('#shipping_cost_order_input').prop('disabled', false);
+            $('.shipping-cost-product-input').prop('disabled', false);
             $('.free_shipping_chkbox').prop('disabled', false);
           }
 
@@ -428,30 +441,52 @@
 
           $('#cancel_product_shipping_cost').prop('disabled', true);
 
-          $('.shipping_cost_order_input').prop('disabled', true);
-          $('.shipping_cost_product_input').prop('disabled', true);
+          $('#shipping_cost_order_input').prop('disabled', true);
+          $('.shipping-cost-product-input').prop('disabled', true);
           $('.free_shipping_chkbox').prop('disabled', true);
         }
       });
 
       $('#cancel_product_shipping_cost').on('change',function(){
         if($(this).is(':checked')) {
-          $('.shipping_cost_product_input').prop('disabled', true);
+          $('.shipping-cost-product-input').prop('disabled', true);
           $('.free_shipping_chkbox').prop('disabled', true);
         }else{
-          $('.shipping_cost_product_input').prop('disabled', false);
+          $('.shipping-cost-product-input').prop('disabled', false);
           $('.free_shipping_chkbox').prop('disabled', false);
         }
       });
 
       $('.free_shipping_chkbox').on('change',function(){
         if($(this).is(':checked')) {
-          $(this).parent().parent().find('.shipping_cost_product_input').prop('disabled', true);
+          $(this).parent().parent().find('.shipping-cost-product-input').prop('disabled', true);
         }else{
-          $(this).parent().parent().find('.shipping_cost_product_input').prop('disabled', false);
+          $(this).parent().parent().find('.shipping-cost-product-input').prop('disabled', false);
         }
       });
 
+      $('.shipping-method-rdobox').on('change',function(){
+        let freeService = $(this).data('free-service');
+        let serviceCost = $(this).data('service-cost');
+
+        if(freeService) {
+          $('#free_order_shipping').trigger('click');
+        }else{
+          $('#charge_order_shipping').trigger('click');
+          $('#shipping_cost_order_input').val(serviceCost);
+        }
+        
+      });
+
+    }
+
+    shippingMethod(freeService,serviceCost) {
+      if(freeService) {
+        $('#free_order_shipping').trigger('click');
+      }else if(serviceCost){
+        $('#charge_order_shipping').trigger('click');
+        $('#shipping_cost_order_input').val(serviceCost);
+      }
     }
 
   }

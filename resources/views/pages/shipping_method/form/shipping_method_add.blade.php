@@ -161,39 +161,10 @@
 
 <script type="text/javascript">
 
-  class ServiceCost {
-
-    constructor() {}
-
-    load() {
-
-      if($('.shipping-service-cost-type:checked').val() != 2) {
-        $('.service-cost').prop('disabled',true);
-      }
-
-      this.bind();
-    }
-
-    bind() {
-
-      $('.shipping-service-cost-type').on('change',function(){
-     
-        if($(this).val() == 2) {
-          $('.service-cost').prop('disabled',false);
-        }else{
-          $('.service-cost').prop('disabled',true);
-        }
-
-      });
-
-    }
-
-  }
-
   $(document).ready(function(){
 
-    const serviceCost = new ServiceCost();
-    serviceCost.load();
+    const shippingMethod = new ShippingMethod();
+    shippingMethod.load();
 
     const form = new Form();
     form.load();

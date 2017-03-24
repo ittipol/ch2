@@ -297,6 +297,8 @@ class ShippingMethod extends Model
     return array(
       'id' => $this->id,
       'name' => $this->name,
+      'free_service' => $this->free_service,
+      'service_cost' => $this->service_cost,
       'shippingService' => $shippingService,
       'shippingServiceCostType' => $shippingServiceCostType,
       'serviceCostText' => $serviceCostText,

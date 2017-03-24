@@ -342,9 +342,9 @@ class OrderController extends Controller
       }else{
 
         foreach ($products as $product) {
-          if(empty($product['free_shipping']) && empty($product['shipping_cost'])) {
-            return Redirect::back()->withErrors(['พบข้อมูลไม่ครบถ้วน'])->withInput(request()->all());
-          }
+          // if(empty($product['free_shipping']) && empty($product['shipping_cost'])) {
+          //   return Redirect::back()->withErrors(['พบข้อมูลไม่ครบถ้วน'])->withInput(request()->all());
+          // }
 
           if(!empty($product['shipping_cost']) && !$validation->isCurrency($product['shipping_cost'])) {
             return Redirect::back()->withErrors(['จำนวนค่าจัดส่งสินค้าไม่ถูกต้อง'])->withInput(request()->all());
