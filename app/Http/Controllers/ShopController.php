@@ -185,9 +185,10 @@ class ShopController extends Controller
       'joins' => array('shop_relate_to', 'shop_relate_to.model_id', '=', $model->getTable().'.id'),
       'conditions' => array(
         array('shop_relate_to.model','like',$model->modelName),
-        array('shop_relate_to.shop_id','=',request()->get('shopId'))
+        array('shop_relate_to.shop_id','=',request()->get('shopId')),
+        array($model->getTable().'.special','=',0)
       ),
-      'order' => array('id','ASC')
+      'order' => array($model->getTable().'.sort','ASC')
     ));
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/shipping_method');
@@ -197,12 +198,16 @@ class ShopController extends Controller
 
     $this->data = $model->paginator->build();
 
-    $this->setData('_formData',request()->get('shop')->formHelper->build());
+    $pickingUpItem = $model->getSpecificSpecialShippingMethods('picking-up-item',request()->get('shopId'),true);
+
+    $this->setData('pickingUpItem',$pickingUpItem);
+    if(!empty($pickingUpItem)) {
+      $this->setData('pickingUpItemEditUrl',request()->get('shopUrl').'shipping_method/edit/'.$pickingUpItem['id']);
+      $this->setData('pickingUpItemDeleteUrl',request()->get('shopUrl').'shipping_method/delete/'.$pickingUpItem['id']);
+    }
 
     $this->setData('shippingMethodAddUrl',request()->get('shopUrl').'shipping_method/add');
-    $this->setData('addPickingupItemUrl',request()->get('shopUrl').'add_pickingup_item');
-
-    $this->setData('allowPickupItem',request()->get('shop')->customer_can_pickup_item);
+    $this->setData('addPickingupItemUrl',request()->get('shopUrl').'pickingup_item');
 
     return $this->view('pages.shop.shipping_method');
 
@@ -571,25 +576,5 @@ class ShopController extends Controller
     }
 
   }
-
-  // public function allowPickupItem() {
-
-  //   $model = request()->get('shop');
-    
-  //   if($model->customer_can_pickup_item) {
-  //     $model->customer_can_pickup_item = 0;
-  //     $model->save();
-
-  //     Message::display('ลบตัวเลือก "รับสินค้าเอง" แล้ว','success');
-  //   }else{
-  //     $model->customer_can_pickup_item = 1;
-  //     $model->save();
-
-  //     Message::display('เพิ่มตัวเลือก "รับสินค้าเอง" แล้ว','success');
-  //   }
-
-  //   return Redirect::to('shop/'.request()->shopSlug.'/shipping_method');
-
-  // }
 
 }

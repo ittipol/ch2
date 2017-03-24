@@ -73,6 +73,11 @@ class ShippingMethodController extends Controller
 
     $this->data = $model->formHelper->build();
 
+    if($model->special) {
+      $this->setData('shippingMethod',$model->modelData->build(true));
+      return $this->view('pages.shipping_method.form.special_shipping_method_edit');
+    }
+
     return $this->view('pages.shipping_method.form.shipping_method_edit');
   }
 
@@ -101,28 +106,37 @@ class ShippingMethodController extends Controller
 
   }
 
-  public function addPickingupItem() {
+  public function pickingUpItem() {
 
     $model = Service::loadModel('ShippingMethod');
 
-    $value = array(
-      'name' => 'รับสินค้าเอง', // default name
-      'shipping_service_id' => 0,
-      'shipping_service_cost_type_id' => 0,
-      'sort' => 2,
-      'ShopRelateTo' => array(
-        'shop_id' => request()->get('shopId')
-      )
-    );
+    // check is exist
+    if(!$model->hasSpecialShippingMethod('picking-up-item',request()->get('shopId'))) {
 
-    if($model->fill($value)->save()) {
-      Message::display('เพิ่มตัวเลือก "รับสินค้าเอง" แล้ว','success');
+      $value = array(
+        'name' => 'รับสินค้าเอง', // default name
+        'shipping_service_id' => 0,
+        'shipping_service_cost_type_id' => 3,
+        'special' => 1,
+        'special_alias' => 'picking-up-item',
+        'sort' => 1,
+        'ShopRelateTo' => array(
+          'shop_id' => request()->get('shopId')
+        )
+      );
+
+      if($model->fill($value)->save()) {
+        Message::display('เพิ่มตัวเลือก "รับสินค้าเอง" แล้ว','success');
+      }else{
+        Message::display('เกิดข้อผิดพลาด ไม่สามารถเพิ่มตัวเลือก "รับสินค้าเอง" ได้','error');
+      }
+
     }else{
-      Message::display('เกิดข้อผิดพลาด ไม่สามารถเพิ่มตัวเลือก "รับสินค้าเอง" ได้','error');
+      Message::display('ตัวเลือก "รับสินค้าเอง" ถูกเพิ่มแล้ว','error');
     }
 
     return Redirect::to(route('shop.shipping_method', ['shopSlug' => request()->shopSlug]));
 
   }
-  
+
 }

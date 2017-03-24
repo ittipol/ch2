@@ -7,7 +7,7 @@ use App\library\currency;
 class ShippingMethod extends Model
 {
   protected $table = 'shipping_methods';
-  protected $fillable = ['name','shipping_service_id','description','shipping_service_cost_type_id','free_service','service_cost','shipping_time','sort','person_id'];
+  protected $fillable = ['name','shipping_service_id','description','shipping_service_cost_type_id','free_service','service_cost','shipping_time','special','special_alias','sort','person_id'];
   protected $modelRelations = array('ShopRelateTo');
 
   public $formHelper = true;
@@ -33,6 +33,16 @@ class ShippingMethod extends Model
         'field' => 'shipping_service_cost_type_id',
         'value' => 2,
       )
+    ),
+    'modelData' => array(
+      'shipping_service_id' => array(
+        'field' => 'special',
+        'value' => 0
+      ),
+      'shipping_service_cost_type_id' => array(
+        'field' => 'special',
+        'value' => 0
+      )
     )
   );
 
@@ -57,6 +67,10 @@ class ShippingMethod extends Model
           $model->sort = 9;
         }
 
+        if(empty($model->special)) {
+          $model->special = 0;
+        }
+
       }
 
       switch ($model->shipping_service_cost_type_id) {
@@ -79,16 +93,16 @@ class ShippingMethod extends Model
 
   }
 
-  public function getCustomerPickupItemInfo() {
-    return array(
-      'id' => 0,
-      'name' => 'รับสินค้าเอง',
-      'shippingService' => '-',
-      'shipping_time' => '-',
-      'shippingServiceCostType' => '-',
-      'serviceCostText' => '-',
-    );
-  }
+  // public function getCustomerPickupItemInfo() {
+  //   return array(
+  //     'id' => 0,
+  //     'name' => 'รับสินค้าเอง',
+  //     'shippingService' => '-',
+  //     'shipping_time' => '-',
+  //     'shippingServiceCostType' => '-',
+  //     'serviceCostText' => '-',
+  //   );
+  // }
 
   public function getShippingMethodChoice($shopId) {
     $shippingMethods = $this
@@ -97,26 +111,12 @@ class ShippingMethod extends Model
       ['shop_relate_to.model','like',$this->modelName],
       ['shop_relate_to.shop_id','=',$shopId]
     ])
+    ->orderBy($this->getTable().'.sort','ASC')
     ->select($this->getTable().'.*')
     ->get();
 
-    $shop = Shop::select('customer_can_pickup_item')->find($shopId);
-
-    $_shippingMethods = array();
-
-    if($shop->customer_can_pickup_item) {
-      $_shippingMethods[] = array(
-        'id' => 0,
-        'name' => 'รับสินค้าเอง',
-        'shippingService' => '-',
-        'shipping_time' => '-',
-        'shippingServiceCostType' => '-',
-        'serviceCostText' => '-',
-        'select' => false
-      );
-    }
-
     $select = true;
+    $_shippingMethods = array();
     foreach ($shippingMethods as $shippingMethod) {
       $_shippingMethods[] = array_merge($shippingMethod->buildPaginationData(),array(
         'select' => $select
@@ -138,9 +138,7 @@ class ShippingMethod extends Model
     ->select($this->getTable().'.*')
     ->exists();
 
-    $shop = Shop::select('customer_can_pickup_item')->find($shopId);
-
-    if($shop->customer_can_pickup_item || $shippingMethods) {
+    if($shippingMethods) {
       return true;
     }
 
@@ -149,21 +147,15 @@ class ShippingMethod extends Model
   }
 
   public function hasShippingMethod($id,$shopId) {
-
-    if($id == 0) {
-      return Shop::select('customer_can_pickup_item')->find($shopId)->customer_can_pickup_item;
-    }else{
-      return $this
-      ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $this->getTable().'.id')
-      ->where([
-        [$this->getTable().'.id','=',$id],
-        ['shop_relate_to.model','like',$this->modelName],
-        ['shop_relate_to.shop_id','=',$shopId]
-      ])
-      ->select($this->getTable().'.*')
-      ->exists();
-    }
-
+    return $this
+    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $this->getTable().'.id')
+    ->where([
+      [$this->getTable().'.id','=',$id],
+      ['shop_relate_to.model','like',$this->modelName],
+      ['shop_relate_to.shop_id','=',$shopId]
+    ])
+    ->select($this->getTable().'.*')
+    ->exists();
   }
 
   public function getShippingMethods($shopId,$build = false) {
@@ -174,6 +166,7 @@ class ShippingMethod extends Model
       ['shop_relate_to.shop_id','=',$shopId]
     ])
     ->select($this->getTable().'.*')
+    ->orderBy($this->getTable().'.sort','ASC')
     ->get();
 
     if(!$build) {
@@ -188,25 +181,70 @@ class ShippingMethod extends Model
     return $_shippingMethods;
   }
 
-  public function buildModelData() {
+  public function getSpecialShippingMethods($shopId,$build = false) {
+    $shippingMethods = $this
+    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $this->getTable().'.id')
+    ->where([
+      ['shop_relate_to.model','like',$this->modelName],
+      ['shop_relate_to.shop_id','=',$shopId],
+      [$this->getTable().'.special','=',1]
+    ])
+    ->select($this->getTable().'.*')
+    ->orderBy($this->getTable().'.sort','ASC')
+    ->get();
 
-    $shippingService = '';
-    if(!empty($this->shippingService)) {
-      $shippingService = $this->shippingService->name;
+    if(!$build) {
+      return $shippingMethods;
     }
 
-    return array(
-      'id' => $this->id,
-      'name' => $this->name,
-      'shippingService' => $shippingService
-    );
+    $_shippingMethods = array();
+    foreach ($shippingMethods as $shippingMethod) {
+      $_shippingMethods[] = $shippingMethod->buildModelData();
+    }
+
+    return $_shippingMethods;
   }
 
-  public function buildPaginationData() {
+  public function getSpecificSpecialShippingMethods($alias,$shopId,$build = false) {
+    $shippingMethod = $this
+    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $this->getTable().'.id')
+    ->where([
+      ['shop_relate_to.model','like',$this->modelName],
+      ['shop_relate_to.shop_id','=',$shopId],
+      [$this->getTable().'.special','=',1],
+      [$this->getTable().'.special_alias','=',$alias]
+    ])
+    ->select($this->getTable().'.*')
+    ->first();
+
+    if(!$build || empty($shippingMethod)) {
+      return $shippingMethod;
+    }
+
+    return $shippingMethod->buildModelData();
+  }
+
+  public function hasSpecialShippingMethod($alias,$shopId) {
+    return $this
+    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $this->getTable().'.id')
+    ->where([
+      ['shop_relate_to.model','like',$this->modelName],
+      ['shop_relate_to.shop_id','=',$shopId],
+      [$this->getTable().'.special','=',1],
+      [$this->getTable().'.special_alias','=',$alias]
+    ])
+    ->select($this->getTable().'.*')
+    ->exists();
+  }
+
+  public function buildModelData() {
 
     $currency = new Currency;
 
-    $serviceCostText = '';
+    $serviceCostText = '-';
+    $shippingService = '-';
+    $shippingServiceCostType = '-';
+    
     switch ($this->shipping_service_cost_type_id) {
       case 1:
           $serviceCostText = '-';
@@ -221,8 +259,50 @@ class ShippingMethod extends Model
         break;
     }
 
-    $shippingService = '';
-    $shippingServiceCostType = '';
+    if(!empty($this->shippingService)) {
+      $shippingService = $this->shippingService->name;
+    }
+
+    if(!empty($this->shippingServiceCostType)) {
+      $shippingServiceCostType = $this->shippingServiceCostType->name;
+    }
+// dd(array(
+//       'id' => $this->id,
+//       'name' => $this->name,
+//       'shippingService' => $shippingService,
+//       'shippingServiceCostType' => $shippingServiceCostType,
+//     ));
+    return array(
+      'id' => $this->id,
+      'name' => $this->name,
+      'shippingService' => $shippingService,
+      'shippingServiceCostType' => $shippingServiceCostType,
+      'serviceCostText' => $serviceCostText,
+      'shipping_time' => !empty($this->shipping_time) ? $this->shipping_time : 'ไม่ระบุ'
+    );
+  }
+
+  public function buildPaginationData() {
+
+    $currency = new Currency;
+
+    $serviceCostText = '-';
+    $shippingService = '-';
+    $shippingServiceCostType = '-';
+
+    switch ($this->shipping_service_cost_type_id) {
+      case 1:
+          $serviceCostText = '-';
+        break;
+      
+      case 2:
+          $serviceCostText = $currency->format($this->service_cost);
+        break;
+
+      case 3:
+          $serviceCostText = $currency->format(0);
+        break;
+    }
 
     if(!empty($this->shippingService)) {
       $shippingService = $this->shippingService->name;

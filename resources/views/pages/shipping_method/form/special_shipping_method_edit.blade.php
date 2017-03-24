@@ -39,23 +39,18 @@
           'autocomplete' => 'off'
         ));
       ?>
-      <p class="notice info">เช่น พัสดุธรรมดา, พัสดุส่งพิเศษ</p>
     </div>
 
     <div class="form-row">
       <?php 
-        echo Form::label('name', 'ผู้ให้บริการการจัดส่ง', array(
-          'class' => 'required'
-        ));
-        echo Form::select('shipping_service_id', $_fieldData['shippingServices']);
+        echo Form::label('name', 'ผู้ให้บริการการจัดส่ง');
       ?>
+      <div>{{$shippingMethod['shippingService']}}</div>
     </div>
 
     <div class="form-row">
       <?php 
-        echo Form::label('name', 'รูปแบบการคิดค่าจัดส่งของวิธีการจัดส่งสินค้านี้', array(
-          'class' => 'required'
-        ));
+        echo Form::label('name', 'รูปแบบการคิดค่าจัดส่งของวิธีการจัดส่งสินค้านี้');
       ?>
 
       <div class="secondary-message-box info">
@@ -82,57 +77,8 @@
         </div>
       </div>
 
-      <div>
-        <label class="choice-box">
-          <?php
-            echo Form::radio('shipping_service_cost_type_id', 1, true, array(
-              'class' => 'shipping-service-cost-type'
-            ));
-          ?> 
-          <div class="inner">{{$_fieldData['shippingServiceCostTypes'][1]}}</div>
-        </label>
-      </div>
+      <div class="space-top-bottom-10">{{$shippingMethod['shippingServiceCostType']}}</div>
 
-      <div>
-        <label class="choice-box">
-          <?php
-            echo Form::radio('shipping_service_cost_type_id', 2, null, array(
-              'class' => 'shipping-service-cost-type'
-            ));
-          ?> 
-          <div class="inner">{{$_fieldData['shippingServiceCostTypes'][2]}}</div>
-        </label>
-      </div>
-
-      <?php 
-        echo Form::text('service_cost', null, array(
-          'class' => 'service-cost',
-          'placeholder' => 'จำนวนค่าบริการ',
-          'autocomplete' => 'off'
-        ));
-      ?>
-
-      <div>
-        <label class="choice-box">
-          <?php
-            echo Form::radio('shipping_service_cost_type_id', 3, null, array(
-              'class' => 'shipping-service-cost-type'
-            ));
-          ?> 
-          <div class="inner">{{$_fieldData['shippingServiceCostTypes'][3]}}</div>
-        </label>
-      </div>
-    </div>
-
-    <div class="form-row">
-      <?php 
-        echo Form::label('shipping_time', 'ระยะเวลาจัดส่ง');
-        echo Form::text('shipping_time', null, array(
-          'placeholder' => 'ระยะเวลาจัดส่ง',
-          'autocomplete' => 'off'
-        ));
-      ?>
-      <p class="notice info">เช่น 1-3 วันทำการ</p>
     </div>
 
     <div class="form-row">

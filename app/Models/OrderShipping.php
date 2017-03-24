@@ -5,7 +5,7 @@ namespace App\Models;
 class OrderShipping extends Model
 {
   protected $table = 'order_shippings';
-  protected $fillable = ['order_id','shipping_method_id','shipping_method_name','shipping_service','shipping_service_cost_type','shipping_time'];
+  protected $fillable = ['order_id','shipping_method_id','shipping_method_name','shipping_service_id','shipping_service_cost_type_id','shipping_time'];
   public $timestamps  = false;
 
   public function buildModelData() {

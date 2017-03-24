@@ -31,3 +31,11 @@
 .secondary-message-box .line {
 	background-color: #EF9A9A;
 }
+
+.secondary-message-box.info .line {
+	background-color: #90CAF9;
+}
+
+.secondary-message-box.success .line {
+	background-color: #A5D6A7;
+}

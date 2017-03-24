@@ -79,9 +79,6 @@ class CheckoutController extends Controller
          
         }
 
-        // check shipping_method_id is exist in shop
-        $shippingMethodModel->hasShippingMethod($shops[$cartProduct['shopId']]['shipping_method_id'],$cartProduct['shopId']);
-
         // allocate product quantity
         $_product->decrement('quantity',$cartProduct['quantity']);
 
@@ -115,7 +112,18 @@ class CheckoutController extends Controller
 
       $order = $orderModel->newInstance();
 
-      $_order = array(
+      // order shipping cost
+      $shipping = array();
+      if(isset($shops[$shopId]['shipping_method_id'])) {
+        $shippingMethod = $shippingMethodModel->find($shops[$shopId]['shipping_method_id']);
+
+        $shipping = array(
+          'order_free_shipping' => $shippingMethod->free_service,
+          'order_shipping_cost' => $shippingMethod->service_cost
+        );
+      }
+
+      $order->fill(array_merge(array(
         'invoice_prefix' => $orderModel->getInvoicePrefix(),
         'invoice_number' => $orderModel->getInvoiceNumber($shopId),
         'shop_id' => $shopId,
@@ -124,25 +132,10 @@ class CheckoutController extends Controller
         'shipping_address' => $shops[$shopId]['shipping_address'],
         'message_to_seller' => $shops[$shopId]['message'],
         'order_status_id' => $orderStatusId
-      );
+      ),$shipping))
+      ->save();
 
-      // order shipping cost
-      if(isset($shops[$shopId]['shipping_method_id'])) {
-
-        dd($shops[$shopId]['shipping_method_id']);
-
-        $shippingMethodModel->getShippingMethod($shops[$shopId]['shipping_method_id']);
-
-        $shippingMethod = $shippingMethodModel->find($shops[$shopId]['shipping_method_id']);
-
-        $_order = array_merge($_order,array(
-          'order_free_shipping' => $shippingMethod->free_service,
-          'order_shipping_cost' => $shippingMethod->service_cost
-        ));
-      }
-
-      $order->fill($_order)->save();
-
+      // If has has shipping method then save
       if(!empty($shops[$shopId]['shipping_method_id'])) {
         $orderShipping
         ->newInstance()
@@ -150,8 +143,8 @@ class CheckoutController extends Controller
           'order_id' => $order->id,
           'shipping_method_id' => $shippingMethod->id,
           'shipping_method_name' => $shippingMethod->name,
-          'shipping_service' => $shippingMethod->shippingService->name,
-          'shipping_service_cost_type' => $shippingMethod->shippingServiceCostType->name,
+          'shipping_service_id' => $shippingMethod->shipping_service_id,
+          'shipping_service_cost_type_id' => $shippingMethod->shipping_service_cost_type_id,
           'shipping_time' => $shippingMethod->shipping_time
         ))
         ->save();
@@ -164,7 +157,12 @@ class CheckoutController extends Controller
         ->find($product['productId']);
 
         $shipping = array();
-        if($_product->shipping_calculate_from == 2) {
+        if(isset($shops[$shopId]['shipping_method_id']) && ($shippingMethod->shipping_service_cost_type_id == 3)) {
+          $shipping = array(
+            'free_shipping' => 1,
+            'shipping_cost' => null
+          );
+        }elseif($_product->shipping_calculate_from == 2) {
 
           $productShipping = $_product->getRelatedData('ProductShipping',array(
             'first' => true
@@ -182,7 +180,9 @@ class CheckoutController extends Controller
 
         }
 
-        $value = array_merge(array(
+        $orderProductModel
+        ->newInstance()
+        ->fill(array_merge(array(
           'order_id' => $order->id,
           'product_id' => $product['productId'],
           'product_name' => $_product->name,
@@ -190,11 +190,7 @@ class CheckoutController extends Controller
           'price' => $_product->getPrice(),
           'quantity' => $product['quantity'],
           'total' => $cartModel->getProductTotal($_product,$product['quantity']),
-        ),$shipping);
-
-        $orderProductModel
-        ->newInstance()
-        ->fill($value)
+        ),$shipping))
         ->save();
 
       }
@@ -214,7 +210,7 @@ class CheckoutController extends Controller
         ->save();
 
       }
-
+dd('xxxds');
       // delete products in cart
       $cartModel->where([
         ['shop_id','=',$shopId],

@@ -139,6 +139,11 @@ class CustomFormRequest extends FormRequest
     $name = Route::currentRouteName();
     $data = request()->all();
 
+    $modelData = array();
+    if($this->method() == 'PATCH') {
+      $modelData = $this->model->find(request()->id);
+    }
+
     // $rules = $this->validation['rules'];
 
     // if(!empty($this->validation['action'][$this->method()])) {
@@ -166,7 +171,14 @@ class CustomFormRequest extends FormRequest
         }
 
         if(!empty($this->validation['conditions'][$key]) && 
-          (!isset($data[$this->validation['conditions'][$key]['field']]) || !($data[$this->validation['conditions'][$key]['field']] == $this->validation['conditions'][$key]['value']))) {
+          (!isset($data[$this->validation['conditions'][$key]['field']]) || !($data[$this->validation['conditions'][$key]['field']] == $this->validation['conditions'][$key]['value'])
+        )) {
+          continue;
+        }
+
+        if(!empty($this->validation['modelData'][$key]) && 
+          (!isset($modelData[$this->validation['modelData'][$key]['field']]) || !($modelData[$this->validation['modelData'][$key]['field']] == $this->validation['modelData'][$key]['value'])
+        )) {
           continue;
         }
         

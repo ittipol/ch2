@@ -38,6 +38,7 @@
 
   .global-nav.is-main-nav-open {
     left: 0;
+    z-index: 90;
   }
 
   .content-wrapper {

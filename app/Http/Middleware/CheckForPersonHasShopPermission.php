@@ -200,7 +200,7 @@ class CheckForPersonHasShopPermission
           'permission' => 'delete',
           'modelName' => 'ShippingMethod'
         ),
-        'shop.shipping_method.add_pickingup_item' => array(
+        'shop.shipping_method.pickingup_item' => array(
           'permission' => 'add',
           'modelName' => 'ShippingMethod'
         )

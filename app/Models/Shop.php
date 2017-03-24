@@ -10,7 +10,7 @@ use Session;
 class Shop extends Model
 {
   protected $table = 'shops';
-  protected $fillable = ['name','description','brand_story','profile_image_id','cover_image_id','customer_can_pickup_item','person_id'];
+  protected $fillable = ['name','description','brand_story','profile_image_id','cover_image_id','person_id'];
   protected $modelRelations = array('Image','Address','Contact','OfficeHour');
   public $errorType;
 
@@ -60,10 +60,6 @@ class Shop extends Model
     parent::boot();
 
     Shop::saving(function($model){
-
-      if($model->state == 'create') {
-        $model->customer_can_pickup_item = 0;
-      }
 
       $image = new Image;
 
