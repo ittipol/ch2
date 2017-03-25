@@ -40,6 +40,14 @@ class Date
     return (int)$date[2].' '.$this->getMonthName($date[1]).' '.($date[0]+543);
   }
 
+  public function covertTimeToSting($dateTime) {
+    list($date,$time) = explode(' ', $dateTime);
+
+    $time = explode(':', $time);
+
+    return (int)$time[0].':'.$time[1];
+  }
+
   public function covertDateTimeToSting($dateTime,$includeSec = false) {
 
     list($date,$time) = explode(' ', $dateTime);

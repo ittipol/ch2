@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\library\currency;
+use App\library\date;
+
 class OrderPaymentConfirm extends Model
 {
   protected $table = 'order_payment_confirms';
   protected $fillable = ['order_id','payment_method_id','payment_amount','payment_date','description'];
-  // protected $directory = true;
+  protected $modelRelations = array('Image');
 
   public $formHelper = true;
   public $modelData = true;
@@ -30,7 +33,25 @@ class OrderPaymentConfirm extends Model
       'payment_amount.regex' => 'จำนวนเงินไม่ถูกต้อง',
       'payment_date.date_format' => 'วันที่ชำระเงินไม่ถูกต้อง',
     )
-  ); 
+  );
+
+  public function paymentMethod() {
+    return $this->hasOne('App\Models\PaymentMethod','id','payment_method_id');
+  }
+
+  public function buildModelData() {
+
+    $currency = new Currency;
+    $date = new Date;
+
+    return array(
+      'paymentMethodName' => $this->paymentMethod->name, 
+      'paymentAmount' => $currency->format($this->payment_amount),
+      'paymentDate' => $date->covertDateToSting($this->payment_date),
+      'paymentTime' => $date->covertTimeToSting($this->payment_date),
+      'description' => !empty($this->description) ? $this->description : '-'
+    );
+  }
 
   public function setUpdatedAt($value) {}
 }

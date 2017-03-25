@@ -99,7 +99,9 @@
 
     @if(empty($orderShippingMethod))
       <div class="secondary-message-box info">
-        <div>*** การสั่งซื้อนี้ยังไม่ได้กำหนดวิธีการจัดส่งสินค้า</div>
+        <div class="secondary-message-box-inner">
+          <div>*** การสั่งซื้อนี้ยังไม่ได้กำหนดวิธีการจัดส่งสินค้า</div>
+        </div>
       </div>
 
       <div class="shipping-method-input">
@@ -146,7 +148,9 @@
     @else
 
       <div class="secondary-message-box info">
-        <div>*** วิธีการจัดส่งที่ลูกค้าเลือก</div>
+        <div class="secondary-message-box-inner">
+          <div>*** วิธีการจัดส่งที่ลูกค้าเลือก</div>
+        </div>
       </div>
 
       <div class="list-h">
@@ -194,9 +198,11 @@
     <div class="line"></div>
 
     <div class="secondary-message-box info">
-      <div>*** ผู้ขายสามารถแก้ไขค่าจัดส่งได้จากส่วนนี้</div>
-      <div>*** ในแต่ละการสั่งซื้อผู้ขายสามารถกำหนดค่าจัดส่งให้กับการสั่งซื้อและสินค้าแต่ละรายการได้</div>
-      <div>*** หลังจากกำหนดค่าจัดส่งสินค้าทั้งหมดแล้ว ค่าจัดส่งทั้งหมดจะถูกนำมารวมและจะเป็นจำนวนค่าจัดส่งสุทธิที่ลูกค้าต้องชำระ</div>
+      <div class="secondary-message-box-inner">
+        <div>*** ผู้ขายสามารถแก้ไขค่าจัดส่งได้จากส่วนนี้</div>
+        <div>*** ในแต่ละการสั่งซื้อผู้ขายสามารถกำหนดค่าจัดส่งให้กับการสั่งซื้อและสินค้าแต่ละรายการได้</div>
+        <div>*** หลังจากกำหนดค่าจัดส่งสินค้าทั้งหมดแล้ว ค่าจัดส่งทั้งหมดจะถูกนำมารวมและจะเป็นจำนวนค่าจัดส่งสุทธิที่ลูกค้าต้องชำระ</div>
+      </div>
     </div>
 
     <div class="shipping-cost-input-section">
@@ -224,7 +230,6 @@
       <div class="line space-bottom-20"></div>
 
       <h4>กำหนดค่าจัดส่งของการสั่งซื้อนี้</h4>
-      <!-- <p class="notice info">เว้นว่างเมื่อไม่ต้องการกำหนดค่าจัดส่งของการสั่งซื้อนี้</p> -->
       <?php
         echo Form::text('order_shipping_cost', $order['order_shipping_cost'], array(
           'class' => 'shipping-cost-input',
@@ -391,8 +396,10 @@
     <div class="line"></div>
 
     <div class="secondary-message-box info">
-      <h3>กำหนดวิธีการชำระเงินของการสั่งซื้อนี้</h3>
-      <p>กรุณาเลือกวิธีการชำระเงินอย่างน้อย 1 วิธีให้กับการสั่งซื้อนี้</p>
+      <div class="secondary-message-box-inner">
+        <h3>กำหนดวิธีการชำระเงินของการสั่งซื้อนี้</h3>
+        <p>กรุณาเลือกวิธีการชำระเงินอย่างน้อย 1 วิธีให้กับการสั่งซื้อนี้</p>
+      </div>
     </div>
 
     <div class="payment-method-input-section">
@@ -420,8 +427,10 @@
   </div>
 
   <div class="secondary-message-box space-top-30">
-    <div>* จะไม่สามารถแก้ไขได้หลังจากยืนยันการสั่งซื้อ</div>
-    <div>* โปรดตรวจสอบความถูกต้องก่อนการยืนยันการสั่งซื้อ</div>
+    <div class="secondary-message-box-inner">
+      <div>*** จะไม่สามารถแก้ไขได้หลังจากยืนยันการสั่งซื้อ</div>
+      <div>*** โปรดตรวจสอบความถูกต้องก่อนการยืนยันการสั่งซื้อ</div>
+    </div>
   </div>
 
   <?php

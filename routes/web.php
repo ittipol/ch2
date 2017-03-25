@@ -172,8 +172,9 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
   Route::get('account/order/{id}', 'OrderController@detail')->name('account.order.detail');
   
-  Route::get('order/payment/confirm/{id}', 'orderController@paymentConfirm')->name('account.order.payment_confirm');
-   Route::post('order/payment/confirm/{id}', 'orderController@paymentConfirmSubmit')->name('account.order.payment_confirm');
+  Route::get('order/payment/inform/{id}', 'orderController@paymentInform')->name('account.order.payment_inform');
+  Route::post('order/payment/inform/{id}', 'orderController@paymentInformSubmit')->name('account.order.payment_inform');
+
 });
 
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
@@ -182,6 +183,11 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
   Route::get('shop/{shopSlug}/order/confirm/{id}','OrderController@shopOrderConfirm')->name('shop.order.confirm');
   Route::post('shop/{shopSlug}/order/confirm/{id}','OrderController@shopOrderConfirmSubmit')->name('shop.order.confirm');
+
+  Route::patch('shop/{shopSlug}/order/payment/confirm/{id}', 'OrderController@paymentConfirm')->name('shop.order.payment.confirm');
+
+  Route::get('shop/{shopSlug}/order/payment/detail/{id}', 'OrderController@paymentDetail')->name('shop.order.payment.detail');
+
 });
 
 // community / Shop

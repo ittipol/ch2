@@ -188,9 +188,11 @@
       <div class="text-right">
 
         <div class="secondary-message-box space-bottom-20">
-          <p class="error-message text-bold">*** รายการสั่งซื้อหรือสินค้าบางรายการอาจยังไม่ได้รวมค่าจัดส่ง</p>
-          <p class="error-message text-bold">*** ค่าจัดส่งของการสั่งซื้ออาจมีการเปลี่ยนแปลงหลังจากผู้ขายได้ทำการยืนยันการสั่งซื้อ</p>
-          <p class="error-message text-bold">*** โปรดรอการยืนยันการสั่งซื้อจากผู้ขายก่อนการชำระเงิน</p>
+          <div class="secondary-message-box-inner">
+            <p class="error-message text-bold">*** รายการสั่งซื้อหรือสินค้าบางรายการอาจยังไม่ได้รวมค่าจัดส่ง</p>
+            <p class="error-message text-bold">*** ค่าจัดส่งของการสั่งซื้ออาจมีการเปลี่ยนแปลงหลังจากผู้ขายได้ทำการยืนยันการสั่งซื้อ</p>
+            <p class="error-message text-bold">*** โปรดรอการยืนยันการสั่งซื้อจากผู้ขายก่อนการชำระเงิน</p>
+          </div>
         </div>
 
         <?php

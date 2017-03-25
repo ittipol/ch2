@@ -16,27 +16,43 @@
 
   @if(!$hasPaymentMethod)
     <div class="secondary-message-box space-bottom-30">
-      <h3>ไม่พบวิธีการชำระเงินชองคุณ</h3>
-      <p>กรุณาเพิ่มวิธีการชำระเงินของคุณอย่างน้อย 1 วิธี เพื่อใช่ในการกำหนดวิธีการชำระเงินให้กับลูกค้า</p>
-      <a href="{{$PaymentMethodAddUrl}}" class="button">เพิ่มวิธีการชำระเงินชองคุณ</a>
+      <div class="secondary-message-box-inner">
+        <h3>ไม่พบวิธีการชำระเงินชองคุณ</h3>
+        <p>กรุณาเพิ่มวิธีการชำระเงินของคุณอย่างน้อย 1 วิธี เพื่อใช่ในการกำหนดวิธีการชำระเงินให้กับลูกค้า</p>
+      </div>
+      <div class="message-box-button-group clearfix">
+        <div class="flat-button">
+          <a href="{{$PaymentMethodAddUrl}}" class="button">เพิ่มวิธีการชำระเงินชองคุณ</a>
+        </div>
+      </div>
     </div>
   @endif
 
   @if($order['order_status_id'] == 1)
   <div class="secondary-message-box info space-bottom-30">
-    <h3>รายการสั่งซื้อนี้ต้องการการยืนยัน</h3>
-    <p>กรุณายืนยันการสั้งซื้อนี้ เพื่อเป็นการยืนยันการสั่งซื้อว่าถูกต้องและสามารถที่จะดำเนินการชำระเงินได้</p>
-    <a href="{{$orderConfirmUrl}}" class="button">ยืนยันการสั่งซื้อ</a>
+    <div class="secondary-message-box-inner">
+      <h3>รอการยืนยันการสั่งซื้อจากผู้ขาย</h3>
+      <p>กรุณายืนยันการสั้งซื้อนี้ เพื่อเป็นการยืนยันการสั่งซื้อว่าถูกต้องและสามารถที่จะดำเนินการชำระเงินได้</p>
+    </div>
+    <div class="message-box-button-group clearfix">
+      <div class="flat-button">
+        <a href="{{$orderConfirmUrl}}" class="button">ยืนยันการสั่งซื้อ</a>
+      </div>
+    </div>
   </div>
   @elseif($order['order_status_id'] == 2)
 
     @if($hasOrderPaymentConfirm)
 
-      <div class="secondary-message-box info space-bottom-30">
+      <?php 
+        echo Form::model([], [
+          'url' => $paymentConfirmUrl,
+          'method' => 'PATCH',
+          'enctype' => 'multipart/form-data'
+        ]);
+      ?>
 
-        <!-- <div class="secondary-message-box-inner">
-          <h3>ลูกค้ายืนยันการชำระเงินเลขที่การสั่งซื้อ {{$order['invoice_number']}} แล้ว</h3>
-        </div> -->
+      <div class="secondary-message-box info space-bottom-30">
 
         <div class="list-empty-message text-center space-bottom-20">
           <img class="space-bottom-20" src="/images/common/payment.png">
@@ -47,24 +63,38 @@
 
         <div class="message-box-button-group two-button clearfix">
           <div class="flat-button">
-            <a href="" class="button">แสดงรายละเอียดการชำระเงิน</a>
+            <a href="{{$paymentDetailUrl}}" class="button">รายละเอียดแจ้งการชำระเงิน</a>
           </div>
           <div class="flat-button">
-            <a href="" class="button" data-modal="1" data-modal-title="ต้องการยืนยันการชำระเงินเลขที่การสั่งซื้อ {{$order['invoice_number']}} ใช่หรือไม่">ยืนยันการชำระเงินจากลูกค้า</a>
+            <?php
+              echo Form::submit('ยืนยันการชำระเงิน' , array(
+                'class' => 'button',
+                'data-modal' => 1,
+                'data-modal-title' => 'ต้องการยืนยันการชำระเงินเลขที่การสั่งซื้อ '.$order['invoice_number'].' ใช่หรือไม่'
+              ));
+            ?>
           </div>
         </div>
 
       </div>
 
+      <?php
+        echo Form::close();
+      ?>
+
     @else
 
-    <div class="secondary-message-box success space-bottom-30">
-      <h3>ยืนยันการสั่งซื้อแล้ว</h3>
-    </div>
+      <div class="secondary-message-box success space-bottom-30">
+        <div class="secondary-message-box-inner">
+          <h3>ยืนยันการสั่งซื้อแล้ว</h3>
+        </div>
+      </div>
 
-    <div class="secondary-message-box info space-bottom-30">
-      <h3>โปรดรอการชำระเงินจากลูกค้า</h3>
-    </div>
+      <div class="secondary-message-box info space-bottom-30">
+        <div class="secondary-message-box-inner">
+          <h3>โปรดรอการแจ้งการชำระเงินจากลูกค้า</h3>
+        </div>
+      </div>
 
     @endif
 

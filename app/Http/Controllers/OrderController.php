@@ -49,7 +49,7 @@ class OrderController extends Controller
         }
 
         $this->setData('paymentMethods',$paymentMethods);
-        $this->setData('paymentConfirmUrl','order/payment/confirm/'.$model->id);
+        $this->setData('paymentInformUrl','order/payment/inform/'.$model->id);
 
       }
 
@@ -72,7 +72,7 @@ class OrderController extends Controller
 
   }
 
-  public function paymentConfirm() {
+  public function paymentInform() {
 
     $order = Service::loadModel('Order')->where([
       ['id','=',$this->param['id']],
@@ -165,10 +165,10 @@ class OrderController extends Controller
     $this->setData('hours',$hours);
     $this->setData('mins',$mins);
     
-    return $this->view('pages.order.payment_confirm');
+    return $this->view('pages.order.payment_inform');
   }
 
-  public function paymentConfirmSubmit(CustomFormRequest $request) {
+  public function paymentInformSubmit(CustomFormRequest $request) {
 
     $order = Service::loadModel('Order')->where([
       ['id','=',$this->param['id']],
@@ -206,6 +206,35 @@ class OrderController extends Controller
 
   }
 
+  public function paymentDetail() {
+
+    $model = Service::loadModel('Order')->find($this->param['id']);
+
+    // $hasOrderPaymentConfirm = $model->hasOrderPaymentConfirm();
+
+    $orderPaymentConfirm = $model->getRelatedData('OrderPaymentConfirm',array(
+      'first' => true
+    ));
+
+    if(empty($orderPaymentConfirm)) {
+      Message::display('ไม่การแจ้งการชำระเงินของการสั่งซื้อ','error');
+      return Redirect::to('account/order/'.$order->id);
+    }
+
+    $orderPaymentConfirm->modelData->loadData(array(
+      'json' => array('Image')
+    ));
+
+    $this->data = $orderPaymentConfirm->modelData->build();
+
+    $this->setData('order',$model->modelData->build(true));
+
+    $this->setData('paymentConfirmUrl',request()->get('shopUrl').'order/payment/confirm/'.$model->id);
+
+    return $this->view('pages.order.payment_detail');
+
+  }
+
   public function shopOrder() {
 
     $model = Service::loadModel('Order');
@@ -223,7 +252,8 @@ class OrderController extends Controller
     ));
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl('item/list');
-    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/order/{id}','detailUrl');
+    // $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/order/{id}','detailUrl');
+    $model->paginator->setUrl(request()->get('shopUrl').'order/{id}','detailUrl');
     $this->data = $model->paginator->build();
 
     return $this->view('pages.order.shop_order');
@@ -250,18 +280,22 @@ class OrderController extends Controller
     if($model->order_status_id == 1) {
       $this->setData('orderConfirmUrl',request()->get('shopUrl').'order/confirm/'.$model->id);
     }elseif($model->order_status_id == 2) {
+
       $hasOrderPaymentConfirm = $model->hasOrderPaymentConfirm();
 
       if($hasOrderPaymentConfirm) {
         // Get order payment confirm
-        $orderPaymentConfirm = $model->getRelatedData('OrderPaymentConfirm',array(
-          'first' => true
-        ));
+        // $orderPaymentConfirm = $model->getRelatedData('OrderPaymentConfirm',array(
+        //   'first' => true
+        // ));
 
-        // dd($orderPaymentConfirm);
+        $this->setData('paymentDetailUrl',request()->get('shopUrl').'order/payment/detail/'.$model->id);
+        $this->setData('paymentConfirmUrl',request()->get('shopUrl').'order/payment/confirm/'.$model->id);
+
       }
 
       $this->setData('hasOrderPaymentConfirm',$hasOrderPaymentConfirm);
+
     }
 
     if(!$hasPaymentMethod) {
@@ -340,7 +374,7 @@ class OrderController extends Controller
     ])->first();
 
     if($model->order_status_id != 1) {
-      Message::display('สินค้านี้ถูกยืนยันแล้ว','error');
+      Message::display('รายการสั่งซื้อถูกยืนยันแล้ว','error');
       return Redirect::to(request()->get('shopUrl').'order');
     }
 
@@ -363,22 +397,6 @@ class OrderController extends Controller
     if(empty($model->getOrderShippingMethod()) && !$shippingMethodModel->checkShippingMethodExistById(request()->get('shipping_method_id'),request()->get('shopId'))) {
       return Redirect::back()->withErrors(['พบวิธีการจัดส่งที่เลือกไม่ถูกต้อง'])->withInput(request()->all());
     }
-    
-    // if(empty($model->getOrderShippingMethod()) && $shippingMethodModel->checkShippingMethodExistById(request()->get('shipping_method_id'),request()->get('shopId'))) {
-    //   // get shipping method
-    //   $shippingMethod = $shippingMethodModel->find(request()->get('shipping_method_id'));
-    //   // save shipping method
-    //   Service::loadModel('OrderShipping')
-    //   ->fill(array(
-    //     'order_id' => $model->id,
-    //     'shipping_method_id' => $shippingMethod->id,
-    //     'shipping_method_name' => $shippingMethod->name,
-    //     'shipping_service_id' => $shippingMethod->shipping_service_id,
-    //     'shipping_service_cost_type_id' => $shippingMethod->shipping_service_cost_type_id,
-    //     'shipping_time' => $shippingMethod->shipping_time
-    //   ))
-    //   ->save();
-    // }
 
     if(request()->get('order_shipping') == 2) {
       // free shipping
@@ -530,8 +548,31 @@ class OrderController extends Controller
     $model->order_status_id = Service::loadModel('OrderStatus')->getIdByalias('pending-customer-payment');
     $model->save();
 
-    Message::display('การสั่งซื้อถูกยืนยันแล้ว','success');
+    Message::display('ยืนยันการสั่งซื้อเรียบร้อยแล้ว','success');
     return Redirect::to('shop/'.$this->param['shopSlug'].'/order/'.$model->id);
+
+  }
+
+  public function paymentConfirm() {
+    
+    $model = Service::loadModel('Order')->where([
+      ['id','=',$this->param['id']],
+      ['shop_id','=',request()->get('shopId')]
+    ])->first();
+
+    if($model->order_status_id != 2) {
+      Message::display('รายการสั่งซื้อยืนยันการชำระเงินแล้ว','error');
+      return Redirect::to(request()->get('shopUrl').'order');
+    }
+
+    $model->order_status_id = 3;
+    if($model->save()) {
+      Message::display('ยืนยันการชำระเงินเรียบร้อยแล้ว','success');
+    }else{
+      Message::display('เกิดข้อผิดพลาด ไม่สามารถยืนยันการชำระเงินได้','error');
+    }
+
+    return Redirect::to(request()->get('shopUrl').'order/'.$model->id);
 
   }
 

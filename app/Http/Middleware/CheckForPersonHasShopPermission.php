@@ -11,13 +11,6 @@ use Schema;
 
 class CheckForPersonHasShopPermission
 {
-    // private $parents = array(
-    //   'ProductDiscount' => array(
-    //     'modelName' => 'Product',
-    //     'param' => 'product_id'
-    //   )
-    // );
-
     /**
      * Handle an incoming request.
      *
@@ -203,6 +196,14 @@ class CheckForPersonHasShopPermission
         'shop.shipping_method.pickingup_item' => array(
           'permission' => 'add',
           'modelName' => 'ShippingMethod'
+        ),
+        'shop.order.payment.confirm' => array(
+          'permission' => 'edit',
+          'modelName' => 'Order'
+        ),
+        'shop.order.payment.detail' => array(
+          'permission' => true,
+          'modelName' => 'Order'
         )
       );
 

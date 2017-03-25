@@ -6,7 +6,7 @@
     <div class="top-header">
       <div class="detail-title">
         <h4 class="sub-title">เลขที่การสั่งซื้อ {{$invoiceNumber}}</h4>
-        <h2 class="title">ยืนยันการชำระเงิน</h2>
+        <h2 class="title">แจ้งการชำระเงิน</h2>
       </div>
     </div>
   </div>
@@ -28,7 +28,7 @@
 
     <div class="form-row">
       <?php 
-        echo Form::label('', 'วิธีที่คุณชำระเงิน', array(
+        echo Form::label('', 'เลือกวิธีการชำระเงิน', array(
           'class' => 'required'
         ));
         echo Form::select('payment_method_id', $paymentMethods);
@@ -121,7 +121,7 @@
 
 <script type="text/javascript">
 
-  class PaymentConfirm {
+  class PaymentInform {
     constructor() {}
 
     load() {
@@ -158,8 +158,8 @@
 
   $(document).ready(function(){
 
-    const paymentConfirm = new PaymentConfirm();
-    paymentConfirm.load();
+    const paymentInform = new PaymentInform();
+    paymentInform.load();
     
     const images = new Images('_image_group','photo',5);
     images.load();

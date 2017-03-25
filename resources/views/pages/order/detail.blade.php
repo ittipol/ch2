@@ -15,33 +15,45 @@
 
   @if($order['order_status_id'] == 1)
   <div class="secondary-message-box info space-bottom-30">
-    <h3>รายการสั่งซื้อนี้ยังไม่ถูกการยืนยันจากผู้ขาย</h3>
-    <p>*** ค่าจัดส่งของการสั่งซื้อนี้ยังไม่ใช่จำนวนสุทธิที่ต้องชำระ</p>
-    <p>*** โปรดรอการยืนยันการสั่งซื้อจากผู้ขายก่อนการชำระเงิน</p>
+    <div class="secondary-message-box-inner">
+      <h3>รายการสั่งซื้อยังไม่ถูกการยืนยันจากผู้ขาย</h3>
+      <p>*** ค่าจัดส่งของการสั่งซื้อนี้ยังไม่ใช่จำนวนสุทธิที่ต้องชำระ</p>
+      <p>*** โปรดรอการยืนยันการสั่งซื้อจากผู้ขายก่อนการชำระเงิน</p>
+    </div>
   </div>
   @elseif($order['order_status_id'] == 2)
 
     @if($hasOrderPaymentConfirm)
 
       <div class="secondary-message-box success">
-        <h3>ยืนยันการชำระเงินเลขที่การสั่งซื้อ {{$order['invoice_number']}} แล้ว</h3>
-        <p>*** โปรดรอการตรวจสอบการชำระเงินจากผู้ขาย</p>
+        <div class="secondary-message-box-inner">
+          <h3>ยืนยันการชำระเงินเลขที่การสั่งซื้อ {{$order['invoice_number']}} แล้ว</h3>
+          <p>*** โปรดรอการตรวจสอบการชำระเงินจากผู้ขาย</p>
+        </div>
       </div>
 
     @else
 
       <div class="secondary-message-box success">
-        <h3>ผู้ขายยืนยันการสั่งซื้อแล้ว</h3>
-        <p>*** การสั่งซื้อนี้สามารถชำระเงินได้แล้ว</p>
+        <div class="secondary-message-box-inner">
+          <h3>ผู้ขายยืนยันการสั่งซื้อแล้ว</h3>
+          <p>*** การสั่งซื้อนี้สามารถชำระเงินได้แล้ว</p>
+        </div>
       </div>
 
       <div class="secondary-message-box info space-bottom-30">
-        <div class="list-empty-message text-center">
-          <img class="space-bottom-20" src="/images/common/payment.png">
-          <div>
-            <h3>จำนวนเงินที่ต้องชำระ {{$orderTotals['total']['value']}}</h3>
-            <p>โปรดชำระเงินตามจำนวนที่ได้ระบุไว้</p>
-            <a href="{{URL::to($paymentConfirmUrl)}}" class="button">ยืนยันการชำระเงิน</a>
+        <div class="secondary-message-box-inner">
+          <div class="list-empty-message text-center">
+            <img class="space-bottom-20" src="/images/common/payment.png">
+            <div>
+              <h3>จำนวนเงินที่ต้องชำระ {{$orderTotals['total']['value']}}</h3>
+              <p>โปรดชำระเงินตามจำนวนที่ได้ระบุไว้</p>
+            </div>
+          </div>
+        </div>
+        <div class="message-box-button-group clearfix">
+          <div class="flat-button">
+            <a href="{{URL::to($paymentInformUrl)}}" class="button">แจ้งการชำระเงิน</a>
           </div>
         </div>
       </div>

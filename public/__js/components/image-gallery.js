@@ -255,7 +255,9 @@ class ImageGallery {
 
   enableImageDesription() {
 
-    $('.display-image-description-icon').css('display','block');
+    if(this.displayDescription) {
+      $('.display-image-description-icon').css('display','block');
+    }
 
     // $('.image-description').css({
     //   'display':'block',

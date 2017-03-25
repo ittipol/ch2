@@ -283,7 +283,7 @@ class Order extends Model
   }
 
   public function hasOrderPaymentConfirm() {
-    return OrderProduct::where('order_id','=',$this->id)->exists();
+    return OrderPaymentConfirm::where('order_id','=',$this->id)->exists();
   }
 
   public function checkAllProductsHaveShippingCost() {
