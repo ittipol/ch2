@@ -130,7 +130,7 @@ class CheckoutController extends Controller
         'person_id' => $personId,
         'person_name' => $personName,
         'shipping_address' => $shops[$shopId]['shipping_address'],
-        'message_to_seller' => $shops[$shopId]['message'],
+        'customer_message' => $shops[$shopId]['message'],
         'order_status_id' => $orderStatusId
       ),$shipping))
       ->save();

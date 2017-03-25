@@ -62,4 +62,14 @@ class PaymentMethod extends Model
     ->exists();
   }
 
+  public function buildModelData() {}
+
+  public function buildPaginationData() {
+    return array(
+      'id' => $this->id,
+      'name' => $this->name,
+      'description' => $this->description,
+    );
+  }
+
 }

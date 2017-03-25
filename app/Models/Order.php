@@ -10,7 +10,7 @@ use App\library\date;
 class Order extends Model
 {
   protected $table = 'orders';
-  protected $fillable = ['invoice_prefix','invoice_number','shop_id','person_id','person_name','shipping_address','payment_detail','message_to_seller','order_status_id','order_free_shipping','order_shipping_cost','shipping_cost_detail'];
+  protected $fillable = ['invoice_prefix','invoice_number','shop_id','person_id','person_name','shipping_address','payment_detail','customer_message','order_status_id','order_free_shipping','order_shipping_cost','shipping_cost_detail'];
   protected $modelRelations = array('OrderProduct','OrderTotal','PaymentMethodToOrder');
 
   public $formHelper = true;
@@ -393,7 +393,7 @@ class Order extends Model
       'order_shipping_cost' => $this->order_shipping_cost,
       'orderShippingCostText' => $currency->format($this->order_shipping_cost),
       'orderStatusName' => $this->orderStatus->name,
-      'message_to_seller' => $this->message_to_seller,
+      'customer_message' => !empty($this->customer_message) ? $this->customer_message : '-',
       'orderedDate' => $date->covertDateToSting($this->created_at->format('Y-m-d')),
       'shipping_cost_detail' => $this->shipping_cost_detail
     );

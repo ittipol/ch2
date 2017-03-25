@@ -9,7 +9,8 @@
 	width: 700px;
 	height: 100%;
 	opacity: 1;
-	background-color: rgb(29, 66, 133);
+	/*background-color: rgb(29, 66, 133);*/
+	background-color: #607D8B;
 	padding: 0;
 	z-index: 90;
 	overflow: hidden;
@@ -28,6 +29,10 @@
 	line-height: 25px;
 	overflow-y: auto;
 	overflow-x: hidden;
+}
+
+.right-size-panel .line {
+	background-color: #fff;
 }
 
 .right-size-panel .right-size-panel-close-icon {

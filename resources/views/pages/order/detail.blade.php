@@ -16,7 +16,7 @@
   @if($order['order_status_id'] == 1)
   <div class="secondary-message-box info space-bottom-30">
     <div class="secondary-message-box-inner">
-      <h3>รายการสั่งซื้อยังไม่ถูกการยืนยันจากผู้ขาย</h3>
+      <h3>รายการสั่งซื้อยังไม่ถูกยืนยันจากผู้ขาย</h3>
       <p>*** ค่าจัดส่งของการสั่งซื้อนี้ยังไม่ใช่จำนวนสุทธิที่ต้องชำระ</p>
       <p>*** โปรดรอการยืนยันการสั่งซื้อจากผู้ขายก่อนการชำระเงิน</p>
     </div>
@@ -62,7 +62,7 @@
         <div class="col-sm-12 space-bottom-30">
 
           <div class="detail-info-section no-margin">
-            <h4>วิธีการชำระเงินของการสั่งซื้อนี้</h4>
+            <h4>วิธีการชำระเงินการสั่งซื้อนี้</h4>
             <div class="line"></div>
 
             <div class="list-h">
@@ -70,7 +70,7 @@
               <div class="list-h-item clearfix">
 
                 <div class="list-image pull-left">
-                  <a href="{{$paymentMethod['url']}}">
+                  <a data-right-side-panel="1" data-right-side-panel-target="#payment_method_{{$paymentMethod['id']}}">
                     <img src="/images/icons/payment-white.png">
                   </a>
                 </div>
@@ -80,7 +80,7 @@
                   <div class="row">
 
                     <div class="col-xs-12 list-content">
-                      <a href="{{$paymentMethod['url']}}">
+                      <a data-right-side-panel="1" data-right-side-panel-target="#payment_method_{{$paymentMethod['id']}}">
                         <h4 class="primary-info single-info">{{$paymentMethod['name']}}</h4>
                       </a>
                     </div>
@@ -90,6 +90,17 @@
                 </div>
 
               </div>
+
+              <div id="payment_method_{{$paymentMethod['id']}}" class="right-size-panel">
+                <div class="right-size-panel-inner">
+                    <h3>{{$paymentMethod['name']}}</h3>
+                    <div class="line space-bottom-10"></div>
+                    <h5>รายละเอียดการชำระเงิน</h5>
+                    {!!$paymentMethod['description']!!}
+                  <div class="right-size-panel-close-icon"></div>
+                </div>
+              </div>
+
               @endforeach
             </div>
             
@@ -292,9 +303,11 @@
           <p class="error-message">*** อาจมีการเปลี่ยนแปลงหลังจากรายการสั่งซื้อถูกยืนยันจากผู้ขาย</p>
         @endif
         @if(!empty($order['shipping_cost_detail']))
-          <a data-right-side-panel="1" data-right-side-panel-target="#shipping_cost_detail" role="button">แสดงรายละเอียดค่าจัดส่นสินค้า</a>
+          <a data-right-side-panel="1" data-right-side-panel-target="#shipping_cost_detail" role="button"><strong>แสดงรายละเอียดค่าจัดส่ง</strong></a>
           <div id="shipping_cost_detail" class="right-size-panel">
             <div class="right-size-panel-inner">
+              <h3>รายละเอียดค่าจัดส่ง</h3>
+              <div class="line space-bottom-10"></div>
               {!!$order['shipping_cost_detail']!!}
             </div>
             <div class="right-size-panel-close-icon"></div>

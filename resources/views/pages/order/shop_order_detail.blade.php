@@ -29,17 +29,17 @@
   @endif
 
   @if($order['order_status_id'] == 1)
-  <div class="secondary-message-box info space-bottom-30">
-    <div class="secondary-message-box-inner">
-      <h3>รอการยืนยันการสั่งซื้อจากผู้ขาย</h3>
-      <p>กรุณายืนยันการสั้งซื้อนี้ เพื่อเป็นการยืนยันการสั่งซื้อว่าถูกต้องและสามารถที่จะดำเนินการชำระเงินได้</p>
-    </div>
-    <div class="message-box-button-group clearfix">
-      <div class="flat-button">
-        <a href="{{$orderConfirmUrl}}" class="button">ยืนยันการสั่งซื้อ</a>
+    <div class="secondary-message-box info space-bottom-30">
+      <div class="secondary-message-box-inner">
+        <h3>รอการยืนยันการสั่งซื้อจากผู้ขาย</h3>
+        <p>กรุณายืนยันการสั้งซื้อนี้ เพื่อเป็นการยืนยันการสั่งซื้อว่าถูกต้องและสามารถที่จะดำเนินการชำระเงินได้</p>
+      </div>
+      <div class="message-box-button-group clearfix">
+        <div class="flat-button">
+          <a href="{{$orderConfirmUrl}}" class="button">ยืนยันการสั่งซื้อ</a>
+        </div>
       </div>
     </div>
-  </div>
   @elseif($order['order_status_id'] == 2)
 
     @if($hasOrderPaymentConfirm)
@@ -121,6 +121,23 @@
         @endforeach
       </div>
 
+      <div class="secondary-message-box info space-bottom-30">
+        <div class="message-box-button-group clearfix">
+          <div class="flat-button">
+            <a class="button" data-right-side-panel="1" data-right-side-panel-target="#order_status">เปลี่ยนสถานะการสั่งซื้อ</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="order_status" class="right-size-panel">
+        <div class="right-size-panel-inner">
+            <h3>ข้อความจากผู้ซื้อ</h3>
+            <div class="line space-bottom-10"></div>
+            xxxxx
+          <div class="right-size-panel-close-icon"></div>
+        </div>
+      </div>
+
       <div class="line space-top-bottom-20"></div>
 
     </div>
@@ -128,9 +145,19 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-12">
-      <a href="" class="button">แสดงข้อความจากผูซื้อ</a>
+    <div class="col-sm-12 text-right">
+      <a class="button" data-right-side-panel="1" data-right-side-panel-target="#customer_message">แสดงข้อความจากผู้ซื้อ</a>
     </div>
+
+    <div id="customer_message" class="right-size-panel">
+      <div class="right-size-panel-inner">
+          <h3>ข้อความจากผู้ซื้อ</h3>
+          <div class="line space-bottom-10"></div>
+          {!!$order['customer_message']!!}
+        <div class="right-size-panel-close-icon"></div>
+      </div>
+    </div>
+
   </div>
 
   <div class="line space-top-bottom-20"></div>
@@ -228,26 +255,6 @@
 
   </div>
 
-  <!-- <div class="row">
-
-    <div class="col-sm-12">
-
-      <div class="detail-info-section">
-        <h4>ข้อความจากผูซื้อ</h4>
-        <div class="line"></div> 
-        <div class="detail-info">
-          @if(!empty($order['message_to_seller']))
-          {{$order['message_to_seller']}}
-          @else
-          ไม่มีข้อความจากผู้ซื้อ
-          @endif
-        </div>
-      </div>
-
-    </div>
-
-  </div> -->
-
   <div class="cart space-top-30">
 
     <div class="product-list-table">
@@ -308,6 +315,27 @@
 
         </div>
         @endforeach
+      </div>
+
+      <div class="shipping-cost-summary">
+        <h4>ค่าจัดส่งสินค้าของการสั่งซื้อนี้</h4>
+        <h5>ค่าจัดส่งต่อการสั่งซื้อ: <strong>{{$orderShippingCosts['orderShippingCost']}}</strong></h5>
+        <h5>ค่าจัดส่งรวมของสินค้าแต่ละรายการ: <strong>{{$orderShippingCosts['productsShippingCost']}}</strong></h5>
+        @if($order['order_status_id'] == 1)
+          <p class="error-message">*** ค่าจัดส่งของการสั่งซื้อนี้ยังไม่ใช่จำนวนสุทธิที่ต้องชำระ</p>
+          <p class="error-message">*** อาจมีการเปลี่ยนแปลงหลังจากรายการสั่งซื้อถูกยืนยันจากผู้ขาย</p>
+        @endif
+        @if(!empty($order['shipping_cost_detail']))
+          <a data-right-side-panel="1" data-right-side-panel-target="#shipping_cost_detail" role="button"><strong>แสดงรายละเอียดค่าจัดส่ง</strong></a>
+          <div id="shipping_cost_detail" class="right-size-panel">
+            <div class="right-size-panel-inner">
+              <h3>รายละเอียดค่าจัดส่ง</h3>
+              <div class="line space-bottom-10"></div>
+              {!!$order['shipping_cost_detail']!!}
+            </div>
+            <div class="right-size-panel-close-icon"></div>
+          </div>
+        @endif
       </div>
 
     </div>

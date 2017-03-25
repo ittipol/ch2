@@ -72,20 +72,8 @@
 	font-weight: bold;
 }
 
-/*.global-cart-panel .product-info .price {
-	color: #0071c5;
-	font-weight: bold;	
-}*/
-
-
-/*.global-cart-panel .delete-product-button {
-	width: 50px;
-	height: 50px;
-	padding: 10px;
-}
-*/
 .global-cart-panel .cart-panel-close-button {
-	position: absolute;
+	/*position: absolute;
   top: 50%;
   right: 20px;
   width: 30px;
@@ -97,8 +85,19 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: 12px;
+  cursor: pointer;*/
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 64px;
+  height: 64px;
+  background-color: #37474F;
+  background-image: url(/images/icons/close.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px;
   cursor: pointer;
-  /*display: block;*/
 }
 
 .global-cart-panel .product-list-overlay {

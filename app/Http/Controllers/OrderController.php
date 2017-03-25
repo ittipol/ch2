@@ -41,11 +41,14 @@ class OrderController extends Controller
         $paymentMethodToOrders = $model->getRelatedData('PaymentMethodToOrder');
         $paymentMethods = array();
         foreach ($paymentMethodToOrders as $paymentMethodToOrder) {
-          $paymentMethod = $paymentMethodToOrder->paymentMethod;
-          $paymentMethods[] = array(
-            'name' => $paymentMethod->name,
-            'url' => 'shop/'.$slug.'/payment_method/'.$paymentMethod->id
-          );
+          // $paymentMethod = $paymentMethodToOrder->paymentMethod;
+
+          $paymentMethods[] = $paymentMethodToOrder->paymentMethod->buildPaginationData();
+
+          // $paymentMethods[] = array(
+          //   'name' => $paymentMethod->name,
+          //   // 'url' => 'shop/'.$slug.'/payment_method/'.$paymentMethod->id
+          // );
         }
 
         $this->setData('paymentMethods',$paymentMethods);
@@ -304,6 +307,7 @@ class OrderController extends Controller
 
     $this->setData('orderShippingMethod',$model->getOrderShippingMethod());
     $this->setData('orderStatuses',$model->getOrderStatuses());
+    $this->setData('orderShippingCosts',$model->getOrderShippingCostSummary());
     
     $this->setData('percent',$model->getOrderProgress());
 
