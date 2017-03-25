@@ -28,6 +28,46 @@
     <p>กรุณายืนยันการสั้งซื้อนี้ เพื่อเป็นการยืนยันการสั่งซื้อว่าถูกต้องและสามารถที่จะดำเนินการชำระเงินได้</p>
     <a href="{{$orderConfirmUrl}}" class="button">ยืนยันการสั่งซื้อ</a>
   </div>
+  @elseif($order['order_status_id'] == 2)
+
+    @if($hasOrderPaymentConfirm)
+
+      <div class="secondary-message-box info space-bottom-30">
+
+        <!-- <div class="secondary-message-box-inner">
+          <h3>ลูกค้ายืนยันการชำระเงินเลขที่การสั่งซื้อ {{$order['invoice_number']}} แล้ว</h3>
+        </div> -->
+
+        <div class="list-empty-message text-center space-bottom-20">
+          <img class="space-bottom-20" src="/images/common/payment.png">
+          <div>
+            <h3>ลูกค้ายืนยันการชำระเงินเลขที่การสั่งซื้อ {{$order['invoice_number']}} แล้ว</h3>
+          </div>
+        </div>
+
+        <div class="message-box-button-group two-button clearfix">
+          <div class="flat-button">
+            <a href="" class="button">แสดงรายละเอียดการชำระเงิน</a>
+          </div>
+          <div class="flat-button">
+            <a href="" class="button" data-modal="1" data-modal-title="ต้องการยืนยันการชำระเงินเลขที่การสั่งซื้อ {{$order['invoice_number']}} ใช่หรือไม่">ยืนยันการชำระเงินจากลูกค้า</a>
+          </div>
+        </div>
+
+      </div>
+
+    @else
+
+    <div class="secondary-message-box success space-bottom-30">
+      <h3>ยืนยันการสั่งซื้อแล้ว</h3>
+    </div>
+
+    <div class="secondary-message-box info space-bottom-30">
+      <h3>โปรดรอการชำระเงินจากลูกค้า</h3>
+    </div>
+
+    @endif
+
   @endif
 
   <div class="row">

@@ -26,7 +26,7 @@ class Product extends Model
   protected $validation = array(
     'rules' => array(
       'name' => 'required|max:255',
-      'price' => 'required|regex:/^[\d,]*(\.\d{1,2})?$/',
+      'price' => 'required|regex:/^[0-9]{1,3}(?:,?[0-9]{3})*(?:\.[0-9]{2})?$/',
       'quantity' => 'numeric',
       'minimum' => 'required|numeric',
       'product_unit' => 'required|max:255',

@@ -282,6 +282,10 @@ class Order extends Model
     ->exists();
   }
 
+  public function hasOrderPaymentConfirm() {
+    return OrderProduct::where('order_id','=',$this->id)->exists();
+  }
+
   public function checkAllProductsHaveShippingCost() {
 
     $total = OrderProduct::where([

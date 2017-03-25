@@ -72,11 +72,11 @@
 
     <div class="form-row">
       <?php
-        echo Form::label('', 'จำนวนเงินที่ชำระ', array(
+        echo Form::label('', 'จำนวนเงิน', array(
           'class' => 'required'
         ));
         echo Form::text('payment_amount', null, array(
-          'placeholder' => 'จำนวนเงินที่ชำระ',
+          'placeholder' => 'จำนวนเงิน',
           'autocomplete' => 'off',
           'role' => 'currency'
         ));
@@ -121,9 +121,47 @@
 
 <script type="text/javascript">
 
+  class PaymentConfirm {
+    constructor() {}
+
+    load() {
+      this.bind();
+    }
+
+    bind() {
+
+      $('#main_form').on('submit',function(){
+
+        var input = document.createElement('input');
+        input.setAttribute('type', 'hidden');
+        input.setAttribute('name', 'payment_date');
+        input.setAttribute('value', 
+          $('#payment_year').val()+
+          '-'+
+          $('#payment_month').val()+
+          '-'+
+          $('#payment_day').val()+
+          ' '+
+          $('#payment_hour').val()+
+          ':'+
+          $('#payment_min').val()+
+          ':'+
+          '00'
+        );
+        this.appendChild(input);
+
+      });
+
+    }
+
+  }
+
   $(document).ready(function(){
+
+    const paymentConfirm = new PaymentConfirm();
+    paymentConfirm.load();
     
-    const images = new Images('_image_group','photo',10,'description');
+    const images = new Images('_image_group','photo',5);
     images.load();
 
     const form = new Form();

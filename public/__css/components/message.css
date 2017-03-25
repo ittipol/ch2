@@ -1,8 +1,12 @@
 .secondary-message-box {
-	padding: 15px;
+	/*padding: 15px;*/
 	color: #D50000;
 	background-color: #FFEBEE;
 }
+
+.secondary-message-box .secondary-message-box-inner {
+	padding: 15px;
+} 
 
 .secondary-message-box.clean {
 	padding: 15px;
@@ -37,5 +41,37 @@
 }
 
 .secondary-message-box.success .line {
-	background-color: #A5D6A7;
+	background-color: #43A047;
+}
+
+.secondary-message-box .message-box-button-group {
+	width: 100%;
+}
+
+.secondary-message-box .message-box-button-group > .flat-button {
+	float: left;
+}
+
+.secondary-message-box .message-box-button-group > .flat-button {
+	width: 100%;
+}
+
+.secondary-message-box .message-box-button-group.two-button > .flat-button {
+	width: 50%;
+}
+
+.secondary-message-box .message-box-button-group .button {
+	width: 100%;
+	line-height: 50px;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+	/*background-color: rgb(244, 67, 54);*/
+	background-color: #009688;
+}
+
+@media only screen and (max-width : 480px) {
+  .secondary-message-box .message-box-button-group.two-button > .flat-button {
+  	width: 100%;
+  }
 }

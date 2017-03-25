@@ -19,64 +19,74 @@
     <p>*** ค่าจัดส่งของการสั่งซื้อนี้ยังไม่ใช่จำนวนสุทธิที่ต้องชำระ</p>
     <p>*** โปรดรอการยืนยันการสั่งซื้อจากผู้ขายก่อนการชำระเงิน</p>
   </div>
-  @endif
+  @elseif($order['order_status_id'] == 2)
 
-  @if($order['order_status_id'] == 2)
-    <div class="secondary-message-box success">
-      <h3>ผู้ขายยืนยันการสั่งซื้อแล้ว</h3>
-      <p>*** การสั่งซื้อนี้สามารถชำระเงินได้แล้ว</p>
-    </div>
+    @if($hasOrderPaymentConfirm)
 
-    <div class="secondary-message-box info space-bottom-30">
-      <div class="list-empty-message text-center">
-        <img class="space-bottom-20" src="/images/common/payment.png">
-        <div>
-          <h3>จำนวนเงินที่ต้องชำระ {{$orderTotals['total']['value']}}</h3>
-          <p>โปรดชำระเงินตามจำนวนที่ได้ระบุไว้</p>
-          <a href="{{URL::to($paymentConfirmUrl)}}" class="button">ยืนยันการชำระเงิน</a>
+      <div class="secondary-message-box success">
+        <h3>ยืนยันการชำระเงินเลขที่การสั่งซื้อ {{$order['invoice_number']}} แล้ว</h3>
+        <p>*** โปรดรอการตรวจสอบการชำระเงินจากผู้ขาย</p>
+      </div>
+
+    @else
+
+      <div class="secondary-message-box success">
+        <h3>ผู้ขายยืนยันการสั่งซื้อแล้ว</h3>
+        <p>*** การสั่งซื้อนี้สามารถชำระเงินได้แล้ว</p>
+      </div>
+
+      <div class="secondary-message-box info space-bottom-30">
+        <div class="list-empty-message text-center">
+          <img class="space-bottom-20" src="/images/common/payment.png">
+          <div>
+            <h3>จำนวนเงินที่ต้องชำระ {{$orderTotals['total']['value']}}</h3>
+            <p>โปรดชำระเงินตามจำนวนที่ได้ระบุไว้</p>
+            <a href="{{URL::to($paymentConfirmUrl)}}" class="button">ยืนยันการชำระเงิน</a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-sm-12 space-bottom-30">
+      <div class="row">
+        <div class="col-sm-12 space-bottom-30">
 
-        <div class="detail-info-section no-margin">
-          <h4>วิธีการชำระเงินของการสั่งซื้อนี้</h4>
-          <div class="line"></div>
+          <div class="detail-info-section no-margin">
+            <h4>วิธีการชำระเงินของการสั่งซื้อนี้</h4>
+            <div class="line"></div>
 
-          <div class="list-h">
-            @foreach($paymentMethods as $paymentMethod)
-            <div class="list-h-item clearfix">
+            <div class="list-h">
+              @foreach($paymentMethods as $paymentMethod)
+              <div class="list-h-item clearfix">
 
-              <div class="list-image pull-left">
-                <a href="{{$paymentMethod['url']}}">
-                  <img src="/images/icons/payment-white.png">
-                </a>
-              </div>
+                <div class="list-image pull-left">
+                  <a href="{{$paymentMethod['url']}}">
+                    <img src="/images/icons/payment-white.png">
+                  </a>
+                </div>
 
-              <div class="col-md-11 col-xs-8">
+                <div class="col-md-11 col-xs-8">
 
-                <div class="row">
+                  <div class="row">
 
-                  <div class="col-xs-12 list-content">
-                    <a href="{{$paymentMethod['url']}}">
-                      <h4 class="primary-info single-info">{{$paymentMethod['name']}}</h4>
-                    </a>
+                    <div class="col-xs-12 list-content">
+                      <a href="{{$paymentMethod['url']}}">
+                        <h4 class="primary-info single-info">{{$paymentMethod['name']}}</h4>
+                      </a>
+                    </div>
+
                   </div>
 
                 </div>
 
               </div>
-
+              @endforeach
             </div>
-            @endforeach
+            
           </div>
-          
-        </div>
 
+        </div>
       </div>
-    </div>
+
+    @endif
 
   @endif
 

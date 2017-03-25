@@ -34,18 +34,26 @@ class OrderController extends Controller
 
     if($model->order_status_id == 2) {
 
-      $paymentMethodToOrders = $model->getRelatedData('PaymentMethodToOrder');
-      $paymentMethods = array();
-      foreach ($paymentMethodToOrders as $paymentMethodToOrder) {
-        $paymentMethod = $paymentMethodToOrder->paymentMethod;
-        $paymentMethods[] = array(
-          'name' => $paymentMethod->name,
-          'url' => 'shop/'.$slug.'/payment_method/'.$paymentMethod->id
-        );
+      $hasOrderPaymentConfirm = $model->hasOrderPaymentConfirm();
+
+      if(!$hasOrderPaymentConfirm) {
+
+        $paymentMethodToOrders = $model->getRelatedData('PaymentMethodToOrder');
+        $paymentMethods = array();
+        foreach ($paymentMethodToOrders as $paymentMethodToOrder) {
+          $paymentMethod = $paymentMethodToOrder->paymentMethod;
+          $paymentMethods[] = array(
+            'name' => $paymentMethod->name,
+            'url' => 'shop/'.$slug.'/payment_method/'.$paymentMethod->id
+          );
+        }
+
+        $this->setData('paymentMethods',$paymentMethods);
+        $this->setData('paymentConfirmUrl','order/payment/confirm/'.$model->id);
+
       }
 
-      $this->setData('paymentMethods',$paymentMethods);
-      $this->setData('paymentConfirmUrl','order/payment/confirm/'.$model->id);
+      $this->setData('hasOrderPaymentConfirm',$hasOrderPaymentConfirm);
 
     }
 
@@ -190,7 +198,7 @@ class OrderController extends Controller
     $model->order_id = $order->id;
 
     if($model->fill($request->all())->save()) {
-      Message::display('ยืนยันการชำระเงินแล้ว','success');
+      Message::display('ยืนยันการชำระเงินเลขที่การสั่งซื้อ '.$order->invoice_number.' แล้ว','success');
       return Redirect::to('account/order/'.$order->id);
     }else{
       return Redirect::back();
@@ -241,6 +249,19 @@ class OrderController extends Controller
 
     if($model->order_status_id == 1) {
       $this->setData('orderConfirmUrl',request()->get('shopUrl').'order/confirm/'.$model->id);
+    }elseif($model->order_status_id == 2) {
+      $hasOrderPaymentConfirm = $model->hasOrderPaymentConfirm();
+
+      if($hasOrderPaymentConfirm) {
+        // Get order payment confirm
+        $orderPaymentConfirm = $model->getRelatedData('OrderPaymentConfirm',array(
+          'first' => true
+        ));
+
+        // dd($orderPaymentConfirm);
+      }
+
+      $this->setData('hasOrderPaymentConfirm',$hasOrderPaymentConfirm);
     }
 
     if(!$hasPaymentMethod) {
