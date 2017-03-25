@@ -21,12 +21,6 @@ class ProductDiscount extends Model
       'date_start' => 'date_format:Y-m-d H:i:s',
       'date_end' => 'date_format:Y-m-d H:i:s|after_or_equal:date_start',
     ),
-    // 'action' => array(
-    //   'PATCH' => array(
-    //     'date_start' => 'date_format:Y-m-d H:i:s',
-    //     'date_end' => 'date_format:Y-m-d H:i:s|after_or_equal:date_start',
-    //   )
-    // ),
     'messages' => array(
       'reduced_price_input.required' => 'จำนวนราคาที่ต้องการลดห้ามว่าง',
       'reduced_percent_input.required' => 'จำนวน % ห้ามว่าง',

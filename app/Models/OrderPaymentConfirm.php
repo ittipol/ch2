@@ -21,11 +21,12 @@ class OrderPaymentConfirm extends Model
   protected $validation = array(
     'rules' => array(
       'payment_method_id' => 'required',
-      'description' => 'required'
+      'payment_date' => 'required|date_format:Y-m-d H:i:s',
+      'payment_time' => 'required|date_format:H:i:s'
     ),
     'messages' => array(
       'payment_method_id.required' => 'วิธีที่คุณชำระเงินห้ามว่าง',
-      'description.required' => 'รายละเอียดการชำระเงินห้ามว่าง',
+      'payment_date.date_format' => 'วันที่ชำระเงินไม่ถูกต้อง',
     )
   ); 
 

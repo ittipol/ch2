@@ -129,12 +129,12 @@
 
           <div class="detail-group-info">
             <h5 class="title">ผู้ให้บริการการจัดส่ง</h5>
-            <p>{{$orderShippingMethod['shipping_service']}}</p>
+            <p>{{$orderShippingMethod['shippingService']}}</p>
           </div>
 
           <div class="detail-group-info">
             <h5 class="title">รูปแบบการคิดค่าจัดส่ง</h5>
-            <p>{{$orderShippingMethod['shipping_service_cost_type']}}</p>
+            <p>{{$orderShippingMethod['shippingServiceCostType']}}</p>
           </div>
 
           <div class="detail-group-info">

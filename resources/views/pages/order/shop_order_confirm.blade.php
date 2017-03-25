@@ -119,10 +119,6 @@
                   <div class="col-md-4 col-xs-12">
                     <h5>{{$shippingMethod['name']}}</h5>
                     <p>ผู้ให้บริการ: <strong>{{$shippingMethod['shippingService']}}</strong></p>
-                    
-                  </div>
-
-                  <div class="col-md-4 col-xs-12">
                     <p>ระยะเวลาจัดส่ง: <strong>{{$shippingMethod['shipping_time']}}</strong></p>
                   </div>
 
@@ -130,11 +126,63 @@
                     <p>รูปแบบการคิดค่าจัดส่ง: <strong>{{$shippingMethod['shippingServiceCostType']}}</strong></p>
                   </div>
 
+                  <div class="col-md-4 col-xs-12">
+                    <div class="shipping-cost">
+                      @if(empty($shippingMethod['serviceCostText']) || ($shippingMethod['serviceCostText'] == '-'))
+                        -
+                      @else
+                        + {{$shippingMethod['serviceCostText']}}
+                      @endif
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </label>
           </div>
         @endforeach
+      </div>
+
+    @else
+
+      <div class="secondary-message-box info">
+        <div>*** วิธีการจัดส่งที่ลูกค้าเลือก</div>
+      </div>
+
+      <div class="list-h">
+
+        <div class="list-h-item clearfix">
+
+          <div class="list-image pull-left">
+            <img src="/images/icons/truck-white.png">
+          </div>
+
+          <div class="col-md-11 col-xs-8">
+
+            <div class="row">
+
+              <div class="col-md-4 col-xs-12 list-content">
+                <h4 class="primary-info">{{$orderShippingMethod['shipping_method_name']}}</h4>
+                <div class="secondary-info">ผู้ให้บริการการจัดส่ง: {{$orderShippingMethod['shippingService']}}</div>
+                <div class="secondary-info">ระยะเวลาจัดส่ง: {{$orderShippingMethod['shipping_time']}}</div>
+              </div>
+
+              <div class="col-md-4 col-xs-12 list-content">
+                <h4 class="primary-info">รูปแบบการคิดค่าจัดส่ง</h4>
+                <div class="secondary-info">{{$orderShippingMethod['shippingServiceCostType']}}</div>
+              </div>
+
+              <div class="col-md-4 col-xs-12 list-content">
+                <h4 class="primary-info">ค่าจัดส่ง</h4>
+                <div class="secondary-info">{{$order['orderShippingCostText']}}</div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
 
     @endif
@@ -146,6 +194,8 @@
     <div class="line"></div>
 
     <div class="secondary-message-box info">
+      <div>*** ผู้ขายสามารถแก้ไขค่าจัดส่งได้จากส่วนนี้</div>
+      <div>*** ในแต่ละการสั่งซื้อผู้ขายสามารถกำหนดค่าจัดส่งให้กับการสั่งซื้อและสินค้าแต่ละรายการได้</div>
       <div>*** หลังจากกำหนดค่าจัดส่งสินค้าทั้งหมดแล้ว ค่าจัดส่งทั้งหมดจะถูกนำมารวมและจะเป็นจำนวนค่าจัดส่งสุทธิที่ลูกค้าต้องชำระ</div>
     </div>
 
@@ -171,8 +221,10 @@
         </label>
       </div>
 
+      <div class="line space-bottom-20"></div>
+
       <h4>กำหนดค่าจัดส่งของการสั่งซื้อนี้</h4>
-      <p class="notice info">เว้นว่างเมื่อไม่ต้องการกำหนดค่าจัดส่งของการสั่งซื้อนี้</p>
+      <!-- <p class="notice info">เว้นว่างเมื่อไม่ต้องการกำหนดค่าจัดส่งของการสั่งซื้อนี้</p> -->
       <?php
         echo Form::text('order_shipping_cost', $order['order_shipping_cost'], array(
           'class' => 'shipping-cost-input',
@@ -391,11 +443,6 @@
     constructor() {}
 
     load() {
-
-      // console.log(typeof $('.shipping-method-rdobox:checked').data('free-service'));
-      // console.log($('.shipping-method-rdobox:checked').data('service-cost'));
-
-      // console.log(typeof undefined);
 
       this.shippingMethod($('.shipping-method-rdobox:checked').data('free-service'),$('.shipping-method-rdobox:checked').data('service-cost'));
 

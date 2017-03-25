@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
 use App\library\message;
+use App\library\date;
 use App\library\validation;
 use Redirect;
 
@@ -96,10 +97,65 @@ class OrderController extends Controller
       $paymentMethods[$paymentMethod->id] = $paymentMethod->name;
     }
 
+    $date = new Date;
+
+    $currentYear = date('Y');
+    
+    $day = array();
+    $month = array();
+    $year = array();
+
+    for ($i=1; $i <= 31; $i++) { 
+      $day[$i] = $i;
+    }
+
+    for ($i=1; $i <= 12; $i++) { 
+      $month[$i] = $date->getMonthName($i);
+    }
+
+    for ($i=$currentYear; $i <= $currentYear + 1; $i++) { 
+      $year[$i] = $i+543;
+    }
+
+    // Time
+    $hours = array();
+    $mins = array();
+
+    for ($i=0; $i <= 23; $i++) { 
+
+      if($i < 10) {
+        $hours['0'.$i] = $i;
+      }else{
+        $hours[$i] = $i;
+      }
+
+    }
+
+    for ($i=0; $i <= 59; $i++) {
+
+      if($i < 10) {
+        $mins['0'.$i] = '0'.$i;
+      }else{
+        $mins[$i] = $i;
+      }
+      
+    }
+
     $this->data = $model->formHelper->build();
     $this->setData('invoiceNumber',$order->invoice_number);
 
     $this->setData('paymentMethods',$paymentMethods);
+
+    $this->setData('day',$day);
+    $this->setData('month',$month);
+    $this->setData('year',$year);
+
+    $this->setData('currentDay',date('j'));
+    $this->setData('currentMonth',date('n'));
+    $this->setData('currentYear',$currentYear);
+
+    $this->setData('hours',$hours);
+    $this->setData('mins',$mins);
     
     return $this->view('pages.order.payment_confirm');
   }
@@ -452,7 +508,7 @@ class OrderController extends Controller
     // 
     $model->order_status_id = Service::loadModel('OrderStatus')->getIdByalias('pending-customer-payment');
     $model->save();
-dd('pppp');
+
     Message::display('การสั่งซื้อถูกยืนยันแล้ว','success');
     return Redirect::to('shop/'.$this->param['shopSlug'].'/order/'.$model->id);
 

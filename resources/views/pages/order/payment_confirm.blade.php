@@ -28,34 +28,64 @@
 
     <div class="form-row">
       <?php 
-        echo Form::label('', 'เลือกวิธีที่คุณชำระเงิน', array(
+        echo Form::label('', 'วิธีที่คุณชำระเงิน', array(
           'class' => 'required'
         ));
+        echo Form::select('payment_method_id', $paymentMethods);
       ?>
-      <div class="row">
+    </div>
+
+    <div class="form-row">
+      <div class="select-group">
         <?php 
-          foreach ($paymentMethods as $id => $name):
-        ?>
-          <div class="col-sm-12">
-            <label class="choice-box">
-              <?php
-                echo Form::radio('payment_method_id', $id);
-              ?>
-              <div class="inner">{{$name}}</div>
-            </label>
-          </div>
-        <?php
-          endforeach;
+          echo Form::label('', 'วันที่ชำระเงิน', array(
+            'class' => 'required'
+          ));
+          echo Form::select('payment_day', $day, $currentDay, array(
+            'id' => 'payment_day'
+          ));
+          echo Form::select('payment_month', $month, $currentMonth, array(
+            'id' => 'payment_month'
+          ));
+          echo Form::select('payment_year', $year, $currentYear, array(
+            'id' => 'payment_year'
+          ));
         ?>
       </div>
+    </div>
 
+    <div class="form-row">
+      <div class="select-group">
+        <?php 
+          echo Form::label('', 'เวลาชำระเงิน', array(
+            'class' => 'required'
+          ));
+          echo Form::select('payment_hour', $hours, null, array(
+            'id' => 'payment_hour'
+          ));
+          echo Form::select('payment_min', $mins, null, array(
+            'id' => 'payment_min'
+          ));
+        ?>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <?php
+        echo Form::label('', 'จำนวนเงินที่ชำระ', array(
+          'class' => 'required'
+        ));
+        echo Form::text('payment_amount', null, array(
+          'placeholder' => 'จำนวนเงินที่ชำระ',
+          'autocomplete' => 'off',
+          'role' => 'currency'
+        ));
+      ?>
     </div>
 
     <div class="form-row">
       <?php 
-        echo Form::label('description', 'รายละเอียดการชำระเงิน', array(
-          'class' => 'required'
-        ));
+        echo Form::label('description', 'รายละเอียดเพิ่มเติม');
         echo Form::textarea('description', null, array(
           'class' => 'ckeditor'
         ));
