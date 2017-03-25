@@ -10,7 +10,8 @@
 	height: 100%;
 	opacity: 1;
 	/*background-color: rgb(29, 66, 133);*/
-	background-color: #607D8B;
+	/*background-color: #607D8B;*/
+	background-color: #004D40;
 	padding: 0;
 	z-index: 90;
 	overflow: hidden;
@@ -33,6 +34,10 @@
 
 .right-size-panel .line {
 	background-color: #fff;
+}
+
+.right-size-panel select {
+	color: #000;
 }
 
 .right-size-panel .right-size-panel-close-icon {

@@ -287,19 +287,21 @@ class OrderController extends Controller
       $hasOrderPaymentConfirm = $model->hasOrderPaymentConfirm();
 
       if($hasOrderPaymentConfirm) {
-        // Get order payment confirm
-        // $orderPaymentConfirm = $model->getRelatedData('OrderPaymentConfirm',array(
-        //   'first' => true
-        // ));
-
         $this->setData('paymentDetailUrl',request()->get('shopUrl').'order/payment/detail/'.$model->id);
         $this->setData('paymentConfirmUrl',request()->get('shopUrl').'order/payment/confirm/'.$model->id);
-
       }
 
       $this->setData('hasOrderPaymentConfirm',$hasOrderPaymentConfirm);
 
     }
+
+    // Get OrderStatus
+    $xxx = Service::loadModel('OrderStatus')->get();
+    $orderStatuses = array();
+    foreach ($xxx as $orderStatus) {
+      $orderStatuses[$orderStatus->id] = $orderStatus->name;
+    }
+    $this->setData('xxx',$orderStatuses);
 
     if(!$hasPaymentMethod) {
       $this->setData('PaymentMethodAddUrl',request()->get('shopUrl').'payment_method');
@@ -308,7 +310,7 @@ class OrderController extends Controller
     $this->setData('orderShippingMethod',$model->getOrderShippingMethod());
     $this->setData('orderStatuses',$model->getOrderStatuses());
     $this->setData('orderShippingCosts',$model->getOrderShippingCostSummary());
-    
+
     $this->setData('percent',$model->getOrderProgress());
 
     $this->setData('hasPaymentMethod',$hasPaymentMethod);

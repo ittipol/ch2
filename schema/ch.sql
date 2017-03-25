@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2017 at 08:55 AM
+-- Generation Time: Mar 25, 2017 at 05:28 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -416,14 +416,6 @@ CREATE TABLE `carts` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `carts`
---
-
-INSERT INTO `carts` (`id`, `person_id`, `session_id`, `shop_id`, `product_id`, `quantity`, `created_at`, `updated_at`) VALUES
-(1, 1, NULL, 3, 12, 1, '2017-03-22 19:56:18', '2017-03-22 19:56:18'),
-(2, 1, NULL, 21, 16, 1, '2017-03-22 21:07:47', '2017-03-22 21:07:47');
 
 -- --------------------------------------------------------
 
@@ -11754,7 +11746,8 @@ INSERT INTO `data_access_permissions` (`id`, `model`, `model_id`, `access_level`
 (51, 'Item', 110, 99, 'Person', 1),
 (52, 'Product', 7, 99, 'Shop', 3),
 (53, 'RealEstate', 77, 99, 'Person', 1),
-(54, 'Product', 16, 99, 'Shop', 21);
+(54, 'Product', 16, 99, 'Shop', 21),
+(55, 'Product', 12, 99, 'Shop', 3);
 
 -- --------------------------------------------------------
 
@@ -12952,7 +12945,9 @@ INSERT INTO `images` (`id`, `model`, `model_id`, `path`, `filename`, `descriptio
 (199, 'RealEstate', 77, NULL, '14900267985205587363919930188761.jpg', 'มีท่อนต่างๆ ของ Lorem Ipsum ให้หยิบมาใช้งานได้มากมาย แต่ส่วนใหญ่แล้วจะถูกนำไปปรับให้เป็นรูปแบบอื่นๆ อาจจะด้วยการสอดแทรกมุกตลก หรือด้วยคำที่มั่วขึ้นมาซึ่งถึงอย่างไรก็ไม่มีทางเป็นเรื่องจริงได้เลยแม้แต่น้อย ถ้าคุณกำลังคิดจะใช้ Lorem Ipsum สักท่อนหนึ่ง คุณจำเป็นจะต้องตรวจให้แน่ใจว่าไม่มีอะไรน่าอับอายซ่อนอยู่ภายในท่อนนั้นๆ ตัวสร้าง Lorem Ipsum บนอินเทอร์เน็ตทุกตัวมักจะเอาท่อนที่แน่ใจแล้วมาใช้ซ้ำๆ ทำให้กลายเป็นที่มาของตัวสร้างที่แท้จริงบนอินเทอร์เน็ต ในการสร้าง Lorem Ipsum ที่ดูเข้าท่า ต้องใช้คำจากพจนานุกรมภาษาละตินถึงกว่า 200 คำ ผสมกับรูปแบบโครงสร้างประโยคอีกจำนวนหนึ่ง เพราะฉะนั้น Lorem Ipsum ที่ถูกสร้างขึ้นใหม่นี้ก็จะไม่ซ้ำไปซ้ำมา ไม่มีมุกตลกซุกแฝงไว้ภายใน หรือไม่มีคำใดๆ ที่ไม่บ่งบอกความหมาย', 1, 1, '2017-03-20 23:20:48', '2017-03-20 23:20:48'),
 (200, 'RealEstate', 77, NULL, '1490026839025306104757486257032.jpg', 'Lorem Ipsum คือ เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 เมื่อเครื่องพิมพ์โนเนมเครื่องหนึ่งนำรางตัวพิมพ์มาสลับสับตำแหน่งตัวอักษรเพื่อทำหนังสือตัวอย่าง Lorem Ipsum อยู่ยงคงกระพันมาไม่ใช่แค่เพียงห้าศตวรรษ แต่อยู่มาจนถึงยุคที่พลิกโฉมเข้าสู่งานเรียงพิมพ์ด้วยวิธีทางอิเล็กทรอนิกส์ และยังคงสภาพเดิมไว้อย่างไม่มีการเปลี่ยนแปลง มันได้รับความนิยมมากขึ้นในยุค ค.ศ. 1960 เมื่อแผ่น Letraset วางจำหน่ายโดยมีข้อความบนนั้นเป็น Lorem Ipsum และล่าสุดกว่านั้น คือเมื่อซอฟท์แวร์การทำสื่อสิ่งพิมพ์ (Desktop Publishing) อย่าง Aldus PageMaker ได้รวมเอา Lorem Ipsum เวอร์ชั่นต่างๆ เข้าไว้ในซอฟท์แวร์ด้วย', 1, 1, '2017-03-20 23:20:49', '2017-03-20 23:20:49'),
 (201, 'Product', 16, NULL, '1490154290186101936895739772486.jpg', 'มีท่อนต่างๆ ของ Lorem Ipsum ให้หยิบมาใช้งานได้มากมาย แต่ส่วนใหญ่แล้วจะถูกนำไปปรับให้เป็นรูปแบบอื่นๆ อาจจะด้วยการสอดแทรกมุกตลก หรือด้วยคำที่มั่วขึ้นมาซึ่งถึงอย่างไรก็ไม่มีทางเป็นเรื่องจริงได้เลยแม้แต่น้อย ถ้าคุณกำลังคิดจะใช้ Lorem Ipsum สักท่อนหนึ่ง คุณจำเป็นจะต้องตรวจให้แน่ใจว่าไม่มีอะไรน่าอับอายซ่อนอยู่ภายในท่อนนั้นๆ ตัวสร้าง Lorem Ipsum บนอินเทอร์เน็ตทุกตัวมักจะเอาท่อนที่แน่ใจแล้วมาใช้ซ้ำๆ ทำให้กลายเป็นที่มาของตัวสร้างที่แท้จริงบนอินเทอร์เน็ต ในการสร้าง Lorem Ipsum ที่ดูเข้าท่า ต้องใช้คำจากพจนานุกรมภาษาละตินถึงกว่า 200 คำ ผสมกับรูปแบบโครงสร้างประโยคอีกจำนวนหนึ่ง เพราะฉะนั้น Lorem Ipsum ที่ถูกสร้างขึ้นใหม่นี้ก็จะไม่ซ้ำไปซ้ำมา ไม่มีมุกตลกซุกแฝงไว้ภายใน หรือไม่มีคำใดๆ ที่ไม่บ่งบอกความหมาย', 1, 1, '2017-03-22 10:46:05', '2017-03-22 10:47:00'),
-(202, 'Item', 105, NULL, '1490158866791975773777569827366.jpg', NULL, 1, 1, '2017-03-22 12:01:25', '2017-03-22 12:01:25');
+(202, 'Item', 105, NULL, '1490158866791975773777569827366.jpg', NULL, 1, 1, '2017-03-22 12:01:25', '2017-03-22 12:01:25'),
+(203, 'OrderPaymentConfirm', 4, NULL, '14904396468449946402735874170594.png', NULL, 1, 1, '2017-03-25 18:00:48', '2017-03-25 18:00:48'),
+(204, 'OrderPaymentConfirm', 5, NULL, '1490456582199499715537136513156.jpg', NULL, 1, 1, '2017-03-25 22:43:04', '2017-03-25 22:43:04');
 
 -- --------------------------------------------------------
 
@@ -13463,7 +13458,8 @@ CREATE TABLE `lookups` (
 
 INSERT INTO `lookups` (`id`, `model`, `model_id`, `name`, `keyword_1`, `keyword_2`, `keyword_3`, `keyword_4`, `description`, `address`, `tags`, `active`, `created_at`, `updated_at`) VALUES
 (1, 'Shop', 3, 'Nike Retail Shop', NULL, NULL, NULL, NULL, NULL, '17/99 อัมพวา 75110 สมุทรปราการ', NULL, 1, '2017-03-22 19:02:18', '2017-03-22 19:02:18'),
-(2, 'Product', 16, 'AdiiDas Pro 777', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-23 13:56:02', '2017-03-23 13:56:02');
+(2, 'Product', 16, 'AdiiDas Pro 777', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-23 13:56:02', '2017-03-23 13:56:02'),
+(3, 'Product', 12, 'Guitar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-23 17:13:35', '2017-03-23 17:13:35');
 
 -- --------------------------------------------------------
 
@@ -13541,8 +13537,10 @@ CREATE TABLE `orders` (
   `person_name` varchar(255) NOT NULL,
   `shipping_address` varchar(255) NOT NULL,
   `payment_detail` text,
-  `message_to_seller` text NOT NULL,
+  `customer_message` text,
   `order_status_id` int(11) UNSIGNED NOT NULL,
+  `order_free_shipping` tinyint(1) DEFAULT NULL,
+  `order_shipping_cost` decimal(15,2) DEFAULT NULL,
   `shipping_cost_detail` text,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -13552,25 +13550,25 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `invoice_prefix`, `invoice_number`, `shop_id`, `person_id`, `person_name`, `shipping_address`, `payment_detail`, `message_to_seller`, `order_status_id`, `shipping_cost_detail`, `created_at`, `updated_at`) VALUES
-(1, 'INV', 1, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, NULL, '2017-03-21 14:30:34', '2017-03-21 15:03:30'),
-(2, 'INV', 2, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, NULL, '2017-03-21 14:31:05', '2017-03-21 17:44:34'),
-(3, 'INV', 3, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, NULL, '2017-03-21 17:50:38', '2017-03-21 18:01:55'),
-(4, 'INV', 4, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, NULL, '2017-03-21 18:02:43', '2017-03-21 18:02:43'),
-(5, 'INV', 5, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, NULL, '2017-03-21 18:09:24', '2017-03-21 18:09:24'),
-(6, 'INV', 6, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, NULL, '2017-03-21 18:10:12', '2017-03-21 18:10:12'),
-(7, 'INV', 7, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, NULL, '2017-03-21 18:23:29', '2017-03-21 18:23:29'),
-(8, 'INV', 8, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, NULL, '2017-03-21 18:24:46', '2017-03-21 18:25:02'),
-(9, 'INV', 9, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, NULL, '2017-03-21 18:25:23', '2017-03-21 18:31:24'),
-(10, 'INV', 1, 21, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, NULL, '2017-03-21 22:10:29', '2017-03-21 22:10:29'),
-(11, 'INV', 2, 21, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, NULL, '2017-03-21 22:15:53', '2017-03-22 10:05:32'),
-(12, 'INV', 3, 21, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, NULL, '2017-03-22 10:33:59', '2017-03-22 10:42:49'),
-(13, 'INV', 4, 21, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, '<p>มีหลักฐานที่เป็นข้อเท็จจริงยืนยันมานานแล้ว ว่าเนื้อหาที่อ่านรู้เรื่องนั้นจะไปกวนสมาธิของคนอ่านให้เขวไปจากส่วนที้เป็น Layout เรานำ Lorem Ipsum มาใช้เพราะความที่มันมีการกระจายของตัวอักษรธรรมดาๆ แบบพอประมาณ ซึ่งเอามาใช้แทนการเขียนว่า &lsquo;ตรงนี้เป็นเนื้อหา, ตรงนี้เป็นเนื้อหา&#39; ได้ และยังทำให้มองดูเหมือนกับภาษาอังกฤษที่อ่านได้ปกติ ปัจจุบันมีแพ็กเกจของซอฟท์แวร์การทำสื่อสิ่งพิมพ์ และซอฟท์แวร์การสร้างเว็บเพจ (Web Page Editor) หลายตัวที่ใช้ Lorem Ipsum เป็นแบบจำลองเนื้อหาที่เป็นค่าตั้งต้น และเวลาที่เสิร์ชด้วยคำว่า &#39;lorem ipsum&#39; ผลการเสิร์ชที่ได้ก็จะไม่พบบรรดาเว็บไซต์ที่ยังคงอยู่ในช่วงเริ่มสร้างด้วย โดยหลายปีที่ผ่านมาก็มีการคิดค้นเวอร์ชั่นต่างๆ ของ Lorem Ipsum ขึ้นมาใช้ บ้างก็เป็นความบังเอิญ บ้างก็เป็นความตั้งใจ (เช่น การแอบแทรกมุกตลก)</p>\r\n', '2017-03-22 10:48:11', '2017-03-22 10:49:17'),
-(14, 'INV', 10, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, NULL, '2017-03-22 11:42:22', '2017-03-22 11:42:22'),
-(15, 'INV', 5, 21, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, '<p>Lorem Ipsum คือ เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 เมื่อเครื่องพิมพ์โนเนมเครื่องหนึ่งนำรางตัวพิมพ์มาสลับสับตำแหน่งตัวอักษรเพื่อทำหนังสือตัวอย่าง Lorem Ipsum อยู่ยงคงกระพันมาไม่ใช่แค่เพียงห้าศตวรรษ แต่อยู่มาจนถึงยุคที่พลิกโฉมเข้าสู่งานเรียงพิมพ์ด้วยวิธีทางอิเล็กทรอนิกส์ และยังคงสภาพเดิมไว้อย่างไม่มีการเปลี่ยนแปลง มันได้รับความนิยมมากขึ้นในยุค ค.ศ. 1960 เมื่อแผ่น Letraset วางจำหน่ายโดยมีข้อความบนนั้นเป็น Lorem Ipsum และล่าสุดกว่านั้น คือเมื่อซอฟท์แวร์การทำสื่อสิ่งพิมพ์ (Desktop Publishing) อย่าง Aldus PageMaker ได้รวมเอา Lorem Ipsum เวอร์ชั่นต่างๆ เข้าไว้ในซอฟท์แวร์ด้วย</p>\r\n', '2017-03-22 11:42:23', '2017-03-22 11:45:20'),
-(16, 'INV', 6, 21, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, NULL, '2017-03-22 11:48:10', '2017-03-22 11:48:10'),
-(17, 'INV', 11, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, NULL, '2017-03-22 11:57:32', '2017-03-22 11:57:32'),
-(18, 'INV', 12, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, NULL, '2017-03-22 13:30:26', '2017-03-22 13:30:26');
+INSERT INTO `orders` (`id`, `invoice_prefix`, `invoice_number`, `shop_id`, `person_id`, `person_name`, `shipping_address`, `payment_detail`, `customer_message`, `order_status_id`, `order_free_shipping`, `order_shipping_cost`, `shipping_cost_detail`, `created_at`, `updated_at`) VALUES
+(1, 'INV', 1, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, NULL, NULL, NULL, '2017-03-23 17:36:37', '2017-03-23 17:36:37'),
+(2, 'INV', 1, 21, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, 1, NULL, NULL, '2017-03-23 17:36:38', '2017-03-25 09:38:35'),
+(3, 'INV', 2, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, NULL, '300.00', NULL, '2017-03-23 17:42:08', '2017-03-23 17:42:08'),
+(4, 'INV', 3, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, NULL, '777.00', NULL, '2017-03-23 17:48:05', '2017-03-23 17:48:05'),
+(5, 'INV', 4, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, 1, NULL, NULL, '2017-03-23 18:01:50', '2017-03-23 18:01:50'),
+(6, 'INV', 5, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, 1, NULL, NULL, '2017-03-23 18:17:53', '2017-03-23 18:17:53'),
+(7, 'INV', 6, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, 1, NULL, NULL, '2017-03-24 15:28:40', '2017-03-24 15:28:40'),
+(8, 'INV', 7, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, 1, NULL, NULL, '2017-03-24 15:29:06', '2017-03-24 15:29:06'),
+(9, 'INV', 8, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, 1, NULL, NULL, '2017-03-24 15:32:09', '2017-03-24 15:32:09'),
+(10, 'INV', 2, 21, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, NULL, '199.00', '<p>Lorem Ipsum คือ เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 เมื่อเครื่องพิมพ์โนเนมเครื่องหนึ่งนำรางตัวพิมพ์มาสลับสับตำแหน่งตัวอักษรเพื่อทำหนังสือตัวอย่าง Lorem Ipsum อยู่ยงคงกระพันมาไม่ใช่แค่เพียงห้าศตวรรษ แต่อยู่มาจนถึงยุคที่พลิกโฉมเข้าสู่งานเรียงพิมพ์ด้วยวิธีทางอิเล็กทรอนิกส์ และยังคงสภาพเดิมไว้อย่างไม่มีการเปลี่ยนแปลง มันได้รับความนิยมมากขึ้นในยุค ค.ศ. 1960 เมื่อแผ่น Letraset วางจำหน่ายโดยมีข้อความบนนั้นเป็น Lorem Ipsum และล่าสุดกว่านั้น คือเมื่อซอฟท์แวร์การทำสื่อสิ่งพิมพ์ (Desktop Publishing) อย่าง Aldus PageMaker ได้รวมเอา Lorem Ipsum เวอร์ชั่นต่างๆ เข้าไว้ในซอฟท์แวร์ด้วย</p>\r\n', '2017-03-24 15:39:48', '2017-03-25 09:42:34'),
+(11, 'INV', 3, 21, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, NULL, '199.00', NULL, '2017-03-24 17:56:28', '2017-03-25 09:41:40'),
+(12, 'INV', 9, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, 1, NULL, NULL, '2017-03-24 17:57:04', '2017-03-25 12:54:00'),
+(13, 'INV', 10, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, NULL, '777.00', '<h2>มันมีที่มาอย่างไร?</h2>\r\n\r\n<p>ตรงกันข้ามกับความเชื่อที่นิยมกัน Lorem Ipsum ไม่ได้เป็นเพียงแค่ชุดตัวอักษรที่สุ่มขึ้นมามั่วๆ แต่หากมีที่มาจากวรรณกรรมละตินคลาสสิกชิ้นหนึ่งในยุค 45 ปีก่อนคริสตศักราช ทำให้มันมีอายุถึงกว่า 2000 ปีเลยทีเดียว ริชาร์ด แมคคลินท็อค ศาสตราจารย์ชาวละติน จากวิทยาลัยแฮมพ์เด็น-ซิดนีย์ ในรัฐเวอร์จิเนียร์ นำคำภาษาละตินคำว่า consectetur ซึ่งหาคำแปลไม่ได้จาก Lorem Ipsum ตอนหนึ่งมาค้นเพิ่มเติม โดยตรวจเทียบกับแหล่งอ้างอิงต่างๆ ในวรรณกรรมคลาสสิก และค้นพบแหล่งข้อมูลที่ไร้ข้อกังขาว่า Lorem Ipsum นั้นมาจากตอนที่ 1.10.32 และ 1.10.33 ของเรื่อง &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) ของ ซิเซโร ที่แต่งไว้เมื่อ 45 ปีก่อนคริสตศักราช หนังสือเล่มนี้เป็นเรื่องราวที่ว่าด้วยทฤษฎีแห่งจริยศาสตร์ ซึ่งเป็นที่นิยมมากในยุคเรเนสซองส์ บรรทัดแรกของ Lorem Ipsum &quot;Lorem ipsum dolor sit amet..&quot; ก็มาจากบรรทัดหนึ่งในตอนที่ 1.10.32 นั่นเอง</p>\r\n', '2017-03-24 17:57:40', '2017-03-25 10:07:47'),
+(14, 'INV', 11, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, 1, NULL, NULL, '2017-03-25 16:17:31', '2017-03-25 16:23:59'),
+(15, 'INV', 12, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, 1, NULL, NULL, '2017-03-25 16:25:52', '2017-03-25 16:26:13'),
+(16, 'INV', 4, 21, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 3, 1, NULL, NULL, '2017-03-25 17:56:56', '2017-03-25 18:56:47'),
+(17, 'INV', 5, 21, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, NULL, '1200.00', '<p>xxx</p>\r\n', '2017-03-25 22:08:05', '2017-03-25 22:10:21'),
+(18, 'INV', 13, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, 'Lorem Ipsum คือ เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 เมื่อเครื่องพิมพ์โนเนมเครื่องหนึ่งนำรางตัวพิมพ์มาสลับสับตำแหน่งตัวอักษรเพื่อทำหนังสือตัวอย่าง Lorem Ipsum อยู่ยงคงกระพันมาไม่ใช่แค่เพียงห้าศตวรรษ แต่อยู่มาจนถึงยุคที่พลิกโฉมเข้าสู่งานเรียงพิมพ์ด้วยวิธีทางอิเล็กทรอนิกส์ และยังคงสภาพเดิมไว้อย่างไม่มีการเปลี่ยนแปลง มันได้รับความนิยมมากขึ้นในยุค ค.ศ. 1960 เมื่อแผ่น Letraset วางจำหน่ายโดยมีข้อความบนนั้นเป็น Lorem Ipsum และล่าสุดกว่านั้น คือเมื่อซอฟท์แวร์การทำสื่อสิ่งพิมพ์ (Desktop Publishing) อย่าง Aldus PageMaker ได้รวมเอา Lorem Ipsum เวอร์ชั่นต่างๆ เข้าไว้ในซอฟท์แวร์ด้วย', 3, NULL, '777.00', '<h2>ทำไมจึงต้องนำมาใช้?</h2>\r\n\r\n<p>มีหลักฐานที่เป็นข้อเท็จจริงยืนยันมานานแล้ว ว่าเนื้อหาที่อ่านรู้เรื่องนั้นจะไปกวนสมาธิของคนอ่านให้เขวไปจากส่วนที้เป็น Layout เรานำ Lorem Ipsum มาใช้เพราะความที่มันมีการกระจายของตัวอักษรธรรมดาๆ แบบพอประมาณ ซึ่งเอามาใช้แทนการเขียนว่า &lsquo;ตรงนี้เป็นเนื้อหา, ตรงนี้เป็นเนื้อหา&#39; ได้ และยังทำให้มองดูเหมือนกับภาษาอังกฤษที่อ่านได้ปกติ ปัจจุบันมีแพ็กเกจของซอฟท์แวร์การทำสื่อสิ่งพิมพ์ และซอฟท์แวร์การสร้างเว็บเพจ (Web Page Editor) หลายตัวที่ใช้ Lorem Ipsum เป็นแบบจำลองเนื้อหาที่เป็นค่าตั้งต้น และเวลาที่เสิร์ชด้วยคำว่า &#39;lorem ipsum&#39; ผลการเสิร์ชที่ได้ก็จะไม่พบบรรดาเว็บไซต์ที่ยังคงอยู่ในช่วงเริ่มสร้างด้วย โดยหลายปีที่ผ่านมาก็มีการคิดค้นเวอร์ชั่นต่างๆ ของ Lorem Ipsum ขึ้นมาใช้ บ้างก็เป็นความบังเอิญ บ้างก็เป็นความตั้งใจ (เช่น การแอบแทรกมุกตลก)</p>\r\n', '2017-03-25 22:35:28', '2017-03-25 22:44:12');
 
 -- --------------------------------------------------------
 
@@ -13596,6 +13594,8 @@ CREATE TABLE `order_payment_confirms` (
   `id` int(11) UNSIGNED NOT NULL,
   `order_id` int(11) UNSIGNED NOT NULL,
   `payment_method_id` int(11) UNSIGNED NOT NULL,
+  `payment_amount` decimal(15,2) NOT NULL,
+  `payment_date` datetime NOT NULL,
   `description` text NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -13604,8 +13604,12 @@ CREATE TABLE `order_payment_confirms` (
 -- Dumping data for table `order_payment_confirms`
 --
 
-INSERT INTO `order_payment_confirms` (`id`, `order_id`, `payment_method_id`, `description`, `created_at`) VALUES
-(1, 9, 6, '<p>ด้านล่างของหน้านี้คือท่อนมาตรฐานของ Lorem Ipsum ที่ใช้กันมาตั้งแต่คริสตศตวรรษที่ 16ที่ได้รับการสร้างขึ้นใหม่สำหรับผู้ที่สนใจ ประกอบไปด้วย ตอนที่ 1.10.32 และ 1.10.33 จากเรื่อง &quot;de Finibus Bonorum et Malorum&quot; โดยซิเซโร ก็ได้รับการผลิตขึ้นใหม่ด้วยเช่นกันในรูปแบบที่ตรงกับต้นฉบับ ตามมาด้วยเวอร์ชั่นภาษาอังกฤษจากการแปลของ เอช แร็คแคม เมื่อปี ค.ศ. 1914</p>', '2017-03-21 23:17:29');
+INSERT INTO `order_payment_confirms` (`id`, `order_id`, `payment_method_id`, `payment_amount`, `payment_date`, `description`, `created_at`) VALUES
+(1, 12, 6, '2599.00', '2017-03-25 12:00:00', '', '2017-03-25 13:08:39'),
+(2, 13, 6, '1111.00', '2017-03-25 14:11:00', '<p>testes</p>', '2017-03-25 13:14:22'),
+(3, 15, 6, '1990.00', '2017-03-25 15:45:00', '', '2017-03-25 16:42:54'),
+(4, 16, 7, '7890.00', '2017-03-25 17:48:00', '', '2017-03-25 18:00:48'),
+(5, 18, 6, '2590.00', '2017-03-25 10:40:00', '', '2017-03-25 22:43:04');
 
 -- --------------------------------------------------------
 
@@ -13618,6 +13622,7 @@ CREATE TABLE `order_products` (
   `order_id` int(11) UNSIGNED NOT NULL,
   `product_id` int(11) UNSIGNED NOT NULL,
   `product_name` varchar(255) NOT NULL,
+  `full_price` decimal(15,2) NOT NULL,
   `price` decimal(15,2) NOT NULL,
   `quantity` int(7) UNSIGNED NOT NULL,
   `free_shipping` tinyint(1) DEFAULT NULL,
@@ -13630,25 +13635,23 @@ CREATE TABLE `order_products` (
 -- Dumping data for table `order_products`
 --
 
-INSERT INTO `order_products` (`id`, `order_id`, `product_id`, `product_name`, `price`, `quantity`, `free_shipping`, `shipping_cost`, `tax`, `total`) VALUES
-(1, 1, 12, 'Guitar', '3500.00', 1, 1, NULL, NULL, '3500.00'),
-(2, 2, 14, 'Harry Potter', '2500.00', 1, NULL, '129.00', NULL, '3499.00'),
-(3, 3, 14, 'Harry Potter', '2500.00', 1, NULL, '1.00', NULL, '2600.00'),
-(4, 4, 14, 'Harry Potter', '2500.00', 1, NULL, '1.00', NULL, '3499.00'),
-(5, 5, 14, 'Harry Potter', '2500.00', 1, NULL, '1.00', NULL, '3499.00'),
-(6, 6, 14, 'Harry Potter', '2500.00', 1, 1, NULL, NULL, '3499.00'),
-(7, 7, 14, 'Harry Potter', '2500.00', 1, NULL, '20.00', NULL, '3499.00'),
-(8, 8, 14, 'Harry Potter', '2500.00', 1, 1, NULL, NULL, '2500.00'),
-(9, 9, 14, 'Harry Potter', '2500.00', 1, NULL, '0.00', NULL, '2500.00'),
-(10, 10, 9, 'Final Fantasy XV JP', '1590.00', 1, NULL, '99.00', NULL, '1689.00'),
-(11, 11, 9, 'Final Fantasy XV JP', '1590.00', 2, NULL, '0.00', NULL, '3180.00'),
-(12, 12, 9, 'Final Fantasy XV JP', '1590.00', 10, NULL, '20.00', NULL, '15920.00'),
-(13, 13, 16, 'AdiiDas Pro 777', '7990.00', 1, 1, NULL, NULL, '7990.00'),
-(14, 14, 11, 'PS4 controller camp color', '1590.00', 4, NULL, NULL, NULL, '6360.00'),
-(15, 15, 16, 'AdiiDas Pro 777', '7990.00', 1, NULL, '0.00', NULL, '7990.00'),
-(16, 16, 16, 'AdiiDas Pro 777', '7990.00', 1, NULL, NULL, NULL, '7990.00'),
-(17, 17, 14, 'Harry Potter', '2500.00', 1, NULL, '999.00', NULL, '3499.00'),
-(18, 18, 13, 'XBOX ONE ELITE', '20000.00', 1, NULL, '500.00', NULL, '20500.00');
+INSERT INTO `order_products` (`id`, `order_id`, `product_id`, `product_name`, `full_price`, `price`, `quantity`, `free_shipping`, `shipping_cost`, `tax`, `total`) VALUES
+(1, 1, 12, 'Guitar', '3500.00', '2100.00', 1, NULL, NULL, NULL, '2100.00'),
+(2, 2, 16, 'AdiiDas Pro 777', '7990.00', '7990.00', 1, 1, NULL, NULL, '7990.00'),
+(3, 3, 10, 'Nike LunarEpic Flyknit Men''s Running Shoe (สีดำ) size 9.5"', '7500.00', '7500.00', 1, NULL, '300.00', NULL, '7800.00'),
+(4, 4, 11, 'PS4 controller camp color', '1590.00', '1590.00', 4, NULL, NULL, NULL, '6360.00'),
+(5, 5, 13, 'XBOX ONE ELITE', '20000.00', '20000.00', 1, NULL, '500.00', NULL, '20500.00'),
+(6, 6, 10, 'Nike LunarEpic Flyknit Men''s Running Shoe (สีดำ) size 9.5"', '7500.00', '7500.00', 1, NULL, '300.00', NULL, '7800.00'),
+(7, 9, 15, 'new item', '1200.00', '1200.00', 1, 1, NULL, NULL, '1200.00'),
+(8, 10, 16, 'AdiiDas Pro 777', '7990.00', '7990.00', 1, NULL, '0.00', NULL, '7990.00'),
+(9, 11, 16, 'AdiiDas Pro 777', '7990.00', '7990.00', 1, 1, NULL, NULL, '7990.00'),
+(10, 12, 10, 'Nike LunarEpic Flyknit Men''s Running Shoe (สีดำ) size 9.5"', '7500.00', '7500.00', 1, 1, NULL, NULL, '7500.00'),
+(11, 13, 14, 'Harry Potter', '2500.00', '2500.00', 1, NULL, '0.00', NULL, '2500.00'),
+(12, 14, 15, 'new item', '1200.00', '600.00', 1, 1, NULL, NULL, '600.00'),
+(13, 15, 14, 'Harry Potter', '2500.00', '2500.00', 1, 1, NULL, NULL, '2500.00'),
+(14, 16, 9, 'Final Fantasy XV JP', '1590.00', '1590.00', 1, 1, NULL, NULL, '1590.00'),
+(15, 17, 16, 'AdiiDas Pro 777', '7990.00', '7990.00', 1, 1, NULL, NULL, '7990.00'),
+(16, 18, 2, 'Playstation 4 Slim 2TB', '12000.00', '12000.00', 1, NULL, '0.00', NULL, '12000.00');
 
 -- --------------------------------------------------------
 
@@ -13661,12 +13664,32 @@ CREATE TABLE `order_shippings` (
   `order_id` int(11) UNSIGNED NOT NULL,
   `shipping_method_id` int(11) UNSIGNED NOT NULL,
   `shipping_method_name` varchar(255) NOT NULL,
-  `shipping_service` varchar(255) NOT NULL,
-  `shipping_service_cost_type` varchar(255) NOT NULL,
-  `free_service` tinyint(1) NOT NULL,
-  `service_cost` decimal(15,2) NOT NULL,
-  `shipping_time` varchar(255) NOT NULL
+  `shipping_service_id` int(11) UNSIGNED DEFAULT NULL,
+  `shipping_service_cost_type_id` int(11) UNSIGNED DEFAULT NULL,
+  `shipping_time` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `order_shippings`
+--
+
+INSERT INTO `order_shippings` (`id`, `order_id`, `shipping_method_id`, `shipping_method_name`, `shipping_service_id`, `shipping_service_cost_type_id`, `shipping_time`) VALUES
+(1, 1, 2, 'พัสดุธรรมดา', 0, 0, ''),
+(2, 3, 1, 'DHL 300 บาท', 0, 0, NULL),
+(3, 4, 1, 'DHL 777 บาท', 0, 0, ''),
+(4, 5, 3, 'จัดส่งฟรี', 0, 0, '3-5 วันทำการ'),
+(5, 6, 3, 'จัดส่งฟรี', 0, 0, '3-5 วันทำการ'),
+(6, 9, 10, 'รับสินค้าเอง', 0, 3, NULL),
+(7, 12, 3, 'จัดส่งฟรี', 12, 3, '3-5 วันทำการ'),
+(8, 13, 1, 'DHL 777 บาท', 4, 2, ''),
+(9, 11, 12, 'พัสดุธรรมดา', 1, 2, ''),
+(10, 2, 13, 'free', 5, 3, ''),
+(11, 10, 12, 'พัสดุธรรมดา', 1, 2, ''),
+(12, 14, 10, 'รับสินค้าเอง', 0, 3, NULL),
+(13, 15, 10, 'รับสินค้าเอง', 0, 3, NULL),
+(14, 16, 11, 'EMS', 1, 3, '1-3 วันทำงาน'),
+(15, 17, 11, 'EMS', 1, 3, '1-3 วันทำงาน'),
+(16, 18, 1, 'DHL 777 บาท', 4, 2, '');
 
 -- --------------------------------------------------------
 
@@ -13712,78 +13735,70 @@ CREATE TABLE `order_totals` (
 --
 
 INSERT INTO `order_totals` (`id`, `order_id`, `alias`, `value`) VALUES
-(1, 1, 'subTotal', '3500.00'),
+(1, 1, 'subTotal', '2100.00'),
 (2, 1, 'shippingCost', '0.00'),
-(3, 1, 'savingPrice', '0.00'),
-(4, 1, 'total', '3500.00'),
-(5, 2, 'subTotal', '2500.00'),
-(6, 2, 'shippingCost', '129.00'),
+(3, 1, 'savingPrice', '1400.00'),
+(4, 1, 'total', '2100.00'),
+(5, 2, 'subTotal', '7990.00'),
+(6, 2, 'shippingCost', '0.00'),
 (7, 2, 'savingPrice', '0.00'),
-(8, 2, 'total', '2629.00'),
-(9, 3, 'subTotal', '2500.00'),
-(10, 3, 'shippingCost', '1.00'),
+(8, 2, 'total', '7990.00'),
+(9, 3, 'subTotal', '7500.00'),
+(10, 3, 'shippingCost', '600.00'),
 (11, 3, 'savingPrice', '0.00'),
-(12, 3, 'total', '2501.00'),
-(13, 4, 'subTotal', '2500.00'),
-(14, 4, 'shippingCost', '999.00'),
+(12, 3, 'total', '7800.00'),
+(13, 4, 'subTotal', '6360.00'),
+(14, 4, 'shippingCost', '777.00'),
 (15, 4, 'savingPrice', '0.00'),
-(16, 4, 'total', '3499.00'),
-(17, 5, 'subTotal', '2500.00'),
-(18, 5, 'shippingCost', '999.00'),
+(16, 4, 'total', '6360.00'),
+(17, 5, 'subTotal', '20000.00'),
+(18, 5, 'shippingCost', '500.00'),
 (19, 5, 'savingPrice', '0.00'),
-(20, 5, 'total', '3499.00'),
-(21, 6, 'subTotal', '2500.00'),
-(22, 6, 'shippingCost', '999.00'),
+(20, 5, 'total', '20500.00'),
+(21, 6, 'subTotal', '7500.00'),
+(22, 6, 'shippingCost', '300.00'),
 (23, 6, 'savingPrice', '0.00'),
-(24, 6, 'total', '3499.00'),
-(25, 7, 'subTotal', '2500.00'),
-(26, 7, 'shippingCost', '999.00'),
-(27, 7, 'savingPrice', '0.00'),
-(28, 7, 'total', '3499.00'),
-(29, 8, 'subTotal', '2500.00'),
-(30, 8, 'shippingCost', '0.00'),
-(31, 8, 'savingPrice', '0.00'),
-(32, 8, 'total', '2500.00'),
-(33, 9, 'subTotal', '2500.00'),
-(34, 9, 'shippingCost', '0.00'),
-(35, 9, 'savingPrice', '0.00'),
-(36, 9, 'total', '2500.00'),
-(37, 10, 'subTotal', '1590.00'),
-(38, 10, 'shippingCost', '99.00'),
-(39, 10, 'savingPrice', '0.00'),
-(40, 10, 'total', '1689.00'),
-(41, 11, 'subTotal', '3180.00'),
-(42, 11, 'shippingCost', '20.00'),
-(43, 11, 'savingPrice', '0.00'),
-(44, 11, 'total', '3180.00'),
-(45, 12, 'subTotal', '15900.00'),
-(46, 12, 'shippingCost', '120.00'),
-(47, 12, 'savingPrice', '0.00'),
-(48, 12, 'total', '15920.00'),
-(49, 13, 'subTotal', '7990.00'),
-(50, 13, 'shippingCost', '0.00'),
-(51, 13, 'savingPrice', '0.00'),
-(52, 13, 'total', '7990.00'),
-(53, 14, 'subTotal', '6360.00'),
-(54, 14, 'shippingCost', '0.00'),
-(55, 14, 'savingPrice', '0.00'),
-(56, 14, 'total', '6360.00'),
-(57, 15, 'subTotal', '7990.00'),
-(58, 15, 'shippingCost', '100.00'),
-(59, 15, 'savingPrice', '0.00'),
-(60, 15, 'total', '7990.00'),
-(61, 16, 'subTotal', '7990.00'),
-(62, 16, 'shippingCost', '0.00'),
-(63, 16, 'savingPrice', '0.00'),
-(64, 16, 'total', '7990.00'),
-(65, 17, 'subTotal', '2500.00'),
-(66, 17, 'shippingCost', '999.00'),
-(67, 17, 'savingPrice', '0.00'),
-(68, 17, 'total', '3499.00'),
-(69, 18, 'subTotal', '20000.00'),
-(70, 18, 'shippingCost', '500.00'),
-(71, 18, 'savingPrice', '0.00'),
-(72, 18, 'total', '20500.00');
+(24, 6, 'total', '7800.00'),
+(25, 9, 'subTotal', '1200.00'),
+(26, 9, 'shippingCost', '0.00'),
+(27, 9, 'savingPrice', '0.00'),
+(28, 9, 'total', '1200.00'),
+(29, 10, 'subTotal', '7990.00'),
+(30, 10, 'shippingCost', '199.00'),
+(31, 10, 'savingPrice', '0.00'),
+(32, 10, 'total', '7990.00'),
+(33, 11, 'subTotal', '7990.00'),
+(34, 11, 'shippingCost', '199.00'),
+(35, 11, 'savingPrice', '0.00'),
+(36, 11, 'total', '7990.00'),
+(37, 12, 'subTotal', '7500.00'),
+(38, 12, 'shippingCost', '0.00'),
+(39, 12, 'savingPrice', '0.00'),
+(40, 12, 'total', '7500.00'),
+(41, 13, 'subTotal', '2500.00'),
+(42, 13, 'shippingCost', '777.00'),
+(43, 13, 'savingPrice', '0.00'),
+(44, 13, 'total', '2500.00'),
+(45, 14, 'subTotal', '600.00'),
+(46, 14, 'shippingCost', '0.00'),
+(47, 14, 'savingPrice', '600.00'),
+(48, 14, 'total', '600.00'),
+(49, 15, 'subTotal', '2500.00'),
+(50, 15, 'shippingCost', '0.00'),
+(51, 15, 'savingPrice', '0.00'),
+(52, 15, 'total', '2500.00'),
+(53, 16, 'subTotal', '1590.00'),
+(54, 16, 'shippingCost', '0.00'),
+(55, 16, 'savingPrice', '0.00'),
+(56, 16, 'total', '1590.00'),
+(57, 17, 'subTotal', '7990.00'),
+(58, 17, 'shippingCost', '1200.00'),
+(59, 17, 'savingPrice', '0.00'),
+(60, 17, 'total', '7990.00'),
+(61, 18, 'subTotal', '12000.00'),
+(62, 18, 'shippingCost', '777.00'),
+(63, 18, 'savingPrice', '0.00'),
+(64, 18, 'total', '12000.00');
 
 -- --------------------------------------------------------
 
@@ -13823,7 +13838,8 @@ INSERT INTO `payment_methods` (`id`, `name`, `description`, `person_id`, `create
 (4, 'xxxx', '', 0, '2017-03-20 20:31:16', '2017-03-20 20:31:16'),
 (5, 'โอนเงิน', '<p>โอนเงิน</p>', 1, '2017-03-20 21:21:31', '2017-03-20 21:21:31'),
 (6, 'โอนเงิน Bank Transfer', '<p>โอนเงิน Bank Transfer</p>', 1, '2017-03-20 21:41:23', '2017-03-20 21:41:23'),
-(7, 'เงินสด', '<p>เงินสด</p>', 1, '2017-03-22 10:01:37', '2017-03-22 10:01:37');
+(7, 'เงินสด', '<p>เงินสด</p>', 1, '2017-03-22 10:01:37', '2017-03-22 10:01:37'),
+(8, 'test', '<p>xxxx</p>', 1, '2017-03-25 22:42:11', '2017-03-25 22:42:11');
 
 -- --------------------------------------------------------
 
@@ -13841,16 +13857,16 @@ CREATE TABLE `payment_method_to_orders` (
 --
 
 INSERT INTO `payment_method_to_orders` (`payment_method_id`, `order_id`) VALUES
-(2, 10),
-(3, 10),
-(6, 2),
-(6, 3),
-(6, 8),
-(6, 9),
+(6, 12),
+(6, 13),
+(6, 14),
+(6, 15),
+(6, 18),
+(7, 2),
+(7, 10),
 (7, 11),
-(7, 12),
-(7, 13),
-(7, 15);
+(7, 16),
+(7, 17);
 
 -- --------------------------------------------------------
 
@@ -14221,21 +14237,21 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `name`, `description`, `product_model`, `sku`, `quantity`, `product_unit`, `minimum`, `price`, `weight`, `weight_unit_id`, `length`, `length_unit_id`, `width`, `height`, `specifications`, `message_out_of_order`, `shipping_calculate_from`, `flag_message_from`, `flag_message`, `active`, `person_id`, `created_at`, `updated_at`) VALUES
 (1, 'Playstation 4 500 GB', '', NULL, NULL, 29, 'เครื่อง', 0, '12000.00', NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, 0, 0, '', 0, 1, '2017-02-25 18:09:14', '2017-03-12 10:26:44'),
-(2, 'Playstation 4 Slim 2TB', '', NULL, '', 124, '', 1, '12000.00', '250.00000000', 2, NULL, NULL, NULL, NULL, '[{"title":"VVV","value":"aaa"}]', NULL, 0, 0, '', 1, 1, '2017-02-25 18:49:17', '2017-03-12 10:26:44'),
+(2, 'Playstation 4 Slim 2TB', '', NULL, '', 123, '', 1, '12000.00', '250.00000000', 2, NULL, NULL, NULL, NULL, '[{"title":"VVV","value":"aaa"}]', NULL, 0, 0, '', 1, 1, '2017-02-25 18:49:17', '2017-03-25 22:35:28'),
 (3, 'Mainboard', '', NULL, NULL, 29, '', 2, '9990.00', NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, 0, 0, '', 1, 1, '2017-02-26 11:47:12', '2017-03-12 10:26:44'),
 (4, 'Mainboard', '', NULL, NULL, 123, 'ตัว', 1, '9990.00', NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, 0, 0, '', 1, 1, '2017-02-26 11:49:26', '2017-03-15 00:45:11'),
 (5, 'FFXV', '<p>The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there&#39;s no limit to what you can achieve.&nbsp;<br />\r\n<br />\r\nThe Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it&#39;s designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data.&nbsp;<br />\r\n<br />\r\nOffering accurate, brilliant color performance, the Cinema HD delivers up to 16.7 million colors across a wide gamut allowing you to see subtle nuances between colors from soft pastels to rich jewel tones. A wide viewing angle ensures uniform color from edge to edge. Apple&#39;s ColorSync technology allows you to create custom profiles to maintain consistent color onscreen and in print. The result: You can confidently use this display in all your color-critical applications.&nbsp;<br />\r\n<br />\r\nHoused in a new aluminum design, the display has a very thin bezel that enhances visual accuracy. Each display features two FireWire 400 ports and two USB 2.0 ports, making attachment of desktop peripherals, such as iSight, iPod, digital and still cameras, hard drives, printers and scanners, even more accessible and convenient. Taking advantage of the much thinner and lighter footprint of an LCD, the new displays support the VESA (Video Electronics Standards Association) mounting interface standard. Customers with the optional Cinema Display VESA Mount Adapter kit gain the flexibility to mount their display in locations most appropriate for their work environment.&nbsp;<br />\r\n<br />\r\nThe Cinema HD features a single cable design with elegant breakout for the USB 2.0, FireWire 400 and a pure digital connection using the industry standard Digital Video Interface (DVI) interface. The DVI connection allows for a direct pure-digital connection.</p>\r\n\r\n<h3>Features:</h3>\r\n\r\n<p>Unrivaled display performance</p>\r\n\r\n<ul>\r\n	<li>30-inch (viewable) active-matrix liquid crystal display provides breathtaking image quality and vivid, richly saturated color.</li>\r\n	<li>Support for 2560-by-1600 pixel resolution for display of high definition still and video imagery.</li>\r\n	<li>Wide-format design for simultaneous display of two full pages of text and graphics.</li>\r\n	<li>Industry standard DVI connector for direct attachment to Mac- and Windows-based desktops and notebooks</li>\r\n	<li>Incredibly wide (170 degree) horizontal and vertical viewing angle for maximum visibility and color performance.</li>\r\n	<li>Lightning-fast pixel response for full-motion digital video playback.</li>\r\n	<li>Support for 16.7 million saturated colors, for use in all graphics-intensive applications.</li>\r\n</ul>\r\n\r\n<p>Simple setup and operation</p>\r\n\r\n<ul>\r\n	<li>Single cable with elegant breakout for connection to DVI, USB and FireWire ports</li>\r\n	<li>Built-in two-port USB 2.0 hub for easy connection of desktop peripheral devices.</li>\r\n	<li>Two FireWire 400 ports to support iSight and other desktop peripherals</li>\r\n</ul>\r\n\r\n<p>Sleek, elegant design</p>\r\n\r\n<ul>\r\n	<li>Huge virtual workspace, very small footprint.</li>\r\n	<li>Narrow Bezel design to minimize visual impact of using dual displays</li>\r\n	<li>Unique hinge design for effortless adjustment</li>\r\n	<li>Support for VESA mounting solutions (Apple Cinema Display VESA Mount Adapter sold separately)</li>\r\n</ul>\r\n\r\n<h3>Technical specifications</h3>\r\n\r\n<p><strong>Screen size (diagonal viewable image size)</strong></p>\r\n\r\n<ul>\r\n	<li>Apple Cinema HD Display: 30 inches (29.7-inch viewable)</li>\r\n</ul>\r\n\r\n<p><strong>Screen type</strong></p>\r\n\r\n<ul>\r\n	<li>Thin film transistor (TFT) active-matrix liquid crystal display (AMLCD)</li>\r\n</ul>\r\n\r\n<p><strong>Resolutions</strong></p>\r\n\r\n<ul>\r\n	<li>2560 x 1600 pixels (optimum resolution)</li>\r\n	<li>2048 x 1280</li>\r\n	<li>1920 x 1200</li>\r\n	<li>1280 x 800</li>\r\n	<li>1024 x 640</li>\r\n</ul>\r\n\r\n<p><strong>Display colors (maximum)</strong></p>\r\n\r\n<ul>\r\n	<li>16.7 million</li>\r\n</ul>\r\n\r\n<p><strong>Viewing angle (typical)</strong></p>\r\n\r\n<ul>\r\n	<li>170&deg; horizontal; 170&deg; vertical</li>\r\n</ul>\r\n\r\n<p><strong>Brightness (typical)</strong></p>\r\n\r\n<ul>\r\n	<li>30-inch Cinema HD Display: 400 cd/m2</li>\r\n</ul>\r\n\r\n<p><strong>Contrast ratio (typical)</strong></p>\r\n\r\n<ul>\r\n	<li>700:1</li>\r\n</ul>\r\n\r\n<p><strong>Response time (typical)</strong></p>\r\n\r\n<ul>\r\n	<li>16 ms</li>\r\n</ul>\r\n\r\n<p><strong>Pixel pitch</strong></p>\r\n\r\n<ul>\r\n	<li>30-inch Cinema HD Display: 0.250 mm</li>\r\n</ul>\r\n\r\n<p><strong>Screen treatment</strong></p>\r\n\r\n<ul>\r\n	<li>Antiglare hardcoat</li>\r\n</ul>\r\n\r\n<p><strong>User controls (hardware and software)</strong></p>\r\n\r\n<ul>\r\n	<li>Display Power,</li>\r\n	<li>System sleep, wake</li>\r\n	<li>Brightness</li>\r\n	<li>Monitor tilt</li>\r\n</ul>\r\n\r\n<p><strong>Connectors and cables</strong><br />\r\nCable</p>\r\n\r\n<ul>\r\n	<li>DVI (Digital Visual Interface)</li>\r\n	<li>FireWire 400</li>\r\n	<li>USB 2.0</li>\r\n	<li>DC power (24 V)</li>\r\n</ul>\r\n\r\n<p>Connectors</p>\r\n\r\n<ul>\r\n	<li>Two-port, self-powered USB 2.0 hub</li>\r\n	<li>Two FireWire 400 ports</li>\r\n	<li>Kensington security port</li>\r\n</ul>\r\n\r\n<p><strong>VESA mount adapter</strong><br />\r\nRequires optional Cinema Display VESA Mount Adapter (M9649G/A)</p>\r\n\r\n<ul>\r\n	<li>Compatible with VESA FDMI (MIS-D, 100, C) compliant mounting solutions</li>\r\n</ul>\r\n\r\n<p><strong>Electrical requirements</strong></p>\r\n\r\n<ul>\r\n	<li>Input voltage: 100-240 VAC 50-60Hz</li>\r\n	<li>Maximum power when operating: 150W</li>\r\n	<li>Energy saver mode: 3W or less</li>\r\n</ul>\r\n\r\n<p><strong>Environmental requirements</strong></p>\r\n\r\n<ul>\r\n	<li>Operating temperature: 50&deg; to 95&deg; F (10&deg; to 35&deg; C)</li>\r\n	<li>Storage temperature: -40&deg; to 116&deg; F (-40&deg; to 47&deg; C)</li>\r\n	<li>Operating humidity: 20% to 80% noncondensing</li>\r\n	<li>Maximum operating altitude: 10,000 feet</li>\r\n</ul>\r\n\r\n<p><strong>Agency approvals</strong></p>\r\n\r\n<ul>\r\n	<li>FCC Part 15 Class B</li>\r\n	<li>EN55022 Class B</li>\r\n	<li>EN55024</li>\r\n	<li>VCCI Class B</li>\r\n	<li>AS/NZS 3548 Class B</li>\r\n	<li>CNS 13438 Class B</li>\r\n	<li>ICES-003 Class B</li>\r\n	<li>ISO 13406 part 2</li>\r\n	<li>MPR II</li>\r\n	<li>IEC 60950</li>\r\n	<li>UL 60950</li>\r\n	<li>CSA 60950</li>\r\n	<li>EN60950</li>\r\n	<li>ENERGY STAR</li>\r\n	<li>TCO &#39;03</li>\r\n</ul>\r\n\r\n<p><strong>Size and weight</strong><br />\r\n30-inch Apple Cinema HD Display</p>\r\n\r\n<ul>\r\n	<li>Height: 21.3 inches (54.3 cm)</li>\r\n	<li>Width: 27.2 inches (68.8 cm)</li>\r\n	<li>Depth: 8.46 inches (21.5 cm)</li>\r\n	<li>Weight: 27.5 pounds (12.5 kg)</li>\r\n</ul>\r\n\r\n<p><strong>System Requirements</strong></p>\r\n\r\n<ul>\r\n	<li>Mac Pro, all graphic options</li>\r\n	<li>MacBook Pro</li>\r\n	<li>Power Mac G5 (PCI-X) with ATI Radeon 9650 or better or NVIDIA GeForce 6800 GT DDL or better</li>\r\n	<li>Power Mac G5 (PCI Express), all graphics options</li>\r\n	<li>PowerBook G4 with dual-link DVI support</li>\r\n	<li>Windows PC and graphics card that supports DVI ports with dual-link digital bandwidth and VESA DDC standard for plug-and-play setup</li>\r\n</ul>', 'Umbrella it-gtech-600w', 'GT188ELAA4912JANTH-9080528', 24, 'แผ่น', 0, '1450.00', '500.15000000', 2, '15.00000000', 1, '10.00000000', '15.00000000', '[{"title":"HDMI","value":"2"},{"title":"D-SUB","value":"1"}]', NULL, 0, 0, '', 0, 1, '2017-02-26 11:55:15', '2017-03-12 10:26:44'),
 (6, 'ABC', '', NULL, '', 23, 'ตัว', 1, '1690.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, '', 1, 1, '2017-02-28 20:59:26', '2017-03-14 22:13:47'),
 (7, 'Fitbit Flex 2', '', NULL, '', 56, 'เรือน', 2, '3000.00', NULL, 1, NULL, NULL, NULL, NULL, '[{"title":"aaa","value":"xxx"}]', 'สินค้า 2 - 3', 1, 0, '', 1, 1, '2017-03-01 00:18:29', '2017-03-20 20:15:55'),
 (8, 'Xbox One', '', '', '', 47, 'เครื่อง', 1, '18500.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 0, '', 1, 1, '2017-03-02 05:35:54', '2017-03-17 19:39:09'),
-(9, 'Final Fantasy XV JP', '', '', '', 32, 'แผ่น', 1, '1590.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ขออภัยหมด สินค้ากำลังถูกสั่งเพิ่ม', 2, 0, '', 1, 1, '2017-03-02 06:05:06', '2017-03-22 10:33:59'),
-(10, 'Nike LunarEpic Flyknit Men''s Running Shoe (สีดำ) size 9.5"', '<p>&nbsp;</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:40px; letter-spacing:-1px; line-height:1.1; margin-bottom:4px; padding-bottom:12px; padding-top:0px; text-transform:uppercase">REVOLUTIONARY RIDE. EPIC RUN.</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Built for the future of running and those who dare to lead it, the Nike LunarEpic Flyknit Men&#39;s Running Shoe delivers an impeccably smooth ride and a virtually unnoticeable, second-skin fit.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">VANISHING FIT</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">The mid-rise Flyknit upper is designed to act like a natural extension of your leg, leaving only the fantastic sensation of cushioning underfoot. The near-seamless, one-piece construction is woven more openly in areas where your foot and ankle need greater stretch and breathability, and tighter in areas that demand more strength and support.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">FLUID FEEL</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">The soft, contoured Lunarlon midsole has precision-lasered cuts on the sides that collapse during footstrike, delivering a perfectly smooth transition from heel to toe.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">SUPERB SOFTNESS</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">The pressure-mapped outsole features Lunarlon pods in key areas to provide targeted cushioning. Laser cuts on the pods help absorb impact while dispersing it more evenly across your foot.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">MORE DETAILS</span></p>\r\n\r\n<ul>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Flywire integrates with the laces for a dynamic, supportive fit</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Skin-like overlay on the heel for added structure</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Fused foam midsole for enhanced durability without the use of glues or cements</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Laser-cut outsole provides great multi-surface traction</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">We recommend you wear this shoe with running socks&mdash;height of the sock is up to your personal preference</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Comes with two sets of sockliners, 4mm and 6mm, so you can fine-tune for an optimal fit</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Weight: 8.3 ounces (men&#39;s size 10)</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Offset: 10mm</li>\r\n</ul>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">FLYKNIT ORIGINS</span></p>\r\n\r\n<p><span style="color:#666666; font-family:Helvetica,ArialMT,sans-serif; font-size:12px">Nike Flyknit technology was inspired by feedback from runners seeking a shoe with the snug (and virtually unnoticed) fit of a sock. Nike embarked on a four-year mission with teams of programmers, engineers and designers to create the technology needed to make the knit upper with static properties for structure and durability. Then the precise placement of support, flexibility and breathability&mdash;all in one layer&mdash;was refined. The result is a featherweight, formfitting and virtually seamless upper.</span></p>', '', '', 14, 'คู่', 1, '7500.00', '300.00000000', 2, NULL, 1, NULL, NULL, '', NULL, 2, 2, '', 1, 1, '2017-03-02 12:34:34', '2017-03-21 13:21:03'),
-(11, 'PS4 controller camp color', '', '', '', 299, 'ชิ้น', 4, '1590.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, '', 1, 1, '2017-03-06 10:41:20', '2017-03-22 11:42:22'),
-(12, 'Guitar', '', '', '', 16, 'ชิ้น', 1, '3500.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '', 1, 1, '2017-03-06 10:42:15', '2017-03-23 14:35:02'),
-(13, 'XBOX ONE ELITE', '', '', '', 36, 'เครื่อง', 1, '20000.00', NULL, 2, NULL, 1, NULL, NULL, '', NULL, 2, 0, '', 1, 1, '2017-03-06 23:18:23', '2017-03-22 13:30:26'),
-(14, 'Harry Potter', '', '', '', 8, 'เล่ม', 1, '2500.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 2, NULL, 1, 1, '2017-03-10 16:37:33', '2017-03-22 11:57:32'),
-(15, 'new item', '', '', '', 196, 'ชิ้น', 1, '1200.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, NULL, 1, 1, '2017-03-14 22:15:35', '2017-03-20 08:44:27'),
-(16, 'AdiiDas Pro 777', '<h2>มันมีที่มาอย่างไร?</h2>\r\n\r\n<p>ตรงกันข้ามกับความเชื่อที่นิยมกัน Lorem Ipsum ไม่ได้เป็นเพียงแค่ชุดตัวอักษรที่สุ่มขึ้นมามั่วๆ แต่หากมีที่มาจากวรรณกรรมละตินคลาสสิกชิ้นหนึ่งในยุค 45 ปีก่อนคริสตศักราช ทำให้มันมีอายุถึงกว่า 2000 ปีเลยทีเดียว ริชาร์ด แมคคลินท็อค ศาสตราจารย์ชาวละติน จากวิทยาลัยแฮมพ์เด็น-ซิดนีย์ ในรัฐเวอร์จิเนียร์ นำคำภาษาละตินคำว่า consectetur ซึ่งหาคำแปลไม่ได้จาก Lorem Ipsum ตอนหนึ่งมาค้นเพิ่มเติม โดยตรวจเทียบกับแหล่งอ้างอิงต่างๆ ในวรรณกรรมคลาสสิก และค้นพบแหล่งข้อมูลที่ไร้ข้อกังขาว่า Lorem Ipsum นั้นมาจากตอนที่ 1.10.32 และ 1.10.33 ของเรื่อง &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) ของ ซิเซโร ที่แต่งไว้เมื่อ 45 ปีก่อนคริสตศักราช หนังสือเล่มนี้เป็นเรื่องราวที่ว่าด้วยทฤษฎีแห่งจริยศาสตร์ ซึ่งเป็นที่นิยมมากในยุคเรเนสซองส์ บรรทัดแรกของ Lorem Ipsum &quot;Lorem ipsum dolor sit amet..&quot; ก็มาจากบรรทัดหนึ่งในตอนที่ 1.10.32 นั่นเอง</p>', 'ADZ-777', '', 45, 'คู่', 1, '7990.00', '700.00000000', 2, NULL, 1, NULL, NULL, '', NULL, 1, 2, NULL, 1, 1, '2017-03-22 10:46:05', '2017-03-23 14:35:02');
+(9, 'Final Fantasy XV JP', '', '', '', 31, 'แผ่น', 1, '1590.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ขออภัยหมด สินค้ากำลังถูกสั่งเพิ่ม', 2, 0, '', 1, 1, '2017-03-02 06:05:06', '2017-03-25 17:56:56'),
+(10, 'Nike LunarEpic Flyknit Men''s Running Shoe (สีดำ) size 9.5"', '<p>&nbsp;</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:40px; letter-spacing:-1px; line-height:1.1; margin-bottom:4px; padding-bottom:12px; padding-top:0px; text-transform:uppercase">REVOLUTIONARY RIDE. EPIC RUN.</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Built for the future of running and those who dare to lead it, the Nike LunarEpic Flyknit Men&#39;s Running Shoe delivers an impeccably smooth ride and a virtually unnoticeable, second-skin fit.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">VANISHING FIT</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">The mid-rise Flyknit upper is designed to act like a natural extension of your leg, leaving only the fantastic sensation of cushioning underfoot. The near-seamless, one-piece construction is woven more openly in areas where your foot and ankle need greater stretch and breathability, and tighter in areas that demand more strength and support.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">FLUID FEEL</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">The soft, contoured Lunarlon midsole has precision-lasered cuts on the sides that collapse during footstrike, delivering a perfectly smooth transition from heel to toe.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">SUPERB SOFTNESS</span></p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">The pressure-mapped outsole features Lunarlon pods in key areas to provide targeted cushioning. Laser cuts on the pods help absorb impact while dispersing it more evenly across your foot.</p>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">MORE DETAILS</span></p>\r\n\r\n<ul>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Flywire integrates with the laces for a dynamic, supportive fit</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Skin-like overlay on the heel for added structure</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Fused foam midsole for enhanced durability without the use of glues or cements</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Laser-cut outsole provides great multi-surface traction</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">We recommend you wear this shoe with running socks&mdash;height of the sock is up to your personal preference</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Comes with two sets of sockliners, 4mm and 6mm, so you can fine-tune for an optimal fit</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Weight: 8.3 ounces (men&#39;s size 10)</li>\r\n	<li style="margin: 0px; padding: 0px; list-style: disc inside; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;">Offset: 10mm</li>\r\n</ul>\r\n\r\n<p style="margin: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: Helvetica, ArialMT, sans-serif; font-size: 12px;"><span class="nsg-font-family--platform" style="color:#333333; display:inline-block; font-family:OneNikeCurrency,&quot;TradeGothicW01-BoldCn20 675334&quot;,Helvetica,Arial,sans-serif; font-size:20px; letter-spacing:-1px; padding-bottom:12px; padding-top:22px; text-transform:uppercase">FLYKNIT ORIGINS</span></p>\r\n\r\n<p><span style="color:#666666; font-family:Helvetica,ArialMT,sans-serif; font-size:12px">Nike Flyknit technology was inspired by feedback from runners seeking a shoe with the snug (and virtually unnoticed) fit of a sock. Nike embarked on a four-year mission with teams of programmers, engineers and designers to create the technology needed to make the knit upper with static properties for structure and durability. Then the precise placement of support, flexibility and breathability&mdash;all in one layer&mdash;was refined. The result is a featherweight, formfitting and virtually seamless upper.</span></p>', '', '', 9, 'คู่', 1, '7500.00', '300.00000000', 2, NULL, 1, NULL, NULL, '', NULL, 2, 2, '', 1, 1, '2017-03-02 12:34:34', '2017-03-24 17:57:04'),
+(11, 'PS4 controller camp color', '', '', '', 295, 'ชิ้น', 4, '1590.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, '', 1, 1, '2017-03-06 10:41:20', '2017-03-23 17:48:05'),
+(12, 'Guitar', '', '', '', 82, 'ชิ้น', 1, '3500.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '', 1, 1, '2017-03-06 10:42:15', '2017-03-23 17:36:37'),
+(13, 'XBOX ONE ELITE', '', '', '', 35, 'เครื่อง', 1, '20000.00', NULL, 2, NULL, 1, NULL, NULL, '', NULL, 2, 0, '', 1, 1, '2017-03-06 23:18:23', '2017-03-23 18:01:50'),
+(14, 'Harry Potter', '', '', '', 6, 'เล่ม', 1, '2500.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 2, NULL, 1, 1, '2017-03-10 16:37:33', '2017-03-25 16:25:52'),
+(15, 'new item', '', '', '', 185, 'ชิ้น', 1, '1200.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, NULL, 1, 1, '2017-03-14 22:15:35', '2017-03-25 16:17:31'),
+(16, 'AdiiDas Pro 777', '<h2>มันมีที่มาอย่างไร?</h2>\r\n\r\n<p>ตรงกันข้ามกับความเชื่อที่นิยมกัน Lorem Ipsum ไม่ได้เป็นเพียงแค่ชุดตัวอักษรที่สุ่มขึ้นมามั่วๆ แต่หากมีที่มาจากวรรณกรรมละตินคลาสสิกชิ้นหนึ่งในยุค 45 ปีก่อนคริสตศักราช ทำให้มันมีอายุถึงกว่า 2000 ปีเลยทีเดียว ริชาร์ด แมคคลินท็อค ศาสตราจารย์ชาวละติน จากวิทยาลัยแฮมพ์เด็น-ซิดนีย์ ในรัฐเวอร์จิเนียร์ นำคำภาษาละตินคำว่า consectetur ซึ่งหาคำแปลไม่ได้จาก Lorem Ipsum ตอนหนึ่งมาค้นเพิ่มเติม โดยตรวจเทียบกับแหล่งอ้างอิงต่างๆ ในวรรณกรรมคลาสสิก และค้นพบแหล่งข้อมูลที่ไร้ข้อกังขาว่า Lorem Ipsum นั้นมาจากตอนที่ 1.10.32 และ 1.10.33 ของเรื่อง &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) ของ ซิเซโร ที่แต่งไว้เมื่อ 45 ปีก่อนคริสตศักราช หนังสือเล่มนี้เป็นเรื่องราวที่ว่าด้วยทฤษฎีแห่งจริยศาสตร์ ซึ่งเป็นที่นิยมมากในยุคเรเนสซองส์ บรรทัดแรกของ Lorem Ipsum &quot;Lorem ipsum dolor sit amet..&quot; ก็มาจากบรรทัดหนึ่งในตอนที่ 1.10.32 นั่นเอง</p>', 'ADZ-777', '', 8, 'คู่', 1, '7990.00', '700.00000000', 2, NULL, 1, NULL, NULL, '', NULL, 1, 2, NULL, 1, 1, '2017-03-22 10:46:05', '2017-03-25 22:08:04');
 
 -- --------------------------------------------------------
 
@@ -14266,7 +14282,8 @@ INSERT INTO `product_discounts` (`id`, `product_id`, `reduced_price`, `created_a
 (8, 15, '1000.00', '2017-03-18 19:23:01', '2017-03-18 19:23:01'),
 (9, 15, '600.00', '2017-03-18 19:23:12', '2017-03-18 19:25:32'),
 (10, 14, '1250.00', '2017-03-19 15:03:16', '2017-03-19 15:03:16'),
-(11, 13, '14000.00', '2017-03-21 10:59:57', '2017-03-21 10:59:57');
+(11, 13, '14000.00', '2017-03-21 10:59:57', '2017-03-21 10:59:57'),
+(12, 12, '2100.00', '2017-03-23 17:28:11', '2017-03-23 17:28:11');
 
 -- --------------------------------------------------------
 
@@ -14302,7 +14319,8 @@ INSERT INTO `product_sale_promotions` (`id`, `product_id`, `sale_promotion_targe
 (8, 15, 1, 1, 'ProductDiscount', 8, '2017-03-18 00:00:00', '2017-03-18 23:59:59', '2017-03-18 19:23:01', '2017-03-18 19:23:01'),
 (9, 15, 1, 1, 'ProductDiscount', 9, '2017-03-25 00:00:00', '2017-03-28 23:59:59', '2017-03-18 19:23:12', '2017-03-18 19:25:32'),
 (10, 14, 1, 1, 'ProductDiscount', 10, '2017-03-20 00:00:00', '2017-03-20 23:59:59', '2017-03-19 15:03:16', '2017-03-19 15:03:16'),
-(11, 13, 1, 1, 'ProductDiscount', 11, '2017-03-21 00:00:00', '2017-03-21 23:59:59', '2017-03-21 10:59:57', '2017-03-21 10:59:57');
+(11, 13, 1, 1, 'ProductDiscount', 11, '2017-03-21 00:00:00', '2017-03-21 23:59:59', '2017-03-21 10:59:57', '2017-03-21 10:59:57'),
+(12, 12, 1, 1, 'ProductDiscount', 12, '2017-03-23 00:00:00', '2017-03-23 23:59:59', '2017-03-23 17:28:11', '2017-03-23 17:28:11');
 
 -- --------------------------------------------------------
 
@@ -14864,12 +14882,15 @@ INSERT INTO `shipping_cost_calculate_types` (`id`, `name`) VALUES
 CREATE TABLE `shipping_methods` (
   `id` int(11) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
+  `description` text,
   `shipping_service_id` int(11) UNSIGNED NOT NULL,
-  `description` text NOT NULL,
   `shipping_service_cost_type_id` int(11) UNSIGNED NOT NULL,
   `free_service` tinyint(1) DEFAULT NULL,
   `service_cost` decimal(15,2) DEFAULT NULL,
   `shipping_time` varchar(255) DEFAULT NULL,
+  `special` tinyint(1) DEFAULT NULL,
+  `special_alias` varchar(255) DEFAULT NULL,
+  `sort` tinyint(1) DEFAULT NULL,
   `person_id` int(11) UNSIGNED NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -14879,10 +14900,14 @@ CREATE TABLE `shipping_methods` (
 -- Dumping data for table `shipping_methods`
 --
 
-INSERT INTO `shipping_methods` (`id`, `name`, `shipping_service_id`, `description`, `shipping_service_cost_type_id`, `free_service`, `service_cost`, `shipping_time`, `person_id`, `created_at`, `updated_at`) VALUES
-(1, 'DHL 300 บาท', 4, '', 2, NULL, '300.00', NULL, 1, '2017-03-23 12:51:51', '2017-03-23 12:51:51'),
-(2, 'พัสดุธรรมดา', 1, '', 1, NULL, NULL, NULL, 1, '2017-03-23 13:02:22', '2017-03-23 13:02:22'),
-(3, 'จัดส่งฟรี', 12, '', 3, 1, NULL, '3-5 วันทำการ', 1, '2017-03-23 13:05:07', '2017-03-23 13:12:25');
+INSERT INTO `shipping_methods` (`id`, `name`, `description`, `shipping_service_id`, `shipping_service_cost_type_id`, `free_service`, `service_cost`, `shipping_time`, `special`, `special_alias`, `sort`, `person_id`, `created_at`, `updated_at`) VALUES
+(1, 'DHL 777 บาท', NULL, 4, 2, NULL, '777.00', '', 0, NULL, 9, 1, '2017-03-23 12:51:51', '2017-03-24 11:59:56'),
+(2, 'พัสดุธรรมดา', NULL, 1, 1, NULL, NULL, '', 0, NULL, 9, 1, '2017-03-23 13:02:22', '2017-03-24 11:59:57'),
+(3, 'จัดส่งฟรี', NULL, 12, 3, 1, NULL, '3-5 วันทำการ', 0, NULL, 9, 1, '2017-03-23 13:05:07', '2017-03-24 11:59:54'),
+(10, 'รับสินค้าเอง', '', 0, 3, 1, NULL, NULL, 1, 'picking-up-item', 1, 1, '2017-03-24 13:02:24', '2017-03-24 14:53:16'),
+(11, 'EMS', '', 1, 3, 1, NULL, '1-3 วันทำงาน', 0, NULL, 9, 1, '2017-03-24 18:56:44', '2017-03-25 00:30:55'),
+(12, 'พัสดุธรรมดา', '', 1, 2, NULL, '199.00', '', 0, NULL, 9, 1, '2017-03-24 19:41:58', '2017-03-25 00:35:54'),
+(13, 'free', '', 5, 3, 1, NULL, '', 0, NULL, 9, 1, '2017-03-25 00:20:17', '2017-03-25 00:20:17');
 
 -- --------------------------------------------------------
 
@@ -14946,7 +14971,6 @@ CREATE TABLE `shops` (
   `brand_story` text,
   `profile_image_id` int(11) UNSIGNED DEFAULT NULL,
   `cover_image_id` int(11) UNSIGNED DEFAULT NULL,
-  `customer_can_pickup_item` tinyint(1) NOT NULL,
   `person_id` int(11) UNSIGNED NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -14956,20 +14980,20 @@ CREATE TABLE `shops` (
 -- Dumping data for table `shops`
 --
 
-INSERT INTO `shops` (`id`, `name`, `description`, `brand_story`, `profile_image_id`, `cover_image_id`, `customer_can_pickup_item`, `person_id`, `created_at`, `updated_at`) VALUES
-(1, 'V has come too', '', NULL, 0, 0, 0, 1, '2017-01-28 17:25:21', '2017-03-22 18:57:30'),
-(2, 'aqw', '', NULL, 0, 0, 0, 1, '2017-01-28 17:26:47', '2017-03-22 18:57:30'),
-(3, 'Nike Retail Shop', '<p>Lorem Ipsum คือ เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 เมื่อเครื่องพิมพ์โนเนมเครื่องหนึ่งนำรางตัวพิมพ์มาสลับสับตำแหน่งตัวอักษรเพื่อทำหนังสือตัวอย่าง Lorem Ipsum อยู่ยงคงกระพันมาไม่ใช่แค่เพียงห้าศตวรรษ แต่อยู่มาจนถึงยุคที่พลิกโฉมเข้าสู่งานเรียงพิมพ์ด้วยวิธีทางอิเล็กทรอนิกส์ และยังคงสภาพเดิมไว้อย่างไม่มีการเปลี่ยนแปลง มันได้รับความนิยมมากขึ้นในยุค ค.ศ. 1960 เมื่อแผ่น Letraset วางจำหน่ายโดยมีข้อความบนนั้นเป็น Lorem Ipsum และล่าสุดกว่านั้น คือเมื่อซอฟท์แวร์การทำสื่อสิ่งพิมพ์ (Desktop Publishing) อย่าง Aldus PageMaker ได้รวมเอา Lorem Ipsum เวอร์ชั่นต่างๆ เข้าไว้ในซอฟท์แวร์ด้วย</p>', '<p>bbbb</p>', 121, 122, 1, 1, '2017-01-28 17:30:45', '2017-03-22 22:46:48'),
-(13, 'ร้านค้า 1', NULL, NULL, 128, 127, 0, 1, '2017-02-14 11:20:13', '2017-03-22 18:57:30'),
-(14, 'ร้านค้าทอสอบ 2', NULL, NULL, NULL, 129, 0, 1, '2017-02-14 11:24:03', '2017-03-22 18:57:30'),
-(15, 'ร้านค้า 3', NULL, NULL, 140, 139, 0, 1, '2017-02-14 11:24:26', '2017-03-22 18:57:30'),
-(16, 'xxx', NULL, NULL, NULL, NULL, 0, 1, '2017-02-14 11:25:25', '2017-03-22 18:57:30'),
-(17, 'xxxx', NULL, NULL, NULL, NULL, 0, 1, '2017-02-14 11:25:45', '2017-03-22 18:57:30'),
-(18, 'aaa', NULL, NULL, NULL, NULL, 0, 1, '2017-02-14 11:27:39', '2017-03-22 18:57:30'),
-(19, 'เสื้อผ้านำเข้าหลัง ม. บรูพา', NULL, NULL, NULL, NULL, 0, 1, '2017-02-20 15:40:05', '2017-03-22 18:57:30'),
-(20, 'ปัง ปั่น ปิง', '<p>ตรงกันข้ามกับความเชื่อที่นิยมกัน Lorem Ipsum ไม่ได้เป็นเพียงแค่ชุดตัวอักษรที่สุ่มขึ้นมามั่วๆ แต่หากมีที่มาจากวรรณกรรมละตินคลาสสิกชิ้นหนึ่งในยุค 45 ปีก่อนคริสตศักราช ทำให้มันมีอายุถึงกว่า 2000 ปีเลยทีเดียว ริชาร์ด แมคคลินท็อค ศาสตราจารย์ชาวละติน จากวิทยาลัยแฮมพ์เด็น-ซิดนีย์ ในรัฐเวอร์จิเนียร์ นำคำภาษาละตินคำว่า consectetur ซึ่งหาคำแปลไม่ได้จาก Lorem Ipsum ตอนหนึ่งมาค้นเพิ่มเติม โดยตรวจเทียบกับแหล่งอ้างอิงต่างๆ ในวรรณกรรมคลาสสิก และค้นพบแหล่งข้อมูลที่ไร้ข้อกังขาว่า Lorem Ipsum นั้นมาจากตอนที่ 1.10.32 และ 1.10.33 ของเรื่อง &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) ของ ซิเซโร ที่แต่งไว้เมื่อ 45 ปีก่อนคริสตศักราช หนังสือเล่มนี้เป็นเรื่องราวที่ว่าด้วยทฤษฎีแห่งจริยศาสตร์ ซึ่งเป็นที่นิยมมากในยุคเรเนสซองส์ บรรทัดแรกของ Lorem Ipsum &quot;Lorem ipsum dolor sit amet..&quot; ก็มาจากบรรทัดหนึ่งในตอนที่ 1.10.32 นั่นเอง</p>', '', 130, 131, 0, 1, '2017-02-20 15:40:47', '2017-03-22 18:57:30'),
-(21, 'Gamer Shop', '<p>ด้านล่างของหน้านี้คือท่อนมาตรฐานของ Lorem Ipsum ที่ใช้กันมาตั้งแต่คริสตศตวรรษที่ 16ที่ได้รับการสร้างขึ้นใหม่สำหรับผู้ที่สนใจ ประกอบไปด้วย ตอนที่ 1.10.32 และ 1.10.33 จากเรื่อง &quot;de Finibus Bonorum et Malorum&quot; โดยซิเซโร ก็ได้รับการผลิตขึ้นใหม่ด้วยเช่นกันในรูปแบบที่ตรงกับต้นฉบับ ตามมาด้วยเวอร์ชั่นภาษาอังกฤษจากการแปลของ เอช แร็คแคม เมื่อปี ค.ศ. 1914</p>', '', 154, 153, 0, 1, '2017-03-02 06:04:18', '2017-03-22 18:57:30'),
-(22, 'ABC SHop', NULL, NULL, NULL, NULL, 0, 1, '2017-03-08 17:09:51', '2017-03-22 18:57:30');
+INSERT INTO `shops` (`id`, `name`, `description`, `brand_story`, `profile_image_id`, `cover_image_id`, `person_id`, `created_at`, `updated_at`) VALUES
+(1, 'V has come too', '', NULL, 0, 0, 1, '2017-01-28 17:25:21', '2017-03-22 18:57:30'),
+(2, 'aqw', '', NULL, 0, 0, 1, '2017-01-28 17:26:47', '2017-03-22 18:57:30'),
+(3, 'Nike Retail Shop', '<p>Lorem Ipsum คือ เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 เมื่อเครื่องพิมพ์โนเนมเครื่องหนึ่งนำรางตัวพิมพ์มาสลับสับตำแหน่งตัวอักษรเพื่อทำหนังสือตัวอย่าง Lorem Ipsum อยู่ยงคงกระพันมาไม่ใช่แค่เพียงห้าศตวรรษ แต่อยู่มาจนถึงยุคที่พลิกโฉมเข้าสู่งานเรียงพิมพ์ด้วยวิธีทางอิเล็กทรอนิกส์ และยังคงสภาพเดิมไว้อย่างไม่มีการเปลี่ยนแปลง มันได้รับความนิยมมากขึ้นในยุค ค.ศ. 1960 เมื่อแผ่น Letraset วางจำหน่ายโดยมีข้อความบนนั้นเป็น Lorem Ipsum และล่าสุดกว่านั้น คือเมื่อซอฟท์แวร์การทำสื่อสิ่งพิมพ์ (Desktop Publishing) อย่าง Aldus PageMaker ได้รวมเอา Lorem Ipsum เวอร์ชั่นต่างๆ เข้าไว้ในซอฟท์แวร์ด้วย</p>', '<p>bbbb</p>', 121, 122, 1, '2017-01-28 17:30:45', '2017-03-24 09:59:54'),
+(13, 'ร้านค้า 1', NULL, NULL, 128, 127, 1, '2017-02-14 11:20:13', '2017-03-22 18:57:30'),
+(14, 'ร้านค้าทอสอบ 2', NULL, NULL, NULL, 129, 1, '2017-02-14 11:24:03', '2017-03-22 18:57:30'),
+(15, 'ร้านค้า 3', NULL, NULL, 140, 139, 1, '2017-02-14 11:24:26', '2017-03-22 18:57:30'),
+(16, 'xxx', NULL, NULL, NULL, NULL, 1, '2017-02-14 11:25:25', '2017-03-22 18:57:30'),
+(17, 'xxxx', NULL, NULL, NULL, NULL, 1, '2017-02-14 11:25:45', '2017-03-22 18:57:30'),
+(18, 'aaa', NULL, NULL, NULL, NULL, 1, '2017-02-14 11:27:39', '2017-03-22 18:57:30'),
+(19, 'เสื้อผ้านำเข้าหลัง ม. บรูพา', NULL, NULL, NULL, NULL, 1, '2017-02-20 15:40:05', '2017-03-22 18:57:30'),
+(20, 'ปัง ปั่น ปิง', '<p>ตรงกันข้ามกับความเชื่อที่นิยมกัน Lorem Ipsum ไม่ได้เป็นเพียงแค่ชุดตัวอักษรที่สุ่มขึ้นมามั่วๆ แต่หากมีที่มาจากวรรณกรรมละตินคลาสสิกชิ้นหนึ่งในยุค 45 ปีก่อนคริสตศักราช ทำให้มันมีอายุถึงกว่า 2000 ปีเลยทีเดียว ริชาร์ด แมคคลินท็อค ศาสตราจารย์ชาวละติน จากวิทยาลัยแฮมพ์เด็น-ซิดนีย์ ในรัฐเวอร์จิเนียร์ นำคำภาษาละตินคำว่า consectetur ซึ่งหาคำแปลไม่ได้จาก Lorem Ipsum ตอนหนึ่งมาค้นเพิ่มเติม โดยตรวจเทียบกับแหล่งอ้างอิงต่างๆ ในวรรณกรรมคลาสสิก และค้นพบแหล่งข้อมูลที่ไร้ข้อกังขาว่า Lorem Ipsum นั้นมาจากตอนที่ 1.10.32 และ 1.10.33 ของเรื่อง &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) ของ ซิเซโร ที่แต่งไว้เมื่อ 45 ปีก่อนคริสตศักราช หนังสือเล่มนี้เป็นเรื่องราวที่ว่าด้วยทฤษฎีแห่งจริยศาสตร์ ซึ่งเป็นที่นิยมมากในยุคเรเนสซองส์ บรรทัดแรกของ Lorem Ipsum &quot;Lorem ipsum dolor sit amet..&quot; ก็มาจากบรรทัดหนึ่งในตอนที่ 1.10.32 นั่นเอง</p>', '', 130, 131, 1, '2017-02-20 15:40:47', '2017-03-22 18:57:30'),
+(21, 'Gamer Shop', '<p>ด้านล่างของหน้านี้คือท่อนมาตรฐานของ Lorem Ipsum ที่ใช้กันมาตั้งแต่คริสตศตวรรษที่ 16ที่ได้รับการสร้างขึ้นใหม่สำหรับผู้ที่สนใจ ประกอบไปด้วย ตอนที่ 1.10.32 และ 1.10.33 จากเรื่อง &quot;de Finibus Bonorum et Malorum&quot; โดยซิเซโร ก็ได้รับการผลิตขึ้นใหม่ด้วยเช่นกันในรูปแบบที่ตรงกับต้นฉบับ ตามมาด้วยเวอร์ชั่นภาษาอังกฤษจากการแปลของ เอช แร็คแคม เมื่อปี ค.ศ. 1914</p>', '', 154, 153, 1, '2017-03-02 06:04:18', '2017-03-22 18:57:30'),
+(22, 'ABC SHop', NULL, NULL, NULL, NULL, 1, '2017-03-08 17:09:51', '2017-03-22 18:57:30');
 
 -- --------------------------------------------------------
 
@@ -15095,6 +15119,7 @@ INSERT INTO `shop_relate_to` (`shop_id`, `model`, `model_id`) VALUES
 (3, 'Job', 44),
 (3, 'Order', 7),
 (3, 'PaymentMethod', 6),
+(3, 'PaymentMethod', 8),
 (3, 'Product', 1),
 (3, 'Product', 2),
 (3, 'Product', 3),
@@ -15112,9 +15137,13 @@ INSERT INTO `shop_relate_to` (`shop_id`, `model`, `model_id`) VALUES
 (3, 'ShippingMethod', 1),
 (3, 'ShippingMethod', 2),
 (3, 'ShippingMethod', 3),
+(3, 'ShippingMethod', 10),
 (21, 'PaymentMethod', 7),
 (21, 'Product', 9),
-(21, 'Product', 16);
+(21, 'Product', 16),
+(21, 'ShippingMethod', 11),
+(21, 'ShippingMethod', 12),
+(21, 'ShippingMethod', 13);
 
 -- --------------------------------------------------------
 
@@ -15645,7 +15674,12 @@ INSERT INTO `temporary_files` (`id`, `model`, `token`, `person_id`, `created_at`
 (321, 'Item', 'So8mKp1j', 1, '2017-03-18 10:52:04'),
 (322, 'OrderPaymentConfirm', 'diovght4', 1, '2017-03-21 23:15:25'),
 (323, 'OrderPaymentConfirm', '4FHvXTpJ', 1, '2017-03-21 23:17:18'),
-(325, 'Item', '3GfbC0mc', 1, '2017-03-22 11:59:04');
+(325, 'Item', '3GfbC0mc', 1, '2017-03-22 11:59:04'),
+(326, 'OrderPaymentConfirm', 'dggC6789', 1, '2017-03-25 12:47:49'),
+(327, 'OrderPaymentConfirm', 'jLtg3led', 1, '2017-03-25 13:07:08'),
+(328, 'OrderPaymentConfirm', '7SZUu3iu', 1, '2017-03-25 13:08:37'),
+(329, 'OrderPaymentConfirm', 'Lan6e5Ps', 1, '2017-03-25 13:14:20'),
+(330, 'OrderPaymentConfirm', 'rGqrHj0z', 1, '2017-03-25 16:42:45');
 
 -- --------------------------------------------------------
 
@@ -17070,7 +17104,7 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT for table `data_access_permissions`
 --
 ALTER TABLE `data_access_permissions`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 --
 -- AUTO_INCREMENT for table `districts`
 --
@@ -17100,7 +17134,7 @@ ALTER TABLE `freelance_types`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=203;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
 --
 -- AUTO_INCREMENT for table `image_types`
 --
@@ -17140,7 +17174,7 @@ ALTER TABLE `length_units`
 -- AUTO_INCREMENT for table `lookups`
 --
 ALTER TABLE `lookups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `notifications`
 --
@@ -17170,17 +17204,17 @@ ALTER TABLE `order_histories`
 -- AUTO_INCREMENT for table `order_payment_confirms`
 --
 ALTER TABLE `order_payment_confirms`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `order_products`
 --
 ALTER TABLE `order_products`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `order_shippings`
 --
 ALTER TABLE `order_shippings`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `order_statuses`
 --
@@ -17190,7 +17224,7 @@ ALTER TABLE `order_statuses`
 -- AUTO_INCREMENT for table `order_totals`
 --
 ALTER TABLE `order_totals`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 --
 -- AUTO_INCREMENT for table `pages`
 --
@@ -17200,7 +17234,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `payment_methods`
 --
 ALTER TABLE `payment_methods`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `people`
 --
@@ -17275,12 +17309,12 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `product_discounts`
 --
 ALTER TABLE `product_discounts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `product_sale_promotions`
 --
 ALTER TABLE `product_sale_promotions`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `product_shippings`
 --
@@ -17340,7 +17374,7 @@ ALTER TABLE `shipping_cost_calculate_types`
 -- AUTO_INCREMENT for table `shipping_methods`
 --
 ALTER TABLE `shipping_methods`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `shipping_services`
 --
@@ -17380,7 +17414,7 @@ ALTER TABLE `taggings`
 -- AUTO_INCREMENT for table `temporary_files`
 --
 ALTER TABLE `temporary_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=326;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=332;
 --
 -- AUTO_INCREMENT for table `users`
 --

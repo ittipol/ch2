@@ -131,9 +131,11 @@
 
       <div id="order_status" class="right-size-panel">
         <div class="right-size-panel-inner">
-            <h3>ข้อความจากผู้ซื้อ</h3>
-            <div class="line space-bottom-10"></div>
-            xxxxx
+          <h5>สถานะการสั่งซื้อ</h5>
+          <div class="line"></div>
+          <?php
+            echo Form::select('order_status_id', $xxx);
+          ?>
           <div class="right-size-panel-close-icon"></div>
         </div>
       </div>
