@@ -11,7 +11,7 @@ class Order extends Model
 {
   protected $table = 'orders';
   protected $fillable = ['invoice_prefix','invoice_number','shop_id','person_id','person_name','shipping_address','payment_detail','customer_message','order_status_id','order_free_shipping','order_shipping_cost','shipping_cost_detail'];
-  protected $modelRelations = array('OrderProduct','OrderTotal','PaymentMethodToOrder');
+  protected $modelRelations = array('OrderProduct','OrderTotal','OrderShipping','OrderPaymentConfirm','OrderHistory','PaymentMethodToOrder');
 
   public $formHelper = true;
   public $modelData = true;
@@ -374,6 +374,15 @@ class Order extends Model
     }
 
     return $orderShipping->buildModelData();
+
+  }
+
+  public function getNextOrderStatuses() {
+
+    return OrderStatus::where([
+      ['default_value','=','1'],
+      ['sort','>',OrderStatus::select('sort')->find($this->order_status_id)->sort]
+    ])->get();
 
   }
 

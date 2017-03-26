@@ -121,6 +121,7 @@
         @endforeach
       </div>
 
+      @if(isset($updateOrderStatusUrl))
       <div class="secondary-message-box info space-bottom-30">
         <div class="message-box-button-group clearfix">
           <div class="flat-button">
@@ -131,14 +132,12 @@
 
       <div id="order_status" class="right-size-panel">
         <div class="right-size-panel-inner">
-          <h5>สถานะการสั่งซื้อ</h5>
-          <div class="line"></div>
-          <?php
-            echo Form::select('order_status_id', $xxx);
-          ?>
+          @include('pages.order.form.order_status_edit')
           <div class="right-size-panel-close-icon"></div>
         </div>
       </div>
+
+      @endif
 
       <div class="line space-top-bottom-20"></div>
 

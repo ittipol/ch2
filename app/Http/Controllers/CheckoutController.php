@@ -217,6 +217,12 @@ class CheckoutController extends Controller
         ['person_id','=',$personId]
       ])->delete();
 
+      // Add Order History
+      $OrderHistoryModel = Service::loadModel('OrderHistory');
+      $OrderHistoryModel->order_id = $order->id;
+      $OrderHistoryModel->order_status_id = 1;
+      $OrderHistoryModel->save();
+
     }
 
     session()->flash('checkout-success',true);

@@ -204,6 +204,10 @@ class CheckForPersonHasShopPermission
         'shop.order.payment.detail' => array(
           'permission' => true,
           'modelName' => 'Order'
+        ),
+        'shop.order.status.update' => array(
+          'permission' => 'edit',
+          'modelName' => 'Order'
         )
       );
 

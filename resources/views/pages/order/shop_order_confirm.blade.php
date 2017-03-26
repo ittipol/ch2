@@ -420,7 +420,7 @@
   <div class="space-top-30">
     <h4>ข้อความถึงผู้ซื้อ</h4>
     <?php 
-      echo Form::textarea('comment', null, array(
+      echo Form::textarea('message', null, array(
         'class' => 'ckeditor'
       ));
     ?>

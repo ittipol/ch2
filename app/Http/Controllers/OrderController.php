@@ -185,7 +185,7 @@ class OrderController extends Controller
       return $this->error();
     }
 
-    if($order->order_status_id != Service::loadModel('OrderStatus')->getIdByalias('pending-customer-payment')) {
+    if($order->order_status_id != 2) {
       Message::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
       return Redirect::to('account/order/'.$order->id);
     }
@@ -293,15 +293,18 @@ class OrderController extends Controller
 
       $this->setData('hasOrderPaymentConfirm',$hasOrderPaymentConfirm);
 
-    }
+    }elseif($model->order_status_id < 5) {
 
-    // Get OrderStatus
-    $xxx = Service::loadModel('OrderStatus')->get();
-    $orderStatuses = array();
-    foreach ($xxx as $orderStatus) {
-      $orderStatuses[$orderStatus->id] = $orderStatus->name;
+      $nextOrderStatuses = $model->getNextOrderStatuses();
+      $_orderStatuses = array();
+      foreach ($nextOrderStatuses as $orderStatus) {
+        $_orderStatuses[$orderStatus->id] = $orderStatus->name;
+      }
+
+      $this->setData('nextOrderStatuses',$_orderStatuses);
+      $this->setData('updateOrderStatusUrl',request()->get('shopUrl').'order/status/update/'.$model->id);
+
     }
-    $this->setData('xxx',$orderStatuses);
 
     if(!$hasPaymentMethod) {
       $this->setData('PaymentMethodAddUrl',request()->get('shopUrl').'payment_method');
@@ -442,11 +445,12 @@ class OrderController extends Controller
 
       }else{
 
-        foreach ($products as $product) {
-          // if(empty($product['free_shipping']) && empty($product['shipping_cost'])) {
-          //   return Redirect::back()->withErrors(['พบข้อมูลไม่ครบถ้วน'])->withInput(request()->all());
-          // }
+        if(!empty($orderShippingCost)) {
+          $model->order_free_shipping = null;
+          $model->order_shipping_cost = $orderShippingCost;
+        }
 
+        foreach ($products as $product) {
           if(!empty($product['shipping_cost']) && !$validation->isCurrency($product['shipping_cost'])) {
             return Redirect::back()->withErrors(['จำนวนค่าจัดส่งสินค้าไม่ถูกต้อง'])->withInput(request()->all());
           }
@@ -482,11 +486,11 @@ class OrderController extends Controller
     }
 
     // order shipping cost
-    if(!empty($orderShippingCost)) {
-      $model->order_free_shipping = null;
-      $model->order_shipping_cost = $orderShippingCost;
-      $model->save();
-    }
+    // if(!empty($orderShippingCost)) {
+    //   $model->order_free_shipping = null;
+    //   $model->order_shipping_cost = $orderShippingCost;
+    //   $model->save();
+    // }
 
     // update order product
     $orderProducts = Service::loadModel('OrderProduct')
@@ -550,9 +554,16 @@ class OrderController extends Controller
       $model->shipping_cost_detail = request()->get('shipping_cost_detail');
     }
 
-    // 
-    $model->order_status_id = Service::loadModel('OrderStatus')->getIdByalias('pending-customer-payment');
+    // Update order 
+    $model->order_status_id = 2;
     $model->save();
+
+    // Add order history
+    $OrderHistoryModel = Service::loadModel('OrderHistory');
+    $OrderHistoryModel->order_id = $model->id;
+    $OrderHistoryModel->order_status_id = $model->order_status_id;
+    $OrderHistoryModel->message = request()->get('message');
+    $OrderHistoryModel->save();
 
     Message::display('ยืนยันการสั่งซื้อเรียบร้อยแล้ว','success');
     return Redirect::to('shop/'.$this->param['shopSlug'].'/order/'.$model->id);
@@ -572,7 +583,49 @@ class OrderController extends Controller
     }
 
     $model->order_status_id = 3;
+
     if($model->save()) {
+      Message::display('ยืนยันการชำระเงินเรียบร้อยแล้ว','success');
+    }else{
+      Message::display('เกิดข้อผิดพลาด ไม่สามารถยืนยันการชำระเงินได้','error');
+    }
+
+    return Redirect::to(request()->get('shopUrl').'order/'.$model->id);
+
+  }
+
+  public function updateOrderStatus() {
+
+    $model = Service::loadModel('Order')->where([
+      ['id','=',$this->param['id']],
+      ['shop_id','=',request()->get('shopId')]
+    ])->first();
+
+    if($model->order_status_id == 1 && $model->order_status_id == 2) {
+      Message::display('ยังไม่สามารถเปลี่ยนแปลงการสั่งซื้อได้','error');
+      return Redirect::to(request()->get('shopUrl').'order/'.$model->id);
+    }
+
+    $orderStatus = Service::loadModel('OrderStatus')->where([
+      ['id','=',$model->order_status_id],
+      ['default_value','=','1']
+    ])->exists();
+
+    if(!$orderStatus) {
+      Message::display('สถานะการสั่งซื้อไม่ถูกต้อง','error');
+      return Redirect::to(request()->get('shopUrl').'order/'.$model->id);
+    }
+
+    $model->order_status_id = request()->get('order_status_id');
+
+    if($model->save()) {
+
+      $OrderHistoryModel = Service::loadModel('OrderHistory');
+      $OrderHistoryModel->order_id = $model->id;
+      $OrderHistoryModel->order_status_id = $model->order_status_id;
+      $OrderHistoryModel->message = request()->get('message');
+      $OrderHistoryModel->save();
+
       Message::display('ยืนยันการชำระเงินเรียบร้อยแล้ว','success');
     }else{
       Message::display('เกิดข้อผิดพลาด ไม่สามารถยืนยันการชำระเงินได้','error');

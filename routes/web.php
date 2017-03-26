@@ -188,6 +188,8 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
   Route::get('shop/{shopSlug}/order/payment/detail/{id}', 'OrderController@paymentDetail')->name('shop.order.payment.detail');
 
+  Route::patch('shop/{shopSlug}/order/status/update/{id}', 'OrderController@updateOrderStatus')->name('shop.order.status.update');
+
 });
 
 // community / Shop
