@@ -4,21 +4,34 @@
 <div class="container">
 
   <?php 
-    echo Form::open(['id' => 'main_form','method' => 'get', 'enctype' => 'multipart/form-data']);
+    echo Form::open(['id' => 'search_form','method' => 'get', 'enctype' => 'multipart/form-data']);
   ?>
 
   <div class="row">
     <div class="col-sm-12 space-top-50 search-box-panel">
-      <input type="text" id="search_query_input" name="search_query" value="{{$q}}" placeholder="ค้นหา" autocomplete="off" class="search-box">
+      <input type="text" name="search_query" value="{{$q}}" placeholder="ค้นหา" autocomplete="off" class="search-box">
       <button class="button-search">
-        <img src="/images/icons/search-black.png">
+        <img src="/images/icons/search.png">
       </button>
+    </div>
+  </div>
+
+  <div id="filters" class="right-size-panel filter">
+    <div class="right-size-panel-inner">
+      @include('components.search_filter')
+      <div class="right-size-panel-close-icon"></div>
     </div>
   </div>
 
   <?php
     echo Form::close();
   ?>
+
+  <div class="text-right space-top-20">
+    <a class="button" data-right-side-panel="1" data-right-side-panel-target="#filters">
+      ตัวกรอง
+    </a>
+  </div>
 
   <div class="result-container space-top-50">
 
@@ -91,5 +104,58 @@
   </div>
 
 </div>
+
+<script type="text/javascript">
+
+  class Filter {
+
+    constructor() {}
+
+    load() {
+      this.bind();
+    }
+
+    bind() {
+
+      // http://lv5.local/list?filter=type:value,type1:value1&q=company&sort=name:asc
+
+      // ?fq=genre:action,genre:adventure,genre:puzzle&sort=dynamicPrice desc
+
+      // ?search_query=Iphone 7 128GB Limited Edition&model=shop&model=product&model=job&model=advertising&model=item&model=real_estate&sort=name:asc
+
+      // let filters = '';
+      let filters = [];
+
+      $('#search_form').on('submit',function(){
+
+        $('.filter-model:checked').each(function(i, obj) {
+            filters.push('model:'+$(this).val());
+        });
+
+        var input = document.createElement('input');
+        input.setAttribute('type', 'hidden');
+        input.setAttribute('name', 'fq');
+        input.setAttribute('value', filters.join());
+
+        this.appendChild(input);
+ 
+      });
+
+    }
+
+    createData() {
+
+    }
+
+  }
+
+  $(document).ready(function(){
+
+    const filter = new Filter();
+    filter.load();
+
+  });
+
+</script>
 
 @stop

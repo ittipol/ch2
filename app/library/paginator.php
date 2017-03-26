@@ -167,7 +167,9 @@ class Paginator {
 
   public function order($model) {
 
-    if(!empty($this->criteriaData['order'])){
+    if(!empty($this->criteriaData['orderByRaw'])) {
+      $model = $model->orderByRaw($this->criteriaData['orderByRaw']);
+    }elseif(!empty($this->criteriaData['order'])){
 
       if(is_array(current($this->criteriaData['order']))) {
 

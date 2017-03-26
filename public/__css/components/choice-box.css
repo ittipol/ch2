@@ -33,7 +33,7 @@ label.choice-box input[type="checkbox"] {
 label.choice-box input[type="radio"] + .inner,
 label.choice-box input[type="checkbox"] + .inner {
 	color: #000;
-	padding: 22px 0 20px 40px;
+	padding: 20px 0 20px 40px;
 	cursor: pointer;
 }
 

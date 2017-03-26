@@ -9,6 +9,7 @@
 	width: 700px;
 	height: 100%;
 	opacity: 1;
+	color: #fff;
 	/*background-color: rgb(29, 66, 133);*/
 	/*background-color: #607D8B;*/
 	background-color: #00695C;
@@ -25,7 +26,6 @@
 .right-size-panel .right-size-panel-inner {
 	padding: 30px 30px 80px;
 	height: 100%;
-	color: #fff;
 	font-size: 16px;
 	line-height: 25px;
 	overflow-y: auto;
@@ -44,16 +44,30 @@
 	position: absolute;
 	top: 0;
 	right: 0;
-	width: 40px;
-	height: 40px;
+	width: 38px;
+	height: 38px;
 	border-radius: 0;
 	background-image: url(/images/icons/close.png);
 	background-repeat: no-repeat;
-	background-size: 20px;
+	background-size: 18px;
 	background-position: center;
 	background-color: rgba(255,255,255,.2);
 	z-index: 5;
 	cursor: pointer;
+}
+
+.right-size-panel.filter {
+	width: 300px;
+	color: #000;
+	background-color: #fff;
+}
+
+.right-size-panel.filter .line {
+	background-color: #000;
+}
+
+.right-size-panel .right-size-panel-close-icon {
+	background-color: #0071c5;
 }
 
 @media only screen and (max-width : 480px) {

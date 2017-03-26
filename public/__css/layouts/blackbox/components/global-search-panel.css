@@ -43,6 +43,7 @@
 	right: 0;
 	display: inline-block;
 	border: none;
+	outline: none;
 	background-color: transparent; 
 	padding: 0;
 	width: 50px;

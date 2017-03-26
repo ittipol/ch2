@@ -20,37 +20,65 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-      view()->composer('*', function($view){
+      view()->composer('pages.shop.layouts.top_nav', function($view){
 
-        $pass = false;
+        if(!empty(Route::current()->parameter('shopSlug'))) {
 
-        $ignorePage = array(
-          'errors.error',
-          'scripts.meta',
-          'scripts.script',
-          // 'pages.user.login',
-          // 'pages.user.register',
-          'layouts.default.main',
-          'layouts.blackbox.main',
-          'layouts.blackbox.components.global-nav',
-          'layouts.blackbox.components.global-header',
-          'layouts.blackbox.components.global-search',
-          'layouts.blackbox.components.global-cart',
-          'layouts.blackbox.components.footer'
-        );
+          // $string = new String;
+          $url = new Url;
 
-        if(in_array($view->getName(), $ignorePage)) {
-          $pass = true;
+          if(!empty(Route::current()->parameter('shopSlug'))) {
+
+            $slug = Route::current()->parameter('shopSlug');
+
+            // $shopId = Service::loadModel('Slug')
+            // ->where('slug','like',$slug)
+            // ->first()
+            // ->model_id;
+
+            // $shop = Service::loadModel('Shop')
+            // ->select('name','description','profile_image_id','cover_image_id')
+            // ->find($shopId);
+
+            // view()->share('_shop_id',$shopId);
+            // view()->share('_shop_name',$shop->name);
+            // view()->share('_shop_short_description',$string->subString($shop->description,250,true));
+            // view()->share('_shop_profileImage',$shop->getProfileImageUrl());
+            // view()->share('_shop_cover',$shop->getCoverUrl());
+
+            // $personToShop = Service::loadModel('PersonToShop');
+            // $person = $personToShop->getData(array(
+            //   'conditions' => array(
+            //     ['person_id','=',session()->get('Person.id')],
+            //     ['shop_id','=',$shopId],
+            //   ),
+            //   'fields' => array('role_id'),
+            //   'first' => true
+            // ));
+
+            // view()->share('_shop_permission',$person->role->getPermission());
+
+            view()->share('_shop_setting_url',$url->url('shop/'.$slug.'/setting'));
+            view()->share('_shop_product_url',$url->url('shop/'.$slug.'/product'));
+            view()->share('_shop_job_url',$url->url('shop/'.$slug.'/job'));
+            view()->share('_shop_advertising_url',$url->url('shop/'.$slug.'/advertising'));
+
+          }
+
         }
 
-        if(!$pass && !empty(Route::current()->parameter('shopSlug'))) {
+      });
+
+      view()->composer('pages.shop.layouts.header', function($view){
+
+        if(!empty(Route::current()->parameter('shopSlug'))) {
 
           $string = new String;
           $url = new Url;
 
-          $slug = Route::current()->parameter('shopSlug');
+          if(!empty(Route::current()->parameter('shopSlug'))) {
 
-          if(!empty($slug)) {
+            $slug = Route::current()->parameter('shopSlug');
 
             $shopId = Service::loadModel('Slug')
             ->where('slug','like',$slug)
@@ -61,33 +89,28 @@ class AppServiceProvider extends ServiceProvider
             ->select('name','description','profile_image_id','cover_image_id')
             ->find($shopId);
 
-            // get desc
-            // get brand story
-            // get open hours
-            // get address
-
             view()->share('_shop_id',$shopId);
             view()->share('_shop_name',$shop->name);
             view()->share('_shop_short_description',$string->subString($shop->description,250,true));
             view()->share('_shop_profileImage',$shop->getProfileImageUrl());
             view()->share('_shop_cover',$shop->getCoverUrl());
 
-            $personToShop = Service::loadModel('PersonToShop');
-            $person = $personToShop->getData(array(
-              'conditions' => array(
-                ['person_id','=',session()->get('Person.id')],
-                ['shop_id','=',$shopId],
-              ),
-              'fields' => array('role_id'),
-              'first' => true
-            ));
+            // $personToShop = Service::loadModel('PersonToShop');
+            // $person = $personToShop->getData(array(
+            //   'conditions' => array(
+            //     ['person_id','=',session()->get('Person.id')],
+            //     ['shop_id','=',$shopId],
+            //   ),
+            //   'fields' => array('role_id'),
+            //   'first' => true
+            // ));
 
-            view()->share('_shop_permission',$person->role->getPermission());
+            // view()->share('_shop_permission',$person->role->getPermission());
 
-            view()->share('_shop_setting_url',$url->url('shop/'.$slug.'/setting'));
-            view()->share('_shop_product_url',$url->url('shop/'.$slug.'/product'));
-            view()->share('_shop_job_url',$url->url('shop/'.$slug.'/job'));
-            view()->share('_shop_advertising_url',$url->url('shop/'.$slug.'/advertising'));
+            // view()->share('_shop_setting_url',$url->url('shop/'.$slug.'/setting'));
+            // view()->share('_shop_product_url',$url->url('shop/'.$slug.'/product'));
+            // view()->share('_shop_job_url',$url->url('shop/'.$slug.'/job'));
+            // view()->share('_shop_advertising_url',$url->url('shop/'.$slug.'/advertising'));
 
           }
 
@@ -138,6 +161,10 @@ class AppServiceProvider extends ServiceProvider
       view()->composer('layouts.blackbox.components.global-cart', function($view){
         $view->with('_products',Service::loadModel('Cart')->getProducts());
       });
+
+      // view()->composer('components.search_filter', function($view){
+      //   dd($view);
+      // });
 
     }
 

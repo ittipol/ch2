@@ -56,7 +56,9 @@ class Item extends Model
       'Contact.phone_number.required' => 'หมายเลขโทรศัพท์ห้ามว่าง',
       'ItemToCategory.item_category_id.required' => 'หมวดหมู่หลักสินค้าห้ามว่าง',
     )
-  ); 
+  );
+
+  private $sortingFields = array('name','created_at');
 
   public function __construct() {  
     parent::__construct();
