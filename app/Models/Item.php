@@ -58,7 +58,7 @@ class Item extends Model
     )
   );
 
-  private $sortingFields = array('name','created_at');
+  protected $sortingFields = array('name','created_at');
 
   public function __construct() {  
     parent::__construct();

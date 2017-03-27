@@ -1,6 +1,6 @@
 <h3>ตัวกรอง</h3>
 <button class="button wide-button">
-  ค้นหา
+  กรองการค้นหา
 </button>
 
 <h4>แสดงข้อมูล</h4>

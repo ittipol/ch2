@@ -165,22 +165,18 @@ class Paginator {
 
   }
 
+  // public function filter() {}
+
   public function order($model) {
 
-    if(!empty($this->criteriaData['orderByRaw'])) {
-      $model = $model->orderByRaw($this->criteriaData['orderByRaw']);
-    }elseif(!empty($this->criteriaData['order'])){
+    if(is_array(current($this->criteriaData['order']))) {
 
-      if(is_array(current($this->criteriaData['order']))) {
-
-        foreach ($this->criteriaData['order'] as $value) {
-          $model = $model->orderBy($value[0],$value[1]);
-        }
-
-      }else{
-        $model = $model->orderBy(current($this->criteriaData['order']),next($this->criteriaData['order']));
+      foreach ($this->criteriaData['order'] as $value) {
+        $model = $model->orderBy($value[0],$value[1]);
       }
-      
+
+    }else{
+      $model = $model->orderBy(current($this->criteriaData['order']),next($this->criteriaData['order']));
     }
 
     return $model;
@@ -190,13 +186,6 @@ class Paginator {
   public function myData() {
     $this->onlyMyData = true;
   }
-
-  // public function itemCount() {
-
-  //   $offset = ($this->page - 1)  * $this->perPage;
-
-  //   return $this->condition($this->model->newInstance())->count();
-  // }
 
   public function getCount() {
     return $this->count;
@@ -252,9 +241,10 @@ class Paginator {
 
   }
 
-  public function getLookupPaginationData() {
-
+  public function search($criteria) {
+    
     $cache = new Cache;
+    $filterHelper = new FilterHelper;
 
     $offset = ($this->page - 1)  * $this->perPage;
 
@@ -268,45 +258,66 @@ class Paginator {
       $query = $this->getAccessPermision($query);
     });
 
-    $model = $this->condition($model);
+    $model = $filterHelper->setCriteria($model,$criteria);
 
-    $this->count = $model->count();
-
-    $model = $this->order($model);
-
-    $records = $model
-    ->take($this->perPage)
-    ->skip($offset)
-    ->get();
-
-    $data = array();
-    foreach ($records as $record) {
-
-      $_data = array();
-      if($this->getImage) {
-
-        $image = $record->getRelatedData('Image',array(
-          'first' => true
-        ));
-
-        $_data['_imageUrl'] = '/images/common/no-img.png';
-        if(!empty($image)) {
-          $_data['_imageUrl'] = $cache->getCacheImageUrl($image,'list');
-        }
-
-      }
-
-      $data[] = array_merge(
-        $_data,
-        $record->buildPaginationData(),
-        $this->parseUrl($record->getRecordForParseUrl())
-      );
-
-    }
-
-    return $data;
+    dd('sdfe');
 
   }
+
+  // public function getLookupPaginationData() {
+
+  //   $cache = new Cache;
+
+  //   $offset = ($this->page - 1)  * $this->perPage;
+
+  //   $model = $this->model->newInstance()
+  //   ->join('data_access_permissions',function($join) {
+  //     $join->on('data_access_permissions.model_id', '=', $this->model->getTable().'.model_id')
+  //          ->on('data_access_permissions.model', '=',$this->model->getTable().'.model');
+  //   })
+  //   ->join('access_levels', 'access_levels.level', '=', 'data_access_permissions.access_level')
+  //   ->where(function ($query) {
+  //     $query = $this->getAccessPermision($query);
+  //   });
+
+  //   $model = $this->condition($model);
+  //   // $model = $this->query($model);
+  //   // $model = $this->filter($model);
+  //   $model = $this->order($model);
+
+  //   $records = $model
+  //   ->take($this->perPage)
+  //   ->skip($offset)
+  //   ->get();
+
+  //   $data = array();
+  //   foreach ($records as $record) {
+
+  //     $_data = array();
+  //     if($this->getImage) {
+
+  //       $image = $record->getRelatedData('Image',array(
+  //         'first' => true
+  //       ));
+
+  //       $_data['_imageUrl'] = '/images/common/no-img.png';
+  //       if(!empty($image)) {
+  //         $_data['_imageUrl'] = $cache->getCacheImageUrl($image,'list');
+  //       }
+
+  //     }
+
+  //     $data[] = array_merge(
+  //       $_data,
+  //       $record->buildPaginationData(),
+  //       $this->parseUrl($record->getRecordForParseUrl())
+  //     );
+
+  //   }
+
+  //   return $data;
+
+  // }
 
   public function getAccessPermision($query) {
 

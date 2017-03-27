@@ -12,6 +12,8 @@ class Lookup extends Model
 
   public $paginator = true;
 
+  protected $sortingFields = array('name','created_at');
+
   //  Lookup Special Format
   // 'keyword' => '{{Department.name|Company.id=>CompanyHasDepartment.company_id,CompanyHasDepartment.department_id=>Department.id}}',
   // 'keyword' => array(

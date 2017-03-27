@@ -41,6 +41,14 @@
               </div>
             </div>
 
+            <div class="button-group">
+
+              <a href="{{$data['detailUrl']}}">
+                <div class="button wide-button">รายละเอียดสินค้า</div>
+              </a>
+            
+            </div>
+
           </div>
         </div>
 

@@ -21,7 +21,7 @@ class Model extends BaseModel
   protected $state = 'create';
   protected $modelRelations = array();
   protected $modelRelationData = array();
-  protected $sortingFields;
+  protected $sortingFields = array();
   protected $behavior;
   protected $validation;
   protected $directory = false;
@@ -276,11 +276,12 @@ class Model extends BaseModel
 
       foreach ($options['conditions']['in'] as $condition) {
 
-        if(empty($condition[1])) {
-          continue;
-        }
+        // if(empty($condition[1])) {
+        //   continue;
+        // }
 
-        $model = $model->whereIn($condition[0],$condition[1]);
+        // $model = $model->whereIn($condition[0],$condition[1]);
+        $model->whereIn(current($condition),next($condition));
       }
 
       unset($options['conditions']['in']);
@@ -291,7 +292,7 @@ class Model extends BaseModel
 
       $conditions = $criteria['conditions']['or'];
 
-      $model = $model->where(function($query) use($conditions) {
+      $model->where(function($query) use($conditions) {
 
         foreach ($conditions as $condition) {
           $query->orWhere(
@@ -308,7 +309,7 @@ class Model extends BaseModel
     }
 
     if(!empty($options['conditions'])){
-      $model = $model->where($options['conditions']);
+      $model->where($options['conditions']);
     }
 
     if(!$model->exists()) {
@@ -316,7 +317,7 @@ class Model extends BaseModel
     }
 
     if(!empty($options['fields'])){
-      $model = $model->select($options['fields']);
+      $model->select($options['fields']);
     }
 
     if(!empty($options['order'])){
@@ -324,11 +325,11 @@ class Model extends BaseModel
       if(is_array(current($options['order']))) {
 
         foreach ($options['order'] as $value) {
-          $model = $model->orderBy($value[0],$value[1]);
+          $model->orderBy($value[0],$value[1]);
         }
 
       }else{
-        $model = $model->orderBy(current($options['order']),next($options['order']));
+        $model->orderBy(current($options['order']),next($options['order']));
       }
       
     }
@@ -573,6 +574,10 @@ class Model extends BaseModel
 
   public function getImageCache() {
       return $this->imageCache;
+  }
+
+  public function getSortingFields() {
+      return $this->sortingFields;
   }
 
   public function getRecordForParseUrl() {

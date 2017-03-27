@@ -4,18 +4,17 @@ namespace App\Http\Controllers;
 
 use App\library\service;
 use App\library\string;
+use App\library\filterHelper;
 
 class SearchController extends Controller
 {
   public function index() {
 
-    $string = new String;
-
     $lookup = Service::loadModel('Lookup');
-    $wordModel = Service::loadModel('word');
-    $province = Service::loadModel('Province');
-    $district = Service::loadModel('District');
-    $subDistrict = Service::loadModel('SubDistrict');
+    $filterHelper = new FilterHelper;
+
+    $criteria = array();
+    $conditions = array();
 
     $page = 1;
     if(!empty($this->query['page'])) {
@@ -27,152 +26,44 @@ class SearchController extends Controller
       $q = trim($this->query['search_query']);
     }
 
-    $_filters = array();
+    $filters = array();
     if(!empty($this->query['fq'])) {
-      $filters = explode(',', $this->query['fq']);
-     
-      foreach ($filters as $filter) {
-        list($alias,$value) = explode(':', $filter);
-        
-        switch ($alias) {
-          case 'model':
-              $_filters['lookups.model'][] = $string->generateModelNameWithoutUnderScore($value);
-            break;
-        }
-
-      }
-
+      $filters = $this->query['fq'];
     }
 
-    $sort = array('created_at','DESC');
+    $sort = 'created_at:desc';
     if(!empty($this->query['sort'])) {
-      list($alias,$value) = explode(':', $this->query['sort']);
-      $sort = array($alias,strtoupper($value));
+      $sort = $this->query['sort'];
     }
-
-    $this->setData('count',0);
 
     if(!empty($q)) {
 
-      $conditions = array();
+      $filterHelper->setSearchQuery($q);
+      $filterHelper->setFilters($filters);
+      $filterHelper->setSorting($sort);
+      // $criteria = $filterHelper->buildCriteria();
 
-      $_q = $q;
+      // $lookup->paginator->criteria($criteria);
+      $lookup->paginator->disableGetImage();
+      $lookup->paginator->setPage($page);
+      $lookup->paginator->setPerPage(20);
+      $lookup->paginator->setPagingUrl('search');
+      // $lookup->paginator->setQuery('search_query',$q);
 
-      $or = array();
-      $and = array();
-
-      $pattern = '/\s[+\'\'\\\\\/:;()*\-^&!<>\[\]\|]\s/';
-      $_q = preg_replace($pattern, ' ', $_q);
-
-      $zipcodePattern = '/^[0-9]{5}$/';
-      $wordGroupPattern = '/([\wก-๙]+|[(\"|\')]{1}[\wก-๙]+[(\+|\s)]{1}[\wก-๙]+[(\"|\')]{1})/';
-
-      preg_match_all($wordGroupPattern, $_q, $words);
-
-      $isAddress = false;
-      $taggingWord = '';
-
-      foreach ($words[0] as $word) {
-
-        $word = str_replace(array('\'','"'), '', $word);
-        $word = str_replace('+', ' ', $word);
-
-        if(mb_strlen($word) < 3) {
-          array_push($or,array('keyword_1','like','%'.$word.'%'));
-          array_push($or,array('keyword_2','like','%'.$word.'%'));
-          array_push($or,array('keyword_3','like','%'.$word.'%'));
-          array_push($or,array('keyword_4','like','%'.$word.'%'));
-          continue;
-        }
-
-        if($isAddress && preg_match($zipcodePattern, $word, $matches)) {
-          $isAddress = false;
-          array_push($or,array('lookups.address','like','%'.$word.'%'));
-          continue;
-        }
-
-        if($province->where('name','like',$word)->exists() || $district->where('name','like',$word)->exists() || $subDistrict->where('name','like',$word)->exists()) {
-          $isAddress = true;
-          array_push($or,array('lookups.address','like','%'.$word.'%'));
-          continue;
-        }
-
-        if($wordModel->where('word','like',$word)->exists()) {
-          array_push($or,array('lookups.name','like','%'.$word.'%'));
-          array_push($or,array('lookups.tags','like','%'.$word.'%'));
-          continue;
-        }else{
-          array_push($or,array('lookups.name','like','%'.$word.'%'));
-        }
-
-        array_push($or,array('keyword_1','like','%'.$word.'%'));
-        array_push($or,array('keyword_2','like','%'.$word.'%'));
-        array_push($or,array('keyword_3','like','%'.$word.'%'));
-        array_push($or,array('keyword_4','like','%'.$word.'%'));
-        
-      }
-
-      if(!empty($and)) {
-        $conditions = $and;
-      }
-
-      if(!empty($or)) {
-        $conditions = array_merge($conditions,array(
-          'or' => $or
-        ));
-      }
-
-      if(!empty($_filters)) {
-
-        foreach ($_filters as $alias => $filter) {
-          $conditions['in'][] = array($alias,$filter);
-        }
-
-      }
-
-      $conditions = array_merge($conditions,array(
-        array('lookups.active','=',1)
+      $this->setData('results',$lookup->paginator->search($filterHelper->buildCriteria()));
+      $this->setData('_pagination',array(
+        'page' => $lookup->paginator->getPage(),
+        'paging' => $lookup->paginator->paging(),
+        'next' => $lookup->paginator->next(),
+        'prev' => $lookup->paginator->prev()
       ));
-
-      if(!empty($conditions)) {
-
-        $criteria = array();
-
-        $criteria['conditions'] = $conditions;
-        $criteria['fields'] = array('lookups.*');
-
-        $data = $lookup->select('id')->where('name','like',$_q);
-        if($data->exists()) {
-
-          $ids = array();
-          foreach ($data->get() as $value) {
-            $ids[] = $value->id;
-          }
-
-          $criteria['orderByRaw'] = 'FIELD(lookups.id, '.implode(' ,', $ids).') DESC, created_at DESC';
-        }else{
-          $criteria['order'] = array('created_at','DESC');
-        }
-
-        $lookup->paginator->criteria($criteria);
-        $lookup->paginator->disableGetImage();
-        $lookup->paginator->setPage($page);
-        $lookup->paginator->setPerPage(20);
-        $lookup->paginator->setPagingUrl('search');
-        // $lookup->paginator->setQuery('search_query',$q);
-
-        $this->setData('results',$lookup->paginator->getLookupPaginationData());
-        $this->setData('_pagination',array(
-          'page' => $lookup->paginator->getPage(),
-          'paging' => $lookup->paginator->paging(),
-          'next' => $lookup->paginator->next(),
-          'prev' => $lookup->paginator->prev()
-        ));
-        $this->setData('count',$lookup->paginator->getCount());
-
-      }
+      $this->setData('count',$lookup->paginator->getCount());
 
     }
+
+    // Get Sorting Fields
+    $sortingFields = $lookup->getSortingFields();
+    dd($sortingFields);
 
     // public $sortingFields = array('name','created_at');
     // library filter helper
@@ -243,8 +134,10 @@ class SearchController extends Controller
 
     $this->setData('q',$q);
     $this->setData('filters',$filterOptions);
+    // $this->setData('count',0);
 
     return $this->view('pages.search.result');
 
   }
+
 }
