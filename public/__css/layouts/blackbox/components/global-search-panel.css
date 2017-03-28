@@ -5,7 +5,8 @@
 	width: 500px;
 	height: 100%;
 	opacity: 1;
-	background: #252525;
+	/*background: #252525;*/
+	background-color: #fff;
 	padding: 0;
 	z-index: 90;
 	overflow: auto;
@@ -17,7 +18,7 @@
 }
 
 .global-search-panel .global-search-input-box {
-	/*padding: 10px;*/
+	border-bottom: 1px solid #ccc;
 }
 
 .global-search-panel .global-search-input-field {

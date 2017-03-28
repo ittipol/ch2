@@ -32,11 +32,10 @@
 	position: absolute;
 	top: 20px;
 	right: 0;
-	padding: 6px 15px;
-	background-color: #0071c5;
+	padding: 6px 20px;
+	background-color: #EF6C00;
 	color: #fff;
 	font-size: 14px;
-	border-radius: 20px 0 0 20px;
 	z-index: 8;
 }
 
@@ -54,8 +53,8 @@
 	margin-bottom: 0;
 }
 
-.detail-info-section {
-	/*margin-top: 20px;*/
+.detail .detail-info-section {
+	margin-top: 20px;
 }
 
 .detail-info-section .detail-info {
@@ -452,6 +451,16 @@
 	border-color: #42A5F5;
 	background-image: url(/images/icons/tick.png);
 	background-size: 60%;
+}
+
+.display-category-button {
+	position: fixed;
+	bottom: 0;
+	right: 15%;
+	color: #fff;
+	background-color: #0091EA;
+	padding: 10px 20px;
+	z-index: 50;
 }
 
 

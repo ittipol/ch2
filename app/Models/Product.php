@@ -5,6 +5,8 @@ namespace App\Models;
 use App\library\currency;
 use App\library\string;
 use App\library\date;
+use App\library\cache;
+use App\library\url;
 
 class Product extends Model
 {
@@ -477,6 +479,33 @@ class Product extends Model
     }
 
     return array_merge($promotion->buildModelData(),$promotion->{lcfirst($promotion->model)}->buildModelData());
+
+  }
+
+  public function buildLookupData() {
+
+    $currency = new Currency;
+    $string = new String;
+    $cache = new Cache;
+    $url = new url;
+
+    $image = $this->getRelatedData('Image',array(
+      'first' => true
+    ));
+
+    $_imageUrl = '/images/common/no-img.png';
+    if(!empty($image)) {
+      $_imageUrl = $cache->getCacheImageUrl($image,'list');
+    }
+
+    return array(
+      // 'name' => $this->name,
+      '_short_name' => $string->subString($this->name,90),
+      '_short_description' => $string->subString($this->description,250),
+      '_price' => $currency->format($this->price),
+      '_imageUrl' => $_imageUrl,
+      '_detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id' => $this->id)),
+    );
 
   }
 

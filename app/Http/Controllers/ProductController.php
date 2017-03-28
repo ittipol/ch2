@@ -15,12 +15,6 @@ class ProductController extends Controller
   public function __construct() { 
     parent::__construct();
   }
-// ข้อความถึงผู้ขาย:
-  // การรับประกันสินค้า
-
-  // wholesale
-  // ราคา
-  // กำหนดช่วงราคา
 
   private function _save($model,$attributes = array()) {
 
@@ -42,6 +36,8 @@ class ProductController extends Controller
       $page = $this->query['page'];
     }
 
+    // join with category table
+
     $model->paginator->criteria(array(
       // 'fields' => array('products.*')
       'order' => array('created_at','DESC')
@@ -51,6 +47,8 @@ class ProductController extends Controller
     $model->paginator->setUrl('product/detail/{id}','detailUrl');
 
     $this->data = $model->paginator->build();
+
+    $this->setData('categories',Service::loadModel('Category')->getCategories(1));
 
     return $this->view('pages.product.list');
 

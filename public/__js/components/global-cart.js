@@ -95,8 +95,8 @@ class GlobalCart {
 	    	// update in cart page
 	    	$('#_product_'+productId).find('.product-total-amount').text(response.productTotal);
 	    	$('#_product_'+productId).find('.product-shipping-cost-amount').text(response.shippingCostTotal);
-	    	$('#_product_'+productId).find('.error-message').remove();
-
+	    	$('#_product_'+productId).find('.product-error-message').remove();
+console.log('xxxx');
 	    	let parent = $('#_product_'+productId).parent().parent();
 
 	    	parent.find('.sub-total').find('.amount').text(response.summaries.subTotal.value);

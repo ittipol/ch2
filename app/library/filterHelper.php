@@ -14,7 +14,7 @@ class FilterHelper {
       'title' => 'แสดงข้อมูล',
       'options' => array(
         array(
-          'name' => 'ร้านค้า',
+          'name' => 'บริษัทและร้านค้า',
           'value' => 'model:shop',
         ),
         array(

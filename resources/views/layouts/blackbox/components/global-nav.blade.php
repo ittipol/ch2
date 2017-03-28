@@ -44,6 +44,7 @@
             <div class="dot"></div>
             <div class="additional-option-content">
               <a href="{{URL::to('account/profile_edit')}}">แก้ไขโปรไฟล์</a>
+              <a href="{{URL::to('account/order')}}">รายการสั่งซื้อสินค้า</a>
               <a href="{{URL::to('logout')}}">ออกจากระบบ</a>
             </div>
           </div>

@@ -1,7 +1,7 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<div class="container">
+<div class="container search">
 
   <?php 
     echo Form::open(['id' => 'search_form','method' => 'get', 'enctype' => 'multipart/form-data']);
@@ -16,9 +16,9 @@
     </div>
   </div>
 
-  <div id="filters" class="right-size-panel filter">
+  <div id="filter_expand_panel" class="right-size-panel filter">
     <div class="right-size-panel-inner">
-      @include('components.search_filter')
+      @include('components.filter_expand_panel')
       <div class="right-size-panel-close-icon"></div>
     </div>
   </div>
@@ -32,7 +32,6 @@
     @foreach($displayingFilters['filters'] as $filters)
 
       <h4>{{$filters['title']}}</h4>
-      <!-- <div class="line"></div> -->
 
       @foreach($filters['display'] as $display)
         <div class="filter-tag">{{$display}}</div>
@@ -41,13 +40,12 @@
     @endforeach
 
     <h4>จัดเรียงตาม</h4>
-    <!-- <div class="line"></div> -->
     <div class="filter-tag">{{$displayingFilters['sort']}}</div>
 
   </div>
 
   <div class="text-right space-top-20">
-    <a class="button" data-right-side-panel="1" data-right-side-panel-target="#filters">
+    <a class="button" data-right-side-panel="1" data-right-side-panel-target="#filter_expand_panel">
       ตัวกรอง
     </a>
   </div>
@@ -90,7 +88,7 @@
                   @endif
 
                   @if(!empty($data['_price']))
-                  <div class="card-sub-info">{{$data['_price']}}</div>
+                  <div class="card-sub-info price">{{$data['_price']}}</div>
                   @endif
                 </div>
 

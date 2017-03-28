@@ -256,6 +256,7 @@ class Paginator {
     $filterHelper = new FilterHelper;
 
     $offset = ($this->page - 1)  * $this->perPage;
+    $this->getLastPage();
 
     $model = $this->model->newInstance()
     ->join('data_access_permissions',function($join) {
@@ -281,7 +282,7 @@ class Paginator {
     $data = array();
     foreach ($records as $record) {
 
-      $_data = array();
+      // $_data = array();
       // if($this->getImage) {
 
       //   $image = $record->getRelatedData('Image',array(
@@ -296,7 +297,7 @@ class Paginator {
       // }
 
       $data[] = array_merge(
-        $_data,
+        // $_data,
         $record->buildPaginationData(),
         $this->parseUrl($record->getRecordForParseUrl())
       );
@@ -307,61 +308,6 @@ class Paginator {
 
 
   }
-
-  // public function getLookupPaginationData() {
-
-  //   $cache = new Cache;
-
-  //   $offset = ($this->page - 1)  * $this->perPage;
-
-  //   $model = $this->model->newInstance()
-  //   ->join('data_access_permissions',function($join) {
-  //     $join->on('data_access_permissions.model_id', '=', $this->model->getTable().'.model_id')
-  //          ->on('data_access_permissions.model', '=',$this->model->getTable().'.model');
-  //   })
-  //   ->join('access_levels', 'access_levels.level', '=', 'data_access_permissions.access_level')
-  //   ->where(function ($query) {
-  //     $query = $this->getAccessPermision($query);
-  //   });
-
-  //   $model = $this->condition($model);
-  //   // $model = $this->query($model);
-  //   // $model = $this->filter($model);
-  //   $model = $this->order($model);
-
-  //   $records = $model
-  //   ->take($this->perPage)
-  //   ->skip($offset)
-  //   ->get();
-
-  //   $data = array();
-  //   foreach ($records as $record) {
-
-  //     $_data = array();
-  //     if($this->getImage) {
-
-  //       $image = $record->getRelatedData('Image',array(
-  //         'first' => true
-  //       ));
-
-  //       $_data['_imageUrl'] = '/images/common/no-img.png';
-  //       if(!empty($image)) {
-  //         $_data['_imageUrl'] = $cache->getCacheImageUrl($image,'list');
-  //       }
-
-  //     }
-
-  //     $data[] = array_merge(
-  //       $_data,
-  //       $record->buildPaginationData(),
-  //       $this->parseUrl($record->getRecordForParseUrl())
-  //     );
-
-  //   }
-
-  //   return $data;
-
-  // }
 
   public function getAccessPermision($query) {
 
