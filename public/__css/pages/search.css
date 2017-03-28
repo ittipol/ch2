@@ -23,7 +23,6 @@ input[type="text"].search-box:focus {
 	top: 10px;
 	right: 0;
 	height: 55px;
-  /*display: inline-block;*/
   border: none;
   outline: none;
   background-color: #fff;
@@ -43,4 +42,16 @@ input[type="text"].search-box:focus {
 .search-results .not-found-image {
 	width: 250px;
 	height: 250px;
+}
+
+.displaying-filters {
+
+}
+
+.displaying-filters .filter-tag {
+	padding: 8px 12px;
+	color: #fff;
+	background-color: #009688;
+	display: inline-block;
+	margin-bottom: 5px;
 }

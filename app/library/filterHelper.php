@@ -9,6 +9,38 @@ class FilterHelper {
   private $sort;
   private $criteria = array();
 
+  private $filterOptions = array(
+    'model' => array(
+      'title' => 'แสดงข้อมูล',
+      'options' => array(
+        array(
+          'name' => 'ร้านค้า',
+          'value' => 'model:shop',
+        ),
+        array(
+          'name' => 'สินค้าในร้านค้า',
+          'value' => 'model:product',
+        ),
+        array(
+          'name' => 'ประกาศงาน',
+          'value' => 'model:job',
+        ),
+        array(
+          'name' => 'โฆษณาจากร้านค้า',
+          'value' => 'model:advertising',
+        ),
+        array(
+          'name' => 'ประกาศซื้อ-เช่า-ขายสินค้า',
+          'value' => 'model:item',
+        ),
+        array(
+          'name' => 'ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์',
+          'value' => 'model:real_estate',
+        )
+      )
+    )
+  );
+
   public function setSearchQuery($searchQuery) {
     $this->searchQuery = $searchQuery;
   }
@@ -98,10 +130,6 @@ class FilterHelper {
       $query['or'] = $or;
     }
 
-    $query = array_merge($query,array(
-      array('lookups.active','=',1)
-    ));
-
     return $query;
 
   }
@@ -133,7 +161,7 @@ class FilterHelper {
       
       switch ($alias) {
         case 'model':
-            $_filters['lookups.model'][] = $string->generateModelNameWithoutUnderScore($value);
+            $_filters['lookups.model'][] = $string->generateModelNameCamelCase($value);
           break;
       }
 
@@ -191,9 +219,9 @@ class FilterHelper {
         $ids[] = $value->id;
       }
 
-      $orderBy['orderByRaw'] = 'FIELD(lookups.id, '.implode(' ,', $ids).') DESC, lookups.'.$sortingField.' '.strtoupper($order);
+      $orderBy['orderByRaw'] = 'FIELD(lookups.id, '.implode(' ,', $ids).') desc, lookups.'.$sortingField.' '.strtolower($order);
     }else{
-      $orderBy['order'] = array('lookups.'.$sortingField,strtoupper($order));
+      $orderBy['order'] = array('lookups.'.$sortingField,strtolower($order));
     }
 
     return $orderBy;
@@ -210,11 +238,18 @@ class FilterHelper {
 
   }
 
+  public function filterValueValidation($value) {
+    if(preg_match('/^\w+:\w+$/', $value)) {
+      return true;
+    }
+    return false;
+  }
+
   public function setCriteria($model,$criteria) {
     
-    foreach ($criteria as $alias => $value) {
+    foreach ($criteria as $key => $value) {
       
-      // switch ($alias) {
+      // switch ($key) {
       //   case 'query':
       //       $model = $this->setCondition($model,$value);
       //     break;
@@ -228,6 +263,10 @@ class FilterHelper {
       //     break;
       // }
 
+      if($key === 'order') {
+        continue;
+      }
+
       $model = $this->setCondition($model,$value);
 
     }
@@ -237,70 +276,81 @@ class FilterHelper {
   }
 
   public function setCondition($model,$conditions) {
-    return $this->_setCondition($model,$conditions);
+
+    if(count($conditions) == 1) {
+      $model = $this->_setCondition($model,$conditions);
+    }else{
+      $model->where(function ($_query) use($conditions) {
+        $_query = $this->_setCondition($_query,$conditions);
+      });
+    }
+
+    return $model;
+
   }
 
-  private function _setCondition($model,$conditions) {
+  private function _setCondition($model,$conditions,$operator = 'and') {
+
+    if(empty($conditions)) {
+      return $model;
+    }
 
     $query = $model;
 
-    foreach ($conditions as $operator => $value) {
+    foreach ($conditions as $_operator => $value) {
 
-      if($operator === 'or') {
-
-        if(!empty(next($value) && !is_array(current($value)))) {
-          $query->orWhere(
-            prev($value),
-            next($value),
-            next($value)
-          );
-        }else{
-          $query->orWhere(function ($_query) use($value) {
-            $_query = $this->setCondition($_query,$value);
-          });
-        }
-
-      }elseif($operator === 'in') {
+      if($_operator === 'in') {
 
         if(is_array(current($value))) {
           
           foreach ($value as $_value) {
-            $model = $model->whereIn(current($_value),next($_value));
+
+            if($operator === 'and') {
+              $query->whereIn(current($_value),next($_value));
+            }else{
+              $query->orWhere(function ($_query) use($_value) {
+                $_query->whereIn(current($_value),next($_value));
+              });
+            }
+
           }
 
         }else{
-          $query->whereIn(current($value),next($value));
-        }
 
-      }elseif($operator === 'order') {
-
-        if(is_array(current($value))) {
-
-          foreach ($value as $value) {
-            $model->orderBy(current($value),next($value));
+          if($operator === 'and') {
+            $query->whereIn(current($value),next($value));
+          }else{
+            $query->orWhere(function ($_query) use($value) {
+              $_query->whereIn(current($value),next($value));
+            });
           }
 
-        }else{
-          $model->orderBy(current($value),next($value));
         }
 
-      }elseif($operator === 'orderByRaw') {
+      }elseif(!empty(next($value) && !is_array(current($value)))) {
 
-        $model->orderByRaw($value);
+        if($operator === 'and') {
+          $query->where(prev($value),next($value),next($value));
+        }elseif($operator === 'or') {
+          $query->orWhere(prev($value),next($value),next($value));
+        }
 
-      }else { // AND
+      }else{
 
-        if(!empty(next($value) && !is_array(current($value)))) {
-          $query->where(
-            prev($value),
-            next($value),
-            next($value)
-          );
-        }else{
-          $query->where(function ($_query) use($value) {
-            $_query = $this->setCondition($_query,$value);
+        if(($_operator !== 'and') && ($_operator !== 'or')) {
+          $_operator = 'and';
+        }
+
+        if($operator === 'and') {
+          $query->where(function ($_query) use($value,$_operator) {
+            $_query = $this->_setCondition($_query,$value,$_operator);
+          });
+        }elseif($operator === 'or') {
+          $query->orWhere(function ($_query) use($value,$_operator) {
+            $_query = $this->_setCondition($_query,$value,$_operator);
           });
         }
+
       }
 
     }
@@ -309,20 +359,250 @@ class FilterHelper {
 
   }
 
-  public function filterValueValidation($value) {
-    if(preg_match('/^\w+:\w+$/', $value)) {
-      return true;
+  // private function _setCondition($model,$conditions) {
+
+  //   if(empty($conditions)) {
+  //     return $model;
+  //   }
+
+  //   $query = $model;
+
+  //   foreach ($conditions as $operator => $value) {
+
+  //     if($operator === 'or') {
+
+  //       if(!empty(next($value) && !is_array(current($value)))) {
+  //         $query->orWhere(
+  //           prev($value),
+  //           next($value),
+  //           next($value)
+  //         );
+  //       }else{
+  //         $query->orWhere(function ($_query) use($value) {
+  //           $_query = $this->_setCondition($_query,$value);
+  //         });
+  //       }
+
+  //     }elseif($operator === 'in') {
+
+  //       if(is_array(current($value))) {
+          
+  //         foreach ($value as $_value) {
+  //           $model = $model->whereIn(current($_value),next($_value));
+  //         }
+
+  //       }else{
+  //         $query->whereIn(current($value),next($value));
+  //       }
+
+  //     }else { // AND
+
+  //       if(!empty(next($value) && !is_array(current($value)))) {
+  //         $query->where(
+  //           prev($value),
+  //           next($value),
+  //           next($value)
+  //         );
+  //       }else{
+  //         $query->where(function ($_query) use($value) {
+  //           $_query = $this->_setCondition($_query,$value);
+  //         });
+  //       }
+  //     }
+
+  //   }
+
+  //   return $query;
+
+  // }
+
+  public function setOrder($model,$criteria) {
+
+    if(empty($criteria['order'])) {
+      return $model;
     }
-    return false;
+
+    $key = key($criteria['order']);
+    $value = $criteria['order'];
+
+    if($key === 'order') {
+
+      if(is_array(current($value))) {
+
+        foreach ($value as $value) {
+          $model->orderBy(current($value),next($value));
+        }
+
+      }else{
+        $model->orderBy(current($value),next($value));
+      }
+
+    }elseif($key === 'orderByRaw') {
+
+      $model->orderByRaw($value);
+
+    }
+
+    return $model;  
+
   }
 
-  public function getSortingFields($fields) {
+  public function getFilterOptions($filters) {
 
-    foreach ($fields as $field) {
-      // ASC
-
-      // DESC
+    if(!empty($filters)) {
+      $filters = explode(',', $filters);
+    }else {
+      $filters = null;
     }
+
+    $_filterOptions = array();
+    foreach ($this->filterOptions as $key => $filter) {
+
+      $_filterOptions[$key]['title'] = $filter['title'];
+
+      foreach ($filter['options'] as $option) {
+
+        $select = true;
+        if(!empty($filters)) {
+          $select = in_array($option['value'], $filters);
+        }
+
+        $_filterOptions[$key]['options'][] = array(
+          'name' => $option['name'],
+          'value' => $option['value'],
+          'select' => $select
+        ); 
+      }
+
+    }
+
+    return $_filterOptions;
+
+  }
+
+  public function getSortingOptions($fields,$sort = null) {
+
+    $orders = array(
+      'asc',
+      'desc'
+    );
+
+    $sortingOptions = array();
+    foreach ($fields as $field) {
+
+      foreach ($orders as $order) {
+
+        $value = $field.':'.$order;
+
+        $select = false;
+        if($sort == $value){
+          $select = true;
+        }
+   
+        $sortingOptions[] = array(
+          'name' => $this->getsortiongOptionName($field,$order),
+          'value' => $value,
+          'select' => $select
+        );
+
+      } 
+
+    }
+
+    return $sortingOptions;
+
+  }
+
+  private function getsortiongOptionName($field, $order) {
+
+    $name = '';
+
+    switch ($field) {
+      case 'name':
+        
+          if($order == 'asc') {
+            $name = 'ตัวอักษร A - Z ก - ฮ';
+          }else{
+            $name = 'ตัวอักษร Z - A ฮ - ก';
+          }
+
+        break;
+      
+      case 'created_at':
+        
+          if($order == 'asc') {
+            $name = 'วันที่เก่าที่สุดไปหาใหม่ที่สุด';
+          }else{
+            $name = 'วันที่ใหม่ที่สุดไปหาเก่าที่สุด';
+          }
+
+        break;
+    }
+
+    return $name;
+
+  }
+
+  public function getDisplayingFilterOptions($filters) {
+
+    if(!empty($filters)) {
+      $filters = explode(',', $filters);
+    }else {
+      $filters = null;
+    }
+
+    $_displayingfilterOptions = array();
+    foreach ($this->filterOptions as $key => $filter) {
+
+      $_displayingfilterOptions[$key]['title'] = $filter['title'];
+
+      foreach ($filter['options'] as $option) {
+
+        $select = true;
+        if(!empty($filters)) {
+          $select = in_array($option['value'], $filters);
+        }
+
+        if($select) {
+          $_displayingfilterOptions[$key]['display'][] = $option['name'];
+        }
+
+      }
+
+    }
+
+    return $_displayingfilterOptions;
+
+  }
+
+  public function getDisplayingSorting($fields,$sort = null) {
+
+    $orders = array(
+      'asc',
+      'desc'
+    );
+
+    $displayingSorting = '';
+    foreach ($fields as $field) {
+
+      foreach ($orders as $order) {
+
+        $value = $field.':'.$order;
+
+        if($sort == $value){
+          $displayingSorting = $this->getsortiongOptionName($field,$order);
+          break;
+        }
+
+      }
+
+      if(!empty($displayingSorting)) {
+        break;
+      }
+
+    }
+
+    return $displayingSorting;
 
   }
 

@@ -13,7 +13,7 @@ class Paginator {
   private $page = 1;
   private $lastPage;
   private $perPage = 24;
-  private $count;
+  private $count = 0;
   private $pagingUrl;
   private $urls = array();
   private $url;
@@ -28,6 +28,11 @@ class Paginator {
   }
 
   public function setQuery($name,$value) {
+
+    if(empty($value)) {
+      return false;
+    }
+
     $this->queries[$name] = $value;
   }
 
@@ -169,6 +174,10 @@ class Paginator {
 
   public function order($model) {
 
+    if(empty($this->criteriaData['order'])) {
+      return $model;
+    }
+
     if(is_array(current($this->criteriaData['order']))) {
 
       foreach ($this->criteriaData['order'] as $value) {
@@ -256,11 +265,46 @@ class Paginator {
     ->join('access_levels', 'access_levels.level', '=', 'data_access_permissions.access_level')
     ->where(function ($query) {
       $query = $this->getAccessPermision($query);
-    });
+    })
+    ->where('lookups.active','=',1)
+    ->select('lookups.*');
 
     $model = $filterHelper->setCriteria($model,$criteria);
+    $this->count = $model->count('lookups.id');
+    $model = $filterHelper->setOrder($model,$criteria);
 
-    dd('sdfe');
+    $records = $model
+    ->take($this->perPage)
+    ->skip($offset)
+    ->get();
+
+    $data = array();
+    foreach ($records as $record) {
+
+      $_data = array();
+      // if($this->getImage) {
+
+      //   $image = $record->getRelatedData('Image',array(
+      //     'first' => true
+      //   ));
+
+      //   $_data['_imageUrl'] = '/images/common/no-img.png';
+      //   if(!empty($image)) {
+      //     $_data['_imageUrl'] = $cache->getCacheImageUrl($image,'list');
+      //   }
+
+      // }
+
+      $data[] = array_merge(
+        $_data,
+        $record->buildPaginationData(),
+        $this->parseUrl($record->getRecordForParseUrl())
+      );
+
+    }
+
+    return $data;
+
 
   }
 
@@ -407,7 +451,7 @@ class Paginator {
 
     $this->setQuery('page','{n}');
     $pagingUrl = $this->parseQuery();
-    
+   
     $next['url'] = str_replace('{n}', $this->page+1, $pagingUrl);
     if(($this->page + 1) > $this->lastPage) {
       $next['url'] = null;

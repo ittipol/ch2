@@ -37,7 +37,7 @@ class String
 
   }
 
-  public function generateModelNameWithoutUnderScore($modelName) {
+  public function generateModelNameCamelCase($modelName) {
 
     $parts = explode('_', $modelName);
 

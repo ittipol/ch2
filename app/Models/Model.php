@@ -251,7 +251,7 @@ class Model extends BaseModel
 
   public function getData($options = array()) {
 
-    $model = $this;
+    $model = $this->newInstance();
 
     if(!empty($options['joins'])) {
 
@@ -281,7 +281,7 @@ class Model extends BaseModel
         // }
 
         // $model = $model->whereIn($condition[0],$condition[1]);
-        $model->whereIn(current($condition),next($condition));
+        $model = $model->whereIn(current($condition),next($condition));
       }
 
       unset($options['conditions']['in']);
@@ -292,7 +292,7 @@ class Model extends BaseModel
 
       $conditions = $criteria['conditions']['or'];
 
-      $model->where(function($query) use($conditions) {
+      $model = $model->where(function($query) use($conditions) {
 
         foreach ($conditions as $condition) {
           $query->orWhere(
@@ -309,7 +309,7 @@ class Model extends BaseModel
     }
 
     if(!empty($options['conditions'])){
-      $model->where($options['conditions']);
+      $model = $model->where($options['conditions']);
     }
 
     if(!$model->exists()) {
@@ -317,7 +317,7 @@ class Model extends BaseModel
     }
 
     if(!empty($options['fields'])){
-      $model->select($options['fields']);
+      $model = $model->select($options['fields']);
     }
 
     if(!empty($options['order'])){
@@ -325,11 +325,11 @@ class Model extends BaseModel
       if(is_array(current($options['order']))) {
 
         foreach ($options['order'] as $value) {
-          $model->orderBy($value[0],$value[1]);
+          $model = $model->orderBy($value[0],$value[1]);
         }
 
       }else{
-        $model->orderBy(current($options['order']),next($options['order']));
+        $model = $model->orderBy(current($options['order']),next($options['order']));
       }
       
     }

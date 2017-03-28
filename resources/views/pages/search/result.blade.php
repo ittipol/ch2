@@ -27,6 +27,25 @@
     echo Form::close();
   ?>
 
+  <div class="displaying-filters">
+
+    @foreach($displayingFilters['filters'] as $filters)
+
+      <h4>{{$filters['title']}}</h4>
+      <!-- <div class="line"></div> -->
+
+      @foreach($filters['display'] as $display)
+        <div class="filter-tag">{{$display}}</div>
+      @endforeach
+
+    @endforeach
+
+    <h4>จัดเรียงตาม</h4>
+    <!-- <div class="line"></div> -->
+    <div class="filter-tag">{{$displayingFilters['sort']}}</div>
+
+  </div>
+
   <div class="text-right space-top-20">
     <a class="button" data-right-side-panel="1" data-right-side-panel-target="#filters">
       ตัวกรอง
@@ -129,7 +148,7 @@
       $('#search_form').on('submit',function(){
 
         $('.filter-model:checked').each(function(i, obj) {
-            filters.push('model:'+$(this).val());
+            filters.push($(this).val());
         });
 
         var input = document.createElement('input');
@@ -138,7 +157,7 @@
         input.setAttribute('value', filters.join());
 
         this.appendChild(input);
- 
+
       });
 
     }

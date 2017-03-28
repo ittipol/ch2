@@ -26,7 +26,7 @@ class SearchController extends Controller
       $q = trim($this->query['search_query']);
     }
 
-    $filters = array();
+    $filters = '';
     if(!empty($this->query['fq'])) {
       $filters = $this->query['fq'];
     }
@@ -48,7 +48,9 @@ class SearchController extends Controller
       $lookup->paginator->setPage($page);
       $lookup->paginator->setPerPage(20);
       $lookup->paginator->setPagingUrl('search');
-      // $lookup->paginator->setQuery('search_query',$q);
+      $lookup->paginator->setQuery('search_query',$q);
+      $lookup->paginator->setQuery('sort',$sort);
+      $lookup->paginator->setQuery('fq',$filters);
 
       $this->setData('results',$lookup->paginator->search($filterHelper->buildCriteria()));
       $this->setData('_pagination',array(
@@ -57,85 +59,34 @@ class SearchController extends Controller
         'next' => $lookup->paginator->next(),
         'prev' => $lookup->paginator->prev()
       ));
-      $this->setData('count',$lookup->paginator->getCount());
+      
+      $count = $lookup->paginator->getCount();
 
     }
 
     // Get Sorting Fields
-    $sortingFields = $lookup->getSortingFields();
-    dd($sortingFields);
-
-    // public $sortingFields = array('name','created_at');
-    // library filter helper
     // if model = search mean all model
     // then model = Item mean select Item automatic
 
-    // Get Filter Data
+    $sortingFields = $lookup->getSortingFields();
+
+    // Get Filter Option
     $filterOptions = array(
-      'model' => array(
-        array(
-          'name' => 'ร้านค้า',
-          'value' => 'shop',
-          'select' => true
-        ),
-        array(
-          'name' => 'สินค้าในร้านค้า',
-          'value' => 'product',
-          'select' => true
-        ),
-        array(
-          'name' => 'ประกาศงาน',
-          'value' => 'job',
-          'select' => true
-        ),
-        array(
-          'name' => 'โฆษณาจากร้านค้า',
-          'value' => 'advertising',
-          'select' => true
-        ),
-        array(
-          'name' => 'ประกาศซื้อ-เช่า-ขายสินค้า',
-          'value' => 'item',
-          'select' => true
-        ),
-        array(
-          'name' => 'ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์',
-          'value' => 'real_estate',
-          'select' => true
-        )
-      ),
-      'sort' => array(
-        array(
-          'name' => 'ตัวอักษร A - Z ก - ฮ',
-          'value' => 'name:asc',
-          'select' => true
-        ),
-        array(
-          'name' => 'ตัวอักษร Z - A ฮ - ก',
-          'value' => 'name:desc',
-          'select' => false
-        ),
-        array(
-          'name' => 'วันที่เก่าที่สุดไปหาใหม่ที่สุด',
-          'value' => 'created_at:asc',
-          'select' => false
-        ),
-        array(
-          'name' => 'วันที่ใหม่ที่สุดไปหาเก่าที่สุด',
-          'value' => 'created_at:desc',
-          'select' => false
-        )
-      )
+      'filters' => $filterHelper->getFilterOptions($filters),
+      'sort' => $filterHelper->getSortingOptions($sortingFields,$sort)
     );
 
-    foreach ($filterOptions['sort'] as $sort) {
-      # code...
-    }
+    // Get Filter Name
+    $displayingFilters = array(
+      'filters' => $filterHelper->getDisplayingFilterOptions($filters),
+      'sort' => $filterHelper->getDisplayingSorting($sortingFields,$sort)
+    );
 
     $this->setData('q',$q);
-    $this->setData('filters',$filterOptions);
-    // $this->setData('count',0);
-
+    $this->setData('count',$lookup->paginator->getCount());
+    $this->setData('filterOptions',$filterOptions);
+    $this->setData('displayingFilters',$displayingFilters);
+    // dd($displayingFilters);
     return $this->view('pages.search.result');
 
   }

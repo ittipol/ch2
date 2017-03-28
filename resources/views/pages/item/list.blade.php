@@ -21,10 +21,18 @@
                 <div class="card-title">{{$data['_short_name']}}</div>
               </a>
               <div class="card-sub-info">
-                <h5>ราคา</h5>
-                {{$data['_price']}}
+                <span class="product-price">{{$data['_price']}}</span>
               </div>
             </div>
+
+            <div class="button-group">
+
+              <a href="{{$data['detailUrl']}}">
+                <div class="button wide-button">รายละเอียดสินค้า</div>
+              </a>
+            
+            </div>
+            
           </div>
         </div>
 
