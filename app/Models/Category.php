@@ -11,6 +11,11 @@ class Category extends Model
   public $timestamps  = false;
 
   public function getCategoryName($id) {
+
+    if(empty($id)) {
+      return null;
+    }
+
     return $this->find($id)->name;
   }
 
@@ -24,7 +29,7 @@ class Category extends Model
     foreach ($categories as $category) {
       $_categories[] = array(
         'name' => $category->name,
-        'url' => $url->setAndParseUrl('product/list?category={id}',array('id' => $category->id)),
+        'url' => $url->setAndParseUrl('product/category:{id}',array('id' => $category->id)),
       );
     }
 

@@ -3,7 +3,8 @@
 
 <div class="container list">
 
-  <h3>{{$categoryName}}</h3>
+  <h3>{{$title}}</h3>
+
   <a href="">แสดงประเททสินค้า</a>
   <!-- <div id="filter_expand_panel" class="right-size-panel filter">
     <div class="right-size-panel-inner">
@@ -20,15 +21,40 @@
 
   <div class="display-category-button">แสดงประเททสินค้า</div>
 
-  <div class="row">
-    <div class="category-list">
-      @foreach($categories as $category)
-      <div class="col-md-4 col-xs-12">
-        <div class="category-item">
-          <a href="{{$category['url']}}">{{$category['name']}}</a>
+  <div class="category-list-extend-panel">
+    <div class="nano">
+      <div class="category-list-extend-panel-inner nano-content">
+
+        <div>
+
+          <h4>ประเภทสินค้า</h4>
+
+          <div class="button-group">
+
+            <div class="additional-option">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="additional-option-content">
+                <a href="">แสดงสินค้านี้</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+
+        <div class="row">
+          @foreach($categories as $category)
+          <div class="col-xs-12">
+            <a href="{{$category['url']}}">
+              <div class="category-item">
+                {{$category['name']}}
+              </div>
+            </a>
+          </div>
+          @endforeach
         </div>
       </div>
-      @endforeach
     </div>
   </div>
 

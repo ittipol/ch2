@@ -36,21 +36,46 @@ class ProductController extends Controller
       $page = $this->query['page'];
     }
 
+    $categoryId = null;
+    if(!empty($this->param['category_id'])) {
+      $categoryId = $this->param['category_id'];
+    }
+
+    $categoryPaths = Service::loadModel('CategoryPath')->where('path_id','=',$categoryId)->get();
+
+    $ids = array();
+    foreach ($categoryPaths as $categoryPath) {
+      $ids[] = $categoryPath->category_id;
+    }  
+
+    $conditions = array();
+
+    if(!empty($ids)) {
+      $conditions = array(
+        'in' => array('product_to_categories.category_id',$ids)
+      );
+    }
+
     $model->paginator->criteria(array(
       'joins' => array('product_to_categories', 'product_to_categories.product_id', '=', 'products.id'),
       'order' => array('created_at','DESC'),
-      'conditions' => array(
-        array('product_to_categories.category_id','=',1)
-      )
+      'conditions' => $conditions
     ));
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl('product/list');
     $model->paginator->setUrl('product/detail/{id}','detailUrl');
 
+    $categoryName = Service::loadModel('Category')->getCategoryName($categoryId);
+
+    $title = 'สินค้าทั้งหมด';
+    if(!empty($categoryName)) {
+      $title = $categoryName;
+    }
+
     $this->data = $model->paginator->build();
 
-    $this->setData('categoryName',Service::loadModel('Category')->getCategoryName(1));
-    $this->setData('categories',Service::loadModel('Category')->getCategories(1));
+    $this->setData('title',$title);
+    $this->setData('categories',Service::loadModel('Category')->getCategories($categoryId));
 
     return $this->view('pages.product.list');
 

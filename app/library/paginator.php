@@ -121,13 +121,19 @@ class Paginator {
 
     if(!empty($criteria['conditions']['in'])) {
 
-      foreach ($criteria['conditions']['in'] as $condition) {
+      if(is_array(current($criteria['conditions']['in']))) {
 
-        if(empty($condition[1])) {
-          continue;
+        foreach ($criteria['conditions']['in'] as $condition) {
+
+          if(empty($condition[1])) {
+            continue;
+          }
+
+          $model = $model->whereIn($condition[0],$condition[1]);
         }
 
-        $model = $model->whereIn($condition[0],$condition[1]);
+      }else {
+        $model = $model->whereIn(current($criteria['conditions']['in']),next($criteria['conditions']['in']));
       }
 
       unset($criteria['conditions']['in']);

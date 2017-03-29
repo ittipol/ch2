@@ -156,6 +156,7 @@ class AppServiceProvider extends ServiceProvider
 
       view()->composer('layouts.blackbox.components.global-header', function($view){
         $view->with('_product_total',Service::loadModel('Cart')->productCount());
+        // notification count
       });
 
       view()->composer('layouts.blackbox.components.global-cart', function($view){

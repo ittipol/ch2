@@ -25,7 +25,7 @@ class PushNotification {
 		let _this = this;
 
 		setInterval(function(){
-			_this.socket.emit('check-notification', { room: this.channel, message: 'check_notifications' });
+			_this.socket.emit('check-notification', { room: _this.channel, person: _this.person, token: _this.token });
 		},6000);
 
 	}

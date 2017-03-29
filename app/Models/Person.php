@@ -7,7 +7,7 @@ use App\library\date;
 class Person extends Model
 {
   protected $table = 'people';
-  protected $fillable = ['user_id','name','gender','birth_date','profile_image_id','cover_image_id','theme'];
+  protected $fillable = ['user_id','name','gender','birth_date','profile_image_id','cover_image_id','theme','token'];
   protected $modelRelations = array('Image','Address','Contact');
 
   public $formHelper = true;

@@ -54,19 +54,20 @@ class UserController extends Controller
 
     if(Auth::attempt($data)){
 
+      // Ger person
+      $person = Person::select(array('id','name','profile_image_id','theme'))->find(Auth::user()->id);
+
       // Update Token
       // User for pushing notification
-      // send user id and token to check user
-      Auth::user()->token = Token::generate();
-      Auth::user()->save();
+      $person->token = Token::generate();
+      $person->save();
 
       // Store data
-      $person = Person::select(array('id','name','profile_image_id','theme'))->find(Auth::user()->id);
       Session::put('Person.id',$person->id);
       Session::put('Person.name',$person->name);
       Session::put('Person.theme',$person->theme);
       Session::put('Person.profile_image',$person->getProfileImageUrl());
-      Session::put('User.token',Auth::user()->token);
+      Session::put('Person.token',$person->token);
       // Session::put('Person.pageAccessLevel',{1-4});
 
       // Update cart
