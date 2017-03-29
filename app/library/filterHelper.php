@@ -2,44 +2,19 @@
 
 namespace App\library;
 
+use Schema;
+
 class FilterHelper {
 
   private $searchQuery;
   private $filters;
   private $sort;
   private $criteria = array();
+  private $model;
 
-  private $filterOptions = array(
-    'model' => array(
-      'title' => 'แสดงข้อมูล',
-      'options' => array(
-        array(
-          'name' => 'บริษัทและร้านค้า',
-          'value' => 'model:shop',
-        ),
-        array(
-          'name' => 'สินค้าในร้านค้า',
-          'value' => 'model:product',
-        ),
-        array(
-          'name' => 'ประกาศงาน',
-          'value' => 'model:job',
-        ),
-        array(
-          'name' => 'โฆษณาจากร้านค้า',
-          'value' => 'model:advertising',
-        ),
-        array(
-          'name' => 'ประกาศซื้อ-เช่า-ขายสินค้า',
-          'value' => 'model:item',
-        ),
-        array(
-          'name' => 'ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์',
-          'value' => 'model:real_estate',
-        )
-      )
-    )
-  );
+  public function __construct($model = null) {
+    $this->model = $model;
+  }
 
   public function setSearchQuery($searchQuery) {
     $this->searchQuery = $searchQuery;
@@ -51,6 +26,10 @@ class FilterHelper {
 
   public function setSorting($sort) {
     $this->sort = $sort;
+  }
+
+  public function setCriteria($criteria) {
+    $this->criteria = $criteria;
   }
 
   public function buildSearchQuery($q = null) {
@@ -135,14 +114,17 @@ class FilterHelper {
   }
 
   public function buildFilters($filters = array()) {
+// model:shop,model:product,model:job,used:0
 
     if(empty($filters) && !empty($this->filters)) {
       $filters = $this->filters;
     }elseif(empty($filters)) {
+      // Get Default
+      // dd('get Default');
       return null;
     }
 
-    $string = new String;
+    // $string = new String;
 
     $filters = explode(',', $filters);
 
@@ -157,25 +139,31 @@ class FilterHelper {
         continue;
       }
 
-      list($alias,$value) = explode(':', $filter);
-      
-      switch ($alias) {
-        case 'model':
-            $_filters['lookups.model'][] = $string->generateModelNameCamelCase($value);
-          break;
+      list($field,$value) = explode(':', $filter);
+
+      if(!Schema::hasColumn($this->model->getTable(), $field)) {
+        continue;
       }
+
+      // if(!empty($this->table)) {
+      //   $field = $this->model->getTable().'.'.$field;
+      // }
+
+      $_filters[$this->model->getTable().'.'.$field][] = $value;
 
     }
 
     $filters = array();
     if(!empty($_filters)) {
-      foreach ($_filters as $alias => $filter) {
+      foreach ($_filters as $field => $filter) {
 
-        switch ($alias) {
-          case 'lookups.model':
-            $filters['in'][] = array($alias,$filter);
-            break;
-        }
+        // switch ($field) {
+        //   case 'lookups.model':
+        //     $filters['in'][] = array($field,$filter);
+        //     break;
+        // }
+
+        $filters['in'][] = array($field,$filter);
 
       }
     }
@@ -245,9 +233,13 @@ class FilterHelper {
     return false;
   }
 
-  public function setCriteria($model,$criteria) {
-    
-    foreach ($criteria as $key => $value) {
+  public function conditions() {
+
+    if(empty($this->model) || empty($this->criteria)) {
+      return null;
+    }
+
+    foreach ($this->criteria as $key => $value) {
       
       // switch ($key) {
       //   case 'query':
@@ -267,11 +259,11 @@ class FilterHelper {
         continue;
       }
 
-      $model = $this->setCondition($model,$value);
+      $this->model = $this->setCondition($this->model,$value);
 
     }
 
-    return $model;
+    return $this->model;
 
   }
 
@@ -416,55 +408,58 @@ class FilterHelper {
 
   // }
 
-  public function setOrder($model,$criteria) {
+  public function order() {
 
-    if(empty($criteria['order'])) {
-      return $model;
+    if(empty($this->model) || empty($this->criteria['order'])) {
+      return null;
     }
 
-    $key = key($criteria['order']);
-    $value = $criteria['order'];
+    $key = key($this->criteria['order']);
+    $value = $this->criteria['order'];
 
     if($key === 'order') {
 
       if(is_array(current($value))) {
 
         foreach ($value as $value) {
-          $model->orderBy(current($value),next($value));
+          $this->model->orderBy(current($value),next($value));
         }
 
       }else{
-        $model->orderBy(current($value),next($value));
+        $this->model->orderBy(current($value),next($value));
       }
 
     }elseif($key === 'orderByRaw') {
 
-      $model->orderByRaw($value);
+      $this->model->orderByRaw($value);
 
     }
 
-    return $model;  
+    return $this->model;  
 
   }
 
-  public function getFilterOptions($filters) {
+  public function getFilterOptions($filterOptions,$selectedfilters) {
 
-    if(!empty($filters)) {
-      $filters = explode(',', $filters);
+    if(!empty($selectedfilters)) {
+      $selectedfilters = explode(',', $selectedfilters);
     }else {
-      $filters = null;
+      $selectedfilters = array();
     }
 
     $_filterOptions = array();
-    foreach ($this->filterOptions as $key => $filter) {
+    foreach ($filterOptions as $key => $filter) {
 
       $_filterOptions[$key]['title'] = $filter['title'];
+      $_filterOptions[$key]['input'] = $filter['input'];
 
       foreach ($filter['options'] as $option) {
 
-        $select = true;
-        if(!empty($filters)) {
-          $select = in_array($option['value'], $filters);
+        $select = false;
+        if(in_array($option['value'], $selectedfilters) || (!empty($filter['default']) && in_array($option['value'], $filter['default']))) {
+          $select = true;
+        }elseif(empty($selectedfilters) && empty($filter['default'])) {
+          $select = true;
         }
 
         $_filterOptions[$key]['options'][] = array(
@@ -480,87 +475,53 @@ class FilterHelper {
 
   }
 
-  public function getSortingOptions($fields,$sort = null) {
+  public function getSortingOptions($sortingOptions,$selectedsort = null) {
 
-    $orders = array(
-      'asc',
-      'desc'
-    );
+    $_sortingOptions = array();
+    foreach ($sortingOptions as $key => $sorting) {
 
-    $sortingOptions = array();
-    foreach ($fields as $field) {
+      $_sortingOptions[$key]['title'] = $sorting['title'];
 
-      foreach ($orders as $order) {
-
-        $value = $field.':'.$order;
+      foreach ($sorting['options'] as $option) {
 
         $select = false;
-        if($sort == $value){
+        if(!empty($selectedsort) && (($selectedsort == $option['value']) || ($option['value'] == $sorting['default']))) {
           $select = true;
         }
-   
-        $sortingOptions[] = array(
-          'name' => $this->getsortiongOptionName($field,$order),
-          'value' => $value,
+
+        $_sortingOptions[$key]['options'][] = array(
+          'name' => $option['name'],
+          'value' => $option['value'],
           'select' => $select
-        );
-
-      } 
+        ); 
+      }    
 
     }
 
-    return $sortingOptions;
+    return $_sortingOptions;
 
   }
 
-  private function getsortiongOptionName($field, $order) {
+  public function getDisplayingFilterOptions($filterOptions,$selectedfilters) {
 
-    $name = '';
-
-    switch ($field) {
-      case 'name':
-        
-          if($order == 'asc') {
-            $name = 'ตัวอักษร A - Z ก - ฮ';
-          }else{
-            $name = 'ตัวอักษร Z - A ฮ - ก';
-          }
-
-        break;
-      
-      case 'created_at':
-        
-          if($order == 'asc') {
-            $name = 'วันที่เก่าที่สุดไปหาใหม่ที่สุด';
-          }else{
-            $name = 'วันที่ใหม่ที่สุดไปหาเก่าที่สุด';
-          }
-
-        break;
-    }
-
-    return $name;
-
-  }
-
-  public function getDisplayingFilterOptions($filters) {
-
-    if(!empty($filters)) {
-      $filters = explode(',', $filters);
+    if(!empty($selectedfilters)) {
+      $selectedfilters = explode(',', $selectedfilters);
     }else {
-      $filters = null;
+      $selectedfilters = array();
     }
 
     $_displayingfilterOptions = array();
-    foreach ($this->filterOptions as $key => $filter) {
+    foreach ($filterOptions as $key => $filter) {
 
       $_displayingfilterOptions[$key]['title'] = $filter['title'];
 
       foreach ($filter['options'] as $option) {
 
-        $select = true;
-        if(!empty($filters)) {
-          $select = in_array($option['value'], $filters);
+        $select = false;
+        if(in_array($option['value'], $selectedfilters) || (!empty($filter['default']) && in_array($option['value'], $filter['default']))) {
+          $select = true;
+        }elseif(empty($selectedfilters) && empty($filter['default'])) {
+          $select = true;
         }
 
         if($select) {
@@ -575,34 +536,24 @@ class FilterHelper {
 
   }
 
-  public function getDisplayingSorting($fields,$sort = null) {
+  public function getDisplayingSorting($sortingOptions,$selectedsort = null) {
 
-    $orders = array(
-      'asc',
-      'desc'
-    );
+    $displayingSorting = array();
+    $_displayingSortingOptions = array();
+    foreach ($sortingOptions as $key => $sorting) {
 
-    $displayingSorting = '';
-    foreach ($fields as $field) {
+      $_displayingSortingOptions[$key]['title'] = $sorting['title'];
 
-      foreach ($orders as $order) {
+      foreach ($sorting['options'] as $option) {
 
-        $value = $field.':'.$order;
-
-        if($sort == $value){
-          $displayingSorting = $this->getsortiongOptionName($field,$order);
-          break;
+        if(!empty($selectedsort) && ($selectedsort == $option['value'])) {
+          $_displayingSortingOptions[$key]['display'][] = $option['name'];
         }
-
-      }
-
-      if(!empty($displayingSorting)) {
-        break;
-      }
+      }    
 
     }
 
-    return $displayingSorting;
+    return $_displayingSortingOptions;
 
   }
 

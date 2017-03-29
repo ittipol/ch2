@@ -12,7 +12,77 @@ class Lookup extends Model
 
   public $paginator = true;
 
-  protected $sortingFields = array('name','created_at');
+  protected $filterOptions = array(
+    'model' => array(
+      'input' => 'checkbox',
+      'title' => 'แสดงข้อมูล',
+      'options' => array(
+        array(
+          'name' => 'บริษัทและร้านค้า',
+          'value' => 'model:shop',
+        ),
+        array(
+          'name' => 'สินค้าในร้านค้า',
+          'value' => 'model:product',
+        ),
+        array(
+          'name' => 'ประกาศงาน',
+          'value' => 'model:job',
+        ),
+        array(
+          'name' => 'โฆษณาจากร้านค้า',
+          'value' => 'model:advertising',
+        ),
+        array(
+          'name' => 'ประกาศซื้อ-เช่า-ขายสินค้า',
+          'value' => 'model:item',
+        ),
+        array(
+          'name' => 'ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์',
+          'value' => 'model:real_estate',
+        )
+      )
+    ),
+    'used' => array(
+      'input' => 'checkbox',
+      'title' => 'สภาพสินค้า',
+      'options' => array(
+        array(
+          'name' => 'สินค้าใหม่',
+          'value' => 'used:0'
+        ),
+        array(
+          'name' => 'สินค้ามือสอง',
+          'value' => 'used:1'
+        )
+      )
+    )
+  );
+
+  protected $sortingFields = array(
+    'sort' => array(
+      'title' => 'จัดเรียงตาม',
+      'options' => array(
+        array(
+          'name' => 'ตัวอักษร A - Z ก - ฮ',
+          'value' => 'name:asc'
+        ),
+        array(
+          'name' => 'ตัวอักษร Z - A ฮ - ก',
+          'value' => 'name:desc'
+        ),
+        array(
+          'name' => 'วันที่เก่าที่สุดไปหาใหม่ที่สุด',
+          'value' => 'created_at:asc'
+        ),
+        array(
+          'name' => 'วันที่ใหม่ที่สุดไปหาเก่าที่สุด',
+          'value' => 'created_at:desc'
+        ),
+      ),
+      'default' => 'created_at:desc'
+    )
+  );
 
   //  Lookup Special Format
   // 'keyword' => '{{Department.name|Company.id=>CompanyHasDepartment.company_id,CompanyHasDepartment.department_id=>Department.id}}',

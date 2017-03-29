@@ -21,6 +21,7 @@ class Model extends BaseModel
   protected $state = 'create';
   protected $modelRelations = array();
   protected $modelRelationData = array();
+  protected $filterOptions = array();
   protected $sortingFields = array();
   protected $behavior;
   protected $validation;
@@ -574,6 +575,10 @@ class Model extends BaseModel
 
   public function getImageCache() {
       return $this->imageCache;
+  }
+
+  public function getFilterOptions() {
+      return $this->filterOptions;
   }
 
   public function getSortingFields() {

@@ -11,7 +11,7 @@ class SearchController extends Controller
   public function index() {
 
     $lookup = Service::loadModel('Lookup');
-    $filterHelper = new FilterHelper;
+    $filterHelper = new FilterHelper($lookup);
 
     $criteria = array();
     $conditions = array();
@@ -41,7 +41,6 @@ class SearchController extends Controller
       $filterHelper->setSearchQuery($q);
       $filterHelper->setFilters($filters);
       $filterHelper->setSorting($sort);
-      // $criteria = $filterHelper->buildCriteria();
 
       // $lookup->paginator->criteria($criteria);
       $lookup->paginator->disableGetImage();
@@ -68,25 +67,26 @@ class SearchController extends Controller
     // if model = search mean all model
     // then model = Item mean select Item automatic
 
+    $filterOptions = $lookup->getFilterOptions();
     $sortingFields = $lookup->getSortingFields();
 
     // Get Filter Option
-    $filterOptions = array(
-      'filters' => $filterHelper->getFilterOptions($filters),
+    $searchOptions = array(
+      'filters' => $filterHelper->getFilterOptions($filterOptions,$filters),
       'sort' => $filterHelper->getSortingOptions($sortingFields,$sort)
     );
 
     // Get Filter Name
     $displayingFilters = array(
-      'filters' => $filterHelper->getDisplayingFilterOptions($filters),
+      'filters' => $filterHelper->getDisplayingFilterOptions($filterOptions,$filters),
       'sort' => $filterHelper->getDisplayingSorting($sortingFields,$sort)
     );
 
     $this->setData('q',$q);
     $this->setData('count',$lookup->paginator->getCount());
-    $this->setData('filterOptions',$filterOptions);
+    $this->setData('searchOptions',$searchOptions);
     $this->setData('displayingFilters',$displayingFilters);
-    // dd($displayingFilters);
+ 
     return $this->view('pages.search.result');
 
   }

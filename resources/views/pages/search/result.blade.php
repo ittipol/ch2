@@ -29,18 +29,35 @@
 
   <div class="displaying-filters">
 
+    <!-- <h4>กรองการค้นหา</h4> -->
+
     @foreach($displayingFilters['filters'] as $filters)
 
-      <h4>{{$filters['title']}}</h4>
+      @if(!empty($filters['display']))
 
-      @foreach($filters['display'] as $display)
-        <div class="filter-tag">{{$display}}</div>
-      @endforeach
+        <h5>{{$filters['title']}}</h5>
+
+        @foreach($filters['display'] as $display)
+          <div class="filter-tag">{{$display}}</div>
+        @endforeach
+
+      @endif
 
     @endforeach
 
-    <h4>จัดเรียงตาม</h4>
-    <div class="filter-tag">{{$displayingFilters['sort']}}</div>
+    @foreach($displayingFilters['sort'] as $sort)
+
+      @if(!empty($sort['display']))
+
+        <h5>{{$sort['title']}}</h5>
+
+        @foreach($sort['display'] as $display)
+          <div class="filter-tag">{{$display}}</div>
+        @endforeach
+
+      @endif
+
+    @endforeach
 
   </div>
 
@@ -140,21 +157,32 @@
 
       // ?search_query=Iphone 7 128GB Limited Edition&model=shop&model=product&model=job&model=advertising&model=item&model=real_estate&sort=name:asc
 
-      // let filters = '';
-      let filters = [];
-
       $('#search_form').on('submit',function(){
 
-        $('.filter-model:checked').each(function(i, obj) {
+        let filters = [];
+        let sorts = [];
+
+        $('.search-filter-value:checked').each(function(i, obj) {
             filters.push($(this).val());
         });
 
-        var input = document.createElement('input');
-        input.setAttribute('type', 'hidden');
-        input.setAttribute('name', 'fq');
-        input.setAttribute('value', filters.join());
+        var inputFilters = document.createElement('input');
+        inputFilters.setAttribute('type', 'hidden');
+        inputFilters.setAttribute('name', 'fq');
+        inputFilters.setAttribute('value', filters.join());
 
-        this.appendChild(input);
+        this.appendChild(inputFilters);
+
+        $('.search-sorting-value:checked').each(function(i, obj) {
+            sorts.push($(this).val());
+        });
+
+        var inputSorts = document.createElement('input');
+        inputSorts.setAttribute('type', 'hidden');
+        inputSorts.setAttribute('name', 'sort');
+        inputSorts.setAttribute('value', sorts.join());
+
+        this.appendChild(inputSorts);
 
       });
 

@@ -27,6 +27,12 @@ class ProductController extends Controller
 
   }
 
+  public function shelf() {
+
+    $model = Service::loadModel('Product');
+    
+  }
+
   public function listView() {
 
     $model = Service::loadModel('Product');
@@ -62,7 +68,7 @@ class ProductController extends Controller
       'conditions' => $conditions
     ));
     $model->paginator->setPage($page);
-    $model->paginator->setPagingUrl('product/list');
+    $model->paginator->setPagingUrl('product/shelf');
     $model->paginator->setUrl('product/detail/{id}','detailUrl');
 
     $categoryName = Service::loadModel('Category')->getCategoryName($categoryId);

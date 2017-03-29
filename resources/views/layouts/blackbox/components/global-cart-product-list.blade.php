@@ -46,7 +46,7 @@
   </div>
   @endforeach
 
-  <a href="{{URL::to('product/list')}}" class="button half-button space-top-20">เลือกซื้อสินค้า</a>
+  <a href="{{URL::to('product/shelf')}}" class="button half-button space-top-20">เลือกซื้อสินค้า</a>
   <a href="{{URL::to('cart')}}" class="button half-button space-top-20">ตระกร้าสินค้า</a>
 
 @else
@@ -54,7 +54,7 @@
   <div class="cart-empty text-center">
     <img src="/images/icons/bag-blue.png">
     <h4>ยังไม่มีสินค้าในตระกร้าสินค้าของคุณ</h4>
-    <a href="{{URL::to('product/list')}}" class="button half-button space-top-20">เลือกซื้อสินค้า</a>
+    <a href="{{URL::to('product/shelf')}}" class="button half-button space-top-20">เลือกซื้อสินค้า</a>
   </div>
 
 @endif

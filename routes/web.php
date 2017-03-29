@@ -221,8 +221,8 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 });
 
 // PRODUCT
-Route::get('product/list','ProductController@listView')->name('product.list');
-Route::get('product/category:{category_id}','ProductController@listView')->name('product.list');
+Route::get('product/shelf','ProductController@shelf')->name('product.shelf');
+Route::get('product/shelf:{category_id}','ProductController@listView')->name('product.shelf');
 Route::get('product/detail/{id}','ProductController@detail')->name('product.detail');
 
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {

@@ -258,8 +258,7 @@ class Paginator {
 
   public function search($criteria) {
     
-    $cache = new Cache;
-    $filterHelper = new FilterHelper;
+    // $cache = new Cache;
 
     $offset = ($this->page - 1)  * $this->perPage;
     $this->getLastPage();
@@ -276,9 +275,12 @@ class Paginator {
     ->where('lookups.active','=',1)
     ->select('lookups.*');
 
-    $model = $filterHelper->setCriteria($model,$criteria);
+    $filterHelper = new FilterHelper($model);
+    $filterHelper->setCriteria($criteria);
+
+    $model = $filterHelper->conditions();
     $this->count = $model->count('lookups.id');
-    $model = $filterHelper->setOrder($model,$criteria);
+    $model = $filterHelper->order();
 
     $records = $model
     ->take($this->perPage)
