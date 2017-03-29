@@ -36,11 +36,12 @@ class ProductController extends Controller
       $page = $this->query['page'];
     }
 
-    // join with category table
-
     $model->paginator->criteria(array(
-      // 'fields' => array('products.*')
-      'order' => array('created_at','DESC')
+      'joins' => array('product_to_categories', 'product_to_categories.product_id', '=', 'products.id'),
+      'order' => array('created_at','DESC'),
+      'conditions' => array(
+        array('product_to_categories.category_id','=',1)
+      )
     ));
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl('product/list');
@@ -48,6 +49,7 @@ class ProductController extends Controller
 
     $this->data = $model->paginator->build();
 
+    $this->setData('categoryName',Service::loadModel('Category')->getCategoryName(1));
     $this->setData('categories',Service::loadModel('Category')->getCategories(1));
 
     return $this->view('pages.product.list');

@@ -162,6 +162,10 @@ class AppServiceProvider extends ServiceProvider
         $view->with('_products',Service::loadModel('Cart')->getProducts());
       });
 
+      view()->composer('layouts.blackbox.components.global-notification', function($view){
+
+      });
+
       // view()->composer('components.search_filter', function($view){
       //   dd($view);
       // });

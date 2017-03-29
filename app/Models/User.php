@@ -8,7 +8,7 @@ use Hash;
 class User extends Model
 {
     protected $table = 'users';
-    protected $fillable = ['email','password'];
+    protected $fillable = ['email','password','token','api_token'];
     protected $hidden = ['password','remember_token'];
     protected $modelRelations = array('Person');
     protected $directory = true;

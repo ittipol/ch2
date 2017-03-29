@@ -13,6 +13,7 @@
   @include('layouts.blackbox.components.global-header')
 
   @include('layouts.blackbox.components.global-search')
+  @include('layouts.blackbox.components.global-notification')
   @include('layouts.blackbox.components.global-nav')
   @include('layouts.blackbox.components.global-cart')
   @include('layouts.blackbox.components.modal-dialog')
@@ -47,6 +48,11 @@
       const inputField = new InputField;
       inputField.load();
 
+      @if (Auth::check())
+        const pushNotification = new PushNotification({{ Session::get("Person.id") }},'{{ Session::get("User.token") }}')
+        pushNotification.load();
+      @endif
+
       setTimeout(function(){
         $(".nano").nanoScroller();
       },1000);
@@ -62,7 +68,7 @@
         let desc = '';
         desc += '<div class="button-group">';
         desc += '<a class="button" href="{{URL::to("login")}}">เข้าสู่ระบบ</a>';
-        desc += '<a class="button" href="{{URL::to("select_registation")}}">สมัครสมาชิก</a>';
+        desc += '<a class="button" href="{{URL::to("register")}}">สมัครสมาชิก</a>';
         desc += '</div>';
 
         const notificationBottom = new NotificationBottom(title,desc,'','medium',true);

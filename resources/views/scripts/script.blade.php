@@ -43,6 +43,8 @@
     '__js/components/modal-dialog.js',
     '__js/components/order-progress-bar.js',
     '__js/components/right-side-panel.js',
+    '__js/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js',
+    '__js/push_notification/push-notification.js',
   );
 
   if($combine){
@@ -108,6 +110,7 @@
     '__css/layouts/blackbox/components/action-bar.css',
     '__css/layouts/blackbox/components/main-nav.css',
     '__css/layouts/blackbox/components/content-wrapper.css',
+    '__css/layouts/blackbox/components/global-notification-panel.css',
     '__css/layouts/blackbox/components/global-search-panel.css',
     '__css/layouts/blackbox/components/global-cart-panel.css',
     '__css/layouts/blackbox/components/header.css',
@@ -148,14 +151,14 @@
 <script type="text/javascript">
   $(document).ready(function(){
 
-    let title = '{{ Session::get("message.title") }}';
-    let type = '{{ Session::get("message.type") }}';
+    // let title = '{{ Session::get("message.title") }}';
+    // let type = '{{ Session::get("message.type") }}';
     let desc = '';
     @if(Session::has('message.desc'))
       desc = '{{ Session::get("message.desc") }}';
     @endif
 
-    const notificationBottom = new NotificationBottom(title,desc,type);
+    const notificationBottom = new NotificationBottom('{{ Session::get("message.title") }}',desc,'{{ Session::get("message.type") }}');
     notificationBottom.load();
 
   });

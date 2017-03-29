@@ -3,14 +3,14 @@
 
 <div class="container list">
 
-  <h3>เสื้อผ้าและเครื่องแต่งกายสุภาพบุรุษ</h3>
-
-  <div id="filter_expand_panel" class="right-size-panel filter">
+  <h3>{{$categoryName}}</h3>
+  <a href="">แสดงประเททสินค้า</a>
+  <!-- <div id="filter_expand_panel" class="right-size-panel filter">
     <div class="right-size-panel-inner">
 
       <div class="right-size-panel-close-icon"></div>
     </div>
-  </div>
+  </div> -->
 
   <!-- <div class="text-right space-top-20">
     <a class="button" data-right-side-panel="1" data-right-side-panel-target="#filter_expand_panel">
@@ -92,9 +92,8 @@
   <div class="list-empty-message text-center space-top-20">
     <img class="space-bottom-20" src="/images/common/not-found.png">
     <div>
-      <h3>ยังไม่มีข้อมูลซื้อ ขายสินค้า</h3>
-      <p>ขออภัย ยังไม่มีข้อมูลซื้อ ขายสินค้า</p>
-      <a href="{{URL::to('item/post')}}" class="button">เพิ่มข้อมูลซื้อ ขายสินค้า</a>
+      <h3>ไม่พบสินค้า</h3>
+      <p>ขออภัย ไม่พบสินค้าที่คุณกำลังหา</p>
     </div>
   </div>
 

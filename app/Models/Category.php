@@ -10,6 +10,10 @@ class Category extends Model
   protected $fillable = ['parent_id','name'];
   public $timestamps  = false;
 
+  public function getCategoryName($id) {
+    return $this->find($id)->name;
+  }
+
   public function getCategories($parentId = null) {
 
     $url = new Url;

@@ -70,6 +70,20 @@ class Blackbox {
       }
       
     });
+    
+    $('#notification_panel_trigger').on('click',function(){
+
+      if($(this).is(':checked')) {
+        $('.global-notification-panel').addClass('panel-opened');
+        $('.content-wrapper-overlay').addClass('isvisible');
+        $('body').css('overflow-y','hidden');
+      }else{
+        $('.global-notification-panel').removeClass('panel-opened');
+        $('.content-wrapper-overlay').removeClass('isvisible');
+        $('body').css('overflow-y','auto');
+      }
+
+    });
 
     // Overlay
     $('.content-wrapper-overlay').on('click',function(){
@@ -80,11 +94,12 @@ class Blackbox {
         $('#search_panel_trigger').trigger('click');
       }else if($('#cart_panel_trigger').is(':checked')) {
         $('#cart_panel_trigger').trigger('click');
+      }else if($('#notification_panel_trigger').is(':checked')) {
+        $('#notification_panel_trigger').trigger('click');
       }
 
     });
 
-    // Close panel Btn
     $('.search-panel-close-button').on('click',function(){
       if($('#search_panel_trigger').is(':checked')) {
         $('#search_panel_trigger').trigger('click');
@@ -94,6 +109,12 @@ class Blackbox {
     $('.cart-panel-close-button').on('click',function(){
       if($('#cart_panel_trigger').is(':checked')) {
         $('#cart_panel_trigger').trigger('click');
+      }
+    });
+
+    $('.notification-panel-close-button').on('click',function(){
+      if($('#notification_panel_trigger').is(':checked')) {
+        $('#notification_panel_trigger').trigger('click');
       }
     });
 
