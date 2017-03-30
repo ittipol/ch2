@@ -42,20 +42,6 @@ class Lookup extends Model
           'value' => 'model:real_estate',
         )
       )
-    ),
-    'used' => array(
-      'input' => 'checkbox',
-      'title' => 'สภาพสินค้า',
-      'options' => array(
-        array(
-          'name' => 'สินค้าใหม่',
-          'value' => 'used:0'
-        ),
-        array(
-          'name' => 'สินค้ามือสอง',
-          'value' => 'used:1'
-        )
-      )
     )
   );
 

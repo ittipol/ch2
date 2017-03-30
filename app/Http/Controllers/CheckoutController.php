@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\library\service;
 use App\library\message;
+use App\library\notificationHelper;
 use Redirect;
 
 class CheckoutController extends Controller
@@ -95,7 +96,7 @@ class CheckoutController extends Controller
       return Redirect::back();
     }
 
-    // $createAt = date('Y-m-d H:i:s');
+    $notificationHelper = new NotificationHelper;
 
     $cartModel->disableCheckingError();
 
@@ -107,6 +108,8 @@ class CheckoutController extends Controller
     $orderShipping = Service::loadModel('OrderShipping');
     $orderProductModel = Service::loadModel('OrderProduct');
     $orderTotalModel = Service::loadModel('OrderTotal');
+
+    // $createAt = date('Y-m-d H:i:s');
 
     foreach ($checkoutProducts as $shopId => $products) {
 
@@ -222,6 +225,10 @@ class CheckoutController extends Controller
       $OrderHistoryModel->order_id = $order->id;
       $OrderHistoryModel->order_status_id = 1;
       $OrderHistoryModel->save();
+
+      // Create Notification
+      // $notificationHelper->setModel($order);
+      // $notificationHelper->create('order.create');
 
     }
 

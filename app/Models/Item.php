@@ -77,6 +77,7 @@ class Item extends Model
       )
     ),
     'used' => array(
+      'input' => 'checkbox',
       'title' => 'สภาพสินค้า',
       'options' => array(
         array(

@@ -10,6 +10,8 @@ use App\library\url;
 use Redirect;
 use Session;
 
+use App\library\notificationHelper;
+
 class ProductController extends Controller
 {
   public function __construct() { 
@@ -30,6 +32,13 @@ class ProductController extends Controller
   public function shelf() {
 
     $model = Service::loadModel('Product');
+
+
+    $order = Service::loadModel('Order')->find(24);
+    $notificationHelper = new NotificationHelper;
+    $notificationHelper->setModel($order);
+    $notificationHelper->create('order.create');
+
     
   }
 
