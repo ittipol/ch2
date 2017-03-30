@@ -155,8 +155,9 @@ class AppServiceProvider extends ServiceProvider
       });
 
       view()->composer('layouts.blackbox.components.global-header', function($view){
-        $view->with('_product_total',Service::loadModel('Cart')->productCount());
-        // notification count
+        $view->with('_product_count',Service::loadModel('Cart')->productCount());
+        $view->with('_norification_count',Service::loadModel('Notification')->notificationUnreadCount());
+        // notification count unread
       });
 
       view()->composer('layouts.blackbox.components.global-cart', function($view){
@@ -164,7 +165,7 @@ class AppServiceProvider extends ServiceProvider
       });
 
       view()->composer('layouts.blackbox.components.global-notification', function($view){
-
+        dd('xcsdf');
       });
 
       // view()->composer('components.search_filter', function($view){

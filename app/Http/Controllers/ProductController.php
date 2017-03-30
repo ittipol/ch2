@@ -34,10 +34,10 @@ class ProductController extends Controller
     $model = Service::loadModel('Product');
 
 
-    $order = Service::loadModel('Order')->find(24);
-    $notificationHelper = new NotificationHelper;
-    $notificationHelper->setModel($order);
-    $notificationHelper->create('order.create');
+    // $order = Service::loadModel('Order')->find(24);
+    // $notificationHelper = new NotificationHelper;
+    // $notificationHelper->setModel($order);
+    // $notificationHelper->create('order.create');
 
     
   }

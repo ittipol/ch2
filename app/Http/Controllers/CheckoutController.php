@@ -227,8 +227,8 @@ class CheckoutController extends Controller
       $OrderHistoryModel->save();
 
       // Create Notification
-      // $notificationHelper->setModel($order);
-      // $notificationHelper->create('order.create');
+      $notificationHelper->setModel($order);
+      $notificationHelper->create('order.create');
 
     }
 

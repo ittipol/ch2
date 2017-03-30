@@ -178,7 +178,6 @@ class Lookup extends Model
     $parseValue = '/[\w\d|._,=>@]+/';
 
     $result = array();
-
     foreach ($options['format'] as $key => $format){
 
       if(is_array($format)){
