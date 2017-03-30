@@ -32,12 +32,12 @@ io.sockets.on('connection', function(socket){
 
 });
 
-io.sockets.on('connection', function (socket) {
-  socket.on('disconnect', function () {
-    console.log('User Disconnected');
-    console.log(socket.id);
-  });
-});
+// io.sockets.on('connection', function (socket) {
+//   socket.on('disconnect', function () {
+//     console.log('User Disconnected');
+//     console.log(socket.id);
+//   });
+// });
 
 server.listen( 8080 );
 

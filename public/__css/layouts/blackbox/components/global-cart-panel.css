@@ -35,7 +35,6 @@
 
 .global-cart-panel > .product-list-table > .product-list-table-inner {
 	padding: 80px 20px 20px;
-	/*transition: height 1.2s ease-out;*/
 }
 
 .global-cart-panel > .product-list-table .product-list-table-row {
@@ -56,10 +55,6 @@
 	color: #D32F2F;
 	font-weight: bold;
 }
-
-/*.global-cart-panel > .product-list-table {
-	height: 90%;
-}*/
 
 .global-cart-panel .product-image img {
 	width: 70px;
@@ -102,7 +97,7 @@
   right: 0;
   width: 64px;
   height: 64px;
-  background-color: #37474F;
+  /*background-color: #37474F;*/
   background-image: url(/images/icons/close.png);
   background-repeat: no-repeat;
   background-position: center;

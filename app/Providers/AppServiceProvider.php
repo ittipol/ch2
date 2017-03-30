@@ -155,9 +155,14 @@ class AppServiceProvider extends ServiceProvider
       });
 
       view()->composer('layouts.blackbox.components.global-header', function($view){
+
+        $NotificationModel = Service::loadModel('Notification');
+
+        $NotificationModel->clearNotify();
+
+        $view->with('_notification_count',Service::loadModel('Notification')->notificationUnreadCount());
         $view->with('_product_count',Service::loadModel('Cart')->productCount());
-        $view->with('_norification_count',Service::loadModel('Notification')->notificationUnreadCount());
-        // notification count unread
+
       });
 
       view()->composer('layouts.blackbox.components.global-cart', function($view){
@@ -165,7 +170,9 @@ class AppServiceProvider extends ServiceProvider
       });
 
       view()->composer('layouts.blackbox.components.global-notification', function($view){
-        dd('xcsdf');
+        
+        $view->with('_notifications',Service::loadModel('Notification')->getUnreadNotification());
+
       });
 
       // view()->composer('components.search_filter', function($view){
