@@ -13,10 +13,21 @@
 
           @foreach($_notifications as $notification)
 
-            <div class="notification-list-table-row">
-              <div class="notification-title">{{$notification['title']}}</div>
-              <div class="notification-message">{!!$notification['message']!!}</div>
-              <div>{{$notification['createdDate']}}</div>
+            <div class="notification-list-table-row clearfix">
+
+              <div class="notification-image pull-left">
+                <a href="{{$notification['url']}}">
+                  <img src="{{$notification['image']}}">
+                </a>
+              </div>
+
+              <div class="notification-info pull-left">
+                <a href="{{$notification['url']}}">
+                  <h4 class="notification-title">{!!$notification['title']!!}</h4>
+                </a>
+                <div class="notification-message">{!!$notification['message']!!}</div>
+                <div class="notification-date">{{$notification['createdDate']}}</div>
+              </div>
             </div>
 
           @endforeach

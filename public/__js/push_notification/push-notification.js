@@ -35,6 +35,7 @@ class PushNotification {
 		let _this = this;
 
 		this.socket.on( 'update-notification', function( data ) {
+			_this.createNotification();
 			_this.popup(data.title,data.message);
 		});
 
@@ -55,5 +56,36 @@ class PushNotification {
 		notificationBottom.load();
 
 	}
+
+	createNotification() {
+
+		// <div class="notification-list-table-row clearfix">
+
+		//               <div class="notification-image pull-left">
+		//                 <a href="http://ch.local/account/order/37">
+		//                   <img src="/images/icons/bag-white.png">
+		//                 </a>
+		//               </div>
+
+		//               <div class="notification-info pull-left">
+		//                 <a href="http://ch.local/account/order/37">
+		//                   <h4 class="notification-title">การสั่งซื้อจากลูกค้า เลขที่ 31</h4>
+		//                 </a>
+		//                 <div class="notification-message"></div>
+		//                 <div class="notification-date">31 มีนาคม 2560</div>
+		//               </div>
+		//             </div>
+
+	}
+
+	// getImage() {
+
+	// 	switch() {
+	// 		case 'Order':
+	// 		    image = '/images/icons/bag-white.png';
+	// 		  break;
+	// 	}
+
+	// }
 
 }

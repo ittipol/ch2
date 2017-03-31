@@ -36,6 +36,8 @@ class NotificationHelper {
     }
 
     $value = array(
+      'model' => $this->model->modelName,
+      'model_id' => $this->model->id,
       'unread' => 1,
       'notify' => 1
     );
@@ -52,7 +54,7 @@ class NotificationHelper {
     );
 
     $result = $this->parser($options);
-dd($result);
+
     if(!empty($result)){
       foreach ($result as $key => $_value){
         $value[$key] = $_value;

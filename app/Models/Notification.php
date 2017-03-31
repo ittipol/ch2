@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use App\library\date;
+use App\library\url;
 
 class Notification extends Model
 {
   protected $table = 'notifications';
-  protected $fillable = ['title','message','url','sender','sender_id','receiver','receiver_id','unread','notify'];
+  protected $fillable = ['model','model_id','title','message','url','sender','sender_id','receiver','receiver_id','type','unread','notify'];
 
   public $formHelper = true;
   public $modelData = true;
@@ -38,7 +39,7 @@ class Notification extends Model
   }
 
   public function getUnreadNotification() {
-    $records = $this->select('title','message','url','created_at')
+    $records = $this->select('model','model_id','title','message','url','created_at')
     ->where(function($query){
       $query->where([
         ['receiver','like','Person'],
@@ -74,9 +75,41 @@ class Notification extends Model
     return array(
       'title' => $this->title,
       'message' => $this->message,
-      'url' => $this->url,
-      'createdDate' => $date->covertDateToSting($this->created_at->format('Y-m-d'))
+      'url' => $this->getUrl($this->model,$this->model_id),
+      'createdDate' => $date->covertDateToSting($this->created_at->format('Y-m-d')),
+      'image' => $this->getImage($this->model)
     );
+  }
+
+  public function getImage($modelName) {
+
+    $image = '';
+
+    switch ($modelName) {
+      case 'Order':
+          $image = '/images/icons/bag-white.png';
+        break;
+    
+    }
+
+    return $image;
+
+  }
+
+  public function getUrl($modelName,$modelId) {
+
+    $url = new Url;
+
+    $_url = '';
+    switch ($modelName) {
+      case 'Order':
+          $_url = $url->setAndParseUrl('account/order/{id}',array('id'=>$modelId));
+        break;
+    
+    }
+
+    return $_url;
+
   }
 
   public function setUpdatedAt($value) {}
