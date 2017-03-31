@@ -321,6 +321,7 @@ class ApiController extends Controller
 
     $result = array(
       'updated' => true,
+      'title' => $notification->title,
       'count' => $notificationModel->countUnreadNotification(),
       'html' => view('layouts.blackbox.components.global-notification-item',array(
         '_notification' => $notification->buildModelData()

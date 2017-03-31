@@ -37,7 +37,7 @@ class ProductController extends Controller
     // $order = Service::loadModel('Order')->find(24);
     // $notificationHelper = new NotificationHelper;
     // $notificationHelper->setModel($order);
-    // $notificationHelper->create('order.create');
+    // $notificationHelper->create('order.confirm');
 
     
   }

@@ -20,12 +20,12 @@ class ShopRelateTo extends Model
     return $this->hasOne('App\Models\Advertising','id','model_id');
   }
 
-  public function shop() {
-    return $this->hasOne('App\Models\Shop','id','shop_id');
-  }
-
   public function paymentMethod() {
     return $this->hasOne('App\Models\PaymentMethod','id','model_id');
+  }
+
+  public function shop() {
+    return $this->hasOne('App\Models\Shop','id','shop_id');
   }
 
   public function __saveRelatedData($model,$options = array()) {

@@ -135,4 +135,35 @@ class Date
 
   }
 
+  public function calPassedDate($dateTime) {
+
+    $secs = time() - $dateTime;
+    $mins = (int)floor($secs / 60);
+    $hours = (int)floor($mins / 60);
+    $days = (int)floor($hours / 24);
+
+    $passed = 'เมื่อไม่กี่วินาทีที่ผ่านมา';
+    if($days == 0) {
+      $passedSecs = $secs % 60;
+      $passedMins = $mins % 60;
+      $passedHours = $hours % 24;
+
+      if($passedHours != 0) {
+        $passed = $passedHours.' ชั่วโมงที่แล้ว';
+      }elseif($passedMins != 0) {
+        $passed = $passedMins.' นาทีที่แล้ว';
+      }elseif($passedSecs > 10) {
+        $passed = $passedSecs.' วินาทีที่แล้ว';
+      }
+
+    }elseif($days == 1){
+      $passed = 'เมื่อวานนี้ เวลา '.$this->covertTimeToSting($this->created_at->format('Y-m-d H:i:s'));
+    }else{
+      $passed = $this->covertDateToSting($this->created_at->format('Y-m-d H:i:s'));
+    }
+
+    return $passed;
+  }
+
+
 }

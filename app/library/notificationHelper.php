@@ -35,20 +35,19 @@ class NotificationHelper {
       return false;
     }
 
+    $event = $event->first();
+
     $value = array(
       'model' => $this->model->modelName,
       'model_id' => $this->model->id,
+      'notification_event_id' => $event->id,
       'unread' => 1,
       'notify' => 1
     );
 
-    $event = $event->first();
-
     $options = array(
       'format' => array(
         'title' => $event->title_format,
-        'message' => $event->message_format,
-        'url' => $event->url_format,
       ),
       'data' => $this->model->getAttributes()
     );
@@ -311,6 +310,14 @@ class NotificationHelper {
             $receivers = $this->getReceiverByGroup($value);
           break;
 
+        case 'person':
+         
+            if($this->model->modelName == 'Order') {
+              $receivers[] = $this->model->person_id;
+            }
+
+          break;
+
       }
 
     }
@@ -323,10 +330,13 @@ class NotificationHelper {
 
     $receivers = array();
     switch ($group) {
+
       case 'all-person-in-shop':
           
-          $people = Service::loadModel('PersonToShop')->where('shop_id','=',$this->model->shop_id)->get();
-
+          if($this->model->modelName == 'Order') {
+            $people = Service::loadModel('PersonToShop')->where('shop_id','=',$this->model->shop_id)->get();
+          }
+          
           foreach ($people as $person) {
             $receivers[] = $person->person_id;
           }

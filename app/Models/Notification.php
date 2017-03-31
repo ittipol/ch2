@@ -2,17 +2,22 @@
 
 namespace App\Models;
 
+use App\library\service;
 use App\library\date;
 use App\library\url;
 
 class Notification extends Model
 {
   protected $table = 'notifications';
-  protected $fillable = ['model','model_id','title','message','url','sender','sender_id','receiver','receiver_id','type','unread','notify'];
+  protected $fillable = ['model','model_id','notification_event_id','title','sender','sender_id','receiver','receiver_id','type','unread','notify'];
 
   public $formHelper = true;
   public $modelData = true;
   public $paginator = true;
+
+  public function notificationEvent() {
+    return $this->hasOne('App\Models\NotificationEvent','id','notification_event_id');
+  }
 
   public function clearNotify() {
 
@@ -40,8 +45,21 @@ class Notification extends Model
 
   }
 
+  public function countUnreadNotification() {
+    return $this
+    ->where(function($query){
+      $query->where([
+        ['receiver','like','Person'],
+        ['receiver_id','=',session()->get('Person.id')]
+      ]);
+    })
+    ->where('unread','=','1')
+    ->where('notify','=','0')
+    ->count();
+  }
+
   public function getUnreadNotification() {
-    $records = $this->select('model','model_id','title','message','url','created_at')
+    $records = $this->select('model','model_id','notification_event_id','title','created_at')
     ->where(function($query){
       $query->where([
         ['receiver','like','Person'],
@@ -65,30 +83,51 @@ class Notification extends Model
 
   }
 
-  public function countUnreadNotification() {
-    return $this
-    ->where(function($query){
-      $query->where([
-        ['receiver','like','Person'],
-        ['receiver_id','=',session()->get('Person.id')]
-      ]);
-    })
-    ->where('unread','=','1')
-    ->where('notify','=','0')
-    ->count();
-  }
-
   public function buildModelData() {
+
+    $date = new Date;
+
     return array(
       'title' => $this->title,
-      'message' => $this->message,
-      'url' => $this->getUrl($this->model,$this->model_id),
-      'createdDate' => $this->calPassedDate(),
-      'image' => $this->getImage($this->model)
+      'url' => $this->getUrl($this->model,$this->model_id,$this->notificationEvent),
+      'createdDate' => $date->calPassedDate(strtotime($this->created_at->format('Y-m-d H:i:s'))),
+      'image' => $this->getNorificationIcon($this->model)
     );
   }
 
-  public function getImage($modelName) {
+  public function getUrl($modelName,$modelId,$notificationEvent) {
+
+    $url = new Url;
+    $model = Service::loadModel($modelName)->find($modelId);
+
+    $_url = '';
+    switch ($notificationEvent->event) {
+
+      case 'order.create':
+
+          // get slug
+          $slug = Service::loadModel('Slug')
+          ->where([
+            ['model','like','Shop'],
+            ['model_id','=',$model->shop_id]
+          ])
+          ->first()
+          ->slug;
+ 
+          $_url = $url->setAndParseUrl($notificationEvent->url_format,array('id'=>$model->id,'shopSlug'=>$slug));
+        break;
+
+      case 'order.confirm':
+          $_url = $url->setAndParseUrl($notificationEvent->url_format,array('id'=>$model->id));
+        break;
+    
+    }
+
+    return $_url;
+
+  }
+
+  public function getNorificationIcon($modelName) {
 
     $image = '';
 
@@ -101,54 +140,6 @@ class Notification extends Model
 
     return $image;
 
-  }
-
-  public function getUrl($modelName,$modelId) {
-
-    $url = new Url;
-
-    $_url = '';
-    switch ($modelName) {
-      case 'Order':
-          $_url = $url->setAndParseUrl('account/order/{id}',array('id'=>$modelId));
-        break;
-    
-    }
-
-    return $_url;
-
-  }
-
-  public function calPassedDate() {
-
-    $date = new Date;
-
-    $secs = time() - strtotime($this->created_at->format('Y-m-d H:i:s'));
-    $mins = (int)floor($secs / 60);
-    $hours = (int)floor($mins / 60);
-    $days = (int)floor($hours / 24);
-
-    $passed = '';
-    if($days == 0) {
-      $passedSecs = $secs % 60;
-      $passedMins = $mins % 60;
-      $passedHours = $hours % 24;
-
-      if($passedHours != 0) {
-        $passed = $passedHours.' ชั่วโมงที่แล้ว';
-      }elseif($passedMins != 0) {
-        $passed = $passedMins.' นาทีที่แล้ว';
-      }elseif($passedSecs != 0) {
-        $passed = 'เมื่อไม่กี่วินาทีที่ผ่านมา';
-      }
-
-    }elseif($days == 1){
-      $passed = 'เมื่อวานนี้ เวลา '.$date->covertTimeToSting($this->created_at->format('Y-m-d H:i:s'));
-    }else{
-      $passed = $date->covertDateToSting($this->created_at->format('Y-m-d H:i:s'));
-    }
-
-    return $passed;
   }
 
   public function setUpdatedAt($value) {}

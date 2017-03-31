@@ -51,31 +51,14 @@ function checkNotification(data) {
       if(rows.length > 0) {
 
         for (id in rows) {
-
           db.query('UPDATE notifications SET notify = 2 WHERE id = '+rows[id].id);
-
-          // io.sockets.in(data.room).emit('update-notification', { 
-          //   id: rows[id].id,
-          //   model: rows[id].model,
-          //   // model_id: rows[id].model_id,
-          //   title: rows[id].title, 
-          //   message: rows[id].message, 
-          //   url: rows[id].url,
-          //   created_at: rows[id].created_at
-          // });
         }
-
+        
         io.sockets.in(data.room).emit('update-notification', { updated:1 });
-
-        // io.sockets.in(data.room).emit('count-notification', { count: rows.length });
       }
 
     }
     
   });
-
-}
-
-function convertDate() {
 
 }

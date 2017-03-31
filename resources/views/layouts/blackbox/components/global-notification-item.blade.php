@@ -10,7 +10,6 @@
     <a href="{{$_notification['url']}}">
       <h4 class="notification-title">{!!$_notification['title']!!}</h4>
     </a>
-    <div class="notification-message">{!!$_notification['message']!!}</div>
     <div class="notification-date">{{$_notification['createdDate']}}</div>
   </div>
 </div>

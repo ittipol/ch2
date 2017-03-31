@@ -7,6 +7,7 @@ use App\library\service;
 use App\library\message;
 use App\library\date;
 use App\library\validation;
+use App\library\notificationHelper;
 use Redirect;
 
 class OrderController extends Controller
@@ -485,13 +486,6 @@ class OrderController extends Controller
 
     }
 
-    // order shipping cost
-    // if(!empty($orderShippingCost)) {
-    //   $model->order_free_shipping = null;
-    //   $model->order_shipping_cost = $orderShippingCost;
-    //   $model->save();
-    // }
-
     // update order product
     $orderProducts = Service::loadModel('OrderProduct')
     ->where('order_id','=',$model->id)
@@ -564,6 +558,10 @@ class OrderController extends Controller
     $OrderHistoryModel->order_status_id = $model->order_status_id;
     $OrderHistoryModel->message = request()->get('message');
     $OrderHistoryModel->save();
+
+    $notificationHelper = new NotificationHelper;
+    $notificationHelper->setModel($model);
+    $notificationHelper->create('order.confirm');
 
     Message::display('ยืนยันการสั่งซื้อเรียบร้อยแล้ว','success');
     return Redirect::to('shop/'.$this->param['shopSlug'].'/order/'.$model->id);
