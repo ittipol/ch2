@@ -78,8 +78,9 @@
 }
 
 .global-notification-panel .notification-title {
-	/*font-size: 14px;*/
-	margin: 5px 0;
+	font-size: 16px;
+	margin: 0 0 5px;
+	line-height: 22px;
 }
 
 .global-notification-panel .notification-date {

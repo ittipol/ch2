@@ -10,9 +10,13 @@
       <div id="notification_panel">
 
         @if(!empty($_notifications))
+
           @foreach($_notifications as $_notification)
             @include('layouts.blackbox.components.global-notification-item')
           @endforeach
+
+          <a href="#" class="button wide-button">แสดงทั้งหมด</a>
+
         @else
 
           <div class="notification-empty text-center">

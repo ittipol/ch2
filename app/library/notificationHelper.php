@@ -52,7 +52,7 @@ class NotificationHelper {
       'data' => $this->model->getAttributes()
     );
 
-    $result = $this->parser($options);
+    $result = $this->parser($this->model,$options);
 
     if(!empty($result)){
       foreach ($result as $key => $_value){
@@ -80,7 +80,7 @@ class NotificationHelper {
 
   }
 
-  private function parser($options = array()) {
+  private function parser($model,$options = array()) {
 
     if(empty($options['format']) || empty($options['data'])){
       return false;
@@ -134,7 +134,7 @@ class NotificationHelper {
           if(!empty($parts[1])){
 
             $records = $this->_parser($parts[0],$model,array(
-              'lookupStringFormat' => $parts[1]
+              'stringFormat' => $parts[1]
             ));
 
             list($class,$field) = explode('.', $parts[0]);
@@ -146,7 +146,7 @@ class NotificationHelper {
                 $_value[] = $record[$field];
               }
             }
-          
+       
             $_value = implode(' ', $_value);
 
           }
@@ -172,16 +172,14 @@ class NotificationHelper {
       return false;
     }
 
-    if(!empty($options['lookupStringFormat'])) {
+    if(!empty($options['stringFormat'])) {
 
-      $lookup = new Lookup;
-
-      $formats = explode(',', $options['lookupStringFormat']);
+      $formats = explode(',', $options['stringFormat']);
 
       $records = array();
       foreach ($formats as $format) {
         list($key1,$key2) = explode('=>', $format);
-        $records = $this->__lookupFormatParser($class,$key1,$key2,$records);
+        $records = $this->__formatParser($class,$key1,$key2,$records);
       }
 
       $fields = explode('.', $fields);
@@ -191,30 +189,13 @@ class NotificationHelper {
         $data[$fields[0]][$key][$fields[1]] = $record[$fields[1]];
       }
 
-    }elseif(!empty($options['lookupArrayFormat'])) {
-
-      $lookup = new Lookup;
-
-      $formats = $options['lookupArrayFormat'];
-
-      $records = array();
-      foreach ($formats as $key1 => $key2) {
-        $records = $this->__lookupFormatParser($class,$key1,$key2,$records);
-      }
-
-      $fields = explode('.', $fields);
-
-      $data = array();
-      foreach ($records as $key => $record) {
-        $data[$fields[0]][$key][$fields[1]] = $record[$fields[1]];
-      }
     }
 
     return $data;
 
   }
 
-  private function __lookupFormatParser($class,$key1,$key2,$records = array()) {
+  private function __formatParser($class,$key1,$key2,$records = array()) {
 
     $temp = array();
 
@@ -285,8 +266,6 @@ class NotificationHelper {
   }
 
   public function getSender() {
-
-    // $param = Route::current()->parameters();
 
     $sender = 'Person';
     $senderId = session()->get('Person.id');

@@ -202,6 +202,11 @@ class OrderController extends Controller
     $model->order_id = $order->id;
 
     if($model->fill($request->all())->save()) {
+
+      $notificationHelper = new NotificationHelper;
+      $notificationHelper->setModel($order);
+      $notificationHelper->create('order-payment-inform');
+
       Message::display('ยืนยันการชำระเงินเลขที่การสั่งซื้อ '.$order->invoice_number.' แล้ว','success');
       return Redirect::to('account/order/'.$order->id);
     }else{
@@ -561,7 +566,7 @@ class OrderController extends Controller
 
     $notificationHelper = new NotificationHelper;
     $notificationHelper->setModel($model);
-    $notificationHelper->create('order.confirm');
+    $notificationHelper->create('order-confirm');
 
     Message::display('ยืนยันการสั่งซื้อเรียบร้อยแล้ว','success');
     return Redirect::to('shop/'.$this->param['shopSlug'].'/order/'.$model->id);
@@ -583,6 +588,11 @@ class OrderController extends Controller
     $model->order_status_id = 3;
 
     if($model->save()) {
+
+      $notificationHelper = new NotificationHelper;
+      $notificationHelper->setModel($model);
+      $notificationHelper->create('order-payment-confirm');
+
       Message::display('ยืนยันการชำระเงินเรียบร้อยแล้ว','success');
     }else{
       Message::display('เกิดข้อผิดพลาด ไม่สามารถยืนยันการชำระเงินได้','error');
@@ -623,6 +633,10 @@ class OrderController extends Controller
       $OrderHistoryModel->order_status_id = $model->order_status_id;
       $OrderHistoryModel->message = request()->get('message');
       $OrderHistoryModel->save();
+
+      $notificationHelper = new NotificationHelper;
+      $notificationHelper->setModel($model);
+      $notificationHelper->create('order-status-change');
 
       Message::display('ยืนยันการชำระเงินเรียบร้อยแล้ว','success');
     }else{

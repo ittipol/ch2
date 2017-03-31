@@ -66,9 +66,10 @@ class Notification extends Model
         ['receiver_id','=',session()->get('Person.id')]
       ]);
     })
-    ->where('unread','=','1')
+    // ->where('unread','=','1')
     ->where('notify','=','0')
-    ->orderBy('created_at','desc');
+    ->orderBy('created_at','desc')
+    ->take(10);
 
     if(!$records->exists()) {
       return null;
@@ -103,7 +104,7 @@ class Notification extends Model
     $_url = '';
     switch ($notificationEvent->event) {
 
-      case 'order.create':
+      case 'order-create':
 
           // get slug
           $slug = Service::loadModel('Slug')
@@ -117,7 +118,25 @@ class Notification extends Model
           $_url = $url->setAndParseUrl($notificationEvent->url_format,array('id'=>$model->id,'shopSlug'=>$slug));
         break;
 
-      case 'order.confirm':
+      case 'order-confirm':
+          $_url = $url->setAndParseUrl($notificationEvent->url_format,array('id'=>$model->id));
+        break;
+
+      case 'order-payment-inform':
+
+          // get slug
+          $slug = Service::loadModel('Slug')
+          ->where([
+            ['model','like','Shop'],
+            ['model_id','=',$model->shop_id]
+          ])
+          ->first()
+          ->slug;
+      
+          $_url = $url->setAndParseUrl($notificationEvent->url_format,array('id'=>$model->id,'shopSlug'=>$slug));
+        break;
+
+      case 'order-payment-confirm':
           $_url = $url->setAndParseUrl($notificationEvent->url_format,array('id'=>$model->id));
         break;
     

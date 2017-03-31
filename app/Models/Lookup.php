@@ -277,7 +277,7 @@ class Lookup extends Model
 
     if(!empty($options['lookupStringFormat'])) {
 
-      $lookup = new Lookup;
+      // $lookup = new Lookup;
 
       $formats = explode(',', $options['lookupStringFormat']);
 
@@ -296,7 +296,7 @@ class Lookup extends Model
 
     }elseif(!empty($options['lookupArrayFormat'])) {
 
-      $lookup = new Lookup;
+      // $lookup = new Lookup;
 
       $formats = $options['lookupArrayFormat'];
 
