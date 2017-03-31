@@ -160,7 +160,7 @@ class AppServiceProvider extends ServiceProvider
 
         $NotificationModel->clearNotify();
 
-        $view->with('_notification_count',Service::loadModel('Notification')->notificationUnreadCount());
+        $view->with('_notification_count',Service::loadModel('Notification')->countUnreadNotification());
         $view->with('_product_count',Service::loadModel('Cart')->productCount());
 
       });

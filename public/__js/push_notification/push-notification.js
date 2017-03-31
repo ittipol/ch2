@@ -13,7 +13,7 @@ class PushNotification {
 		this.subscribe();
 		this.check();
 		this.updateNotification();
-		this.updateCount();
+		// this.updateCount();
 	}
 
 	subscribe() {
@@ -30,23 +30,56 @@ class PushNotification {
 
 	}
 
+	// updateCount() {
+
+	// 	this.socket.on('count-notification', function( data ) {
+	// 		let currentCount = parseInt($('#notification_count').text());
+	// 		$('#notification_count').text(currentCount+data.count);
+	// 	});
+
+	// }
+
 	updateNotification() {
 
 		let _this = this;
 
-		this.socket.on( 'update-notification', function( data ) {
-			_this.createNotification();
-			_this.popup(data.title,data.message);
+		this.socket.on('update-notification', function( data ) {
+
+			// console.log(data.updated);
+
+			// _this.createNotification(data.title,data.url);
+			// _this.popup(data.title,data.message);
+
+			_this.getData();
+
 		});
 
 	}
 
-	updateCount() {
+	getData() {
 
-		this.socket.on( 'count-notification', function( data ) {
-			let currentCount = parseInt($('#notification_count').text());
-			$('#notification_count').text(currentCount+data.count);
+		let request = $.ajax({
+		  url: "/notification_update",
+		  type: "get",
+		  dataType:'json'
 		});
+
+	  request.done(function (response, textStatus, jqXHR){
+	    // $('#district').empty();
+	    // $.each(response, function(key,value) {
+	    //   let option = $("<option></option>");
+
+  	  //   if(key == _this.districtId){
+  	  //     option.prop('selected',true);
+  	  //     _this.districtId = null;
+  	  //   }
+
+	    //   $('#district').append(option.attr("value", key).text(value));
+	    // });
+
+	    // _this.getSubDistrict($('#district').val());
+	    
+	  });
 
 	}
 
@@ -57,35 +90,27 @@ class PushNotification {
 
 	}
 
-	createNotification() {
+	createNotification(title,url) {
 
-		// <div class="notification-list-table-row clearfix">
+		let html = '';
 
-		//               <div class="notification-image pull-left">
-		//                 <a href="http://ch.local/account/order/37">
-		//                   <img src="/images/icons/bag-white.png">
-		//                 </a>
-		//               </div>
+		html += '<div class="notification-list-table-row clearfix">';
+		html += '<div class="notification-image pull-left">';
+		html += '<a href="http://ch.local/account/order/37">';
+		html += '<img src="/images/icons/bag-white.png">';
+		html += '</a>';
+		html += '</div>';
+		html += '<div class="notification-info pull-left">';
+		html += '<a href="http://ch.local/account/order/37">';
+		html += '<h4 class="notification-title">'+title+'</h4>';
+		html += '</a>';
+		html += '<div class="notification-message"></div>';
+		html += '<div class="notification-date">31 มีนาคม 2560</div>';
+		html += '</div>';
+		html += '</div>';
 
-		//               <div class="notification-info pull-left">
-		//                 <a href="http://ch.local/account/order/37">
-		//                   <h4 class="notification-title">การสั่งซื้อจากลูกค้า เลขที่ 31</h4>
-		//                 </a>
-		//                 <div class="notification-message"></div>
-		//                 <div class="notification-date">31 มีนาคม 2560</div>
-		//               </div>
-		//             </div>
+		$('#notification_panel').prepend(html);
 
 	}
-
-	// getImage() {
-
-	// 	switch() {
-	// 		case 'Order':
-	// 		    image = '/images/icons/bag-white.png';
-	// 		  break;
-	// 	}
-
-	// }
 
 }

@@ -23,7 +23,9 @@ class Notification extends Model
         ['receiver_id','=',session()->get('Person.id')]
       ]);
     })
-    ->where('notify','=','1');
+    ->where(function($query){
+      $query->where('notify','=','1')->orWhere('notify','=','2');
+    });
 
     if($records->exists()) {
       
@@ -46,7 +48,9 @@ class Notification extends Model
         ['receiver_id','=',session()->get('Person.id')]
       ]);
     })
-    ->where('unread','=','1');
+    ->where('unread','=','1')
+    ->where('notify','=','0')
+    ->orderBy('created_at','desc');
 
     if(!$records->exists()) {
       return null;
@@ -61,22 +65,25 @@ class Notification extends Model
 
   }
 
-  public function notificationUnreadCount() {
-    return $this->where([
-      ['notify','=','0'],
-      ['unread','=','1']
-    ])->count();
+  public function countUnreadNotification() {
+    return $this
+    ->where(function($query){
+      $query->where([
+        ['receiver','like','Person'],
+        ['receiver_id','=',session()->get('Person.id')]
+      ]);
+    })
+    ->where('unread','=','1')
+    ->where('notify','=','0')
+    ->count();
   }
 
   public function buildModelData() {
-
-    $date = new Date;
-
     return array(
       'title' => $this->title,
       'message' => $this->message,
       'url' => $this->getUrl($this->model,$this->model_id),
-      'createdDate' => $date->covertDateToSting($this->created_at->format('Y-m-d')),
+      'createdDate' => $this->calPassedDate(),
       'image' => $this->getImage($this->model)
     );
   }
@@ -110,6 +117,38 @@ class Notification extends Model
 
     return $_url;
 
+  }
+
+  public function calPassedDate() {
+
+    $date = new Date;
+
+    $secs = time() - strtotime($this->created_at->format('Y-m-d H:i:s'));
+    $mins = (int)floor($secs / 60);
+    $hours = (int)floor($mins / 60);
+    $days = (int)floor($hours / 24);
+
+    $passed = '';
+    if($days == 0) {
+      $passedSecs = $secs % 60;
+      $passedMins = $mins % 60;
+      $passedHours = $hours % 24;
+
+      if($passedHours != 0) {
+        $passed = $passedHours.' ชั่วโมงที่แล้ว';
+      }elseif($passedMins != 0) {
+        $passed = $passedMins.' นาทีที่แล้ว';
+      }elseif($passedSecs != 0) {
+        $passed = 'เมื่อไม่กี่วินาทีที่ผ่านมา';
+      }
+
+    }elseif($days == 1){
+      $passed = 'เมื่อวานนี้ เวลา '.$date->covertTimeToSting($this->created_at->format('Y-m-d H:i:s'));
+    }else{
+      $passed = $date->covertDateToSting($this->created_at->format('Y-m-d H:i:s'));
+    }
+
+    return $passed;
   }
 
   public function setUpdatedAt($value) {}

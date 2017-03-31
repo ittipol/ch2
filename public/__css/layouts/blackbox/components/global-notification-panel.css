@@ -59,7 +59,7 @@
 	padding: 64px 0 20px;
 }
 
-.global-notification-panel .notification-list-table-row {
+.global-notification-panel .notification-item {
 	padding: 10px 20px;
 	border-bottom: 1px solid #ccc;
 }
@@ -67,8 +67,9 @@
 .global-notification-panel .notification-image img {
 	width: 50px;
   height: 50px;
-  background-color: #009688;
   padding: 10px;
+  background-color: #009688;
+  border-radius: 50px;
 }
 
 .global-notification-panel .notification-info {
@@ -77,13 +78,14 @@
 }
 
 .global-notification-panel .notification-title {
-	font-size: 14px;
+	/*font-size: 14px;*/
 	margin: 5px 0;
 }
 
 .global-notification-panel .notification-date {
-	font-size: 12px;
-	color: #888;
+	font-size: 15px;
+	color: #555;
+	/*font-weight: bold;*/
 }
 
 .notification-empty > img {

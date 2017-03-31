@@ -43,7 +43,7 @@ server.listen( 8080 );
 
 function checkNotification(data) {
 
-  db.query('SELECT * FROM `notifications` WHERE (`receiver` = "Person" AND `receiver_id` = '+data.person+') AND `notify` = 1 ORDER BY id ASC LIMIT 1', function(err, rows) {
+  db.query('SELECT id FROM `notifications` WHERE (`receiver` = "Person" AND `receiver_id` = '+data.person+') AND `notify` = 1 ORDER BY id ASC LIMIT 1', function(err, rows) {
     if (err) {
       io.sockets.in(data.room).emit('update-notification', { err:err });
     }else{
@@ -51,15 +51,31 @@ function checkNotification(data) {
       if(rows.length > 0) {
 
         for (id in rows) {
-           db.query('UPDATE notifications SET notify = 0 WHERE id = '+rows[id].id);
-           io.sockets.in(data.room).emit('update-notification', { id: rows[id].id, title: rows[id].title, message: rows[id].message});
+
+          db.query('UPDATE notifications SET notify = 2 WHERE id = '+rows[id].id);
+
+          // io.sockets.in(data.room).emit('update-notification', { 
+          //   id: rows[id].id,
+          //   model: rows[id].model,
+          //   // model_id: rows[id].model_id,
+          //   title: rows[id].title, 
+          //   message: rows[id].message, 
+          //   url: rows[id].url,
+          //   created_at: rows[id].created_at
+          // });
         }
 
-        io.sockets.in(data.room).emit('count-notification', { count: rows.length });
+        io.sockets.in(data.room).emit('update-notification', { updated:1 });
+
+        // io.sockets.in(data.room).emit('count-notification', { count: rows.length });
       }
 
     }
     
   });
+
+}
+
+function convertDate() {
 
 }

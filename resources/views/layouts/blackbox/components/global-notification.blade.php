@@ -10,28 +10,9 @@
       <div id="notification_panel">
 
         @if(!empty($_notifications))
-
-          @foreach($_notifications as $notification)
-
-            <div class="notification-list-table-row clearfix">
-
-              <div class="notification-image pull-left">
-                <a href="{{$notification['url']}}">
-                  <img src="{{$notification['image']}}">
-                </a>
-              </div>
-
-              <div class="notification-info pull-left">
-                <a href="{{$notification['url']}}">
-                  <h4 class="notification-title">{!!$notification['title']!!}</h4>
-                </a>
-                <div class="notification-message">{!!$notification['message']!!}</div>
-                <div class="notification-date">{{$notification['createdDate']}}</div>
-              </div>
-            </div>
-
+          @foreach($_notifications as $_notification)
+            @include('layouts.blackbox.components.global-notification-item')
           @endforeach
-
         @else
 
           <div class="notification-empty text-center">

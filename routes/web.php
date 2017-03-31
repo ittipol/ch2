@@ -404,6 +404,10 @@ Route::group(['middleware' => 'auth'], function () {
   Route::post('upload_profile_image', 'ApiController@uploadProfileImage')->name('Api.upload.profile_image');
 });
 
+Route::group(['middleware' => 'auth'], function () {
+  Route::get('notification_update', 'ApiController@notificationUpdate');
+});
+
 Route::post('cart_add', 'ApiController@cartAdd');
 Route::post('cart_delete', 'CartController@cartDelete');
 Route::get('cart_update', 'ApiController@cartUpdate');
