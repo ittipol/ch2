@@ -332,6 +332,39 @@ class ApiController extends Controller
 
   }
 
+  public function notificationRead() {
+
+    if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+      $this->error = array(
+        'message' => 'ขออภัย ไม่อนุญาตให้เข้าถึงหน้านี้ได้'
+      );
+      return $this->error();
+    }
+
+    $notifications = Service::loadModel('Notification')
+    ->where(function($query){
+      $query->where([
+        ['receiver','like','Person'],
+        ['receiver_id','=',session()->get('Person.id')]
+      ]);
+    })
+    ->where('unread','=','1')
+    ->where('notify','=','0')
+    ->orderBy('created_at','desc');
+
+    if($notifications->exists()) {
+
+      foreach ($notifications->get() as $notification) {
+        $notification->notify = 0;
+        $notification->save();
+      }
+
+    }
+
+    return response()->json(true); 
+
+  }
+
   private function getGeneralError() {
 
     $result = array(

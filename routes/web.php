@@ -406,6 +406,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => 'auth'], function () {
   Route::get('notification_update', 'ApiController@notificationUpdate');
+  Route::get('notification_read', 'ApiController@notificationRead');
 });
 
 Route::post('cart_add', 'ApiController@cartAdd');

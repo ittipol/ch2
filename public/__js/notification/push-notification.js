@@ -20,6 +20,28 @@ class PushNotification {
 
 	bind() {
 
+		let _this = this;
+
+		$('#notification_panel_trigger').on('click',function(){
+			
+			if(_this.clearCount) {
+
+				_this.clearCount = false;
+
+				$('#notification_count').text(0);
+
+				let request = $.ajax({
+				  url: "/notification_read",
+				  type: "get",
+				  dataType:'json'
+				});
+
+				// request.done(function (response, textStatus, jqXHR){});
+
+			}
+
+		});
+
 	}
 
 	subscribe() {
@@ -62,6 +84,9 @@ class PushNotification {
 	  		$('#notification_count').text(response.count);
 	  		$('#notification_panel').prepend(response.html);
 	  		_this.popup(response.title);
+
+	  		_this.clearCount = true;
+
 	  	}
 	    
 	  });

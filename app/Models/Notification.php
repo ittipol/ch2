@@ -21,7 +21,7 @@ class Notification extends Model
 
   public function clearNotify() {
 
-    $records = $this->select('id')
+    $notifications = $this->select('id')
     ->where(function($query){
       $query->where([
         ['receiver','like','Person'],
@@ -32,9 +32,9 @@ class Notification extends Model
       $query->where('notify','=','1')->orWhere('notify','=','2');
     });
 
-    if($records->exists()) {
+    if($notifications->exists()) {
       
-      foreach ($records->get() as $notification) {
+      foreach ($notifications->get() as $notification) {
         $notification->notify = 0;
         $notification->save();
       }
@@ -66,7 +66,7 @@ class Notification extends Model
         ['receiver_id','=',session()->get('Person.id')]
       ]);
     })
-    // ->where('unread','=','1')
+    ->where('unread','=','1')
     ->where('notify','=','0')
     ->orderBy('created_at','desc')
     ->take(10);

@@ -30,7 +30,7 @@ class OrderProduct extends Model
 
     $product = $this->product;
 
-    $totalWeight = '';
+    $totalWeight = 'ยังไม่ระบุน้ำหนัก';
     if(!empty($product->weight) && !empty($product->weight_unit_id)) {
       $totalWeight = ($this->quantity * $product->weight).' '.$product->weightUnit->name;
     }
