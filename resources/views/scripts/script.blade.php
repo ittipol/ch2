@@ -44,7 +44,7 @@
     '__js/components/order-progress-bar.js',
     '__js/components/right-side-panel.js',
     '__js/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js',
-    '__js/push_notification/push-notification.js',
+    '__js/notification/push-notification.js',
   );
 
   if($combine){

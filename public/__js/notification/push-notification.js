@@ -4,7 +4,8 @@ class PushNotification {
 		this.person = person;
 		this.token = token;
 		this.channel = token;
-		this.socket;
+		this.socket = null;
+		this.clearCount = true;
 	}
 
 	load() {
@@ -13,6 +14,12 @@ class PushNotification {
 		this.subscribe();
 		this.check();
 		this.updateNotification();
+	
+		this.bind();
+	}
+
+	bind() {
+
 	}
 
 	subscribe() {

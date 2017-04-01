@@ -5,6 +5,14 @@
     <div class="notification-panel-close-button"></div>
   </div>
 
+  <div class="notification-header-nav">
+    <div class="notification-header-nav-inner">
+      <div class="text-right">
+        <a href="#" class="flat-button">แสดงทั้งหมด</a>
+      </div>
+    </div>
+  </div>
+
   <div class="notification-list-table">
     <div class="notification-list-table-inner">
       <div id="notification_panel">
@@ -14,8 +22,6 @@
           @foreach($_notifications as $_notification)
             @include('layouts.blackbox.components.global-notification-item')
           @endforeach
-
-          <a href="#" class="button wide-button">แสดงทั้งหมด</a>
 
         @else
 
