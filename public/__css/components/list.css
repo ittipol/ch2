@@ -75,6 +75,10 @@
 	padding: 20px;
 }
 
+.list-empty-message h4 {
+	line-height: 22px;
+}
+
 .product-category-list {
 	position: relative;
 	min-height: 350px;

@@ -7,6 +7,7 @@
   <div class="global-search-header">
 
     <div class="global-search-header-action-bar">
+      <div class="search-panel-header-title">ค้นหา</div>
       <div class="search-panel-close-button"></div>
     </div>
 

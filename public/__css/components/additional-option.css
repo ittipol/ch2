@@ -126,8 +126,5 @@
 }
 
 .global-nav .additional-option .dot {
-/*  width: 5px;
-  height: 5px;
-  margin: 6px auto;*/
-  background-color: #ffffff;
+  background-color: #fff;
 }

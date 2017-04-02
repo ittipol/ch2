@@ -1,7 +1,7 @@
 .header-wrapper {
 	height: 256px;
 	padding: 115px 16px 0;
-	background-color: #00897B;
+	/*background-color: #00897B;*/
 }
 
 .header-wrapper.active {
@@ -94,9 +94,6 @@ header .header-button input[type="checkbox"] {
 }
 
 header img.icon-header {
-	/*width: 50px;
-	height: 50px;
-	padding: 10px;*/
 	width: 64px;
 	height: 64px;
 	padding: 17px;
@@ -105,17 +102,16 @@ header img.icon-header {
 .global-header {
 	width: 100%;
 	height: 64px;
-	/*background-color: #0071c5;*/
 }
 
 .header-fixed-top {
 	position: fixed;
 	top: 0;
 	left: 0;
-	/*right: 0;*/
 	width: 100%;
 	height: 64px;
 	box-shadow: 0 2px 5px rgba(0,0,0,.26);
+	/*background-color: #009688;*/
 	background-color: #0071c5;
 	z-index: 80;
 	padding: 0 15px;
@@ -129,7 +125,6 @@ header img.icon-header {
 	top: 0;
 	z-index: 99;
 	position: absolute;
-	/*background-color: #0071c5;*/
 }
 
 @media only screen and (min-width: 1200px) {

@@ -29,8 +29,6 @@
 
   <div class="displaying-filters">
 
-    <!-- <h4>กรองการค้นหา</h4> -->
-
     @foreach($displayingFilters['filters'] as $filters)
 
       @if(!empty($filters['display']))

@@ -5,7 +5,6 @@
 	width: 500px;
 	height: 100%;
 	opacity: 1;
-	/*background: #252525;*/
 	background-color: #fff;
 	padding: 0;
 	z-index: 90;
@@ -17,14 +16,19 @@
 	right: 0;
 }
 
+.global-search-panel .search-panel-header-title {
+	line-height: 64px;
+	color: #fff;
+	font-size: 20px;
+	text-align: center;
+}
+
 .global-search-panel .global-search-input-box {
 	border-bottom: 1px solid #ccc;
 }
 
 .global-search-panel .global-search-input-field {
 	background-color: #fff;
-	/*background-color: #333;*/
-	/*border-bottom: 1px solid #bababa;*/
 	position: relative;
 }
 
@@ -52,9 +56,6 @@
 }
 
 .global-search-panel .global-button-search img {
-	/*width: 45px;
-	height: 45px;
-	padding: 10px;*/
 	width: 35px;
 	height: 35px;
 	padding: 5px;
@@ -64,26 +65,21 @@
 
 .global-search-panel .search-panel-close-button {
 	position: absolute;
-  top: 50%;
-  right: 20px;
-  width: 30px;
-  height: 30px;
-  margin-top: -15px;
-  border-radius: 30px;
-  background-color: #00695C;
-  background-image: url(/images/icons/close.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 12px;
-  cursor: pointer;
-  /*display: none;*/
+	top: 0;
+	right: 0;
+	width: 64px;
+	height: 64px;
+	background-image: url(/images/icons/close.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 20px;
+	cursor: pointer;
 }
 
 .global-search-panel .global-search-header {
 	position: relative;
 	background-color: #009688;
 	z-index: 9;
-	/*padding: 70px 10px 10px;*/
 }
 
 .global-search-panel .global-search-header-action-bar {
@@ -97,9 +93,5 @@
 	.global-search-panel {
 		width: 100%;
 	}
-
-	/*.global-search-panel .search-panel-close-button {
-		display: block;
-	}*/
 
 }

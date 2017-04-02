@@ -1,6 +1,7 @@
 <div class="global-cart-panel">
 
   <div class="cart-panel-header">
+    <div class="cart-panel-header-title">ตระกร้าสินค้า</div>
     <div class="cart-panel-close-button"></div>
   </div>
   

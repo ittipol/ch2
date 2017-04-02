@@ -33,13 +33,98 @@ class ProductController extends Controller
 
     $model = Service::loadModel('Product');
 
+    $categories = Service::loadModel('Category')->getPrimaryCategories();
 
-    // $order = Service::loadModel('Order')->find(50);
-    // $notificationHelper = new NotificationHelper;
-    // $notificationHelper->setModel($order);
-    // $notificationHelper->create('order-status-change');
+    $shelfs = array();
+    foreach ($categories as $category) {
 
-    
+      $subCategories = Service::loadModel('Category')->select('id','name')->where('parent_id','=',$category->id)->get();
+
+      $_subCategories = array();
+      foreach ($subCategories as $subCategory) {
+        $_subCategories[] = array(
+          'name' => $subCategory->name
+        );
+      }
+
+      $categoryPaths = Service::loadModel('CategoryPath')->where('path_id','=',$category->id)->get();
+
+      $ids = array();
+      foreach ($categoryPaths as $categoryPath) {
+        $ids[] = $categoryPath->category_id;
+      }
+
+      $products = $model
+      ->join('product_to_categories', 'product_to_categories.product_id', '=', 'products.id')
+      ->whereIn('product_to_categories.category_id',$ids);
+
+      $total = $products->count('products.id');
+
+      $products = $products
+      ->select('products.*')
+      ->orderBy('products.created_at','desc')
+      ->take(2)
+      ->get();
+
+      $_products = array();
+      foreach ($products as $product) {
+        $_products['items'][] = $product->buildPaginationData();
+      }
+
+      if($total > 2) {
+        // display all Product link
+        $_products['all'] = array(
+          'title' => '+'.($total-2)
+        );
+      }
+
+      $shelfs[] = array(
+        'categoryName' => $category->name,
+        'subCategories' => $_subCategories,
+        'products' => $_products,
+        'total' => $total
+      );
+
+    }
+
+    $this->setData('shelfs',$shelfs);
+
+    return $this->view('pages.product.shelf');
+
+  }
+
+  public function category() {
+
+    $url = new Url;
+
+    $model = Service::loadModel('Product');
+
+    $categories = Service::loadModel('Category')->getPrimaryCategories();
+
+    $_categories = array();
+    foreach ($categories as $category) {
+
+      $subCategories = Service::loadModel('Category')->select('id','name')->where('parent_id','=',$category->id)->get();
+
+      $_subCategories = array();
+      foreach ($subCategories as $subCategory) {
+        $_subCategories[] = array(
+          'name' => $subCategory->name,
+          'url' =>  $url->setAndParseUrl('product/shelf:{category_id}',array('category_id'=>$subCategory->id))
+        );
+      }
+
+      $_categories[] = array(
+        'categoryName' => $category->name,
+        'subCategories' => $_subCategories,
+      );
+
+    }
+
+    $this->setData('categories',$_categories);
+
+    return $this->view('pages.product.category');
+
   }
 
   public function listView() {

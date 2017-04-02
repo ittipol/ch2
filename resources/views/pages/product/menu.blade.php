@@ -100,10 +100,10 @@
     <div class="list-item">
       <a href="{{$productCategoryEditUrl}}">
         <img class="icon" src="/images/common/pencil.png" >
-        <h4>ประเภทสินค้า</h4>
+        <h4>หมวดสินค้า</h4>
       </a>
       <div class="list-item-group-info">
-        <h5><b>ประเภทสินค้า</b>: {{$_modelData['_categoryPathName']}}</h5>
+        <h5><b>หมวดสินค้า</b>: {{$_modelData['_categoryPathName']}}</h5>
       </div>
     </div>
 

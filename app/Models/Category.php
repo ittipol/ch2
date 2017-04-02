@@ -19,6 +19,10 @@ class Category extends Model
     return $this->find($id)->name;
   }
 
+  public function getPrimaryCategories() {
+    return $this->select('id','name')->where('parent_id','=',null)->get();
+  }
+
   public function getCategories($parentId = null) {
 
     $url = new Url;

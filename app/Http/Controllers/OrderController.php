@@ -260,7 +260,7 @@ class OrderController extends Controller
       'order' => array('id','DESC')
     ));
     $model->paginator->setPage($page);
-    $model->paginator->setPagingUrl('item/list');
+    $model->paginator->setPagingUrl(request()->get('shopUrl').'order');
     // $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/order/{id}','detailUrl');
     $model->paginator->setUrl(request()->get('shopUrl').'order/{id}','detailUrl');
     $this->data = $model->paginator->build();

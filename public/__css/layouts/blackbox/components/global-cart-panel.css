@@ -22,8 +22,15 @@
 	left: 0;
 	width: 100%;
 	height: 64px;
-	background-color: #607D8B;
+	background-color: #009688;
 	z-index: 9;
+}
+
+.global-cart-panel .cart-panel-header-title {
+	line-height: 64px;
+	color: #fff;
+	font-size: 20px;
+	text-align: center;
 }
 
 .global-cart-panel > .product-list-table {

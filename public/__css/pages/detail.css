@@ -14,6 +14,7 @@
 .detail .text-emphasize-green {
 	color: #088921;
 }
+
 .detail .origin-price {
 	text-decoration: line-through;
 	font-size: 12px;
@@ -488,14 +489,35 @@
 	/*border-bottom: 1px solid #1B5E20;*/
 }
 
-/*.category-list-extend-panel .category-item:first-child {
-	border-top: 1px solid #1B5E20;
-}*/
-
-/*.category-list-extend-panel .category-item:last-child {
-	border-bottom: none;
+.shelf .sub-category {
+	padding: 10px 10px 10px 20px;
+	/*border-left: 1px solid #ececec;*/
+	background-color: #ececec;
 }
-*/
+
+.shelf .sub-category .sub-category-text {
+	font-size: 16px;
+	margin-bottom: 10px;
+	display: block;
+}
+
+.shelf .bottom-wide-button {
+	width: 100%;
+  background-color: #ececec;
+  display: block;
+  line-height: 60px;
+  text-align: center;
+}
+
+.shelf .product-all-tile {
+	width: 100%;
+  background-color: #ececec;
+  display: block;
+  line-height: 400px;
+  text-align: center;
+  font-size: 40px;
+  color: #333;
+}
 
 /*==========  Non-Mobile First Method  ==========*/
 

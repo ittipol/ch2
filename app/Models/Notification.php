@@ -66,10 +66,10 @@ class Notification extends Model
         ['receiver_id','=',session()->get('Person.id')]
       ]);
     })
-    ->where('unread','=','1')
+    // ->where('unread','=','1')
     ->where('notify','=','0')
     ->orderBy('created_at','desc')
-    ->take(10);
+    ->take(16);
 
     if(!$records->exists()) {
       return null;
@@ -91,7 +91,7 @@ class Notification extends Model
     return array(
       'title' => $this->title,
       'url' => $this->getUrl($this->model,$this->model_id,$this->notificationEvent),
-      'createdDate' => $date->calPassedDate(strtotime($this->created_at->format('Y-m-d H:i:s'))),
+      'createdDate' => $date->calPassedDate($this->created_at->format('Y-m-d H:i:s')),
       'image' => $this->getNorificationIcon($this->model)
     );
   }

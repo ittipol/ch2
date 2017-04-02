@@ -120,11 +120,11 @@
   <div class="form-section">
 
     <div class="title">
-      ประเภทสินค้า
+      หมวดสินค้า
     </div>
 
     <div class="form-row">
-      <h4>ประเภทสินค้าที่เลือก</h4>
+      <h4>หมวดสินค้าที่เลือก</h4>
       <div id="category_selected" class="category-name">-</div>
       <div id="category_panel" class="product-category-list"></div>
     </div>

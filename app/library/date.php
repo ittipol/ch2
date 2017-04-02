@@ -137,7 +137,7 @@ class Date
 
   public function calPassedDate($dateTime) {
 
-    $secs = time() - $dateTime;
+    $secs = time() - strtotime($dateTime);
     $mins = (int)floor($secs / 60);
     $hours = (int)floor($mins / 60);
     $days = (int)floor($hours / 24);
@@ -157,9 +157,9 @@ class Date
       }
 
     }elseif($days == 1){
-      $passed = 'เมื่อวานนี้ เวลา '.$this->covertTimeToSting($this->created_at->format('Y-m-d H:i:s'));
+      $passed = 'เมื่อวานนี้ เวลา '.$this->covertTimeToSting($dateTime);
     }else{
-      $passed = $this->covertDateToSting($this->created_at->format('Y-m-d H:i:s'));
+      $passed = $this->covertDateToSting($dateTime);
     }
 
     return $passed;

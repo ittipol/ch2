@@ -355,7 +355,7 @@ class ApiController extends Controller
     if($notifications->exists()) {
 
       foreach ($notifications->get() as $notification) {
-        $notification->notify = 0;
+        $notification->unread = 0;
         $notification->save();
       }
 

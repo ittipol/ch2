@@ -11,6 +11,7 @@
 	margin-top: 40px;
 	position: relative;
 	padding-top: 20px;
+	background-color: #fff;
 	border: 2px solid #F2F3F7;
 }
 
@@ -216,4 +217,8 @@
 .card .additional-option .dot {
 	margin: 3px auto;
 	background-color: #fff;
+}
+
+.shelf .card {
+	margin: 0;
 }
