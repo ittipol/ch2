@@ -19,10 +19,13 @@
   <div class="shelf">
 
     <h3>{{$shelf['categoryName']}}</h3>
-    <div class="space-bottom-10">
-      <a href="" >แสดงสินค้าทั้งหมด ({{$shelf['total']}})</a>
+    <!-- <div class="space-bottom-10"> -->
+      <!-- <a href="" >แสดงสินค้าทั้งหมด ({{$shelf['total']}})</a> -->
       <!-- <a href="">แสดงหมวดสินค้าที่เกี่ยวข้องทั้งหมด</a> -->
-    </div>
+    <!-- </div> -->
+
+    <h2>{{$shelf['total']}}</h2>
+    <h5>รายการสินค้า</h5>
 
     <div class="row">
 
@@ -32,7 +35,7 @@
         <div class="row">
 
           @foreach($shelf['products']['items'] as $product)
-            <div class="col-md-4 col-xs-12">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 
               <div class="card">
 
@@ -41,15 +44,15 @@
                 @endif
                 
                 <div class="image-tile">
-                 
+                  <a href="{{$product['detailUrl']}}">
                     <div class="card-image" style="background-image:url({{$product['_imageUrl']}});"></div>
-              
+                  </a>
                 </div>
                 
                 <div class="card-info">
-                 
+                  <a href="{{$product['detailUrl']}}">
                     <div class="card-title">{{$product['name']}}</div>
-               
+                  </a>
                   <div class="card-sub-info">
 
                     <div class="card-sub-info-row product-price-section">
@@ -71,9 +74,13 @@
           @endforeach
 
           @if(!empty($shelf['products']['all']))
-            <div class="col-md-4 col-xs-12">
-              <a href="#" class="product-all-tile">
-                {{$shelf['products']['all']['title']}}
+            <div class="col-lg-3 col-md-12 col-xs-12">
+              <a href="{{$shelf['productShelfUrl']}}" class="product-all-tile">
+                <span>
+                  แสดงสินค้าทั้งหมด<br>
+                  {{$shelf['products']['all']['title']}}
+                  <img src="/images/common/tag.png">
+                </span>
               </a>
             </div>
           @endif
@@ -83,7 +90,6 @@
         @else
 
           <div class="list-empty-message text-center space-top-20">
-            <!-- <img class="space-bottom-20 not-found-image" src="/images/common/not-found.png"> -->
             <div>
               <h4>ยังไม่มีสินค้าหมวด{{$shelf['categoryName']}}</h4>
             </div>
@@ -94,7 +100,7 @@
       </div>
 
       <div class="col-md-12 col-xs-12">
-        <a href="" class="bottom-wide-button space-top-20">แสดงหมวดสินค้าที่เกี่ยวข้องทั้งหมด</a>
+        <a href="{{$shelf['categoryUrl']}}" class="bottom-wide-button space-top-20">แสดงหมวดสินค้าที่เกี่ยวข้อง</a>
       </div>
 
     </div>

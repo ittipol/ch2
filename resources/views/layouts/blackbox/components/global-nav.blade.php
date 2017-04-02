@@ -9,7 +9,7 @@
       @if (!Auth::check())
 
         <div class="account-info">
-          <div>คุญยังไม่ได้เข้าสู่ระบบ</div>
+          <div>ยังไม่ได้เข้าสู่ระบบ</div>
           <div class="account-description">
             <a href="{{URL::to('login')}}">
               <h4>เข้าสู่ระบบ</h4>
@@ -19,14 +19,14 @@
         <div class="line space-top-bottom-10"></div>
 
         <div class="account-info">
-          <div>คุณยังไม่ได้เป็นสมาชิก</div>
+          <div>ยังไม่ได้เป็นสมาชิก</div>
           <div class="account-description">
             <a href="{{URL::to('register')}}">
               <h4>สมัครสมาชิก</h4>
             </a>
           </div>
         </div>
-        <div class="line space-top-bottom-10"></div>
+        <!-- <div class="line space-top-bottom-10"></div> -->
 
       @else
 

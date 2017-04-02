@@ -1,60 +1,58 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<div class="container list">
-
-  <h3>{{$title}}</h3>
-
-  <a href="">แสดงประเททสินค้า</a>
-  <!-- <div id="filter_expand_panel" class="right-size-panel filter">
-    <div class="right-size-panel-inner">
-
-      <div class="right-size-panel-close-icon"></div>
-    </div>
-  </div> -->
-
-  <!-- <div class="text-right space-top-20">
-    <a class="button" data-right-side-panel="1" data-right-side-panel-target="#filter_expand_panel">
-      ค้นหา
-    </a>
-  </div> -->
-
-  <div class="display-category-button">แสดงประเททสินค้า</div>
-
-  <div class="category-list-extend-panel">
-    <div class="nano">
-      <div class="category-list-extend-panel-inner nano-content">
-
-        <div>
-
-          <h4>หมวดสินค้า</h4>
-
-          <div class="button-group">
-
-            <div class="additional-option">
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="additional-option-content">
-                <a href="">แสดงสินค้านี้</a>
-              </div>
-            </div>
-          
+<div class="sub-header-nav">
+  <div class="sub-header-nav-fixed-top">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="additional-option pull-right">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="additional-option-content">
+            <a href="">ไปยังหน้าสินค้าหลัก</a>
+            <a href="">ไปยังหน้าแสดงหมวดสินค้า</a>
           </div>
-        </div>
-
-        <div class="row">
-          @foreach($categories as $category)
-          <div class="col-xs-12">
-            <a href="{{$category['url']}}">
-              <div class="category-item">
-                {{$category['name']}}
-              </div>
-            </a>
-          </div>
-          @endforeach
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="container list space-top-30">
+
+  <h3>{{$title}}</h3>
+  <!-- <a data-right-side-panel="1" data-right-side-panel-target="#category_expand_panel">แสดงหมวดสินค้าที่เกี่ยวข้อง</a> -->
+  <div class="line"></div>
+  <div class="text-right space-top-bottom-20">
+    <a class="button" data-right-side-panel="1" data-right-side-panel-target="#category_expand_panel">หมวดสินค้า</a>
+    <a class="button" data-right-side-panel="1" data-right-side-panel-target="#filter_expand_panel">ตัวกรอง</a>
+  </div>
+
+  <div id="category_expand_panel" class="right-size-panel category">
+
+    <a href="">หมวดสินค้าหลัก</a>
+    <div class="line"></div>
+    <a href="">หมวดสินค้า</a>
+    <div class="line"></div>
+    <a href="">หมวดก่อนหน้าสินค้า</a>
+
+    <div class="right-size-panel-inner">
+      @foreach($categories as $category)
+        <a href="{{$category['url']}}">
+          <div class="category-item">
+            {{$category['name']}}
+          </div>
+        </a>
+      @endforeach
+      <div class="right-size-panel-close-icon"></div>
+    </div>
+  </div>
+
+  <div id="filter_expand_panel" class="right-size-panel filter">
+    <div class="right-size-panel-inner">
+      @include('components.filter_expand_panel')
+      <div class="right-size-panel-close-icon"></div>
     </div>
   </div>
 

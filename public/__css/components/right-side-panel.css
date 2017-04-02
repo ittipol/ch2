@@ -74,9 +74,16 @@
 	width: 100%;
 }
 
+.right-size-panel.category {
+	width: 400px;
+	color: #000;
+	background-color: #fff;
+}
+
 @media only screen and (max-width : 480px) {
   
-	.right-size-panel {
+	.right-size-panel,
+	.right-size-panel.category {
 		width: 100%;
 	}
 

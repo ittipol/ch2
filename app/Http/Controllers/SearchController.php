@@ -63,20 +63,14 @@ class SearchController extends Controller
 
     }
 
-    // Get Sorting Fields
-    // if model = search mean all model
-    // then model = Item mean select Item automatic
-
     $filterOptions = $lookup->getFilterOptions();
     $sortingFields = $lookup->getSortingFields();
 
-    // Get Filter Option
     $searchOptions = array(
       'filters' => $filterHelper->getFilterOptions($filterOptions,$filters),
       'sort' => $filterHelper->getSortingOptions($sortingFields,$sort)
     );
 
-    // Get Filter Name
     $displayingFilters = array(
       'filters' => $filterHelper->getDisplayingFilterOptions($filterOptions,$filters),
       'sort' => $filterHelper->getDisplayingSorting($sortingFields,$sort)

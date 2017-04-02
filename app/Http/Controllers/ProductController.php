@@ -6,6 +6,7 @@ use App\Http\Requests\CustomFormRequest;
 use App\library\service;
 use App\library\message;
 use App\library\cache;
+use App\library\filterHelper;
 use App\library\url;
 use Redirect;
 use Session;
@@ -31,9 +32,11 @@ class ProductController extends Controller
 
   public function shelf() {
 
+    $url = new Url;
+
     $model = Service::loadModel('Product');
 
-    $categories = Service::loadModel('Category')->getPrimaryCategories();
+    $categories = Service::loadModel('Category')->getCategories(null,false);
 
     $shelfs = array();
     foreach ($categories as $category) {
@@ -63,18 +66,20 @@ class ProductController extends Controller
       $products = $products
       ->select('products.*')
       ->orderBy('products.created_at','desc')
-      ->take(2)
+      ->take(3)
       ->get();
 
       $_products = array();
       foreach ($products as $product) {
-        $_products['items'][] = $product->buildPaginationData();
+        $_products['items'][] = array_merge($product->buildPaginationData(),array(
+          'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
+        ));
+        
       }
 
-      if($total > 2) {
-        // display all Product link
+      if($total > 3) {
         $_products['all'] = array(
-          'title' => '+'.($total-2)
+          'title' => '+'.($total-3)
         );
       }
 
@@ -82,7 +87,9 @@ class ProductController extends Controller
         'categoryName' => $category->name,
         'subCategories' => $_subCategories,
         'products' => $_products,
-        'total' => $total
+        'total' => $total,
+        'productShelfUrl' => $url->setAndParseUrl('product/shelf/{category_id}',array('category_id'=>$category->id)),
+        'categoryUrl' => $url->setAndParseUrl('product/category/{category_id}',array('category_id'=>$category->id))
       );
 
     }
@@ -98,29 +105,44 @@ class ProductController extends Controller
     $url = new Url;
 
     $model = Service::loadModel('Product');
+    $categoryModel = Service::loadModel('Category');
 
-    $categories = Service::loadModel('Category')->getPrimaryCategories();
+    $categoryId = null;
+    if(!empty($this->param['category_id'])) {
+      $categoryId = $this->param['category_id'];
+    }
+
+    $categories = $categoryModel->getCategories($categoryId,false);
+
+    if(empty($categories)) {
+      $this->error = array(
+        'message' => 'ขออภัย ไม่พบหมวดสินค้า'
+      );
+      return $this->error();
+    }
 
     $_categories = array();
     foreach ($categories as $category) {
 
-      $subCategories = Service::loadModel('Category')->select('id','name')->where('parent_id','=',$category->id)->get();
+      $subCategories = $categoryModel->select('id','name')->where('parent_id','=',$category->id)->get();
 
       $_subCategories = array();
       foreach ($subCategories as $subCategory) {
         $_subCategories[] = array(
           'name' => $subCategory->name,
-          'url' =>  $url->setAndParseUrl('product/shelf:{category_id}',array('category_id'=>$subCategory->id))
+          'url' =>  $url->setAndParseUrl('product/category/{category_id}',array('category_id'=>$subCategory->id))
         );
       }
 
       $_categories[] = array(
         'categoryName' => $category->name,
         'subCategories' => $_subCategories,
+        'productShelfUrl' => $url->setAndParseUrl('product/shelf/{category_id}',array('category_id'=>$category->id)),
       );
 
     }
 
+    $this->setData('categoryName',$categoryModel->getCategoryName($categoryId));
     $this->setData('categories',$_categories);
 
     return $this->view('pages.product.category');
@@ -130,10 +152,20 @@ class ProductController extends Controller
   public function listView() {
 
     $model = Service::loadModel('Product');
-    
+
     $page = 1;
     if(!empty($this->query['page'])) {
       $page = $this->query['page'];
+    }
+
+    $filters = '';
+    if(!empty($this->query['fq'])) {
+      $filters = $this->query['fq'];
+    }
+
+    $sort = 'created_at:desc';
+    if(!empty($this->query['sort'])) {
+      $sort = $this->query['sort'];
     }
 
     $categoryId = null;
@@ -174,8 +206,25 @@ class ProductController extends Controller
 
     $this->data = $model->paginator->build();
 
+    $filterHelper = new FilterHelper;
+
+    $filterOptions = $model->getFilterOptions();
+    $sortingFields = $model->getSortingFields();
+
+    $searchOptions = array(
+      'filters' => $filterHelper->getFilterOptions($filterOptions,$filters),
+      'sort' => $filterHelper->getSortingOptions($sortingFields,$sort)
+    );
+
+    $displayingFilters = array(
+      'filters' => $filterHelper->getDisplayingFilterOptions($filterOptions,$filters),
+      'sort' => $filterHelper->getDisplayingSorting($sortingFields,$sort)
+    );
+    
     $this->setData('title',$title);
-    $this->setData('categories',Service::loadModel('Category')->getCategories($categoryId));
+    $this->setData('categories',Service::loadModel('Category')->_getCategories($categoryId));
+    $this->setData('searchOptions',$searchOptions);
+    $this->setData('displayingFilters',$displayingFilters);
 
     return $this->view('pages.product.list');
 

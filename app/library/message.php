@@ -42,7 +42,7 @@ class Message
   // }
 
   public function loginSuccess() {
-    Session::flash('message.title', 'คุณเข้าสู่ระบบแล้ว');
+    Session::flash('message.title', 'เข้าสู่ระบบแล้ว');
     Session::flash('message.desc', '');
     Session::flash('message.type', 'info');
   }
