@@ -15,7 +15,7 @@
 <div class="container">
 
   @if(!$hasPaymentMethod)
-    <div class="secondary-message-box space-bottom-30">
+    <div class="secondary-message-box error space-bottom-30">
       <div class="secondary-message-box-inner">
         <h3>ไม่พบวิธีการชำระเงินชองคุณ</h3>
         <p>กรุณาเพิ่มวิธีการชำระเงินของคุณอย่างน้อย 1 วิธี เพื่อใช่ในการกำหนดวิธีการชำระเงินให้กับลูกค้า</p>

@@ -1,7 +1,6 @@
 .secondary-message-box {
-	/*padding: 15px;*/
-	color: #D50000;
-	background-color: #FFEBEE;
+	color: #000;
+	background-color: #ececec;
 }
 
 .secondary-message-box .secondary-message-box-inner {
@@ -12,6 +11,11 @@
 	padding: 15px;
 	color: #000;
 	background-color: transparent;
+}
+
+.secondary-message-box.error {
+	color: #D50000;
+	background-color: #FFEBEE;
 }
 
 .secondary-message-box.info {
@@ -33,6 +37,10 @@
 }
 
 .secondary-message-box .line {
+	background-color: #bababa;
+}
+
+.secondary-message-box.error .line {
 	background-color: #EF9A9A;
 }
 

@@ -142,7 +142,11 @@
                 <div class="shipping-method-choice">
                   <label class="choice-box">
                     <?php
-                      echo Form::radio('shop['.$value['shop']['id'].'][shipping_method_id]', $shippingMethod['id'], $shippingMethod['select']);
+                      echo Form::radio('shop['.$value['shop']['id'].'][shipping_method_id]', $shippingMethod['id'], $shippingMethod['select'], array(
+                        'class' => 'shipping-method-rdobox',
+                        'data-has-branch' => $shippingMethod['hasBranch'],
+                        'data-branch-select-box-target' => '#branch_'.$shippingMethod['id']
+                      ));
                     ?> 
                     <div class="inner">
                       <div class="row">
@@ -170,6 +174,25 @@
                       </div>
                     </div>
                   </label>
+
+                  @if(!empty($shippingMethod['branches']))
+                  <div class="secondary-message-box space-bottom-20 hide-element">
+                    <div class="secondary-message-box-inner">
+                      <h5 class="space-bottom-10">เลือกสาขาที่ต้องการรับสินค้า</h5>
+                      <?php
+                        echo Form::select('shop['.$value['shop']['id'].'][branch_id]', $shippingMethod['branches'], null, array(
+                          'id' => 'branch_'.$shippingMethod['id'],
+                          'disabled' => true
+                        ));
+                      ?>
+                    </div>
+                  </div>
+                  @endif
+
+                  <!-- <div class="text-right">
+                    <a class="button" data-right-side-panel="1" data-right-side-panel-target="#shipping_method_expand_panel">รายละเอียดการจัดส่ง</a>
+                  </div> -->
+
                 </div>
               @endforeach
 
@@ -187,11 +210,11 @@
 
       <div class="text-right">
 
-        <div class="secondary-message-box space-bottom-20">
+        <div class="secondary-message-box error space-bottom-20">
           <div class="secondary-message-box-inner">
-            <p class="error-message text-bold">*** รายการสั่งซื้อหรือสินค้าบางรายการอาจยังไม่ได้รวมค่าจัดส่ง</p>
-            <p class="error-message text-bold">*** ค่าจัดส่งของการสั่งซื้ออาจมีการเปลี่ยนแปลงหลังจากผู้ขายได้ทำการยืนยันการสั่งซื้อ</p>
-            <p class="error-message text-bold">*** โปรดรอการยืนยันการสั่งซื้อจากผู้ขายก่อนการชำระเงิน</p>
+            <p class="text-bold">*** รายการสั่งซื้อหรือสินค้าบางรายการอาจยังไม่ได้รวมค่าจัดส่ง</p>
+            <p class="text-bold">*** ค่าจัดส่งของการสั่งซื้ออาจมีการเปลี่ยนแปลงหลังจากผู้ขายได้ทำการยืนยันการสั่งซื้อ</p>
+            <p class="text-bold">*** โปรดรอการยืนยันการสั่งซื้อจากผู้ขายก่อนการชำระเงิน</p>
           </div>
         </div>
 
@@ -206,6 +229,13 @@
         echo Form::close();
       ?>
 
+      <div id="shipping_method_expand_panel" class="right-size-panel filter">
+        <div class="right-size-panel-inner">
+
+          <div class="right-size-panel-close-icon"></div>
+        </div>
+      </div>
+
     @else
 
       @include('pages.cart.cart_empty')
@@ -215,5 +245,61 @@
   </div>
 
 </div>
+
+<script type="text/javascript">
+  
+  class Checkout {
+
+    constructor() {
+      this.branchTarget;
+    }
+
+    load() {
+
+      if($('.shipping-method-rdobox:checked').data('has-branch')) {
+        let target = $('.shipping-method-rdobox:checked').data('branch-select-box-target');
+        $(target).parent().parent().css('display','block');
+        $(target).prop('disabled',false);
+        this.branchTarget = target;
+      }
+
+      this.bind();
+    }
+
+    bind() {
+
+      let _this = this;
+
+      $('.shipping-method-rdobox').on('change',function(){
+        if($(this).data('has-branch')) {
+
+          if(_this.branchTarget) {
+            $(_this.branchTarget).parent().parent().slideUp(220);
+            $(_this.branchTarget).prop('disabled',true);  
+          }
+          
+          let target = $(this).data('branch-select-box-target');
+          $(target).parent().parent().slideDown(220);
+          $(target).prop('disabled',false);
+          _this.branchTarget = target;
+
+        }else{
+          $(_this.branchTarget).parent().parent().slideUp(220);
+          $(_this.branchTarget).prop('disabled',true);
+          _this.branchTarget = null;
+
+        }
+      });
+
+    }
+
+  }
+
+  $(document).ready(function(){
+    const checkout = new Checkout();
+    checkout.load();
+  });
+
+</script>
 
 @stop

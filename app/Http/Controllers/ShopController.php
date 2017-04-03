@@ -35,6 +35,13 @@ class ShopController extends Controller
 
     $this->data = $model->modelData->build();
 
+    // $product = Service::loadModel('Product')
+    // ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
+    // ->where('shop_relate_to.model','like','Product')
+    // ->where('shop_relate_to.shop_id','=',request()->get('shopId'))
+    // ->select('products.*')
+    // ->get();
+
     $totalProduct = Service::loadModel('ShopRelateTo')
     ->where([
       ['shop_id','=',request()->get('shopId')],
@@ -291,8 +298,7 @@ class ShopController extends Controller
 
       $this->data = $branch->paginator->build();
     }
-
-    $this->setData('jobUrl',request()->get('shopUrl').'job');
+    
     $this->setData('branchAddUrl',request()->get('shopUrl').'branch/add');
 
     return $this->view('pages.shop.branch');

@@ -39,10 +39,35 @@ class Branch extends Model
     'messages' => array(
       'name.required' => 'ชื่อสาขาห้ามว่าง',
     )
-  ); 
+  );
 
   public function __construct() {  
     parent::__construct();
+  }
+
+  public function getBranches($shopId,$build = true) {
+
+    $branches = $this
+    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'branches.id')
+    ->where('shop_relate_to.model','like','Branch')
+    ->where('shop_relate_to.shop_id','=',request()->get('shopId'))
+    ->select('branches.id','branches.name');
+
+    if(!$branches->exists()) {
+      return null;
+    }
+
+    if(!$build) {
+      return $branches->get();
+    }
+
+    $_branches = array();
+    foreach ($branches->get() as $branch) {
+      $_branches[] = $branch->buildModelData();
+    }
+
+    return $_branches;
+
   }
 
   public function buildModelData() {

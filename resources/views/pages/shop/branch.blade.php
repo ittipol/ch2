@@ -29,19 +29,6 @@
       </div>
     </div>
 
-    <div class="tile-nav small">
-      <div class="tile-nav-image">
-        <a href="{{$jobUrl}}">
-          <img src="/images/common/career.png">
-        </a>
-      </div>
-      <div class="tile-nav-info">
-        <a href="{{$jobUrl}}">
-          <h4 class="tile-nav-title">งาน</h4>
-        </a>
-      </div>
-    </div>
-
   </div>
 
   <div class="line"></div>

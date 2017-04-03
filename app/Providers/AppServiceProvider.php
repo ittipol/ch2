@@ -32,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
           view()->share('_shop_product_url',$url->url('shop/'.$slug.'/product'));
           view()->share('_shop_job_url',$url->url('shop/'.$slug.'/job'));
           view()->share('_shop_advertising_url',$url->url('shop/'.$slug.'/advertising'));
+          view()->share('_shop_branch_url',$url->url('shop/'.$slug.'/branch/manage'));
 
         // }
 

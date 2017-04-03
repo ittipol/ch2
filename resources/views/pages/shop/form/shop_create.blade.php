@@ -103,4 +103,15 @@
 
   </div>
 
+  <script type="text/javascript">
+
+    $(document).ready(function(){
+      
+      const form = new Form();
+      form.load();
+
+    });
+
+  </script>
+
 @stop

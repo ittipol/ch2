@@ -426,7 +426,7 @@
     ?>
   </div>
 
-  <div class="secondary-message-box space-top-30">
+  <div class="secondary-message-box error space-top-30">
     <div class="secondary-message-box-inner">
       <div>*** จะไม่สามารถแก้ไขได้หลังจากยืนยันการสั่งซื้อ</div>
       <div>*** โปรดตรวจสอบความถูกต้องก่อนการยืนยันการสั่งซื้อ</div>

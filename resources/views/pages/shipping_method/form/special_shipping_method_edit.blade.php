@@ -43,6 +43,30 @@
       ?>
     </div>
 
+    @if(!empty($branches))
+    <div class="form-row">
+      <?php 
+        echo Form::label('branch', 'กำหนดสาขาที่ลูกค้าสามารถรับสินค้าได้');
+      ?>
+      <div class="form-item-group">
+        <div class="form-item-group-inner">
+          <div class="row">
+              @foreach ($branches as $id => $branch)
+              <div class="col-lg-4 col-sm-6 col-sm-12">
+                <label class="choice-box">
+                  <?php
+                    echo Form::checkbox('shippingMethodToBranch[branch_id][]', $id);
+                  ?>
+                  <div class="inner"><?php echo $branch; ?></div>
+                </label>
+              </div>
+              @endforeach
+          </div>
+        </div>
+      </div>
+    </div>
+    @endif
+
     <div class="form-row">
       <?php 
         echo Form::label('name', 'ผู้ให้บริการการจัดส่ง');

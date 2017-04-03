@@ -51,6 +51,7 @@ class ShippingMethodController extends Controller
   }
 
   public function edit() {
+
     $model = Service::loadModel('ShippingMethod')->find($this->param['id']);
 
     $model->formHelper->loadFieldData('ShippingService',array(
@@ -74,7 +75,13 @@ class ShippingMethodController extends Controller
     $this->data = $model->formHelper->build();
 
     if($model->special) {
+
+      if($model->special_alias == 'picking-up-item') {
+        $this->setData('branches',request()->get('shop')->getRelatedShopData('Branch'));
+      }
+
       $this->setData('shippingMethod',$model->modelData->build(true));
+
       return $this->view('pages.shipping_method.form.special_shipping_method_edit');
     }
 

@@ -21,6 +21,8 @@ class CheckoutController extends Controller
     $productSummaries = Service::loadModel('Cart')->getProductSummary();
 
     $shippingMethodModel = Service::loadModel('ShippingMethod');
+    $shippingMethodToBranchModel = Service::loadModel('ShippingMethodToBranch');
+
     $shippingMethods = array();
     foreach ($productSummaries as $productSummary) {
       $shippingMethods[$productSummary['shop']['id']] = $shippingMethodModel->getShippingMethodChoice($productSummary['shop']['id']);

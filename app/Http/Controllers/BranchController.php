@@ -127,7 +127,7 @@ class BranchController extends Controller
 
     if($model->fill($request->all())->save()) {
       Message::display('สาขา '.$model->name.' ถูกเพิ่มแล้ว','success');
-      return Redirect::to(route('shop.branch.detail', ['id' => $model->id]));
+      return Redirect::to(route('shop.branch.detail', ['shopSlug' => request()->shopSlug,'id' => $model->id]));
     }else{
       return Redirect::back();
     }
@@ -164,7 +164,7 @@ class BranchController extends Controller
     if($model->fill($request->all())->save()) {
 
       Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to(route('shop.branch.detail', ['id' => $model->id]));
+      return Redirect::to(route('shop.branch.detail', ['shopSlug' => request()->shopSlug,'id' => $model->id]));
     }else{
       return Redirect::back();
     }
