@@ -21,10 +21,12 @@
 
 <div class="container">
 
-  @if(!empty($_modelData['_categoryPaths']))
+  @if(!empty($categoryPaths))
   <ol class="breadcrumb">
-    @foreach($_modelData['_categoryPaths'] as $path)
-    <li class="breadcrumb-item">{{$path['name']}}</li>
+    @foreach($categoryPaths as $path)
+    <li class="breadcrumb-item">
+      <a href="{{$path['url']}}">{{$path['name']}}</a>
+    </li>
     @endforeach
   </ol>
   @endif

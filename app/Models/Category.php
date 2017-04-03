@@ -10,15 +10,6 @@ class Category extends Model
   protected $fillable = ['parent_id','name'];
   public $timestamps  = false;
 
-  // public function getCategoryName($id) {
-
-  //   if(empty($id)) {
-  //     return null;
-  //   }
-
-  //   return $this->find($id)->name;
-  // }
-
   public function getCategoryName($id) {
 
     if(empty($id)) {
@@ -34,11 +25,11 @@ class Category extends Model
     return $category->first()->name;
   }
 
-  public function getCategories($parentId = null,$build = true) {
+  public function getSubCategories($parentId = null,$build = true) {
 
     $url = new Url;
 
-    $categories = $this->where('parent_id','=',$parentId);
+    $categories = $this->select('id','name')->where('parent_id','=',$parentId);
 
     if(!$categories->exists()) {
       return null;
@@ -60,14 +51,14 @@ class Category extends Model
 
   }
 
-  public function _getCategories($id = null) {
+  public function getCategoriesWithSubCategories($id = null) {
 
     $url = new Url;
  
     $category = $this->find($id);
 
     if(empty($category->parent_id)) {
-      $categories = $this->getCategories($category->id,false);
+      $categories = $this->getSubCategories($category->id,false);
 
       $_categories = array();
       foreach ($categories as $_category) {
@@ -81,7 +72,7 @@ class Category extends Model
       }
 
     }else{
-      $categories = $this->getCategories($category->parent_id,false);
+      $categories = $this->getSubCategories($category->parent_id,false);
 
       $_categories = array();
       foreach ($categories as $_category) {
@@ -89,7 +80,7 @@ class Category extends Model
         $__subCategories = array();
         if($id == $_category->id) {
       
-          $subCategories = $this->getCategories($_category->id,false);
+          $subCategories = $this->getSubCategories($_category->id,false);
 
           if(!empty($subCategories)) {
             foreach ($subCategories as $_subCategories) {
@@ -115,5 +106,44 @@ class Category extends Model
     return $_categories;
 
   }
+
+  public function getCategoryPaths($id) {
+
+    $url = new Url;
+
+    $paths = CategoryPath::where('category_id','=',$id)->get();
+
+    foreach ($paths as $path) {
+
+      $subCat = $path->path->where('parent_id','=',$path->path->id)->first();
+
+      $hasChild = false;
+      if(!empty($subCat)) {
+        $hasChild = true;
+      }
+
+      $categoryPaths[] = array(
+        // 'id' => $path->path->id,
+        'name' => $path->path->name,
+        'url' => $url->setAndParseUrl('product/shelf/{category_id}',array('category_id'=>$path->path->id)),
+        'hasChild' => $hasChild
+      );
+    }
+
+    return $categoryPaths;
+
+  }
+
+  public function getParentCategory($id) {
+
+    $category = $this->select('parent_id')->where('id','=',$id);
+
+    if(!$category->exists()) {
+      return null;
+    }
+
+    return $this->select('id','parent_id','name')->where('id','=',$category->first()->parent_id)->first();
+
+  }  
 
 }

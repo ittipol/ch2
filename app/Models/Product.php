@@ -260,31 +260,17 @@ class Product extends Model
 
   public function getCategoryPaths() {
 
+    $url = new Url;
+
+    $categoryModel = new Category;
+
     $productToCategory = ProductToCategory::where('product_id','=',$this->id)
     ->select('category_id')
     ->first();
 
     $categoryPaths = array();
     if(!empty($productToCategory)) {
-
-      $paths = CategoryPath::where('category_id','=',$productToCategory->category_id)->get();
-
-      foreach ($paths as $path) {
-
-        $subCat = $path->path->where('parent_id','=',$path->path->id)->first();
-
-        $hasChild = false;
-        if(!empty($subCat)) {
-          $hasChild = true;
-        }
-
-        $categoryPaths[] = array(
-          'id' => $path->path->id,
-          'name' => $path->path->name,
-          'hasChild' => $hasChild
-        );
-      }
-
+      $categoryPaths = $categoryModel->getCategoryPaths($productToCategory->category_id);
     }
 
     return $categoryPaths;
@@ -389,9 +375,9 @@ class Product extends Model
       '_shipping_calculate_from' => $shippingCalculateFrom,
       'active' => $this->active,
       '_active' => $this->active ? 'เปิดการขายสินค้า' : 'ปิดการขาย',
-      '_categoryName' => !empty($categoryName) ? $categoryName : '-',
-      '_categoryPathName' => !empty($categoryPathName) ? $categoryPathName : '-',
-      '_categoryPaths' => $this->getCategoryPaths(),
+      // '_categoryName' => !empty($categoryName) ? $categoryName : '-',
+      // '_categoryPathName' => !empty($categoryPathName) ? $categoryPathName : '-',
+      // '_categoryPaths' => $this->getCategoryPaths(),
       'promotion' => $this->getPromotion(),
       'flag' => $this->getFlag(),
     ),$this->getShippingCostText());

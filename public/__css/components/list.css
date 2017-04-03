@@ -145,18 +145,6 @@
 	margin-left: 40px;
 }
 
-.category-name {
-	line-height: 40px;
-	font-size: 20px;
-	padding: 20px 0;
-}
-
-.category-name > span {
-	color: #fff;
-  background-color: #0D47A1;
-  padding: 10px 15px;
-}
-
 .list-item-group {
 	padding: 10px;
 }

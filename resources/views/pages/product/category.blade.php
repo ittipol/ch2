@@ -16,7 +16,7 @@
     <h3>{{$categoryName}}</h3>
     <div class="line"></div>
     <div class="text-right">
-      <a href="" class="button space-top-bottom-20">แสดงสินค้าทั้งหมด</a>
+      <a href="{{$productShelfUrl}}" class="button space-top-bottom-20">แสดงสินค้าทั้งหมด</a>
     </div>
   @endif
 

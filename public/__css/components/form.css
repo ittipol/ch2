@@ -269,10 +269,6 @@ form .input-addon > select:last-child {
 	display: inline-block;
 }
 
-/*.text-group .text-input-wrapper:not(:first-child) input[type="text"] {
-	margin-top: 10px;
-}*/
-
 .text-input-wrapper {
 	position: relative;
 }
@@ -290,7 +286,6 @@ form .input-addon > select:last-child {
 }
 
 .text-input-wrapper .button-clear-text.round {
-  /*height: 40px;*/
   line-height: 40px;
   width: 40px;
   background-color: pink;
@@ -305,7 +300,6 @@ form .input-addon > select:last-child {
   right: 30px;
 }
 
-
 .text-input-group-wrapper > input[type="text"] {
 	width: 40%;
 	margin-right: 5px;
@@ -317,8 +311,6 @@ form .input-addon > select:last-child {
 	right: 0;
   line-height: 40px;
   width: 40px;
-  /*background-color: pink;*/
-  /*border-radius: 40px;*/
   text-align: center;
   display: inline-block;
 }
@@ -382,6 +374,18 @@ select[name^="OfficeHour"].disabled {
 .input-field-group > input[type="text"] {
 	width: 26%;
 	margin-right: 10px;
+}
+
+form .category-name {
+	line-height: 40px;
+	font-size: 20px;
+	padding: 20px 0;
+}
+
+form .category-name > span {
+	color: #fff;
+  background-color: #0D47A1;
+  padding: 10px 15px;
 }
 
 /*==========  Mobile First Method  ==========*/

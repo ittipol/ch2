@@ -10,8 +10,8 @@
           <div class="dot"></div>
           <div class="dot"></div>
           <div class="additional-option-content">
-            <a href="">ไปยังหน้าสินค้าหลัก</a>
-            <a href="">ไปยังหน้าแสดงหมวดสินค้า</a>
+            <a href="{{URL::to('product/shelf')}}">ไปยังหน้าสินค้าหลัก</a>
+            <a href="{{URL::to('product/category')}}">ไปยังหน้าแสดงหมวดสินค้า</a>
           </div>
         </div>
       </div>
@@ -21,8 +21,17 @@
 
 <div class="container list space-top-30">
 
+  @if(!empty($categoryPaths))
+  <ol class="breadcrumb">
+    @foreach($categoryPaths as $path)
+    <li class="breadcrumb-item">
+      <a href="{{$path['url']}}">{{$path['name']}}</a>
+    </li>
+    @endforeach
+  </ol>
+  @endif
+
   <h3>{{$title}}</h3>
-  <!-- <a data-right-side-panel="1" data-right-side-panel-target="#category_expand_panel">แสดงหมวดสินค้าที่เกี่ยวข้อง</a> -->
   <div class="line"></div>
   <div class="text-right space-top-bottom-20">
     <a class="button" data-right-side-panel="1" data-right-side-panel-target="#category_expand_panel">หมวดสินค้า</a>
@@ -31,19 +40,25 @@
 
   <div id="category_expand_panel" class="right-size-panel category">
 
-    <a href="">หมวดสินค้าหลัก</a>
-    <div class="line"></div>
-    <a href="">หมวดสินค้า</a>
-    <div class="line"></div>
-    <a href="">หมวดก่อนหน้าสินค้า</a>
-
     <div class="right-size-panel-inner">
+
+      <h4>หมวดสินค้า</h4>
+      <h4 class="category-name">{{$parentCategoryName}}</h4>
+      <div class="line space-bottom-10"></div>
+
       @foreach($categories as $category)
-        <a href="{{$category['url']}}">
-          <div class="category-item">
-            {{$category['name']}}
-          </div>
+        <a href="{{$category['url']}}" class="category-item">
+          {{$category['name']}}
         </a>
+        @if(!empty($category['subCategories']))
+          <div class="sub-category">
+          @foreach($category['subCategories'] as $subCategories)
+            <a href="{{$subCategories['url']}}" class="sub-category-item">
+              {{$subCategories['name']}}
+            </a>
+          @endforeach
+          </div>
+        @endif
       @endforeach
       <div class="right-size-panel-close-icon"></div>
     </div>

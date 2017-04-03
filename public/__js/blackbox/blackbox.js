@@ -119,7 +119,7 @@ class Blackbox {
     });
 
     // $(document).scroll(function() {
-    //   // console.log($(this).scrollTop());
+    //   $(this).scrollTop();
     // });
 
   }

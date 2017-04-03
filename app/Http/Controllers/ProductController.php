@@ -35,13 +35,14 @@ class ProductController extends Controller
     $url = new Url;
 
     $model = Service::loadModel('Product');
+    $categoryModel = Service::loadModel('Category');
 
-    $categories = Service::loadModel('Category')->getCategories(null,false);
+    $categories = $categoryModel->getSubCategories(null,false);
 
     $shelfs = array();
     foreach ($categories as $category) {
 
-      $subCategories = Service::loadModel('Category')->select('id','name')->where('parent_id','=',$category->id)->get();
+      $subCategories = $categoryModel->select('id','name')->where('parent_id','=',$category->id)->get();
 
       $_subCategories = array();
       foreach ($subCategories as $subCategory) {
@@ -112,7 +113,7 @@ class ProductController extends Controller
       $categoryId = $this->param['category_id'];
     }
 
-    $categories = $categoryModel->getCategories($categoryId,false);
+    $categories = $categoryModel->getSubCategories($categoryId,false);
 
     if(empty($categories)) {
       $this->error = array(
@@ -144,6 +145,7 @@ class ProductController extends Controller
 
     $this->setData('categoryName',$categoryModel->getCategoryName($categoryId));
     $this->setData('categories',$_categories);
+    $this->setData('productShelfUrl',$url->setAndParseUrl('product/shelf/{category_id}',array('category_id'=>$categoryId)));
 
     return $this->view('pages.product.category');
 
@@ -152,6 +154,7 @@ class ProductController extends Controller
   public function listView() {
 
     $model = Service::loadModel('Product');
+    $categoryModel = Service::loadModel('Category');
 
     $page = 1;
     if(!empty($this->query['page'])) {
@@ -199,7 +202,7 @@ class ProductController extends Controller
 
     $categoryName = Service::loadModel('Category')->getCategoryName($categoryId);
 
-    $title = 'สินค้าทั้งหมด';
+    $title = '';
     if(!empty($categoryName)) {
       $title = $categoryName;
     }
@@ -220,17 +223,23 @@ class ProductController extends Controller
       'filters' => $filterHelper->getDisplayingFilterOptions($filterOptions,$filters),
       'sort' => $filterHelper->getDisplayingSorting($sortingFields,$sort)
     );
+
+    $parent = $categoryModel->getParentCategory($categoryId);
     
     $this->setData('title',$title);
-    $this->setData('categories',Service::loadModel('Category')->_getCategories($categoryId));
+    $this->setData('categories',$categoryModel->getCategoriesWithSubCategories($categoryId));
     $this->setData('searchOptions',$searchOptions);
     $this->setData('displayingFilters',$displayingFilters);
+    $this->setData('categoryPaths',$categoryModel->getCategoryPaths($categoryId));
+    $this->setData('parentCategoryName',$parent['name']);
 
     return $this->view('pages.product.list');
 
   }
 
   public function detail() {
+
+    $categoryModel = Service::loadModel('Category');
 
     $model = Service::loadModel('Product')->find($this->param['id']);
 
@@ -263,6 +272,7 @@ class ProductController extends Controller
     $this->setData('shopImageUrl',$shop->getProfileImageUrl());
     $this->setData('shopCoverUrl',$shop->getCoverUrl());
     $this->setData('shopUrl','shop/'.$slug);
+    $this->setData('categoryPaths',$model->getCategoryPaths());
 
     return $this->view('pages.product.detail');
 
