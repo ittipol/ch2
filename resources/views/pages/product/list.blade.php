@@ -42,20 +42,27 @@
 
     <div class="right-size-panel-inner">
 
-      <h4>หมวดสินค้า</h4>
+      <!-- <h4>หมวดสินค้า</h4> -->
       <h4 class="category-name">{{$parentCategoryName}}</h4>
       <div class="line space-bottom-10"></div>
 
       @foreach($categories as $category)
-        <a href="{{$category['url']}}" class="category-item">
-          {{$category['name']}}
-        </a>
+        <div class="category-item">
+          <a href="{{$category['url']}}">
+            {{$category['name']}}
+          </a>
+          <span class="category-product-total">({{$category['total']}})</span>
+        </div>
         @if(!empty($category['subCategories']))
           <div class="sub-category">
           @foreach($category['subCategories'] as $subCategories)
-            <a href="{{$subCategories['url']}}" class="sub-category-item">
-              {{$subCategories['name']}}
-            </a>
+            <div class="sub-category-item">
+              <a href="{{$subCategories['url']}}">
+                {{$subCategories['name']}}
+              </a>
+              <span class="category-product-total">({{$subCategories['total']}})</span>
+            </div>
+            
           @endforeach
           </div>
         @endif

@@ -25,5 +25,27 @@
       <img class="icon-header" src="/images/icons/search-white.png" />
       <input type="checkbox" id="search_panel_trigger" class="search-trigger">
     </label>
+
+    <label class="header-button additional-button" for="additional_panel_trigger">
+      <div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <input type="checkbox" id="additional_panel_trigger" class="additional-trigger">
+    </label>
+
+    <!-- <label class="header-button additional-option-button additional-option">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="additional-option-content">
+        <a href="">เพิ่มงานฟรีแลนซ์ของคุณ</a>
+        <a href="">เพิ่มร้านค้า</a>
+        <a href="">เพิ่มประกาศซื้อ-เช่า-ขายสินค้า</a>
+        <a href="">เพิ่มประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</a>
+      </div>
+    </label> -->
   </div>
+  
 </header>

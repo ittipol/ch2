@@ -154,7 +154,7 @@ class ProductDiscountController extends Controller
     $request->request->add(['product_id' => $this->param['product_id']]);
 
     if($model->fill($request->all())->save()) {
-      Message::display('ลงประกาศเรียบร้อยแล้ว','success');
+      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('shop/'.request()->shopSlug.'/product_sale_promotion/'.$this->param['product_id']);
     }else{
       return Redirect::back();

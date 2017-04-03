@@ -1,6 +1,8 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
+@include('pages.product.layouts.top_nav')
+
 <div class="container">
   
   <div class="container-header">

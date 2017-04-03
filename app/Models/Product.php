@@ -376,7 +376,7 @@ class Product extends Model
       'active' => $this->active,
       '_active' => $this->active ? 'เปิดการขายสินค้า' : 'ปิดการขาย',
       // '_categoryName' => !empty($categoryName) ? $categoryName : '-',
-      // '_categoryPathName' => !empty($categoryPathName) ? $categoryPathName : '-',
+      '_categoryPathName' => !empty($categoryPathName) ? $categoryPathName : '-',
       // '_categoryPaths' => $this->getCategoryPaths(),
       'promotion' => $this->getPromotion(),
       'flag' => $this->getFlag(),

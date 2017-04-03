@@ -12,6 +12,7 @@
 <?php
 
   $jsFiles = array(
+    '__js/node_modules/socket.io.js',
     '__js/jquery-3.1.1.min.js',
     '__js/jquery.validate.min.js',
     '__js/blackbox/blackbox.js',
@@ -35,7 +36,6 @@
     '__js/components/notification-bottom.js',
     '__js/components/additional-option.js',
     '__js/components/custom-scroll.js',
-    // '__js/components/filter.js',
     '__js/components/image-gallery.js',
     // '__js/components/tabs.js'
     '__js/components/profile-image.js',
@@ -43,7 +43,6 @@
     '__js/components/modal-dialog.js',
     '__js/components/order-progress-bar.js',
     '__js/components/right-side-panel.js',
-    '__js/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js',
     '__js/notification/push-notification.js',
   );
 

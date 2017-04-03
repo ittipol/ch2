@@ -280,14 +280,6 @@ class ProductController extends Controller
 
   public function menu() {
 
-    // ผู้ให้บริการขนส่ง
-    // ไปรษณีย์ไทย
-    // Nim Express
-    // DHL
-    // UPS
-    // Kerry Express
-    // ระบบขนส่งของทางร้าน
-
     $cache = new Cache;
 
     $model = Service::loadModel('Product')->find($this->param['id']);
@@ -316,6 +308,7 @@ class ProductController extends Controller
     $this->setData('productShippingUrl',request()->get('shopUrl').'product_shipping_edit/'.$model->id);
     $this->setData('productNotificationEditUrl',request()->get('shopUrl').'product_notification_edit/'.$model->id);
     $this->setData('productSalePromotionUrl',request()->get('shopUrl').'product_sale_promotion/'.$model->id);
+    $this->setData('categoryPaths',$model->getCategoryPaths());
 
     return $this->view('pages.product.menu');
 

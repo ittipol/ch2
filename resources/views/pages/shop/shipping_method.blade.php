@@ -55,8 +55,10 @@
   @else
   
     <div class="secondary-message-box success space-top-bottom-20">
-      <h3>เปิดการใช้งานตัวเลือก "รับสินค้าเอง" แล้ว</h3>
-      <p>*** ลูกค้าสามารถเลือกตัวเลือก "รับสินค้าเอง" จากหน้าการสั่งซื้อได้แล้ว</p>
+      <div class="secondary-message-box-inner">
+        <h3>เพิ่มตัวเลือก "รับสินค้าเอง" แล้ว</h3>
+        <p>*** ลูกค้าสามารถเลือกตัวเลือก "รับสินค้าเอง" จากหน้าการสั่งซื้อได้แล้ว</p>
+      </div>
     </div>
 
     <div class="list-h">
@@ -116,9 +118,7 @@
       <div class="list-h-item clearfix">
 
         <div class="list-image pull-left">
-          <a href="{{$data['detailUrl']}}">
-            <img src="/images/icons/truck-white.png">
-          </a>
+          <img src="/images/icons/truck-white.png">
         </div>
 
         <div class="col-md-11 col-xs-8">
@@ -126,9 +126,7 @@
           <div class="row">
 
             <div class="col-md-4 col-xs-12 list-content">
-              <a href="{{$data['detailUrl']}}">
-                <h4 class="primary-info">{{$data['name']}}</h4>
-              </a>
+              <h4 class="primary-info">{{$data['name']}}</h4>
               <div class="secondary-info">ผู้ให้บริการการจัดส่ง: {{$data['shippingService']}}</div>
               <div class="secondary-info">ระยะเวลาจัดส่ง: {{$data['shipping_time']}}</div>
             </div>

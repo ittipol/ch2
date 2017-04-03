@@ -1,18 +1,11 @@
 footer {
-/*	background-color: rgb(44,89,169);
-	border-top: 1px solid rgb(19,47,99);*/
 	border-top: 1px solid #bababa;
-	/*padding-left: 280px;*/
 	margin-top: 150px;
 }
 
 .footer {
 	background-color: #fff;
 	padding: 20px 20px 10px;
-/*	height: 200px;
-	margin-top: 20px;
-	color: #fff;
-	background-color: rgb(29,66,133);*/
 }
 
 @media only screen and (min-width : 1201px) {

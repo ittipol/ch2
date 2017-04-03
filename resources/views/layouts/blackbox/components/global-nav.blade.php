@@ -26,7 +26,6 @@
             </a>
           </div>
         </div>
-        <!-- <div class="line space-top-bottom-10"></div> -->
 
       @else
 
@@ -44,6 +43,7 @@
             <div class="dot"></div>
             <div class="additional-option-content">
               <a href="{{URL::to('account/profile_edit')}}">แก้ไขโปรไฟล์</a>
+              <a href="{{URL::to('person/experience')}}">เพิ่มประวัติการทำงาน</a>
               <a href="{{URL::to('account/order')}}">รายการสั่งซื้อสินค้า</a>
               <a href="{{URL::to('logout')}}">ออกจากระบบ</a>
             </div>
@@ -65,17 +65,30 @@
           @if (Auth::check())
 
             <li class="item">
-              <a href="{{URL::to('person/experience')}}">ประวัติการทำงาน</a>
-            </li>
-
-            <li class="item">
               <a href="{{URL::to('person/freelance')}}">ฟรีแลนซ์</a>
+              <div class="additional-option">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="additional-option-content">
+                  <a href="">เพิ่มงานฟรีแลนซ์ของคุณ</a>
+                  <a href="">ค้นหาฟรีแลนซ์</a>
+                </div>
+              </div>
             </li>
 
             <li class="line space-top-bottom-10"></li>
 
             <li class="item">
               <a href="javascript:void(0)">ร้านค้าในชุมชนของคุณ</a>
+              <div class="additional-option">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="additional-option-content">
+                  <a href="{{URL::to('community/shop_create')}}">เพิ่มร้านค้า</a>
+                </div>
+              </div>
               <ul class="submenu">
                 <li class="submenu-item">
 
@@ -100,10 +113,6 @@
 
                     @endforeach
 
-                    <div class="submenu-item-row">
-                      <a href="{{URL::to('community/shop_create')}}">เพิ่มร้านค้า</a>
-                    </div>
-
                   @else
 
                     <div class="submenu-item-row">
@@ -127,25 +136,27 @@
             <li class="line space-top-bottom-10"></li>
 
             <li class="item">
-              <a href="{{URL::to('product')}}">สินค้าในร้านค้า</a>
-            </li>
-            <li class="item">
-              <a href="{{URL::to('job')}}">ประกาศงานจากบริษัทและร้านค้า</a>
-            </li>
-            <li class="item">
-              <a href="{{URL::to('advertising')}}">ประกาศโฆษณาจากบริษัทและร้านค้า</a>
+              <a href="javascript:void(0)">สินค้าและการประกาศ</a>
+              <ul class="submenu">
+                <li class="submenu-item">
+                  <a href="{{URL::to('product/add')}}">สินค้าจากร้านค้า</a>
+                  <a href="{{URL::to('product/add')}}">ประกาศงาน</a>
+                  <a href="{{URL::to('product/add')}}">โฆษณาจากบริษัทและร้านค้า</a>
+                </li>
+              </ul>
             </li>
 
             <li class="line space-top-bottom-10"></li>
 
             <li class="item">
-              <a href="javascript:void(0)">ประกาศ</a>
+              <a href="javascript:void(0)">ประกาศซื้อ-เช่า-ขาย</a>
               <div class="additional-option">
                 <div class="dot"></div>
                 <div class="dot"></div>
                 <div class="dot"></div>
                 <div class="additional-option-content">
-                  <a href="{{URL::to('announcement/create')}}">แสดงรายละเอียด</a>
+                  <a href="{{URL::to('item/post')}}">เพิ่มประกาศสินค้า</a>
+                  <a href="{{URL::to('real_estate/post')}}">เพิ่มประกาศอสังหาริมทรัพย์</a>
                 </div>
               </div>
               <ul class="submenu">
@@ -155,14 +166,15 @@
                 </li>
               </ul>
             </li>
+
             <li class="line space-top-bottom-10"></li>
+
             <li class="item">
-              <a href="{{URL::to('entity/create')}}">สินค้าแนะนำ</a>
+              <a href="{{URL::to('entity/create')}}">วิธีการใช้งาน</a>
             </li>
             <li class="item">
-              <a href="{{URL::to('entity/create')}}">งานที่คุณกำลังค้นหา</a>
+              <a href="{{URL::to('entity/create')}}">แจ้งปัญหาการใช้งาน</a>
             </li>
-            <li class="line space-top-bottom-10"></li>
             <li class="item">
               <a href="{{URL::to('entity/create')}}">ข้อเสนอแนะ</a>
             </li>

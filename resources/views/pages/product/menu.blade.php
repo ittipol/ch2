@@ -1,37 +1,50 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
+@include('pages.shop.layouts.top_nav') 
+
 <div class="top-header-wrapper">
   <div class="container">
     <div class="top-header">
+
       <div class="row">
+
         <div class="col-md-4 col-sm-12">
           <a href="{{URL::to($productDetailUrl)}}">
             <img class="header-primary-image" src="{{$imageUrl}}">
           </a>
         </div>
+
         <div class="header-info col-md-8 col-sm-12">
           <a href="{{URL::to($productDetailUrl)}}">
             <h2>{{$_modelData['name']}}</h2>
           </a>
+
           @if(!empty($_modelData['promotion']))
             <h4>{{$_modelData['promotion']['_reduced_price']}}</h4>
             <h5 class="text-line-through">{{$_modelData['_price']}}</h5>
           @else
             <h4>{{$_modelData['_price']}}</h4>
           @endif
+
           <div class="line"></div>
+
           <div class="space-top-20">
-            @if(!empty($_modelData['_categoryPaths']))
+            @if(!empty($categoryPaths))
             <ol class="breadcrumb">
-              @foreach($_modelData['_categoryPaths'] as $path)
-              <li class="breadcrumb-item">{{$path['name']}}</li>
+              @foreach($categoryPaths as $path)
+              <li class="breadcrumb-item">
+                <a href="{{$path['url']}}">{{$path['name']}}</a>
+              </li>
               @endforeach
             </ol>
             @endif
           </div>
+
         </div>
+
       </div>
+      
     </div>
   </div>
 </div>

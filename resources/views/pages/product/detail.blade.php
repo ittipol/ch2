@@ -5,16 +5,28 @@
   <div class="container">
     <div class="top-header">
       <div class="detail-title">
-        <h2 class="title">{{$_modelData['name']}}</h2>
-        <div class="tag-group">
-          @if(!empty($_modelData['_categoryName']) && ($_modelData['_categoryName'] != '-'))
-          <a class="tag-box">{{$_modelData['_categoryName']}}</a>
-          @endif
-          @foreach ($_modelData['Tagging'] as $tagging)
-            <a class="tag-box">{{$tagging['_word']}}</a>
-          @endforeach
+        <div class="row">
+          <div class="col-xs-11">
+            <h2 class="title">{{$_modelData['name']}}</h2>
+            @if(!empty($_modelData['Tagging']))
+              <div class="tag-group">
+                @foreach ($_modelData['Tagging'] as $tagging)
+                  <a class="tag-box">{{$tagging['_word']}}</a>
+                @endforeach
+              </div>
+            @endif
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="additional-option pull-right">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="additional-option-content">
+      <a href="{{URL::to('product/shelf')}}">ไปยังหน้าสินค้าหลัก</a>
+      <a href="{{URL::to('product/category')}}">ไปยังหน้าแสดงหมวดสินค้า</a>
     </div>
   </div>
 </div>

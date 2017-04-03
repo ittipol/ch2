@@ -22,99 +22,57 @@ class AppServiceProvider extends ServiceProvider
     {
       view()->composer('pages.shop.layouts.top_nav', function($view){
 
-        if(!empty(Route::current()->parameter('shopSlug'))) {
+        // if(!empty(Route::current()->parameter('shopSlug'))) {
 
-          // $string = new String;
           $url = new Url;
 
-          if(!empty(Route::current()->parameter('shopSlug'))) {
+          $slug = Route::current()->parameter('shopSlug');
 
-            $slug = Route::current()->parameter('shopSlug');
+          view()->share('_shop_setting_url',$url->url('shop/'.$slug.'/setting'));
+          view()->share('_shop_product_url',$url->url('shop/'.$slug.'/product'));
+          view()->share('_shop_job_url',$url->url('shop/'.$slug.'/job'));
+          view()->share('_shop_advertising_url',$url->url('shop/'.$slug.'/advertising'));
 
-            // $shopId = Service::loadModel('Slug')
-            // ->where('slug','like',$slug)
-            // ->first()
-            // ->model_id;
-
-            // $shop = Service::loadModel('Shop')
-            // ->select('name','description','profile_image_id','cover_image_id')
-            // ->find($shopId);
-
-            // view()->share('_shop_id',$shopId);
-            // view()->share('_shop_name',$shop->name);
-            // view()->share('_shop_short_description',$string->subString($shop->description,250,true));
-            // view()->share('_shop_profileImage',$shop->getProfileImageUrl());
-            // view()->share('_shop_cover',$shop->getCoverUrl());
-
-            // $personToShop = Service::loadModel('PersonToShop');
-            // $person = $personToShop->getData(array(
-            //   'conditions' => array(
-            //     ['person_id','=',session()->get('Person.id')],
-            //     ['shop_id','=',$shopId],
-            //   ),
-            //   'fields' => array('role_id'),
-            //   'first' => true
-            // ));
-
-            // view()->share('_shop_permission',$person->role->getPermission());
-
-            view()->share('_shop_setting_url',$url->url('shop/'.$slug.'/setting'));
-            view()->share('_shop_product_url',$url->url('shop/'.$slug.'/product'));
-            view()->share('_shop_job_url',$url->url('shop/'.$slug.'/job'));
-            view()->share('_shop_advertising_url',$url->url('shop/'.$slug.'/advertising'));
-
-          }
-
-        }
+        // }
 
       });
 
-      view()->composer('pages.shop.layouts.header', function($view){
+      view()->composer('pages.product.layouts.top_nav', function($view){
 
-        if(!empty(Route::current()->parameter('shopSlug'))) {
+        $url = new Url;
 
-          $string = new String;
-          $url = new Url;
+        $slug = Route::current()->parameter('shopSlug');
 
-          if(!empty(Route::current()->parameter('shopSlug'))) {
+        view()->share('_shop_product_menu',$url->url('shop/'.$slug.'/product/'.Route::current()->parameter('id')));
+        view()->share('_shop_product_url',$url->url('shop/'.$slug.'/product'));
+        view()->share('_shop_job_url',$url->url('shop/'.$slug.'/job'));
+        view()->share('_shop_advertising_url',$url->url('shop/'.$slug.'/advertising'));
 
-            $slug = Route::current()->parameter('shopSlug');
+      });
 
-            $shopId = Service::loadModel('Slug')
-            ->where('slug','like',$slug)
-            ->first()
-            ->model_id;
+      view()->composer('pages.shipping_method.layouts.top_nav', function($view){
 
-            $shop = Service::loadModel('Shop')
-            ->select('name','description','profile_image_id','cover_image_id')
-            ->find($shopId);
+        $url = new Url;
 
-            view()->share('_shop_id',$shopId);
-            view()->share('_shop_name',$shop->name);
-            view()->share('_shop_short_description',$string->subString($shop->description,250,true));
-            view()->share('_shop_profileImage',$shop->getProfileImageUrl());
-            view()->share('_shop_cover',$shop->getCoverUrl());
+        $slug = Route::current()->parameter('shopSlug');
 
-            // $personToShop = Service::loadModel('PersonToShop');
-            // $person = $personToShop->getData(array(
-            //   'conditions' => array(
-            //     ['person_id','=',session()->get('Person.id')],
-            //     ['shop_id','=',$shopId],
-            //   ),
-            //   'fields' => array('role_id'),
-            //   'first' => true
-            // ));
+        view()->share('_shop_shipping_method',$url->url('shop/'.$slug.'/shipping_method'));
+        view()->share('_shop_product_url',$url->url('shop/'.$slug.'/product'));
+        view()->share('_shop_job_url',$url->url('shop/'.$slug.'/job'));
+        view()->share('_shop_advertising_url',$url->url('shop/'.$slug.'/advertising'));
 
-            // view()->share('_shop_permission',$person->role->getPermission());
+      });
 
-            // view()->share('_shop_setting_url',$url->url('shop/'.$slug.'/setting'));
-            // view()->share('_shop_product_url',$url->url('shop/'.$slug.'/product'));
-            // view()->share('_shop_job_url',$url->url('shop/'.$slug.'/job'));
-            // view()->share('_shop_advertising_url',$url->url('shop/'.$slug.'/advertising'));
+      view()->composer('pages.payment_method.layouts.top_nav', function($view){
 
-          }
+        $url = new Url;
 
-        }
+        $slug = Route::current()->parameter('shopSlug');
+
+        view()->share('_shop_payment_method',$url->url('shop/'.$slug.'/payment_method'));
+        view()->share('_shop_product_url',$url->url('shop/'.$slug.'/product'));
+        view()->share('_shop_job_url',$url->url('shop/'.$slug.'/job'));
+        view()->share('_shop_advertising_url',$url->url('shop/'.$slug.'/advertising'));
 
       });
 
@@ -151,6 +109,34 @@ class AppServiceProvider extends ServiceProvider
           $view->with('_shops',$shops);
 
         }
+
+      });
+
+      view()->composer('pages.shop.layouts.header', function($view){
+
+        // if(!empty(Route::current()->parameter('shopSlug'))) {
+
+          $string = new String;
+          $url = new Url;
+
+          $slug = Route::current()->parameter('shopSlug');
+
+          $shopId = Service::loadModel('Slug')
+          ->where('slug','like',$slug)
+          ->first()
+          ->model_id;
+
+          $shop = Service::loadModel('Shop')
+          ->select('name','description','profile_image_id','cover_image_id')
+          ->find($shopId);
+
+          view()->share('_shop_id',$shopId);
+          view()->share('_shop_name',$shop->name);
+          view()->share('_shop_short_description',$string->subString($shop->description,250,true));
+          view()->share('_shop_profileImage',$shop->getProfileImageUrl());
+          view()->share('_shop_cover',$shop->getCoverUrl());
+
+        // }
 
       });
 

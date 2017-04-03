@@ -54,7 +54,7 @@ class Category extends Model
   public function getCategoriesWithSubCategories($id = null) {
 
     $url = new Url;
- 
+    
     $category = $this->find($id);
 
     if(empty($category->parent_id)) {
@@ -66,6 +66,7 @@ class Category extends Model
         $_categories[] = array(
           'name' => $_category->name,
           'url' => $url->setAndParseUrl('product/shelf/{id}',array('id' => $_category->id)),
+          'total' => $this->countProduct($_category->id),
           'subCategories' => array()
         );
 
@@ -84,9 +85,11 @@ class Category extends Model
 
           if(!empty($subCategories)) {
             foreach ($subCategories as $_subCategories) {
+
               $__subCategories[] = array(
                 'name' => $_subCategories->name,
                 'url' => $url->setAndParseUrl('product/shelf/{id}',array('id' => $_subCategories->id)),
+                'total' => $this->countProduct($_subCategories->id)
               );
             }
           }
@@ -96,6 +99,7 @@ class Category extends Model
         $_categories[] = array(
           'name' => $_category->name,
           'url' => $url->setAndParseUrl('product/shelf/{id}',array('id' => $_category->id)),
+          'total' => $this->countProduct($_category->id),
           'subCategories' => $__subCategories
         );
 
@@ -145,5 +149,20 @@ class Category extends Model
     return $this->select('id','parent_id','name')->where('id','=',$category->first()->parent_id)->first();
 
   }  
+
+  public function countProduct($id) {
+
+    $categoryPaths = CategoryPath::select('category_id')->where('path_id','=',$id)->get();
+
+    $ids = array();
+    foreach ($categoryPaths as $categoryPath) {
+      $ids[] = $categoryPath->category_id;
+    }
+
+    return Product::join('product_to_categories', 'product_to_categories.product_id', '=', 'products.id')
+    ->whereIn('product_to_categories.category_id',$ids)
+    ->count();
+
+  }
 
 }

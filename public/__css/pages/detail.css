@@ -41,10 +41,11 @@
 }
 
 .detail-title {
-	margin-bottom: 20px;
+	/*margin-bottom: 10px;*/
 }
 
 .detail-title .title {
+	font-size: 26px;
 	margin-top: 10px;
 	margin-bottom: 0;
 }
@@ -61,10 +62,6 @@
 .detail-info-section .detail-info {
 	/*margin-top: 10px;*/
 	margin: 10px 0 20px;
-}
-
-.tag-group {
-	margin-bottom: 10px;
 }
 
 .tag-group .tag-box {

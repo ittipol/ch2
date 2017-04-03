@@ -1,11 +1,10 @@
 .modal-box {
 	position: fixed;
 	top: 0;
-	right: -100%;
+	right: -120%;
 	width: 700px;
 	height: 100%;
 	opacity: 1;
-	/*background-color: rgb(29, 66, 133);*/
 	background-color: rgb(47,97,186);
 	padding: 0;
 	z-index: 90;

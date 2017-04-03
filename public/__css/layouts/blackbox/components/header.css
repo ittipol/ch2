@@ -1,7 +1,6 @@
 .header-wrapper {
 	height: 256px;
 	padding: 115px 16px 0;
-	/*background-color: #00897B;*/
 }
 
 .header-wrapper.active {
@@ -52,16 +51,6 @@ header .hamburger-button {
 	text-align: center;
 }
 
-header .cart-button {
-	position: absolute;
-	top: 0;
-	right: 64px;
-	z-index: 2;
-	width: 64px;
-	line-height: 64px;
-	cursor: pointer;
-}
-
 header .badge {
 	position: absolute;
 	top: 10px;
@@ -69,10 +58,50 @@ header .badge {
 	background-color: #D50000;
 }
 
-header .search-button {
+header .additional-button {
 	position: absolute;
 	top: 0;
 	right: 0;
+	z-index: 2;
+	width: 64px;
+	height: 64px;
+	cursor: pointer;
+}
+
+header .additional-button .dot-group {
+	margin-top: 22px;
+}
+
+header .additional-button .dot {
+	width: 4px;
+	height: 4px;
+	border-radius: 4px;
+	background-color: #fff;
+	margin: 5px auto;
+}
+
+/*header .additional-option-button.additional-option {
+	padding-top: 16px;
+}
+
+header .additional-option-button.additional-option > .dot {
+	background-color: #fff;
+}*/
+
+header .search-button {
+	position: absolute;
+	top: 0;
+	right: 50px;
+	z-index: 2;
+	width: 64px;
+	line-height: 64px;
+	cursor: pointer;
+}
+
+header .cart-button {
+	position: absolute;
+	top: 0;
+	right: 114px;
 	z-index: 2;
 	width: 64px;
 	line-height: 64px;
@@ -82,7 +111,7 @@ header .search-button {
 header .notification-button {
 	position: absolute;
 	top: 0;
-	right: 128px;
+	right: 178px;
 	z-index: 2;
 	width: 64px;
 	line-height: 64px;
@@ -111,7 +140,6 @@ header img.icon-header {
 	width: 100%;
 	height: 64px;
 	box-shadow: 0 2px 5px rgba(0,0,0,.26);
-	/*background-color: #009688;*/
 	background-color: #0071c5;
 	z-index: 80;
 	padding: 0 15px;

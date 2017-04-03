@@ -72,6 +72,7 @@
 
 .right-size-panel.filter label.choice-box {
 	width: 100%;
+	font-size: 14px;
 }
 
 .right-size-panel.category {
@@ -95,7 +96,6 @@
 
 .right-size-panel.category  a {
 	color: #000;
-	display: block;
 }
 
 .right-size-panel.category a:hover {
@@ -116,6 +116,10 @@
 
 .right-size-panel.category .sub-category .sub-category-item:last-child {
 	margin-bottom: 0;
+}
+
+.right-size-panel.category .category-product-total {
+	color: #999;
 }
 
 @media only screen and (max-width : 480px) {

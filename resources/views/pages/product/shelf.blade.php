@@ -12,7 +12,7 @@
 <div class="container">
 
   <div class="text-right">
-    <a href="" class="button">แสดงหมวดหมู่สินค้าทั้งหมด</a>
+    <a href="{{URL::to('product/category')}}" class="button">แสดงหมวดสินค้า</a>
   </div>
 
   @foreach($shelfs as $shelf)

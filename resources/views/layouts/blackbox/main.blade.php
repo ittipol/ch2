@@ -12,18 +12,18 @@
 
   @include('layouts.blackbox.components.global-header')
 
-  @include('layouts.blackbox.components.global-search')
-  @include('layouts.blackbox.components.global-notification')
-  @include('layouts.blackbox.components.global-nav')
-  @include('layouts.blackbox.components.global-cart')
-  @include('layouts.blackbox.components.modal-dialog')
-
   <div id="container">
     @include('layouts.blackbox.components.content-wrapper')
   </div>
-  <div id="loading_icon" class="loading"></div>
-  <div class="global-overlay"></div>
 
+  @include('layouts.blackbox.components.global-nav')
+  @include('layouts.blackbox.components.global-search')
+  @include('layouts.blackbox.components.global-notification')
+  @include('layouts.blackbox.components.global-cart')
+  @include('layouts.blackbox.components.modal-dialog')
+
+  @include('layouts.blackbox.components.common')
+  
   @include('layouts.blackbox.components.footer')
 
   <script type="text/javascript">
@@ -52,6 +52,10 @@
         const pushNotification = new PushNotification({{ Session::get("Person.id") }},'{{ Session::get("Person.token") }}')
         pushNotification.load();
       @endif
+
+      // setTimeout(function(){
+      //   $('body').css('overflow-y','auto');
+      // },50);
 
       setTimeout(function(){
         $(".nano").nanoScroller();
