@@ -43,6 +43,7 @@
     '__js/components/modal-dialog.js',
     '__js/components/order-progress-bar.js',
     '__js/components/right-side-panel.js',
+    '__js/components/filter.js',
     '__js/notification/push-notification.js',
   );
 

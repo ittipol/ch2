@@ -11,9 +11,17 @@ class FilterHelper {
   private $sort;
   private $criteria = array();
   private $model;
+  private $filterOptions;
+  private $sortingFields;
 
   public function __construct($model = null) {
-    $this->model = $model;
+    
+    if(!empty($model)) {
+      $this->model = $model;
+      $this->filterOptions = $model->getFilterOptions();
+      $this->sortingFields = $model->getSortingFields();
+    }
+
   }
 
   public function setSearchQuery($searchQuery) {
@@ -114,17 +122,41 @@ class FilterHelper {
   }
 
   public function buildFilters($filters = array()) {
-// model:shop,model:product,model:job,used:0
 
-    if(empty($filters) && !empty($this->filters)) {
-      $filters = $this->filters;
-    }elseif(empty($filters)) {
-      // Get Default
-      // dd('get Default');
-      return null;
+    // if(empty($filters) && !empty($this->filters)) {
+    //   $filters = $this->filters;
+    // }elseif(empty($filters)) {
+ 
+
+
+    //   return null;
+    // }
+
+    if(empty($filters)) {
+
+      if(!empty($this->filters)) {
+        $filters = $this->filters;
+      }elseif(!empty($this->filterOptions)) {
+
+        $filters = array();
+        foreach ($this->filterOptions as $filter) {
+
+          if(empty($filter['default'])) {
+            // select all if default is empty
+            dd($filter['options']);
+            continue;
+          }
+
+          $filters[] = $filter['default'];
+        }
+dd($filters);
+        
+      }else {
+        return null;
+      }
+
     }
 
-    // $string = new String;
 
     $filters = explode(',', $filters);
 
@@ -174,10 +206,16 @@ class FilterHelper {
 
   public function buildSorting($sort = null,$q = null) {
 
-    if(empty($sort) && !empty($this->sort)) {
-      $sort = $this->sort;
-    }elseif(empty($sort)) {
-      return null;
+    if(empty($sort)) {
+
+      if(!empty($this->sort)) {
+        $sort = $this->sort;
+      }elseif(!empty($this->sortingFields['default'])) {
+        $sort = $this->sortingFields['default'];
+      }else {
+        return null;
+      }
+
     }
 
     if(!$this->filterValueValidation($sort)) {
@@ -475,30 +513,41 @@ class FilterHelper {
 
   }
 
-  public function getSortingOptions($sortingOptions,$selectedsort = null) {
+  public function getSortingOptions() {
 
-    $_sortingOptions = array();
-    foreach ($sortingOptions as $key => $sorting) {
+    if(empty($selectedsort)) {
 
-      $_sortingOptions[$key]['title'] = $sorting['title'];
-
-      foreach ($sorting['options'] as $option) {
-
-        $select = false;
-        if(!empty($selectedsort) && (($selectedsort == $option['value']) || ($option['value'] == $sorting['default']))) {
-          $select = true;
-        }
-
-        $_sortingOptions[$key]['options'][] = array(
-          'name' => $option['name'],
-          'value' => $option['value'],
-          'select' => $select
-        ); 
-      }    
+      if(!empty($this->sort)) {
+        $selectedsort = $this->sort;
+      }elseif(!empty($this->sortingFields['default'])) {
+        $selectedsort = $this->sortingFields['default'];
+      }else {
+        $selectedsort = null;
+      }
 
     }
 
-    return $_sortingOptions;
+    $sortingOptions['title'] = $this->sortingFields['title'];
+
+    foreach ($this->sortingFields['options'] as $option) {
+
+      $select = false;
+      // if(!empty($selectedsort) && (($selectedsort == $option['value']) || ($option['value'] == $this->sortingFields['default']))) {
+      //   $select = true;
+      // }
+
+      if(!empty($selectedsort) && ($selectedsort == $option['value'])) {
+        $select = true;
+      }
+
+      $sortingOptions['options'][] = array(
+        'name' => $option['name'],
+        'value' => $option['value'],
+        'select' => $select
+      ); 
+    }    
+
+    return $sortingOptions;
 
   }
 
@@ -536,24 +585,45 @@ class FilterHelper {
 
   }
 
-  public function getDisplayingSorting($sortingOptions,$selectedsort = null) {
+  public function getDisplayingSorting() {
 
-    $displayingSorting = array();
-    $_displayingSortingOptions = array();
-    foreach ($sortingOptions as $key => $sorting) {
+    if(empty($selectedsort)) {
 
-      $_displayingSortingOptions[$key]['title'] = $sorting['title'];
-
-      foreach ($sorting['options'] as $option) {
-
-        if(!empty($selectedsort) && ($selectedsort == $option['value'])) {
-          $_displayingSortingOptions[$key]['display'][] = $option['name'];
-        }
-      }    
+      if(!empty($this->sort)) {
+        $selectedsort = $this->sort;
+      }elseif(!empty($this->sortingFields['default'])) {
+        $selectedsort = $this->sortingFields['default'];
+      }else {
+        $selectedsort = null;
+      }
 
     }
 
-    return $_displayingSortingOptions;
+    // $displayingSorting = array();
+    // $_displayingSortingOptions = array();
+    // foreach ($sortingOptions as $key => $sorting) {
+
+    //   $_displayingSortingOptions[$key]['title'] = $sorting['title'];
+
+    //   foreach ($sorting['options'] as $option) {
+
+    //     if(!empty($selectedsort) && ($selectedsort == $option['value'])) {
+    //       $_displayingSortingOptions[$key]['display'][] = $option['name'];
+    //     }
+    //   }    
+
+    // }
+
+    $displayingSortingOptions['title'] = $this->sortingFields['title'];
+
+    foreach ($this->sortingFields['options'] as $option) {
+
+      if(!empty($selectedsort) && ($selectedsort == $option['value'])) {
+        $displayingSortingOptions['display'][] = $option['name'];
+      }
+    }  
+
+    return $displayingSortingOptions;
 
   }
 

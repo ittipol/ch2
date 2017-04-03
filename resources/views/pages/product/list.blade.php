@@ -42,7 +42,6 @@
 
     <div class="right-size-panel-inner">
 
-      <!-- <h4>หมวดสินค้า</h4> -->
       <h4 class="category-name">{{$parentCategoryName}}</h4>
       <div class="line space-bottom-10"></div>
 
@@ -70,6 +69,14 @@
       <div class="right-size-panel-close-icon"></div>
     </div>
   </div>
+
+  <?php 
+    echo Form::open(['id' => 'search_form','method' => 'get', 'enctype' => 'multipart/form-data']);
+  ?>
+
+  <?php
+    echo Form::close();
+  ?>
 
   <div id="filter_expand_panel" class="right-size-panel filter">
     <div class="right-size-panel-inner">
@@ -146,5 +153,16 @@
   @endif
 
 </div>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+
+    const filter = new Filter();
+    filter.load();
+
+  });
+
+</script>
 
 @stop

@@ -155,6 +155,7 @@ class ProductController extends Controller
 
     $model = Service::loadModel('Product');
     $categoryModel = Service::loadModel('Category');
+    $filterHelper = new FilterHelper($model);
 
     $page = 1;
     if(!empty($this->query['page'])) {
@@ -166,7 +167,8 @@ class ProductController extends Controller
       $filters = $this->query['fq'];
     }
 
-    $sort = 'created_at:desc';
+    // $sort = 'created_at:desc';
+    $sort = '';
     if(!empty($this->query['sort'])) {
       $sort = $this->query['sort'];
     }
@@ -181,7 +183,10 @@ class ProductController extends Controller
     $ids = array();
     foreach ($categoryPaths as $categoryPath) {
       $ids[] = $categoryPath->category_id;
-    }  
+    }
+
+    $filterHelper->setSorting($sort);
+    $filterHelper->buildSorting();
 
     $conditions = array();
 
@@ -209,19 +214,17 @@ class ProductController extends Controller
 
     $this->data = $model->paginator->build();
 
-    $filterHelper = new FilterHelper;
-
     $filterOptions = $model->getFilterOptions();
-    $sortingFields = $model->getSortingFields();
+    // $sortingFields = $model->getSortingFields();
 
     $searchOptions = array(
-      'filters' => $filterHelper->getFilterOptions($filterOptions,$filters),
-      'sort' => $filterHelper->getSortingOptions($sortingFields,$sort)
+      // 'filters' => $filterHelper->getFilterOptions($filterOptions,$filters),
+      'sort' => $filterHelper->getSortingOptions()
     );
 
     $displayingFilters = array(
-      'filters' => $filterHelper->getDisplayingFilterOptions($filterOptions,$filters),
-      'sort' => $filterHelper->getDisplayingSorting($sortingFields,$sort)
+      // 'filters' => $filterHelper->getDisplayingFilterOptions($filterOptions,$filters),
+      'sort' => $filterHelper->getDisplayingSorting()
     );
 
     $parent = $categoryModel->getParentCategory($categoryId);

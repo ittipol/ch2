@@ -42,32 +42,45 @@ class Lookup extends Model
           'value' => 'model:real_estate',
         )
       )
+    ),
+    'used' => array(
+      'input' => 'checkbox',
+      'title' => 'สินค้า',
+      'options' => array(
+        array(
+          'name' => 'มือ 1',
+          'value' => 'used:0',
+        ),
+        array(
+          'name' => 'มือ 2',
+          'value' => 'used:1',
+        )
+      ),
+      'default' => 'used:0'
     )
   );
 
   protected $sortingFields = array(
-    'sort' => array(
-      'title' => 'จัดเรียงตาม',
-      'options' => array(
-        array(
-          'name' => 'ตัวอักษร A - Z ก - ฮ',
-          'value' => 'name:asc'
-        ),
-        array(
-          'name' => 'ตัวอักษร Z - A ฮ - ก',
-          'value' => 'name:desc'
-        ),
-        array(
-          'name' => 'วันที่เก่าที่สุดไปหาใหม่ที่สุด',
-          'value' => 'created_at:asc'
-        ),
-        array(
-          'name' => 'วันที่ใหม่ที่สุดไปหาเก่าที่สุด',
-          'value' => 'created_at:desc'
-        ),
+    'title' => 'จัดเรียงตาม',
+    'options' => array(
+      array(
+        'name' => 'ตัวอักษร A - Z ก - ฮ',
+        'value' => 'name:asc'
       ),
-      'default' => 'created_at:desc'
-    )
+      array(
+        'name' => 'ตัวอักษร Z - A ฮ - ก',
+        'value' => 'name:desc'
+      ),
+      array(
+        'name' => 'วันที่เก่าที่สุดไปหาใหม่ที่สุด',
+        'value' => 'created_at:asc'
+      ),
+      array(
+        'name' => 'วันที่ใหม่ที่สุดไปหาเก่าที่สุด',
+        'value' => 'created_at:desc'
+      ),
+    ),
+    'default' => 'created_at:desc'
   );
 
   //  Lookup Special Format

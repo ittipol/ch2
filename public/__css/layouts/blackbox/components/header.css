@@ -54,7 +54,8 @@ header .hamburger-button {
 header .badge {
 	position: absolute;
 	top: 10px;
-	right: 10px;
+	/*right: 10px;*/
+	right: 0;
 	background-color: #D50000;
 }
 
@@ -63,7 +64,7 @@ header .additional-button {
 	top: 0;
 	right: 0;
 	z-index: 2;
-	width: 64px;
+	width: 50px;
 	height: 64px;
 	cursor: pointer;
 }
@@ -80,20 +81,12 @@ header .additional-button .dot {
 	margin: 5px auto;
 }
 
-/*header .additional-option-button.additional-option {
-	padding-top: 16px;
-}
-
-header .additional-option-button.additional-option > .dot {
-	background-color: #fff;
-}*/
-
 header .search-button {
 	position: absolute;
 	top: 0;
 	right: 50px;
 	z-index: 2;
-	width: 64px;
+	width: 50px;
 	line-height: 64px;
 	cursor: pointer;
 }
@@ -101,9 +94,9 @@ header .search-button {
 header .cart-button {
 	position: absolute;
 	top: 0;
-	right: 114px;
+	right: 100px;
 	z-index: 2;
-	width: 64px;
+	width: 50px;
 	line-height: 64px;
 	cursor: pointer;
 }
@@ -111,9 +104,9 @@ header .cart-button {
 header .notification-button {
 	position: absolute;
 	top: 0;
-	right: 178px;
+	right: 150px;
 	z-index: 2;
-	width: 64px;
+	width: 50px;
 	line-height: 64px;
 	cursor: pointer;
 }
@@ -123,9 +116,12 @@ header .header-button input[type="checkbox"] {
 }
 
 header img.icon-header {
-	width: 64px;
+	/*width: 64px;
 	height: 64px;
-	padding: 17px;
+	padding: 17px;*/
+	width: 50px;
+	height: 50px;
+	padding: 10px;
 }
 
 .global-header {
@@ -149,7 +145,7 @@ header img.icon-header {
 .global-header .nav-fixed-top {
 	height: 64px;
 	left: 72px;
-	right: 192px;
+	right: 200px;
 	top: 0;
 	z-index: 99;
 	position: absolute;
