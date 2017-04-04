@@ -174,6 +174,13 @@
     </div>
 
     <div class="list-item">
+      <a href="{{$productBranchUrl}}">
+        <img class="icon" src="/images/common/pencil.png" >
+        <h4>สาขาที่ขายสินค้า</h4>
+      </a>
+    </div>
+
+    <div class="list-item">
       <a href="{{$productNotificationEditUrl}}">
         <img class="icon" src="/images/common/pencil.png" >
         <h4>ข้อความและการแจ้งเตือน</h4>
@@ -198,21 +205,7 @@
     <div class="list-item">
       <a href="">
         <img class="icon" src="/images/common/pencil.png" >
-        <h4>รายละเอียดการส่งสินค้า</h4>
-      </a>
-    </div>
-
-    <div class="list-item">
-      <a href="">
-        <img class="icon" src="/images/common/pencil.png" >
         <h4>รายละเอียดการหีบห่อสินค้า</h4>
-      </a>
-    </div>
-
-    <div class="list-item">
-      <a href="">
-        <img class="icon" src="/images/common/pencil.png" >
-        <h4>รายละเอียดการจ่ายเงินสินค้า</h4>
       </a>
     </div> -->
 

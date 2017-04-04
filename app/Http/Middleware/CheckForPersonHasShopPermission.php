@@ -135,6 +135,10 @@ class CheckForPersonHasShopPermission
           'permission' => 'edit',
           'modelName' => 'Product'
         ),
+        'shop.product_branch.edit' => array(
+          'permission' => 'edit',
+          'modelName' => 'Product'
+        ),
         'shop.product_notification.edit' => array(
           'permission' => 'edit',
           'modelName' => 'Product'

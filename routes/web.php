@@ -270,6 +270,9 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::get('shop/{shopSlug}/product_discount/edit/{id}/product_id:{product_id}','ProductDiscountController@edit')->name('shop.product_discount.edit');
   Route::patch('shop/{shopSlug}/product_discount/edit/{id}/product_id:{product_id}','ProductDiscountController@editingSubmit')->name('shop.product_discount.edit');
 
+  Route::get('shop/{shopSlug}/product_branch/{id}','ProductController@branchEdit')->name('shop.product_branch.edit');
+  Route::patch('shop/{shopSlug}/product_branch/{id}','ProductController@branchEditingSubmit')->name('shop.product_branch.edit');
+
 });
 
 // Payment Method

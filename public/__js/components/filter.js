@@ -51,15 +51,11 @@ class Filter {
         this.appendChild(inputFilters);
       }
 
-      $('.search-sorting-value:checked').each(function(i, obj) {
-          sorts.push($(this).val());
-      });
-
-      if(sorts.length > 0) {
+      if($('.search-sorting-value').val() != '') {
         var inputSorts = document.createElement('input');
         inputSorts.setAttribute('type', 'hidden');
         inputSorts.setAttribute('name', 'sort');
-        inputSorts.setAttribute('value', sorts.join());
+        inputSorts.setAttribute('value', $('.search-sorting-value').val());
 
         this.appendChild(inputSorts);
       }

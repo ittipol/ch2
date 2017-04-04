@@ -25,7 +25,7 @@ class RelateToBranch extends Model
     if(!empty($options['value']['branch_id'])) {
 
       // check branch is in shop first
-
+  
       if($model->state == 'update') {
         $this->where(array(
           array('model','like',$model->modelName),

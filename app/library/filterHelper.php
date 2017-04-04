@@ -13,6 +13,7 @@ class FilterHelper {
   private $model;
   private $filterOptions;
   private $sortingFields;
+  private $defaultSorting = 'created_at:desc';
 
   public function __construct($model = null) {
     
@@ -29,7 +30,13 @@ class FilterHelper {
   }
 
   public function setFilters($filters) {
-    $this->filters = $filters;
+
+    if(empty($filters)) {
+      $this->filters = null;
+    }else{
+      $this->filters = explode(',',$filters);
+    }
+
   }
 
   public function setSorting($sort) {
@@ -121,44 +128,26 @@ class FilterHelper {
 
   }
 
-  public function buildFilters($filters = array()) {
+  public function buildFilters() {
 
-    // if(empty($filters) && !empty($this->filters)) {
-    //   $filters = $this->filters;
-    // }elseif(empty($filters)) {
- 
+    if(!empty($this->filters)) {
+      $filters = $this->filters;
+    }elseif(!empty($this->filterOptions)) {
 
+      $filters = array();
+      foreach ($this->filterOptions as $filter) {
 
-    //   return null;
-    // }
-
-    if(empty($filters)) {
-
-      if(!empty($this->filters)) {
-        $filters = $this->filters;
-      }elseif(!empty($this->filterOptions)) {
-
-        $filters = array();
-        foreach ($this->filterOptions as $filter) {
-
-          if(empty($filter['default'])) {
-            // select all if default is empty
-            dd($filter['options']);
-            continue;
-          }
-
-          $filters[] = $filter['default'];
+        if(empty($filter['default'])) {
+          // $selectedfilters = $this->getDefaultFilter($filter['options']);
+          continue;
         }
-dd($filters);
-        
-      }else {
-        return null;
+
+        $filters[] = $filter['default'];
       }
-
+      
+    }else {
+      return null;
     }
-
-
-    $filters = explode(',', $filters);
 
     if(empty($filters)) {
       return null;
@@ -173,49 +162,103 @@ dd($filters);
 
       list($field,$value) = explode(':', $filter);
 
-      if(!Schema::hasColumn($this->model->getTable(), $field)) {
-        continue;
+      if($field == 'f') {
+        $specialFilter = $this->getSpecialFilter($value);
+
+        if(!empty($specialFilter)) {
+
+          if(!empty($specialFilter['operator'])) {
+            $_filters[$specialFilter['key']]['operator'] = $specialFilter['operator'];
+          }
+          
+          foreach ($specialFilter['value'] as $value) {
+            // $_filters[$specialFilter['key']][] = $value;
+            $_filters[$specialFilter['key']]['value'][] = $value;
+          }
+
+        }
+
+      }elseif(Schema::hasColumn($this->model->getTable(), $field)) {
+        $_filters[$this->model->getTable().'_'.$field]['value'][] = array($this->model->getTable().'.'.$field,'=',$value);
       }
-
-      // if(!empty($this->table)) {
-      //   $field = $this->model->getTable().'.'.$field;
-      // }
-
-      $_filters[$this->model->getTable().'.'.$field][] = $value;
 
     }
 
+    // 'or' => array(
+    //   array(
+    //     array('products.active','=',1),
+    //   ),
+    //   array(
+    //     array('products.created_at','>','2017-03-28 14:24:48'),
+    //   )
+    // )
+
     $filters = array();
-    if(!empty($_filters)) {
-      foreach ($_filters as $field => $filter) {
+    foreach ($_filters as $filter) {
 
-        // switch ($field) {
-        //   case 'lookups.model':
-        //     $filters['in'][] = array($field,$filter);
-        //     break;
-        // }
+      $operator = 'or';
+      if(!empty($filter['operator'])) {
+        $operator = $filter['operator'];
+      }
 
-        $filters['in'][] = array($field,$filter);
+      $value = array();
+      if(count($filter['value']) == 1) {
+
+        $value = current($filter['value']);
+
+      }else{
+
+        foreach ($filter['value'] as $_value) {
+          $value[] = $_value;
+        }
+
+        if($operator == 'or') {
+          $temp['or'] = $value;
+          $value = $temp;
+        }
 
       }
+
+      $filters[] = $value;
+
     }
 
     return $filters;
 
   }
 
-  public function buildSorting($sort = null,$q = null) {
+  public function getSpecialFilter($alias) {
 
-    if(empty($sort)) {
+    $filter = null;
+    switch ($alias) {
+      case 'new-arrival':
+          
+        $date = new Date;
+        $date = date('Y-m-d H:i:s',$date->now(true,true) - 604800);
+        $filter = array(
+          'key' => $this->model->getTable().'_created_at',
+          'operator' => 'and',
+          'value' => array(
+            array($this->model->getTable().'.created_at','>',$date)
+          )
+        );
 
-      if(!empty($this->sort)) {
-        $sort = $this->sort;
-      }elseif(!empty($this->sortingFields['default'])) {
-        $sort = $this->sortingFields['default'];
-      }else {
-        return null;
-      }
+        break;
+    
+    }
 
+    return $filter;
+
+  }
+
+  public function buildSorting($q = null) {
+
+    if(!empty($this->sort)) {
+      $sort = $this->sort;
+    }elseif(!empty($this->sortingFields['default'])) {
+      $sort = $this->sortingFields['default'];
+    }else {
+      $sort = $this->defaultSorting;
     }
 
     if(!$this->filterValueValidation($sort)) {
@@ -224,18 +267,17 @@ dd($filters);
 
     list($sortingField,$order) = explode(':', $sort);
 
-    if(empty($sortingField) || empty($order)) {
+    if(empty($sortingField) || empty($order) || !Schema::hasColumn($this->model->getTable(), $sortingField)) {
       return null;
     }
 
-    if(empty($q) && !empty($this->q)) {
+    if(empty($q) && !empty($this->searchQuery)) {
       $q = $this->searchQuery;
     }
 
     $hasData = false;
-
-    if(!empty($q)) {
-      $data = Service::loadModel('Lookup')->select('id')->where('name','like',$q);
+    if(!empty($q) && Schema::hasColumn($this->model->getTable(), 'name')) {
+      $data = $this->model->select('id')->where('name','like',$q);
       $hasData = $data->exists();
     }
 
@@ -245,9 +287,9 @@ dd($filters);
         $ids[] = $value->id;
       }
 
-      $orderBy['orderByRaw'] = 'FIELD(lookups.id, '.implode(' ,', $ids).') desc, lookups.'.$sortingField.' '.strtolower($order);
+      $orderBy['orderByRaw'] = 'FIELD('.$this->model->getTable().'.id, '.implode(' ,', $ids).') desc, '.$this->model->getTable().'.'.$sortingField.' '.strtolower($order);
     }else{
-      $orderBy['order'] = array('lookups.'.$sortingField,strtolower($order));
+      $orderBy['order'] = array($this->model->getTable().'.'.$sortingField,strtolower($order));
     }
 
     return $orderBy;
@@ -265,15 +307,15 @@ dd($filters);
   }
 
   public function filterValueValidation($value) {
-    if(preg_match('/^\w+:\w+$/', $value)) {
+    if(preg_match('/^\w+:[\w\-]+$/', $value)) {
       return true;
     }
     return false;
   }
 
-  public function conditions() {
+  public function conditions($model = null) {
 
-    if(empty($this->model) || empty($this->criteria)) {
+    if(empty($model) || empty($this->criteria)) {
       return null;
     }
 
@@ -297,11 +339,11 @@ dd($filters);
         continue;
       }
 
-      $this->model = $this->setCondition($this->model,$value);
+      $model = $this->setCondition($model,$value);
 
     }
 
-    return $this->model;
+    return $model;
 
   }
 
@@ -446,47 +488,60 @@ dd($filters);
 
   // }
 
-  public function order() {
+  public function order($model) {
 
-    if(empty($this->model) || empty($this->criteria['order'])) {
+    if(empty($model) || empty($this->criteria['order'])) {
       return null;
     }
 
     $key = key($this->criteria['order']);
-    $value = $this->criteria['order'];
+    $value = $this->criteria['order'][$key];
 
     if($key === 'order') {
 
       if(is_array(current($value))) {
 
         foreach ($value as $value) {
-          $this->model->orderBy(current($value),next($value));
+          $model->orderBy(current($value),next($value));
         }
 
       }else{
-        $this->model->orderBy(current($value),next($value));
+        $model->orderBy(current($value),next($value));
       }
 
     }elseif($key === 'orderByRaw') {
 
-      $this->model->orderByRaw($value);
+      $model->orderByRaw($value);
 
     }
 
-    return $this->model;  
+    return $model;  
 
   }
 
-  public function getFilterOptions($filterOptions,$selectedfilters) {
+  public function getFilterOptions() {
 
-    if(!empty($selectedfilters)) {
-      $selectedfilters = explode(',', $selectedfilters);
-    }else {
+    if(!empty($this->filters)) {
+      $selectedfilters = $this->filters;
+    }elseif(!empty($this->filterOptions)) {
+
       $selectedfilters = array();
+      foreach ($this->filterOptions as $filter) {
+
+        if(empty($filter['default'])) {
+          // $selectedfilters = $this->getDefaultFilter($filter['options']);
+          continue;
+        }
+
+        $selectedfilters[] = $filter['default'];
+      }
+      
+    }else {
+      $selectedfilters = null;
     }
 
     $_filterOptions = array();
-    foreach ($filterOptions as $key => $filter) {
+    foreach ($this->filterOptions as $key => $filter) {
 
       $_filterOptions[$key]['title'] = $filter['title'];
       $_filterOptions[$key]['input'] = $filter['input'];
@@ -494,9 +549,7 @@ dd($filters);
       foreach ($filter['options'] as $option) {
 
         $select = false;
-        if(in_array($option['value'], $selectedfilters) || (!empty($filter['default']) && in_array($option['value'], $filter['default']))) {
-          $select = true;
-        }elseif(empty($selectedfilters) && empty($filter['default'])) {
+        if(in_array($option['value'], $selectedfilters)) {
           $select = true;
         }
 
@@ -515,16 +568,12 @@ dd($filters);
 
   public function getSortingOptions() {
 
-    if(empty($selectedsort)) {
-
-      if(!empty($this->sort)) {
-        $selectedsort = $this->sort;
-      }elseif(!empty($this->sortingFields['default'])) {
-        $selectedsort = $this->sortingFields['default'];
-      }else {
-        $selectedsort = null;
-      }
-
+    if(!empty($this->sort)) {
+      $selectedsort = $this->sort;
+    }elseif(!empty($this->sortingFields['default'])) {
+      $selectedsort = $this->sortingFields['default'];
+    }else {
+      $selectedsort = $sort = $this->defaultSorting;
     }
 
     $sortingOptions['title'] = $this->sortingFields['title'];
@@ -532,10 +581,6 @@ dd($filters);
     foreach ($this->sortingFields['options'] as $option) {
 
       $select = false;
-      // if(!empty($selectedsort) && (($selectedsort == $option['value']) || ($option['value'] == $this->sortingFields['default']))) {
-      //   $select = true;
-      // }
-
       if(!empty($selectedsort) && ($selectedsort == $option['value'])) {
         $select = true;
       }
@@ -551,16 +596,29 @@ dd($filters);
 
   }
 
-  public function getDisplayingFilterOptions($filterOptions,$selectedfilters) {
+  public function getDisplayingFilterOptions() {
 
-    if(!empty($selectedfilters)) {
-      $selectedfilters = explode(',', $selectedfilters);
-    }else {
+    if(!empty($this->filters)) {
+      $selectedfilters = $this->filters;
+    }elseif(!empty($this->filterOptions)) {
+
       $selectedfilters = array();
+      foreach ($this->filterOptions as $filter) {
+
+        if(empty($filter['default'])) {
+          // $selectedfilters = $this->getDefaultFilter($filter['options']);
+          continue;
+        }
+
+        $selectedfilters[] = $filter['default'];
+      }
+      
+    }else {
+      $selectedfilters = null;
     }
 
     $_displayingfilterOptions = array();
-    foreach ($filterOptions as $key => $filter) {
+    foreach ($this->filterOptions as $key => $filter) {
 
       $_displayingfilterOptions[$key]['title'] = $filter['title'];
 
@@ -587,32 +645,13 @@ dd($filters);
 
   public function getDisplayingSorting() {
 
-    if(empty($selectedsort)) {
-
-      if(!empty($this->sort)) {
-        $selectedsort = $this->sort;
-      }elseif(!empty($this->sortingFields['default'])) {
-        $selectedsort = $this->sortingFields['default'];
-      }else {
-        $selectedsort = null;
-      }
-
+    if(!empty($this->sort)) {
+      $selectedsort = $this->sort;
+    }elseif(!empty($this->sortingFields['default'])) {
+      $selectedsort = $this->sortingFields['default'];
+    }else {
+      $selectedsort = $this->defaultSorting;
     }
-
-    // $displayingSorting = array();
-    // $_displayingSortingOptions = array();
-    // foreach ($sortingOptions as $key => $sorting) {
-
-    //   $_displayingSortingOptions[$key]['title'] = $sorting['title'];
-
-    //   foreach ($sorting['options'] as $option) {
-
-    //     if(!empty($selectedsort) && ($selectedsort == $option['value'])) {
-    //       $_displayingSortingOptions[$key]['display'][] = $option['name'];
-    //     }
-    //   }    
-
-    // }
 
     $displayingSortingOptions['title'] = $this->sortingFields['title'];
 
@@ -624,6 +663,17 @@ dd($filters);
     }  
 
     return $displayingSortingOptions;
+
+  }
+
+  public function getDefaultFilter($options) {
+
+    $filters = array();
+    foreach ($options as $option) {
+      $filters[] = $option['value'];
+    }
+
+    return $filters;
 
   }
 

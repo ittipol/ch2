@@ -9,7 +9,7 @@
 <div class="row">
 
   @if(!empty($searchOptions['filters']))
-    @foreach($searchOptions['filters'] as $filters)
+    @foreach($searchOptions['filters'] as $key => $filters)
 
       <h4>{{$filters['title']}}</h4>
       <div class="line"></div>
@@ -20,7 +20,7 @@
         @if($filters['input'] === 'checkbox')
           <label class="choice-box">
             <?php
-              echo Form::checkbox('', $option['value'], $option['select'], array(
+              echo Form::checkbox($key, $option['value'], $option['select'], array(
                 'class' => 'search-filter-value'
               ));
             ?>
@@ -29,7 +29,7 @@
         @elseif($filters['input'] === 'radio')
           <label class="choice-box">
             <?php
-              echo Form::radio('', $option['value'], $option['select'], array(
+              echo Form::radio($key, $option['value'], $option['select'], array(
                 'class' => 'search-filter-value'
               ));
             ?>

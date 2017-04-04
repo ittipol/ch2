@@ -158,21 +158,6 @@
 
   </div>
 
-<!--   <div class="form-section">
-
-    <div class="form-row">
-
-      <label class="choice-box">
-        <?php
-          echo Form::checkbox('active', 1);
-        ?>
-        <div class="inner">เปิดการขายสินค้านี้</div>
-      </label>
-
-    </div>
-
-  </div> -->
-
   <?php
     echo Form::submit('เพิ่มสินค้า', array(
       'class' => 'button'

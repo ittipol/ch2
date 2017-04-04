@@ -167,7 +167,6 @@ class ProductController extends Controller
       $filters = $this->query['fq'];
     }
 
-    // $sort = 'created_at:desc';
     $sort = '';
     if(!empty($this->query['sort'])) {
       $sort = $this->query['sort'];
@@ -185,25 +184,25 @@ class ProductController extends Controller
       $ids[] = $categoryPath->category_id;
     }
 
+    $filterHelper->setFilters($filters);
     $filterHelper->setSorting($sort);
-    $filterHelper->buildSorting();
 
-    $conditions = array();
+    $conditions = $filterHelper->buildFilters();
+    $order = $filterHelper->buildSorting();
 
     if(!empty($ids)) {
-      $conditions = array(
-        'in' => array('product_to_categories.category_id',$ids)
-      );
+      $conditions['in'][] = array('product_to_categories.category_id',$ids);
     }
 
-    $model->paginator->criteria(array(
+    $model->paginator->criteria(array_merge(array(
       'joins' => array('product_to_categories', 'product_to_categories.product_id', '=', 'products.id'),
-      'order' => array('created_at','DESC'),
       'conditions' => $conditions
-    ));
+    ),$order));
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl('product/shelf');
     $model->paginator->setUrl('product/detail/{id}','detailUrl');
+    $model->paginator->setQuery('sort',$sort);
+    $model->paginator->setQuery('fq',$filters);
 
     $categoryName = Service::loadModel('Category')->getCategoryName($categoryId);
 
@@ -214,16 +213,16 @@ class ProductController extends Controller
 
     $this->data = $model->paginator->build();
 
-    $filterOptions = $model->getFilterOptions();
+    // $filterOptions = $model->getFilterOptions();
     // $sortingFields = $model->getSortingFields();
 
     $searchOptions = array(
-      // 'filters' => $filterHelper->getFilterOptions($filterOptions,$filters),
+      'filters' => $filterHelper->getFilterOptions(),
       'sort' => $filterHelper->getSortingOptions()
     );
 
     $displayingFilters = array(
-      // 'filters' => $filterHelper->getDisplayingFilterOptions($filterOptions,$filters),
+      'filters' => $filterHelper->getDisplayingFilterOptions(),
       'sort' => $filterHelper->getDisplayingSorting()
     );
 
@@ -311,6 +310,8 @@ class ProductController extends Controller
     $this->setData('productShippingUrl',request()->get('shopUrl').'product_shipping_edit/'.$model->id);
     $this->setData('productNotificationEditUrl',request()->get('shopUrl').'product_notification_edit/'.$model->id);
     $this->setData('productSalePromotionUrl',request()->get('shopUrl').'product_sale_promotion/'.$model->id);
+    $this->setData('productBranchUrl',request()->get('shopUrl').'product_branch/'.$model->id);
+
     $this->setData('categoryPaths',$model->getCategoryPaths());
 
     return $this->view('pages.product.menu');
@@ -655,6 +656,36 @@ class ProductController extends Controller
 
     return $this->view('pages.product.sale_promotion');
 
+  }
+
+  public function branchEdit() {
+
+    $model = Service::loadModel('Product')->find($this->param['id']);
+
+    $relateToBranch = $model->getRelatedData('RelateToBranch',array(
+      'fields' => array('branch_id')
+    ));
+
+    $branches = array();
+    if(!empty($relateToBranch)) {
+      foreach ($relateToBranch as $value) {
+        $branches['branch_id'][] = $value->branch->id;
+      }
+    }
+
+    // Get Selected Branch
+    $model->formHelper->setFormData('RelateToBranch',$branches);
+
+    $model->formHelper->setData('branches',request()->get('shop')->getRelatedShopData('Branch'));
+
+    $this->data = $model->formHelper->build();
+
+    return $this->view('pages.product.form.branch_edit');
+
+  }
+
+  public function branchEditingSubmit(CustomFormRequest $request) {
+    return $this->_save(Service::loadModel('Product')->find($this->param['id']),$request->all());
   }
 
 }

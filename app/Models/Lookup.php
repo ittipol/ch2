@@ -19,44 +19,29 @@ class Lookup extends Model
       'options' => array(
         array(
           'name' => 'บริษัทและร้านค้า',
-          'value' => 'model:shop',
+          'value' => 'model:Shop',
         ),
         array(
           'name' => 'สินค้าในร้านค้า',
-          'value' => 'model:product',
+          'value' => 'model:Product',
         ),
         array(
           'name' => 'ประกาศงาน',
-          'value' => 'model:job',
+          'value' => 'model:Job',
         ),
         array(
           'name' => 'โฆษณาจากร้านค้า',
-          'value' => 'model:advertising',
+          'value' => 'model:Advertising',
         ),
         array(
           'name' => 'ประกาศซื้อ-เช่า-ขายสินค้า',
-          'value' => 'model:item',
+          'value' => 'model:Item',
         ),
         array(
           'name' => 'ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์',
-          'value' => 'model:real_estate',
+          'value' => 'model:RealEstate',
         )
       )
-    ),
-    'used' => array(
-      'input' => 'checkbox',
-      'title' => 'สินค้า',
-      'options' => array(
-        array(
-          'name' => 'มือ 1',
-          'value' => 'used:0',
-        ),
-        array(
-          'name' => 'มือ 2',
-          'value' => 'used:1',
-        )
-      ),
-      'default' => 'used:0'
     )
   );
 
@@ -79,8 +64,7 @@ class Lookup extends Model
         'name' => 'วันที่ใหม่ที่สุดไปหาเก่าที่สุด',
         'value' => 'created_at:desc'
       ),
-    ),
-    'default' => 'created_at:desc'
+    )
   );
 
   //  Lookup Special Format

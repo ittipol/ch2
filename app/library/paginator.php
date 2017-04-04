@@ -119,50 +119,56 @@ class Paginator {
 
     }
 
-    if(!empty($criteria['conditions']['in'])) {
-
-      if(is_array(current($criteria['conditions']['in']))) {
-
-        foreach ($criteria['conditions']['in'] as $condition) {
-
-          if(empty($condition[1])) {
-            continue;
-          }
-
-          $model = $model->whereIn($condition[0],$condition[1]);
-        }
-
-      }else {
-        $model = $model->whereIn(current($criteria['conditions']['in']),next($criteria['conditions']['in']));
-      }
-
-      unset($criteria['conditions']['in']);
-
+    if(!empty($criteria['conditions'])) {
+      $filterHelper = new FilterHelper();
+      $model = $filterHelper->setCondition($model,$criteria['conditions']);
+      unset($criteria['conditions']);
     }
 
-    if(!empty($criteria['conditions']['or'])) {
+    // if(!empty($criteria['conditions']['in'])) {
 
-      $conditions = $criteria['conditions']['or'];
+    //   if(is_array(current($criteria['conditions']['in']))) {
 
-      $model = $model->where(function($query) use($conditions) {
+    //     foreach ($criteria['conditions']['in'] as $condition) {
 
-        foreach ($conditions as $condition) {
-          $query->orWhere(
-            $condition[0],
-            $condition[1],
-            $condition[2]
-          );
-        }
+    //       if(empty($condition[1])) {
+    //         continue;
+    //       }
 
-      });
+    //       $model->whereIn($condition[0],$condition[1]);
+    //     }
 
-      unset($criteria['conditions']['or']);
+    //   }else {
+    //     $model->whereIn(current($criteria['conditions']['in']),next($criteria['conditions']['in']));
+    //   }
 
-    }
+    //   unset($criteria['conditions']['in']);
 
-    if(!empty($criteria['conditions'])){
-      $model = $model->where($criteria['conditions']);
-    }
+    // }
+
+    // if(!empty($criteria['conditions']['or'])) {
+
+    //   $conditions = $criteria['conditions']['or'];
+
+    //   $model = $model->where(function($query) use($conditions) {
+
+    //     foreach ($conditions as $condition) {
+    //       $query->orWhere(
+    //         $condition[0],
+    //         $condition[1],
+    //         $condition[2]
+    //       );
+    //     }
+
+    //   });
+
+    //   unset($criteria['conditions']['or']);
+
+    // }
+
+    // if(!empty($criteria['conditions'])){
+    //   $model->where($criteria['conditions']);
+    // }
 
     if($this->onlyMyData) {
       $model = $model->where('person_id','=',Session::get('Person.id'));
@@ -257,7 +263,7 @@ class Paginator {
   }
 
   public function search($criteria) {
-    
+
     // $cache = new Cache;
 
     $offset = ($this->page - 1)  * $this->perPage;
@@ -275,12 +281,12 @@ class Paginator {
     ->where('lookups.active','=',1)
     ->select('lookups.*');
 
-    $filterHelper = new FilterHelper($model);
+    $filterHelper = new FilterHelper();
     $filterHelper->setCriteria($criteria);
 
-    $model = $filterHelper->conditions();
+    $model = $filterHelper->conditions($model);
     $this->count = $model->count('lookups.id');
-    $model = $filterHelper->order();
+    $model = $filterHelper->order($model);
 
     $records = $model
     ->take($this->perPage)

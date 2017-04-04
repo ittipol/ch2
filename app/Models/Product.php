@@ -12,7 +12,7 @@ class Product extends Model
 {
   protected $table = 'products';
   protected $fillable = ['name','description','product_model','sku','quantity','quantity_available','minimum','product_unit','price','weight','weight_unit_id','length','length_unit_id','width','height','specifications','message_out_of_order','shipping_calculate_from','flag_message_from','flag_message','active','person_id'];
-  protected $modelRelations = array('Image','Tagging','ProductToCategory','ShopRelateTo');
+  protected $modelRelations = array('Image','Tagging','ProductToCategory','RelateToBranch','ShopRelateTo');
   protected $directory = true;
 
   public $formHelper = true;
@@ -59,6 +59,7 @@ class Product extends Model
       'shop.product_minimum.edit' => array('name','price','quantity','product_unit','length','width','height','weight'),
       'shop.product_stock.edit' => array('name','price','minimum','product_unit','length','width','height','weight'),
       'shop.product_price.edit' => array('name','quantity','minimum','product_unit','length','width','height','weight'),
+      'shop.product_branch.edit' => array('name','price','minimum','quantity','product_unit','length','width','height','weight'),
       'shop.product_notification.edit' => array('name','price','minimum','quantity','product_unit','length','width','height','weight'),
     )
   );
@@ -78,25 +79,22 @@ class Product extends Model
     )
   );
 
-  // protected $filterOptions = array(
-  //   'model' => array(
-  //     'title' => 'แสดงข้อมูล',
-  //     'options' => array(
-  //       array(
-  //         'name' => 'ประกาศซื้อ',
-  //         'value' => 'announcement_type_id:1',
-  //       ),
-  //       array(
-  //         'name' => 'ประกาศขาย',
-  //         'value' => 'announcement_type_id:2',
-  //       ),
-  //       array(
-  //         'name' => 'ประกาศให้เช่า',
-  //         'value' => 'announcement_type_id:3',
-  //       )
-  //     )
-  //   )
-  // );
+  protected $filterOptions = array(
+    'product' => array(
+      'input' => 'checkbox',
+      'title' => 'แสดงสินค้า',
+      'options' => array(
+        array(
+          'name' => 'สินค้าที่เปิดขาย',
+          'value' => 'active:1',
+        ),
+        array(
+          'name' => 'สินค้ามาใหม่',
+          'value' => 'f:new-arrival',
+        )
+      )
+    )
+  );
 
   protected $sortingFields = array(
     'title' => 'จัดเรียงตาม',

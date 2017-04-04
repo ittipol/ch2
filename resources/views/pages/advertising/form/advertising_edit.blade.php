@@ -32,7 +32,7 @@
     @if(!empty($_fieldData['branches']))
     <div class="form-row">
       <?php 
-        echo Form::label('branch', 'เลือกสาขาที่ลงโฆษณานี้ (สามารถเว้นว่างได้)');
+        echo Form::label('branch', 'เลือกสาขาที่ลงโฆษณานี้ (เว้นว่างได้)');
       ?>
       <div class="form-item-group">
         <div class="form-item-group-inner">

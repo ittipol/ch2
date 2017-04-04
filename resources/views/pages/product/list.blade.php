@@ -42,7 +42,12 @@
 
     <div class="right-size-panel-inner">
 
+      <h5>หมวดสินค้า</h5>
+      @if(!empty($parentCategoryName))
       <h4 class="category-name">{{$parentCategoryName}}</h4>
+      @else
+      <h4 class="category-name">{{$title}}</h4>
+      @endif
       <div class="line space-bottom-10"></div>
 
       @foreach($categories as $category)
@@ -72,9 +77,6 @@
 
   <?php 
     echo Form::open(['id' => 'search_form','method' => 'get', 'enctype' => 'multipart/form-data']);
-  ?>
-
-  <?php
     echo Form::close();
   ?>
 

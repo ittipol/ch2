@@ -31,7 +31,7 @@ class SearchController extends Controller
       $filters = $this->query['fq'];
     }
 
-    $sort = 'created_at:desc';
+    $sort = '';
     if(!empty($this->query['sort'])) {
       $sort = $this->query['sort'];
     }
@@ -42,7 +42,6 @@ class SearchController extends Controller
       $filterHelper->setFilters($filters);
       $filterHelper->setSorting($sort);
 
-      // $lookup->paginator->criteria($criteria);
       $lookup->paginator->disableGetImage();
       $lookup->paginator->setPage($page);
       $lookup->paginator->setPerPage(20);
@@ -63,17 +62,14 @@ class SearchController extends Controller
 
     }
 
-    $filterOptions = $lookup->getFilterOptions();
-    $sortingFields = $lookup->getSortingFields();
-
     $searchOptions = array(
-      'filters' => $filterHelper->getFilterOptions($filterOptions,$filters),
-      'sort' => $filterHelper->getSortingOptions($sortingFields,$sort)
+      'filters' => $filterHelper->getFilterOptions(),
+      'sort' => $filterHelper->getSortingOptions()
     );
 
     $displayingFilters = array(
-      'filters' => $filterHelper->getDisplayingFilterOptions($filterOptions,$filters),
-      'sort' => $filterHelper->getDisplayingSorting($sortingFields,$sort)
+      'filters' => $filterHelper->getDisplayingFilterOptions(),
+      'sort' => $filterHelper->getDisplayingSorting()
     );
 
     $this->setData('q',$q);

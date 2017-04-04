@@ -16,16 +16,16 @@
     </div>
   </div>
 
+  <?php
+    echo Form::close();
+  ?>
+
   <div id="filter_expand_panel" class="right-size-panel filter">
     <div class="right-size-panel-inner">
       @include('components.filter_expand_panel')
       <div class="right-size-panel-close-icon"></div>
     </div>
   </div>
-
-  <?php
-    echo Form::close();
-  ?>
 
   <div class="displaying-filters">
 
@@ -43,19 +43,15 @@
 
     @endforeach
 
-    @foreach($displayingFilters['sort'] as $sort)
+    @if(!empty($displayingFilters['sort']['display']))
 
-      @if(!empty($sort['display']))
+      <h5>{{$displayingFilters['sort']['title']}}</h5>
 
-        <h5>{{$sort['title']}}</h5>
+      @foreach($displayingFilters['sort']['display'] as $display)
+        <div class="filter-tag">{{$display}}</div>
+      @endforeach
 
-        @foreach($sort['display'] as $display)
-          <div class="filter-tag">{{$display}}</div>
-        @endforeach
-
-      @endif
-
-    @endforeach
+    @endif
 
   </div>
 

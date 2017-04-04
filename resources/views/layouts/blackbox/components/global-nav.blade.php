@@ -87,6 +87,7 @@
                 <div class="dot"></div>
                 <div class="additional-option-content">
                   <a href="{{URL::to('community/shop_create')}}">เพิ่มร้านค้า</a>
+                  <a href="{{URL::to('community/shop_create')}}">แสดงร้านค้าของคุณ</a>
                 </div>
               </div>
               <ul class="submenu">
