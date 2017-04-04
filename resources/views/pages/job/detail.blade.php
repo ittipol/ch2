@@ -184,7 +184,8 @@
   </div>
 
   @if($hasBranchLocation)
-  <h4>สาขาที่กำลังเปิดรับสมัครงานนี้</h4>   
+  <h4>สาขาที่กำลังเปิดรับสมัครงานนี้</h4>
+  <div class="line space-top-bottom-20"></div>
   <div class="row">
     <div class="col-xs-12">
 
@@ -201,8 +202,6 @@
 
     </div> 
   </div>
-
-  <div class="line space-top-bottom-20"></div>
 
   @endif
 

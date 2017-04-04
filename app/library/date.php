@@ -159,7 +159,7 @@ class Date
     }elseif($days == 1){
       $passed = 'เมื่อวานนี้ เวลา '.$this->covertTimeToSting($dateTime);
     }else{
-      $passed = $this->covertDateToSting($dateTime);
+      $passed = $this->covertDateTimeToSting($dateTime);
     }
 
     return $passed;

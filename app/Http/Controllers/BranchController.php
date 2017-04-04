@@ -64,6 +64,9 @@ class BranchController extends Controller
 
     // Get Branches
     $jobIds = $model->getRelatedData('RelateToBranch',array(
+      'conditions' => array(
+        'model' => 'Job'
+      ),
       'list' => 'model_id',
       'fields' => array('model_id'),
     ));

@@ -281,6 +281,7 @@ class Map {
     }
     html += item['address'];
     html += '</h4>';
+    html += '<a href="'+item['detailUrl']+'">แสดงรายละเอียด</a>'
     html += '</div>';
     html += '</div>';
 

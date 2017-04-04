@@ -96,7 +96,10 @@ class AdvertisingController extends Controller
           'address' => $branch->name,
           'latitude' => $graphics['latitude'],
           'longitude' => $graphics['longitude'],
-          'detailUrl' => $url->setAndParseUrl('branch/detail/{id}',$branch->getAttributes())
+          'detailUrl' => $url->setAndParseUrl('shop/{shopSlug}/branch/{id}',array(
+            'shopSlug' => $slug,
+            'id' => $branch->id
+          ))
         );
       }
     }

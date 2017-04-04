@@ -68,6 +68,15 @@
   transition: transform 220ms ease-out;
 }
 
+.side-panel .side-panel-item-row a {
+  color: #fff;
+  margin-top: 5px;
+  padding: 5px;
+  margin-left: 38px;
+  background-color: #0D47A1;
+  display: inline-block;
+}
+
 .side-panel-close.rotate {
   transform: rotate(180deg);
 }

@@ -6,7 +6,7 @@ class Branch extends Model
 {
   public $table = 'branches';
   protected $fillable = ['name','description','person_id'];
-  protected $modelRelations = array('Image','Address','Contact','ShopRelateTo');
+  protected $modelRelations = array('Image','Address','Contact','ShopRelateTo','RelateToBranch');
   protected $directory = true;
 
   public $formHelper = true;

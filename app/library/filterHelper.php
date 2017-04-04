@@ -378,9 +378,9 @@ class FilterHelper {
           foreach ($value as $_value) {
 
             if($operator === 'and') {
-              $query->whereIn(current($_value),next($_value));
+              $query = $query->whereIn(current($_value),next($_value));
             }else{
-              $query->orWhere(function ($_query) use($_value) {
+              $query = $query->orWhere(function ($_query) use($_value) {
                 $_query->whereIn(current($_value),next($_value));
               });
             }
@@ -390,9 +390,9 @@ class FilterHelper {
         }else{
 
           if($operator === 'and') {
-            $query->whereIn(current($value),next($value));
+            $query = $query->whereIn(current($value),next($value));
           }else{
-            $query->orWhere(function ($_query) use($value) {
+            $query = $query->orWhere(function ($_query) use($value) {
               $_query->whereIn(current($value),next($value));
             });
           }
@@ -402,9 +402,9 @@ class FilterHelper {
       }elseif(!empty(next($value) && !is_array(current($value)))) {
 
         if($operator === 'and') {
-          $query->where(prev($value),next($value),next($value));
+          $query = $query->where(prev($value),next($value),next($value));
         }elseif($operator === 'or') {
-          $query->orWhere(prev($value),next($value),next($value));
+          $query = $query->orWhere(prev($value),next($value),next($value));
         }
 
       }else{
@@ -414,11 +414,11 @@ class FilterHelper {
         }
 
         if($operator === 'and') {
-          $query->where(function ($_query) use($value,$_operator) {
+          $query = $query->where(function ($_query) use($value,$_operator) {
             $_query = $this->_setCondition($_query,$value,$_operator);
           });
         }elseif($operator === 'or') {
-          $query->orWhere(function ($_query) use($value,$_operator) {
+          $query = $query->orWhere(function ($_query) use($value,$_operator) {
             $_query = $this->_setCondition($_query,$value,$_operator);
           });
         }
@@ -502,16 +502,16 @@ class FilterHelper {
       if(is_array(current($value))) {
 
         foreach ($value as $value) {
-          $model->orderBy(current($value),next($value));
+          $model = $model->orderBy(current($value),next($value));
         }
 
       }else{
-        $model->orderBy(current($value),next($value));
+        $model = $model->orderBy(current($value),next($value));
       }
 
     }elseif($key === 'orderByRaw') {
 
-      $model->orderByRaw($value);
+      $model = $model->orderByRaw($value);
 
     }
 

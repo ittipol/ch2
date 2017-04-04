@@ -171,6 +171,7 @@ class ImageGallery {
 
         $('#image_display').css({
           'height': '100%',
+          'margin-top': '0'
           // 'margin-left': -((imgW - frameWidth) / 2)
         });
 
@@ -201,13 +202,6 @@ class ImageGallery {
 
         let imgH = Math.ceil(imgHeight * (frameWidth / imgWidth));
         let imgW = Math.ceil(imgWidth * (frameheight / imgHeight));
-
-
-        // $('#image_display').css({
-        //   'width': '100%',
-        //   'height': imgH,
-        //   'margin-top': (frameheight - imgH) / 2
-        // });
 
         if(imgW > frameWidth) {
           $('#image_display').css({

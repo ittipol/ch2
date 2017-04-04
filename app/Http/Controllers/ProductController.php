@@ -241,6 +241,8 @@ class ProductController extends Controller
 
   public function detail() {
 
+    $url = new Url;
+
     $categoryModel = Service::loadModel('Category');
 
     $model = Service::loadModel('Product')->find($this->param['id']);
@@ -268,6 +270,44 @@ class ProductController extends Controller
       'fields' => array('slug')
     ))->slug;
 
+    $branchIds = $model->getRelatedData('RelateToBranch',array(
+      'list' => 'branch_id',
+      'fields' => array('branch_id'),
+    ));
+
+    $branches = array();
+    if(!empty($branchIds)){
+      $branches = Service::loadModel('Branch')
+      ->select(array('id','name'))
+      ->whereIn('id',$branchIds)
+      ->get();
+    }
+
+    $branchLocations = array();
+    $hasBranchLocation = false;
+    foreach ($branches as $branch) {
+
+      $address = $branch->modelData->loadAddress();
+
+      if(!empty($address)){
+
+        $hasBranchLocation = true;
+
+        $graphics = json_decode($address['_geographic'],true);
+        
+        $branchLocations[] = array(
+          'id' => $branch->id,
+          'address' => $branch->name,
+          'latitude' => $graphics['latitude'],
+          'longitude' => $graphics['longitude'],
+          'detailUrl' => $url->setAndParseUrl('shop/{shopSlug}/branch/{id}',array(
+            'shopSlug' => $slug,
+            'id' => $branch->id
+          ))
+        );
+      }
+    }
+
     $this->data = $model->modelData->build();
 
     $this->setData('shop',$shop->modelData->build(true));
@@ -275,6 +315,9 @@ class ProductController extends Controller
     $this->setData('shopCoverUrl',$shop->getCoverUrl());
     $this->setData('shopUrl','shop/'.$slug);
     $this->setData('categoryPaths',$model->getCategoryPaths());
+
+    $this->setData('branchLocations',json_encode($branchLocations));
+    $this->setData('hasBranchLocation',$hasBranchLocation);
 
     return $this->view('pages.product.detail');
 

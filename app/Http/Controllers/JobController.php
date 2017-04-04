@@ -37,6 +37,8 @@ class JobController extends Controller
 
   public function detail() {
 
+    $url = new Url;
+
     $model = Service::loadModel('Job')->find($this->param['id']);
 
     if(empty($model)) {
@@ -73,8 +75,6 @@ class JobController extends Controller
       ->whereIn('id',$branchIds)
       ->get();
     }
-    
-    $url = new Url;
 
     $branchLocations = array();
     $hasBranchLocation = false;
@@ -93,7 +93,10 @@ class JobController extends Controller
           'address' => $branch->name,
           'latitude' => $graphics['latitude'],
           'longitude' => $graphics['longitude'],
-          'detailUrl' => $url->setAndParseUrl('branch/detail/{id}',$branch->getAttributes())
+          'detailUrl' => $url->setAndParseUrl('shop/{shopSlug}/branch/{id}',array(
+            'shopSlug' => $slug,
+            'id' => $branch->id
+          ))
         );
       }
     }
