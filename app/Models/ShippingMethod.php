@@ -8,7 +8,7 @@ class ShippingMethod extends Model
 {
   protected $table = 'shipping_methods';
   protected $fillable = ['name','shipping_service_id','description','shipping_service_cost_type_id','free_service','service_cost','shipping_time','special','special_alias','sort','person_id'];
-  protected $modelRelations = array('shippingMethodToBranch','ShopRelateTo');
+  protected $modelRelations = array('ShopRelateTo');
 
   public $formHelper = true;
   public $modelData = true;
@@ -46,19 +46,19 @@ class ShippingMethod extends Model
     )
   );
 
-  public function fill(array $attributes) {
+  // public function fill(array $attributes) {
 
-    if(!empty($attributes)) {
+  //   if(!empty($attributes)) {
       
-      if(!$this->special || ($this->special_alias != 'picking-up-item')) {
-        unset($attributes['shippingMethodToBranch']);
-      }
+  //     if(!$this->special || ($this->special_alias != 'picking-up-item')) {
+  //       unset($attributes['RelateToBranch']);
+  //     }
 
-    }
+  //   }
 
-    return parent::fill($attributes);
+  //   return parent::fill($attributes);
 
-  }
+  // }
 
   public function shippingService() {
     return $this->hasOne('App\Models\ShippingService','id','shipping_service_id');
@@ -121,18 +121,7 @@ class ShippingMethod extends Model
     $select = true;
     $_shippingMethods = array();
     foreach ($shippingMethods as $shippingMethod) {
-      $shippingMethodToBranches = ShippingMethodToBranch::where('shipping_method_id','=',$shippingMethod->id);
-      
-      $branches = array();
-      $hasBranch = false;
-      foreach ($shippingMethodToBranches->get() as $shippingMethodToBranch) {
-        $branches[$shippingMethodToBranch->branch->id] = $shippingMethodToBranch->branch->name; 
-        $hasBranch = true;
-      }
-
       $_shippingMethods[] = array_merge($shippingMethod->buildPaginationData(),array(
-        'branches' => $branches,
-        'hasBranch' => $hasBranch,
         'select' => $select
       ));
       $select = false;

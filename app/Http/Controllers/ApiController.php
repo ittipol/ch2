@@ -93,6 +93,38 @@ class ApiController extends Controller
     return response()->json($result);
   }
 
+  public function GetShippingMethodId($shippingMethodId) {
+
+    // if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+    //   $this->error = array(
+    //     'message' => 'ขออภัย ไม่อนุญาตให้เข้าถึงหน้านี้ได้'
+    //   );
+    //   return $this->error();
+    // }
+
+    $shippingMethod = Service::loadModel('ShippingMethod')
+    ->select('name','description')
+    ->where('id','=',$shippingMethodId);
+
+    $result = array(
+      'success' => false
+    );
+
+    if($shippingMethod->exists()) {
+
+      $shippingMethod = $shippingMethod->first();
+
+      $result = array(
+        'success' => true,
+        'description' => !empty($shippingMethod->description) ? $shippingMethod->description : 'ไม่ระบุรายระเอียดวิธีการจัดส่งสินค้า <strong>'.$shippingMethod->name.'</strong>'
+      );
+
+    }
+
+    return response()->json($result);
+
+  }
+
   public function uploadImage() {
 
     if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {

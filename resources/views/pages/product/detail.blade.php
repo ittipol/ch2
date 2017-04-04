@@ -238,7 +238,6 @@
 
       </div> 
     </div>
-
     @endif
 
   <!-- </div> -->
@@ -253,8 +252,10 @@
     const product = new Product('{{ csrf_token() }}',{{$_modelData['id']}});
     product.load();
 
+    @if($hasBranchLocation)
     const map = new Map(false,false,false);
     map.setLocations({!!$branchLocations!!});
+    @endif
 
   });
 </script>

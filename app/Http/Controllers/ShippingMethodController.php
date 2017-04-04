@@ -76,9 +76,10 @@ class ShippingMethodController extends Controller
 
     if($model->special) {
 
-      if($model->special_alias == 'picking-up-item') {
-        $this->setData('branches',request()->get('shop')->getRelatedShopData('Branch'));
-      }
+      // if($model->special_alias == 'picking-up-item') {
+      //   // Get Branches
+      //   $this->setData('branches',request()->get('shop')->getRelatedShopData('Branch'));
+      // }
 
       $this->setData('shippingMethod',$model->modelData->build(true));
 

@@ -38,7 +38,7 @@ class Address {
 
 	  let _this = this;
 
-	  let CSRF_TOKEN = $('input[name="_token"]').val();        
+	  // let CSRF_TOKEN = $('input[name="_token"]').val();        
 
 	  let request = $.ajax({
 	    url: "/api/v1/get_district/"+provinceId,

@@ -400,25 +400,28 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['prefix' => 'api/v1', 'middleware' => 'api'], function () {
   Route::get('get_district/{provinceId}', 'ApiController@GetDistrict');
   Route::get('get_sub_district/{districtId}', 'ApiController@GetSubDistrict');
+});
+
+Route::group(['prefix' => 'api/v1', 'middleware' => ['api','auth']], function () {
+  Route::get('get_shipping_method/{shippingMethodId}', 'ApiController@GetShippingMethodId');
   Route::get('get_category/{parentId?}', 'ApiController@GetCategory');
 });
 
 Route::group(['middleware' => 'auth'], function () {
   Route::post('upload_image', 'ApiController@uploadImage');
   Route::post('upload_profile_image', 'ApiController@uploadProfileImage')->name('Api.upload.profile_image');
-});
 
-Route::group(['middleware' => 'auth'], function () {
   Route::get('notification_update', 'ApiController@notificationUpdate');
   Route::get('notification_read', 'ApiController@notificationRead');
 });
 
-Route::post('cart_add', 'ApiController@cartAdd');
-Route::post('cart_delete', 'CartController@cartDelete');
-Route::get('cart_update', 'ApiController@cartUpdate');
-Route::get('product_count', 'ApiController@productCount');
-
-Route::post('update_quantity', 'CartController@cartUpdateQuantity');
+Route::group(['middleware' => 'api'], function () {
+  Route::post('cart_add', 'ApiController@cartAdd');
+  Route::post('cart_delete', 'CartController@cartDelete');
+  Route::get('cart_update', 'ApiController@cartUpdate');
+  Route::get('product_count', 'ApiController@productCount');
+  Route::post('update_quantity', 'CartController@cartUpdateQuantity');
+});
 
 // Route::group(['namespace' => 'Admin'], function () {
 //     // Controllers Within The "App\Http\Controllers\Admin" Namespace

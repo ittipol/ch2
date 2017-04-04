@@ -95,6 +95,11 @@
 	font-size: 22px;
 }
 
+.shipping-method-detail .shipping-method-detail-panel {
+	padding: 15px;
+	background-color: #ececec;
+}
+
 @media only screen and (max-width : 480px) {
   .checkout .secondary-message-box {
   	text-align: left;
