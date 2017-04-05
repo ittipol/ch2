@@ -78,6 +78,7 @@
 	font-size: 15px;
 	font-weight: bold;
 	margin: 0;
+	line-height: 20px;
 }
 
 .shipping-method-input label.choice-box p {
@@ -98,6 +99,11 @@
 .shipping-method-detail .shipping-method-detail-panel {
 	padding: 15px;
 	background-color: #ececec;
+}
+
+.shipping-method-detail .shipping-method-special-option {
+	padding: 15px;
+	background-color: #B2DFDB;
 }
 
 @media only screen and (max-width : 480px) {

@@ -72,36 +72,36 @@ class ShippingMethodController extends Controller
       )
     ));
 
-    if($model->special) {
-
-      if($model->special_alias == 'picking-up-item') {
-
-        $relateToBranch = $model->getRelatedData('RelateToBranch',array(
-          'fields' => array('branch_id')
-        ));
-
-        $branches = array();
-        if(!empty($relateToBranch)) {
-          foreach ($relateToBranch as $value) {
-            $branches['branch_id'][] = $value->branch->id;
-          }
-        }
-        // Get Selected Branch
-        $model->formHelper->setFormData('RelateToBranch',$branches);
-
-        $model->formHelper->setData('branches',request()->get('shop')->getRelatedShopData('Branch'));
-
-      }
-
+    if(!$model->special) {
       $this->data = $model->formHelper->build();
-      $this->setData('shippingMethod',$model->modelData->build(true));
+      return $this->view('pages.shipping_method.form.shipping_method_edit');
+    }
 
-      return $this->view('pages.shipping_method.form.special_shipping_method_edit');
+    // Special
+    if($model->special_alias == 'picking-up-item') {
+
+      $relateToBranch = $model->getRelatedData('RelateToBranch',array(
+        'fields' => array('branch_id')
+      ));
+
+      $branches = array();
+      if(!empty($relateToBranch)) {
+        foreach ($relateToBranch as $value) {
+          $branches['branch_id'][] = $value->branch->id;
+        }
+      }
+      // Get Selected Branch
+      $model->formHelper->setFormData('RelateToBranch',$branches);
+
+      $model->formHelper->setData('branches',request()->get('shop')->getRelatedShopData('Branch'));
+
     }
 
     $this->data = $model->formHelper->build();
+    $this->setData('shippingMethod',$model->modelData->build(true));
 
-    return $this->view('pages.shipping_method.form.shipping_method_edit');
+    return $this->view('pages.shipping_method.form.special_shipping_method_edit');
+
   }
 
   public function editingSubmit(CustomFormRequest $request) {

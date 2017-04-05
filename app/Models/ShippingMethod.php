@@ -46,20 +46,6 @@ class ShippingMethod extends Model
     )
   );
 
-  public function fill(array $attributes) {
-
-    if(!empty($attributes)) {
-
-      if(!$this->special || ($this->special_alias != 'picking-up-item')) {
-        unset($attributes['RelateToBranch']);
-      }
-
-    }
-
-    return parent::fill($attributes);
-
-  }
-
   public function shippingService() {
     return $this->hasOne('App\Models\ShippingService','id','shipping_service_id');
   }
@@ -84,6 +70,8 @@ class ShippingMethod extends Model
         if(empty($model->special)) {
           $model->special = 0;
         }
+
+        $model->active = 1;
 
       }
 
@@ -122,19 +110,33 @@ class ShippingMethod extends Model
     $_shippingMethods = array();
     foreach ($shippingMethods as $shippingMethod) {
 
+      $hasOption = false;
+      $specialOptions = array();
       if($shippingMethod->special_alias == 'picking-up-item') {
         // Get Branch
-        $branchIds = $shippingMethod->getRelatedData('RelateToBranch',array(
-          // 'list' => 'branch_id',
-          // 'fields' => array('branch_id'),
+        $branches = $shippingMethod->getRelatedData('RelateToBranch',array(
+          'fields' => array('branch_id'),
         ));
 
-        dd($branchIds);
+        if(!empty($branches)) {
+          foreach ($branches as $branch) {
+            $specialOptions[$branch->branch->id] = $branch->branch->name;
+          }
+
+          $hasOption = true;
+        }
+        
       }
 
       $_shippingMethods[] = array_merge($shippingMethod->buildPaginationData(),array(
-        'select' => $select
+        'select' => $select, 
+        'special' => array(
+          // 'alias' => $shippingMethod->special_alias,
+          'hasOption' => $hasOption,
+          'options' => $specialOptions 
+        )
       ));
+
       $select = false;
     }
 

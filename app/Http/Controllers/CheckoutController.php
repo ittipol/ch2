@@ -119,7 +119,9 @@ class CheckoutController extends Controller
       // order shipping cost
       $shipping = array();
       if(isset($shops[$shopId]['shipping_method_id'])) {
-        $shippingMethod = $shippingMethodModel->find($shops[$shopId]['shipping_method_id']);
+        $shippingMethod = $shippingMethodModel
+        ->select('id','name','service_cost','free_service','shipping_service_id','shipping_service_cost_type_id','shipping_time','special_alias')
+        ->find($shops[$shopId]['shipping_method_id']);
 
         $shipping = array(
           'order_free_shipping' => $shippingMethod->free_service,
@@ -140,7 +142,8 @@ class CheckoutController extends Controller
       ->save();
 
       // If has has shipping method then save
-      if(!empty($shops[$shopId]['shipping_method_id'])) {
+      if(isset($shops[$shopId]['shipping_method_id'])) {
+
         $orderShipping
         ->newInstance()
         ->fill(array(
@@ -152,6 +155,12 @@ class CheckoutController extends Controller
           'shipping_time' => $shippingMethod->shipping_time
         ))
         ->save();
+
+        // save to relateToBranch
+        if($shippingMethod->special_alias == 'picking-up-item') {
+
+        }
+
       }
 
       foreach ($products as $product) {

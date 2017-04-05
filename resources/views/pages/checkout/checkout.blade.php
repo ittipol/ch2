@@ -146,7 +146,8 @@
                         'class' => 'shipping-method-rdobox',
                         'id' => 'shipping_method_rdobox_'.$shippingMethod['id'],
                         'data-group' => $value['shop']['id'],
-                        'data-shipping-method' => $shippingMethod['id']
+                        'data-shipping-method' => $shippingMethod['id'],
+                        'data-has-option' => $shippingMethod['special']['hasOption']
                       ));
                     ?> 
                     <div class="inner">
@@ -177,6 +178,19 @@
                   </label>
 
                   <div class="shipping-method-detail hide-element">
+
+                    @if($shippingMethod['special']['hasOption'] && !empty($shippingMethod['special']['options']))
+                      <div class="shipping-method-special-option space-bottom-10">
+                        <h4>ระบุสาขาที่คุณต้องการเข้ารับสินค้า</h4>
+                        <?php
+                          echo Form::select('shop['.$value['shop']['id'].'][branch_id]', $shippingMethod['special']['options'], null, array(
+                            'id' => 'special_option_'.$shippingMethod['id'],
+                            'disabled' => true
+                          ));
+                        ?>
+                      </div>
+                    @endif
+
                     <div class="shipping-method-detail-panel"></div>
                   </div>
 
@@ -245,12 +259,13 @@
 </div>
 
 <script type="text/javascript">
-  // ระบุสาขาที่คุณต้องการเข้ารับสินค้า
+
   class Checkout {
 
     constructor() {
       this.downloaded = [];
       this.currentTarget = [];
+      this.currentOption = [];
     }
 
     load() {
@@ -264,6 +279,12 @@
 
         _this.currentTarget[group] = shippingMethodId;
         _this.getShippingMethodDetail(shippingMethodId,$(this).parent().parent().find('.shipping-method-detail'));
+
+        if($(this).data('has-option')) {
+          _this.currentOption[group] = shippingMethodId;
+          $('#special_option_'+shippingMethodId).prop('disabled',false);
+        }
+
       });
 
       this.bind();
@@ -288,17 +309,26 @@
         _this.currentTarget[group] = shippingMethodId;
         _this.getShippingMethodDetail(shippingMethodId,$(this).parent().parent().find('.shipping-method-detail'));
 
+        if(_this.currentOption[group]) {
+          $('#special_option_'+_this.currentOption[group]).prop('disabled',true);
+        }
+
+        if($(this).data('has-option')) {
+          _this.currentOption[group] = shippingMethodId;
+          $('#special_option_'+shippingMethodId).prop('disabled',false);
+        }
+
       });
 
-      $('.shipping-method-detail-button').on('click',function(){
+      // $('.shipping-method-detail-button').on('click',function(){
 
-        // let group = $(this).data('group');
-        // let shippingMethodId = $(this).data('shipping-method');
+      //   let group = $(this).data('group');
+      //   let shippingMethodId = $(this).data('shipping-method');
 
-        // _this.currentTarget[group] = shippingMethodId;
-        // _this.getShippingMethodDetail(shippingMethodId,$(this).parent().parent().find('.shipping-method-detail'));
+      //   _this.currentTarget[group] = shippingMethodId;
+      //   _this.getShippingMethodDetail(shippingMethodId,$(this).parent().parent().find('.shipping-method-detail'));
 
-      });
+      // });
 
     }
 

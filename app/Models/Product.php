@@ -137,10 +137,14 @@ class Product extends Model
 
     Product::saving(function($product){
 
+      if($product->state == 'create') {
+        $product->active = 0;
+      }
+
       if(!$product->exists){
-        if(empty($product->active)) {
-          $product->active = 0;
-        }
+        // if(empty($product->active)) {
+        //   $product->active = 0;
+        // }
         // 1 = seller (person)
         // 2 = system
         $product->shipping_calculate_from = 1;
