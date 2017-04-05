@@ -59,6 +59,19 @@
       </div>
 
       <div class="row">
+
+        @if(!empty($orderConfirmMessage))
+        <div class="col-sm-12 space-bottom-30">
+          <div class="detail-info-section no-margin">
+            <h4>ข้อความจากผู้ขาย</h4>
+            <div class="line"></div>
+            <div class="space-top-10">
+              {!!$orderConfirmMessage!!}
+            </div>
+          </div>
+        </div>
+        @endif
+
         <div class="col-sm-12 space-bottom-30">
 
           <div class="detail-info-section no-margin">
@@ -178,18 +191,6 @@
 
     <div class="col-md-4 col-sm-12">
 
-      <div class="detail-info-section no-margin">
-        <h4>ที่อยู่สำหรับการจัดส่ง</h4>
-        <div class="line"></div> 
-        <div class="detail-info">
-          {{$order['shipping_address']}}
-        </div>
-      </div>
-
-    </div>
-
-    <div class="col-md-4 col-sm-12">
-
       <div class="detail-group">
         <h4>วิธีการจัดส่งสินค้า</h4>
         <div class="line"></div>
@@ -226,6 +227,30 @@
 
         @endif
 
+      </div>
+
+    </div>
+
+    <div class="col-md-4 col-sm-12">
+
+      @if($order['pick_up_order'])
+      <div class="detail-info-section no-margin">
+        <h4>สาขาที่เข้ารับสินค้า</h4>
+        <div class="line"></div> 
+        <div class="detail-info">
+          @foreach($branches as $branch)
+            <a href="{{$branch['detailUrl']}}">{{$branch['name']}}</a>
+          @endforeach
+        </div>
+      </div>
+      @endif
+
+      <div class="detail-info-section no-margin">
+        <h4>ที่อยู่สำหรับการจัดส่ง</h4>
+        <div class="line"></div> 
+        <div class="detail-info">
+          {{$order['shipping_address']}}
+        </div>
       </div>
 
     </div>
@@ -330,6 +355,24 @@
       </div>
 
     </div>
+
+  </div>
+
+  <div>
+    <h4>ประวัติการสั่งซื้อ</h4>
+    <div class="line"></div>
+
+    @foreach($orderHistories as $orderHistory)
+      <div class="space-bottom-20">
+        <h4>{{$orderHistory['orderStatus']}}</h4>
+        <h5>{{$orderHistory['createdDate']}}</h5>
+        @if(!empty($orderHistory['message']))
+        <div>
+          {!!$orderHistory['message']!!}
+        </div>
+        @endif
+      </div>
+    @endforeach
 
   </div>
 

@@ -200,18 +200,6 @@
 
     <div class="col-md-4 col-sm-12">
 
-      <div class="detail-info-section no-margin">
-        <h4>ที่อยู่สำหรับการจัดส่ง</h4>
-        <div class="line"></div> 
-        <div class="detail-info">
-          {{$order['shipping_address']}}
-        </div>
-      </div>
-
-    </div>
-
-    <div class="col-md-4 col-sm-12">
-
       <div class="detail-group">
         <h4>วิธีการจัดส่งสินค้า</h4>
         <div class="line"></div>
@@ -250,6 +238,30 @@
 
         @endif
 
+      </div>
+
+    </div>
+
+    <div class="col-md-4 col-sm-12">
+
+      @if($order['pick_up_order'])
+      <div class="detail-info-section no-margin">
+        <h4>สาขาที่เข้ารับสินค้า</h4>
+        <div class="line"></div> 
+        <div class="detail-info">
+          @foreach($branches as $branch)
+            {{$branch['name']}}
+          @endforeach
+        </div>
+      </div>
+      @endif
+
+      <div class="detail-info-section no-margin">
+        <h4>ที่อยู่สำหรับการจัดส่ง</h4>
+        <div class="line"></div> 
+        <div class="detail-info">
+          {{$order['shipping_address']}}
+        </div>
       </div>
 
     </div>

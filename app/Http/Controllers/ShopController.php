@@ -195,7 +195,7 @@ class ShopController extends Controller
 
     $this->data = $model->paginator->build();
 
-    $pickingUpItem = $model->getSpecificSpecialShippingMethods('picking-up-item',request()->get('shopId'),true);
+    $pickingUpItem = $model->getSpecificSpecialShippingMethods(Service::loadModel('SpecialShippingMethod')->getIdByalias('picking-up-product'),request()->get('shopId'),true);
 
     $this->setData('pickingUpItem',$pickingUpItem);
     if(!empty($pickingUpItem)) {

@@ -7,7 +7,7 @@ use App\library\currency;
 class ShippingMethod extends Model
 {
   protected $table = 'shipping_methods';
-  protected $fillable = ['name','shipping_service_id','description','shipping_service_cost_type_id','free_service','service_cost','shipping_time','special','special_alias','sort','person_id'];
+  protected $fillable = ['name','shipping_service_id','description','shipping_service_cost_type_id','free_service','service_cost','shipping_time','special','special_shipping_method_id','sort','person_id'];
   protected $modelRelations = array('RelateToBranch','ShopRelateTo');
 
   public $formHelper = true;
@@ -96,6 +96,7 @@ class ShippingMethod extends Model
   }
 
   public function getShippingMethodChoice($shopId) {
+
     $shippingMethods = $this
     ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $this->getTable().'.id')
     ->where([
@@ -106,13 +107,16 @@ class ShippingMethod extends Model
     ->select($this->getTable().'.*')
     ->get();
 
+    $specialShippingMethodModel = new SpecialShippingMethod;
+    $specialShippingMethodId = $specialShippingMethodModel->getIdByalias('picking-up-product');
+
     $select = true;
     $_shippingMethods = array();
     foreach ($shippingMethods as $shippingMethod) {
 
       $hasOption = false;
       $specialOptions = array();
-      if($shippingMethod->special_alias == 'picking-up-item') {
+      if($shippingMethod->special_shipping_method_id == $specialShippingMethodId) {
         // Get Branch
         $branches = $shippingMethod->getRelatedData('RelateToBranch',array(
           'fields' => array('branch_id'),
@@ -131,7 +135,6 @@ class ShippingMethod extends Model
       $_shippingMethods[] = array_merge($shippingMethod->buildPaginationData(),array(
         'select' => $select, 
         'special' => array(
-          // 'alias' => $shippingMethod->special_alias,
           'hasOption' => $hasOption,
           'options' => $specialOptions 
         )
@@ -220,14 +223,14 @@ class ShippingMethod extends Model
     return $_shippingMethods;
   }
 
-  public function getSpecificSpecialShippingMethods($alias,$shopId,$build = false) {
+  public function getSpecificSpecialShippingMethods($specialShippingMethodId,$shopId,$build = false) {
     $shippingMethod = $this
     ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $this->getTable().'.id')
     ->where([
       ['shop_relate_to.model','like',$this->modelName],
       ['shop_relate_to.shop_id','=',$shopId],
       [$this->getTable().'.special','=',1],
-      [$this->getTable().'.special_alias','=',$alias]
+      [$this->getTable().'.special_shipping_method_id','=',$specialShippingMethodId]
     ])
     ->select($this->getTable().'.*')
     ->first();
@@ -239,14 +242,14 @@ class ShippingMethod extends Model
     return $shippingMethod->buildModelData();
   }
 
-  public function hasSpecialShippingMethod($alias,$shopId) {
+  public function hasSpecialShippingMethod($specialShippingMethodId,$shopId) {
     return $this
     ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $this->getTable().'.id')
     ->where([
       ['shop_relate_to.model','like',$this->modelName],
       ['shop_relate_to.shop_id','=',$shopId],
       [$this->getTable().'.special','=',1],
-      [$this->getTable().'.special_alias','=',$alias]
+      [$this->getTable().'.special_shipping_method_id','=',$specialShippingMethodId]
     ])
     ->exists();
   }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
 use App\library\message;
+use App\library\url;
 use App\library\date;
 use App\library\validation;
 use App\library\notificationHelper;
@@ -13,6 +14,8 @@ use Redirect;
 class OrderController extends Controller
 {
   public function detail() {
+
+    $url = new Url;
 
     $model = Service::loadModel('Order')->where([
       ['id','=',$this->param['id']],
@@ -42,14 +45,7 @@ class OrderController extends Controller
         $paymentMethodToOrders = $model->getRelatedData('PaymentMethodToOrder');
         $paymentMethods = array();
         foreach ($paymentMethodToOrders as $paymentMethodToOrder) {
-          // $paymentMethod = $paymentMethodToOrder->paymentMethod;
-
           $paymentMethods[] = $paymentMethodToOrder->paymentMethod->buildPaginationData();
-
-          // $paymentMethods[] = array(
-          //   'name' => $paymentMethod->name,
-          //   // 'url' => 'shop/'.$slug.'/payment_method/'.$paymentMethod->id
-          // );
         }
 
         $this->setData('paymentMethods',$paymentMethods);
@@ -57,7 +53,29 @@ class OrderController extends Controller
 
       }
 
+      $this->setData('orderConfirmMessage',$model->orderStatusMessage());
+
       $this->setData('hasOrderPaymentConfirm',$hasOrderPaymentConfirm);
+
+    }
+
+    if($model->pick_up_order) {
+      // $branches = $model->getRelatedData('OrderPickUpToBranch');
+      
+      $_branches = array();
+      foreach ($model->getRelatedData('OrderPickUpToBranch') as $branch) {
+
+        $_branches[] = array(
+          'name' => $branch->branch->name,
+          'detailUrl' => $url->setAndParseUrl('shop/{shopSlug}/branch/{id}',array(
+            'shopSlug' => $slug,
+            'id' => $branch->branch->id,
+          ))
+        );
+
+      }
+
+      $this->setData('branches',$_branches);
 
     }
 
@@ -67,9 +85,8 @@ class OrderController extends Controller
     $this->setData('orderStatuses',$model->getOrderStatuses());
     $this->setData('orderShippingMethod',$model->getOrderShippingMethod());
     $this->setData('orderShippingCosts',$model->getOrderShippingCostSummary());
-
+    $this->setData('orderHistories',$model->getOrderHistories());
     $this->setData('percent',$model->getOrderProgress());
-
     $this->setData('shopUrl','shop/'.$slug);
 
     return $this->view('pages.order.detail');
@@ -316,12 +333,25 @@ class OrderController extends Controller
       $this->setData('PaymentMethodAddUrl',request()->get('shopUrl').'payment_method');
     }
 
+    if($model->pick_up_order) {
+      
+      $_branches = array();
+      foreach ($model->getRelatedData('OrderPickUpToBranch') as $branch) {
+
+        $_branches[] = array(
+          'name' => $branch->branch->name
+        );
+
+      }
+
+      $this->setData('branches',$_branches);
+
+    }
+
     $this->setData('orderShippingMethod',$model->getOrderShippingMethod());
     $this->setData('orderStatuses',$model->getOrderStatuses());
     $this->setData('orderShippingCosts',$model->getOrderShippingCostSummary());
-
     $this->setData('percent',$model->getOrderProgress());
-
     $this->setData('hasPaymentMethod',$hasPaymentMethod);
 
     return $this->view('pages.order.shop_order_detail');

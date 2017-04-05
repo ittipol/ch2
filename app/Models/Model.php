@@ -250,6 +250,21 @@ class Model extends BaseModel
     return $record->id;
   }
 
+  public function getByAlias($alias) {
+
+    if(!Schema::hasColumn($this->getTable(), 'alias')){
+      return false;
+    }
+
+    return $this->getData(array(
+      'conditions' => array(
+        ['alias','like',$alias]
+      ),
+      'first' => true
+    ));
+
+  }
+
   public function getData($options = array()) {
 
     $model = $this->newInstance();

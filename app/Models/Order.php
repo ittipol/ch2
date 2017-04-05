@@ -10,7 +10,7 @@ use App\library\date;
 class Order extends Model
 {
   protected $table = 'orders';
-  protected $fillable = ['invoice_prefix','invoice_number','shop_id','person_id','person_name','shipping_address','payment_detail','customer_message','order_status_id','order_free_shipping','order_shipping_cost','shipping_cost_detail'];
+  protected $fillable = ['invoice_prefix','invoice_number','shop_id','person_id','person_name','shipping_address','payment_detail','customer_message','order_status_id','order_free_shipping','order_shipping_cost','shipping_cost_detail','pick_up_order'];
   protected $modelRelations = array('OrderProduct','OrderTotal','OrderShipping','OrderPaymentConfirm','OrderHistory','PaymentMethodToOrder');
 
   public $formHelper = true;
@@ -266,6 +266,19 @@ class Order extends Model
 
   }
 
+  public function getOrderHistories() {
+
+    $orderhistories = $this->getRelatedData('OrderHistory');
+
+    $_orderhistories = array();
+    foreach ($orderhistories as $orderhistory) {
+      $_orderhistories[] = $orderhistory->buildModelData();
+    }
+
+    return $_orderhistories;
+
+  }
+
   public function checkHasProductNotSetShippingCost() {
     return OrderProduct::where('order_id','=',$this->id)
     ->whereNull('free_shipping')
@@ -386,6 +399,24 @@ class Order extends Model
 
   }
 
+  public function orderStatusMessage() {
+
+    $orderHistory = $this->getRelatedData('OrderHistory',array(
+      'conditions' => array(
+        'order_status_id' => $this->order_status_id
+      ),
+      'fields' => array('message'),
+      'first' => true
+    ));
+
+    if(empty($orderHistory)) {
+      return null;
+    }
+
+    return $orderHistory->message;
+
+  }
+
   public function buildModelData() {
 
     $currency = new Currency;
@@ -404,7 +435,8 @@ class Order extends Model
       'orderStatusName' => $this->orderStatus->name,
       'customer_message' => !empty($this->customer_message) ? $this->customer_message : '-',
       'orderedDate' => $date->covertDateToSting($this->created_at->format('Y-m-d')),
-      'shipping_cost_detail' => $this->shipping_cost_detail
+      'shipping_cost_detail' => $this->shipping_cost_detail,
+      'pick_up_order' => $this->pick_up_order
     );
   }
 

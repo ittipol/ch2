@@ -41,6 +41,8 @@ class CheckoutController extends Controller
     $cartModel = Service::loadModel('Cart');
     $shippingMethodModel = Service::loadModel('ShippingMethod');
 
+    $pickUpMethodId = Service::loadModel('SpecialShippingMethod')->getIdByalias('picking-up-product');
+
     // form data
     $shops = request()->input('shop');
     // Get cart
@@ -81,6 +83,15 @@ class CheckoutController extends Controller
          
         }
 
+        $specialShippingMethodId = $shippingMethodModel
+        ->select('special_shipping_method_id')
+        ->find($shops[$cartProduct['shopId']]['shipping_method_id'])
+        ->special_shipping_method_id;
+
+        if(($specialShippingMethodId == $pickUpMethodId) && empty($shops[$cartProduct['shopId']]['branch_id'])) {
+          return Redirect::back()->withErrors('ยังไม่ได้ระบุสาขาที่คุณต้องการเข้ารับสินค้า');
+        }
+
         // allocate product quantity
         $_product->decrement('quantity',$cartProduct['quantity']);
 
@@ -109,6 +120,7 @@ class CheckoutController extends Controller
     $orderShipping = Service::loadModel('OrderShipping');
     $orderProductModel = Service::loadModel('OrderProduct');
     $orderTotalModel = Service::loadModel('OrderTotal');
+    $orderPickUpToBranchModel = Service::loadModel('OrderPickUpToBranch');
 
     // $createAt = date('Y-m-d H:i:s');
 
@@ -118,15 +130,23 @@ class CheckoutController extends Controller
 
       // order shipping cost
       $shipping = array();
+      $pickUpOrder = false;
+
       if(isset($shops[$shopId]['shipping_method_id'])) {
         $shippingMethod = $shippingMethodModel
-        ->select('id','name','service_cost','free_service','shipping_service_id','shipping_service_cost_type_id','shipping_time','special_alias')
+        ->select('id','name','service_cost','free_service','shipping_service_id','shipping_service_cost_type_id','shipping_time','special_shipping_method_id')
         ->find($shops[$shopId]['shipping_method_id']);
+
+        if($shippingMethod->special_shipping_method_id == $pickUpMethodId) {
+          $pickUpOrder = true;
+        }
 
         $shipping = array(
           'order_free_shipping' => $shippingMethod->free_service,
-          'order_shipping_cost' => $shippingMethod->service_cost
+          'order_shipping_cost' => $shippingMethod->service_cost,
+          'pick_up_order' => $pickUpOrder
         );
+
       }
 
       $order->fill(array_merge(array(
@@ -156,9 +176,15 @@ class CheckoutController extends Controller
         ))
         ->save();
 
-        // save to relateToBranch
-        if($shippingMethod->special_alias == 'picking-up-item') {
-
+        // pick up product
+        if($pickUpOrder) {
+          $orderPickUpToBranchModel
+          ->newInstance()
+          ->fill(array(
+            'order_id' => $order->id,
+            'branch_id' => $shops[$shopId]['branch_id']
+          ))
+          ->save();
         }
 
       }

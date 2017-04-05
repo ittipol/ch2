@@ -78,7 +78,7 @@ class ShippingMethodController extends Controller
     }
 
     // Special
-    if($model->special_alias == 'picking-up-item') {
+    if($model->special_shipping_method_id == Service::loadModel('SpecialShippingMethod')->getIdByalias('picking-up-product')) {
 
       $relateToBranch = $model->getRelatedData('RelateToBranch',array(
         'fields' => array('branch_id')
@@ -132,17 +132,18 @@ class ShippingMethodController extends Controller
   public function pickingUpItem() {
 
     $model = Service::loadModel('ShippingMethod');
+    $specialShippingMethod = Service::loadModel('SpecialShippingMethod')->getByAlias('picking-up-product');
 
-    // check is exist
-    if(!$model->hasSpecialShippingMethod('picking-up-item',request()->get('shopId'))) {
+    // check if exist
+    if(!$model->hasSpecialShippingMethod($specialShippingMethod->id,request()->get('shopId'))) {
 
       $value = array(
         'name' => 'รับสินค้าเอง', // default name
-        'shipping_service_id' => 0,
-        'shipping_service_cost_type_id' => 3,
+        'shipping_service_id' => $specialShippingMethod->shipping_service_id,
+        'shipping_service_cost_type_id' => $specialShippingMethod->shipping_service_cost_type_id,
         'special' => 1,
-        'special_alias' => 'picking-up-item',
-        'sort' => 1,
+        'special_shipping_method_id' => $specialShippingMethod->id,
+        'sort' => $specialShippingMethod->sort,
         'ShopRelateTo' => array(
           'shop_id' => request()->get('shopId')
         )
