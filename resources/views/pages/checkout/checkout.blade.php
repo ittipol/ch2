@@ -144,6 +144,8 @@
                     <?php
                       echo Form::radio('shop['.$value['shop']['id'].'][shipping_method_id]', $shippingMethod['id'], $shippingMethod['select'], array(
                         'class' => 'shipping-method-rdobox',
+                        'id' => 'shipping_method_rdobox_'.$shippingMethod['id'],
+                        'data-group' => $value['shop']['id'],
                         'data-shipping-method' => $shippingMethod['id']
                       ));
                     ?> 
@@ -173,11 +175,20 @@
                       </div>
                     </div>
                   </label>
-<!-- <a class="button" data-right-side-panel="1" data-right-side-panel-target="#shipping_method_expand_panel">รายละเอียดการจัดส่ง</a> -->
+
                   <div class="shipping-method-detail hide-element">
                     <div class="shipping-method-detail-panel"></div>
-                    <!-- <div class="line"></div> -->
                   </div>
+
+                  <!-- <div class="text-right">
+                    <a 
+                    class="button shipping-method-detail-button" 
+                    data-right-side-panel="1" 
+                    data-right-side-panel-target="#shipping_method_expand_panel"
+                    data-group="{{$value['shop']['id']}}"
+                    data-shipping-method="{{$shippingMethod['id']}}"
+                    >รายละเอียดการจัดส่ง</a>
+                  </div> -->
 
                 </div>
 
@@ -216,12 +227,12 @@
         echo Form::close();
       ?>
 
-      <div id="shipping_method_expand_panel" class="right-size-panel filter">
+      <!-- <div id="shipping_method_expand_panel" class="right-size-panel filter">
         <div class="right-size-panel-inner">
-
+          <div id="shipping_method_panel"></div>
           <div class="right-size-panel-close-icon"></div>
         </div>
-      </div>
+      </div> -->
 
     @else
 
@@ -234,30 +245,25 @@
 </div>
 
 <script type="text/javascript">
-  
+  // ระบุสาขาที่คุณต้องการเข้ารับสินค้า
   class Checkout {
 
     constructor() {
-      this.branchTarget;
+      this.downloaded = [];
+      this.currentTarget = [];
     }
 
     load() {
 
       let _this = this;
 
-      // if($('.shipping-method-rdobox:checked').data('has-branch')) {
-        // let target = $('.shipping-method-rdobox:checked').data('branch-select-box-target');
-        // $(target).parent().parent().css('display','block');
-        // $(target).prop('disabled',false);
-        // this.branchTarget = target;
-      // }
-      let obj = null;
-      let shippingMethodId = null;
       $('.shipping-method-rdobox:checked').each(function(i, obj) {
-        obj = $(this).parent().parent().find('.shipping-method-detail');
 
-        shippingMethodId = $(this).data('shipping-method');
-        _this.getShippingMethodDetail(shippingMethodId,obj);
+        let group = $(this).data('group');
+        let shippingMethodId = $(this).data('shipping-method');
+
+        _this.currentTarget[group] = shippingMethodId;
+        _this.getShippingMethodDetail(shippingMethodId,$(this).parent().parent().find('.shipping-method-detail'));
       });
 
       this.bind();
@@ -268,44 +274,64 @@
       let _this = this;
 
       $('.shipping-method-rdobox').on('change',function(){
-        if($(this).data('has-branch')) {
 
-          if(_this.branchTarget) {
-            $(_this.branchTarget).parent().parent().slideUp(220);
-            $(_this.branchTarget).prop('disabled',true);  
-          }
-          
-          let target = $(this).data('branch-select-box-target');
-          $(target).parent().parent().slideDown(220);
-          $(target).prop('disabled',false);
-          _this.branchTarget = target;
+        let group = $(this).data('group');
+        let shippingMethodId = $(this).data('shipping-method');
+        let obj = $('#shipping_method_rdobox_'+_this.currentTarget[group]).parent().parent().find('.shipping-method-detail');
 
-        }else{
-          $(_this.branchTarget).parent().parent().slideUp(220);
-          $(_this.branchTarget).prop('disabled',true);
-          _this.branchTarget = null;
+        obj.slideUp(220);
 
+        if(window.innerWidth <= 480) {
+          $(document).scrollTop($(this).parent().position().top-obj.height());
         }
+
+        _this.currentTarget[group] = shippingMethodId;
+        _this.getShippingMethodDetail(shippingMethodId,$(this).parent().parent().find('.shipping-method-detail'));
+
+      });
+
+      $('.shipping-method-detail-button').on('click',function(){
+
+        // let group = $(this).data('group');
+        // let shippingMethodId = $(this).data('shipping-method');
+
+        // _this.currentTarget[group] = shippingMethodId;
+        // _this.getShippingMethodDetail(shippingMethodId,$(this).parent().parent().find('.shipping-method-detail'));
+
       });
 
     }
 
     getShippingMethodDetail(shippingMethodId,obj) {
 
-      let request = $.ajax({
-        url: "/api/v1/get_shipping_method/"+shippingMethodId,
-        type: "get",
-        dataType:'json'
-      });
+      let _this = this;
 
-      request.done(function (response, textStatus, jqXHR){
+      if((typeof this.downloaded[shippingMethodId] === 'boolean') && this.downloaded[shippingMethodId]) {
+        obj.slideDown(220);
+      }else{
 
-        if(response.success) {
-          obj.find('.shipping-method-detail-panel').html(response.description);
-          obj.slideDown(220);
-        }
-        
-      });
+        let request = $.ajax({
+          url: "/api/v1/get_shipping_method/"+shippingMethodId,
+          type: "get",
+          dataType:'json',
+          // beforeSend: function( xhr ) {
+          //   $('#shipping_method_panel').text('');
+          // }
+        });
+
+        request.done(function (response, textStatus, jqXHR){
+
+          if(response.success) {
+            obj.find('.shipping-method-detail-panel').html(response.description);
+            obj.slideDown(220);
+            _this.downloaded[shippingMethodId] = true;
+
+            // $('#shipping_method_panel').html(response.description);
+          }
+          
+        });
+
+      }
 
     }
 

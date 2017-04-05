@@ -50,6 +50,30 @@
       <div>{{$shippingMethod['shippingService']}}</div>
     </div>
 
+    @if(!empty($_fieldData['branches']))
+    <div class="form-row">
+      <?php 
+        echo Form::label('branch', 'ระบุสาขาที่ลูกค้าสามารถรับสินค้าได้ (เว้นว่างได้)');
+      ?>
+      <div class="form-item-group">
+        <div class="form-item-group-inner">
+          <div class="row">
+              @foreach ($_fieldData['branches'] as $id => $branch)
+              <div class="col-lg-4 col-sm-6 col-sm-12">
+                <label class="choice-box">
+                  <?php
+                    echo Form::checkbox('RelateToBranch[branch_id][]', $id);
+                  ?>
+                  <div class="inner"><?php echo $branch; ?></div>
+                </label>
+              </div>
+              @endforeach
+          </div>
+        </div>
+      </div>
+    </div>
+    @endif
+
     <div class="form-row">
       <?php 
         echo Form::label('name', 'รูปแบบการคิดค่าจัดส่งของวิธีการจัดส่งสินค้านี้');
@@ -97,7 +121,9 @@
   </div>
 
   <div class="secondary-message-box info space-bottom-20">
-    <p>*** เมื่อเพิ่มวิธีการจัดส่งสินค้าแล้ว วิธีการจัดส่งสินค้าจะถูกแสดงเป็นตัวเลือกให้ลูกค้าเลือกในหน้าสั่งซื้อสินค้า</p>
+    <div class="secondary-message-box-inner">
+      <p>*** เมื่อเพิ่มวิธีการจัดส่งสินค้าแล้ว วิธีการจัดส่งสินค้าจะถูกแสดงเป็นตัวเลือกให้ลูกค้าเลือกในหน้าสั่งซื้อสินค้า</p>
+    </div>
   </div>
 
   <?php

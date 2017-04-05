@@ -95,12 +95,12 @@ class ApiController extends Controller
 
   public function GetShippingMethodId($shippingMethodId) {
 
-    // if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
-    //   $this->error = array(
-    //     'message' => 'ขออภัย ไม่อนุญาตให้เข้าถึงหน้านี้ได้'
-    //   );
-    //   return $this->error();
-    // }
+    if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+      $this->error = array(
+        'message' => 'ขออภัย ไม่อนุญาตให้เข้าถึงหน้านี้ได้'
+      );
+      return $this->error();
+    }
 
     $shippingMethod = Service::loadModel('ShippingMethod')
     ->select('name','description')
