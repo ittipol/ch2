@@ -116,6 +116,12 @@
           </a>
         </div>
 
+        <div class="list-item">
+          <a href="{{URL::to('account/order')}}">
+            <img class="icon" src="/images/common/bag.png" >
+            <h4>งานที่สมัคร</h4>
+          </a>
+        </div>
 
         <div class="list-item">
           <a href="{{URL::to('account/notification')}}">

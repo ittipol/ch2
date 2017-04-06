@@ -23,6 +23,12 @@
 
   <h4 class="title-with-icon location-pin">{{$_modelData['Address']['_short_address']}}</h4>
 
+  @if (Auth::check() && (Session::get('Person.id') == $_modelData['person_id']))
+  <div class="text-right">
+    <a href="" class="button">ปิดการประกาศ</a>
+  </div>
+  @endif
+
   <div class="image-gallery">
 
     <div class="row">

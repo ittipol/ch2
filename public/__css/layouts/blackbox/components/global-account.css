@@ -1,0 +1,28 @@
+.global-account-panel .account-info {
+	padding: 100px 0 20px;
+	position: relative;
+	background-color: #448AFF;
+}
+
+.global-account-panel .account-info .account-image-frame {
+	width: 120px;
+	height: 120px;
+	border-radius: 120px;
+	overflow: hidden;
+	background-color: #aaa;
+	margin: 0 auto;
+}
+
+.global-account-panel .account-info .account-image-frame > .profile-image {
+	width: 100%;
+	height: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: auto 100%;
+}
+
+.global-account-panel .account-info h4 {
+	color: #fff;
+	font-size: 20px;
+	margin-top: 25px;
+}

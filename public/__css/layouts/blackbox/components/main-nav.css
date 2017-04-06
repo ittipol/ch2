@@ -14,18 +14,19 @@
 }
 
 .global-nav .navigation-top {
-  /*background-color: #004D40;*/
-  padding: 20px 0;
+  line-height: 62px;
   border-bottom: 1px solid #fff;
+  background-color: #01579B;
 }
 
 .navigation-top .logo {
-	padding: 0 20px 10px;
+	/*padding: 0 20px 10px;*/
+  text-align: center;
 }
 
 .navigation-top a.logo-link {
 	color: #fff;
-	font-size: 20px;
+	font-size: 18px;
   text-transform: uppercase;
 }
 
@@ -70,8 +71,8 @@
 }
 
 .navigation-primary-menu {
-  height: 70%;
-  padding-bottom: 8px;
+  height: 90%;
+  /*padding-bottom: 8px;*/
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -109,7 +110,7 @@
 .navigation-primary-menu ul > li a:hover,
 .navigation-primary-menu ul > li a.active { 
 	color: #fff;
-  background-color: #fff;
+  /*background-color: #fff;*/
   background-color: rgb(164,61,51);
 }
 

@@ -23,11 +23,11 @@ class Cache
       'height' => 150,
       'fx' => '',
     ),
-    // 'md' => array(
-    //   'width' => 250,
-    //   'height' => 250,
-    //   'fx' => '',
-    // ),
+    'md' => array(
+      'width' => 250,
+      'height' => 250,
+      'fx' => '',
+    ),
     'list' => array(
       'width' => 250,
       'height' => 250,

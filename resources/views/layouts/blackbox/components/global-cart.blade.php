@@ -1,8 +1,8 @@
-<div class="global-cart-panel">
+<div class="global-panel global-cart-panel">
 
-  <div class="cart-panel-header">
-    <div class="cart-panel-header-title">ตระกร้าสินค้า</div>
-    <div class="cart-panel-close-button"></div>
+  <div class="panel-header cart-panel-header">
+    <div class="panel-header-title">ตระกร้าสินค้า</div>
+    <div class="panel-close-button cart-panel-close-button"></div>
   </div>
   
   <div class="product-list-table">

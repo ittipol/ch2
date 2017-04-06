@@ -168,7 +168,8 @@ class Item extends Model
       '_price' => $currency->format($this->price),
       '_used' => $this->used ? 'สินค้าใหม่' : 'สินค้ามือสอง',
       '_announcementTypeName' => $this->announcementType->name,
-      '_categoryName' => $categoryName
+      '_categoryName' => $categoryName,
+      'person_id' => $this->person_id
     );
 
   }

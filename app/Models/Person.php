@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\library\date;
+use App\library\cache;
 
 class Person extends Model
 {
@@ -95,7 +96,9 @@ class Person extends Model
     );
   }
 
-  public function getProfileImageUrl() {
+  public function getProfileImageUrl($size = null) {
+
+    $cache = new Cache;
 
     $image = Image::select('id','model','model_id','filename','image_type_id')->find($this->profile_image_id);
 
@@ -103,7 +106,12 @@ class Person extends Model
       return '/images/common/no-img.png';
     }
 
-    return $image->getImageUrl();
+    if(empty($size)) {
+      return $image->getImageUrl();
+    }
+
+    return $cache->getCacheImageUrl($image,'xs');
+
   }
 
   public function buildModelData() {

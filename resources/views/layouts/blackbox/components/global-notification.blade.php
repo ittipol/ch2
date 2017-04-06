@@ -1,8 +1,8 @@
-<div class="global-notification-panel">
+<div class="global-panel global-notification-panel">
 
-  <div class="notification-panel-header">
-    <div class="notification-panel-header-title">การแจ้งเตือน</div>
-    <div class="notification-panel-close-button"></div>
+  <div class="panel-header notification-panel-header">
+    <div class="panel-header-title">การแจ้งเตือน</div>
+    <div class="panel-close-button notification-panel-close-button"></div>
   </div>
 
   <div class="notification-header-nav">

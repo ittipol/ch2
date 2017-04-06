@@ -66,7 +66,8 @@ class UserController extends Controller
       Session::put('Person.id',$person->id);
       Session::put('Person.name',$person->name);
       Session::put('Person.theme',$person->theme);
-      Session::put('Person.profile_image',$person->getProfileImageUrl());
+      Session::put('Person.profile_image_xs',$person->getProfileImageUrl('xs'));
+      Session::put('Person.profile_image',$person->getProfileImageUrl('md'));
       Session::put('Person.token',$person->token);
       // Session::put('Person.pageAccessLevel',{1-4});
 

@@ -8,7 +8,7 @@
 
       @if (!Auth::check())
 
-        <div class="account-info">
+        <!-- <div class="account-info">
           <div>ยังไม่ได้เข้าสู่ระบบ</div>
           <div class="account-description">
             <a href="{{URL::to('login')}}">
@@ -25,11 +25,11 @@
               <h4>สมัครสมาชิก</h4>
             </a>
           </div>
-        </div>
+        </div> -->
 
       @else
 
-        <div class="account-info clearfix">
+        <!-- <div class="account-info clearfix">
           <a class="avatar pull-left" href="{{URL::to('account')}}">
             <div class="profile-image" style="background-image:url({{Session::get('Person.profile_image')}});"></div>
           </a>
@@ -48,7 +48,7 @@
               <a href="{{URL::to('logout')}}">ออกจากระบบ</a>
             </div>
           </div>
-        </div>
+        </div> -->
 
       @endif
 
@@ -62,7 +62,51 @@
             <a href="{{URL::to('/')}}">หน้าแรก</a>
           </li>
 
-          @if (Auth::check())
+          @if (!Auth::check())
+
+            <li class="item">
+              <a href="{{URL::to('login')}}">เข้าสู่ระบบ</a>
+            </li>
+
+            <li class="item">
+              <a href="{{URL::to('register')}}">สมัครสมาชิก</a>
+            </li>
+
+            <li class="line space-top-bottom-10"></li>
+
+            <li class="item">
+              <a href="{{URL::to('person/freelance')}}">ฟรีแลนซ์</a>
+              <div class="additional-option">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="additional-option-content">
+                  <a href="">เพิ่มงานฟรีแลนซ์ของคุณ</a>
+                  <a href="">ค้นหาฟรีแลนซ์</a>
+                </div>
+              </div>
+            </li>
+
+            <li class="line space-top-bottom-10"></li>
+
+            <li class="item">
+              <a href="javascript:void(0)">ร้านค้าในชุมชนของคุณ</a>
+              <div class="additional-option">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="additional-option-content">
+                  <a href="{{URL::to('community/shop_create')}}">เพิ่มร้านค้า</a>
+                  <a href="{{URL::to('community/shop_create')}}">แสดงร้านค้าของคุณ</a>
+                </div>
+              </div>
+            </li>
+
+            <li class="line space-top-bottom-10"></li>
+
+          @else
+
+            <li class="line space-top-bottom-10"></li>
 
             <li class="item">
               <a href="{{URL::to('person/freelance')}}">ฟรีแลนซ์</a>
@@ -118,14 +162,14 @@
 
                     <div class="submenu-item-row">
                       <a href="{{URL::to('community/shop_create')}}">ยังไม่มีร้านค้าของคุณในชุมชน</a>
-                      <div class="additional-option">
+                      <!-- <div class="additional-option">
                         <div class="dot"></div>
                         <div class="dot"></div>
                         <div class="dot"></div>
                         <div class="additional-option-content">
                           <a href="{{URL::to('community/shop_create')}}">เพิ่มร้านค้าของคุณ</a>
                         </div>
-                      </div>
+                      </div> -->
                     </div>
 
                   @endif
@@ -136,54 +180,55 @@
 
             <li class="line space-top-bottom-10"></li>
 
-            <li class="item">
-              <a href="javascript:void(0)">สินค้าและการประกาศ</a>
-              <ul class="submenu">
-                <li class="submenu-item">
-                  <a href="{{URL::to('product/add')}}">สินค้าจากร้านค้า</a>
-                  <a href="{{URL::to('product/add')}}">ประกาศงาน</a>
-                  <a href="{{URL::to('product/add')}}">โฆษณาจากบริษัทและร้านค้า</a>
-                </li>
-              </ul>
-            </li>
-
-            <li class="line space-top-bottom-10"></li>
-
-            <li class="item">
-              <a href="javascript:void(0)">ประกาศซื้อ-เช่า-ขาย</a>
-              <div class="additional-option">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="additional-option-content">
-                  <a href="{{URL::to('item/post')}}">เพิ่มประกาศสินค้า</a>
-                  <a href="{{URL::to('real_estate/post')}}">เพิ่มประกาศอสังหาริมทรัพย์</a>
-                </div>
-              </div>
-              <ul class="submenu">
-                <li class="submenu-item">
-                  <a href="{{URL::to('product/add')}}">ประกาศซื้อ-เช่า-ขายสินค้า</a>
-                  <a href="{{URL::to('real-estate/add')}}">ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</a>
-                </li>
-              </ul>
-            </li>
-
-            <li class="line space-top-bottom-10"></li>
-
-            <li class="item">
-              <a href="{{URL::to('entity/create')}}">วิธีการใช้งาน</a>
-            </li>
-            <li class="item">
-              <a href="{{URL::to('entity/create')}}">แจ้งปัญหาการใช้งาน</a>
-            </li>
-            <li class="item">
-              <a href="{{URL::to('entity/create')}}">ข้อเสนอแนะ</a>
-            </li>
-            <li class="item">
-              <a href="{{URL::to('entity/create')}}">ติดต่อเรา</a>
-            </li>
-
           @endif
+
+          <li class="item">
+            <a href="javascript:void(0)">สินค้าและการประกาศ</a>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="{{URL::to('product/add')}}">สินค้าจากร้านค้า</a>
+                <a href="{{URL::to('product/add')}}">ประกาศงาน</a>
+                <a href="{{URL::to('product/add')}}">โฆษณาจากบริษัทและร้านค้า</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="line space-top-bottom-10"></li>
+
+          <li class="item">
+            <a href="javascript:void(0)">ประกาศซื้อ-เช่า-ขาย</a>
+            <div class="additional-option">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="additional-option-content">
+                <a href="{{URL::to('item/post')}}">เพิ่มประกาศสินค้า</a>
+                <a href="{{URL::to('real_estate/post')}}">เพิ่มประกาศอสังหาริมทรัพย์</a>
+              </div>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="{{URL::to('product/add')}}">ประกาศซื้อ-เช่า-ขายสินค้า</a>
+                <a href="{{URL::to('real-estate/add')}}">ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="line space-top-bottom-10"></li>
+
+          <li class="item">
+            <a href="{{URL::to('entity/create')}}">วิธีการใช้งาน</a>
+          </li>
+          <li class="item">
+            <a href="{{URL::to('entity/create')}}">แจ้งปัญหาการใช้งาน</a>
+          </li>
+          <li class="item">
+            <a href="{{URL::to('entity/create')}}">ข้อเสนอแนะ</a>
+          </li>
+          <li class="item">
+            <a href="{{URL::to('entity/create')}}">ติดต่อเรา</a>
+          </li>
+
         </ul>
       </div>
     </div>

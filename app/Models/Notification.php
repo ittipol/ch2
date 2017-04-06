@@ -69,7 +69,7 @@ class Notification extends Model
     // ->where('unread','=','1')
     ->where('notify','=','0')
     ->orderBy('created_at','desc')
-    ->take(16);
+    ->take(12);
 
     if(!$records->exists()) {
       return null;

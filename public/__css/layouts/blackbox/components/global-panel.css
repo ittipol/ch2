@@ -1,0 +1,55 @@
+.global-panel {
+	position: fixed;
+	top: 0;
+	right: -100%;
+	width: 500px;
+	height: 100%;
+	opacity: 1;
+	background: #fff;
+	padding: 0;
+	z-index: 90;
+	overflow: hidden;
+	transition: right .2s ease-out;
+}
+
+.global-panel.panel-opened {
+	right: 0;
+}
+
+.global-panel .panel-header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 64px;
+	background-color: #2979FF;
+	z-index: 9;
+}
+
+.global-panel .panel-header-title {
+	line-height: 64px;
+	color: #fff;
+	font-size: 20px;
+	text-align: center;
+}
+
+.global-panel .panel-close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 64px;
+  height: 64px;
+  background-image: url(/images/icons/close.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px;
+  cursor: pointer;
+}
+
+@media only screen and (max-width : 480px) {
+  
+	.global-panel {
+		width: 100%;
+	}
+
+}

@@ -37,6 +37,22 @@ class Blackbox {
       }
     });
 
+    $('#account_panel_trigger').on('click',function(){
+
+      if($(this).is(':checked')) {
+
+        $('.global-account-panel').addClass('panel-opened');
+        $('.content-wrapper-overlay').addClass('isvisible');
+        $('body').css('overflow-y','hidden');
+      }else{
+
+        $('.global-account-panel').removeClass('panel-opened');
+        $('.content-wrapper-overlay').removeClass('isvisible');
+        $('body').css('overflow-y','auto');
+      }
+
+    });
+
     $('#search_panel_trigger').on('click',function(){
 
       if($(this).is(':checked')) {
@@ -96,8 +112,16 @@ class Blackbox {
         $('#cart_panel_trigger').trigger('click');
       }else if($('#notification_panel_trigger').is(':checked')) {
         $('#notification_panel_trigger').trigger('click');
+      }else if($('#account_panel_trigger').is(':checked')) {
+        $('#account_panel_trigger').trigger('click');
       }
 
+    });
+
+    $('.account-panel-close-button').on('click',function(){
+      if($('#account_panel_trigger').is(':checked')) {
+        $('#account_panel_trigger').trigger('click');
+      }
     });
 
     $('.search-panel-close-button').on('click',function(){
