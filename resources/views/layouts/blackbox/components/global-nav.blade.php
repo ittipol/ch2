@@ -74,111 +74,15 @@
 
             <li class="line space-top-bottom-10"></li>
 
-            <li class="item">
-              <a href="{{URL::to('person/freelance')}}">ฟรีแลนซ์</a>
-              <div class="additional-option">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="additional-option-content">
-                  <a href="">เพิ่มงานฟรีแลนซ์ของคุณ</a>
-                  <a href="">ค้นหาฟรีแลนซ์</a>
-                </div>
-              </div>
-            </li>
-
-            <li class="line space-top-bottom-10"></li>
-
-            <li class="item">
-              <a href="javascript:void(0)">ร้านค้าในชุมชนของคุณ</a>
-              <div class="additional-option">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="additional-option-content">
-                  <a href="{{URL::to('community/shop_create')}}">เพิ่มร้านค้า</a>
-                  <a href="{{URL::to('community/shop_create')}}">แสดงร้านค้าของคุณ</a>
-                </div>
-              </div>
-            </li>
-
-            <li class="line space-top-bottom-10"></li>
-
           @else
 
-            <li class="line space-top-bottom-10"></li>
-
             <li class="item">
               <a href="{{URL::to('person/freelance')}}">ฟรีแลนซ์</a>
-              <div class="additional-option">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="additional-option-content">
-                  <a href="">เพิ่มงานฟรีแลนซ์ของคุณ</a>
-                  <a href="">ค้นหาฟรีแลนซ์</a>
-                </div>
-              </div>
             </li>
-
-            <li class="line space-top-bottom-10"></li>
 
             <li class="item">
-              <a href="javascript:void(0)">ร้านค้าในชุมชนของคุณ</a>
-              <div class="additional-option">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="additional-option-content">
-                  <a href="{{URL::to('community/shop_create')}}">เพิ่มร้านค้า</a>
-                  <a href="{{URL::to('community/shop_create')}}">แสดงร้านค้าของคุณ</a>
-                </div>
-              </div>
-              <ul class="submenu">
-                <li class="submenu-item">
-
-                  @if(!empty($_shops)) 
-
-                    @foreach ($_shops as $shop)
-
-                    <div class="submenu-item-row">
-                      <a href="{{$shop['url']}}">{{$shop['name']}}</a>
-                      <div class="additional-option">
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="additional-option-content">
-                          <a href="{{$shop['url']}}product">จัดการสินค้า</a>
-                          <a href="{{$shop['url']}}job">ประกาศงาน</a>
-                          <a href="{{$shop['url']}}advertising">จัดการโฆษณา</a>
-                          <a href="{{$shop['url']}}setting">ตั้งค่า</a>
-                        </div>
-                      </div>
-                    </div>
-
-                    @endforeach
-
-                  @else
-
-                    <div class="submenu-item-row">
-                      <a href="{{URL::to('community/shop_create')}}">ยังไม่มีร้านค้าของคุณในชุมชน</a>
-                      <!-- <div class="additional-option">
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="additional-option-content">
-                          <a href="{{URL::to('community/shop_create')}}">เพิ่มร้านค้าของคุณ</a>
-                        </div>
-                      </div> -->
-                    </div>
-
-                  @endif
-
-                </li>
-              </ul>
+              <a href="javascript:void(0)">บริษัทและร้านค้า</a>
             </li>
-
-            <li class="line space-top-bottom-10"></li>
 
           @endif
 

@@ -20,22 +20,31 @@ class NotificationBottom {
   }
 
   bind() {
+
+    let _this = this;
+
     $('#notification_bottom_close').on('click', function(){
       $('#notification_bottom').stop().fadeOut(220)
     });
 
     $('#global_nav_trigger').on('click',function(){
-      if($(this).is(':checked')) {
-        $('#notification_bottom').stop().css({
-          bottom: 0,
-          opacity: 0
-        });
-      }else{
-        $('#notification_bottom').stop().css({
-          bottom: 50,
-          opacity: 1
-        });
-      }
+      _this.hideNotificationBox(this);
+    });
+
+    $('#account_panel_trigger').on('click',function(){
+      _this.hideNotificationBox(this);
+    });
+
+    $('#search_panel_trigger').on('click',function(){
+      _this.hideNotificationBox(this);
+    });
+
+    $('#cart_panel_trigger').on('click',function(){
+      _this.hideNotificationBox(this);
+    });
+    
+    $('#notification_panel_trigger').on('click',function(){
+      _this.hideNotificationBox(this);
     });
   }
 
@@ -80,6 +89,22 @@ class NotificationBottom {
     
   }
 
+  hideNotificationBox(obj) {
+
+    if($(obj).is(':checked')) {
+      $('#notification_bottom').stop().css({
+        bottom: 0,
+        opacity: 0
+      });
+    }else{
+      $('#notification_bottom').stop().css({
+        bottom: 50,
+        opacity: 1
+      });
+    }
+
+  }
+
   setDelay(delay) {
     this.delay = delay;
   }
@@ -87,4 +112,5 @@ class NotificationBottom {
   setVisible(visible) {
     this.alwaysVisible = visible;
   }
+
 }

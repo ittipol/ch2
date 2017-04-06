@@ -109,6 +109,15 @@
 
 }
 
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 480px) {
+
+	.notification-bottom .message .title {
+		font-size: 15px;
+	}
+
+}
+
 /* Custom, iPhone Retina */ 
 @media only screen and (max-width : 320px) {
 	.notification-bottom {

@@ -77,14 +77,14 @@
         <div class="list-item">
           <a href="{{URL::to('person/experience')}}">
             <img class="icon" src="/images/common/resume.png" >
-            <h4>ประวัติการทำงาน</h4>
+            <h4>เพิ่มประวัติการทำงาน</h4>
           </a>
         </div>
 
         <div class="list-item">
           <a href="{{URL::to('person/freelance')}}">
             <img class="icon" src="/images/common/career.png" >
-            <h4>งานฟรีแลนซ์ที่ประกาศ</h4>
+            <h4>ฟรีแลนซ์</h4>
           </a>
         </div>
 
@@ -98,14 +98,14 @@
         <div class="list-item">
           <a href="{{URL::to('account/item')}}">
             <img class="icon" src="/images/common/tag.png" >
-            <h4>สินค้ามือหนึ่งและมือสองที่ประกาศ</h4>
+            <h4>ประกาศซื้อ-เช่า-ขายสินค้า</h4>
           </a>
         </div>
 
         <div class="list-item">
           <a href="{{URL::to('account/real_estate')}}">
             <img class="icon" src="/images/common/building.png" >
-            <h4>อสังหาทรัพย์ที่ประกาศ</h4>
+            <h4>ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</h4>
           </a>
         </div>
 

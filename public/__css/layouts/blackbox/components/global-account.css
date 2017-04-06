@@ -1,19 +1,32 @@
+.global-account-panel .account-content-wrapper {
+	overflow-x: hidden;
+	overflow-y: auto;
+	height: 100%;
+	padding-bottom: 180px;
+}
+
+.global-account-panel .account-content {
+	padding: 0 30px;
+}
+
 .global-account-panel .account-info {
+	position: relative;
 	padding: 100px 0 20px;
 	position: relative;
 	background-color: #448AFF;
 }
 
 .global-account-panel .account-info .account-image-frame {
-	width: 120px;
-	height: 120px;
-	border-radius: 120px;
+	width: 150px;
+	height: 150px;
+	border-radius: 150px;
 	overflow: hidden;
 	background-color: #aaa;
 	margin: 0 auto;
+	border: 5px solid #fff;
 }
 
-.global-account-panel .account-info .account-image-frame > .profile-image {
+.global-account-panel .account-info .account-image-frame .profile-image {
 	width: 100%;
 	height: 100%;
 	background-position: center;
@@ -25,4 +38,40 @@
 	color: #fff;
 	font-size: 20px;
 	margin-top: 25px;
+}
+
+.global-account-panel .account-info .additional-option {
+	position: absolute;
+	top: 15px;
+	right: 55px;
+	width: 40px;
+	height: 40px;
+}
+
+.global-account-panel .account-info .additional-option .dot {
+	background-color: #fff;
+}
+
+.global-account-panel .account-tile-button-group {
+	padding: 20px;
+}
+
+.global-account-panel .account-tile-button {
+	padding: 10px 10px 0;
+}
+
+.global-account-panel .account-tile-button img {
+	width: 30px;
+	height: 30px;
+}
+
+.global-account-panel .account-tile-button h5 {
+	line-height: 18px;
+	height: 36px;
+}
+
+.global-account-panel .list-h .list-h-item .additional-option {
+	padding-top: 0px;
+	top: 10px;
+	right: 0;
 }

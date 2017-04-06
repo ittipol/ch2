@@ -5,7 +5,8 @@
 	z-index: 80;
 	width: 280px;
   height: 100%;
-  background-color: rgb(38,50,56);
+  /*background-color: rgb(38,50,56);*/
+  background-color: rgb(53,71,89);
   transition: left .2s ease-out;
 }
 
@@ -88,8 +89,8 @@
   position: relative;
 }
 
-.navigation-primary-menu ul > li.item {
-}
+/*.navigation-primary-menu ul > li.item {
+}*/
 
 .navigation-primary-menu ul > li > .submenu-item-row {
   position: relative;

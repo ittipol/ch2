@@ -84,7 +84,8 @@ class AccountController extends Controller
 
       Session::put('Person.name',$model->name);
       Session::put('Person.theme',$model->theme);
-      Session::put('Person.profile_image',$model->getProfileImageUrl());
+      Session::put('Person.profile_image_xs',$model->getProfileImageUrl('xs'));
+      Session::put('Person.profile_image',$model->getProfileImageUrl('xsm'));
 
       Message::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('account');

@@ -121,9 +121,9 @@
   transition: all .3s ease-in-out;
 }
 
-.global-nav .additional-option:hover {
+/*.global-nav .additional-option:hover {
   background-color: #3F51B5;
-}
+}*/
 
 .global-nav .additional-option .dot {
   background-color: #fff;

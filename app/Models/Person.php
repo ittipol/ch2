@@ -110,7 +110,7 @@ class Person extends Model
       return $image->getImageUrl();
     }
 
-    return $cache->getCacheImageUrl($image,'xs');
+    return $cache->getCacheImageUrl($image,$size);
 
   }
 

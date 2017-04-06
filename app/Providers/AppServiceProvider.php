@@ -77,42 +77,43 @@ class AppServiceProvider extends ServiceProvider
 
       });
 
-      view()->composer('layouts.blackbox.components.global-nav', function($view){
+      // view()->composer('layouts.blackbox.components.global-nav', function($view){
 
-        if(Auth::check()){
+      //   if(Auth::check()){
 
-          $url = new Url;
 
-          $records = Service::loadModel('PersonToShop')
-          ->select(array('shop_id'))
-          ->where('person_id','=',session()->get('Person.id'))
-          ->get();
+      //     $url = new Url;
 
-          $slugModel = Service::loadModel('Slug');
+      //     $records = Service::loadModel('PersonToShop')
+      //     ->select(array('shop_id'))
+      //     ->where('person_id','=',session()->get('Person.id'))
+      //     ->get();
 
-          $shops = array();
-          foreach ($records as $record) {
+      //     $slugModel = Service::loadModel('Slug');
 
-            $shop = $record->shop;
+      //     $shops = array();
+      //     foreach ($records as $record) {
 
-            $slug = $slugModel->where(array(
-              array('model','like','Shop'),
-              array('model_id','=',$shop->id)
-            ))->first()->slug;
+      //       $shop = $record->shop;
 
-            $shops[] = array(
-              'name' => $shop->name,
-              'url' => $url->url('shop/'.$slug)
-            );
+      //       $slug = $slugModel->where(array(
+      //         array('model','like','Shop'),
+      //         array('model_id','=',$shop->id)
+      //       ))->first()->slug;
 
-          }
+      //       $shops[] = array(
+      //         'name' => $shop->name,
+      //         'url' => $url->url('shop/'.$slug)
+      //       );
 
-          $view->with('_shops',$shops);
+      //     }
 
-        }
+      //     $view->with('_shops',$shops);
 
-      });
+      //   }
 
+      // });
+      
       view()->composer('pages.shop.layouts.header', function($view){
 
         // if(!empty(Route::current()->parameter('shopSlug'))) {
@@ -162,9 +163,41 @@ class AppServiceProvider extends ServiceProvider
 
       });
 
-      // view()->composer('components.search_filter', function($view){
-      //   dd($view);
-      // });
+      view()->composer('layouts.blackbox.components.global-account', function($view){
+        
+        if(Auth::check()){
+
+          $url = new Url;
+
+          $records = Service::loadModel('PersonToShop')
+          ->select(array('shop_id'))
+          ->where('person_id','=',session()->get('Person.id'))
+          ->get();
+
+          $slugModel = Service::loadModel('Slug');
+
+          $shops = array();
+          foreach ($records as $record) {
+
+            $shop = $record->shop;
+
+            $slug = $slugModel->where(array(
+              array('model','like','Shop'),
+              array('model_id','=',$shop->id)
+            ))->first()->slug;
+
+            $shops[] = array(
+              'name' => $shop->name,
+              'url' => $url->url('shop/'.$slug)
+            );
+
+          }
+
+          $view->with('_shops',$shops);
+
+        }
+
+      });
 
     }
 

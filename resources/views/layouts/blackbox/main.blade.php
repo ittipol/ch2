@@ -17,7 +17,10 @@
     @include('layouts.blackbox.components.content-wrapper')
   </div>
 
-  @include('layouts.blackbox.components.global-account')
+  @if (Auth::check())
+    @include('layouts.blackbox.components.global-account')
+  @endif
+
   @include('layouts.blackbox.components.global-search')
   @include('layouts.blackbox.components.global-notification')
   @include('layouts.blackbox.components.global-cart')
@@ -49,7 +52,7 @@
       const inputField = new InputField;
       inputField.load();
 
-      @if (Auth::check())
+      @if(Auth::check())
         const pushNotification = new PushNotification({{ Session::get("Person.id") }},'{{ Session::get("Person.token") }}')
         pushNotification.load();
       @endif

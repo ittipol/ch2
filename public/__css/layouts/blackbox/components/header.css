@@ -167,7 +167,6 @@ header img.icon-header {
 	position: absolute;
 	top: 0;
 	right: 0;
-	/*width: 370px;*/
 	height: 64px;
 }
 
@@ -175,7 +174,7 @@ header img.icon-header {
 	float: left;
 	width: 1px;
 	height: 40px;
-	background-color: #fff;
+	background-color: #448AFF;
 	margin: 12px 5px;
 }
 

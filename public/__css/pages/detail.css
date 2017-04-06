@@ -278,11 +278,12 @@
 }
 
 .content-box .image-frame {
-	width: 150px;
-	height: 150px;
-	border-radius: 150px;
+	width: 160px;
+	height: 160px;
+	border-radius: 160px;
 	overflow: hidden;
 	background-color: #aaa;
+	border: 5px solid #fff;
 }
 
 .content-box .content-box-main-image {
