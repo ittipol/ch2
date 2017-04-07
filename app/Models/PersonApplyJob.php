@@ -4,11 +4,12 @@ namespace App\Models;
 
 use App\library\cache;
 use App\library\string;
+use App\library\date;
 
 class PersonApplyJob extends Model
 {
   protected $table = 'person_apply_jobs';
-  protected $fillable = ['person_id','job_id','shop_id','message'];
+  protected $fillable = ['person_id','job_id','shop_id','message','approved'];
   protected $modelRelations = array('JobApplyToBranch');
 
   public $formHelper = true;
@@ -40,6 +41,7 @@ class PersonApplyJob extends Model
     $image = new Image;
     $cache = new Cache;
     $string = new String;
+    $date = new Date;
 
     $personExperience = $this->person->personExperience;
 
@@ -50,14 +52,23 @@ class PersonApplyJob extends Model
       ->find($this->person->profile_image_id);
 
       $imageUrl = $cache->getCacheImageUrl($image,'list');
+    }
 
+    $jobImage = $this->job->getRelatedData('Image',array(
+      'first' => true
+    ));
+
+    $jobImageUrl = '/images/common/no-img.png';
+    if(!empty($jobImage)) {
+      $jobImageUrl = $cache->getCacheImageUrl($jobImage,'list');
     }
 
     return array(
-      // 'jobName' => $this->job->name,
-      '_jobNameShort' => $string->subString($this->job->name,45),
       'personName' => $this->person->name,
-      '_imageUrl' => $imageUrl
+      '_imageUrl' => $imageUrl,
+      '_jobNameShort' => $string->subString($this->job->name,45),
+      '_jobImageUrl' => $jobImageUrl,
+      'createdDate' => $date->covertDateTimeToSting($this->created_at->format('Y-m-d H:i:s')),
     );
 
   }

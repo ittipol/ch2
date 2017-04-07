@@ -21,6 +21,7 @@ class Paginator {
   private $getImage = true;
   private $queries = array();
   private $criteriaData = array();
+  private $paginationDataOptions = array();
 
   public function __construct($model = null) {
     $this->model = $model;
@@ -81,13 +82,19 @@ class Paginator {
     $this->getImage = false;
   }
 
-  public function getTotal() {
-    return $this->model->count();
+  public function getTotal($model = null) {
+
+    if(empty($model)) {
+      return $this->model->count();
+    }
+
+    return $model->count();
+
   }
 
-  public function getLastPage() {
+  public function getLastPage($model = null) {
 
-    $this->lastPage = (int)ceil($this->getTotal() / $this->perPage);
+    $this->lastPage = (int)ceil($this->getTotal($model) / $this->perPage);
 
     return $this->lastPage;
   }
@@ -104,7 +111,7 @@ class Paginator {
 
       if(is_array(current($criteria['joins']))) {
 
-        foreach ($criteria['order'] as $value) {
+        foreach ($criteria['joins'] as $value) {
           $model = $model->join($value[0], $value[1], $value[2], $value[3]);
         }
 
@@ -364,13 +371,15 @@ class Paginator {
 
   }
 
-  public function getPaginationData() {
+  public function getPaginationData($model = null) {
 
     $cache = new Cache;
 
     $offset = ($this->page - 1)  * $this->perPage;
 
-    $model = $this->condition($this->model->newInstance());
+    if(empty($model)) {
+      $model = $this->condition($this->model->newInstance());
+    }
     $model = $this->order($model);
 
     $records = $model
@@ -535,14 +544,16 @@ class Paginator {
 
   public function build($onlyData = false) {
 
+    $model = $this->condition($this->model->newInstance());
+
     $data = array(
       'page' => $this->page,
-      'lastPage' => $this->getLastPage(),
-      'total' => $this->getTotal(),
+      'lastPage' => $this->getLastPage($model),
+      'total' => $this->getTotal($model),
       'paging' => $this->paging(),
       'next' => $this->next(),
       'prev' => $this->prev(),
-      'data' => $this->getPaginationData()
+      'data' => $this->getPaginationData($model)
     );
 
     if($onlyData) {
@@ -575,7 +586,10 @@ class Paginator {
       '_pagination' => $data
     );
 
+  }
 
+  public function setPaginationDataOptions($options) {
+    $this->paginationDataOptions = $options;
   }
 
 }

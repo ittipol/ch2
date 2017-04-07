@@ -117,7 +117,7 @@
         </div>
 
         <div class="list-item">
-          <a href="{{URL::to('account/job')}}">
+          <a href="{{URL::to('account/job_applying')}}">
             <img class="icon" src="/images/common/career.png" >
             <h4>งานที่สมัคร</h4>
           </a>

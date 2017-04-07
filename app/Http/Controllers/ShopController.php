@@ -247,7 +247,7 @@ class ShopController extends Controller
     }
     
     $this->setData('jobPostUrl',request()->get('shopUrl').'job_post');
-    $this->setData('jobApplyListUrl',request()->get('shopUrl').'job_apply_list');
+    $this->setData('jobApplyListUrl',request()->get('shopUrl').'job_applying_list');
     $this->setData('branchManageUrl',request()->get('shopUrl').'branch/manage');
     // $this->setData('departmentAddUrl',request()->get('shopUrl'));
 

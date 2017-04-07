@@ -303,7 +303,7 @@ class JobController extends Controller
 
   }
 
-  public function jobApplyList() {
+  public function jobApplyingList() {
 
     $model = Service::loadModel('PersonApplyJob');
 
@@ -313,26 +313,23 @@ class JobController extends Controller
     }
 
     $model->paginator->disableGetImage();
-    // or with ShopRelateTo
-    // PersonApplyJob.job_id = ShopRelateTo.model_id
-    // AND ShopRelateTo.shop_id = {shop_id}
     $model->paginator->criteria(array(
       'conditions' => array(
         array('shop_id','=',request()->get('shopId'))
       )
     ));
     $model->paginator->setPage($page);
-    $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/job_apply_list');
-    $model->paginator->setUrl('shop/'.request()->shopSlug.'/job_apply_detail/{id}','detailUrl');
+    $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/job_applying_list');
+    $model->paginator->setUrl('shop/'.request()->shopSlug.'/job_applying_detail/{id}','detailUrl');
     $model->paginator->setUrl('experience/detail/{person_id}','experienceDetailUrl');
 
     $this->data = $model->paginator->build();
 
-    return $this->view('pages.job.job_apply_list');
+    return $this->view('pages.job.job_applying_list');
 
   }
 
-  public function jobApplyDetail() {
+  public function jobApplyingDetail() {
 
     $model = Service::loadModel('PersonApplyJob')->find($this->param['id']);
 
@@ -460,7 +457,26 @@ class JobController extends Controller
     $this->setData('hasBranch',!empty($total) ? true : false);
     $this->setData('branches',$_branches);
 
-    return $this->view('pages.job.job_apply_detail');
+    return $this->view('pages.job.job_applying_detail');
+
+  }
+
+  public function accountJobApplyingDetail() {
+
+    $model = Service::loadModel('PersonApplyJob')->find($this->param['id']);
+
+    if(empty($model)) {
+      $this->error = array(
+        'message' => 'ขออภัย ไม่พบประกาศนี้ หรือข้อมูลนี้อาจถูกลบแล้ว'
+      );
+      return $this->error();
+    }
+
+    $person = $model->person;
+
+    $person->modelData->loadData(array(
+      'models' => array('Address','Contact')
+    ));
 
   }
 

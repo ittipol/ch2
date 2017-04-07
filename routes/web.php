@@ -64,19 +64,22 @@ Route::get('search','SearchController@index')->name('search');
 // Account
 Route::group(['middleware' => 'auth'], function () {
 
-  Route::get('account', 'accountController@account')->name('account');
+  Route::get('account', 'AccountController@account')->name('account');
 
-  Route::get('account/profile_edit', 'accountController@profileEdit')->name('account.profile.edit');
-  Route::patch('account/profile_edit','accountController@profileEditingSubmit')->name('account.profile.edit');
+  Route::get('account/profile_edit', 'AccountController@profileEdit')->name('account.profile.edit');
+  Route::patch('account/profile_edit','AccountController@profileEditingSubmit')->name('account.profile.edit');
 
-  Route::get('account/theme', 'accountController@theme')->name('account.theme.edit');
+  Route::get('account/theme', 'AccountController@theme')->name('account.theme.edit');
   // Route::patch('account/theme','PersonExperienceController@themeEditingSubmit')->name('account.theme.edit');
 
-  Route::get('account/item', 'accountController@item')->name('account.item');
-  Route::get('account/real_estate', 'accountController@realEstate')->name('account.real_estate');
-  Route::get('account/shop', 'accountController@shop')->name('account.shop');
+  Route::get('account/item', 'AccountController@item')->name('account.item');
+  Route::get('account/real_estate', 'AccountController@realEstate')->name('account.real_estate');
+  Route::get('account/shop', 'AccountController@shop')->name('account.shop');
 
-  Route::get('account/order', 'accountController@order')->name('account.order');
+  Route::get('account/order', 'AccountController@order')->name('account.order');
+
+  Route::get('account/job_applying', 'AccountController@jobApplying')->name('account.job');
+  Route::get('account/job_applying/{id}', 'JobController@accountJobApplyingDetail')->name('account.job.detail');
 
 });
 
@@ -325,8 +328,8 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
   Route::get('shop/{shopSlug}/job','ShopController@job')->name('shop.job');
 
-  Route::get('shop/{shopSlug}/job_apply_list','JobController@jobApplyList')->name('shop.job.apply_list');
-  Route::get('shop/{shopSlug}/job_apply_detail/{id}','JobController@jobApplyDetail')->name('shop.job.apply_detail');
+  Route::get('shop/{shopSlug}/job_applying_list','JobController@jobApplyingList')->name('shop.job.apply_list');
+  Route::get('shop/{shopSlug}/job_applying_detail/{id}','JobController@jobApplyingDetail')->name('shop.job.apply_detail');
   
   Route::get('shop/{shopSlug}/job_post','JobController@add')->name('shop.job.add');
   Route::post('shop/{shopSlug}/job_post','JobController@addingSubmit')->name('shop.job.add');

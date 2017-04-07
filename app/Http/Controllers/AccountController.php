@@ -243,4 +243,29 @@ class AccountController extends Controller
 
   }
 
+  public function jobApplying() {
+
+    $model = Service::loadModel('PersonApplyJob');
+
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
+
+    $model->paginator->disableGetImage();
+    $model->paginator->criteria(array(
+      'conditions' => array(
+        array('person_id','=',session()->get('Person.id'))
+      ),
+      'order' => array('created_at','desc')
+    ));
+    $model->paginator->setPage($page);
+    $model->paginator->setPagingUrl('account/job_applying');
+    $model->paginator->setUrl('account/job_applying/{id}','detailUrl');
+
+    $this->data = $model->paginator->build();
+
+    return $this->view('pages.account.job_applying');
+  }
+
 }
