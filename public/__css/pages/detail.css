@@ -274,7 +274,7 @@
 .content-box {
 	margin: 20px 0;
 	color: #fff;
-	background-color: #0071c5;
+	background-color: #448AFF;
 }
 
 .content-box .image-frame {
@@ -450,6 +450,10 @@
 	border-color: #42A5F5;
 	background-image: url(/images/icons/tick.png);
 	background-size: 60%;
+}
+
+.person-experience-content .person-experience-info:not(:last-child) {
+	margin-bottom: 50px;
 }
 
 /*==========  Non-Mobile First Method  ==========*/

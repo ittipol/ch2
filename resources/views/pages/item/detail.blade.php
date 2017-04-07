@@ -78,9 +78,82 @@
     <div class="line space-top-bottom-20"></div>
     @endif
 
+  </div class="row">
+
+    <div class="col-md-4 col-xs-12">
+
+      <div class="item-info">
+
+        <div class="item-info-row">
+          <p>ราคา{{$_modelData['_announcementTypeName']}}</p>
+          <h4 class="text-emphasize">{{$_modelData['_price']}}</h4>
+        </div>
+
+      </div>
+
+      <div class="line space-top-bottom-20"></div>
+
+      <div class="item-info">
+
+        <p>ติดต่อผู้{{$_modelData['_announcementTypeName']}}</p>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="item-info-row">
+              @if(!empty($_modelData['Contact']['phone_number']))
+              <h4 class="title-with-icon phone">{{$_modelData['Contact']['phone_number']}}</h4>
+              @else
+              <h4 class="title-with-icon phone">-</h4>
+              @endif
+            </div>
+          </div>
+          <div class="col-xs-12">
+            <div class="item-info-row">
+              @if(!empty($_modelData['Contact']['email']))
+              <h4 class="title-with-icon email">{{$_modelData['Contact']['email']}}</h4>
+              @else
+              <h4 class="title-with-icon email">-</h4>
+              @endif
+            </div>
+          </div>
+          <div class="col-xs-12">
+            <div class="item-info-row">
+              @if(!empty($_modelData['Contact']['line']))
+              <h4 class="title-with-icon line-app">{{$_modelData['Contact']['line']}}</h4>
+              @else
+              <h4 class="title-with-icon line-app">-</h4>
+              @endif
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      @if (Auth::check() && (Session::get('Person.id') == $_modelData['person_id']))
+      <div class="space-top-20">
+        <a href="" class="button">ปิดการประกาศ</a>
+      </div>
+      @endif
+
+    </div>
+
+    <div class="col-md-8 col-xs-12">
+
+      <div class="detail-info-section">
+        <h4>รายละเอียด {{$_modelData['name']}}</h4>
+        <div class="line"></div> 
+        <div class="detail-info">
+          {!!$_modelData['description']!!}
+        </div>
+      </div>
+
+    </div>
+
+  <div>
+
   </div>
 
-  <div class="row">
+  <!-- <div class="row">
 
     <div class="col-xs-6">
       <div class="item-info">
@@ -131,15 +204,15 @@
       </div>
     </div>
 
-  </div>
+  </div> -->
 
-  <div class="detail-info-section">
+  <!-- <div class="detail-info-section">
     <h4>รายละเอียด {{$_modelData['name']}}</h4>
     <div class="line"></div> 
     <div class="detail-info">
       {!!$_modelData['description']!!}
     </div>
-  </div>
+  </div> -->
 
 </div>
 

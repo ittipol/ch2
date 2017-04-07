@@ -199,8 +199,8 @@ Route::group(['middleware' => ['auth','shop']], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-  Route::get('community/shop_create','ShopController@create')->name('shop.create');
-  Route::post('community/shop_create','ShopController@creatingSubmit')->name('shop.create');
+  Route::get('community/shop/create','ShopController@create')->name('shop.create');
+  Route::post('community/shop/create','ShopController@creatingSubmit')->name('shop.create');
 });
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
   Route::get('shop/{shopSlug}/manage','ShopController@manage')->name('shop.manage');

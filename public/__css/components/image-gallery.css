@@ -171,9 +171,15 @@
 }
 
 @media only screen and (max-width : 768px) {
+	
+	.image-gallery .image-description {
+		width: 600px;
+	}
+
 	.image-gallery .image-gallery-list {
 		margin: 0;
 	}
+
 }
 
 @media only screen and (max-width : 480px) {

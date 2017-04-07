@@ -125,13 +125,6 @@
             </dl>
             @endif
 
-            @if(!empty($profile['Contact']['line']))
-            <dl>
-              <dt>Line ID</dt>
-              <dd>{{$profile['Contact']['line']}}</dd>
-            </dl>
-            @endif
-
           </div>
 
         </div>

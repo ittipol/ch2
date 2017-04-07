@@ -86,8 +86,8 @@ class NotificationHelper {
       return false;
     }
 
-    $parseFormat = '/{{[\w\d|._,=>@]+}}/';
-    $parseValue = '/[\w\d|._,=>@]+/';
+    $parseFormat = '/{{[\w\d|._,=>@$]+}}/';
+    $parseValue = '/[\w\d|._,=>@$]+/';
 
     $result = array();
     foreach ($options['format'] as $key => $format){
@@ -114,7 +114,17 @@ class NotificationHelper {
           break;
         }
 
-        if(substr($_matches[0],0,2) == '__'){
+        if(substr($_matches[0],0,2) == '$$'){
+
+          list($var,$valueName) = explode('|', $_matches[0]);
+
+          switch (substr($var,2)) {
+            case 'Session':
+              $_value = session()->get($valueName);
+              break;
+          }
+
+        }elseif(substr($_matches[0],0,2) == '__'){
      
           if(strpos($_matches[0], '|')) {
             
@@ -311,11 +321,17 @@ class NotificationHelper {
     switch ($group) {
 
       case 'all-person-in-shop':
-          
-          if($this->model->modelName == 'Order') {
-            $people = Service::loadModel('PersonToShop')->where('shop_id','=',$this->model->shop_id)->get();
+
+          switch ($this->model->modelName) {
+            case 'Order':
+              $people = Service::loadModel('PersonToShop')->where('shop_id','=',$this->model->shop_id)->get();
+              break;
+            
+            case 'PersonApplyJob':
+              $people = Service::loadModel('PersonToShop')->where('shop_id','=',$this->model->shop_id)->get();
+              break;
           }
-          
+
           foreach ($people as $person) {
             $receivers[] = $person->person_id;
           }

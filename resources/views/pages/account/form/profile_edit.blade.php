@@ -123,16 +123,6 @@
       </div>
     </div>
 
-    <div class="form-row">
-      <?php 
-        echo Form::label('Contact[line]', 'Line ID');
-      ?>
-      <div id="line_id_input" class="text-group">
-        <div class="text-group-panel"></div>
-        <a href="javascript:void(0);" class="text-add">เพิ่ม +</a>
-      </div>
-    </div>
-
   </div>
 
   <div class="form-section">

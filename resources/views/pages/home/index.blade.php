@@ -6,7 +6,7 @@
     <div class="banner-overlay-message">
       <h2 class="banner-primary-title">เริ่มต้นธุรกิจของคุณและเชื่อมต่อธุรกิจของคุณกับผู้คนในชลบุรี</h2>
       <p class="banner-description">เพิ่มธุรกิจของคุณ และให้เราทำหน้าที่เชื่อมต่อธุรกิจของคุณกับผู้คนในขลบุรี</p>
-      <a href="{{URL::to('community/shop_create')}}" class="button">เริ่มต้นธุรกิจของคุณ</a>
+      <a href="{{URL::to('community/shop/create')}}" class="button">เริ่มต้นธุรกิจของคุณ</a>
     </div>
   </div>
 </div>
@@ -27,7 +27,7 @@
           <h4 class="site-map-title">บริษัทและร้านค้า</h4>
           <div class="site-map-content">
             <div class="site-map-link">
-              <a href="{{URL::to('community/shop_create')}}">เพิ่มร้านค้าของคุณ</a>
+              <a href="{{URL::to('community/shop/create')}}">เพิ่มร้านค้าของคุณ</a>
             </div>
             <div class="site-map-link">
               <a href="{{URL::to('product')}}">สินค้าในร้านค้า</a>
@@ -120,7 +120,7 @@
             <div class="list-empty-message text-center space-top-bottom-20">
               <div>
                 <h3>ยังไม่มีสินค้า</h3>
-                <a href="URL::to('community/shop_create')" class="button">เพิ่มบริษัทหรือร้านค้าและเพิ่มสินค้าลงในร้านค้าของคุณ</a>
+                <a href="URL::to('community/shop/create')" class="button">เพิ่มบริษัทหรือร้านค้าและเพิ่มสินค้าลงในร้านค้าของคุณ</a>
               </div>
             </div>
 
@@ -176,7 +176,7 @@
             <div class="list-empty-message text-center space-top-bottom-20">
               <div>
                 <h3>ยังไม่มีประกาศงาน</h3>
-                <a href="URL::to('community/shop_create')" class="button">เพิ่มบริษัทหรือร้านค้าและเพิ่มการประกาศงานของคุณ</a>
+                <a href="URL::to('community/shop/create')" class="button">เพิ่มบริษัทหรือร้านค้าและเพิ่มการประกาศงานของคุณ</a>
               </div>
             </div>
 
@@ -229,7 +229,7 @@
             <div class="list-empty-message text-center space-top-bottom-20">
               <div>
                 <h3>ยังไม่มีประกาศโฆษณา</h3>
-                <a href="URL::to('community/shop_create')" class="button">เพิ่มบริษัทหรือร้านค้าและเพิ่มการประกาศโฆษณาของคุณ</a>
+                <a href="URL::to('community/shop/create')" class="button">เพิ่มบริษัทหรือร้านค้าและเพิ่มการประกาศโฆษณาของคุณ</a>
               </div>
             </div>
 

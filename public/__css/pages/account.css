@@ -14,16 +14,12 @@
   background-size: auto 100%;
 }
 
-/*.profile-info {
-	margin-left: 20px;
-}*/
-
 .profile-info h3 {
 	margin-top: 10px;
 }
 
 .profile-contact-info {
-  padding: 20px;
+  padding: 20px 20px 20px 0;
   /*margin-left: -30px;*/
 }
 

@@ -39,7 +39,7 @@
         </div>
 
         <div class="col-xs-4">
-          <a href="{{URL::to('account/experience')}}">
+          <a href="{{URL::to('person/experience')}}">
             <div class="account-tile-button text-center">
               <img class="icon" src="/images/common/resume.png">
               <h5>เพิ่มประวัติการทำงาน</h5>
@@ -114,6 +114,17 @@
         </div>
         @endforeach
       </div>
+
+      @else
+
+        <div class="list-empty-message text-center space-top-20">
+          <img src="/images/common/shop.png">
+          <div>
+            <h3>ยังไม่มีร้านค้า</h3>
+            <p>เพิ่มร้านค้าของคุณ เพื่อการขายสินค้า การประกาศงาน และการโฆษณาสินค้า แบรนด์ หรือร้านค้าของคุณ</p>
+            <a href="{{URL::to('community/shop/create')}}" class="button">เพิ่มร้านค้า</a>
+          </div>
+        </div>
 
       @endif
 

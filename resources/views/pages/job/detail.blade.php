@@ -205,30 +205,34 @@
 
   @endif
 
-  <h4>สมัครงานนี้ได้ที่</h4>
+  <div class="space-top-20">
 
-  <div class="text-center space-top-bottom-20">
-    @if($personApplyJob)
-      <h4 class="sign info">สมัครงานนี้แล้ว</h4>
-    @else
-    <a class="button" href="{{$jobApplyUrl}}">
-      <img src="/images/icons/edit-white.png">
-      สมัครงานนี้ผ่าน CHONBURI SQUARE
-    </a>
+    <h4>สมัครงานนี้ได้ที่</h4>
+
+    <div class="text-center space-top-bottom-20">
+      @if($personApplyJob)
+        <h4 class="sign info">สมัครงานนี้แล้ว</h4>
+      @else
+      <a class="button" href="{{$jobApplyUrl}}">
+        <img src="/images/icons/edit-white.png">
+        สมัครงานนี้ผ่าน CHONBURI SQUARE
+      </a>
+      @endif
+    </div>
+
+    @if(!empty($_modelData['_recruitment_custom']) && !empty($_modelData['recruitment_custom_detail']))
+
+    <div class="text-strike">
+      <span>หรือ</span>
+      <div class="line"></div>
+    </div>
+    
+    <div class="space-top-30">
+      {!!$_modelData['recruitment_custom_detail']!!}
+    </div>
     @endif
-  </div>
 
-  @if(!empty($_modelData['_recruitment_custom']) && !empty($_modelData['recruitment_custom_detail']))
-
-  <div class="text-strike">
-    <span>หรือ</span>
-    <div class="line"></div>
   </div>
-  
-  <div class="space-top-30">
-    {!!$_modelData['recruitment_custom_detail']!!}
-  </div>
-  @endif
 
 
 </div>

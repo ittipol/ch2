@@ -106,7 +106,6 @@ class Notification extends Model
 
       case 'order-create':
 
-          // get slug
           $slug = Service::loadModel('Slug')
           ->where([
             ['model','like','Shop'],
@@ -124,7 +123,6 @@ class Notification extends Model
 
       case 'order-payment-inform':
 
-          // get slug
           $slug = Service::loadModel('Slug')
           ->where([
             ['model','like','Shop'],
@@ -138,6 +136,19 @@ class Notification extends Model
 
       case 'order-payment-confirm':
           $_url = $url->setAndParseUrl($notificationEvent->url_format,array('id'=>$model->id));
+        break;
+
+      case 'job-apply':
+
+          $slug = Service::loadModel('Slug')
+          ->where([
+            ['model','like','Shop'],
+            ['model_id','=',$model->shop_id]
+          ])
+          ->first()
+          ->slug;
+
+          $_url = $url->setAndParseUrl($notificationEvent->url_format,array('id'=>$model->id,'shopSlug'=>$slug));
         break;
     
     }
@@ -153,6 +164,10 @@ class Notification extends Model
     switch ($modelName) {
       case 'Order':
           $image = '/images/icons/bag-white.png';
+        break;
+
+      case 'PersonApplyJob':
+          $image = '/images/icons/career-white.png';
         break;
     
     }

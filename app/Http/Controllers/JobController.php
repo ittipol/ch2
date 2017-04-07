@@ -6,6 +6,7 @@ use App\Http\Requests\CustomFormRequest;
 use App\library\service;
 use App\library\message;
 use App\library\url;
+use App\library\notificationHelper;
 use Redirect;
 
 class JobController extends Controller
@@ -289,6 +290,11 @@ class JobController extends Controller
     request()->request->add(['shop_id' => $shopToModel->shop_id]);
 
     if($model->fill(request()->all())->save()) {
+
+      $notificationHelper = new NotificationHelper;
+      $notificationHelper->setModel($model);
+      $notificationHelper->create('job-apply');
+
       Message::display('สมัครงานนี้เรียบร้อยแล้ว','success');
       return Redirect::to('job/detail/'.$this->param['id']);
     }else{
@@ -435,7 +441,7 @@ class JobController extends Controller
     $this->setData('jobName',$model->job->name);
     $this->setData('jobApply',$model->modelData->build(true));
     $this->setData('profile',$person->modelData->build(true));
-    $this->setData('profileImageUrl',$person->getProfileImageUrl());
+    $this->setData('profileImageUrl',$person->getProfileImageUrl('xsm'));
     $this->setData('careerObjective',$careerObjective->career_objective);
     $this->setData('skills',$_skills);
     $this->setData('languageSkills',$_languageSkills);

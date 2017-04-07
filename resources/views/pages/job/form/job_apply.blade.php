@@ -71,9 +71,12 @@
           'class' => 'ckeditor'
         ));
       ?>
-      <div class="space-top-10">
-        <p class="error-message">* ข้อความนี้จะแสดงอยู่ส่วนแรกของรายละเอียดการสมัครงานของคุณ</p>
-        <p class="error-message">* สามารถเว้นว่างข้อความนี้ได้</p>
+
+      <div class="secondary-message-box error space-top-20">
+        <div class="secondary-message-box-inner">
+          <p>*** ข้อความนี้จะแสดงอยู่ส่วนแรกของรายละเอียดการสมัครงานของคุณ</p>
+          <p>*** สามารถเว้นว่างข้อความนี้ได้</p>
+        </div>
       </div>
     </div>
 

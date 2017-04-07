@@ -116,6 +116,10 @@ a.button:visited {
 	margin-bottom: 30px !important;
 }
 
+.space-bottom-50 {
+	margin-bottom: 30px !important;
+}
+
 .no-margin {
 	margin: 0 !important;
 }

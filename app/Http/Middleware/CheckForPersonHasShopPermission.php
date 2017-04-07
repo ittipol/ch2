@@ -58,7 +58,8 @@ class CheckForPersonHasShopPermission
           'permission' => true
         ),
         'shop.job.apply_detail' => array(
-          'permission' => true
+          'permission' => true,
+          'modelName' => 'PersonApplyJob'
         ),
         'shop.branch.manage' => array(
           'permission' => true

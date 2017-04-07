@@ -75,3 +75,9 @@
 	top: 10px;
 	right: 0;
 }
+
+.global-account-panel .list-empty-message img {
+	width: 100px;
+	height: 100px;
+	padding: 10px;
+}

@@ -132,6 +132,18 @@ class AppServiceProvider extends ServiceProvider
           ->select('name','description','profile_image_id','cover_image_id')
           ->find($shopId);
 
+          $personToShop = Service::loadModel('PersonToShop');
+          $person = $personToShop->getData(array(
+            'conditions' => array(
+              ['person_id','=',session()->get('Person.id')],
+              ['shop_id','=',$shopId],
+            ),
+            'fields' => array('role_id'),
+            'first' => true
+          ));
+
+          view()->share('_shop_permission',$person->role->getPermission());
+
           view()->share('_shop_id',$shopId);
           view()->share('_shop_name',$shop->name);
           view()->share('_shop_short_description',$string->subString($shop->description,250,true));
