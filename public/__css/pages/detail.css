@@ -452,6 +452,10 @@
 	background-size: 60%;
 }
 
+.person-experience-content .person-experience-info:first-child {
+	margin-top: 20px;
+}
+
 .person-experience-content .person-experience-info:not(:last-child) {
 	margin-bottom: 50px;
 }

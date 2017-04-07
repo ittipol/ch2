@@ -33,7 +33,7 @@ class Model extends BaseModel
   public $modelData = false;
   public $paginator = false;
 
-  public $param;
+  // public $param;
   
   public function __construct(array $attributes = []) {
 

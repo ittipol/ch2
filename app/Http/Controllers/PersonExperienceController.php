@@ -77,10 +77,10 @@ class PersonExperienceController extends Controller
 
     $url = new Url;
 
-    $model = Service::loadModel('PersonExperience');
+    // $model = Service::loadModel('PersonExperience');
 
-    $profile = $model
-    ->select(array('id','private_websites','active'))
+    $profile = Service::loadModel('PersonExperience')
+    ->select(array('id','active'))
     ->where('person_id','=',Session::get('Person.id'))
     ->first();
 
@@ -230,34 +230,6 @@ class PersonExperienceController extends Controller
     }else{
       Message::display('เกิดข้อผิดพลาด ไม่สามารถบันทึกได้','error');
       return Redirect::to('experience/profile/edit');
-    }
-
-  }
-
-  public function websiteAdd() {
-
-    $model = Service::loadModel('PersonExperience')->where('person_id','=',Session::get('Person.id'))->first();
-  
-    $model->formHelper->setData('websiteTypes',json_encode(array(
-      array('private-website','เว็บไซต์ส่วนตัว'),
-      array('blog','บล็อก'),
-      array('company-website','เว็บไซต์บริษัท')
-    )));
-
-    $this->data = $model->formHelper->build();
-
-    return $this->view('pages.person_experience.form.website_add');
-  }
-
-  public function websiteAddingSubmit() {
-
-    $model = Service::loadModel('PersonExperience')->where('person_id','=',Session::get('Person.id'))->first();
-
-    if($model->fill(request()->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('person/experience');
-    }else{
-      return Redirect::back();
     }
 
   }

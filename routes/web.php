@@ -56,6 +56,7 @@ Route::get('register','UserController@registerForm')->middleware('guest');
 Route::post('register','UserController@register')->middleware('guest');
 
 Route::get('safe_image/{file}', 'StaticFileController@serveImages');
+Route::get('redirect', 'UrlController@redirect');
 
 // Search
 Route::get('search','SearchController@index')->name('search');
@@ -95,8 +96,12 @@ Route::group(['middleware' => ['auth','person.experience']], function () {
   Route::get('experience/profile/edit','PersonExperienceController@profile')->name('person_experience.profile');
   Route::patch('experience/profile/edit','PersonExperienceController@profileEditingSubmit')->name('person_experience.profile.edit');
 
-  Route::get('experience/profile/website_add','PersonExperienceController@websiteAdd');
-  Route::patch('experience/profile/website_add','PersonExperienceController@websiteAddingSubmit');
+  Route::get('person/private_website/list','PersonPrivateWebsiteController@listView');
+  Route::get('person/private_website/add','PersonPrivateWebsiteController@add');
+  Route::post('person/private_website/add','PersonPrivateWebsiteController@addingSubmit');
+  Route::get('person/private_website/edit/{id}','PersonPrivateWebsiteController@edit');
+  Route::patch('person/private_website/edit/{id}','PersonPrivateWebsiteController@editingSubmit');
+  // Route::patch('person/private_website/delete/{id}','PersonPrivateWebsiteController@delete');
 
   Route::get('experience/career_objective','PersonExperienceController@careerObjectiveEdit');
   Route::patch('experience/career_objective','PersonExperienceController@careerObjectiveEditingSubmit');

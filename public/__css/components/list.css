@@ -1,5 +1,9 @@
+.list-group {
+	margin-top: 10px;
+}
+
 .list-group > .list-row {
-	padding: 10px 0;
+	/*padding: 10px 0;*/
 	position: relative;
 }
 

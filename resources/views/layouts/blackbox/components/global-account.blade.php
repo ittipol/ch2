@@ -48,7 +48,7 @@
         </div>
 
         <div class="col-xs-4">
-          <a href="{{URL::to('account/freelance')}}">
+          <a href="{{URL::to('person/freelance')}}">
             <div class="account-tile-button text-center">
               <img class="icon" src="/images/common/career.png">
               <h5>ฟรีแลนซ์</h5>

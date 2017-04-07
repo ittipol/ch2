@@ -1,17 +1,19 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<div class="container">
-
-  <div class="container-header">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="title">
-          ประสบการณ์การทำงาน
+<div class="top-header-wrapper top-header-border">
+  <div class="container">
+    <div class="top-header">
+      <div class="detail-title">
+        <h2 class="title">แก้ไขประสบการณ์การทำงาน</h2>
+        <div class="tag-group">
         </div>
       </div>
     </div>
   </div>
+</div>
+
+<div class="container">
 
   @include('components.form_error') 
 

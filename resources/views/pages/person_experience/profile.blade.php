@@ -1,8 +1,16 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<div class="top-header-wrapper">
-  <h2 class="top-header">ประวัติการทำงาน</h2>
+<div class="top-header-wrapper top-header-border">
+  <div class="container">
+    <div class="top-header">
+      <div class="detail-title">
+        <h2 class="title">เพิ่มประวัติการทำงานและทักษะ</h2>
+        <div class="tag-group">
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="container">
@@ -15,7 +23,7 @@
     ]);
   ?>
 
-  <h4>ใครบ้างที่สามารถเห็นประวัติการทำงานของคุณได้</h4>
+  <h4>ใครบ้างที่สามารถเห็นประวัติการทำงานของฉันได้</h4>
   <div class="input-group clearfix">
     <div class="input-item">
       <?php

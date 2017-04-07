@@ -349,76 +349,87 @@ class JobController extends Controller
       'models' => array('Address','Contact')
     ));
 
-    $profile = $model->person->personExperience;
+    // $profile = $model->person->personExperience;
 
     // Get career objective
-    $careerObjective = Service::loadModel('PersonCareerObjective')
-    ->select(array('id','career_objective'))
-    ->where('person_experience_id','=',$profile->id)
-    ->first();
+    // $careerObjective = Service::loadModel('PersonCareerObjective')
+    // ->select(array('id','career_objective'))
+    // ->where('person_experience_id','=',$profile->id)
+    // ->first();
+
+    // $personPrivateWebsites = Service::loadModel('PersonPrivateWebsite')->where('person_experience_id','=',$profile->id)->get();
+
+    // $_privateWebsites = array();
+    // foreach ($personPrivateWebsites as $personPrivateWebsite) {
+    //   $_privateWebsites[] = array(
+    //     'website_url' => $personPrivateWebsite->website_url,
+    //     'websiteType' => $personPrivateWebsite->websiteType->name,
+    //     'url' => $url->redirect($personPrivateWebsite->website_url)
+    //   );
+    // }
 
     // Get skill
-    $skills = Service::loadModel('PersonSkill')->where('person_experience_id','=',$profile->id)->get();
+    // $skills = Service::loadModel('PersonSkill')->where('person_experience_id','=',$profile->id)->get();
 
-    $_skills = array();
-    foreach ($skills as $skill) {
-      $_skills[] = array(
-        'skill' => $skill->skill
-      );
-    }
+    // $_skills = array();
+    // foreach ($skills as $skill) {
+    //   $_skills[] = array(
+    //     'skill' => $skill->skill
+    //   );
+    // }
 
-    // Get language skill
-    $languageSkills = Service::loadModel('PersonLanguageSkill')->where('person_experience_id','=',$profile->id)->get();
+    // // Get language skill
+    // $languageSkills = Service::loadModel('PersonLanguageSkill')->where('person_experience_id','=',$profile->id)->get();
 
-    $_languageSkills = array();
-    foreach ($languageSkills as $languageSkill) {
-      $_languageSkills[] = array(
-        'name' => $languageSkill->language->name,
-        'level' => $languageSkill->languageSkillLevel->name
-      );
-    }
+    // $_languageSkills = array();
+    // foreach ($languageSkills as $languageSkill) {
+    //   $_languageSkills[] = array(
+    //     'name' => $languageSkill->language->name,
+    //     'level' => $languageSkill->languageSkillLevel->name
+    //   );
+    // }
 
-    $models = array(
-      'PersonWorkingExperience' => 'working',
-      'PersonInternship' => 'internship',
-      'PersonEducation' => 'education',
-      'PersonProject' => 'project',
-      'PersonCertificate' => 'certificate'
-    );
+    // $models = array(
+    //   'PersonWorkingExperience' => 'working',
+    //   'PersonInternship' => 'internship',
+    //   'PersonEducation' => 'education',
+    //   'PersonProject' => 'project',
+    //   'PersonCertificate' => 'certificate'
+    // );
 
-    foreach ($models as $_model => $alias) {
-      $experienceDetails = Service::loadModel('PersonExperienceDetail')
-      ->orderBy('start_year','DESC')
-      ->orderBy('start_month','DESC')
-      ->orderBy('start_day','DESC')
-      ->select(array('model','model_id','start_year','start_month','start_day','end_year','end_month','end_day','current'))
-      ->where(array(
-        array('person_experience_id','=',$profile->id),
-        array('model','like',$_model)
-      ))
-      ->get();
+    // foreach ($models as $_model => $alias) {
+    //   $experienceDetails = Service::loadModel('PersonExperienceDetail')
+    //   ->orderBy('start_year','DESC')
+    //   ->orderBy('start_month','DESC')
+    //   ->orderBy('start_day','DESC')
+    //   ->select(array('model','model_id','start_year','start_month','start_day','end_year','end_month','end_day','current'))
+    //   ->where(array(
+    //     array('person_experience_id','=',$profile->id),
+    //     array('model','like',$_model)
+    //   ))
+    //   ->get();
 
-      $details = array();
-      foreach ($experienceDetails as $experienceDetail) {
+    //   $details = array();
+    //   foreach ($experienceDetails as $experienceDetail) {
         
-        $__model = $experienceDetail->{lcfirst($experienceDetail->model)};
+    //     $__model = $experienceDetail->{lcfirst($experienceDetail->model)};
 
-        if(empty($__model)) {
-          continue;
-        }
+    //     if(empty($__model)) {
+    //       continue;
+    //     }
 
-        $details[] = array_merge(
-          $__model->buildModelData(),
-          array(
-            'peroid' => $experienceDetail->getPeriod()
-          )
-        );
+    //     $details[] = array_merge(
+    //       $__model->buildModelData(),
+    //       array(
+    //         'peroid' => $experienceDetail->getPeriod()
+    //       )
+    //     );
 
-      }
+    //   }
 
-      $this->setData($_model,$details);
+    //   $this->setData($_model,$details);
 
-    }
+    // }
 
     // relate to branches
     $total = Service::loadModel('relateToBranch')
@@ -438,13 +449,14 @@ class JobController extends Controller
       $_branches[] = $branch->branch->name;
     }
 
+    $this->data = $person->personExperience->getPersonExperience();
     $this->setData('jobName',$model->job->name);
     $this->setData('jobApply',$model->modelData->build(true));
     $this->setData('profile',$person->modelData->build(true));
     $this->setData('profileImageUrl',$person->getProfileImageUrl('xsm'));
-    $this->setData('careerObjective',$careerObjective->career_objective);
-    $this->setData('skills',$_skills);
-    $this->setData('languageSkills',$_languageSkills);
+    // $this->setData('careerObjective',$careerObjective->career_objective);
+    // $this->setData('skills',$_skills);
+    // $this->setData('languageSkills',$_languageSkills);
     $this->setData('hasBranch',!empty($total) ? true : false);
     $this->setData('branches',$_branches);
 

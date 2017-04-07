@@ -23,20 +23,20 @@
       </div>
       <div class="tile-nav-info">
         <a href="{{URL::to('experience/profile/edit')}}">
-          <h4 class="tile-nav-title">เพิ่มประวัติการทำงานของคุณ</h4>
+          <h4 class="tile-nav-title">เพิ่มประวัติการทำงานและทักษะ</h4>
         </a>
       </div>
     </div>
 
     <div class="tile-nav small">
       <div class="tile-nav-image">
-        <a href="{{URL::to('experience/profile/website_add')}}">
+        <a href="{{URL::to('person/private_website/list')}}">
           <img src="/images/common/globe.png">
         </a>
       </div>
       <div class="tile-nav-info">
-        <a href="{{URL::to('experience/profile/website_add')}}">
-          <h4 class="tile-nav-title">เพิ่มเว็บไซต์ส่วนตัว</h4>
+        <a href="{{URL::to('person/private_website/list')}}">
+          <h4 class="tile-nav-title">เว็บไซต์ส่วนตัว</h4>
         </a>
       </div>
     </div>
@@ -58,132 +58,155 @@
 
   <div class="line"></div>
 
-  <div class="space-top-bottom-20">
-
-    <div class="space-top-50"></div>
-    <h4>รายละเอียดประวัติการทำงาน</h4>
+  <h3 class="space-bottom-10">ประวัติการทำงานและทักษะ</h3>
+  <div class="person-experience-content">
 
     @if(!empty($careerObjective))
-    <div class="space-top-50"></div>
-    <h4>จุดมุ่งหมายในอาชีพ</h4>
-    <div class="line"></div>
-    <p>{!!$careerObjective!!}</p>
+      <div class="person-experience-info">
+        <h4>จุดมุ่งหมายในอาชีพ</h4>
+        <div class="line"></div>
+        <p>{!!$careerObjective!!}</p>
+      </div>
     @endif
 
     @if(!empty($PersonWorkingExperience))
-    <div class="space-top-50"></div>
-    <h4>ประสบการณ์การทำงาน</h4>
-    <div class="line"></div>
-    <div class="list-group">
-      @foreach($PersonWorkingExperience as $detail)
-        <div class="list-row row">
-          <div class="col-xs-9">
-            <h4>{{$detail['message']}}</h4>
-            <h5>{{$detail['peroid']}}</h5>
+    <div class="person-experience-info">
+      <h4>ประสบการณ์การทำงาน</h4>
+      <div class="line"></div>
+      <div class="list-group">
+        @foreach($PersonWorkingExperience as $detail)
+          <div class="list-row row">
+            <div class="col-xs-9">
+              <h4>{{$detail['message']}}</h4>
+              <h5>{{$detail['peroid']}}</h5>
+            </div>
           </div>
-        </div>
-      @endforeach
+        @endforeach
+      </div>
     </div>
     @endif
 
     @if(!empty($PersonInternship))
-    <div class="space-top-50"></div>
-    <h4>ประสบการณ์การฝึกงาน</h4>
-    <div class="line"></div>
-    <div class="list-group">
-      @foreach($PersonInternship as $detail)
-        <div class="list-row row">
-          <div class="col-xs-9">
-            <h4>{{$detail['company']}}</h4>
-            <h5>{{$detail['peroid']}}</h5>
+    <div class="person-experience-info">
+      <h4>ประสบการณ์การฝึกงาน</h4>
+      <div class="line"></div>
+      <div class="list-group">
+        @foreach($PersonInternship as $detail)
+          <div class="list-row row">
+            <div class="col-xs-9">
+              <h4>{{$detail['company']}}</h4>
+              <h5>{{$detail['peroid']}}</h5>
+            </div>
           </div>
-        </div>
-      @endforeach
+        @endforeach
+      </div>
     </div>
     @endif
-    
+
     @if(!empty($PersonEducation))
-    <div class="space-top-50"></div>
-    <h4>ประวัติการศึกษา</h4>
-    <div class="line"></div>
-    <div class="list-group">
-      @foreach($PersonEducation as $detail)
-        <div class="list-row row">
-          <div class="col-xs-9">
-            <h4>{{$detail['message']}}</h4>
-            <h5>{{$detail['peroid']}}</h5>
+    <div class="person-experience-info">
+      <h4>ประวัติการศึกษา</h4>
+      <div class="line"></div>
+      <div class="list-group">
+        @foreach($PersonEducation as $detail)
+          <div class="list-row row">
+            <div class="col-xs-9">
+              <h4>{{$detail['message']}}</h4>
+              <h5>{{$detail['peroid']}}</h5>
+            </div>
           </div>
-        </div>
-      @endforeach
+        @endforeach
+      </div>
     </div>
     @endif
 
     @if(!empty($PersonProject))
-    <div class="space-top-50"></div>
-    <h4>โปรเจค</h4>
-    <div class="line"></div>
-    <div class="list-group">
-      @foreach($PersonProject as $detail)
-        <div class="list-row row">
-          <div class="col-xs-9">
-            <h4>{{$detail['name']}}</h4>
-            <h5>{{$detail['peroid']}}</h5>
+    <div class="person-experience-info">
+      <h4>โปรเจค</h4>
+      <div class="line"></div>
+      <div class="list-group">
+        @foreach($PersonProject as $detail)
+          <div class="list-row row">
+            <div class="col-xs-9">
+              <h4>{{$detail['name']}}</h4>
+              <h5>{{$detail['peroid']}}</h5>
+            </div>
           </div>
-        </div>
-      @endforeach
+        @endforeach
+      </div>
     </div>
     @endif
 
     @if(!empty($PersonCertificate))
-    <div class="space-top-50"></div>
-    <h4>ประกาศนียบัตรและการฝึกอบรม</h4>
-    <div class="line"></div>
-    <div class="list-group">
-      @foreach($PersonCertificate as $detail)
-        <div class="list-row row">
-          <div class="col-xs-9">
-            <h4>{{$detail['name']}}</h4>
-            <h5>{{$detail['peroid']}}</h5>
+    <div class="person-experience-info">
+      <h4>ประกาศนียบัตรและการฝึกอบรม</h4>
+      <div class="line"></div>
+      <div class="list-group">
+        @foreach($PersonCertificate as $detail)
+          <div class="list-row row">
+            <div class="col-xs-9">
+              <h4>{{$detail['name']}}</h4>
+              <h5>{{$detail['peroid']}}</h5>
+            </div>
           </div>
-        </div>
-      @endforeach
+        @endforeach
+      </div>
     </div>
     @endif
 
     @if(!empty($skills))
-    <div class="space-top-50"></div>
-    <h4>ทักษะและความสามารถ</h4>
-    <div class="line"></div>
-    <div class="list-group">
-      @foreach($skills as $skill)
-        <div class="list-row row">
-          <div class="col-xs-9">
-            <h4>{{$skill['skill']}}</h4>
+    <div class="person-experience-info">
+      <h4>ทักษะและความสามารถ</h4>
+      <div class="line"></div>
+      <div class="list-group">
+        @foreach($skills as $skill)
+          <div class="list-row row">
+            <div class="col-xs-9">
+              <h4>{{$skill['skill']}}</h4>
+            </div>
           </div>
-        </div>
-      @endforeach
+        @endforeach
+      </div>
     </div>
     @endif
 
     @if(!empty($languageSkills))
-    <div class="space-top-50"></div>
-    <h4>ภาษาที่สามารถสื่อสารได้</h4>
-    <div class="line"></div>
-    <div class="list-group">
-      @foreach($languageSkills as $languageSkill)
-        <div class="list-row row">
-          <div class="col-xs-9">
-            <h4>{{$languageSkill['name']}}</h4>
-            <h5>{{$languageSkill['level']}}</h5>
+    <div class="person-experience-info">
+      <h4>ภาษาที่สามารถสื่อสารได้</h4>
+      <div class="line"></div>
+      <div class="list-group">
+        @foreach($languageSkills as $languageSkill)
+          <div class="list-row row">
+            <div class="col-xs-9">
+              <h4>{{$languageSkill['name']}}</h4>
+              <h5>{{$languageSkill['level']}}</h5>
+            </div>
           </div>
-        </div>
-      @endforeach
+        @endforeach
+      </div>
     </div>
     @endif
 
-    <a href="{{$experienceDetailUrl}}" class="button">ไปยังหน้าแสดงประวัติการทำงาน</a>
+    @if(!empty($privateWebsites))
+    <div class="person-experience-info">
+      <h4>เว็บไซต์ส่วนตัว</h4>
+      <div class="line"></div>
+      <div class="list-group">
+        @foreach($privateWebsites as $privateWebsite)
+          <div class="list-row row">
+            <div class="col-xs-9">
+              <h4><a href="{{$privateWebsite['url']}}">{{$privateWebsite['website_url']}}</a></h4>
+              <h5>{{$privateWebsite['websiteType']}}</h5>
+            </div>
+          </div>
+        @endforeach
+      </div>
+    </div>
+    @endif
 
   </div>
+
+  <a href="{{$experienceDetailUrl}}" class="button">ไปยังหน้าแสดงประวัติการทำงาน</a>
   
 </div>
 

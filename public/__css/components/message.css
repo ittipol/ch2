@@ -36,6 +36,11 @@
 	margin: 5px 0;
 }
 
+.secondary-message-box img {
+	width: 200px;
+	height: 200px;
+}
+
 .secondary-message-box .line {
 	background-color: #bababa;
 }
@@ -74,8 +79,11 @@
 	padding: 0;
 	margin: 0;
 	text-align: center;
-	/*background-color: rgb(244, 67, 54);*/
 	background-color: #009688;
+}
+
+.secondary-message-box .message-box-button-group .button.danger {
+	background-color: #D32F2F;
 }
 
 @media only screen and (max-width : 480px) {

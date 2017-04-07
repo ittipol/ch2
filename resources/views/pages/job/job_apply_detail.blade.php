@@ -14,6 +14,24 @@
 
 <div class="detail container">
 
+  <div class="secondary-message-box space-bottom-30">
+    <div class="secondary-message-box-inner">
+      <div class="text-center">
+        <img src="/images/common/resume.png">
+        <h3>ใบสมัครงาน</h3>
+        <p>หากคุณสนใจผู้สมัครรายนี้ สามารถตอบกลับไปยังผู้สมัครได้ หรือยกเลิกการสมัครงานของผู้สมัครรายนี้</p>
+      </div>
+    </div>
+    <div class="message-box-button-group two-button clearfix">
+      <div class="flat-button">
+        <a href="" class="button">ตอบกลับไปยังผู้สมัคร</a>
+      </div>
+      <div class="flat-button">
+        <a href="" class="button danger">ยกเลิกการสมัคร</a>
+      </div>
+    </div>
+  </div>
+
   <div class="detail-title">
     <h3 class="sub-title">รายละเอียดจากผู้สมัคร</h3>
     <div class="line space-top-10"></div>
@@ -127,6 +145,23 @@
         </div>
       </div>
     </div>
+
+    @if(!empty($privateWebsites))
+    <div class="person-experience-info">
+      <h4>เว็บไซต์ส่วนตัวของผู้สมัคร</h4>
+      <div class="line"></div>
+      <div class="row">
+      @foreach($privateWebsites as $privateWebsite)
+        <div class="col-md-6 col-xs-12">
+          <h4><a href="{{$privateWebsite['url']}}">{{$privateWebsite['website_url']}}</a></h4>
+          <h5>{{$privateWebsite['websiteType']}}</h5>
+          <a href="{{$privateWebsite['url']}}" class="button">เข้าสู่หน้าเว็บ</a>
+          <div class="line space-top-20"></div>
+        </div>
+      @endforeach
+      </div>
+    </div>
+    @endif
 
     <h3 class="space-bottom-10">ประวัติการทำงานของผู้สมัคร</h3>
 

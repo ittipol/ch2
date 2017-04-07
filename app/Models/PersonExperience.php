@@ -5,11 +5,12 @@ namespace App\Models;
 use App\library\service;
 use App\library\string;
 use App\library\cache;
+use App\library\url;
 
 class PersonExperience extends Model
 {
   protected $table = 'person_experiences';
-  protected $fillable = ['person_id','private_websites','active'];
+  protected $fillable = ['person_id','active'];
   protected $directory = true;
 
   public $formHelper = true;
@@ -75,36 +76,36 @@ class PersonExperience extends Model
 
   }
 
-  public function fill(array $attributes) {
+  // public function fill(array $attributes) {
 
-    if(!empty($attributes)) {
+  //   if(!empty($attributes)) {
 
-      if(!empty($attributes['private_websites'])) {
+  //     if(!empty($attributes['private_websites'])) {
 
-        $websites = array();
-        foreach ($attributes['private_websites'] as $value) {
-          if(empty($value['value'])) {
-            continue;
-          }
+  //       $websites = array();
+  //       foreach ($attributes['private_websites'] as $value) {
+  //         if(empty($value['value'])) {
+  //           continue;
+  //         }
 
-          $websites[] = array(
-            'type' => trim($value['type']),
-            'name' => trim($value['value'])
-          );
-        }
+  //         $websites[] = array(
+  //           'type' => trim($value['type']),
+  //           'name' => trim($value['value'])
+  //         );
+  //       }
 
-        $attributes['private_websites'] = '';
-        if(!empty($websites)) {
-          $attributes['private_websites'] = json_encode($websites);
-        }
+  //       $attributes['private_websites'] = '';
+  //       if(!empty($websites)) {
+  //         $attributes['private_websites'] = json_encode($websites);
+  //       }
 
-      }
+  //     }
       
-    }
+  //   }
 
-    return parent::fill($attributes);
+  //   return parent::fill($attributes);
 
-  }
+  // }
 
   public function getByPersonId() {
     return $this->where('person_id','=',session()->get('Person.id'))->first();
@@ -116,6 +117,8 @@ class PersonExperience extends Model
 
   public function getPersonExperience() {
 
+    $url = new Url;
+
     $data = array();
 
     // Get career objective
@@ -123,6 +126,18 @@ class PersonExperience extends Model
     ->select(array('id','career_objective'))
     ->where('person_experience_id','=',$this->id)
     ->first();
+
+    //
+    $personPrivateWebsites = Service::loadModel('PersonPrivateWebsite')->where('person_experience_id','=',$this->id)->get();
+
+    $_privateWebsites = array();
+    foreach ($personPrivateWebsites as $personPrivateWebsite) {
+      $_privateWebsites[] = array(
+        'website_url' => $personPrivateWebsite->website_url,
+        'websiteType' => $personPrivateWebsite->websiteType->name,
+        'url' => $url->redirect($personPrivateWebsite->website_url)
+      );
+    }
 
     // Get skill
     $skills = Service::loadModel('PersonSkill')->where('person_experience_id','=',$this->id)->get();
@@ -188,6 +203,7 @@ class PersonExperience extends Model
     }
 
     $data['careerObjective'] = $careerObjective->career_objective;
+    $data['privateWebsites'] = $_privateWebsites;
     $data['skills'] = $_skills;
     $data['languageSkills'] = $_languageSkills;
 
