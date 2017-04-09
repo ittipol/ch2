@@ -402,12 +402,20 @@ class JobController extends Controller
     ->select('slug')
     ->first();
 
+    $messages = $model->getRelatedData('Message');
+
+    $_messages = array();
+    foreach ($messages as $message) {
+      $_messages[] = $message->buildModelData();
+    }
+dd($_messages);
     $this->setData('shopName',$model->shop->name);
     $this->setData('shopUrl',$url->setAndParseUrl('shop/{shopSlug}',array('shopSlug'=>$slug)));
     $this->setData('jobName',$model->job->name);
     $this->setData('jobUrl',$url->setAndParseUrl('job/detail/{id}',array('id'=>$model->job->id)));
     $this->setData('createdDate',$date->covertDateTimeToSting($model->created_at->format('Y-m-d H:i:s')));
-
+    $this->setData('messages',$_messages);
+    
     return $this->view('pages.job.account_job_applying_detail');
 
   }
@@ -468,7 +476,7 @@ class JobController extends Controller
 
       $notificationHelper = new NotificationHelper;
       $notificationHelper->setModel($model);
-      $notificationHelper->create('message-sent',$options);
+      $notificationHelper->create('job-applying-message-send-to-person',$options);
 
       MessageHelper::display('ข้อความถูกส่งแล้ว','success');
       return Redirect::to('shop/'.$request->shopSlug.'/job_applying_detail/'.$this->param['id']);

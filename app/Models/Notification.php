@@ -98,101 +98,55 @@ class Notification extends Model
 
   public function getUrl($modelName,$modelId,$notificationEvent) {
 
-    // $url = new Url;
+    $url = new Url;
+
     $model = Service::loadModel($modelName)->find($modelId);
 
-    $_url = '';
-    switch ($notificationEvent->event) {
-
-      case 'order-create':
-
-          $_url = $this->getNorificationUrl($model,$notificationEvent->url_format,'shop-slug');
-
-          // $slug = Service::loadModel('Slug')
-          // ->where([
-          //   ['model','like','Shop'],
-          //   ['model_id','=',$model->shop_id]
-          // ])
-          // ->first()
-          // ->slug;
- 
-          // $_url = $url->setAndParseUrl($notificationEvent->url_format,array('id'=>$model->id,'shopSlug'=>$slug));
-        break;
-
-      case 'order-confirm':
-          $_url = $this->getNorificationUrl($model,$notificationEvent->url_format);
-          // $_url = $url->setAndParseUrl($notificationEvent->url_format,array('id'=>$model->id));
-        break;
-
-      case 'order-payment-inform':
-
-          $_url = $this->getNorificationUrl($model,$notificationEvent->url_format,'shop-slug');
-
-          // $slug = Service::loadModel('Slug')
-          // ->where([
-          //   ['model','like','Shop'],
-          //   ['model_id','=',$model->shop_id]
-          // ])
-          // ->first()
-          // ->slug;
-      
-          // $_url = $url->setAndParseUrl($notificationEvent->url_format,array('id'=>$model->id,'shopSlug'=>$slug));
-        break;
-
-      case 'order-payment-confirm':
-          $_url = $this->getNorificationUrl($model,$notificationEvent->url_format);
-          // $_url = $url->setAndParseUrl($notificationEvent->url_format,array('id'=>$model->id));
-        break;
-
-      case 'job-apply':
-
-          $_url = $this->getNorificationUrl($model,$notificationEvent->url_format,'shop-slug');
-
-          // $slug = Service::loadModel('Slug')
-          // ->where([
-          //   ['model','like','Shop'],
-          //   ['model_id','=',$model->shop_id]
-          // ])
-          // ->first()
-          // ->slug;
-
-          // $_url = $url->setAndParseUrl($notificationEvent->url_format,array('id'=>$model->id,'shopSlug'=>$slug));
-        break;
-    
-    }
-
-    return $_url;
+    return $url->setAndParseUrl($notificationEvent->url_format,$this->parseUrl($notificationEvent->url_format,$model));
 
   }
 
-  public function getNorificationUrl($model,$urlFormat,$format = null) {
+  // public function getNorificationUrl($model,$urlFormat,$format = null) {
 
-    $url = new Url;
+  //   $url = new Url;
+  //   $_url = $url->setAndParseUrl($urlFormat,$this->parseUrl($urlFormat,$model));
 
-    $_url;
-    switch ($format) {
-      case 'shop-slug':
+  //   return $_url;
+
+  // }
+
+  private function parseUrl($urlFormat,$model) {
+
+    preg_match_all('/{[\w0-9]+}/', $urlFormat, $matches);
+
+    $value = array();
+    foreach ($matches[0] as $pattern) {
+
+      switch ($pattern) {
+        case '{id}':
+            
+            $value['id'] = $model->id;
+
+          break;
         
-          $slug = Slug::select('slug')
-          ->where([
-            ['model','like','Shop'],
-            ['model_id','=',$model->shop_id]
-          ])
-          ->first()
-          ->slug;
+        case '{shopSlug}':
 
-          $_url = $url->setAndParseUrl($urlFormat,array('id'=>$model->id,'shopSlug'=>$slug));
+            $slug = Slug::select('slug')
+            ->where([
+              ['model','like','Shop'],
+              ['model_id','=',$model->shop_id]
+            ])
+            ->first()
+            ->slug;
+          
+            $value['shopSlug'] = $model->id;
 
-        break;
-      
-      default:
+          break;
+      }
 
-          $_url = $url->setAndParseUrl($urlFormat,array('id'=>$model->id));
-
-        break;
     }
 
-    return $_url;
+    return $value;
 
   }
 
@@ -207,6 +161,10 @@ class Notification extends Model
 
       case 'PersonApplyJob':
           $image = '/images/icons/career-white.png';
+        break;
+
+      case 'Message':
+          $image = '/images/icons/message-white.png';
         break;
     
     }

@@ -81,10 +81,12 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('account/job_applying', 'AccountController@jobApplying')->name('account.job');
   Route::get('account/job_applying/{id}', 'JobController@accountJobApplyingDetail')->name('account.job.detail');
 
+  Route::get('get_file_attachment/{id}', 'StaticFileController@attachedFile');
+
 });
 
 // Announcement
-Route::get('announcement/create','AnnouncementController@create');
+// Route::get('announcement/create','AnnouncementController@create');
 
 // Experience
 Route::get('experience/profile/list','PersonExperienceController@listView')->name('person_experience.list');

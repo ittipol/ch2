@@ -151,6 +151,7 @@ class ApiController extends Controller
         'model' => Input::get('model'),
         'token' => Input::get('token'),
         'filename' => $file->getFileName(),
+        'filesize' => $file->getFilesize(),
         'alias' => $file->getAlias()
       ))->save();
 

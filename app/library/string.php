@@ -4,7 +4,7 @@ namespace App\library;
 
 class String
 {
-  public function subString($string,$len,$stripTag = true){
+  public function truncString($string,$len,$stripTag = true){
 
     $string = iconv(mb_detect_encoding($string, mb_detect_order(), true), "UTF-8", $string);
     mb_internal_encoding('UTF-8');

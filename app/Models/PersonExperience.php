@@ -236,8 +236,8 @@ class PersonExperience extends Model
     return array(
       'id' => $this->id,
       'name' => $person->name,
-      // '_short_name' => $string->subString($person->name,45),
-      'careerObjective' => !empty($personCareerObjective->career_objective) ? $string->subString($personCareerObjective->career_objective,150,true) : '-',
+      // '_short_name' => $string->truncString($person->name,45),
+      'careerObjective' => !empty($personCareerObjective->career_objective) ? $string->truncString($personCareerObjective->career_objective,150,true) : '-',
       '_imageUrl' => $imageUrl
     );
     

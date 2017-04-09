@@ -126,7 +126,7 @@ class NotificationHelper {
           }
 
         }elseif(substr($_matches[0],0,2) == '__'){
-     
+   
           if(strpos($_matches[0], '|')) {
             
             list($_model,$fx) = explode('|', $_matches[0]);
@@ -136,7 +136,7 @@ class NotificationHelper {
           }else{
             $_value = $model->{substr($_matches[0],2)}();
           }
-        
+
         }elseif(array_key_exists($_matches[0],$options['data'])) {
           $_value = $options['data'][$_matches[0]];
         }else{

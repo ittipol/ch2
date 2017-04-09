@@ -35,6 +35,10 @@ class HandleAttachedFile
     return $this->alias;
   }
 
+  public function getFilesize() {
+    return $this->filesize;
+  }
+
   public function checkFileType() {
     $acceptedFileTypes = array(
       'image/jpg',

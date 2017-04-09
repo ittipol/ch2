@@ -63,7 +63,7 @@ class Freelance extends Model
       'id' => $this->id,
       'name' => $this->name,
       'description' => !empty($this->description) ? $this->description : '-',
-      '_short_name' => $string->subString($this->name,60),
+      '_short_name' => $string->truncString($this->name,60),
       '_freelanceType' => FreelanceType::select(array('name'))->find($this->freelance_type_id)->name
     );
     
@@ -86,8 +86,8 @@ class Freelance extends Model
 
     return array(
       // 'name' => $this->name,
-      '_short_name' => $string->subString($this->name,90),
-      '_short_description' => $string->subString($this->description,250),
+      '_short_name' => $string->truncString($this->name,90),
+      '_short_description' => $string->truncString($this->description,250),
       '_imageUrl' => $_imageUrl,
       '_detailUrl' => $url->setAndParseUrl('freelance/detail/{id}',array('id' => $this->id))
     );

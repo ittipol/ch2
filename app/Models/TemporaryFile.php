@@ -9,7 +9,7 @@ use Session;
 class TemporaryFile extends Model
 {
   protected $table = 'temporary_files';
-  protected $fillable = ['model','filename','token','filename','alias','person_id'];
+  protected $fillable = ['model','filename','token','filename','filesize','alias','person_id'];
   private $temporaryPath = 'temporary/';
 
   public function __construct() {

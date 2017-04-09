@@ -402,7 +402,7 @@ class Product extends Model
     return array(
       'id' => $this->id,
       'name' => $this->name,
-      '_short_name' => $string->subString($this->name,45),
+      '_short_name' => $string->truncString($this->name,45),
       'sku' => !empty($this->sku) ? $this->sku : '-',
       '_price' => $currency->format($this->price),
       'quantity' => $this->quantity,
@@ -542,8 +542,8 @@ class Product extends Model
 
     return array(
       // 'name' => $this->name,
-      '_short_name' => $string->subString($this->name,90),
-      '_short_description' => $string->subString($this->description,250),
+      '_short_name' => $string->truncString($this->name,90),
+      '_short_description' => $string->truncString($this->description,250),
       '_price' => $currency->format($this->price),
       '_imageUrl' => $_imageUrl,
       '_detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id' => $this->id)),

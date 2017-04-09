@@ -146,7 +146,7 @@ class AppServiceProvider extends ServiceProvider
 
           view()->share('_shop_id',$shopId);
           view()->share('_shop_name',$shop->name);
-          view()->share('_shop_short_description',$string->subString($shop->description,250,true));
+          view()->share('_shop_short_description',$string->truncString($shop->description,250,true));
           view()->share('_shop_profileImage',$shop->getProfileImageUrl());
           view()->share('_shop_cover',$shop->getCoverUrl());
 

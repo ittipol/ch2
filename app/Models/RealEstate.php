@@ -266,7 +266,7 @@ class RealEstate extends Model
     return array(
       'id' => $this->id,
       'name' => $this->name,
-      '_short_name' => $string->subString($this->name,45),
+      '_short_name' => $string->truncString($this->name,45),
       // 'description' => $this->description,
       '_price' => $currency->format($this->price),
       '_realEstateTypeName' => $this->realEstateType->name

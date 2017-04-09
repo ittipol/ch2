@@ -67,7 +67,7 @@ class PersonApplyJob extends Model
     return array(
       'personName' => $this->person->name,
       '_imageUrl' => $imageUrl,
-      '_jobNameShort' => $string->subString($this->job->name,45),
+      '_jobNameShort' => $string->truncString($this->job->name,45),
       '_jobImageUrl' => $jobImageUrl,
       'createdDate' => $date->covertDateTimeToSting($this->created_at->format('Y-m-d H:i:s')),
     );

@@ -27,9 +27,9 @@ class StaticFileController extends Controller
         // 'Content-length' => filesize($path),
       );
 
-      return Response::make(file_get_contents($path), 200, $headers);
+      // return Response::make(file_get_contents($path), 200, $headers);
 
-      // return response()->download($path, null, [], null);
+      return Response::download($path, $filename, $headers);
     }
 
     $image = Service::loadModel('Image')
@@ -40,8 +40,6 @@ class StaticFileController extends Controller
     if(empty($image)) {
       return response()->download($this->noImagePath, null, [], null);
     }
-    
-    // Storage::get($this->id.'/'.$this->id.'.jpeg');
 
     $path = $image->getImagePath();
 
@@ -55,9 +53,10 @@ class StaticFileController extends Controller
         // 'Content-length' => filesize($path),
       );
 
-      return Response::make(file_get_contents($path), 200, $headers);
+      // return Response::make(file_get_contents($path), 200, $headers);
 
-      // return response()->download($path, null, [], null);
+      return Response::download($path, $filename, $headers);
+
     }
 
     return response()->download($this->noImagePath, null, [], null);
@@ -77,22 +76,24 @@ class StaticFileController extends Controller
 
   }
 
-  public function avatar(){
+  public function attachedFile($id) {
 
-    $user = new User;
-    $avatarPath = storage_path($user->dirPath.Auth::user()->id.'/avatar/avatar.jpg');
+    $file = Service::loadModel('AttachedFile')->find($id);
 
-    if(!File::exists($avatarPath)){
-      $avatarPath = 'images/default-avatar.png';
-    }
+    $path = $file->getImagePath();
 
-    return response()->download($avatarPath, null, [], null);
+    $headers = array(
+      // 'Content-Description' => 'File Transfer',
+      'Content-Disposition' => 'attachment; filename=' . $file->filename,
+      'Content-Type' => mime_content_type($path),
+      'Content-Length' => $file->filesize,
+    );
 
-    // $headers = array(
-    //     'Content-Type' => mime_content_type($avatarPath),
-    //     'Content-Disposition' => 'inline; filename="avatar.jpg"'
-    // );
-    // return Response::make(file_get_contents($avatarPath), 200, $headers);
+    return Response::download($path, $file->filename, $headers);
+    // return Response::make(file_get_contents($path), 200, $headers);
+    // Service::loadModel('AttachedFileAccessPermission');
+    dd(session()->get('Person.id'));
 
   }
+
 }

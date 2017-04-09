@@ -622,9 +622,9 @@ class Model extends BaseModel
 
     return array(
       'name' => $this->name,
-      '_short_name' => $string->subString($this->name,45),
+      '_short_name' => $string->truncString($this->name,45),
       'description' => !empty($this->description) ? $this->description : '-',
-      '_short_description' => $string->subString($this->description,200),
+      '_short_description' => $string->truncString($this->description,200),
       '_imageUrl' => '/images/common/no-img.png'
     );
 

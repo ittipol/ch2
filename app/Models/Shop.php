@@ -259,7 +259,7 @@ class Shop extends Model
     return array(
       'name' => $this->name,
       'description' => $this->description,
-      '_short_description' => $string->subString($this->description,250,true),
+      '_short_description' => $string->truncString($this->description,250,true),
       // 'profileImage' => $this->getProfileImageUrl(),
       // 'cover' => $this->getCoverUrl()
     );
@@ -311,8 +311,8 @@ class Shop extends Model
     ))->slug;
 
     return array(
-      '_short_name' => $string->subString($this->name,90),
-      '_short_description' => $string->subString($this->description,250),
+      '_short_name' => $string->truncString($this->name,90),
+      '_short_description' => $string->truncString($this->description,250),
       '_imageUrl' => $_imageUrl,
       '_detailUrl' => $url->url('shop/'.$slug)
     );

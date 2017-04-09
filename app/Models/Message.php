@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\library\service;
+use App\library\string;
+
 class Message extends Model
 {
   protected $table = 'messages';
@@ -20,5 +23,44 @@ class Message extends Model
       'message.required' => 'ข้อความห้ามว่าง',
     )
   );
+
+  public function getSenderName() {
+    return Service::loadModel($this->sender)->select('name')->find($this->sender_id)->name;
+  }
+
+  public function getReceiverName() {
+    return Service::loadModel($this->receiver)->select('name')->find($this->receiver_id)->name;
+  }
+
+  public function getMessage() {
+
+    $string = new String;
+
+    return $string->truncString($this->message,40,true);
+  }
+
+  public function buildModelData() {
+
+    // Get Attached files
+    $files = $this->getRelatedData('AttachedFile',array(
+      'fileds' => array('id','filename','filesize')
+    ));
+    
+    $_files = array();
+    foreach ($files as $file) {
+      $_files[] = array(
+        'filename' => $file->filename,
+        'filesize' => $file->getFilesize(),
+        'url' => $file->buildUrl()
+      );
+    }
+
+    return array(
+      'message' => $this->message,
+      'sender' => $this->getSenderName(),
+      'attachedFile' => $_files
+    );
+
+  }
 
 }

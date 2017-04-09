@@ -140,7 +140,7 @@ class Job extends Model
     return array(
       'id' => $this->id,
       'name' => $this->name,
-      '_short_name' => $string->subString($this->name,60),
+      '_short_name' => $string->truncString($this->name,60),
       '_salary' => $this->getSalary()
     );
 
@@ -205,8 +205,8 @@ class Job extends Model
     }
 
     return array(
-      '_short_name' => $string->subString($this->name,90),
-      '_short_description' => $string->subString($this->description,250),
+      '_short_name' => $string->truncString($this->name,90),
+      '_short_description' => $string->truncString($this->description,250),
       '_salary' => $this->getSalary(),
       '_detailUrl' => $url->setAndParseUrl('job/detail/{id}',array('id' => $this->id)),
       '_imageUrl' => $_imageUrl,
