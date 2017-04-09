@@ -1,0 +1,17 @@
+.message-content .message {
+	/*padding: 15px;*/
+	/*background-color: #90A4AE;*/
+	margin-bottom: 15px;
+}
+
+.message-content .message-box {
+	color: #000;
+	padding: 15px 15px 5px;
+	background-color: #CFD8DC;
+}
+
+.message-content .message-file-attachment {
+	padding: 10px;
+	background-color: #039BE5;
+	border-left: 5px solid #0277BD;
+}

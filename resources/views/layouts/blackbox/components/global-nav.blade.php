@@ -6,52 +6,6 @@
         <a class="logo-link" href="{{URL::to('/')}}">Chonburi Square</a>
       </div>
 
-      @if (!Auth::check())
-
-        <!-- <div class="account-info">
-          <div>ยังไม่ได้เข้าสู่ระบบ</div>
-          <div class="account-description">
-            <a href="{{URL::to('login')}}">
-              <h4>เข้าสู่ระบบ</h4>
-            </a>
-          </div>
-        </div>
-        <div class="line space-top-bottom-10"></div>
-
-        <div class="account-info">
-          <div>ยังไม่ได้เป็นสมาชิก</div>
-          <div class="account-description">
-            <a href="{{URL::to('register')}}">
-              <h4>สมัครสมาชิก</h4>
-            </a>
-          </div>
-        </div> -->
-
-      @else
-
-        <!-- <div class="account-info clearfix">
-          <a class="avatar pull-left" href="{{URL::to('account')}}">
-            <div class="profile-image" style="background-image:url({{Session::get('Person.profile_image')}});"></div>
-          </a>
-          <div class="account-description pull-left">
-            <div>{{Session::get('Person.name')}}</div>
-            <div><a class="pull-left" href="{{URL::to('account')}}">จัดการบัญชี</a></div>
-          </div>
-          <div class="additional-option">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="additional-option-content">
-              <a href="{{URL::to('account/profile_edit')}}">แก้ไขโปรไฟล์</a>
-              <a href="{{URL::to('person/experience')}}">เพิ่มประวัติการทำงาน</a>
-              <a href="{{URL::to('account/order')}}">รายการสั่งซื้อสินค้า</a>
-              <a href="{{URL::to('logout')}}">ออกจากระบบ</a>
-            </div>
-          </div>
-        </div> -->
-
-      @endif
-
     </div>
 
     <div class="navigation-primary-menu">

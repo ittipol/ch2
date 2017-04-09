@@ -408,7 +408,7 @@ class JobController extends Controller
     foreach ($messages as $message) {
       $_messages[] = $message->buildModelData();
     }
-dd($_messages);
+
     $this->setData('shopName',$model->shop->name);
     $this->setData('shopUrl',$url->setAndParseUrl('shop/{shopSlug}',array('shopSlug'=>$slug)));
     $this->setData('jobName',$model->job->name);

@@ -131,4 +131,14 @@ class AttachedFile extends Model
     return round($bytes / pow(1024, $i), 2).' '.$sizes[$i];
   }
 
+  public function buildModelData() {
+
+    return array(
+      'filename' => $this->filename,
+      'filesize' => $this->getFilesize(),
+      'downloadUrl' => $this->buildUrl()
+    );
+
+  }
+
 }

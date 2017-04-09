@@ -193,7 +193,7 @@ class AttachedFile {
 
 		html += '<div class="line grey space-top-bottom-10"></div>';
 
-		html += '<div id="'+this.code+'_attached_file_panel"></div>';
+		html += '<div id="'+this.code+'_attached_file_panel clearfix"></div>';
 
 		$('#'+this.panel).append(html);
 

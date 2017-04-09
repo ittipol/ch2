@@ -51,13 +51,55 @@
   </div>
 
   <h4>ข้อความ</h4>
-  <div class="line"></div>
-  <div class="list-empty-message text-center space-top-20">
-    <img class="space-bottom-20 not-found-image" src="/images/common/not-found.png">
-    <div>
-      <h3>ยังไม่มีการตอบกลับจากผู้ประกาศงาน</h3>
+  <div class="line space-bottom-20"></div>
+
+  @if(!empty($messages))
+    <div class="message-content">
+      @foreach($messages as $message)
+        
+        {{$message['sender']}}
+
+        <div class="message">
+          <div class="message-box">
+            {!!$message['message']!!}
+          </div>
+
+          @if(!empty($message['attachedFiles']))
+          <div class="message-file-attachment clearfix">
+
+            @foreach($message['attachedFiles'] as $attachedFile)
+
+              <a href="{{$attachedFile['downloadUrl']}}" class="attached-file-box clearfix">
+                <div class="attached-file-image">
+                  <img src="/images/icons/document-white.png">
+                </div>
+                <div class="attached-file-info">
+                  <div class="attached-file-title">
+                    <h4>{{$attachedFile['filename']}}</h4>
+                    <h5>{{$attachedFile['filesize']}}</h5>
+                  </div>
+                </div>
+              </a>
+
+            @endforeach
+          </div>
+          @endif
+
+        </div>
+
+      @endforeach
     </div>
-  </div>
+
+  @else
+
+    <div class="list-empty-message text-center space-top-20">
+      <img class="space-bottom-20 not-found-image" src="/images/common/not-found.png">
+      <div>
+        <h3>ยังไม่มีการตอบกลับจากผู้ประกาศงาน</h3>
+      </div>
+    </div>
+
+  @endif
 
 </div>
 

@@ -45,20 +45,20 @@ class Message extends Model
     $files = $this->getRelatedData('AttachedFile',array(
       'fileds' => array('id','filename','filesize')
     ));
-    
+   
     $_files = array();
-    foreach ($files as $file) {
-      $_files[] = array(
-        'filename' => $file->filename,
-        'filesize' => $file->getFilesize(),
-        'url' => $file->buildUrl()
-      );
+    if(!empty($files)) {
+
+      foreach ($files as $file) {
+        $_files[] = $file->buildModelData();
+      }
+
     }
 
     return array(
       'message' => $this->message,
       'sender' => $this->getSenderName(),
-      'attachedFile' => $_files
+      'attachedFiles' => $_files
     );
 
   }
