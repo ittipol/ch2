@@ -89,8 +89,6 @@ class Url
 
   public function redirect($url,$ssl=false) {
 
-    // http://www.javlibrary.com/en/redirect.php?url=http://imgspice.com/6k9diays7gks/MIDE-349_s.jpg.html
-
     if((substr($url, 0,7) == 'http://') || (substr($url, 0,8) == 'https://')) {
       return $this->url('redirect?url='.$url);
     }
@@ -102,6 +100,10 @@ class Url
     }
 
     return $this->url('redirect?url='.$url);
+  }
+
+  public function download() {
+    //download/{code}
   }
 
 }

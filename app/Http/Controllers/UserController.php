@@ -10,7 +10,7 @@ use App\Models\Person;
 // use App\Models\PersonInterest;
 // use App\Models\Word;
 // use App\library\date;
-use App\library\message;
+use App\library\messageHelper;
 use App\library\service;
 use App\library\url;
 use App\library\token;
@@ -102,7 +102,7 @@ class UserController extends Controller
 
       }
 
-      $message = new Message;
+      $message = new MessageHelper;
       $message->loginSuccess();
       return Redirect::intended('/');
     }else{
@@ -134,7 +134,7 @@ class UserController extends Controller
   	$user->fill($request->all());
 
     if($user->save()){
-      $message = new Message;
+      $message = new MessageHelper;
       $message->registerSuccess();
     }
 

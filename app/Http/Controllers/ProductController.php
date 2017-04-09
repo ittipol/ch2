@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
-use App\library\message;
+use App\library\messageHelper;
 use App\library\cache;
 use App\library\filterHelper;
 use App\library\url;
@@ -22,7 +22,7 @@ class ProductController extends Controller
   private function _save($model,$attributes = array()) {
 
     if($model->fill($attributes)->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
     }else{
       return Redirect::back();
@@ -380,7 +380,7 @@ class ProductController extends Controller
 
       session()->flash('product_added', true);
 
-      Message::display('ข้อมูลถูกเพิ่มแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกเพิ่มแล้ว','success');
       return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
     }else{
       return Redirect::back();
@@ -551,7 +551,7 @@ class ProductController extends Controller
     // $model = Service::loadModel('Product')->find($this->param['id']);
 
     // if($model->fill($request->all())->save()) {
-    //   Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+    //   MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
     //   return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
     // }else{
     //   return Redirect::back();
@@ -613,7 +613,7 @@ class ProductController extends Controller
     }
 
     if($model->fill($request->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('shop/'.request()->shopSlug.'/product/'.$product->id);
     }else{
       return Redirect::back();
@@ -644,7 +644,7 @@ class ProductController extends Controller
     // $model = Service::loadModel('Product')->find($this->param['id']);
 
     // if($model->fill($request->all())->save()) {
-    //   Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+    //   MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
     //   return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
     // }else{
     //   return Redirect::back();

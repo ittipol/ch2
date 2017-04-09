@@ -91,7 +91,7 @@
 
       </div>
 
-      <div class="line space-top-bottom-20"></div>
+      <div class="space-top-bottom-20"></div>
 
       <div class="item-info">
 
@@ -131,6 +131,7 @@
 
       @if (Auth::check() && (Session::get('Person.id') == $_modelData['person_id']))
       <div class="space-top-20">
+        <div class="line space-bottom-20"></div>
         <a href="" class="button">ปิดการประกาศ</a>
       </div>
       @endif
@@ -139,7 +140,7 @@
 
     <div class="col-md-8 col-xs-12">
 
-      <div class="detail-info-section">
+      <div class="detail-info-section no-margin">
         <h4>รายละเอียด {{$_modelData['name']}}</h4>
         <div class="line"></div> 
         <div class="detail-info">

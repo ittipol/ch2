@@ -24,7 +24,7 @@
     </div>
     <div class="message-box-button-group two-button clearfix">
       <div class="flat-button">
-        <a href="" class="button">ตอบกลับไปยังผู้สมัคร</a>
+        <a href="{{$messagePostUrl}}" class="button">ตอบกลับไปยังผู้สมัคร</a>
       </div>
       <div class="flat-button">
         <a href="" class="button danger">ยกเลิกการสมัคร</a>

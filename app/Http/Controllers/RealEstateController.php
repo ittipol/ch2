@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
-use App\library\message;
+use App\library\messageHelper;
 use Redirect;
 
 class RealEstateController extends Controller
@@ -107,7 +107,7 @@ class RealEstateController extends Controller
     $model = Service::loadModel('RealEstate');
 
     if($model->fill($request->all())->save()) {
-      Message::display('ลงประกาศเรียบร้อยแล้ว','success');
+      MessageHelper::display('ลงประกาศเรียบร้อยแล้ว','success');
       return Redirect::to('real-estate/detail/'.$model->id);
     }else{
       return Redirect::back();
@@ -173,7 +173,7 @@ class RealEstateController extends Controller
     $model = Service::loadModel('RealEstate')->find($this->param['id']);
 
     if($model->fill($request->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('real-estate/detail/'.$model->id);
     }else{
       return Redirect::back();

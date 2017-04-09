@@ -9,7 +9,7 @@ use App\library\url;
 class Notification extends Model
 {
   protected $table = 'notifications';
-  protected $fillable = ['model','model_id','notification_event_id','title','sender','sender_id','receiver','receiver_id','type','unread','notify'];
+  protected $fillable = ['model','model_id','notification_event_id','title','sender','sender_id','receiver','receiver_id','type','unread','notify','person_id'];
 
   public $formHelper = true;
   public $modelData = true;
@@ -98,7 +98,7 @@ class Notification extends Model
 
   public function getUrl($modelName,$modelId,$notificationEvent) {
 
-    $url = new Url;
+    // $url = new Url;
     $model = Service::loadModel($modelName)->find($modelId);
 
     $_url = '';
@@ -106,41 +106,74 @@ class Notification extends Model
 
       case 'order-create':
 
-          $slug = Service::loadModel('Slug')
-          ->where([
-            ['model','like','Shop'],
-            ['model_id','=',$model->shop_id]
-          ])
-          ->first()
-          ->slug;
+          $_url = $this->getNorificationUrl($model,$notificationEvent->url_format,'shop-slug');
+
+          // $slug = Service::loadModel('Slug')
+          // ->where([
+          //   ['model','like','Shop'],
+          //   ['model_id','=',$model->shop_id]
+          // ])
+          // ->first()
+          // ->slug;
  
-          $_url = $url->setAndParseUrl($notificationEvent->url_format,array('id'=>$model->id,'shopSlug'=>$slug));
+          // $_url = $url->setAndParseUrl($notificationEvent->url_format,array('id'=>$model->id,'shopSlug'=>$slug));
         break;
 
       case 'order-confirm':
-          $_url = $url->setAndParseUrl($notificationEvent->url_format,array('id'=>$model->id));
+          $_url = $this->getNorificationUrl($model,$notificationEvent->url_format);
+          // $_url = $url->setAndParseUrl($notificationEvent->url_format,array('id'=>$model->id));
         break;
 
       case 'order-payment-inform':
 
-          $slug = Service::loadModel('Slug')
-          ->where([
-            ['model','like','Shop'],
-            ['model_id','=',$model->shop_id]
-          ])
-          ->first()
-          ->slug;
+          $_url = $this->getNorificationUrl($model,$notificationEvent->url_format,'shop-slug');
+
+          // $slug = Service::loadModel('Slug')
+          // ->where([
+          //   ['model','like','Shop'],
+          //   ['model_id','=',$model->shop_id]
+          // ])
+          // ->first()
+          // ->slug;
       
-          $_url = $url->setAndParseUrl($notificationEvent->url_format,array('id'=>$model->id,'shopSlug'=>$slug));
+          // $_url = $url->setAndParseUrl($notificationEvent->url_format,array('id'=>$model->id,'shopSlug'=>$slug));
         break;
 
       case 'order-payment-confirm':
-          $_url = $url->setAndParseUrl($notificationEvent->url_format,array('id'=>$model->id));
+          $_url = $this->getNorificationUrl($model,$notificationEvent->url_format);
+          // $_url = $url->setAndParseUrl($notificationEvent->url_format,array('id'=>$model->id));
         break;
 
       case 'job-apply':
 
-          $slug = Service::loadModel('Slug')
+          $_url = $this->getNorificationUrl($model,$notificationEvent->url_format,'shop-slug');
+
+          // $slug = Service::loadModel('Slug')
+          // ->where([
+          //   ['model','like','Shop'],
+          //   ['model_id','=',$model->shop_id]
+          // ])
+          // ->first()
+          // ->slug;
+
+          // $_url = $url->setAndParseUrl($notificationEvent->url_format,array('id'=>$model->id,'shopSlug'=>$slug));
+        break;
+    
+    }
+
+    return $_url;
+
+  }
+
+  public function getNorificationUrl($model,$urlFormat,$format = null) {
+
+    $url = new Url;
+
+    $_url;
+    switch ($format) {
+      case 'shop-slug':
+        
+          $slug = Slug::select('slug')
           ->where([
             ['model','like','Shop'],
             ['model_id','=',$model->shop_id]
@@ -148,9 +181,15 @@ class Notification extends Model
           ->first()
           ->slug;
 
-          $_url = $url->setAndParseUrl($notificationEvent->url_format,array('id'=>$model->id,'shopSlug'=>$slug));
+          $_url = $url->setAndParseUrl($urlFormat,array('id'=>$model->id,'shopSlug'=>$slug));
+
         break;
-    
+      
+      default:
+
+          $_url = $url->setAndParseUrl($urlFormat,array('id'=>$model->id));
+
+        break;
     }
 
     return $_url;

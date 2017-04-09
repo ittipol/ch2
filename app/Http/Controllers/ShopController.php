@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
 use App\library\url;
-use App\library\message;
+use App\library\messageHelper;
 use Redirect;
 
 class ShopController extends Controller
@@ -87,7 +87,7 @@ class ShopController extends Controller
     $this->setData('advertisings',$advertising->paginator->getPaginationData());
 
     $this->setData('productPostUrl',request()->get('shopUrl').'product_post');
-    $this->setData('jobPostUrl',request()->get('shopUrl').'job_post');
+    $this->setData('jobPostUrl',request()->get('shopUrl').'job/post');
     $this->setData('productPostUrl',request()->get('shopUrl').'shop_ad_post');
 
     $this->setData('settingUrl',request()->get('shopUrl').'setting');
@@ -239,14 +239,14 @@ class ShopController extends Controller
       ));
       $job->paginator->setPage($page);
       $job->paginator->setPagingUrl('shop/'.request()->shopSlug.'/job');
-      $job->paginator->setUrl('shop/'.$this->param['shopSlug'].'/job_edit/{id}','editUrl');
-      $job->paginator->setUrl('shop/'.$this->param['shopSlug'].'/job_delete/{id}','deleteUrl');
+      $job->paginator->setUrl('shop/'.$this->param['shopSlug'].'/job/edit/{id}','editUrl');
+      $job->paginator->setUrl('shop/'.$this->param['shopSlug'].'/job/delete/{id}','deleteUrl');
       $job->paginator->setUrl('job/detail/{id}','detailUrl');
 
       $this->data = $job->paginator->build();
     }
     
-    $this->setData('jobPostUrl',request()->get('shopUrl').'job_post');
+    $this->setData('jobPostUrl',request()->get('shopUrl').'job/post');
     $this->setData('jobApplyListUrl',request()->get('shopUrl').'job_applying_list');
     $this->setData('branchManageUrl',request()->get('shopUrl').'branch/manage');
     // $this->setData('departmentAddUrl',request()->get('shopUrl'));
@@ -376,7 +376,7 @@ class ShopController extends Controller
         'first' => true
       ))->slug;
 
-      Message::display('บริษัท ร้านค้า หรือธุรกิจถูกเพิ่มเข้าสู่ชุมชนแล้ว','success');
+      MessageHelper::display('บริษัท ร้านค้า หรือธุรกิจถูกเพิ่มเข้าสู่ชุมชนแล้ว','success');
       return Redirect::to(route('shop.manage', ['slug' => $slug]));
     }else{
       return Redirect::back();
@@ -411,7 +411,7 @@ class ShopController extends Controller
     $model = request()->get('shop');
 
     if($model->fill(request()->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('shop/'.request()->shopSlug.'/manage');
     }else{
       return Redirect::back();
@@ -472,7 +472,7 @@ class ShopController extends Controller
     }
 
     if($model->fill(request()->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('shop/'.request()->shopSlug.'/manage');
     }else{
       return Redirect::back();
@@ -524,7 +524,7 @@ class ShopController extends Controller
     }
 
     if($model->fill(request()->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('shop/'.request()->shopSlug.'/manage');
     }else{
       return Redirect::back();
@@ -565,7 +565,7 @@ class ShopController extends Controller
     }
 
     if($model->fill(request()->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('shop/'.request()->shopSlug.'/manage');
     }else{
       return Redirect::back();

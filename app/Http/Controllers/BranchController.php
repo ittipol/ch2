@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
-use App\library\message;
+use App\library\messageHelper;
 use App\library\url;
 use Redirect;
 
@@ -129,7 +129,7 @@ class BranchController extends Controller
     $request->request->add(['ShopRelateTo' => array('shop_id' => request()->get('shopId'))]);
 
     if($model->fill($request->all())->save()) {
-      Message::display('สาขา '.$model->name.' ถูกเพิ่มแล้ว','success');
+      MessageHelper::display('สาขา '.$model->name.' ถูกเพิ่มแล้ว','success');
       return Redirect::to(route('shop.branch.detail', ['shopSlug' => request()->shopSlug,'id' => $model->id]));
     }else{
       return Redirect::back();
@@ -166,7 +166,7 @@ class BranchController extends Controller
 
     if($model->fill($request->all())->save()) {
 
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to(route('shop.branch.detail', ['shopSlug' => request()->shopSlug,'id' => $model->id]));
     }else{
       return Redirect::back();

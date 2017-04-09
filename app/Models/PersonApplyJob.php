@@ -31,6 +31,7 @@ class PersonApplyJob extends Model
   public function buildModelData() {
 
     return array(
+      'shopName' => $this->shop->name,
       'message' => $this->message
     );
 

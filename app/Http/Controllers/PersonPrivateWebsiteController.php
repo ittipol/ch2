@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\library\service;
-use App\library\message;
+use App\library\messageHelper;
 use App\library\url;
 use Session;
 use Redirect;
@@ -86,7 +86,7 @@ class PersonPrivateWebsiteController extends Controller
       }
     }
 
-    Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+    MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
     return Redirect::to('person/private_website/list');
 
   }
@@ -130,7 +130,7 @@ class PersonPrivateWebsiteController extends Controller
     }
 
     if($model->fill(request()->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('person/private_website/list');
     }else{
       return Redirect::back()->withErrors(['เกิดข้อผิดพลาด ไม่สามารถบันถึกได้']);

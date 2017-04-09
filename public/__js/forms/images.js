@@ -16,7 +16,6 @@ class Images {
 	load(images){
 
 		this.init();
-		this.bind();
 
 		if((typeof images != 'undefined') && (images != 'null')) {
 			if(typeof images == 'string') {
@@ -31,6 +30,9 @@ class Images {
 		if(this.index < this.limit){
 			this.index = this.createUploader(this.index);
 		}
+
+		this.bind();
+		
 	}
 
 	init(){
@@ -42,7 +44,6 @@ class Images {
     hidden.setAttribute('name','Image['+this.type+'][token]');
     hidden.setAttribute('value',this.code);
     $('#'+this.panel).append(hidden);
-
 	}
 
 	bind(){
@@ -74,54 +75,83 @@ class Images {
 
 		if (input.files && input.files[0]) {
 
-			let _this = this;
+			// let _this = this;
 
 			let parent = $(input).parent();
-			// let CSRF_TOKEN = $('input[name="_token"]').val();
-			let proceed = true;
+			// let proceed = true;
 
 			if(!window.File && window.FileReader && window.FileList && window.Blob){ //if browser doesn't supports File API
 			  alert("Your browser does not support new File API! Please upgrade.");
-				proceed = false;
+				// proceed = false;
+				return false;
 			}else{
 			  let fileSize = input.files[0].size;
 			  let mimeType = input.files[0].type;
 
-			  let reader = new FileReader();
+			  // let reader = new FileReader();
 
-			  reader.onload = function (e) {
+			  // reader.onload = function (e) {
 
-			  	parent.find('div.preview-image').css('display','none').css('background-image', 'url(' + e.target.result + ')');
+			  // 	parent.find('div.preview-image').css('display','none').css('background-image', 'url(' + e.target.result + ')');
 
-			  	if(_this.checkImageType(mimeType) && _this.checkImageSize(fileSize)) {
-			  		parent.css('borderColor','#E0E0E0');
-			  		parent.find('.error-message').css('display','none').text('');
-			  	}else{
-			  		parent.css('borderColor','red');
-			  		parent.find('.error-message').css('display','block').text('ไม่รองรับไฟล์นี้');
-			  		parent.find('input[type="hidden"]').remove();
-			  		parent.find('input').val('');
-			  	}
+			  // 	if(_this.checkImageType(mimeType) && _this.checkImageSize(fileSize)) {
+			  // 		parent.css('borderColor','#E0E0E0');
+			  // 		parent.find('.error-message').css('display','none').text('');
+			  // 	}else{
+			  // 		parent.css('borderColor','red');
+			  // 		parent.find('.error-message').css('display','block').text('ไม่รองรับไฟล์นี้');
+			  // 		parent.find('input[type="hidden"]').remove();
+			  // 		parent.find('input').val('');
+			  // 	}
 
-			  }
+			  // }
 
-			  reader.readAsDataURL(input.files[0]);
+			  // reader.readAsDataURL(input.files[0]);
 
 			  if(!this.checkImageType(mimeType) || !this.checkImageSize(fileSize)) {
-			  	proceed = false;
+		
+			  	parent.css('borderColor','red');
+		  		parent.find('.error-message').css('display','block').text('ไม่รองรับไฟล์นี้');
+		  		parent.find('input[type="hidden"]').remove();
+		  		parent.find('input').val('');
+
+			  	// proceed = false;
+
+			  }else {
+
+			  	let reader = new FileReader();
+
+			  	reader.onload = function (e) {
+			  		parent.find('div.preview-image').css('display','none').css('background-image', 'url(' + e.target.result + ')');
+			  	}
+
+			  	reader.readAsDataURL(input.files[0]);
+
+		  		parent.css('borderColor','#E0E0E0');
+		  		parent.find('.error-message').css('display','none').text('');
+
+		  		let formData = new FormData();
+		  		formData.append('_token', $('input[name="_token"]').val());  
+		  		formData.append('model', $('input[name="_model"]').val());
+		  		formData.append('imageToken', this.code);
+		  		formData.append('imageType', this.type);
+		  		formData.append('image', input.files[0]);
+
+		  		this.uploadImage(parent,input,formData);
+
 			  }
 			}
 
-			if(proceed) {
-				let formData = new FormData();
-				formData.append('_token', $('input[name="_token"]').val());  
-				formData.append('model', $('input[name="_model"]').val());
-				formData.append('imageToken', this.code);
-				formData.append('imageType', this.type);
-				formData.append('image', input.files[0]);
+			// if(proceed) {
+			// 	let formData = new FormData();
+			// 	formData.append('_token', $('input[name="_token"]').val());  
+			// 	formData.append('model', $('input[name="_model"]').val());
+			// 	formData.append('imageToken', this.code);
+			// 	formData.append('imageType', this.type);
+			// 	formData.append('image', input.files[0]);
 
-				this.uploadImage(parent,input,formData);
-			}
+			// 	this.uploadImage(parent,input,formData);
+			// }
 
 		}
 
@@ -153,7 +183,7 @@ class Images {
 	    },
 	    mimeType:"multipart/form-data",
 	    xhr: function(){
-	    	//upload Progress
+	
 	    	let xhr = $.ajaxSettings.xhr();
 	    	if (xhr.upload) {
 	    		xhr.upload.addEventListener('progress', function(event) {
@@ -163,7 +193,7 @@ class Images {
 	    			if (event.lengthComputable) {
 	    				percent = Math.ceil(position / total * 100);
 	    			}
-	    			//update progressbar
+	    
 	    			parent.parent().find('.status').css('width',percent +'%');
 	    		}, true);
 	    	}
@@ -195,7 +225,7 @@ class Images {
 	  	}else{
 
 	  		if(typeof response.message == 'object') {
-					const notificationBottom = new NotificationBottom(response.message.title,'',response.message.type);
+					const notificationBottom = new NotificationBottom('เกิดข้อผิดพลาด','','error');
 					notificationBottom.load();
 	  		}
 
@@ -330,6 +360,7 @@ class Images {
 		html += '</div>';
 
 		++this.runningNumber;
+		
 		$('#'+this.panel).append(html);
 
 		return ++index;
@@ -363,4 +394,5 @@ class Images {
 
 		return allowed;
 	}
+
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\library\service;
-use App\library\message;
+use App\library\messageHelper;
 use Redirect;
 
 class PersonLanguageSkillController extends Controller
@@ -39,7 +39,7 @@ class PersonLanguageSkillController extends Controller
       }
     }
 
-    Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+    MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
     return Redirect::to('experience/profile/edit');
 
   }
@@ -74,7 +74,7 @@ class PersonLanguageSkillController extends Controller
     }
 
     if($model->fill(request()->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('experience/profile/edit');
     }else{
       return Redirect::back();

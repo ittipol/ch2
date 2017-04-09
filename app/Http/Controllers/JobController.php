@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
-use App\library\message;
+use App\library\messageHelper;
 use App\library\url;
+use App\library\date;
 use App\library\notificationHelper;
 use Redirect;
 
@@ -149,7 +150,7 @@ class JobController extends Controller
     $request->request->add(['ShopRelateTo' => array('shop_id' => request()->get('shopId'))]);
 
     if($model->fill($request->all())->save()) {
-      Message::display('ลงประกาศแล้ว','success');
+      MessageHelper::display('ลงประกาศแล้ว','success');
       return Redirect::to('shop/'.$request->shopSlug.'/job');
     }else{
       return Redirect::back();
@@ -198,7 +199,7 @@ class JobController extends Controller
     $model = Service::loadModel('Job')->find($this->param['id']);
 
     if($model->fill($request->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('shop/'.request()->shopSlug.'/job');
     }else{
       return Redirect::back();
@@ -216,7 +217,7 @@ class JobController extends Controller
     ))->exists();
 
     if($exist) {
-      Message::display('สมัครงานนี้แล้ว','info');
+      MessageHelper::display('สมัครงานนี้แล้ว','info');
       return Redirect::to('job/detail/'.$this->param['id']);
     }
 
@@ -274,7 +275,7 @@ class JobController extends Controller
     ))->exists();
 
     if($exist) {
-      Message::display('สมัครงานนี้แล้ว','info');
+      MessageHelper::display('สมัครงานนี้แล้ว','info');
       return Redirect::to('job/detail/'.$this->param['id']);
     }
 
@@ -295,7 +296,7 @@ class JobController extends Controller
       $notificationHelper->setModel($model);
       $notificationHelper->create('job-apply');
 
-      Message::display('สมัครงานนี้เรียบร้อยแล้ว','success');
+      MessageHelper::display('สมัครงานนี้เรียบร้อยแล้ว','success');
       return Redirect::to('job/detail/'.$this->param['id']);
     }else{
       return Redirect::back();
@@ -331,6 +332,8 @@ class JobController extends Controller
 
   public function jobApplyingDetail() {
 
+    $url = new Url;
+
     $model = Service::loadModel('PersonApplyJob')->find($this->param['id']);
 
     if(empty($model)) {
@@ -345,88 +348,6 @@ class JobController extends Controller
     $person->modelData->loadData(array(
       'models' => array('Address','Contact')
     ));
-
-    // $profile = $model->person->personExperience;
-
-    // Get career objective
-    // $careerObjective = Service::loadModel('PersonCareerObjective')
-    // ->select(array('id','career_objective'))
-    // ->where('person_experience_id','=',$profile->id)
-    // ->first();
-
-    // $personPrivateWebsites = Service::loadModel('PersonPrivateWebsite')->where('person_experience_id','=',$profile->id)->get();
-
-    // $_privateWebsites = array();
-    // foreach ($personPrivateWebsites as $personPrivateWebsite) {
-    //   $_privateWebsites[] = array(
-    //     'website_url' => $personPrivateWebsite->website_url,
-    //     'websiteType' => $personPrivateWebsite->websiteType->name,
-    //     'url' => $url->redirect($personPrivateWebsite->website_url)
-    //   );
-    // }
-
-    // Get skill
-    // $skills = Service::loadModel('PersonSkill')->where('person_experience_id','=',$profile->id)->get();
-
-    // $_skills = array();
-    // foreach ($skills as $skill) {
-    //   $_skills[] = array(
-    //     'skill' => $skill->skill
-    //   );
-    // }
-
-    // // Get language skill
-    // $languageSkills = Service::loadModel('PersonLanguageSkill')->where('person_experience_id','=',$profile->id)->get();
-
-    // $_languageSkills = array();
-    // foreach ($languageSkills as $languageSkill) {
-    //   $_languageSkills[] = array(
-    //     'name' => $languageSkill->language->name,
-    //     'level' => $languageSkill->languageSkillLevel->name
-    //   );
-    // }
-
-    // $models = array(
-    //   'PersonWorkingExperience' => 'working',
-    //   'PersonInternship' => 'internship',
-    //   'PersonEducation' => 'education',
-    //   'PersonProject' => 'project',
-    //   'PersonCertificate' => 'certificate'
-    // );
-
-    // foreach ($models as $_model => $alias) {
-    //   $experienceDetails = Service::loadModel('PersonExperienceDetail')
-    //   ->orderBy('start_year','DESC')
-    //   ->orderBy('start_month','DESC')
-    //   ->orderBy('start_day','DESC')
-    //   ->select(array('model','model_id','start_year','start_month','start_day','end_year','end_month','end_day','current'))
-    //   ->where(array(
-    //     array('person_experience_id','=',$profile->id),
-    //     array('model','like',$_model)
-    //   ))
-    //   ->get();
-
-    //   $details = array();
-    //   foreach ($experienceDetails as $experienceDetail) {
-        
-    //     $__model = $experienceDetail->{lcfirst($experienceDetail->model)};
-
-    //     if(empty($__model)) {
-    //       continue;
-    //     }
-
-    //     $details[] = array_merge(
-    //       $__model->buildModelData(),
-    //       array(
-    //         'peroid' => $experienceDetail->getPeriod()
-    //       )
-    //     );
-
-    //   }
-
-    //   $this->setData($_model,$details);
-
-    // }
 
     // relate to branches
     $total = Service::loadModel('relateToBranch')
@@ -451,11 +372,9 @@ class JobController extends Controller
     $this->setData('jobApply',$model->modelData->build(true));
     $this->setData('profile',$person->modelData->build(true));
     $this->setData('profileImageUrl',$person->getProfileImageUrl('xsm'));
-    // $this->setData('careerObjective',$careerObjective->career_objective);
-    // $this->setData('skills',$_skills);
-    // $this->setData('languageSkills',$_languageSkills);
     $this->setData('hasBranch',!empty($total) ? true : false);
     $this->setData('branches',$_branches);
+    $this->setData('messagePostUrl',$url->setAndParseUrl('shop/{shopSlug}/job_applying_message/new/{id}',array('shopSlug'=>$this->param['shopSlug'],'id'=>$model->id)));
 
     return $this->view('pages.job.job_applying_detail');
 
@@ -463,20 +382,99 @@ class JobController extends Controller
 
   public function accountJobApplyingDetail() {
 
+    $url = new Url;
+    $date = new Date;
+
     $model = Service::loadModel('PersonApplyJob')->find($this->param['id']);
 
-    if(empty($model)) {
+    if(empty($model) || ($model->person_id != session()->get('Person.id'))) {
       $this->error = array(
         'message' => 'ขออภัย ไม่พบประกาศนี้ หรือข้อมูลนี้อาจถูกลบแล้ว'
       );
       return $this->error();
     }
 
-    $person = $model->person;
+    $slug = Service::loadModel('Slug')
+    ->where([
+      ['model','=','Shop'],
+      ['model_id','=',$model->shop_id]
+    ])
+    ->select('slug')
+    ->first();
 
-    $person->modelData->loadData(array(
-      'models' => array('Address','Contact')
-    ));
+    $this->setData('shopName',$model->shop->name);
+    $this->setData('shopUrl',$url->setAndParseUrl('shop/{shopSlug}',array('shopSlug'=>$slug)));
+    $this->setData('jobName',$model->job->name);
+    $this->setData('jobUrl',$url->setAndParseUrl('job/detail/{id}',array('id'=>$model->job->id)));
+    $this->setData('createdDate',$date->covertDateTimeToSting($model->created_at->format('Y-m-d H:i:s')));
+
+    return $this->view('pages.job.account_job_applying_detail');
+
+  }
+
+  public function jobApplyingMessageAdd() {
+    
+    $model = Service::loadModel('Message');
+
+    $this->data = $model->formHelper->build();
+
+    $sendAs = array(
+      array(
+        'text' => 'ส่งในนามบริษัทหรือร้านค้า',
+        'value' => 'shop',
+        'select' => true,
+      ),
+      array(
+        'text' => 'ส่งในนานบุคคล',
+        'value' => 'person',
+        'select' => false,
+      )
+    );
+
+    $this->setData('sendAs',$sendAs);
+
+    return $this->view('pages.message.form.message_add');
+
+  }
+
+  public function jobApplyingMessageAddingSubmit(CustomFormRequest $request) {
+
+    $personApplyJob = Service::loadModel('PersonApplyJob')->find($this->param['id']);
+
+    $messageHelper = new MessageHelper;
+    $messageHelper->setModel($personApplyJob);
+    $sender = $messageHelper->getSender($request->get('send_as'));
+    $receiver = $messageHelper->getReceiver('person');
+
+    $model = Service::loadModel('Message');
+    $model->model = 'PersonApplyJob';
+    $model->model_id = $this->param['id'];
+    $model->sender = $sender['sender'];
+    $model->sender_id = $sender['sender_id'];
+    $model->receiver = $receiver['receiver'];
+    $model->receiver_id = $receiver['receiver_id'];
+
+    if($model->fill($request->all())->save()) {
+
+      $options = array();
+      if($request->get('send_as') == 'shop') {
+        $options = array(
+          'sender' => array(
+            'model' => 'Shop',
+            'id' => request()->get('shopId')
+          )
+        );
+      }
+
+      $notificationHelper = new NotificationHelper;
+      $notificationHelper->setModel($model);
+      $notificationHelper->create('message-sent',$options);
+
+      MessageHelper::display('ข้อความถูกส่งแล้ว','success');
+      return Redirect::to('shop/'.$request->shopSlug.'/job_applying_detail/'.$this->param['id']);
+    }else{
+      return Redirect::back();
+    }
 
   }
 

@@ -3,6 +3,7 @@
 namespace App\library;
 
 use Route;
+use Schema;
 
 class NotificationHelper {
 
@@ -16,7 +17,7 @@ class NotificationHelper {
     $this->model = $model;
   }
 
-  public function create($event) {
+  public function create($event,$options = array()) {
 
     if(empty($this->model)) {
       return false;
@@ -45,14 +46,14 @@ class NotificationHelper {
       'notify' => 1
     );
 
-    $options = array(
+    $parserOptions = array(
       'format' => array(
         'title' => $event->title_format,
       ),
       'data' => $this->model->getAttributes()
     );
 
-    $result = $this->parser($this->model,$options);
+    $result = $this->parser($this->model,$parserOptions);
 
     if(!empty($result)){
       foreach ($result as $key => $_value){
@@ -60,7 +61,7 @@ class NotificationHelper {
       }
     }
 
-    $value = array_merge($value,$this->getSender());
+    $value = array_merge($value,$this->getSender($options));
 
     $receivers = $this->getReceiver($event->receiver);
 
@@ -275,10 +276,23 @@ class NotificationHelper {
     return $value;
   }
 
-  public function getSender() {
+  public function setSender() {
 
-    $sender = 'Person';
-    $senderId = session()->get('Person.id');
+  }
+
+  public function setReceiver() {
+    
+  }
+
+  public function getSender($options = array()) {
+
+    if(!empty($options['sender'])) {
+      $sender = $options['sender']['model'];
+      $senderId = $options['sender']['id'];
+    }else{
+      $sender = 'Person';
+      $senderId = session()->get('Person.id');
+    }
 
     return array(
       'sender' => $sender,
@@ -301,9 +315,12 @@ class NotificationHelper {
 
         case 'person':
          
-            if($this->model->modelName == 'Order') {
+            if(Schema::hasColumn($this->model->getTable(), 'person_id')) {
               $receivers[] = $this->model->person_id;
             }
+            // if($this->model->modelName == 'Order') {
+            //   $receivers[] = $this->model->person_id;
+            // }
 
           break;
 
@@ -322,14 +339,22 @@ class NotificationHelper {
 
       case 'all-person-in-shop':
 
-          switch ($this->model->modelName) {
-            case 'Order':
-              $people = Service::loadModel('PersonToShop')->where('shop_id','=',$this->model->shop_id)->get();
-              break;
-            
-            case 'PersonApplyJob':
-              $people = Service::loadModel('PersonToShop')->where('shop_id','=',$this->model->shop_id)->get();
-              break;
+          $people = array();
+          if(Schema::hasColumn($this->model->getTable(), 'shop_id')) {
+            $people = Service::loadModel('PersonToShop')
+            ->where('shop_id','=',$this->model->shop_id)
+            ->select('person_id')
+            ->get();
+          }else{
+            // switch ($this->model->modelName) {
+            //   case 'Order':
+            //     $people = Service::loadModel('PersonToShop')->where('shop_id','=',$this->model->shop_id)->get();
+            //     break;
+              
+            //   case 'PersonApplyJob':
+            //     $people = Service::loadModel('PersonToShop')->where('shop_id','=',$this->model->shop_id)->get();
+            //     break;
+            // }
           }
 
           foreach ($people as $person) {

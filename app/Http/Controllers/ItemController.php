@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
-use App\library\message;
+use App\library\messageHelper;
 use Redirect;
 
 class ItemController extends Controller
@@ -92,7 +92,7 @@ class ItemController extends Controller
     $model = Service::loadModel('Item');
 
     if($model->fill($request->all())->save()) {
-      Message::display('ลงประกาศเรียบร้อยแล้ว','success');
+      MessageHelper::display('ลงประกาศเรียบร้อยแล้ว','success');
       return Redirect::to('item/detail/'.$model->id);
     }else{
       return Redirect::back();
@@ -145,7 +145,7 @@ class ItemController extends Controller
     $model = Service::loadModel('Item')->find($this->param['id']);
 
     if($model->fill($request->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('item/detail/'.$model->id);
     }else{
       return Redirect::back();
@@ -165,10 +165,10 @@ class ItemController extends Controller
     }
 
     if($model->delete()) {
-      Message::display('ข้อมูลถูกลบแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
       return Redirect::to('account/item');
     }else{
-      Message::display('ไม่สามารถลบข้อมูลนี้ได้','error');
+      MessageHelper::display('ไม่สามารถลบข้อมูลนี้ได้','error');
       return Redirect::to('account/item');
     }
 

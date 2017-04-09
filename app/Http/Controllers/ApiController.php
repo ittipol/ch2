@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\library\service;
 use App\library\imageTool;
 use App\library\handleImageFile;
+use App\library\handleAttachedFile;
 use Input;
 // use Session;
 use Schema;
@@ -125,6 +126,53 @@ class ApiController extends Controller
 
   }
 
+  public function uploadAttachedFile() {
+
+    if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+      $this->error = array(
+        'message' => 'ขออภัย ไม่อนุญาตให้เข้าถึงหน้านี้ได้'
+      );
+      return $this->error();
+    }
+
+    if(empty(Input::file('file'))) {
+      return $this->getGeneralError();
+    }
+
+    $result = array('success' => false);
+
+    $file = new handleAttachedFile(Input::file('file'));
+
+    if($file->checkFileSize() && $file->checkFileType()) {
+
+      $tempFile = Service::loadModel('TemporaryFile');
+
+      $tempFile->fill(array(
+        'model' => Input::get('model'),
+        'token' => Input::get('token'),
+        'filename' => $file->getFileName(),
+        'alias' => $file->getAlias()
+      ))->save();
+
+      $temporaryPath = $tempFile->createTemporyFolder(Input::get('model').'_'.Input::get('token').'_attached_file');
+
+      $moved = $tempFile->moveTemporaryFile($file->getRealPath(),$file->getAlias(),array(
+        'directoryName' => Input::get('model').'_'.Input::get('token').'_attached_file'
+      ));
+      
+      if($moved) {
+        $result = array(
+          'success' => true,
+          'filename' => $file->getAlias()
+        );
+      }
+
+    }
+
+    return response()->json($result);
+
+  }
+
   public function uploadImage() {
 
     if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
@@ -138,11 +186,9 @@ class ApiController extends Controller
       return $this->getGeneralError();
     }
 
-    $image = new HandleImageFile(Input::file('image'));
+    $result = array('success' => false);
 
-    $result = array(
-      'success' => false,
-    );
+    $image = new HandleImageFile(Input::file('image'));
 
     if($image->checkFileSize() && $image->checkFileType()) {
     
@@ -195,17 +241,17 @@ class ApiController extends Controller
       'success' => false,
     );
 
-    $acceptModels = array(
+    $acceptedModels = array(
       'Shop',
       'Person'
     );
 
-    $acceptType = array(
+    $acceptedType = array(
       'cover',
       'profile-image'
     );
 
-    if(!in_array(Input::get('model'), $acceptModels) || !in_array(Input::get('imageType'), $acceptType)) {
+    if(!in_array(Input::get('model'), $acceptedModels) || !in_array(Input::get('imageType'), $acceptedType)) {
       return $this->getGeneralError();
     }
 

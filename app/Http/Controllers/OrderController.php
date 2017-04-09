@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
-use App\library\message;
+use App\library\messageHelper;
 use App\library\url;
 use App\library\date;
 use App\library\validation;
@@ -108,14 +108,14 @@ class OrderController extends Controller
     }
 
     if($order->order_status_id != Service::loadModel('OrderStatus')->getIdByalias('pending-customer-payment')) {
-      Message::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
+      MessageHelper::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
       return Redirect::to('account/order/'.$order->id);
     }
 
     $model = Service::loadModel('OrderPaymentConfirm');
 
     if($model->where('order_id','=',$order->id)->exists()) {
-      Message::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
+      MessageHelper::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
       return Redirect::to('account/order/'.$order->id);
     }
 
@@ -204,14 +204,14 @@ class OrderController extends Controller
     }
 
     if($order->order_status_id != 2) {
-      Message::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
+      MessageHelper::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
       return Redirect::to('account/order/'.$order->id);
     }
 
     $model = Service::loadModel('OrderPaymentConfirm');
 
     if($model->where('order_id','=',$order->id)->exists()) {
-      Message::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
+      MessageHelper::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
       return Redirect::to('account/order/'.$order->id);
     }
 
@@ -222,9 +222,14 @@ class OrderController extends Controller
 
       $notificationHelper = new NotificationHelper;
       $notificationHelper->setModel($order);
-      $notificationHelper->create('order-payment-inform');
+      $notificationHelper->create('order-payment-inform',array(
+        'sender' => array(
+          'model' => 'Shop',
+          'id' => request()->get('shopId')
+        )
+      ));
 
-      Message::display('ยืนยันการชำระเงินเลขที่การสั่งซื้อ '.$order->invoice_number.' แล้ว','success');
+      MessageHelper::display('ยืนยันการชำระเงินเลขที่การสั่งซื้อ '.$order->invoice_number.' แล้ว','success');
       return Redirect::to('account/order/'.$order->id);
     }else{
       return Redirect::back();
@@ -243,7 +248,7 @@ class OrderController extends Controller
     ));
 
     if(empty($orderPaymentConfirm)) {
-      Message::display('ไม่การแจ้งการชำระเงินของการสั่งซื้อ','error');
+      MessageHelper::display('ไม่การแจ้งการชำระเงินของการสั่งซื้อ','error');
       return Redirect::to('account/order/'.$order->id);
     }
 
@@ -366,7 +371,7 @@ class OrderController extends Controller
     ])->first();
 
     if($model->order_status_id != 1) {
-      Message::display('สินค้านี้ถูกยืนยันแล้ว','error');
+      MessageHelper::display('สินค้านี้ถูกยืนยันแล้ว','error');
       return Redirect::to(request()->get('shopUrl').'order');
     }
 
@@ -377,13 +382,13 @@ class OrderController extends Controller
     $shippingMethodNotExist = !$shippingMethodModel->hasShippingMethod(request()->get('shopId'));
 
     if($paymentMethodNotExist && $shippingMethodNotExist) {
-      Message::display('ไม่พบวิธีการชำระเงินและวิธีการจัดส่ง กรุณาเพิ่มวิธีการชำระเงินและวิธีการจัดส่งในร้านค้าของคุณ','error');
+      MessageHelper::display('ไม่พบวิธีการชำระเงินและวิธีการจัดส่ง กรุณาเพิ่มวิธีการชำระเงินและวิธีการจัดส่งในร้านค้าของคุณ','error');
       return Redirect::to('shop/'.request()->shopSlug.'/product');
     }elseif($paymentMethodNotExist) {
-      Message::display('ไม่พบวิธีการชำระเงิน กรุณาเพิ่มวิธีการชำระเงินในร้านค้าของคุณ','error');
+      MessageHelper::display('ไม่พบวิธีการชำระเงิน กรุณาเพิ่มวิธีการชำระเงินในร้านค้าของคุณ','error');
       return Redirect::to('shop/'.request()->shopSlug.'/payment_method');
     }elseif($shippingMethodNotExist) {
-      Message::display('ไม่พบวิธีการจัดส่ง กรุณาเพิ่มวิธีการจัดส่งในร้านค้าของคุณ','error');
+      MessageHelper::display('ไม่พบวิธีการจัดส่ง กรุณาเพิ่มวิธีการจัดส่งในร้านค้าของคุณ','error');
       return Redirect::to('shop/'.request()->shopSlug.'/shipping_method');
     }
 
@@ -419,7 +424,7 @@ class OrderController extends Controller
     ])->first();
 
     if($model->order_status_id != 1) {
-      Message::display('รายการสั่งซื้อถูกยืนยันแล้ว','error');
+      MessageHelper::display('รายการสั่งซื้อถูกยืนยันแล้ว','error');
       return Redirect::to(request()->get('shopUrl').'order');
     }
 
@@ -596,9 +601,14 @@ class OrderController extends Controller
 
     $notificationHelper = new NotificationHelper;
     $notificationHelper->setModel($model);
-    $notificationHelper->create('order-confirm');
+    $notificationHelper->create('order-confirm',array(
+      'sender' => array(
+        'model' => 'Shop',
+        'id' => request()->get('shopId')
+      )
+    ));
 
-    Message::display('ยืนยันการสั่งซื้อเรียบร้อยแล้ว','success');
+    MessageHelper::display('ยืนยันการสั่งซื้อเรียบร้อยแล้ว','success');
     return Redirect::to('shop/'.$this->param['shopSlug'].'/order/'.$model->id);
 
   }
@@ -611,7 +621,7 @@ class OrderController extends Controller
     ])->first();
 
     if($model->order_status_id != 2) {
-      Message::display('รายการสั่งซื้อยืนยันการชำระเงินแล้ว','error');
+      MessageHelper::display('รายการสั่งซื้อยืนยันการชำระเงินแล้ว','error');
       return Redirect::to(request()->get('shopUrl').'order');
     }
 
@@ -623,9 +633,9 @@ class OrderController extends Controller
       $notificationHelper->setModel($model);
       $notificationHelper->create('order-payment-confirm');
 
-      Message::display('ยืนยันการชำระเงินเรียบร้อยแล้ว','success');
+      MessageHelper::display('ยืนยันการชำระเงินเรียบร้อยแล้ว','success');
     }else{
-      Message::display('เกิดข้อผิดพลาด ไม่สามารถยืนยันการชำระเงินได้','error');
+      MessageHelper::display('เกิดข้อผิดพลาด ไม่สามารถยืนยันการชำระเงินได้','error');
     }
 
     return Redirect::to(request()->get('shopUrl').'order/'.$model->id);
@@ -640,7 +650,7 @@ class OrderController extends Controller
     ])->first();
 
     if($model->order_status_id == 1 && $model->order_status_id == 2) {
-      Message::display('ยังไม่สามารถเปลี่ยนแปลงการสั่งซื้อได้','error');
+      MessageHelper::display('ยังไม่สามารถเปลี่ยนแปลงการสั่งซื้อได้','error');
       return Redirect::to(request()->get('shopUrl').'order/'.$model->id);
     }
 
@@ -650,7 +660,7 @@ class OrderController extends Controller
     ])->exists();
 
     if(!$orderStatus) {
-      Message::display('สถานะการสั่งซื้อไม่ถูกต้อง','error');
+      MessageHelper::display('สถานะการสั่งซื้อไม่ถูกต้อง','error');
       return Redirect::to(request()->get('shopUrl').'order/'.$model->id);
     }
 
@@ -666,11 +676,16 @@ class OrderController extends Controller
 
       $notificationHelper = new NotificationHelper;
       $notificationHelper->setModel($model);
-      $notificationHelper->create('order-status-change');
+      $notificationHelper->create('order-status-change',array(
+        'sender' => array(
+          'model' => 'Shop',
+          'id' => request()->get('shopId')
+        )
+      ));
 
-      Message::display('ยืนยันการชำระเงินเรียบร้อยแล้ว','success');
+      MessageHelper::display('ยืนยันการชำระเงินเรียบร้อยแล้ว','success');
     }else{
-      Message::display('เกิดข้อผิดพลาด ไม่สามารถยืนยันการชำระเงินได้','error');
+      MessageHelper::display('เกิดข้อผิดพลาด ไม่สามารถยืนยันการชำระเงินได้','error');
     }
 
     return Redirect::to(request()->get('shopUrl').'order/'.$model->id);

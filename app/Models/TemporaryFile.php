@@ -9,7 +9,7 @@ use Session;
 class TemporaryFile extends Model
 {
   protected $table = 'temporary_files';
-  protected $fillable = ['model','filename','token','file_type','person_id'];
+  protected $fillable = ['model','filename','token','filename','alias','person_id'];
   private $temporaryPath = 'temporary/';
 
   public function __construct() {
@@ -39,12 +39,12 @@ class TemporaryFile extends Model
 
   }
 
-  // public function moveTemporaryFile($oldPath,$filename,$options = array()) {
+  public function moveTemporaryFile($oldPath,$filename,$options = array()) {
 
-  //   $temporaryPath = $this->createTemporyFolder($options['directoryName']);
+    $temporaryPath = $this->createTemporyFolder($options['directoryName']);
 
-  //   return File::move($oldPath, $temporaryPath.$filename);
-  // }
+    return File::move($oldPath, $temporaryPath.$filename);
+  }
 
   public function getFilePath($filename,$options = array()) {
 

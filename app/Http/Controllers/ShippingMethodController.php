@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
-use App\library\message;
+use App\library\messageHelper;
 use App\library\url;
 use Redirect;
 
@@ -43,7 +43,7 @@ class ShippingMethodController extends Controller
     $request->request->add(['ShopRelateTo' => array('shop_id' => request()->get('shopId'))]);
 
     if($model->fill($request->all())->save()) {
-      Message::display('วิธีการจัดส่งสินค้าถูกเพิ่มแล้ว','success');
+      MessageHelper::display('วิธีการจัดส่งสินค้าถูกเพิ่มแล้ว','success');
       return Redirect::to(route('shop.shipping_method', ['shopSlug' => request()->shopSlug]));
     }else{
       return Redirect::back();
@@ -108,7 +108,7 @@ class ShippingMethodController extends Controller
     $model = Service::loadModel('ShippingMethod')->find($this->param['id']);
 
     if($model->fill($request->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to(route('shop.shipping_method', ['shopSlug' => request()->shopSlug]));
     }else{
       return Redirect::back();
@@ -120,10 +120,10 @@ class ShippingMethodController extends Controller
     $model = Service::loadModel('ShippingMethod')->find($this->param['id']);
 
     if($model->delete()) {
-      Message::display('ข้อมูลถูกลบแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
       return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
     }else{
-      Message::display('ไม่สามารถลบข้อมูลนี้ได้','error');
+      MessageHelper::display('ไม่สามารถลบข้อมูลนี้ได้','error');
       return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
     }
 
@@ -150,13 +150,13 @@ class ShippingMethodController extends Controller
       );
 
       if($model->fill($value)->save()) {
-        Message::display('เพิ่มตัวเลือก "รับสินค้าเอง" แล้ว','success');
+        MessageHelper::display('เพิ่มตัวเลือก "รับสินค้าเอง" แล้ว','success');
       }else{
-        Message::display('เกิดข้อผิดพลาด ไม่สามารถเพิ่มตัวเลือก "รับสินค้าเอง" ได้','error');
+        MessageHelper::display('เกิดข้อผิดพลาด ไม่สามารถเพิ่มตัวเลือก "รับสินค้าเอง" ได้','error');
       }
 
     }else{
-      Message::display('ตัวเลือก "รับสินค้าเอง" ถูกเพิ่มแล้ว','error');
+      MessageHelper::display('ตัวเลือก "รับสินค้าเอง" ถูกเพิ่มแล้ว','error');
     }
 
     return Redirect::to(route('shop.shipping_method', ['shopSlug' => request()->shopSlug]));

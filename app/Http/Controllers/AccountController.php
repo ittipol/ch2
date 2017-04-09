@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
-use App\library\message;
+use App\library\messageHelper;
 use App\library\date;
 use App\library\url;
 use Redirect;
@@ -87,7 +87,7 @@ class AccountController extends Controller
       Session::put('Person.profile_image_xs',$model->getProfileImageUrl('xs'));
       Session::put('Person.profile_image',$model->getProfileImageUrl('xsm'));
 
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('account');
     }else{
       return Redirect::back();

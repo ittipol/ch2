@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
-use App\library\message;
+use App\library\messageHelper;
 use App\library\date;
 use Redirect;
 
@@ -33,7 +33,7 @@ class PersonProjectController extends Controller
     $model = Service::loadModel('PersonProject');
 
     if($model->fill($request->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('experience/profile/edit');
     }else{
       return Redirect::back();
@@ -88,7 +88,7 @@ class PersonProjectController extends Controller
     }
 
     if($model->fill($request->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('experience/profile/edit');
     }else{
       return Redirect::back();

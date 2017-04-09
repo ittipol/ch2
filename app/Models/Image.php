@@ -32,7 +32,8 @@ class Image extends Model
     )
   );
 
-  private $prefix = 'image';
+  // private $prefix = 'image';
+  protected $storagePath = 'app/public/images/';
 
   // photos/?tab=album&album_id=270003133398148
   // photos/?tab=album&album_id=1299989693406181
@@ -156,34 +157,6 @@ class Image extends Model
 
   }
 
-  // public function deleteImages($model,$imageIds) {
-
-  //   $images = $this->newInstance()
-  //   ->whereIn('id',$imageIds)
-  //   ->where([
-  //     ['model','=',$model->modelName],
-  //     ['model_id','=',$model->id],
-  //     ['person_id','=',Session::get('Person.id')]
-  //   ]);
-
-  //   $_images = $images->get();
-
-  //   foreach ($_images as $image) {
-      
-  //     $path = $image->getImagePath();
-
-  //     if(!file_exists($path)){
-  //       continue;
-  //     }
-
-  //     File::Delete($path);
-
-  //   }
-
-  //   $images->delete();
-
-  // }
-
   public function deleteDirectory($model) {
     return File::deleteDirectory(storage_path($this->storagePath.$model->modelAlias).'/'.$model->id.'/');
   }
@@ -234,10 +207,10 @@ class Image extends Model
     }
 
     if(!$imageInstance->exists) { // new record
-      $imageInstance->image_type_id = $imageType->getIdByalias($options['type']);
-      $imageInstance->filename = $image['filename'];
       $imageInstance->model = $model->modelName;
       $imageInstance->model_id = $model->id;
+      $imageInstance->filename = $image['filename'];
+      $imageInstance->image_type_id = $imageType->getIdByalias($options['type']);
     }
 
     if(!empty($image['description'])) {
@@ -248,7 +221,6 @@ class Image extends Model
       return false;
     }
 
-    // $toPath = $imageInstance->getDirPath().$imageInstance->imageType->path;
     $toPath = $imageInstance->getFullDirPath();
     if(!is_dir($toPath)){
       mkdir($toPath,0777,true);
@@ -263,7 +235,6 @@ class Image extends Model
   }
 
   public function moveImage($oldPath,$to) {
-    // move image
     return File::move($oldPath, $to);
   }
 
@@ -278,7 +249,14 @@ class Image extends Model
     
     $string = new String;
 
-    return storage_path($this->storagePath.$string->generateUnderscoreName($this->model)).'/'.$this->model_id.'/'.$this->imageType->path.'/';
+    $path = $this->getDirPath();
+
+    if(!empty($this->imageType->path)) {
+      $path .= $this->imageType->path.'/';
+    }
+
+    return $path;
+    // return storage_path($this->storagePath.$string->generateUnderscoreName($this->model)).'/'.$this->model_id.'/'.$this->imageType->path.'/';
   }
 
   public function getImagePath($filename = '') {
@@ -287,12 +265,13 @@ class Image extends Model
       $filename = $this->filename;
     }
 
-    if(!empty($this->imageType->path)) {
-      $url = new Url;
-      $filename = $url->addSlash($this->imageType->path).$filename;
-    }
+    // if(!empty($this->imageType->path)) {
+    //   $url = new Url;
+    //   $filename = $url->addSlash($this->imageType->path).$filename;
+    // }
 
-    return $this->getDirPath().$filename;
+    // return $this->getDirPath().$filename;
+    return $this->getFullDirPath().$filename;
   }
 
   public function getImageUrl($filename = '') {
@@ -390,10 +369,10 @@ class Image extends Model
     $image = new HandleImageFile($image);
 
     if(!$this->exists) {
-      $this->image_type_id = $imageType->getIdByalias($options['type']);
-      $this->filename = $filename = $image->getFileName();
       $this->model = $model->modelName;
       $this->model_id = $model->id;
+      $this->filename = $filename = $image->getFileName();
+      $this->image_type_id = $imageType->getIdByalias($options['type']);
     }
 
     if(!empty($options['description'])) {

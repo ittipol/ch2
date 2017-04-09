@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
-use App\library\message;
+use App\library\messageHelper;
 use App\library\url;
 use Redirect;
 
@@ -45,7 +45,7 @@ class PaymentMethodController extends Controller
     $request->request->add(['ShopRelateTo' => array('shop_id' => request()->get('shopId'))]);
 
     if($model->fill($request->all())->save()) {
-      Message::display('วิธีการชำระเงินถูกเพิ่มแล้ว','success');
+      MessageHelper::display('วิธีการชำระเงินถูกเพิ่มแล้ว','success');
       return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
     }else{
       return Redirect::back();
@@ -69,7 +69,7 @@ class PaymentMethodController extends Controller
 
     if($model->fill($request->all())->save()) {
 
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
     }else{
       return Redirect::back();
@@ -81,10 +81,10 @@ class PaymentMethodController extends Controller
     $model = Service::loadModel('PaymentMethod')->find($this->param['id']);
 
     if($model->delete()) {
-      Message::display('ข้อมูลถูกลบแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
       return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
     }else{
-      Message::display('ไม่สามารถลบข้อมูลนี้ได้','error');
+      MessageHelper::display('ไม่สามารถลบข้อมูลนี้ได้','error');
       return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
     }
 

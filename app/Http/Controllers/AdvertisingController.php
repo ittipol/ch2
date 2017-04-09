@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
-use App\library\message;
+use App\library\messageHelper;
 use App\library\url;
 use Redirect;
 
@@ -151,7 +151,7 @@ class AdvertisingController extends Controller
     $request->request->add(['ShopRelateTo' => array('shop_id' => request()->get('shopId'))]);
 
     if($model->fill($request->all())->save()) {
-      Message::display('ลงประกาศแล้ว','success');
+      MessageHelper::display('ลงประกาศแล้ว','success');
       return Redirect::to('shop/'.$request->shopSlug.'/advertising');
     }else{
       return Redirect::back();
@@ -199,7 +199,7 @@ class AdvertisingController extends Controller
     $model = Service::loadModel('Advertising')->find($this->param['id']);
 
     if($model->fill($request->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('shop/'.request()->shopSlug.'/advertising');
     }else{
       return Redirect::back();

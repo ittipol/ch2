@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
-use App\library\message;
+use App\library\messageHelper;
 use App\library\date;
 use App\library\url;
 use Redirect;
@@ -225,10 +225,10 @@ class PersonExperienceController extends Controller
     ));
 
     if($saved) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('experience/profile/edit');
     }else{
-      Message::display('เกิดข้อผิดพลาด ไม่สามารถบันทึกได้','error');
+      MessageHelper::display('เกิดข้อผิดพลาด ไม่สามารถบันทึกได้','error');
       return Redirect::to('experience/profile/edit');
     }
 
@@ -256,7 +256,7 @@ class PersonExperienceController extends Controller
     ->first();
 
     if($model->fill(request()->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('experience/profile/edit');
     }else{
       return Redirect::back();

@@ -76,7 +76,7 @@ class Model extends BaseModel
         //   $model->ip_address = Service::ipAddress();
         // }
 
-        if((Schema::hasColumn($model->getTable(), 'person_id')) && (empty($model->person_id))) {
+        if(Schema::hasColumn($model->getTable(), 'person_id') && empty($model->person_id)) {
           $model->person_id = Session::get('Person.id');
         }
 
@@ -91,7 +91,7 @@ class Model extends BaseModel
 
       if(($model->state == 'create') && $model->exists) {
 
-        $model->createDirectory();  
+        // $model->createDirectory();  
 
         if(!empty($model->behavior['Slug'])) {
           $slug = new Slug;
@@ -194,18 +194,18 @@ class Model extends BaseModel
     return parent::fill($attributes);
   }
 
-  protected function createDirectory() {
+  // protected function createDirectory() {
 
-    if(empty($this->directory) || empty($this->directoryPath)) {
-      return false;
-    }
+  //   if(empty($this->directory) || empty($this->directoryPath)) {
+  //     return false;
+  //   }
 
-    $path = $this->getDirectoryPath().$this->id.'/';
-    if(!is_dir($path)){
-      mkdir($path,0777,true);
-    }
+  //   $path = $this->getDirectoryPath().$this->id.'/';
+  //   if(!is_dir($path)){
+  //     mkdir($path,0777,true);
+  //   }
 
-  }
+  // }
 
   public function getDirectoryPath() {
 

@@ -328,14 +328,17 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
   Route::get('shop/{shopSlug}/job','ShopController@job')->name('shop.job');
 
-  Route::get('shop/{shopSlug}/job_applying_list','JobController@jobApplyingList')->name('shop.job.apply_list');
-  Route::get('shop/{shopSlug}/job_applying_detail/{id}','JobController@jobApplyingDetail')->name('shop.job.apply_detail');
+  Route::get('shop/{shopSlug}/job_applying_list','JobController@jobApplyingList')->name('shop.job.applying_list');
+  Route::get('shop/{shopSlug}/job_applying_detail/{id}','JobController@jobApplyingDetail')->name('shop.job.applying_detail');
   
-  Route::get('shop/{shopSlug}/job_post','JobController@add')->name('shop.job.add');
-  Route::post('shop/{shopSlug}/job_post','JobController@addingSubmit')->name('shop.job.add');
+  Route::get('shop/{shopSlug}/job_applying_message/new/{id}','JobController@jobApplyingMessageAdd')->name('shop.job.applying_message.add');
+  Route::post('shop/{shopSlug}/job_applying_message/new/{id}','JobController@jobApplyingMessageAddingSubmit')->name('shop.job.applying_message.add');
 
-  Route::get('shop/{shopSlug}/job_edit/{id}','JobController@edit')->name('shop.job.edit');
-  Route::patch('shop/{shopSlug}/job_edit/{id}','JobController@editingSubmit')->name('shop.job.edit');
+  Route::get('shop/{shopSlug}/job/post','JobController@add')->name('shop.job.add');
+  Route::post('shop/{shopSlug}/job/post','JobController@addingSubmit')->name('shop.job.add');
+
+  Route::get('shop/{shopSlug}/job/edit/{id}','JobController@edit')->name('shop.job.edit');
+  Route::patch('shop/{shopSlug}/job/edit/{id}','JobController@editingSubmit')->name('shop.job.edit');
 
 });
 
@@ -418,6 +421,8 @@ Route::group(['prefix' => 'api/v1', 'middleware' => ['api','auth']], function ()
 Route::group(['middleware' => 'auth'], function () {
   Route::post('upload_image', 'ApiController@uploadImage');
   Route::post('upload_profile_image', 'ApiController@uploadProfileImage')->name('Api.upload.profile_image');
+
+  Route::post('upload_attached_file', 'ApiController@uploadAttachedFile');
 
   Route::get('notification_update', 'ApiController@notificationUpdate');
   Route::get('notification_read', 'ApiController@notificationRead');

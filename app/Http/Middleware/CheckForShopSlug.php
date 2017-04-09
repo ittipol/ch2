@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\Shop;
 use App\Models\Slug;
-use App\library\message;
+use App\library\messageHelper;
 use App\library\url;
 use Closure;
 

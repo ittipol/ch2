@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
-use App\library\message;
+use App\library\messageHelper;
 use App\library\url;
 use Redirect;
 use Session;
@@ -96,7 +96,7 @@ class FreelanceController extends Controller
     $model = Service::loadModel('Freelance');
 
     if($model->fill($request->all())->save()) {
-      Message::display('ลงประกาศแล้ว','success');
+      MessageHelper::display('ลงประกาศแล้ว','success');
       return Redirect::to('person/freelance');
     }else{
       return Redirect::back();
@@ -129,7 +129,7 @@ class FreelanceController extends Controller
     $model = Service::loadModel('Freelance')->find($this->param['id']);
     
     if($model->fill($request->all())->save()) {
-      Message::display('ข้อมูลถูกบันทึกแล้ว','success');
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('person/freelance');
     }else{
       return Redirect::back();

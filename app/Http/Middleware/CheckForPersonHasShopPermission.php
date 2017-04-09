@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Shop;
-use App\library\message;
+use App\library\messageHelper;
 use App\library\service;
 use Closure;
 use Route;
@@ -54,10 +54,14 @@ class CheckForPersonHasShopPermission
           'permission' => 'edit',
           'modelName' => 'Job'
         ),
-        'shop.job.apply_list' => array(
+        'shop.job.applying_list' => array(
           'permission' => true
         ),
-        'shop.job.apply_detail' => array(
+        'shop.job.applying_detail' => array(
+          'permission' => true,
+          'modelName' => 'PersonApplyJob'
+        ),
+        'shop.job.applying_message.add' => array(
           'permission' => true,
           'modelName' => 'PersonApplyJob'
         ),

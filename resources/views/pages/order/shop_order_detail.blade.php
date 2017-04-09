@@ -11,7 +11,6 @@
   </div>
 </div>
 
-
 <div class="container">
 
   @if(!$hasPaymentMethod)

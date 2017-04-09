@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\library\service;
-use App\library\message;
+use App\library\messageHelper;
 use App\library\notificationHelper;
 use Redirect;
 
@@ -104,7 +104,7 @@ class CheckoutController extends Controller
     }
 
     if(empty($checkoutProducts)) {
-      Message::display('ไม่ได้เลือกร้านค้าที่ต้องการสั่งซื้อสินค้า กรุณาเลือกร้านค้าที่ต้องการสั่งซื้อสินค้าแล้วสั่งซื้ออีกครั้ง','error');
+      MessageHelper::display('ไม่ได้เลือกร้านค้าที่ต้องการสั่งซื้อสินค้า กรุณาเลือกร้านค้าที่ต้องการสั่งซื้อสินค้าแล้วสั่งซื้ออีกครั้ง','error');
       return Redirect::back();
     }
 
@@ -270,7 +270,7 @@ class CheckoutController extends Controller
 
     session()->flash('checkout-success',true);
 
-    // Message::display('ลงประกาศเรียบร้อยแล้ว','success');
+    // MessageHelper::display('ลงประกาศเรียบร้อยแล้ว','success');
     return Redirect::to('checkout/success');
 
   }
