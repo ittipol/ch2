@@ -20,16 +20,16 @@ class StaticFileController extends Controller
     if(!empty($path)) {
 
       $headers = array(
-        'Pragma' => 'no-cache',
-        'Cache-Control' => 'no-cache, must-revalidate',
-        'Cache-Control' => 'pre-check=0, post-check=0, max-age=0',
+        // 'Pragma' => 'no-cache',
+        // 'Cache-Control' => 'no-cache, must-revalidate',
+        // 'Cache-Control' => 'pre-check=0, post-check=0, max-age=0',
         'Content-Type' => mime_content_type($path),
         // 'Content-length' => filesize($path),
       );
 
-      // return Response::make(file_get_contents($path), 200, $headers);
+      return Response::make(file_get_contents($path), 200, $headers);
 
-      return Response::download($path, $filename, $headers);
+      // return Response::download($path, $filename, $headers);
     }
 
     $image = Service::loadModel('Image')
@@ -38,7 +38,8 @@ class StaticFileController extends Controller
     ->first();
 
     if(empty($image)) {
-      return response()->download($this->noImagePath, null, [], null);
+      return Response::make(file_get_contents($this->noImagePath), 200, $headers);
+      // return response()->download($this->noImagePath, null, [], null);
     }
 
     $path = $image->getImagePath();
@@ -46,16 +47,16 @@ class StaticFileController extends Controller
     if(file_exists($path)){
 
       $headers = array(
-        'Pragma' => 'no-cache',
-        'Cache-Control' => 'no-cache, must-revalidate',
-        'Cache-Control' => 'pre-check=0, post-check=0, max-age=0',
+        // 'Pragma' => 'no-cache',
+        // 'Cache-Control' => 'no-cache, must-revalidate',
+        // 'Cache-Control' => 'pre-check=0, post-check=0, max-age=0',
         'Content-Type' => mime_content_type($path),
         // 'Content-length' => filesize($path),
       );
 
-      // return Response::make(file_get_contents($path), 200, $headers);
+      return Response::make(file_get_contents($path), 200, $headers);
 
-      return Response::download($path, $filename, $headers);
+      // return Response::download($path, $filename, $headers);
 
     }
 
@@ -80,19 +81,22 @@ class StaticFileController extends Controller
 
     $file = Service::loadModel('AttachedFile')->find($id);
 
+    if(empty($file) || !$file->hasPermission()) {
+      $this->error = array(
+        'message' => 'ขออภัย ไม่สามารถดาวน์โหลดไฟล์นี้ได้'
+      );
+      return $this->error();
+    }
+
     $path = $file->getImagePath();
 
     $headers = array(
-      // 'Content-Description' => 'File Transfer',
       'Content-Disposition' => 'attachment; filename=' . $file->filename,
       'Content-Type' => mime_content_type($path),
       'Content-Length' => $file->filesize,
     );
 
     return Response::download($path, $file->filename, $headers);
-    // return Response::make(file_get_contents($path), 200, $headers);
-    // Service::loadModel('AttachedFileAccessPermission');
-    dd(session()->get('Person.id'));
 
   }
 

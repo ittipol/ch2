@@ -121,47 +121,6 @@
 	padding-left: 55px;
 }
 
-
-.tabs {
-	margin: 20px 0;
-	border-bottom: 1px solid #bababa;
-}
-
-.tabs span {
-	color: #000;
-	background-color: #ececec;
-	padding: 12px 10px;
-	display: block;
-	position: relative;
-	cursor: pointer;
-}
-
-.tabs .tab:checked + span::before {
-	content: "";
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	height: 2px;
-	background-color: #2196F3;
-}
-
-.tabs label {
-	margin-bottom: 0;
-}
-
-.tabs label:nth-child(n+2) {
-	margin-left: -4px;
-}
-
-.tabs label > input[type="radio"] {
-	display: none;
-}
-
-.tab-content {
-
-}
-
 .detail .title-with-icon {
 	position: relative;
 	padding-left: 40px;

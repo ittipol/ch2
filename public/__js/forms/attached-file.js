@@ -1,30 +1,17 @@
 class AttachedFile {
 
-	constructor(panel,limit = 5) {
+	constructor(panel) {
 		this.panel = panel;
-		// this.type = type;
-		this.limit = limit;
+		this.limit = 10;
 		this.code = null;
 		this.index = 0;
 		this.runningNumber = 0;
-		this.imagesPlaced = [];
-		this.defaultImage = '/images/common/image.svg';
-		this.allowedClick = true;
-		this.inputDisable = [];
+		this.hasError = false;
 	}
 
 	load() {
-
 		this.init();
-
-		this.createAddButtonAndPanel();
-
-		// if(this.index < this.limit){
-		// 	this.index = this.createUploader(this.index);
-		// }
-
 		this.bind();
-
 	}
 
 	init(){
@@ -36,6 +23,8 @@ class AttachedFile {
     hidden.setAttribute('name','AttachedFile[token]');
     hidden.setAttribute('value',this.code);
     $('#'+this.panel).append(hidden);
+
+    this.createAddButtonAndPanel()
 	}
 
 	bind() {
@@ -43,13 +32,24 @@ class AttachedFile {
 		let _this = this;
 
 		$(document).on('change', '.'+this.code+'-attached-file-input', function(){
-			_this.preview(this);
+
+			$(this).prop('disabled',true);
+			$(this).parent().addClass('disabled')
+
+			if(_this.index < _this.limit){
+				_this.preview(this);
+			}
+
 		});
 
 		$(document).on('click','.attached-file-cancel-button',function(){
 		
 			$(this).parent().remove();
-			_this.index--;
+
+			if(--_this.index < _this.limit){
+				$('#'+_this.code+'_attached_file_input').prop('disabled',false);
+				$('#'+_this.code+'_attached_file_input').parent().removeClass('disabled');
+			}
 
 		});
 
@@ -59,42 +59,46 @@ class AttachedFile {
 
 		if (input.files && input.files[0]) {
 
-				// let _this = this;
-				// let parent = $(input).parent();
+			if(!window.File && window.FileReader && window.FileList && window.Blob){ //if browser doesn't supports File API
+			  alert("Your browser does not support new File API! Please upgrade.");
+				return false;
+			}else{
+			  let fileSize = input.files[0].size;
+			  let mimeType = input.files[0].type;
+			  let filename = input.value.replace(/^.*[\\\/]/, '');
 
-				if(!window.File && window.FileReader && window.FileList && window.Blob){ //if browser doesn't supports File API
-				  alert("Your browser does not support new File API! Please upgrade.");
-					return false;
-				}else{
-				  let fileSize = input.files[0].size;
-				  let mimeType = input.files[0].type;
-				  let filename = input.value.replace(/^.*[\\\/]/, '');
+			  if(this.hasError) {
+			  	$('.attached-file-box.error').remove();
+			  	this.hasError = false;
+			  }			  
 
-				  if(!this.checkImageType(mimeType) || !this.checkFileSize(fileSize)) {
-				  	$('#'+this.code+'_attached_file_error').css('display','block').text('ไม่รองรับไฟล์นี้');
-				  }else{
+			  if(!this.checkImageType(mimeType) || !this.checkFileSize(fileSize)) {
 
-				  	$('#'+this.code+'_attached_file_error').css('display','none');
+			  	this.hasError = true;
+			  	$('#'+this.code+'_attached_file_error').css('display','block').text('ไม่รองรับไฟล์นี้');
+			  	this.createError(this.truncString(filename,20),this.bytesToSize(fileSize));
 
-				  	let formData = new FormData();
-				  	formData.append('_token', $('input[name="_token"]').val());  
-				  	formData.append('model', $('input[name="_model"]').val());
-				  	formData.append('token', this.code);
-				  	formData.append('file', input.files[0]);
+			  }else{
 
-				  	this.uploadFile(input,formData,filename,fileSize);
+			  	$('#'+this.code+'_attached_file_error').css('display','none');
 
-				  }
+			  	let formData = new FormData();
+			  	formData.append('_token', $('input[name="_token"]').val());  
+			  	formData.append('model', $('input[name="_model"]').val());
+			  	formData.append('token', this.code);
+			  	formData.append('file', input.files[0]);
 
-				}
+			  	this.uploadFile(input,formData,filename,fileSize);
+
+			  }
+
+			}
 
 		}
 
 	}
 
 	uploadFile(input,data,filename,fileSize) {
-
-		$('#'+this.code+'_attached_file_input').val('').prop('disabled',true);
 
 		let _this = this;
 
@@ -110,7 +114,10 @@ class AttachedFile {
 	    cache: false,
 	    processData:false,
 	    beforeSend: function( xhr ) {
-	    	$('#main_form input[type="submit"]').prop('disabled','disabled').addClass('disabled');  
+
+	    	$('#'+_this.code+'_attached_file_input').val('');
+	    	$('#main_form input[type="submit"]').prop('disabled','disabled').addClass('disabled'); 
+	    	 
 	    	obj.find('.progress-bar').css('display','block');
 	    },
 	    mimeType:"multipart/form-data",
@@ -135,7 +142,10 @@ class AttachedFile {
 
     request.done(function (response, textStatus, jqXHR){
 
-    	$('#'+_this.code+'_attached_file_input').prop('disabled',false);
+    	if(_this.index < _this.limit) {
+    		$('#'+_this.code+'_attached_file_input').prop('disabled',false);
+    		$('#'+_this.code+'_attached_file_input').parent().removeClass('disabled');
+    	}
 
     	if(response.success){
 
@@ -179,21 +189,15 @@ class AttachedFile {
 	createAddButtonAndPanel() {
 
 		let html = '';
-		html += '<label class="attached-file-box clearfix">';
+		html += '<label class="attached-file-add-button clearfix">';
 		html += '<input id="'+this.code+'_attached_file_input" class="'+this.code+'-attached-file-input" type="file">';
-		html += '<div class="attached-file-image">';
+		html += '<div class="attached-file-add-button-text">';
 		html += '<img src="/images/icons/plus-white.png">';
-		html += '</div>';
-		html += '<div class="attached-file-info">';
-		html += '<div class="attached-file-text">เพิ่มไฟล์</div>';
+		html += '<h4>เพิ่มไฟล์</h4>';
 		html += '</div>';
 		html += '</label>';
-
-		html += '<div id="'+this.code+'_attached_file_error" class="attached-file-error"></div>';
-
-		html += '<div class="line grey space-top-bottom-10"></div>';
-
-		html += '<div id="'+this.code+'_attached_file_panel clearfix"></div>';
+		html += '<div class="line grey space-top-bottom-20"></div>';
+		html += '<div id="'+this.code+'_attached_file_panel" class="clearfix"></div>';
 
 		$('#'+this.panel).append(html);
 
@@ -225,10 +229,30 @@ class AttachedFile {
 
 		return itemId;
 
+	}
+
+	createError(filename,filesize) {
+
+		let html = '';
+		html += '<div class="attached-file-box error clearfix">';
+		html += '<div class="attached-file-image">';
+		html += '<img src="/images/icons/close-white.png">';
+		html += '</div>';
+		html += '<div class="attached-file-info">';
+		html += '<div class="attached-file-title">';
+		html += '<h4>'+filename+'</h4>'
+		// html += '<h5>'+filesize+'</h5>'
+		html += '<h5>ไม่รองรับไฟล์นี้</h5>'
+		html += '</div>';
+		html += '</div>';
+		html += '</div>';
+
+		$('#'+this.code+'_attached_file_panel').append(html);
 
 	}
 
 	checkImageType(type){
+
 		let acceptedFileTypes = [
 		'image/jpg',
 		'image/jpeg',
@@ -275,9 +299,6 @@ class AttachedFile {
 	checkFileSize(size) {
 		// 2MB
 		let maxSize = 2097152;
-
-		// let allowed = false;
-
 		if(size <= maxSize){
 			return true;
 		}

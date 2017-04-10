@@ -38,7 +38,7 @@
     '__js/components/additional-option.js',
     '__js/components/custom-scroll.js',
     '__js/components/image-gallery.js',
-    // '__js/components/tabs.js'
+    '__js/components/tabs.js',
     '__js/components/profile-image.js',
     '__js/components/global-cart.js',
     '__js/components/modal-dialog.js',
@@ -102,6 +102,7 @@
     '__css/components/sub-header.css',
     '__css/components/breadcrumb.css',
     '__css/components/attached-file.css',
+    '__css/components/tab.css',
     '__css/pages/home.css',
     '__css/pages/shop.css',
     '__css/pages/account.css',

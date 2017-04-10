@@ -1,15 +1,22 @@
 class Tabs {
   constructor(tab = '') {
     this.currentTab = tab;
+    this.prevTab;
   }
 
   load() {
     this.init();
     this.bind();
+
+    $('.tab[data-tab="person_experience_tab"]').trigger('click');
+
   }
 
   init() {
-    this.showTab(this.currentTab);
+
+    // $('#notification_panel_trigger').trigger('click');
+
+    // this.showTab(this.currentTab);
   }
 
   bind() {
@@ -17,16 +24,25 @@ class Tabs {
     let _this = this;
 
     $('.tab').on('click',function(){
-      if($(this).is(':checked')) {
-        _this.showTab($(this).data('tab'));
-      }
+      // if($(this).is(':checked')) {
+      //   _this.showTab($(this).data('tab'));
+      // }
+
+      _this.showTab($(this).data('tab'));
+
     });
 
   }
 
   showTab(tab) {
-    $('.tab-content').css('display','none');
+
+    if(this.prevTab) {
+      $('#'+this.prevTab).css('display','none');
+    }
+    
     $('#'+tab).css('display','block');
+  
+    this.prevTab = tab;
   }
 
   // <div class="tabs clearfix">

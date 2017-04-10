@@ -10,7 +10,7 @@ class PersonApplyJob extends Model
 {
   protected $table = 'person_apply_jobs';
   protected $fillable = ['person_id','job_id','shop_id','message','approved'];
-  protected $modelRelations = array('JobApplyToBranch');
+  protected $modelRelations = array('JobApplyToBranch','AttachedFile');
 
   public $formHelper = true;
   public $modelData = true;

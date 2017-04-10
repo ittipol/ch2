@@ -57,7 +57,15 @@
     <div class="message-content">
       @foreach($messages as $message)
         
-        {{$message['sender']}}
+        <div class="sender-profile clearfix">
+          <div class="sender-profile-image">
+            <div class="profile-image" style="background-image:url({{$message['sender']['profileImage']}});"></div>
+          </div>
+          <div class="sender-profile-info">
+            <div><strong>{{$message['sender']['name']}}</strong></div>
+            <div>{{$message['createdDate']}}</div>
+          </div>
+        </div>
 
         <div class="message">
           <div class="message-box">
@@ -84,6 +92,9 @@
             @endforeach
           </div>
           @endif
+          <div class="message-reply-flat-button text-right">
+            <a href="">ตอบกลับ</a>
+          </div>
 
         </div>
 

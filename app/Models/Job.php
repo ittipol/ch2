@@ -91,13 +91,17 @@ class Job extends Model
       $salary = str_replace($match, number_format($match, 0, '.', ','), $salary);
     }
 
-    $_salary = substr($salary, -3);
     $addBaht = true;
-    for ($i=0; $i < 3; $i++) { 
-      
-      if((ord($_salary[$i]) < 48) || (ord($_salary[$i]) > 57)) {
-        $addBaht = false;
-        break;
+    if(strlen($salary) > 3) {
+
+      $_salary = substr($salary, -3);
+      for ($i=0; $i < 3; $i++) { 
+        
+        if((ord($_salary[$i]) < 48) || (ord($_salary[$i]) > 57)) {
+          $addBaht = false;
+          break;
+        }
+
       }
 
     }
@@ -148,30 +152,32 @@ class Job extends Model
 
   public function buildModelData() {
 
-    $this->salary = trim($this->salary);
-    $this->salary = str_replace(',', '', $this->salary);
+    // $this->salary = trim($this->salary);
+    // $this->salary = str_replace(',', '', $this->salary);
 
-    preg_match_all('/[0-9]+/', $this->salary, $matches);
+    // preg_match_all('/[0-9]+/', $this->salary, $matches);
 
-    $numbers = array();
-    foreach ($matches[0] as $key => $match) {
-      $this->salary = str_replace($match, number_format($match, 0, '.', ','), $this->salary);
-    }
+    // $numbers = array();
+    // foreach ($matches[0] as $key => $match) {
+    //   $this->salary = str_replace($match, number_format($match, 0, '.', ','), $this->salary);
+    // }
 
-    $_salary = substr($this->salary, -3);
-    $addBaht = true;
-    for ($i=0; $i < 3; $i++) { 
+    // $_salary = substr($this->salary, -3);
+    // $addBaht = true;
+    // for ($i=0; $i < 3; $i++) { 
       
-      if((ord($_salary[$i]) < 48) || (ord($_salary[$i]) > 57)) {
-        $addBaht = false;
-        break;
-      }
+    //   if((ord($_salary[$i]) < 48) || (ord($_salary[$i]) > 57)) {
+    //     $addBaht = false;
+    //     break;
+    //   }
 
-    }
+    // }
 
-    if($addBaht) {
-      $this->salary .= ' บาท';
-    }
+    // if($addBaht) {
+    //   $this->salary .= ' บาท';
+    // }
+    
+    $this->salary = $this->getSalary($this->salary);
 
     $recruitment = json_decode($this->recruitment,true);
 

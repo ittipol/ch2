@@ -9,7 +9,7 @@ use File;
 class AttachedFile extends Model
 {
   protected $table = 'attached_files';
-  protected $fillable = ['model','model_id','path','filename','filesize','person_id'];
+  protected $fillable = ['model','model_id','path','filename','filesize','alias','person_id'];
 
   protected $storagePath = 'app/public/attached_files/';
 
@@ -43,9 +43,9 @@ class AttachedFile extends Model
 
       $attechedFileInstance->model = $model->modelName;
       $attechedFileInstance->model_id = $model->id;
-      $attechedFileInstance->path = $tempFile->alias;
       $attechedFileInstance->filename = $tempFile->filename;
       $attechedFileInstance->filesize = $tempFile->filesize;
+      $attechedFileInstance->alias = $tempFile->alias;
 
       if(!$attechedFileInstance->save()) {
         continue;
@@ -73,53 +73,125 @@ class AttachedFile extends Model
 
   }
 
-  public function fileAccessPermission($model,$file) {
-
-    $attachedFileAccessPermission = new AttachedFileAccessPermission;
-
-    $attachedFileAccessPermission->newInstance()
-    ->fill(array(
-      'model' => $model->sender,
-      'model_id' => $model->sender_id,
-      'attached_file_id' => $file->id
-    ))
-    ->save();
-
-    $attachedFileAccessPermission->newInstance()
-    ->fill(array(
-      'model' => $model->receiver,
-      'model_id' => $model->receiver_id,
-      'attached_file_id' => $file->id
-    ))
-    ->save();
-
-  }
-
   public function getFullDirPath() {
     
     $string = new String;
 
-    return storage_path($this->storagePath.$string->generateUnderscoreName($this->model)).'/'.$this->model_id.'/'.$this->path.'/';
+    return storage_path($this->storagePath.$string->generateUnderscoreName($this->model)).'/'.$this->model_id.'/';
+    // return storage_path($this->storagePath.$string->generateUnderscoreName($this->model)).'/'.$this->model_id.'/'.$this->path.'/';
   }
 
-  public function getImagePath($filename = '') {
+  public function getImagePath($alias = '') {
 
-    if(empty($filename)) {
-      $filename = $this->filename;
+    if(empty($alias)) {
+      $alias = $this->alias;
     }
 
-    return $this->getFullDirPath().$filename;
+    return $this->getFullDirPath().$alias;
   }
 
   public function moveFile($oldPath,$to) {
     return File::move($oldPath, $to);
   }
 
+  public function fileAccessPermission($model,$file) {
+
+    $attachedFileAccessPermission = new AttachedFileAccessPermission;
+
+    switch ($model->modelName) {
+      case 'Message':
+        dd('meesds');
+        $attachedFileAccessPermission->newInstance()
+        ->fill(array(
+          'model' => $model->sender,
+          'model_id' => $model->sender_id,
+          'attached_file_id' => $file->id
+        ))
+        ->save();
+
+        $attachedFileAccessPermission->newInstance()
+        ->fill(array(
+          'model' => $model->receiver,
+          'model_id' => $model->receiver_id,
+          'attached_file_id' => $file->id
+        ))
+        ->save();
+
+        break;
+      
+      case 'PersonApplyJob':
+     
+        $attachedFileAccessPermission->newInstance()
+        ->fill(array(
+          'model' => 'Person',
+          'model_id' => $model->person_id,
+          'attached_file_id' => $file->id
+        ))
+        ->save();
+
+        $attachedFileAccessPermission->newInstance()
+        ->fill(array(
+          'model' => 'Shop',
+          'model_id' => $model->shop_id,
+          'attached_file_id' => $file->id
+        ))
+        ->save();
+
+        break;
+    }
+
+  }
+
+
+  public function hasPermission() {
+
+    $permissions = $this->getRelatedData('AttachedFileAccessPermission',array(
+      'fields' => array('model','model_id')
+    ));
+
+    $hasPermission = false;
+    foreach ($permissions as $permission) {
+      
+      switch ($permission->model) {
+        case 'Shop':
+          
+          $personToShopModel = new PersonToShop;
+          $records = $personToShopModel->getByShopId($permission->model_id);
+
+          $personIds = array();
+          foreach ($records as $record) {
+            $personIds[] = $record->person_id; 
+          }
+
+
+          $hasPermission = in_array(session()->get('Person.id'), $personIds);
+
+          break;
+        
+        case 'Person':
+          
+          if(session()->get('Person.id') == $permission->model_id) {
+            $hasPermission = true;
+          }
+
+          break;
+      }
+
+      if($hasPermission) {
+        break;
+      }
+
+    }
+
+    return $hasPermission;
+
+  }
+
   public function getFilesize() {
     return $this->bytesToSize($this->filesize);
   }
 
-  public function buildUrl() {
+  public function fileAttachmentUrl() {
     $url = new Url;
     return $url->url('/get_file_attachment/'.$this->id);
   }
@@ -133,10 +205,12 @@ class AttachedFile extends Model
 
   public function buildModelData() {
 
+    $string = new String;
+
     return array(
-      'filename' => $this->filename,
+      'filename' => $string->truncString($this->filename,20),
       'filesize' => $this->getFilesize(),
-      'downloadUrl' => $this->buildUrl()
+      'downloadUrl' => $this->fileAttachmentUrl()
     );
 
   }

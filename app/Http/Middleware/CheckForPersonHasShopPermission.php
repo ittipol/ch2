@@ -61,7 +61,7 @@ class CheckForPersonHasShopPermission
           'permission' => true,
           'modelName' => 'PersonApplyJob'
         ),
-        'shop.job.applying_message.add' => array(
+        'shop.job.applying.new_message' => array(
           'permission' => true,
           'modelName' => 'PersonApplyJob'
         ),

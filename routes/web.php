@@ -81,6 +81,9 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('account/job_applying', 'AccountController@jobApplying')->name('account.job');
   Route::get('account/job_applying/{id}', 'JobController@accountJobApplyingDetail')->name('account.job.detail');
 
+  Route::get('account/job_applying/message_reply/{id}','JobController@jobApplyingMessageReply');
+  Route::post('account/job_applying/message_reply/{id}','JobController@jobApplyingMessageReplySend');
+
   Route::get('get_file_attachment/{id}', 'StaticFileController@attachedFile');
 
 });
@@ -149,8 +152,6 @@ Route::group(['middleware' => ['auth','person.experience']], function () {
 });
 
 // Freelance
-// Route::get('freelance','FreelanceController@index')->name('freelance.index');
-// Route::get('freelance/list','FreelanceController@listView')->name('freelance.list');
 Route::get('freelance/detail/{id}','FreelanceController@detail')->name('freelance.detail');
 
 Route::group(['middleware' => ['auth','person.experience']], function () {
@@ -321,7 +322,6 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
 });
 
-
 // Job
 Route::get('job/list','JobController@listView')->name('job.list');
 Route::get('job/detail/{id}','JobController@detail')->name('job.detail');
@@ -333,9 +333,9 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::get('shop/{shopSlug}/job_applying_list','JobController@jobApplyingList')->name('shop.job.applying_list');
   Route::get('shop/{shopSlug}/job_applying_detail/{id}','JobController@jobApplyingDetail')->name('shop.job.applying_detail');
   
-  Route::get('shop/{shopSlug}/job_applying_message/new/{id}','JobController@jobApplyingMessageAdd')->name('shop.job.applying_message.add');
-  Route::post('shop/{shopSlug}/job_applying_message/new/{id}','JobController@jobApplyingMessageAddingSubmit')->name('shop.job.applying_message.add');
-
+  Route::get('shop/{shopSlug}/job_applying/new_message/{id}','JobController@jobApplyingNewMessage')->name('shop.job.applying.new_message');
+  Route::post('shop/{shopSlug}/job_applying/new_message/{id}','JobController@jobApplyingMessageSend')->name('shop.job.applying.new_message');
+  
   Route::get('shop/{shopSlug}/job/post','JobController@add')->name('shop.job.add');
   Route::post('shop/{shopSlug}/job/post','JobController@addingSubmit')->name('shop.job.add');
 

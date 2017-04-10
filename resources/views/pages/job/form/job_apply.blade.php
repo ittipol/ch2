@@ -71,15 +71,31 @@
           'class' => 'ckeditor'
         ));
       ?>
-
-      <div class="secondary-message-box error space-top-20">
-        <div class="secondary-message-box-inner">
-          <p>*** ข้อความนี้จะแสดงอยู่ส่วนแรกของรายละเอียดการสมัครงานของคุณ</p>
-          <p>*** สามารถเว้นว่างข้อความนี้ได้</p>
-        </div>
-      </div>
+      
     </div>
 
+    <div class="form-row">
+
+      <div class="sub-title">แนบไฟล์</div>
+
+      <div class="secondary-message-box error space-bottom-20">
+        <div class="secondary-message-box-inner">
+          <p>*** ขนาดของไฟล์ต้องไม่เกิน 2 MB</p>
+          <p>*** สามารถแนบไฟล์ได้สูงสุด 10 ไฟล์</p>
+        </div>
+      </div>
+
+      <div id="_file_group"></div>
+
+    </div>
+
+  </div>
+
+  <div class="secondary-message-box error space-top-20">
+    <div class="secondary-message-box-inner">
+      <p>*** ข้อความนี้จะแสดงอยู่ส่วนแรกของรายละเอียดการสมัครงานของคุณ</p>
+      <p>*** สามารถเว้นว่างข้อความนี้ได้</p>
+    </div>
   </div>
 
   <?php
@@ -93,5 +109,19 @@
   ?>
 
 </div>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+
+    const attachedFile = new AttachedFile('_file_group');
+    attachedFile.load();
+
+    const form = new Form();
+    form.load();
+
+  });
+
+</script>
 
 @stop

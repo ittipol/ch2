@@ -52,7 +52,7 @@
   @if($hasBranch)
   <div class="space-top-20">
     <div class="row">
-      <dt class="col-sm-3">สาขาที่ผู้สมัครสามารถทำงานได้</dt>
+      <dt class="col-sm-3">สาขาที่ผู้สมัครสามารถเข้าทำงานได้</dt>
       <dd class="col-sm-9">
       @if(!empty($branches))
         @foreach($branches as $branch)
@@ -72,231 +72,349 @@
   </div>
   @endif
 
+  @if(!empty($attachedFiles))
+  <div class="space-top-20">
+
+    <h4>ไฟล์จากผู้สมัคร</h4>
+    <div class="message-file-attachment clearfix">
+
+      @foreach($attachedFiles as $attachedFile)
+
+        <a href="{{$attachedFile['downloadUrl']}}" class="attached-file-box clearfix">
+          <div class="attached-file-image">
+            <img src="/images/icons/document-white.png">
+          </div>
+          <div class="attached-file-info">
+            <div class="attached-file-title">
+              <h4>{{$attachedFile['filename']}}</h4>
+              <h5>{{$attachedFile['filesize']}}</h5>
+            </div>
+          </div>
+        </a>
+
+      @endforeach
+    </div>
+  </div>
+  @endif
+
   <div class="line space-top-bottom-30"></div>
 
-  <h3>ข้อมูลผู้สมัครงาน</h3>
+  <div class="tabs clearfix">
+    <label>
+      <input class="tab" type="radio" name="tabs"  data-tab="person_experience_tab">
+      <span>ประวัติผู้สมัคร</span>
+    </label>
+    <label>
+      <input class="tab" type="radio" name="tabs" data-tab="message_tab">
+      <span>ข้อความ</span>
+    </label>
+  </div>
 
-  <div class="space-top-bottom-10">
+  <div id="message_tab" class="tab-content">
 
-    <div class="content-box">
-      <div class="content-box-inner">
-        <div class="row">
+    <!-- <h4>ข้อความ</h4>
+    <div class="line space-bottom-20"></div> -->
 
-          <div class="col-md-6 col-sm-12">
-            <div class="content-box-panel overlay-bg">
-              <h5>โปรไฟล์</h5>
-
-              <div class="row">
-
-                <div class="col-sm-12">
-                  <div class="image-frame elem-center">
-                    @if(!empty($profileImageUrl))
-                    <div class="content-box-main-image" style="background-image:url({{$profileImageUrl}});"></div>
-                    @endif
-                  </div>
-                </div>
-
-                <div class="col-sm-12">
-                  <div class="profile-info text-center space-top-20">
-                    <h3>{{$profile['name']}}</h3>
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="line space-top-bottom-20"></div>
-
-              <div class="content-box-main-sub-content clearfix">
-                
-                <div class="main-sub-content">
-                  <div><strong>เพศ</strong>: {{$profile['gender']}}</div>
-                </div>
-
-              </div>
-
+    @if(!empty($messages))
+      <div class="message-content">
+        @foreach($messages as $message)
+          
+          <div class="sender-profile clearfix">
+            <div class="sender-profile-image">
+              <div class="profile-image" style="background-image:url({{$message['sender']['profileImage']}});"></div>
+            </div>
+            <div class="sender-profile-info">
+              <div><strong>{{$message['sender']['name']}}</strong></div>
+              <div>{{$message['createdDate']}}</div>
             </div>
           </div>
 
-          <div class="col-md-6 col-sm-12">
+          <div class="message">
+            <div class="message-box">
+              {!!$message['message']!!}
+            </div>
 
-            <div class="profile-contact-info">
+            @if(!empty($message['attachedFiles']))
+            <div class="message-file-attachment clearfix">
 
-              <h4>ติดต่อผู้สมัคร</h4>
-              <div class="line space-top-bottom-10"></div>
+              @foreach($message['attachedFiles'] as $attachedFile)
 
-              @if(!empty($profile['Contact']['phone_number']))
-              <dl>
-                <dt>หมายเลขโทรศัพท์</dt>
-                <dd>{{$profile['Contact']['phone_number']}}</dd>
-              </dl>
-              @endif
+                <a href="{{$attachedFile['downloadUrl']}}" class="attached-file-box clearfix">
+                  <div class="attached-file-image">
+                    <img src="/images/icons/document-white.png">
+                  </div>
+                  <div class="attached-file-info">
+                    <div class="attached-file-title">
+                      <h4>{{$attachedFile['filename']}}</h4>
+                      <h5>{{$attachedFile['filesize']}}</h5>
+                    </div>
+                  </div>
+                </a>
 
-              @if(!empty($profile['Contact']['email']))
-              <dl>
-                <dt>อีเมล</dt>
-                <dd>{{$profile['Contact']['email']}}</dd>
-              </dl>
-              @endif
+              @endforeach
+            </div>
+            @endif
 
+            <div class="message-reply-flat-button text-right">
+              <a href="">ตอบกลับ</a>
             </div>
 
           </div>
 
-        </div>
+        @endforeach
       </div>
-    </div>
 
-    @if(!empty($privateWebsites))
-    <div class="person-experience-info">
-      <h4>เว็บไซต์ส่วนตัวของผู้สมัคร</h4>
-      <div class="line"></div>
-      <div class="row">
-      @foreach($privateWebsites as $privateWebsite)
-        <div class="col-md-6 col-xs-12">
-          <h4><a href="{{$privateWebsite['url']}}">{{$privateWebsite['website_url']}}</a></h4>
-          <h5>{{$privateWebsite['websiteType']}}</h5>
-          <a href="{{$privateWebsite['url']}}" class="button">เข้าสู่หน้าเว็บ</a>
-          <div class="line space-top-20"></div>
+    @else
+
+      <div class="list-empty-message text-center space-top-20">
+        <img class="space-bottom-20 not-found-image" src="/images/common/not-found.png">
+        <div>
+          <h3>ยังไม่มีข้อความตอบกลับจากผู้สมัคร</h3>
         </div>
-      @endforeach
       </div>
-    </div>
+
     @endif
 
-    <h3 class="space-bottom-10">ประวัติการทำงานของผู้สมัคร</h3>
+  </div>
 
-    <div class="person-experience-content">
+  <div id="person_experience_tab" class="tab-content">
 
-      @if(!empty($careerObjective))
+    <h3>ข้อมูลผู้สมัครงาน</h3>
+
+    <div class="space-top-bottom-10">
+
+      <div class="content-box">
+        <div class="content-box-inner">
+          <div class="row">
+
+            <div class="col-md-6 col-sm-12">
+              <div class="content-box-panel overlay-bg">
+                <h5>โปรไฟล์</h5>
+
+                <div class="row">
+
+                  <div class="col-sm-12">
+                    <div class="image-frame elem-center">
+                      @if(!empty($profileImageUrl))
+                      <div class="content-box-main-image" style="background-image:url({{$profileImageUrl}});"></div>
+                      @endif
+                    </div>
+                  </div>
+
+                  <div class="col-sm-12">
+                    <div class="profile-info text-center space-top-20">
+                      <h3>{{$profile['name']}}</h3>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="line space-top-bottom-20"></div>
+
+                <div class="content-box-main-sub-content clearfix">
+                  
+                  <div class="main-sub-content">
+                    <div><strong>เพศ</strong>: {{$profile['gender']}}</div>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+
+              <div class="profile-contact-info">
+
+                <h4>ติดต่อผู้สมัคร</h4>
+                <div class="line space-top-bottom-10"></div>
+
+                @if(!empty($profile['Contact']['phone_number']))
+                <dl>
+                  <dt>หมายเลขโทรศัพท์</dt>
+                  <dd>{{$profile['Contact']['phone_number']}}</dd>
+                </dl>
+                @endif
+
+                @if(!empty($profile['Contact']['email']))
+                <dl>
+                  <dt>อีเมล</dt>
+                  <dd>{{$profile['Contact']['email']}}</dd>
+                </dl>
+                @endif
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      @if(!empty($privateWebsites))
+      <div class="person-experience-info">
+        <h4>เว็บไซต์ส่วนตัวของผู้สมัคร</h4>
+        <div class="line"></div>
+        <div class="row">
+        @foreach($privateWebsites as $privateWebsite)
+          <div class="col-md-6 col-xs-12">
+            <h4><a href="{{$privateWebsite['url']}}">{{$privateWebsite['website_url']}}</a></h4>
+            <h5>{{$privateWebsite['websiteType']}}</h5>
+            <a href="{{$privateWebsite['url']}}" class="button">เข้าสู่หน้าเว็บ</a>
+            <div class="line space-top-20"></div>
+          </div>
+        @endforeach
+        </div>
+      </div>
+      @endif
+
+      <h3 class="space-bottom-10">ประวัติการทำงานของผู้สมัคร</h3>
+
+      <div class="person-experience-content">
+
+        @if(!empty($careerObjective))
+          <div class="person-experience-info">
+            <h4>จุดมุ่งหมายในอาชีพ</h4>
+            <div class="line"></div>
+            <p>{!!$careerObjective!!}</p>
+          </div>
+        @endif
+
+        @if(!empty($PersonWorkingExperience))
         <div class="person-experience-info">
-          <h4>จุดมุ่งหมายในอาชีพ</h4>
+          <h4>ประสบการณ์การทำงาน</h4>
           <div class="line"></div>
-          <p>{!!$careerObjective!!}</p>
-        </div>
-      @endif
-
-      @if(!empty($PersonWorkingExperience))
-      <div class="person-experience-info">
-        <h4>ประสบการณ์การทำงาน</h4>
-        <div class="line"></div>
-        <div class="list-group">
-          @foreach($PersonWorkingExperience as $detail)
-            <div class="list-row row">
-              <div class="col-xs-9">
-                <h4>{{$detail['message']}}</h4>
-                <h5>{{$detail['peroid']}}</h5>
+          <div class="list-group">
+            @foreach($PersonWorkingExperience as $detail)
+              <div class="list-row row">
+                <div class="col-xs-9">
+                  <h4>{{$detail['message']}}</h4>
+                  <h5>{{$detail['peroid']}}</h5>
+                </div>
               </div>
-            </div>
-          @endforeach
+            @endforeach
+          </div>
         </div>
-      </div>
-      @endif
+        @endif
 
-      @if(!empty($PersonInternship))
-      <div class="person-experience-info">
-        <h4>ประสบการณ์การฝึกงาน</h4>
-        <div class="line"></div>
-        <div class="list-group">
-          @foreach($PersonInternship as $detail)
-            <div class="list-row row">
-              <div class="col-xs-9">
-                <h4>{{$detail['company']}}</h4>
-                <h5>{{$detail['peroid']}}</h5>
+        @if(!empty($PersonInternship))
+        <div class="person-experience-info">
+          <h4>ประสบการณ์การฝึกงาน</h4>
+          <div class="line"></div>
+          <div class="list-group">
+            @foreach($PersonInternship as $detail)
+              <div class="list-row row">
+                <div class="col-xs-9">
+                  <h4>{{$detail['company']}}</h4>
+                  <h5>{{$detail['peroid']}}</h5>
+                </div>
               </div>
-            </div>
-          @endforeach
+            @endforeach
+          </div>
         </div>
-      </div>
-      @endif
+        @endif
 
-      @if(!empty($PersonEducation))
-      <div class="person-experience-info">
-        <h4>ประวัติการศึกษา</h4>
-        <div class="line"></div>
-        <div class="list-group">
-          @foreach($PersonEducation as $detail)
-            <div class="list-row row">
-              <div class="col-xs-9">
-                <h4>{{$detail['message']}}</h4>
-                <h5>{{$detail['peroid']}}</h5>
+        @if(!empty($PersonEducation))
+        <div class="person-experience-info">
+          <h4>ประวัติการศึกษา</h4>
+          <div class="line"></div>
+          <div class="list-group">
+            @foreach($PersonEducation as $detail)
+              <div class="list-row row">
+                <div class="col-xs-9">
+                  <h4>{{$detail['message']}}</h4>
+                  <h5>{{$detail['peroid']}}</h5>
+                </div>
               </div>
-            </div>
-          @endforeach
+            @endforeach
+          </div>
         </div>
-      </div>
-      @endif
+        @endif
 
-      @if(!empty($PersonProject))
-      <div class="person-experience-info">
-        <h4>โปรเจค</h4>
-        <div class="line"></div>
-        <div class="list-group">
-          @foreach($PersonProject as $detail)
-            <div class="list-row row">
-              <div class="col-xs-9">
-                <h4>{{$detail['name']}}</h4>
-                <h5>{{$detail['peroid']}}</h5>
+        @if(!empty($PersonProject))
+        <div class="person-experience-info">
+          <h4>โปรเจค</h4>
+          <div class="line"></div>
+          <div class="list-group">
+            @foreach($PersonProject as $detail)
+              <div class="list-row row">
+                <div class="col-xs-9">
+                  <h4>{{$detail['name']}}</h4>
+                  <h5>{{$detail['peroid']}}</h5>
+                </div>
               </div>
-            </div>
-          @endforeach
+            @endforeach
+          </div>
         </div>
-      </div>
-      @endif
+        @endif
 
-      @if(!empty($PersonCertificate))
-      <div class="person-experience-info">
-        <h4>ประกาศนียบัตรและการฝึกอบรม</h4>
-        <div class="line"></div>
-        <div class="list-group">
-          @foreach($PersonCertificate as $detail)
-            <div class="list-row row">
-              <div class="col-xs-9">
-                <h4>{{$detail['name']}}</h4>
-                <h5>{{$detail['peroid']}}</h5>
+        @if(!empty($PersonCertificate))
+        <div class="person-experience-info">
+          <h4>ประกาศนียบัตรและการฝึกอบรม</h4>
+          <div class="line"></div>
+          <div class="list-group">
+            @foreach($PersonCertificate as $detail)
+              <div class="list-row row">
+                <div class="col-xs-9">
+                  <h4>{{$detail['name']}}</h4>
+                  <h5>{{$detail['peroid']}}</h5>
+                </div>
               </div>
-            </div>
-          @endforeach
+            @endforeach
+          </div>
         </div>
-      </div>
-      @endif
+        @endif
 
-      @if(!empty($skills))
-      <div class="person-experience-info">
-        <h4>ทักษะและความสามารถ</h4>
-        <div class="line"></div>
-        <div class="list-group">
-          @foreach($skills as $skill)
-            <div class="list-row row">
-              <div class="col-xs-9">
-                <h4>{{$skill['skill']}}</h4>
+        @if(!empty($skills))
+        <div class="person-experience-info">
+          <h4>ทักษะและความสามารถ</h4>
+          <div class="line"></div>
+          <div class="list-group">
+            @foreach($skills as $skill)
+              <div class="list-row row">
+                <div class="col-xs-9">
+                  <h4>{{$skill['skill']}}</h4>
+                </div>
               </div>
-            </div>
-          @endforeach
+            @endforeach
+          </div>
         </div>
-      </div>
-      @endif
+        @endif
 
-      @if(!empty($languageSkills))
-      <div class="person-experience-info">
-        <h4>ภาษาที่สามารถสื่อสารได้</h4>
-        <div class="line"></div>
-        <div class="list-group">
-          @foreach($languageSkills as $languageSkill)
-            <div class="list-row row">
-              <div class="col-xs-9">
-                <h4>{{$languageSkill['name']}}</h4>
-                <h5>{{$languageSkill['level']}}</h5>
+        @if(!empty($languageSkills))
+        <div class="person-experience-info">
+          <h4>ภาษาที่สามารถสื่อสารได้</h4>
+          <div class="line"></div>
+          <div class="list-group">
+            @foreach($languageSkills as $languageSkill)
+              <div class="list-row row">
+                <div class="col-xs-9">
+                  <h4>{{$languageSkill['name']}}</h4>
+                  <h5>{{$languageSkill['level']}}</h5>
+                </div>
               </div>
-            </div>
-          @endforeach
+            @endforeach
+          </div>
         </div>
+        @endif
+
       </div>
-      @endif
 
     </div>
 
   </div>
 
 </div>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+
+    const tabs = new Tabs('person_experience_tab');
+    tabs.load();
+
+  });
+
+</script>
 
 @stop

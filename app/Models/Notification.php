@@ -106,15 +106,6 @@ class Notification extends Model
 
   }
 
-  // public function getNorificationUrl($model,$urlFormat,$format = null) {
-
-  //   $url = new Url;
-  //   $_url = $url->setAndParseUrl($urlFormat,$this->parseUrl($urlFormat,$model));
-
-  //   return $_url;
-
-  // }
-
   private function parseUrl($urlFormat,$model) {
 
     preg_match_all('/{[\w0-9]+}/', $urlFormat, $matches);
@@ -139,7 +130,7 @@ class Notification extends Model
             ->first()
             ->slug;
           
-            $value['shopSlug'] = $model->id;
+            $value['shopSlug'] = $slug;
 
           break;
       }

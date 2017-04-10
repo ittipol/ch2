@@ -170,9 +170,7 @@ class AppServiceProvider extends ServiceProvider
       });
 
       view()->composer('layouts.blackbox.components.global-notification', function($view){
-        
         $view->with('_notifications',Service::loadModel('Notification')->getUnreadNotification());
-
       });
 
       view()->composer('layouts.blackbox.components.global-account', function($view){

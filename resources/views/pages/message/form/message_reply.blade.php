@@ -5,7 +5,7 @@
   <div class="container-header">
     <div class="row">
       <div class="col-lg-6 col-sm-12">
-        <div class="title">ข้อความถึงผู้สมัคร</div>
+        <div class="title">ตอบกลับข้อความ</div>
       </div>
     </div>
   </div>
@@ -40,28 +40,27 @@
 
       <div class="secondary-message-box error space-bottom-20">
         <div class="secondary-message-box-inner">
-          <p>*** ขนาดของไฟล์ต้องไม่เกิน 3 MB</p>
+          <p>*** ขนาดของไฟล์ต้องไม่เกิน 2 MB</p>
+          <p>*** สามารถแนบไฟล์ได้สูงสุด 10 ไฟล์</p>
         </div>
       </div>
 
-      <div class="form-row">
-        <div id="_file_group"></div>
-      </div>
-
-      @if(!empty($sendAs))
-        <div class="form-row">
-        @foreach($sendAs as $value)
-          <label class="choice-box">
-            <?php
-              echo Form::radio('send_as', $value['value'], $value['select']);
-            ?>
-            <div class="inner">{{$value['text']}}</div>
-          </label>
-        @endforeach
-        </div>
-      @endif
+      <div id="_file_group"></div>
 
     </div>
+
+    @if(!empty($sendAs))
+      <div class="form-row">
+      @foreach($sendAs as $value)
+        <label class="choice-box">
+          <?php
+            echo Form::radio('send_as', $value['value'], $value['select']);
+          ?>
+          <div class="inner">{{$value['text']}}</div>
+        </label>
+      @endforeach
+      </div>
+    @endif
 
   </div>
 

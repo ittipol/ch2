@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\library\service;
 use App\library\string;
+use App\library\date;
 
 class Message extends Model
 {
@@ -32,6 +33,14 @@ class Message extends Model
     return Service::loadModel($this->receiver)->select('name')->find($this->receiver_id)->name;
   }
 
+  public function getSenderInfo() {
+    $sender = Service::loadModel($this->sender)->select('id','name','profile_image_id')->find($this->sender_id);
+    return array(
+      'name' => $sender->name,
+      'profileImage' => $sender->getProfileImageUrl('xs')
+    );
+  }
+
   public function getMessage() {
 
     $string = new String;
@@ -39,9 +48,63 @@ class Message extends Model
     return $string->truncString($this->message,40,true);
   }
 
+  public function hasPermission() {
+
+    if($this->checkPermission($this->sender,$this->sender_id) || $this->checkPermission($this->receiver,$this->receiver_id)) {
+      return true;
+    }
+
+    return false;
+
+  }
+
+  public function checkPermission($modelName,$modelId) {
+
+    $hasPermission = false;
+    switch ($modelName) {
+      case 'Shop':
+        
+        $personToShopModel = new PersonToShop;
+        $records = $personToShopModel->getByShopId($modelId);
+
+        $personIds = array();
+        foreach ($records as $record) {
+          $personIds[] = $record->person_id; 
+        }
+
+
+        $hasPermission = in_array(session()->get('Person.id'), $personIds);
+
+        break;
+      
+      case 'Person':
+        
+        if(session()->get('Person.id') == $permission->model_id) {
+          $hasPermission = true;
+        }
+
+        break;
+
+    }
+
+    return $hasPermission;
+
+  }
+
+  public function isTopParent() {
+
+    if($this->parent_id == null) {
+      return true;
+    }
+
+    return false;
+
+  }
+
   public function buildModelData() {
 
-    // Get Attached files
+    $date = new Date;
+
     $files = $this->getRelatedData('AttachedFile',array(
       'fileds' => array('id','filename','filesize')
     ));
@@ -55,10 +118,13 @@ class Message extends Model
 
     }
 
+    // Get Reply message
+
     return array(
       'message' => $this->message,
-      'sender' => $this->getSenderName(),
-      'attachedFiles' => $_files
+      'sender' => $this->getSenderInfo(),
+      'attachedFiles' => $_files,
+      'createdDate' => $date->calPassedDate($this->created_at->format('Y-m-d H:i:s'))
     );
 
   }

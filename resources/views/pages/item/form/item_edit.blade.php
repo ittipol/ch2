@@ -141,8 +141,7 @@
       <div class="sub-title">รูปภาพ</div>
 
       <div class="form-row">
-        <div id="_image_group">
-        </div>
+        <div id="_image_group"></div>
       </div>
 
     </div>

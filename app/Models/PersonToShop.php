@@ -37,5 +37,16 @@ class PersonToShop extends Model
 
   }
 
+  public function getByShopId($shopId) {
+    $records = $this->where('shop_id','=',$shopId);
+
+    if(!$records->exists()) {
+      return null;
+    }
+
+    return $records->get();
+
+  }
+
   public function setUpdatedAt($value) {}
 }

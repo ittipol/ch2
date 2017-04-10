@@ -1,28 +1,51 @@
-.attached-file-box {
+.attached-file-add-button {
 	position: relative;
 	width: 250px;
-	height: 50px;
-	background-color: #CFD8DC;
-	/*display: inline-block;*/
-	float: left;
-	margin-right: 10px;
-}
-
-label.attached-file-box {
+	/*height: 50px;*/
+	background-color: #EF6C00;
+	margin: 0;
+	padding: 12px 0;
 	cursor: pointer;
 }
 
-label.attached-file-box input[type="file"] {
+.attached-file-add-button.disabled {
+	background-color: #ccc;
+	cursor: default;
+}
+
+.attached-file-add-button-text {
+	text-align: center;
+}
+
+.attached-file-add-button input[type="file"] {
 	opacity: 0;
 	position: absolute;
 	z-index: -1;
 }
 
-.attached-file-error {
-	color: #D50000;
-	background-color: #FFEBEE;
-	padding: 20px;
-	display: none;
+.attached-file-add-button img {
+	width: 25px;
+	height: 25px;
+	display: inline-block;
+	padding: 2px;
+	margin-top: -2px;
+}
+
+.attached-file-add-button h4 {
+	color: #fff;
+	font-size: 14px;
+	padding: 0;
+	margin: 0;
+	display: inline-block;
+}
+
+.attached-file-box {
+	position: relative;
+	width: 250px;
+	height: 50px;
+	background-color: #CFD8DC;
+	float: left;
+	margin-right: 10px;
 }
 
 .attached-file-box.attached-file-button {
@@ -45,7 +68,7 @@ label.attached-file-box input[type="file"] {
 .attached-file-box > .attached-file-info {
 	float: left;
 	padding: 10px;
-	width: 70%;
+	width: 72%;
 }
 
 .attached-file-box .progress-bar {
@@ -93,4 +116,12 @@ label.attached-file-box input[type="file"] {
 
 .attached-file-box .attached-file-cancel-button:hover {
 	background-color: rgb(200,200,200);
+}
+
+.attached-file-box.error > .attached-file-image {
+	background-color: #FF5252;
+}
+
+.attached-file-box.error .attached-file-title h5 {
+	color: #FF1744;
 }
