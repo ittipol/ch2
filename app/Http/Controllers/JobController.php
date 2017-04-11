@@ -385,12 +385,14 @@ class JobController extends Controller
     ));
 
     $_messages = array();
-    if(!empty($_messages)) {
+    if(!empty($messages)) {
       foreach ($messages as $message) {
-        $_messages[] = $message->buildModelData();
+        $_messages[] = array_merge($message->buildModelData(),array(
+          'replyUrl' => $url->setAndParseUrl('shop/{shopSlug}/job_applying/message_reply/{id}',array('shopSlug'=>$this->param['shopSlug'],'id'=>$message->id))
+        ));
       }  
     }
-    
+
     $this->data = $person->personExperience->getPersonExperience();
     $this->setData('jobName',$model->job->name);
     $this->setData('jobApply',$model->modelData->build(true));
@@ -435,8 +437,12 @@ class JobController extends Controller
     ));
 
     $_messages = array();
-    foreach ($messages as $message) {
-      $_messages[] = $message->buildModelData();
+    if(!empty($messages)) {
+      foreach ($messages as $message) {
+        $_messages[] = array_merge($message->buildModelData(),array(
+          'replyUrl' => $url->setAndParseUrl('account/job_applying/message_reply/{id}',array('id'=>$message->id))
+        ));
+      }
     }
 
     $this->setData('shopName',$model->shop->name);
@@ -530,6 +536,26 @@ class JobController extends Controller
     $model = Service::loadModel('Message');
 
     $this->data = $model->formHelper->build();
+    $this->setData('message',$message->message);
+
+    if(!empty($this->param['shopSlug'])) {
+
+      $sendAs = array(
+        array(
+          'text' => 'ส่งในนามบริษัทหรือร้านค้า',
+          'value' => 'shop',
+          'select' => true,
+        ),
+        array(
+          'text' => 'ส่งในนานบุคคล',
+          'value' => 'person',
+          'select' => false,
+        )
+      );
+
+      $this->setData('sendAs',$sendAs);
+
+    }
 
     return $this->view('pages.message.form.message_reply');
 
@@ -550,8 +576,14 @@ class JobController extends Controller
 
     $messageHelper = new MessageHelper;
     $messageHelper->setModel($personApplyJob);
-    $sender = $messageHelper->getSender();
-    $receiver = $messageHelper->getReceiver('shop');
+
+    if(!empty($this->param['shopSlug'])) {
+      $sender = $messageHelper->getSender($request->get('send_as'));
+      $receiver = $messageHelper->getReceiver('person');
+    }else {
+      $sender = $messageHelper->getSender();
+      $receiver = $messageHelper->getReceiver('shop');
+    }
 
     $model = Service::loadModel('Message');
     $model->model = 'PersonApplyJob';
@@ -564,14 +596,34 @@ class JobController extends Controller
 
     if($model->fill($request->all())->save()) {
 
-      dd('dsdsxx');
+      if(!empty($this->param['shopSlug'])) {
+        $options = array();
+        if($request->get('send_as') == 'shop') {
+          $options = array(
+            'sender' => array(
+              'model' => 'Shop',
+              'id' => request()->get('shopId')
+            )
+          );
+        }
 
-      $notificationHelper = new NotificationHelper;
-      $notificationHelper->setModel($model);
-      $notificationHelper->create('job-applying-message-reply-send-to-shop');
+        $notificationHelper = new NotificationHelper;
+        $notificationHelper->setModel($model);
+        $notificationHelper->create('job-applying-message-reply-send-to-person',$options);
 
-      MessageHelper::display('ข้อความถูกส่งแล้ว','success');
-      return Redirect::to('shop/'.$request->shopSlug.'/job_applying_detail/'.$this->param['id']);
+        MessageHelper::display('ข้อความถูกส่งแล้ว','success');
+        return Redirect::to('shop/'.$request->shopSlug.'/job_applying_detail/'.$message->model_id);
+
+      }else{
+        $notificationHelper = new NotificationHelper;
+        $notificationHelper->setModel($model);
+        $notificationHelper->create('job-applying-message-reply-send-to-shop');
+
+        MessageHelper::display('ข้อความถูกส่งแล้ว','success');
+        return Redirect::to('account/job_applying/'.$message->model_id);
+
+      }
+
     }else{
       return Redirect::back();
     }

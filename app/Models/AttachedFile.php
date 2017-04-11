@@ -100,7 +100,7 @@ class AttachedFile extends Model
 
     switch ($model->modelName) {
       case 'Message':
-        dd('meesds');
+
         $attachedFileAccessPermission->newInstance()
         ->fill(array(
           'model' => $model->sender,

@@ -29,7 +29,7 @@
     <div class="row space-bottom-30">
       <a class="button pull-right" href="{{$jobApplyUrl}}">
         <img src="/images/icons/edit-white.png">
-        สมัครงานนี้ผ่าน CHONBURI SQUARE
+        สมัครงานนี้
       </a>
     </div>
   @endif
@@ -215,7 +215,7 @@
       @else
       <a class="button" href="{{$jobApplyUrl}}">
         <img src="/images/icons/edit-white.png">
-        สมัครงานนี้ผ่าน CHONBURI SQUARE
+        สมัครงานนี้
       </a>
       @endif
     </div>

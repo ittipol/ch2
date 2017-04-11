@@ -111,7 +111,6 @@
     '__css/pages/cart.css',
     '__css/pages/checkout.css',
     '__css/pages/shelf.css',
-    '__css/pages/message.css',
     '__css/layouts/blackbox/wrapper.css',
     '__css/layouts/blackbox/components/action-bar.css',
     '__css/layouts/blackbox/components/main-nav.css',

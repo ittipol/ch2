@@ -35,8 +35,24 @@ Route::get('/debug',function(){
 
 });
 
+Route::get('/debug_notification',function(){
+  $notification = new App\Models\Notification;
+  $notification->getUnreadNotification();
+});
+
 // 
 
+// 
+
+// 
+
+// 
+
+// 
+
+// 
+
+// 
 Route::get('/','HomeController@index');
 
 Route::get('logout',function(){
@@ -336,6 +352,11 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::get('shop/{shopSlug}/job_applying/new_message/{id}','JobController@jobApplyingNewMessage')->name('shop.job.applying.new_message');
   Route::post('shop/{shopSlug}/job_applying/new_message/{id}','JobController@jobApplyingMessageSend')->name('shop.job.applying.new_message');
   
+  Route::get('shop/{shopSlug}/job_applying/message_reply/{id}','JobController@jobApplyingMessageReply')->name('shop.job.applying.message_reply');
+  Route::post('shop/{shopSlug}/job_applying/message_reply/{id}','JobController@jobApplyingMessageReplySend')->name('shop.job.applying.message_reply');
+
+  Route::post('shop/{shopSlug}/job_applying/cancel/{id}','JobController@jobApplyingCancel')->name('shop.job.applying.cancel');
+
   Route::get('shop/{shopSlug}/job/post','JobController@add')->name('shop.job.add');
   Route::post('shop/{shopSlug}/job/post','JobController@addingSubmit')->name('shop.job.add');
 

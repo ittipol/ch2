@@ -29,8 +29,19 @@
     </div>
 
     <div class="form-row">
-      <h4>งาน</h4>
+      <h4>ตำแหน่งงาน</h4>
       <div>{{$jobName}}</div>
+    </div>
+
+    <div class="form-row">
+      <div class="secondary-message-box info space-bottom-20">
+        <div class="secondary-message-box-inner">
+          <h4>ประวัติการทำงาน</h4>
+          <p>*** เมื่อคุณสมัครงานแล้ว ประวัติการทำงานจะแสดงไปยังเจ้าของบริษัท HR หรือผู้ที่เกี่ยวข้องกับงาน</p>
+          <p>*** ประวัติการทำงานจะถูกเก็บรวบรวมไว้และสามารถถูกค้นหาโดยเจ้าของบริษัท HR หรือผู้ที่ทำหน้าที่ในหารหาพนักงานให้กับบริษัทต่างๆ</p>
+        </div>
+      </div>
+      <a href="{{URL::to('person/experience')}}" class="button">เพิ่มประวัติการทำงาน</a>
     </div>
 
     @if(!empty($branches))
@@ -65,6 +76,14 @@
       <?php 
         echo Form::label('message', 'ข้อความถึงผู้รับสมัครงานนี้');
       ?>
+
+      <div class="secondary-message-box info">
+    <div class="secondary-message-box-inner">
+      <p>*** ข้อความถึงผู้รับสมัครงานจะแสดงอยู่ส่วนแรกของรายละเอียดการสมัครงานของคุณ</p>
+      <p>*** สามารถเว้นว่างข้อความนี้ได้</p>
+    </div>
+  </div>
+
       <p class="notice info">แนะนำตัวคุณหรือกล่าวอะไรบ้างอย่างถึงผู้รับสมัครงานนี้</p>
       <?php
         echo Form::textarea('message', null, array(
@@ -78,7 +97,7 @@
 
       <div class="sub-title">แนบไฟล์</div>
 
-      <div class="secondary-message-box error space-bottom-20">
+      <div class="secondary-message-box info space-bottom-20">
         <div class="secondary-message-box-inner">
           <p>*** ขนาดของไฟล์ต้องไม่เกิน 2 MB</p>
           <p>*** สามารถแนบไฟล์ได้สูงสุด 10 ไฟล์</p>
@@ -89,13 +108,6 @@
 
     </div>
 
-  </div>
-
-  <div class="secondary-message-box error space-top-20">
-    <div class="secondary-message-box-inner">
-      <p>*** ข้อความนี้จะแสดงอยู่ส่วนแรกของรายละเอียดการสมัครงานของคุณ</p>
-      <p>*** สามารถเว้นว่างข้อความนี้ได้</p>
-    </div>
   </div>
 
   <?php

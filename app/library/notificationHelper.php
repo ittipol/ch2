@@ -26,7 +26,6 @@ class NotificationHelper {
     $notificationModel = Service::loadModel('Notification');
     $notificationEventModel = Service::loadModel('NotificationEvent');
 
-    // Check event exist
     $event = $notificationEventModel->where([
       ['model','like',$this->model->modelName],
       ['event','like',$event]
@@ -126,7 +125,7 @@ class NotificationHelper {
           }
 
         }elseif(substr($_matches[0],0,2) == '__'){
-   
+
           if(strpos($_matches[0], '|')) {
             
             list($_model,$fx) = explode('|', $_matches[0]);
@@ -318,9 +317,6 @@ class NotificationHelper {
             if(Schema::hasColumn($this->model->getTable(), 'person_id')) {
               $receivers[] = $this->model->person_id;
             }
-            // if($this->model->modelName == 'Order') {
-            //   $receivers[] = $this->model->person_id;
-            // }
 
           break;
 
@@ -339,27 +335,36 @@ class NotificationHelper {
 
       case 'all-person-in-shop':
 
-          $people = array();
-          if(Schema::hasColumn($this->model->getTable(), 'shop_id')) {
-            $people = Service::loadModel('PersonToShop')
-            ->where('shop_id','=',$this->model->shop_id)
-            ->select('person_id')
-            ->get();
-          }else{
-            // switch ($this->model->modelName) {
-            //   case 'Order':
-            //     $people = Service::loadModel('PersonToShop')->where('shop_id','=',$this->model->shop_id)->get();
-            //     break;
-              
-            //   case 'PersonApplyJob':
-            //     $people = Service::loadModel('PersonToShop')->where('shop_id','=',$this->model->shop_id)->get();
-            //     break;
-            // }
-          }
+        $people = array();
+        if(Schema::hasColumn($this->model->getTable(), 'shop_id')) {
+          $people = Service::loadModel('PersonToShop')
+          ->where('shop_id','=',$this->model->shop_id)
+          ->select('person_id')
+          ->get();
+        }else{
 
-          foreach ($people as $person) {
-            $receivers[] = $person->person_id;
+          switch ($this->model->modelName) {
+            case 'Message':
+
+              if($this->model->receiver == 'Shop') {
+                $people = Service::loadModel('PersonToShop')
+                ->where('shop_id','=',$this->model->receiver_id)
+                ->select('person_id')
+                ->get();
+              }
+
+              break;
           }
+          
+        }
+
+        if(empty($people)) {
+          break;
+        }
+
+        foreach ($people as $person) {
+          $receivers[] = $person->person_id;
+        }
 
         break;
 

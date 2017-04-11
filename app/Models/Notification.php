@@ -108,6 +108,10 @@ class Notification extends Model
 
   private function parseUrl($urlFormat,$model) {
 
+    if(empty($model)) {
+      return null;
+    }
+
     preg_match_all('/{[\w0-9]+}/', $urlFormat, $matches);
 
     $value = array();
@@ -115,29 +119,59 @@ class Notification extends Model
 
       switch ($pattern) {
         case '{id}':
-            
             $value['id'] = $model->id;
-
           break;
         
         case '{shopSlug}':
 
-            $slug = Slug::select('slug')
-            ->where([
-              ['model','like','Shop'],
-              ['model_id','=',$model->shop_id]
-            ])
-            ->first()
-            ->slug;
-          
+            if(!empty($model->shop_id)) {
+              $slug = Slug::select('slug')
+              ->where([
+                ['model','like','Shop'],
+                ['model_id','=',$model->shop_id]
+              ])
+              ->first()
+              ->slug;
+            }else {
+
+              switch ($model->modelName) {
+                case 'Message':
+                  
+                  if($model->receiver == 'Shop') {
+
+                    $slug = Slug::select('slug')
+                    ->where([
+                      ['model','like','Shop'],
+                      ['model_id','=',$model->receiver_id]
+                    ])
+                    ->first()
+                    ->slug;
+
+                  }
+
+                  break;
+                
+              }
+
+            }
+
             $value['shopSlug'] = $slug;
 
           break;
+
+        case '{model_id}':
+            $value['model_id'] = $model->model_id;
+          break;
+
       }
 
     }
 
     return $value;
+
+  }
+
+  public function getModelId() {
 
   }
 

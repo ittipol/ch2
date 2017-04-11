@@ -5,7 +5,7 @@
   <div class="container-header">
     <div class="row">
       <div class="col-lg-6 col-sm-12">
-        <div class="title">ตอบกลับข้อความ</div>
+        <div class="title">ตอบกลับ</div>
       </div>
     </div>
   </div>
@@ -13,7 +13,12 @@
 
 <div class="container">
 
-  @include('components.form_error') 
+  @include('components.form_error')
+
+  <div>
+    <h4>ข้อความ</h4>
+    {!!$message!!}
+  </div> 
 
   <?php 
     echo Form::open(['id' => 'main_form','method' => 'post', 'enctype' => 'multipart/form-data']);
@@ -27,7 +32,7 @@
 
     <div class="form-row">
       <?php 
-        echo Form::label('message', 'ข้อความ');
+        echo Form::label('message', 'ข้อความตอบกลับ');
         echo Form::textarea('message', null, array(
           'class' => 'ckeditor'
         ));
@@ -38,7 +43,7 @@
 
       <div class="sub-title">แนบไฟล์</div>
 
-      <div class="secondary-message-box error space-bottom-20">
+      <div class="secondary-message-box info space-bottom-20">
         <div class="secondary-message-box-inner">
           <p>*** ขนาดของไฟล์ต้องไม่เกิน 2 MB</p>
           <p>*** สามารถแนบไฟล์ได้สูงสุด 10 ไฟล์</p>

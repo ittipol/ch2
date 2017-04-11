@@ -112,11 +112,10 @@
 
   <div id="message_tab" class="tab-content">
 
-    <!-- <h4>ข้อความ</h4>
-    <div class="line space-bottom-20"></div> -->
-
     @if(!empty($messages))
+
       <div class="message-content">
+
         @foreach($messages as $message)
           
           <div class="sender-profile clearfix">
@@ -156,12 +155,64 @@
             @endif
 
             <div class="message-reply-flat-button text-right">
-              <a href="">ตอบกลับ</a>
+              <a href="{{$message['replyUrl']}}" class="button">ตอบกลับ</a>
             </div>
 
           </div>
 
+          @if(!empty($message['replyMessages']))
+          <div class="reply-message-content">
+
+            @foreach($message['replyMessages'] as $replyMessages)
+
+              <div class="reply-message">
+
+                <div class="sender-profile clearfix">
+                  <div class="sender-profile-image">
+                    <div class="profile-image" style="background-image:url({{$replyMessages['sender']['profileImage']}});"></div>
+                  </div>
+                  <div class="sender-profile-info">
+                    <div><strong>{{$replyMessages['sender']['name']}}</strong></div>
+                    <div>{{$replyMessages['createdDate']}}</div>
+                  </div>
+                </div>
+
+                <div class="message">
+                  <div class="message-box">
+                    {!!$replyMessages['message']!!}
+                  </div>
+                
+                  @if(!empty($replyMessages['attachedFiles']))
+                  <div class="message-file-attachment clearfix">
+
+                    @foreach($replyMessages['attachedFiles'] as $attachedFile)
+
+                      <a href="{{$attachedFile['downloadUrl']}}" class="attached-file-box clearfix">
+                        <div class="attached-file-image">
+                          <img src="/images/icons/document-white.png">
+                        </div>
+                        <div class="attached-file-info">
+                          <div class="attached-file-title">
+                            <h4>{{$attachedFile['filename']}}</h4>
+                            <h5>{{$attachedFile['filesize']}}</h5>
+                          </div>
+                        </div>
+                      </a>
+
+                    @endforeach
+                  </div>
+                  @endif
+
+                </div>
+
+              </div>
+
+            @endforeach
+          </div>
+          @endif
+
         @endforeach
+
       </div>
 
     @else

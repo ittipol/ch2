@@ -65,6 +65,10 @@ class CheckForPersonHasShopPermission
           'permission' => true,
           'modelName' => 'PersonApplyJob'
         ),
+        'shop.job.applying.message_reply' => array(
+          'permission' => true,
+          'modelName' => 'PersonApplyJob'
+        ),
         'shop.branch.manage' => array(
           'permission' => true
         ),

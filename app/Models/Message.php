@@ -101,6 +101,27 @@ class Message extends Model
 
   }
 
+  public function getReplyMessage($build = false) {
+
+    $replyMessages = $this->where('parent_id','=',$this->id);
+
+    if(!$replyMessages->exists()) {
+      return null;
+    }
+
+    if(!$build) {
+      return $replyMessages->get();
+    }
+
+    $_replyMessages = array();
+    foreach ($replyMessages->get() as $message) {
+      $_replyMessages[] = $message->buildModelData();
+    }
+
+    return $_replyMessages;
+
+  }
+
   public function buildModelData() {
 
     $date = new Date;
@@ -118,13 +139,12 @@ class Message extends Model
 
     }
 
-    // Get Reply message
-
     return array(
       'message' => $this->message,
       'sender' => $this->getSenderInfo(),
       'attachedFiles' => $_files,
-      'createdDate' => $date->calPassedDate($this->created_at->format('Y-m-d H:i:s'))
+      'createdDate' => $date->calPassedDate($this->created_at->format('Y-m-d H:i:s')),
+      'replyMessages' => $this->getReplyMessage(true)
     );
 
   }
