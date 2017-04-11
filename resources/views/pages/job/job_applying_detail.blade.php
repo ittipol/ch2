@@ -97,7 +97,7 @@
   </div>
   @endif
 
-  <div class="line space-top-bottom-30"></div>
+  <div class="line space-bottom-30"></div>
 
   <div class="tabs clearfix">
     <label>
@@ -312,7 +312,7 @@
             <h4><a href="{{$privateWebsite['url']}}">{{$privateWebsite['website_url']}}</a></h4>
             <h5>{{$privateWebsite['websiteType']}}</h5>
             <a href="{{$privateWebsite['url']}}" class="button">เข้าสู่หน้าเว็บ</a>
-            <div class="line space-top-20"></div>
+            <!-- <div class="line space-top-20"></div> -->
           </div>
         @endforeach
         </div>
