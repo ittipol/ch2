@@ -198,22 +198,22 @@ class OrderController extends Controller
 
     if(empty($order)) {
       $this->error = array(
-        'message' => 'ขออภัย ไม่พบประกาศนี้ หรือข้อมูลนี้อาจถูกลบแล้ว'
+        'message' => 'ไม่พบรายการสั่งซื้อ'
       );
       return $this->error();
     }
 
-    if($order->order_status_id != 2) {
-      MessageHelper::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
-      return Redirect::to('account/order/'.$order->id);
-    }
+    // if($order->order_status_id != 2) {
+    //   MessageHelper::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
+    //   return Redirect::to('account/order/'.$order->id);
+    // }
 
     $model = Service::loadModel('OrderPaymentConfirm');
 
-    if($model->where('order_id','=',$order->id)->exists()) {
-      MessageHelper::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
-      return Redirect::to('account/order/'.$order->id);
-    }
+    // if($model->where('order_id','=',$order->id)->exists()) {
+    //   MessageHelper::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
+    //   return Redirect::to('account/order/'.$order->id);
+    // }
 
     // Set order id
     $model->order_id = $order->id;
@@ -222,12 +222,7 @@ class OrderController extends Controller
 
       $notificationHelper = new NotificationHelper;
       $notificationHelper->setModel($order);
-      $notificationHelper->create('order-payment-inform',array(
-        'sender' => array(
-          'model' => 'Shop',
-          'id' => request()->get('shopId')
-        )
-      ));
+      $notificationHelper->create('order-payment-inform');
 
       MessageHelper::display('ยืนยันการชำระเงินเลขที่การสั่งซื้อ '.$order->invoice_number.' แล้ว','success');
       return Redirect::to('account/order/'.$order->id);

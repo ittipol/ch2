@@ -295,14 +295,6 @@
 	width: 49%;
 }
 
-.detail-group h4 {
-/*	color: #fff;
-	font-size: 14px;
-	padding: 10px;
-	background-color: #0071c5;
-	margin: 0;*/
-}
-
 .detail-group .detail-info {
 	margin-top: 10px;
 }
@@ -316,12 +308,7 @@
 }
 
 .detail-group .detail-group-info-section {
-	/*border-top: 5px solid #0071c5;*/
 	padding: 10px;
-}
-
-.detail-group .detail-group-info-section > .detail-group-info:not(:first-child) {
-	/*margin-top: 20px;*/
 }
 
 .order-progress-bar {

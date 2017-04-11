@@ -10,13 +10,16 @@
 	height: 100%;
 	opacity: 1;
 	color: #fff;
-	/*background-color: rgb(29, 66, 133);*/
-	/*background-color: #607D8B;*/
 	background-color: #00695C;
 	padding: 0;
 	z-index: 90;
 	overflow: hidden;
 	transition: right .15s ease-out;
+}
+
+.right-size-panel.form {
+	color: #000;
+	background-color: #fff;
 }
 
 .right-size-panel.opened {
@@ -34,6 +37,10 @@
 
 .right-size-panel .line {
 	background-color: #fff;
+}
+
+.right-size-panel.form .line {
+	background-color: #0071c5;
 }
 
 .right-size-panel select {

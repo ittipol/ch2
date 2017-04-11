@@ -19,16 +19,25 @@
       <div class="text-center">
         <img src="/images/common/resume.png">
         <h3>ใบสมัครงาน</h3>
-        <p>หากคุณสนใจผู้สมัครรายนี้ สามารถตอบกลับไปยังผู้สมัครได้ หรือยกเลิกการสมัครงานของผู้สมัครรายนี้</p>
+        <p>ส่งข้อความและไฟล์ต่างๆที่จำเป็นไปยังผู้สมัครหากคุณสนใจผู้สมัคร หรือสามารถยกเลิกการสมัครนี้ได้</p>
       </div>
     </div>
     <div class="message-box-button-group two-button clearfix">
       <div class="flat-button">
-        <a href="{{$messagePostUrl}}" class="button">ตอบกลับไปยังผู้สมัคร</a>
+        <a href="{{$messagePostUrl}}" class="button">ส่งข้อไปยังผู้สมัคร</a>
       </div>
       <div class="flat-button">
-        <a href="" class="button danger">ยกเลิกการสมัคร</a>
+        <a class="button danger" data-right-side-panel="1" data-right-side-panel-target="#cancel_job_appying_panel">
+          ยกเลิกการสมัคร
+        </a>
       </div>
+    </div>
+  </div>
+<!-- job_applying_histories -->
+  <div id="cancel_job_appying_panel" class="right-size-panel">
+    <div class="right-size-panel-inner">
+      <h3>xxx</h3>
+      <div class="line space-bottom-10"></div>
     </div>
   </div>
 

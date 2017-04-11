@@ -129,7 +129,7 @@
         </div>
       </div>
 
-      <div id="order_status" class="right-size-panel">
+      <div id="order_status" class="right-size-panel form">
         <div class="right-size-panel-inner">
           @include('pages.order.form.order_status_edit')
           <div class="right-size-panel-close-icon"></div>

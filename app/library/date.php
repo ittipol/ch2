@@ -142,7 +142,7 @@ class Date
     $hours = (int)floor($mins / 60);
     $days = (int)floor($hours / 24);
 
-    $passed = 'เมื่อไม่กี่วินาทีที่ผ่านมา';
+    $passed = 'เมื่อสักครู่นี้';
     if($days == 0) {
       $passedSecs = $secs % 60;
       $passedMins = $mins % 60;

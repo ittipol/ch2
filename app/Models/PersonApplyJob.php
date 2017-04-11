@@ -9,7 +9,7 @@ use App\library\date;
 class PersonApplyJob extends Model
 {
   protected $table = 'person_apply_jobs';
-  protected $fillable = ['person_id','job_id','shop_id','message','approved'];
+  protected $fillable = ['person_id','job_id','shop_id','message','job_applying_status_id'];
   protected $modelRelations = array('JobApplyToBranch','AttachedFile');
 
   public $formHelper = true;
