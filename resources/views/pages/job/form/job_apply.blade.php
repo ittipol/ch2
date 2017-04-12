@@ -86,9 +86,7 @@
 
       <p class="notice info">แนะนำตัวคุณหรือกล่าวอะไรบ้างอย่างถึงผู้รับสมัครงานนี้</p>
       <?php
-        echo Form::textarea('message', null, array(
-          'class' => 'ckeditor'
-        ));
+        echo Form::textarea('message');
       ?>
       
     </div>

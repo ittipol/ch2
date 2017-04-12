@@ -97,27 +97,21 @@
     <div class="form-row">
       <?php 
         echo Form::label('qualification', 'คุณสมบัติผู้สมัคร');
-        echo Form::textarea('qualification', null, array(
-          'class' => 'ckeditor'
-        ));
+        echo Form::textarea('qualification');
       ?>
     </div>
 
     <div class="form-row">
       <?php 
         echo Form::label('description', 'รายละเอียดงาน');
-        echo Form::textarea('description', null, array(
-          'class' => 'ckeditor'
-        ));
+        echo Form::textarea('description');
       ?>
     </div>
 
     <div class="form-row">
       <?php 
         echo Form::label('benefit', 'สวัสดิการ');
-        echo Form::textarea('benefit', null, array(
-          'class' => 'ckeditor'
-        ));
+        echo Form::textarea('benefit');
       ?>
     </div>
 
@@ -166,9 +160,7 @@
 
       <?php 
         echo Form::label('recruitment_custom_detail', 'รายละเอียดการสมัครงานนี้');
-        echo Form::textarea('recruitment_custom_detail', null, array(
-          'class' => 'ckeditor'
-        ));
+        echo Form::textarea('recruitment_custom_detail');
       ?>
     </div>
 

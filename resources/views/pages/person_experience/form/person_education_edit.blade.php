@@ -80,7 +80,7 @@
       <?php 
         echo Form::label('description', 'รายละเอียด');
         echo Form::textarea('description', null, array(
-          'class' => 'ckeditor'
+          'class' => 'person-experience-textarea'
         ));
       ?>
     </div>
@@ -102,8 +102,6 @@
 <script type="text/javascript">
 
   $(document).ready(function(){
-
-    CKEDITOR.instances['description'].config.height = '600px';
 
     const periodDate = new PeriodDate('period_date',{{$currentYear}},{!!$month!!});
     periodDate.load();

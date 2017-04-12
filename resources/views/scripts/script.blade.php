@@ -45,8 +45,7 @@
     '__js/components/order-progress-bar.js',
     '__js/components/right-side-panel.js',
     '__js/components/filter.js',
-    '__js/components/job-applying-new-message.js',
-    '__js/components/job-applying-reply-message.js',
+    '__js/components/job-applying-message.js',
     '__js/notification/push-notification.js',
   );
 
@@ -151,10 +150,6 @@
   <link rel="stylesheet" href="<?php echo '/'.$css; ?>" />
 @endforeach
 @endif
-
-<script type="text/javascript">
-  CKEDITOR.config.height = '300px';
-</script>
 
 @if(Session::has('message.title') && Session::has('message.type'))
 <script type="text/javascript">

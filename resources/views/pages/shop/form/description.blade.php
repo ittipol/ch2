@@ -26,36 +26,28 @@
     <div class="form-row">
       <?php 
         echo Form::label('description', 'คำอธิบายสั้นๆ เพื่ออธิบายถึงบริษัท ร้านค้า หรือธุรกิจของคุณ');
-        echo Form::textarea('description', null, array(
-          'class' => 'ckeditor'
-        ));
+        echo Form::textarea('description');
       ?>
     </div>
 
     <div class="form-row">
       <?php 
         echo Form::label('brand_story', 'เรื่องราว (Brand Story)');
-        echo Form::textarea('brand_story', null, array(
-          'class' => 'ckeditor'
-        ));
+        echo Form::textarea('brand_story');
       ?>
     </div>
 
     <div class="form-row">
       <?php 
         echo Form::label('vision', 'วิสัยทัศน์');
-        echo Form::textarea('vision', null, array(
-          'class' => 'ckeditor'
-        ));
+        echo Form::textarea('vision');
       ?>
     </div>
 
     <div class="form-row">
       <?php 
         echo Form::label('mission', 'พันธกิจ');
-        echo Form::textarea('mission', null, array(
-          'class' => 'ckeditor'
-        ));
+        echo Form::textarea('mission');
       ?>
     </div>
 

@@ -44,9 +44,7 @@
         echo Form::label('description', 'รายละเอียดวิธีการชำระเงิน', array(
           'class' => 'required'
         ));
-        echo Form::textarea('description', null, array(
-          'class' => 'ckeditor'
-        ));
+        echo Form::textarea('description');
       ?>
     </div>
 

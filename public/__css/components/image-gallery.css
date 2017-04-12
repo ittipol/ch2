@@ -110,26 +110,22 @@
 .image-gallery .image-description .prev-image-description-icon {
 	width: 20px;
 	height: 25px;
-	/*border-radius: 30px;*/
 	margin-top: 2px;
 	background-image: url(/images/icons/prev-white.png);
 	background-repeat: no-repeat;
 	background-size: 20px;
 	background-position: center;
-	/*background-color: rgba(255,255,255,.2);*/
 	cursor: pointer;
 }
 
 .image-gallery .image-description .next-image-description-icon {
 	width: 20px;
 	height: 25px;
-	/*border-radius: 30px;*/
 	margin-top: 2px;
 	background-image: url(/images/icons/next-white.png);
 	background-repeat: no-repeat;
 	background-size: 20px;
 	background-position: center;
-	/*background-color: rgba(255,255,255,.2);*/
 	cursor: pointer;
 }
 
@@ -153,7 +149,6 @@
 	position: absolute;
 	bottom: 9px;
 	right: 9px;
-	/*background-color: rgb(47,97,186);*/
 	background-color: #1E88E5;
 	color: #fff;
   width: 40px;
@@ -168,6 +163,18 @@
 	height: 40px;
 	width: 40px;
 	padding: 10px;
+}
+
+.image-gallery .additional-option {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 40px;
+	z-index: 9;
+}
+
+.image-gallery .additional-option .dot {
+	background-color: #000;
 }
 
 @media only screen and (max-width : 768px) {

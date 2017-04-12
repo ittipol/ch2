@@ -28,9 +28,7 @@
     <div class="form-row">
       <?php 
         echo Form::label('message', 'ข้อความ');
-        echo Form::textarea('message', null, array(
-          'class' => 'ckeditor'
-        ));
+        echo Form::textarea('message');
       ?>
     </div>
 

@@ -23,7 +23,7 @@
     <p class="message-input-error-message error-message hide-element">ข้อความห้ามว่าง</p>
     <?php
       echo Form::textarea('message', null, array(
-        'class' => 'ckeditor'
+        'class' => 'ckeditor message-input'
       ));
     ?>
   </div>
@@ -70,11 +70,8 @@
     const attachedFile = new AttachedFile('_file_group_for_new_message','#job_applying_new_message_form');
     attachedFile.load();
 
-    const jobApplyingNewMessage = new JobApplyingNewMessage('#job_appying_new_message_panel',attachedFile);
+    const jobApplyingNewMessage = new JobApplyingMessage('#job_appying_new_message_panel',attachedFile);
     jobApplyingNewMessage.load();
-
-    const form = new Form('#job_applying_new_message_form');
-    form.load();
 
   });
 

@@ -72,7 +72,7 @@ class ImageGallery {
 
     });
   
-    $(document).on('click','.open-description',function(){
+    $(document).on('click','.image-description-display-button',function(){
 
       if(!_this.descriptionOpened) {
         $('.display-image-description-icon').css('display','none');

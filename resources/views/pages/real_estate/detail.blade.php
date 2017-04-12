@@ -56,7 +56,7 @@
           <div class="display-image-description-icon additional-option icon">
             <img src="/images/icons/additional-white.png">
             <div class="additional-option-content">
-              <a class="open-description">แสดงคำอธิบายรูปภาพ</a>
+              <a class="image-description-display-button">แสดงคำอธิบายรูปภาพ</a>
             </div>
           </div>
 

@@ -8,7 +8,8 @@ input[type="password"] {
 
 textarea {
 	padding: 10px;
-	width: 60%;
+	width: 100%;
+	height: 300px;
 	resize: none;
 }
 
@@ -387,31 +388,8 @@ form .category-name > span {
   padding: 10px 15px;
 }
 
-/*==========  Mobile First Method  ==========*/
-
-/* Custom, iPhone Retina */ 
-@media only screen and (min-width : 320px) {
-    
-}
-
-/* Extra Small Devices, Phones */ 
-@media only screen and (min-width : 480px) {
-
-}
-
-/* Small Devices, Tablets */
-@media only screen and (min-width : 768px) {
-
-}
-
-/* Medium Devices, Desktops */
-@media only screen and (min-width : 992px) {
-
-}
-
-/* Large Devices, Wide Screens */
-@media only screen and (min-width : 1200px) {
-
+form textarea.person-experience-textarea {
+	height: 500px;
 }
 
 /*==========  Non-Mobile First Method  ==========*/
@@ -425,18 +403,6 @@ form .category-name > span {
 	form .input-addon > span:first-child {
 	  width: 100px; 
 	}
-}
-
-/* Medium Devices, Desktops */
-@media only screen and (max-width : 992px) {
-
-}
-
-/* Small Devices, Tablets */
-@media only screen and (max-width : 768px) {
-/*	.image-panel.description > textarea {
-		width: 65%;
-	}*/
 }
 
 /* Extra Small Devices, Phones */ 
@@ -472,15 +438,5 @@ form .category-name > span {
 		margin-top: 10px;
 		margin-left: 0;
 	}
-
-}
-
-/* Custom */ 
-@media only screen and (max-width : 360px) {
-
-}
-
-/* Custom, iPhone Retina */ 
-@media only screen and (max-width : 320px) {
 
 }

@@ -120,7 +120,7 @@ class AttachedFile {
 	    beforeSend: function( xhr ) {
 
 	    	$('#'+_this.panel).find('.attached-file-input').val('');
-	    	$(_this.form).find('input[type="submit"]').prop('disabled','disabled').addClass('disabled'); 
+	    	$(_this.form).find('input[type="submit"]').prop('disabled',true).addClass('disabled'); 
 	    	 
 	    	obj.find('.progress-bar').css('display','block');
 	    },

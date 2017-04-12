@@ -33,7 +33,7 @@
       <div class="form-row">
         <?php 
           echo Form::textarea('career_objective', null, array(
-            'class' => 'ckeditor'
+            'class' => 'person-experience-textarea'
           ));
         ?>
       </div>
@@ -55,8 +55,6 @@
   <script type="text/javascript">
 
     $(document).ready(function(){
-
-      CKEDITOR.instances['career_objective'].config.height = '600px';
 
       const form = new Form();
       form.load();

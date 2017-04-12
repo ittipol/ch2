@@ -477,22 +477,10 @@ class JobController extends Controller
 
   }
 
-  // public function jobApplyingNewMessage() {
-    
-  //   $model = Service::loadModel('Message');
-
-  //   $this->data = $model->formHelper->build();
-
-  //   $this->getSendAs();
-
-  //   return $this->view('pages.message.form.new_message');
-
-  // }
-
   public function jobApplyingMessageSend(CustomFormRequest $request) {
 
     $personApplyJob = Service::loadModel('PersonApplyJob')->find($this->param['id']);
-dd($personApplyJob->job_applying_status_id);
+
     if($personApplyJob->job_applying_status_id == 1) {
       $personApplyJob->job_applying_status_id = 2;
       $personApplyJob->save();
@@ -534,32 +522,6 @@ dd($personApplyJob->job_applying_status_id);
     }
 
   }
-
-  // public function jobApplyingMessageReply() {
-
-  //   $message = Service::loadModel('Message')->find($this->param['id']);
-
-  //   if(empty($message) || !$message->hasPermission() || !$message->isTopParent()) {
-  //     $this->error = array(
-  //       'message' => 'ไม่พบข้อความ หรือไม่สามารถตอบกลับข้อความนี้ได้'
-  //     );
-  //     return $this->error();
-  //   }
-
-  //   $model = Service::loadModel('Message');
-
-  //   $this->data = $model->formHelper->build();
-  //   $this->setData('message',$message->message);
-
-  //   if(!empty($this->param['shopSlug'])) {
-
-  //     $this->getSendAs();
-
-  //   }
-
-  //   return $this->view('pages.message.form.message_reply');
-
-  // }
 
   public function jobApplyingMessageReplySend(CustomFormRequest $request) {
 

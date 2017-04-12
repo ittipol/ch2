@@ -86,9 +86,7 @@
     <div class="form-row">
       <?php 
         echo Form::label('description', 'รายละเอียดเพิ่มเติม');
-        echo Form::textarea('description', null, array(
-          'class' => 'ckeditor'
-        ));
+        echo Form::textarea('description');
       ?>
     </div>
 
