@@ -61,13 +61,17 @@ class CheckForPersonHasShopPermission
           'permission' => true,
           'modelName' => 'PersonApplyJob'
         ),
+        'shop.job.applying.cancel' => array(
+          'permission' => true,
+          'modelName' => 'PersonApplyJob'
+        ),
         'shop.job.applying.new_message' => array(
           'permission' => true,
           'modelName' => 'PersonApplyJob'
         ),
         'shop.job.applying.message_reply' => array(
           'permission' => true,
-          'modelName' => 'PersonApplyJob'
+          'modelName' => 'Message'
         ),
         'shop.branch.manage' => array(
           'permission' => true
@@ -259,18 +263,36 @@ class CheckForPersonHasShopPermission
         // data check
         if(!empty($request->id)) {
 
-          $_model = Service::loadModel($pages[$name]['modelName']);
+          $_model = Service::loadModel($pages[$name]['modelName'])->find($request->id);
 
           if(empty($_model)) {
             return $this->errorPage('ไม่พบข้อมูลนี้');
           }
 
-          $exists = true;
-          if(Schema::hasColumn($_model->getTable(), 'shop_id')) {
-            $exists = $_model->where([
-              ['id','=',$request->id],
-              ['shop_id','=',$shopId]
-            ])->exists();
+          $exists = false;
+          if(Schema::hasColumn($_model->getTable(), 'shop_id') && ($_model->shop_id == $shopId)) {
+            $exists = true;
+            // $exists = $_model->where([
+            //   ['id','=',$request->id],
+            //   ['shop_id','=',$shopId]
+            // ])->exists();
+
+          }elseif(Schema::hasColumn($_model->getTable(), 'model') && Schema::hasColumn($_model->getTable(), 'model_id')) {
+
+            $__model = Service::loadModel($_model->model)->find($_model->model_id);
+            
+            if(Schema::hasColumn($__model->getTable(), 'shop_id') && ($__model->shop_id == $shopId)) {
+              $exists = true;
+            }else{
+              $exists = Service::loadModel('ShopRelateTo')
+              ->select('shop_id')
+              ->where([
+                ['model','like',$_model->model],
+                ['model_id','=',$_model->model_id],
+                ['shop_id','=',$shopId],
+              ])->exists();
+            }
+
           }else{
             // check by ShopRelateTo model
 
@@ -286,6 +308,7 @@ class CheckForPersonHasShopPermission
                 ['shop_id','=',$shopId],
               ])->exists();
             }else{
+
               $exists = Service::loadModel('ShopRelateTo')
               ->select('shop_id')
               ->where([

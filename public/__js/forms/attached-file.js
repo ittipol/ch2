@@ -1,12 +1,13 @@
 class AttachedFile {
 
-	constructor(panel) {
+	constructor(panel,form = '#main_form') {
 		this.panel = panel;
 		this.limit = 10;
 		this.code = null;
 		this.index = 0;
 		this.runningNumber = 0;
 		this.hasError = false;
+		this.form = form;
 	}
 
 	load() {
@@ -31,7 +32,7 @@ class AttachedFile {
 
 		let _this = this;
 
-		$(document).on('change', '.'+this.code+'-attached-file-input', function(){
+		$('#'+_this.panel).on('change', '.attached-file-input', function(){
 
 			$(this).prop('disabled',true);
 			$(this).parent().addClass('disabled')
@@ -42,13 +43,13 @@ class AttachedFile {
 
 		});
 
-		$(document).on('click','.attached-file-cancel-button',function(){
+		$('#'+_this.panel).on('click','.attached-file-cancel-button',function(){
 		
 			$(this).parent().remove();
 
 			if(--_this.index < _this.limit){
-				$('#'+_this.code+'_attached_file_input').prop('disabled',false);
-				$('#'+_this.code+'_attached_file_input').parent().removeClass('disabled');
+				$('#'+_this.panel).find('.attached-file-input').prop('disabled',false);
+				$('#'+_this.panel).find('.attached-file-input').parent().removeClass('disabled');
 			}
 
 		});
@@ -78,6 +79,9 @@ class AttachedFile {
 			  	$('#'+this.code+'_attached_file_error').css('display','block').text('ไม่รองรับไฟล์นี้');
 			  	this.createError(this.truncString(filename,20),this.bytesToSize(fileSize));
 
+			  	$('#'+this.panel).find('.attached-file-input').prop('disabled',false);
+			  	$('#'+this.panel).find('.attached-file-input').parent().removeClass('disabled');
+
 			  }else{
 
 			  	$('#'+this.code+'_attached_file_error').css('display','none');
@@ -106,7 +110,7 @@ class AttachedFile {
 		let obj = $('#'+itemId);
 
 		let request = $.ajax({
-	    url: "/upload_attached_file",
+	    url: "/upload_file_attachment",
 	    type: "POST",
 	    data: data,
 	    dataType: 'json',
@@ -115,8 +119,8 @@ class AttachedFile {
 	    processData:false,
 	    beforeSend: function( xhr ) {
 
-	    	$('#'+_this.code+'_attached_file_input').val('');
-	    	$('#main_form input[type="submit"]').prop('disabled','disabled').addClass('disabled'); 
+	    	$('#'+_this.panel).find('.attached-file-input').val('');
+	    	$(_this.form).find('input[type="submit"]').prop('disabled','disabled').addClass('disabled'); 
 	    	 
 	    	obj.find('.progress-bar').css('display','block');
 	    },
@@ -143,8 +147,8 @@ class AttachedFile {
     request.done(function (response, textStatus, jqXHR){
 
     	if(_this.index < _this.limit) {
-    		$('#'+_this.code+'_attached_file_input').prop('disabled',false);
-    		$('#'+_this.code+'_attached_file_input').parent().removeClass('disabled');
+    		$('#'+_this.panel).find('.attached-file-input').prop('disabled',false);
+    		$('#'+_this.panel).find('.attached-file-input').parent().removeClass('disabled');
     	}
 
     	if(response.success){
@@ -155,7 +159,7 @@ class AttachedFile {
 
     		_this.createAttachedFile(obj,response.filename);
 
-    		$('#main_form input[type="submit"]').prop('disabled',false).removeClass('disabled');
+    		$(_this.form).find('input[type="submit"]').prop('disabled',false).removeClass('disabled');
 
     	}else{
 
@@ -190,14 +194,14 @@ class AttachedFile {
 
 		let html = '';
 		html += '<label class="attached-file-add-button clearfix">';
-		html += '<input id="'+this.code+'_attached_file_input" class="'+this.code+'-attached-file-input" type="file">';
+		html += '<input id="'+this.code+'_attached_file_input" class="attached-file-input" type="file">';
 		html += '<div class="attached-file-add-button-text">';
 		html += '<img src="/images/icons/plus-white.png">';
 		html += '<h4>เพิ่มไฟล์</h4>';
 		html += '</div>';
 		html += '</label>';
 		html += '<div class="line grey space-top-bottom-20"></div>';
-		html += '<div id="'+this.code+'_attached_file_panel" class="clearfix"></div>';
+		html += '<div id="'+this.code+'_attached_file_panel" class="attached_file_panel clearfix"></div>';
 
 		$('#'+this.panel).append(html);
 
@@ -241,7 +245,6 @@ class AttachedFile {
 		html += '<div class="attached-file-info">';
 		html += '<div class="attached-file-title">';
 		html += '<h4>'+filename+'</h4>'
-		// html += '<h5>'+filesize+'</h5>'
 		html += '<h5>ไม่รองรับไฟล์นี้</h5>'
 		html += '</div>';
 		html += '</div>';
@@ -324,5 +327,17 @@ class AttachedFile {
    let i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
    return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
 	};
+
+	clear() {
+		this.index = 0;
+		this.runningNumber = 0;
+		$('#'+this.panel).find('.attached_file_panel').text('');
+		$('#'+this.panel).find('.attached-file-input').prop('disabled',false);
+		$('#'+this.panel).find('.attached-file-input').parent().removeClass('disabled');
+	}
+
+	getCode() {
+		return this.code;
+	}
 
 }

@@ -140,6 +140,7 @@ class Message extends Model
     }
 
     return array(
+      'id' => $this->id,
       'message' => $this->message,
       'sender' => $this->getSenderInfo(),
       'attachedFiles' => $_files,

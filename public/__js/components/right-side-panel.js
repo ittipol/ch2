@@ -24,7 +24,7 @@ class RightSidePanel {
 
     });
 
-    $('.right-size-panel-close-icon').on('click',function(){
+    $('.right-size-panel-close-button').on('click',function(){
       
       if(_this.currentTarget) {
         $(_this.currentTarget).removeClass('opened');

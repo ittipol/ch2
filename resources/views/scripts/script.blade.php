@@ -45,6 +45,8 @@
     '__js/components/order-progress-bar.js',
     '__js/components/right-side-panel.js',
     '__js/components/filter.js',
+    '__js/components/job-applying-new-message.js',
+    '__js/components/job-applying-reply-message.js',
     '__js/notification/push-notification.js',
   );
 

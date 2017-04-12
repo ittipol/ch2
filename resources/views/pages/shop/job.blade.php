@@ -37,8 +37,11 @@
         </a>
       </div>
       <div class="tile-nav-info">
+
+        <div class="tile-flag-count">{{$countJobApplying}}</div>
+        
         <a href="{{$jobApplyListUrl}}">
-          <h4 class="tile-nav-title">แสดงรายชื่อผู้ที่สมัครงานของคุณ</h4>
+          <h4 class="tile-nav-title">รายชื่อผู้ที่สมัครงาน</h4>
         </a>
       </div>
     </div>

@@ -406,6 +406,15 @@
 	margin-bottom: 50px;
 }
 
+.person-experience-content .person-experience-info:not(:last-child) {
+	margin-bottom: 50px;
+}
+
+.person-private-website-content {
+	padding: 15px;
+	background-color: #ececec;
+}
+
 /*==========  Non-Mobile First Method  ==========*/
 
 /* Large Devices, Wide Screens */

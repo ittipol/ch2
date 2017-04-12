@@ -228,8 +228,8 @@ class ShopController extends Controller
 
     if($shopTos->exists()) {
 
-      $job = Service::loadModel('Job');
-      $job->paginator->criteria(array(
+      $jobModel = Service::loadModel('Job');
+      $jobModel->paginator->criteria(array(
         'conditions' => array(
           'in' => array(
             array('id',Service::getList($shopTos->get(),'model_id'))
@@ -237,19 +237,23 @@ class ShopController extends Controller
         ),
         'order' => array('id','DESC')
       ));
-      $job->paginator->setPage($page);
-      $job->paginator->setPagingUrl('shop/'.request()->shopSlug.'/job');
-      $job->paginator->setUrl('shop/'.$this->param['shopSlug'].'/job/edit/{id}','editUrl');
-      $job->paginator->setUrl('shop/'.$this->param['shopSlug'].'/job/delete/{id}','deleteUrl');
-      $job->paginator->setUrl('job/detail/{id}','detailUrl');
+      $jobModel->paginator->setPage($page);
+      $jobModel->paginator->setPagingUrl('shop/'.request()->shopSlug.'/job');
+      $jobModel->paginator->setUrl('shop/'.$this->param['shopSlug'].'/job/edit/{id}','editUrl');
+      $jobModel->paginator->setUrl('shop/'.$this->param['shopSlug'].'/job/delete/{id}','deleteUrl');
+      $jobModel->paginator->setUrl('job/detail/{id}','detailUrl');
 
-      $this->data = $job->paginator->build();
+      $this->data = $jobModel->paginator->build();
     }
+
+    $this->setData('countJobApplying',Service::loadModel('PersonApplyJob')
+    ->where('shop_id','=',request()->get('shopId'))
+    ->whereIn('job_applying_status_id',array(1,2))
+    ->count());
     
     $this->setData('jobPostUrl',request()->get('shopUrl').'job/post');
-    $this->setData('jobApplyListUrl',request()->get('shopUrl').'job_applying_list');
+    $this->setData('jobApplyListUrl',request()->get('shopUrl').'job_applying');
     $this->setData('branchManageUrl',request()->get('shopUrl').'branch/manage');
-    // $this->setData('departmentAddUrl',request()->get('shopUrl'));
 
     return $this->view('pages.shop.job');
   }

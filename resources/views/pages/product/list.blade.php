@@ -71,7 +71,7 @@
           </div>
         @endif
       @endforeach
-      <div class="right-size-panel-close-icon"></div>
+      <div class="right-size-panel-close-button"></div>
     </div>
   </div>
 
@@ -83,7 +83,7 @@
   <div id="filter_expand_panel" class="right-size-panel filter">
     <div class="right-size-panel-inner">
       @include('components.filter_expand_panel')
-      <div class="right-size-panel-close-icon"></div>
+      <div class="right-size-panel-close-button"></div>
     </div>
   </div>
 

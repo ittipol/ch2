@@ -5,7 +5,7 @@
   <div class="container-header">
     <div class="row">
       <div class="col-lg-6 col-sm-12">
-        <div class="title">ข้อความถึงผู้สมัคร</div>
+        <div class="title">ข้อความ</div>
       </div>
     </div>
   </div>

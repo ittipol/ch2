@@ -32,7 +32,8 @@ class PersonApplyJob extends Model
 
     return array(
       'shopName' => $this->shop->name,
-      'message' => $this->message
+      'message' => $this->message,
+      'job_applying_status_id' => $this->job_applying_status_id
     );
 
   }

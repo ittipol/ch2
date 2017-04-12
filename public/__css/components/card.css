@@ -55,6 +55,10 @@
 	background-repeat: no-repeat;
 }
 
+.card .image-tile.cover .card-image {
+	background-size: cover;
+}
+
 .card .image-tile .card-image.round {
 	width: 250px;
 	border-radius: 250px;

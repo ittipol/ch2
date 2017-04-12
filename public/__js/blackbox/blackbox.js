@@ -101,7 +101,7 @@ class Blackbox {
 
     });
 
-    // Overlay
+    // Overlay screen
     $('.content-wrapper-overlay').on('click',function(){
 
       if($('#global_nav_trigger').is(':checked')) {

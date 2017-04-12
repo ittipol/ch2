@@ -258,7 +258,6 @@ class ApiController extends Controller
 
     $model = Service::loadModel(Input::get('model'))->find(Input::get('model_id'));
 
-    // Check permission
     $permission = true;
     switch (Input::get('model')) {
       case 'Shop':
@@ -304,6 +303,17 @@ class ApiController extends Controller
 
     return response()->json($result);
 
+  }
+
+  public function clearAttachedFile() {
+    // Clear Temp files
+    $temporaryFile = Service::loadModel('TemporaryFile');
+    // remove temp dir
+    $temporaryFile->deleteTemporaryDirectory(Input::get('model').'_'.Input::get('token').'_attached_file');
+    // remove temp file record
+    $temporaryFile->deleteTemporaryRecords(Input::get('model'),Input::get('token'));
+
+    return response()->json(array('success'=>true));
   }
 
   public function cartAdd() {

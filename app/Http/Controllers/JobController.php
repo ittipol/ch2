@@ -269,15 +269,15 @@ class JobController extends Controller
 
     $model = Service::loadModel('PersonApplyJob');
 
-    // $exist = $model->where(array(
-    //   array('person_id','=',session()->get('Person.id')),
-    //   array('job_id','=',$this->param['id'])
-    // ))->exists();
+    $exist = $model->where(array(
+      array('person_id','=',session()->get('Person.id')),
+      array('job_id','=',$this->param['id'])
+    ))->exists();
 
-    // if($exist) {
-    //   MessageHelper::display('สมัครงานนี้แล้ว','info');
-    //   return Redirect::to('job/detail/'.$this->param['id']);
-    // }
+    if($exist) {
+      MessageHelper::display('สมัครงานนี้แล้ว','info');
+      return Redirect::to('job/detail/'.$this->param['id']);
+    }
 
     $shopToModel = Service::loadModel('ShopRelateTo')
     ->select('shop_id')
@@ -287,10 +287,19 @@ class JobController extends Controller
     ))
     ->first();
 
-    request()->request->add(['job_id' => $this->param['id']]);
+    $jobApplyingStatus = Service::loadModel('JobApplyingStatus')->getIdByAlias('job-applying');
+
+    $model->job_id = $this->param['id'];
+    $model->job_applying_status_id = $jobApplyingStatus;
+
     request()->request->add(['shop_id' => $shopToModel->shop_id]);
 
     if($model->fill(request()->all())->save()) {
+
+      Service::loadModel('JobApplyingHistory')->fill(array(
+        'job_id' => $model->job_id,
+        'job_applying_status_id' => $jobApplyingStatus
+      ))->save();
 
       $notificationHelper = new NotificationHelper;
       $notificationHelper->setModel($model);
@@ -320,7 +329,7 @@ class JobController extends Controller
       )
     ));
     $model->paginator->setPage($page);
-    $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/job_applying_list');
+    $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/job_applying');
     $model->paginator->setUrl('shop/'.request()->shopSlug.'/job_applying_detail/{id}','detailUrl');
     $model->paginator->setUrl('experience/detail/{person_id}','experienceDetailUrl');
 
@@ -395,17 +404,27 @@ class JobController extends Controller
 
     $this->data = $person->personExperience->getPersonExperience();
     $this->setData('jobName',$model->job->name);
-    $this->setData('jobApply',$model->modelData->build(true));
+    $this->setData('personApplyJob',$model->modelData->build(true));
     $this->setData('profile',$person->modelData->build(true));
     $this->setData('profileImageUrl',$person->getProfileImageUrl('xsm'));
     $this->setData('hasBranch',!empty($total) ? true : false);
     $this->setData('branches',$_branches);
     $this->setData('attachedFiles',$_attachedFiles);
     $this->setData('messages',$_messages);
-    $this->setData('messagePostUrl',$url->setAndParseUrl('shop/{shopSlug}/job_applying/new_message/{id}',array('shopSlug'=>$this->param['shopSlug'],'id'=>$model->id)));
 
+    // form url
+    $this->setData('jobApplyingCancelUrl',$url->setAndParseUrl('shop/{shopSlug}/job_applying/cancel/{id}',array('shopSlug'=>$this->param['shopSlug'],'id'=>$model->id)));
+    $this->setData('newMessagePostUrl',$url->setAndParseUrl('shop/{shopSlug}/job_applying/new_message/{id}',array('shopSlug'=>$this->param['shopSlug'],'id'=>$model->id)));
+    $this->setData('replyMessageUrl',$url->setAndParseUrl('shop/{shopSlug}/job_applying/message_reply',array('shopSlug'=>$this->param['shopSlug'],'id'=>$model->id)));
+
+    // send as
+    $this->getSendAs();
     return $this->view('pages.job.job_applying_detail');
 
+  }
+
+  public function jobApplyingCancel() {
+    dd('xxsscccc');
   }
 
   public function accountJobApplyingDetail() {
@@ -451,39 +470,33 @@ class JobController extends Controller
     $this->setData('jobUrl',$url->setAndParseUrl('job/detail/{id}',array('id'=>$model->job->id)));
     $this->setData('createdDate',$date->covertDateTimeToSting($model->created_at->format('Y-m-d H:i:s')));
     $this->setData('messages',$_messages);
+
+    $this->setData('replyMessageUrl',$url->setAndParseUrl('account/job_applying/message_reply/{id}',array('id'=>$model->id)));
     
     return $this->view('pages.job.account_job_applying_detail');
 
   }
 
-  public function jobApplyingNewMessage() {
+  // public function jobApplyingNewMessage() {
     
-    $model = Service::loadModel('Message');
+  //   $model = Service::loadModel('Message');
 
-    $this->data = $model->formHelper->build();
+  //   $this->data = $model->formHelper->build();
 
-    $sendAs = array(
-      array(
-        'text' => 'ส่งในนามบริษัทหรือร้านค้า',
-        'value' => 'shop',
-        'select' => true,
-      ),
-      array(
-        'text' => 'ส่งในนานบุคคล',
-        'value' => 'person',
-        'select' => false,
-      )
-    );
+  //   $this->getSendAs();
 
-    $this->setData('sendAs',$sendAs);
+  //   return $this->view('pages.message.form.new_message');
 
-    return $this->view('pages.message.form.new_message');
-
-  }
+  // }
 
   public function jobApplyingMessageSend(CustomFormRequest $request) {
 
     $personApplyJob = Service::loadModel('PersonApplyJob')->find($this->param['id']);
+dd($personApplyJob->job_applying_status_id);
+    if($personApplyJob->job_applying_status_id == 1) {
+      $personApplyJob->job_applying_status_id = 2;
+      $personApplyJob->save();
+    }
 
     $messageHelper = new MessageHelper;
     $messageHelper->setModel($personApplyJob);
@@ -522,48 +535,35 @@ class JobController extends Controller
 
   }
 
-  public function jobApplyingMessageReply() {
+  // public function jobApplyingMessageReply() {
 
-    $message = Service::loadModel('Message')->find($this->param['id']);
+  //   $message = Service::loadModel('Message')->find($this->param['id']);
 
-    if(empty($message) || !$message->hasPermission() || !$message->isTopParent()) {
-      $this->error = array(
-        'message' => 'ไม่พบข้อความ หรือไม่สามารถตอบกลับข้อความนี้ได้'
-      );
-      return $this->error();
-    }
+  //   if(empty($message) || !$message->hasPermission() || !$message->isTopParent()) {
+  //     $this->error = array(
+  //       'message' => 'ไม่พบข้อความ หรือไม่สามารถตอบกลับข้อความนี้ได้'
+  //     );
+  //     return $this->error();
+  //   }
 
-    $model = Service::loadModel('Message');
+  //   $model = Service::loadModel('Message');
 
-    $this->data = $model->formHelper->build();
-    $this->setData('message',$message->message);
+  //   $this->data = $model->formHelper->build();
+  //   $this->setData('message',$message->message);
 
-    if(!empty($this->param['shopSlug'])) {
+  //   if(!empty($this->param['shopSlug'])) {
 
-      $sendAs = array(
-        array(
-          'text' => 'ส่งในนามบริษัทหรือร้านค้า',
-          'value' => 'shop',
-          'select' => true,
-        ),
-        array(
-          'text' => 'ส่งในนานบุคคล',
-          'value' => 'person',
-          'select' => false,
-        )
-      );
+  //     $this->getSendAs();
 
-      $this->setData('sendAs',$sendAs);
+  //   }
 
-    }
+  //   return $this->view('pages.message.form.message_reply');
 
-    return $this->view('pages.message.form.message_reply');
-
-  }
+  // }
 
   public function jobApplyingMessageReplySend(CustomFormRequest $request) {
 
-    $message = Service::loadModel('Message')->find($this->param['id']);
+    $message = Service::loadModel('Message')->find($request->get('id'));
 
     if(empty($message) || !$message->hasPermission() || !$message->isTopParent()) {
       $this->error = array(
@@ -588,7 +588,7 @@ class JobController extends Controller
     $model = Service::loadModel('Message');
     $model->model = 'PersonApplyJob';
     $model->model_id = $message->model_id;
-    $model->parent_id = $this->param['id'];
+    $model->parent_id = $request->get('id');
     $model->sender = $sender['sender'];
     $model->sender_id = $sender['sender_id'];
     $model->receiver = $receiver['receiver'];
@@ -628,6 +628,23 @@ class JobController extends Controller
       return Redirect::back();
     }
 
+  }
+
+  private function getSendAs() {
+    $sendAs = array(
+      array(
+        'text' => 'ส่งในนามบริษัทหรือร้านค้า',
+        'value' => 'shop',
+        'select' => true,
+      ),
+      array(
+        'text' => 'ส่งในนานบุคคล',
+        'value' => 'person',
+        'select' => false,
+      )
+    );
+
+    $this->setData('sendAs',$sendAs);
   }
 
 }

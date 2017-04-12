@@ -110,7 +110,7 @@
                     <div class="line space-bottom-10"></div>
                     <h5>รายละเอียดการชำระเงิน</h5>
                     {!!$paymentMethod['description']!!}
-                  <div class="right-size-panel-close-icon"></div>
+                  <div class="right-size-panel-close-button"></div>
                 </div>
               </div>
 
@@ -335,7 +335,7 @@
               <div class="line space-bottom-10"></div>
               {!!$order['shipping_cost_detail']!!}
             </div>
-            <div class="right-size-panel-close-icon"></div>
+            <div class="right-size-panel-close-button"></div>
           </div>
         @endif
       </div>

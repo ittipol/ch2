@@ -1,5 +1,7 @@
 class Form {
-	constructor() {}
+	constructor(form = '#main_form') {
+		this.form = form;
+	}
 
 	load() {
 		this.init();
@@ -7,7 +9,7 @@ class Form {
 	}
 
 	init() {
-	  $('form#main_form input').keydown(function(event){
+	  $(this.form).find('input').keydown(function(event){
   	  if(event.keyCode == 13) {
   	    event.preventDefault()
   	    return false;
@@ -17,7 +19,9 @@ class Form {
 
 	bind() {
 
-		$('#main_form').on('submit',function(){
+		let _this = this;
+
+		$(_this.form).on('submit',function(){
 
 			if(($('#birth_day').length > 0) && ($('#birth_month').length > 0) && ($('#birth_year').length > 0)) {
 				var input = document.createElement("input");
@@ -28,7 +32,7 @@ class Form {
 				this.appendChild(input);
 			}
 
-			$('#main_form input[type="submit"]').prop('disabled','disabled').addClass('disabled');
+			$(_this.form).find('input[type="submit"]').prop('disabled','disabled').addClass('disabled');
 		
 		});
 

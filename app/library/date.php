@@ -152,8 +152,10 @@ class Date
         $passed = $passedHours.' ชั่วโมงที่แล้ว';
       }elseif($passedMins != 0) {
         $passed = $passedMins.' นาทีที่แล้ว';
-      }elseif($passedSecs > 10) {
+      }elseif($passedSecs > 30) {
         $passed = $passedSecs.' วินาทีที่แล้ว';
+      }elseif($passedSecs > 10) {
+        $passed = 'ไม่กี่วินาทีที่แล้ว';
       }
 
     }elseif($days == 1){

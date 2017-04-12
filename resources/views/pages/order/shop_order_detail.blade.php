@@ -131,8 +131,8 @@
 
       <div id="order_status" class="right-size-panel form">
         <div class="right-size-panel-inner">
-          @include('pages.order.form.order_status_edit')
-          <div class="right-size-panel-close-icon"></div>
+          @include('pages.order.components.order_status_edit')
+          <div class="right-size-panel-close-button"></div>
         </div>
       </div>
 
@@ -154,7 +154,7 @@
           <h3>ข้อความจากผู้ซื้อ</h3>
           <div class="line space-bottom-10"></div>
           {!!$order['customer_message']!!}
-        <div class="right-size-panel-close-icon"></div>
+        <div class="right-size-panel-close-button"></div>
       </div>
     </div>
 
@@ -345,7 +345,7 @@
               <div class="line space-bottom-10"></div>
               {!!$order['shipping_cost_detail']!!}
             </div>
-            <div class="right-size-panel-close-icon"></div>
+            <div class="right-size-panel-close-button"></div>
           </div>
         @endif
       </div>

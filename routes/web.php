@@ -346,14 +346,14 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
   Route::get('shop/{shopSlug}/job','ShopController@job')->name('shop.job');
 
-  Route::get('shop/{shopSlug}/job_applying_list','JobController@jobApplyingList')->name('shop.job.applying_list');
+  Route::get('shop/{shopSlug}/job_applying','JobController@jobApplyingList')->name('shop.job.applying_list');
   Route::get('shop/{shopSlug}/job_applying_detail/{id}','JobController@jobApplyingDetail')->name('shop.job.applying_detail');
   
-  Route::get('shop/{shopSlug}/job_applying/new_message/{id}','JobController@jobApplyingNewMessage')->name('shop.job.applying.new_message');
+  // Route::get('shop/{shopSlug}/job_applying/new_message/{id}','JobController@jobApplyingNewMessage')->name('shop.job.applying.new_message');
   Route::post('shop/{shopSlug}/job_applying/new_message/{id}','JobController@jobApplyingMessageSend')->name('shop.job.applying.new_message');
   
-  Route::get('shop/{shopSlug}/job_applying/message_reply/{id}','JobController@jobApplyingMessageReply')->name('shop.job.applying.message_reply');
-  Route::post('shop/{shopSlug}/job_applying/message_reply/{id}','JobController@jobApplyingMessageReplySend')->name('shop.job.applying.message_reply');
+  // Route::get('shop/{shopSlug}/job_applying/message_reply/{id}','JobController@jobApplyingMessageReply')->name('shop.job.applying.message_reply');
+  Route::post('shop/{shopSlug}/job_applying/message_reply','JobController@jobApplyingMessageReplySend')->name('shop.job.applying.message_reply');
 
   Route::post('shop/{shopSlug}/job_applying/cancel/{id}','JobController@jobApplyingCancel')->name('shop.job.applying.cancel');
 
@@ -441,11 +441,12 @@ Route::group(['prefix' => 'api/v1', 'middleware' => ['api','auth']], function ()
   Route::get('get_category/{parentId?}', 'ApiController@GetCategory');
 });
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['api','auth']], function () {
   Route::post('upload_image', 'ApiController@uploadImage');
   Route::post('upload_profile_image', 'ApiController@uploadProfileImage')->name('Api.upload.profile_image');
 
-  Route::post('upload_attached_file', 'ApiController@uploadAttachedFile');
+  Route::post('upload_file_attachment', 'ApiController@uploadAttachedFile');
+  Route::post('clear_file_attachment', 'ApiController@clearAttachedFile');
 
   Route::get('notification_update', 'ApiController@notificationUpdate');
   Route::get('notification_read', 'ApiController@notificationRead');

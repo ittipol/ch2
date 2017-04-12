@@ -14,17 +14,22 @@
 
 <div class="detail container">
 
+  @include('components.form_error') 
+
+  @if($personApplyJob['job_applying_status_id'] == 1)
   <div class="secondary-message-box space-bottom-30">
     <div class="secondary-message-box-inner">
       <div class="text-center">
         <img src="/images/common/resume.png">
         <h3>ใบสมัครงาน</h3>
-        <p>ส่งข้อความและไฟล์ต่างๆที่จำเป็นไปยังผู้สมัครหากคุณสนใจผู้สมัคร หรือสามารถยกเลิกการสมัครนี้ได้</p>
+        <p>หากคุณสนใจผู้สมัคร คุณสามารถส่งข้อความและไฟล์ต่างๆที่จำเป็นไปยังผู้สมัครได้ทันที หรือสามารถยกเลิกการสมัครนี้ได้</p>
       </div>
     </div>
     <div class="message-box-button-group two-button clearfix">
       <div class="flat-button">
-        <a href="{{$messagePostUrl}}" class="button">ส่งข้อไปยังผู้สมัคร</a>
+        <a class="button" data-right-side-panel="1" data-right-side-panel-target="#job_appying_new_message_panel">
+          ส่งข้อความติดต่อไปยังผู้สมัคร
+        </a>
       </div>
       <div class="flat-button">
         <a class="button danger" data-right-side-panel="1" data-right-side-panel-target="#cancel_job_appying_panel">
@@ -33,11 +38,26 @@
       </div>
     </div>
   </div>
-<!-- job_applying_histories -->
-  <div id="cancel_job_appying_panel" class="right-size-panel">
+  @endif
+
+  <div id="job_appying_new_message_panel" class="right-size-panel form">
     <div class="right-size-panel-inner">
-      <h3>xxx</h3>
-      <div class="line space-bottom-10"></div>
+      @include('pages.job.components.job_applying_new_message')
+      <div class="right-size-panel-close-button"></div>
+    </div>
+  </div>
+
+  <div id="job_appying_reply_message_panel" class="right-size-panel form">
+    <div class="right-size-panel-inner">
+      @include('pages.job.components.job_applying_reply_message')
+      <div class="right-size-panel-close-button"></div>
+    </div>
+  </div>
+
+  <div id="cancel_job_appying_panel" class="right-size-panel form">
+    <div class="right-size-panel-inner">
+      @include('pages.job.components.job_applying_cancel')
+      <div class="right-size-panel-close-button"></div>
     </div>
   </div>
 
@@ -46,10 +66,10 @@
     <div class="line space-top-10"></div>
   </div>
 
-  @if(!empty($jobApply['message']))
+  @if(!empty($personApplyJob['message']))
     <div class="space-top-20">
       <h4>ข้อความจากผู้สมัคร</h4>
-      <div>{!!$jobApply['message']!!}</div>
+      <div>{!!$personApplyJob['message']!!}</div>
     </div>
   @endif
 
@@ -164,7 +184,7 @@
             @endif
 
             <div class="message-reply-flat-button text-right">
-              <a href="{{$message['replyUrl']}}" class="button">ตอบกลับ</a>
+              <a class="button" data-right-side-panel="1" data-right-side-panel-target="#job_appying_reply_message_panel" data-reply-message="{{$message['id']}}">ตอบกลับ</a>
             </div>
 
           </div>
@@ -312,16 +332,17 @@
       </div>
 
       @if(!empty($privateWebsites))
-      <div class="person-experience-info">
+      <div class="person-private-website-content">
         <h4>เว็บไซต์ส่วนตัวของผู้สมัคร</h4>
         <div class="line"></div>
         <div class="row">
         @foreach($privateWebsites as $privateWebsite)
           <div class="col-md-6 col-xs-12">
-            <h4><a href="{{$privateWebsite['url']}}">{{$privateWebsite['website_url']}}</a></h4>
-            <h5>{{$privateWebsite['websiteType']}}</h5>
-            <a href="{{$privateWebsite['url']}}" class="button">เข้าสู่หน้าเว็บ</a>
-            <!-- <div class="line space-top-20"></div> -->
+            <div class="space-top-20">
+              <h4><a href="{{$privateWebsite['url']}}">{{$privateWebsite['website_url']}}</a></h4>
+              <h5>{{$privateWebsite['websiteType']}}</h5>
+              <a href="{{$privateWebsite['url']}}" class="button">เข้าสู่หน้าเว็บ</a>
+            </div>
           </div>
         @endforeach
         </div>

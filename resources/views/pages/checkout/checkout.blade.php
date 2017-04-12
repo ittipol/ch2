@@ -244,7 +244,7 @@
       <!-- <div id="shipping_method_expand_panel" class="right-size-panel filter">
         <div class="right-size-panel-inner">
           <div id="shipping_method_panel"></div>
-          <div class="right-size-panel-close-icon"></div>
+          <div class="right-size-panel-close-button"></div>
         </div>
       </div> -->
 

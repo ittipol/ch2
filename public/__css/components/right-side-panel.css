@@ -47,7 +47,7 @@
 	color: #000;
 }
 
-.right-size-panel .right-size-panel-close-icon {
+.right-size-panel .right-size-panel-close-button {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -73,7 +73,7 @@
 	background-color: #000;
 }
 
-.right-size-panel .right-size-panel-close-icon {
+.right-size-panel .right-size-panel-close-button {
 	background-color: #0071c5;
 }
 

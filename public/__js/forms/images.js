@@ -50,7 +50,7 @@ class Images {
 
 		let _this = this;
 
-		$(document).on('click', '.'+this.code+'-image', function(e){
+		$('#'+_this.panel).on('click', '.image-input', function(e){
 
 			for (var i = 0; i < _this.inputDisable.length; i++) {
 				if(_this.inputDisable[i] == this.id) {
@@ -61,11 +61,11 @@ class Images {
 
 		});
 
-		$(document).on('change', '.'+this.code+'-image', function(){
+		$('#'+_this.panel).on('change', '.image-input', function(){
 			_this.preview(this);
 		});
 
-		$(document).on('click', '.'+this.code+'-remove-btn', function(){
+		$('#'+_this.panel).on('click', '.image-remove-btn', function(){
 			_this.removePreview(this);
 		});
 		
@@ -322,9 +322,9 @@ class Images {
 		let html = '';
 		html += '<div class="image-panel '+this.style+' clearfix">';
 		html += '<label id="'+this.code+'_'+this.runningNumber+'" class="image-label">';
-		html += '<input id="'+this.code+'_image_'+this.runningNumber+'" class="'+this.code+'-image" type="file">';
+		html += '<input id="'+this.code+'_image_'+this.runningNumber+'" class="image-input" type="file">';
 		html +=	'<div class="preview-image" style="background-image:url('+this.defaultImage+')"></div>';
-		html += '<a href="javscript:void(0);" class="'+this.code+'-remove-btn">×</a>'
+		html += '<a href="javscript:void(0);" class="image-remove-btn">×</a>'
 		html += '<p class="error-message"></p>';
 		html += '<div class="progress-bar"><div class="status"></div></div>'
 		html += '</label>';

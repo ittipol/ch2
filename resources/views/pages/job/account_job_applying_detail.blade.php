@@ -14,6 +14,15 @@
 
 <div class="container">
 
+  @include('components.form_error') 
+
+  <div id="job_appying_reply_message_panel" class="right-size-panel form">
+    <div class="right-size-panel-inner">
+      @include('pages.job.components.job_applying_reply_message')
+      <div class="right-size-panel-close-button"></div>
+    </div>
+  </div>
+
   <div class="tabs clearfix">
     <label>
       <input class="tab" type="radio" name="tabs"  data-tab="job_applying_detail">
@@ -108,7 +117,7 @@
             @endif
 
             <div class="message-reply-flat-button text-right">
-              <a href="{{$message['replyUrl']}}" class="button">ตอบกลับ</a>
+              <a class="button" data-right-side-panel="1" data-right-side-panel-target="#job_appying_reply_message_panel" data-reply-message="{{$message['id']}}">ตอบกลับ</a>
             </div>
 
           </div>
@@ -122,7 +131,7 @@
 
                 <div class="sender-profile clearfix">
                   <div class="sender-profile-image">
-                    <div class="profile-image" style="background-image:url({{$message['sender']['profileImage']}});"></div>
+                    <div class="profile-image" style="background-image:url({{$replyMessages['sender']['profileImage']}});"></div>
                   </div>
                   <div class="sender-profile-info">
                     <div><strong>{{$replyMessages['sender']['name']}}</strong></div>
