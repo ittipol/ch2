@@ -14,30 +14,75 @@
 
 <div class="detail container">
 
-  @include('components.form_error') 
+  @include('components.form_error')
+
+  <div class="text-right space-bottom-20">
+    <a class="button" data-right-side-panel="1" data-right-side-panel-target="#job_appying_new_message_panel">ส่งข้อความไปยังผู้สมัคร</a>
+  </div> 
 
   @if($personApplyJob['job_applying_status_id'] == 1)
-  <div class="secondary-message-box space-bottom-30">
-    <div class="secondary-message-box-inner">
-      <div class="text-center">
-        <img src="/images/common/resume.png">
-        <h3>ใบสมัครงาน</h3>
-        <p>หากคุณสนใจผู้สมัคร คุณสามารถส่งข้อความและไฟล์ต่างๆที่จำเป็นไปยังผู้สมัครได้ทันที หรือสามารถยกเลิกการสมัครนี้ได้</p>
+    <div class="secondary-message-box space-bottom-30">
+      <div class="secondary-message-box-inner">
+        <div class="text-center">
+          <img src="/images/common/resume.png">
+          <h3>ใบสมัครงาน</h3>
+          <p>หากผู้สมัครรายนี้มีคุณสมบัติตรงตามที่คุณต้องการ คุณสามารถส่งข้อความและไฟล์ต่างๆที่จำเป็นไปยังผู้สมัครได้ทันที หรือสามารถยกเลิกการสมัครนี้ได้</p>
+        </div>
+      </div>
+      <div class="message-box-button-group two-button clearfix">
+        <div class="flat-button">
+          <a class="button" data-right-side-panel="1" data-right-side-panel-target="#job_appying_new_message_panel">
+            ส่งข้อความไปยังผู้สมัคร
+          </a>
+        </div>
+        <div class="flat-button">
+          <a class="button danger" data-right-side-panel="1" data-right-side-panel-target="#job_appying_cancel_panel">
+            ยกเลิกการสมัคร
+          </a>
+        </div>
       </div>
     </div>
-    <div class="message-box-button-group two-button clearfix">
-      <div class="flat-button">
-        <a class="button" data-right-side-panel="1" data-right-side-panel-target="#job_appying_new_message_panel">
-          ส่งข้อความติดต่อไปยังผู้สมัคร
-        </a>
+  @elseif($personApplyJob['job_applying_status_id'] == 2)
+
+    <div class="secondary-message-box space-bottom-30">
+      <div class="secondary-message-box-inner">
+        <div class="text-center">
+          <img src="/images/common/resume.png">
+          <h3>ผลลัพธ์การสมัครงาน</h3>
+          <p>ใบสมัครงานนี้รอการประเมินจากคุณ หากได้ผลลัพธ์ของการสมัครแล้ว คุณสามารถแจ้งผลลัพธ์ไปยังผู้สมัครได้ทันทีโดยการเลือกตัวเลือกข้างล่างนี้</p>
+        </div>
       </div>
-      <div class="flat-button">
-        <a class="button danger" data-right-side-panel="1" data-right-side-panel-target="#cancel_job_appying_panel">
-          ยกเลิกการสมัคร
-        </a>
+      <div class="message-box-button-group three-button clearfix">
+        <div class="flat-button">
+          <a class="button" data-right-side-panel="1" data-right-side-panel-target="#job_appying_new_message_panel">
+            ผ่าน
+          </a>
+        </div>
+        <div class="flat-button">
+          <a class="button danger" data-right-side-panel="1" data-right-side-panel-target="#job_appying_cancel_panel">
+            ไม่ผ่าน
+          </a>
+        </div>
+        <div class="flat-button">
+          <a class="button warning" data-right-side-panel="1" data-right-side-panel-target="#job_appying_cancel_panel">
+            ยกเลิกการสมัคร
+          </a>
+        </div>
       </div>
     </div>
-  </div>
+
+  @else
+
+    <div class="secondary-message-box space-bottom-30">
+      <div class="secondary-message-box-inner">
+        <div class="text-center">
+          <img src="/images/common/resume.png">
+          <h3>{{$personApplyJob['jobApplyingStatusName']}}</h3>
+          <p></p>
+        </div>
+      </div>
+    </div>
+
   @endif
 
   <div id="job_appying_new_message_panel" class="right-size-panel form">
@@ -54,7 +99,7 @@
     </div>
   </div>
 
-  <div id="cancel_job_appying_panel" class="right-size-panel form">
+  <div id="job_appying_cancel_panel" class="right-size-panel form">
     <div class="right-size-panel-inner">
       @include('pages.job.components.job_applying_cancel')
       <div class="right-size-panel-close-button"></div>

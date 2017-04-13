@@ -10,8 +10,20 @@ class AttachedFile extends Model
 {
   protected $table = 'attached_files';
   protected $fillable = ['model','model_id','path','filename','filesize','alias','person_id'];
+  protected $modelRelations = array('AttachedFileAccessPermission');
 
   protected $storagePath = 'app/public/attached_files/';
+
+  public static function boot() {
+
+    parent::boot();
+
+    AttachedFile::deleted(function($model) {
+      // delete image file after image record is deleted
+      $model->deleteFile();
+    });
+
+  }
 
   public function __saveRelatedData($model,$options = array()) {
 
@@ -60,7 +72,7 @@ class AttachedFile extends Model
         mkdir($toPath,0777,true);
       }
 
-      $this->moveFile($path,$attechedFileInstance->getImagePath());
+      $this->moveFile($path,$attechedFileInstance->getFilePath());
 
       $this->fileAccessPermission($model,$attechedFileInstance);
 
@@ -73,15 +85,23 @@ class AttachedFile extends Model
 
   }
 
-  public function getFullDirPath() {
+  public function getFullDirPath($modelName = '',$modelId = '') {
     
     $string = new String;
 
-    return storage_path($this->storagePath.$string->generateUnderscoreName($this->model)).'/'.$this->model_id.'/';
-    // return storage_path($this->storagePath.$string->generateUnderscoreName($this->model)).'/'.$this->model_id.'/'.$this->path.'/';
+    if(empty($modelName)) {
+      $modelName = $this->model;
+    }
+
+    if(empty($modelId)) {
+      $modelId = $this->model_id;
+    }
+
+    return storage_path($this->storagePath.$string->generateUnderscoreName($modelName)).'/'.$modelId.'/';
+
   }
 
-  public function getImagePath($alias = '') {
+  public function getFilePath($alias = '') {
 
     if(empty($alias)) {
       $alias = $this->alias;
@@ -92,6 +112,35 @@ class AttachedFile extends Model
 
   public function moveFile($oldPath,$to) {
     return File::move($oldPath, $to);
+  }
+
+  public function deleteFile() {
+
+    $path = $this->getFilePath();
+
+    if(!file_exists($path)){
+      return false;
+    }
+
+    File::Delete($path);
+
+    return true;
+
+  }
+
+  public function deleteDirectory($modelName,$modelId) {
+
+    $path = $this->getFullDirPath($modelName,$modelId);
+
+    if(!$this->checkDirectoryExist($path)) {
+      return false;
+    }
+
+    return File::deleteDirectory($path);
+  }
+
+  public function checkDirectoryExist($directoryName) {
+    return is_dir($directoryName);
   }
 
   public function fileAccessPermission($model,$file) {

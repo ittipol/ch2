@@ -32,7 +32,6 @@ class Image extends Model
     )
   );
 
-  // private $prefix = 'image';
   protected $storagePath = 'app/public/images/';
 
   // photos/?tab=album&album_id=270003133398148
@@ -47,7 +46,7 @@ class Image extends Model
     parent::boot();
 
     Image::deleted(function($model) {
-      // delete image after image record is deleted
+      // delete image file after image record is deleted
       $model->deleteImage();
     });
 
@@ -123,7 +122,7 @@ class Image extends Model
     $path = $this->getImagePath();
 
     if(!file_exists($path)){
-      continue;
+      return false;
     }
 
     if(File::Delete($path)) {

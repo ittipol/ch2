@@ -12,7 +12,6 @@
 <?php
 
   $jsFiles = array(
-    '__js/node_modules/socket.io.js',
     '__js/jquery-3.1.1.min.js',
     '__js/jquery.validate.min.js',
     '__js/blackbox/blackbox.js',
@@ -67,7 +66,7 @@
 @if($combine)
 <script type="text/javascript" src="{{ URL::asset('js/8fcf1793a14f7d35.js') }}"></script>
 @endif
-<script type="text/javascript" src="{{ URL::asset('js/ckeditor/ckeditor.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/node_modules/socket.io.js') }}"></script>
 
 @if(!$combine)
 @foreach ($jsFiles as $js)

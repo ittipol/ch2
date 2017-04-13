@@ -73,6 +73,10 @@
 	width: 50%;
 }
 
+.secondary-message-box .message-box-button-group.three-button > .flat-button {
+	width: 33.333333333333333333333333333333%;
+}
+
 .secondary-message-box .message-box-button-group .button {
 	width: 100%;
 	line-height: 50px;
@@ -84,6 +88,10 @@
 
 .secondary-message-box .message-box-button-group .button.danger {
 	background-color: #D32F2F;
+}
+
+.secondary-message-box .message-box-button-group .button.warning {
+	background-color: #EF6C00;
 }
 
 .message-content .message {
@@ -135,7 +143,8 @@
 }
 
 @media only screen and (max-width : 480px) {
-  .secondary-message-box .message-box-button-group.two-button > .flat-button {
+  .secondary-message-box .message-box-button-group.two-button > .flat-button,
+  .secondary-message-box .message-box-button-group.three-button > .flat-button {
   	width: 100%;
   }
 }

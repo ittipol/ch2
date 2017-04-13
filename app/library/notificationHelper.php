@@ -301,26 +301,40 @@ class NotificationHelper {
   }
 
   public function getReceiver($receiver) {
-    
-    $receiverGroup = json_decode($receiver);
+
+    $receiverGroup = json_decode($receiver,true);
 
     $receivers = array();    
-    foreach ($receiverGroup as $key => $value) {
+    foreach ($receiverGroup as $groups) {
       
-      switch ($key) {
-        case 'group':
-            $receivers = $this->getReceiverByGroup($value);
-          break;
+      foreach ($groups as $group => $value) {
 
-        case 'person':
-         
-            if(Schema::hasColumn($this->model->getTable(), 'person_id')) {
-              $receivers[] = $this->model->person_id;
-            }
+        switch ($group) {
+          case 'group':
+              $people = $this->getReceiverByGroup($value);
 
-          break;
+              if(empty($people)) {
+                break;
+              }
+
+              foreach ($people as $person) {
+                $receivers[$person->person_id] = $person->person_id;
+              }
+
+            break;
+
+          case 'person':
+           
+              if(Schema::hasColumn($this->model->getTable(), 'person_id')) {
+                $receivers[$this->model->person_id] = $this->model->person_id;
+              }
+
+            break;
+
+        }
 
       }
+
 
     }
 
@@ -330,12 +344,11 @@ class NotificationHelper {
 
   private function getReceiverByGroup($group) {
 
-    $receivers = array();
+    $people = array();
     switch ($group) {
 
       case 'all-person-in-shop':
 
-        $people = array();
         if(Schema::hasColumn($this->model->getTable(), 'shop_id')) {
           $people = Service::loadModel('PersonToShop')
           ->where('shop_id','=',$this->model->shop_id)
@@ -358,19 +371,15 @@ class NotificationHelper {
           
         }
 
-        if(empty($people)) {
-          break;
-        }
-
-        foreach ($people as $person) {
-          $receivers[] = $person->person_id;
-        }
-
         break;
 
     }
 
-    return $receivers;
+    if(empty($people)) {
+      return null;
+    }
+
+    return $people;
 
   }
 

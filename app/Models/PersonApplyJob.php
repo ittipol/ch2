@@ -9,7 +9,7 @@ use App\library\date;
 class PersonApplyJob extends Model
 {
   protected $table = 'person_apply_jobs';
-  protected $fillable = ['person_id','job_id','shop_id','message','job_applying_status_id'];
+  protected $fillable = ['person_id','job_id','shop_id','message','job_applying_status_id','times'];
   protected $modelRelations = array('JobApplyToBranch','AttachedFile');
 
   public $formHelper = true;
@@ -28,12 +28,17 @@ class PersonApplyJob extends Model
     return $this->hasOne('App\Models\Shop','id','shop_id');
   }
 
+  public function jobApplyingStatus() {
+    return $this->hasOne('App\Models\JobApplyingStatus','id','job_applying_status_id');
+  }
+
   public function buildModelData() {
 
     return array(
       'shopName' => $this->shop->name,
       'message' => $this->message,
-      'job_applying_status_id' => $this->job_applying_status_id
+      'job_applying_status_id' => $this->job_applying_status_id,
+      'jobApplyingStatusName' => $this->JobApplyingStatus->name
     );
 
   }

@@ -5,7 +5,7 @@ namespace App\Models;
 class JobApplyingHistory extends Model
 {
   protected $table = 'job_applying_histories';
-  protected $fillable = ['job_id','job_applying_status_id','message'];
+  protected $fillable = ['job_id','job_applying_status_id','message','times'];
 
   public function setUpdatedAt($value) {}
 }

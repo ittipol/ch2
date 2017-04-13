@@ -129,6 +129,14 @@
 	color: #999;
 }
 
+@media only screen and (max-width : 1200px) {
+  
+	.right-size-panel {
+		width: 500px;
+	}
+
+}
+
 @media only screen and (max-width : 480px) {
   
 	.right-size-panel {

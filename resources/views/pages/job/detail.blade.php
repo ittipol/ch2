@@ -23,8 +23,35 @@
 
 <div class="detail container">
 
-  @if($personApplyJob)
-    <h4 class="sign info wide space-bottom-20">สมัครงานนี้แล้ว</h4>
+  @if($alreadyApply)
+    
+    @if(($personApplyJob['job_applying_status_id'] == 4) || ($personApplyJob['job_applying_status_id'] == 5))
+      <div class="secondary-message-box space-bottom-30">
+        <div class="secondary-message-box-inner">
+          <div class="text-center">
+            <img src="/images/common/resume.png">
+            <h3>คุณเคยสมัครงานนี้แล้ว</h3>
+            <p>ดูเหมือนว่าผลลัพธ์การสมัครอาจจยังไม่เป็นตามที่คุณต้องกการ คุณต้องกการสมัครงานนี้อีกครั้งหรือไม่?</p>
+          </div>
+        </div>
+        <div class="message-box-button-group clearfix">
+          <div class="flat-button">
+            <a href="{{$jobApplyUrl}}" class="button">
+              สมัครงานนี้
+            </a>
+          </div>
+        </div>
+      </div>
+    @elseif($personApplyJob['job_applying_status_id'] == 3)
+      <h4 class="sign success wide space-bottom-20">สมัครงานนี้แล้ว และยินดีด้วยคุณผ่านการสมัครงานนี้แล้ว</h4>
+      <a class="button pull-right" href="{{$jobApplyUrl}}">
+        <img src="/images/icons/edit-white.png">
+        ไปยังหน้าสมัครงาน
+      </a>
+    @else
+      <h4 class="sign info wide space-bottom-20">สมัครงานนี้แล้ว</h4>
+    @endif
+
   @else
     <div class="row space-bottom-30">
       <a class="button pull-right" href="{{$jobApplyUrl}}">
@@ -210,7 +237,7 @@
     <h4>สมัครงานนี้ได้ที่</h4>
 
     <div class="text-center space-top-bottom-20">
-      @if($personApplyJob)
+      @if($alreadyApply)
         <h4 class="sign info">สมัครงานนี้แล้ว</h4>
       @else
       <a class="button" href="{{$jobApplyUrl}}">

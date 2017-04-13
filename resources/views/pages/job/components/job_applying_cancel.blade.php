@@ -10,8 +10,8 @@
 ?>
 <div class="form-row">
   <?php 
-    echo Form::label('description', 'คำอธิบายหรือเหตุผลของการยกเลิกการสมัคร');
-    echo Form::textarea('description', null, array(
+    echo Form::label('message', 'คำอธิบายหรือเหตุผลของการยกเลิกการสมัคร');
+    echo Form::textarea('message', null, array(
       'class' => 'ckeditor'
     ));
   ?>

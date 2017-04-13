@@ -211,6 +211,10 @@ a.button:visited {
 	background-color: rgb(44,89,169);
 }
 
+.sign.success {
+	background-color: #388E3C;
+}
+
 #map.map-small {
 	height: 250px;
 }

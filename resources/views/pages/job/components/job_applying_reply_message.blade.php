@@ -58,7 +58,7 @@
 
 </div>
 <?php 
-  echo Form::submit('บันทึก' , array(
+  echo Form::submit('ส่ง' , array(
     'class' => 'button space-top-20'
   ));
   echo Form::close();

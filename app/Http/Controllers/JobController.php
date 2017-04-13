@@ -114,13 +114,15 @@ class JobController extends Controller
     $personApplyJob = Service::loadModel('PersonApplyJob')->where(array(
       array('person_id','=',session()->get('Person.id')),
       array('job_id','=',$this->param['id'])
-    ))->exists();
+    ));
 
-    $this->setData('personApplyJob',$personApplyJob);
+    $this->setData('personApplyJob',$personApplyJob->first()->buildModelData());
+    $this->setData('alreadyApply',$personApplyJob->exists());
+    $this->setData('jobApplyUrl',$url->setAndParseUrl('job/apply/{id}',array('id' => $this->param['id'])));
 
-    if(!$personApplyJob) {
-      $this->setData('jobApplyUrl',$url->setAndParseUrl('job/apply/{id}',array('id' => $this->param['id'])));
-    }
+    // if(!$personApplyJob->exists()) {
+    //   $this->setData('jobApplyUrl',$url->setAndParseUrl('job/apply/{id}',array('id' => $this->param['id'])));
+    // }
 
     return $this->view('pages.job.detail');
 
@@ -211,14 +213,22 @@ class JobController extends Controller
 
     $model = Service::loadModel('PersonApplyJob');
 
-    $exist = $model->where(array(
+    $_model = $model->where(array(
       array('person_id','=',session()->get('Person.id')),
       array('job_id','=',$this->param['id'])
-    ))->exists();
+    ));
 
-    if($exist) {
-      MessageHelper::display('สมัครงานนี้แล้ว','info');
-      return Redirect::to('job/detail/'.$this->param['id']);
+    if($_model->exists()) {
+
+      if(($model->job_applying_status_id != 4) && ($model->job_applying_status_id != 5)) {
+        MessageHelper::display('สมัครงานนี้แล้ว','info');
+        return Redirect::to('job/detail/'.$this->param['id']);
+      }
+
+      // Get Existing data
+      // and set to field
+      // BuildFormData
+
     }
 
     $jobModel = Service::loadModel('Job')->find($this->param['id']);
@@ -269,36 +279,65 @@ class JobController extends Controller
 
     $model = Service::loadModel('PersonApplyJob');
 
-    $exist = $model->where(array(
+    $_model = $model->where(array(
       array('person_id','=',session()->get('Person.id')),
       array('job_id','=',$this->param['id'])
-    ))->exists();
-
-    if($exist) {
-      MessageHelper::display('สมัครงานนี้แล้ว','info');
-      return Redirect::to('job/detail/'.$this->param['id']);
-    }
-
-    $shopToModel = Service::loadModel('ShopRelateTo')
-    ->select('shop_id')
-    ->where(array(
-      array('model','like','Job'),
-      array('model_id','=',$this->param['id'])
-    ))
-    ->first();
+    ));
 
     $jobApplyingStatus = Service::loadModel('JobApplyingStatus')->getIdByAlias('job-applying');
 
-    $model->job_id = $this->param['id'];
-    $model->job_applying_status_id = $jobApplyingStatus;
+    if($_model->exists()) {
 
-    request()->request->add(['shop_id' => $shopToModel->shop_id]);
+      $model = $_model->first();
+
+      if(($model->job_applying_status_id != 4) && ($model->job_applying_status_id != 5)) {
+        MessageHelper::display('สมัครงานนี้แล้ว','info');
+        return Redirect::to('job/detail/'.$this->param['id']);
+      }
+dd('555');
+      $attachedFileModel = Service::loadModel('AttachedFile');
+
+      // Clear attached files
+      $files = $attachedFileModel->where([
+        ['model','like','PersonApplyJob'],
+        ['model_id','=',$model->id]
+      ]);
+      
+      if($files->exists()) {
+        foreach ($files->get() as $file) {
+          $file->delete();
+        }
+
+        $attachedFileModel->deleteDirectory('PersonApplyJob',$model->id);
+      }
+      
+      $model->times = $model->times + 1;
+
+    }else{
+
+      $shopToModel = Service::loadModel('ShopRelateTo')
+      ->select('shop_id')
+      ->where(array(
+        array('model','like','Job'),
+        array('model_id','=',$this->param['id'])
+      ))
+      ->first();
+
+      request()->request->add(['shop_id' => $shopToModel->shop_id]);
+
+      $model->job_id = $this->param['id'];
+      $model->times = 1;
+
+    }
+
+    $model->job_applying_status_id = $jobApplyingStatus;
 
     if($model->fill(request()->all())->save()) {
 
       Service::loadModel('JobApplyingHistory')->fill(array(
         'job_id' => $model->job_id,
-        'job_applying_status_id' => $jobApplyingStatus
+        'job_applying_status_id' => $jobApplyingStatus,
+        'times' => $model->times
       ))->save();
 
       $notificationHelper = new NotificationHelper;
@@ -423,8 +462,43 @@ class JobController extends Controller
 
   }
 
-  public function jobApplyingCancel() {
+  public function jobApplyingPassed() {
     dd('xxsscccc');
+  }
+
+  public function jobApplyingNotPass() {
+    dd('xxsscccc');
+  }
+
+  public function jobApplyingCancel() {
+
+    $model = Service::loadModel('PersonApplyJob')->find($this->param['id']);
+
+    if(($model->job_applying_status_id != 1) && ($model->job_applying_status_id != 2)) {
+      $this->error = array(
+        'message' => 'เกิดข้อผิดพลาด พบการทำงานที่ไม่ถูกต้อง'
+      );
+      return $this->error();
+    }
+
+    $jobApplyingStatus = Service::loadModel('JobApplyingStatus')->getIdByAlias('job-applying-cancel');
+
+    $model->job_applying_status_id = $jobApplyingStatus;
+    $model->save();
+
+    Service::loadModel('JobApplyingHistory')->fill(array(
+      'job_id' => $model->job_id,
+      'job_applying_status_id' => $jobApplyingStatus,
+      'message' => request()->get('message')
+    ))->save();
+
+    $notificationHelper = new NotificationHelper;
+    $notificationHelper->setModel($model);
+    $notificationHelper->create('job-applying-cancel');
+
+    MessageHelper::display('ผลการสมัครงานถูกส่งไปยังผู้สมัครแล้ว','success');
+    return Redirect::to('shop/'.$this->param['shopSlug'].'/job_applying_detail/'.$model->id);
+
   }
 
   public function accountJobApplyingDetail() {
