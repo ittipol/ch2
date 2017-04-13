@@ -116,13 +116,13 @@ class JobController extends Controller
       array('job_id','=',$this->param['id'])
     ));
 
-    $this->setData('personApplyJob',$personApplyJob->first()->buildModelData());
+
+    if($personApplyJob->exists()) {
+      $this->setData('personApplyJob',$personApplyJob->first()->buildModelData());
+    }
+
     $this->setData('alreadyApply',$personApplyJob->exists());
     $this->setData('jobApplyUrl',$url->setAndParseUrl('job/apply/{id}',array('id' => $this->param['id'])));
-
-    // if(!$personApplyJob->exists()) {
-    //   $this->setData('jobApplyUrl',$url->setAndParseUrl('job/apply/{id}',array('id' => $this->param['id'])));
-    // }
 
     return $this->view('pages.job.detail');
 
@@ -211,6 +211,15 @@ class JobController extends Controller
 
   public function apply() {
 
+    $jobModel = Service::loadModel('Job')->find($this->param['id']);
+
+    if(empty($jobModel)) {
+      $this->error = array(
+        'message' => 'ไม่พบข้อมูลตำแหน่งงาน ข้อมูลอาจถูกลบไปแล้ว'
+      );
+      return $this->error();
+    }    
+
     $model = Service::loadModel('PersonApplyJob');
 
     $_model = $model->where(array(
@@ -218,27 +227,29 @@ class JobController extends Controller
       array('job_id','=',$this->param['id'])
     ));
 
-    if($_model->exists()) {
+    $exist = $_model->exists();
+
+    if($exist) {
+
+      $model = $_model->first();
 
       if(($model->job_applying_status_id != 4) && ($model->job_applying_status_id != 5)) {
         MessageHelper::display('สมัครงานนี้แล้ว','info');
         return Redirect::to('job/detail/'.$this->param['id']);
       }
 
-      // Get Existing data
-      // and set to field
-      // BuildFormData
+      $relateToBranch = $model->getRelatedData('JobApplyToBranch');
+
+      $branches = array();
+      if(!empty($relateToBranch)) {
+        foreach ($relateToBranch as $value) {
+          $branches['branch_id'][] = $value->branch->id;
+        }
+      }
+
+      $model->formHelper->setFormData('JobApplyToBranch',$branches);
 
     }
-
-    $jobModel = Service::loadModel('Job')->find($this->param['id']);
-
-    if(empty($jobModel)) {
-      $this->error = array(
-        'message' => 'ไม่พบงานนี้'
-      );
-      return $this->error();
-    }    
 
     $branchIds = $jobModel->getRelatedData('RelateToBranch',array(
       'list' => 'branch_id',
@@ -267,9 +278,26 @@ class JobController extends Controller
     ->first();
 
     $this->data = $model->formHelper->build();
+
     $this->setData('shopName',$shopToModel->shop->name);
     $this->setData('jobName',$jobModel->name);
     $this->setData('branches',$_branches);
+
+    if($exist) {
+
+      $attachedFiles = $model->getRelatedData('AttachedFile');
+
+      $_attachedFiles = array();
+      if(!empty($attachedFiles)) {
+        foreach ($attachedFiles as $file) {
+          $_attachedFiles[] = $file->buildModelData();
+        }
+      }
+
+      $this->setData('attachedFiles',$_attachedFiles);
+
+      return $this->view('pages.job.form.job_apply_edit');
+    }
 
     return $this->view('pages.job.form.job_apply');
 
@@ -294,23 +322,7 @@ class JobController extends Controller
         MessageHelper::display('สมัครงานนี้แล้ว','info');
         return Redirect::to('job/detail/'.$this->param['id']);
       }
-dd('555');
-      $attachedFileModel = Service::loadModel('AttachedFile');
 
-      // Clear attached files
-      $files = $attachedFileModel->where([
-        ['model','like','PersonApplyJob'],
-        ['model_id','=',$model->id]
-      ]);
-      
-      if($files->exists()) {
-        foreach ($files->get() as $file) {
-          $file->delete();
-        }
-
-        $attachedFileModel->deleteDirectory('PersonApplyJob',$model->id);
-      }
-      
       $model->times = $model->times + 1;
 
     }else{

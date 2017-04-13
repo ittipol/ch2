@@ -12,6 +12,12 @@ class PersonApplyJob extends Model
   protected $fillable = ['person_id','job_id','shop_id','message','job_applying_status_id','times'];
   protected $modelRelations = array('JobApplyToBranch','AttachedFile');
 
+  protected $modelRelationDataOption = array(
+    'AttachedFile' => array(
+      'deleteBeforeSaving' => true
+    )
+  );
+
   public $formHelper = true;
   public $modelData = true;
   public $paginator = true;
@@ -36,7 +42,7 @@ class PersonApplyJob extends Model
 
     return array(
       'shopName' => $this->shop->name,
-      'message' => $this->message,
+      'message' => nl2br($this->message),
       'job_applying_status_id' => $this->job_applying_status_id,
       'jobApplyingStatusName' => $this->JobApplyingStatus->name
     );

@@ -141,7 +141,7 @@ class Message extends Model
 
     return array(
       'id' => $this->id,
-      'message' => $this->message,
+      'message' => nl2br($this->message),
       'sender' => $this->getSenderInfo(),
       'attachedFiles' => $_files,
       'createdDate' => $date->calPassedDate($this->created_at->format('Y-m-d H:i:s')),

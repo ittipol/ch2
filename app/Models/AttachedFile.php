@@ -25,11 +25,29 @@ class AttachedFile extends Model
 
   }
 
-  public function __saveRelatedData($model,$options = array()) {
+  public function __saveRelatedData($model,$data = array()) {
 
-    if(!empty($options['value']['files'])) {
-      $this->handleFiles($model,$options['value']['files'],$options['value']);
+    if(empty($data['value']['files'])) {
+      return false;
     }
+
+    if(!empty($data['options']['deleteBeforeSaving']) && $data['options']['deleteBeforeSaving']) {
+      // Delete old record
+      $files = $this->where([
+        ['model','like','PersonApplyJob'],
+        ['model_id','=',$model->id]
+      ]);
+
+      if($files->exists()) {
+        foreach ($files->get() as $file) {
+          $file->delete();
+        }
+
+        $this->deleteDirectory('PersonApplyJob',$model->id);
+      }
+    }
+
+    return $this->handleFiles($model,$data['value']['files'],$data['value']);
     
   }
 
@@ -82,6 +100,8 @@ class AttachedFile extends Model
     $temporaryFile->deleteTemporaryDirectory($model->modelName.'_'.$options['token'].'_attached_file');
     // remove temp file record
     $temporaryFile->deleteTemporaryRecords($model->modelName,$options['token']);
+
+    return true;
 
   }
 

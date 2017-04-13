@@ -21,6 +21,7 @@ class Model extends BaseModel
   protected $state = 'create';
   protected $modelRelations = array();
   protected $modelRelationData = array();
+  protected $modelRelationDataOption = array();
   protected $filterOptions = array();
   protected $sortingFields = array();
   protected $behavior;
@@ -32,8 +33,6 @@ class Model extends BaseModel
   public $formHelper = false;
   public $modelData = false;
   public $paginator = false;
-
-  // public $param;
   
   public function __construct(array $attributes = []) {
 
@@ -54,8 +53,6 @@ class Model extends BaseModel
     if($this->paginator) {
       $this->paginator = new Paginator($this);
     }
-
-    // $this->param = Route::current()->parameters();
 
     parent::__construct($attributes);
     
@@ -90,8 +87,6 @@ class Model extends BaseModel
     parent::saved(function($model){
 
       if(($model->state == 'create') && $model->exists) {
-
-        // $model->createDirectory();  
 
         if(!empty($model->behavior['Slug'])) {
           $slug = new Slug;
@@ -142,8 +137,9 @@ class Model extends BaseModel
           continue;
         }
 
-        $options = array(
-          'value' => $value
+        $data = array(
+          'value' => $value,
+          'options' => $this->getModelRelationDataOption($modelName)
         );
 
         $model = Service::loadModel($modelName);
@@ -152,11 +148,12 @@ class Model extends BaseModel
           return false;
         }
 
-        $model->__saveRelatedData($this,$options);
+        $model->__saveRelatedData($this,$data);
 
         unset($this->modelRelationData[$modelName]);
 
       }
+
     }
     
   }
@@ -193,19 +190,6 @@ class Model extends BaseModel
     
     return parent::fill($attributes);
   }
-
-  // protected function createDirectory() {
-
-  //   if(empty($this->directory) || empty($this->directoryPath)) {
-  //     return false;
-  //   }
-
-  //   $path = $this->getDirectoryPath().$this->id.'/';
-  //   if(!is_dir($path)){
-  //     mkdir($path,0777,true);
-  //   }
-
-  // }
 
   public function getDirectoryPath() {
 
@@ -291,12 +275,6 @@ class Model extends BaseModel
     if(!empty($options['conditions']['in'])) {
 
       foreach ($options['conditions']['in'] as $condition) {
-
-        // if(empty($condition[1])) {
-        //   continue;
-        // }
-
-        // $model = $model->whereIn($condition[0],$condition[1]);
         $model = $model->whereIn(current($condition),next($condition));
       }
 
@@ -400,52 +378,6 @@ class Model extends BaseModel
 
   }
 
-  // public function getRelatedData($modelName,$options = array()) {
-
-  //   $model = Service::loadModel($modelName);
-  //   $field = $this->modelAlias.'_id';
-
-  //   if(!Schema::hasColumn($model->getTable(), $field)) {
-  //     return false;
-  //   }
-
-  //   $conditions = array(
-  //     [$field,'=',$this->id],
-  //   );
-
-  //   if(!empty($options['conditions'])){
-  //     $options['conditions'] = array_merge($options['conditions'],$conditions);
-  //   }else{
-  //     $options['conditions'] = $conditions;
-  //   }
-
-  //   return $model->getData($options);
-
-  // }
-
-  // public function getRelatedData($modelName,$options = array()) {
-
-  //   $model = Service::loadModel($modelName);
-
-  //   if(!$model->checkHasFieldModelAndModelId()) {
-  //     return false;
-  //   }
-
-  //   $conditions = array(
-  //     ['model','like',$this->modelName],
-  //     ['model_id','=',$this->id],
-  //   );
-
-  //   if(!empty($options['conditions'])){
-  //     $options['conditions'] = array_merge($options['conditions'],$conditions);
-  //   }else{
-  //     $options['conditions'] = $conditions;
-  //   }
-
-  //   return $model->getData($options);
-
-  // }
-
   public function deleteRelatedData($model) {
 
     $field = $model->modelAlias.'_id';
@@ -487,33 +419,6 @@ class Model extends BaseModel
     return true;
 
   }
-
-  // public function deleteRelatedData($model) {
-
-  //   $string = new String;
-
-  //   $field = $model->modelAlias.'_id';
-
-  //   if(!Schema::hasColumn($this->getTable(), $field)) {
-  //     return false;
-  //   }
-
-  //   return $this->where($field,'=',$model->id)->delete();
-
-  // }
-
-  // public function deleteRelatedModelData($model) {
-
-  //   if(!$this->checkHasFieldModelAndModelId()) {
-  //     return false;
-  //   }
-
-  //   return $this->where([
-  //     ['model','=',$model->modelName],
-  //     ['model_id','=',$model->id],
-  //   ])->delete();
-
-  // }
 
   public function deleteAllRelatedData($options = array()) {
 
@@ -567,6 +472,16 @@ class Model extends BaseModel
     }
 
     return $this->modelRelationData[$modelName];
+
+  }
+
+  public function getModelRelationDataOption($modelName) {
+
+    if(empty($this->modelRelationDataOption[$modelName])) {
+      return null;
+    }
+
+    return $this->modelRelationDataOption[$modelName];
 
   }
 

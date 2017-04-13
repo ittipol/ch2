@@ -16,10 +16,6 @@
 
   @include('components.form_error')
 
-  <div class="text-right space-bottom-20">
-    <a class="button" data-right-side-panel="1" data-right-side-panel-target="#job_appying_new_message_panel">ส่งข้อความไปยังผู้สมัคร</a>
-  </div> 
-
   @if($personApplyJob['job_applying_status_id'] == 1)
     <div class="secondary-message-box space-bottom-30">
       <div class="secondary-message-box-inner">
@@ -32,7 +28,7 @@
       <div class="message-box-button-group two-button clearfix">
         <div class="flat-button">
           <a class="button" data-right-side-panel="1" data-right-side-panel-target="#job_appying_new_message_panel">
-            ส่งข้อความไปยังผู้สมัคร
+            ยอมรับและส่งข้อความตอบรับไปยังผู้สมัคร
           </a>
         </div>
         <div class="flat-button">
@@ -111,18 +107,23 @@
     <div class="line space-top-10"></div>
   </div>
 
-  @if(!empty($personApplyJob['message']))
-    <div class="space-top-20">
-      <h4>ข้อความจากผู้สมัคร</h4>
-      <div>{!!$personApplyJob['message']!!}</div>
-    </div>
-  @endif
-
   <div class="space-top-20">
     <h4>ตำแหน่งที่สมัคร</h4>
     <div>{{$jobName}}</div>
   </div>
 
+
+  @if(!empty($personApplyJob['message']))
+    <div class="space-top-20">
+      <h4>ข้อความจากผู้สมัคร</h4>
+      <div class="secondary-message-box">
+        <div class="secondary-message-box-inner">
+          {!!$personApplyJob['message']!!}
+        </div>
+      </div>
+    </div>
+  @endif
+  
   @if($hasBranch)
   <div class="space-top-20">
     <div class="row">
@@ -171,7 +172,7 @@
   </div>
   @endif
 
-  <div class="line space-bottom-30"></div>
+  <div class="line space-top-20 space-bottom-30"></div>
 
   <div class="tabs clearfix">
     <label>
@@ -187,6 +188,10 @@
   <div id="message_tab" class="tab-content">
 
     @if(!empty($messages))
+
+      <div class="text-right space-bottom-20">
+        <a class="button" data-right-side-panel="1" data-right-side-panel-target="#job_appying_new_message_panel">ส่งข้อความไปยังผู้สมัคร</a>
+      </div> 
 
       <div class="message-content">
 
@@ -229,7 +234,7 @@
             @endif
 
             <div class="message-reply-flat-button text-right">
-              <a class="button" data-right-side-panel="1" data-right-side-panel-target="#job_appying_reply_message_panel" data-reply-message="{{$message['id']}}">ตอบกลับ</a>
+              <a data-right-side-panel="1" data-right-side-panel-target="#job_appying_reply_message_panel" data-reply-message="{{$message['id']}}">ตอบกลับ</a>
             </div>
 
           </div>
@@ -294,7 +299,8 @@
       <div class="list-empty-message text-center space-top-20">
         <img class="space-bottom-20 not-found-image" src="/images/common/not-found.png">
         <div>
-          <h3>ยังไม่มีข้อความตอบกลับจากผู้สมัคร</h3>
+          <h3>ยังไม่มีข้อความ</h3>
+          <a class="button" data-right-side-panel="1" data-right-side-panel-target="#job_appying_new_message_panel">ส่งข้อความไปยังผู้สมัคร</a>
         </div>
       </div>
 

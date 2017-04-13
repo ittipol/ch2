@@ -368,6 +368,7 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 Route::group(['middleware' => ['auth','person.experience']], function () {
   Route::get('job/apply/{id}','JobController@apply');
   Route::post('job/apply/{id}','JobController@applyingSubmit');
+  Route::patch('job/apply/{id}','JobController@applyingSubmit');
 });
 
 // Branch
