@@ -381,7 +381,7 @@ class JobController extends Controller
     ));
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/job_applying');
-    $model->paginator->setUrl('shop/'.request()->shopSlug.'/job_applying_detail/{id}','detailUrl');
+    $model->paginator->setUrl('shop/'.request()->shopSlug.'/job_applying/detail/{id}','detailUrl');
     $model->paginator->setUrl('experience/detail/{person_id}','experienceDetailUrl');
 
     $this->data = $model->paginator->build();
@@ -464,6 +464,8 @@ class JobController extends Controller
     $this->setData('messages',$_messages);
 
     // form url
+    $this->setData('jobApplyingPassedUrl',$url->setAndParseUrl('shop/{shopSlug}/job_applying/passed/{id}',array('shopSlug'=>$this->param['shopSlug'],'id'=>$model->id)));
+    $this->setData('jobApplyingNotPassUrl',$url->setAndParseUrl('shop/{shopSlug}/job_applying/not_pass/{id}',array('shopSlug'=>$this->param['shopSlug'],'id'=>$model->id)));
     $this->setData('jobApplyingCancelUrl',$url->setAndParseUrl('shop/{shopSlug}/job_applying/cancel/{id}',array('shopSlug'=>$this->param['shopSlug'],'id'=>$model->id)));
     $this->setData('newMessagePostUrl',$url->setAndParseUrl('shop/{shopSlug}/job_applying/new_message/{id}',array('shopSlug'=>$this->param['shopSlug'],'id'=>$model->id)));
     $this->setData('replyMessageUrl',$url->setAndParseUrl('shop/{shopSlug}/job_applying/message_reply',array('shopSlug'=>$this->param['shopSlug'],'id'=>$model->id)));
@@ -475,11 +477,72 @@ class JobController extends Controller
   }
 
   public function jobApplyingPassed() {
-    dd('xxsscccc');
+
+    $model = Service::loadModel('PersonApplyJob')->find($this->param['id']);
+
+    if($model->job_applying_status_id != 2) {
+      $this->error = array(
+        'message' => 'เกิดข้อผิดพลาด พบการทำงานที่ไม่ถูกต้อง'
+      );
+      return $this->error();
+    }
+
+    $jobApplyingStatus = Service::loadModel('JobApplyingStatus')->getIdByAlias('job-passed');
+
+    $model->job_applying_status_id = $jobApplyingStatus;
+
+    if($model->save()) {
+      Service::loadModel('JobApplyingHistory')->fill(array(
+        'job_id' => $model->job_id,
+        'job_applying_status_id' => $jobApplyingStatus,
+        'message' => request()->get('message'),
+        'times' => $model->times
+      ))->save();
+
+      $notificationHelper = new NotificationHelper;
+      $notificationHelper->setModel($model);
+      $notificationHelper->create('job-applying-passed');
+
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
+    }else{
+      MessageHelper::display('เกิดข้อผิดพลาด ไม่สามารถบันทึกข้อมูลได้','error');
+    }
+
+    return Redirect::to('shop/'.$this->param['shopSlug'].'/job_applying/detail/'.$model->id);
+
   }
 
   public function jobApplyingNotPass() {
-    dd('xxsscccc');
+    
+    $model = Service::loadModel('PersonApplyJob')->find($this->param['id']);
+
+    if($model->job_applying_status_id != 2) {
+      $this->error = array(
+        'message' => 'เกิดข้อผิดพลาด พบการทำงานที่ไม่ถูกต้อง'
+      );
+      return $this->error();
+    }
+
+    $jobApplyingStatus = Service::loadModel('JobApplyingStatus')->getIdByAlias('job-not-pass');
+
+    dd($jobApplyingStatus);
+
+    $model->job_applying_status_id = $jobApplyingStatus;
+    $model->save();
+
+    Service::loadModel('JobApplyingHistory')->fill(array(
+      'job_id' => $model->job_id,
+      'job_applying_status_id' => $jobApplyingStatus,
+      'message' => request()->get('message')
+    ))->save();
+
+    $notificationHelper = new NotificationHelper;
+    $notificationHelper->setModel($model);
+    $notificationHelper->create('job-applying-not-pass');
+
+    MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
+    return Redirect::to('shop/'.$this->param['shopSlug'].'/job_applying/detail/'.$model->id);
+
   }
 
   public function jobApplyingCancel() {
@@ -508,8 +571,8 @@ class JobController extends Controller
     $notificationHelper->setModel($model);
     $notificationHelper->create('job-applying-cancel');
 
-    MessageHelper::display('ผลการสมัครงานถูกส่งไปยังผู้สมัครแล้ว','success');
-    return Redirect::to('shop/'.$this->param['shopSlug'].'/job_applying_detail/'.$model->id);
+    MessageHelper::display('ยกเลิกการสมัครแล้ว','success');
+    return Redirect::to('shop/'.$this->param['shopSlug'].'/job_applying/detail/'.$model->id);
 
   }
 
@@ -602,7 +665,7 @@ class JobController extends Controller
       $notificationHelper->create('job-applying-message-send-to-person',$options);
 
       MessageHelper::display('ข้อความถูกส่งแล้ว','success');
-      return Redirect::to('shop/'.$request->shopSlug.'/job_applying_detail/'.$this->param['id']);
+      return Redirect::to('shop/'.$request->shopSlug.'/job_applying/detail/'.$this->param['id']);
     }else{
       return Redirect::back();
     }
@@ -660,7 +723,7 @@ class JobController extends Controller
         $notificationHelper->create('job-applying-message-reply-send-to-person',$options);
 
         MessageHelper::display('ข้อความถูกส่งแล้ว','success');
-        return Redirect::to('shop/'.$request->shopSlug.'/job_applying_detail/'.$message->model_id);
+        return Redirect::to('shop/'.$request->shopSlug.'/job_applying/detail/'.$message->model_id);
 
       }else{
         $notificationHelper = new NotificationHelper;

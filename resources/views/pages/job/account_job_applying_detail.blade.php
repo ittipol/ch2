@@ -117,7 +117,7 @@
             @endif
 
             <div class="message-reply-flat-button text-right">
-              <a class="button" data-right-side-panel="1" data-right-side-panel-target="#job_appying_reply_message_panel" data-reply-message="{{$message['id']}}">ตอบกลับ</a>
+              <a data-right-side-panel="1" data-right-side-panel-target="#job_appying_reply_message_panel" data-reply-message="{{$message['id']}}">ตอบกลับ</a>
             </div>
 
           </div>

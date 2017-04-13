@@ -61,6 +61,14 @@ class CheckForPersonHasShopPermission
           'permission' => true,
           'modelName' => 'PersonApplyJob'
         ),
+        'shop.job.applying.passed' => array(
+          'permission' => true,
+          'modelName' => 'PersonApplyJob'
+        ),
+        'shop.job.applying.not_pass' => array(
+          'permission' => true,
+          'modelName' => 'PersonApplyJob'
+        ),
         'shop.job.applying.cancel' => array(
           'permission' => true,
           'modelName' => 'PersonApplyJob'

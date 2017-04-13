@@ -1,15 +1,15 @@
-<h3>ยกเลิกการสมัคร</h3>
-  
+<h3>ผ่านการสมัคร</h3>
+
 <div class="secondary-message-box info space-bottom-20">
   <div class="secondary-message-box-inner">
-    <h4>คุณต้องยกเลิกการสมัครของผู้สมัครรายนี้ใช่หรือไม่?</h4>
+    <h4>คุณต้องการให้ผู้สมัครรายนี้ผ่านการสมัครใช่หรือไม่?</h4>
   </div>
 </div>
 
 <div class="line space-bottom-10"></div>
 <?php 
   echo Form::open([
-    'url' => $jobApplyingCancelUrl,
+    'url' => $jobApplyingPassedUrl,
     'id' => 'job_applying_cancel_form',
     'method' => 'post', 
     'enctype' => 'multipart/form-data'
@@ -17,7 +17,7 @@
 ?>
 <div class="form-row">
   <?php 
-    echo Form::label('message', 'คำอธิบาย');
+    echo Form::label('message', 'คำอธิบายหรือเหตุผลของการยกเลิกการสมัคร');
     echo Form::textarea('message', null, array(
       'class' => 'ckeditor'
     ));

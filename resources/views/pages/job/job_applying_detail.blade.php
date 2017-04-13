@@ -50,13 +50,13 @@
       </div>
       <div class="message-box-button-group three-button clearfix">
         <div class="flat-button">
-          <a class="button" data-right-side-panel="1" data-right-side-panel-target="#job_appying_new_message_panel">
-            ผ่าน
+          <a class="button" data-right-side-panel="1" data-right-side-panel-target="#job_appying_passed_panel">
+            ผ่านการสมัคร
           </a>
         </div>
         <div class="flat-button">
-          <a class="button danger" data-right-side-panel="1" data-right-side-panel-target="#job_appying_cancel_panel">
-            ไม่ผ่าน
+          <a class="button danger" data-right-side-panel="1" data-right-side-panel-target="#job_appying_not_pass_panel">
+            ไม่ผ่านการสมัคร
           </a>
         </div>
         <div class="flat-button">
@@ -67,9 +67,23 @@
       </div>
     </div>
 
+    <div id="job_appying_passed_panel" class="right-size-panel form">
+      <div class="right-size-panel-inner">
+        @include('pages.job.components.job_applying_passed')
+        <div class="right-size-panel-close-button"></div>
+      </div>
+    </div>
+
+    <div id="job_appying_not_pass_panel" class="right-size-panel form">
+      <div class="right-size-panel-inner">
+        @include('pages.job.components.job_applying_not_pass')
+        <div class="right-size-panel-close-button"></div>
+      </div>
+    </div>
+
   @else
 
-    <div class="secondary-message-box space-bottom-30">
+    <!-- <div class="secondary-message-box space-bottom-30">
       <div class="secondary-message-box-inner">
         <div class="text-center">
           <img src="/images/common/resume.png">
@@ -77,7 +91,33 @@
           <p></p>
         </div>
       </div>
+    </div> -->
+
+    @if($personApplyJob['job_applying_status_id'] == 3)
+    <div class="secondary-message-box info space-bottom-30">
+      <div class="secondary-message-box-inner">
+        <div class="text-center">
+          <h3>คุณกำหนดให้ผู้สมัครรายนี้ผ่านการสมัครแล้ว</h3>
+        </div>
+      </div>
     </div>
+    @elseif($personApplyJob['job_applying_status_id'] == 4)
+    <div class="secondary-message-box info space-bottom-30">
+      <div class="secondary-message-box-inner">
+        <div class="text-center">
+          <h3>คุณกำหนดให้ผู้สมัครรายนี้ไม่ผ่านการสมัคร</h3>
+        </div>
+      </div>
+    </div>
+    @elseif($personApplyJob['job_applying_status_id'] == 5)
+    <div class="secondary-message-box info space-bottom-30">
+      <div class="secondary-message-box-inner">
+        <div class="text-center">
+          <h3>คุณยกเลิกการสมัครนี้แล้ว</h3>
+        </div>
+      </div>
+    </div>
+    @endif
 
   @endif
 

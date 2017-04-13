@@ -88,7 +88,7 @@ class StaticFileController extends Controller
       return $this->error();
     }
 
-    $path = $file->getImagePath();
+    $path = $file->getFilePath();
 
     $headers = array(
       'Content-Disposition' => 'attachment; filename=' . $file->filename,

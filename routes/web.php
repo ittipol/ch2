@@ -347,7 +347,7 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::get('shop/{shopSlug}/job','ShopController@job')->name('shop.job');
 
   Route::get('shop/{shopSlug}/job_applying','JobController@jobApplyingList')->name('shop.job.applying_list');
-  Route::get('shop/{shopSlug}/job_applying_detail/{id}','JobController@jobApplyingDetail')->name('shop.job.applying_detail');
+  Route::get('shop/{shopSlug}/job_applying/detail/{id}','JobController@jobApplyingDetail')->name('shop.job.applying_detail');
   
   // Route::get('shop/{shopSlug}/job_applying/new_message/{id}','JobController@jobApplyingNewMessage')->name('shop.job.applying.new_message');
   Route::post('shop/{shopSlug}/job_applying/new_message/{id}','JobController@jobApplyingMessageSend')->name('shop.job.applying.new_message');
@@ -355,6 +355,8 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   // Route::get('shop/{shopSlug}/job_applying/message_reply/{id}','JobController@jobApplyingMessageReply')->name('shop.job.applying.message_reply');
   Route::post('shop/{shopSlug}/job_applying/message_reply','JobController@jobApplyingMessageReplySend')->name('shop.job.applying.message_reply');
 
+  Route::post('shop/{shopSlug}/job_applying/passed/{id}','JobController@jobApplyingPassed')->name('shop.job.applying.passed');
+  Route::post('shop/{shopSlug}/job_applying/not_pass/{id}','JobController@jobApplyingNotPass')->name('shop.job.applying.not_pass');
   Route::post('shop/{shopSlug}/job_applying/cancel/{id}','JobController@jobApplyingCancel')->name('shop.job.applying.cancel');
 
   Route::get('shop/{shopSlug}/job/post','JobController@add')->name('shop.job.add');
