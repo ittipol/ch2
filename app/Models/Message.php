@@ -78,8 +78,8 @@ class Message extends Model
         break;
       
       case 'Person':
-        
-        if(session()->get('Person.id') == $permission->model_id) {
+    
+        if(session()->get('Person.id') == $modelId) {
           $hasPermission = true;
         }
 

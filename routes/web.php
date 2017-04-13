@@ -97,7 +97,10 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('account/job_applying', 'AccountController@jobApplying')->name('account.job');
   Route::get('account/job_applying/{id}', 'JobController@accountJobApplyingDetail')->name('account.job.detail');
 
-  Route::get('account/job_applying/message_reply/{id}','JobController@jobApplyingMessageReply');
+  Route::post('shop/{shopSlug}/job_applying/new_message/{id}','JobController@jobApplyingMessageSend');
+
+  Route::post('account/job_applying/new_message/{id}','JobController@jobApplyingMessageSend');
+
   Route::post('account/job_applying/message_reply/{id}','JobController@jobApplyingMessageReplySend');
 
   Route::get('get_file_attachment/{id}', 'StaticFileController@attachedFile');
@@ -348,16 +351,15 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
   Route::get('shop/{shopSlug}/job_applying','JobController@jobApplyingList')->name('shop.job.applying_list');
   Route::get('shop/{shopSlug}/job_applying/detail/{id}','JobController@jobApplyingDetail')->name('shop.job.applying_detail');
-  
-  // Route::get('shop/{shopSlug}/job_applying/new_message/{id}','JobController@jobApplyingNewMessage')->name('shop.job.applying.new_message');
+
   Route::post('shop/{shopSlug}/job_applying/new_message/{id}','JobController@jobApplyingMessageSend')->name('shop.job.applying.new_message');
   
-  // Route::get('shop/{shopSlug}/job_applying/message_reply/{id}','JobController@jobApplyingMessageReply')->name('shop.job.applying.message_reply');
   Route::post('shop/{shopSlug}/job_applying/message_reply','JobController@jobApplyingMessageReplySend')->name('shop.job.applying.message_reply');
 
+  Route::post('shop/{shopSlug}/job_applying/accept/{id}','JobController@jobApplyingAccept')->name('shop.job.applying.accept');
   Route::post('shop/{shopSlug}/job_applying/passed/{id}','JobController@jobApplyingPassed')->name('shop.job.applying.passed');
   Route::post('shop/{shopSlug}/job_applying/not_pass/{id}','JobController@jobApplyingNotPass')->name('shop.job.applying.not_pass');
-  Route::post('shop/{shopSlug}/job_applying/cancel/{id}','JobController@jobApplyingCancel')->name('shop.job.applying.cancel');
+  Route::post('shop/{shopSlug}/job_applying/canceled/{id}','JobController@jobApplyingCancel')->name('shop.job.applying.canceled');
 
   Route::get('shop/{shopSlug}/job/post','JobController@add')->name('shop.job.add');
   Route::post('shop/{shopSlug}/job/post','JobController@addingSubmit')->name('shop.job.add');

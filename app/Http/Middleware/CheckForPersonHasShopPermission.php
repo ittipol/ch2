@@ -61,6 +61,10 @@ class CheckForPersonHasShopPermission
           'permission' => true,
           'modelName' => 'PersonApplyJob'
         ),
+        'shop.job.applying.accept' => array(
+          'permission' => true,
+          'modelName' => 'PersonApplyJob'
+        ),
         'shop.job.applying.passed' => array(
           'permission' => true,
           'modelName' => 'PersonApplyJob'
@@ -69,7 +73,7 @@ class CheckForPersonHasShopPermission
           'permission' => true,
           'modelName' => 'PersonApplyJob'
         ),
-        'shop.job.applying.cancel' => array(
+        'shop.job.applying.canceled' => array(
           'permission' => true,
           'modelName' => 'PersonApplyJob'
         ),

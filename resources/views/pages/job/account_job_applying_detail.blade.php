@@ -16,6 +16,62 @@
 
   @include('components.form_error') 
 
+  @if($personApplyJob['job_applying_status_id'] == 1)
+    <div class="secondary-message-box space-bottom-30">
+      <div class="secondary-message-box-inner">
+        <div class="text-center">
+          <img src="/images/common/resume.png">
+          <h3>ใบสมัครงานถูกส่งแล้ว</h3>
+          <p>โปรดรอการตอบรับจากผู้รับสมัคร</p>
+        </div>
+      </div>
+    </div>
+  @elseif($personApplyJob['job_applying_status_id'] == 2)
+
+
+  @elseif($personApplyJob['job_applying_status_id'] == 3)
+
+    <div class="secondary-message-box info space-bottom-30">
+      <div class="secondary-message-box-inner">
+        <div class="text-center">
+          <h3>ผ่านการสมัครแล้ว</h3>
+        </div>
+      </div>
+    </div>
+
+  @elseif($personApplyJob['job_applying_status_id'] == 4)
+
+    <div class="secondary-message-box info space-bottom-30">
+      <div class="secondary-message-box-inner">
+        <div class="text-center">
+          <h3>ไม่ผ่านการสมัคร</h3>
+        </div>
+      </div>
+    </div>
+
+  @elseif($personApplyJob['job_applying_status_id'] == 5)
+
+    <div class="secondary-message-box info space-bottom-30">
+      <div class="secondary-message-box-inner">
+        <div class="text-center">
+          <h3>ยกเลิกการสมัครนี้</h3>
+        </div>
+      </div>
+    </div>
+
+  @endif
+
+  <div class="text-right space-bottom-20">
+    <a class="button" data-right-side-panel="1" data-right-side-panel-target="#job_appying_new_message_panel">ส่งข้อความไปยังผู้รับสมัคร</a>
+  </div>
+
+  <div id="job_appying_new_message_panel" class="right-size-panel form">
+    <div class="right-size-panel-inner">
+      @include('pages.job.components.job_applying_new_message')
+      <div class="right-size-panel-close-button"></div>
+    </div>
+  </div>
+
   <div id="job_appying_reply_message_panel" class="right-size-panel form">
     <div class="right-size-panel-inner">
       @include('pages.job.components.job_applying_reply_message')
@@ -182,7 +238,8 @@
       <div class="list-empty-message text-center space-top-20">
         <img class="space-bottom-20 not-found-image" src="/images/common/not-found.png">
         <div>
-          <h3>ยังไม่มีการตอบกลับจากผู้ประกาศงาน</h3>
+          <h3>ยังไม่มีข้อความ</h3>
+          <a class="button" data-right-side-panel="1" data-right-side-panel-target="#job_appying_new_message_panel">ส่งข้อความไปยังผู้รับสมัคร</a>
         </div>
       </div>
 

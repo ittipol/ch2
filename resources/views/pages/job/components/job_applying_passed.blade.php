@@ -2,7 +2,7 @@
 
 <div class="secondary-message-box info space-bottom-20">
   <div class="secondary-message-box-inner">
-    <h4>คุณต้องการให้ผู้สมัครรายนี้ผ่านการสมัครใช่หรือไม่?</h4>
+    <h4>ต้องการให้ผู้สมัครผ่านการสมัครใช่หรือไม่?</h4>
   </div>
 </div>
 
@@ -15,14 +15,6 @@
     'enctype' => 'multipart/form-data'
   ]);
 ?>
-<div class="form-row">
-  <?php 
-    echo Form::label('message', 'คำอธิบายหรือเหตุผลของการยกเลิกการสมัคร');
-    echo Form::textarea('message', null, array(
-      'class' => 'ckeditor'
-    ));
-  ?>
-</div>
 <?php 
   echo Form::submit('ตกลง' , array(
     'class' => 'button space-top-20'

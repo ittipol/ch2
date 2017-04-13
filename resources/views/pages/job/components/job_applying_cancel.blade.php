@@ -2,7 +2,8 @@
   
 <div class="secondary-message-box info space-bottom-20">
   <div class="secondary-message-box-inner">
-    <h4>คุณต้องยกเลิกการสมัครของผู้สมัครรายนี้ใช่หรือไม่?</h4>
+    <h4>ต้องการยกเลิกการสมัครใช่หรือไม่?</h4>
+    <div>หากผู้สมัครมีคุณสมบัติไม่ตรงตามต้องการหรือมีการรับพนักงานใหม่เข้าทำงานแล้ว ดังนั้นอาจจำเป็นที่ต้องยกเลิกการสมัคร</div>
   </div>
 </div>
 
@@ -17,7 +18,7 @@
 ?>
 <div class="form-row">
   <?php 
-    echo Form::label('message', 'คำอธิบาย');
+    echo Form::label('message', 'คำอธิบายว่าทำไมถึงยกเลิกการสมัคร');
     echo Form::textarea('message', null, array(
       'class' => 'ckeditor'
     ));

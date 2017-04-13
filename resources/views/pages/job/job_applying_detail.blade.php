@@ -17,18 +17,19 @@
   @include('components.form_error')
 
   @if($personApplyJob['job_applying_status_id'] == 1)
+
     <div class="secondary-message-box space-bottom-30">
       <div class="secondary-message-box-inner">
         <div class="text-center">
           <img src="/images/common/resume.png">
           <h3>ใบสมัครงาน</h3>
-          <p>หากผู้สมัครรายนี้มีคุณสมบัติตรงตามที่คุณต้องการ คุณสามารถส่งข้อความและไฟล์ต่างๆที่จำเป็นไปยังผู้สมัครได้ทันที หรือสามารถยกเลิกการสมัครนี้ได้</p>
+          <p>ตอบรับการสมัครจะเป็นการบอกผู้สมัครให้ทราบว่าบริษัทหรือผู้ที่เกี่ยวข้องได้รับทราบการสมัครแล้ว หรือหากผู้สมัครมีคุณสมบัติไม่ตรงตามที่ต้องการสามารถยกเลิกการสมัครได้</p>
         </div>
       </div>
       <div class="message-box-button-group two-button clearfix">
         <div class="flat-button">
-          <a class="button" data-right-side-panel="1" data-right-side-panel-target="#job_appying_new_message_panel">
-            ยอมรับและส่งข้อความตอบรับไปยังผู้สมัคร
+          <a class="button" data-right-side-panel="1" data-right-side-panel-target="#job_appying_accept_panel">
+            ตอบรับการสมัคร
           </a>
         </div>
         <div class="flat-button">
@@ -38,14 +39,29 @@
         </div>
       </div>
     </div>
+
+    <div id="job_appying_accept_panel" class="right-size-panel form">
+      <div class="right-size-panel-inner">
+        @include('pages.job.components.job_applying_accept')
+        <div class="right-size-panel-close-button"></div>
+      </div>
+    </div>
+
+    <div id="job_appying_cancel_panel" class="right-size-panel form">
+      <div class="right-size-panel-inner">
+        @include('pages.job.components.job_applying_cancel')
+        <div class="right-size-panel-close-button"></div>
+      </div>
+    </div>
+
   @elseif($personApplyJob['job_applying_status_id'] == 2)
 
     <div class="secondary-message-box space-bottom-30">
       <div class="secondary-message-box-inner">
         <div class="text-center">
           <img src="/images/common/resume.png">
-          <h3>ผลลัพธ์การสมัครงาน</h3>
-          <p>ใบสมัครงานนี้รอการประเมินจากคุณ หากได้ผลลัพธ์ของการสมัครแล้ว คุณสามารถแจ้งผลลัพธ์ไปยังผู้สมัครได้ทันทีโดยการเลือกตัวเลือกข้างล่างนี้</p>
+          <h3>ตอบรับการสมัครแล้ว</h3>
+          <p>เมื่อสัมภาษณ์และทดสอบผู้สมัครแล้วและต้องการแจ้งผลลัพธ์การสมัคร สามารถแจ้งผลลัพธ์ไปยังผู้สมัครโดยตรงด้วยการเลือกตัวเลือกข้างล่างนี้</p>
         </div>
       </div>
       <div class="message-box-button-group three-button clearfix">
@@ -81,45 +97,48 @@
       </div>
     </div>
 
-  @else
+    <div id="job_appying_cancel_panel" class="right-size-panel form">
+      <div class="right-size-panel-inner">
+        @include('pages.job.components.job_applying_cancel')
+        <div class="right-size-panel-close-button"></div>
+      </div>
+    </div>
 
-    <!-- <div class="secondary-message-box space-bottom-30">
-      <div class="secondary-message-box-inner">
-        <div class="text-center">
-          <img src="/images/common/resume.png">
-          <h3>{{$personApplyJob['jobApplyingStatusName']}}</h3>
-          <p></p>
-        </div>
-      </div>
-    </div> -->
+  @elseif($personApplyJob['job_applying_status_id'] == 3)
 
-    @if($personApplyJob['job_applying_status_id'] == 3)
     <div class="secondary-message-box info space-bottom-30">
       <div class="secondary-message-box-inner">
         <div class="text-center">
-          <h3>คุณกำหนดให้ผู้สมัครรายนี้ผ่านการสมัครแล้ว</h3>
+          <h3>ผ่านการสมัครแล้ว</h3>
         </div>
       </div>
     </div>
-    @elseif($personApplyJob['job_applying_status_id'] == 4)
+
+  @elseif($personApplyJob['job_applying_status_id'] == 4)
+
     <div class="secondary-message-box info space-bottom-30">
       <div class="secondary-message-box-inner">
         <div class="text-center">
-          <h3>คุณกำหนดให้ผู้สมัครรายนี้ไม่ผ่านการสมัคร</h3>
+          <h3>ไม่ผ่านการสมัคร</h3>
         </div>
       </div>
     </div>
-    @elseif($personApplyJob['job_applying_status_id'] == 5)
+
+  @elseif($personApplyJob['job_applying_status_id'] == 5)
+
     <div class="secondary-message-box info space-bottom-30">
       <div class="secondary-message-box-inner">
         <div class="text-center">
-          <h3>คุณยกเลิกการสมัครนี้แล้ว</h3>
+          <h3>ยกเลิกการสมัครนี้</h3>
         </div>
       </div>
     </div>
-    @endif
 
   @endif
+
+  <div class="text-right space-bottom-20">
+    <a class="button" data-right-side-panel="1" data-right-side-panel-target="#job_appying_new_message_panel">ส่งข้อความไปยังผู้สมัคร</a>
+  </div>
 
   <div id="job_appying_new_message_panel" class="right-size-panel form">
     <div class="right-size-panel-inner">
@@ -131,13 +150,6 @@
   <div id="job_appying_reply_message_panel" class="right-size-panel form">
     <div class="right-size-panel-inner">
       @include('pages.job.components.job_applying_reply_message')
-      <div class="right-size-panel-close-button"></div>
-    </div>
-  </div>
-
-  <div id="job_appying_cancel_panel" class="right-size-panel form">
-    <div class="right-size-panel-inner">
-      @include('pages.job.components.job_applying_cancel')
       <div class="right-size-panel-close-button"></div>
     </div>
   </div>
@@ -228,10 +240,6 @@
   <div id="message_tab" class="tab-content">
 
     @if(!empty($messages))
-
-      <div class="text-right space-bottom-20">
-        <a class="button" data-right-side-panel="1" data-right-side-panel-target="#job_appying_new_message_panel">ส่งข้อความไปยังผู้สมัคร</a>
-      </div> 
 
       <div class="message-content">
 
