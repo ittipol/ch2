@@ -57,15 +57,6 @@
         <div>
           {!!$jobPositionDescription!!}
         </div>
-
-        @if(!empty($jobApplyHistory['message']))
-          <div class="line space-top-bottom-20"></div>
-
-          <div>
-            {!!$jobApplyHistory['message']!!}
-          </div>
-        @endif
-
       </div>
 
       <div class="message-box-button-group two-button clearfix">
@@ -80,7 +71,6 @@
           </a>
         </div>
       </div>
-
     </div>
 
     <div id="job_position_accept_panel" class="right-size-panel form">
@@ -101,8 +91,16 @@
 
     <div class="secondary-message-box info space-bottom-30">
       <div class="secondary-message-box-inner">
-        <div class="text-center">
-          <h3>ไม่ผ่านการสมัคร</h3>
+        <div>
+          <h3>ไม่ผ่านการประเมิน</h3>
+          <p>ดูเหมือนว่าผลลัพธ์การสมัครอาจจยังไม่เป็นตามที่คุณต้องกการ คุณต้องกการสมัครงานนี้อีกครั้งหรือไม่?</p>
+        </div>
+      </div>
+      <div class="message-box-button-group clearfix">
+        <div class="flat-button">
+          <a href="{{$jobApplyUrl}}" class="button">
+            สมัครงานนี้
+          </a>
         </div>
       </div>
     </div>
@@ -111,8 +109,45 @@
 
     <div class="secondary-message-box info space-bottom-30">
       <div class="secondary-message-box-inner">
-        <div class="text-center">
-          <h3>ยกเลิกการสมัครนี้</h3>
+        <div>
+          <h3>การสมัครถูกยกเลิกแล้ว</h3>
+          <p>ดูเหมือนว่าผลลัพธ์การสมัครอาจจยังไม่เป็นตามที่คุณต้องกการ คุณต้องกการสมัครงานนี้อีกครั้งหรือไม่?</p>
+        </div>
+      </div>
+      <div class="message-box-button-group clearfix">
+        <div class="flat-button">
+          <a href="{{$jobApplyUrl}}" class="button">
+            สมัครงานนี้
+          </a>
+        </div>
+      </div>
+    </div>
+
+  @elseif($personApplyJob['job_applying_status_id'] == 6)
+
+    <div class="secondary-message-box info">
+      <div class="secondary-message-box-inner">
+        <div>
+          <h3>คุณตกลงเข้าทำงานนี้</h3>
+        </div>
+      </div>
+    </div>
+    <div class="secondary-message-box clean space-bottom-30">
+      <div class="secondary-message-box-inner">
+        <h4>ข้อเสนอและข้อตกลงต่างๆ ของตำแหน่งงานนี้</h4>
+        <div class="line space-bottom-10"></div>
+        <div>
+          {!!$jobPositionDescription!!}
+        </div>
+      </div>
+    </div>
+
+  @elseif($personApplyJob['job_applying_status_id'] == 7)
+
+    <div class="secondary-message-box info space-bottom-30">
+      <div class="secondary-message-box-inner">
+        <div>
+          <h3>คุณปฏิเสธเข้าทำงานนี้</h3>
         </div>
       </div>
     </div>

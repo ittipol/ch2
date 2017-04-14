@@ -24,12 +24,6 @@
     echo Form::textarea('job_position_description');
   ?>
 </div>
-<div class="form-row">
-  <?php 
-    echo Form::label('message', 'กล่าวอะไรบ้างอย่างถึงผู้สมัคร');
-    echo Form::textarea('message');
-  ?>
-</div>
 <?php 
   echo Form::submit('ตกลง' , array(
     'class' => 'button'

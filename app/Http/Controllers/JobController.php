@@ -118,12 +118,21 @@ class JobController extends Controller
 
 
     if($personApplyJob->exists()) {
-      $this->setData('personApplyJob',$personApplyJob->first()->buildModelData());
+
+      $personApplyJob = $personApplyJob->first();
+
+      $this->setData('personApplyJob',$personApplyJob->buildModelData());
+
+      if(($personApplyJob->job_applying_status_id == 4) || ($personApplyJob->job_applying_status_id == 5)) {
+        $this->setData('jobApplyUrl',$url->setAndParseUrl('job/apply/{id}',array('id' => $this->param['id'])));
+      }
+
+    }else{
+      $this->setData('jobApplyUrl',$url->setAndParseUrl('job/apply/{id}',array('id' => $this->param['id'])));
     }
 
     $this->setData('alreadyApply',$personApplyJob->exists());
-    $this->setData('jobApplyUrl',$url->setAndParseUrl('job/apply/{id}',array('id' => $this->param['id'])));
-
+    
     return $this->view('pages.job.detail');
 
   }
@@ -457,6 +466,7 @@ class JobController extends Controller
     $this->setData('jobName',$model->job->name);
     $this->setData('personApplyJob',$model->modelData->build(true));
     $this->setData('messageFromApplicant',$model->getMessage());
+    $this->setData('jobApplyHistory',$model->getJobApplyHistory(true));
     $this->setData('profile',$person->modelData->build(true));
     $this->setData('profileImageUrl',$person->getProfileImageUrl('xsm'));
     $this->setData('hasBranch',!empty($total) ? true : false);
@@ -470,6 +480,8 @@ class JobController extends Controller
     }elseif($model->job_applying_status_id == 2) {
       $this->setData('jobApplyingPassedUrl',$url->setAndParseUrl('shop/{shopSlug}/job_applying/passed/{id}',array('shopSlug'=>$this->param['shopSlug'],'id'=>$model->id)));
       $this->setData('jobApplyingNotPassUrl',$url->setAndParseUrl('shop/{shopSlug}/job_applying/not_pass/{id}',array('shopSlug'=>$this->param['shopSlug'],'id'=>$model->id)));
+      $this->setData('jobApplyingCancelUrl',$url->setAndParseUrl('shop/{shopSlug}/job_applying/canceled/{id}',array('shopSlug'=>$this->param['shopSlug'],'id'=>$model->id)));
+    }elseif($model->job_applying_status_id == 3) {
       $this->setData('jobApplyingCancelUrl',$url->setAndParseUrl('shop/{shopSlug}/job_applying/canceled/{id}',array('shopSlug'=>$this->param['shopSlug'],'id'=>$model->id)));
     }
 
@@ -543,7 +555,7 @@ class JobController extends Controller
       Service::loadModel('JobApplyingHistory')->fill(array(
         'job_id' => $model->job_id,
         'job_applying_status_id' => $jobApplyingStatus,
-        'message' => request()->get('message'),
+        // 'message' => request()->get('message'),
         'times' => $model->times
       ))->save();
 
@@ -581,7 +593,8 @@ class JobController extends Controller
     Service::loadModel('JobApplyingHistory')->fill(array(
       'job_id' => $model->job_id,
       'job_applying_status_id' => $jobApplyingStatus,
-      'message' => request()->get('message')
+      'message' => request()->get('message'),
+      'times' => $model->times
     ))->save();
 
     $notificationHelper = new NotificationHelper;
@@ -597,7 +610,7 @@ class JobController extends Controller
 
     $model = Service::loadModel('PersonApplyJob')->find($this->param['id']);
 
-    if(($model->job_applying_status_id != 1) && ($model->job_applying_status_id != 2)) {
+    if(($model->job_applying_status_id != 1) && ($model->job_applying_status_id != 2) && ($model->job_applying_status_id != 3)) {
       $this->error = array(
         'message' => 'เกิดข้อผิดพลาดการทำงานไม่ถูกต้อง'
       );
@@ -612,7 +625,8 @@ class JobController extends Controller
     Service::loadModel('JobApplyingHistory')->fill(array(
       'job_id' => $model->job_id,
       'job_applying_status_id' => $jobApplyingStatus,
-      'message' => request()->get('message')
+      'message' => request()->get('message'),
+      'times' => $model->times
     ))->save();
 
     $notificationHelper = new NotificationHelper;
@@ -622,6 +636,69 @@ class JobController extends Controller
     MessageHelper::display('ยกเลิกการสมัครแล้ว','success');
     return Redirect::to('shop/'.$this->param['shopSlug'].'/job_applying/detail/'.$model->id);
 
+  }
+
+  public function jobPositionAccept() {
+    
+    $model = Service::loadModel('PersonApplyJob')->find($this->param['id']);
+
+    if($model->job_applying_status_id != 3) {
+      $this->error = array(
+        'message' => 'เกิดข้อผิดพลาดการทำงานไม่ถูกต้อง'
+      );
+      return $this->error();
+    }
+
+    $jobApplyingStatus = Service::loadModel('JobApplyingStatus')->getIdByAlias('job-position-accept');
+
+    $model->job_applying_status_id = $jobApplyingStatus;
+    $model->save();
+
+    Service::loadModel('JobApplyingHistory')->fill(array(
+      'job_id' => $model->job_id,
+      'job_applying_status_id' => $jobApplyingStatus,
+      'message' => request()->get('message'),
+      'times' => $model->times
+    ))->save();
+
+    $notificationHelper = new NotificationHelper;
+    $notificationHelper->setModel($model);
+    $notificationHelper->create('job-position-accept');
+
+    MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
+    return Redirect::to('account/job_applying/'.$this->param['id']);
+
+  }
+
+  public function jobPositionDecline() {
+    
+    $model = Service::loadModel('PersonApplyJob')->find($this->param['id']);
+
+    if($model->job_applying_status_id != 3) {
+      $this->error = array(
+        'message' => 'เกิดข้อผิดพลาดการทำงานไม่ถูกต้อง'
+      );
+      return $this->error();
+    }
+    
+    $jobApplyingStatus = Service::loadModel('JobApplyingStatus')->getIdByAlias('job-position-decline');
+
+    $model->job_applying_status_id = $jobApplyingStatus;
+    $model->save();
+
+    Service::loadModel('JobApplyingHistory')->fill(array(
+      'job_id' => $model->job_id,
+      'job_applying_status_id' => $jobApplyingStatus,
+      'message' => request()->get('message'),
+      'times' => $model->times
+    ))->save();
+
+    $notificationHelper = new NotificationHelper;
+    $notificationHelper->setModel($model);
+    $notificationHelper->create('job-position-decline');
+
+    MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
+    return Redirect::to('account/job_applying/'.$this->param['id']);
   }
 
   public function accountJobApplyingDetail() {
@@ -663,7 +740,7 @@ class JobController extends Controller
 
     $this->setData('personApplyJob',$model->modelData->build(true));
     $this->setData('jobPositionDescription',$model->getJobPositionDescription());
-    $this->setData('jobApplyHistory',$model->getJobApplyHistory(true));
+    // $this->setData('jobApplyHistory',$model->getJobApplyHistory(true));
     $this->setData('shopName',$model->shop->name);
     $this->setData('shopUrl',$url->setAndParseUrl('shop/{shopSlug}',array('shopSlug'=>$slug)));
     $this->setData('jobName',$model->job->name);
@@ -674,6 +751,8 @@ class JobController extends Controller
     if($model->job_applying_status_id == 3) {
       $this->setData('jobPositionAcceptUrl',$url->setAndParseUrl('account/job_applying/job_position_accept/{id}',array('id'=>$model->id)));
       $this->setData('jobPositionDeclineUrl',$url->setAndParseUrl('account/job_applying/job_position_decline/{id}',array('id'=>$model->id)));
+    }elseif(($model->job_applying_status_id == 4) || ($model->job_applying_status_id == 5)) {
+      $this->setData('jobApplyUrl',$url->setAndParseUrl('job/apply/{id}',array('id' => $model->job_id)));
     }
 
     $this->setData('newMessagePostUrl',$url->setAndParseUrl('account/job_applying/new_message/{id}',array('id'=>$model->id)));

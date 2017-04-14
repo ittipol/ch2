@@ -94,10 +94,13 @@ Route::group(['middleware' => 'auth'], function () {
 
   Route::get('account/order', 'AccountController@order')->name('account.order');
 
-  Route::get('account/job_applying', 'AccountController@jobApplying')->name('account.job');
-  Route::get('account/job_applying/{id}', 'JobController@accountJobApplyingDetail')->name('account.job.detail');
+  Route::get('account/job_applying', 'AccountController@jobApplying');
+  Route::get('account/job_applying/{id}', 'JobController@accountJobApplyingDetail');
 
-  Route::post('shop/{shopSlug}/job_applying/new_message/{id}','JobController@jobApplyingMessageSend');
+  Route::post('account/job_applying/job_position_accept/{id}', 'JobController@jobPositionAccept');
+  Route::post('account/job_applying/job_position_decline/{id}', 'JobController@jobPositionDecline');
+
+  // Route::post('shop/{shopSlug}/job_applying/new_message/{id}','JobController@jobApplyingMessageSend');
 
   Route::post('account/job_applying/new_message/{id}','JobController@jobApplyingMessageSend');
 

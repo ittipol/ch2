@@ -1,9 +1,8 @@
-<h3>ตอบรับการสมัคร</h3>
+<h3>ปฏิเสธเข้าทำงาน</h3>
   
 <div class="secondary-message-box info space-bottom-20">
   <div class="secondary-message-box-inner">
-    <h4>ต้องการตอบรับการสมัครใช่หรือไม่?</h4>
-    <div>ตอบรับการสมัครจะเป็นการบอกผู้สมัครให้ทราบว่าบริษัท สถานประกอบการหรือผู้ที่เกี่ยวข้องได้สนใจในตัวผู้สมัครและรับทราบการสมัครแล้ว</div>
+    <h4>ต้องการตอบปฏิเสธเข้าทำงานใช่หรือไม่?</h4>
   </div>
 </div>
 
@@ -16,6 +15,12 @@
     'enctype' => 'multipart/form-data'
   ]);
 ?>
+<div class="form-row">
+  <?php 
+    echo Form::label('message', 'คำอธิบายว่าทำไมถึงปฏิเสธเข้าทำงาน');
+    echo Form::textarea('message');
+  ?>
+</div>
 <?php 
   echo Form::submit('ตกลง' , array(
     'class' => 'button space-top-20'

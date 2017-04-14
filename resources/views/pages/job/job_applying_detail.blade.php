@@ -109,9 +109,23 @@
     <div class="secondary-message-box info space-bottom-30">
       <div class="secondary-message-box-inner">
         <div>
-          <h3>ผ่านการประเมินและรับผู้สมัครเข้าทำงาน</h3>
+          <h3>ผู้สมัครผ่านการประเมินแล้ว</h3>
           <h5>โปรดรอการยืนยันการเข้าทำงานจากผู้สมัคร</h5>
         </div>
+      </div>
+      <div class="message-box-button-group clearfix">
+        <div class="flat-button">
+          <a class="button danger" data-right-side-panel="1" data-right-side-panel-target="#job_appying_cancel_panel">
+            ยกเลิกการสมัคร
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div id="job_appying_cancel_panel" class="right-size-panel form">
+      <div class="right-size-panel-inner">
+        @include('pages.job.components.job_applying_cancel')
+        <div class="right-size-panel-close-button"></div>
       </div>
     </div>
 
@@ -119,8 +133,8 @@
 
     <div class="secondary-message-box info space-bottom-30">
       <div class="secondary-message-box-inner">
-        <div class="text-center">
-          <h3>ไม่ผ่านการประเมิน</h3>
+        <div>
+          <h3>ผู้สมัครไม่ผ่านการประเมิน</h3>
         </div>
       </div>
     </div>
@@ -129,11 +143,51 @@
 
     <div class="secondary-message-box info space-bottom-30">
       <div class="secondary-message-box-inner">
-        <div class="text-center">
-          <h3>ยกเลิกการสมัคร</h3>
+        <div>
+          <h3>การสมัครถูกยกเลิกแล้ว</h3>
         </div>
       </div>
     </div>
+
+  @elseif($personApplyJob['job_applying_status_id'] == 6)
+
+    <div class="secondary-message-box info">
+      <div class="secondary-message-box-inner">
+        <div>
+          <h3>ผู้สมัครตกลงเข้าทำงานนี้</h3>
+        </div>
+      </div>
+
+      <div class="secondary-message-box-inner clean">
+        <h4>คำอธิบายหรือคำกล่าวถึงบรืษัทหรือผู้ที่เกี่ยวข้อง</h4>
+        <div class="line space-bottom-10"></div>
+        <div>
+          {!!$jobApplyHistory['message']!!}
+        </div>
+      </div>
+
+    </div>
+
+  @elseif($personApplyJob['job_applying_status_id'] == 7)
+
+    <div class="secondary-message-box info">
+      <div class="secondary-message-box-inner">
+        <div>
+          <h3>ผู้สมัครปฏิเสธเข้าทำงานนี้</h3>
+        </div>
+      </div>
+    </div>
+    @if(!empty($jobApplyHistory['message']))
+      <div class="secondary-message-box clean space-bottom-30">
+        <div class="secondary-message-box-inner">
+          <h4>คำอธิบายว่าทำไมถึงปฏิเสธเข้าทำงาน</h4>
+          <div class="line space-bottom-10"></div>
+          <div>
+            {!!$jobApplyHistory['message']!!}
+          </div>
+        </div>
+      </div>
+    @endif
 
   @endif
 
@@ -155,8 +209,18 @@
     </div>
   </div>
 
+  @if(!empty($messageFromApplicant))
+    <div class="detail-title">
+      <h3>ข้อความจากผู้สมัคร</h3>
+      <div class="line space-bottom-10"></div>
+      <div>
+        {!!$messageFromApplicant!!}
+      </div>
+    </div>
+  @endif
+
   <div class="detail-title">
-    <h3 class="sub-title">รายละเอียดจากผู้สมัคร</h3>
+    <h3>รายละเอียดจากผู้สมัคร</h3>
     <div class="line space-top-10"></div>
   </div>
 
@@ -164,18 +228,6 @@
     <h4>ตำแหน่งที่สมัคร</h4>
     <div>{{$jobName}}</div>
   </div>
-
-
-  @if(!empty($messageFromApplicant))
-    <div class="space-top-20">
-      <h4>ข้อความจากผู้สมัคร</h4>
-      <div class="secondary-message-box">
-        <div class="secondary-message-box-inner">
-          {!!$messageFromApplicant!!}
-        </div>
-      </div>
-    </div>
-  @endif
   
   @if($hasBranch)
   <div class="space-top-20">
