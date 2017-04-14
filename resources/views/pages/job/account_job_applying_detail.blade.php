@@ -17,6 +17,7 @@
   @include('components.form_error') 
 
   @if($personApplyJob['job_applying_status_id'] == 1)
+
     <div class="secondary-message-box space-bottom-30">
       <div class="secondary-message-box-inner">
         <div class="text-center">
@@ -26,16 +27,73 @@
         </div>
       </div>
     </div>
+
   @elseif($personApplyJob['job_applying_status_id'] == 2)
 
+    <div class="secondary-message-box space-bottom-30">
+      <div class="secondary-message-box-inner">
+        <div class="text-center">
+          <img src="/images/common/resume.png">
+          <h3>การสมัครงานนี้ถูกรับทราบแล้ว</h3>
+          <p>บริษัท สถานประกอบการหรือผู้ที่เกี่ยวข้องได้รับทราบการสมัครของคุณแล้ว</p>
+        </div>
+      </div>
+    </div>
 
   @elseif($personApplyJob['job_applying_status_id'] == 3)
 
-    <div class="secondary-message-box info space-bottom-30">
+    <div class="secondary-message-box success">
       <div class="secondary-message-box-inner">
-        <div class="text-center">
-          <h3>ผ่านการสมัครแล้ว</h3>
+        <div>
+          <h3>คุณผ่านการประเมินและถูกรับเข้าทำงานแล้ว</h3>
+          <h5>โปรดยืนยันหากคุณต้องการทำงานในตำแหน่งนี้</h5>
         </div>
+      </div>
+    </div>
+    <div class="secondary-message-box clean space-bottom-30">
+      <div class="secondary-message-box-inner">
+        <h4>ข้อเสนอและข้อตกลงต่างๆ ของตำแหน่งงานนี้</h4>
+        <div class="line space-bottom-10"></div>
+        <div>
+          {!!$jobPositionDescription!!}
+        </div>
+
+        @if(!empty($jobApplyHistory['message']))
+          <div class="line space-top-bottom-20"></div>
+
+          <div>
+            {!!$jobApplyHistory['message']!!}
+          </div>
+        @endif
+
+      </div>
+
+      <div class="message-box-button-group two-button clearfix">
+        <div class="flat-button">
+          <a class="button" data-right-side-panel="1" data-right-side-panel-target="#job_position_accept_panel">
+            ตกลงเข้าทำงาน
+          </a>
+        </div>
+        <div class="flat-button">
+          <a class="button danger" data-right-side-panel="1" data-right-side-panel-target="#job_position_decline_panel">
+            ปฏิเสธเข้าทำงาน
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="job_position_accept_panel" class="right-size-panel form">
+      <div class="right-size-panel-inner">
+        @include('pages.job.components.job_position_accept')
+        <div class="right-size-panel-close-button"></div>
+      </div>
+    </div>
+
+    <div id="job_position_decline_panel" class="right-size-panel form">
+      <div class="right-size-panel-inner">
+        @include('pages.job.components.job_position_decline')
+        <div class="right-size-panel-close-button"></div>
       </div>
     </div>
 

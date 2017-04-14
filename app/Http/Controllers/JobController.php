@@ -456,6 +456,7 @@ class JobController extends Controller
     $this->data = $person->personExperience->getPersonExperience();
     $this->setData('jobName',$model->job->name);
     $this->setData('personApplyJob',$model->modelData->build(true));
+    $this->setData('messageFromApplicant',$model->getMessage());
     $this->setData('profile',$person->modelData->build(true));
     $this->setData('profileImageUrl',$person->getProfileImageUrl('xsm'));
     $this->setData('hasBranch',!empty($total) ? true : false);
@@ -488,7 +489,7 @@ class JobController extends Controller
 
     if($model->job_applying_status_id != 1) {
       $this->error = array(
-        'message' => 'เกิดข้อผิดพลาด พบการทำงานที่ไม่ถูกต้อง'
+        'message' => 'เกิดข้อผิดพลาดการทำงานไม่ถูกต้อง'
       );
       return $this->error();
     }
@@ -524,14 +525,19 @@ class JobController extends Controller
 
     if($model->job_applying_status_id != 2) {
       $this->error = array(
-        'message' => 'เกิดข้อผิดพลาด พบการทำงานที่ไม่ถูกต้อง'
+        'message' => 'เกิดข้อผิดพลาดการทำงานไม่ถูกต้อง'
       );
       return $this->error();
+    }
+
+    if(empty(request()->get('job_position_description'))) {
+      return Redirect::back()->withErrors(['เงินเดือน วันที่เริ่มทำงาน หรือข้อตกลงต่างๆ ของตำแหน่งงานนี้ห้ามว่าง']);
     }
 
     $jobApplyingStatus = Service::loadModel('JobApplyingStatus')->getIdByAlias('job-applying-passed');
 
     $model->job_applying_status_id = $jobApplyingStatus;
+    $model->job_position_description = request()->get('job_position_description');
 
     if($model->save()) {
       Service::loadModel('JobApplyingHistory')->fill(array(
@@ -560,7 +566,7 @@ class JobController extends Controller
 
     if($model->job_applying_status_id != 2) {
       $this->error = array(
-        'message' => 'เกิดข้อผิดพลาด พบการทำงานที่ไม่ถูกต้อง'
+        'message' => 'เกิดข้อผิดพลาดการทำงานไม่ถูกต้อง'
       );
       return $this->error();
     }
@@ -593,7 +599,7 @@ class JobController extends Controller
 
     if(($model->job_applying_status_id != 1) && ($model->job_applying_status_id != 2)) {
       $this->error = array(
-        'message' => 'เกิดข้อผิดพลาด พบการทำงานที่ไม่ถูกต้อง'
+        'message' => 'เกิดข้อผิดพลาดการทำงานไม่ถูกต้อง'
       );
       return $this->error();
     }
@@ -656,12 +662,19 @@ class JobController extends Controller
     }
 
     $this->setData('personApplyJob',$model->modelData->build(true));
+    $this->setData('jobPositionDescription',$model->getJobPositionDescription());
+    $this->setData('jobApplyHistory',$model->getJobApplyHistory(true));
     $this->setData('shopName',$model->shop->name);
     $this->setData('shopUrl',$url->setAndParseUrl('shop/{shopSlug}',array('shopSlug'=>$slug)));
     $this->setData('jobName',$model->job->name);
     $this->setData('jobUrl',$url->setAndParseUrl('job/detail/{id}',array('id'=>$model->job->id)));
     $this->setData('createdDate',$date->covertDateTimeToSting($model->created_at->format('Y-m-d H:i:s')));
     $this->setData('messages',$_messages);
+
+    if($model->job_applying_status_id == 3) {
+      $this->setData('jobPositionAcceptUrl',$url->setAndParseUrl('account/job_applying/job_position_accept/{id}',array('id'=>$model->id)));
+      $this->setData('jobPositionDeclineUrl',$url->setAndParseUrl('account/job_applying/job_position_decline/{id}',array('id'=>$model->id)));
+    }
 
     $this->setData('newMessagePostUrl',$url->setAndParseUrl('account/job_applying/new_message/{id}',array('id'=>$model->id)));
     $this->setData('replyMessageUrl',$url->setAndParseUrl('account/job_applying/message_reply/{id}',array('id'=>$model->id)));
@@ -673,11 +686,6 @@ class JobController extends Controller
   public function jobApplyingMessageSend(CustomFormRequest $request) {
 
     $personApplyJob = Service::loadModel('PersonApplyJob')->find($this->param['id']);
-
-    // if($personApplyJob->job_applying_status_id == 1) {
-    //   $personApplyJob->job_applying_status_id = 2;
-    //   $personApplyJob->save();
-    // }
 
     $messageHelper = new MessageHelper;
     $messageHelper->setModel($personApplyJob);

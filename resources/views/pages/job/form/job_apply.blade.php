@@ -74,7 +74,7 @@
 
     <div class="form-row">
       <?php 
-        echo Form::label('message', 'ข้อความถึงผู้รับสมัครงานนี้');
+        echo Form::label('applicant_message', 'ข้อความถึงผู้รับสมัครงานนี้');
       ?>
 
       <div class="secondary-message-box info">
@@ -86,7 +86,7 @@
 
       <p class="notice info">แนะนำตัวคุณหรือกล่าวอะไรบ้างอย่างถึงผู้รับสมัครงานนี้</p>
       <?php
-        echo Form::textarea('message');
+        echo Form::textarea('applicant_message');
       ?>
       
     </div>

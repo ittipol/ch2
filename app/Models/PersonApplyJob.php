@@ -9,7 +9,7 @@ use App\library\date;
 class PersonApplyJob extends Model
 {
   protected $table = 'person_apply_jobs';
-  protected $fillable = ['person_id','job_id','shop_id','message','job_applying_status_id','times'];
+  protected $fillable = ['person_id','job_id','shop_id','applicant_message','job_position_description','job_applying_status_id','times'];
   protected $modelRelations = array('JobApplyToBranch','AttachedFile');
 
   protected $modelRelationDataOption = array(
@@ -38,11 +38,37 @@ class PersonApplyJob extends Model
     return $this->hasOne('App\Models\JobApplyingStatus','id','job_applying_status_id');
   }
 
+  public function getMessage() {
+    return nl2br($this->applicant_message);
+  }
+
+  public function getJobPositionDescription() {
+    return nl2br($this->job_position_description);
+  }
+
+  public function getJobApplyHistory($build = false) {
+    $jobApplyHistory = JobApplyingHistory::where([
+      ['job_id','=',$this->job_id],
+      ['job_applying_status_id','=',$this->job_applying_status_id],
+      ['times','=',$this->times]
+    ]);
+    
+    if(!$jobApplyHistory->exists()) {
+      return null;
+    }
+
+    if($build) {
+      return $jobApplyHistory->first()->buildModelData();
+    }
+
+    return $jobApplyHistory->first();
+
+  }
+
   public function buildModelData() {
 
     return array(
       'shopName' => $this->shop->name,
-      'message' => nl2br($this->message),
       'job_applying_status_id' => $this->job_applying_status_id,
       'jobApplyingStatusName' => $this->JobApplyingStatus->name
     );

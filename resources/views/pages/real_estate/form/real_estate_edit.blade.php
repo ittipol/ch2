@@ -356,9 +356,7 @@
           <div class="form-row">
             <?php 
               echo Form::label('description', 'รายละเอียดอสังหาริมทรัพย์');
-              echo Form::textarea('description', null, array(
-                'class' => 'ckeditor'
-              ));
+              echo Form::textarea('description');
             ?>
           </div>
 

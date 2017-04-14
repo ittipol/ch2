@@ -60,19 +60,19 @@
       <div class="secondary-message-box-inner">
         <div class="text-center">
           <img src="/images/common/resume.png">
-          <h3>ตอบรับการสมัครแล้ว</h3>
-          <p>เมื่อสัมภาษณ์และทดสอบผู้สมัครแล้วและต้องการแจ้งผลลัพธ์การสมัคร สามารถแจ้งผลลัพธ์ไปยังผู้สมัครโดยตรงด้วยการเลือกตัวเลือกข้างล่างนี้</p>
+          <h3>ตอบรับการสมัครนี้แล้ว</h3>
+          <p>เมื่อได้ผลลัพธ์การสมัครแล้ว สามารถแจ้งผลลัพธ์ไปยังผู้สมัครโดยตรงด้วยการเลือกตัวเลือกข้างล่างนี้</p>
         </div>
       </div>
       <div class="message-box-button-group three-button clearfix">
         <div class="flat-button">
           <a class="button" data-right-side-panel="1" data-right-side-panel-target="#job_appying_passed_panel">
-            ผ่านการสมัคร
+            ผ่านการประเมินและรับเข้าทำงาน
           </a>
         </div>
         <div class="flat-button">
           <a class="button danger" data-right-side-panel="1" data-right-side-panel-target="#job_appying_not_pass_panel">
-            ไม่ผ่านการสมัคร
+            ไม่ผ่านการประเมิน
           </a>
         </div>
         <div class="flat-button">
@@ -108,8 +108,9 @@
 
     <div class="secondary-message-box info space-bottom-30">
       <div class="secondary-message-box-inner">
-        <div class="text-center">
-          <h3>ผ่านการสมัครแล้ว</h3>
+        <div>
+          <h3>ผ่านการประเมินและรับผู้สมัครเข้าทำงาน</h3>
+          <h5>โปรดรอการยืนยันการเข้าทำงานจากผู้สมัคร</h5>
         </div>
       </div>
     </div>
@@ -119,7 +120,7 @@
     <div class="secondary-message-box info space-bottom-30">
       <div class="secondary-message-box-inner">
         <div class="text-center">
-          <h3>ไม่ผ่านการสมัคร</h3>
+          <h3>ไม่ผ่านการประเมิน</h3>
         </div>
       </div>
     </div>
@@ -129,7 +130,7 @@
     <div class="secondary-message-box info space-bottom-30">
       <div class="secondary-message-box-inner">
         <div class="text-center">
-          <h3>ยกเลิกการสมัครนี้</h3>
+          <h3>ยกเลิกการสมัคร</h3>
         </div>
       </div>
     </div>
@@ -165,12 +166,12 @@
   </div>
 
 
-  @if(!empty($personApplyJob['message']))
+  @if(!empty($messageFromApplicant))
     <div class="space-top-20">
       <h4>ข้อความจากผู้สมัคร</h4>
       <div class="secondary-message-box">
         <div class="secondary-message-box-inner">
-          {!!$personApplyJob['message']!!}
+          {!!$messageFromApplicant!!}
         </div>
       </div>
     </div>

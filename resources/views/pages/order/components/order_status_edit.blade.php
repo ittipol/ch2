@@ -18,9 +18,7 @@
 <div class="form-row">
   <h5>ข้อความถึงผู้ซื้อ</h5>
   <?php
-    echo Form::textarea('message', null, array(
-      'class' => 'ckeditor'
-    ));
+    echo Form::textarea('message');
   ?>
 </div>
 <?php 

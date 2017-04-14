@@ -19,9 +19,7 @@
 <div class="form-row">
   <?php 
     echo Form::label('message', 'คำอธิบายว่าทำไมถึงยกเลิกการสมัคร');
-    echo Form::textarea('message', null, array(
-      'class' => 'ckeditor'
-    ));
+    echo Form::textarea('message');
   ?>
 </div>
 <?php 

@@ -13,6 +13,10 @@ textarea {
 	resize: none;
 }
 
+textarea.small-textarea {
+	height: 80px;
+}
+
 .select-group select:nth-of-type(n+2) {
 	margin-left: 10px;
 }
