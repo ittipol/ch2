@@ -17,7 +17,7 @@
 ?>
 <div class="form-row">
   <?php 
-    echo Form::label('message', 'คำอธิบายหรือกล่าวอะไรบ้างอย่างถึงบรืษัทหรือผู้ที่เกี่ยวข้อง');
+    echo Form::label('message', 'กล่าวอะไรบางอย่างถึงบรืษัทหรือผู้ที่เกี่ยวข้อง');
     echo Form::textarea('message');
   ?>
 </div>

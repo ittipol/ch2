@@ -84,18 +84,6 @@ class Notification extends Model
 
   }
 
-  public function buildModelData() {
-
-    $date = new Date;
-
-    return array(
-      'title' => $this->title,
-      'url' => $this->getUrl($this->model,$this->model_id,$this->notificationEvent),
-      'createdDate' => $date->calPassedDate($this->created_at->format('Y-m-d H:i:s')),
-      'image' => $this->getNorificationIcon($this->model)
-    );
-  }
-
   public function getUrl($modelName,$modelId,$notificationEvent) {
 
     $url = new Url;
@@ -171,10 +159,6 @@ class Notification extends Model
 
   }
 
-  public function getModelId() {
-
-  }
-
   public function getNorificationIcon($modelName) {
 
     $image = '';
@@ -191,11 +175,39 @@ class Notification extends Model
       case 'Message':
           $image = '/images/icons/message-white.png';
         break;
+
+      default:
+         $image = '/images/icons/bell-white.png'; 
     
     }
 
     return $image;
 
+  }
+
+  public function buildModelData() {
+
+    $date = new Date;
+
+    return array(
+      'title' => $this->title,
+      'url' => $this->getUrl($this->model,$this->model_id,$this->notificationEvent),
+      'createdDate' => $date->calPassedDate($this->created_at->format('Y-m-d H:i:s')),
+      'image' => $this->getNorificationIcon($this->model)
+    );
+  }
+
+  public function buildPaginationData() {
+
+    $date = new Date;
+
+    return array(
+      'title' => $this->title,
+      'url' => $this->getUrl($this->model,$this->model_id,$this->notificationEvent),
+      'createdDate' => $date->calPassedDate($this->created_at->format('Y-m-d H:i:s')),
+      'image' => $this->getNorificationIcon($this->model)
+    );
+    
   }
 
   public function setUpdatedAt($value) {}

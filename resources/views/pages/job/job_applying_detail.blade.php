@@ -159,7 +159,7 @@
       </div>
 
       <div class="secondary-message-box-inner clean">
-        <h4>คำอธิบายหรือคำกล่าวถึงบรืษัทหรือผู้ที่เกี่ยวข้อง</h4>
+        <h4>คำกล่าวถึงบรืษัทหรือผู้ที่เกี่ยวข้อง</h4>
         <div class="line space-bottom-10"></div>
         <div>
           {!!$jobApplyHistory['message']!!}

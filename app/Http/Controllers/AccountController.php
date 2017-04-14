@@ -231,7 +231,7 @@ class AccountController extends Controller
       'conditions' => array(
         array('person_id','=',session()->get('Person.id'))
       ),
-      'order' => array('id','DESC')
+      'order' => array('created_at','desc')
     ));
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl('account/order');
@@ -266,6 +266,31 @@ class AccountController extends Controller
     $this->data = $model->paginator->build();
 
     return $this->view('pages.account.job_applying');
+  }
+
+  public function notification() {
+
+    $model = Service::loadModel('Notification');
+
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
+
+    $model->paginator->criteria(array(
+      'conditions' => array(
+        array('person_id','=',session()->get('Person.id'))
+      ),
+      'order' => array('created_at','desc')
+    ));
+    $model->paginator->setPage($page);
+    $model->paginator->setPagingUrl('account/notification');
+    // $model->paginator->setUrl('account/notification/{id}','detailUrl');
+
+    $this->data = $model->paginator->build();
+
+    return $this->view('pages.account.notification');
+
   }
 
 }

@@ -8,7 +8,7 @@
   <div class="notification-header-nav">
     <div class="notification-header-nav-inner">
       <div class="text-right">
-        <a href="#" class="flat-button">แสดงทั้งหมด</a>
+        <a href="{{URL::to('account/notification')}}" class="flat-button">แสดงทั้งหมด</a>
       </div>
     </div>
   </div>

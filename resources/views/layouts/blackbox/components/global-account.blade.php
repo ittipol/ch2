@@ -50,7 +50,7 @@
         <div class="col-xs-4">
           <a href="{{URL::to('person/freelance')}}">
             <div class="account-tile-button text-center">
-              <img class="icon" src="/images/common/career.png">
+              <img class="icon" src="/images/common/home-office.png">
               <h5>ฟรีแลนซ์</h5>
             </div>
           </a>
@@ -75,10 +75,10 @@
         </div>
 
         <div class="col-xs-4">
-          <a href="{{URL::to('account/real_estate')}}">
+          <a href="{{URL::to('account')}}">
             <div class="account-tile-button text-center">
-              <img class="icon" src="/images/common/building.png">
-              <h5>ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</h5>
+              <img class="icon" src="/images/common/additional.png">
+              <h5>ทั้งหมด</h5>
             </div>
           </a>
         </div>
