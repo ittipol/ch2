@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
 use App\library\messageHelper;
-use App\library\cache;
 use App\library\filterHelper;
 use App\library\url;
+use App\library\cache;
 use Redirect;
 use Session;
 
@@ -33,6 +33,7 @@ class ProductController extends Controller
   public function shelf() {
 
     $url = new Url;
+    $cache = new Cache;
 
     $model = Service::loadModel('Product');
     $categoryModel = Service::loadModel('Category');
@@ -51,7 +52,9 @@ class ProductController extends Controller
         );
       }
 
-      $categoryPaths = Service::loadModel('CategoryPath')->where('path_id','=',$category->id)->get();
+      $categoryPaths = Service::loadModel('CategoryPath')
+      ->where('path_id','=',$category->id)
+      ->get();
 
       $ids = array();
       foreach ($categoryPaths as $categoryPath) {
@@ -72,7 +75,18 @@ class ProductController extends Controller
 
       $_products = array();
       foreach ($products as $product) {
+
+        $image = $product->getRelatedData('Image',array(
+          'first' => true
+        ));
+
+        $imageUrl = '/images/common/no-img.png';
+        if(!empty($image)) {
+          $imageUrl = $cache->getCacheImageUrl($image,'list');
+        }
+
         $_products['items'][] = array_merge($product->buildPaginationData(),array(
+          '_imageUrl' => $imageUrl,
           'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
         ));
         
@@ -211,11 +225,6 @@ class ProductController extends Controller
       $title = $categoryName;
     }
 
-    $this->data = $model->paginator->build();
-
-    // $filterOptions = $model->getFilterOptions();
-    // $sortingFields = $model->getSortingFields();
-
     $searchOptions = array(
       'filters' => $filterHelper->getFilterOptions(),
       'sort' => $filterHelper->getSortingOptions()
@@ -228,6 +237,7 @@ class ProductController extends Controller
 
     $parent = $categoryModel->getParentCategory($categoryId);
     
+    $this->data = $model->paginator->build();
     $this->setData('title',$title);
     $this->setData('categories',$categoryModel->getCategoriesWithSubCategories($categoryId));
     $this->setData('searchOptions',$searchOptions);
@@ -545,18 +555,7 @@ class ProductController extends Controller
   }
 
   public function priceEditingSubmit(CustomFormRequest $request) {
-
     return $this->_save(Service::loadModel('Product')->find($this->param['id']),$request->all());
-
-    // $model = Service::loadModel('Product')->find($this->param['id']);
-
-    // if($model->fill($request->all())->save()) {
-    //   MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
-    //   return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
-    // }else{
-    //   return Redirect::back();
-    // }
-
   }
 
   public function shippingEdit() {

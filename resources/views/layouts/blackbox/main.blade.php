@@ -43,13 +43,13 @@
       const rightSidePanel = new RightSidePanel();
       rightSidePanel.load();
 
-      const modelDialog = new ModelDialog;
+      const modelDialog = new ModelDialog();
       modelDialog.load();
 
       const globalCart = new GlobalCart('{{ csrf_token() }}');
       globalCart.load();
 
-      const inputField = new InputField;
+      const inputField = new InputField();
       inputField.load();
 
       @if(Auth::check())

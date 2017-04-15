@@ -29,7 +29,7 @@
 
           <div class="row">
 
-            <div class="col-md-12 col-xs-12 list-content">
+            <div class="col-xs-12 list-content">
               <a href="{{$data['url']}}">
                 <h4 class="primary-info">{!!$data['title']!!}</h4>
                 <div class="secondary-info">{{$data['createdDate']}}</div>

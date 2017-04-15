@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
 use App\library\messageHelper;
+use App\library\filterHelper;
+use App\library\url;
+use App\library\cache;
 use Redirect;
 
 class ItemController extends Controller
@@ -13,23 +16,133 @@ class ItemController extends Controller
     parent::__construct();
   }
 
+  public function board() {
+
+    $url = new Url;
+    $cache = new Cache;
+
+    $model = Service::loadModel('Item');
+
+    $itemCategories = Service::loadModel('ItemCategory')->all();
+
+    $boards = array();
+    foreach ($itemCategories as $category) {
+   
+      $items = $model
+      ->join('item_to_categories', 'item_to_categories.item_id', '=', 'items.id')
+      ->where('item_to_categories.item_category_id','=',$category->id);
+
+      $total = $items->count('items.id');
+
+      $items = $items
+      ->select('items.*')
+      ->orderBy('items.created_at','desc')
+      ->take(3)
+      ->get();
+
+      $_items = array();
+      foreach ($items as $item) {
+
+        $image = $item->getRelatedData('Image',array(
+          'first' => true
+        ));
+
+        $imageUrl = '/images/common/no-img.png';
+        if(!empty($image)) {
+          $imageUrl = $cache->getCacheImageUrl($image,'list');
+        }
+
+        $_items['items'][] = array_merge($item->buildPaginationData(),array(
+          '_imageUrl' => $imageUrl,
+          'detailUrl' => $url->setAndParseUrl('item/detail/{id}',array('id'=>$item->id))
+        ));
+        
+      }
+
+      if($total > 3) {
+        $_items['all'] = array(
+          'title' => '+'.($total-3)
+        );
+      }
+
+      $boards[] = array(
+        'categoryName' => $category->name,
+        'items' => $_items,
+        'total' => $total,
+        'itemBoardUrl' => $url->setAndParseUrl('item/board/{category_id}',array('category_id'=>$category->id)),
+      );
+
+    }
+
+    $this->setData('boards',$boards);
+
+    return $this->view('pages.item.board');
+
+  }
+
   public function listView() {
 
     $model = Service::loadModel('Item');
+    $categoryModel = Service::loadModel('ItemCategory');
+    $filterHelper = new FilterHelper($model);
     
     $page = 1;
     if(!empty($this->query['page'])) {
       $page = $this->query['page'];
     }
 
-    // $model->paginator->criteria(array(
-    //   'fields' => array('items.*')
-    // ));
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
+
+    $filters = '';
+    if(!empty($this->query['fq'])) {
+      $filters = $this->query['fq'];
+    }
+
+    $sort = '';
+    if(!empty($this->query['sort'])) {
+      $sort = $this->query['sort'];
+    }
+
+    if(!empty($this->param['category_id'])) {
+      $categoryId = $this->param['category_id'];
+    }
+
+    $filterHelper->setFilters($filters);
+    $filterHelper->setSorting($sort);
+
+    $conditions = $filterHelper->buildFilters();
+    $order = $filterHelper->buildSorting();
+
+    $conditions[] = array('item_to_categories.item_category_id','=',$this->param['category_id']);
+// dd($conditions);
+    $model->paginator->criteria(array_merge(array(
+      'joins' => array('item_to_categories', 'item_to_categories.item_id', '=', 'items.id'),
+      'conditions' => $conditions
+    ),$order));
+
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl('item/list');
     $model->paginator->setUrl('item/detail/{id}','detailUrl');
 
+    $title = Service::loadModel('ItemCategory')->getCategoryName($this->param['category_id']);
+
+    $searchOptions = array(
+      'filters' => $filterHelper->getFilterOptions(),
+      'sort' => $filterHelper->getSortingOptions()
+    );
+
+    $displayingFilters = array(
+      'filters' => $filterHelper->getDisplayingFilterOptions(),
+      'sort' => $filterHelper->getDisplayingSorting()
+    );
+
     $this->data = $model->paginator->build();
+    $this->setData('title',$title);
+    $this->setData('searchOptions',$searchOptions);
+    $this->setData('displayingFilters',$displayingFilters);
 
     return $this->view('pages.item.list');
   }

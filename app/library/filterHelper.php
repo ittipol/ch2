@@ -184,15 +184,6 @@ class FilterHelper {
 
     }
 
-    // 'or' => array(
-    //   array(
-    //     array('products.active','=',1),
-    //   ),
-    //   array(
-    //     array('products.created_at','>','2017-03-28 14:24:48'),
-    //   )
-    // )
-
     $filters = array();
     foreach ($_filters as $filter) {
 

@@ -252,7 +252,7 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 });
 
 // PRODUCT
-Route::get('product/shelf','ProductController@shelf')->name('product.shelf');
+Route::get('product/shelf','ProductController@shelf')->name('product.shelf.all');
 Route::get('product/shelf/{category_id}','ProductController@listView')->name('product.shelf');
 Route::get('product/category/{category_id?}','ProductController@category')->name('product.category');
 Route::get('product/detail/{id}','ProductController@detail')->name('product.detail');
@@ -410,6 +410,8 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 });
 
 // Person Post Item
+Route::get('item/board','ItemController@board');
+Route::get('item/board/{category_id}','ItemController@listView')->name('item.board');
 Route::get('item/list','ItemController@listView')->name('item.list');
 Route::get('item/detail/{id}','ItemController@detail')->name('item.detail');
 

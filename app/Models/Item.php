@@ -59,8 +59,9 @@ class Item extends Model
   );
 
   protected $filterOptions = array(
-    'model' => array(
-      'title' => 'แสดงข้อมูล',
+    'announcement' => array(
+      'input' => 'checkbox',
+      'title' => 'แสดงประกาศ',
       'options' => array(
         array(
           'name' => 'ประกาศซื้อ',
@@ -92,29 +93,61 @@ class Item extends Model
     )
   );
 
+  // protected $filterOptions = array(
+  //   'model' => array(
+  //     'title' => 'แสดงข้อมูล',
+  //     'options' => array(
+  //       array(
+  //         'name' => 'ประกาศซื้อ',
+  //         'value' => 'announcement_type_id:1',
+  //       ),
+  //       array(
+  //         'name' => 'ประกาศขาย',
+  //         'value' => 'announcement_type_id:2',
+  //       ),
+  //       array(
+  //         'name' => 'ประกาศให้เช่า',
+  //         'value' => 'announcement_type_id:3',
+  //       )
+  //     )
+  //   ),
+  //   'used' => array(
+  //     'input' => 'checkbox',
+  //     'title' => 'สภาพสินค้า',
+  //     'options' => array(
+  //       array(
+  //         'name' => 'สินค้าใหม่',
+  //         'value' => 'used:0'
+  //       ),
+  //       array(
+  //         'name' => 'สินค้ามือสอง',
+  //         'value' => 'used:1'
+  //       )
+  //     )
+  //   )
+  // );
+
   protected $sortingFields = array(
-    'sort' => array(
-      'title' => 'จัดเรียงตาม',
-      'options' => array(
-        array(
-          'name' => 'ตัวอักษร A - Z ก - ฮ',
-          'value' => 'name:asc'
-        ),
-        array(
-          'name' => 'ตัวอักษร Z - A ฮ - ก',
-          'value' => 'name:desc'
-        ),
-        array(
-          'name' => 'วันที่เก่าที่สุดไปหาใหม่ที่สุด',
-          'value' => 'created_at:asc'
-        ),
-        array(
-          'name' => 'วันที่ใหม่ที่สุดไปหาเก่าที่สุด',
-          'value' => 'created_at:desc'
-        ),
+    'title' => 'จัดเรียงตาม',
+    'options' => array(
+      array(
+        'name' => 'ตัวอักษร A - Z ก - ฮ',
+        'value' => 'name:asc'
       ),
-      'default' => 'created_at:desc'
-    )
+      array(
+        'name' => 'ตัวอักษร Z - A ฮ - ก',
+        'value' => 'name:desc'
+      ),
+      array(
+        'name' => 'วันที่เก่าที่สุดไปหาใหม่ที่สุด',
+        'value' => 'created_at:asc'
+      ),
+      array(
+        'name' => 'วันที่ใหม่ที่สุดไปหาเก่าที่สุด',
+        'value' => 'created_at:desc'
+      ),
+    ),
+    'default' => 'created_at:desc'
   );
 
   public function __construct() {  

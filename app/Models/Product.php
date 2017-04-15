@@ -388,17 +388,7 @@ class Product extends Model
 
     $string = new String;
     $currency = new Currency;
-    $cache = new Cache;
-
-    $image = $this->getRelatedData('Image',array(
-      'first' => true
-    ));
-
-    $imageUrl = '/images/common/no-img.png';
-    if(!empty($image)) {
-      $imageUrl = $cache->getCacheImageUrl($image,'list');
-    }
-
+    
     return array(
       'id' => $this->id,
       'name' => $this->name,
@@ -408,8 +398,7 @@ class Product extends Model
       'quantity' => $this->quantity,
       '_active' => $this->active ? 'เปิดการขายสินค้า' : 'ปิดการขายสินค้า',
       'promotion' => $this->getPromotion(),
-      'flag' => $this->getFlag(),
-      '_imageUrl' => $imageUrl
+      'flag' => $this->getFlag()
     );
     
   }

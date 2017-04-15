@@ -76,8 +76,8 @@
   </div>
 
   <?php 
-    echo Form::open(['id' => 'search_form','method' => 'get', 'enctype' => 'multipart/form-data']);
-    echo Form::close();
+    // echo Form::open(['id' => 'search_form','method' => 'get', 'enctype' => 'multipart/form-data']);
+    // echo Form::close();
   ?>
 
   <div id="filter_expand_panel" class="right-size-panel filter">
@@ -160,7 +160,7 @@
 
   $(document).ready(function(){
 
-    const filter = new Filter();
+    const filter = new Filter(true);
     filter.load();
 
   });
