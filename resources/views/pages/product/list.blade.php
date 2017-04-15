@@ -75,11 +75,6 @@
     </div>
   </div>
 
-  <?php 
-    // echo Form::open(['id' => 'search_form','method' => 'get', 'enctype' => 'multipart/form-data']);
-    // echo Form::close();
-  ?>
-
   <div id="filter_expand_panel" class="right-size-panel filter">
     <div class="right-size-panel-inner">
       @include('components.filter_expand_panel')

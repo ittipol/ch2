@@ -213,7 +213,7 @@ class ProductController extends Controller
       'conditions' => $conditions
     ),$order));
     $model->paginator->setPage($page);
-    $model->paginator->setPagingUrl('product/shelf');
+    $model->paginator->setPagingUrl('product/shelf/'.$categoryId);
     $model->paginator->setUrl('product/detail/{id}','detailUrl');
     $model->paginator->setQuery('sort',$sort);
     $model->paginator->setQuery('fq',$filters);

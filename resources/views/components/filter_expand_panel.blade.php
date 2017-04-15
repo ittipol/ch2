@@ -6,6 +6,7 @@
   </button>
 </div>
 
+@if(!empty($searchOptions['filters']))
 <div class="row">
 
   @if(!empty($searchOptions['filters']))
@@ -44,7 +45,9 @@
   @endif
 
 </div>
+@endif
 
+@if(!empty($searchOptions['sort']))
 <div class="row">
 
   <h4>{{$searchOptions['sort']['title']}}</h4>
@@ -66,3 +69,4 @@
   @endforeach
 
 </div>
+@endif

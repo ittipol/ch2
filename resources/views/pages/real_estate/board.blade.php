@@ -4,7 +4,7 @@
 <div class="top-header-wrapper top-header-border">
   <div class="container">
     <div class="top-header">
-      <h2>ประกาศซื้อ-เช่า-ขายสินค้า</h2>
+      <h2>ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</h2>
     </div>
   </div>
 </div>
@@ -15,10 +15,10 @@
 
     <div class="shelf">
 
-      <h3>{{$board['categoryName']}}</h3>
+      <h3>{{$board['typeName']}}</h3>
 
       <h2>{{$board['total']}}</h2>
-      <h5>รายการประกาศสินค้า</h5>
+      <h5>รายการประกาศอสังหาริมทรัพย์</h5>
 
       <div class="row">
 
@@ -43,7 +43,7 @@
                   <div class="card-info">
 
                     <a href="{{$item['detailUrl']}}">
-                      <div class="card-title">{{$item['name']}}</div>
+                      <div class="card-title">{{$item['_short_name']}}</div>
                     </a>
 
                     <div class="card-sub-info">
@@ -80,7 +80,7 @@
 
             <div class="list-empty-message text-center space-top-20">
               <div>
-                <h4>ยังไม่มีประกาศสินค้าหมวด{{$board['categoryName']}}</h4>
+                <h4>ยังไม่มีประกาศอสังหาริมทรัพย์ประเภท{{$board['typeName']}}</h4>
               </div>
             </div>
 

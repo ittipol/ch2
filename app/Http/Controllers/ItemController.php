@@ -52,7 +52,7 @@ class ItemController extends Controller
           $imageUrl = $cache->getCacheImageUrl($image,'list');
         }
 
-        $_items['items'][] = array_merge($item->buildPaginationData(),array(
+        $_items['data'][] = array_merge($item->buildPaginationData(),array(
           '_imageUrl' => $imageUrl,
           'detailUrl' => $url->setAndParseUrl('item/detail/{id}',array('id'=>$item->id))
         ));
@@ -83,7 +83,7 @@ class ItemController extends Controller
   public function listView() {
 
     $model = Service::loadModel('Item');
-    $categoryModel = Service::loadModel('ItemCategory');
+    // $itemCategoryModel = Service::loadModel('ItemCategory');
     $filterHelper = new FilterHelper($model);
     
     $page = 1;
@@ -106,9 +106,9 @@ class ItemController extends Controller
       $sort = $this->query['sort'];
     }
 
-    if(!empty($this->param['category_id'])) {
-      $categoryId = $this->param['category_id'];
-    }
+    // if(!empty($this->param['category_id'])) {
+    //   $categoryId = $this->param['category_id'];
+    // }
 
     $filterHelper->setFilters($filters);
     $filterHelper->setSorting($sort);
@@ -117,15 +117,17 @@ class ItemController extends Controller
     $order = $filterHelper->buildSorting();
 
     $conditions[] = array('item_to_categories.item_category_id','=',$this->param['category_id']);
-// dd($conditions);
+
     $model->paginator->criteria(array_merge(array(
       'joins' => array('item_to_categories', 'item_to_categories.item_id', '=', 'items.id'),
       'conditions' => $conditions
     ),$order));
 
     $model->paginator->setPage($page);
-    $model->paginator->setPagingUrl('item/list');
+    $model->paginator->setPagingUrl('item/board/'.$this->param['category_id']);
     $model->paginator->setUrl('item/detail/{id}','detailUrl');
+    $model->paginator->setQuery('sort',$sort);
+    $model->paginator->setQuery('fq',$filters);
 
     $title = Service::loadModel('ItemCategory')->getCategoryName($this->param['category_id']);
 

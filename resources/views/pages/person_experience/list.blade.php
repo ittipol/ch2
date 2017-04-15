@@ -3,7 +3,7 @@
 
   <div class="container list">
 
-    @if(!empty($_pagination['data']))
+    @if(empty($_pagination['data']))
 
       <div class="row">
 
@@ -40,9 +40,8 @@
     <div class="list-empty-message text-center space-top-20">
       <img class="space-bottom-20" src="/images/common/not-found.png">
       <div>
-        <h3>ยังไม่มีข้อมูลนี้</h3>
-        <p>ขออภัย ยังไม่มีข้อมูลซื้อ ขายสินค้า</p>
-        <a href="{{URL::to('item/post')}}" class="button">เพิ่มข้อมูลซื้อ ขายสินค้า</a>
+        <h3>ไม่พบข้อมูล ประวัติการทำงาน</h3>
+        <a href="{{URL::to('person/experience')}}" class="button">เพิ่มข้อมูลประวัติการทำงาน</a>
       </div>
     </div>
 

@@ -31,22 +31,28 @@
           @else
 
             <li class="item">
+              <a href="{{URL::to('person/experience')}}">ประวัติการทำงานบุคคล</a>
+            </li>
+
+            <li class="item">
               <a href="{{URL::to('person/freelance')}}">ฟรีแลนซ์</a>
             </li>
 
             <li class="item">
-              <a href="javascript:void(0)">บริษัทและร้านค้า</a>
+              <a href="{{URL::to('community/shop')}}">บริษัทและร้านค้า</a>
             </li>
 
           @endif
+
+          <li class="line space-top-bottom-10"></li>
 
           <li class="item">
             <a href="javascript:void(0)">สินค้าและการประกาศ</a>
             <ul class="submenu">
               <li class="submenu-item">
-                <a href="{{URL::to('product/add')}}">สินค้าจากร้านค้า</a>
-                <a href="{{URL::to('product/add')}}">ประกาศงาน</a>
-                <a href="{{URL::to('product/add')}}">โฆษณาจากบริษัทและร้านค้า</a>
+                <a href="{{URL::to('product/shelf')}}">สินค้าจากร้านค้า</a>
+                <a href="{{URL::to('job/board')}}">ประกาศงาน</a>
+                <a href="{{URL::to('advertising/board')}}">โฆษณาจากบริษัทและร้านค้า</a>
               </li>
             </ul>
           </li>
@@ -66,8 +72,8 @@
             </div>
             <ul class="submenu">
               <li class="submenu-item">
-                <a href="{{URL::to('product/add')}}">ประกาศซื้อ-เช่า-ขายสินค้า</a>
-                <a href="{{URL::to('real-estate/add')}}">ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</a>
+                <a href="{{URL::to('item/board')}}">ประกาศซื้อ-เช่า-ขายสินค้า</a>
+                <a href="{{URL::to('real-estate/board')}}">ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</a>
               </li>
             </ul>
           </li>
@@ -75,16 +81,16 @@
           <li class="line space-top-bottom-10"></li>
 
           <li class="item">
-            <a href="{{URL::to('entity/create')}}">วิธีการใช้งาน</a>
+            <a href="{{URL::to('how_to_use')}}">วิธีการใช้งาน</a>
           </li>
           <li class="item">
-            <a href="{{URL::to('entity/create')}}">แจ้งปัญหาการใช้งาน</a>
+            <a href="#">แจ้งปัญหาการใช้งาน</a>
           </li>
           <li class="item">
-            <a href="{{URL::to('entity/create')}}">ข้อเสนอแนะ</a>
+            <a href="#">ข้อเสนอแนะ</a>
           </li>
           <li class="item">
-            <a href="{{URL::to('entity/create')}}">ติดต่อเรา</a>
+            <a href="{{URL::to('contact')}}">ติดต่อเรา</a>
           </li>
 
         </ul>

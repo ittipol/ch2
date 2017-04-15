@@ -224,6 +224,7 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 });
 
 // community / Shop
+Route::get('community/shop','ShopController@listView');
 // Route::get('community/shop_feature','ShopController@feature');
 Route::group(['middleware' => ['auth','shop']], function () {
   Route::get('shop/{shopSlug}','ShopController@index')->name('shop.index');
@@ -426,7 +427,8 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 // Real Estate
-Route::get('real-estate/list','RealEstateController@listView');
+Route::get('real-estate/board','RealEstateController@board');
+Route::get('real-estate/board/{real_estate_type_id}','RealEstateController@listView');
 Route::get('real-estate/detail/{id}','RealEstateController@detail')->name('real_estate.detail');
 
 Route::group(['middleware' => 'auth'], function () {

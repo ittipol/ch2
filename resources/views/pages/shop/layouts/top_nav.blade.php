@@ -1,7 +1,8 @@
-<div class="shop-top-nav">
-  <div class="shop-top-fixed-top">
+<div class="sub-header-nav">
+  <div class="sub-header-nav-fixed-top">
     <div class="row">
       <div class="col-xs-12">
+
         <div class="btn-group pull-right">
           <button class="btn btn-secondary additional-option">
             จัดการ...
@@ -14,6 +15,7 @@
           </button>
           <a href="{{$_shop_setting_url}}" class="btn btn-secondary">ตั้งค่าร้านค้า</a>
         </div>
+
       </div>
     </div>
   </div>

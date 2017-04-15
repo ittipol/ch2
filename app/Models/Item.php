@@ -92,41 +92,7 @@ class Item extends Model
       )
     )
   );
-
-  // protected $filterOptions = array(
-  //   'model' => array(
-  //     'title' => 'แสดงข้อมูล',
-  //     'options' => array(
-  //       array(
-  //         'name' => 'ประกาศซื้อ',
-  //         'value' => 'announcement_type_id:1',
-  //       ),
-  //       array(
-  //         'name' => 'ประกาศขาย',
-  //         'value' => 'announcement_type_id:2',
-  //       ),
-  //       array(
-  //         'name' => 'ประกาศให้เช่า',
-  //         'value' => 'announcement_type_id:3',
-  //       )
-  //     )
-  //   ),
-  //   'used' => array(
-  //     'input' => 'checkbox',
-  //     'title' => 'สภาพสินค้า',
-  //     'options' => array(
-  //       array(
-  //         'name' => 'สินค้าใหม่',
-  //         'value' => 'used:0'
-  //       ),
-  //       array(
-  //         'name' => 'สินค้ามือสอง',
-  //         'value' => 'used:1'
-  //       )
-  //     )
-  //   )
-  // );
-
+  
   protected $sortingFields = array(
     'title' => 'จัดเรียงตาม',
     'options' => array(

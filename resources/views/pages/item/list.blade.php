@@ -5,14 +5,19 @@
   <div class="sub-header-nav-fixed-top">
     <div class="row">
       <div class="col-xs-12">
-        <div class="additional-option pull-right">
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="additional-option-content">
-            <a href="{{URL::to('item/board')}}">ไปยังหน้าประกาศสินค้าหลัก</a>
-          </div>
+
+        <div class="btn-group pull-right">
+          <a href="{{URL::to('item/post')}}" class="btn btn-secondary">เพิ่มประกาศเช่า-ซื้อ-ขายสินค้า</a>
+          <button class="btn btn-secondary additional-option">
+            ...
+            <div class="additional-option-content">
+              <a href="{{URL::to('item/board')}}">ไปยังหน้าหลักของประกาศสินค้า</a>
+              <a href="{{URL::to('real_estate/board')}}">ไปยังหน้าหลักของประกาศอสังหาริมทรัพย์</a>
+              <a href="{{URL::to('real_estate/post')}}">เพิ่มประกาศเช่า-ซื้อ-ขายอสังหาริมทรัพย์</a>
+            </div>
+          </button>
         </div>
+
       </div>
     </div>
   </div>
@@ -25,11 +30,6 @@
   <div class="text-right space-top-bottom-20">
     <a class="button" data-right-side-panel="1" data-right-side-panel-target="#filter_expand_panel">ตัวกรอง</a>
   </div>
-
-  <?php 
-    // echo Form::open(['id' => 'search_form','method' => 'get', 'enctype' => 'multipart/form-data']);
-    // echo Form::close();
-  ?>
 
   <div id="filter_expand_panel" class="right-size-panel filter">
     <div class="right-size-panel-inner">
@@ -82,9 +82,8 @@
   <div class="list-empty-message text-center space-top-20">
     <img class="space-bottom-20" src="/images/common/not-found.png">
     <div>
-      <h3>ยังไม่มีข้อมูลซื้อ ขายสินค้า</h3>
-      <p>ขออภัย ยังไม่มีข้อมูลซื้อ ขายสินค้า</p>
-      <a href="{{URL::to('item/post')}}" class="button">เพิ่มข้อมูลซื้อ ขายสินค้า</a>
+      <h3>ไม่พบข้อมูล การประกาศซื้อ-ขายสินค้า</h3>
+      <a href="{{URL::to('item/post')}}" class="button">เพิ่มการประกาศ</a>
     </div>
   </div>
 

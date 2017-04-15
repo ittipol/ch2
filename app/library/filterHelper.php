@@ -520,7 +520,6 @@ class FilterHelper {
       foreach ($this->filterOptions as $filter) {
 
         if(empty($filter['default'])) {
-          // $selectedfilters = $this->getDefaultFilter($filter['options']);
           continue;
         }
 
@@ -565,6 +564,10 @@ class FilterHelper {
       $selectedsort = $this->sortingFields['default'];
     }else {
       $selectedsort = $sort = $this->defaultSorting;
+    }
+
+    if(empty($this->sortingFields)) {
+      return null;
     }
 
     $sortingOptions['title'] = $this->sortingFields['title'];
@@ -642,6 +645,10 @@ class FilterHelper {
       $selectedsort = $this->sortingFields['default'];
     }else {
       $selectedsort = $this->defaultSorting;
+    }
+
+    if(empty($this->sortingFields)) {
+      return null;
     }
 
     $displayingSortingOptions['title'] = $this->sortingFields['title'];
