@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-md-8 col-xs-12">
         <div class="title">
-          ฟรีแลนซ์
+          เพิ่มงานฟรีแลนซ์
         </div>
       </div>
     </div>
@@ -51,11 +51,23 @@
 
     <div class="form-row">
       <?php 
-        echo Form::label('name', 'ชื่องานฟรีแลนซ์ที่รับทำ', array(
+        echo Form::label('name', 'ชื่องานฟรีแลนซ์', array(
           'class' => 'required'
         ));
         echo Form::text('name', null, array(
-          'placeholder' => 'ชื่องานฟรีแลนซ์ที่รับทำ',
+          'placeholder' => 'ชื่องานฟรีแลนซ์',
+          'autocomplete' => 'off'
+        ));
+      ?>
+    </div>
+
+    <div class="form-row">
+      <?php 
+        echo Form::label('default_wage', 'อัตราค่าจ้างเริ่มต้น', array(
+          'class' => 'required'
+        ));
+        echo Form::text('default_wage', null, array(
+          'placeholder' => 'อัตราค่าจ้างเริ่มต้น',
           'autocomplete' => 'off'
         ));
       ?>

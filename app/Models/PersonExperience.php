@@ -45,6 +45,72 @@ class PersonExperience extends Model
     )
   );
 
+  protected $filterOptions = array(
+    'gender' => array(
+      'input' => 'checkbox',
+      'title' => 'เพศ',
+      'options' => array(
+        array(
+          'name' => 'ชาย',
+          'value' => 'gender:1',
+        ),
+        array(
+          'name' => 'หญิง',
+          'value' => 'gender:2',
+        )
+      )
+    ),
+    'age' => array(
+      'input' => 'checkbox',
+      'title' => 'ช่วงอายุ',
+      'options' => array(
+        array(
+          'name' => '18-24 ปี',
+          'value' => 'age:1'
+        ),
+        array(
+          'name' => '25-34 ปี',
+          'value' => 'used:2'
+        ),
+        array(
+          'name' => '35-44 ปี',
+          'value' => 'used:3'
+        ),
+        array(
+          'name' => '45-54 ปี',
+          'value' => 'used:4'
+        ),
+        array(
+          'name' => '55-60 ปี',
+          'value' => 'used:5'
+        )
+      )
+    )
+  );
+
+  protected $sortingFields = array(
+    'title' => 'จัดเรียงตาม',
+    'options' => array(
+      array(
+        'name' => 'ตัวอักษร A - Z ก - ฮ',
+        'value' => 'name:asc'
+      ),
+      array(
+        'name' => 'ตัวอักษร Z - A ฮ - ก',
+        'value' => 'name:desc'
+      ),
+      array(
+        'name' => 'วันที่เก่าที่สุดไปหาใหม่ที่สุด',
+        'value' => 'created_at:asc'
+      ),
+      array(
+        'name' => 'วันที่ใหม่ที่สุดไปหาเก่าที่สุด',
+        'value' => 'created_at:desc'
+      ),
+    ),
+    'default' => 'created_at:desc'
+  );
+
   public static function boot() {
 
     parent::boot();
@@ -75,37 +141,6 @@ class PersonExperience extends Model
     });
 
   }
-
-  // public function fill(array $attributes) {
-
-  //   if(!empty($attributes)) {
-
-  //     if(!empty($attributes['private_websites'])) {
-
-  //       $websites = array();
-  //       foreach ($attributes['private_websites'] as $value) {
-  //         if(empty($value['value'])) {
-  //           continue;
-  //         }
-
-  //         $websites[] = array(
-  //           'type' => trim($value['type']),
-  //           'name' => trim($value['value'])
-  //         );
-  //       }
-
-  //       $attributes['private_websites'] = '';
-  //       if(!empty($websites)) {
-  //         $attributes['private_websites'] = json_encode($websites);
-  //       }
-
-  //     }
-      
-  //   }
-
-  //   return parent::fill($attributes);
-
-  // }
 
   public function getByPersonId() {
     return $this->where('person_id','=',session()->get('Person.id'))->first();
@@ -229,15 +264,23 @@ class PersonExperience extends Model
 
     }
 
-    $personCareerObjective = PersonCareerObjective::select('career_objective')
-    ->where('person_experience_id','=',$this->id)
+    // $personCareerObjective = PersonCareerObjective::select('career_objective')
+    // ->where('person_experience_id','=',$this->id)
+    // ->first();
+
+    // Get lastest working exp.
+    $workingExperience = PersonWorkingExperience::where('person_id','=',session()->get('Person.id'))
+    ->orderBy('created_at','desc')
+    ->select('position')
     ->first();
 
     return array(
       'id' => $this->id,
       'name' => $person->name,
+      'gender' => $person->getGender(),
       // '_short_name' => $string->truncString($person->name,45),
-      'careerObjective' => !empty($personCareerObjective->career_objective) ? $string->truncString($personCareerObjective->career_objective,150,true) : '-',
+      // 'careerObjective' => !empty($personCareerObjective->career_objective) ? $string->truncString($personCareerObjective->career_objective,150,true) : '-',
+      'position' => $workingExperience->position,
       '_imageUrl' => $imageUrl
     );
     

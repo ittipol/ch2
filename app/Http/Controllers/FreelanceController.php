@@ -216,7 +216,7 @@ class FreelanceController extends Controller
 
     if($model->fill($request->all())->save()) {
       MessageHelper::display('ลงประกาศแล้ว','success');
-      return Redirect::to('person/freelance');
+      return Redirect::to('freelance/detail'.$model->id);
     }else{
       return Redirect::back();
     }
@@ -254,6 +254,10 @@ class FreelanceController extends Controller
       return Redirect::back();
     }
 
+  }
+
+  public function queueAdd() {
+    
   }
 
 }

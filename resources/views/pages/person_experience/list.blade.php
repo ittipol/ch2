@@ -25,6 +25,16 @@
 
   <h3>ประวัติการทำงานบุคคล</h3>
   <div class="line"></div>
+  <div class="text-right space-top-bottom-20">
+    <a class="button" data-right-side-panel="1" data-right-side-panel-target="#filter_expand_panel">ตัวกรอง</a>
+  </div>
+
+  <div id="filter_expand_panel" class="right-size-panel filter">
+    <div class="right-size-panel-inner">
+      @include('components.filter_expand_panel')
+      <div class="right-size-panel-close-button"></div>
+    </div>
+  </div>
   
   @if(!empty($_pagination['data']))
 
@@ -34,20 +44,23 @@
 
       <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
         <div class="card">
-          <div class="image-tile">
+          <div class="image-tile cover">
             <a href="{{$data['detailUrl']}}">
-              <div class="card-image round" style="background-image:url({{$data['_imageUrl']}});"></div>
+              <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
             </a>
           </div>
           <div class="card-info">
             <a href="{{$data['detailUrl']}}">
               <div class="card-name">{{$data['name']}}</div>
             </a>
-            @if(!empty($data['careerObjective']) && ($data['careerObjective'] != '-'))
-            <div class="card-desciption">
-              {{$data['careerObjective']}}
+            <div class="card-sub-info">
+              <h5>เพศ</h5>
+              <div>{{$data['gender']}}</div>
             </div>
-            @endif
+            <div class="card-sub-info">
+              <h5>ตำแหน่งงานล่าสุด</h5>
+              <div>{{$data['position']}}</div>
+            </div>
           </div>
         </div>
       </div>

@@ -180,6 +180,9 @@ Route::group(['middleware' => ['auth','person.experience']], function () {
 
   Route::get('person/freelance','FreelanceController@manage')->name('person.freelance.manage');
 
+  Route::get('person/freelance/queue/manage','FreelanceController@queueManage')->name('person.freelance.queue.manage');
+  Route::get('person/freelance/queue/add','FreelanceController@queueAdd')->name('person.freelance.queue.add');
+
   Route::get('person/freelance/post','FreelanceController@add')->name('freelance.add');
   Route::post('person/freelance/post','FreelanceController@addingSubmit')->name('freelance.add');
 

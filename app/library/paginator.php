@@ -219,13 +219,20 @@ class Paginator {
     return $this->count;
   }
 
-  public function getPermissionPaginationData() {
+  public function getPermissionPaginationData($model = null) {
 
     $cache = new Cache;
 
     $offset = ($this->page - 1)  * $this->perPage;
 
-    $model = $this->condition($this->model->newInstance());
+    // $model = $this->condition($this->model->newInstance());
+    // $model = $this->order($model);
+
+    if(empty($model)) {
+      $model = $this->model->newInstance();
+    }
+
+    $model = $this->condition($model);
     $model = $this->order($model);
 
     $records = $model
@@ -378,8 +385,10 @@ class Paginator {
     $offset = ($this->page - 1)  * $this->perPage;
 
     if(empty($model)) {
-      $model = $this->condition($this->model->newInstance());
+      $model = $this->model->newInstance();
     }
+
+    $model = $this->condition($model);
     $model = $this->order($model);
 
     $records = $model
@@ -567,15 +576,17 @@ class Paginator {
   }
 
   public function buildPermissionData($onlyData = false) {
+
+    $model = $this->condition($this->model->newInstance());
     
     $data = array(
       'page' => $this->page,
-      'lastPage' => $this->getLastPage(),
+      'lastPage' => $this->getLastPage($model),
       'total' => $this->getTotal(),
       'paging' => $this->paging(),
       'next' => $this->next(),
       'prev' => $this->prev(),
-      'data' => $this->getPermissionPaginationData()
+      'data' => $this->getPermissionPaginationData($model)
     );
 
     if($onlyData) {

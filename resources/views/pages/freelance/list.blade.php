@@ -68,8 +68,7 @@
     <img class="space-bottom-20" src="/images/common/not-found.png">
     <div>
       <h3>ยังไม่มีข้อมูลตำแหน่งงาน</h3>
-      <p>ขออภัย ยังไม่มีข้อมูลตำแหน่งงาน</p>
-      <a href="{{URL::to('community/shop/create')}}" class="button">สร้างร้านค้าของคุณในชุมชน เพื่อเพิ่มตำแหน่งของคุณ</a>
+      <a href="{{URL::to('community/shop/create')}}" class="button">เพิ่มบริษัทหรือร้านค้าของคุณ เพื่อเพิ่มตำแหน่งงาน</a>
     </div>
   </div>
 

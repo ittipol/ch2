@@ -62,9 +62,14 @@ class Person extends Model
     return $this->fill($options['value'])->save();
   }
 
-  public function getGender($gender = '-') {
+  public function getGender($genderSign = null) {
 
-    switch ($gender) {
+    if(empty($genderSign)) {
+      $genderSign = $this->gender;
+    }
+
+    $gender = 'ไม่ระบุ';
+    switch ($genderSign) {
       case 'm':
         $gender = 'ชาย';
         break;
@@ -73,9 +78,6 @@ class Person extends Model
         $gender = 'หญิง';
         break;
 
-      case '0':
-        $gender = 'ไม่ระบุ';
-        break;
     }
 
     return $gender;

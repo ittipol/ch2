@@ -9,7 +9,7 @@ use App\library\url;
 class Freelance extends Model
 {
   public $table = 'freelances';
-  protected $fillable = ['freelance_type_id','name','description','person_id'];
+  protected $fillable = ['freelance_type_id','name','default_wage','description','person_id'];
   protected $modelRelations = array('Image','Tagging');
   protected $directory = true;
 
@@ -39,12 +39,38 @@ class Freelance extends Model
   protected $validation = array(
     'rules' => array(
       'name' => 'required|max:255',
+      'default_wage' => 'required|regex:/^[0-9,]*(\.[0-9]{1,2})?$/|max:255',
       'freelance_type_id' => 'required',
     ),
     'messages' => array(
       'name.required' => 'ชื่องานฟรีแลนซ์ที่รับทำห้ามว่าง',
+      'price.required' => 'อัตราค่าจ้างเริ่มต้นห้ามว่าง',
+      'price.regex' => 'รูปแบบอัตราค่าจ้างเริ่มต้นไม่ถูกต้อง',
       'freelance_type_id.required' => 'ประเภทงานฟรีแลนซ์ห้ามว่าง',
     )
+  );
+
+  protected $sortingFields = array(
+    'title' => 'จัดเรียงตาม',
+    'options' => array(
+      array(
+        'name' => 'ตัวอักษร A - Z ก - ฮ',
+        'value' => 'name:asc'
+      ),
+      array(
+        'name' => 'ตัวอักษร Z - A ฮ - ก',
+        'value' => 'name:desc'
+      ),
+      array(
+        'name' => 'วันที่เก่าที่สุดไปหาใหม่ที่สุด',
+        'value' => 'created_at:asc'
+      ),
+      array(
+        'name' => 'วันที่ใหม่ที่สุดไปหาเก่าที่สุด',
+        'value' => 'created_at:desc'
+      ),
+    ),
+    'default' => 'created_at:desc'
   );
 
   public function freelanceType() {

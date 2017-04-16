@@ -83,7 +83,6 @@ class ItemController extends Controller
   public function listView() {
 
     $model = Service::loadModel('Item');
-    // $itemCategoryModel = Service::loadModel('ItemCategory');
     $filterHelper = new FilterHelper($model);
     
     $page = 1;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
 use App\library\messageHelper;
+use App\library\filterHelper;
 use App\library\date;
 use App\library\url;
 use Redirect;
@@ -19,21 +20,59 @@ class PersonExperienceController extends Controller
   public function listView() {
 
     $model = Service::loadModel('PersonExperience');
+    $filterHelper = new FilterHelper($model);
     
     $page = 1;
     if(!empty($this->query['page'])) {
       $page = $this->query['page'];
     }
 
-    $model->paginator->criteria(array(
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
+
+    $filters = '';
+    if(!empty($this->query['fq'])) {
+      $filters = $this->query['fq'];
+    }
+
+    $sort = '';
+    if(!empty($this->query['sort'])) {
+      $sort = $this->query['sort'];
+    }
+
+    $filterHelper->setFilters($filters);
+    $filterHelper->setSorting($sort);
+
+    $conditions = $filterHelper->buildFilters();
+    $order = $filterHelper->buildSorting();
+
+    $model->paginator->criteria(array_merge(array(
+      'conditions' => $conditions,
       'fields' => array('person_experiences.*')
-    ));
+    ),$order));
     $model->paginator->disableGetImage();
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl('experience/profile/list');
     $model->paginator->setUrl('experience/profile/{id}','detailUrl');
+    $model->paginator->setQuery('sort',$sort);
+    $model->paginator->setQuery('fq',$filters);
+
+    $searchOptions = array(
+      'filters' => $filterHelper->getFilterOptions(),
+      'sort' => $filterHelper->getSortingOptions()
+    );
+
+    $displayingFilters = array(
+      'filters' => $filterHelper->getDisplayingFilterOptions(),
+      'sort' => $filterHelper->getDisplayingSorting()
+    );
+
 
     $this->data = $model->paginator->buildPermissionData();
+    $this->setData('searchOptions',$searchOptions);
+    $this->setData('displayingFilters',$displayingFilters);
 
     return $this->view('pages.person_experience.list');
   }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2017 at 10:03 AM
+-- Generation Time: Apr 16, 2017 at 05:31 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -355,12 +355,10 @@ CREATE TABLE `attached_files` (
 --
 
 INSERT INTO `attached_files` (`id`, `model`, `model_id`, `path`, `filename`, `filesize`, `alias`, `person_id`, `created_at`, `updated_at`) VALUES
-(2, 'PersonApplyJob', 1, NULL, 'resume.pdf', '243661', 'kEr3n29', 1, '2017-04-11 11:49:19', '2017-04-11 11:49:19'),
-(3, 'Message', 1, NULL, 'suggestion.docx', '11919', 'DUA7pnC', 1, '2017-04-11 11:50:09', '2017-04-11 11:50:09'),
-(4, 'Message', 2, NULL, 'website.txt', '1939', 'WCDFYBg', 1, '2017-04-11 11:51:14', '2017-04-11 11:51:14'),
-(5, 'Message', 8, NULL, 'website.txt', '1939', 'T24gAn9', 1, '2017-04-11 13:46:22', '2017-04-11 13:46:22'),
-(6, 'Message', 9, NULL, 'suggestion.docx', '11919', 'HwxO0hv', 1, '2017-04-11 13:48:16', '2017-04-11 13:48:16'),
-(7, 'Message', 9, NULL, 'resume.pdf', '243661', 'wnu4sGI', 1, '2017-04-11 13:48:16', '2017-04-11 13:48:16');
+(3, 'PersonApplyJob', 1, NULL, 'resume.pdf', '243661', 'tIbN8g7', 1, '2017-04-13 13:53:01', '2017-04-13 13:53:01'),
+(4, 'Message', 2, NULL, 'info.php', '35', 'euTsz3P', 1, '2017-04-13 17:03:32', '2017-04-13 17:03:32'),
+(5, 'Message', 2, NULL, 'db.js', '271', 'qJ8K2yd', 1, '2017-04-13 17:03:32', '2017-04-13 17:03:32'),
+(6, 'Message', 5, NULL, 'info.php', '35', 'S7v9PZg', 1, '2017-04-13 23:16:52', '2017-04-13 23:16:52');
 
 -- --------------------------------------------------------
 
@@ -380,20 +378,14 @@ CREATE TABLE `attached_file_access_permissions` (
 --
 
 INSERT INTO `attached_file_access_permissions` (`id`, `model`, `model_id`, `attached_file_id`) VALUES
-(1, 'Person', 1, 1),
-(2, 'Shop', 24, 1),
-(3, 'Person', 1, 2),
-(4, 'Shop', 24, 2),
-(5, 'Shop', 24, 3),
-(6, 'Person', 1, 3),
-(7, 'Person', 1, 4),
-(8, 'Shop', 24, 4),
-(9, 'Person', 1, 5),
-(10, 'Shop', 24, 5),
+(5, 'Person', 1, 3),
+(6, 'Shop', 24, 3),
+(7, 'Shop', 24, 4),
+(8, 'Person', 1, 4),
+(9, 'Shop', 24, 5),
+(10, 'Person', 1, 5),
 (11, 'Person', 1, 6),
-(12, 'Shop', 24, 6),
-(13, 'Person', 1, 7),
-(14, 'Shop', 24, 7);
+(12, 'Shop', 24, 6);
 
 -- --------------------------------------------------------
 
@@ -11889,7 +11881,8 @@ INSERT INTO `data_access_permissions` (`id`, `model`, `model_id`, `access_level`
 (91, 'Job', 59, 99, 'Shop', 23),
 (92, 'Job', 60, 99, 'Shop', 23),
 (93, 'Job', 61, 99, 'Shop', 23),
-(94, 'Job', 62, 99, 'Shop', 23);
+(94, 'Job', 62, 99, 'Shop', 23),
+(95, 'Freelance', 10, 99, 'Person', 1);
 
 -- --------------------------------------------------------
 
@@ -12877,6 +12870,7 @@ CREATE TABLE `freelances` (
   `id` int(11) UNSIGNED NOT NULL,
   `freelance_type_id` int(11) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
+  `default_wage` decimal(15,2) NOT NULL,
   `description` text,
   `person_id` int(11) UNSIGNED NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -12887,16 +12881,17 @@ CREATE TABLE `freelances` (
 -- Dumping data for table `freelances`
 --
 
-INSERT INTO `freelances` (`id`, `freelance_type_id`, `name`, `description`, `person_id`, `created_at`, `updated_at`) VALUES
-(1, 10, 'xxxx', '<p>test</p>', 1, '2017-02-17 20:50:35', '2017-02-17 20:52:44'),
-(2, 1, 'Bowjung Designer โ บ จั ง スニサ', '<h2>ผลงานของ Bowjung Designer โ บ จั ง スニサ</h2>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>- รับตัดเว็บไซต์จากไฟล์ Photoshop (.psd) ที่ออกแบบไว้แล้ว ทำให้เป็นเว็บไซต์แบบ HTML / CSS สามารถจัดทำเว็บไซต์ให้รองรับการแสดงผลเทุกหน้าจอการทำงาน (Responsive) เช่น Desktop, สมาร์ทโฟนและแท็บเล็ต<br />\r\n<br />\r\n- รับออกแบบเนอร์ เเละออกแบบเว็บไซต์&nbsp;</p>', 1, '2017-02-18 23:14:33', '2017-02-18 23:14:33'),
-(3, 3, 'รับวาดรูปและออกแบบ logo สินค้า และอื่นๆ', '', 1, '2017-02-20 15:49:43', '2017-02-20 15:49:43'),
-(4, 3, 'รับวาดรูปและออกแบบ logo สินค้า และอื่นๆ', '', 1, '2017-02-20 15:50:12', '2017-02-20 15:50:12'),
-(5, 3, 'รับวาดรูปและออกแบบ logo สินค้า และอื่นๆ', '', 1, '2017-02-20 15:50:29', '2017-02-20 15:50:29'),
-(6, 3, 'รับวาดรูปและออกแบบ logo สินค้า และอื่นๆ', '', 1, '2017-02-20 15:50:41', '2017-02-20 15:50:41'),
-(7, 3, 'รับวาดรูปและออกแบบ logo สินค้า และอื่นๆ', '', 1, '2017-02-20 15:51:27', '2017-02-20 15:51:27'),
-(8, 3, 'รับวาดรูปและออกแบบ logo สินค้า และอื่นๆ', '', 1, '2017-02-20 15:51:32', '2017-02-20 15:51:32'),
-(9, 1, 'website', '', 1, '2017-02-22 00:20:12', '2017-02-22 00:20:12');
+INSERT INTO `freelances` (`id`, `freelance_type_id`, `name`, `default_wage`, `description`, `person_id`, `created_at`, `updated_at`) VALUES
+(1, 10, 'xxxx', '0.00', '<p>test</p>', 1, '2017-02-17 20:50:35', '2017-02-17 20:52:44'),
+(2, 1, 'Bowjung Designer โ บ จั ง スニサ', '0.00', '<h2>ผลงานของ Bowjung Designer โ บ จั ง スニサ</h2>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>- รับตัดเว็บไซต์จากไฟล์ Photoshop (.psd) ที่ออกแบบไว้แล้ว ทำให้เป็นเว็บไซต์แบบ HTML / CSS สามารถจัดทำเว็บไซต์ให้รองรับการแสดงผลเทุกหน้าจอการทำงาน (Responsive) เช่น Desktop, สมาร์ทโฟนและแท็บเล็ต<br />\r\n<br />\r\n- รับออกแบบเนอร์ เเละออกแบบเว็บไซต์&nbsp;</p>', 1, '2017-02-18 23:14:33', '2017-02-18 23:14:33'),
+(3, 3, 'รับวาดรูปและออกแบบ logo สินค้า และอื่นๆ', '0.00', '', 1, '2017-02-20 15:49:43', '2017-02-20 15:49:43'),
+(4, 3, 'รับวาดรูปและออกแบบ logo สินค้า และอื่นๆ', '0.00', '', 1, '2017-02-20 15:50:12', '2017-02-20 15:50:12'),
+(5, 3, 'รับวาดรูปและออกแบบ logo สินค้า และอื่นๆ', '0.00', '', 1, '2017-02-20 15:50:29', '2017-02-20 15:50:29'),
+(6, 3, 'รับวาดรูปและออกแบบ logo สินค้า และอื่นๆ', '0.00', '', 1, '2017-02-20 15:50:41', '2017-02-20 15:50:41'),
+(7, 3, 'รับวาดรูปและออกแบบ logo สินค้า และอื่นๆ', '0.00', '', 1, '2017-02-20 15:51:27', '2017-02-20 15:51:27'),
+(8, 3, 'รับวาดรูปและออกแบบ logo สินค้า และอื่นๆ', '0.00', '', 1, '2017-02-20 15:51:32', '2017-02-20 15:51:32'),
+(9, 1, 'website', '0.00', '', 1, '2017-02-22 00:20:12', '2017-02-22 00:20:12'),
+(10, 1, 'ออกแบบ AAA', '3000.00', '', 1, '2017-04-16 21:41:57', '2017-04-16 21:41:57');
 
 -- --------------------------------------------------------
 
@@ -12927,6 +12922,43 @@ INSERT INTO `freelance_types` (`id`, `name`) VALUES
 (11, 'การตลาดและโฆษณา'),
 (12, 'บัญชีและการเงิน'),
 (13, 'กฏหมาย');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `freelance_working_queues`
+--
+
+CREATE TABLE `freelance_working_queues` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `freelance_id` int(11) UNSIGNED NOT NULL,
+  `working_time` smallint(4) NOT NULL,
+  `start_working_date` datetime DEFAULT NULL,
+  `freelance_working_status_id` int(11) UNSIGNED NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `freelance_working_statuses`
+--
+
+CREATE TABLE `freelance_working_statuses` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `alias` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `freelance_working_statuses`
+--
+
+INSERT INTO `freelance_working_statuses` (`id`, `name`, `alias`) VALUES
+(1, 'อยู่ในคิว', 'queued'),
+(2, 'กำลังดำเนินการ', 'in-progress'),
+(3, 'ทำงานสำเร็จ', 'completed');
 
 -- --------------------------------------------------------
 
@@ -13130,7 +13162,8 @@ INSERT INTO `images` (`id`, `model`, `model_id`, `path`, `filename`, `descriptio
 (242, 'Item', 124, NULL, '14917456334100983604012041482001.png', NULL, 1, 1, '2017-04-09 20:47:15', '2017-04-09 20:47:15'),
 (243, 'Job', 46, NULL, '14918438504524814061133947189746.jpg', NULL, 1, 1, '2017-04-11 00:04:14', '2017-04-11 00:04:14'),
 (244, 'Job', 48, NULL, '14918447235472192073927805165411.jpg', NULL, 1, 1, '2017-04-11 00:18:58', '2017-04-11 00:18:58'),
-(245, 'Job', 49, NULL, '14918449033912808832578213162203.jpg', NULL, 1, 1, '2017-04-11 00:21:45', '2017-04-11 00:21:45');
+(245, 'Job', 49, NULL, '14918449033912808832578213162203.jpg', NULL, 1, 1, '2017-04-11 00:21:45', '2017-04-11 00:21:45'),
+(246, 'Freelance', 10, NULL, '1492353692904283936099585617496.jpg', NULL, 1, 1, '2017-04-16 21:41:57', '2017-04-16 21:41:57');
 
 -- --------------------------------------------------------
 
@@ -13169,6 +13202,7 @@ CREATE TABLE `items` (
   `description` text,
   `price` decimal(15,2) NOT NULL,
   `used` tinyint(1) NOT NULL,
+  `opened` tinyint(1) NOT NULL,
   `person_id` int(11) UNSIGNED NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -13178,110 +13212,110 @@ CREATE TABLE `items` (
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`id`, `announcement_type_id`, `name`, `announcement_detail`, `description`, `price`, `used`, `person_id`, `created_at`, `updated_at`) VALUES
-(1, 2, 'nnnn', NULL, '', '1111.00', 1, 1, '2017-02-05 20:42:43', '2017-02-05 20:42:43'),
-(2, 2, 'xxx', NULL, '', '111.00', 1, 1, '2017-02-06 02:17:22', '2017-02-06 02:17:22'),
-(3, 2, 'GGG', NULL, '', '100.00', 1, 1, '2017-02-07 15:33:00', '2017-02-07 15:33:00'),
-(4, 2, 'xcxx', NULL, '', '111.00', 1, 1, '2017-02-07 15:39:36', '2017-02-07 15:39:36'),
-(5, 2, 'xcxx', NULL, '', '111.00', 1, 1, '2017-02-07 15:39:42', '2017-02-07 15:39:42'),
-(6, 2, 'xcxx', NULL, '', '111.00', 1, 1, '2017-02-07 15:39:56', '2017-02-07 15:39:56'),
-(7, 2, 'xcxx', NULL, '', '111.00', 1, 1, '2017-02-07 15:40:49', '2017-02-07 15:40:49'),
-(8, 2, 'xcxx', NULL, '', '111.00', 1, 1, '2017-02-07 15:40:57', '2017-02-07 15:40:57'),
-(9, 2, 'xcxx', NULL, '', '111.00', 1, 1, '2017-02-07 15:41:40', '2017-02-07 15:41:40'),
-(10, 2, 'xcxx', NULL, '', '111.00', 1, 1, '2017-02-07 15:41:51', '2017-02-07 15:41:51'),
-(11, 2, 'xcxx', NULL, '', '111.00', 1, 1, '2017-02-07 15:41:55', '2017-02-07 15:41:55'),
-(12, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:38:59', '2017-02-13 05:38:59'),
-(13, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:39:45', '2017-02-13 05:39:45'),
-(14, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:40:06', '2017-02-13 05:40:06'),
-(15, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:42:14', '2017-02-13 05:42:14'),
-(16, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:42:20', '2017-02-13 05:42:20'),
-(17, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:42:31', '2017-02-13 05:42:31'),
-(18, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:42:43', '2017-02-13 05:42:43'),
-(19, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:43:45', '2017-02-13 05:43:45'),
-(20, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:45:25', '2017-02-13 05:45:25'),
-(21, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:45:32', '2017-02-13 05:45:32'),
-(22, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:45:40', '2017-02-13 05:45:40'),
-(23, 2, 'bbb', NULL, '', '1200.00', 1, 1, '2017-02-13 05:49:49', '2017-02-13 05:49:49'),
-(24, 2, 'gggg', NULL, '', '11.00', 1, 1, '2017-02-13 05:52:25', '2017-02-13 05:52:25'),
-(25, 2, 'CPU I7 3.0 Ghz', NULL, '<h2>Technical Specifications</h2>\r\n\r\n<h3>Essentials</h3>\r\n\r\n<p>Processor Number</p>\r\n\r\n<p>i7-7920HQ</p>\r\n\r\n<p>Status</p>\r\n\r\n<p>Launched</p>\r\n\r\n<p>Launch Date</p>\r\n\r\n<p>Q1&#39;17</p>\r\n\r\n<p>Lithography</p>\r\n\r\n<p>14 nm</p>\r\n\r\n<h3>Performance</h3>\r\n\r\n<p># of Cores</p>\r\n\r\n<p>4</p>\r\n\r\n<p># of Threads</p>\r\n\r\n<p>8</p>\r\n\r\n<p>Processor Base Frequency</p>\r\n\r\n<p>3.10 GHz</p>\r\n\r\n<p>Max Turbo Frequency</p>\r\n\r\n<p>4.10 GHz</p>\r\n\r\n<p>Cache</p>\r\n\r\n<p>8 MB</p>\r\n\r\n<p>Bus Speed</p>\r\n\r\n<p>8 GT/s DMI3</p>\r\n\r\n<p>TDP</p>\r\n\r\n<p>45 W</p>\r\n\r\n<p>Configurable TDP-down</p>\r\n\r\n<p>35 W</p>\r\n\r\n<h3>Supplemental Information</h3>\r\n\r\n<p>Embedded Options Available</p>\r\n\r\n<p>No</p>\r\n\r\n<p>Conflict Free</p>\r\n\r\n<p>Yes</p>\r\n\r\n<h3>Memory Specifications</h3>\r\n\r\n<p>Max Memory Size (dependent on memory type)</p>\r\n\r\n<p>64 GB</p>\r\n\r\n<p>Memory Types</p>\r\n\r\n<p>DDR4-2400, LPDDR3-2133, DDR3L-1600</p>\r\n\r\n<p>Max # of Memory Channels</p>\r\n\r\n<p>2</p>\r\n\r\n<p>Max Memory Bandwidth</p>\r\n\r\n<p>34.1 GB/s</p>\r\n\r\n<p>ECC Memory Supported&nbsp;&Dagger;</p>\r\n\r\n<p>No</p>\r\n\r\n<h3>Graphics Specifications</h3>\r\n\r\n<p>Processor Graphics&nbsp;&Dagger;</p>\r\n\r\n<p>Intel&reg; HD Graphics 630</p>\r\n\r\n<p>Graphics Base Frequency</p>\r\n\r\n<p>350.00 MHz</p>\r\n\r\n<p>Graphics Max Dynamic Frequency</p>\r\n\r\n<p>1.10 GHz</p>\r\n\r\n<p>Graphics Video Max Memory</p>\r\n\r\n<p>64 GB</p>\r\n\r\n<p>Graphics Output</p>\r\n\r\n<p>eDP/DP/HDMI/DVI</p>\r\n\r\n<p>4K Support</p>\r\n\r\n<p>Yes, at 60Hz</p>\r\n\r\n<p>Max Resolution (HDMI 1.4)&Dagger;</p>\r\n\r\n<p>4096x2304@30Hz</p>\r\n\r\n<p>Max Resolution (DP)&Dagger;</p>\r\n\r\n<p>4096x2304@60Hz</p>\r\n\r\n<p>DirectX* Support</p>\r\n\r\n<p>12</p>\r\n\r\n<p>OpenGL* Support</p>\r\n\r\n<p>4.4</p>\r\n\r\n<p>Intel&reg; Quick Sync Video</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Clear Video HD Technology</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p># of Displays Supported&nbsp;&Dagger;</p>\r\n\r\n<p>3</p>\r\n\r\n<p>Device ID</p>\r\n\r\n<p>0x591B</p>\r\n\r\n<h3>Expansion Options</h3>\r\n\r\n<p>PCI Express Revision</p>\r\n\r\n<p>3.0</p>\r\n\r\n<p>PCI Express Configurations&nbsp;&Dagger;</p>\r\n\r\n<p>Up to 1x16, 2x8, 1x8+2x4</p>\r\n\r\n<p>Max # of PCI Express Lanes</p>\r\n\r\n<p>16</p>\r\n\r\n<h3>Package Specifications</h3>\r\n\r\n<p>Max CPU Configuration</p>\r\n\r\n<p>1</p>\r\n\r\n<p>TJUNCTION</p>\r\n\r\n<p>100&deg;C</p>\r\n\r\n<p>Package Size</p>\r\n\r\n<p>42mm x 28mm</p>\r\n\r\n<h3>Advanced Technologies</h3>\r\n\r\n<p>Intel&reg; Speed Shift Technology</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Turbo Boost Technology&nbsp;&Dagger;</p>\r\n\r\n<p>2.0</p>\r\n\r\n<p>Intel&reg; vPro Technology&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Hyper-Threading Technology&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Virtualization Technology (VT-x)&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Virtualization Technology for Directed I/O (VT-d)&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; VT-x with Extended Page Tables (EPT)&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; TSX-NI</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; 64&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Instruction Set</p>\r\n\r\n<p>64-bit</p>\r\n\r\n<p>Instruction Set Extensions</p>\r\n\r\n<p>SSE4.1/4.2, AVX 2.0</p>\r\n\r\n<p>Idle States</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Enhanced Intel SpeedStep&reg; Technology</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Thermal Monitoring Technologies</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Flex Memory Access</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Identity Protection Technology&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Stable Image Platform Program (SIPP)</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Smart Response Technology</p>\r\n\r\n<p>Yes</p>\r\n\r\n<h3>Intel&reg; Data Protection Technology</h3>\r\n\r\n<p>Intel&reg; AES New Instructions</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Secure Key</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Software Guard Extensions (Intel&reg; SGX)</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Memory Protection Extensions (Intel&reg; MPX)</p>\r\n\r\n<p>Yes</p>\r\n\r\n<h3>Intel&reg; Platform Protection Technology</h3>\r\n\r\n<p>Trusted Execution Technology&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Execute Disable Bit&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>', '10000.00', 1, 1, '2017-02-13 05:55:28', '2017-02-19 00:17:54'),
-(26, 2, 'xxx', NULL, '', '111.00', 1, 1, '2017-02-13 07:30:09', '2017-02-13 07:30:09'),
-(27, 2, 'xxxxx', NULL, '', '11222.00', 1, 1, '2017-02-13 07:38:23', '2017-02-13 07:38:23'),
-(28, 2, 'xxxx', NULL, '', '12000.00', 1, 1, '2017-02-18 22:00:46', '2017-02-18 22:00:46'),
-(29, 2, 'xxxx', NULL, '', '1210.00', 1, 1, '2017-02-18 22:06:49', '2017-02-18 22:06:49'),
-(30, 2, 'xxxx', NULL, '', '1111.00', 1, 1, '2017-02-18 22:08:05', '2017-02-18 22:08:05'),
-(31, 2, 'xxxx', NULL, '', '12000.00', 1, 1, '2017-02-19 08:39:58', '2017-02-19 08:39:58'),
-(32, 2, 'xxxx', NULL, '', '12000.00', 1, 1, '2017-02-19 08:40:31', '2017-02-19 08:40:31'),
-(33, 2, 'hhhhhhh aaaaaaaaa', NULL, '', '12000.00', 1, 1, '2017-02-19 08:45:00', '2017-02-19 08:45:00'),
-(34, 2, 'hhhhhhh aaaaaaaaa', NULL, '', '12000.00', 1, 1, '2017-02-19 08:45:17', '2017-02-19 08:45:17'),
-(35, 2, 'hhhhhhh aaaaaaaaa', NULL, '', '12000.00', 1, 1, '2017-02-19 08:45:37', '2017-02-19 08:45:37'),
-(36, 2, 'hhhhhhh aaaaaaaaa', NULL, '', '12000.00', 1, 1, '2017-02-19 08:46:38', '2017-02-19 08:46:38'),
-(37, 2, 'hhhhhhh aaaaaaaaa', NULL, '', '12000.00', 1, 1, '2017-02-19 08:46:49', '2017-02-19 08:46:49'),
-(38, 2, 'Canon 17-85 mm IS มีกันสั่น USM มอเตอร์โฟกัสเร็วไว เมาส์ท้ายเลนส์ทำด้วยโลหะ ที่ 85 MM ถ่ายคน เบรอฉากหลังได้ มีฟิวเตอร์ฮูดกันกระแทกกันแสงให้', NULL, '<p>เลนส์ซูมคุณภาพ CANON มีกันสั่น เมาส์ท้ายเลนส์ทำด้วยโลหะแข็งแรง<br />\r\nขายเลนส์ CANON EF-S 17-85 MM F/4-5.6 IS USM&nbsp;<br />\r\nเลนส์ซูมคุณภาพ ให้มุมกว้าง 17 มม ซูมได้ยาวถึง 85 มม ในเลนส์ตัวเดียว&nbsp;<br />\r\nดีกว่าเลนส์ KIT 18-55 MM ที่มุมกว้างน้อยกว่า และยังซูมได้แค่ 55 มม&nbsp;<br />\r\nเลนส์ CANON 17-85 MM ตัวนี้ มีมอเตอร์ USM โฟกัสเร็วไว ในขณะที่ 18-55&nbsp;<br />\r\nไม่มี USM มอเตอร์ ตัวเลนส์มี IS กันภาพสั่นไหว และที่สำคัญเมาส์ท้ายเลนส์&nbsp;<br />\r\nCANON 17-85 MM ตัวนี้ ทำด้วยโลหะ แข็งแรงทนทาน ดีกว่า เลนส์ KIT&nbsp;<br />\r\n18-55 mm ที่ติดมากับกล้อง ตัวเลนส์สภาพสวย มี HOOD บังแสงมาให้ด้วย&nbsp;<br />\r\nซื้อเลนส์ใหม่ ก็ต้องซื้อ ฮูดเพิ่มนะครับไม่มีแถมให้ เลนส์ตัวนี้ ที่ช่วง 85 มม&nbsp;<br />\r\nนำไปถ่ายภาพ กีฬา หรือภาพ คน เบรอฉากหลังได้&nbsp;<br />\r\n*** พิเศษ คุณสามารถนำ เลนส์ KIT 18-55 หรือเลนส์ช่วงอื่นๆ มาแลกซื้อ&nbsp;<br />\r\nCANON 17-85 MM IS USM เมาส์โลหะตัวนี้ได้ ***&nbsp;<br />\r\nโทรสอบถามเพิ่มเติม นัดหมายนำกล้องมาทดสอบเลนส์ก่อนซื้อได้ครับ&nbsp;<br />\r\nพิเศษ มีฟิวเตอร์ UV ปิดหน้าเลนส์ให้ด้วยครับ ในราคานี้ ประหยัดไปก็ร่วม 1 พันแล้ว</p>', '12000.00', 1, 1, '2017-02-19 08:47:18', '2017-02-19 08:52:06'),
-(39, 2, 'xxxx', NULL, '', '12000.00', 1, 1, '2017-02-19 10:34:41', '2017-02-19 10:34:41'),
-(40, 2, 'xxxx', NULL, '', '12000.00', 1, 1, '2017-02-19 10:36:13', '2017-02-19 10:36:13'),
-(41, 2, 'xxxx', NULL, '', '12000.00', 1, 1, '2017-02-19 10:37:22', '2017-02-19 10:37:22'),
-(42, 2, 'xxxx', NULL, '', '12000.00', 1, 1, '2017-02-19 10:37:45', '2017-02-19 10:37:45'),
-(43, 2, 'xxxx', NULL, '', '12000.00', 1, 1, '2017-02-19 10:38:32', '2017-02-19 10:38:32'),
-(44, 2, 'xxxx', NULL, '', '12000.00', 1, 1, '2017-02-19 10:38:39', '2017-02-19 10:38:39'),
-(45, 2, 'xxxx', NULL, '', '12000.00', 1, 1, '2017-02-19 10:41:13', '2017-02-19 10:41:13'),
-(46, 2, 'สินค้าขายดี Samsung Galaxy J7 2016 เครื่องใหม่มือ1 ประกันศูนย์', NULL, '<p>&raquo; Samsung Galaxy J7 2016&nbsp;<br />\r\n&raquo; อุปกรณ์ / แท้ครบยกกล่อง&nbsp;<br />\r\n&raquo; ประกันศูนย์ซัมซุง สามารถใช้บริการ ส่งเคลมได้ที่ศูนย์ Samsung&nbsp;<br />\r\n&raquo; สาขาเซียร์รังสิต /พันธุ์ทิพย์ประตูน้ำ / ฟอร์จูน / มาบุญครอง&nbsp;<br />\r\n&raquo; ฟรีค่าซ่อมศูนย์ 1 ปี / ฟรีค่าอะไหล่ 3 เดือน&nbsp;<br />\r\n-----------------------------------------------------------<br />\r\n&raquo; อุปกรณ์ที่จะได้รับ&nbsp;<br />\r\n&raquo; เครื่อง + ที่ชาร์ทแท้ + หูฟัง + คู่มือ + ใบรับประกันสินค้า<br />\r\n&raquo; สภาพเครื่อง &raquo; สินค้าใหม่ มือ1 ประกันศูนย์ ไม่ผ่านการใช้งาน<br />\r\n------------------------------------------------------------<br />\r\n&raquo; มีบริการจัดส่งถึงมือ ในเขตกรุงเทพ ปริมณฑล<br />\r\n&raquo; ลูกค้า สามารถ มารับสินค้าเองได้ที่บ้าน สุขาภิบาล5 ซอย70<br />\r\n&raquo; ลูกค้า สามารถ ไปรับสินค้าได้ที่ร้าน ( 3Buddy มาบุณครอง ชั้น4 )<br />\r\n&raquo; ลูกค้า ต่างจังหวัด มีบริการส่งด่วน EMS (จ่ายเงินปลายทาง)<br />\r\n&raquo; ยินดี รับบัตรเครดิต ทุกธนาคาร&nbsp;<br />\r\n-----------------------------------------------------------<br />\r\n&raquo;&raquo;&raquo; โทรติดต่อ&nbsp;กดเพื่อดูเบอร์โทร xxxxxx560&nbsp;( ดอน )<br />\r\n&raquo;&raquo;&raquo; Home Office &raquo; 020371671<br />\r\n&raquo;&raquo;&raquo;&nbsp;กดเพื่อดู Line: xxxxx&nbsp;&raquo; @doctorit ( ใส่ @ ด้านหน้าด้วยนะครับ )<br />\r\n&raquo;&raquo;&raquo; ติดตามสินค้าอื่นๆได้ที่ facebook ดร มือสอง / เพจ Doctor It<br />\r\n-----------------------------------------------------------<br />\r\nหมายเหตุ.. ลูกค้าทุกท่าน สามารถโทรมาสอบถาม เพิ่มเติม&nbsp;<br />\r\nเกี่ยวกับตัวสินค้า ได้ตลอดนะครับ ไม่ต้องเกรงใจ ยินดีให้บริการครับ</p>', '6890.00', 1, 1, '2017-02-19 10:51:50', '2017-02-19 10:53:22'),
-(47, 2, 'สินค้าขายดี Samsung Galaxy J7 2016 เครื่องใหม่มือ1 ประกันศูนย์', NULL, '', '6890.00', 1, 1, '2017-02-19 10:52:12', '2017-02-19 10:52:12'),
-(48, 2, 'fuji x pro 1 lens 35 f1.4', NULL, '', '15000.00', 1, 1, '2017-02-19 14:54:10', '2017-02-19 14:54:10'),
-(49, 2, 'HP Workstation Z400 (Xeon-W3680 3.33 GHz) ครบชุด', NULL, '<p>Workstation Z400<br />\r\nIntel Xeon W3680 3.33 GHz/LGA 1366<br />\r\nRAM DDR3 ECC 8 GB (4x2GB)<br />\r\nHDD SATA 500 GB<br />\r\nDVD-ROM<br />\r\nVGA Quadro FX580 1 GB/128 Bit<br />\r\nLCD 22&quot; HP รุ่น LA2205wg<br />\r\nMouse, Keyboard USB<br />\r\nLicense Win 7 Pro<br />\r\nการรับประกัน สินค้ามือสอง รับประกัน 3 เดือน<br />\r\nราคา ครบชุด 14,900 บาท เฉพาะเครื่อง 12,900 บาท<br />\r\nชมสินค้าเชิญที่ร้าน nicetechno computer เซียร์รังสิต ชั้น 3 (โซนด้านหลัง) ห้อง T-03<br />\r\nติดต่อสอบถาม&nbsp;กดเพื่อดูเบอร์โทร xxxxxx579&nbsp;(คุณตา) ,&nbsp;กดเพื่อดูเบอร์โทร xxxxxx798&nbsp;(คุณเก่ง), 02-9927269 (เบอร์ร้าน)<br />\r\nการจัดส่ง<br />\r\nรังสิต ลำลูกกา คลอง 1-4 สายไหม ส่งให้ฟรี<br />\r\nในเขตกรุงเทพ ปริมณฑณ สั่งของก่อน 11.00 น. ส่งของภายในวันนั้นๆครับ คิดค่าส่งตามระยะทาง หรือตามตกลงครับ<br />\r\nต่างจังหวัดส่งทาง logispost และขนส่งเอกชน เช่น Kerry, SDS, NTC, IT Transport, เชาวลิน ทรานสปอร์ต ครับ<br />\r\nชมสินค้าเพิ่มเติมได้ที่<br />\r\nWebsite: www.nicetechnocomputer.com<br />\r\nFacebook: www.facebook.com/NicetechnoComputer<br />\r\nYoutube: www.youtube.com/watch?v=oSo8c8LiMtw</p>', '39999.00', 1, 1, '2017-02-19 14:55:11', '2017-02-19 14:55:11'),
-(50, 2, 'Fish Oil 1000mg', NULL, '', '520.00', 1, 1, '2017-02-19 14:58:13', '2017-02-19 14:58:13'),
-(51, 2, 'Batman', NULL, '', '1999.00', 1, 1, '2017-02-19 14:59:28', '2017-02-19 14:59:28'),
-(52, 2, 'Batman', NULL, '', '1999.00', 1, 1, '2017-02-19 15:00:02', '2017-02-19 15:00:02'),
-(53, 2, 'Batman', NULL, '', '1999.00', 1, 1, '2017-02-19 15:00:13', '2017-02-19 15:00:13'),
-(54, 2, 'Batman', NULL, '', '1999.00', 1, 1, '2017-02-19 15:00:32', '2017-02-19 15:00:32'),
-(55, 2, 'Batman', NULL, '', '1999.00', 1, 1, '2017-02-19 15:00:48', '2017-02-19 15:00:48'),
-(56, 2, 'FFXV', NULL, '<p><em>Final Fantasy XV</em>&nbsp;(originally titled&nbsp;<em>Final Fantasy Versus XIII</em>), an&nbsp;action role-playing video game&nbsp;released on November 2016, is the fifteenth main installment in the&nbsp;<em>Final Fantasy</em>&nbsp;series, and is thematically connected to&nbsp;<em>Fabula Nova Crystallis Final Fantasy</em>, a subseries of games linked by a common mythos which includes&nbsp;<em>Final Fantasy XIII</em>&nbsp;and&nbsp;<em>Final Fantasy Type-0</em>. The world and main characters were created by&nbsp;Tetsuya Nomura, the game&#39;s original director. Nomura also designed the main characters: other character designers involved with the game included Roberto Ferrari and Yusaku Nakaaki.</p>\r\n\r\n<p>The story revolves around a conflict between Lucis, the last free kingdom in the world, and the expansionist empire of Niflheim. The main protagonist is Noctis Lucis Caelum, sole heir to the throne of Lucis. On his journey, he is accompanied by three companions: Gladiolus Amicitia, a brother-figure from a noble family sworn to Noctis&#39;s protection; Ignis Scientia, Noctis&#39;s strategist; and Prompto Argentum, a friend of Noctis from a lower-class family. A key character is Lunafreya Nox Fleuret, Noctis&#39;s fianc&eacute;e through an arranged marriage. Other characters include Noctis&#39;s father Regis, the king of Lucis; Cor Leonis, a famous warrior of Lucis; Gentiana, Lunafreya&#39;s companion and attendant; Cindy, who with her grandfather Cid acts as mechanic for Noctis&#39; car; and Iris, Gladiolus&#39;s sister. Characters from Niflheim serve as the game&#39;s main antagonists, including emperor Iedolas Aldercapt, his chancellor Ardyn Izunia, supreme commander and Lunafreya&#39;s brother Ravus Nox Fleuret, head researcher Verstael Besithia, and mercenary dragoon Aranea Highwind.</p>\r\n\r\n<p>During the game&#39;s&nbsp;prolonged development, during which it changed its name and prospective platforms, multiple concepts went through revisions and some elements were cut entirely, including characters and story scenes. Conversely, some characters and concepts were retained throughout development, such as the dragoon Aranea and the game&#39;s thematic relation to&nbsp;<em>Fabula Nova Crystallis</em>. Additional media and merchandise based upon the world and characters of&nbsp;<em>XV</em>&nbsp;have been produced, with its expanded media being dubbed the &quot;<em>Final Fantasy XV</em>&nbsp;Universe&quot;: these include the anime&nbsp;<em>Brotherhood: Final Fantasy XV</em>&nbsp;and the CGI film&nbsp;<em>Kingsglaive: Final Fantasy XV</em>.</p>', '1590.00', 1, 1, '2017-02-19 19:39:00', '2017-02-19 19:39:00'),
-(57, 2, 'Final Fantasy VII Remake', NULL, '', '2350.00', 1, 1, '2017-02-19 20:04:13', '2017-02-19 20:04:13'),
-(58, 2, 'Fibit Flex', NULL, '<h2>Set a goal&nbsp;and go.</h2>\r\n\r\n<p>Stay focused on your goals and get motivated to be more active with Flex&mdash;a slim, stylish device that tracks all-day activity like steps taken, distance traveled, calories burned and active minutes.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h2>See your day in a whole new light.</h2>\r\n\r\n<p>Flex lets you see how every day is stacking up with LEDs that light up like a scoreboard as you get 20% closer to completing your step, calorie or distance goal.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h2>Step. Sleep. Wake. Repeat.</h2>\r\n\r\n<p>Fitbit Flex automatically tracks how long and how well you sleep&mdash;no tapping necessary&mdash;so you can monitor your sleep trends without interrupting your nighttime routine. It also includes a silent, vibrating alarm to make your wake-up call more peaceful.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h2>Wear Flex your way,&nbsp;every day.</h2>\r\n\r\n<p>Style your Flex tracker with bright accessory bands from Fitbit. To change bands, simply pop the slim Flex tracker out of your wristband and slip it into the accessory that fits your personality</p>', '1500.00', 0, 1, '2017-02-19 20:18:00', '2017-02-19 21:40:03'),
-(59, 2, 'PS4 SLIM : Ultimate Holiday Pack [500GB] + DUALSHOCK 4 + PS4 Bag', NULL, '<p><strong>Important Made in USA Origin Disclaimer:</strong>&nbsp;For certain items sold by Walmart on Walmart.com, the displayed country of origin information may not be accurate or consistent with manufacturer information. For updated, accurate country of origin data, it is recommended that you rely on product packaging or manufacturer information.</p>\r\n\r\n<p>We&#39;re bringing you the Supreme Party Edition - an all-new value bundle with Guitar Hero Live software, 2 guitar controllers, and GHTV Bonus Content! Grab a friend and take the stage together in the groundbreaking GH Live mode, rock out to hundreds of songs now featured in GHTV, and enjoy extra content in the GHTV store. It&#39;s About to Get Real. Guitar Hero Live is here. FreeStyleGames have reinvented the legendary Guitar Hero franchise, with two innovative new gameplay modes and an all-new guitar controller. GH Live mode puts you onstage, looking out: you get a heart-stopping first-person perspective as a real crowd reacts to the notes you play. Or switch over to GHTV - a playable music video network, where you can play along in real time, discover new music, and challenge friends around the world.</p>\r\n\r\n<ul>\r\n	<li>GH LIVE - YOU are the rock star. Playing music in front of a real crowd is like no other experience. With the new GH Live first-person view, YOU&#39;LL take center stage like never before.</li>\r\n	<li>Rock real crowds with real reactions - Feel the rush of performing in a REAL band, in front of REAL crowds who react in REAL time to your performance. You&#39;ll either win the crowd or lose them. Plus, your band mates will also let you know if you&#39;re rocking out or need to pick it up. Fight the stage fright and bring down the house.</li>\r\n	<li>Awesome music, epic venues - In GH Live, you&#39;ll take the stage in a variety of venues. Experience it all from the intimacy of a small club or the main stage of a massive outdoor festival.</li>\r\n	<li>GHTV - All playable. All the time. GHTV is a continuous broadcast of music videos where you and your guitar controller are the star. Hundreds of videos are available, spanning all different genres of music.</li>\r\n	<li>Play what you want - Turning on GHTV is similar to turning on your regular TV. Pick a channel and dive right in. Don&#39;t like what&#39;s on? Just switch over to another channel and play a new song. You&#39;ll earn in-game currency in GHTV that you can use to play songs on demand or to acquire a ton of different items in the game like custom note highways, player cards and more.</li>\r\n	<li>Rock with your friends - GHTV makes it more fun to play with your friends than ever. While one person is playing, everyone else can watch the videos. Plus, GHTV delivers exciting competition, no matter your skill level. Compete in your living room or online with people from all over the world, playing at similar progression levels and difficulty as you. Check out the leaderboards to see how you stack up against fellow rock stars around the world.</li>\r\n	<li>Level up and earn rewards - Level up to unlock more content and achieve Hero status. Along the way you&#39;ll earn the use of new Hero Powers and you can level up your guitar controller. Hero Powers, similar to Star Power back in the day, can be used to gain a competitive edge and achieve new high scores.</li>\r\n	<li>Premium Content - Premium Shows include anything from new music videos in GHTV to live concert footage that you can play along to. Get access to this content by leveling up and completing challenges, or use real currency to play instantly.</li>\r\n	<li>Customize your experience - In GHTV you will have access to unique personalization items. Customize your note highway and player card to show off your style.</li>\r\n	<li>The Guitar Controller - Easier to play, harder to master. The guitar controller was redesigned for the best gameplay across all skill levels. The new 2x3 button layout makes it easier to play with only three buttons, or, on veteran, it starts mirrors what it&#39;s like to play chord shapes with all six buttons, making the game easier for beginners and harder for experts.</li>\r\n	<li>Direct access to GHTV - The GHTV button lets you jump straight into GHTV from anywhere in the game.</li>\r\n	<li>Take on Vocals! - Offering even more ways to play together, Guitar Hero Live adds another layer of social gameplay to your living room with vocals, letting singers take the stage. Vocalists will be able to accompany the Guitarist with their very own lyrics highway at the top of the screen. All you need is a USB mic and you&#39;re ready to rock out.</li>\r\n	<li>ESRB Rating: TEEN with Lyrics</li>\r\n</ul>', '15750.00', 0, 1, '2017-02-19 21:02:48', '2017-02-21 23:27:15'),
-(60, 2, 'DUALSHOCK 4 Camo Color มี 2 สีให้เลือก', NULL, '<p>The&nbsp;DualShock&reg;4 Wireless Controller&nbsp;for PlayStation&reg;4 defines the next generation of play, combining revolutionary new features with intuitive, precision controls. Improved analog sticks and trigger buttons allow for unparalleled accuracy with every move while innovative new technologies such as the multi-touch, clickable touch pad, integrated light bar, and internal speaker offer exciting new ways to experience and interact with your games. And with the addition of the Share button, celebrate and upload your greatest gaming moments on PlayStation&reg;4 with the touch of a button.<br />\r\n<br />\r\nPrecision Control:<br />\r\nThe feel, shape, and sensitivity of the DualShock&reg;4&rsquo;s analog sticks and trigger buttons have been enhanced to offer players absolute control for all games on PlayStation&reg;4.<br />\r\n<br />\r\nSharing at your Fingertips:<br />\r\nThe addition of the Share button makes sharing your greatest gaming moments as easy as a push of a button. Upload gameplay videos and screenshots directly from your system or live-stream your gameplay, all without disturbing the game in progress.<br />\r\n<br />\r\nNew ways to Play:<br />\r\nRevolutionary features like the touch pad, integrated light bar, and built-in speaker offer exciting new ways to experience and interact with your games and its 3.5mm audio jack offers a practical personal audio&nbsp;</p>', '2000.00', 0, 3, '2017-02-19 21:06:58', '2017-02-22 17:22:27'),
-(61, 2, 'YAMAHA SE700E (Made inJapan)ปี1985', NULL, '<p>ขายกีต้าร์YAMAHA SE700E<br />\r\nMade in Japan ปี1985&#39; สภาพสวยสดเดิมๆนำเข้าจากญี่ปุ่นปีเก่า เสียงดีมาก น่าสะสมหายากแล้ว (ขาย10,800฿) รวมส่งด่วนEms เซ็ท อัพ ปรับแอ็คชั่นเปลี่ยนสายใหม่พร้อมใช้งาน ราคาขายในญี่ปุ่น80,000เยน หรือราว33,000฿ไทย สนใจต่อรองกันได้ครับผม<br />\r\nสเป็คคร่าวๆ<br />\r\nRelease date October 1985<br />\r\nDiscontinued years 1985<br />\r\nPrice at launch 80,000 yen<br />\r\nMain Specifications<br />\r\nBody / neck structure<br />\r\nBolt-o Scale 648mm<br />\r\nFingerboard Ebony<br />\r\nBody Alder<br />\r\nNeck Maple<br />\r\nPeg Die-cast with a torque adjustment, black chrome<br />\r\nBridge Rockin&#39;Magic<br />\r\nPickup Single bobbin (Supinekkusu) &times; 2, open backing Han (Supinekkusu) &times; 1<br />\r\nPickup switch 5P selector SW<br />\r\nControl 1 volume, 1 tone<br />\r\n(by sound system)<br />\r\nString Light gauge<br />\r\nWeight 3.9kg<br />\r\nColor Red<br />\r\nเพื่อป้องกันการก็อบรูปสินค้าของผม ไปหลอกขาย</p>', '18000.00', 1, 2, '2017-02-22 14:10:12', '2017-02-22 17:21:44'),
-(62, 2, 'ALESIS D4 โมดูลกลองไฟฟ้า ต่อทริกกลอง แป้นไฟฟ้า เวทีแสดงสด แห่นาค แตรวง ซาวด์กลองแน่นปึ๊กที่สุดแล้ว ใหม่ๆทุกตัวจากญี่ปุ่น ที่ร้านโทไคมิวสิค', NULL, '<p>ดูของทางเวปก่อนที่ &gt;&gt; WWW.TOKAIMUSIC.COM&nbsp;<br />\r\nร้านโทไค มิวสิค จำหน่ายเครื่องดนตรีแบรนด์คุณภาพ!! ทั้งใหม่และมือสอง นำเข้า จากญี่ปุ่น!!!จำนวนมาก!!ทุกเดือน!! อาทิ..<br />\r\nซาวด์คาราโอเกะ กลองไฟฟ้า ริทึ่มบอก ซีเควนเซอร์ คีย์บอร์ดไฟฟ้า กีต้าร์ไฟฟ้า มัลติเอฟเฟค ตู้แอมป์กีต้าร์<br />\r\nมิกเซอร์ เครื่อง MD อุปกรณ์PA อีควอไลเซอร์ คอมเพรสเซ่อร์ ครอสโอเว่อร์ ลำโพงสตูดิโอ ดิจิตอลมิกเซอร์ ฯลฯ</p>', '11000.00', 1, 1, '2017-02-22 14:17:43', '2017-02-22 14:17:43'),
-(63, 2, 'xxxxxxxxx', NULL, '', '12000.00', 1, 1, '2017-02-23 10:25:17', '2017-02-23 10:25:17'),
-(64, 2, 'xxxxxxxxx', NULL, '', '12000.00', 1, 1, '2017-02-23 10:41:25', '2017-02-23 10:41:25'),
-(65, 2, 'xxxxxxxxx', NULL, '', '12000.00', 1, 1, '2017-02-23 10:41:41', '2017-02-23 10:41:41'),
-(66, 2, 'xxx', NULL, '', '1111.00', 1, 1, '2017-02-23 11:53:42', '2017-02-23 11:53:42'),
-(67, 2, 'xxx', NULL, '', '1111.00', 1, 1, '2017-02-23 11:55:05', '2017-02-23 11:55:05'),
-(68, 2, 'xxx', NULL, '', '1111.00', 1, 1, '2017-02-23 11:57:27', '2017-02-23 11:57:27'),
-(69, 2, 'xxx', NULL, '', '1111.00', 1, 1, '2017-02-23 11:57:39', '2017-02-23 11:57:39'),
-(70, 2, 'xxx', NULL, '', '1111.00', 1, 1, '2017-02-23 11:57:54', '2017-02-23 11:57:54'),
-(71, 2, 'xxx', NULL, '', '1111.00', 1, 1, '2017-02-23 11:57:58', '2017-02-23 11:57:58'),
-(72, 2, 'xxx', NULL, '', '1111.00', 1, 1, '2017-02-23 12:02:38', '2017-02-23 12:02:38'),
-(74, 2, 'yyyy', NULL, '', '12000.00', 1, 1, '2017-03-17 19:56:40', '2017-03-17 19:56:40'),
-(75, 2, 'oooooo', NULL, '', '5000.00', 1, 1, '2017-03-17 19:58:34', '2017-03-17 19:58:34'),
-(76, 2, 'oooooo', NULL, '', '5000.00', 1, 1, '2017-03-17 19:58:41', '2017-03-17 19:58:41'),
-(77, 2, 'oooooo', NULL, '', '5000.00', 1, 1, '2017-03-17 19:58:42', '2017-03-17 19:58:42'),
-(78, 2, 'oooooo', NULL, '', '5000.00', 1, 1, '2017-03-17 19:58:43', '2017-03-17 19:58:43'),
-(79, 2, 'oooooo', NULL, '', '5000.00', 1, 1, '2017-03-17 19:58:45', '2017-03-17 19:58:45'),
-(89, 2, 'xxxx', NULL, '', '12222.00', 1, 1, '2017-03-18 10:17:40', '2017-03-18 10:17:40'),
-(91, 2, 'gggggggggg', NULL, '', '5000.00', 1, 1, '2017-03-18 10:29:38', '2017-03-18 10:29:38'),
-(95, 2, 'dddddd', NULL, '', '2000.00', 1, 1, '2017-03-18 10:30:04', '2017-03-18 10:30:04'),
-(98, 2, 'dddddd', NULL, '', '2000.00', 1, 1, '2017-03-18 10:30:10', '2017-03-18 10:30:10'),
-(104, 2, 'IP7 32GB', NULL, '<p>Lorem Ipsum คือ เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 เมื่อเครื่องพิมพ์โนเนมเครื่องหนึ่งนำรางตัวพิมพ์มาสลับสับตำแหน่งตัวอักษรเพื่อทำหนังสือตัวอย่าง Lorem Ipsum อยู่ยงคงกระพันมาไม่ใช่แค่เพียงห้าศตวรรษ แต่อยู่มาจนถึงยุคที่พลิกโฉมเข้าสู่งานเรียงพิมพ์ด้วยวิธีทางอิเล็กทรอนิกส์ และยังคงสภาพเดิมไว้อย่างไม่มีการเปลี่ยนแปลง มันได้รับความนิยมมากขึ้นในยุค ค.ศ. 1960 เมื่อแผ่น Letraset วางจำหน่ายโดยมีข้อความบนนั้นเป็น Lorem Ipsum และล่าสุดกว่านั้น คือเมื่อซอฟท์แวร์การทำสื่อสิ่งพิมพ์ (Desktop Publishing) อย่าง Aldus PageMaker ได้รวมเอา Lorem Ipsum เวอร์ชั่นต่างๆ เข้าไว้ในซอฟท์แวร์ด้วย</p>', '35000.00', 0, 1, '2017-03-19 19:34:09', '2017-03-19 19:34:09'),
-(105, 2, 'NB 1111', NULL, '', '4500.00', 0, 1, '2017-03-22 12:01:25', '2017-03-22 12:01:25'),
-(106, 2, 'iphone 7 red', NULL, '', '25990.00', 1, 1, '2017-03-26 13:13:52', '2017-03-26 13:13:52'),
-(107, 2, 'Iphone 6s Plus 32 GB', NULL, '', '45000.00', 1, 1, '2017-03-26 13:14:32', '2017-03-26 13:14:32'),
-(108, 1, 'Iphone 7 128GB Limited Edition', NULL, '', '51200.00', 1, 1, '2017-03-26 13:16:56', '2017-03-26 13:16:56'),
-(109, 2, 'abcdddd', NULL, '', '1111.00', 0, 1, '2017-03-28 00:15:47', '2017-03-28 00:15:47'),
-(110, 2, 'eeeeee', NULL, '', '777.00', 1, 1, '2017-03-28 00:16:54', '2017-03-28 00:16:54'),
-(111, 2, 'eeeee', NULL, '', '111.00', 1, 1, '2017-03-28 00:22:45', '2017-03-28 00:22:45'),
-(112, 2, 'BBBBB', NULL, '', '1233.00', 1, 1, '2017-03-29 10:42:31', '2017-03-29 10:42:31'),
-(113, 2, 'Sony Experia Z Ultra 3G มือสองสถาพดี ถูกๆ', NULL, '<p>ขาย Sony Experia Z Ultra 3G จอ 6.4 นิ้ว สภาพดี มือสอง ราคาเบาๆ พร้อมใช้งาน ฟิล์มกันรอยหน้า-หลัง มีรอยบ้างทั่วไป จากการใช้งาน ไม่มีรอยหนัก ไม่ตก ไม่เคยซ่อม ใช้งานปรกติ มีกล่องใบ สายชาร์ท ไม่มีหูฟัง สนใจสอบถามต่อรอง ดูรูปเพิ่มได้ครับ TEL/LINE ID:กดเพื่อดูเบอร์โทร xxxxxx656&nbsp;ราคารวมส่ง EMS ฟรีครับ</p>', '4250.00', 1, 1, '2017-04-06 11:24:34', '2017-04-06 11:24:34'),
-(114, 2, 'xxx', NULL, '', '100.00', 1, 1, '2017-04-08 22:28:14', '2017-04-08 22:28:14'),
-(115, 2, 'xxx', NULL, '', '100.00', 1, 1, '2017-04-08 22:28:29', '2017-04-08 22:28:29'),
-(116, 2, 'xxx', NULL, '', '100.00', 1, 1, '2017-04-08 22:28:44', '2017-04-08 22:28:44'),
-(117, 2, 'tttt', NULL, '', '111.00', 1, 1, '2017-04-08 22:42:09', '2017-04-08 22:42:09'),
-(118, 2, 'qqq', NULL, '', '111.00', 1, 1, '2017-04-08 22:43:00', '2017-04-08 22:43:00'),
-(119, 2, 'uuuu', NULL, '', '111.00', 1, 1, '2017-04-08 22:43:50', '2017-04-08 22:43:50'),
-(120, 2, 'ffff', NULL, '', '111.00', 1, 1, '2017-04-08 23:00:56', '2017-04-08 23:00:56'),
-(121, 2, 'xxxx', NULL, '', '111.00', 1, 1, '2017-04-08 23:01:28', '2017-04-08 23:01:28'),
-(122, 2, 'eeee', NULL, '', '1111.00', 1, 1, '2017-04-08 23:05:21', '2017-04-08 23:05:21'),
-(123, 2, 'rrrr', NULL, '', '1000.00', 1, 1, '2017-04-09 19:07:11', '2017-04-09 19:07:11'),
-(124, 2, 'xxdsds', NULL, '', '111.00', 1, 1, '2017-04-09 20:47:15', '2017-04-09 20:47:15');
+INSERT INTO `items` (`id`, `announcement_type_id`, `name`, `announcement_detail`, `description`, `price`, `used`, `opened`, `person_id`, `created_at`, `updated_at`) VALUES
+(1, 2, 'nnnn', NULL, '', '1111.00', 1, 0, 1, '2017-02-05 20:42:43', '2017-02-05 20:42:43'),
+(2, 2, 'xxx', NULL, '', '111.00', 1, 0, 1, '2017-02-06 02:17:22', '2017-02-06 02:17:22'),
+(3, 2, 'GGG', NULL, '', '100.00', 1, 0, 1, '2017-02-07 15:33:00', '2017-02-07 15:33:00'),
+(4, 2, 'xcxx', NULL, '', '111.00', 1, 0, 1, '2017-02-07 15:39:36', '2017-02-07 15:39:36'),
+(5, 2, 'xcxx', NULL, '', '111.00', 1, 0, 1, '2017-02-07 15:39:42', '2017-02-07 15:39:42'),
+(6, 2, 'xcxx', NULL, '', '111.00', 1, 0, 1, '2017-02-07 15:39:56', '2017-02-07 15:39:56'),
+(7, 2, 'xcxx', NULL, '', '111.00', 1, 0, 1, '2017-02-07 15:40:49', '2017-02-07 15:40:49'),
+(8, 2, 'xcxx', NULL, '', '111.00', 1, 0, 1, '2017-02-07 15:40:57', '2017-02-07 15:40:57'),
+(9, 2, 'xcxx', NULL, '', '111.00', 1, 0, 1, '2017-02-07 15:41:40', '2017-02-07 15:41:40'),
+(10, 2, 'xcxx', NULL, '', '111.00', 1, 0, 1, '2017-02-07 15:41:51', '2017-02-07 15:41:51'),
+(11, 2, 'xcxx', NULL, '', '111.00', 1, 0, 1, '2017-02-07 15:41:55', '2017-02-07 15:41:55'),
+(12, 2, 'bbb', NULL, '', '1200.00', 1, 0, 1, '2017-02-13 05:38:59', '2017-02-13 05:38:59'),
+(13, 2, 'bbb', NULL, '', '1200.00', 1, 0, 1, '2017-02-13 05:39:45', '2017-02-13 05:39:45'),
+(14, 2, 'bbb', NULL, '', '1200.00', 1, 0, 1, '2017-02-13 05:40:06', '2017-02-13 05:40:06'),
+(15, 2, 'bbb', NULL, '', '1200.00', 1, 0, 1, '2017-02-13 05:42:14', '2017-02-13 05:42:14'),
+(16, 2, 'bbb', NULL, '', '1200.00', 1, 0, 1, '2017-02-13 05:42:20', '2017-02-13 05:42:20'),
+(17, 2, 'bbb', NULL, '', '1200.00', 1, 0, 1, '2017-02-13 05:42:31', '2017-02-13 05:42:31'),
+(18, 2, 'bbb', NULL, '', '1200.00', 1, 0, 1, '2017-02-13 05:42:43', '2017-02-13 05:42:43'),
+(19, 2, 'bbb', NULL, '', '1200.00', 1, 0, 1, '2017-02-13 05:43:45', '2017-02-13 05:43:45'),
+(20, 2, 'bbb', NULL, '', '1200.00', 1, 0, 1, '2017-02-13 05:45:25', '2017-02-13 05:45:25'),
+(21, 2, 'bbb', NULL, '', '1200.00', 1, 0, 1, '2017-02-13 05:45:32', '2017-02-13 05:45:32'),
+(22, 2, 'bbb', NULL, '', '1200.00', 1, 0, 1, '2017-02-13 05:45:40', '2017-02-13 05:45:40'),
+(23, 2, 'bbb', NULL, '', '1200.00', 1, 0, 1, '2017-02-13 05:49:49', '2017-02-13 05:49:49'),
+(24, 2, 'gggg', NULL, '', '11.00', 1, 0, 1, '2017-02-13 05:52:25', '2017-02-13 05:52:25'),
+(25, 2, 'CPU I7 3.0 Ghz', NULL, '<h2>Technical Specifications</h2>\r\n\r\n<h3>Essentials</h3>\r\n\r\n<p>Processor Number</p>\r\n\r\n<p>i7-7920HQ</p>\r\n\r\n<p>Status</p>\r\n\r\n<p>Launched</p>\r\n\r\n<p>Launch Date</p>\r\n\r\n<p>Q1&#39;17</p>\r\n\r\n<p>Lithography</p>\r\n\r\n<p>14 nm</p>\r\n\r\n<h3>Performance</h3>\r\n\r\n<p># of Cores</p>\r\n\r\n<p>4</p>\r\n\r\n<p># of Threads</p>\r\n\r\n<p>8</p>\r\n\r\n<p>Processor Base Frequency</p>\r\n\r\n<p>3.10 GHz</p>\r\n\r\n<p>Max Turbo Frequency</p>\r\n\r\n<p>4.10 GHz</p>\r\n\r\n<p>Cache</p>\r\n\r\n<p>8 MB</p>\r\n\r\n<p>Bus Speed</p>\r\n\r\n<p>8 GT/s DMI3</p>\r\n\r\n<p>TDP</p>\r\n\r\n<p>45 W</p>\r\n\r\n<p>Configurable TDP-down</p>\r\n\r\n<p>35 W</p>\r\n\r\n<h3>Supplemental Information</h3>\r\n\r\n<p>Embedded Options Available</p>\r\n\r\n<p>No</p>\r\n\r\n<p>Conflict Free</p>\r\n\r\n<p>Yes</p>\r\n\r\n<h3>Memory Specifications</h3>\r\n\r\n<p>Max Memory Size (dependent on memory type)</p>\r\n\r\n<p>64 GB</p>\r\n\r\n<p>Memory Types</p>\r\n\r\n<p>DDR4-2400, LPDDR3-2133, DDR3L-1600</p>\r\n\r\n<p>Max # of Memory Channels</p>\r\n\r\n<p>2</p>\r\n\r\n<p>Max Memory Bandwidth</p>\r\n\r\n<p>34.1 GB/s</p>\r\n\r\n<p>ECC Memory Supported&nbsp;&Dagger;</p>\r\n\r\n<p>No</p>\r\n\r\n<h3>Graphics Specifications</h3>\r\n\r\n<p>Processor Graphics&nbsp;&Dagger;</p>\r\n\r\n<p>Intel&reg; HD Graphics 630</p>\r\n\r\n<p>Graphics Base Frequency</p>\r\n\r\n<p>350.00 MHz</p>\r\n\r\n<p>Graphics Max Dynamic Frequency</p>\r\n\r\n<p>1.10 GHz</p>\r\n\r\n<p>Graphics Video Max Memory</p>\r\n\r\n<p>64 GB</p>\r\n\r\n<p>Graphics Output</p>\r\n\r\n<p>eDP/DP/HDMI/DVI</p>\r\n\r\n<p>4K Support</p>\r\n\r\n<p>Yes, at 60Hz</p>\r\n\r\n<p>Max Resolution (HDMI 1.4)&Dagger;</p>\r\n\r\n<p>4096x2304@30Hz</p>\r\n\r\n<p>Max Resolution (DP)&Dagger;</p>\r\n\r\n<p>4096x2304@60Hz</p>\r\n\r\n<p>DirectX* Support</p>\r\n\r\n<p>12</p>\r\n\r\n<p>OpenGL* Support</p>\r\n\r\n<p>4.4</p>\r\n\r\n<p>Intel&reg; Quick Sync Video</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Clear Video HD Technology</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p># of Displays Supported&nbsp;&Dagger;</p>\r\n\r\n<p>3</p>\r\n\r\n<p>Device ID</p>\r\n\r\n<p>0x591B</p>\r\n\r\n<h3>Expansion Options</h3>\r\n\r\n<p>PCI Express Revision</p>\r\n\r\n<p>3.0</p>\r\n\r\n<p>PCI Express Configurations&nbsp;&Dagger;</p>\r\n\r\n<p>Up to 1x16, 2x8, 1x8+2x4</p>\r\n\r\n<p>Max # of PCI Express Lanes</p>\r\n\r\n<p>16</p>\r\n\r\n<h3>Package Specifications</h3>\r\n\r\n<p>Max CPU Configuration</p>\r\n\r\n<p>1</p>\r\n\r\n<p>TJUNCTION</p>\r\n\r\n<p>100&deg;C</p>\r\n\r\n<p>Package Size</p>\r\n\r\n<p>42mm x 28mm</p>\r\n\r\n<h3>Advanced Technologies</h3>\r\n\r\n<p>Intel&reg; Speed Shift Technology</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Turbo Boost Technology&nbsp;&Dagger;</p>\r\n\r\n<p>2.0</p>\r\n\r\n<p>Intel&reg; vPro Technology&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Hyper-Threading Technology&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Virtualization Technology (VT-x)&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Virtualization Technology for Directed I/O (VT-d)&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; VT-x with Extended Page Tables (EPT)&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; TSX-NI</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; 64&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Instruction Set</p>\r\n\r\n<p>64-bit</p>\r\n\r\n<p>Instruction Set Extensions</p>\r\n\r\n<p>SSE4.1/4.2, AVX 2.0</p>\r\n\r\n<p>Idle States</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Enhanced Intel SpeedStep&reg; Technology</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Thermal Monitoring Technologies</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Flex Memory Access</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Identity Protection Technology&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Stable Image Platform Program (SIPP)</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Smart Response Technology</p>\r\n\r\n<p>Yes</p>\r\n\r\n<h3>Intel&reg; Data Protection Technology</h3>\r\n\r\n<p>Intel&reg; AES New Instructions</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Secure Key</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Software Guard Extensions (Intel&reg; SGX)</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Intel&reg; Memory Protection Extensions (Intel&reg; MPX)</p>\r\n\r\n<p>Yes</p>\r\n\r\n<h3>Intel&reg; Platform Protection Technology</h3>\r\n\r\n<p>Trusted Execution Technology&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>\r\n\r\n<p>Execute Disable Bit&nbsp;&Dagger;</p>\r\n\r\n<p>Yes</p>', '10000.00', 1, 0, 1, '2017-02-13 05:55:28', '2017-02-19 00:17:54'),
+(26, 2, 'xxx', NULL, '', '111.00', 1, 0, 1, '2017-02-13 07:30:09', '2017-02-13 07:30:09'),
+(27, 2, 'xxxxx', NULL, '', '11222.00', 1, 0, 1, '2017-02-13 07:38:23', '2017-02-13 07:38:23'),
+(28, 2, 'xxxx', NULL, '', '12000.00', 1, 0, 1, '2017-02-18 22:00:46', '2017-02-18 22:00:46'),
+(29, 2, 'xxxx', NULL, '', '1210.00', 1, 0, 1, '2017-02-18 22:06:49', '2017-02-18 22:06:49'),
+(30, 2, 'xxxx', NULL, '', '1111.00', 1, 0, 1, '2017-02-18 22:08:05', '2017-02-18 22:08:05'),
+(31, 2, 'xxxx', NULL, '', '12000.00', 1, 0, 1, '2017-02-19 08:39:58', '2017-02-19 08:39:58'),
+(32, 2, 'xxxx', NULL, '', '12000.00', 1, 0, 1, '2017-02-19 08:40:31', '2017-02-19 08:40:31'),
+(33, 2, 'hhhhhhh aaaaaaaaa', NULL, '', '12000.00', 1, 0, 1, '2017-02-19 08:45:00', '2017-02-19 08:45:00'),
+(34, 2, 'hhhhhhh aaaaaaaaa', NULL, '', '12000.00', 1, 0, 1, '2017-02-19 08:45:17', '2017-02-19 08:45:17'),
+(35, 2, 'hhhhhhh aaaaaaaaa', NULL, '', '12000.00', 1, 0, 1, '2017-02-19 08:45:37', '2017-02-19 08:45:37'),
+(36, 2, 'hhhhhhh aaaaaaaaa', NULL, '', '12000.00', 1, 0, 1, '2017-02-19 08:46:38', '2017-02-19 08:46:38'),
+(37, 2, 'hhhhhhh aaaaaaaaa', NULL, '', '12000.00', 1, 0, 1, '2017-02-19 08:46:49', '2017-02-19 08:46:49'),
+(38, 2, 'Canon 17-85 mm IS มีกันสั่น USM มอเตอร์โฟกัสเร็วไว เมาส์ท้ายเลนส์ทำด้วยโลหะ ที่ 85 MM ถ่ายคน เบรอฉากหลังได้ มีฟิวเตอร์ฮูดกันกระแทกกันแสงให้', NULL, '<p>เลนส์ซูมคุณภาพ CANON มีกันสั่น เมาส์ท้ายเลนส์ทำด้วยโลหะแข็งแรง<br />\r\nขายเลนส์ CANON EF-S 17-85 MM F/4-5.6 IS USM&nbsp;<br />\r\nเลนส์ซูมคุณภาพ ให้มุมกว้าง 17 มม ซูมได้ยาวถึง 85 มม ในเลนส์ตัวเดียว&nbsp;<br />\r\nดีกว่าเลนส์ KIT 18-55 MM ที่มุมกว้างน้อยกว่า และยังซูมได้แค่ 55 มม&nbsp;<br />\r\nเลนส์ CANON 17-85 MM ตัวนี้ มีมอเตอร์ USM โฟกัสเร็วไว ในขณะที่ 18-55&nbsp;<br />\r\nไม่มี USM มอเตอร์ ตัวเลนส์มี IS กันภาพสั่นไหว และที่สำคัญเมาส์ท้ายเลนส์&nbsp;<br />\r\nCANON 17-85 MM ตัวนี้ ทำด้วยโลหะ แข็งแรงทนทาน ดีกว่า เลนส์ KIT&nbsp;<br />\r\n18-55 mm ที่ติดมากับกล้อง ตัวเลนส์สภาพสวย มี HOOD บังแสงมาให้ด้วย&nbsp;<br />\r\nซื้อเลนส์ใหม่ ก็ต้องซื้อ ฮูดเพิ่มนะครับไม่มีแถมให้ เลนส์ตัวนี้ ที่ช่วง 85 มม&nbsp;<br />\r\nนำไปถ่ายภาพ กีฬา หรือภาพ คน เบรอฉากหลังได้&nbsp;<br />\r\n*** พิเศษ คุณสามารถนำ เลนส์ KIT 18-55 หรือเลนส์ช่วงอื่นๆ มาแลกซื้อ&nbsp;<br />\r\nCANON 17-85 MM IS USM เมาส์โลหะตัวนี้ได้ ***&nbsp;<br />\r\nโทรสอบถามเพิ่มเติม นัดหมายนำกล้องมาทดสอบเลนส์ก่อนซื้อได้ครับ&nbsp;<br />\r\nพิเศษ มีฟิวเตอร์ UV ปิดหน้าเลนส์ให้ด้วยครับ ในราคานี้ ประหยัดไปก็ร่วม 1 พันแล้ว</p>', '12000.00', 1, 0, 1, '2017-02-19 08:47:18', '2017-02-19 08:52:06'),
+(39, 2, 'xxxx', NULL, '', '12000.00', 1, 0, 1, '2017-02-19 10:34:41', '2017-02-19 10:34:41'),
+(40, 2, 'xxxx', NULL, '', '12000.00', 1, 0, 1, '2017-02-19 10:36:13', '2017-02-19 10:36:13'),
+(41, 2, 'xxxx', NULL, '', '12000.00', 1, 0, 1, '2017-02-19 10:37:22', '2017-02-19 10:37:22'),
+(42, 2, 'xxxx', NULL, '', '12000.00', 1, 0, 1, '2017-02-19 10:37:45', '2017-02-19 10:37:45'),
+(43, 2, 'xxxx', NULL, '', '12000.00', 1, 0, 1, '2017-02-19 10:38:32', '2017-02-19 10:38:32'),
+(44, 2, 'xxxx', NULL, '', '12000.00', 1, 0, 1, '2017-02-19 10:38:39', '2017-02-19 10:38:39'),
+(45, 2, 'xxxx', NULL, '', '12000.00', 1, 0, 1, '2017-02-19 10:41:13', '2017-02-19 10:41:13'),
+(46, 2, 'สินค้าขายดี Samsung Galaxy J7 2016 เครื่องใหม่มือ1 ประกันศูนย์', NULL, '<p>&raquo; Samsung Galaxy J7 2016&nbsp;<br />\r\n&raquo; อุปกรณ์ / แท้ครบยกกล่อง&nbsp;<br />\r\n&raquo; ประกันศูนย์ซัมซุง สามารถใช้บริการ ส่งเคลมได้ที่ศูนย์ Samsung&nbsp;<br />\r\n&raquo; สาขาเซียร์รังสิต /พันธุ์ทิพย์ประตูน้ำ / ฟอร์จูน / มาบุญครอง&nbsp;<br />\r\n&raquo; ฟรีค่าซ่อมศูนย์ 1 ปี / ฟรีค่าอะไหล่ 3 เดือน&nbsp;<br />\r\n-----------------------------------------------------------<br />\r\n&raquo; อุปกรณ์ที่จะได้รับ&nbsp;<br />\r\n&raquo; เครื่อง + ที่ชาร์ทแท้ + หูฟัง + คู่มือ + ใบรับประกันสินค้า<br />\r\n&raquo; สภาพเครื่อง &raquo; สินค้าใหม่ มือ1 ประกันศูนย์ ไม่ผ่านการใช้งาน<br />\r\n------------------------------------------------------------<br />\r\n&raquo; มีบริการจัดส่งถึงมือ ในเขตกรุงเทพ ปริมณฑล<br />\r\n&raquo; ลูกค้า สามารถ มารับสินค้าเองได้ที่บ้าน สุขาภิบาล5 ซอย70<br />\r\n&raquo; ลูกค้า สามารถ ไปรับสินค้าได้ที่ร้าน ( 3Buddy มาบุณครอง ชั้น4 )<br />\r\n&raquo; ลูกค้า ต่างจังหวัด มีบริการส่งด่วน EMS (จ่ายเงินปลายทาง)<br />\r\n&raquo; ยินดี รับบัตรเครดิต ทุกธนาคาร&nbsp;<br />\r\n-----------------------------------------------------------<br />\r\n&raquo;&raquo;&raquo; โทรติดต่อ&nbsp;กดเพื่อดูเบอร์โทร xxxxxx560&nbsp;( ดอน )<br />\r\n&raquo;&raquo;&raquo; Home Office &raquo; 020371671<br />\r\n&raquo;&raquo;&raquo;&nbsp;กดเพื่อดู Line: xxxxx&nbsp;&raquo; @doctorit ( ใส่ @ ด้านหน้าด้วยนะครับ )<br />\r\n&raquo;&raquo;&raquo; ติดตามสินค้าอื่นๆได้ที่ facebook ดร มือสอง / เพจ Doctor It<br />\r\n-----------------------------------------------------------<br />\r\nหมายเหตุ.. ลูกค้าทุกท่าน สามารถโทรมาสอบถาม เพิ่มเติม&nbsp;<br />\r\nเกี่ยวกับตัวสินค้า ได้ตลอดนะครับ ไม่ต้องเกรงใจ ยินดีให้บริการครับ</p>', '6890.00', 1, 0, 1, '2017-02-19 10:51:50', '2017-02-19 10:53:22'),
+(47, 2, 'สินค้าขายดี Samsung Galaxy J7 2016 เครื่องใหม่มือ1 ประกันศูนย์', NULL, '', '6890.00', 1, 0, 1, '2017-02-19 10:52:12', '2017-02-19 10:52:12'),
+(48, 2, 'fuji x pro 1 lens 35 f1.4', NULL, '', '15000.00', 1, 0, 1, '2017-02-19 14:54:10', '2017-02-19 14:54:10'),
+(49, 2, 'HP Workstation Z400 (Xeon-W3680 3.33 GHz) ครบชุด', NULL, '<p>Workstation Z400<br />\r\nIntel Xeon W3680 3.33 GHz/LGA 1366<br />\r\nRAM DDR3 ECC 8 GB (4x2GB)<br />\r\nHDD SATA 500 GB<br />\r\nDVD-ROM<br />\r\nVGA Quadro FX580 1 GB/128 Bit<br />\r\nLCD 22&quot; HP รุ่น LA2205wg<br />\r\nMouse, Keyboard USB<br />\r\nLicense Win 7 Pro<br />\r\nการรับประกัน สินค้ามือสอง รับประกัน 3 เดือน<br />\r\nราคา ครบชุด 14,900 บาท เฉพาะเครื่อง 12,900 บาท<br />\r\nชมสินค้าเชิญที่ร้าน nicetechno computer เซียร์รังสิต ชั้น 3 (โซนด้านหลัง) ห้อง T-03<br />\r\nติดต่อสอบถาม&nbsp;กดเพื่อดูเบอร์โทร xxxxxx579&nbsp;(คุณตา) ,&nbsp;กดเพื่อดูเบอร์โทร xxxxxx798&nbsp;(คุณเก่ง), 02-9927269 (เบอร์ร้าน)<br />\r\nการจัดส่ง<br />\r\nรังสิต ลำลูกกา คลอง 1-4 สายไหม ส่งให้ฟรี<br />\r\nในเขตกรุงเทพ ปริมณฑณ สั่งของก่อน 11.00 น. ส่งของภายในวันนั้นๆครับ คิดค่าส่งตามระยะทาง หรือตามตกลงครับ<br />\r\nต่างจังหวัดส่งทาง logispost และขนส่งเอกชน เช่น Kerry, SDS, NTC, IT Transport, เชาวลิน ทรานสปอร์ต ครับ<br />\r\nชมสินค้าเพิ่มเติมได้ที่<br />\r\nWebsite: www.nicetechnocomputer.com<br />\r\nFacebook: www.facebook.com/NicetechnoComputer<br />\r\nYoutube: www.youtube.com/watch?v=oSo8c8LiMtw</p>', '39999.00', 1, 0, 1, '2017-02-19 14:55:11', '2017-02-19 14:55:11'),
+(50, 2, 'Fish Oil 1000mg', NULL, '', '520.00', 1, 0, 1, '2017-02-19 14:58:13', '2017-02-19 14:58:13'),
+(51, 2, 'Batman', NULL, '', '1999.00', 1, 0, 1, '2017-02-19 14:59:28', '2017-02-19 14:59:28'),
+(52, 2, 'Batman', NULL, '', '1999.00', 1, 0, 1, '2017-02-19 15:00:02', '2017-02-19 15:00:02'),
+(53, 2, 'Batman', NULL, '', '1999.00', 1, 0, 1, '2017-02-19 15:00:13', '2017-02-19 15:00:13'),
+(54, 2, 'Batman', NULL, '', '1999.00', 1, 0, 1, '2017-02-19 15:00:32', '2017-02-19 15:00:32'),
+(55, 2, 'Batman', NULL, '', '1999.00', 1, 0, 1, '2017-02-19 15:00:48', '2017-02-19 15:00:48'),
+(56, 2, 'FFXV', NULL, '<p><em>Final Fantasy XV</em>&nbsp;(originally titled&nbsp;<em>Final Fantasy Versus XIII</em>), an&nbsp;action role-playing video game&nbsp;released on November 2016, is the fifteenth main installment in the&nbsp;<em>Final Fantasy</em>&nbsp;series, and is thematically connected to&nbsp;<em>Fabula Nova Crystallis Final Fantasy</em>, a subseries of games linked by a common mythos which includes&nbsp;<em>Final Fantasy XIII</em>&nbsp;and&nbsp;<em>Final Fantasy Type-0</em>. The world and main characters were created by&nbsp;Tetsuya Nomura, the game&#39;s original director. Nomura also designed the main characters: other character designers involved with the game included Roberto Ferrari and Yusaku Nakaaki.</p>\r\n\r\n<p>The story revolves around a conflict between Lucis, the last free kingdom in the world, and the expansionist empire of Niflheim. The main protagonist is Noctis Lucis Caelum, sole heir to the throne of Lucis. On his journey, he is accompanied by three companions: Gladiolus Amicitia, a brother-figure from a noble family sworn to Noctis&#39;s protection; Ignis Scientia, Noctis&#39;s strategist; and Prompto Argentum, a friend of Noctis from a lower-class family. A key character is Lunafreya Nox Fleuret, Noctis&#39;s fianc&eacute;e through an arranged marriage. Other characters include Noctis&#39;s father Regis, the king of Lucis; Cor Leonis, a famous warrior of Lucis; Gentiana, Lunafreya&#39;s companion and attendant; Cindy, who with her grandfather Cid acts as mechanic for Noctis&#39; car; and Iris, Gladiolus&#39;s sister. Characters from Niflheim serve as the game&#39;s main antagonists, including emperor Iedolas Aldercapt, his chancellor Ardyn Izunia, supreme commander and Lunafreya&#39;s brother Ravus Nox Fleuret, head researcher Verstael Besithia, and mercenary dragoon Aranea Highwind.</p>\r\n\r\n<p>During the game&#39;s&nbsp;prolonged development, during which it changed its name and prospective platforms, multiple concepts went through revisions and some elements were cut entirely, including characters and story scenes. Conversely, some characters and concepts were retained throughout development, such as the dragoon Aranea and the game&#39;s thematic relation to&nbsp;<em>Fabula Nova Crystallis</em>. Additional media and merchandise based upon the world and characters of&nbsp;<em>XV</em>&nbsp;have been produced, with its expanded media being dubbed the &quot;<em>Final Fantasy XV</em>&nbsp;Universe&quot;: these include the anime&nbsp;<em>Brotherhood: Final Fantasy XV</em>&nbsp;and the CGI film&nbsp;<em>Kingsglaive: Final Fantasy XV</em>.</p>', '1590.00', 1, 0, 1, '2017-02-19 19:39:00', '2017-02-19 19:39:00'),
+(57, 2, 'Final Fantasy VII Remake', NULL, '', '2350.00', 1, 0, 1, '2017-02-19 20:04:13', '2017-02-19 20:04:13'),
+(58, 2, 'Fibit Flex', NULL, '<h2>Set a goal&nbsp;and go.</h2>\r\n\r\n<p>Stay focused on your goals and get motivated to be more active with Flex&mdash;a slim, stylish device that tracks all-day activity like steps taken, distance traveled, calories burned and active minutes.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h2>See your day in a whole new light.</h2>\r\n\r\n<p>Flex lets you see how every day is stacking up with LEDs that light up like a scoreboard as you get 20% closer to completing your step, calorie or distance goal.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h2>Step. Sleep. Wake. Repeat.</h2>\r\n\r\n<p>Fitbit Flex automatically tracks how long and how well you sleep&mdash;no tapping necessary&mdash;so you can monitor your sleep trends without interrupting your nighttime routine. It also includes a silent, vibrating alarm to make your wake-up call more peaceful.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h2>Wear Flex your way,&nbsp;every day.</h2>\r\n\r\n<p>Style your Flex tracker with bright accessory bands from Fitbit. To change bands, simply pop the slim Flex tracker out of your wristband and slip it into the accessory that fits your personality</p>', '1500.00', 0, 0, 1, '2017-02-19 20:18:00', '2017-02-19 21:40:03'),
+(59, 2, 'PS4 SLIM : Ultimate Holiday Pack [500GB] + DUALSHOCK 4 + PS4 Bag', NULL, '<p><strong>Important Made in USA Origin Disclaimer:</strong>&nbsp;For certain items sold by Walmart on Walmart.com, the displayed country of origin information may not be accurate or consistent with manufacturer information. For updated, accurate country of origin data, it is recommended that you rely on product packaging or manufacturer information.</p>\r\n\r\n<p>We&#39;re bringing you the Supreme Party Edition - an all-new value bundle with Guitar Hero Live software, 2 guitar controllers, and GHTV Bonus Content! Grab a friend and take the stage together in the groundbreaking GH Live mode, rock out to hundreds of songs now featured in GHTV, and enjoy extra content in the GHTV store. It&#39;s About to Get Real. Guitar Hero Live is here. FreeStyleGames have reinvented the legendary Guitar Hero franchise, with two innovative new gameplay modes and an all-new guitar controller. GH Live mode puts you onstage, looking out: you get a heart-stopping first-person perspective as a real crowd reacts to the notes you play. Or switch over to GHTV - a playable music video network, where you can play along in real time, discover new music, and challenge friends around the world.</p>\r\n\r\n<ul>\r\n	<li>GH LIVE - YOU are the rock star. Playing music in front of a real crowd is like no other experience. With the new GH Live first-person view, YOU&#39;LL take center stage like never before.</li>\r\n	<li>Rock real crowds with real reactions - Feel the rush of performing in a REAL band, in front of REAL crowds who react in REAL time to your performance. You&#39;ll either win the crowd or lose them. Plus, your band mates will also let you know if you&#39;re rocking out or need to pick it up. Fight the stage fright and bring down the house.</li>\r\n	<li>Awesome music, epic venues - In GH Live, you&#39;ll take the stage in a variety of venues. Experience it all from the intimacy of a small club or the main stage of a massive outdoor festival.</li>\r\n	<li>GHTV - All playable. All the time. GHTV is a continuous broadcast of music videos where you and your guitar controller are the star. Hundreds of videos are available, spanning all different genres of music.</li>\r\n	<li>Play what you want - Turning on GHTV is similar to turning on your regular TV. Pick a channel and dive right in. Don&#39;t like what&#39;s on? Just switch over to another channel and play a new song. You&#39;ll earn in-game currency in GHTV that you can use to play songs on demand or to acquire a ton of different items in the game like custom note highways, player cards and more.</li>\r\n	<li>Rock with your friends - GHTV makes it more fun to play with your friends than ever. While one person is playing, everyone else can watch the videos. Plus, GHTV delivers exciting competition, no matter your skill level. Compete in your living room or online with people from all over the world, playing at similar progression levels and difficulty as you. Check out the leaderboards to see how you stack up against fellow rock stars around the world.</li>\r\n	<li>Level up and earn rewards - Level up to unlock more content and achieve Hero status. Along the way you&#39;ll earn the use of new Hero Powers and you can level up your guitar controller. Hero Powers, similar to Star Power back in the day, can be used to gain a competitive edge and achieve new high scores.</li>\r\n	<li>Premium Content - Premium Shows include anything from new music videos in GHTV to live concert footage that you can play along to. Get access to this content by leveling up and completing challenges, or use real currency to play instantly.</li>\r\n	<li>Customize your experience - In GHTV you will have access to unique personalization items. Customize your note highway and player card to show off your style.</li>\r\n	<li>The Guitar Controller - Easier to play, harder to master. The guitar controller was redesigned for the best gameplay across all skill levels. The new 2x3 button layout makes it easier to play with only three buttons, or, on veteran, it starts mirrors what it&#39;s like to play chord shapes with all six buttons, making the game easier for beginners and harder for experts.</li>\r\n	<li>Direct access to GHTV - The GHTV button lets you jump straight into GHTV from anywhere in the game.</li>\r\n	<li>Take on Vocals! - Offering even more ways to play together, Guitar Hero Live adds another layer of social gameplay to your living room with vocals, letting singers take the stage. Vocalists will be able to accompany the Guitarist with their very own lyrics highway at the top of the screen. All you need is a USB mic and you&#39;re ready to rock out.</li>\r\n	<li>ESRB Rating: TEEN with Lyrics</li>\r\n</ul>', '15750.00', 0, 0, 1, '2017-02-19 21:02:48', '2017-02-21 23:27:15'),
+(60, 2, 'DUALSHOCK 4 Camo Color มี 2 สีให้เลือก', NULL, '<p>The&nbsp;DualShock&reg;4 Wireless Controller&nbsp;for PlayStation&reg;4 defines the next generation of play, combining revolutionary new features with intuitive, precision controls. Improved analog sticks and trigger buttons allow for unparalleled accuracy with every move while innovative new technologies such as the multi-touch, clickable touch pad, integrated light bar, and internal speaker offer exciting new ways to experience and interact with your games. And with the addition of the Share button, celebrate and upload your greatest gaming moments on PlayStation&reg;4 with the touch of a button.<br />\r\n<br />\r\nPrecision Control:<br />\r\nThe feel, shape, and sensitivity of the DualShock&reg;4&rsquo;s analog sticks and trigger buttons have been enhanced to offer players absolute control for all games on PlayStation&reg;4.<br />\r\n<br />\r\nSharing at your Fingertips:<br />\r\nThe addition of the Share button makes sharing your greatest gaming moments as easy as a push of a button. Upload gameplay videos and screenshots directly from your system or live-stream your gameplay, all without disturbing the game in progress.<br />\r\n<br />\r\nNew ways to Play:<br />\r\nRevolutionary features like the touch pad, integrated light bar, and built-in speaker offer exciting new ways to experience and interact with your games and its 3.5mm audio jack offers a practical personal audio&nbsp;</p>', '2000.00', 0, 0, 3, '2017-02-19 21:06:58', '2017-02-22 17:22:27'),
+(61, 2, 'YAMAHA SE700E (Made inJapan)ปี1985', NULL, '<p>ขายกีต้าร์YAMAHA SE700E<br />\r\nMade in Japan ปี1985&#39; สภาพสวยสดเดิมๆนำเข้าจากญี่ปุ่นปีเก่า เสียงดีมาก น่าสะสมหายากแล้ว (ขาย10,800฿) รวมส่งด่วนEms เซ็ท อัพ ปรับแอ็คชั่นเปลี่ยนสายใหม่พร้อมใช้งาน ราคาขายในญี่ปุ่น80,000เยน หรือราว33,000฿ไทย สนใจต่อรองกันได้ครับผม<br />\r\nสเป็คคร่าวๆ<br />\r\nRelease date October 1985<br />\r\nDiscontinued years 1985<br />\r\nPrice at launch 80,000 yen<br />\r\nMain Specifications<br />\r\nBody / neck structure<br />\r\nBolt-o Scale 648mm<br />\r\nFingerboard Ebony<br />\r\nBody Alder<br />\r\nNeck Maple<br />\r\nPeg Die-cast with a torque adjustment, black chrome<br />\r\nBridge Rockin&#39;Magic<br />\r\nPickup Single bobbin (Supinekkusu) &times; 2, open backing Han (Supinekkusu) &times; 1<br />\r\nPickup switch 5P selector SW<br />\r\nControl 1 volume, 1 tone<br />\r\n(by sound system)<br />\r\nString Light gauge<br />\r\nWeight 3.9kg<br />\r\nColor Red<br />\r\nเพื่อป้องกันการก็อบรูปสินค้าของผม ไปหลอกขาย</p>', '18000.00', 1, 0, 2, '2017-02-22 14:10:12', '2017-02-22 17:21:44'),
+(62, 2, 'ALESIS D4 โมดูลกลองไฟฟ้า ต่อทริกกลอง แป้นไฟฟ้า เวทีแสดงสด แห่นาค แตรวง ซาวด์กลองแน่นปึ๊กที่สุดแล้ว ใหม่ๆทุกตัวจากญี่ปุ่น ที่ร้านโทไคมิวสิค', NULL, '<p>ดูของทางเวปก่อนที่ &gt;&gt; WWW.TOKAIMUSIC.COM&nbsp;<br />\r\nร้านโทไค มิวสิค จำหน่ายเครื่องดนตรีแบรนด์คุณภาพ!! ทั้งใหม่และมือสอง นำเข้า จากญี่ปุ่น!!!จำนวนมาก!!ทุกเดือน!! อาทิ..<br />\r\nซาวด์คาราโอเกะ กลองไฟฟ้า ริทึ่มบอก ซีเควนเซอร์ คีย์บอร์ดไฟฟ้า กีต้าร์ไฟฟ้า มัลติเอฟเฟค ตู้แอมป์กีต้าร์<br />\r\nมิกเซอร์ เครื่อง MD อุปกรณ์PA อีควอไลเซอร์ คอมเพรสเซ่อร์ ครอสโอเว่อร์ ลำโพงสตูดิโอ ดิจิตอลมิกเซอร์ ฯลฯ</p>', '11000.00', 1, 0, 1, '2017-02-22 14:17:43', '2017-02-22 14:17:43'),
+(63, 2, 'xxxxxxxxx', NULL, '', '12000.00', 1, 0, 1, '2017-02-23 10:25:17', '2017-02-23 10:25:17'),
+(64, 2, 'xxxxxxxxx', NULL, '', '12000.00', 1, 0, 1, '2017-02-23 10:41:25', '2017-02-23 10:41:25'),
+(65, 2, 'xxxxxxxxx', NULL, '', '12000.00', 1, 0, 1, '2017-02-23 10:41:41', '2017-02-23 10:41:41'),
+(66, 2, 'xxx', NULL, '', '1111.00', 1, 0, 1, '2017-02-23 11:53:42', '2017-02-23 11:53:42'),
+(67, 2, 'xxx', NULL, '', '1111.00', 1, 0, 1, '2017-02-23 11:55:05', '2017-02-23 11:55:05'),
+(68, 2, 'xxx', NULL, '', '1111.00', 1, 0, 1, '2017-02-23 11:57:27', '2017-02-23 11:57:27'),
+(69, 2, 'xxx', NULL, '', '1111.00', 1, 0, 1, '2017-02-23 11:57:39', '2017-02-23 11:57:39'),
+(70, 2, 'xxx', NULL, '', '1111.00', 1, 0, 1, '2017-02-23 11:57:54', '2017-02-23 11:57:54'),
+(71, 2, 'xxx', NULL, '', '1111.00', 1, 0, 1, '2017-02-23 11:57:58', '2017-02-23 11:57:58'),
+(72, 2, 'xxx', NULL, '', '1111.00', 1, 0, 1, '2017-02-23 12:02:38', '2017-02-23 12:02:38'),
+(74, 2, 'yyyy', NULL, '', '12000.00', 1, 0, 1, '2017-03-17 19:56:40', '2017-03-17 19:56:40'),
+(75, 2, 'oooooo', NULL, '', '5000.00', 1, 0, 1, '2017-03-17 19:58:34', '2017-03-17 19:58:34'),
+(76, 2, 'oooooo', NULL, '', '5000.00', 1, 0, 1, '2017-03-17 19:58:41', '2017-03-17 19:58:41'),
+(77, 2, 'oooooo', NULL, '', '5000.00', 1, 0, 1, '2017-03-17 19:58:42', '2017-03-17 19:58:42'),
+(78, 2, 'oooooo', NULL, '', '5000.00', 1, 0, 1, '2017-03-17 19:58:43', '2017-03-17 19:58:43'),
+(79, 2, 'oooooo', NULL, '', '5000.00', 1, 0, 1, '2017-03-17 19:58:45', '2017-03-17 19:58:45'),
+(89, 2, 'xxxx', NULL, '', '12222.00', 1, 0, 1, '2017-03-18 10:17:40', '2017-03-18 10:17:40'),
+(91, 2, 'gggggggggg', NULL, '', '5000.00', 1, 0, 1, '2017-03-18 10:29:38', '2017-03-18 10:29:38'),
+(95, 2, 'dddddd', NULL, '', '2000.00', 1, 0, 1, '2017-03-18 10:30:04', '2017-03-18 10:30:04'),
+(98, 2, 'dddddd', NULL, '', '2000.00', 1, 0, 1, '2017-03-18 10:30:10', '2017-03-18 10:30:10'),
+(104, 2, 'IP7 32GB', NULL, '<p>Lorem Ipsum คือ เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 เมื่อเครื่องพิมพ์โนเนมเครื่องหนึ่งนำรางตัวพิมพ์มาสลับสับตำแหน่งตัวอักษรเพื่อทำหนังสือตัวอย่าง Lorem Ipsum อยู่ยงคงกระพันมาไม่ใช่แค่เพียงห้าศตวรรษ แต่อยู่มาจนถึงยุคที่พลิกโฉมเข้าสู่งานเรียงพิมพ์ด้วยวิธีทางอิเล็กทรอนิกส์ และยังคงสภาพเดิมไว้อย่างไม่มีการเปลี่ยนแปลง มันได้รับความนิยมมากขึ้นในยุค ค.ศ. 1960 เมื่อแผ่น Letraset วางจำหน่ายโดยมีข้อความบนนั้นเป็น Lorem Ipsum และล่าสุดกว่านั้น คือเมื่อซอฟท์แวร์การทำสื่อสิ่งพิมพ์ (Desktop Publishing) อย่าง Aldus PageMaker ได้รวมเอา Lorem Ipsum เวอร์ชั่นต่างๆ เข้าไว้ในซอฟท์แวร์ด้วย</p>', '35000.00', 0, 0, 1, '2017-03-19 19:34:09', '2017-03-19 19:34:09'),
+(105, 2, 'NB 1111', NULL, '', '4500.00', 0, 0, 1, '2017-03-22 12:01:25', '2017-03-22 12:01:25'),
+(106, 2, 'iphone 7 red', NULL, '', '25990.00', 1, 0, 1, '2017-03-26 13:13:52', '2017-03-26 13:13:52'),
+(107, 2, 'Iphone 6s Plus 32 GB', NULL, '', '45000.00', 1, 0, 1, '2017-03-26 13:14:32', '2017-03-26 13:14:32'),
+(108, 1, 'Iphone 7 128GB Limited Edition', NULL, '', '51200.00', 1, 0, 1, '2017-03-26 13:16:56', '2017-03-26 13:16:56'),
+(109, 2, 'abcdddd', NULL, '', '1111.00', 0, 0, 1, '2017-03-28 00:15:47', '2017-03-28 00:15:47'),
+(110, 2, 'eeeeee', NULL, '', '777.00', 1, 0, 1, '2017-03-28 00:16:54', '2017-03-28 00:16:54'),
+(111, 2, 'eeeee', NULL, '', '111.00', 1, 0, 1, '2017-03-28 00:22:45', '2017-03-28 00:22:45'),
+(112, 2, 'BBBBB', NULL, '', '1233.00', 1, 0, 1, '2017-03-29 10:42:31', '2017-03-29 10:42:31'),
+(113, 2, 'Sony Experia Z Ultra 3G มือสองสถาพดี ถูกๆ', NULL, '<p>ขาย Sony Experia Z Ultra 3G จอ 6.4 นิ้ว สภาพดี มือสอง ราคาเบาๆ พร้อมใช้งาน ฟิล์มกันรอยหน้า-หลัง มีรอยบ้างทั่วไป จากการใช้งาน ไม่มีรอยหนัก ไม่ตก ไม่เคยซ่อม ใช้งานปรกติ มีกล่องใบ สายชาร์ท ไม่มีหูฟัง สนใจสอบถามต่อรอง ดูรูปเพิ่มได้ครับ TEL/LINE ID:กดเพื่อดูเบอร์โทร xxxxxx656&nbsp;ราคารวมส่ง EMS ฟรีครับ</p>', '4250.00', 1, 0, 1, '2017-04-06 11:24:34', '2017-04-06 11:24:34'),
+(114, 2, 'xxx', NULL, '', '100.00', 1, 0, 1, '2017-04-08 22:28:14', '2017-04-08 22:28:14'),
+(115, 2, 'xxx', NULL, '', '100.00', 1, 0, 1, '2017-04-08 22:28:29', '2017-04-08 22:28:29'),
+(116, 2, 'xxx', NULL, '', '100.00', 1, 0, 1, '2017-04-08 22:28:44', '2017-04-08 22:28:44'),
+(117, 2, 'tttt', NULL, '', '111.00', 1, 0, 1, '2017-04-08 22:42:09', '2017-04-08 22:42:09'),
+(118, 2, 'qqq', NULL, '', '111.00', 1, 0, 1, '2017-04-08 22:43:00', '2017-04-08 22:43:00'),
+(119, 2, 'uuuu', NULL, '', '111.00', 1, 0, 1, '2017-04-08 22:43:50', '2017-04-08 22:43:50'),
+(120, 2, 'ffff', NULL, '', '111.00', 1, 0, 1, '2017-04-08 23:00:56', '2017-04-08 23:00:56'),
+(121, 2, 'xxxx', NULL, '', '111.00', 1, 0, 1, '2017-04-08 23:01:28', '2017-04-08 23:01:28'),
+(122, 2, 'eeee', NULL, '', '1111.00', 1, 0, 1, '2017-04-08 23:05:21', '2017-04-08 23:05:21'),
+(123, 2, 'rrrr', NULL, '', '1000.00', 1, 0, 1, '2017-04-09 19:07:11', '2017-04-09 19:07:11'),
+(124, 2, 'xxdsds', NULL, '', '111.00', 1, 0, 1, '2017-04-09 20:47:15', '2017-04-09 20:47:15');
 
 -- --------------------------------------------------------
 
@@ -13493,6 +13527,67 @@ INSERT INTO `jobs` (`id`, `employment_type_id`, `name`, `salary`, `description`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `job_applying_histories`
+--
+
+CREATE TABLE `job_applying_histories` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `job_id` int(11) UNSIGNED NOT NULL,
+  `job_applying_status_id` int(11) UNSIGNED NOT NULL,
+  `message` text,
+  `times` tinyint(2) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `job_applying_histories`
+--
+
+INSERT INTO `job_applying_histories` (`id`, `job_id`, `job_applying_status_id`, `message`, `times`, `created_at`) VALUES
+(1, 48, 1, NULL, 1, '2017-04-13 09:34:25'),
+(2, 48, 1, NULL, 8, '2017-04-13 13:05:02'),
+(3, 48, 1, NULL, 54, '2017-04-13 13:24:52'),
+(4, 48, 1, NULL, 63, '2017-04-13 13:48:34'),
+(5, 48, 1, NULL, 64, '2017-04-13 13:48:55'),
+(6, 48, 1, NULL, 65, '2017-04-13 13:50:25'),
+(7, 48, 1, NULL, 66, '2017-04-13 13:53:01'),
+(8, 46, 1, NULL, 1, '2017-04-13 14:10:34'),
+(10, 46, 3, 'great XXXX', 1, '2017-04-13 18:51:08'),
+(11, 48, 2, NULL, 66, '2017-04-14 00:02:26'),
+(12, 48, 3, 'You''re great', 66, '2017-04-14 11:33:58'),
+(13, 48, 3, 'xxxx', 66, '2017-04-14 12:52:31'),
+(14, 48, 3, 'xxxx hhh', 66, '2017-04-14 13:25:36'),
+(15, 48, 5, 'xx', 66, '2017-04-14 16:53:49'),
+(17, 48, 6, 'Thanks', 66, '2017-04-14 18:35:27');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `job_applying_statuses`
+--
+
+CREATE TABLE `job_applying_statuses` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `alias` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `job_applying_statuses`
+--
+
+INSERT INTO `job_applying_statuses` (`id`, `name`, `alias`) VALUES
+(1, 'ยืนใบสมัคร', 'job-applying'),
+(2, 'รับทราบการสมัคร', 'job-applying-accept'),
+(3, 'ผ่านการสมัครแล้ว', 'job-applying-passed'),
+(4, 'ไม่ผ่านการสมัคร', 'job-applying-not-pass'),
+(5, 'ยกเลิกการสมัคร', 'job-applying-canceled'),
+(6, 'ตกลงเข้าทำงาน', 'job-position-accept'),
+(7, 'ปฏิเสธเข้าทำงาน', 'job-position-decline');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `job_apply_to_branches`
 --
 
@@ -13506,7 +13601,7 @@ CREATE TABLE `job_apply_to_branches` (
 --
 
 INSERT INTO `job_apply_to_branches` (`person_apply_job_id`, `branch_id`) VALUES
-(1, 65);
+(1, 66);
 
 -- --------------------------------------------------------
 
@@ -13748,7 +13843,8 @@ INSERT INTO `lookups` (`id`, `model`, `model_id`, `name`, `keyword_1`, `keyword_
 (47, 'Job', 59, 'yuuuy', 'B Shop', 'พาร์ทไทม์', NULL, '3', NULL, NULL, NULL, 1, '2017-04-11 00:52:30', '2017-04-11 00:52:30'),
 (48, 'Job', 60, '5555', 'B Shop', 'พนักงานประจำ', NULL, '5555', NULL, NULL, NULL, 1, '2017-04-11 00:53:17', '2017-04-11 00:53:17'),
 (49, 'Job', 61, '8888', 'B Shop', 'พนักงานประจำ', NULL, '88', NULL, NULL, NULL, 1, '2017-04-11 00:54:02', '2017-04-11 00:54:02'),
-(50, 'Job', 62, 'ssss', 'B Shop', 'พนักงานประจำ', NULL, '11', NULL, NULL, NULL, 1, '2017-04-11 00:55:12', '2017-04-11 00:55:12');
+(50, 'Job', 62, 'ssss', 'B Shop', 'พนักงานประจำ', NULL, '11', NULL, NULL, NULL, 1, '2017-04-11 00:55:12', '2017-04-11 00:55:12'),
+(51, 'Freelance', 10, 'ออกแบบ AAA', 'เว็บไซต์', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-04-16 21:41:58', '2017-04-16 21:41:58');
 
 -- --------------------------------------------------------
 
@@ -13776,28 +13872,12 @@ CREATE TABLE `messages` (
 --
 
 INSERT INTO `messages` (`id`, `model`, `model_id`, `parent_id`, `message`, `sender`, `sender_id`, `receiver`, `receiver_id`, `person_id`, `created_at`, `updated_at`) VALUES
-(1, 'PersonApplyJob', 1, NULL, '<p>mmmmm</p>', 'Shop', 24, 'Person', 1, 1, '2017-04-11 11:50:09', '2017-04-11 11:50:09'),
-(2, 'PersonApplyJob', 1, 1, '<p>abcdddddd</p>', 'Person', 1, 'Shop', 24, 1, '2017-04-11 11:51:14', '2017-04-11 11:51:14'),
-(3, 'PersonApplyJob', 1, NULL, '<p>second message</p>', 'Shop', 24, 'Person', 1, 1, '2017-04-11 12:54:09', '2017-04-11 12:54:09'),
-(4, 'PersonApplyJob', 1, 1, '<p>xxxx</p>', 'Person', 1, 'Shop', 24, 1, '2017-04-11 13:29:41', '2017-04-11 13:29:41'),
-(5, 'PersonApplyJob', 1, 1, '<p>heeeeeeeee</p>', 'Person', 1, 'Shop', 24, 1, '2017-04-11 13:29:57', '2017-04-11 13:29:57'),
-(6, 'PersonApplyJob', 1, 1, '<p>f s</p>', 'Shop', 24, 'Person', 1, 1, '2017-04-11 13:31:28', '2017-04-11 13:31:28'),
-(7, 'PersonApplyJob', 1, 1, '<p>abtttt</p>', 'Shop', 24, 'Person', 1, 1, '2017-04-11 13:42:01', '2017-04-11 13:42:01'),
-(8, 'PersonApplyJob', 1, 3, '<p>2-1</p>', 'Person', 1, 'Shop', 24, 1, '2017-04-11 13:46:21', '2017-04-11 13:46:21'),
-(9, 'PersonApplyJob', 1, 3, '<p>2-2</p>', 'Person', 1, 'Shop', 24, 1, '2017-04-11 13:48:16', '2017-04-11 13:48:16'),
-(10, 'PersonApplyJob', 1, 3, '<p>xxx</p>', 'Person', 1, 'Shop', 24, 1, '2017-04-11 13:49:41', '2017-04-11 13:49:41'),
-(11, 'PersonApplyJob', 1, 3, '<p>xxx</p>', 'Person', 1, 'Shop', 24, 1, '2017-04-11 13:49:52', '2017-04-11 13:49:52'),
-(12, 'PersonApplyJob', 1, 3, '<p>xxx</p>', 'Person', 1, 'Shop', 24, 1, '2017-04-11 13:50:02', '2017-04-11 13:50:02'),
-(13, 'PersonApplyJob', 1, 3, '<p>xxx</p>', 'Person', 1, 'Shop', 24, 1, '2017-04-11 13:51:05', '2017-04-11 13:51:05'),
-(14, 'PersonApplyJob', 1, 3, '<p>xxx</p>', 'Person', 1, 'Shop', 24, 1, '2017-04-11 13:51:15', '2017-04-11 13:51:15'),
-(15, 'PersonApplyJob', 1, 3, '<p>xxx</p>', 'Person', 1, 'Shop', 24, 1, '2017-04-11 13:51:49', '2017-04-11 13:51:49'),
-(16, 'PersonApplyJob', 1, 3, '<p>xxx</p>', 'Person', 1, 'Shop', 24, 1, '2017-04-11 13:51:58', '2017-04-11 13:51:58'),
-(17, 'PersonApplyJob', 1, 3, '<p>xxx</p>', 'Person', 1, 'Shop', 24, 1, '2017-04-11 13:52:07', '2017-04-11 13:52:07'),
-(18, 'PersonApplyJob', 1, 3, '<p>xxx</p>', 'Person', 1, 'Shop', 24, 1, '2017-04-11 13:52:37', '2017-04-11 13:52:37'),
-(19, 'PersonApplyJob', 1, 3, '<p>xxx</p>', 'Person', 1, 'Shop', 24, 1, '2017-04-11 13:55:00', '2017-04-11 13:55:00'),
-(20, 'PersonApplyJob', 1, 3, '<p>xxx</p>', 'Person', 1, 'Shop', 24, 1, '2017-04-11 13:55:38', '2017-04-11 13:55:38'),
-(21, 'PersonApplyJob', 1, 3, '<p>xxx</p>', 'Person', 1, 'Shop', 24, 1, '2017-04-11 13:57:22', '2017-04-11 13:57:22'),
-(22, 'PersonApplyJob', 1, 3, '<p>xxx</p>', 'Person', 1, 'Shop', 24, 1, '2017-04-11 13:57:26', '2017-04-11 13:57:26');
+(1, 'PersonApplyJob', 2, NULL, 'สวัสดีคุณ Venom Skake\r\nเรา aa company ยินดีตอนรับ', 'Shop', 24, 'Person', 1, 1, '2017-04-13 14:22:08', '2017-04-13 14:22:08'),
+(2, 'PersonApplyJob', 2, 1, 'PHP and JS File\r\nPlease see these files\r\nI build some file', 'Shop', 24, 'Person', 1, 1, '2017-04-13 17:03:32', '2017-04-13 17:03:32'),
+(3, 'PersonApplyJob', 1, NULL, 'first', 'Person', 1, 'Shop', 24, 1, '2017-04-13 23:13:44', '2017-04-13 23:13:44'),
+(4, 'PersonApplyJob', 1, 3, '555', 'Person', 1, 'Shop', 24, 1, '2017-04-13 23:16:38', '2017-04-13 23:16:38'),
+(5, 'PersonApplyJob', 1, NULL, 'ahain', 'Person', 1, 'Shop', 24, 1, '2017-04-13 23:16:52', '2017-04-13 23:16:52'),
+(6, 'PersonApplyJob', 1, 3, 'xxx', 'Person', 1, 'Shop', 24, 1, '2017-04-13 23:17:01', '2017-04-13 23:17:01');
 
 -- --------------------------------------------------------
 
@@ -13827,11 +13907,30 @@ CREATE TABLE `notifications` (
 --
 
 INSERT INTO `notifications` (`id`, `model`, `model_id`, `notification_event_id`, `title`, `sender`, `sender_id`, `receiver`, `receiver_id`, `unread`, `notify`, `person_id`, `created_at`, `updated_at`) VALUES
-(1, 'PersonApplyJob', 1, 6, '<strong>Venom Skake</strong> ได้สมัครงาน <strong>marksman</strong>', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-11 11:49:19', '2017-04-11 11:49:21'),
-(2, 'Message', 1, 7, '<strong>Diamond Dogs</strong> ส่งข้อความว่า "mmmmm"', 'Shop', 24, 'Person', 1, 0, 0, 1, '2017-04-11 11:50:09', '2017-04-11 11:50:17'),
-(3, 'Message', 3, 7, '<strong>Diamond Dogs</strong> ส่งข้อความว่า "second message"', 'Shop', 24, 'Person', 1, 0, 0, 1, '2017-04-11 12:54:09', '2017-04-11 13:45:38'),
-(4, 'Message', 7, 8, '<strong>Diamond Dogs</strong> ตอบกลับว่า "abtttt"', 'Shop', 24, 'Person', 1, 0, 0, 1, '2017-04-11 13:42:01', '2017-04-11 13:45:38'),
-(5, 'Message', 22, 9, '<strong>Venom Skake</strong> ตอบกลับว่า "xxx"', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-11 13:57:26', '2017-04-11 14:05:25');
+(1, 'PersonApplyJob', 1, 6, '<strong>Venom Skake</strong> ได้สมัครงาน <strong>Engineer</strong>', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-13 09:34:25', '2017-04-13 09:34:40'),
+(2, 'PersonApplyJob', 1, 6, '<strong>Venom Skake</strong> ได้สมัครงาน <strong>Engineer</strong>', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-13 13:05:03', '2017-04-13 13:50:29'),
+(3, 'PersonApplyJob', 1, 6, '<strong>Venom Skake</strong> ได้สมัครงาน <strong>Engineer</strong>', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-13 13:24:52', '2017-04-13 13:50:29'),
+(4, 'PersonApplyJob', 1, 6, '<strong>Venom Skake</strong> ได้สมัครงาน <strong>Engineer</strong>', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-13 13:48:34', '2017-04-13 13:50:29'),
+(5, 'PersonApplyJob', 1, 6, '<strong>Venom Skake</strong> ได้สมัครงาน <strong>Engineer</strong>', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-13 13:48:55', '2017-04-13 13:50:29'),
+(6, 'PersonApplyJob', 1, 6, '<strong>Venom Skake</strong> ได้สมัครงาน <strong>Engineer</strong>', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-13 13:50:25', '2017-04-13 13:50:29'),
+(7, 'PersonApplyJob', 1, 6, '<strong>Venom Skake</strong> ได้สมัครงาน <strong>Engineer</strong>', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-13 13:53:01', '2017-04-13 13:54:38'),
+(8, 'PersonApplyJob', 2, 6, '<strong>Venom Skake</strong> ได้สมัครงาน <strong>marksman</strong>', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-13 14:10:34', '2017-04-13 14:10:41'),
+(9, 'Message', 1, 7, '<strong>Diamond Dogs</strong> ส่งข้อความว่า "สวัสดีคุณ Venom Skake เรา aa company ยิ"', 'Shop', 24, 'Person', 1, 0, 0, 1, '2017-04-13 14:22:08', '2017-04-13 16:59:27'),
+(10, 'Message', 2, 8, '<strong>Diamond Dogs</strong> ตอบกลับว่า "PHP and JS File Please see these files I..."', 'Shop', 24, 'Person', 1, 0, 0, 1, '2017-04-13 17:03:32', '2017-04-13 18:45:20'),
+(11, 'PersonApplyJob', 2, 10, 'ผ่านการสมัครงานตำแหน่ง marksman', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-13 18:51:08', '2017-04-13 18:51:11'),
+(12, 'Message', 3, 9, '<strong>Venom Skake</strong> ตอบกลับว่า "first"', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-13 23:13:44', '2017-04-13 23:36:32'),
+(13, 'Message', 4, 9, '<strong>Venom Skake</strong> ตอบกลับว่า "555"', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-13 23:16:38', '2017-04-13 23:36:32'),
+(14, 'Message', 5, 9, '<strong>Venom Skake</strong> ตอบกลับว่า "ahain"', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-13 23:16:53', '2017-04-13 23:36:32'),
+(15, 'Message', 6, 9, '<strong>Venom Skake</strong> ตอบกลับว่า "xxx"', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-13 23:17:01', '2017-04-13 23:36:32'),
+(16, 'PersonApplyJob', 1, 10, 'คุณผ่านการสมัครงาน Engineer แล้ว', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-14 11:33:58', '2017-04-14 11:38:18'),
+(17, 'PersonApplyJob', 1, 10, 'คุณผ่านการสมัครงาน Engineer แล้ว โปรดยืนยันว่าคุณต้องการเข้าทำงานในตำแหน่งนี้', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-14 12:52:31', '2017-04-14 13:04:01'),
+(18, 'PersonApplyJob', 1, 10, 'คุณผ่านการสมัครงาน Engineer แล้ว โปรดยืนยันหากคุณต้องการเข้าทำงานในตำแหน่งนี้', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-14 13:25:36', '2017-04-14 14:10:40'),
+(19, 'PersonApplyJob', 1, 12, 'การสมัครงาน Engineer ถูกยกเลิกแล้ว', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-14 16:53:49', '2017-04-14 17:10:52'),
+(20, 'PersonApplyJob', 1, 12, 'การสมัครงาน Engineer ถูกยกเลิกแล้ว', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-14 17:50:26', '2017-04-14 18:03:27'),
+(21, 'PersonApplyJob', 1, 15, '<strong>Venom Skake</strong> ได้ตกลงเข้าทำงานแล้ว', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-14 17:55:19', '2017-04-14 18:03:27'),
+(22, 'PersonApplyJob', 1, 15, '<strong>Venom Skake</strong> ได้ตอบตกลงเข้าทำงานแล้ว', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-14 18:07:45', '2017-04-14 18:07:50'),
+(23, 'PersonApplyJob', 1, 16, '<strong>Venom Skake</strong> ได้ปฏิเสธเข้าทำงานแล้ว', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-14 18:08:44', '2017-04-14 18:08:46'),
+(24, 'PersonApplyJob', 1, 15, '<strong>Venom Skake</strong> ได้ตอบตกลงเข้าทำงานแล้ว', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-14 18:35:27', '2017-04-14 23:11:52');
 
 -- --------------------------------------------------------
 
@@ -13853,15 +13952,22 @@ CREATE TABLE `notification_events` (
 --
 
 INSERT INTO `notification_events` (`id`, `model`, `event`, `receiver`, `title_format`, `url_format`) VALUES
-(1, 'Order', 'order-create', '{"group":"all-person-in-shop"}', 'การสั่งซื้อสินค้าจากลูกค้า เลขที่การสั่งซื้อ {{invoice_number}}', 'shop/{shopSlug}/order/{id}'),
-(2, 'Order', 'order-confirm', '{"person":"person"}', 'เลขที่การสั่งซื้อ {{invoice_number}} ได้ถูกยืนยันการสั่งซื้อแล้ว', 'account/order/{id}'),
-(3, 'Order', 'order-payment-inform', '{"group":"all-person-in-shop"}', 'ลูกค้าแจ้งการชำระเงินเลขที่การสั่งซื้อ {{invoice_number}}', 'shop/{shopSlug}/order/{id}'),
-(4, 'Order', 'order-payment-confirm', '{"person":"person"}', 'เลขที่การสั่งซื้อ {{invoice_number}} ได้ถูกยืนยันการชำระเงินแล้ว', 'account/order/{id}'),
-(5, 'Order', 'order-status-change', '{"person":"person"}', 'เลขที่การสั่งซื้อ {{invoice_number}} ได้ถูกเปลี่ยนสถานะเป็น <strong>{{OrderStatus.name|Order.order_status_id=>OrderStatus.id}}</strong> แล้ว', 'account/order/{id}'),
-(6, 'PersonApplyJob', 'job-apply', '{"group":"all-person-in-shop"}', '<strong>{{$$Session|Person.name}}</strong> ได้สมัครงาน <strong>{{Job.name|PersonApplyJob.job_id=>Job.id}}</strong>', 'shop/{shopSlug}/job_applying_detail/{id}'),
-(7, 'Message', 'job-applying-message-send-to-person', '{"person":"person"}', '<strong>{{__getSenderName}}</strong> ส่งข้อความว่า "{{__getMessage}}"', 'account/job_applying/{model_id}'),
-(8, 'Message', 'job-applying-message-reply-send-to-person', '{"person":"person"}', '<strong>{{__getSenderName}}</strong> ตอบกลับว่า "{{__getMessage}}"', 'account/job_applying/{model_id}'),
-(9, 'Message', 'job-applying-message-reply-send-to-shop', '{"group":"all-person-in-shop"}', '<strong>{{__getSenderName}}</strong> ตอบกลับว่า "{{__getMessage}}"', 'shop/{shopSlug}/job_applying_detail/{model_id}');
+(1, 'Order', 'order-create', '[{"group":"all-person-in-shop"}]', 'การสั่งซื้อสินค้าจากลูกค้า เลขที่การสั่งซื้อ {{invoice_number}}', 'shop/{shopSlug}/order/{id}'),
+(2, 'Order', 'order-confirm', '[{"person":"person"}]', 'เลขที่การสั่งซื้อ {{invoice_number}} ได้ถูกยืนยันการสั่งซื้อแล้ว', 'account/order/{id}'),
+(3, 'Order', 'order-payment-inform', '[{"group":"all-person-in-shop"}]', 'ลูกค้าแจ้งการชำระเงินเลขที่การสั่งซื้อ {{invoice_number}}', 'shop/{shopSlug}/order/{id}'),
+(4, 'Order', 'order-payment-confirm', '[{"person":"person"}]', 'เลขที่การสั่งซื้อ {{invoice_number}} ได้ถูกยืนยันการชำระเงินแล้ว', 'account/order/{id}'),
+(5, 'Order', 'order-status-change', '[{"person":"person"}]', 'เลขที่การสั่งซื้อ {{invoice_number}} ได้ถูกเปลี่ยนสถานะเป็น <strong>{{OrderStatus.name|Order.order_status_id=>OrderStatus.id}}</strong> แล้ว', 'account/order/{id}'),
+(6, 'PersonApplyJob', 'job-apply', '[{"group":"all-person-in-shop"}]', '<strong>{{$$Session|Person.name}}</strong> ได้สมัครงาน <strong>{{Job.name|PersonApplyJob.job_id=>Job.id}}</strong>', 'shop/{shopSlug}/job_applying/detail/{id}'),
+(7, 'Message', 'job-applying-message-send-to-person', '[{"person":"person"}]', '<strong>{{__getSenderName}}</strong> ส่งข้อความว่า "{{__getMessage}}"', 'account/job_applying/{model_id}'),
+(8, 'Message', 'job-applying-message-reply-send-to-person', '[{"person":"person"}]', '<strong>{{__getSenderName}}</strong> ตอบกลับว่า "{{__getMessage}}"', 'account/job_applying/{model_id}'),
+(9, 'Message', 'job-applying-message-reply-send-to-shop', '[{"group":"all-person-in-shop"}]', '<strong>{{__getSenderName}}</strong> ตอบกลับว่า "{{__getMessage}}"', 'shop/{shopSlug}/job_applying/detail/{model_id}'),
+(10, 'PersonApplyJob', 'job-applying-passed', '[{"person":"person"}]', 'คุณผ่านการสมัครงาน {{Job.name|PersonApplyJob.job_id=>Job.id}} แล้ว โปรดยืนยันหากคุณต้องการเข้าทำงานในตำแหน่งนี้', 'account/job_applying/{id}'),
+(11, 'PersonApplyJob', 'job-applying-not-pass', '[{"person":"person"}]', 'คุณไม่ผ่านการสมัครงาน {{Job.name|PersonApplyJob.job_id=>Job.id}}', 'account/job_applying/{id}'),
+(12, 'PersonApplyJob', 'job-applying-cancel', '[{"person":"person"}]', 'การสมัครงาน {{Job.name|PersonApplyJob.job_id=>Job.id}} ถูกยกเลิกแล้ว', 'account/job_applying/{id}'),
+(13, 'Message', 'job-applying-message-send-to-shop', '[{"group":"all-person-in-shop"}]', '<strong>{{__getSenderName}}</strong> ส่งข้อความว่า "{{__getMessage}}"', 'shop/{shopSlug}/job_applying/detail/{model_id}'),
+(14, 'PersonApplyJob', 'job-applying-accept', '[{"person":"person"}]', 'บริษัทหรือผู้ที่เกี่ยวข้องได้รับทราบ การสมัครงาน {{Job.name|PersonApplyJob.job_id=>Job.id}} แล้ว', 'account/job_applying/{id}'),
+(15, 'PersonApplyJob', 'job-position-accept', '[{"group":"all-person-in-shop"}]', '<strong>{{$$Session|Person.name}}</strong> ได้ตอบตกลงเข้าทำงานแล้ว', 'shop/{shopSlug}/job_applying/detail/{id}'),
+(16, 'PersonApplyJob', 'job-position-decline', '[{"group":"all-person-in-shop"}]', '<strong>{{$$Session|Person.name}}</strong> ได้ปฏิเสธเข้าทำงานแล้ว', 'shop/{shopSlug}/job_applying/detail/{id}');
 
 -- --------------------------------------------------------
 
@@ -13960,8 +14066,8 @@ INSERT INTO `orders` (`id`, `invoice_prefix`, `invoice_number`, `shop_id`, `pers
 (44, 'INV', 38, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, 1, NULL, NULL, NULL, '2017-03-31 16:40:16', '2017-03-31 16:40:16'),
 (45, 'INV', 39, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, 1, NULL, NULL, NULL, '2017-03-31 16:42:21', '2017-03-31 16:42:21'),
 (46, 'INV', 40, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, 1, NULL, NULL, NULL, '2017-03-31 16:43:03', '2017-03-31 16:43:03'),
-(47, 'INV', 41, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, 1, NULL, NULL, NULL, '2017-03-31 16:44:38', '2017-03-31 16:44:38'),
-(48, 'INV', 42, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, 1, NULL, NULL, NULL, '2017-03-31 16:46:19', '2017-03-31 17:36:55'),
+(47, 'INV', 41, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 3, 1, NULL, NULL, NULL, '2017-03-31 16:44:38', '2017-04-11 20:00:48'),
+(48, 'INV', 42, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 3, 1, NULL, NULL, NULL, '2017-03-31 16:46:19', '2017-04-11 19:55:23'),
 (49, 'INV', 43, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, 1, NULL, NULL, NULL, '2017-03-31 21:29:47', '2017-03-31 21:30:16'),
 (50, 'INV', 44, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 5, 1, NULL, NULL, NULL, '2017-03-31 21:40:19', '2017-03-31 22:05:19'),
 (51, 'INV', 45, 3, 1, 'Noctis Lucis Caelum', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 5, NULL, '777.00', NULL, NULL, '2017-04-01 10:11:40', '2017-04-01 10:14:46'),
@@ -14055,7 +14161,8 @@ INSERT INTO `order_histories` (`id`, `order_id`, `order_status_id`, `message`, `
 (57, 60, 2, '', '2017-04-09 09:44:33'),
 (58, 61, 1, NULL, '2017-04-09 09:54:18'),
 (59, 62, 1, NULL, '2017-04-09 09:55:33'),
-(60, 62, 2, '', '2017-04-09 09:55:46');
+(60, 62, 2, '', '2017-04-09 09:55:46'),
+(61, 47, 2, '', '2017-04-11 19:56:46');
 
 -- --------------------------------------------------------
 
@@ -14086,7 +14193,15 @@ INSERT INTO `order_payment_confirms` (`id`, `order_id`, `payment_method_id`, `pa
 (6, 21, 6, '6560.00', '2017-03-26 11:17:00', '<p>มีหลักฐานที่เป็นข้อเท็จจริงยืนยันมานานแล้ว ว่าเนื้อหาที่อ่านรู้เรื่องนั้นจะไปกวนสมาธิของคนอ่านให้เขวไปจากส่วนที้เป็น Layout เรานำ Lorem Ipsum มาใช้เพราะความที่มันมีการกระจายของตัวอักษรธรรมดาๆ แบบพอประมาณ ซึ่งเอามาใช้แทนการเขียนว่า &lsquo;ตรงนี้เป็นเนื้อหา, ตรงนี้เป็นเนื้อหา&#39; ได้ และยังทำให้มองดูเหมือนกับภาษาอังกฤษที่อ่านได้ปกติ ปัจจุบันมีแพ็กเกจของซอฟท์แวร์การทำสื่อสิ่งพิมพ์ และซอฟท์แวร์การสร้างเว็บเพจ (Web Page Editor) หลายตัวที่ใช้ Lorem Ipsum เป็นแบบจำลองเนื้อหาที่เป็นค่าตั้งต้น และเวลาที่เสิร์ชด้วยคำว่า &#39;lorem ipsum&#39; ผลการเสิร์ชที่ได้ก็จะไม่พบบรรดาเว็บไซต์ที่ยังคงอยู่ในช่วงเริ่มสร้างด้วย โดยหลายปีที่ผ่านมาก็มีการคิดค้นเวอร์ชั่นต่างๆ ของ Lorem Ipsum ขึ้นมาใช้ บ้างก็เป็นความบังเอิญ บ้างก็เป็นความตั้งใจ (เช่น การแอบแทรกมุกตลก)</p>', '2017-03-26 13:02:36'),
 (7, 49, 6, '1200.00', '2017-03-31 00:00:00', '', '2017-03-31 21:39:12'),
 (8, 50, 6, '12000.00', '2017-03-31 00:00:00', '', '2017-03-31 21:40:41'),
-(9, 51, 6, '24224.00', '2017-03-31 15:48:00', '', '2017-04-01 10:13:40');
+(9, 51, 6, '24224.00', '2017-03-31 15:48:00', '', '2017-04-01 10:13:40'),
+(10, 48, 6, '2000.00', '2017-04-11 00:00:00', '', '2017-04-11 19:55:11'),
+(11, 47, 6, '2222.00', '2017-04-11 00:00:00', '', '2017-04-11 19:58:28'),
+(12, 47, 6, '2222.00', '2017-04-11 00:00:00', '', '2017-04-11 19:58:43'),
+(13, 47, 6, '2222.00', '2017-04-11 00:00:00', '', '2017-04-11 19:58:54'),
+(14, 47, 6, '2222.00', '2017-04-11 00:00:00', '', '2017-04-11 19:59:46'),
+(15, 47, 6, '2222.00', '2017-04-11 00:00:00', '', '2017-04-11 19:59:53'),
+(16, 47, 6, '2222.00', '2017-04-11 00:00:00', '', '2017-04-11 20:00:27'),
+(17, 47, 6, '2222.00', '2017-04-11 00:00:00', '', '2017-04-11 20:00:31');
 
 -- --------------------------------------------------------
 
@@ -14628,6 +14743,7 @@ INSERT INTO `payment_method_to_orders` (`payment_method_id`, `order_id`) VALUES
 (6, 18),
 (6, 19),
 (6, 21),
+(6, 47),
 (6, 48),
 (6, 49),
 (6, 50),
@@ -14673,7 +14789,7 @@ CREATE TABLE `people` (
 --
 
 INSERT INTO `people` (`id`, `user_id`, `name`, `gender`, `birth_date`, `profile_image_id`, `cover_image_id`, `theme`, `token`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Venom Skake', 'm', '2007-09-05', 228, NULL, 1, 'prEHroB60JEmbqTWVMV44MPd6mnvz7kAXKr57sEsYjSICNcWulKJ0MeqL9DsG', '2016-12-08 12:57:33', '2017-04-11 09:48:20'),
+(1, 1, 'Venom Skake', 'm', '2007-09-05', 228, NULL, 1, 'dB1A2aR5ussVDd2lQxAgVSwdvCcSfnuTBK1YRPf1v75ka3z2uIblqScGsdHNy', '2016-12-08 12:57:33', '2017-04-16 21:19:18'),
 (11, 11, 'ABC DEF', NULL, NULL, 0, NULL, NULL, NULL, '2017-01-22 13:18:36', '2017-01-22 13:18:36');
 
 -- --------------------------------------------------------
@@ -14708,17 +14824,21 @@ CREATE TABLE `person_apply_jobs` (
   `person_id` int(11) UNSIGNED NOT NULL,
   `job_id` int(11) UNSIGNED NOT NULL,
   `shop_id` int(11) UNSIGNED NOT NULL,
-  `message` text NOT NULL,
+  `applicant_message` text NOT NULL,
+  `job_position_description` text,
+  `job_applying_status_id` int(11) UNSIGNED DEFAULT NULL,
+  `times` tinyint(2) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `approved` tinyint(1) DEFAULT NULL
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `person_apply_jobs`
 --
 
-INSERT INTO `person_apply_jobs` (`id`, `person_id`, `job_id`, `shop_id`, `message`, `created_at`, `approved`) VALUES
-(1, 1, 46, 24, '<p>xxx</p>', '2017-04-11 11:49:18', NULL);
+INSERT INTO `person_apply_jobs` (`id`, `person_id`, `job_id`, `shop_id`, `applicant_message`, `job_position_description`, `job_applying_status_id`, `times`, `created_at`, `updated_at`) VALUES
+(1, 1, 48, 24, 'Hello HR\r\n65', 'Good Afternoon Em.\r\n\r\nThank you very much for coming in for the interview yesterday.\r\n\r\nI would like to make you a formal offer for the position of a full time web developer at Firecreek Co., Ltd.\r\n\r\nThe salary we are offering is 30,000 BAHT per month.\r\n\r\nWe will provide you with a one year contract with a standard three months probation with a six month pay review.\r\n\r\nIf possible we would like you to start on Monday, 1st, June. Let me know if this is OK for you.\r\n\r\nWe think you would fit in great with our company. You have a great character and you want to learn - this is exactly what we''re looking for.\r\n\r\nWell done and I hope to hear from you soon with your confirmation!\r\n\r\nIf you have any questions please get in touch.', 6, 66, '2017-04-13 09:34:25', '2017-04-14 18:35:27'),
+(2, 1, 46, 24, 'fsdf\r\nsdfdsfsdfew\r\n\r\nsdfdsfs', NULL, 1, 1, '2017-04-13 14:10:33', '2017-04-13 22:41:49');
 
 -- --------------------------------------------------------
 
@@ -15350,6 +15470,7 @@ CREATE TABLE `real_estates` (
   `facility` text,
   `feature` text,
   `need_broker` varchar(1) NOT NULL,
+  `opened` tinyint(1) NOT NULL,
   `person_id` int(11) UNSIGNED NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -15359,84 +15480,84 @@ CREATE TABLE `real_estates` (
 -- Dumping data for table `real_estates`
 --
 
-INSERT INTO `real_estates` (`id`, `announcement_type_id`, `real_estate_type_id`, `name`, `description`, `price`, `home_area`, `land_area`, `indoor`, `furniture`, `facility`, `feature`, `need_broker`, `person_id`, `created_at`, `updated_at`) VALUES
-(1, 2, 2, 'เจ้าของขายเอง สตูดิโอวิวสระ Q Asoke', '<p>ห้องสตูดิโด วิวสระ ชั้น 15<br />\r\nพื้นที่ 30.57 ห้องใหม่ยังไม่เคยอยู่<br />\r\nตกแต่งพร้อมเฟอร์นิเจอร์พร้อมเข้าอยู่<br />\r\nห้องมุมนี้มีชั้นละ 1 ห้องเท่านั้นๆ</p>', '6000000.00', '{"sqm":"31"}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["25","26","27","29","31","33","35","41"]', '["19","22"]', '0', 1, '2017-01-27 21:30:21', '2017-01-27 21:30:21'),
-(2, 2, 1, 'aaa', '', '10000.00', '{"sqm":"30"}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["40","41"]', '["10","14"]', '0', 1, '2017-01-27 23:09:04', '2017-01-27 23:09:04'),
-(3, 2, 1, '**ขายบ้าน** Casa seaside rayong 3 ห้องนอน 3 ห้องน้ำ (ปลอดค่าส่วนกลาง 1 ปี)', '<p>** พื้นที่ใช้สอย 129 ตรม. 60 ตรว.<br />\r\n<br />\r\n** สถานที่ใกล้เคียง**<br />\r\n+++ ถนนเรียบหาดแม่รำพึง ต.ตะพง อ.เมือง จ.ระยอง<br />\r\n+++ ห่างจากตลาดเพเพียง 9 กม.<br />\r\n+++ แบบบ้านเป็น Modern Breeze<br />\r\n<br />\r\n*** สนใจติดต่อ *** 081-6661866</p>', '5500000.00', '{"sqm":"129"}', '{"rai":"","ngan":"","wa":"60","sqm":"240"}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 'e', 'null', 'null', '0', 1, '2017-01-29 09:50:07', '2017-01-29 09:50:07'),
-(4, 2, 1, 'aaa', '', '100.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', 'null', 'null', '0', 1, '2017-01-29 09:55:45', '2017-01-29 09:55:45'),
-(5, 2, 2, 'xxxx', '', '10000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', 'null', 'null', '0', 1, '2017-01-29 10:01:29', '2017-01-29 10:01:29'),
-(6, 2, 1, 'xzxxx', '', '1200.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', 'null', 'null', '0', 1, '2017-01-29 10:06:13', '2017-01-29 10:06:13'),
-(7, 2, 5, 'xxxx', '', '1111.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', 'null', 'null', '0', 1, '2017-01-29 10:23:46', '2017-01-29 10:23:46'),
-(8, 2, 4, 'xxx', '', '1200.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', 'null', 'null', '0', 1, '2017-01-29 10:30:24', '2017-01-29 10:30:24'),
-(9, 2, 1, 'Home111', '', '20000000.00', '{"sqm":"100"}', '{"rai":"10","ngan":"","wa":"","sqm":"16000"}', '{"bedroom":"1","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["28","31","35","38"]', '["11","14","17"]', '0', 1, '2017-01-31 17:42:35', '2017-01-31 17:42:35'),
-(10, 3, 5, 'TEST 123', '<p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>', '99999.00', '{"sqm":"1"}', '{"rai":"2","ngan":"3","wa":"4","sqm":"4416"}', '{"bedroom":"5","bathroom":"6","living_room":"7","home_office":"8","floors":"9","carpark":"10"}', 'e', '["28","29","30"]', '["1","2","3"]', '0', 1, '2017-01-31 19:36:27', '2017-01-31 20:54:24'),
-(11, 2, 1, 'hhhhh', '', '1200.00', '{"sqm":"1000"}', '{"rai":"","ngan":"","wa":"","sqm":"150"}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-01 09:07:32', '2017-02-01 09:07:32'),
-(12, 2, 1, 'Dev 123', '', '100000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-01 09:31:52', '2017-02-01 19:15:01'),
-(13, 2, 1, 'eee', '', '10000.00', '{"sqm":"100"}', '{"rai":"","ngan":"","wa":"","sqm":"120"}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-01 09:32:31', '2017-02-01 09:32:31'),
-(14, 2, 1, 'xxx', '', '1000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:43:07', '2017-02-03 16:43:07'),
-(15, 2, 1, 'xxx', '', '1000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:43:15', '2017-02-03 16:43:15'),
-(16, 2, 1, 'xxx', '', '1000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:43:23', '2017-02-03 16:43:23'),
-(17, 2, 1, 'xxx', '', '1000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:44:53', '2017-02-03 16:44:53'),
-(18, 2, 1, 'xxx', '', '1000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:46:12', '2017-02-03 16:46:12'),
-(19, 2, 1, 'xxx', '', '1000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:47:38', '2017-02-03 16:47:38'),
-(20, 2, 1, 'xxx', '', '1000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:47:50', '2017-02-03 16:47:50'),
-(21, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:52:50', '2017-02-03 16:52:50'),
-(22, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:53:38', '2017-02-03 16:53:38'),
-(23, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:53:42', '2017-02-03 16:53:42'),
-(24, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:53:50', '2017-02-03 16:53:50'),
-(25, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:56:41', '2017-02-03 16:56:41'),
-(26, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:58:09', '2017-02-03 16:58:09'),
-(27, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:59:11', '2017-02-03 16:59:11'),
-(28, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 16:59:28', '2017-02-03 16:59:28'),
-(29, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:01:42', '2017-02-03 17:01:42'),
-(30, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:02:08', '2017-02-03 17:02:08'),
-(31, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:03:08', '2017-02-03 17:03:08'),
-(32, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:03:14', '2017-02-03 17:03:14'),
-(33, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:03:51', '2017-02-03 17:03:51'),
-(34, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:05:33', '2017-02-03 17:05:33'),
-(35, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:09:30', '2017-02-03 17:09:30'),
-(36, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:11:08', '2017-02-03 17:11:08'),
-(37, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:11:20', '2017-02-03 17:11:20'),
-(38, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:12:23', '2017-02-03 17:12:23'),
-(39, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:12:40', '2017-02-03 17:12:40'),
-(40, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:17:31', '2017-02-03 17:17:31'),
-(41, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:18:11', '2017-02-03 17:18:11'),
-(42, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:18:21', '2017-02-03 17:18:21'),
-(43, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:22:06', '2017-02-03 17:22:06'),
-(44, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:22:27', '2017-02-03 17:22:27'),
-(45, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:22:43', '2017-02-03 17:22:43'),
-(46, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:23:03', '2017-02-03 17:23:03'),
-(47, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:23:58', '2017-02-03 17:23:58'),
-(48, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:24:14', '2017-02-03 17:24:14'),
-(49, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:25:32', '2017-02-03 17:25:32'),
-(50, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:25:52', '2017-02-03 17:25:52'),
-(51, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:26:49', '2017-02-03 17:26:49'),
-(52, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:27:00', '2017-02-03 17:27:00'),
-(53, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:27:50', '2017-02-03 17:27:50'),
-(54, 2, 1, 'abc', '', '1200000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 17:29:11', '2017-02-03 17:29:11'),
-(55, 2, 1, 'aaa', '', '12000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-03 20:20:52', '2017-02-03 20:20:52'),
-(56, 2, 1, 'Homeee', '', '120000000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-13 10:11:20', '2017-02-13 10:11:20'),
-(57, 2, 1, 'xxx', '', '111.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-02-15 14:54:22', '2017-02-15 14:54:22'),
-(58, 2, 2, 'xxxxx', '', '1200000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["41","44","45"]', '["13","14","17"]', '0', 1, '2017-02-18 22:11:53', '2017-02-18 22:11:53'),
-(59, 2, 2, 'xxxx', '<p>-รับเขียนบทความทุกแนว ตามความต้องการลูกค้า เนื่องจากมีความสนใจอ่านหนังสือ และการหาข้อมูล ในหลายๆหัวข้อด้วยกัน ด้วยประสบการณ์เขียนหลากหลายแนว ทำให้สามารถ เขียนได้หลากหลายแนวครับ<br />\r\n- หรือ ต้องการให้ เขียน content สำหรับ การขาย , คำเชิญชวน , บทความให้ความรู้ , คำโฆษณา , บทความบนเว็ปไซต์ ฯลฯ<br />\r\n- เขียนรีวิว สินค้า ผลิตภัณฑ์ และบริการ หรือ เชียร์อัพสินค้า , บทความเชิญชวน ให้สนใจ เลือกซื้อสินค้า หรือบริการ<br />\r\n<br />\r\n- ความยาวของบทความ ตั้งแต่ 500-700 คำ (โดยนับจาก ตัวนับคำ Microsoft Word)<br />\r\n- บทความทุกบทความ เขียนใหม่ 100% ไม่มีการ Copy แน่นอน คุณจะได้บทความที่ไม่ซ้ำใครอย่างแน่นอน&nbsp;<br />\r\n- บทความที่คุณได้ ทุกบทความ สามารถใช้ทำ SEO ได้ อย่างแน่นอน เพราะเราเขียนแบบมี pattern ตามหลัก SEO<br />\r\n- ลูกค้าสามารถกำหนด Keyword ในการเขียนบทความ สำหรับทำ SEO ตามที่ลูกค้าต้องการได้</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>- ทำงานด้านการตลาด ออนไลน์ (Online Marketing) มา 7 ปี<br />\r\n- รับงานเขียนบทความมาแล้วมากมายหลากหลายธุรกิจ<br />\r\n- ประสบการณ์การเขียนหนังสือ ebook มาแล้วหลายเล่ม<br />\r\n- ให้บริการทำการตลาด ออนไลน์ ทุกรูปแบบ ครบวงจร<br />\r\n- ให้บริการ ทำ SEO มายาวนานกว่า 7 ปี<br />\r\n- Freelance Writer<br />\r\n- เรามีทีมนักเขียน จำนวนมาก บทความเยอะไม่มีปัญหา</p>', '50000000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["28","29","30"]', '["8","11","14"]', '0', 1, '2017-02-19 00:40:31', '2017-02-19 00:40:31'),
-(60, 1, 6, 'ขายคอนโดเซ็นทริคซีน รัชวิภาตกแต่งพร้อมอยู่ ห้องสวย วิวเมือง ใกล้สถานีรถไฟฟ้าสายสีม่วง ขึ้นลงทางด่วนสะดวกสบาย', '', '4500000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["36","37","38"]', '["3","6","8","10"]', '0', 1, '2017-02-20 14:03:25', '2017-02-20 14:03:25'),
-(61, 2, 1, 'คอนโดใกล้รถไฟฟ้าสีม่วง,คอนโดสายสีม่วง', '', '1200000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["37","39"]', '["17","18","20"]', '0', 1, '2017-02-20 14:04:29', '2017-02-20 14:04:29'),
-(62, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:05:26', '2017-02-20 14:05:26'),
-(63, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:05:52', '2017-02-20 14:05:52'),
-(64, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:05:56', '2017-02-20 14:05:56'),
-(65, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:06:05', '2017-02-20 14:06:05'),
-(66, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:06:15', '2017-02-20 14:06:15'),
-(67, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:06:31', '2017-02-20 14:06:31'),
-(68, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:06:45', '2017-02-20 14:06:45'),
-(69, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:07:45', '2017-02-20 14:07:45'),
-(70, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:08:57', '2017-02-20 14:08:57'),
-(71, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:09:07', '2017-02-20 14:09:07'),
-(72, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:10:01', '2017-02-20 14:10:01'),
-(73, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:10:10', '2017-02-20 14:10:10'),
-(74, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 1, '2017-02-20 14:12:21', '2017-02-20 14:12:21'),
-(75, 2, 5, 'อาคารพาณิชย์ อนุสาวรีย์ชัยสมรภูมิ ถนนราชวิถี เขตราชเทวี กรุงเทพมหานคร', '<p>อาคารพาณิชย์ 4.5 ชั้น 5 นอน 5 น้ำ 43 ตร.ว. อนุสาวรีย์ชัยสมรภูมิ ถ.ราชวิถี แขวงถนนพญาไท เขตราชเทวี กรุงเทพมหานคร<br />\r\nอาคารพาณิชย์ 2 คูหา บริเวณอนุสาวรีย์ชัยสมรภูมิ(ฝั่งเกาะนางพญา) ซอยราชวิถี 11 (เลิศปัญญา) ทำเลการค้า ติดสถานีรถไฟฟ้าอนุสาวรีย์ชัยสมรภูมิ เข้า-ออก ถนนราชวิถี, ถนนพญาไท, ถนนพหลโยธิน, ทางด่วนศรีรัช, ถนนรางน้ำ, ใกล้เซ็นเตอร์วัน, วิคตอรี่พอยท์, รพ.ราชวิถี, รพ.พระมงกุฎเกล้า, เซ็นจูรี่มอลล์, ภัตตาคารพงหลี, รพ.พญาไท 2, คิงพาวเวอร์รางน้ำ</p>', '50000000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","36","39","41"]', '["1","18","19","23"]', '0', 1, '2017-02-20 14:16:12', '2017-02-20 14:16:12'),
-(76, 2, 1, 'xxx', '', '102000000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["28","29"]', '["7","11"]', '0', 1, '2017-03-01 20:41:14', '2017-03-01 20:41:14'),
-(77, 2, 4, 'ABCDEEE', '', '120000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 1, '2017-03-20 23:20:48', '2017-03-20 23:20:48');
+INSERT INTO `real_estates` (`id`, `announcement_type_id`, `real_estate_type_id`, `name`, `description`, `price`, `home_area`, `land_area`, `indoor`, `furniture`, `facility`, `feature`, `need_broker`, `opened`, `person_id`, `created_at`, `updated_at`) VALUES
+(1, 2, 2, 'เจ้าของขายเอง สตูดิโอวิวสระ Q Asoke', '<p>ห้องสตูดิโด วิวสระ ชั้น 15<br />\r\nพื้นที่ 30.57 ห้องใหม่ยังไม่เคยอยู่<br />\r\nตกแต่งพร้อมเฟอร์นิเจอร์พร้อมเข้าอยู่<br />\r\nห้องมุมนี้มีชั้นละ 1 ห้องเท่านั้นๆ</p>', '6000000.00', '{"sqm":"31"}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["25","26","27","29","31","33","35","41"]', '["19","22"]', '0', 0, 1, '2017-01-27 21:30:21', '2017-01-27 21:30:21'),
+(2, 2, 1, 'aaa', '', '10000.00', '{"sqm":"30"}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["40","41"]', '["10","14"]', '0', 0, 1, '2017-01-27 23:09:04', '2017-01-27 23:09:04'),
+(3, 2, 1, '**ขายบ้าน** Casa seaside rayong 3 ห้องนอน 3 ห้องน้ำ (ปลอดค่าส่วนกลาง 1 ปี)', '<p>** พื้นที่ใช้สอย 129 ตรม. 60 ตรว.<br />\r\n<br />\r\n** สถานที่ใกล้เคียง**<br />\r\n+++ ถนนเรียบหาดแม่รำพึง ต.ตะพง อ.เมือง จ.ระยอง<br />\r\n+++ ห่างจากตลาดเพเพียง 9 กม.<br />\r\n+++ แบบบ้านเป็น Modern Breeze<br />\r\n<br />\r\n*** สนใจติดต่อ *** 081-6661866</p>', '5500000.00', '{"sqm":"129"}', '{"rai":"","ngan":"","wa":"60","sqm":"240"}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 'e', 'null', 'null', '0', 0, 1, '2017-01-29 09:50:07', '2017-01-29 09:50:07'),
+(4, 2, 1, 'aaa', '', '100.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', 'null', 'null', '0', 0, 1, '2017-01-29 09:55:45', '2017-01-29 09:55:45'),
+(5, 2, 2, 'xxxx', '', '10000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', 'null', 'null', '0', 0, 1, '2017-01-29 10:01:29', '2017-01-29 10:01:29'),
+(6, 2, 1, 'xzxxx', '', '1200.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', 'null', 'null', '0', 0, 1, '2017-01-29 10:06:13', '2017-01-29 10:06:13'),
+(7, 2, 5, 'xxxx', '', '1111.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', 'null', 'null', '0', 0, 1, '2017-01-29 10:23:46', '2017-01-29 10:23:46'),
+(8, 2, 4, 'xxx', '', '1200.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', 'null', 'null', '0', 0, 1, '2017-01-29 10:30:24', '2017-01-29 10:30:24'),
+(9, 2, 1, 'Home111', '', '20000000.00', '{"sqm":"100"}', '{"rai":"10","ngan":"","wa":"","sqm":"16000"}', '{"bedroom":"1","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["28","31","35","38"]', '["11","14","17"]', '0', 0, 1, '2017-01-31 17:42:35', '2017-01-31 17:42:35'),
+(10, 3, 5, 'TEST 123', '<p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>', '99999.00', '{"sqm":"1"}', '{"rai":"2","ngan":"3","wa":"4","sqm":"4416"}', '{"bedroom":"5","bathroom":"6","living_room":"7","home_office":"8","floors":"9","carpark":"10"}', 'e', '["28","29","30"]', '["1","2","3"]', '0', 0, 1, '2017-01-31 19:36:27', '2017-01-31 20:54:24'),
+(11, 2, 1, 'hhhhh', '', '1200.00', '{"sqm":"1000"}', '{"rai":"","ngan":"","wa":"","sqm":"150"}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-01 09:07:32', '2017-02-01 09:07:32'),
+(12, 2, 1, 'Dev 123', '', '100000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-01 09:31:52', '2017-02-01 19:15:01'),
+(13, 2, 1, 'eee', '', '10000.00', '{"sqm":"100"}', '{"rai":"","ngan":"","wa":"","sqm":"120"}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-01 09:32:31', '2017-02-01 09:32:31'),
+(14, 2, 1, 'xxx', '', '1000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 16:43:07', '2017-02-03 16:43:07'),
+(15, 2, 1, 'xxx', '', '1000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 16:43:15', '2017-02-03 16:43:15'),
+(16, 2, 1, 'xxx', '', '1000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 16:43:23', '2017-02-03 16:43:23'),
+(17, 2, 1, 'xxx', '', '1000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 16:44:53', '2017-02-03 16:44:53'),
+(18, 2, 1, 'xxx', '', '1000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 16:46:12', '2017-02-03 16:46:12'),
+(19, 2, 1, 'xxx', '', '1000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 16:47:38', '2017-02-03 16:47:38'),
+(20, 2, 1, 'xxx', '', '1000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 16:47:50', '2017-02-03 16:47:50'),
+(21, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 16:52:50', '2017-02-03 16:52:50'),
+(22, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 16:53:38', '2017-02-03 16:53:38'),
+(23, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 16:53:42', '2017-02-03 16:53:42'),
+(24, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 16:53:50', '2017-02-03 16:53:50'),
+(25, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 16:56:41', '2017-02-03 16:56:41'),
+(26, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 16:58:09', '2017-02-03 16:58:09'),
+(27, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 16:59:11', '2017-02-03 16:59:11'),
+(28, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 16:59:28', '2017-02-03 16:59:28'),
+(29, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:01:42', '2017-02-03 17:01:42'),
+(30, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:02:08', '2017-02-03 17:02:08'),
+(31, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:03:08', '2017-02-03 17:03:08'),
+(32, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:03:14', '2017-02-03 17:03:14'),
+(33, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:03:51', '2017-02-03 17:03:51'),
+(34, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:05:33', '2017-02-03 17:05:33'),
+(35, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:09:30', '2017-02-03 17:09:30'),
+(36, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:11:08', '2017-02-03 17:11:08'),
+(37, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:11:20', '2017-02-03 17:11:20'),
+(38, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:12:23', '2017-02-03 17:12:23'),
+(39, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:12:40', '2017-02-03 17:12:40'),
+(40, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:17:31', '2017-02-03 17:17:31'),
+(41, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:18:11', '2017-02-03 17:18:11'),
+(42, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:18:21', '2017-02-03 17:18:21'),
+(43, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:22:06', '2017-02-03 17:22:06'),
+(44, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:22:27', '2017-02-03 17:22:27'),
+(45, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:22:43', '2017-02-03 17:22:43'),
+(46, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:23:03', '2017-02-03 17:23:03'),
+(47, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:23:58', '2017-02-03 17:23:58'),
+(48, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:24:14', '2017-02-03 17:24:14'),
+(49, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:25:32', '2017-02-03 17:25:32'),
+(50, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:25:52', '2017-02-03 17:25:52'),
+(51, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:26:49', '2017-02-03 17:26:49'),
+(52, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:27:00', '2017-02-03 17:27:00'),
+(53, 2, 2, 'aaaa', '', '1.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:27:50', '2017-02-03 17:27:50'),
+(54, 2, 1, 'abc', '', '1200000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 17:29:11', '2017-02-03 17:29:11'),
+(55, 2, 1, 'aaa', '', '12000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-03 20:20:52', '2017-02-03 20:20:52'),
+(56, 2, 1, 'Homeee', '', '120000000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-13 10:11:20', '2017-02-13 10:11:20'),
+(57, 2, 1, 'xxx', '', '111.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-02-15 14:54:22', '2017-02-15 14:54:22'),
+(58, 2, 2, 'xxxxx', '', '1200000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["41","44","45"]', '["13","14","17"]', '0', 0, 1, '2017-02-18 22:11:53', '2017-02-18 22:11:53'),
+(59, 2, 2, 'xxxx', '<p>-รับเขียนบทความทุกแนว ตามความต้องการลูกค้า เนื่องจากมีความสนใจอ่านหนังสือ และการหาข้อมูล ในหลายๆหัวข้อด้วยกัน ด้วยประสบการณ์เขียนหลากหลายแนว ทำให้สามารถ เขียนได้หลากหลายแนวครับ<br />\r\n- หรือ ต้องการให้ เขียน content สำหรับ การขาย , คำเชิญชวน , บทความให้ความรู้ , คำโฆษณา , บทความบนเว็ปไซต์ ฯลฯ<br />\r\n- เขียนรีวิว สินค้า ผลิตภัณฑ์ และบริการ หรือ เชียร์อัพสินค้า , บทความเชิญชวน ให้สนใจ เลือกซื้อสินค้า หรือบริการ<br />\r\n<br />\r\n- ความยาวของบทความ ตั้งแต่ 500-700 คำ (โดยนับจาก ตัวนับคำ Microsoft Word)<br />\r\n- บทความทุกบทความ เขียนใหม่ 100% ไม่มีการ Copy แน่นอน คุณจะได้บทความที่ไม่ซ้ำใครอย่างแน่นอน&nbsp;<br />\r\n- บทความที่คุณได้ ทุกบทความ สามารถใช้ทำ SEO ได้ อย่างแน่นอน เพราะเราเขียนแบบมี pattern ตามหลัก SEO<br />\r\n- ลูกค้าสามารถกำหนด Keyword ในการเขียนบทความ สำหรับทำ SEO ตามที่ลูกค้าต้องการได้</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>- ทำงานด้านการตลาด ออนไลน์ (Online Marketing) มา 7 ปี<br />\r\n- รับงานเขียนบทความมาแล้วมากมายหลากหลายธุรกิจ<br />\r\n- ประสบการณ์การเขียนหนังสือ ebook มาแล้วหลายเล่ม<br />\r\n- ให้บริการทำการตลาด ออนไลน์ ทุกรูปแบบ ครบวงจร<br />\r\n- ให้บริการ ทำ SEO มายาวนานกว่า 7 ปี<br />\r\n- Freelance Writer<br />\r\n- เรามีทีมนักเขียน จำนวนมาก บทความเยอะไม่มีปัญหา</p>', '50000000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["28","29","30"]', '["8","11","14"]', '0', 0, 1, '2017-02-19 00:40:31', '2017-02-19 00:40:31'),
+(60, 1, 6, 'ขายคอนโดเซ็นทริคซีน รัชวิภาตกแต่งพร้อมอยู่ ห้องสวย วิวเมือง ใกล้สถานีรถไฟฟ้าสายสีม่วง ขึ้นลงทางด่วนสะดวกสบาย', '', '4500000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["36","37","38"]', '["3","6","8","10"]', '0', 0, 1, '2017-02-20 14:03:25', '2017-02-20 14:03:25'),
+(61, 2, 1, 'คอนโดใกล้รถไฟฟ้าสีม่วง,คอนโดสายสีม่วง', '', '1200000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["37","39"]', '["17","18","20"]', '0', 0, 1, '2017-02-20 14:04:29', '2017-02-20 14:04:29'),
+(62, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 0, 1, '2017-02-20 14:05:26', '2017-02-20 14:05:26'),
+(63, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 0, 1, '2017-02-20 14:05:52', '2017-02-20 14:05:52'),
+(64, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 0, 1, '2017-02-20 14:05:56', '2017-02-20 14:05:56'),
+(65, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 0, 1, '2017-02-20 14:06:05', '2017-02-20 14:06:05'),
+(66, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 0, 1, '2017-02-20 14:06:15', '2017-02-20 14:06:15'),
+(67, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 0, 1, '2017-02-20 14:06:31', '2017-02-20 14:06:31'),
+(68, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 0, 1, '2017-02-20 14:06:45', '2017-02-20 14:06:45'),
+(69, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 0, 1, '2017-02-20 14:07:45', '2017-02-20 14:07:45'),
+(70, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 0, 1, '2017-02-20 14:08:57', '2017-02-20 14:08:57'),
+(71, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 0, 1, '2017-02-20 14:09:07', '2017-02-20 14:09:07'),
+(72, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 0, 1, '2017-02-20 14:10:01', '2017-02-20 14:10:01'),
+(73, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 0, 1, '2017-02-20 14:10:10', '2017-02-20 14:10:10'),
+(74, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 0, 1, '2017-02-20 14:12:21', '2017-02-20 14:12:21'),
+(75, 2, 5, 'อาคารพาณิชย์ อนุสาวรีย์ชัยสมรภูมิ ถนนราชวิถี เขตราชเทวี กรุงเทพมหานคร', '<p>อาคารพาณิชย์ 4.5 ชั้น 5 นอน 5 น้ำ 43 ตร.ว. อนุสาวรีย์ชัยสมรภูมิ ถ.ราชวิถี แขวงถนนพญาไท เขตราชเทวี กรุงเทพมหานคร<br />\r\nอาคารพาณิชย์ 2 คูหา บริเวณอนุสาวรีย์ชัยสมรภูมิ(ฝั่งเกาะนางพญา) ซอยราชวิถี 11 (เลิศปัญญา) ทำเลการค้า ติดสถานีรถไฟฟ้าอนุสาวรีย์ชัยสมรภูมิ เข้า-ออก ถนนราชวิถี, ถนนพญาไท, ถนนพหลโยธิน, ทางด่วนศรีรัช, ถนนรางน้ำ, ใกล้เซ็นเตอร์วัน, วิคตอรี่พอยท์, รพ.ราชวิถี, รพ.พระมงกุฎเกล้า, เซ็นจูรี่มอลล์, ภัตตาคารพงหลี, รพ.พญาไท 2, คิงพาวเวอร์รางน้ำ</p>', '50000000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","36","39","41"]', '["1","18","19","23"]', '0', 0, 1, '2017-02-20 14:16:12', '2017-02-20 14:16:12'),
+(76, 2, 1, 'xxx', '', '102000000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["28","29"]', '["7","11"]', '0', 0, 1, '2017-03-01 20:41:14', '2017-03-01 20:41:14'),
+(77, 2, 4, 'ABCDEEE', '', '120000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-03-20 23:20:48', '2017-03-20 23:20:48');
 
 -- --------------------------------------------------------
 
@@ -16392,7 +16513,38 @@ INSERT INTO `temporary_files` (`id`, `model`, `token`, `filename`, `filesize`, `
 (19, 'PersonApplyJob', 'z75oQ0OS', 'resume.pdf', '243661', 'UQ9xq8Y', 1, '2017-04-11 00:55:19'),
 (20, 'PersonApplyJob', 'hmEP3Srj', 'resume.pdf', '243661', 'GYZB4zQ', 1, '2017-04-11 00:59:44'),
 (22, 'PersonApplyJob', 'aqMWSRPV', 'resume.pdf', '243661', 'sUh5KNw', 1, '2017-04-11 10:21:18'),
-(24, 'Message', 'jB9n3jZr', 'suggestion.docx', '11919', '2Izlxv4', 1, '2017-04-11 10:30:41');
+(24, 'Message', 'jB9n3jZr', 'suggestion.docx', '11919', '2Izlxv4', 1, '2017-04-11 10:30:41'),
+(25, 'undefined', '7P8emG7w', 'test.pptx', '41448', '9DUA7pn', 1, '2017-04-12 05:33:40'),
+(27, 'Item', '0oTDjUJw', NULL, NULL, NULL, 1, '2017-04-12 06:32:06'),
+(28, 'Item', 'HBtMnAef', NULL, NULL, NULL, 1, '2017-04-12 06:32:13'),
+(32, 'Message', 'ZIKEix7U', '();.jpg', '21332', 'kgnuss6', 1, '2017-04-12 06:44:13'),
+(33, 'Message', 'ZIKEix7U', '11.jpeg', '58911', 'WrYSJvW', 1, '2017-04-12 06:44:14'),
+(43, 'Message', 'BUqyPFoI', '();.jpg', '21332', 'num8bOe', 1, '2017-04-12 06:53:27'),
+(44, 'Message', 'BUqyPFoI', '11.jpeg', '58911', 'EqKGAzq', 1, '2017-04-12 06:53:29'),
+(45, 'Message', 'tiEorc7k', '();.jpg', '21332', 'W6lggLT', 1, '2017-04-12 06:54:56'),
+(46, 'Message', 'GuSEstIG', '();.jpg', '21332', 'sAqBmdr', 1, '2017-04-12 06:55:26'),
+(47, 'Message', 'QFJc6TX9', '11.jpeg', '58911', 'SARaxF8', 1, '2017-04-12 06:55:52'),
+(48, 'Item', 'r1vjaww1', NULL, NULL, NULL, 1, '2017-04-12 06:58:23'),
+(49, 'Item', 'FZEXYPK9', NULL, NULL, NULL, 1, '2017-04-12 06:58:35'),
+(50, 'Message', 'WaLEc9sy', '();.jpg', '21332', '4O7Zgif', 1, '2017-04-12 06:59:25'),
+(51, 'Message', 'XYtCY0On', '();.jpg', '21332', 'on0W2QM', 1, '2017-04-12 06:59:53'),
+(52, 'Message', '21pjMmUp', '249db9c336a09727aeb598b13bf7f46f.jpeg', '48622', 'U9uELC8', 1, '2017-04-12 07:00:19'),
+(53, 'Message', 'pED83cM7', '249db9c336a09727aeb598b13bf7f46f.jpeg', '48622', 'S9v2Fse', 1, '2017-04-12 07:00:42'),
+(64, 'Message', '7hhhGBBd', '();.jpg', '21332', 'PIXLN1W', 1, '2017-04-12 07:11:31'),
+(65, 'Message', '7hhhGBBd', '11.jpeg', '58911', '1Dl09XF', 1, '2017-04-12 07:11:38'),
+(68, 'Message', 'mAVVkoen', '();.jpg', '21332', '6MODusm', 1, '2017-04-12 07:47:09'),
+(71, 'Message', 'LMDx4JQi', 'desgine.jpg', '17496', 'UyQPgEW', 1, '2017-04-12 08:37:53'),
+(73, 'Message', 'fIx5Jrft', '();.jpg', '21332', 'ARgJ3Um', 1, '2017-04-12 09:11:35'),
+(75, 'Message', '6RvbtbuP', '11.jpeg', '58911', 'aBf53RA', 1, '2017-04-12 13:43:49'),
+(77, 'Message', 'Etk0BDTg', '1027370_screenhi_en_US_02.jpg', '291566', '9Ez6Xym', 1, '2017-04-12 13:44:42'),
+(78, 'Message', 'cecMHM56', '20151221182933_big.png', '286018', 'wiso49t', 1, '2017-04-12 13:46:26'),
+(80, 'Message', 'MqlLHTRM', '249db9c336a09727aeb598b13bf7f46f.jpeg', '48622', 'R1a9wXB', 1, '2017-04-12 13:47:55'),
+(81, 'PersonApplyJob', 'i7VuTrjt', '1212.jpg', '67093', 'ydc2ldY', 1, '2017-04-13 13:25:16'),
+(82, 'PersonApplyJob', 'QevWy3lh', 'db.js', '271', 'kzkYwkO', 1, '2017-04-13 16:57:14'),
+(83, 'PersonApplyJob', 'VQIQMjxQ', 'resume.pdf', '243661', 'J9wLC80', 1, '2017-04-13 16:57:41'),
+(84, 'PersonApplyJob', 'VQIQMjxQ', 'db.js', '271', 'KALKVhm', 1, '2017-04-13 16:57:46'),
+(85, 'PersonApplyJob', 'KrZpfouE', 'info.php', '35', 'o4FrpbI', 1, '2017-04-13 16:59:22'),
+(86, 'Freelance', 'R6LBSTHv', NULL, NULL, NULL, 1, '2017-04-16 21:41:02');
 
 -- --------------------------------------------------------
 
@@ -17391,6 +17543,18 @@ ALTER TABLE `freelance_types`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `freelance_working_queues`
+--
+ALTER TABLE `freelance_working_queues`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `freelance_working_statuses`
+--
+ALTER TABLE `freelance_working_statuses`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `images`
 --
 ALTER TABLE `images`
@@ -17425,6 +17589,18 @@ ALTER TABLE `item_to_categories`
 -- Indexes for table `jobs`
 --
 ALTER TABLE `jobs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `job_applying_histories`
+--
+ALTER TABLE `job_applying_histories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `job_applying_statuses`
+--
+ALTER TABLE `job_applying_statuses`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -17866,12 +18042,12 @@ ALTER TABLE `announcement_types`
 -- AUTO_INCREMENT for table `attached_files`
 --
 ALTER TABLE `attached_files`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `attached_file_access_permissions`
 --
 ALTER TABLE `attached_file_access_permissions`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `branches`
 --
@@ -17896,7 +18072,7 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT for table `data_access_permissions`
 --
 ALTER TABLE `data_access_permissions`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 --
 -- AUTO_INCREMENT for table `districts`
 --
@@ -17916,17 +18092,27 @@ ALTER TABLE `experience_types`
 -- AUTO_INCREMENT for table `freelances`
 --
 ALTER TABLE `freelances`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `freelance_types`
 --
 ALTER TABLE `freelance_types`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
+-- AUTO_INCREMENT for table `freelance_working_queues`
+--
+ALTER TABLE `freelance_working_queues`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `freelance_working_statuses`
+--
+ALTER TABLE `freelance_working_statuses`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=246;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=247;
 --
 -- AUTO_INCREMENT for table `image_types`
 --
@@ -17948,6 +18134,16 @@ ALTER TABLE `item_categories`
 ALTER TABLE `jobs`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 --
+-- AUTO_INCREMENT for table `job_applying_histories`
+--
+ALTER TABLE `job_applying_histories`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT for table `job_applying_statuses`
+--
+ALTER TABLE `job_applying_statuses`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
 -- AUTO_INCREMENT for table `languages`
 --
 ALTER TABLE `languages`
@@ -17966,22 +18162,22 @@ ALTER TABLE `length_units`
 -- AUTO_INCREMENT for table `lookups`
 --
 ALTER TABLE `lookups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `notification_events`
 --
 ALTER TABLE `notification_events`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `open_hours`
 --
@@ -17996,12 +18192,12 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `order_histories`
 --
 ALTER TABLE `order_histories`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 --
 -- AUTO_INCREMENT for table `order_payment_confirms`
 --
 ALTER TABLE `order_payment_confirms`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `order_products`
 --
@@ -18046,7 +18242,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `person_apply_jobs`
 --
 ALTER TABLE `person_apply_jobs`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `person_career_objectives`
 --
@@ -18221,7 +18417,7 @@ ALTER TABLE `taggings`
 -- AUTO_INCREMENT for table `temporary_files`
 --
 ALTER TABLE `temporary_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 --
 -- AUTO_INCREMENT for table `users`
 --
