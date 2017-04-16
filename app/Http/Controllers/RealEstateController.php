@@ -33,7 +33,6 @@ class RealEstateController extends Controller
       $total = $realEsates->count('id');
 
       $realEsates = $realEsates
-      // ->select('*')
       ->orderBy('created_at','desc')
       ->take(3)
       ->get();
@@ -67,7 +66,7 @@ class RealEstateController extends Controller
         'typeName' => $type->name,
         'data' => $_realEsates,
         'total' => $total,
-        'itemBoardUrl' => $url->setAndParseUrl('real-estate/board/{category_id}',array('category_id'=>$type->id)),
+        'itemBoardUrl' => $url->setAndParseUrl('real-estate/board/{real_estate_type_id}',array('real_estate_type_id'=>$type->id)),
       );
 
     }
@@ -104,10 +103,6 @@ class RealEstateController extends Controller
       $sort = $this->query['sort'];
     }
 
-    // if(!empty($this->param['real_estate_type_id'])) {
-    //   $categoryId = $this->param['real_estate_type_id'];
-    // }
-
     $conditions = $filterHelper->buildFilters();
     $order = $filterHelper->buildSorting();
 
@@ -134,7 +129,7 @@ class RealEstateController extends Controller
       'sort' => $filterHelper->getDisplayingSorting()
     );
 
-    $this->mergeData($model->paginator->build());
+    $this->data = $model->paginator->build();
     $this->setData('title',$title);
     $this->setData('searchOptions',$searchOptions);
     $this->setData('displayingFilters',$displayingFilters);

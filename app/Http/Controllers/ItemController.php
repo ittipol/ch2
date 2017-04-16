@@ -52,7 +52,7 @@ class ItemController extends Controller
           $imageUrl = $cache->getCacheImageUrl($image,'list');
         }
 
-        $_items['data'][] = array_merge($item->buildPaginationData(),array(
+        $_items['items'][] = array_merge($item->buildPaginationData(),array(
           '_imageUrl' => $imageUrl,
           'detailUrl' => $url->setAndParseUrl('item/detail/{id}',array('id'=>$item->id))
         ));
@@ -67,7 +67,7 @@ class ItemController extends Controller
 
       $boards[] = array(
         'categoryName' => $category->name,
-        'items' => $_items,
+        'data' => $_items,
         'total' => $total,
         'itemBoardUrl' => $url->setAndParseUrl('item/board/{category_id}',array('category_id'=>$category->id)),
       );
@@ -106,10 +106,6 @@ class ItemController extends Controller
       $sort = $this->query['sort'];
     }
 
-    // if(!empty($this->param['category_id'])) {
-    //   $categoryId = $this->param['category_id'];
-    // }
-
     $filterHelper->setFilters($filters);
     $filterHelper->setSorting($sort);
 
@@ -122,7 +118,6 @@ class ItemController extends Controller
       'joins' => array('item_to_categories', 'item_to_categories.item_id', '=', 'items.id'),
       'conditions' => $conditions
     ),$order));
-
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl('item/board/'.$this->param['category_id']);
     $model->paginator->setUrl('item/detail/{id}','detailUrl');

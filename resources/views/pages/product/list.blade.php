@@ -5,15 +5,18 @@
   <div class="sub-header-nav-fixed-top">
     <div class="row">
       <div class="col-xs-12">
-        <div class="additional-option pull-right">
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="additional-option-content">
-            <a href="{{URL::to('product/shelf')}}">ไปยังหน้าสินค้าหลัก</a>
-            <a href="{{URL::to('product/category')}}">ไปยังหน้าแสดงหมวดสินค้า</a>
-          </div>
+
+        <div class="btn-group pull-right">
+          <a href="{{URL::to('product/shelf')}}" class="btn btn-secondary">กลับไปยังหน้าหลักสินค้า</a>
+          <button class="btn btn-secondary additional-option">
+            ...
+            <div class="additional-option-content">
+              <a href="{{URL::to('product/category')}}">ไปยังหน้าแสดงหมวดสินค้า</a>
+              <a href="{{URL::to('community/shop/create')}}">เพิ่มบริษัทหรือร้านค้า</a>
+            </div>
+          </button>
         </div>
+
       </div>
     </div>
   </div>
@@ -92,7 +95,9 @@
         <div class="card">
 
           @if(!empty($data['flag']))
+          <div class="flag-wrapper">
             <div class="flag sale-promotion">{{$data['flag']}}</div>
+          </div>
           @endif
           
           <div class="image-tile">

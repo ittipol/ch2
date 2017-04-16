@@ -11,7 +11,7 @@
           <button class="btn btn-secondary additional-option">
             ...
             <div class="additional-option-content">
-              <a href="{{URL::to('real_estate/board')}}">ไปยังหน้าหลักของประกาศอสังหาริมทรัพย์</a>
+              <a href="{{URL::to('real-estate/board')}}">ไปยังหน้าหลักของประกาศอสังหาริมทรัพย์</a>
               <a href="{{URL::to('item/board')}}">ไปยังหน้าหลักของประกาศสินค้า</a>
               <a href="{{URL::to('item/post')}}">เพิ่มประกาศเช่า-ซื้อ-ขายสินค้า</a>
             </div>
@@ -47,6 +47,13 @@
       <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
         <div class="card">
 
+          <div class="flag-wrapper">
+            <div class="flag">{{$data['_announcementTypeName']}}</div>
+            @if(!empty($data['need_broker']))
+            <div class="flag">{{$data['_need_broker']}}</div>
+            @endif
+          </div>
+
           <div class="image-tile">
             <a href="{{$data['detailUrl']}}">
               <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
@@ -57,12 +64,8 @@
               <div class="card-title">{{$data['_short_name']}}</div>
             </a>
             <div class="card-sub-info">
-              <h5>ราคา</h5>
-              {{$data['_price']}}
-            </div>
-            <div class="card-sub-info">
-              <h5>ประเภทอสังหาริมทรัพย์</h5>
-              {{$data['_realEstateTypeName']}}
+              <h5>ราคา{{$data['_announcementTypeName']}}</h5>
+              <div class="text-emphasize">{{$data['_price']}}</div>
             </div>
           </div>
 

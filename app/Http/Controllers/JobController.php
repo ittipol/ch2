@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
-use App\library\messageHelper;
-use App\library\url;
 use App\library\date;
+use App\library\messageHelper;
+use App\library\filterHelper;
 use App\library\notificationHelper;
+use App\library\url;
+use App\library\cache;
 use Redirect;
 
 class JobController extends Controller
@@ -16,24 +18,123 @@ class JobController extends Controller
     parent::__construct();
   }
 
+  public function board() {
+
+    $url = new Url;
+    $cache = new Cache;
+
+    $model = Service::loadModel('Job');
+
+    $employmentTypes = Service::loadModel('EmploymentType')->all();
+
+    $boards = array();
+    foreach ($employmentTypes as $type) {
+
+      $jobs = $model->where('employment_type_id','=',$type->id);
+
+      $total = $jobs->count('id');
+
+      $jobs = $jobs
+      ->orderBy('created_at','desc')
+      ->take(3)
+      ->get();
+
+      $_jobs = array();
+      foreach ($jobs as $job) {
+
+        $image = $job->getRelatedData('Image',array(
+          'first' => true
+        ));
+
+        $imageUrl = '/images/common/no-img.png';
+        if(!empty($image)) {
+          $imageUrl = $cache->getCacheImageUrl($image,'list');
+        }
+
+        $_jobs['items'][] = array_merge($job->buildPaginationData(),array(
+          '_imageUrl' => $imageUrl,
+          'detailUrl' => $url->setAndParseUrl('job/detail/{id}',array('id'=>$job->id))
+        ));
+        
+      }
+
+      if($total > 3) {
+        $_jobs['all'] = array(
+          'title' => '+'.($total-3)
+        );
+      }
+
+      $boards[] = array(
+        'typeName' => $type->name,
+        'data' => $_jobs,
+        'total' => $total,
+        'itemBoardUrl' => $url->setAndParseUrl('job/board/{employment_type_id}',array('employment_type_id'=>$type->id)),
+      );
+
+    }
+
+    $this->setData('boards',$boards);
+
+    return $this->view('pages.job.board');
+
+  }
+
   public function listView() {
 
     $model = Service::loadModel('Job');
+    $filterHelper = new FilterHelper($model);
     
     $page = 1;
     if(!empty($this->query['page'])) {
       $page = $this->query['page'];
     }
 
-    $model->paginator->criteria(array(
-      'order' => array('create_at','DESC')
-    ));
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
+
+    $filters = '';
+    if(!empty($this->query['fq'])) {
+      $filters = $this->query['fq'];
+    }
+
+    $sort = '';
+    if(!empty($this->query['sort'])) {
+      $sort = $this->query['sort'];
+    }
+
+    $conditions = $filterHelper->buildFilters();
+    $order = $filterHelper->buildSorting();
+
+    $conditions[] = array('employment_type_id','=',$this->param['employment_type_id']);
+
+    $model->paginator->criteria(array_merge(array(
+      'conditions' => $conditions
+    ),$order));
     $model->paginator->setPage($page);
-    $model->paginator->setPagingUrl('job/list');
+    $model->paginator->setPagingUrl('job/board/'.$this->param['employment_type_id']);
     $model->paginator->setUrl('job/detail/{id}','detailUrl');
+    $model->paginator->setQuery('sort',$sort);
+    $model->paginator->setQuery('fq',$filters);
+
+    $title = Service::loadModel('EmploymentType')->getTypeName($this->param['employment_type_id']);
+
+    $searchOptions = array(
+      'filters' => $filterHelper->getFilterOptions(),
+      'sort' => $filterHelper->getSortingOptions()
+    );
+
+    $displayingFilters = array(
+      'filters' => $filterHelper->getDisplayingFilterOptions(),
+      'sort' => $filterHelper->getDisplayingSorting()
+    );
 
     $this->data = $model->paginator->build();
-
+    $this->setData('title',$title);
+    $this->setData('searchOptions',$searchOptions);
+    $this->setData('displayingFilters',$displayingFilters);
+    
     return $this->view('pages.job.list');
   }
 

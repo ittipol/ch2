@@ -26,16 +26,14 @@
               <a href="{{URL::to('register')}}">สมัครสมาชิก</a>
             </li>
 
-            <li class="line space-top-bottom-10"></li>
-
           @else
 
             <li class="item">
-              <a href="{{URL::to('person/experience')}}">ประวัติการทำงานบุคคล</a>
+              <a href="{{URL::to('experience/profile/list')}}">ประวัติการทำงานบุคคล</a>
             </li>
 
             <li class="item">
-              <a href="{{URL::to('person/freelance')}}">ฟรีแลนซ์</a>
+              <a href="{{URL::to('freelance/board')}}">ฟรีแลนซ์</a>
             </li>
 
             <li class="item">

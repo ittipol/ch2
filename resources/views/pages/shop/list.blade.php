@@ -7,15 +7,7 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{URL::to('item/post')}}" class="btn btn-secondary">เพิ่มประกาศเช่า-ซื้อ-ขายสินค้า</a>
-          <button class="btn btn-secondary additional-option">
-            ...
-            <div class="additional-option-content">
-              <a href="{{URL::to('item/board')}}">ไปยังหน้าหลักของประกาศสินค้า</a>
-              <a href="{{URL::to('real_estate/board')}}">ไปยังหน้าหลักของประกาศอสังหาริมทรัพย์</a>
-              <a href="{{URL::to('real_estate/post')}}">เพิ่มประกาศเช่า-ซื้อ-ขายอสังหาริมทรัพย์</a>
-            </div>
-          </button>
+          <a href="{{URL::to('community/shop/create')}}" class="btn btn-secondary">เพิ่มบริษัทหรือร้านค้า</a>
         </div>
 
       </div>
@@ -25,7 +17,7 @@
 
 <div class="container list space-top-30">
 
-  <h3>{{$title}}</h3>
+  <h3>บริษัทและร้านค้า</h3>
   <div class="line"></div>
   <div class="text-right space-top-bottom-20">
     <a class="button" data-right-side-panel="1" data-right-side-panel-target="#filter_expand_panel">ตัวกรอง</a>
@@ -46,31 +38,21 @@
 
       <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
         <div class="card">
-
-          <div class="flag-wrapper">
-            <div class="flag">{{$data['_announcementTypeName']}}</div>
-          </div>
-
           <div class="image-tile">
-            <a href="{{$data['detailUrl']}}">
-              <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+            <a href="{{$data['shopUrl']}}">
+              <div class="card-image" style="background-image:url({{$data['cover']}});"></div>
             </a>
           </div>
-          
           <div class="card-info">
-            <a href="{{$data['detailUrl']}}">
-              <div class="card-title">{{$data['_short_name']}}</div>
+            <a href="{{$data['shopUrl']}}">
+              <div class="card-title">{{$data['name']}}</div>
             </a>
-            <div class="card-sub-info">
-              <h5>ราคา{{$data['_announcementTypeName']}}</h5>
-              <div class="text-emphasize">{{$data['_price']}}</div>
-            </div>
           </div>
 
           <div class="button-group">
 
-            <a href="{{$data['detailUrl']}}">
-              <div class="button wide-button">รายละเอียดสินค้า</div>
+            <a href="{{$data['shopUrl']}}">
+              <div class="button wide-button">ไปยังร้านค้า</div>
             </a>
           
           </div>

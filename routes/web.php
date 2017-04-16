@@ -172,19 +172,21 @@ Route::group(['middleware' => ['auth','person.experience']], function () {
 });
 
 // Freelance
+Route::get('freelance/board','FreelanceController@board');
+Route::get('freelance/board/{freelance_type_id}','FreelanceController@listView');
 Route::get('freelance/detail/{id}','FreelanceController@detail')->name('freelance.detail');
 
 Route::group(['middleware' => ['auth','person.experience']], function () {
 
   Route::get('person/freelance','FreelanceController@manage')->name('person.freelance.manage');
 
-  Route::get('person/freelance_post','FreelanceController@add')->name('freelance.add');
-  Route::post('person/freelance_post','FreelanceController@addingSubmit')->name('freelance.add');
+  Route::get('person/freelance/post','FreelanceController@add')->name('freelance.add');
+  Route::post('person/freelance/post','FreelanceController@addingSubmit')->name('freelance.add');
 
-  Route::get('person/freelance_edit/{id}','FreelanceController@edit')->name('freelance.edit')->middleware('editing.permission');;
-  Route::patch('person/freelance_edit/{id}','FreelanceController@editingSubmit')->name('freelance.edit')->middleware('editing.permission');;
+  Route::get('person/freelance/edit/{id}','FreelanceController@edit')->name('freelance.edit')->middleware('editing.permission');;
+  Route::patch('person/freelance/edit/{id}','FreelanceController@editingSubmit')->name('freelance.edit')->middleware('editing.permission');;
 
-  Route::get('person/freelance_delete/{id}','FreelanceController@delete')->name('freelance.delete');
+  Route::get('person/freelance/delete/{id}','FreelanceController@delete')->name('freelance.delete');
 
 });
 
@@ -344,7 +346,8 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 });
 
 // Job
-Route::get('job/list','JobController@listView')->name('job.list');
+Route::get('job/board','JobController@board');
+Route::get('job/board/{employment_type_id}','JobController@listView');
 Route::get('job/detail/{id}','JobController@detail')->name('job.detail');
 
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
@@ -395,7 +398,8 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 });
 
 // Advertising
-Route::get('advertising/list','AdvertisingController@listView')->name('advertising.list');
+Route::get('advertising/board','AdvertisingController@board');
+Route::get('advertising/board/{advertising_type_id}','AdvertisingController@listView')->name('advertising.list');
 Route::get('advertising/detail/{id}','AdvertisingController@detail')->name('advertising.detail');
 
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {

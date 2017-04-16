@@ -7,13 +7,11 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{URL::to('item/post')}}" class="btn btn-secondary">เพิ่มประกาศเช่า-ซื้อ-ขายสินค้า</a>
+          <a href="{{URL::to('job/board')}}" class="btn btn-secondary">กลับไปยังหน้าหลักการประกาศงาน</a>
           <button class="btn btn-secondary additional-option">
             ...
             <div class="additional-option-content">
-              <a href="{{URL::to('item/board')}}">ไปยังหน้าหลักของประกาศสินค้า</a>
-              <a href="{{URL::to('real_estate/board')}}">ไปยังหน้าหลักของประกาศอสังหาริมทรัพย์</a>
-              <a href="{{URL::to('real_estate/post')}}">เพิ่มประกาศเช่า-ซื้อ-ขายอสังหาริมทรัพย์</a>
+              <a href="{{URL::to('community/shop/create')}}">เพิ่มบริษัทหรือร้านค้า</a>
             </div>
           </button>
         </div>
@@ -23,7 +21,7 @@
   </div>
 </div>
 
-<div class="container list space-top-30">
+<div class="container list">
 
   <h3>{{$title}}</h3>
   <div class="line"></div>
@@ -46,38 +44,18 @@
 
       <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
         <div class="card">
-
-          <div class="flag-wrapper">
-            <div class="flag">{{$data['_announcementTypeName']}}</div>
-          </div>
-
           <div class="image-tile">
             <a href="{{$data['detailUrl']}}">
               <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
             </a>
           </div>
-          
           <div class="card-info">
             <a href="{{$data['detailUrl']}}">
               <div class="card-title">{{$data['_short_name']}}</div>
             </a>
-            <div class="card-sub-info">
-              <h5>ราคา{{$data['_announcementTypeName']}}</h5>
-              <div class="text-emphasize">{{$data['_price']}}</div>
-            </div>
           </div>
-
-          <div class="button-group">
-
-            <a href="{{$data['detailUrl']}}">
-              <div class="button wide-button">รายละเอียดสินค้า</div>
-            </a>
-          
-          </div>
-          
         </div>
       </div>
-
       @endforeach
 
     </div>
@@ -89,24 +67,14 @@
   <div class="list-empty-message text-center space-top-20">
     <img class="space-bottom-20" src="/images/common/not-found.png">
     <div>
-      <h3>ไม่พบข้อมูล การประกาศซื้อ-ขายสินค้า</h3>
-      <a href="{{URL::to('item/post')}}" class="button">เพิ่มการประกาศ</a>
+      <h3>ยังไม่มีข้อมูลตำแหน่งงาน</h3>
+      <p>ขออภัย ยังไม่มีข้อมูลตำแหน่งงาน</p>
+      <a href="{{URL::to('community/shop/create')}}" class="button">สร้างร้านค้าของคุณในชุมชน เพื่อเพิ่มตำแหน่งของคุณ</a>
     </div>
   </div>
 
   @endif
 
 </div>
-
-<script type="text/javascript">
-
-  $(document).ready(function(){
-
-    const filter = new Filter(true);
-    filter.load();
-
-  });
-
-</script>
 
 @stop

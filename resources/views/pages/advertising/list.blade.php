@@ -1,51 +1,84 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-  <div class="container list">
+<div class="sub-header-nav">
+  <div class="sub-header-nav-fixed-top">
+    <div class="row">
+      <div class="col-xs-12">
 
-    @if(!empty($_pagination['data']))
-
-      <div class="row">
-
-        @foreach($_pagination['data'] as $data)
-
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-          <div class="card">
-            <div class="image-tile">
-              <a href="{{$data['detailUrl']}}">
-                <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
-              </a>
+        <div class="btn-group pull-right">
+          <a href="{{URL::to('advertising/board')}}" class="btn btn-secondary">กลับไปยังหน้าหลักโฆษณา</a>
+          <button class="btn btn-secondary additional-option">
+            ...
+            <div class="additional-option-content">
+              <a href="{{URL::to('community/shop/create')}}">เพิ่มบริษัทหรือร้านค้า</a>
             </div>
-            <div class="card-info">
-              <a href="{{$data['detailUrl']}}">
-                <div class="card-title">{{$data['_short_name']}}</div>
-              </a>
-              <div class="card-sub-info">
-                <div>ประเภทโฆษณา</div>
-                {{$data['_advertisingType']}}
-              </div>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container list">
+
+  <h3>{{$title}}</h3>
+  <div class="line"></div>
+  <div class="text-right space-top-bottom-20">
+    <a class="button" data-right-side-panel="1" data-right-side-panel-target="#filter_expand_panel">ตัวกรอง</a>
+  </div>
+
+  <div id="filter_expand_panel" class="right-size-panel filter">
+    <div class="right-size-panel-inner">
+      @include('components.filter_expand_panel')
+      <div class="right-size-panel-close-button"></div>
+    </div>
+  </div>
+
+  @if(!empty($_pagination['data']))
+
+    <div class="row">
+
+      @foreach($_pagination['data'] as $data)
+
+      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <div class="card">
+          <div class="image-tile">
+            <a href="{{$data['detailUrl']}}">
+              <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+            </a>
+          </div>
+          <div class="card-info">
+            <a href="{{$data['detailUrl']}}">
+              <div class="card-title">{{$data['_short_name']}}</div>
+            </a>
+            <div class="card-sub-info">
+              <div>ประเภทโฆษณา</div>
+              {{$data['_advertisingType']}}
             </div>
           </div>
         </div>
-        @endforeach
-
       </div>
+      @endforeach
 
-      @include('components.pagination') 
-
-    @else
-
-    <div class="list-empty-message text-center space-top-20">
-      <img class="space-bottom-20" src="/images/common/not-found.png">
-      <div>
-        <h3>ยังไม่มีข้อมูลตำแหน่งงาน</h3>
-        <p>ขออภัย ยังไม่มีข้อมูลตำแหน่งงาน</p>
-        <a href="{{URL::to('community/shop/create')}}" class="button">สร้างร้านค้าของคุณในชุมชน เพื่อเพิ่มตำแหน่งของคุณ</a>
-      </div>
     </div>
 
-    @endif
+    @include('components.pagination') 
 
+  @else
+
+  <div class="list-empty-message text-center space-top-20">
+    <img class="space-bottom-20" src="/images/common/not-found.png">
+    <div>
+      <h3>ยังไม่มีข้อมูลตำแหน่งงาน</h3>
+      <p>ขออภัย ยังไม่มีข้อมูลตำแหน่งงาน</p>
+      <a href="{{URL::to('community/shop/create')}}" class="button">สร้างร้านค้าของคุณในชุมชน เพื่อเพิ่มตำแหน่งของคุณ</a>
+    </div>
   </div>
+
+  @endif
+
+</div>
 
 @stop

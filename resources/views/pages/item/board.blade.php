@@ -34,6 +34,10 @@
 
                 <div class="card">
 
+                  <div class="flag-wrapper">
+                    <div class="flag">{{$item['_announcementTypeName']}}</div>
+                  </div>
+                  
                   <div class="image-tile">
                     <a href="{{$item['detailUrl']}}">
                       <div class="card-image" style="background-image:url({{$item['_imageUrl']}});"></div>
@@ -47,11 +51,8 @@
                     </a>
 
                     <div class="card-sub-info">
-
-                      <div class="card-sub-info-row product-price-section">
-                        <span class="product-price">{{$item['_price']}}</span>
-                      </div>
-
+                      <h5>ราคา{{$item['_announcementTypeName']}}</h5>
+                      <div class="text-emphasize">{{$item['_price']}}</div>
                     </div>
 
                   </div>

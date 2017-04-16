@@ -48,7 +48,30 @@ class Job extends Model
       'name.required' => 'ชื่อห้ามว่าง',
       'salary.required' => 'เงินเดือนห้ามว่าง',
     )
-  ); 
+  );
+
+  protected $sortingFields = array(
+    'title' => 'จัดเรียงตาม',
+    'options' => array(
+      array(
+        'name' => 'ตัวอักษร A - Z ก - ฮ',
+        'value' => 'name:asc'
+      ),
+      array(
+        'name' => 'ตัวอักษร Z - A ฮ - ก',
+        'value' => 'name:desc'
+      ),
+      array(
+        'name' => 'วันที่เก่าที่สุดไปหาใหม่ที่สุด',
+        'value' => 'created_at:asc'
+      ),
+      array(
+        'name' => 'วันที่ใหม่ที่สุดไปหาเก่าที่สุด',
+        'value' => 'created_at:desc'
+      ),
+    ),
+    'default' => 'created_at:desc'
+  );
 
   public function __construct() {  
     parent::__construct();
@@ -141,42 +164,23 @@ class Job extends Model
 
     $string = new String;
 
+    // get Company name
+    $shop = $this->getRelatedData('ShopRelateTo',array(
+      'first' => true,
+    ))->shop;
+
     return array(
       'id' => $this->id,
       'name' => $this->name,
       '_short_name' => $string->truncString($this->name,60),
-      '_salary' => $this->getSalary()
+      '_salary' => $this->getSalary(),
+      'shopName' => $shop->name
     );
 
   }
 
   public function buildModelData() {
 
-    // $this->salary = trim($this->salary);
-    // $this->salary = str_replace(',', '', $this->salary);
-
-    // preg_match_all('/[0-9]+/', $this->salary, $matches);
-
-    // $numbers = array();
-    // foreach ($matches[0] as $key => $match) {
-    //   $this->salary = str_replace($match, number_format($match, 0, '.', ','), $this->salary);
-    // }
-
-    // $_salary = substr($this->salary, -3);
-    // $addBaht = true;
-    // for ($i=0; $i < 3; $i++) { 
-      
-    //   if((ord($_salary[$i]) < 48) || (ord($_salary[$i]) > 57)) {
-    //     $addBaht = false;
-    //     break;
-    //   }
-
-    // }
-
-    // if($addBaht) {
-    //   $this->salary .= ' บาท';
-    // }
-    
     $this->salary = $this->getSalary($this->salary);
 
     $recruitment = json_decode($this->recruitment,true);

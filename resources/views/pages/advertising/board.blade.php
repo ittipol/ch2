@@ -4,7 +4,7 @@
 <div class="top-header-wrapper top-header-border">
   <div class="container">
     <div class="top-header">
-      <h2>ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</h2>
+      <h2>โฆษณา</h2>
     </div>
   </div>
 </div>
@@ -15,10 +15,10 @@
 
     <div class="shelf">
 
-      <h3>{{$board['typeName']}}</h3>
+      <h3>โฆษณา{{$board['typeName']}}</h3>
 
       <h2>{{$board['total']}}</h2>
-      <h5>รายการประกาศอสังหาริมทรัพย์</h5>
+      <h5>รายการโฆษณา</h5>
 
       <div class="row">
 
@@ -34,13 +34,6 @@
 
                 <div class="card">
 
-                  <div class="flag-wrapper">
-                    <div class="flag">{{$item['_announcementTypeName']}}</div>
-                    @if(!empty($item['need_broker']))
-                    <div class="flag">{{$item['_need_broker']}}</div>
-                    @endif
-                  </div>
-
                   <div class="image-tile">
                     <a href="{{$item['detailUrl']}}">
                       <div class="card-image" style="background-image:url({{$item['_imageUrl']}});"></div>
@@ -52,11 +45,6 @@
                     <a href="{{$item['detailUrl']}}">
                       <div class="card-title">{{$item['_short_name']}}</div>
                     </a>
-
-                    <div class="card-sub-info">
-                      <h5>ราคา{{$item['_announcementTypeName']}}</h5>
-                      <div class="text-emphasize">{{$item['_price']}}</div>
-                    </div>
 
                   </div>
 

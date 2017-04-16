@@ -3,16 +3,11 @@
 }
 
 .card {
-	/*margin-top: 40px;
-	position: relative;
-	border-top: 5px solid #0071c5;
-	padding-top: 20px;*/
-
 	margin-top: 40px;
 	position: relative;
-	padding-top: 20px;
+	/*padding-top: 20px;*/
 	background-color: #fff;
-	border: 2px solid #F2F3F7;
+	border: 2px solid #FDD835;
 }
 
 .card .overlay-top-info {
@@ -32,18 +27,15 @@
 }
 
 .card .card-info {
-	/*margin-top: 20px;*/
-
 	position: relative;
-	/*margin-top: 20px;*/
-  background-color: #F2F3F7;
+  background-color: #FFD54F;
   padding: 15px 10px;
 }
 
 .card .image-tile {
 	width: 100%;
 	text-align: center;
-	margin-bottom: 10px;
+	/*margin-bottom: 10px;*/
 }
 
 .card .image-tile .card-image {
@@ -65,16 +57,6 @@
 }
 
 .card .card-title {
-  /*text-transform: uppercase;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 16px;
-  color: #0071c5;
-  cursor: pointer;
-  height: 50px;
-  line-height: 24px;
-  overflow: hidden;*/
-
   text-decoration: none;
   font-size: 16px;
   color: #666;
@@ -115,6 +97,10 @@
 
 .card .card-desciption {
 	height: 80px;
+}
+
+.card .text-emphasize {
+	color: #EF6C00;
 }
 
 .card .info h4 {
@@ -167,39 +153,26 @@
 	color: #999;
 }
 
-.card .flag {
-	/*position: absolute;
-  top: 20px;
-  right: 0;
-  padding: 6px 15px;
-  background-color: #0071c5;
-  color: #fff;
-  font-size: 14px;
-  border-radius: 20px 0 0 20px;*/
+.card .flag-wrapper {
+	position: absolute;
+	top: -1px;
+	right: -1px;
+}
 
-  position: absolute;
-  top: -1px;
-  right: -1px;
+.card .flag {
   padding: 6px 20px;
   background-color: #EF6C00;
   color: #fff;
   font-size: 14px;
+  display: inline-block;
 }
 
 .card .button-group {
-	/*position: relative;
-	margin: 15px 0 0;
-	height: 40px;*/
-
 	position: relative;
 	height: 40px;
 }
 
 .card .button {
-	/*margin: 0;
-	padding: 0;
-	line-height: 40px;*/
-
 	margin: 0;
 	padding: 0;
 	line-height: 40px;
@@ -214,7 +187,6 @@
 	position: absolute;
 	top: 0;
 	right: 0;
-	/*background-color: rgb(29,66,133);*/
 	background-color: #BDBDBD;
 }
 

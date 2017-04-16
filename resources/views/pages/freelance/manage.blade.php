@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-lg-6 col-sm-12">
         <div class="title">
-          ฟรีแลนซ์
+          งานฟรีแลนซ์ที่ประกาศ
         </div>
       </div>
     </div>
@@ -17,12 +17,12 @@
 
     <div class="tile-nav small">
       <div class="tile-nav-image">
-        <a href="{{URL::to('person/freelance_post')}}">
+        <a href="{{URL::to('person/freelance/post')}}">
           <img src="/images/common/plus.png">
         </a>
       </div>
       <div class="tile-nav-info">
-        <a href="{{URL::to('person/freelance_post')}}">
+        <a href="{{URL::to('person/freelance/post')}}">
           <h4 class="tile-nav-title">เพิ่มงานฟรีแลนซ์ของคุณ</h4>
         </a>
       </div>
@@ -89,7 +89,7 @@
       <div>
         <h3>ฟรีแลนซ์</h3>
         <p>ยังไม่มีงานฟรีแลนซ์ เพิ่มฟรีแลนซ์ของคุณ เพื่อให้ผู้คนได้เห็นและจ้างงานฟรีแลนซ์คุณได้</p>
-        <a href="{{URL::to('person/freelance_post')}}" class="button">เพิ่มสาขา</a>
+        <a href="{{URL::to('person/freelance/post')}}" class="button">เพิ่มสาขา</a>
       </div>
     </div>
 

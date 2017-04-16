@@ -19,10 +19,6 @@
     <div class="shelf">
 
       <h3>{{$shelf['categoryName']}}</h3>
-      <!-- <div class="space-bottom-10"> -->
-        <!-- <a href="" >แสดงสินค้าทั้งหมด ({{$shelf['total']}})</a> -->
-        <!-- <a href="">แสดงหมวดสินค้าที่เกี่ยวข้องทั้งหมด</a> -->
-      <!-- </div> -->
 
       <h2>{{$shelf['total']}}</h2>
       <h5>รายการสินค้า</h5>
@@ -40,7 +36,9 @@
                 <div class="card">
 
                   @if(!empty($product['flag']))
+                  <div class="flag-wrapper">
                     <div class="flag sale-promotion">{{$product['flag']}}</div>
+                  </div>
                   @endif
                   
                   <div class="image-tile">

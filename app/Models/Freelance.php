@@ -55,6 +55,18 @@ class Freelance extends Model
     return $this->freelanceType->name;
   }
 
+  public function buildPaginationData() {
+
+    $string = new String;
+
+    return array(
+      'id' => $this->id,
+      'name' => $this->name,
+      '_short_name' => $string->truncString($this->name,45),
+    );
+    
+  }
+
   public function buildModelData() {
 
     $string = new String;

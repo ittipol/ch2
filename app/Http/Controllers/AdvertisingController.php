@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
 use App\library\messageHelper;
+use App\library\filterHelper;
 use App\library\url;
+use App\library\cache;
 use Redirect;
 
 class AdvertisingController extends Controller
@@ -14,23 +16,123 @@ class AdvertisingController extends Controller
     parent::__construct();
   }
 
+  public function board() {
+
+    $url = new Url;
+    $cache = new Cache;
+
+    $model = Service::loadModel('Advertising');
+
+    $advertisingTypes = Service::loadModel('AdvertisingType')->all();
+
+    $boards = array();
+    foreach ($advertisingTypes as $type) {
+
+      $advertisings = $model->where('advertising_type_id','=',$type->id);
+
+      $total = $advertisings->count('id');
+
+      $advertisings = $advertisings
+      ->orderBy('created_at','desc')
+      ->take(3)
+      ->get();
+
+      $_advertisings = array();
+      foreach ($advertisings as $advertising) {
+        
+        $image = $advertising->getRelatedData('Image',array(
+          'first' => true
+        ));
+
+        $imageUrl = '/images/common/no-img.png';
+        if(!empty($image)) {
+          $imageUrl = $cache->getCacheImageUrl($image,'list');
+        }
+
+        $_advertisings['items'][] = array_merge($advertising->buildPaginationData(),array(
+          '_imageUrl' => $imageUrl,
+          'detailUrl' => $url->setAndParseUrl('real-estate/detail/{id}',array('id'=>$advertising->id))
+        ));
+
+      }
+
+      if($total > 3) {
+        $_advertisings['all'] = array(
+          'title' => '+'.($total-3)
+        );
+      }
+
+      $boards[] = array(
+        'typeName' => $type->name,
+        'data' => $_advertisings,
+        'total' => $total,
+        'itemBoardUrl' => $url->setAndParseUrl('advertising/board/{advertising_type_id}',array('advertising_type_id'=>$type->id)),
+      );
+
+    }
+
+    $this->setData('boards',$boards);
+
+    return $this->view('pages.advertising.board');
+
+  }
+
   public function listView() {
 
     $model = Service::loadModel('Advertising');
-    
+    $filterHelper = new FilterHelper($model);
+
     $page = 1;
     if(!empty($this->query['page'])) {
       $page = $this->query['page'];
     }
 
-    $model->paginator->criteria(array(
-      'order' => array('created_at','DESC')
-    ));
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
+
+    $filters = '';
+    if(!empty($this->query['fq'])) {
+      $filters = $this->query['fq'];
+    }
+
+    $sort = '';
+    if(!empty($this->query['sort'])) {
+      $sort = $this->query['sort'];
+    }
+
+    $conditions = $filterHelper->buildFilters();
+    $order = $filterHelper->buildSorting();
+
+    $conditions[] = array('advertising_type_id','=',$this->param['advertising_type_id']);
+
+
+    $model->paginator->criteria(array_merge(array(
+      'conditions' => $conditions
+    ),$order));
     $model->paginator->setPage($page);
-    $model->paginator->setPagingUrl('advertising/list');
+    $model->paginator->setPagingUrl('advertising/board/'.$this->param['advertising_type_id']);
     $model->paginator->setUrl('advertising/detail/{id}','detailUrl');
+    $model->paginator->setQuery('sort',$sort);
+    $model->paginator->setQuery('fq',$filters);
+
+    $title = Service::loadModel('AdvertisingType')->getTypeName($this->param['advertising_type_id']);
+
+    $searchOptions = array(
+      'filters' => $filterHelper->getFilterOptions(),
+      'sort' => $filterHelper->getSortingOptions()
+    );
+
+    $displayingFilters = array(
+      'filters' => $filterHelper->getDisplayingFilterOptions(),
+      'sort' => $filterHelper->getDisplayingSorting()
+    );
 
     $this->data = $model->paginator->build();
+    $this->setData('title',$title);
+    $this->setData('searchOptions',$searchOptions);
+    $this->setData('displayingFilters',$displayingFilters);
 
     return $this->view('pages.advertising.list');
   }

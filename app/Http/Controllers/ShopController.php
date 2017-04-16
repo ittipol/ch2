@@ -6,6 +6,7 @@ use App\Http\Requests\CustomFormRequest;
 use App\library\service;
 use App\library\url;
 use App\library\messageHelper;
+use App\library\filterHelper;
 use Redirect;
 
 class ShopController extends Controller
@@ -15,7 +16,64 @@ class ShopController extends Controller
     parent::__construct();
   }
 
-  // public function index() {}
+  public function listView() {
+
+    $model = Service::loadModel('Shop');
+    $filterHelper = new FilterHelper($model);
+
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
+
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
+
+    $filters = '';
+    if(!empty($this->query['fq'])) {
+      $filters = $this->query['fq'];
+    }
+
+    $sort = '';
+    if(!empty($this->query['sort'])) {
+      $sort = $this->query['sort'];
+    }
+
+    $filterHelper->setFilters($filters);
+    $filterHelper->setSorting($sort);
+
+    $conditions = $filterHelper->buildFilters();
+    $order = $filterHelper->buildSorting();
+
+    $model->paginator->criteria(array_merge(array(
+      'conditions' => $conditions
+    ),$order));
+    $model->paginator->setPage($page);
+    $model->paginator->setPagingUrl('community/shop');
+    $model->paginator->setUrl('shop/{slug}','shopUrl');
+    $model->paginator->setQuery('sort',$sort);
+    $model->paginator->setQuery('fq',$filters);
+    $model->paginator->disableGetImage();
+
+    $searchOptions = array(
+      'filters' => $filterHelper->getFilterOptions(),
+      'sort' => $filterHelper->getSortingOptions()
+    );
+
+    $displayingFilters = array(
+      'filters' => $filterHelper->getDisplayingFilterOptions(),
+      'sort' => $filterHelper->getDisplayingSorting()
+    );
+
+    $this->data = $model->paginator->build();
+    $this->setData('searchOptions',$searchOptions);
+    $this->setData('displayingFilters',$displayingFilters);
+
+    return $this->view('pages.shop.list');
+
+  }
 
   public function manage() {
 

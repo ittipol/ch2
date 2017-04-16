@@ -129,7 +129,6 @@ class RealEstate extends Model
     'default' => 'created_at:desc'
   );
 
-
   public function __construct() {  
     parent::__construct();
   }
@@ -140,6 +139,20 @@ class RealEstate extends Model
 
   public function realEstateType() {
     return $this->hasOne('App\Models\RealEstateType','id','real_estate_type_id');
+  }
+
+  public static function boot() {
+
+    parent::boot();
+
+    RealEstate::saving(function($realEstate){
+
+      if(!$realEstate->exists && empty($realEstate->opened)) {
+        $realEstate->opened = 1;
+      }
+
+    });
+
   }
 
   public function fill(array $attributes) {
@@ -322,8 +335,8 @@ class RealEstate extends Model
       'name' => $this->name,
       'description' => !empty($this->description) ? $this->description : '-',
       'need_broker' => $this->need_broker,
-      '_furniture' => $furniture,
       '_need_broker' => $this->need_broker ? 'ต้องการตัวแทนขาย' : 'ไม่ต้องการตัวแทนขาย',
+      '_furniture' => $furniture,
       '_price' => $currency->format($this->price),
       '_homeArea' => $_homeArea,
       '_landArea' => $_landArea,
@@ -345,7 +358,10 @@ class RealEstate extends Model
       'name' => $this->name,
       '_short_name' => $string->truncString($this->name,70),
       '_price' => $currency->format($this->price),
-      '_realEstateTypeName' => $this->realEstateType->name
+      '_realEstateTypeName' => $this->realEstateType->name,
+      '_announcementTypeName' => $this->announcementType->name,
+      'need_broker' => $this->need_broker,
+      '_need_broker' => $this->need_broker ? 'ต้องการตัวแทนขาย' : 'ไม่ต้องการตัวแทนขาย',
     );
   }
 

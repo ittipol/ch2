@@ -132,6 +132,20 @@ class Item extends Model
     return $this->hasMany('App\Models\ItemToCategory','item_id','id');
   }
 
+  public static function boot() {
+
+    parent::boot();
+
+    Item::saving(function($item){
+
+      if(!$item->exists && empty($item->opened)) {
+        $item->opened = 1;
+      }
+
+    });
+
+  }
+
   public function fill(array $attributes) {
 
     if(!empty($attributes)) {
@@ -182,7 +196,8 @@ class Item extends Model
       'id' => $this->id,
       'name' => $this->name,
       '_short_name' => $string->truncString($this->name,45),
-      '_price' => $currency->format($this->price)
+      '_price' => $currency->format($this->price),
+      '_announcementTypeName' => $this->announcementType->name,
     );
     
   }
