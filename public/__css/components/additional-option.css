@@ -71,7 +71,7 @@
   position: absolute;
   background-color: #ffffff;
   border: 1px solid #cfcfcf;
-  z-index: 999;
+  z-index: 70;
   display: none;
 }
 

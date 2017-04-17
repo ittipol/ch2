@@ -192,7 +192,6 @@ class Paginator {
     ->Where(function ($query) {
       $query = $this->getAccessPermision($query);
     })    
-    // ->select('data_access_permissions.*')
     ->take($this->perPage)
     ->skip($offset)
     ->get();

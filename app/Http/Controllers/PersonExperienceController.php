@@ -47,15 +47,12 @@ class PersonExperienceController extends Controller
 
     $conditions = $filterHelper->buildFilters();
     $order = $filterHelper->buildSorting();
-    $joins = $filterHelper->getJoining();
 
     $criteria = array();
 
-    if(!empty($joins)) {
-      $criteria = array_merge($criteria,array(
-        'joins' => $joins
-      ));
-    }
+    $criteria = array_merge($criteria,array(
+      'joins' => array('people', 'people.id', '=', 'person_experiences.person_id')
+    ));
 
     if(!empty($conditions)) {
       $criteria = array_merge($criteria,array(
@@ -99,13 +96,15 @@ class PersonExperienceController extends Controller
 
   public function detail() {
 
-    $person = Service::loadModel('Person')->find(Session::get('Person.id'));
+    $personExperience = Service::loadModel('PersonExperience')->find($this->param['id']);
+
+    $person = $personExperience->person;
 
     $person->modelData->loadData(array(
       'models' => array('Address','Contact')
     ));
 
-    $this->data = $person->personExperience->getPersonExperience();
+    $this->data = $personExperience->getPersonExperience();
     $this->setData('profile',$person->modelData->build(true));
     $this->setData('profileImageUrl',$person->getProfileImageUrl());
 
@@ -257,7 +256,6 @@ class PersonExperienceController extends Controller
     if(!$model->checkExistByPersonId()) {
       
       $model->fill(array(
-        'name' => $person->name,
         'active' => 0
       ))->save();
 
@@ -269,7 +267,7 @@ class PersonExperienceController extends Controller
 
     }
 
-    return Redirect::to('experience');
+    return Redirect::to('person/experience');
 
   }
 

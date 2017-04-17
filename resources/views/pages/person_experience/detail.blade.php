@@ -65,19 +65,23 @@
             <h4>ติดต่อ</h4>
             <div class="line space-top-bottom-10"></div>
 
-            @if(!empty($profile['Contact']['phone_number']))
             <dl>
               <dt>หมายเลขโทรศัพท์</dt>
+              @if(!empty($profile['Contact']['phone_number']))
               <dd>{{$profile['Contact']['phone_number']}}</dd>
+              @else
+              <dd>-</dd>
+              @endif
             </dl>
-            @endif
 
-            @if(!empty($profile['Contact']['email']))
             <dl>
               <dt>อีเมล</dt>
+              @if(!empty($profile['Contact']['email']))
               <dd>{{$profile['Contact']['email']}}</dd>
+              @else
+              <dd>-</dd>
+              @endif
             </dl>
-            @endif
 
           </div>
 

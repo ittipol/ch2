@@ -45,6 +45,10 @@ a.button:visited {
 	background-color: #0071c5;
 }
 
+.line.only-space {
+	height: 0;
+}
+
 .line.grey {
 	background-color: #bababa;
 }

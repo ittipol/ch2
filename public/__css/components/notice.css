@@ -1,0 +1,40 @@
+.notice-box-wrapper {
+
+}
+
+.notice-box-wrapper .notice-box {
+	color: #fff;
+	width: 100%;
+	height: 530px;
+	background-color: rgb(12,139,8);
+	margin-bottom: 15px;
+	position: relative;
+}
+
+.notice-box .notice-box-inner {
+	padding: 15px;
+}
+
+.notice-box .notice-box-image {
+
+}
+
+.notice-box .notice-box-image > img {
+	width: 100%;
+	/*height: 150px;*/
+}
+
+.notice-box .notice-box-info {
+	padding: 20px 60px;
+}
+
+.notice-box .notice-box-info .notice-box-description {
+	font-size: 18px;
+}
+
+.notice-box .float-button {
+	position: absolute;
+	bottom: 15px;
+	right: 15px;
+	background-color: rgba(0,0,0,.3);
+}

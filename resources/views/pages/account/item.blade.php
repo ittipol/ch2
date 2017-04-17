@@ -40,7 +40,7 @@
 
         @foreach($_pagination['data'] as $data)
 
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <div class="col-lg-3 col-sm-4 col-xs-12">
           <div class="card">
             <div class="image-tile">
               <a href="{{$data['detailUrl']}}">
@@ -68,7 +68,7 @@
                 <div class="dot"></div>
                 <div class="additional-option-content">
                   <a href="{{$data['detailUrl']}}">แสดงรายละเอียด</a>
-                  <a href="{{$data['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการลบ {{$data['_short_name']}} ใช่หรือไม่">ลบ</a>
+                  <a href="{{$data['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการยกเลิกประกาศ {{$data['_short_name']}} ใช่หรือไม่">ยกเลิกประกาศ</a>
                 </div>
               </div>
            

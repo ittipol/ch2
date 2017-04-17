@@ -3,6 +3,28 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 
+<div class="sub-header-nav">
+  <div class="sub-header-nav-fixed-top">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <div class="btn-group pull-right">
+          <a href="{{URL::to('item/post')}}" class="btn btn-secondary">เพิ่มประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</a>
+          <button class="btn btn-secondary additional-option">
+            ...
+            <div class="additional-option-content">
+              <a href="{{URL::to('real-estate/board')}}">ไปยังหน้าหลักของประกาศอสังหาริมทรัพย์</a>
+              <a href="{{URL::to('item/board')}}">ไปยังหน้าหลักของประกาศสินค้า</a>
+              <a href="{{URL::to('item/post')}}">เพิ่มประกาศเช่า-ซื้อ-ขายสินค้า</a>
+            </div>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="top-header-wrapper top-header-border">
   <div class="container">
     <div class="top-header">
@@ -50,19 +72,20 @@
         </div>
         
         <div class="image-gallary-display-inner">
-
           <div class="image-gallary-panel">
             <img id="image_display">
           </div>
 
-          <div class="display-image-description-icon additional-option icon">
-            <img src="/images/icons/additional-white.png">
-            <div class="additional-option-content">
-              <a class="image-description-display-button">แสดงคำอธิบายรูปภาพ</a>
+          <div class="additional-option">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="additional-option-content">
+                <a class="image-description-display-button">คำอธิบายรูปภาพ</a>
+              </div>
             </div>
-          </div>
-
         </div>
+        
       </div>
 
     </div>
@@ -81,6 +104,14 @@
   <div class="row">
 
     <div class="col-xs-6">
+
+      @if (Auth::check() && (Session::get('Person.id') == $_modelData['person_id']))
+      <div>
+        <a href="" class="button">ยกเลิกประกาศ</a>
+        <div class="line space-top-bottom-20"></div>
+      </div>
+      @endif
+
       <div class="item-info">
 
         <div class="item-info-row">
@@ -159,7 +190,7 @@
     </div>
   </div>
 
-  <div class="line space-top-bottom-20"></div>
+  <div class="line only-space space-top-bottom-30"></div>
 
   <div class="row">
     <dt class="col-sm-3">คุณสมบัติ</dt>
@@ -172,7 +203,7 @@
     </dd>
   </div>
 
-  <div class="line space-top-bottom-20"></div>
+  <div class="line only-space space-top-bottom-30"></div>
 
   <div class="row">
     <dt class="col-sm-3">จุดเด่น</dt>
@@ -193,7 +224,7 @@
     </dd>
   </div>
 
-  <div class="line space-top-bottom-20"></div>
+  <div class="line only-space space-top-bottom-30"></div>
 
   <div class="row">
     <dt class="col-sm-3">สิ่งอำนวยความสะดวก</dt>

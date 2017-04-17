@@ -103,6 +103,7 @@
     '__css/components/breadcrumb.css',
     '__css/components/attached-file.css',
     '__css/components/tab.css',
+    '__css/components/notice.css',
     '__css/pages/home.css',
     '__css/pages/shop.css',
     '__css/pages/account.css',

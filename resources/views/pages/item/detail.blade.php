@@ -1,6 +1,28 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
+<div class="sub-header-nav">
+  <div class="sub-header-nav-fixed-top">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <div class="btn-group pull-right">
+          <a href="{{URL::to('item/post')}}" class="btn btn-secondary">เพิ่มประกาศเช่า-ซื้อ-ขายสินค้า</a>
+          <button class="btn btn-secondary additional-option">
+            ...
+            <div class="additional-option-content">
+              <a href="{{URL::to('item/board')}}">ไปยังหน้าหลักของประกาศสินค้า</a>
+              <a href="{{URL::to('real_estate/board')}}">ไปยังหน้าหลักของประกาศอสังหาริมทรัพย์</a>
+              <a href="{{URL::to('real_estate/post')}}">เพิ่มประกาศเช่า-ซื้อ-ขายอสังหาริมทรัพย์</a>
+            </div>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="top-header-wrapper top-header-border">
   <div class="container">
     <div class="top-header">
@@ -22,12 +44,6 @@
 <div class="detail container">
 
   <h4 class="title-with-icon location-pin">{{$_modelData['Address']['_short_address']}}</h4>
-
-  @if (Auth::check() && (Session::get('Person.id') == $_modelData['person_id']))
-  <div class="text-right">
-    <a href="" class="button">ปิดการประกาศ</a>
-  </div>
-  @endif
 
   <div class="image-gallery">
 
@@ -52,19 +68,20 @@
         </div>
 
         <div class="image-gallary-display-inner">
-
           <div class="image-gallary-panel">
             <img id="image_display">
           </div>
 
-          <div class="display-image-description-icon additional-option icon">
-            <img src="/images/icons/additional-white.png">
-            <div class="additional-option-content">
-              <a class="image-description-display-button">แสดงคำอธิบายรูปภาพ</a>
+          <div class="additional-option">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="additional-option-content">
+                <a class="image-description-display-button">คำอธิบายรูปภาพ</a>
+              </div>
             </div>
-          </div>
-
         </div>
+
       </div>
 
     </div>
@@ -78,9 +95,18 @@
     <div class="line space-top-bottom-20"></div>
     @endif
 
-  </div class="row">
+  </div>
+
+  <div class="row">
 
     <div class="col-md-4 col-xs-12">
+
+      @if (Auth::check() && (Session::get('Person.id') == $_modelData['person_id']))
+      <div>
+        <a href="" class="button">ยกเลิกประกาศ</a>
+        <div class="line space-top-bottom-20"></div>
+      </div>
+      @endif
 
       <div class="item-info">
 
@@ -129,91 +155,34 @@
 
       </div>
 
-      @if (Auth::check() && (Session::get('Person.id') == $_modelData['person_id']))
-      <div class="space-top-20">
-        <div class="line space-bottom-20"></div>
-        <a href="" class="button">ปิดการประกาศ</a>
-      </div>
-      @endif
-
     </div>
 
     <div class="col-md-8 col-xs-12">
 
-      <div class="detail-info-section no-margin">
+      <div class="margin-section section-border-left no-margin">
+
+        <div class="space-top-bottom-10 section-inner">
+          
+          <h4>รายละเอียด {{$_modelData['name']}}</h4>   
+          <div>
+            {!!$_modelData['description']!!}
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- <div class="detail-info-section no-margin">
         <h4>รายละเอียด {{$_modelData['name']}}</h4>
         <div class="line"></div> 
         <div class="detail-info">
           {!!$_modelData['description']!!}
         </div>
-      </div>
+      </div> -->
 
     </div>
-
-  <div>
 
   </div>
-
-  <!-- <div class="row">
-
-    <div class="col-xs-6">
-      <div class="item-info">
-
-        <div class="item-info-row">
-          <p>ราคา{{$_modelData['_announcementTypeName']}}</p>
-          <h4 class="text-emphasize">{{$_modelData['_price']}}</h4>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="col-xs-6">
-      <div class="item-info">
-
-        <p>ติดต่อผู้{{$_modelData['_announcementTypeName']}}</p>
-
-        <div class="row">
-          <div class="col-md-3">
-            <div class="item-info-row">
-              @if(!empty($_modelData['Contact']['phone_number']))
-              <h4 class="title-with-icon phone">{{$_modelData['Contact']['phone_number']}}</h4>
-              @else
-              <h4 class="title-with-icon phone">-</h4>
-              @endif
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="item-info-row">
-              @if(!empty($_modelData['Contact']['email']))
-              <h4 class="title-with-icon email">{{$_modelData['Contact']['email']}}</h4>
-              @else
-              <h4 class="title-with-icon email">-</h4>
-              @endif
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="item-info-row">
-              @if(!empty($_modelData['Contact']['line']))
-              <h4 class="title-with-icon line-app">{{$_modelData['Contact']['line']}}</h4>
-              @else
-              <h4 class="title-with-icon line-app">-</h4>
-              @endif
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-  </div> -->
-
-  <!-- <div class="detail-info-section">
-    <h4>รายละเอียด {{$_modelData['name']}}</h4>
-    <div class="line"></div> 
-    <div class="detail-info">
-      {!!$_modelData['description']!!}
-    </div>
-  </div> -->
 
 </div>
 

@@ -111,6 +111,10 @@ class PersonExperience extends Model
     'default' => 'created_at:desc'
   );
 
+  public function person() {
+    return $this->hasOne('App\Models\Person','id','person_id');
+  }
+
   public static function boot() {
 
     parent::boot();

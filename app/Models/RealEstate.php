@@ -344,7 +344,8 @@ class RealEstate extends Model
       '_facilities' => $facilities,
       '_features' => $features,
       '_announcementTypeName' => $this->announcementType->name,
-      '_realEstateTypeName' => $this->realEstateType->name
+      '_realEstateTypeName' => $this->realEstateType->name,
+      'person_id' => $this->person_id
     );
   }
 

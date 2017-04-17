@@ -45,19 +45,20 @@
         </div>
         
         <div class="image-gallary-display-inner">
-
           <div class="image-gallary-panel">
             <img id="image_display">
           </div>
 
-          <div class="display-image-description-icon additional-option icon">
-            <img src="/images/icons/additional-white.png">
-            <div class="additional-option-content">
-              <a class="image-description-display-button">แสดงคำอธิบายรูปภาพ</a>
+          <div class="additional-option">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="additional-option-content">
+                <a class="image-description-display-button">คำอธิบายรูปภาพ</a>
+              </div>
             </div>
-          </div>
-
         </div>
+
       </div>
 
     </div>
@@ -136,25 +137,33 @@
   </div>
 
   <div class="row">
-    <div class="list-description col-md-6 col-sm-12">
-      <dl class="list-description-item row">
-        <dt class="col-sm-4">ประเภทงานฟรีแลนซ์</dt>
-        <dd class="col-sm-8">{{$_modelData['_freelanceType']}}</dd>
-      </dl>
-    </div>
-  </div>
 
-  <div class="row">
+    <div class="col-md-4 col-xs-12">
 
-    <div class="col-sm-12 margin-section section-border-left">
+      <div class="item-info">
 
-      <div class="space-top-bottom-10 section-inner">
-        
-        <h4>รายละเอียดข้อตกลง</h4>
-        <div>
-          {!!$_modelData['description']!!}
+        <div class="item-info-row">
+          <p>อัตราค่าจ้างเริ่มต้น</p>
+          <h4 class="text-emphasize">{{$_modelData['defaultWage']}}</h4>
         </div>
 
+        <div class="item-info-row">
+          <p>ประเภทงานฟรีแลนซ์</p>
+          <h4>{{$_modelData['_freelanceType']}}</h4>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="col-md-8 col-xs-12">
+
+      <div class="detail-info-section no-margin">
+        <h4>รายละเอียดข้อตกลง</h4>
+        <div class="line"></div> 
+        <div class="detail-info">
+          {!!$_modelData['description']!!}
+        </div>
       </div>
 
     </div>

@@ -13,74 +13,137 @@
 
 <div class="container">
 
-  <div class="row">
-    <div class="col-xs-12">
-      <h3>ชุมชน</h3>
-      <p>เชื่อมต่อคุณหรือธุรกิจของคุณกับชุมชนและผู้คนในชลบุรี เพื่อสะดวกต่อการเข้าถึงบิษัท ร้านค้า สินค้า แบรนด์ งานบริการ ตำแหน่งงาน และอื่นๆ อีกมากมาย</p>
-    </div>
+  <div>
+    <h3>มีอะไรบ้างที่น่าสนใจ</h3>
+    <!-- <div class="line"></div> -->
+  </div>
 
-    <div class="site-map col-xs-12">
+  <div class="notice-box-wrapper">
 
-      <div class="row">
+    <div class="row">
 
-        <div class="col-md-3">
-          <h4 class="site-map-title">บริษัทและร้านค้า</h4>
-          <div class="site-map-content">
-            <div class="site-map-link">
-              <a href="{{URL::to('community/shop/create')}}">เพิ่มร้านค้าของคุณ</a>
-            </div>
-            <div class="site-map-link">
-              <a href="{{URL::to('product')}}">สินค้าในร้านค้า</a>
-            </div>
-            <div class="site-map-link">
-              <a href="{{URL::to('job')}}">ประกาศงานจากบริษัทและร้านค้า</a>
-            </div>
-            <div class="site-map-link">
-              <a href="{{URL::to('advertising')}}">ประกาศโฆษณาจากบริษัทและร้านค้า</a>
+      <div class="col-md-6 col-xs-12">
+        <div class="notice-box">
+
+          <div class="notice-box-image text-center">
+            <img src="/images/banners/WP_20161129_004.jpg">
+          </div>
+
+          <div class="notice-box-info">
+            <h2>สร้างธุรกิจในแบบที่คุณต้องการ</h2>
+            <div class="notice-box-description">
+              สร้างธุรกิจของคุณ เพิ่มช่องทางการขายสินค้า ค้นหาพนักงานให้กับธุรกิจของคุณ รวมถึงการโฆษณาแบรนด์ ธุรกิจ หรืองานบริการของคุณ
             </div>
           </div>
-        </div>
 
-        <div class="col-md-3">
-          <h4 class="site-map-title">บอร์ดประกาศ</h4>
-          <div class="site-map-content">
-            <div class="site-map-link">
-              <a href="{{URL::to('item')}}">ประกาศซื้อ-เช่า-ขายสินค้า</a>
-            </div>
-            <div class="site-map-link">
-              <a href="{{URL::to('real-estate')}}">ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</a>
+          <a href="#" class="button float-button">
+            เพิ่มร้านสินค้า
+          </a>
+
+        </div>
+      </div>
+
+      <div class="col-md-6 col-xs-12">
+        <div class="notice-box">
+
+          <div class="notice-box-image text-center">
+            <img src="/images/banners/WP_20161129_004.jpg">
+          </div>
+
+          <div class="notice-box-info">
+            <h2>สินค้าจากร้านค้า</h2>
+            <div class="notice-box-description">
+              สินค้าต่างๆจากร้านค้าที่เปิดให้คุณเลือกซื้อได้ทุกเวลาที่ต้องการ
             </div>
           </div>
-        </div>
 
-        <div class="col-md-3">
-          <h4 class="site-map-title">ประวัติการทำงาน</h4>
-          <div class="site-map-content">
-            <div class="site-map-link">
-              <a href="{{URL::to('person/experience')}}">ประวัติการทำงานของคุณ</a>
-            </div>
-            <div class="site-map-link">
-              <a href="{{URL::to('experience/profile/list')}}">แสดงประวัติการทำงาน</a>
+          <a href="#" class="button float-button">
+            ไปยังหน้าสินค้า
+          </a>
+
+        </div>
+      </div>
+
+      <div class="col-md-6 col-xs-12">
+        <div class="notice-box">
+
+          <div class="notice-box-image text-center">
+            <img src="/images/banners/WP_20161129_004.jpg">
+          </div>
+
+          <div class="notice-box-info">
+            <h2>ค้าหาตำแหน่งงานที่ต้องการ</h2>
+            <div class="notice-box-description">
+              ตำแหน่งงานมากมายจากบริษัทที่หลากหลายให้ผู้ที่กำลังค้าหางานได้มีโอกาสเลือกตำแหน่งงานที่ต้องการมากที่สุด
             </div>
           </div>
-        </div>
 
-        <div class="col-md-3">
-          <h4 class="site-map-title">ฟรีแลนซ์</h4>
-          <div class="site-map-content">
-            <div class="site-map-link">
-              <a href="{{URL::to('person/freelance')}}">เพิ่มงานฟรีแลนซ์ของคุณ</a>
-            </div>
-            <div class="site-map-link">
-              <a href="{{URL::to('freelance/list')}}">ค้นหาฟรีแลนซ์</a>
+          <a href="#" class="button float-button">
+            ไปยังหน้าประกาศงาน
+          </a>
+
+        </div>
+      </div>
+
+      <div class="col-md-6 col-xs-12">
+        <div class="notice-box">
+
+          <div class="notice-box-image text-center">
+            <img src="/images/banners/WP_20161129_004.jpg">
+          </div>
+
+          <div class="notice-box-info">
+            <h2>โฆษณาจากบริษัทและร้านค้า</h2>
+            <div class="notice-box-description">
+              ติดตามข่าวสารและการโฆษณาต่างๆจากบริษัทและร้านค้า ไม่ว่าจะเป็นสินค้า การบริการใหม่ๆ หรือร้านที่เปิดใหม่ และอื่นๆอีกมากมาย
             </div>
           </div>
-        </div>
 
+          <a href="#" class="button float-button">
+            ไปยังหน้าโฆษณาจากบริษัทและร้านค้า
+          </a>
+
+        </div>
+      </div>
+
+      <div class="col-md-6 col-xs-12">
+        <div class="notice-box">
+          <div class="notice-box-inner">
+            <h3>ประกาศซื้อ-เช่า-ขายสินค้า</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-xs-12">
+        <div class="notice-box">
+          <div class="notice-box-inner">
+            <h3>ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-xs-12">
+        <div class="notice-box">
+          <div class="notice-box-inner">
+            <h3>สร้างประวัติการทำงานและเพิ่มโอกาศในการได้งาน</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-xs-12">
+        <div class="notice-box">
+          <div class="notice-box-inner">
+            <h3>งานฟรีแลนซ์</h3>
+          </div>
+        </div>
       </div>
 
     </div>
+
   </div>
+
+
+
 
   <h4>สินค้าในร้านค้า</h4>
   <div class="content-panel row">

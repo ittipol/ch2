@@ -84,19 +84,20 @@
         </div>
         
         <div class="image-gallary-display-inner">
-
           <div class="image-gallary-panel">
             <img id="image_display">
           </div>
 
-          <div class="display-image-description-icon additional-option icon">
-            <img src="/images/icons/additional-white.png">
-            <div class="additional-option-content">
-              <a class="image-description-display-button">แสดงคำอธิบายรูปภาพ</a>
+          <div class="additional-option">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="additional-option-content">
+                <a class="image-description-display-button">คำอธิบายรูปภาพ</a>
+              </div>
             </div>
-          </div>
-
         </div>
+        
       </div>
 
     </div>
@@ -144,7 +145,7 @@
 
         <div class="item-info-row">
           <p>เงินเดือน (บาท)</p>
-          <h4 class="price">{{$_modelData['_salary']}}</h4>
+          <h4 class="text-emphasize">{{$_modelData['_salary']}}</h4>
         </div>
 
       </div>

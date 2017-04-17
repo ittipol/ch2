@@ -4,7 +4,6 @@ namespace App\library;
 
 class Date
 {
-
   public function today($time = true, $timestamp = false) {
 
     $today = date('Y-m-d 00:00:00');
@@ -167,5 +166,32 @@ class Date
     return $passed;
   }
 
+  public function isLeapYear($year) {
+    return ((($year % 4) == 0) && ((($year % 100) != 0) || (($year % 400) == 0)));
+  }
+
+  public function findDateRange($start,$end,$date = array()) {
+
+    $yearStart = $date['year'] - $end;
+    $yearEnd = $date['year'] - $start;
+
+    if(!$this->isLeapYear($yearStart) && ((int)$date['month'] == 2) && ($date['day'] == 29)) {
+      $start = $yearStart.'-'.$date['month'].'-28 00:00:00';
+    }else{
+      $start = $yearStart.'-'.$date['month'].'-'.$date['day'].' 00:00:00';
+    }
+
+    if(!$this->isLeapYear($yearEnd) && ((int)$date['month'] == 2) && ($date['day'] == 29)) {
+      $end = $yearEnd.'-'.$date['month'].'-28 23:59:59';
+    }else{
+      $end = $yearEnd.'-'.$date['month'].'-'.$date['day'].' 23:59:59';
+    }
+
+    return array(
+      'start' => $start,
+      'end' => $end
+    );
+
+  }
 
 }

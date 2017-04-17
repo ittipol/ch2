@@ -17,8 +17,21 @@ class FilterHelper {
 
   private $specialFilterForModelAcceptedFields = array(
     'PersonExperience' => array(
-      'gender' => array(
-        'key' => 'people_gender'
+      'filter' => array(
+        'gender' => array(
+          'key' => 'people_gender'
+        ),
+        'age' => array(
+          'key' => 'people_age'
+        )
+      ),
+      'sorting' => array(
+        'name' => array(
+          'table' => 'people'
+        )
+      ),
+      'joins' => array(
+        'person_experiences_join_people' => array('people', 'people.id', '=', 'person_experiences.person_id')
       )
     )
   );
@@ -136,80 +149,10 @@ class FilterHelper {
 
   }
 
-  public function getJoining() {
+  // public function getJoining() {
 
-    if(!empty($this->filters)) {
-      $filters = $this->filters;
-    }elseif(!empty($this->filterOptions)) {
-
-      $filters = array();
-      foreach ($this->filterOptions as $filter) {
-
-        if(empty($filter['default'])) {
-          continue;
-        }
-
-        $filters[] = $filter['default'];
-      }
-      
-    }else {
-      return null;
-    }
-
-    if(empty($filters)) {
-      return null;
-    }
-
-    $joinings = array();
-    $exists = array();
-    foreach ($filters as $filter) {
-
-      if(!$this->filterValueValidation($filter)) {
-        continue;
-      }
-
-      list($field,$value) = explode(':', $filter);
-
-      if($this->hasSpecialFilterForModel($field)) {
-
-        $key = $this->getSpecialFilterForModelKey($field);
-
-        if(in_array($key, $exists)) {
-          continue;
-        }
-
-        $table = $this->getJoiningTable($field);
-
-        if(!empty($table)) {
-          $exists[] = $key;
-          $joinings[] = $table;
-        }
-
-      }
-
-    }
-
-    return $joinings;
     
-  }
-
-  public function getJoiningTable($field) {
-
-    $joinings = null;
-    switch ($this->model->modelName) {
-      case 'PersonExperience':
-        
-          if($field == 'gender') {
-            $joinings = array('people', 'people.id', '=', 'person_experiences.person_id');
-          }
-
-        break;
-
-    }
-
-    return $joinings;
-    
-  }
+  // }
 
   public function buildFilters() {
 
@@ -261,7 +204,7 @@ class FilterHelper {
 
       }elseif($this->hasSpecialFilterForModel($field)) {
 
-        $key = $this->getSpecialFilterForModelKey($field);
+        $key = $this->getKeyForModel($field);
 
         $specialFilter = $this->getSpecialFilterForModel($field,$value);
 
@@ -271,11 +214,24 @@ class FilterHelper {
             $_filters[$key]['operator'] = $specialFilter['operator'];
           }
 
+          // if(is_array(current($specialFilter['value']))) {
+
+          //   foreach ($specialFilter['value'] as $value) {
+          //     $_filters[$key]['value'][] = $value;
+          //   }
+
+          // }else{
+          //   $_filters[$key]['value'][] = $specialFilter['value'];
+          // }
+
           if(is_array(current($specialFilter['value']))) {
 
+            $_value = array();
             foreach ($specialFilter['value'] as $value) {
-              $_filters[$key]['value'][] = $value;
+              $_value[] = $value;
             }
+
+             $_filters[$key]['value'][] = $_value;
 
           }else{
             $_filters[$key]['value'][] = $specialFilter['value'];
@@ -323,43 +279,6 @@ class FilterHelper {
 
   }
 
-  public function getSpecialFilterForModel($field,$value) {
-
-    $filters = null;
-    switch ($this->model->modelName) {
-      case 'PersonExperience':
-        
-          if($field == 'gender') {
-
-            $filters = array(
-              'operator' => 'or',
-              'value' => array('people.gender','=',$value)
-            );
-
-          }
-
-        break;
-
-    }
-
-    return $filters;
-
-  }
-
-  public function hasSpecialFilterForModel($field) {
-    return array_key_exists($field, $this->specialFilterForModelAcceptedFields[$this->model->modelName]);
-  }
-
-  public function getSpecialFilterForModelKey($field) {
-
-    if(empty($this->specialFilterForModelAcceptedFields[$this->model->modelName][$field]['key'])) {
-      return null;
-    }
-
-    return $this->specialFilterForModelAcceptedFields[$this->model->modelName][$field]['key'];
-
-  }
-
   public function getSpecialFilter($alias) {
 
     $filter = null;
@@ -384,6 +303,79 @@ class FilterHelper {
 
   }
 
+  public function getSpecialFilterForModel($field,$value) {
+
+    $filters = null;
+    switch ($this->model->modelName) {
+      case 'PersonExperience':
+
+          switch ($field) {
+            case 'gender':
+              
+              $filters = array(
+                'operator' => 'or',
+                'value' => array('people.gender','=',$value)
+              );
+
+              break;
+
+            case 'age':
+              
+              $range = Service::loadModel('Person')->getAgeRange($value);
+
+              if(empty($range)) {
+                break;
+              }
+
+              $filters = array(
+                'operator' => 'or',
+                'value' => array(
+                  array('people.birth_date','>=',$range['start']),
+                  array('people.birth_date','<=',$range['end'])
+                )
+              );
+
+              break;
+            
+          }
+
+        break;
+
+    }
+
+    return $filters;
+
+  }
+
+  public function hasSpecialFilterForModel($field,$type = 'filter') {
+
+    if(empty($this->specialFilterForModelAcceptedFields[$this->model->modelName][$type])) {
+      return false;
+    }
+
+    return array_key_exists($field, $this->specialFilterForModelAcceptedFields[$this->model->modelName][$type]);
+  }
+
+  public function getKeyForModel($field) {
+
+    if(empty($this->specialFilterForModelAcceptedFields[$this->model->modelName]['filter'][$field]['key'])) {
+      return null;
+    }
+
+    return $this->specialFilterForModelAcceptedFields[$this->model->modelName]['filter'][$field]['key'];
+
+  }
+
+  public function getSortingFieldForModel($field) {
+
+    if(empty($this->specialFilterForModelAcceptedFields[$this->model->modelName]['sorting'][$field]['table'])) {
+      return null;
+    }
+
+    return $this->specialFilterForModelAcceptedFields[$this->model->modelName]['sorting'][$field]['table'];
+
+  }
+
   public function buildSorting($q = null) {
 
     if(!empty($this->sort)) {
@@ -400,7 +392,18 @@ class FilterHelper {
 
     list($sortingField,$order) = explode(':', $sort);
 
-    if(empty($sortingField) || empty($order) || !Schema::hasColumn($this->model->getTable(), $sortingField)) {
+    if(empty($sortingField) || empty($order)) {
+      return null;
+    }
+
+    $table = null;
+    if($this->hasSpecialFilterForModel($sortingField,'sorting')) {
+      $table = $this->getSortingFieldForModel($sortingField);
+    }elseif(Schema::hasColumn($this->model->getTable(), $sortingField)) {
+      $table = $this->model->getTable();
+    }
+
+    if(empty($table)) {
       return null;
     }
 
@@ -420,9 +423,9 @@ class FilterHelper {
         $ids[] = $value->id;
       }
 
-      $orderBy['orderByRaw'] = 'FIELD('.$this->model->getTable().'.id, '.implode(' ,', $ids).') desc, '.$this->model->getTable().'.'.$sortingField.' '.strtolower($order);
+      $orderBy['orderByRaw'] = 'FIELD('.$this->model->getTable().'.id, '.implode(' ,', $ids).') desc, '.$table.'.'.$sortingField.' '.strtolower($order);
     }else{
-      $orderBy['order'] = array($this->model->getTable().'.'.$sortingField,strtolower($order));
+      $orderBy['order'] = array($table.'.'.$sortingField,strtolower($order));
     }
 
     return $orderBy;

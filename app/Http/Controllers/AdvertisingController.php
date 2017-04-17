@@ -51,7 +51,7 @@ class AdvertisingController extends Controller
 
         $_advertisings['items'][] = array_merge($advertising->buildPaginationData(),array(
           '_imageUrl' => $imageUrl,
-          'detailUrl' => $url->setAndParseUrl('real-estate/detail/{id}',array('id'=>$advertising->id))
+          'detailUrl' => $url->setAndParseUrl('advertising/detail/{id}',array('id'=>$advertising->id))
         ));
 
       }

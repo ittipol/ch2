@@ -3,7 +3,7 @@
 }
 
 .card {
-	margin-top: 40px;
+	margin-top: 20px;
 	position: relative;
 	/*padding-top: 20px;*/
 	background-color: #fff;
@@ -195,6 +195,6 @@
 	background-color: #fff;
 }
 
-.shelf .card {
+/*.shelf .card {
 	margin: 0;
-}
+}*/

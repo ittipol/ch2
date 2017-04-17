@@ -84,6 +84,45 @@ class Person extends Model
 
   }
 
+  public function getAgeRange($alias) {
+
+    $date = new Date;
+
+    $currentDate = array(
+      'year' => date('Y'),
+      'month' => date('m'),
+      'day' => date('d'),
+    );
+
+    $range = null;
+    switch ($alias) {
+      
+      case 'ageRange1':
+          $range = $date->findDateRange(18,24,$currentDate);
+        break;
+
+      case 'ageRange2':
+          $range = $date->findDateRange(25,34,$currentDate);
+        break;
+
+      case 'ageRange3':
+          $range = $date->findDateRange(35,44,$currentDate);
+        break;
+
+      case 'ageRange4':
+          $range = $date->findDateRange(45,54,$currentDate);
+        break;
+
+      case 'ageRange5':
+          $range = $date->findDateRange(55,60,$currentDate);
+        break;
+
+    }
+
+    return $range;
+
+  }
+
   public function getProfileImage() {
 
     $image = Image::select('id','model','model_id','filename','image_type_id')->find($this->profile_image_id);

@@ -7,7 +7,6 @@ class Filter {
 
   load() {
     this.bind();
-    // this.createSearchForm();
   }
 
   bind() {
@@ -95,11 +94,11 @@ class Filter {
         this.appendChild(inputFilters);
       }
 
-      if($('.search-sorting-value').val() != '') {
+      if($('.search-sorting-value:checked').val() != '') {
         var inputSorts = document.createElement('input');
         inputSorts.setAttribute('type', 'hidden');
         inputSorts.setAttribute('name', 'sort');
-        inputSorts.setAttribute('value', $('.search-sorting-value').val());
+        inputSorts.setAttribute('value', $('.search-sorting-value:checked').val());
 
         this.appendChild(inputSorts);
       }

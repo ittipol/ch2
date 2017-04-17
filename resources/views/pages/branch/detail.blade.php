@@ -165,7 +165,7 @@
 
         @foreach($jobs as $data)
 
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <div class="col-lg-3 col-sm-4 col-xs-12">
           <div class="card">
             <div class="image-tile">
               <a href="{{$data['detailUrl']}}">
