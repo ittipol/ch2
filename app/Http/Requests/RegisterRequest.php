@@ -23,7 +23,7 @@ class RegisterRequest extends FormRequest
         'Person.name.required' => 'กรุณากรอกชื่อ',
         'email.required' => 'กรุณากรอกอีเมล',
         'email.email' => 'อีเมลไม่ถูกต้อง',
-        // 'email.unique' => 'อีเมลถูกใช้งานแล้ว',
+        'email.unique' => 'อีเมลถูกใช้งานแล้ว',
         'password.required' => 'กรุณากรอกรหัสผ่าน',
         'password.min' => 'รัสผ่านต้องมีอย่างน้อย 4 อักขระ',
         'password.confirmed' => 'รหัสผ่านไม่ตรงกัน',
@@ -41,8 +41,7 @@ class RegisterRequest extends FormRequest
     {
       return [
         'Person.name' => 'required|max:255',
-        // 'email' => 'required|email|unique:users,email',
-        'email' => 'required|email',
+        'email' => 'required|email|unique:users,email',
         'password' => 'required|min:4|max:255|confirmed',
         // 'password_confirmation' => 'required',
         // 'avatar' => 'mimes:jpeg,jpg,png|max:1024',

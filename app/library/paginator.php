@@ -132,51 +132,6 @@ class Paginator {
       unset($criteria['conditions']);
     }
 
-    // if(!empty($criteria['conditions']['in'])) {
-
-    //   if(is_array(current($criteria['conditions']['in']))) {
-
-    //     foreach ($criteria['conditions']['in'] as $condition) {
-
-    //       if(empty($condition[1])) {
-    //         continue;
-    //       }
-
-    //       $model->whereIn($condition[0],$condition[1]);
-    //     }
-
-    //   }else {
-    //     $model->whereIn(current($criteria['conditions']['in']),next($criteria['conditions']['in']));
-    //   }
-
-    //   unset($criteria['conditions']['in']);
-
-    // }
-
-    // if(!empty($criteria['conditions']['or'])) {
-
-    //   $conditions = $criteria['conditions']['or'];
-
-    //   $model = $model->where(function($query) use($conditions) {
-
-    //     foreach ($conditions as $condition) {
-    //       $query->orWhere(
-    //         $condition[0],
-    //         $condition[1],
-    //         $condition[2]
-    //       );
-    //     }
-
-    //   });
-
-    //   unset($criteria['conditions']['or']);
-
-    // }
-
-    // if(!empty($criteria['conditions'])){
-    //   $model->where($criteria['conditions']);
-    // }
-
     if($this->onlyMyData) {
       $model = $model->where('person_id','=',Session::get('Person.id'));
     }
@@ -225,14 +180,9 @@ class Paginator {
 
     $offset = ($this->page - 1)  * $this->perPage;
 
-    // $model = $this->condition($this->model->newInstance());
-    // $model = $this->order($model);
-
     if(empty($model)) {
-      $model = $this->model->newInstance();
+      $model = $this->condition($this->model->newInstance());
     }
-
-    $model = $this->condition($model);
     $model = $this->order($model);
 
     $records = $model
@@ -385,10 +335,8 @@ class Paginator {
     $offset = ($this->page - 1)  * $this->perPage;
 
     if(empty($model)) {
-      $model = $this->model->newInstance();
+      $model = $this->condition($this->model->newInstance());
     }
-
-    $model = $this->condition($model);
     $model = $this->order($model);
 
     $records = $model

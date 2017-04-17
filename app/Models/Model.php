@@ -257,7 +257,7 @@ class Model extends BaseModel
 
       if(is_array(current($options['joins']))) {
 
-        foreach ($options['order'] as $value) {
+        foreach ($options['joins'] as $value) {
           $model = $model->join($value[0], $value[1], $value[2], $value[3]);
         }
 

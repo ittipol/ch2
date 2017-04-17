@@ -30,6 +30,12 @@ class MessageHelper
     Session::flash('message.type', 'info');
   }
 
+  public function registerSuccess() {
+    Session::flash('message.title', 'สมัครสมาชิกแล้ว');
+    // Session::flash('message.desc', '');
+    Session::flash('message.type', 'info');
+  }
+
   public function error($text = '') {
     Session::flash('message.title', 'เกิดข้อผิดพลาด '.$text);
     Session::flash('message.type', 'error'); 

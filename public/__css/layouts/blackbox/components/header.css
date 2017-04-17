@@ -198,6 +198,7 @@ header img.icon-header {
   border-radius: 35px;
   margin: 14px auto 0;
   overflow: hidden;
+  background-color: #fff;
 }
 
 .global-header .avatar > .profile-image {

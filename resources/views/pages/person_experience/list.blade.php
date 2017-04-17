@@ -76,7 +76,7 @@
   <div class="list-empty-message text-center space-top-20">
     <img class="space-bottom-20" src="/images/common/not-found.png">
     <div>
-      <h3>ไม่พบข้อมูล ประวัติการทำงาน</h3>
+      <h3>ไม่พบประวัติการทำงานรายบุคคล</h3>
       <a href="{{URL::to('person/experience')}}" class="button">เพิ่มข้อมูลประวัติการทำงาน</a>
     </div>
   </div>
@@ -84,5 +84,16 @@
   @endif
 
 </div>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+
+    const filter = new Filter(true);
+    filter.load();
+
+  });
+
+</script>
 
 @stop

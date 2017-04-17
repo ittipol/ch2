@@ -43,7 +43,6 @@ class Item extends Model
   protected $validation = array(
     'rules' => array(
       'name' => 'required|max:255',
-      // 'price' => 'required|regex:/^[\d,]*(\.\d{1,2})?$/|max:255',
       'price' => 'required|regex:/^[0-9,]*(\.[0-9]{1,2})?$/|max:255',
       'Contact.phone_number' => 'required|max:255',
       // 'Contact.email' => 'email|unique:contacts,email|max:255',

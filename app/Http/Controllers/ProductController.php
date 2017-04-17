@@ -208,10 +208,21 @@ class ProductController extends Controller
       $conditions['in'][] = array('product_to_categories.category_id',$ids);
     }
 
-    $model->paginator->criteria(array_merge(array(
-      'joins' => array('product_to_categories', 'product_to_categories.product_id', '=', 'products.id'),
+    $criteria = array();
+
+    $criteria = array_merge($criteria,array(
+      'joins' => array('product_to_categories', 'product_to_categories.product_id', '=', 'products.id')
+    ));
+
+    $criteria = array_merge($criteria,array(
       'conditions' => $conditions
-    ),$order));
+    ));
+
+    if(!empty($order)) {
+      $criteria = array_merge($criteria,$order);
+    }
+
+    $model->paginator->criteria($criteria);
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl('product/shelf/'.$categoryId);
     $model->paginator->setUrl('product/detail/{id}','detailUrl');

@@ -47,11 +47,31 @@ class PersonExperienceController extends Controller
 
     $conditions = $filterHelper->buildFilters();
     $order = $filterHelper->buildSorting();
+    $joins = $filterHelper->getJoining();
 
-    $model->paginator->criteria(array_merge(array(
-      'conditions' => $conditions,
+    $criteria = array();
+
+    if(!empty($joins)) {
+      $criteria = array_merge($criteria,array(
+        'joins' => $joins
+      ));
+    }
+
+    if(!empty($conditions)) {
+      $criteria = array_merge($criteria,array(
+        'conditions' => $conditions
+      ));
+    }
+
+    if(!empty($order)) {
+      $criteria = array_merge($criteria,$order);
+    }
+
+    $criteria = array_merge($criteria,array(
       'fields' => array('person_experiences.*')
-    ),$order));
+    ));
+
+    $model->paginator->criteria($criteria);
     $model->paginator->disableGetImage();
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl('experience/profile/list');

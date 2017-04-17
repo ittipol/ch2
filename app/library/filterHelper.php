@@ -15,6 +15,14 @@ class FilterHelper {
   private $sortingFields;
   private $defaultSorting = 'created_at:desc';
 
+  private $specialFilterForModelAcceptedFields = array(
+    'PersonExperience' => array(
+      'gender' => array(
+        'key' => 'people_gender'
+      )
+    )
+  );
+
   public function __construct($model = null) {
     
     if(!empty($model)) {
@@ -128,6 +136,81 @@ class FilterHelper {
 
   }
 
+  public function getJoining() {
+
+    if(!empty($this->filters)) {
+      $filters = $this->filters;
+    }elseif(!empty($this->filterOptions)) {
+
+      $filters = array();
+      foreach ($this->filterOptions as $filter) {
+
+        if(empty($filter['default'])) {
+          continue;
+        }
+
+        $filters[] = $filter['default'];
+      }
+      
+    }else {
+      return null;
+    }
+
+    if(empty($filters)) {
+      return null;
+    }
+
+    $joinings = array();
+    $exists = array();
+    foreach ($filters as $filter) {
+
+      if(!$this->filterValueValidation($filter)) {
+        continue;
+      }
+
+      list($field,$value) = explode(':', $filter);
+
+      if($this->hasSpecialFilterForModel($field)) {
+
+        $key = $this->getSpecialFilterForModelKey($field);
+
+        if(in_array($key, $exists)) {
+          continue;
+        }
+
+        $table = $this->getJoiningTable($field);
+
+        if(!empty($table)) {
+          $exists[] = $key;
+          $joinings[] = $table;
+        }
+
+      }
+
+    }
+
+    return $joinings;
+    
+  }
+
+  public function getJoiningTable($field) {
+
+    $joinings = null;
+    switch ($this->model->modelName) {
+      case 'PersonExperience':
+        
+          if($field == 'gender') {
+            $joinings = array('people', 'people.id', '=', 'person_experiences.person_id');
+          }
+
+        break;
+
+    }
+
+    return $joinings;
+    
+  }
+
   public function buildFilters() {
 
     if(!empty($this->filters)) {
@@ -138,7 +221,6 @@ class FilterHelper {
       foreach ($this->filterOptions as $filter) {
 
         if(empty($filter['default'])) {
-          // $selectedfilters = $this->getDefaultFilter($filter['options']);
           continue;
         }
 
@@ -172,8 +254,31 @@ class FilterHelper {
           }
           
           foreach ($specialFilter['value'] as $value) {
-            // $_filters[$specialFilter['key']][] = $value;
             $_filters[$specialFilter['key']]['value'][] = $value;
+          }
+
+        }
+
+      }elseif($this->hasSpecialFilterForModel($field)) {
+
+        $key = $this->getSpecialFilterForModelKey($field);
+
+        $specialFilter = $this->getSpecialFilterForModel($field,$value);
+
+        if(!empty($specialFilter)) {
+
+          if(!empty($specialFilter['operator'])) {
+            $_filters[$key]['operator'] = $specialFilter['operator'];
+          }
+
+          if(is_array(current($specialFilter['value']))) {
+
+            foreach ($specialFilter['value'] as $value) {
+              $_filters[$key]['value'][] = $value;
+            }
+
+          }else{
+            $_filters[$key]['value'][] = $specialFilter['value'];
           }
 
         }
@@ -215,6 +320,43 @@ class FilterHelper {
     }
 
     return $filters;
+
+  }
+
+  public function getSpecialFilterForModel($field,$value) {
+
+    $filters = null;
+    switch ($this->model->modelName) {
+      case 'PersonExperience':
+        
+          if($field == 'gender') {
+
+            $filters = array(
+              'operator' => 'or',
+              'value' => array('people.gender','=',$value)
+            );
+
+          }
+
+        break;
+
+    }
+
+    return $filters;
+
+  }
+
+  public function hasSpecialFilterForModel($field) {
+    return array_key_exists($field, $this->specialFilterForModelAcceptedFields[$this->model->modelName]);
+  }
+
+  public function getSpecialFilterForModelKey($field) {
+
+    if(empty($this->specialFilterForModelAcceptedFields[$this->model->modelName][$field]['key'])) {
+      return null;
+    }
+
+    return $this->specialFilterForModelAcceptedFields[$this->model->modelName][$field]['key'];
 
   }
 

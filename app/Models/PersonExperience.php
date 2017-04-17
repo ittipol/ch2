@@ -52,11 +52,11 @@ class PersonExperience extends Model
       'options' => array(
         array(
           'name' => 'ชาย',
-          'value' => 'gender:1',
+          'value' => 'gender:m',
         ),
         array(
           'name' => 'หญิง',
-          'value' => 'gender:2',
+          'value' => 'gender:f',
         )
       )
     ),
@@ -66,23 +66,23 @@ class PersonExperience extends Model
       'options' => array(
         array(
           'name' => '18-24 ปี',
-          'value' => 'age:1'
+          'value' => 'age:ageRange1'
         ),
         array(
           'name' => '25-34 ปี',
-          'value' => 'used:2'
+          'value' => 'age:ageRange2'
         ),
         array(
           'name' => '35-44 ปี',
-          'value' => 'used:3'
+          'value' => 'age:ageRange3'
         ),
         array(
           'name' => '45-54 ปี',
-          'value' => 'used:4'
+          'value' => 'age:ageRange4'
         ),
         array(
           'name' => '55-60 ปี',
-          'value' => 'used:5'
+          'value' => 'age:ageRange5'
         )
       )
     )
@@ -269,10 +269,15 @@ class PersonExperience extends Model
     // ->first();
 
     // Get lastest working exp.
-    $workingExperience = PersonWorkingExperience::where('person_id','=',session()->get('Person.id'))
+    $workingExperience = PersonWorkingExperience::where('person_id','=',$person->id)
     ->orderBy('created_at','desc')
     ->select('position')
     ->first();
+
+    $position = '-';
+    if(!empty($workingExperience->position)) {
+      $position = $workingExperience->position;
+    }
 
     return array(
       'id' => $this->id,
@@ -280,7 +285,7 @@ class PersonExperience extends Model
       'gender' => $person->getGender(),
       // '_short_name' => $string->truncString($person->name,45),
       // 'careerObjective' => !empty($personCareerObjective->career_objective) ? $string->truncString($personCareerObjective->career_objective,150,true) : '-',
-      'position' => $workingExperience->position,
+      'position' => $position,
       '_imageUrl' => $imageUrl
     );
     
