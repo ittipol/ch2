@@ -298,6 +298,11 @@ dd('ccc');
 
   public function index() {
 
+    $product = Service::loadModel('Product')
+    ->orderBy('created_at','desc')
+    ->first();
+    $this->setData('product',$product->buildModelData());
+
     $product = Service::loadModel('Product');
     $product->paginator->setPerPage(3);
     $product->paginator->criteria(array(

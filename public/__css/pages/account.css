@@ -102,7 +102,12 @@ label.tile-color.blue-grey {
   background-color: #546E7A;
 }
 
-/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 768px) {
+  .profile-contact-info {
+    padding: 15px;
+  }
+}
+
 @media only screen and (max-width : 480px) {
   .profile-contact-info {
     padding: 15px;

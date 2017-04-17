@@ -108,7 +108,7 @@
   </div>
   @endif
 
-  <h3 class="space-bottom-10">ประวัติการทำงานของผู้สมัคร</h3>
+  <!-- <h3 class="space-bottom-10">ประวัติการทำงาน</h3> -->
 
   <div class="person-experience-content">
 
@@ -120,10 +120,10 @@
       </div>
     @endif
 
-    @if(!empty($PersonWorkingExperience))
     <div class="person-experience-info">
       <h4>ประสบการณ์การทำงาน</h4>
       <div class="line"></div>
+      @if(!empty($PersonWorkingExperience))
       <div class="list-group">
         @foreach($PersonWorkingExperience as $detail)
           <div class="list-row row">
@@ -134,13 +134,15 @@
           </div>
         @endforeach
       </div>
+      @else
+        <h5>ไม่มีข้อมูลประสบการณ์การทำงานให้แสดง</h5>
+      @endif
     </div>
-    @endif
-
-    @if(!empty($PersonInternship))
+    
     <div class="person-experience-info">
       <h4>ประสบการณ์การฝึกงาน</h4>
       <div class="line"></div>
+      @if(!empty($PersonInternship))
       <div class="list-group">
         @foreach($PersonInternship as $detail)
           <div class="list-row row">
@@ -151,13 +153,15 @@
           </div>
         @endforeach
       </div>
+      @else
+        <h5>ไม่มีข้อมูลประสบการณ์การฝึกงานให้แสดง</h5>
+      @endif
     </div>
-    @endif
 
-    @if(!empty($PersonEducation))
     <div class="person-experience-info">
       <h4>ประวัติการศึกษา</h4>
       <div class="line"></div>
+      @if(!empty($PersonEducation))
       <div class="list-group">
         @foreach($PersonEducation as $detail)
           <div class="list-row row">
@@ -168,8 +172,10 @@
           </div>
         @endforeach
       </div>
+      @else
+        <h5>ไม่มีข้อมูลประวัติการศึกษาให้แสดง</h5>
+      @endif
     </div>
-    @endif
 
     @if(!empty($PersonProject))
     <div class="person-experience-info">
@@ -205,10 +211,10 @@
     </div>
     @endif
 
-    @if(!empty($skills))
     <div class="person-experience-info">
       <h4>ทักษะและความสามารถ</h4>
       <div class="line"></div>
+      @if(!empty($skills))
       <div class="list-group">
         @foreach($skills as $skill)
           <div class="list-row row">
@@ -218,9 +224,11 @@
           </div>
         @endforeach
       </div>
+      @else
+        <h5>ไม่มีข้อมูลทักษะและความสามารถให้แสดง</h5>
+      @endif
     </div>
-    @endif
-
+    
     @if(!empty($languageSkills))
     <div class="person-experience-info">
       <h4>ภาษาที่สามารถสื่อสารได้</h4>

@@ -77,7 +77,6 @@
                   <span>
                     แสดงสินค้าทั้งหมด<br>
                     {{$shelf['products']['all']['title']}}
-                    <img src="/images/common/tag.png">
                   </span>
                 </a>
               </div>

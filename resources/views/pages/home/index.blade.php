@@ -13,20 +13,18 @@
 
 <div class="container">
 
-  <div>
-    <h3>มีอะไรบ้างที่น่าสนใจ</h3>
-    <!-- <div class="line"></div> -->
-  </div>
+  <h3>คุณสมบัติที่โด่ดเด่น</h3>
+  <!-- <div class="line"></div> -->
 
   <div class="notice-box-wrapper">
 
     <div class="row">
 
-      <div class="col-md-6 col-xs-12">
+      <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="notice-box">
 
-          <div class="notice-box-image text-center">
-            <img src="/images/banners/WP_20161129_004.jpg">
+          <div class="notice-box-image">
+            <div class="image" style="background-image:url(/images/banners/WP_20161129_003.jpg)"></div>
           </div>
 
           <div class="notice-box-info">
@@ -43,15 +41,15 @@
         </div>
       </div>
 
-      <div class="col-md-6 col-xs-12">
+      <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="notice-box">
 
           <div class="notice-box-image text-center">
-            <img src="/images/banners/WP_20161129_004.jpg">
+            <img src="/images/banners/WP_20161129_003.jpg">
           </div>
 
           <div class="notice-box-info">
-            <h2>สินค้าจากร้านค้า</h2>
+            <h2>เลือกซื้อสินค้าจากร้านค้า</h2>
             <div class="notice-box-description">
               สินค้าต่างๆจากร้านค้าที่เปิดให้คุณเลือกซื้อได้ทุกเวลาที่ต้องการ
             </div>
@@ -64,14 +62,14 @@
         </div>
       </div>
 
-      <div class="col-md-6 col-xs-12">
+      <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="notice-box">
 
           <div class="notice-box-image text-center">
-            <img src="/images/banners/WP_20161129_004.jpg">
+            <img src="/images/a1.jpg">
           </div>
 
-          <div class="notice-box-info">
+          <div class="notice-box-info-float">
             <h2>ค้าหาตำแหน่งงานที่ต้องการ</h2>
             <div class="notice-box-description">
               ตำแหน่งงานมากมายจากบริษัทที่หลากหลายให้ผู้ที่กำลังค้าหางานได้มีโอกาสเลือกตำแหน่งงานที่ต้องการมากที่สุด
@@ -85,7 +83,7 @@
         </div>
       </div>
 
-      <div class="col-md-6 col-xs-12">
+      <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="notice-box">
 
           <div class="notice-box-image text-center">
@@ -106,14 +104,14 @@
         </div>
       </div>
 
-      <div class="col-md-6 col-xs-12">
+      <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="notice-box">
 
           <div class="notice-box-image text-center">
-            <img src="/images/banners/WP_20161129_004.jpg">
+            <img src="/images/a2.jpg">
           </div>
 
-          <div class="notice-box-info">
+          <div class="notice-box-info-float">
             <h2>ประกาศซื้อ-เช่า-ขายสินค้า</h2>
             <div class="notice-box-description">
               ไม่ว่าสินค้านั้นจะเป็นสินใหม่หรือเก่า และไม่ได้ใช้สินค้านั้นแล้วสามารถประกาศขายได้จากที่นี้ รวมถึงต้องการซื้อหรือเช่า
@@ -127,7 +125,7 @@
         </div>
       </div>
 
-      <div class="col-md-6 col-xs-12">
+      <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="notice-box">
 
           <div class="notice-box-image text-center">
@@ -148,7 +146,7 @@
         </div>
       </div>
 
-      <div class="col-md-6 col-xs-12">
+      <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="notice-box">
 
           <div class="notice-box-image text-center">
@@ -169,7 +167,7 @@
         </div>
       </div>
 
-      <div class="col-md-6 col-xs-12">
+      <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="notice-box">
 
           <div class="notice-box-image text-center">
@@ -195,6 +193,40 @@
   </div>
 
 
+
+  <h3>สินค้าในร้านค้า</h3>
+  <div class="line"></div>
+
+  <div class="row">
+
+    <div class="col-md-12 col-xs-12">
+      
+      <div class="recommended-shelf clearfix">
+
+        <div class="pull-left">
+          <a href="{{$products[0]['detailUrl']}}">
+            <div class="image-tile" style="background-image:url({{$products[0]['_imageUrl']}});"></div>
+          </a>
+        </div>
+
+        <div class="recommended-shelf-info pull-left">
+
+          <h3>{{$product['name']}}</h3>
+          <div class="line space-bottom-20"></div>
+
+          <h4>{{$product['_price']}}</h4>
+
+          <div>
+            {{$product['description']}}
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
 
 
   <h4>สินค้าในร้านค้า</h4>
@@ -248,11 +280,15 @@
 
   </div>
 
-  <div class="clearfix text-right space-top-20">
-    <a  href="URL::to('product')" class="button">ไปยังหน้าแสดงสินค้าของร้านค้า</a>
+  <div class="clearfix space-top-20">
+    <a  href="URL::to('product')" class="button wide-button">ไปยังหน้าแสดงสินค้าของร้านค้า</a>
   </div>
 
-  <h4>ประกาศงานจากบริษัทและร้านค้า</h4>
+
+
+
+
+  <!-- <h4>ประกาศงานจากบริษัทและร้านค้า</h4>
   <div class="content-panel row">
 
     <div class="col-md-12">
@@ -475,7 +511,7 @@
 
   <div class="clearfix text-right space-top-20">
     <a href="URL::to('real-estate')" class="button">ไปยังหน้าแสดงประกาศซื้อขายอสังหาทรัพย์</a>
-  </div>
+  </div> -->
 
 </div>
 

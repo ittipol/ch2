@@ -3,9 +3,8 @@
 }
 
 .card {
-	margin-top: 20px;
+	margin-bottom: 20px;
 	position: relative;
-	/*padding-top: 20px;*/
 	background-color: #fff;
 	border: 2px solid #FDD835;
 }
@@ -194,7 +193,3 @@
 	margin: 3px auto;
 	background-color: #fff;
 }
-
-/*.shelf .card {
-	margin: 0;
-}*/

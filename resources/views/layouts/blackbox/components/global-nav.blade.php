@@ -33,7 +33,7 @@
             </li>
 
             <li class="item">
-              <a href="{{URL::to('freelance/board')}}">ฟรีแลนซ์</a>
+              <a href="{{URL::to('freelance/board')}}">งานฟรีแลนซ์</a>
             </li>
 
             <li class="item">

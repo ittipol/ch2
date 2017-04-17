@@ -97,7 +97,7 @@
         @foreach ($_shops as $shop)
         <div class="list-h-item clearfix">
           <div class="col-md-11 col-xs-8">
-            <a href="{{$shop['url']}}">{{$shop['name']}}|</a>
+            <a href="{{$shop['url']}}">{{$shop['name']}}</a>
           </div>
 
           <div class="additional-option">
@@ -113,6 +113,13 @@
           </div>
         </div>
         @endforeach
+
+        <div class="list-h-item clearfix">
+          <div class="col-md-11 col-xs-8">
+            <a href="{{URL::to('community/shop/create')}}">+ เพิ่มร้านค้า</a>
+          </div>
+        </div>
+
       </div>
 
       @else

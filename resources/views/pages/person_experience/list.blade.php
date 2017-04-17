@@ -11,7 +11,7 @@
           <button class="btn btn-secondary additional-option">
             ...
             <div class="additional-option-content">
-              <a href="{{URL::to('community/shop/create')}}">ฟรีแลนซ์</a>
+              <a href="{{URL::to('freelance/board')}}">งานฟรีแลนซ์</a>
             </div>
           </button>
         </div>

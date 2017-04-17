@@ -234,7 +234,8 @@
 .content-box {
 	margin: 20px 0;
 	color: #fff;
-	background-color: #448AFF;
+	/*background-color: #448AFF;*/
+	background-color: #455A64;
 }
 
 .content-box .image-frame {

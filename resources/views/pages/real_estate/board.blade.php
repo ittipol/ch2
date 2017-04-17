@@ -93,7 +93,6 @@
                   <span>
                     แสดงประกาศทั้งหมด<br>
                     {{$board['data']['all']['title']}}
-                    <img src="/images/common/tag.png">
                   </span>
                 </a>
               </div>

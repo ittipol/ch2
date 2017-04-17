@@ -230,7 +230,6 @@ class Paginator {
     // $cache = new Cache;
 
     $offset = ($this->page - 1)  * $this->perPage;
-    $this->getLastPage();
 
     $model = $this->model->newInstance()
     ->join('data_access_permissions',function($join) {
@@ -248,7 +247,10 @@ class Paginator {
     $filterHelper->setCriteria($criteria);
 
     $model = $filterHelper->conditions($model);
+
+    $this->getLastPage($model);
     $this->count = $model->count('lookups.id');
+    
     $model = $filterHelper->order($model);
 
     $records = $model
