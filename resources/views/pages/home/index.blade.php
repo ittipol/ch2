@@ -4,8 +4,8 @@
 <div class="banner">
   <div class="container">
     <div class="banner-overlay-message">
-      <h2 class="banner-primary-title">เริ่มต้นธุรกิจของคุณและเชื่อมต่อธุรกิจของคุณกับผู้คนในชลบุรี</h2>
-      <p class="banner-description">เพิ่มธุรกิจของคุณ และให้เราทำหน้าที่เชื่อมต่อธุรกิจของคุณกับผู้คนในขลบุรี</p>
+      <h2 class="banner-primary-title">เริ่มต้นธุรกิจของคุณและเชื่อมต่อธุรกิจของคุณกับผู้คน</h2>
+      <p class="banner-description">สร้างธุรกิจของคุณ จัดการธุรกิจของคุณไปในทิศทางที่คุณต้องการ และให้เราทำหน้าที่เชื่อมต่อธุรกิจของคุณกับผู้คนอีกมากมาย</p>
       <a href="{{URL::to('community/shop/create')}}" class="button">เริ่มต้นธุรกิจของคุณ</a>
     </div>
   </div>
@@ -108,33 +108,85 @@
 
       <div class="col-md-6 col-xs-12">
         <div class="notice-box">
-          <div class="notice-box-inner">
-            <h3>ประกาศซื้อ-เช่า-ขายสินค้า</h3>
+
+          <div class="notice-box-image text-center">
+            <img src="/images/banners/WP_20161129_004.jpg">
           </div>
+
+          <div class="notice-box-info">
+            <h2>ประกาศซื้อ-เช่า-ขายสินค้า</h2>
+            <div class="notice-box-description">
+              ไม่ว่าสินค้านั้นจะเป็นสินใหม่หรือเก่า และไม่ได้ใช้สินค้านั้นแล้วสามารถประกาศขายได้จากที่นี้ รวมถึงต้องการซื้อหรือเช่า
+            </div>
+          </div>
+
+          <a href="#" class="button float-button">
+            ไปยังหน้าประกาศซื้อ-เช่า-ขายสินค้า
+          </a>
+
         </div>
       </div>
 
       <div class="col-md-6 col-xs-12">
         <div class="notice-box">
-          <div class="notice-box-inner">
-            <h3>ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</h3>
+
+          <div class="notice-box-image text-center">
+            <img src="/images/banners/WP_20161129_004.jpg">
           </div>
+
+          <div class="notice-box-info">
+            <h2>ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</h2>
+            <div class="notice-box-description">
+              อสังหาริมทรัพย์ที่ต้องการขาย หรือ ต้องการให้เช่า หรือ ต้องการประกาศซื้อ สามารถประกาศได้จากที่นี้
+            </div>
+          </div>
+
+          <a href="#" class="button float-button">
+            ไปยังหน้าประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์
+          </a>
+
         </div>
       </div>
 
       <div class="col-md-6 col-xs-12">
         <div class="notice-box">
-          <div class="notice-box-inner">
-            <h3>สร้างประวัติการทำงานและเพิ่มโอกาศในการได้งาน</h3>
+
+          <div class="notice-box-image text-center">
+            <img src="/images/banners/WP_20161129_004.jpg">
           </div>
+
+          <div class="notice-box-info">
+            <h2>เพิ่มโอกาสได้งานใหม่</h2>
+            <div class="notice-box-description">
+              เพิ่มประวัติการทำงานและทักษะ เพื่อให้บุลคลที่ต้องการหาพนักงานใหม่ๆ สามารถค้นหาประวัติการทำงานของคุณได้ เพื่อเพิ่มโอกาสการทำงานของคุณ
+            </div>
+          </div>
+
+          <a href="#" class="button float-button">
+            ไปยังหน้าเพิ่มประวัติการทำงาน
+          </a>
+
         </div>
       </div>
 
       <div class="col-md-6 col-xs-12">
         <div class="notice-box">
-          <div class="notice-box-inner">
-            <h3>งานฟรีแลนซ์</h3>
+
+          <div class="notice-box-image text-center">
+            <img src="/images/banners/WP_20161129_004.jpg">
           </div>
+
+          <div class="notice-box-info">
+            <h2>งานฟรีแลนซ์</h2>
+            <div class="notice-box-description">
+              หากคุณคือฟรีแลนซ์และต้องการประกาศให้ผู้คนทราบถึงงานฟรีแลนซ์ของคุณ สามารถประกาศได้จจากที่นี้
+            </div>
+          </div>
+
+          <a href="#" class="button float-button">
+            ไปยังหน้างานฟรีแลนซ์
+          </a>
+
         </div>
       </div>
 
