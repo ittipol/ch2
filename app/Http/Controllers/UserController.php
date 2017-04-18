@@ -57,14 +57,21 @@ class UserController extends Controller
       // User for pushing notification
       $person->token = Token::generate();
       $person->save();
-
+      
       // Store data
       Session::put('Person.id',$person->id);
       Session::put('Person.name',$person->name);
       Session::put('Person.theme',$person->theme);
-      Session::put('Person.profile_image_xs',$person->getProfileImageUrl('xs'));
-      Session::put('Person.profile_image',$person->getProfileImageUrl('xsm'));
       Session::put('Person.token',$person->token);
+
+      if(empty($person->profile_image_id)) {
+        Session::put('Person.profile_image_xs','/images/common/avatar.png');
+        Session::put('Person.profile_image','/images/common/avatar.png');
+      }else{
+        Session::put('Person.profile_image_xs',$person->getProfileImageUrl('xs'));
+        Session::put('Person.profile_image',$person->getProfileImageUrl('xsm'));
+      }
+
       // Session::put('Person.pageAccessLevel',{1-4});
 
       // Update cart

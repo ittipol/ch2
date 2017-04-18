@@ -363,7 +363,7 @@ class Product extends Model
     return array_merge(array(
       'id' => $this->id,
       'name' => $this->name,
-      'description' => !empty($this->description) ? $this->description : '-',
+      'description' => !empty($this->description) ? nl2br($this->description) : '-',
       'sku' => $this->sku,
       '_price' => $currency->format($this->price),
       'quantity' => $this->quantity,
@@ -392,7 +392,7 @@ class Product extends Model
     return array(
       'id' => $this->id,
       'name' => $this->name,
-      '_short_name' => $string->truncString($this->name,45),
+      '_short_name' => $string->truncString($this->name,25),
       'sku' => !empty($this->sku) ? $this->sku : '-',
       '_price' => $currency->format($this->price),
       'quantity' => $this->quantity,

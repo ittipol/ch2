@@ -107,7 +107,6 @@ class AdvertisingController extends Controller
 
     $conditions[] = array('advertising_type_id','=',$this->param['advertising_type_id']);
 
-
     $model->paginator->criteria(array_merge(array(
       'conditions' => $conditions
     ),$order));
@@ -137,6 +136,81 @@ class AdvertisingController extends Controller
     return $this->view('pages.advertising.list');
   }
 
+  public function shopAdvertisinglistView() {
+
+    $model = Service::loadModel('Advertising');
+    $filterHelper = new FilterHelper($model);
+
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
+
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
+
+    $filters = '';
+    if(!empty($this->query['fq'])) {
+      $filters = $this->query['fq'];
+    }
+
+    $sort = '';
+    if(!empty($this->query['sort'])) {
+      $sort = $this->query['sort'];
+    }
+
+    $filterHelper->setFilters($filters);
+    $filterHelper->setSorting($sort);
+
+    $conditions = $filterHelper->buildFilters();
+    $order = $filterHelper->buildSorting();
+
+    $conditions[] = array(
+      array('shop_relate_to.model','like','Advertising'),
+      array('shop_relate_to.shop_id','=',request()->get('shopId'))
+    );
+
+    $criteria = array();
+
+    $criteria = array_merge($criteria,array(
+      'joins' => array('shop_relate_to', 'shop_relate_to.model_id', '=', 'advertisings.id')
+    ));
+
+    $criteria = array_merge($criteria,array(
+      'conditions' => $conditions
+    ));
+
+    if(!empty($order)) {
+      $criteria = array_merge($criteria,$order);
+    }
+
+    $model->paginator->criteria($criteria);
+    $model->paginator->setPage($page);
+    $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/advertising');
+    $model->paginator->setUrl('shop/'.request()->shopSlug.'/advertising/{id}','detailUrl');
+    $model->paginator->setQuery('sort',$sort);
+    $model->paginator->setQuery('fq',$filters);
+
+    $searchOptions = array(
+      'filters' => $filterHelper->getFilterOptions(),
+      'sort' => $filterHelper->getSortingOptions()
+    );
+
+    $displayingFilters = array(
+      'filters' => $filterHelper->getDisplayingFilterOptions(),
+      'sort' => $filterHelper->getDisplayingSorting()
+    );
+
+    $this->data = $model->paginator->build();
+    $this->setData('searchOptions',$searchOptions);
+    $this->setData('displayingFilters',$displayingFilters);
+
+    return $this->view('pages.advertising.shop_advertising_list');
+
+  }
+
   public function detail() {
 
     $model = Service::loadModel('Advertising')->find($this->param['id']);
@@ -152,8 +226,6 @@ class AdvertisingController extends Controller
       'models' => array('Image','Tagging'),
       'json' => array('Image')
     ));
-
-    $this->mergeData($model->modelData->build());
 
     // Get Shop Address
     $shop = $model->getRelatedData('ShopRelateTo',array(
@@ -206,6 +278,7 @@ class AdvertisingController extends Controller
       }
     }
 
+    $this->data = $model->modelData->build();
     $this->setData('shop',$shop->modelData->build(true));
     $this->setData('shopImageUrl',$shop->getProfileImageUrl());
     $this->setData('shopCoverUrl',$shop->getCoverUrl());
@@ -213,19 +286,59 @@ class AdvertisingController extends Controller
     $this->setData('branchLocations',json_encode($branchLocations));
     $this->setData('hasBranchLocation',$hasBranchLocation);
 
-    // Get person apply job
-    $personApplyJob = Service::loadModel('PersonApplyJob')->where(array(
-      array('person_id','=',session()->get('Person.id')),
-      array('job_id','=',$this->param['id'])
-    ))->exists();
+    return $this->view('pages.advertising.detail');
 
-    $this->setData('personApplyJob',$personApplyJob);
+  }
 
-    if(!$personApplyJob) {
-      $this->setData('jobApplyUrl',$url->setAndParseUrl('job/apply/{id}',array('id' => $this->param['id'])));
+  public function shopAdvertisingDetail() {
+
+    $model = Service::loadModel('Advertising')->find($this->param['id']);
+
+    $model->modelData->loadData(array(
+      'models' => array('Image','Tagging'),
+      'json' => array('Image')
+    ));
+
+    $branches = array();
+    if(!empty($branchIds)){
+      $branches = Service::loadModel('Branch')
+      ->select(array('id','name'))
+      ->whereIn('id',$branchIds)
+      ->get();
+    }
+    
+    $url = new Url;
+
+    $branchLocations = array();
+    $hasBranchLocation = false;
+    foreach ($branches as $branch) {
+
+      $address = $branch->modelData->loadAddress();
+
+      if(!empty($address)){
+
+        $hasBranchLocation = true;
+
+        $graphics = json_decode($address['_geographic'],true);
+        
+        $branchLocations[] = array(
+          'id' => $branch->id,
+          'address' => $branch->name,
+          'latitude' => $graphics['latitude'],
+          'longitude' => $graphics['longitude'],
+          'detailUrl' => $url->setAndParseUrl('shop/{shopSlug}/branch/{id}',array(
+            'shopSlug' => request()->shopSlug,
+            'id' => $branch->id
+          ))
+        );
+      }
     }
 
-    return $this->view('pages.advertising.detail');
+    $this->data = $model->modelData->build();
+    $this->setData('branchLocations',json_encode($branchLocations));
+    $this->setData('hasBranchLocation',$hasBranchLocation);
+
+    return $this->view('pages.advertising.shop_advertising_detail');
 
   }
 

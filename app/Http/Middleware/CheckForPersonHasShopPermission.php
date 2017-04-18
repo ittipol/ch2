@@ -44,7 +44,9 @@ class CheckForPersonHasShopPermission
         'shop.edit.opening_hours' => array(
           'permission' => 'edit'
         ),
-        'shop.job' => array(
+        'shop.job.list' => true,
+        'shop.job.detail' => true,
+        'shop.job.manage' => array(
           'permission' => true
         ),
         'shop.job.add' => array(
@@ -101,11 +103,13 @@ class CheckForPersonHasShopPermission
           'permission' => 'delete',
           'modelName' => 'Branch'
         ),
-        'shop.product.menu' => array(
+        'shop.product.manage.menu' => array(
           'permission' => 'edit',
           'modelName' => 'Product'
         ),
-        'shop.advertising' => array(
+        'shop.advertising.list' => true,
+        'shop.advertising.detail' => true,
+        'shop.advertising.manage' => array(
           'permission' => true
         ),
         'shop.advertising.add' => array(
@@ -126,7 +130,9 @@ class CheckForPersonHasShopPermission
           'permission' => true,
           'modelName' => 'Order'
         ),
-        'shop.product' => array(
+        'shop.product.list' => true,
+        'shop.product.detail' => true,
+        'shop.product.manage' => array(
           'permission' => true
         ),
         'shop.product.add' => array(

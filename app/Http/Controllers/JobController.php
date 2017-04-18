@@ -138,6 +138,76 @@ class JobController extends Controller
     return $this->view('pages.job.list');
   }
 
+  public function shopJoblistView() {
+
+    $model = Service::loadModel('Job');
+    $filterHelper = new FilterHelper($model);
+
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
+
+    $filters = '';
+    if(!empty($this->query['fq'])) {
+      $filters = $this->query['fq'];
+    }
+
+    $sort = '';
+    if(!empty($this->query['sort'])) {
+      $sort = $this->query['sort'];
+    }
+
+    $filterHelper->setFilters($filters);
+    $filterHelper->setSorting($sort);
+
+    $conditions = $filterHelper->buildFilters();
+    $order = $filterHelper->buildSorting();
+
+    $conditions[] = array(
+      array('shop_relate_to.model','like','Job'),
+      array('shop_relate_to.shop_id','=',request()->get('shopId'))
+    );
+
+    $criteria = array();
+
+    $criteria = array_merge($criteria,array(
+      'joins' => array('shop_relate_to', 'shop_relate_to.model_id', '=', 'jobs.id')
+    ));
+
+    $criteria = array_merge($criteria,array(
+      'conditions' => $conditions
+    ));
+
+    if(!empty($order)) {
+      $criteria = array_merge($criteria,$order);
+    }
+
+    $model->paginator->criteria($criteria);
+    $model->paginator->setPage($page);
+    $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/job');
+    $model->paginator->setUrl('shop/'.request()->shopSlug.'/job/{id}','detailUrl');
+    $model->paginator->setQuery('sort',$sort);
+    $model->paginator->setQuery('fq',$filters);
+
+    $searchOptions = array(
+      'filters' => $filterHelper->getFilterOptions(),
+      'sort' => $filterHelper->getSortingOptions()
+    );
+
+    $displayingFilters = array(
+      'filters' => $filterHelper->getDisplayingFilterOptions(),
+      'sort' => $filterHelper->getDisplayingSorting()
+    );
+
+    $this->data = $model->paginator->build();
+    $this->setData('searchOptions',$searchOptions);
+    $this->setData('displayingFilters',$displayingFilters);
+
+    return $this->view('pages.job.shop_job_list');
+
+  }
+
   public function detail() {
 
     $url = new Url;
@@ -155,8 +225,6 @@ class JobController extends Controller
       'models' => array('Image','Tagging'),
       'json' => array('Image')
     ));
-
-    $this->mergeData($model->modelData->build());
 
     $shop = $model->getRelatedData('ShopRelateTo',array(
       'first' => true,
@@ -204,6 +272,7 @@ class JobController extends Controller
       }
     }
 
+    $this->data = $model->modelData->build();
     $this->setData('shop',$shop->modelData->build(true));
     $this->setData('shopImageUrl',$shop->getProfileImageUrl());
     $this->setData('shopCoverUrl',$shop->getCoverUrl());
@@ -235,6 +304,94 @@ class JobController extends Controller
     $this->setData('alreadyApply',$personApplyJob->exists());
     
     return $this->view('pages.job.detail');
+
+  }
+
+  public function shopJobDetail() {
+
+    $url = new Url;
+
+    $model = Service::loadModel('Job')->find($this->param['id']);
+
+    if(empty($model)) {
+      $this->error = array(
+        'message' => 'ไม่พบประกาศ'
+      );
+      return $this->error();
+    }
+
+    $model->modelData->loadData(array(
+      'models' => array('Image','Tagging'),
+      'json' => array('Image')
+    ));
+
+    $branchIds = $model->getRelatedData('RelateToBranch',array(
+      'list' => 'branch_id',
+      'fields' => array('branch_id'),
+    ));
+
+    $branches = array();
+    if(!empty($branchIds)){
+      $branches = Service::loadModel('Branch')
+      ->select(array('id','name'))
+      ->whereIn('id',$branchIds)
+      ->get();
+    }
+
+    $branchLocations = array();
+    $hasBranchLocation = false;
+    foreach ($branches as $branch) {
+
+      $address = $branch->modelData->loadAddress();
+
+      if(!empty($address)){
+
+        $hasBranchLocation = true;
+
+        $graphics = json_decode($address['_geographic'],true);
+        
+        $branchLocations[] = array(
+          'id' => $branch->id,
+          'address' => $branch->name,
+          'latitude' => $graphics['latitude'],
+          'longitude' => $graphics['longitude'],
+          'detailUrl' => $url->setAndParseUrl('shop/{shopSlug}/branch/{id}',array(
+            'shopSlug' => request()->shopSlug,
+            'id' => $branch->id
+          ))
+        );
+      }
+
+    }
+
+    $this->data = $model->modelData->build();
+    $this->setData('branchLocations',json_encode($branchLocations));
+    $this->setData('hasBranchLocation',$hasBranchLocation);
+
+    // Get person apply job
+    $personApplyJob = Service::loadModel('PersonApplyJob')->where(array(
+      array('person_id','=',session()->get('Person.id')),
+      array('job_id','=',$this->param['id'])
+    ));
+
+
+    if($personApplyJob->exists()) {
+
+      $personApplyJob = $personApplyJob->first();
+
+      $this->setData('personApplyJob',$personApplyJob->buildModelData());
+
+      if(($personApplyJob->job_applying_status_id == 4) || ($personApplyJob->job_applying_status_id == 5)) {
+        $this->setData('jobApplyUrl',$url->setAndParseUrl('job/apply/{id}',array('id' => $this->param['id'])));
+      }
+
+    }else{
+      $this->setData('jobApplyUrl',$url->setAndParseUrl('job/apply/{id}',array('id' => $this->param['id'])));
+    }
+
+    $this->setData('alreadyApply',$personApplyJob->exists());
+    
+    return $this->view('pages.job.shop_job_detail');
 
   }
 

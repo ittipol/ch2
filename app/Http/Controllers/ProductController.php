@@ -260,6 +260,76 @@ class ProductController extends Controller
 
   }
 
+  public function shopProductlistView() {
+
+    $model = Service::loadModel('Product');
+    $filterHelper = new FilterHelper($model);
+
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
+
+    $filters = '';
+    if(!empty($this->query['fq'])) {
+      $filters = $this->query['fq'];
+    }
+
+    $sort = '';
+    if(!empty($this->query['sort'])) {
+      $sort = $this->query['sort'];
+    }
+
+    $filterHelper->setFilters($filters);
+    $filterHelper->setSorting($sort);
+
+    $conditions = $filterHelper->buildFilters();
+    $order = $filterHelper->buildSorting();
+
+    $conditions[] = array(
+      array('shop_relate_to.model','like','Product'),
+      array('shop_relate_to.shop_id','=',request()->get('shopId'))
+    );
+
+    $criteria = array();
+
+    $criteria = array_merge($criteria,array(
+      'joins' => array('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
+    ));
+
+    $criteria = array_merge($criteria,array(
+      'conditions' => $conditions
+    ));
+
+    if(!empty($order)) {
+      $criteria = array_merge($criteria,$order);
+    }
+
+    $model->paginator->criteria($criteria);
+    $model->paginator->setPage($page);
+    $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/product');
+    $model->paginator->setUrl('shop/'.request()->shopSlug.'/product/{id}','detailUrl');
+    $model->paginator->setQuery('sort',$sort);
+    $model->paginator->setQuery('fq',$filters);
+
+    $searchOptions = array(
+      'filters' => $filterHelper->getFilterOptions(),
+      'sort' => $filterHelper->getSortingOptions()
+    );
+
+    $displayingFilters = array(
+      'filters' => $filterHelper->getDisplayingFilterOptions(),
+      'sort' => $filterHelper->getDisplayingSorting()
+    );
+
+    $this->data = $model->paginator->build();
+    $this->setData('searchOptions',$searchOptions);
+    $this->setData('displayingFilters',$displayingFilters);
+
+    return $this->view('pages.product.shop_product_list');
+
+  }
+
   public function detail() {
 
     $url = new Url;
@@ -341,6 +411,68 @@ class ProductController extends Controller
     $this->setData('hasBranchLocation',$hasBranchLocation);
 
     return $this->view('pages.product.detail');
+
+  }
+
+  public function shopProductDetail() {
+
+    $model = Service::loadModel('Product')->find($this->param['id']);
+
+    $model->modelData->loadData(array(
+      'json' => array('Image')
+    ));
+
+    $branchIds = $model->getRelatedData('RelateToBranch',array(
+      'list' => 'branch_id',
+      'fields' => array('branch_id'),
+    ));
+
+    $branches = array();
+    if(!empty($branchIds)){
+      $branches = Service::loadModel('Branch')
+      ->select(array('id','name'))
+      ->whereIn('id',$branchIds)
+      ->get();
+    }
+
+    $branchLocations = array();
+    $hasBranchLocation = false;
+    foreach ($branches as $branch) {
+
+      $address = $branch->modelData->loadAddress();
+
+      if(!empty($address)){
+
+        $hasBranchLocation = true;
+
+        $graphics = json_decode($address['_geographic'],true);
+        
+        $branchLocations[] = array(
+          'id' => $branch->id,
+          'address' => $branch->name,
+          'latitude' => $graphics['latitude'],
+          'longitude' => $graphics['longitude'],
+          'detailUrl' => $url->setAndParseUrl('shop/{shopSlug}/branch/{id}',array(
+            'shopSlug' => request()->shopSlug,
+            'id' => $branch->id
+          ))
+        );
+      }
+    }
+
+    $this->data = $model->modelData->build();
+
+    // $this->setData('shop',$shop->modelData->build(true));
+    // $this->setData('shopImageUrl',$shop->getProfileImageUrl());
+    // $this->setData('shopCoverUrl',$shop->getCoverUrl());
+    // $this->setData('shopUrl',request()->get('shopUrl'));
+
+    $this->setData('categoryPaths',$model->getCategoryPaths());
+
+    $this->setData('branchLocations',json_encode($branchLocations));
+    $this->setData('hasBranchLocation',$hasBranchLocation);
+
+    return $this->view('pages.product.shop_product_detail');
 
   }
 

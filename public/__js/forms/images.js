@@ -348,7 +348,7 @@ class Images {
 		html += '<div class="image-panel '+this.style+' clearfix">';
 		html += '<input type="hidden" name="Image['+this.type+'][images]['+index+'][id]" value="'+image.id+'" >';
 		html += '<label id="'+this.code+'_'+this.runningNumber+'" class="image-label">';
-		html += '<input id="'+this.code+'_image_'+this.runningNumber+'" class="'+this.code+'-image" type="file">';
+		html += '<input id="'+this.code+'_image_'+this.runningNumber+'" class="image-input" type="file">';
 		html +=	'<div class="preview-image" style="background-image:url('+image._url+')"></div>';
 		html += '<a href="javscript:void(0);" class="'+this.code+'-remove-btn" data-id="'+image.id+'" style="display:block;">×</a>';
 		html += '<p class="error-message"></p>';

@@ -8,12 +8,6 @@
 
         <div class="btn-group pull-right">
           <a href="{{URL::to('advertising/board')}}" class="btn btn-secondary">กลับไปยังหน้าหลักโฆษณา</a>
-          <button class="btn btn-secondary additional-option">
-            ...
-            <div class="additional-option-content">
-              <a href="{{URL::to('community/shop/create')}}">เพิ่มบริษัทหรือร้านค้า</a>
-            </div>
-          </button>
         </div>
 
       </div>
@@ -21,9 +15,9 @@
   </div>
 </div>
 
-<div class="container list">
+<div class="container list space-top-30">
 
-  <h3>{{$title}}</h3>
+  <h3>โฆษณา{{$title}}</h3>
   <div class="line"></div>
   <div class="text-right space-top-bottom-20">
     <a class="button" data-right-side-panel="1" data-right-side-panel-target="#filter_expand_panel">ตัวกรอง</a>
@@ -71,9 +65,7 @@
   <div class="list-empty-message text-center space-top-20">
     <img class="space-bottom-20" src="/images/common/not-found.png">
     <div>
-      <h3>ยังไม่มีข้อมูลตำแหน่งงาน</h3>
-      <p>ขออภัย ยังไม่มีข้อมูลตำแหน่งงาน</p>
-      <a href="{{URL::to('community/shop/create')}}" class="button">สร้างร้านค้าของคุณในชุมชน เพื่อเพิ่มตำแหน่งของคุณ</a>
+      <h3>ไม่มีข้อมูลโฆษณาให้แสดง</h3>
     </div>
   </div>
 

@@ -3,6 +3,28 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 
+<div class="sub-header-nav">
+  <div class="sub-header-nav-fixed-top">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <div class="btn-group pull-right">
+          <a href="{{request()->get('shopUrl')}}job" class="btn btn-secondary">กลับไปยังหน้าหลักประกาศงาน</a>
+          <button class="btn btn-secondary additional-option">
+            ...
+            <div class="additional-option-content">
+              <a href="{{request()->get('shopUrl')}}">ไปยังหน้าหลักร้านค้า</a>
+              <a href="{{request()->get('shopUrl')}}product">ไปยังหน้าหลักสินค้า</a>
+              <a href="{{request()->get('shopUrl')}}advertising">ไปยังหน้าหลักโฆษณา</a>
+            </div>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="top-header-wrapper top-header-border">
   <div class="container">
     <div class="top-header">
@@ -111,31 +133,6 @@
 
   </div>
 
-  <div class="content-box content-box-bg" style="background-image:url({{$shopCoverUrl}})">
-    <div class="content-box-inner">
-      <div class="row">
-
-        <div class="col-md-6 col-sm-12">
-          <div class="content-box-panel overlay-bg">
-            <div>
-              <h5>บริษัทหรือร้านค้า</h5>
-              <h3>
-                <a href="{{URL::to($shopUrl)}}">{{$shop['name']}}</a>
-              </h3>
-              <div class="line space-top-bottom-20"></div>
-              <p>{{$shop['_short_description']}}</p>
-            </div>
-
-            <a href="{{URL::to($shopUrl)}}" class="button wide-button">ไปยังร้านค้านี้</a>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-sm-12"></div>
-
-      </div>
-    </div>
-  </div>
-
   <div class="row">
 
     <div class="col-xs-4">
@@ -237,7 +234,7 @@
 
     <div class="text-center space-top-bottom-20">
       @if($alreadyApply)
-
+        
         @if(($personApplyJob['job_applying_status_id'] == 4) || ($personApplyJob['job_applying_status_id'] == 5))
           <div class="secondary-message-box space-bottom-30">
             <div class="secondary-message-box-inner">

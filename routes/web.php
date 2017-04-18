@@ -265,9 +265,12 @@ Route::get('product/detail/{id}','ProductController@detail')->name('product.deta
 
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
 
-  Route::get('shop/{shopSlug}/product','ShopController@product')->name('shop.product');
 
-  Route::get('shop/{shopSlug}/product/{id}','ProductController@menu')->name('shop.product.menu');
+  Route::get('shop/{shopSlug}/product','ProductController@shopProductlistView')->name('shop.product.list');
+  Route::get('shop/{shopSlug}/product/{id}','ProductController@shopProductDetail')->name('shop.product.detail');
+
+  Route::get('shop/{shopSlug}/product/manage','ShopController@product')->name('shop.product.manage');
+  Route::get('shop/{shopSlug}/product/manage/{id}','ProductController@menu')->name('shop.product.manage.menu');
 
   Route::get('shop/{shopSlug}/product_post','ProductController@add')->name('shop.product.add');
   Route::post('shop/{shopSlug}/product_post','ProductController@addingSubmit')->name('shop.product.add');
@@ -355,7 +358,10 @@ Route::get('job/detail/{id}','JobController@detail')->name('job.detail');
 
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
 
-  Route::get('shop/{shopSlug}/job','ShopController@job')->name('shop.job');
+  Route::get('shop/{shopSlug}/job','JobController@shopJoblistView')->name('shop.job.list');
+  Route::get('shop/{shopSlug}/job/{id}','JobController@shopJobDetail')->name('shop.job.detail');
+
+  Route::get('shop/{shopSlug}/job/manage','ShopController@job')->name('shop.job.manage');
 
   Route::get('shop/{shopSlug}/job_applying','JobController@jobApplyingList')->name('shop.job.applying_list');
   Route::get('shop/{shopSlug}/job_applying/detail/{id}','JobController@jobApplyingDetail')->name('shop.job.applying_detail');
@@ -407,7 +413,10 @@ Route::get('advertising/detail/{id}','AdvertisingController@detail')->name('adve
 
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
 
-  Route::get('shop/{shopSlug}/advertising','ShopController@advertising')->name('shop.advertising');
+  Route::get('shop/{shopSlug}/advertising','AdvertisingController@shopAdvertisinglistView')->name('shop.advertising.list');
+  Route::get('shop/{shopSlug}/advertising/{id}','AdvertisingController@shopAdvertisingDetail')->name('shop.advertising.detail');
+
+  Route::get('shop/{shopSlug}/advertising/manage','ShopController@advertising')->name('shop.advertising.manage');
   
   Route::get('shop/{shopSlug}/shop_ad_post','AdvertisingController@add')->name('shop.advertising.add');
   Route::post('shop/{shopSlug}/shop_ad_post','AdvertisingController@addingSubmit')->name('shop.advertising.add');

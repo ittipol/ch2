@@ -5,26 +5,23 @@
 .notice-box-wrapper .notice-box {
 	color: #fff;
 	width: 100%;
-	height: 530px;
+	height: 400px;
 	background-color: rgb(12,139,8);
 	margin-bottom: 15px;
 	position: relative;
 	overflow: hidden;
 }
 
+.notice-box-wrapper .notice-box.large {
+	height: 530px;
+}
+
+.notice-box-wrapper .notice-box.small {
+	height: 280px;
+}
+
 .notice-box .notice-box-inner {
 	padding: 15px;
-}
-
-.notice-box .notice-box-image > .image {
-	height: 310px;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-}
-
-.notice-box .notice-box-image > img {
-	width: 100%;
 }
 
 .notice-box .notice-box-info {
@@ -51,20 +48,49 @@
 	background-color: rgb(12,139,8);
 }
 
+.notice-box .notice-box-image > .image {
+	height: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.notice-box.large .notice-box-image {
+	height: 300px;
+}
+
+.notice-box.small .notice-box-image {
+	height: 100%;
+}
+
+.notice-box.small .float-button {
+	background-color: rgba(0,0,0,.5);
+}
+
 @media only screen and (max-width : 1024px) {
-  .notice-box .notice-box-image > .image {
+  .notice-box.large .notice-box-image {
   	height: 280px;
   }
 }
 
 @media only screen and (max-width : 992px) {
-	.notice-box .notice-box-image > .image {
+	.notice-box.large .notice-box-image {
 		height: 260px;
 	}
 }
 
 @media only screen and (max-width : 768px) {
-	.notice-box .notice-box-image > .image {
+	.notice-box.large .notice-box-image {
 		height: 240px;
+	}
+}
+
+@media only screen and (max-width : 480px) {
+	.notice-box-wrapper .notice-box.small {
+		height: 120px;
+	}
+
+	.notice-box.small .notice-box-image > .image {
+		/*background-size: auto;*/
 	}
 }

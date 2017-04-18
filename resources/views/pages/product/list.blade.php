@@ -12,7 +12,6 @@
             ...
             <div class="additional-option-content">
               <a href="{{URL::to('product/category')}}">ไปยังหน้าแสดงหมวดสินค้า</a>
-              <a href="{{URL::to('community/shop/create')}}">เพิ่มบริษัทหรือร้านค้า</a>
             </div>
           </button>
         </div>

@@ -47,10 +47,11 @@ a.button:visited {
 
 .line.only-space {
 	height: 0;
+	/*background-color: transparent;*/
 }
 
 .line.grey {
-	background-color: #bababa;
+	background-color: #ccc;
 }
 
 .text-strike {
@@ -82,6 +83,16 @@ a.button:visited {
 .space-top-bottom-30 {
 	margin-top: 30px !important;
 	margin-bottom: 30px !important;
+}
+
+.space-top-bottom-100 {
+	margin-top: 100px !important;
+	margin-bottom: 100px !important;
+}
+
+.space-top-bottom-120 {
+	margin-top: 120px !important;
+	margin-bottom: 120px !important;
 }
 
 .space-top-10 {
@@ -120,8 +131,24 @@ a.button:visited {
 	margin-bottom: 30px !important;
 }
 
+.space-bottom-40 {
+	margin-bottom: 40px !important;
+}
+
 .space-bottom-50 {
-	margin-bottom: 30px !important;
+	margin-bottom: 50px !important;
+}
+
+.space-bottom-100 {
+	margin-bottom: 100px !important;
+}
+
+.space-bottom-120 {
+	margin-bottom: 120px !important;
+}
+
+.space-bottom-240 {
+	margin-bottom: 240px !important;
 }
 
 .no-margin {
@@ -229,4 +256,21 @@ a.button:visited {
 
 .text-line-through {
 	text-decoration: line-through;
+}
+
+.article-title {
+	color: #0071c5;
+}
+
+.article-title.color-teal {
+	color: #00897b;
+}
+
+.article-title.color-pink {
+	color: #ad1457;
+}
+
+.article-content .paragraph {
+	max-width: 760px;
+	line-height: 22px;
 }

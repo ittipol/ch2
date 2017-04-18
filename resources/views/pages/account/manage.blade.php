@@ -19,9 +19,7 @@
 
                   <div class="col-sm-12">
                     <div class="image-frame elem-center">
-                      @if(!empty($profileImageUrl))
-                      <div class="content-box-main-image" style="background-image:url({{$profileImageUrl}});"></div>
-                      @endif
+                      <div class="content-box-main-image" style="background-image:url({{Session::get('Person.profile_image')}});"></div>
                     </div>
                   </div>
 

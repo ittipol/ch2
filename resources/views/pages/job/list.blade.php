@@ -8,12 +8,6 @@
 
         <div class="btn-group pull-right">
           <a href="{{URL::to('job/board')}}" class="btn btn-secondary">กลับไปยังหน้าหลักการประกาศงาน</a>
-          <button class="btn btn-secondary additional-option">
-            ...
-            <div class="additional-option-content">
-              <a href="{{URL::to('community/shop/create')}}">เพิ่มบริษัทหรือร้านค้า</a>
-            </div>
-          </button>
         </div>
 
       </div>
@@ -21,7 +15,7 @@
   </div>
 </div>
 
-<div class="container list">
+<div class="container list space-top-30">
 
   <h3>{{$title}}</h3>
   <div class="line"></div>

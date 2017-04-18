@@ -2,6 +2,10 @@
 	padding: 20px 0;
 }
 
+.grid-card {
+	margin-top: 20px;
+}
+
 .card {
 	margin-bottom: 20px;
 	position: relative;
@@ -129,11 +133,12 @@
 }
 
 .card .product-price-section {
-	height: 44px;
+	/*height: 44px;*/
 }
 
 .card .product-price {
-	color: #0071c5;
+	/*color: #0071c5;*/
+	color: #EF6C00;
 	font-size: 18px;
 	font-weight: bold;
 }

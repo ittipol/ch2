@@ -21,7 +21,7 @@ class AccountController extends Controller
     ));
 
     $this->setData('profile',$profile->modelData->build(true));
-    $this->setData('profileImageUrl',$profile->getProfileImageUrl());
+    // $this->setData('profileImageUrl',$profile->getProfileImageUrl());
 
     return $this->view('pages.account.manage');
   }

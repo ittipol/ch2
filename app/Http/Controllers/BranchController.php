@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
 use App\library\messageHelper;
+use App\library\filterHelper;
 use App\library\url;
 use Redirect;
 
@@ -18,27 +19,73 @@ class BranchController extends Controller
   public function listView() {
 
     $model = Service::loadModel('Branch');
-    
+    $filterHelper = new FilterHelper($model);
+
     $page = 1;
     if(!empty($this->query['page'])) {
       $page = $this->query['page'];
     }
 
-    $model->paginator->criteria(array(
-      'joins' => array('shop_relate_to', 'shop_relate_to.model_id', '=', $model->getTable().'.id'),
-      'conditions' => array(
-        array('shop_relate_to.model','like','Product'),
-        array('shop_relate_to.shop_id','=',request()->get('shopId'))
-      ),
-      'order' => array('id','DESC')
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
+
+    $filters = '';
+    if(!empty($this->query['fq'])) {
+      $filters = $this->query['fq'];
+    }
+
+    $sort = '';
+    if(!empty($this->query['sort'])) {
+      $sort = $this->query['sort'];
+    }
+
+    $filterHelper->setFilters($filters);
+    $filterHelper->setSorting($sort);
+
+    $conditions = $filterHelper->buildFilters();
+    $order = $filterHelper->buildSorting();
+
+    $conditions[] = array(
+      array('shop_relate_to.model','like','Branch'),
+      array('shop_relate_to.shop_id','=',request()->get('shopId'))
+    );
+
+    $criteria = array();
+
+    $criteria = array_merge($criteria,array(
+      'joins' => array('shop_relate_to', 'shop_relate_to.model_id', '=', 'branches.id')
     ));
+
+    $criteria = array_merge($criteria,array(
+      'conditions' => $conditions
+    ));
+
+    if(!empty($order)) {
+      $criteria = array_merge($criteria,$order);
+    }
+
+    $model->paginator->criteria($criteria);
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/branch');
-    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/branch/{id}','detailUrl');
+    $model->paginator->setUrl('shop/'.request()->shopSlug.'/branch/{id}','detailUrl');
+    $model->paginator->setQuery('sort',$sort);
+    $model->paginator->setQuery('fq',$filters);
+
+    $searchOptions = array(
+      'filters' => $filterHelper->getFilterOptions(),
+      'sort' => $filterHelper->getSortingOptions()
+    );
+
+    $displayingFilters = array(
+      'filters' => $filterHelper->getDisplayingFilterOptions(),
+      'sort' => $filterHelper->getDisplayingSorting()
+    );
 
     $this->data = $model->paginator->build();
-
-    $this->setData('shopName',request()->get('shop')->name);
+    $this->setData('searchOptions',$searchOptions);
+    $this->setData('displayingFilters',$displayingFilters);
 
     return $this->view('pages.branch.list');
 
@@ -47,13 +94,6 @@ class BranchController extends Controller
   public function detail() {
 
     $model = Service::loadModel('Branch')->find($this->param['id']);
-
-    if(empty($model)) {
-      $this->error = array(
-        'message' => 'ขออภัย ไม่พบประกาศนี้ หรือข้อมูลนี้อาจถูกลบแล้ว'
-      );
-      return $this->error();
-    }
 
     $model->modelData->loadData(array(
       'models' => array('Image','Address','Contact'),

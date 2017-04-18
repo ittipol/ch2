@@ -29,9 +29,9 @@ class AppServiceProvider extends ServiceProvider
           $slug = Route::current()->parameter('shopSlug');
 
           view()->share('_shop_setting_url',$url->url('shop/'.$slug.'/setting'));
-          view()->share('_shop_product_url',$url->url('shop/'.$slug.'/product'));
-          view()->share('_shop_job_url',$url->url('shop/'.$slug.'/job'));
-          view()->share('_shop_advertising_url',$url->url('shop/'.$slug.'/advertising'));
+          view()->share('_shop_product_url',$url->url('shop/'.$slug.'/manage/product'));
+          view()->share('_shop_job_url',$url->url('shop/'.$slug.'/manage/job'));
+          view()->share('_shop_advertising_url',$url->url('shop/'.$slug.'/manage/advertising'));
           view()->share('_shop_branch_url',$url->url('shop/'.$slug.'/branch/manage'));
 
         // }
@@ -44,10 +44,10 @@ class AppServiceProvider extends ServiceProvider
 
         $slug = Route::current()->parameter('shopSlug');
 
-        view()->share('_shop_product_menu',$url->url('shop/'.$slug.'/product/'.Route::current()->parameter('id')));
-        view()->share('_shop_product_url',$url->url('shop/'.$slug.'/product'));
-        view()->share('_shop_job_url',$url->url('shop/'.$slug.'/job'));
-        view()->share('_shop_advertising_url',$url->url('shop/'.$slug.'/advertising'));
+        view()->share('_shop_product_menu',$url->url('shop/'.$slug.'/manage/product/'.Route::current()->parameter('id')));
+        view()->share('_shop_product_url',$url->url('shop/'.$slug.'/manage/product'));
+        view()->share('_shop_job_url',$url->url('shop/'.$slug.'/manage/job'));
+        view()->share('_shop_advertising_url',$url->url('shop/'.$slug.'/manage/advertising'));
 
       });
 
