@@ -151,7 +151,7 @@
 
     <div class="col-xs-8">
 
-      <p>รูปแบบงาน</p>
+      <p>รูปแบบการจ้างงาน</p>
       <h4>{{$_modelData['_employmentTypeName']}}</h4>
 
     </div>

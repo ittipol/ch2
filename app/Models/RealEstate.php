@@ -402,16 +402,27 @@ class RealEstate extends Model
       $_imageUrl = $cache->getCacheImageUrl($image,'list');
     }
 
+    $needBroker = '';
+    if($this->need_broker) {
+      $needBroker = 'ต้องการตัวแทนขาย';
+    }
+
     return array(
-      // 'name' => $this->name,
-      '_short_name' => $string->truncString($this->name,90),
-      '_short_description' => $string->truncString($this->description,250),
-      '_price' => $currency->format($this->price),
-      '_imageUrl' => $_imageUrl,
-      '_detailUrl' => $url->setAndParseUrl('real-estate/detail/{id}',array('id' => $this->id)),
-      'flag' => 'ประกาศ'.$this->announcementType->name,
-      'need_broker' => $this->need_broker,
-      'dataFromFlag' => 'ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์'
+      'title' => $string->truncString($this->name,90),
+      'description' => $string->truncString($this->description,250),
+      'flags' => array(
+        'ประกาศ'.$this->announcementType->name,
+        $needBroker
+      ),
+      'data' => array(
+        'price' => array(
+          'title' => 'ราคา'.$this->announcementType->name,
+          'value' => $currency->format($this->price)
+        )
+      ),
+      'detailUrl' => $url->setAndParseUrl('real-estate/detail/{id}',array('id' => $this->id)),
+      'image' => $_imageUrl,
+      'isDataTitle' => 'ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์'
     );
 
   }

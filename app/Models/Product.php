@@ -377,7 +377,7 @@ class Product extends Model
       '_active' => $this->active ? 'เปิดการขายสินค้า' : 'ปิดการขาย',
       '_categoryPathName' => !empty($categoryPathName) ? $categoryPathName : '-',
       'promotion' => $this->getPromotion(),
-      'flag' => $this->getFlag(),
+      'flag' => $this->getProductFlag(),
     ),$this->getShippingCostText());
 
   }
@@ -396,7 +396,7 @@ class Product extends Model
       'quantity' => $this->quantity,
       '_active' => $this->active ? 'เปิดการขายสินค้า' : 'ปิดการขายสินค้า',
       'promotion' => $this->getPromotion(),
-      'flag' => $this->getFlag()
+      'flag' => $this->getProductFlag()
     );
     
   }
@@ -431,7 +431,7 @@ class Product extends Model
 
   }
 
-  public function getFlag() {
+  public function getProductFlag() {
 
     $flagMessage = '';
     switch ($this->flag_message_from) {
@@ -528,15 +528,22 @@ class Product extends Model
     }
 
     return array(
-      // 'name' => $this->name,
-      '_short_name' => $string->truncString($this->name,90),
-      '_short_description' => $string->truncString($this->description,250),
-      '_price' => $currency->format($this->price),
-      '_imageUrl' => $_imageUrl,
-      '_detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id' => $this->id)),
-      'promotion' => $this->getPromotion(),
-      'flag' => $this->getFlag(),
-      'dataFromFlag' => 'สินค้า'
+      'title' => $string->truncString($this->name,90),
+      'description' => $string->truncString($this->description,250),
+      'flags' => array(
+        $this->getProductFlag()
+      ),
+      'data' => array(
+        'productPrice' => array(
+          'value' => array(
+            'price' => $currency->format($this->price),
+            'promotion' => $this->getPromotion()
+          )
+        )
+      ),
+      'detailUrl' => $url->setAndParseUrl('item/detail/{id}',array('id' => $this->id)),
+      'image' => $_imageUrl,
+      'isDataTitle' => 'สินค้า'
     );
 
   }

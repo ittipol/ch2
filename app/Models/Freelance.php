@@ -126,13 +126,18 @@ class Freelance extends Model
     }
 
     return array(
-      // 'name' => $this->name,
-      '_short_name' => $string->truncString($this->name,90),
-      '_short_description' => $string->truncString($this->description,250),
-      '_imageUrl' => $_imageUrl,
-      '_detailUrl' => $url->setAndParseUrl('freelance/detail/{id}',array('id' => $this->id))
+      'title' => $string->truncString($this->name,90),
+      'description' => $string->truncString($this->description,250),
+      'data' => array(
+        'freelanceType' => array(
+          'title' => 'ประเภทงานฟรีแลนซ์',
+          'value' => $this->freelanceType->name
+        )
+      ),
+      'detailUrl' => $url->setAndParseUrl('freelance/detail/{id}',array('id' => $this->id)),
+      'image' => $_imageUrl,
+      'isDataTitle' => 'งานฟรีแลนซ์'
     );
-
 
   }
 

@@ -215,12 +215,21 @@ class Job extends Model
     }
 
     return array(
-      '_short_name' => $string->truncString($this->name,90),
-      '_short_description' => $string->truncString($this->description,250),
-      '_salary' => $this->getSalary(),
-      '_detailUrl' => $url->setAndParseUrl('job/detail/{id}',array('id' => $this->id)),
-      '_imageUrl' => $_imageUrl,
-      'dataFromFlag' => 'ประกาศงาน'
+      'title' => $string->truncString($this->name,90),
+      'description' => $string->truncString($this->description,250),
+      'data' => array(
+        'salary' => array(
+          'title' => 'อัตราค่าจ้าง',
+          'value' => $this->getSalary()
+        ),
+        'employmentType' => array(
+          'title' => 'รูปแบบการจ้างงาน',
+          'value' => $this->employmentType->name
+        )
+      ),
+      'detailUrl' => $url->setAndParseUrl('job/detail/{id}',array('id' => $this->id)),
+      'image' => $_imageUrl,
+      'isDataTitle' => 'ประกาศงาน'
     );
 
   }

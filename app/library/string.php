@@ -10,7 +10,7 @@ class String
     mb_internal_encoding('UTF-8');
 
     if(empty($string)) {
-      return '-';
+      return '';
     }
 
     if($stripTag){

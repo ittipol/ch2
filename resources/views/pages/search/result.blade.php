@@ -75,43 +75,67 @@
 
         <div class="row">
 
-          @foreach($results as $data)
+          @foreach($results as $result)
 
           <div class="col-xs-12 list">
 
             <div class="list-content-wrapper clearfix">
 
-              <div class="flag data-form-flag">{{$data['dataFromFlag']}}</div>
+              <div class="flag data-form-flag">{{$result['isDataTitle']}}</div>
 
               <div class="list-content image">
-                <a href="{{$data['_detailUrl']}}">
-                  <div class="primary-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+                <a href="{{$result['detailUrl']}}">
+                  <div class="primary-image" style="background-image:url({{$result['image']}});"></div>
                 </a>
               </div>
 
               <div class="list-content info">
-                <a href="{{$data['_detailUrl']}}">
-                  <div class="title">{{$data['_short_name']}}</div>
+                <a href="{{$result['detailUrl']}}">
+                  <div class="title">{{$result['title']}}</div>
                 </a>
 
-                @if(!empty($data['flag']))
-                  <div class="flag">{{$data['flag']}}</div>
+                @if(!empty($result['flags']))
+                  @foreach($result['flags'] as $flag)
+                    @if(!empty($flag))
+                      <div class="flag">{{$flag}}</div>
+                    @endif
+                  @endforeach
                 @endif
 
-                @if(!empty($data['need_broker']))
-                  <div class="flag">ต้องการตัวแทนขาย</div>
+                @if(!empty($result['description']))
+                  <div class="description">{{$result['description']}}</div>
                 @endif
 
-                @if(!empty($data['_short_description']) && ($data['_short_description'] != '-'))
-                  <div class="description">{{$data['_short_description']}}</div>
-                @endif
+                @if(!empty($result['data']))
 
-                @if(!empty($data['promotion']))
-                  <span class="price">{{$data['promotion']['_reduced_price']}}</span>
-                  <span class="price-discount-tag">{{$data['promotion']['percentDiscount']}}</span>
-                  <h5 class="origin-price">{{$data['_price']}}</h5>
-                @elseif(!empty($data['_price']))
-                  <div class="price">{{$data['_price']}}</div>
+                  @foreach($result['data'] as $type => $data)
+
+                    <div class="result-data-content">
+
+                    @if(!empty($data['title']))
+                      <div class="data-title">{{$data['title']}}</div>
+                    @endif
+
+                    @if($type == 'productPrice')
+
+                      @if(!empty($data['value']['promotion']))
+                        <span class="price">{{$data['value']['promotion']['_reduced_price']}}</span>
+                        <span class="price-discount-tag">{{$data['value']['promotion']['percentDiscount']}}</span>
+                        <h5 class="origin-price">{{$data['value']['price']}}</h5>
+                      @elseif(!empty($data['value']['price']))
+                        <span class="price">{{$data['value']['price']}}</span>
+                      @endif
+
+                    @elseif($type == 'price')
+                      <span class="price">{{$data['value']}}</span>
+                    @else
+                      <span class="data-value">{{$data['value']}}</span>
+                    @endif
+
+                    </div>
+
+                  @endforeach
+
                 @endif
 
               </div>
@@ -131,7 +155,7 @@
       <div class="list-empty-message text-center space-top-20">
         <img class="space-bottom-20 not-found-image" src="/images/common/not-found.png">
         <div>
-          <h3>ขออภัย ไม่พบสิ่งที่คุณกำลังค้นหา</h3>
+          <h3>ขออภัย ไม่พบผลลัพธ์ที่ตรงกับคำค้นหา</h3>
           <p>โปรดลองค้นหาอีกครั้งด้วยคำค้นหาที่แตกต่างจากคำค้นหานี้</p>
         </div>
       </div>

@@ -121,6 +121,20 @@
 	top: 0;
 	left: 0;
 	margin: 0;
-	background-color: #FFD600;
-	color: #F44336;
+	background-color: #E64A19;
+	color: #fff;
+}
+
+.search .list .list-content-wrapper .result-data-content {
+	margin-bottom: 10px;
+}
+
+.search .list .list-content-wrapper .data-title {
+	font-size: 14px;
+}
+
+.search .list .list-content-wrapper .data-value {
+	font-size: 20px;
+	color: #0071c5;
+	margin-top: 10px;
 }

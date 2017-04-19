@@ -76,7 +76,7 @@
 
     <div class="form-row">
       <?php
-        echo Form::label('employment_type_id', 'รูปแบบงาน', array(
+        echo Form::label('employment_type_id', 'รูปแบบการจ้างงาน', array(
           'class' => 'required'
         ));
       ?>

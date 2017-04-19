@@ -218,14 +218,20 @@ class Item extends Model
     }
 
     return array(
-      // 'name' => $this->name,
-      '_short_name' => $string->truncString($this->name,90),
-      '_short_description' => $string->truncString($this->description,250),
-      '_price' => $currency->format($this->price),
-      '_imageUrl' => $_imageUrl,
-      '_detailUrl' => $url->setAndParseUrl('item/detail/{id}',array('id' => $this->id)),
-      'flag' => 'ประกาศ'.$this->announcementType->name,
-      'dataFromFlag' => 'ประกาศซื้อ-เช่า-ขายสินค้า'
+      'title' => $string->truncString($this->name,90),
+      'description' => $string->truncString($this->description,250),
+      'flags' => array(
+        'ประกาศ'.$this->announcementType->name
+      ),
+      'data' => array(
+        'price' => array(
+          'title' => 'ราคา'.$this->announcementType->name,
+          'value' => $currency->format($this->price)
+        )
+      ),
+      'detailUrl' => $url->setAndParseUrl('item/detail/{id}',array('id' => $this->id)),
+      'image' => $_imageUrl,
+      'isDataTitle' => 'ประกาศซื้อ-เช่า-ขายสินค้า'
     );
 
   }

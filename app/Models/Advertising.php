@@ -71,6 +71,10 @@ class Advertising extends Model
     'default' => 'created_at:desc'
   );
 
+  public function advertisingType() {
+    return $this->hasOne('App\Models\AdvertisingType','id','advertising_type_id');
+  }
+
   public function buildModelData() {
 
     $string = new String;
@@ -112,15 +116,19 @@ class Advertising extends Model
     if(!empty($image)) {
       $_imageUrl = $cache->getCacheImageUrl($image,'list');
     }
-    
+
     return array(
-      'id' => $this->id,
-      'name' => $this->name,
-      '_short_name' => $string->truncString($this->name,60),
-      '_advertisingType' => AdvertisingType::select(array('name'))->find($this->advertising_type_id)->name,
-      '_detailUrl' => $url->setAndParseUrl('advertising/detail/{id}',array('id' => $this->id)),
-      '_imageUrl' => $_imageUrl,
-      'dataFromFlag' => 'โฆษณาจากบริษัทและร้านค้า'
+      'title' => $string->truncString($this->name,90),
+      'description' => $string->truncString($this->description,250),
+      'data' => array(
+        'advertisingType' => array(
+          'title' => 'ประเภทการโฆษณา',
+          'value' => $this->advertisingType->name
+        )
+      ),
+      'detailUrl' => $url->setAndParseUrl('item/detail/{id}',array('id' => $this->id)),
+      'image' => $_imageUrl,
+      'isDataTitle' => 'โฆษณาจากบริษัทและร้านค้า'
     );
     
   }

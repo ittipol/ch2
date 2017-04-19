@@ -127,25 +127,31 @@ class Branch extends Model
       $_imageUrl = $cache->getCacheImageUrl($image,'list');
     }
 
-    $slug = ShopRelateTo::select('shop_id')
+    $shop = ShopRelateTo::select('shop_id')
     ->where(array(
       array('model','like','Branch'),
       array('model_id','=',$this->id)
     ))
     ->first()
-    ->shop->getRelatedData('Slug',array(
+    ->shop;
+
+    $slug = $shop->getRelatedData('Slug',array(
       'fields' => array('slug'),
       'first' => true
-    ))
-    ->slug;
+    ))->slug;
 
     return array(
-      'id' => $this->id,
-      'name' => $this->name,
-      '_short_name' => $string->truncString($this->name,60),
-      '_detailUrl' => $url->url('shop/'.$slug.'/branch/'.$this->id),
-      '_imageUrl' => $_imageUrl,
-      'dataFromFlag' => 'สาขา'
+      'title' => $string->truncString($this->name,90),
+      'description' => $string->truncString($this->description,250),
+      'data' => array(
+        'branch' => array(
+          'title' => 'สาขาในบริษัทหรือร้านค้า',
+          'value' => $shop->name
+        )
+      ),
+      'detailUrl' => $url->url('shop/'.$slug.'/branch/'.$this->id),
+      'image' => $_imageUrl,
+      'isDataTitle' => 'สาขา'
     );
     
   }
