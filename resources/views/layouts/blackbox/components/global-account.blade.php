@@ -105,10 +105,10 @@
             <div class="dot"></div>
             <div class="dot"></div>
             <div class="additional-option-content">
-              <a href="{{$shop['url']}}product/manage">จัดการสินค้า</a>
-              <a href="{{$shop['url']}}job/manage">ประกาศงาน</a>
-              <a href="{{$shop['url']}}advertising/manage">จัดการโฆษณา</a>
-              <a href="{{$shop['url']}}setting/manage">ตั้งค่า</a>
+              <a href="{{$shop['url']}}manage/product">จัดการสินค้า</a>
+              <a href="{{$shop['url']}}manage/job">ประกาศงาน</a>
+              <a href="{{$shop['url']}}manage/advertising">จัดการโฆษณา</a>
+              <a href="{{$shop['url']}}setting">ตั้งค่า</a>
             </div>
           </div>
         </div>

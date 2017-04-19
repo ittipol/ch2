@@ -22,7 +22,7 @@
   </div>
 </div>
 
-<div class="container list">
+<div class="container list space-top-30">
 
   <h3>ประกาศงานจาก {{request()->get('shop')->name}}</h3>
   <div class="line"></div>

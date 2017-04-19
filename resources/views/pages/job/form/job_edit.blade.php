@@ -160,7 +160,9 @@
 
       <?php 
         echo Form::label('recruitment_custom_detail', 'รายละเอียดการสมัครงานนี้');
-        echo Form::textarea('recruitment_custom_detail');
+        echo Form::textarea('recruitment_custom_detail', null, array(
+          'class' => 'recruitment-custom-input'
+        ));
       ?>
     </div>
 

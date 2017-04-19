@@ -13,15 +13,15 @@ class InputField {
 		let _this = this;
 		$('input[role="number"]').on('keyup',function(){
 
-			if($(this).val() == '') {
+			if(this.value == '') {
 				_this.oldInput = '';
 				return false;
 			}
 
 			const regex = /^[0-9]+\.?[0-9]*$/;
 
-			if($(this).val().match(regex) == null) {
-			  $(this).val(_this.oldInput);
+			if(this.value.match(regex) == null) {
+				this.value = _this.oldInput;
 			  return false;
 			}
 
@@ -29,22 +29,30 @@ class InputField {
 			
 		});
 
+		$('input[role="number"]').on('focus',function(){
+			_this.oldInput = '';
+		});
+
 		$('input[role="currency"]').on('keyup',function(){
 
-			if($(this).val() == '') {
+			if(this.value == '') {
 				_this.oldInput = '';
 				return false;
 			}
 
 			const regex = /^[0-9]+\.?[0-9]{0,2}$/;
 
-			if($(this).val().match(regex) == null) {
-			  $(this).val(_this.oldInput);
+			if(this.value.match(regex) == null) {
+				this.value = _this.oldInput;
 			  return false;
 			}
 
 			_this.oldInput = $(this).val();
 
+		});
+
+		$('input[role="currency"]').on('focus',function(){
+			_this.oldInput = '';
 		});
 
 		$(document).on('click','a[role="button"]',function(e){

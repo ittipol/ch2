@@ -61,7 +61,9 @@
 <div class="container detail">
 
   @if(!empty($_modelData['flag']))
-    <div class="flag sale-promotion">{{$_modelData['flag']}}</div>
+    <div class="flag-wrapper">
+      <div class="flag sale-promotion">{{$_modelData['flag']}}</div>
+    </div>
   @endif
 
   <div class="image-gallery">

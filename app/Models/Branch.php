@@ -2,6 +2,10 @@
 
 namespace App\Models;
 
+use App\library\string;
+use App\library\cache;
+use App\library\url;
+
 class Branch extends Model
 {
   public $table = 'branches';
@@ -104,6 +108,44 @@ class Branch extends Model
     return array(
       'id' => $this->id,
       'name' => $this->name
+    );
+    
+  }
+
+  public function buildLookupData() {
+
+    $string = new String;
+    $cache = new Cache;
+    $url = new url;
+
+    $image = $this->getRelatedData('Image',array(
+      'first' => true
+    ));
+
+    $_imageUrl = '/images/common/no-img.png';
+    if(!empty($image)) {
+      $_imageUrl = $cache->getCacheImageUrl($image,'list');
+    }
+
+    $slug = ShopRelateTo::select('shop_id')
+    ->where(array(
+      array('model','like','Branch'),
+      array('model_id','=',$this->id)
+    ))
+    ->first()
+    ->shop->getRelatedData('Slug',array(
+      'fields' => array('slug'),
+      'first' => true
+    ))
+    ->slug;
+
+    return array(
+      'id' => $this->id,
+      'name' => $this->name,
+      '_short_name' => $string->truncString($this->name,60),
+      '_detailUrl' => $url->url('shop/'.$slug.'/branch/'.$this->id),
+      '_imageUrl' => $_imageUrl,
+      'dataFromFlag' => 'สาขา'
     );
     
   }

@@ -269,8 +269,8 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::get('shop/{shopSlug}/product','ProductController@shopProductlistView')->name('shop.product.list');
   Route::get('shop/{shopSlug}/product/{id}','ProductController@shopProductDetail')->name('shop.product.detail');
 
-  Route::get('shop/{shopSlug}/product/manage','ShopController@product')->name('shop.product.manage');
-  Route::get('shop/{shopSlug}/product/manage/{id}','ProductController@menu')->name('shop.product.manage.menu');
+  Route::get('shop/{shopSlug}/manage/product','ShopController@product')->name('shop.product.manage');
+  Route::get('shop/{shopSlug}/manage/product/{id}','ProductController@menu')->name('shop.product.manage.menu');
 
   Route::get('shop/{shopSlug}/product_post','ProductController@add')->name('shop.product.add');
   Route::post('shop/{shopSlug}/product_post','ProductController@addingSubmit')->name('shop.product.add');
@@ -361,7 +361,7 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::get('shop/{shopSlug}/job','JobController@shopJoblistView')->name('shop.job.list');
   Route::get('shop/{shopSlug}/job/{id}','JobController@shopJobDetail')->name('shop.job.detail');
 
-  Route::get('shop/{shopSlug}/job/manage','ShopController@job')->name('shop.job.manage');
+  Route::get('shop/{shopSlug}/manage/job','ShopController@job')->name('shop.job.manage');
 
   Route::get('shop/{shopSlug}/job_applying','JobController@jobApplyingList')->name('shop.job.applying_list');
   Route::get('shop/{shopSlug}/job_applying/detail/{id}','JobController@jobApplyingDetail')->name('shop.job.applying_detail');
@@ -392,7 +392,7 @@ Route::group(['middleware' => ['auth','person.experience']], function () {
 // Branch
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
 
-  Route::get('shop/{shopSlug}/branch/manage','ShopController@branch')->name('shop.branch.manage');
+  Route::get('shop/{shopSlug}/manage/branch','ShopController@branch')->name('shop.branch.manage');
 
   Route::get('shop/{shopSlug}/branch','BranchController@listView')->name('shop.branch.list');
   Route::get('shop/{shopSlug}/branch/{id}','BranchController@detail')->name('shop.branch.detail');
@@ -416,7 +416,7 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::get('shop/{shopSlug}/advertising','AdvertisingController@shopAdvertisinglistView')->name('shop.advertising.list');
   Route::get('shop/{shopSlug}/advertising/{id}','AdvertisingController@shopAdvertisingDetail')->name('shop.advertising.detail');
 
-  Route::get('shop/{shopSlug}/advertising/manage','ShopController@advertising')->name('shop.advertising.manage');
+  Route::get('shop/{shopSlug}/manage/advertising','ShopController@advertising')->name('shop.advertising.manage');
   
   Route::get('shop/{shopSlug}/shop_ad_post','AdvertisingController@add')->name('shop.advertising.add');
   Route::post('shop/{shopSlug}/shop_ad_post','AdvertisingController@addingSubmit')->name('shop.advertising.add');

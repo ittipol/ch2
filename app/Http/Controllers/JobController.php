@@ -469,7 +469,7 @@ class JobController extends Controller
 
     if($model->fill($request->all())->save()) {
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/job');
+      return Redirect::to('shop/'.request()->shopSlug.'/manage/job');
     }else{
       return Redirect::back();
     }

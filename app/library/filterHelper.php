@@ -99,7 +99,11 @@ class FilterHelper {
       $word = str_replace(array('\'','"'), '', $word);
       $word = str_replace('+', ' ', $word);
 
-      if(mb_strlen($word) < 3) {
+      $len = mb_strlen($word);
+
+      if($len < 2) {
+        continue;
+      }elseif($len < 3) {
         array_push($or,array('lookups.keyword_1','like','%'.$word.'%'));
         array_push($or,array('lookups.keyword_2','like','%'.$word.'%'));
         array_push($or,array('lookups.keyword_3','like','%'.$word.'%'));

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\library\string;
+use App\library\cache;
+use App\library\url;
 
 class Advertising extends Model
 {
@@ -87,14 +89,40 @@ class Advertising extends Model
 
     $string = new String;
 
-    $advertisingType = AdvertisingType::select(array('name'))->find($this->advertising_type_id);
-
     return array(
       'id' => $this->id,
       'name' => $this->name,
       '_short_name' => $string->truncString($this->name,60),
-      '_advertisingType' => $advertisingType->name
+      '_advertisingType' => AdvertisingType::select(array('name'))->find($this->advertising_type_id)->name
     );
     
   }
+
+  public function buildLookupData() {
+
+    $string = new String;
+    $cache = new Cache;
+    $url = new url;
+
+    $image = $this->getRelatedData('Image',array(
+      'first' => true
+    ));
+
+    $_imageUrl = '/images/common/no-img.png';
+    if(!empty($image)) {
+      $_imageUrl = $cache->getCacheImageUrl($image,'list');
+    }
+    
+    return array(
+      'id' => $this->id,
+      'name' => $this->name,
+      '_short_name' => $string->truncString($this->name,60),
+      '_advertisingType' => AdvertisingType::select(array('name'))->find($this->advertising_type_id)->name,
+      '_detailUrl' => $url->setAndParseUrl('advertising/detail/{id}',array('id' => $this->id)),
+      '_imageUrl' => $_imageUrl,
+      'dataFromFlag' => 'โฆษณาจากบริษัทและร้านค้า'
+    );
+    
+  }
+
 }

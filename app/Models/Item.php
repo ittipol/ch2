@@ -176,7 +176,7 @@ class Item extends Model
       'id' => $this->id,
       'announcement_type_id' => $this->announcement_type_id,
       'name' => $this->name,
-      'description' => !empty($this->description) ? $this->description : '-',
+      'description' => !empty($this->description) ? nl2br($this->description) : '-',
       '_price' => $currency->format($this->price),
       '_used' => $this->used ? 'สินค้าใหม่' : 'สินค้ามือสอง',
       '_announcementTypeName' => $this->announcementType->name,
@@ -223,7 +223,9 @@ class Item extends Model
       '_short_description' => $string->truncString($this->description,250),
       '_price' => $currency->format($this->price),
       '_imageUrl' => $_imageUrl,
-      '_detailUrl' => $url->setAndParseUrl('item/detail/{id}',array('id' => $this->id))
+      '_detailUrl' => $url->setAndParseUrl('item/detail/{id}',array('id' => $this->id)),
+      'flag' => 'ประกาศ'.$this->announcementType->name,
+      'dataFromFlag' => 'ประกาศซื้อ-เช่า-ขายสินค้า'
     );
 
   }

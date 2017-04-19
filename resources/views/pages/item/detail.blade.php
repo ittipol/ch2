@@ -97,16 +97,16 @@
 
   </div>
 
+  @if (Auth::check() && (Session::get('Person.id') == $_modelData['person_id']))
+  <div class="text-right">
+    <a href="" class="button">ยกเลิกประกาศ</a>
+    <!-- <div class="line space-top-bottom-20"></div> -->
+  </div>
+  @endif
+
   <div class="row">
 
-    <div class="col-md-4 col-xs-12">
-
-      @if (Auth::check() && (Session::get('Person.id') == $_modelData['person_id']))
-      <div>
-        <a href="" class="button">ยกเลิกประกาศ</a>
-        <div class="line space-top-bottom-20"></div>
-      </div>
-      @endif
+    <div class="col-md-3 col-xs-12">
 
       <div class="item-info">
 
@@ -116,8 +116,6 @@
         </div>
 
       </div>
-
-      <div class="space-top-bottom-20"></div>
 
       <div class="item-info">
 
@@ -157,9 +155,14 @@
 
     </div>
 
-    <div class="col-md-8 col-xs-12">
+    <div class="col-md-9 col-xs-12">
 
-      <div class="margin-section section-border-left no-margin">
+      <div class="flag-group space-bottom-20">
+        <div class="flag">ประกาศ{{$_modelData['_announcementTypeName']}}</div>
+        <div class="flag">{{$_modelData['_used']}}</div>
+      </div>
+
+      <!-- <div class="margin-section section-border-left no-margin">
 
         <div class="space-top-bottom-10 section-inner">
           
@@ -170,15 +173,15 @@
 
         </div>
 
-      </div>
+      </div> -->
 
-      <!-- <div class="detail-info-section no-margin">
+      <div class="detail-info-section no-margin">
         <h4>รายละเอียด {{$_modelData['name']}}</h4>
         <div class="line"></div> 
         <div class="detail-info">
           {!!$_modelData['description']!!}
         </div>
-      </div> -->
+      </div>
 
     </div>
 

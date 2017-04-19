@@ -4,7 +4,6 @@
 
 .detail .line {
 	background-color: #bababa;
-	/*background-color: red;*/
 }
 
 .detail .text-emphasize {
@@ -14,6 +13,10 @@
 
 .detail .text-emphasize-green {
 	color: #088921;
+}
+
+.detail .item-info {
+	margin-bottom: 20px;
 }
 
 .detail .origin-price {
@@ -30,19 +33,19 @@
 	color: #D50000;
 }
 
-.detail .flag {
+.detail .flag-wrapper .flag {
 	position: absolute;
 	top: 20px;
-	right: 0;
+	right: 10px;
+	z-index: 8;
+}
+
+.detail .flag {
 	padding: 6px 20px;
 	background-color: #EF6C00;
 	color: #fff;
 	font-size: 14px;
-	z-index: 8;
-}
-
-.detail-title {
-	/*margin-bottom: 10px;*/
+	display: inline-block;
 }
 
 .detail-title .title {

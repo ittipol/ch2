@@ -30,7 +30,7 @@ class Lookup extends Model
           'value' => 'model:Job',
         ),
         array(
-          'name' => 'โฆษณาจากร้านค้า',
+          'name' => 'โฆษณาจากบริษัทและร้านค้า',
           'value' => 'model:Advertising',
         ),
         array(

@@ -83,7 +83,7 @@
                 <div class="card-title">{{$data['_short_name']}}</div>
               </a>
               <div class="card-sub-info">
-                {{$data['_salary']}}
+                <div class="text-emphasize">{{$data['_salary']}}</div>
               </div>
             </div>
             

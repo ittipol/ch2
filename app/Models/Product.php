@@ -375,9 +375,7 @@ class Product extends Model
       '_shipping_calculate_from' => $shippingCalculateFrom,
       'active' => $this->active,
       '_active' => $this->active ? 'เปิดการขายสินค้า' : 'ปิดการขาย',
-      // '_categoryName' => !empty($categoryName) ? $categoryName : '-',
       '_categoryPathName' => !empty($categoryPathName) ? $categoryPathName : '-',
-      // '_categoryPaths' => $this->getCategoryPaths(),
       'promotion' => $this->getPromotion(),
       'flag' => $this->getFlag(),
     ),$this->getShippingCostText());
@@ -536,6 +534,9 @@ class Product extends Model
       '_price' => $currency->format($this->price),
       '_imageUrl' => $_imageUrl,
       '_detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id' => $this->id)),
+      'promotion' => $this->getPromotion(),
+      'flag' => $this->getFlag(),
+      'dataFromFlag' => 'สินค้า'
     );
 
   }

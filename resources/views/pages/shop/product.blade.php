@@ -87,7 +87,9 @@
           <div class="card">
 
             @if(!empty($data['flag']))
-              <div class="flag sale-promotion">{{$data['flag']}}</div>
+              <div class="flag-wrapper">
+                <div class="flag sale-promotion">{{$data['flag']}}</div>
+              </div>
             @endif
 
             <div class="image-tile">

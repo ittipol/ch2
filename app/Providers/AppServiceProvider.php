@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
           view()->share('_shop_product_url',$url->url('shop/'.$slug.'/manage/product'));
           view()->share('_shop_job_url',$url->url('shop/'.$slug.'/manage/job'));
           view()->share('_shop_advertising_url',$url->url('shop/'.$slug.'/manage/advertising'));
-          view()->share('_shop_branch_url',$url->url('shop/'.$slug.'/branch/manage'));
+          view()->share('_shop_branch_url',$url->url('shop/'.$slug.'/manage/branch'));
 
         // }
 
@@ -48,6 +48,7 @@ class AppServiceProvider extends ServiceProvider
         view()->share('_shop_product_url',$url->url('shop/'.$slug.'/manage/product'));
         view()->share('_shop_job_url',$url->url('shop/'.$slug.'/manage/job'));
         view()->share('_shop_advertising_url',$url->url('shop/'.$slug.'/manage/advertising'));
+        view()->share('_shop_branch_url',$url->url('shop/'.$slug.'/manage/branch'));
 
       });
 

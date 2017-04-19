@@ -36,6 +36,10 @@ class Shop extends Model
         'name' => '{{name}}'
       ),
       'active' => 1
+    ),
+    'DataAccessPermission' => array(
+      'owner' => 'Person',
+      'defaultAccessLevel' => 99
     )
   );
 
@@ -337,7 +341,8 @@ class Shop extends Model
       '_short_name' => $string->truncString($this->name,90),
       '_short_description' => $string->truncString($this->description,250),
       '_imageUrl' => $_imageUrl,
-      '_detailUrl' => $url->url('shop/'.$slug)
+      '_detailUrl' => $url->url('shop/'.$slug),
+      'dataFromFlag' => 'บริษัทหรือร้านค้า'
     );
 
   }

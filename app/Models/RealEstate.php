@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\library\currency;
 use App\library\string;
+use App\library\cache;
+use App\library\url;
 
 class RealEstate extends Model
 {
@@ -382,6 +384,36 @@ class RealEstate extends Model
       'feature' => json_decode($this->feature,true),
       'need_broker' => $this->need_broker,
     );
-  } 
+  }
+
+  public function buildLookupData() {
+
+    $currency = new Currency;
+    $string = new String;
+    $cache = new Cache;
+    $url = new url;
+
+    $image = $this->getRelatedData('Image',array(
+      'first' => true
+    ));
+
+    $_imageUrl = '/images/common/no-img.png';
+    if(!empty($image)) {
+      $_imageUrl = $cache->getCacheImageUrl($image,'list');
+    }
+
+    return array(
+      // 'name' => $this->name,
+      '_short_name' => $string->truncString($this->name,90),
+      '_short_description' => $string->truncString($this->description,250),
+      '_price' => $currency->format($this->price),
+      '_imageUrl' => $_imageUrl,
+      '_detailUrl' => $url->setAndParseUrl('real-estate/detail/{id}',array('id' => $this->id)),
+      'flag' => 'ประกาศ'.$this->announcementType->name,
+      'need_broker' => $this->need_broker,
+      'dataFromFlag' => 'ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์'
+    );
+
+  }
 
 }

@@ -220,6 +220,7 @@ class Job extends Model
       '_salary' => $this->getSalary(),
       '_detailUrl' => $url->setAndParseUrl('job/detail/{id}',array('id' => $this->id)),
       '_imageUrl' => $_imageUrl,
+      'dataFromFlag' => 'ประกาศงาน'
     );
 
   }

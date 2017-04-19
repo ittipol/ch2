@@ -77,8 +77,9 @@ class ShopController extends Controller
 
   public function manage() {
 
-    $model = request()->get('shop');
+    $shopRelateToModel = Service::loadModel('ShopRelateTo');
 
+    $model = request()->get('shop');
     $model->modelData->loadData();
 
     $this->data = $model->modelData->build();
@@ -90,7 +91,7 @@ class ShopController extends Controller
     // ->select('products.*')
     // ->get();
 
-    $totalProduct = Service::loadModel('ShopRelateTo')
+    $totalProduct = $shopRelateToModel
     ->where([
       ['shop_id','=',request()->get('shopId')],
       ['model','like','Product']
@@ -103,7 +104,7 @@ class ShopController extends Controller
     ));
     $product->paginator->setUrl('product/detail/{id}','detailUrl');
 
-    $totalJob = Service::loadModel('ShopRelateTo')
+    $totalJob = $shopRelateToModel
     ->where([
       ['shop_id','=',request()->get('shopId')],
       ['model','like','Job']
@@ -116,7 +117,7 @@ class ShopController extends Controller
     ));
     $job->paginator->setUrl('job/detail/{id}','detailUrl');
 
-    $totalAdvertising = Service::loadModel('ShopRelateTo')
+    $totalAdvertising = $shopRelateToModel
     ->where([
       ['shop_id','=',request()->get('shopId')],
       ['model','like','Advertising']
@@ -175,9 +176,9 @@ class ShopController extends Controller
       'order' => array('id','DESC')
     ));
     $model->paginator->setPage($page);
-    $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/product');
-    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/product/manage/{id}','menuUrl');
-    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/product/delete/{id}','deleteUrl');
+    $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/manage/product');
+    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/manage/product/{id}','menuUrl');
+    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/manage/product/delete/{id}','deleteUrl');
     $model->paginator->setUrl('product/detail/{id}','detailUrl');
 
     $this->data = $model->paginator->build();

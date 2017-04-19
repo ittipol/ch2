@@ -57,10 +57,6 @@
         pushNotification.load();
       @endif
 
-      // setTimeout(function(){
-      //   $('body').css('overflow-y','auto');
-      // },50);
-
       setTimeout(function(){
         $(".nano").nanoScroller();
       },1000);
