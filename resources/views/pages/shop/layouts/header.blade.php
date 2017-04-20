@@ -77,8 +77,8 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="nav-group clearfix">
-          <a class="nav">หน้าแรก</a>
-          <a class="nav">เกี่ยวกับ</a>
+          <a href="{{request()->get('shopUrl')}}" class="nav">หน้าแรก</a>
+          <a href="{{request()->get('shopUrl')}}about" class="nav">เกี่ยวกับ</a>
         </div>
       </div>
     </div>

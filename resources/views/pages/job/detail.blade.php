@@ -265,7 +265,7 @@
         @endif
 
       @else
-      <a class="button" href="{{$jobApplyUrl}}">
+      <a class="button wide-button" href="{{$jobApplyUrl}}">
         <img src="/images/icons/edit-white.png">
         สมัครงานนี้
       </a>

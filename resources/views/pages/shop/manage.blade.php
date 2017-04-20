@@ -3,18 +3,18 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 
-<div class="shop-wrapper">
+@include('pages.shop.layouts.top_nav') 
+@include('pages.shop.layouts.header') 
 
-  @include('pages.shop.layouts.top_nav') 
-  @include('pages.shop.layouts.header') 
+<div class="shop-content-wrapper">
 
   <div class="shop-notice">
 
     <div class="container">
     
       <div class="shop-notice-header">
-        <h3>ยินดีต้อนรับเข้าสู่ชุมชน</h3>
-        <p>กรุณาเพิ่มข้อมูลต่างๆของร้านค้าของคุณ ก่อนการใช้งาน</p>
+        <h3>จัดการร้านค้า</h3>
+        <p>กรุณาเพิ่มข้อมูลของร้านค้า ก่อนการใช้งาน</p>
       </div>
 
       <div class="shop-notice-content">
@@ -33,142 +33,210 @@
 
     <div class="row">
 
-      <div class="col-md-4 col-xs-12">
+      <div class="col-lg-6 col-md-12 col-xs-12">
         <div class="box">
           <div class="box-inner">
             <h3>สินค้า</h3>
-
-            @if(!empty($products))
-
-              <h4>จำนวนสินค้าทั้งหมด: {{$totalProduct}} รายการ</h4>
-
-              <h5 class="space-top-20">สินค้าล่าสุด</h5>
-              <div class="line"></div>
-
-              @foreach($products as $product)
-
-                <div class="info-box">
-                  <a href="{{$product['detailUrl']}}">
-                    <div class="primary-image-tile" style="background-image:url({{$product['_imageUrl']}});"></div>
-                  </a>
-                  <div class="primary-info-section">
-                    <a href="{{$product['detailUrl']}}">
-                      <h4 class="title">{{$product['name']}}</h4>
-                    </a>
-                    <div class="secondary-info-section">
-                      <div class="price">{{$product['_price']}}</div>
-                    </div>
-                  </div>
-                </div>
-
-              @endforeach
-
-            @else
-
-            <div class="notice text-center space-top-40">
-              <img class="space-bottom-20" src="/images/common/tag.png">
-              <div>
-                <h3>สินค้า</h3>
-                <p>ยังไม่มีสินค้า เพิ่มสินค้า เพื่อขายสินค้าของคุณ</p>
-                <a href="{{$productPostUrl}}" class="button">เพิ่มสินค้า</a>
-              </div>
+            <div>
+              <h1>{{$totalProduct}}</h1>
+              <div>รายการสินค้า</div>
             </div>
 
-            @endif
+            <a href="#" class="button wide-button space-top-bottom-20">
+              จัดการสินค้า
+            </a>
+
+            <div class="line"></div>
+
+            <div class="tile-nav-group space-top-20 clearfix">
+
+              <div class="tile-nav small">
+                <div class="tile-nav-image">
+                  <a href="{{$productPostUrl}}">
+                    <img src="/images/common/plus.png">
+                  </a>
+                </div>
+                <div class="tile-nav-info">
+                  <a href="{{$productPostUrl}}">
+                    <h4 class="tile-nav-title">เพิ่มสินค้า</h4>
+                  </a>
+                </div>
+              </div>
+
+              <div class="tile-nav small">
+                <div class="tile-flag-count">99</div>
+
+                <div class="tile-nav-image">
+                  <a href="">
+                    <img src="/images/common/bag.png">
+                  </a>
+                </div>
+                <div class="tile-nav-info">
+                  <a href="">
+                    <h4 class="tile-nav-title">รายการสั่งซื้อ</h4>
+                  </a>
+                </div>
+              </div>
+
+              <div class="tile-nav small">
+                <div class="tile-nav-image">
+                  <a href="">
+                    <img src="/images/common/payment.png">
+                  </a>
+                </div>
+                <div class="tile-nav-info">
+                  <a href="">
+                    <h4 class="tile-nav-title">วิธีการชำระเงิน</h4>
+                  </a>
+                </div>
+              </div>
+
+              <div class="tile-nav small">
+                <div class="tile-nav-image">
+                  <a href="">
+                    <img src="/images/common/truck.png">
+                  </a>
+                </div>
+                <div class="tile-nav-info">
+                  <a href="">
+                    <h4 class="tile-nav-title">วิธีการจัดส่งสินค้า</h4>
+                  </a>
+                </div>
+              </div>
+
+            </div>
 
           </div>
         </div>
       </div>
 
-      <div class="col-md-4 col-xs-12">
+      <div class="col-md-6 col-xs-12">
         <div class="box">
           <div class="box-inner">
             <h3>ประกาศงาน</h3>
 
-            @if(!empty($jobs))
+            <div>
+              <h1>{{$totalJob}}</h1>
+              <div>รายการประกาศ</div>
+            </div>
 
-            <h4>จำนวนประกาศทั้งหมด: {{$totalJob}} รายการ</h4>
+            <a href="{{request()->get('shopUrl')}}manage/job" class="button wide-button space-top-bottom-20">
+              จัดการประกาศงาน
+            </a>
 
-            <h5 class="space-top-20">ประกาศล่าสุด</h5>
             <div class="line"></div>
 
-              @foreach($jobs as $job)
+            <div class="tile-nav-group space-top-bottom-20 clearfix">
 
-              <div class="info-box">
-                <a href="{{$job['detailUrl']}}">
-                  <div class="primary-image-tile" style="background-image:url({{$job['_imageUrl']}});"></div>
-                </a>
-                <div class="primary-info-section">
-                  <a href="{{$job['detailUrl']}}">
-                    <h4 class="title">{{$job['name']}}</h4>
+              <div class="tile-nav small">
+                <div class="tile-nav-image">
+                  <a href="">
+                    <img src="/images/common/plus.png">
+                  </a>
+                </div>
+                <div class="tile-nav-info">
+                  <a href="">
+                    <h4 class="tile-nav-title">ลงประกาศงาน</h4>
                   </a>
                 </div>
               </div>
 
-              @endforeach
+              <div class="tile-nav small">
+                <div class="tile-nav-image">
+                  <a href="">
+                    <img src="/images/common/resume.png">
+                  </a>
+                </div>
+                <div class="tile-nav-info">
 
-            @else
-
-              <div class="notice text-center space-top-40">
-                <img class="space-bottom-20" src="/images/common/career.png">
-                <div>
-                  <h3>ลงประกาศงาน</h3>
-                  <p>ยังไม่มีประกาศงานของคุณ เพิ่มประกาศงานของคุณเพื่อค้นหาพนักงานใหม่</p>
-                  <a href="" class="button">ลงประกาศงาน</a>
+                  <div class="tile-flag-count">99</div>
+                  
+                  <a href="">
+                    <h4 class="tile-nav-title">รายชื่อผู้ที่สมัครงาน</h4>
+                  </a>
                 </div>
               </div>
 
-            @endif
+            </div>
 
           </div>
         </div>
       </div>
 
-      <div class="col-md-4 col-xs-12">
+      <div class="col-md-6 col-xs-12">
         <div class="box">
           <div class="box-inner">
             <h3>โฆษณา</h3>
 
-            @if(!empty($advertisings))
+            <div>
+              <h1>{{$totalAdvertising}}</h1>
+              <div>รายการโฆษณา</div>
+            </div>
 
-              <h4>จำนวนประกาศทั้งหมด: {{$totalAdvertising}} รายการ</h4>
+            <a href="#" class="button wide-button space-top-bottom-20">
+              จัดการโฆษณา
+            </a>
 
-              <h5 class="space-top-20">ประกาศล่าสุด</h5>
-              <div class="line"></div>
+            <div class="line"></div>
 
-              @foreach($advertisings as $advertising)
+            <div class="tile-nav-group space-top-bottom-20 clearfix">
 
-              <div class="info-box">
-                <a href="{{$advertising['detailUrl']}}">
-                  <div class="primary-image-tile" style="background-image:url({{$advertising['_imageUrl']}});"></div>
-                </a>
-                <div class="primary-info-section">
-                  <a href="{{$advertising['detailUrl']}}">
-                    <h4 class="title">{{$advertising['name']}}</h4>
+              <div class="tile-nav small">
+                <div class="tile-nav-image">
+                  <a href="">
+                    <img src="/images/common/plus.png">
+                  </a>
+                </div>
+                <div class="tile-nav-info">
+                  <a href="">
+                    <h4 class="tile-nav-title">ลงโฆษณา</h4>
                   </a>
                 </div>
               </div>
 
-              @endforeach
-
-            @else
-
-              <div class="notice text-center space-top-40">
-                <img class="space-bottom-20" src="/images/common/megaphone.png">
-                <div>
-                  <h3>โฆษณา</h3>
-                  <p>ยังไม่มีประกาศงานของคุณ เพิ่มประกาศงานของคุณเพื่อค้นหาพนักงานใหม่</p>
-                  <a href="" class="button">ลงโฆษณา</a>
-                </div>
-              </div>
-
-            @endif
+            </div>
 
           </div>
         </div>
       </div>
 
-      @if(!empty($_modelData['Address']))
+      <div class="col-md-6 col-xs-12">
+        <div class="box">
+          <div class="box-inner">
+            <h3>สาขา</h3>
+
+            <div>
+              <h1>0</h1>
+              <div>สาขา</div>
+            </div>
+
+            <a href="#" class="button wide-button space-top-bottom-20">
+              จัดการสาขา
+            </a>
+
+            <div class="line"></div>
+
+            <div class="tile-nav-group space-top-bottom-20 clearfix">
+
+              <div class="tile-nav small">
+                <div class="tile-nav-image">
+                  <a href="">
+                    <img src="/images/common/plus.png">
+                  </a>
+                </div>
+                <div class="tile-nav-info">
+                  <a href="">
+                    <h4 class="tile-nav-title">เพิ่มสาขา</h4>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
       <div class="col-xs-12">
         <div class="box">
           <div class="box-inner">
@@ -178,23 +246,48 @@
 
             <div>
               <h5><strong>ที่อยู่</strong></h5>
-              {{$_modelData['Address']['_long_address']}}
+              @if(!empty($_modelData['Address']['_long_address']))
+                {{$_modelData['Address']['_long_address']}}
+              @else
+                -
+              @endif
             </div>
 
             <div>
               <h5><strong>หมายเลขโทรศัพท์</strong></h5>
-              {{$_modelData['Contact']['phone_number']}}
+              @if(!empty($_modelData['Contact']['phone_number']))
+                {{$_modelData['Contact']['phone_number']}}
+              @else
+                -
+              @endif
             </div>
 
             <div>
               <h5><strong>อีเมล</strong></h5>
-              {{$_modelData['Contact']['email']}}
+              @if(!empty($_modelData['Contact']['email']))
+                {{$_modelData['Contact']['email']}}
+              @else
+                -
+              @endif
             </div>
+
+            <div>
+              <h5><strong>เว็บไซต์</strong></h5>
+              @if(!empty($_modelData['Contact']['website']))
+                {{$_modelData['Contact']['website']}}
+              @else
+                -
+              @endif
+            </div>
+
+            <div class="line only-space space-top-bottom-20"></div>
+
+            <a href="" class="button">แก้ไขที่อยู่</a>
+            <a href="" class="button">แก้ไขการติดต่อ</a>
 
           </div>
         </div>
       </div>
-      @endif
 
     </div>
 

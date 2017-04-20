@@ -46,19 +46,6 @@
       </div>
     </div>
 
-    <div class="tile-nav small">
-      <div class="tile-nav-image">
-          <a href="{{$branchManageUrl}}">
-            <img src="/images/common/building.png">
-          </a>
-      </div>
-      <div class="tile-nav-info">
-        <a href="{{$branchManageUrl}}">
-          <h4 class="tile-nav-title">สาขา</h4>
-        </a>
-      </div>
-    </div>
-
   </div>
 
   <div class="line"></div>

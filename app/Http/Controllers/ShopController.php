@@ -297,10 +297,10 @@ class ShopController extends Controller
         'order' => array('id','DESC')
       ));
       $jobModel->paginator->setPage($page);
-      $jobModel->paginator->setPagingUrl('shop/'.request()->shopSlug.'/job');
-      $jobModel->paginator->setUrl('shop/'.$this->param['shopSlug'].'/job/edit/{id}','editUrl');
-      $jobModel->paginator->setUrl('shop/'.$this->param['shopSlug'].'/job/delete/{id}','deleteUrl');
-      $jobModel->paginator->setUrl('job/detail/{id}','detailUrl');
+      $jobModel->paginator->setPagingUrl('shop/'.request()->shopSlug.'/manage/job');
+      $jobModel->paginator->setUrl('shop/'.$this->param['shopSlug'].'/manage/job/edit/{id}','editUrl');
+      $jobModel->paginator->setUrl('shop/'.$this->param['shopSlug'].'/manage/job/delete/{id}','deleteUrl');
+      $jobModel->paginator->setUrl('shop/'.request()->shopSlug.'/job/{id}','detailUrl');
 
       $this->data = $jobModel->paginator->build();
     }
@@ -312,7 +312,6 @@ class ShopController extends Controller
     
     $this->setData('jobPostUrl',request()->get('shopUrl').'job/post');
     $this->setData('jobApplyListUrl',request()->get('shopUrl').'job_applying');
-    $this->setData('branchManageUrl',request()->get('shopUrl').'branch/manage');
 
     return $this->view('pages.shop.job');
   }

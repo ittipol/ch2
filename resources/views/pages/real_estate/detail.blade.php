@@ -101,16 +101,22 @@
 
   </div>
 
+  @if (Auth::check() && (Session::get('Person.id') == $_modelData['person_id']))
+  <div class="text-right">
+    <a data-right-side-panel="1" data-right-side-panel-target="#cancel_panel" class="button">ยกเลิกประกาศ</a>
+  </div>
+
+  <div id="cancel_panel" class="right-size-panel filter">
+    <div class="right-size-panel-inner">
+   
+      <div class="right-size-panel-close-button"></div>
+    </div>
+  </div>
+  @endif
+
   <div class="row">
 
     <div class="col-xs-6">
-
-      @if (Auth::check() && (Session::get('Person.id') == $_modelData['person_id']))
-      <div>
-        <a href="" class="button">ยกเลิกประกาศ</a>
-        <div class="line space-top-bottom-20"></div>
-      </div>
-      @endif
 
       <div class="item-info">
 

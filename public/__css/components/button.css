@@ -45,7 +45,7 @@ a.button:hover {
 	text-align: center;
 }
 
-.floating-button {
+/*.floating-button {
 	position: fixed;
 	bottom: 120px;
 	right: 220px;
@@ -55,15 +55,15 @@ a.button:hover {
 	background-color: #2196F3;
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 	cursor: pointer;
-}
+}*/
 
-.floating-button .dot {
+/*.floating-button .dot {
   width: 6px;
   height: 6px;
   border-radius: 6px;
   background-color: #fff;
   margin: 10px auto;
-}
+}*/
 
 /*.cover-edit-button input[type="file"] {
 	opacity: 0;

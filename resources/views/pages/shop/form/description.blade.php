@@ -1,8 +1,36 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<div class="top-header-wrapper">
-  <h2 class="top-header">คำอธิบายร้านค้า</h2>
+<div class="sub-header-nav">
+  <div class="sub-header-nav-fixed-top">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <div class="btn-group pull-right">
+          <a href="{{request()->get('shopUrl')}}setting" class="btn btn-secondary">กลับไปยังหน้าข้อมูลร้านค้า</a>
+
+          <button class="btn btn-secondary additional-option">
+            ...
+            <div class="additional-option-content">
+              <a href="{{request()->get('shopUrl')}}manage">กลับไปยังหน้าจัดการหลัก</a>
+            </div>
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="container-header">
+    <div class="row">
+      <div class="col-lg-6 col-sm-12">
+        <div class="title">คำอธิบายร้านค้า</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="container">

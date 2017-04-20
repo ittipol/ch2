@@ -101,6 +101,13 @@
   <div class="text-right">
     <a data-right-side-panel="1" data-right-side-panel-target="#cancel_panel" class="button">ยกเลิกประกาศ</a>
   </div>
+
+  <div id="cancel_panel" class="right-size-panel filter">
+    <div class="right-size-panel-inner">
+   
+      <div class="right-size-panel-close-button"></div>
+    </div>
+  </div>
   @endif
 
   <div class="row">

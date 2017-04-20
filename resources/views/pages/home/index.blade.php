@@ -34,7 +34,7 @@
             </div>
           </div>
 
-          <a href="#" class="button float-button">
+          <a href="#" class="button floating-button">
             เพิ่มร้านสินค้า
           </a>
 
@@ -55,7 +55,7 @@
             </div>
           </div>
 
-          <a href="#" class="button float-button">
+          <a href="#" class="button floating-button">
             ไปยังหน้าสินค้า
           </a>
 
@@ -76,7 +76,7 @@
             </div>
           </div>
 
-          <a href="#" class="button float-button">
+          <a href="#" class="button floating-button">
             ไปยังหน้าประกาศงาน
           </a>
 
@@ -97,7 +97,7 @@
             </div>
           </div>
 
-          <a href="#" class="button float-button">
+          <a href="#" class="button floating-button">
             ไปยังหน้าโฆษณาจากบริษัทและร้านค้า
           </a>
 
@@ -118,7 +118,7 @@
             </div>
           </div>
 
-          <a href="#" class="button float-button">
+          <a href="#" class="button floating-button">
             ไปยังหน้าประกาศซื้อ-เช่า-ขายสินค้า
           </a>
 
@@ -139,7 +139,7 @@
             </div>
           </div>
 
-          <a href="#" class="button float-button">
+          <a href="#" class="button floating-button">
             ไปยังหน้าประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์
           </a>
 
@@ -160,7 +160,7 @@
             </div>
           </div>
 
-          <a href="#" class="button float-button">
+          <a href="#" class="button floating-button">
             ไปยังหน้าเพิ่มประวัติการทำงาน
           </a>
 
@@ -181,7 +181,7 @@
             </div>
           </div>
 
-          <a href="#" class="button float-button">
+          <a href="#" class="button floating-button">
             ไปยังหน้างานฟรีแลนซ์
           </a>
 
@@ -217,7 +217,7 @@
             <div class="image" style="background-image:url(/images/store.jpg)"></div>
           </div>
 
-          <a href="#" class="button float-button">
+          <a href="#" class="button floating-button">
             เลือกซื้อสินค้า
           </a>
 
@@ -288,7 +288,7 @@
             <div class="image" style="background-image:url(/images/banners/WP_20161129_004.jpg)"></div>
           </div>
 
-          <a href="#" class="button float-button">
+          <a href="#" class="button floating-button">
             ค้นหางาน
           </a>
 
@@ -359,7 +359,7 @@
             <div class="image" style="background-image:url(/images/banners/WP_20161129_004.jpg)"></div>
           </div>
 
-          <a href="#" class="button float-button">
+          <a href="#" class="button floating-button">
             แสดงโฆษณา
           </a>
 
@@ -432,7 +432,7 @@
             <div class="image" style="background-image:url(/images/banners/WP_20161129_004.jpg)"></div>
           </div>
 
-          <a href="#" class="button float-button">
+          <a href="#" class="button floating-button">
             เลือกดูประกาศสินค้า
           </a>
 
@@ -503,7 +503,7 @@
             <div class="image" style="background-image:url(/images/banners/WP_20161129_004.jpg)"></div>
           </div>
 
-          <a href="#" class="button float-button">
+          <a href="#" class="button floating-button">
             เลือกดูประกาศอสังหาริมทรัพย์
           </a>
 

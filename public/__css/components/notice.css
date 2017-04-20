@@ -32,7 +32,7 @@
 	font-size: 16px;
 }
 
-.notice-box .float-button {
+.notice-box .floating-button {
 	position: absolute;
 	bottom: 15px;
 	right: 15px;
@@ -63,7 +63,7 @@
 	height: 100%;
 }
 
-.notice-box.small .float-button {
+.notice-box.small .floating-button {
 	background-color: rgba(0,0,0,.5);
 }
 
@@ -88,9 +88,5 @@
 @media only screen and (max-width : 480px) {
 	.notice-box-wrapper .notice-box.small {
 		height: 120px;
-	}
-
-	.notice-box.small .notice-box-image > .image {
-		/*background-size: auto;*/
 	}
 }

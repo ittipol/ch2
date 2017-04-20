@@ -1,13 +1,25 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-@include('pages.shop.layouts.top_nav')
+<div class="sub-header-nav">
+  <div class="sub-header-nav-fixed-top">
+    <div class="row">
+      <div class="col-xs-12">
 
-<div class="top-header-wrapper top-header-border">
-  <div class="container">
-    <div class="top-header">
-      <div class="detail-title">
-        <h2 class="title">ตั้งค่า</h2>
+        <div class="btn-group pull-right">
+          <a href="{{request()->get('shopUrl')}}manage" class="btn btn-secondary">กลับไปยังหน้าจัดการหลัก</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="container-header">
+    <div class="row">
+      <div class="col-lg-6 col-sm-12">
+        <div class="title">ข้อมูลร้านค้า</div>
       </div>
     </div>
   </div>
