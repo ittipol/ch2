@@ -80,79 +80,61 @@ class ShopController extends Controller
     $shopRelateToModel = Service::loadModel('ShopRelateTo');
 
     $model = request()->get('shop');
-    $model->modelData->loadData();
 
-    $this->data = $model->modelData->build();
-
-    // $product = Service::loadModel('Product')
-    // ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
-    // ->where('shop_relate_to.model','like','Product')
-    // ->where('shop_relate_to.shop_id','=',request()->get('shopId'))
-    // ->select('products.*')
-    // ->get();
-
-    $totalProduct = $shopRelateToModel
+    $this->setData('totalProduct',$shopRelateToModel
     ->where([
-      ['shop_id','=',request()->get('shopId')],
+      ['shop_id','=',$model->id],
       ['model','like','Product']
-    ])->count();
+    ])->count());
 
-    $product = Service::loadModel('Product');
-    $product->paginator->setPerPage(5);
-    $product->paginator->criteria(array(
-      'order' => array('created_at','DESC')
-    ));
-    $product->paginator->setUrl('product/detail/{id}','detailUrl');
-
-    $totalJob = $shopRelateToModel
+    $this->setData('totalJob',$shopRelateToModel
     ->where([
-      ['shop_id','=',request()->get('shopId')],
+      ['shop_id','=',$model->id],
       ['model','like','Job']
-    ])->count();
+    ])->count());
 
-    $job = Service::loadModel('Job');
-    $job->paginator->setPerPage(5);
-    $job->paginator->criteria(array(
-      'order' => array('created_at','DESC')
-    ));
-    $job->paginator->setUrl('job/detail/{id}','detailUrl');
-
-    $totalAdvertising = $shopRelateToModel
+    $this->setData('totalAdvertising',$shopRelateToModel
     ->where([
-      ['shop_id','=',request()->get('shopId')],
+      ['shop_id','=',$model->id],
       ['model','like','Advertising']
-    ])->count();
+    ])->count());
 
-    $advertising = Service::loadModel('Advertising');
-    $advertising->paginator->setPerPage(3);
-    $advertising->paginator->criteria(array(
-      'order' => array('created_at','DESC')
-    ));
-    $advertising->paginator->setUrl('advertising/detail/{id}','detailUrl');
+    $this->setData('totalBranch',$shopRelateToModel
+    ->where([
+      ['shop_id','=',$model->id],
+      ['model','like','Branch']
+    ])->count());
 
-    $item = Service::loadModel('Item');
-    $item->paginator->setPerPage(3);
-    $item->paginator->criteria(array(
-      'order' => array('created_at','DESC')
-    ));
-    $item->paginator->setUrl('item/detail/{id}','detailUrl');
+    $orderModel = Service::loadModel('Order');
 
-    $this->setData('totalProduct',$totalProduct);
-    $this->setData('totalJob',$totalJob);
-    $this->setData('totalAdvertising',$totalAdvertising);
+    $this->setData('totalOrder',$orderModel
+    ->where('shop_id','=',$model->id)
+    ->count());
 
-    $this->setData('products',$product->paginator->getPaginationData());
-    $this->setData('jobs',$job->paginator->getPaginationData());
-    $this->setData('advertisings',$advertising->paginator->getPaginationData());
+    $this->setData('countNewOrder',$orderModel->where([
+      ['shop_id','=',$model->id],
+      ['order_status_id','=',1]
+    ])->count());
 
-    $this->setData('productPostUrl',request()->get('shopUrl').'product_post');
-    $this->setData('jobPostUrl',request()->get('shopUrl').'job/post');
-    $this->setData('productPostUrl',request()->get('shopUrl').'shop_ad_post');
+    $personApplyJobModel = Service::loadModel('PersonApplyJob');
 
-    $this->setData('settingUrl',request()->get('shopUrl').'setting');
-    // $this->setData('productUrl',request()->get('shopUrl').'product');
-    // $this->setData('jobUrl',request()->get('shopUrl').'job');
-    // $this->setData('advertisingUrl',request()->get('shopUrl').'advertising');
+    $this->setData('totalJobApplying',$personApplyJobModel
+    ->where('shop_id','=',$model->id)
+    ->count());
+
+    $this->setData('countNewJobApplying',$personApplyJobModel
+    ->where([
+      ['shop_id','=',$model->id],
+      ['job_applying_status_id','=',1]
+    ])
+    ->count());
+
+    // $this->setData('countActiveJobApplying',$personApplyJobModel
+    // ->where([
+    //   ['shop_id','=',$model->id],
+    //   ['job_applying_status_id','=',2]
+    // ])
+    // ->count());
 
     return $this->view('pages.shop.manage');
   }
@@ -178,7 +160,7 @@ class ShopController extends Controller
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/manage/product');
     $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/manage/product/{id}','menuUrl');
-    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/manage/product/delete/{id}','deleteUrl');
+    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/product/delete/{id}','deleteUrl');
     $model->paginator->setUrl('product/detail/{id}','detailUrl');
 
     $this->data = $model->paginator->build();
@@ -188,7 +170,7 @@ class ShopController extends Controller
       ['order_status_id','=',1]
     ])->count());
 
-    $this->setData('productPostUrl',request()->get('shopUrl').'product_post');
+    $this->setData('productPostUrl',request()->get('shopUrl').'product/add');
     $this->setData('orderUrl',request()->get('shopUrl').'order');
     $this->setData('paymentMethodUrl',request()->get('shopUrl').'payment_method');
     $this->setData('shippingMethodUrl',request()->get('shopUrl').'shipping_method');
@@ -298,19 +280,21 @@ class ShopController extends Controller
       ));
       $jobModel->paginator->setPage($page);
       $jobModel->paginator->setPagingUrl('shop/'.request()->shopSlug.'/manage/job');
-      $jobModel->paginator->setUrl('shop/'.$this->param['shopSlug'].'/manage/job/edit/{id}','editUrl');
-      $jobModel->paginator->setUrl('shop/'.$this->param['shopSlug'].'/manage/job/delete/{id}','deleteUrl');
+      $jobModel->paginator->setUrl('shop/'.$this->param['shopSlug'].'/job/edit/{id}','editUrl');
+      $jobModel->paginator->setUrl('shop/'.$this->param['shopSlug'].'/job/delete/{id}','deleteUrl');
       $jobModel->paginator->setUrl('shop/'.request()->shopSlug.'/job/{id}','detailUrl');
 
       $this->data = $jobModel->paginator->build();
     }
 
     $this->setData('countJobApplying',Service::loadModel('PersonApplyJob')
-    ->where('shop_id','=',request()->get('shopId'))
-    ->whereIn('job_applying_status_id',array(1,2))
+    ->where([
+      ['shop_id','=',request()->get('shopId')],
+      ['job_applying_status_id','=',1]
+    ])
     ->count());
     
-    $this->setData('jobPostUrl',request()->get('shopUrl').'job/post');
+    $this->setData('jobPostUrl',request()->get('shopUrl').'job/add');
     $this->setData('jobApplyListUrl',request()->get('shopUrl').'job_applying');
 
     return $this->view('pages.shop.job');
@@ -384,16 +368,16 @@ class ShopController extends Controller
         'order' => array('created_at','DESC')
       ));
       $advertising->paginator->setPage($page);
-      $advertising->paginator->setPagingUrl('shop/'.request()->shopSlug.'/advertising');
-      $advertising->paginator->setUrl('shop/'.$this->param['shopSlug'].'/shop_ad_edit/{id}','editUrl');
-      $advertising->paginator->setUrl('shop/'.$this->param['shopSlug'].'/shop_ad_delete/{id}','deleteUrl');
+      $advertising->paginator->setPagingUrl('shop/'.request()->shopSlug.'/manage/advertising');
+      $advertising->paginator->setUrl('shop/'.$this->param['shopSlug'].'/advertising/edit/{id}','editUrl');
+      $advertising->paginator->setUrl('shop/'.$this->param['shopSlug'].'/advertising/delete/{id}','deleteUrl');
       $advertising->paginator->setUrl('advertising/detail/{id}','detailUrl');
 
       $this->data = $advertising->paginator->build();
 
     }
 
-    $this->setData('advertisingPostUrl',request()->get('shopUrl').'shop_ad_post');
+    $this->setData('advertisingPostUrl',request()->get('shopUrl').'advertising/add');
 
     return $this->view('pages.shop.advertising');
 

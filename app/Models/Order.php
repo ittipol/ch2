@@ -17,6 +17,71 @@ class Order extends Model
   public $modelData = true;
   public $paginator = true;
 
+  protected $filterOptions = array(
+    'orderStatus' => array(
+      'input' => 'checkbox',
+      'title' => 'สถานะการสั่งซื้อ',
+      'options' => array(
+        array(
+          'name' => 'รอผู้ขายยืนยันการสั่งซื้อ',
+          'value' => 'order_status_id:1',
+        ),
+        array(
+          'name' => 'รอลูกค้าชำระเงิน',
+          'value' => 'order_status_id:2',
+        ),
+        array(
+          'name' => 'จัดเตรียมสินค้า',
+          'value' => 'order_status_id:3',
+        ),
+        array(
+          'name' => 'จัดส่งสินค้า',
+          'value' => 'order_status_id:4',
+        ),
+        array(
+          'name' => 'บิลถูกปิด',
+          'value' => 'order_status_id:5',
+        )
+      )
+    ),
+    'freeShipping' => array(
+      'input' => 'checkbox',
+      'title' => 'การจัดส่ง',
+      'options' => array(
+        array(
+          'name' => 'รายการสั่งซื้อที่ไม่คิดค่าจัดส่ง',
+          'value' => 'order_free_shipping:1',
+        )
+      )
+    ),
+    // 'pickUpItem' => array(
+
+    // )
+  );
+
+  protected $sortingFields = array(
+    'title' => 'จัดเรียงตาม',
+    'options' => array(
+      array(
+        'name' => 'ตัวอักษร A - Z ก - ฮ',
+        'value' => 'name:asc'
+      ),
+      array(
+        'name' => 'ตัวอักษร Z - A ฮ - ก',
+        'value' => 'name:desc'
+      ),
+      array(
+        'name' => 'วันที่เก่าที่สุดไปหาใหม่ที่สุด',
+        'value' => 'created_at:asc'
+      ),
+      array(
+        'name' => 'วันที่ใหม่ที่สุดไปหาเก่าที่สุด',
+        'value' => 'created_at:desc'
+      ),
+    ),
+    'default' => 'created_at:desc'
+  );
+
   public function orderStatus() {
     return $this->hasOne('App\Models\OrderStatus','id','order_status_id');
   }

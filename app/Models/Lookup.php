@@ -40,6 +40,10 @@ class Lookup extends Model
         array(
           'name' => 'ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์',
           'value' => 'model:RealEstate',
+        ),
+        array(
+          'name' => 'งานฟรีแลนซ์',
+          'value' => 'model:Freelance',
         )
       )
     )

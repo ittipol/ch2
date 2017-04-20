@@ -23,7 +23,7 @@
   </div>
 </div>
 
-<div class="container list">
+<div class="container list space-top-30">
 
   <h3>สาขา</h3>
   <div class="line"></div>

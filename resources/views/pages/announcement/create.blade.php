@@ -23,7 +23,7 @@
           <div class="inner">
             <h4>ประกาศขายสินค้า</h4>
             <p>ประกาศขายสินค้า</p>
-            <a href="{{URL::to('product/add')}}" class="button">เพิ่มประกาศขายสินค้า</a>
+            <a href="{{URL::to('manage/product/add')}}" class="button">เพิ่มประกาศขายสินค้า</a>
           </div>
         </div>
       </div>

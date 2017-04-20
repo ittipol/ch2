@@ -82,8 +82,8 @@ Route::group(['middleware' => 'auth'], function () {
 
   Route::get('account', 'AccountController@account')->name('account');
 
-  Route::get('account/profile_edit', 'AccountController@profileEdit')->name('account.profile.edit');
-  Route::patch('account/profile_edit','AccountController@profileEditingSubmit')->name('account.profile.edit');
+  Route::get('account/profile/edit', 'AccountController@profileEdit')->name('account.profile.edit');
+  Route::patch('account/profile/edit','AccountController@profileEditingSubmit')->name('account.profile.edit');
 
   Route::get('account/theme', 'AccountController@theme')->name('account.theme.edit');
   // Route::patch('account/theme','PersonExperienceController@themeEditingSubmit')->name('account.theme.edit');
@@ -136,38 +136,38 @@ Route::group(['middleware' => ['auth','person.experience']], function () {
 
   Route::get('experience/working_add','PersonWorkingExperienceController@add');
   Route::post('experience/working_add','PersonWorkingExperienceController@addingSubmit');
-  Route::get('experience/working_edit/{id}','PersonWorkingExperienceController@edit');
-  Route::patch('experience/working_edit/{id}','PersonWorkingExperienceController@editingSubmit');
+  Route::get('experience/working/edit/{id}','PersonWorkingExperienceController@edit');
+  Route::patch('experience/working/edit/{id}','PersonWorkingExperienceController@editingSubmit');
 
   Route::get('experience/internship_add','PersonInternshipController@add')->name('person_experience.internship.add');
   Route::post('experience/internship_add','PersonInternshipController@addingSubmit')->name('person_experience.internship.add');
-  Route::get('experience/internship_edit/{id}','PersonInternshipController@edit')->name('person_experience.internship.edit');
-  Route::patch('experience/internship_edit/{id}','PersonInternshipController@editingSubmit')->name('person_experience.internship.edit');
+  Route::get('experience/internship/edit/{id}','PersonInternshipController@edit')->name('person_experience.internship.edit');
+  Route::patch('experience/internship/edit/{id}','PersonInternshipController@editingSubmit')->name('person_experience.internship.edit');
 
   Route::get('experience/education_add','PersonEducationController@add');
   Route::post('experience/education_add','PersonEducationController@addingSubmit');
-  Route::get('experience/education_edit/{id}','PersonEducationController@edit');
-  Route::patch('experience/education_edit/{id}','PersonEducationController@editingSubmit');
+  Route::get('experience/education/edit/{id}','PersonEducationController@edit');
+  Route::patch('experience/education/edit/{id}','PersonEducationController@editingSubmit');
 
   Route::get('experience/project_add','PersonProjectController@add');
   Route::post('experience/project_add','PersonProjectController@addingSubmit');
-  Route::get('experience/project_edit/{id}','PersonProjectController@edit');
-  Route::patch('experience/project_edit/{id}','PersonProjectController@editingSubmit');
+  Route::get('experience/project/edit/{id}','PersonProjectController@edit');
+  Route::patch('experience/project/edit/{id}','PersonProjectController@editingSubmit');
 
   Route::get('experience/certificate_add','PersonCertificateController@add');
   Route::post('experience/certificate_add','PersonCertificateController@addingSubmit');
-  Route::get('experience/certificate_edit/{id}','PersonCertificateController@edit');
-  Route::patch('experience/certificate_edit/{id}','PersonCertificateController@editingSubmit');
+  Route::get('experience/certificate/edit/{id}','PersonCertificateController@edit');
+  Route::patch('experience/certificate/edit/{id}','PersonCertificateController@editingSubmit');
 
   Route::get('experience/skill_add','PersonSkillController@add');
   Route::post('experience/skill_add','PersonSkillController@addingSubmit');
-  Route::get('experience/skill_edit/{id}','PersonSkillController@edit');
-  Route::patch('experience/skill_edit/{id}','PersonSkillController@editingSubmit');
+  Route::get('experience/skill/edit/{id}','PersonSkillController@edit');
+  Route::patch('experience/skill/edit/{id}','PersonSkillController@editingSubmit');
   
   Route::get('experience/language_skill_add','PersonLanguageSkillController@add');
   Route::post('experience/language_skill_add','PersonLanguageSkillController@addingSubmit');
-  Route::get('experience/language_skill_edit/{id}','PersonLanguageSkillController@edit');
-  Route::patch('experience/language_skill_edit/{id}','PersonLanguageSkillController@editingSubmit');
+  Route::get('experience/language_skill/edit/{id}','PersonLanguageSkillController@edit');
+  Route::patch('experience/language_skill/edit/{id}','PersonLanguageSkillController@editingSubmit');
 
 });
 
@@ -272,35 +272,35 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::get('shop/{shopSlug}/manage/product','ShopController@product')->name('shop.product.manage');
   Route::get('shop/{shopSlug}/manage/product/{id}','ProductController@menu')->name('shop.product.manage.menu');
 
-  Route::get('shop/{shopSlug}/product_post','ProductController@add')->name('shop.product.add');
-  Route::post('shop/{shopSlug}/product_post','ProductController@addingSubmit')->name('shop.product.add');
+  Route::get('shop/{shopSlug}/product/add','ProductController@add')->name('shop.product.add');
+  Route::post('shop/{shopSlug}/product/add','ProductController@addingSubmit')->name('shop.product.add');
 
-  Route::get('shop/{shopSlug}/product_edit/{id}','ProductController@edit')->name('shop.product.edit');
-  Route::patch('shop/{shopSlug}/product_edit/{id}','ProductController@editingSubmit')->name('shop.product.edit');
+  Route::get('shop/{shopSlug}/product/edit/{id}','ProductController@edit')->name('shop.product.edit');
+  Route::patch('shop/{shopSlug}/product/edit/{id}','ProductController@editingSubmit')->name('shop.product.edit');
 
-  Route::get('shop/{shopSlug}/product_status_edit/{id}','ProductController@statusEdit')->name('shop.product_status.edit');
-  Route::patch('shop/{shopSlug}/product_status_edit/{id}','ProductController@statusEditingSubmit')->name('shop.product_status.edit');
+  Route::get('shop/{shopSlug}/product_status/edit/{id}','ProductController@statusEdit')->name('shop.product_status.edit');
+  Route::patch('shop/{shopSlug}/product_status/edit/{id}','ProductController@statusEditingSubmit')->name('shop.product_status.edit');
 
-  Route::get('shop/{shopSlug}/product_specification_edit/{id}','ProductController@specificationEdit')->name('shop.product_specification.edit');
-  Route::patch('shop/{shopSlug}/product_specification_edit/{id}','ProductController@specificationEditingSubmit')->name('shop.product_specification.edit');
+  Route::get('shop/{shopSlug}/product_specification/edit/{id}','ProductController@specificationEdit')->name('shop.product_specification.edit');
+  Route::patch('shop/{shopSlug}/product_specification/edit/{id}','ProductController@specificationEditingSubmit')->name('shop.product_specification.edit');
 
-  Route::get('shop/{shopSlug}/product_category_edit/{id}','ProductController@categoryEdit')->name('shop.product_category.edit');
-  Route::patch('shop/{shopSlug}/product_category_edit/{id}','ProductController@categoryEditingSubmit')->name('shop.product_category.edit');
+  Route::get('shop/{shopSlug}/product_category/edit/{id}','ProductController@categoryEdit')->name('shop.product_category.edit');
+  Route::patch('shop/{shopSlug}/product_category/edit/{id}','ProductController@categoryEditingSubmit')->name('shop.product_category.edit');
 
-  Route::get('shop/{shopSlug}/product_minimum_edit/{id}','ProductController@minimumEdit')->name('shop.product_minimum.edit');
-  Route::patch('shop/{shopSlug}/product_minimum_edit/{id}','ProductController@minimumEditingSubmit')->name('shop.product_minimum.edit');
+  Route::get('shop/{shopSlug}/product_minimum/edit/{id}','ProductController@minimumEdit')->name('shop.product_minimum.edit');
+  Route::patch('shop/{shopSlug}/product_minimum/edit/{id}','ProductController@minimumEditingSubmit')->name('shop.product_minimum.edit');
 
-  Route::get('shop/{shopSlug}/product_stock_edit/{id}','ProductController@stockEdit')->name('shop.product_stock.edit');
-  Route::patch('shop/{shopSlug}/product_stock_edit/{id}','ProductController@stockEditingSubmit')->name('shop.product_stock.edit');
+  Route::get('shop/{shopSlug}/product_stock/edit/{id}','ProductController@stockEdit')->name('shop.product_stock.edit');
+  Route::patch('shop/{shopSlug}/product_stock/edit/{id}','ProductController@stockEditingSubmit')->name('shop.product_stock.edit');
 
-  Route::get('shop/{shopSlug}/product_price_edit/{id}','ProductController@priceEdit')->name('shop.product_price.edit');
-  Route::patch('shop/{shopSlug}/product_price_edit/{id}','ProductController@priceEditingSubmit')->name('shop.product_price.edit');
+  Route::get('shop/{shopSlug}/product_price/edit/{id}','ProductController@priceEdit')->name('shop.product_price.edit');
+  Route::patch('shop/{shopSlug}/product_price/edit/{id}','ProductController@priceEditingSubmit')->name('shop.product_price.edit');
 
-  Route::get('shop/{shopSlug}/product_shipping_edit/{id}','ProductController@shippingEdit')->name('shop.product_shipping.edit');
-  Route::patch('shop/{shopSlug}/product_shipping_edit/{id}','ProductController@shippingEditingSubmit')->name('shop.product_shipping.edit');
+  Route::get('shop/{shopSlug}/product_shipping/edit/{id}','ProductController@shippingEdit')->name('shop.product_shipping.edit');
+  Route::patch('shop/{shopSlug}/product_shipping/edit/{id}','ProductController@shippingEditingSubmit')->name('shop.product_shipping.edit');
 
-  Route::get('shop/{shopSlug}/product_notification_edit/{id}','ProductController@notificationEdit')->name('shop.product_notification.edit');
-  Route::patch('shop/{shopSlug}/product_notification_edit/{id}','ProductController@notificationEditingSubmit')->name('shop.product_notification.edit');
+  Route::get('shop/{shopSlug}/product_notification/edit/{id}','ProductController@notificationEdit')->name('shop.product_notification.edit');
+  Route::patch('shop/{shopSlug}/product_notification/edit/{id}','ProductController@notificationEditingSubmit')->name('shop.product_notification.edit');
 
   Route::get('shop/{shopSlug}/product_sale_promotion/{id}','ProductController@salePromotion')->name('shop.product_sale_promotion');
 
@@ -375,8 +375,8 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::post('shop/{shopSlug}/job_applying/not_pass/{id}','JobController@jobApplyingNotPass')->name('shop.job.applying.not_pass');
   Route::post('shop/{shopSlug}/job_applying/canceled/{id}','JobController@jobApplyingCancel')->name('shop.job.applying.canceled');
 
-  Route::get('shop/{shopSlug}/job/post','JobController@add')->name('shop.job.add');
-  Route::post('shop/{shopSlug}/job/post','JobController@addingSubmit')->name('shop.job.add');
+  Route::get('shop/{shopSlug}/job/add','JobController@add')->name('shop.job.add');
+  Route::post('shop/{shopSlug}/job/add','JobController@addingSubmit')->name('shop.job.add');
 
   Route::get('shop/{shopSlug}/job/edit/{id}','JobController@edit')->name('shop.job.edit');
   Route::patch('shop/{shopSlug}/job/edit/{id}','JobController@editingSubmit')->name('shop.job.edit');
@@ -418,11 +418,13 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
   Route::get('shop/{shopSlug}/manage/advertising','ShopController@advertising')->name('shop.advertising.manage');
   
-  Route::get('shop/{shopSlug}/shop_ad_post','AdvertisingController@add')->name('shop.advertising.add');
-  Route::post('shop/{shopSlug}/shop_ad_post','AdvertisingController@addingSubmit')->name('shop.advertising.add');
+  Route::get('shop/{shopSlug}/advertising/add','AdvertisingController@add')->name('shop.advertising.add');
+  Route::post('shop/{shopSlug}/advertising/add','AdvertisingController@addingSubmit')->name('shop.advertising.add');
 
-  Route::get('shop/{shopSlug}/shop_ad_edit/{id}','AdvertisingController@edit')->name('shop.advertising.edit');
-  Route::patch('shop/{shopSlug}/shop_ad_edit/{id}','AdvertisingController@editingSubmit')->name('shop.advertising.edit');
+  Route::get('shop/{shopSlug}/advertising/edit/{id}','AdvertisingController@edit')->name('shop.advertising.edit');
+  Route::patch('shop/{shopSlug}/advertising/edit/{id}','AdvertisingController@editingSubmit')->name('shop.advertising.edit');
+
+  Route::get('shop/{shopSlug}/advertising/delete/{id}','AdvertisingController@delete')->name('shop.advertising.delete');
 
 });
 
@@ -436,8 +438,8 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('item/post','ItemController@add')->name('item.post');
   Route::post('item/post','ItemController@addingSubmit')->name('item.post');
 
-  Route::get('account/item_edit/{id}','ItemController@edit')->name('item.edit')->middleware('editing.permission');
-  Route::patch('account/item_edit/{id}','ItemController@editingSubmit')->name('item.edit')->middleware('editing.permission');
+  Route::get('account/item/edit/{id}','ItemController@edit')->name('item.edit')->middleware('editing.permission');
+  Route::patch('account/item/edit/{id}','ItemController@editingSubmit')->name('item.edit')->middleware('editing.permission');
 
   Route::get('account/item_delete/{id}','ItemController@delete')->name('item.delete');
 });
@@ -451,8 +453,8 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('real-estate/post','RealEstateController@add')->name('real_estate.post');
   Route::post('real-estate/post','RealEstateController@addingSubmit')->name('real_estate.post');
 
-  Route::get('account/real_estate_edit/{id}','RealEstateController@edit')->name('real_estate.edit')->middleware('editing.permission');
-  Route::patch('account/real_estate_edit/{id}','RealEstateController@editingSubmit')->name('real_estate.edit')->middleware('editing.permission');
+  Route::get('account/real_estate/edit/{id}','RealEstateController@edit')->name('real_estate.edit')->middleware('editing.permission');
+  Route::patch('account/real_estate/edit/{id}','RealEstateController@editingSubmit')->name('real_estate.edit')->middleware('editing.permission');
 
   Route::get('account/real_estate_delete/{id}','RealEstateController@delete');
 });

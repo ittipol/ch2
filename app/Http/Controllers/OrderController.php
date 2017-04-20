@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
 use App\library\messageHelper;
+use App\library\filterHelper;
 use App\library\url;
 use App\library\date;
 use App\library\validation;
@@ -264,23 +265,58 @@ class OrderController extends Controller
   public function shopOrder() {
 
     $model = Service::loadModel('Order');
+    $filterHelper = new FilterHelper($model);
     
     $page = 1;
     if(!empty($this->query['page'])) {
       $page = $this->query['page'];
     }
 
-    $model->paginator->criteria(array(
-      'conditions' => array(
-        array('shop_id','=',request()->get('shopId'))
-      ),
-      'order' => array('id','DESC')
-    ));
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
+
+    $filters = '';
+    if(!empty($this->query['fq'])) {
+      $filters = $this->query['fq'];
+    }
+
+    $sort = '';
+    if(!empty($this->query['sort'])) {
+      $sort = $this->query['sort'];
+    }
+
+    $filterHelper->setFilters($filters);
+    $filterHelper->setSorting($sort);
+
+    $conditions = $filterHelper->buildFilters();
+    $order = $filterHelper->buildSorting();
+
+    $conditions[] = array('shop_id','=',request()->get('shopId'));
+
+    $model->paginator->criteria(array_merge(array(
+      'conditions' => $conditions
+    ),$order));
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl(request()->get('shopUrl').'order');
-    // $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/order/{id}','detailUrl');
     $model->paginator->setUrl(request()->get('shopUrl').'order/{id}','detailUrl');
+    $model->paginator->setQuery('sort',$sort);
+    $model->paginator->setQuery('fq',$filters);
+
+    $searchOptions = array(
+      'filters' => $filterHelper->getFilterOptions(),
+      'sort' => $filterHelper->getSortingOptions()
+    );
+
+    // $displayingFilters = array(
+    //   'filters' => $filterHelper->getDisplayingFilterOptions(),
+    //   'sort' => $filterHelper->getDisplayingSorting()
+    // );
+
     $this->data = $model->paginator->build();
+    $this->setData('searchOptions',$searchOptions);
+    // $this->setData('displayingFilters',$displayingFilters);
 
     return $this->view('pages.order.shop_order');
 

@@ -125,15 +125,15 @@ class JobController extends Controller
       'sort' => $filterHelper->getSortingOptions()
     );
 
-    $displayingFilters = array(
-      'filters' => $filterHelper->getDisplayingFilterOptions(),
-      'sort' => $filterHelper->getDisplayingSorting()
-    );
+    // $displayingFilters = array(
+    //   'filters' => $filterHelper->getDisplayingFilterOptions(),
+    //   'sort' => $filterHelper->getDisplayingSorting()
+    // );
 
     $this->data = $model->paginator->build();
     $this->setData('title',$title);
     $this->setData('searchOptions',$searchOptions);
-    $this->setData('displayingFilters',$displayingFilters);
+    // $this->setData('displayingFilters',$displayingFilters);
     
     return $this->view('pages.job.list');
   }
@@ -634,24 +634,60 @@ class JobController extends Controller
   public function jobApplyingList() {
 
     $model = Service::loadModel('PersonApplyJob');
+    $filterHelper = new FilterHelper($model);
 
     $page = 1;
     if(!empty($this->query['page'])) {
       $page = $this->query['page'];
     }
 
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
+
+    $filters = '';
+    if(!empty($this->query['fq'])) {
+      $filters = $this->query['fq'];
+    }
+
+    $sort = '';
+    if(!empty($this->query['sort'])) {
+      $sort = $this->query['sort'];
+    }
+
+    $filterHelper->setFilters($filters);
+    $filterHelper->setSorting($sort);
+
+    $conditions = $filterHelper->buildFilters();
+    $order = $filterHelper->buildSorting();
+
+    $conditions[] = array('shop_id','=',request()->get('shopId'));
+
+    $model->paginator->criteria(array_merge(array(
+      'conditions' => $conditions
+    ),$order));
     $model->paginator->disableGetImage();
-    $model->paginator->criteria(array(
-      'conditions' => array(
-        array('shop_id','=',request()->get('shopId'))
-      )
-    ));
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/job_applying');
     $model->paginator->setUrl('shop/'.request()->shopSlug.'/job_applying/detail/{id}','detailUrl');
     $model->paginator->setUrl('experience/detail/{person_id}','experienceDetailUrl');
+    $model->paginator->setQuery('sort',$sort);
+    $model->paginator->setQuery('fq',$filters);
+
+    $searchOptions = array(
+      'filters' => $filterHelper->getFilterOptions(),
+      'sort' => $filterHelper->getSortingOptions()
+    );
+
+    // $displayingFilters = array(
+    //   'filters' => $filterHelper->getDisplayingFilterOptions(),
+    //   'sort' => $filterHelper->getDisplayingSorting()
+    // );
 
     $this->data = $model->paginator->build();
+    $this->setData('searchOptions',$searchOptions);
+    // $this->setData('displayingFilters',$displayingFilters);
 
     return $this->view('pages.job.job_applying_list');
 

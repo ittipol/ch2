@@ -5,9 +5,19 @@
 
 <div class="container">
 
+  <div class="container-header">
+    <div class="row">
+      <div class="col-lg-6 col-sm-12">
+        <div class="title">
+          โฆษณา
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="tile-nav-group space-top-bottom-20 clearfix">
 
-    <div class="tile-nav xxs">
+    <div class="tile-nav small">
       <div class="tile-nav-image">
         <a href="{{$advertisingPostUrl}}">
           <img src="/images/common/plus.png">

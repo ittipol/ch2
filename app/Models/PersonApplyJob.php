@@ -22,6 +22,21 @@ class PersonApplyJob extends Model
   public $modelData = true;
   public $paginator = true;
 
+  protected $sortingFields = array(
+    'title' => 'จัดเรียงตาม',
+    'options' => array(
+      array(
+        'name' => 'วันที่เก่าที่สุดไปหาใหม่ที่สุด',
+        'value' => 'created_at:asc'
+      ),
+      array(
+        'name' => 'วันที่ใหม่ที่สุดไปหาเก่าที่สุด',
+        'value' => 'created_at:desc'
+      ),
+    ),
+    'default' => 'created_at:desc'
+  );
+
   public function person() {
     return $this->hasOne('App\Models\Person','id','person_id');
   }
