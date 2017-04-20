@@ -5,12 +5,13 @@ namespace App\Models;
 use App\library\string;
 use App\library\cache;
 use App\library\url;
+use App\library\date;
 use Session;
 
 class Shop extends Model
 {
   protected $table = 'shops';
-  protected $fillable = ['name','description','brand_story','profile_image_id','cover_image_id','person_id'];
+  protected $fillable = ['name','description','brand_story','mission','vision','profile_image_id','cover_image_id','person_id'];
   protected $modelRelations = array('Image','Address','Contact','OfficeHour');
   public $errorType;
 
@@ -277,6 +278,57 @@ class Shop extends Model
     }
 
     return $image->getImageUrl();
+  }
+
+  public function getOpenHours() {
+
+    $openHours = $this->getRelatedData('OpenHour',array(
+      'conditions' => array(
+        array('active','=',1)
+      ),
+      'fields' => array('time'),
+      'first' => true
+    ));
+
+    if(empty($openHours)) {
+      return null;
+    }
+
+    $date = new Date;
+
+    $openHours = json_decode($openHours->time,true);
+
+    $today = date('N');
+    $_openHours = array(
+      'text' => 'วันนี้ปิดทำการ',
+      'status' => 'shop-closed', 
+      'timeTable' => array()
+    );
+
+    foreach ($openHours as $key => $time) {
+
+      $startTime = explode(':', $time['start_time']);
+      $endTime = explode(':', $time['end_time']);
+
+      $_time = 'ปิด';
+      if($time['open']){
+        $_time = $startTime[0].':'.$startTime[1].' - '.$endTime[0].':'.$endTime[1];
+      }
+
+      if(($today == $key) && $time['open']) {
+        $_openHours['text'] = 'วันนี้เปิดทำการเวลา '.$_time;
+        $_openHours['status'] = 'shop-open';
+      }
+
+      $_openHours['timeTable'][$key] = array(
+        'day' => $date->getDayName($key),
+        'openHour' => $_time
+      );
+
+    }
+
+    return $_openHours;
+
   }
 
   public function buildModelData() {

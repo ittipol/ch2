@@ -293,7 +293,7 @@ class OrderController extends Controller
     $conditions = $filterHelper->buildFilters();
     $order = $filterHelper->buildSorting();
 
-    $conditions[] = array('shop_id','=',request()->get('shopId'));
+    $conditions[] = array('orders.shop_id','=',request()->get('shopId'));
 
     $model->paginator->criteria(array_merge(array(
       'conditions' => $conditions

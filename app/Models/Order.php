@@ -44,19 +44,20 @@ class Order extends Model
         )
       )
     ),
-    'freeShipping' => array(
+    'shipping' => array(
       'input' => 'checkbox',
       'title' => 'การจัดส่ง',
       'options' => array(
         array(
           'name' => 'รายการสั่งซื้อที่ไม่คิดค่าจัดส่ง',
           'value' => 'order_free_shipping:1',
+        ),
+        array(
+          'name' => 'รายการสั่งซื้อที่ต้องการรับสินค้าเอง',
+          'value' => 'pick_up_order:1',
         )
       )
-    ),
-    // 'pickUpItem' => array(
-
-    // )
+    )
   );
 
   protected $sortingFields = array(

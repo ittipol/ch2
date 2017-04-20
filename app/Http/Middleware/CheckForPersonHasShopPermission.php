@@ -26,6 +26,8 @@ class CheckForPersonHasShopPermission
       // Get Page name from DB
 
       $pages = array(
+        'shop.index' => true,
+        'shop.about' => true,
         'shop.manage' => array(
           'permission' => true
         ),

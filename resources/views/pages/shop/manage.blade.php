@@ -37,6 +37,7 @@
         <div class="box">
           <div class="box-inner">
             <h3>สินค้า</h3>
+            
             <div>
               <h1>{{$totalProduct}}</h1>
               <div>รายการสินค้า</div>
@@ -126,7 +127,7 @@
 
             <div class="line"></div>
 
-            <div class="tile-nav-group space-top-bottom-20 clearfix">
+            <div class="tile-nav-group space-top-20 clearfix">
 
               <div class="tile-nav small">
                 <div class="tile-nav-image">
@@ -153,80 +154,6 @@
                   
                   <a href="{{request()->get('shopUrl')}}job_applying">
                     <h4 class="tile-nav-title">รายชื่อผู้สมัครงาน</h4>
-                  </a>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-6 col-md-12 col-xs-12">
-        <div class="box">
-          <div class="box-inner">
-            <h3>โฆษณา</h3>
-
-            <div>
-              <h1>{{$totalAdvertising}}</h1>
-              <div>รายการโฆษณา</div>
-            </div>
-
-            <a href="{{request()->get('shopUrl')}}manage/advertising" class="button wide-button space-top-bottom-20">
-              จัดการโฆษณา
-            </a>
-
-            <div class="line"></div>
-
-            <div class="tile-nav-group space-top-bottom-20 clearfix">
-
-              <div class="tile-nav small">
-                <div class="tile-nav-image">
-                  <a href="{{request()->get('shopUrl')}}advertising/add">
-                    <img src="/images/common/plus.png">
-                  </a>
-                </div>
-                <div class="tile-nav-info">
-                  <a href="{{request()->get('shopUrl')}}advertising/add">
-                    <h4 class="tile-nav-title">ลงโฆษณา</h4>
-                  </a>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-6 col-md-12 col-xs-12">
-        <div class="box">
-          <div class="box-inner">
-            <h3>สาขา</h3>
-
-            <div>
-              <h1>{{$totalBranch}}</h1>
-              <div>สาขา</div>
-            </div>
-
-            <a href="{{request()->get('shopUrl')}}manage/branch" class="button wide-button space-top-bottom-20">
-              จัดการสาขา
-            </a>
-
-            <div class="line"></div>
-
-            <div class="tile-nav-group space-top-bottom-20 clearfix">
-
-              <div class="tile-nav small">
-                <div class="tile-nav-image">
-                  <a href="{{request()->get('shopUrl')}}branch/add">
-                    <img src="/images/common/plus.png">
-                  </a>
-                </div>
-                <div class="tile-nav-info">
-                  <a href="{{request()->get('shopUrl')}}branch/add">
-                    <h4 class="tile-nav-title">เพิ่มสาขา</h4>
                   </a>
                 </div>
               </div>
@@ -282,6 +209,80 @@
             <a href="{{request()->get('shopUrl')}}job_applying" class="button wide-button space-top-bottom-20">
               จัดการการสมัครงาน
             </a>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-md-12 col-xs-12">
+        <div class="box">
+          <div class="box-inner">
+            <h3>โฆษณา</h3>
+
+            <div>
+              <h1>{{$totalAdvertising}}</h1>
+              <div>รายการโฆษณา</div>
+            </div>
+
+            <a href="{{request()->get('shopUrl')}}manage/advertising" class="button wide-button space-top-bottom-20">
+              จัดการโฆษณา
+            </a>
+
+            <div class="line"></div>
+
+            <div class="tile-nav-group space-top-20 clearfix">
+
+              <div class="tile-nav small">
+                <div class="tile-nav-image">
+                  <a href="{{request()->get('shopUrl')}}advertising/add">
+                    <img src="/images/common/plus.png">
+                  </a>
+                </div>
+                <div class="tile-nav-info">
+                  <a href="{{request()->get('shopUrl')}}advertising/add">
+                    <h4 class="tile-nav-title">ลงโฆษณา</h4>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-md-12 col-xs-12">
+        <div class="box">
+          <div class="box-inner">
+            <h3>สาขา</h3>
+
+            <div>
+              <h1>{{$totalBranch}}</h1>
+              <div>สาขา</div>
+            </div>
+
+            <a href="{{request()->get('shopUrl')}}manage/branch" class="button wide-button space-top-bottom-20">
+              จัดการสาขา
+            </a>
+
+            <div class="line"></div>
+
+            <div class="tile-nav-group space-top-20 clearfix">
+
+              <div class="tile-nav small">
+                <div class="tile-nav-image">
+                  <a href="{{request()->get('shopUrl')}}branch/add">
+                    <img src="/images/common/plus.png">
+                  </a>
+                </div>
+                <div class="tile-nav-info">
+                  <a href="{{request()->get('shopUrl')}}branch/add">
+                    <h4 class="tile-nav-title">เพิ่มสาขา</h4>
+                  </a>
+                </div>
+              </div>
+
+            </div>
 
           </div>
         </div>

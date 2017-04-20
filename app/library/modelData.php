@@ -67,44 +67,6 @@ class ModelData {
         $data = $this->loadTagging();
         break;
 
-      // case 'OfficeHour':
-
-      //   $officeHour = $this->model->getRelatedData('OfficeHour',array(
-      //     'first' => true,
-      //     'fields' => array('same_time','time')
-      //   ));
-
-      //   if(empty($officeHour)){
-      //     $this->data['officeHour'] = array();
-      //     break;
-      //   }
-
-      //   $this->data['sameTime'] = $officeHour->same_time;
-
-      //   $time = json_decode($officeHour->time,true);
-      //   $officeHour = array();
-      //   foreach ($time as $day => $value) {
-
-      //     $startTime = explode(':', $value['start_time']);
-      //     $endTime = explode(':', $value['end_time']);
-
-      //     $officeHour[$day] = array(
-      //       'open' => $value['open'],
-      //       'start_time' => array(
-      //         'hour' => (int)$startTime[0],
-      //         'min' => (int)$startTime[1]
-      //       ),
-      //       'end_time' => array(
-      //         'hour' => (int)$endTime[0],
-      //         'min' => (int)$endTime[1]
-      //       )
-      //     );
-      //   }
-
-      //   $this->data['officeHour'] = json_encode($officeHour);
-
-      //   break;
-
       case 'Contact':
         $data = $this->loadContact();
         break;

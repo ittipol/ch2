@@ -40,10 +40,29 @@
       </div>
 
       <div class="shop-info">
+
         <h3>{{$_shop_name}}</h3>
+
+        @if(!empty($_shop_open_hours))
+        <div class="additional-option display-content shop-open-hours {{$_shop_open_hours['status']}}">
+          {{$_shop_open_hours['text']}}
+          <div class="additional-option-content">
+            <div class="shop-time-table-wrapper">
+            @foreach($_shop_open_hours['timeTable'] as $time)
+              <div class="shop-time-table clearfix">
+                <div class="shop-time-table-day pull-left">{{$time['day']}}</div>
+                <div class="shop-time-table-time pull-left">{{$time['openHour']}}</div>
+              </div>
+            @endforeach
+            </div>
+          </div>
+        </div>
+        @endif
+
         @if(!empty($_shop_short_description) && ($_shop_short_description != '-'))
         <p class="shop-description">{{$_shop_short_description}}</p>
         @endif
+
       </div>
     </div>
 
@@ -68,7 +87,6 @@
     <a id="cancel_shop_cover_button" class="icon-button-round close-icon float-button cover-cancel button"></a>
 
   </div>
-
 
 </div>
 

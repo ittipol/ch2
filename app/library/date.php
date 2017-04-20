@@ -73,6 +73,22 @@ class Date
     );
   }
 
+  public function getDayName($day) {   
+
+    $dayName = array(
+      'วันจันทร์',
+      'วันอังคาร',
+      'วันพุธ',
+      'วันพฤหัสบดี',
+      'วันศุกร์',
+      'วันเสาร์',
+      'วันอาทิตย์'
+    );
+
+    return !empty($dayName[$day-1]) ? $dayName[$day-1] : null;
+
+  }
+
   public function getMonthName($month) {   
 
     $monthName = array(

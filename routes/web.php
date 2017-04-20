@@ -240,6 +240,9 @@ Route::group(['middleware' => 'auth'], function () {
   Route::post('community/shop/create','ShopController@creatingSubmit')->name('shop.create');
 });
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
+
+  Route::get('shop/{shopSlug}/about','ShopController@about')->name('shop.about');
+
   Route::get('shop/{shopSlug}/manage','ShopController@manage')->name('shop.manage');
   
   Route::get('shop/{shopSlug}/setting','ShopController@setting')->name('shop.setting');

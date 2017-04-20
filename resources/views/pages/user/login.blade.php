@@ -88,7 +88,7 @@
         $('body').addClass('login-bg');
 
         let background = new Image();
-        background.src = '/images/login-bg.jpg';
+        background.src = '/images/login.jpg';
 
         let windowWidth = window.innerWidth;
         // let windowHeight = window.innerHeight;

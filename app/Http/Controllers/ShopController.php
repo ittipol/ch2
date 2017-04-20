@@ -16,6 +16,12 @@ class ShopController extends Controller
     parent::__construct();
   }
 
+  public function about() {
+
+    $model = request()->get('shop');
+    dd($model->getAttributes());
+  }
+
   public function listView() {
 
     $model = Service::loadModel('Shop');

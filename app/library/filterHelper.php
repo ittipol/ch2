@@ -488,7 +488,7 @@ class FilterHelper {
     if(count($conditions) == 1) {
       $model = $this->_setCondition($model,$conditions);
     }else{
-      $model->where(function ($_query) use($conditions) {
+      $model = $model->where(function ($_query) use($conditions) {
         $_query = $this->_setCondition($_query,$conditions);
       });
     }
