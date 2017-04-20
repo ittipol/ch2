@@ -246,10 +246,6 @@ a.button:visited {
 	background-color: #388E3C;
 }
 
-#map.map-small {
-	height: 250px;
-}
-
 .hide-element {
 	display: none;
 }

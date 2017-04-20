@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2017 at 05:31 PM
+-- Generation Time: Apr 20, 2017 at 08:10 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -257,7 +257,11 @@ INSERT INTO `addresses` (`id`, `model`, `model_id`, `address`, `province_id`, `d
 (202, 'Item', 119, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-04-08 22:43:50', '2017-04-08 22:43:50'),
 (203, 'Item', 121, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-04-08 23:01:28', '2017-04-08 23:01:28'),
 (204, 'Item', 122, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-04-08 23:05:21', '2017-04-08 23:05:21'),
-(205, 'Item', 124, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-04-09 20:47:16', '2017-04-09 20:47:16');
+(205, 'Item', 124, NULL, 9, 146, 1, NULL, NULL, NULL, 1, '2017-04-09 20:47:16', '2017-04-09 20:47:16'),
+(206, 'Person', 12, '', 9, 146, 1, NULL, NULL, NULL, 12, '2017-04-17 14:35:39', '2017-04-17 14:35:39'),
+(207, 'Item', 125, NULL, 2, 25, 0, NULL, NULL, NULL, 1, '2017-04-19 14:18:20', '2017-04-19 14:18:20'),
+(208, 'RealEstate', 78, NULL, 9, 146, 1, NULL, '13.301095868963433', '100.95422744750977', 1, '2017-04-19 15:19:32', '2017-04-19 15:19:32'),
+(209, 'Shop', 21, '', 2, 11, 0, NULL, '13.727378816774177', '100.54584503173828', 1, '2017-04-21 01:05:39', '2017-04-21 01:05:39');
 
 -- --------------------------------------------------------
 
@@ -289,7 +293,8 @@ INSERT INTO `advertisings` (`id`, `advertising_type_id`, `name`, `description`, 
 (7, 1, 'จัดทำเว็บไซต์', '', 1, '2017-02-15 13:50:11', '2017-02-17 00:37:34'),
 (8, 1, 'xxx', '', 1, '2017-02-15 13:50:25', '2017-02-15 13:50:25'),
 (9, 2, 'xxxx', '', 1, '2017-02-17 18:05:12', '2017-02-17 18:05:12'),
-(10, 1, 'xxx', '', 1, '2017-03-14 18:55:30', '2017-03-14 18:55:30');
+(10, 1, 'xxx', '', 1, '2017-03-14 18:55:30', '2017-03-14 18:55:30'),
+(11, 3, 'new shop เปิด 12 กันยายน นี้', 'new shop at ศรีราชา', 1, '2017-04-17 15:26:10', '2017-04-17 15:26:10');
 
 -- --------------------------------------------------------
 
@@ -490,6 +495,13 @@ CREATE TABLE `carts` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`id`, `person_id`, `session_id`, `shop_id`, `product_id`, `quantity`, `created_at`, `updated_at`) VALUES
+(2, 1, NULL, 24, 22, 1, '2017-04-20 17:18:45', '2017-04-20 17:18:45');
 
 -- --------------------------------------------------------
 
@@ -11593,7 +11605,7 @@ INSERT INTO `contacts` (`id`, `model`, `model_id`, `phone_number`, `fax`, `email
 (9, 'Branch', 2, NULL, NULL, NULL, NULL, NULL, 1, '2017-02-13 11:05:21', '2017-02-13 11:05:21'),
 (10, 'Branch', 3, NULL, NULL, NULL, NULL, NULL, 1, '2017-02-13 11:06:03', '2017-02-13 11:06:03'),
 (11, 'Branch', 4, NULL, NULL, NULL, NULL, NULL, 1, '2017-02-13 11:06:29', '2017-02-13 11:06:29'),
-(12, 'Shop', 3, '["0854545258"]', NULL, NULL, NULL, NULL, 1, '2017-02-13 19:47:16', '2017-02-13 20:06:57'),
+(12, 'Shop', 3, '["0854545258","0898989999"]', NULL, NULL, NULL, NULL, 1, '2017-02-13 19:47:16', '2017-04-20 23:57:10'),
 (13, 'Branch', 5, NULL, NULL, NULL, NULL, NULL, 1, '2017-02-14 06:22:26', '2017-02-14 06:22:26'),
 (14, 'Shop', 13, NULL, NULL, NULL, NULL, NULL, 1, '2017-02-14 11:20:13', '2017-02-14 11:20:13'),
 (15, 'Shop', 14, NULL, NULL, NULL, NULL, NULL, 1, '2017-02-14 11:24:03', '2017-02-14 11:24:03'),
@@ -11780,7 +11792,11 @@ INSERT INTO `contacts` (`id`, `model`, `model_id`, `phone_number`, `fax`, `email
 (221, 'Item', 119, NULL, NULL, NULL, NULL, NULL, 1, '2017-04-08 22:43:50', '2017-04-08 22:43:50'),
 (222, 'Item', 121, NULL, NULL, NULL, NULL, NULL, 1, '2017-04-08 23:01:29', '2017-04-08 23:01:29'),
 (223, 'Item', 122, NULL, NULL, NULL, NULL, NULL, 1, '2017-04-08 23:05:21', '2017-04-08 23:05:21'),
-(224, 'Item', 124, NULL, NULL, NULL, NULL, NULL, 1, '2017-04-09 20:47:17', '2017-04-09 20:47:17');
+(224, 'Item', 124, NULL, NULL, NULL, NULL, NULL, 1, '2017-04-09 20:47:17', '2017-04-09 20:47:17'),
+(225, 'Person', 12, NULL, NULL, NULL, NULL, NULL, 12, '2017-04-17 14:35:39', '2017-04-17 14:35:39'),
+(226, 'Shop', 25, NULL, NULL, NULL, NULL, NULL, 1, '2017-04-19 12:57:31', '2017-04-19 12:57:31'),
+(227, 'Item', 125, NULL, NULL, NULL, NULL, NULL, 1, '2017-04-19 14:18:20', '2017-04-19 14:18:20'),
+(228, 'RealEstate', 78, NULL, NULL, NULL, NULL, NULL, 1, '2017-04-19 15:19:32', '2017-04-19 15:19:32');
 
 -- --------------------------------------------------------
 
@@ -11802,7 +11818,7 @@ CREATE TABLE `data_access_permissions` (
 --
 
 INSERT INTO `data_access_permissions` (`id`, `model`, `model_id`, `access_level`, `owner`, `owner_id`) VALUES
-(1, 'PersonExperience', 1, 1, 'Person', 1),
+(1, 'PersonExperience', 1, 9, 'Person', 1),
 (2, 'Product', 9, 99, 'Shop', 21),
 (3, 'Advertising', 10, 99, 'Shop', 3),
 (4, 'Product', 15, 99, 'Shop', 3),
@@ -11882,7 +11898,13 @@ INSERT INTO `data_access_permissions` (`id`, `model`, `model_id`, `access_level`
 (92, 'Job', 60, 99, 'Shop', 23),
 (93, 'Job', 61, 99, 'Shop', 23),
 (94, 'Job', 62, 99, 'Shop', 23),
-(95, 'Freelance', 10, 99, 'Person', 1);
+(95, 'Freelance', 10, 99, 'Person', 1),
+(96, 'PersonExperience', 2, 99, 'Person', 12),
+(97, 'Advertising', 11, 99, 'Shop', 24),
+(98, 'Shop', 3, 99, 'Person', 1),
+(99, 'Shop', 25, 99, 'Person', 1),
+(100, 'Item', 125, 99, 'Person', 1),
+(101, 'RealEstate', 78, 99, 'Person', 1);
 
 -- --------------------------------------------------------
 
@@ -13163,7 +13185,13 @@ INSERT INTO `images` (`id`, `model`, `model_id`, `path`, `filename`, `descriptio
 (243, 'Job', 46, NULL, '14918438504524814061133947189746.jpg', NULL, 1, 1, '2017-04-11 00:04:14', '2017-04-11 00:04:14'),
 (244, 'Job', 48, NULL, '14918447235472192073927805165411.jpg', NULL, 1, 1, '2017-04-11 00:18:58', '2017-04-11 00:18:58'),
 (245, 'Job', 49, NULL, '14918449033912808832578213162203.jpg', NULL, 1, 1, '2017-04-11 00:21:45', '2017-04-11 00:21:45'),
-(246, 'Freelance', 10, NULL, '1492353692904283936099585617496.jpg', NULL, 1, 1, '2017-04-16 21:41:57', '2017-04-16 21:41:57');
+(246, 'Freelance', 10, NULL, '1492353692904283936099585617496.jpg', NULL, 1, 1, '2017-04-16 21:41:57', '2017-04-16 21:41:57'),
+(247, 'Advertising', 11, NULL, '14924175593539742228593073110461.jpg', NULL, 1, 1, '2017-04-17 15:26:10', '2017-04-17 15:26:10'),
+(248, 'Advertising', 11, NULL, '1492417568508729259701285613156.jpg', NULL, 1, 1, '2017-04-17 15:26:10', '2017-04-17 15:26:10'),
+(249, 'Product', 23, NULL, '1492513784984829242089059917202.jpg', NULL, 1, 1, '2017-04-18 18:09:48', '2017-04-18 18:09:48'),
+(250, 'Item', 125, NULL, '1492586279589150515305796261773.jpg', NULL, 1, 1, '2017-04-19 14:18:19', '2017-04-19 14:18:19'),
+(251, 'RealEstate', 78, NULL, '1492589961299227955330621757032.jpg', NULL, 1, 1, '2017-04-19 15:19:32', '2017-04-19 15:19:32'),
+(252, 'RealEstate', 78, NULL, '1492589969240573069977362945896.jpg', NULL, 1, 1, '2017-04-19 15:19:32', '2017-04-19 15:19:32');
 
 -- --------------------------------------------------------
 
@@ -13315,7 +13343,8 @@ INSERT INTO `items` (`id`, `announcement_type_id`, `name`, `announcement_detail`
 (121, 2, 'xxxx', NULL, '', '111.00', 1, 0, 1, '2017-04-08 23:01:28', '2017-04-08 23:01:28'),
 (122, 2, 'eeee', NULL, '', '1111.00', 1, 0, 1, '2017-04-08 23:05:21', '2017-04-08 23:05:21'),
 (123, 2, 'rrrr', NULL, '', '1000.00', 1, 0, 1, '2017-04-09 19:07:11', '2017-04-09 19:07:11'),
-(124, 2, 'xxdsds', NULL, '', '111.00', 1, 0, 1, '2017-04-09 20:47:15', '2017-04-09 20:47:15');
+(124, 2, 'xxdsds', NULL, '', '111.00', 1, 0, 1, '2017-04-09 20:47:15', '2017-04-09 20:47:15'),
+(125, 2, 'Casio G-shock นาฬิกาข้อมือ สีแดง สายเรซิน รุ่น G-7900A-4DR', NULL, 'คุณสมบัติ\r\n\r\nทนทานไม่มีใครเทียบ\r\nCasio G-shock นาฬิกาข้อมือ สีแดง สายเรซิน รุ่น G-7900A-4DR นาฬิกาทนทานแข็งแรงรุ่นใหม่จาก G-SHOCK ซึ่งเป็นนาฬิกาที่ขึ้นชื่อเรื่องความทนทานไม่มีใครเทียบ มีการออกแบบและสรรค์สร้างมาเพื่อเป็นนาฬิกาคู่ใจของผู้ที่ชื่นชอบกิจกรรมผาดโผนโจนทะยาน คุณสมบัติหลักๆเช่นสกรูใหญ่รอบกรอบหน้าปัด 4 ตัวและพื้นผิวหน้าปัดที่ยื่นออกมาซึ่งช่วยแบ่งหน้าปัดออกเป็น 6 ส่วนเพื่อดีไซน์ที่ดูทันสมัย มาพร้อมกับปุ่มซึ่งมีขนาดใหญ่ที่สุดในนาฬิกา G-SHOCK ทั้งหมดเพื่อการใช้งานง่าย\r\n\r\nแสดงข้อมูลชัดเจน\r\nCasio G-shock นาฬิกาข้อมือ สีแดง สายเรซิน รุ่น G-7900A-4DR ทนทานต่ออุณหภูมิต่ำทำให้นาฬิกายังสามารถทำงานได้แม้ว่าอยู่ในสภาวะหนาวมาก กราฟแสดงดวงจันทร์และความสูงของคลื่นให้ข้อมูลที่เป็นประโยชน์มากต่อผู้ที่ชื่นชอบกีฬาทางน้ำ หน้อจอ LCD ขนาดใหญ่แบ่งออกเป็นส่วนๆเพื่อดูและอ่านข้อมูลได้ง่าย\r\n\r\nข้อมูลจำเพาะ\r\n- กระจกมิเนอรัล\r\n- ทนทานต่อแรงสั่นสะเทือน\r\n- กันน้ำลึก 200 เมตร\r\n- วัสดุตัวเรือน / กรอบ: เรซิน\r\n- สายเรซิน\r\n- ไฟ EL ให้แสงสว่างพื้นหลังทั้งหน้าปัด\r\n- สวิตช์เปิดไฟอัตโนมัติ เลือกระยะเวลาการเรืองแสงได้ แสงระเรื่อ\r\n- ไฟกะพริบแจ้งเตือน\r\n- ไฟแจ้งเตือนพร้อมระบบสั่นสำหรับนาฬิกาปลุก แจ้งเตือนบอกเวลาต้นชั่วโมง การหมดเวลานับถอยหลัง ความคืบหน้าของการนับ และการเริ่มต้นจับเวลาอัตโนมัติ\r\n- ทนอุณหภูมิต่ำได้ (-20C)\r\n- แสดงเวลาโลก\r\n- 29 โซนเวลา (ใน 48 เมือง) รหัสเมือง ปิด/เปิดเวลาออมแสง (Daylight saving)\r\n- ข้อมูลดวงจันทร์ (แสดงลักษณะดวงจันทร์จากข้อมูลที่ใส่เข้ามา กราฟแสดงข้างขึ้นข้างแรมของดวงจันทร์)\r\n- กราฟแสดงความสูงของคลื่น (ระดับคลื่นในวันและเวลาที่ต้องการเรียกดู)\r\n- จับเวลาได้ละเอียด 1/100 วินาที (ST1)\r\n- จับเวลาได้ต่อเนื่องสูงสุด: 999:59''59.99''''\r\n- รูปแบบการจับเวลา: การจับเวลาตั้งแต่เริ่มต้นถึงตำแหน่งปัจจุบัน (Elapsed time), จับเวลาเป็นช่วงๆในระหว่างจุดเริ่มต้นถึงสิ้นสุด (Split time) และเวลาเข้าเส้นชัยของผู้แข่งขันที่ได้ตำแหน่งที่ 1 และ 2\r\n- คุณสมบัติอื่น: เริ่มต้นนับเวลาถอยหลัง 5 วินาทีโดยอัตโนมัติ\r\n- จับเวลาได้ละเอียด 1/100 วินาที (ST2)\r\n- จับเวลาได้ต่อเนื่องสูงสุด: 999:59''59.99''''\r\n- รูปแบบการจับเวลา: การจับเวลาตั้งแต่เริ่มต้นถึงตำแหน่งปัจจุบัน (Elapsed time), จับเวลาเป็นช่วงๆในระหว่างจุดเริ่มต้นถึงสิ้นสุด (Split time) และเวลาเข้าเส้นชัยของผู้แข่งขันที่ได้ตำแหน่งที่ 1 และ 2\r\n- ตัวนับเวลาถอยหลัง\r\n- หน่วยวัด: 1 วินาที\r\n- ช่วงเวลานับถอยหลัง: 24 ชั่วโมง\r\n- ระยะเวลาที่เริ่มต้นนับถอยหลังที่ตั้งได้: 1 นาทีถึง 24 ชั่วโมง (เพิ่มทีละ 1 นาที, เพิ่มทีละ 1 ชั่วโมง)\r\n- คุณสมบัติอื่น: เริ่มนับใหม่อัตโนมัติ เสียงแจ้งเตือนความคืบหน้าของการนับ\r\n- นาฬิกาปลุกเอนกประสงค์ที่ทำงานแยกกัน 5 ตัว (มาพร้อมกับนาฬิกาปลุกที่ปลุกซ้ำได้ 1 ตัว)\r\n- สัญญาณแจ้งต้นชั่วโมง\r\n- แสดงปฏิทินแบบเต็มโดยอัตโนมัติ (ถึงปี 2099)\r\n- แสดงเวลารูปแบบ 12/24 ชั่วโมง\r\n- เปิด/ปิดเสียงการทำงานของปุ่ม\r\n- บอกเวลาปกติแบบทั่วไป: ชั่วโมง นาที วินาที เวลาหลังเที่ยง เดือน วันที่ วันในรอบสัปดาห์\r\n- ความแม่นยำ ?15 วินาทีต่อเดือน\r\n- อายุการใช้งาน โดยประมาณ: 2 ปีกับถ่านกระดุม CR2025\r\n- ขนาดของกล่อง:52.4x50x17.7mm\r\n- น้ำหนักรวม: 68.2 g\r\n- ไฟ EL:เขียวอมฟ้า', '2750.00', 0, 1, 1, '2017-04-19 14:18:19', '2017-04-19 14:18:19');
 
 -- --------------------------------------------------------
 
@@ -13433,7 +13462,8 @@ INSERT INTO `item_to_categories` (`item_id`, `item_category_id`) VALUES
 (119, 4),
 (121, 5),
 (122, 1),
-(124, 1);
+(124, 1),
+(125, 3);
 
 -- --------------------------------------------------------
 
@@ -13509,7 +13539,7 @@ INSERT INTO `jobs` (`id`, `employment_type_id`, `name`, `salary`, `description`,
 (46, 1, 'marksman', '90000', '', '', '', '{"s":"1","c":"0"}', NULL, 1, '2017-04-11 00:04:14', '2017-04-11 00:04:14'),
 (47, 1, 'xxxx', '1111', '', '', '', '{"s":"1","c":"0"}', NULL, 1, '2017-04-11 00:14:12', '2017-04-11 00:14:12'),
 (48, 1, 'Engineer', '50000', '', '', '', '{"s":"1","c":"0"}', NULL, 1, '2017-04-11 00:18:58', '2017-04-11 00:18:58'),
-(49, 2, 'Skull', '25000', '', '', '', '{"s":"1","c":"0"}', NULL, 1, '2017-04-11 00:21:45', '2017-04-11 00:21:45'),
+(49, 2, 'Skull', '25000', 'งานที่ต้องทำ\r\n- พัฒนา realtime backend เพื่อ support ธุรกิจ\r\n- พัฒนา mobile application เชื่อมกับ backend\r\n- เชื่อมต่อระบบ backend กับ third party เช่นระบบบัญชี', 'ยูดริ้งค์ไอไดรฟ์ บริษัท สตาร์ทอัพ สาย คนขับรถ On-Demand ที่ ฮอต ที่สุดในประเทศไทย\r\n\r\nเกิดขึ้นด้วยอุดมการณ์ ที่จะแก้ปัญหา เมาแล้วขับ สู่ธุรกิจ ที่เติบโตแบบก้าวกระโดด หากคุณสนใจที่จะ สร้างเทคโนโลยี ที่จะเปลี่ยนสังคม ให้ดีขึ้น มาร่วมงานกับเรา\r\n\r\nสามารถพัฒนา web application ด้วย framework meteorjs ได้ (หากเขียน nodejs เป็นสามารถมาเรียนรู้ต่อได้)\r\nสามารถพัฒนา mobile application ด้วยภาษาด้านบนได้ (พัฒนาเป็น responsive web แล้ว export ออกมาเป็น app ด้วย meteorjs)\r\nสามารถใช้ git, issue tracker, linux command line เบื้องต้นได้\r\nหากสามารถเขียน react หรือ angular หรือ vuejs ได้จะพิจารณาเป็นพิเศษ\r\nมีความเชื่อใน code ที่สะอาดและสวยงาม สามารถเขียน document กำกับ code ด้วยภาษาดอกไม้ได้\r\nสามารถเขียน html5 css3 js และภาษาที่เกี่ยวข้องได้\r\nรู้ว่า sql และ nosql ต่างกันอย่างไร\r\nงานที่ต้องทำ\r\n- พัฒนา realtime backend เพื่อ support ธุรกิจ\r\n- พัฒนา mobile application เชื่อมกับ backend\r\n- เชื่อมต่อระบบ backend กับ third party เช่นระบบบัญชี', '', '{"s":"1","c":"1"}', 'สนใจส่งโปรไฟล์ของคุณมาได้ที่\r\njirayu@udrinkidrive.co.th\r\nสอบถาม โทร 0819321191', 1, '2017-04-11 00:21:45', '2017-04-19 14:07:32'),
 (50, 1, 'xxx', '20000', '', '', '', '{"s":"1","c":"0"}', NULL, 1, '2017-04-11 00:40:35', '2017-04-11 00:40:35'),
 (51, 2, 'www', '1', '', '', '', '{"s":"1","c":"0"}', NULL, 1, '2017-04-11 00:41:28', '2017-04-11 00:41:28'),
 (52, 1, 'xcsdsd', '1', '', '', '', '{"s":"1","c":"0"}', NULL, 1, '2017-04-11 00:47:33', '2017-04-11 00:47:33'),
@@ -13558,7 +13588,10 @@ INSERT INTO `job_applying_histories` (`id`, `job_id`, `job_applying_status_id`, 
 (13, 48, 3, 'xxxx', 66, '2017-04-14 12:52:31'),
 (14, 48, 3, 'xxxx hhh', 66, '2017-04-14 13:25:36'),
 (15, 48, 5, 'xx', 66, '2017-04-14 16:53:49'),
-(17, 48, 6, 'Thanks', 66, '2017-04-14 18:35:27');
+(17, 48, 6, 'Thanks', 66, '2017-04-14 18:35:27'),
+(18, 49, 1, NULL, 1, '2017-04-18 23:05:09'),
+(19, 49, 2, NULL, 1, '2017-04-18 23:05:21'),
+(20, 49, 5, '', 1, '2017-04-18 23:05:53');
 
 -- --------------------------------------------------------
 
@@ -13817,7 +13850,7 @@ INSERT INTO `lookups` (`id`, `model`, `model_id`, `name`, `keyword_1`, `keyword_
 (21, 'Branch', 65, 'สาขาศรีราชา', 'Diamond Dogs', NULL, NULL, NULL, NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-04-05 18:03:03', '2017-04-05 18:03:03'),
 (22, 'Branch', 66, 'สาขาบางพระ', 'Diamond Dogs', NULL, NULL, NULL, NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-04-05 18:03:36', '2017-04-05 18:03:36'),
 (23, 'Product', 22, 'PS4 Pro', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-04-05 18:09:18', '2017-04-05 18:09:18'),
-(24, 'Product', 23, 'PS4 Slim', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-04-05 18:32:08', '2017-04-05 18:32:08'),
+(24, 'Product', 23, 'NIKE FREE RN MOTION FLYKNIT 2017', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-04-05 18:32:08', '2017-04-18 11:22:54'),
 (25, 'Item', 113, 'Sony Experia Z Ultra 3G มือสองสถาพดี ถูกๆ', 'ขาย', 'โทรศัพท์มือถือและแท็บเล็ต', 'สินค้าใหม่', '4250', NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-04-06 11:24:35', '2017-04-06 11:24:35'),
 (26, 'Job', 45, 'Medic', 'Diamond Dogs', 'พนักงานประจำ', NULL, '40000', NULL, NULL, NULL, 1, '2017-04-07 09:34:43', '2017-04-07 09:34:43'),
 (27, 'Item', 116, 'xxx', 'ขาย', 'เสื้อผ้าและเครื่องแต่งกายสุภาพบุรุษ', 'สินค้าใหม่', '100', NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-04-08 22:28:44', '2017-04-08 22:28:44'),
@@ -13844,7 +13877,11 @@ INSERT INTO `lookups` (`id`, `model`, `model_id`, `name`, `keyword_1`, `keyword_
 (48, 'Job', 60, '5555', 'B Shop', 'พนักงานประจำ', NULL, '5555', NULL, NULL, NULL, 1, '2017-04-11 00:53:17', '2017-04-11 00:53:17'),
 (49, 'Job', 61, '8888', 'B Shop', 'พนักงานประจำ', NULL, '88', NULL, NULL, NULL, 1, '2017-04-11 00:54:02', '2017-04-11 00:54:02'),
 (50, 'Job', 62, 'ssss', 'B Shop', 'พนักงานประจำ', NULL, '11', NULL, NULL, NULL, 1, '2017-04-11 00:55:12', '2017-04-11 00:55:12'),
-(51, 'Freelance', 10, 'ออกแบบ AAA', 'เว็บไซต์', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-04-16 21:41:58', '2017-04-16 21:41:58');
+(51, 'Freelance', 10, 'ออกแบบ AAA', 'เว็บไซต์', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-04-16 21:41:58', '2017-04-16 21:41:58'),
+(52, 'Advertising', 11, 'new shop เปิด 12 กันยายน นี้', 'Diamond Dogs', 'สถาที่', NULL, NULL, NULL, NULL, NULL, 1, '2017-04-17 15:26:11', '2017-04-17 15:26:11'),
+(53, 'Shop', 25, 'IG Store', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-04-19 12:57:32', '2017-04-19 12:57:32'),
+(54, 'Item', 125, 'Casio G-shock นาฬิกาข้อมือ สีแดง สายเรซิน รุ่น G-7900A-4DR', 'ขาย', 'นาฬิกาและเครื่องประดับ', 'สินค้ามือสอง', '2750', NULL, 'ประเวศ 10250 กรุงเทพมหานคร', NULL, 1, '2017-04-19 14:18:21', '2017-04-19 14:18:21'),
+(55, 'RealEstate', 78, 'บ้าน 45 m.', 'ขาย บ้านเดี่ยว', 'ศาลาชมทิวทัศน์ อินเตอร์เน็ต สภาพเดิม ชั้นบน ชั้นล่าง', NULL, '25000000', NULL, 'เสม็ด เมืองชลบุรี 20000 ชลบุรี', NULL, 1, '2017-04-19 15:19:33', '2017-04-19 15:19:33');
 
 -- --------------------------------------------------------
 
@@ -13930,7 +13967,11 @@ INSERT INTO `notifications` (`id`, `model`, `model_id`, `notification_event_id`,
 (21, 'PersonApplyJob', 1, 15, '<strong>Venom Skake</strong> ได้ตกลงเข้าทำงานแล้ว', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-14 17:55:19', '2017-04-14 18:03:27'),
 (22, 'PersonApplyJob', 1, 15, '<strong>Venom Skake</strong> ได้ตอบตกลงเข้าทำงานแล้ว', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-14 18:07:45', '2017-04-14 18:07:50'),
 (23, 'PersonApplyJob', 1, 16, '<strong>Venom Skake</strong> ได้ปฏิเสธเข้าทำงานแล้ว', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-14 18:08:44', '2017-04-14 18:08:46'),
-(24, 'PersonApplyJob', 1, 15, '<strong>Venom Skake</strong> ได้ตอบตกลงเข้าทำงานแล้ว', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-14 18:35:27', '2017-04-14 23:11:52');
+(24, 'PersonApplyJob', 1, 15, '<strong>Venom Skake</strong> ได้ตอบตกลงเข้าทำงานแล้ว', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-14 18:35:27', '2017-04-14 23:11:52'),
+(25, 'PersonApplyJob', 3, 6, '<strong>Venom Skake</strong> ได้สมัครงาน <strong>Skull</strong>', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-18 23:05:09', '2017-04-18 23:05:16'),
+(26, 'PersonApplyJob', 3, 14, 'บริษัทหรือผู้ที่เกี่ยวข้องได้รับทราบ การสมัครงาน Skull แล้ว', 'Person', 1, 'Person', 1, 0, 0, 1, '2017-04-18 23:05:21', '2017-04-18 23:05:23'),
+(27, 'PersonApplyJob', 3, 12, 'การสมัครงาน Skull ถูกยกเลิกแล้ว', 'Person', 1, 'Person', 1, 1, 0, 1, '2017-04-18 23:05:53', '2017-04-18 23:05:54'),
+(28, 'Order', 63, 1, 'การสั่งซื้อสินค้าจากลูกค้า เลขที่การสั่งซื้อ 4', 'Person', 1, 'Person', 1, 1, 0, 1, '2017-04-20 17:15:07', '2017-04-20 17:15:07');
 
 -- --------------------------------------------------------
 
@@ -13988,7 +14029,8 @@ CREATE TABLE `open_hours` (
 --
 
 INSERT INTO `open_hours` (`id`, `shop_id`, `time`, `same_time`, `active`) VALUES
-(1, 3, '{"1":{"open":0,"start_time":"00:00:00","end_time":"00:00:00"},"2":{"open":"1","start_time":"10:30:00","end_time":"20:00:00"},"3":{"open":"1","start_time":"10:30:00","end_time":"20:00:00"},"4":{"open":"1","start_time":"0:00:00","end_time":"0:00:00"},"5":{"open":"1","start_time":"10:30:00","end_time":"20:00:00"},"6":{"open":"1","start_time":"10:30:00","end_time":"20:00:00"},"7":{"open":0,"start_time":"00:00:00","end_time":"00:00:00"}}', 1, 1);
+(1, 3, '{"1":{"open":"1","start_time":"10:00:00","end_time":"20:30:00"},"2":{"open":"1","start_time":"10:00:00","end_time":"20:30:00"},"3":{"open":"1","start_time":"10:00:00","end_time":"20:30:00"},"4":{"open":"1","start_time":"10:00:00","end_time":"20:30:00"},"5":{"open":"1","start_time":"10:00:00","end_time":"20:30:00"},"6":{"open":0,"start_time":"00:00:00","end_time":"00:00:00"},"7":{"open":0,"start_time":"00:00:00","end_time":"00:00:00"}}', 1, 1),
+(2, 24, '{"1":{"open":"1","start_time":"11:00:00","end_time":"20:30:00"},"2":{"open":"1","start_time":"11:00:00","end_time":"20:30:00"},"3":{"open":"1","start_time":"11:00:00","end_time":"20:30:00"},"4":{"open":"1","start_time":"11:00:00","end_time":"20:30:00"},"5":{"open":"1","start_time":"11:00:00","end_time":"20:30:00"},"6":{"open":0,"start_time":"00:00:00","end_time":"00:00:00"},"7":{"open":0,"start_time":"00:00:00","end_time":"00:00:00"}}', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -14081,7 +14123,8 @@ INSERT INTO `orders` (`id`, `invoice_prefix`, `invoice_number`, `shop_id`, `pers
 (59, 'INV', 3, 23, 1, 'Venom Skake', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, 1, NULL, NULL, 0, '2017-04-09 09:42:38', '2017-04-09 09:43:11'),
 (60, 'INV', 4, 23, 1, 'Venom Skake', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, 1, NULL, NULL, 0, '2017-04-09 09:44:15', '2017-04-09 09:44:33'),
 (61, 'INV', 7, 21, 1, 'Venom Skake', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, 1, NULL, NULL, 0, '2017-04-09 09:54:18', '2017-04-09 09:54:18'),
-(62, 'INV', 3, 24, 1, 'Venom Skake', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, 1, NULL, NULL, 1, '2017-04-09 09:55:32', '2017-04-09 09:55:46');
+(62, 'INV', 3, 24, 1, 'Venom Skake', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 2, 1, NULL, NULL, 1, '2017-04-09 09:55:32', '2017-04-09 09:55:46'),
+(63, 'INV', 4, 24, 1, 'Venom Skake', '17/88 พญาไท กรุงเทพมหานคร 10400', NULL, '', 1, 1, NULL, NULL, 1, '2017-04-20 17:15:06', '2017-04-20 17:15:06');
 
 -- --------------------------------------------------------
 
@@ -14162,7 +14205,8 @@ INSERT INTO `order_histories` (`id`, `order_id`, `order_status_id`, `message`, `
 (58, 61, 1, NULL, '2017-04-09 09:54:18'),
 (59, 62, 1, NULL, '2017-04-09 09:55:33'),
 (60, 62, 2, '', '2017-04-09 09:55:46'),
-(61, 47, 2, '', '2017-04-11 19:56:46');
+(61, 47, 2, '', '2017-04-11 19:56:46'),
+(62, 63, 1, NULL, '2017-04-20 17:15:07');
 
 -- --------------------------------------------------------
 
@@ -14221,7 +14265,8 @@ CREATE TABLE `order_pick_up_to_branches` (
 INSERT INTO `order_pick_up_to_branches` (`order_id`, `branch_id`) VALUES
 (55, 65),
 (56, 66),
-(62, 65);
+(62, 65),
+(63, 65);
 
 -- --------------------------------------------------------
 
@@ -14308,7 +14353,8 @@ INSERT INTO `order_products` (`id`, `order_id`, `product_id`, `product_name`, `f
 (58, 59, 21, 'Forerunner 935', '20000.00', '20000.00', 1, 1, NULL, NULL, '20000.00'),
 (59, 60, 21, 'Forerunner 935', '20000.00', '20000.00', 1, 1, NULL, NULL, '20000.00'),
 (60, 61, 16, 'AdiiDas Pro 777', '7990.00', '7990.00', 1, 1, NULL, NULL, '7990.00'),
-(61, 62, 23, 'PS4 Slim', '15990.00', '15990.00', 1, 1, NULL, NULL, '15990.00');
+(61, 62, 23, 'PS4 Slim', '15990.00', '15990.00', 1, 1, NULL, NULL, '15990.00'),
+(62, 63, 23, 'NIKE FREE RN MOTION FLYKNIT 2017', '15990.00', '15990.00', 1, 1, NULL, NULL, '15990.00');
 
 -- --------------------------------------------------------
 
@@ -14390,7 +14436,8 @@ INSERT INTO `order_shippings` (`id`, `order_id`, `shipping_method_id`, `shipping
 (57, 59, 14, 'รับสินค้าเอง', 0, 3, NULL),
 (58, 60, 14, 'รับสินค้าเอง', 0, 3, NULL),
 (59, 61, 11, 'EMS', 1, 3, '1-3 วันทำงาน'),
-(60, 62, 16, 'รับสินค้าเอง', NULL, 3, NULL);
+(60, 62, 16, 'รับสินค้าเอง', NULL, 3, NULL),
+(61, 63, 16, 'รับสินค้าเอง', NULL, 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -14675,7 +14722,11 @@ INSERT INTO `order_totals` (`id`, `order_id`, `alias`, `value`) VALUES
 (237, 62, 'subTotal', '15990.00'),
 (238, 62, 'shippingCost', '0.00'),
 (239, 62, 'savingPrice', '0.00'),
-(240, 62, 'total', '15990.00');
+(240, 62, 'total', '15990.00'),
+(241, 63, 'subTotal', '15990.00'),
+(242, 63, 'shippingCost', '0.00'),
+(243, 63, 'savingPrice', '0.00'),
+(244, 63, 'total', '15990.00');
 
 -- --------------------------------------------------------
 
@@ -14789,8 +14840,9 @@ CREATE TABLE `people` (
 --
 
 INSERT INTO `people` (`id`, `user_id`, `name`, `gender`, `birth_date`, `profile_image_id`, `cover_image_id`, `theme`, `token`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Venom Skake', 'm', '2007-09-05', 228, NULL, 1, 'dB1A2aR5ussVDd2lQxAgVSwdvCcSfnuTBK1YRPf1v75ka3z2uIblqScGsdHNy', '2016-12-08 12:57:33', '2017-04-16 21:19:18'),
-(11, 11, 'ABC DEF', NULL, NULL, 0, NULL, NULL, NULL, '2017-01-22 13:18:36', '2017-01-22 13:18:36');
+(1, 1, 'Venom Skake', 'm', '2007-09-05', 228, NULL, 1, '87qc6CiIvRFz6wfYaHhKqZZArOyO5r8qVXntZX9NGRuc3MKUts6JG6Rv8a5hy', '2016-12-08 12:57:33', '2017-04-20 23:18:20'),
+(11, 11, 'ABC DEF', NULL, NULL, 0, NULL, NULL, NULL, '2017-01-22 13:18:36', '2017-01-22 13:18:36'),
+(12, 12, 'Zero Major', 'f', '1991-03-12', NULL, NULL, NULL, 'Wy0IipBgUd3xQ7wZbThUdSfCcFfd7a5JGhj9dHyfKZdnvH40Xd7IjL86dcwPp', '2017-04-17 10:29:10', '2017-04-18 20:01:02');
 
 -- --------------------------------------------------------
 
@@ -14838,7 +14890,8 @@ CREATE TABLE `person_apply_jobs` (
 
 INSERT INTO `person_apply_jobs` (`id`, `person_id`, `job_id`, `shop_id`, `applicant_message`, `job_position_description`, `job_applying_status_id`, `times`, `created_at`, `updated_at`) VALUES
 (1, 1, 48, 24, 'Hello HR\r\n65', 'Good Afternoon Em.\r\n\r\nThank you very much for coming in for the interview yesterday.\r\n\r\nI would like to make you a formal offer for the position of a full time web developer at Firecreek Co., Ltd.\r\n\r\nThe salary we are offering is 30,000 BAHT per month.\r\n\r\nWe will provide you with a one year contract with a standard three months probation with a six month pay review.\r\n\r\nIf possible we would like you to start on Monday, 1st, June. Let me know if this is OK for you.\r\n\r\nWe think you would fit in great with our company. You have a great character and you want to learn - this is exactly what we''re looking for.\r\n\r\nWell done and I hope to hear from you soon with your confirmation!\r\n\r\nIf you have any questions please get in touch.', 6, 66, '2017-04-13 09:34:25', '2017-04-14 18:35:27'),
-(2, 1, 46, 24, 'fsdf\r\nsdfdsfsdfew\r\n\r\nsdfdsfs', NULL, 1, 1, '2017-04-13 14:10:33', '2017-04-13 22:41:49');
+(2, 1, 46, 24, 'fsdf\r\nsdfdsfsdfew\r\n\r\nsdfdsfs', NULL, 1, 1, '2017-04-13 14:10:33', '2017-04-13 22:41:49'),
+(3, 1, 49, 24, '', NULL, 5, 1, '2017-04-18 23:05:08', '2017-04-18 23:05:53');
 
 -- --------------------------------------------------------
 
@@ -14860,7 +14913,8 @@ CREATE TABLE `person_career_objectives` (
 --
 
 INSERT INTO `person_career_objectives` (`id`, `person_experience_id`, `person_id`, `career_objective`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, '<p>Lorem Ipsum คือ เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 เมื่อเครื่องพิมพ์โนเนมเครื่องหนึ่งนำรางตัวพิมพ์มาสลับสับตำแหน่งตัวอักษรเพื่อทำหนังสือตัวอย่าง Lorem Ipsum อยู่ยงคงกระพันมาไม่ใช่แค่เพียงห้าศตวรรษ แต่อยู่มาจนถึงยุคที่พลิกโฉมเข้าสู่งานเรียงพิมพ์ด้วยวิธีทางอิเล็กทรอนิกส์ และยังคงสภาพเดิมไว้อย่างไม่มีการเปลี่ยนแปลง มันได้รับความนิยมมากขึ้นในยุค ค.ศ. 1960 เมื่อแผ่น Letraset วางจำหน่ายโดยมีข้อความบนนั้นเป็น Lorem Ipsum และล่าสุดกว่านั้น คือเมื่อซอฟท์แวร์การทำสื่อสิ่งพิมพ์ (Desktop Publishing) อย่าง Aldus PageMaker ได้รวมเอา Lorem Ipsum เวอร์ชั่นต่างๆ เข้าไว้ในซอฟท์แวร์ด้วย</p>', '2017-02-12 16:07:52', '2017-02-22 23:04:41');
+(1, 1, 1, '<p>Lorem Ipsum คือ เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 เมื่อเครื่องพิมพ์โนเนมเครื่องหนึ่งนำรางตัวพิมพ์มาสลับสับตำแหน่งตัวอักษรเพื่อทำหนังสือตัวอย่าง Lorem Ipsum อยู่ยงคงกระพันมาไม่ใช่แค่เพียงห้าศตวรรษ แต่อยู่มาจนถึงยุคที่พลิกโฉมเข้าสู่งานเรียงพิมพ์ด้วยวิธีทางอิเล็กทรอนิกส์ และยังคงสภาพเดิมไว้อย่างไม่มีการเปลี่ยนแปลง มันได้รับความนิยมมากขึ้นในยุค ค.ศ. 1960 เมื่อแผ่น Letraset วางจำหน่ายโดยมีข้อความบนนั้นเป็น Lorem Ipsum และล่าสุดกว่านั้น คือเมื่อซอฟท์แวร์การทำสื่อสิ่งพิมพ์ (Desktop Publishing) อย่าง Aldus PageMaker ได้รวมเอา Lorem Ipsum เวอร์ชั่นต่างๆ เข้าไว้ในซอฟท์แวร์ด้วย</p>', '2017-02-12 16:07:52', '2017-02-22 23:04:41'),
+(2, 2, 12, NULL, '2017-04-17 10:46:17', '2017-04-17 10:46:17');
 
 -- --------------------------------------------------------
 
@@ -14927,7 +14981,8 @@ CREATE TABLE `person_experiences` (
 --
 
 INSERT INTO `person_experiences` (`id`, `person_id`, `active`, `created_at`, `updated_at`) VALUES
-(1, 1, 0, '2017-02-12 16:07:52', '2017-02-18 20:09:34');
+(1, 1, 0, '2017-02-12 16:07:52', '2017-02-18 20:09:34'),
+(2, 12, 0, '2017-04-17 10:46:17', '2017-04-17 10:46:17');
 
 -- --------------------------------------------------------
 
@@ -15105,7 +15160,8 @@ INSERT INTO `person_to_shops` (`shop_id`, `person_id`, `role_id`, `created_at`) 
 (21, 1, 1, '2017-03-02 06:04:19'),
 (22, 1, 1, '2017-03-08 17:09:52'),
 (23, 1, 1, '2017-04-03 16:25:18'),
-(24, 1, 1, '2017-04-05 17:50:40');
+(24, 1, 1, '2017-04-05 17:50:40'),
+(25, 1, 1, '2017-04-19 12:57:32');
 
 -- --------------------------------------------------------
 
@@ -15189,10 +15245,10 @@ INSERT INTO `products` (`id`, `name`, `description`, `product_model`, `sku`, `qu
 (17, 'Nike Air Max', '<p><strong>MODERN MINIMALISM</strong></p>\r\n\r\n<p>The Nike Air Max LD-Zero Unisex Shoe fuses an LD-1000 upper with full-length Max Air cushioning to deliver a truly unique, modern icon. It pulls inspiration from the original design by Hiroshi Fujiwara, long-time Nike collaborator and designer behind the fashion label fragment.</p>\r\n\r\n<p><strong>BENEFITS</strong></p>\r\n\r\n<ul>\r\n	<li>Mesh, textile or leather construction depending on color</li>\r\n	<li>Ultra-light Flywire cables provide support</li>\r\n	<li>Full-length Max Air unit for maximum cushioning</li>\r\n	<li>Rubber outsole with Waffle-inspired traction pattern</li>\r\n</ul>\r\n\r\n<p><strong>NIKE AIR MAX ORIGINS</strong></p>\r\n\r\n<p>Nike&#39;s revolutionary Air-Sole unit made its way into Nike footwear in the late &#39;70s. In 1987, the Nike Air Max 1 debuted with visible air in its heel, allowing fans more than just the feel of Air-Sole comfort&mdash;suddenly they could see it. Since then, next-generation Nike Air Max shoes have become a hit with athletes and collectors by offering striking color combinations and reliable, lightweight cushioning.</p>', '', '', 0, 'คู่', 1, '7990.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, NULL, NULL, 1, 1, '2017-03-28 19:21:24', '2017-03-31 09:24:04'),
 (18, 'เสื้อยืดชาย', '', '', '', 100, 'ตัว', 1, '199.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, NULL, NULL, 0, 1, '2017-03-29 14:26:40', '2017-03-29 14:26:40'),
 (19, 'Grip', '', '', '', 100, 'ชิ้น', 1, '999.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, NULL, NULL, 0, 1, '2017-04-02 20:24:37', '2017-04-02 20:24:37'),
-(20, 'Sweater', '', '', '', 7, 'ตัว', 1, '1590.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, NULL, NULL, 1, 1, '2017-04-03 09:40:25', '2017-04-05 13:22:35'),
+(20, 'Sweater', 'Lorem Ipsum คืออะไร?\r\nLorem Ipsum คือ เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 เมื่อเครื่องพิมพ์โนเนมเครื่องหนึ่งนำรางตัวพิมพ์มาสลับสับตำแหน่งตัวอักษรเพื่อทำหนังสือตัวอย่าง Lorem Ipsum อยู่ยงคงกระพันมาไม่ใช่แค่เพียงห้าศตวรรษ แต่อยู่มาจนถึงยุคที่พลิกโฉมเข้าสู่งานเรียงพิมพ์ด้วยวิธีทางอิเล็กทรอนิกส์ และยังคงสภาพเดิมไว้อย่างไม่มีการเปลี่ยนแปลง มันได้รับความนิยมมากขึ้นในยุค ค.ศ. 1960 เมื่อแผ่น Letraset วางจำหน่ายโดยมีข้อความบนนั้นเป็น Lorem Ipsum และล่าสุดกว่านั้น คือเมื่อซอฟท์แวร์การทำสื่อสิ่งพิมพ์ (Desktop Publishing) อย่าง Aldus PageMaker ได้รวมเอา Lorem Ipsum เวอร์ชั่นต่างๆ เข้าไว้ในซอฟท์แวร์ด้วย', '', '', 7, 'ตัว', 1, '1590.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, NULL, NULL, 1, 1, '2017-04-03 09:40:25', '2017-04-19 13:19:48'),
 (21, 'Forerunner 935', '<h3>Premium GPS Running/Triathlon Watch with Wrist-based Heart Rate&sup1;</h3>\r\n\r\n<ul>\r\n	<li>Offers advanced running and multisport features in a comfortable watch you can wear all day, and it only weighs 49 grams</li>\r\n	<li>Provides elevation changes with a built-in barometer; altimeter and electronic compass help you keep your bearings</li>\r\n	<li>Evaluates your training status to indicate if you&rsquo;re undertraining or overdoing it and offers additional performance monitoring features</li>\r\n	<li>Provides advanced dynamics&sup2; for running, cycling and swimming, including ground contact time balance, stride length and more</li>\r\n	<li>Battery life: up to 2 weeks in watch mode, up to 24 hours in GPS mode or up to 50 hours in UltraTrac&trade; mode</li>\r\n</ul>\r\n\r\n<p>Who cares that Forerunner 935 gives you rich data like running dynamics, wrist-based heart rate, training status, FTP and VO2 max? A dedicated athlete like you who&rsquo;s ready to beat yesterday. This premium GPS running/triathlon watch helps you fine-tune your training and recovery to be a better athlete.</p>\r\n\r\n<h3>Fits Your Wrist and Your Fashion Sense</h3>\r\n\r\n<p>Forerunner 935 GPS running/triathlon watch features a lightweight, comfortable design you&rsquo;ll be happy to wear all day. The 935 is compatible with our line of easy-to-swap&nbsp;QuickFit&trade; bands. With a band to suit every event, you can easily change from sporty silicone to classic leather and even high-end metal.</p>\r\n\r\n<h3>Monitor Your Performance, Training and Recovery</h3>\r\n\r\n<p>Just how effective is your current training plan? Forerunner 935 will help you monitor your training and recovery so you can better prepare for a race or training cycle. Training status is a new performance monitoring tool that automatically evaluates your recent exercise history and performance indicators to let you know if you&rsquo;re training productively, peaking or overreaching. The new anaerobic training effect metric opens a window of insight to a critical dimension of training, telling you how your training is improving your ability to push the limits. You can even view your overall training load, which measures your exercise volume from the last 7 days and compares it to the optimal range for your fitness and recent training history.</p>\r\n\r\n<h3>Analyze Your Technique</h3>\r\n\r\n<p>We&rsquo;re making it easier to get the data you need to improve your form. Let Forerunner 935 measure crucial running metrics&sup2; that you can use to analyze your performance. Biomechanical measurements such as cadence, stride length, ground contact time and balance, vertical oscillation and vertical ratio are the key to understanding your form so you can bring your best on race day. These metrics are available with the addition of a compatible heart rate strap&sup2; or the compact Running Dynamics Pod, which clips right onto your waistband. Also, take advantage of feature sets to help with cycling and even swim training. In the water, Forerunner 935 will track your distance, pace, stroke count and more.</p>\r\n\r\n<h3>Go Longer Between Charges</h3>\r\n\r\n<p>Outlast your longest workout with a battery you can rely on, even in the middle of an iron-distance triathlon or ultramarathon. Forerunner 935 features up to 24 hours of battery life in GPS mode and up to 50 hours in UltraTrac battery saver mode. When you&rsquo;re just using it as your day-to-day smartwatch, you&rsquo;ll get up to 2 weeks from a single charge.</p>\r\n\r\n<h3>Run, Sprint, Swim, Bike, Tri</h3>\r\n\r\n<p>Your routine is anything but routine. Forerunner 935 lets you change things up with ease thanks to built-in activity profiles for running (indoor/outdoor), cycling (indoor/outdoor), swimming (pool/open water), cross-country skiing, paddle sports, trail running, hiking, strength training and many more.</p>\r\n\r\n<p>For brick workouts and du/triathlon races, the auto multisport feature lets you switch sports with just one button press. The 935 is compatible with advanced workouts for running, cycling &mdash; and even pool swimming. Create your own custom workouts and download for free from Garmin Connect&trade; online fitness community. Then review your past efforts on the app or share them with family and friends for added motivation.</p>', '', '', 34, 'เรือน', 1, '20000.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, NULL, NULL, 1, 1, '2017-04-03 17:16:06', '2017-04-09 09:44:15'),
 (22, 'PS4 Pro', '', '', '', 43, 'เครื่อง', 1, '19990.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, NULL, NULL, 1, 1, '2017-04-05 18:09:18', '2017-04-05 18:30:03'),
-(23, 'PS4 Slim', '', '', '', 47, 'เครื่อง', 1, '15990.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, NULL, NULL, 1, 1, '2017-04-05 18:32:07', '2017-04-09 09:55:32');
+(23, 'NIKE FREE RN MOTION FLYKNIT 2017', 'NATURAL FLEXIBILITY. ADAPTIVE FIT.\r\nThe Nike Free RN Motion Flyknit 2017 Men''s Running Shoe features an incredibly flexible sole that lets you move naturally and a revolutionary two-strap system for snug, lace-free comfort.\r\n\r\nSEAMLESS COMFORT\r\nNike Flyknit fabric wraps your ankle and foot for a snug yet stretchy feel. A two-strap system lets you customize the fit and eliminates any pressure from traditional laces.\r\n\r\nLIGHTWEIGHT CUSHIONING\r\nSoft and firm foam combine for lightweight cushioning that promotes a smooth ride.\r\n\r\nCOMPLETE FLEXIBILITY\r\nThe lightweight, low-profile Nike Free sole flexes with your foot for a comfortable, natural ride.\r\n\r\nPRODUCT DETAILS\r\nAnatomical rounded heel enables natural movement\r\nWeight: 8.25 ounces (men''s size 10)\r\nOffset: 4mm\r\n\r\nFLYKNIT ORIGINS\r\nNike Flyknit technology was inspired by feedback from runners seeking a shoe with the snug (and virtually unnoticed) fit of a sock. Nike embarked on a four-year mission with teams of programmers, engineers and designers to create the technology needed to make the knit upper with static properties for structure and durability. Then the precise placement of support, flexibility and breathability—all in one layer—was refined. The result is a featherweight, formfitting and virtually seamless upper.\r\n\r\nNIKE FREE ORIGINS\r\nAfter learning that Stanford athletes had been training barefoot, three of Nike''s most innovative and creative employees set out to develop a shoe that felt natural and weightless, similar to bare feet. The team spent four years studying the biomechanics of runners'' feet in motion. The results yielded a profound understanding of the foot''s natural landing angle, pressure and toe position, allowing Nike designers to build an unconventional and flexible running shoe from the inside out.', '', '', 46, 'คู่', 1, '15990.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, NULL, NULL, 1, 1, '2017-04-05 18:32:07', '2017-04-20 17:15:06');
 
 -- --------------------------------------------------------
 
@@ -15225,7 +15281,8 @@ INSERT INTO `product_discounts` (`id`, `product_id`, `reduced_price`, `created_a
 (10, 14, '1250.00', '2017-03-19 15:03:16', '2017-03-19 15:03:16'),
 (11, 13, '14000.00', '2017-03-21 10:59:57', '2017-03-21 10:59:57'),
 (12, 12, '2100.00', '2017-03-23 17:28:11', '2017-03-23 17:28:11'),
-(13, 20, '1000.00', '2017-04-03 10:39:58', '2017-04-03 10:39:58');
+(13, 20, '1000.00', '2017-04-03 10:39:58', '2017-04-03 10:39:58'),
+(14, 20, '795.00', '2017-04-19 11:30:00', '2017-04-19 11:30:00');
 
 -- --------------------------------------------------------
 
@@ -15263,7 +15320,8 @@ INSERT INTO `product_sale_promotions` (`id`, `product_id`, `sale_promotion_targe
 (10, 14, 1, 1, 'ProductDiscount', 10, '2017-03-20 00:00:00', '2017-03-20 23:59:59', '2017-03-19 15:03:16', '2017-03-19 15:03:16'),
 (11, 13, 1, 1, 'ProductDiscount', 11, '2017-03-21 00:00:00', '2017-03-21 23:59:59', '2017-03-21 10:59:57', '2017-03-21 10:59:57'),
 (12, 12, 1, 1, 'ProductDiscount', 12, '2017-03-23 00:00:00', '2017-03-23 23:59:59', '2017-03-23 17:28:11', '2017-03-23 17:28:11'),
-(13, 20, 1, 1, 'ProductDiscount', 13, '2017-04-03 00:00:00', '2017-04-05 23:59:59', '2017-04-03 10:39:58', '2017-04-03 10:39:58');
+(13, 20, 1, 1, 'ProductDiscount', 13, '2017-04-03 00:00:00', '2017-04-05 23:59:59', '2017-04-03 10:39:58', '2017-04-03 10:39:58'),
+(14, 20, 1, 1, 'ProductDiscount', 14, '2017-04-19 00:00:00', '2017-04-19 23:59:59', '2017-04-19 11:30:00', '2017-04-19 11:30:00');
 
 -- --------------------------------------------------------
 
@@ -15557,7 +15615,8 @@ INSERT INTO `real_estates` (`id`, `announcement_type_id`, `real_estate_type_id`,
 (74, 2, 5, 'xxx', '', '1222222.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","37"]', '["11","12","13","14"]', '0', 0, 1, '2017-02-20 14:12:21', '2017-02-20 14:12:21'),
 (75, 2, 5, 'อาคารพาณิชย์ อนุสาวรีย์ชัยสมรภูมิ ถนนราชวิถี เขตราชเทวี กรุงเทพมหานคร', '<p>อาคารพาณิชย์ 4.5 ชั้น 5 นอน 5 น้ำ 43 ตร.ว. อนุสาวรีย์ชัยสมรภูมิ ถ.ราชวิถี แขวงถนนพญาไท เขตราชเทวี กรุงเทพมหานคร<br />\r\nอาคารพาณิชย์ 2 คูหา บริเวณอนุสาวรีย์ชัยสมรภูมิ(ฝั่งเกาะนางพญา) ซอยราชวิถี 11 (เลิศปัญญา) ทำเลการค้า ติดสถานีรถไฟฟ้าอนุสาวรีย์ชัยสมรภูมิ เข้า-ออก ถนนราชวิถี, ถนนพญาไท, ถนนพหลโยธิน, ทางด่วนศรีรัช, ถนนรางน้ำ, ใกล้เซ็นเตอร์วัน, วิคตอรี่พอยท์, รพ.ราชวิถี, รพ.พระมงกุฎเกล้า, เซ็นจูรี่มอลล์, ภัตตาคารพงหลี, รพ.พญาไท 2, คิงพาวเวอร์รางน้ำ</p>', '50000000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["35","36","39","41"]', '["1","18","19","23"]', '0', 0, 1, '2017-02-20 14:16:12', '2017-02-20 14:16:12'),
 (76, 2, 1, 'xxx', '', '102000000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', '["28","29"]', '["7","11"]', '0', 0, 1, '2017-03-01 20:41:14', '2017-03-01 20:41:14'),
-(77, 2, 4, 'ABCDEEE', '', '120000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-03-20 23:20:48', '2017-03-20 23:20:48');
+(77, 2, 4, 'ABCDEEE', '', '120000.00', '{"sqm":""}', '{"rai":"","ngan":"","wa":"","sqm":""}', '{"bedroom":"0","bathroom":"0","living_room":"0","home_office":"0","floors":"0","carpark":"0"}', 's', NULL, NULL, '0', 0, 1, '2017-03-20 23:20:48', '2017-03-20 23:20:48'),
+(78, 2, 1, 'บ้าน 45 m.', '', '25000000.00', '{"sqm":"100"}', '{"rai":"","ngan":"","wa":"","sqm":"150"}', '{"bedroom":"2","bathroom":"2","living_room":"1","home_office":"0","floors":"2","carpark":"0"}', 'e', '["42","46"]', '["1","5","6"]', '0', 1, 1, '2017-04-19 15:19:31', '2017-04-19 15:19:31');
 
 -- --------------------------------------------------------
 
@@ -15697,6 +15756,7 @@ INSERT INTO `relate_to_branches` (`model`, `model_id`, `branch_id`) VALUES
 ('Advertising', 8, 7),
 ('Advertising', 9, 7),
 ('Advertising', 10, 14),
+('Advertising', 11, 65),
 ('Job', 4, 7),
 ('Job', 6, 7),
 ('Job', 7, 7),
@@ -15752,6 +15812,8 @@ INSERT INTO `relate_to_branches` (`model`, `model_id`, `branch_id`) VALUES
 ('Job', 52, 63),
 ('Product', 21, 63),
 ('Product', 21, 64),
+('Product', 23, 65),
+('Product', 23, 66),
 ('ShippingMethod', 14, 63),
 ('ShippingMethod', 14, 64),
 ('ShippingMethod', 16, 65),
@@ -15815,7 +15877,7 @@ CREATE TABLE `sale_promotion_types` (
 --
 
 INSERT INTO `sale_promotion_types` (`id`, `name`, `alias`) VALUES
-(1, 'ลดราคาสินค้า', 'discount');
+(1, 'สินค้าลดราคา', 'discount');
 
 -- --------------------------------------------------------
 
@@ -15938,6 +16000,8 @@ CREATE TABLE `shops` (
   `name` varchar(255) NOT NULL,
   `description` text,
   `brand_story` text,
+  `mission` text,
+  `vision` text,
   `profile_image_id` int(11) UNSIGNED DEFAULT NULL,
   `cover_image_id` int(11) UNSIGNED DEFAULT NULL,
   `person_id` int(11) UNSIGNED NOT NULL,
@@ -15949,22 +16013,23 @@ CREATE TABLE `shops` (
 -- Dumping data for table `shops`
 --
 
-INSERT INTO `shops` (`id`, `name`, `description`, `brand_story`, `profile_image_id`, `cover_image_id`, `person_id`, `created_at`, `updated_at`) VALUES
-(1, 'V has come too', '', NULL, 0, 0, 1, '2017-01-28 17:25:21', '2017-03-22 18:57:30'),
-(2, 'aqw', '', NULL, 0, 0, 1, '2017-01-28 17:26:47', '2017-03-22 18:57:30'),
-(3, 'Nike Retail Shop', '<p>Lorem Ipsum คือ เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 เมื่อเครื่องพิมพ์โนเนมเครื่องหนึ่งนำรางตัวพิมพ์มาสลับสับตำแหน่งตัวอักษรเพื่อทำหนังสือตัวอย่าง Lorem Ipsum อยู่ยงคงกระพันมาไม่ใช่แค่เพียงห้าศตวรรษ แต่อยู่มาจนถึงยุคที่พลิกโฉมเข้าสู่งานเรียงพิมพ์ด้วยวิธีทางอิเล็กทรอนิกส์ และยังคงสภาพเดิมไว้อย่างไม่มีการเปลี่ยนแปลง มันได้รับความนิยมมากขึ้นในยุค ค.ศ. 1960 เมื่อแผ่น Letraset วางจำหน่ายโดยมีข้อความบนนั้นเป็น Lorem Ipsum และล่าสุดกว่านั้น คือเมื่อซอฟท์แวร์การทำสื่อสิ่งพิมพ์ (Desktop Publishing) อย่าง Aldus PageMaker ได้รวมเอา Lorem Ipsum เวอร์ชั่นต่างๆ เข้าไว้ในซอฟท์แวร์ด้วย</p>', '<p>bbbb</p>', 121, 122, 1, '2017-01-28 17:30:45', '2017-03-24 09:59:54'),
-(13, 'ร้านค้า 1', NULL, NULL, 128, 127, 1, '2017-02-14 11:20:13', '2017-03-22 18:57:30'),
-(14, 'ร้านค้าทอสอบ 2', NULL, NULL, NULL, 129, 1, '2017-02-14 11:24:03', '2017-03-22 18:57:30'),
-(15, 'ร้านค้า 3', NULL, NULL, 140, 139, 1, '2017-02-14 11:24:26', '2017-03-22 18:57:30'),
-(16, 'xxx', NULL, NULL, NULL, NULL, 1, '2017-02-14 11:25:25', '2017-03-22 18:57:30'),
-(17, 'xxxx', NULL, NULL, NULL, NULL, 1, '2017-02-14 11:25:45', '2017-03-22 18:57:30'),
-(18, 'aaa', NULL, NULL, NULL, NULL, 1, '2017-02-14 11:27:39', '2017-03-22 18:57:30'),
-(19, 'เสื้อผ้านำเข้าหลัง ม. บรูพา', NULL, NULL, NULL, NULL, 1, '2017-02-20 15:40:05', '2017-03-22 18:57:30'),
-(20, 'ปัง ปั่น ปิง', '<p>ตรงกันข้ามกับความเชื่อที่นิยมกัน Lorem Ipsum ไม่ได้เป็นเพียงแค่ชุดตัวอักษรที่สุ่มขึ้นมามั่วๆ แต่หากมีที่มาจากวรรณกรรมละตินคลาสสิกชิ้นหนึ่งในยุค 45 ปีก่อนคริสตศักราช ทำให้มันมีอายุถึงกว่า 2000 ปีเลยทีเดียว ริชาร์ด แมคคลินท็อค ศาสตราจารย์ชาวละติน จากวิทยาลัยแฮมพ์เด็น-ซิดนีย์ ในรัฐเวอร์จิเนียร์ นำคำภาษาละตินคำว่า consectetur ซึ่งหาคำแปลไม่ได้จาก Lorem Ipsum ตอนหนึ่งมาค้นเพิ่มเติม โดยตรวจเทียบกับแหล่งอ้างอิงต่างๆ ในวรรณกรรมคลาสสิก และค้นพบแหล่งข้อมูลที่ไร้ข้อกังขาว่า Lorem Ipsum นั้นมาจากตอนที่ 1.10.32 และ 1.10.33 ของเรื่อง &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) ของ ซิเซโร ที่แต่งไว้เมื่อ 45 ปีก่อนคริสตศักราช หนังสือเล่มนี้เป็นเรื่องราวที่ว่าด้วยทฤษฎีแห่งจริยศาสตร์ ซึ่งเป็นที่นิยมมากในยุคเรเนสซองส์ บรรทัดแรกของ Lorem Ipsum &quot;Lorem ipsum dolor sit amet..&quot; ก็มาจากบรรทัดหนึ่งในตอนที่ 1.10.32 นั่นเอง</p>', '', 130, 131, 1, '2017-02-20 15:40:47', '2017-03-22 18:57:30'),
-(21, 'Gamer Shop', '<p>ด้านล่างของหน้านี้คือท่อนมาตรฐานของ Lorem Ipsum ที่ใช้กันมาตั้งแต่คริสตศตวรรษที่ 16ที่ได้รับการสร้างขึ้นใหม่สำหรับผู้ที่สนใจ ประกอบไปด้วย ตอนที่ 1.10.32 และ 1.10.33 จากเรื่อง &quot;de Finibus Bonorum et Malorum&quot; โดยซิเซโร ก็ได้รับการผลิตขึ้นใหม่ด้วยเช่นกันในรูปแบบที่ตรงกับต้นฉบับ ตามมาด้วยเวอร์ชั่นภาษาอังกฤษจากการแปลของ เอช แร็คแคม เมื่อปี ค.ศ. 1914</p>', '', 154, 153, 1, '2017-03-02 06:04:18', '2017-03-22 18:57:30'),
-(22, 'ABC SHop', NULL, NULL, NULL, NULL, 1, '2017-03-08 17:09:51', '2017-03-22 18:57:30'),
-(23, 'B Shop', NULL, NULL, NULL, NULL, 1, '2017-04-03 16:25:17', '2017-04-03 16:25:17'),
-(24, 'Diamond Dogs', NULL, NULL, 232, 233, 1, '2017-04-05 17:50:40', '2017-04-07 11:04:55');
+INSERT INTO `shops` (`id`, `name`, `description`, `brand_story`, `mission`, `vision`, `profile_image_id`, `cover_image_id`, `person_id`, `created_at`, `updated_at`) VALUES
+(1, 'V has come too', '', NULL, NULL, NULL, 0, 0, 1, '2017-01-28 17:25:21', '2017-03-22 18:57:30'),
+(2, 'aqw', '', NULL, NULL, NULL, 0, 0, 1, '2017-01-28 17:26:47', '2017-03-22 18:57:30'),
+(3, 'Nike Retail Shop', 'Lorem Ipsum คือ \r\nเนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 เมื่อเครื่องพิมพ์โนเนมเครื่องหนึ่งนำรางตัวพิมพ์มาสลับสับตำแหน่งตัวอักษรเพื่อทำหนังสือตัวอย่าง Lorem Ipsum อยู่ยงคงกระพันมาไม่ใช่แค่เพียงห้าศตวรรษ แต่อยู่มาจนถึงยุคที่พลิกโฉมเข้าสู่งานเรียงพิมพ์ด้วยวิธีทางอิเล็กทรอนิกส์ และยังคงสภาพเดิมไว้อย่างไม่มีการเปลี่ยนแปลง มันได้รับความนิยมมากขึ้นในยุค ค.ศ. 1960 เมื่อแผ่น Letraset วางจำหน่ายโดยมีข้อความบนนั้นเป็น Lorem Ipsum และล่าสุดกว่านั้น คือเมื่อซอฟท์แวร์การทำสื่อสิ่งพิมพ์ (Desktop Publishing) อย่าง Aldus PageMaker ได้รวมเอา Lorem Ipsum เวอร์ชั่นต่างๆ เข้าไว้ในซอฟท์แวร์ด้วย', 'NIKE FREE ORIGINS\r\nAfter learning that Stanford athletes had been training barefoot, three of Nike''s most innovative and creative employees set out to develop a shoe that felt natural and weightless, similar to bare feet. The team spent four years studying the biomechanics of runners'' feet in motion. The results yielded a profound understanding of the foot''s natural landing angle, pressure and toe position, allowing Nike designers to build an unconventional and flexible running shoe from the inside out.', 'FLYKNIT ORIGINS\r\nNike Flyknit technology was inspired by feedback from runners seeking a shoe with the snug (and virtually unnoticed) fit of a sock. Nike embarked on a four-year mission with teams of programmers, engineers and designers to create the technology needed to make the knit upper with static properties for structure and durability. Then the precise placement of support, flexibility and breathability—all in one layer—was refined. The result is a featherweight, formfitting and virtually seamless upper.', '', 121, 122, 1, '2017-01-28 17:30:45', '2017-04-21 00:27:48'),
+(13, 'ร้านค้า 1', NULL, NULL, NULL, NULL, 128, 127, 1, '2017-02-14 11:20:13', '2017-03-22 18:57:30'),
+(14, 'ร้านค้าทอสอบ 2', NULL, NULL, NULL, NULL, NULL, 129, 1, '2017-02-14 11:24:03', '2017-03-22 18:57:30'),
+(15, 'ร้านค้า 3', NULL, NULL, NULL, NULL, 140, 139, 1, '2017-02-14 11:24:26', '2017-03-22 18:57:30'),
+(16, 'xxx', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-02-14 11:25:25', '2017-03-22 18:57:30'),
+(17, 'xxxx', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-02-14 11:25:45', '2017-03-22 18:57:30'),
+(18, 'aaa', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-02-14 11:27:39', '2017-03-22 18:57:30'),
+(19, 'เสื้อผ้านำเข้าหลัง ม. บรูพา', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-02-20 15:40:05', '2017-03-22 18:57:30'),
+(20, 'ปัง ปั่น ปิง', '<p>ตรงกันข้ามกับความเชื่อที่นิยมกัน Lorem Ipsum ไม่ได้เป็นเพียงแค่ชุดตัวอักษรที่สุ่มขึ้นมามั่วๆ แต่หากมีที่มาจากวรรณกรรมละตินคลาสสิกชิ้นหนึ่งในยุค 45 ปีก่อนคริสตศักราช ทำให้มันมีอายุถึงกว่า 2000 ปีเลยทีเดียว ริชาร์ด แมคคลินท็อค ศาสตราจารย์ชาวละติน จากวิทยาลัยแฮมพ์เด็น-ซิดนีย์ ในรัฐเวอร์จิเนียร์ นำคำภาษาละตินคำว่า consectetur ซึ่งหาคำแปลไม่ได้จาก Lorem Ipsum ตอนหนึ่งมาค้นเพิ่มเติม โดยตรวจเทียบกับแหล่งอ้างอิงต่างๆ ในวรรณกรรมคลาสสิก และค้นพบแหล่งข้อมูลที่ไร้ข้อกังขาว่า Lorem Ipsum นั้นมาจากตอนที่ 1.10.32 และ 1.10.33 ของเรื่อง &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) ของ ซิเซโร ที่แต่งไว้เมื่อ 45 ปีก่อนคริสตศักราช หนังสือเล่มนี้เป็นเรื่องราวที่ว่าด้วยทฤษฎีแห่งจริยศาสตร์ ซึ่งเป็นที่นิยมมากในยุคเรเนสซองส์ บรรทัดแรกของ Lorem Ipsum &quot;Lorem ipsum dolor sit amet..&quot; ก็มาจากบรรทัดหนึ่งในตอนที่ 1.10.32 นั่นเอง</p>', '', NULL, NULL, 130, 131, 1, '2017-02-20 15:40:47', '2017-03-22 18:57:30'),
+(21, 'Gamer Shop', '<p>ด้านล่างของหน้านี้คือท่อนมาตรฐานของ Lorem Ipsum ที่ใช้กันมาตั้งแต่คริสตศตวรรษที่ 16ที่ได้รับการสร้างขึ้นใหม่สำหรับผู้ที่สนใจ ประกอบไปด้วย ตอนที่ 1.10.32 และ 1.10.33 จากเรื่อง &quot;de Finibus Bonorum et Malorum&quot; โดยซิเซโร ก็ได้รับการผลิตขึ้นใหม่ด้วยเช่นกันในรูปแบบที่ตรงกับต้นฉบับ ตามมาด้วยเวอร์ชั่นภาษาอังกฤษจากการแปลของ เอช แร็คแคม เมื่อปี ค.ศ. 1914</p>', '', NULL, NULL, 154, 153, 1, '2017-03-02 06:04:18', '2017-03-22 18:57:30'),
+(22, 'ABC SHop', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-08 17:09:51', '2017-03-22 18:57:30'),
+(23, 'B Shop', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-04-03 16:25:17', '2017-04-03 16:25:17'),
+(24, 'Diamond Dogs', NULL, NULL, NULL, NULL, 232, 233, 1, '2017-04-05 17:50:40', '2017-04-07 11:04:55'),
+(25, 'IG Store', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-04-19 12:57:31', '2017-04-19 12:57:31');
 
 -- --------------------------------------------------------
 
@@ -16139,6 +16204,7 @@ INSERT INTO `shop_relate_to` (`shop_id`, `model`, `model_id`) VALUES
 (23, 'Product', 21),
 (23, 'ShippingMethod', 14),
 (23, 'ShippingMethod', 15),
+(24, 'Advertising', 11),
 (24, 'Branch', 65),
 (24, 'Branch', 66),
 (24, 'Job', 45),
@@ -16183,7 +16249,8 @@ INSERT INTO `slugs` (`id`, `model`, `model_id`, `slug`) VALUES
 (12, 'Shop', 21, 'Gamer-Shop-21'),
 (13, 'Shop', 22, 'ABC-SHop-22'),
 (14, 'Shop', 23, 'B-Shop-23'),
-(15, 'Shop', 24, 'Diamond-Dogs-24');
+(15, 'Shop', 24, 'Diamond-Dogs-24'),
+(16, 'Shop', 25, 'IG-Store-25');
 
 -- --------------------------------------------------------
 
@@ -16544,7 +16611,10 @@ INSERT INTO `temporary_files` (`id`, `model`, `token`, `filename`, `filesize`, `
 (83, 'PersonApplyJob', 'VQIQMjxQ', 'resume.pdf', '243661', 'J9wLC80', 1, '2017-04-13 16:57:41'),
 (84, 'PersonApplyJob', 'VQIQMjxQ', 'db.js', '271', 'KALKVhm', 1, '2017-04-13 16:57:46'),
 (85, 'PersonApplyJob', 'KrZpfouE', 'info.php', '35', 'o4FrpbI', 1, '2017-04-13 16:59:22'),
-(86, 'Freelance', 'R6LBSTHv', NULL, NULL, NULL, 1, '2017-04-16 21:41:02');
+(86, 'Freelance', 'R6LBSTHv', NULL, NULL, NULL, 1, '2017-04-16 21:41:02'),
+(87, 'Product', 'sK3DGX0l', NULL, NULL, NULL, 1, '2017-04-18 11:19:38'),
+(88, 'Product', 'oGlsbUP1', NULL, NULL, NULL, 1, '2017-04-18 11:19:56'),
+(90, 'RealEstate', 'agHoeFWW', NULL, NULL, NULL, 1, '2017-04-19 15:18:44');
 
 -- --------------------------------------------------------
 
@@ -16568,8 +16638,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `receive_email`, `remember_token`, `api_token`, `created_at`, `updated_at`) VALUES
-(1, '1', '$2y$10$JzjB5lnDBSuvrCk5BeGdYOKlkrilHaRILTNaLuo6k9o0PcfKWZRc6', NULL, 'T4Ccpp7qn3yt9K9tB96e3p6LrF6n28sbeVAAkMZB8bMer086L0WtvczMipxV', '', '2016-12-08 12:57:33', '2017-04-06 19:28:05'),
-(11, 'ab@mail.com', '$2y$10$92fIYHxW4m9qw/lrzJ3TH.n6MumrWkwjWtOzaGjvzBKiIwpe77wtm', NULL, NULL, 'xXGR0NYUXnVsle49PGjShVRLLhhvYhRo4q936znHMSra46HXxHYGEocKb3zpJ', '2017-01-22 13:18:36', '2017-01-22 13:18:36');
+(1, '1', '$2y$10$JzjB5lnDBSuvrCk5BeGdYOKlkrilHaRILTNaLuo6k9o0PcfKWZRc6', NULL, 'Yr49OD7hVfGJ1qMQIHmMH4zMrJz9TYVH8SnAbJMmtlrOkJgfbGhEbjiOOsMf', '', '2016-12-08 12:57:33', '2017-04-18 20:00:53'),
+(11, 'ab@mail.com', '$2y$10$92fIYHxW4m9qw/lrzJ3TH.n6MumrWkwjWtOzaGjvzBKiIwpe77wtm', NULL, NULL, 'xXGR0NYUXnVsle49PGjShVRLLhhvYhRo4q936znHMSra46HXxHYGEocKb3zpJ', '2017-01-22 13:18:36', '2017-01-22 13:18:36'),
+(12, '2', '$2y$10$2pyM4CKsCB1lrIihzDT1wu3VWz4QEQ58KGTXt7WZv.UDgYT91IOhy', NULL, 'm16hMjCKePi0ikUmc2qT0v8uu5NHEjp6e3K6mN0QxtQVI1tsutNV5rSfnxdr', 'tGaUJO9BrmTZ89r6EiBljDl1kqTprKdfAt6VGFEoEcpYgjGChmNisVWaJ7Wla', '2017-04-17 10:29:10', '2017-04-18 20:01:19');
 
 -- --------------------------------------------------------
 
@@ -18022,12 +18093,12 @@ ALTER TABLE `access_levels`
 -- AUTO_INCREMENT for table `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=206;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=210;
 --
 -- AUTO_INCREMENT for table `advertisings`
 --
 ALTER TABLE `advertisings`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `advertising_types`
 --
@@ -18057,7 +18128,7 @@ ALTER TABLE `branches`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `categories`
 --
@@ -18067,12 +18138,12 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=225;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
 --
 -- AUTO_INCREMENT for table `data_access_permissions`
 --
 ALTER TABLE `data_access_permissions`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 --
 -- AUTO_INCREMENT for table `districts`
 --
@@ -18112,7 +18183,7 @@ ALTER TABLE `freelance_working_statuses`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=247;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=253;
 --
 -- AUTO_INCREMENT for table `image_types`
 --
@@ -18122,7 +18193,7 @@ ALTER TABLE `image_types`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 --
 -- AUTO_INCREMENT for table `item_categories`
 --
@@ -18137,7 +18208,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `job_applying_histories`
 --
 ALTER TABLE `job_applying_histories`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `job_applying_statuses`
 --
@@ -18162,7 +18233,7 @@ ALTER TABLE `length_units`
 -- AUTO_INCREMENT for table `lookups`
 --
 ALTER TABLE `lookups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 --
 -- AUTO_INCREMENT for table `messages`
 --
@@ -18172,7 +18243,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `notification_events`
 --
@@ -18182,17 +18253,17 @@ ALTER TABLE `notification_events`
 -- AUTO_INCREMENT for table `open_hours`
 --
 ALTER TABLE `open_hours`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 --
 -- AUTO_INCREMENT for table `order_histories`
 --
 ALTER TABLE `order_histories`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 --
 -- AUTO_INCREMENT for table `order_payment_confirms`
 --
@@ -18202,12 +18273,12 @@ ALTER TABLE `order_payment_confirms`
 -- AUTO_INCREMENT for table `order_products`
 --
 ALTER TABLE `order_products`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 --
 -- AUTO_INCREMENT for table `order_shippings`
 --
 ALTER TABLE `order_shippings`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 --
 -- AUTO_INCREMENT for table `order_statuses`
 --
@@ -18217,7 +18288,7 @@ ALTER TABLE `order_statuses`
 -- AUTO_INCREMENT for table `order_totals`
 --
 ALTER TABLE `order_totals`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=245;
 --
 -- AUTO_INCREMENT for table `pages`
 --
@@ -18232,7 +18303,7 @@ ALTER TABLE `payment_methods`
 -- AUTO_INCREMENT for table `people`
 --
 ALTER TABLE `people`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `permissions`
 --
@@ -18242,12 +18313,12 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `person_apply_jobs`
 --
 ALTER TABLE `person_apply_jobs`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `person_career_objectives`
 --
 ALTER TABLE `person_career_objectives`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `person_certificates`
 --
@@ -18262,7 +18333,7 @@ ALTER TABLE `person_educations`
 -- AUTO_INCREMENT for table `person_experiences`
 --
 ALTER TABLE `person_experiences`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `person_experience_details`
 --
@@ -18307,12 +18378,12 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `product_discounts`
 --
 ALTER TABLE `product_discounts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `product_sale_promotions`
 --
 ALTER TABLE `product_sale_promotions`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `product_shippings`
 --
@@ -18332,7 +18403,7 @@ ALTER TABLE `provinces`
 -- AUTO_INCREMENT for table `real_estates`
 --
 ALTER TABLE `real_estates`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 --
 -- AUTO_INCREMENT for table `real_estate_features`
 --
@@ -18387,12 +18458,12 @@ ALTER TABLE `shipping_service_cost_types`
 -- AUTO_INCREMENT for table `shops`
 --
 ALTER TABLE `shops`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `slugs`
 --
 ALTER TABLE `slugs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `special_shipping_methods`
 --
@@ -18417,12 +18488,12 @@ ALTER TABLE `taggings`
 -- AUTO_INCREMENT for table `temporary_files`
 --
 ALTER TABLE `temporary_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `villages`
 --

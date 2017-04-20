@@ -45,7 +45,7 @@
           <li class="line space-top-bottom-10"></li>
 
           <li class="item">
-            <a href="javascript:void(0)">บริษัทและร้านค้า</a>
+            <a href="{{URL::to('community/shop')}}">บริษัทและร้านค้า</a>
             <ul class="submenu">
               <li class="submenu-item">
                 <a href="{{URL::to('product/shelf')}}">สินค้าจากร้านค้า</a>

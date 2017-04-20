@@ -331,16 +331,26 @@ class Shop extends Model
 
   }
 
+  public function getShopAbout() {
+    return array(
+      'description' => nl2br($this->description),
+      'brand_story' => nl2br($this->brand_story),
+      'mission' => nl2br($this->mission),
+      'vision' => nl2br($this->vision),
+    );
+  }
+
   public function buildModelData() {
 
     $string = new String;
 
     return array(
       'name' => $this->name,
-      'description' => $this->description,
+      // 'description' => nl2br($this->description),
+      // 'brand_story' => nl2br($this->brand_story),
+      // 'mission' => nl2br($this->mission),
+      // 'vision' => nl2br($this->vision),
       '_short_description' => $string->truncString($this->description,250,true),
-      // 'profileImage' => $this->getProfileImageUrl(),
-      // 'cover' => $this->getCoverUrl()
     );
   }
 

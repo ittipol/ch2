@@ -32,7 +32,7 @@
     <div class="list-item">
       <a href="{{$descriptionUrl}}">
         <img class="icon" src="/images/common/pencil.png" >
-        <h4>คำอธิบายร้านค้า</h4>
+        <h4>คำอธิบายเกี่ยวกับร้านค้า</h4>
       </a>
     </div>
 

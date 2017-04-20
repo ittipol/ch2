@@ -19,12 +19,12 @@
 
     <div class="tile-nav small">
       <div class="tile-nav-image">
-        <a href="{{$productPostUrl}}">
+        <a href="{{request()->get('shopUrl')}}product/add">
           <img src="/images/common/plus.png">
         </a>
       </div>
       <div class="tile-nav-info">
-        <a href="{{$productPostUrl}}">
+        <a href="{{request()->get('shopUrl')}}product/add">
           <h4 class="tile-nav-title">เพิ่มสินค้า</h4>
         </a>
       </div>
@@ -34,12 +34,12 @@
       <div class="tile-flag-count">{{$countOrder}}</div>
 
       <div class="tile-nav-image">
-        <a href="{{$orderUrl}}">
+        <a href="{{request()->get('shopUrl')}}order">
           <img src="/images/common/bag.png">
         </a>
       </div>
       <div class="tile-nav-info">
-        <a href="{{$orderUrl}}">
+        <a href="{{request()->get('shopUrl')}}order">
           <h4 class="tile-nav-title">รายการสั่งซื้อ</h4>
         </a>
       </div>
@@ -47,12 +47,12 @@
 
     <div class="tile-nav small">
       <div class="tile-nav-image">
-        <a href="{{$paymentMethodUrl}}">
+        <a href="{{request()->get('shopUrl')}}payment_method">
           <img src="/images/common/payment.png">
         </a>
       </div>
       <div class="tile-nav-info">
-        <a href="{{$paymentMethodUrl}}">
+        <a href="{{request()->get('shopUrl')}}payment_method">
           <h4 class="tile-nav-title">วิธีการชำระเงิน</h4>
         </a>
       </div>
@@ -60,12 +60,12 @@
 
     <div class="tile-nav small">
       <div class="tile-nav-image">
-        <a href="{{$shippingMethodUrl}}">
+        <a href="{{request()->get('shopUrl')}}shipping_method">
           <img src="/images/common/truck.png">
         </a>
       </div>
       <div class="tile-nav-info">
-        <a href="{{$shippingMethodUrl}}">
+        <a href="{{request()->get('shopUrl')}}shipping_method">
           <h4 class="tile-nav-title">วิธีการจัดส่งสินค้า</h4>
         </a>
       </div>

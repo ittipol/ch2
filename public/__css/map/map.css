@@ -88,6 +88,16 @@
   background-color: #E0E0E0;
 }
 
+#map.map-small {
+  height: 250px;
+}
+
+
+#map.map-md {
+  height: 400px;
+}
+
+
 .controls {
   margin-top: 10px;
   border-radius: 2px 0 0 2px;

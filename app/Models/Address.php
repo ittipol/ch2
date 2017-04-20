@@ -104,6 +104,8 @@ class Address extends Model
 
     if(!empty($this->address)) {
       $longAddress = $this->address.$shortAddress;
+    }else{
+      $longAddress = $shortAddress;
     }
 
     return array(

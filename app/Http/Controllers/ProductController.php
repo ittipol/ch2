@@ -23,7 +23,7 @@ class ProductController extends Controller
 
     if($model->fill($attributes)->save()) {
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
+      return Redirect::to('shop/'.request()->shopSlug.'/manage/product/'.$model->id);
     }else{
       return Redirect::back();
     }
@@ -415,6 +415,8 @@ class ProductController extends Controller
   }
 
   public function shopProductDetail() {
+
+    $url = new Url;
 
     $model = Service::loadModel('Product')->find($this->param['id']);
 

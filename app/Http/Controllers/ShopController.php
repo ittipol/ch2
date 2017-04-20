@@ -19,7 +19,14 @@ class ShopController extends Controller
   public function about() {
 
     $model = request()->get('shop');
-    dd($model->getAttributes());
+    $model->modelData->loadData();
+
+    $this->data = $model->modelData->build();
+    $this->setData('openHours',$model->getOpenHours());
+    $this->setData('about',$model->getShopAbout());
+
+    return $this->view('pages.shop.about');
+
   }
 
   public function listView() {
@@ -175,11 +182,6 @@ class ShopController extends Controller
       ['shop_id','=',request()->get('shopId')],
       ['order_status_id','=',1]
     ])->count());
-
-    $this->setData('productPostUrl',request()->get('shopUrl').'product/add');
-    $this->setData('orderUrl',request()->get('shopUrl').'order');
-    $this->setData('paymentMethodUrl',request()->get('shopUrl').'payment_method');
-    $this->setData('shippingMethodUrl',request()->get('shopUrl').'shipping_method');
 
     return $this->view('pages.shop.product');
   }

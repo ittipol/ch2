@@ -34,19 +34,19 @@ class AppServiceProvider extends ServiceProvider
 
       // });
 
-      view()->composer('pages.product.layouts.top_nav', function($view){
+      // view()->composer('pages.product.layouts.top_nav', function($view){
 
-        $url = new Url;
+      //   $url = new Url;
 
-        $slug = Route::current()->parameter('shopSlug');
+      //   $slug = Route::current()->parameter('shopSlug');
 
-        view()->share('_shop_product_menu',$url->url('shop/'.$slug.'/manage/product/'.Route::current()->parameter('id')));
-        view()->share('_shop_product_url',$url->url('shop/'.$slug.'/manage/product'));
-        view()->share('_shop_job_url',$url->url('shop/'.$slug.'/manage/job'));
-        view()->share('_shop_advertising_url',$url->url('shop/'.$slug.'/manage/advertising'));
-        view()->share('_shop_branch_url',$url->url('shop/'.$slug.'/manage/branch'));
+      //   view()->share('_shop_product_menu',$url->url('shop/'.$slug.'/manage/product/'.Route::current()->parameter('id')));
+      //   view()->share('_shop_product_url',$url->url('shop/'.$slug.'/manage/product'));
+      //   view()->share('_shop_job_url',$url->url('shop/'.$slug.'/manage/job'));
+      //   view()->share('_shop_advertising_url',$url->url('shop/'.$slug.'/manage/advertising'));
+      //   view()->share('_shop_branch_url',$url->url('shop/'.$slug.'/manage/branch'));
 
-      });
+      // });
 
       // view()->composer('pages.shipping_method.layouts.top_nav', function($view){
 

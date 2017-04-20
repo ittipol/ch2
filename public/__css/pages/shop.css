@@ -74,7 +74,7 @@
 	position: relative;
 	width: 200px;
 	height: 200px;
-	margin: 50px auto 30px;
+	margin: 80px auto 30px;
 }
 
 .shop-top-haeder-wrapper .shop-logo-outer {
@@ -168,6 +168,11 @@
   border-radius: 14px;
   margin-left: 10px;
   background-color: #ccc;
+  display: none;
+}
+
+.shop-open-hours.shop-open-sign::before {
+	display: block;
 }
 
 .shop-open-hours.shop-open::before {
@@ -215,7 +220,13 @@
 	text-align: right;
 }
 
-/*==========  Non-Mobile First Method  ==========*/
+.shop-about-content .line {
+	background-color: #ccc;
+}
+
+.shop-about-content .shop-about-content-inner {
+	padding: 10px;
+}
 
 /* Large Devices, Wide Screens */
 @media only screen and (max-width : 1200px) {

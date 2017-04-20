@@ -27,7 +27,7 @@
   <div class="container-header">
     <div class="row">
       <div class="col-lg-6 col-sm-12">
-        <div class="title">คำอธิบายร้านค้า</div>
+        <div class="title">คำอธิบายเกี่ยวกับร้านค้า</div>
       </div>
     </div>
   </div>

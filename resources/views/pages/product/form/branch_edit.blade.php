@@ -61,7 +61,7 @@
   </div>
 
   <?php
-    echo Form::submit('เพิ่มสินค้า', array(
+    echo Form::submit('บันทึก', array(
       'class' => 'button'
     ));
   ?>
