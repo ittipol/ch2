@@ -110,27 +110,69 @@
 
                   @foreach($result['data'] as $type => $data)
 
+                    <?php
+                      if(empty($data['value'])) continue;
+                    ?>
+
                     <div class="result-data-content">
 
                     @if(!empty($data['title']))
                       <div class="data-title">{{$data['title']}}</div>
                     @endif
 
-                    @if($type == 'productPrice')
+                    <?php
+                      switch ($type) {
+                        case 'productPrice':
+                    ?>
+                          @if(!empty($data['value']['promotion']))
+                            <span class="price">{{$data['value']['promotion']['_reduced_price']}}</span>
+                            <span class="price-discount-tag">{{$data['value']['promotion']['percentDiscount']}}</span>
+                            <h5 class="origin-price">{{$data['value']['price']}}</h5>
+                          @elseif(!empty($data['value']['price']))
+                            <span class="price">{{$data['value']['price']}}</span>
+                          @endif
+                    <?php
+                          break;
+                    
+                        case 'price':
+                    ?>
+                          <span class="price">{{$data['value']}}</span>
+                    <?php
+                          break;
 
-                      @if(!empty($data['value']['promotion']))
-                        <span class="price">{{$data['value']['promotion']['_reduced_price']}}</span>
-                        <span class="price-discount-tag">{{$data['value']['promotion']['percentDiscount']}}</span>
-                        <h5 class="origin-price">{{$data['value']['price']}}</h5>
-                      @elseif(!empty($data['value']['price']))
-                        <span class="price">{{$data['value']['price']}}</span>
-                      @endif
+                        case 'address':
+                    ?>
+                          <img class="data-icon" src="/images/common/location-pin.png">
+                          <span class="data-value">{{$data['value']}}</span>
+                    <?php
+                          break;
 
-                    @elseif($type == 'price')
-                      <span class="price">{{$data['value']}}</span>
-                    @else
-                      <span class="data-value">{{$data['value']}}</span>
-                    @endif
+                        case 'openHours':
+                    ?>
+                          <div class="additional-option after-text-icon black-color shop-open-sign {{$data['value']['status']}} space-top-10">
+                            {{$data['value']['text']}}
+                            <div class="additional-option-content">
+                              <div class="shop-time-table-wrapper">
+                              @foreach($data['value']['timeTable'] as $time)
+                                <div class="shop-time-table clearfix">
+                                  <div class="shop-time-table-day pull-left">{{$time['day']}}</div>
+                                  <div class="shop-time-table-time pull-left">{{$time['openHour']}}</div>
+                                </div>
+                              @endforeach
+                              </div>
+                            </div>
+                          </div>
+                    <?php
+                          break;
+                        
+                        default:
+                      ?>
+                          <span class="data-value">{{$data['value']}}</span>
+                      <?php  
+                          break;
+                      }
+
+                    ?>
 
                     </div>
 

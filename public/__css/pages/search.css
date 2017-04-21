@@ -63,6 +63,11 @@
   color: #999;
 }
 
+.search .search-results img.data-icon {
+	width: 20px;
+	height: 20px;
+}
+
 .search .displaying-filters {
 	padding: 10px 15px
 }

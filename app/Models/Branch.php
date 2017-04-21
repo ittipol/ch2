@@ -140,10 +140,26 @@ class Branch extends Model
       'first' => true
     ))->slug;
 
+    $address = $this->getRelatedData('Address',
+      array(
+        'first' => true,
+        'fields' => array('address','province_id','district_id','sub_district_id','description','latitude','longitude'),
+        'order' => array('id','DESC')
+      )
+    );
+
+    $fullAddress = null;
+    if(!empty($address)) {
+      $fullAddress = $address->getAddress();
+    }
+
     return array(
       'title' => $string->truncString($this->name,90),
       'description' => $string->truncString($this->description,250),
       'data' => array(
+        'address' => array(
+          'value' => $fullAddress
+        ),
         'branch' => array(
           'title' => 'สาขาในบริษัทหรือร้านค้า',
           'value' => $shop->name

@@ -373,8 +373,9 @@ class Shop extends Model
 
     return array(
       'name' => $this->name,
-      'profileImage' => $profileImage,
-      'cover' => $cover
+      // 'profileImage' => $profileImage,
+      'cover' => $cover,
+      'openHours' => $this->getOpenHours()
     );
 
   }
@@ -385,9 +386,7 @@ class Shop extends Model
     $cache = new Cache;
     $url = new url;
 
-    $image = $this->getRelatedData('Image',array(
-      'first' => true
-    ));
+    $image = Image::select('id','model','model_id','filename','image_type_id')->find($this->cover_image_id);
 
     $_imageUrl = '/images/common/no-img.png';
     if(!empty($image)) {
@@ -399,9 +398,30 @@ class Shop extends Model
       'first' => true
     ))->slug;
 
+    $address = $this->getRelatedData('Address',
+      array(
+        'first' => true,
+        'fields' => array('address','province_id','district_id','sub_district_id','description','latitude','longitude'),
+        'order' => array('id','DESC')
+      )
+    );
+
+    $fullAddress = null;
+    if(!empty($address)) {
+      $fullAddress = $address->getAddress();
+    }
+
     return array(
       'title' => $string->truncString($this->name,90),
       'description' => $string->truncString($this->description,250),
+      'data' => array(
+        'address' => array(
+          'value' => $fullAddress
+        ),
+        'openHours' => array(
+          'value' => $this->getOpenHours()
+        )
+      ),
       'detailUrl' => $url->url('shop/'.$slug),
       'image' => $_imageUrl,
       'isDataTitle' => 'บริษัทหรือร้านค้า'

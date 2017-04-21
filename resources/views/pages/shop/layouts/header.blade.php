@@ -44,7 +44,7 @@
         <h3>{{$_shop_name}}</h3>
 
         @if(!empty($_shop_open_hours))
-        <div class="additional-option shop-open-hours shop-open-sign {{$_shop_open_hours['status']}}">
+        <div class="additional-option after-text-icon shop-open-hours shop-open-sign {{$_shop_open_hours['status']}}">
           {{$_shop_open_hours['text']}}
           <div class="additional-option-content">
             <div class="shop-time-table-wrapper">

@@ -22,6 +22,18 @@
 	background-color: rgba(236,236,236,.7);
 }
 
+.card .floating-data {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+.card .floating-data.shop-open-hours {
+	padding: 10px;
+	background-color: rgba(20,27,32,.85);
+	color: #fff;
+}
+
 .card .card-pin-top {
 	padding: 10px 0;
 	margin-top: -20px;

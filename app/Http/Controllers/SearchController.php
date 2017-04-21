@@ -49,7 +49,7 @@ class SearchController extends Controller
       $lookup->paginator->setQuery('search_query',$q);
       $lookup->paginator->setQuery('sort',$sort);
       $lookup->paginator->setQuery('fq',$filters);
-// dd($lookup->paginator->search($filterHelper->buildCriteria()));
+
       $this->setData('results',$lookup->paginator->search($filterHelper->buildCriteria()));
       $this->setData('_pagination',array(
         'page' => $lookup->paginator->getPage(),

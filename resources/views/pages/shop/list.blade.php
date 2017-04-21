@@ -38,6 +38,15 @@
 
       <div class="col-lg-3 col-sm-4 col-xs-12">
         <div class="card">
+
+          @if(!empty($data['openHours']))
+          <div class="floating-data shop-open-hours">
+            <div class="shop-open-sign {{$data['openHours']['status']}}">
+              {{$data['openHours']['text']}}
+            </div>
+          </div>
+          @endif
+
           <div class="image-tile">
             <a href="{{$data['shopUrl']}}">
               <div class="card-image" style="background-image:url({{$data['cover']}});"></div>

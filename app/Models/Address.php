@@ -48,7 +48,6 @@ class Address extends Model
 
     $address = array();
 
-
     if(!empty($this->address)) {
       $address[] = $this->address;
     }
@@ -87,6 +86,10 @@ class Address extends Model
     $districtName = '';
     $provinceName = '';
 
+    if(!empty($this->address)) {
+      $longAddress = $this->address;
+    }
+
     if(!empty($this->subDistrict->name)) {
       $subDistrictName = $this->subDistrict->name;
       $shortAddress .= ' '.$this->subDistrict->name;
@@ -102,11 +105,13 @@ class Address extends Model
       $shortAddress .= ' '.$this->province->name;
     }
 
-    if(!empty($this->address)) {
-      $longAddress = $this->address.$shortAddress;
-    }else{
-      $longAddress = $shortAddress;
-    }
+    $longAddress .= $shortAddress;
+
+    // if(!empty($this->address)) {
+    //   $longAddress = $this->address.$shortAddress;
+    // }else{
+    //   $longAddress = $shortAddress;
+    // }
 
     return array(
       '_province_name' => $provinceName,
