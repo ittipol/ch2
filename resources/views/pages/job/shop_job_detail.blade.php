@@ -139,8 +139,8 @@
       <div class="item-info">
 
         <div class="item-info-row">
-          <p>เงินเดือน (บาท)</p>
-          <h4 class="text-emphasize">{{$_modelData['_salary']}}</h4>
+          <p>อัตราค่าจ้าง (บาท)</p>
+          <span class="text-emphasize">{{$_modelData['_wage']}}<span class="sub-info-text"> / {{$_modelData['_wageType']}}</span></span>
         </div>
 
       </div>

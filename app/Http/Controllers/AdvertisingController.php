@@ -123,15 +123,15 @@ class AdvertisingController extends Controller
       'sort' => $filterHelper->getSortingOptions()
     );
 
-    $displayingFilters = array(
-      'filters' => $filterHelper->getDisplayingFilterOptions(),
-      'sort' => $filterHelper->getDisplayingSorting()
-    );
+    // $displayingFilters = array(
+    //   'filters' => $filterHelper->getDisplayingFilterOptions(),
+    //   'sort' => $filterHelper->getDisplayingSorting()
+    // );
 
     $this->data = $model->paginator->build();
     $this->setData('title',$title);
     $this->setData('searchOptions',$searchOptions);
-    $this->setData('displayingFilters',$displayingFilters);
+    // $this->setData('displayingFilters',$displayingFilters);
 
     return $this->view('pages.advertising.list');
   }
@@ -198,14 +198,14 @@ class AdvertisingController extends Controller
       'sort' => $filterHelper->getSortingOptions()
     );
 
-    $displayingFilters = array(
-      'filters' => $filterHelper->getDisplayingFilterOptions(),
-      'sort' => $filterHelper->getDisplayingSorting()
-    );
+    // $displayingFilters = array(
+    //   'filters' => $filterHelper->getDisplayingFilterOptions(),
+    //   'sort' => $filterHelper->getDisplayingSorting()
+    // );
 
     $this->data = $model->paginator->build();
     $this->setData('searchOptions',$searchOptions);
-    $this->setData('displayingFilters',$displayingFilters);
+    // $this->setData('displayingFilters',$displayingFilters);
 
     return $this->view('pages.advertising.shop_advertising_list');
 

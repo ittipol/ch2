@@ -18,7 +18,7 @@
 ?>
 <div class="form-row">
   <?php 
-    echo Form::label('job_position_description', 'เงินเดือน วันที่เริ่มทำงาน หรือข้อตกลงต่างๆ ของตำแหน่งงานนี้', array(
+    echo Form::label('job_position_description', 'อัตราค่าจ้าง วันที่เริ่มทำงาน หรือข้อตกลงต่างๆ ของตำแหน่งงานนี้', array(
       'class' => 'required'
     ));
     echo Form::textarea('job_position_description');

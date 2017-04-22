@@ -9,7 +9,7 @@ use App\library\url;
 class Job extends Model
 {
   public $table = 'jobs';
-  protected $fillable = ['employment_type_id','name','description','qualification','benefit','salary','recruitment','recruitment_custom_detail','person_id'];
+  protected $fillable = ['employment_type_id','name','description','qualification','benefit','wage','wage_type_id','recruitment','recruitment_custom_detail','person_id'];
   protected $modelRelations = array('Image','Tagging','RelateToBranch','ShopRelateTo');
   protected $directory = true;
 
@@ -30,7 +30,7 @@ class Job extends Model
         'keyword_1' => '{{__Shop|getShopName}}',
         'keyword_2' => '{{EmploymentType.name|Job.employment_type_id=>EmploymentType.id}}',
         // 'keyword_3' => '{{__getRelatedBranch}}',
-        'keyword_4' => '{{salary}}',
+        'keyword_4' => '{{wage}}',
       )
     ),
     'DataAccessPermission' => array(
@@ -42,11 +42,11 @@ class Job extends Model
   protected $validation = array(
     'rules' => array(
       'name' => 'required|max:255',
-      'salary' => 'required',
+      'wage' => 'required',
     ),
     'messages' => array(
       'name.required' => 'ชื่อห้ามว่าง',
-      'salary.required' => 'เงินเดือนห้ามว่าง',
+      'wage.required' => 'อัตราค่าจ้างห้ามว่าง',
     )
   );
 
@@ -81,6 +81,11 @@ class Job extends Model
     return $this->hasOne('App\Models\EmploymentType','id','employment_type_id');
   }
 
+  public function wageType() {
+    return $this->hasOne('App\Models\WageType','id','wage_type_id');
+  }
+
+
   public function fill(array $attributes) {
     
     if(!empty($attributes)) {
@@ -103,24 +108,24 @@ class Job extends Model
 
   public function getSalary() {
 
-    $salary = $this->salary;
-    $salary = trim($salary);
-    $salary = str_replace(',', '', $salary);
+    $wage = $this->wage;
+    $wage = trim($wage);
+    $wage = str_replace(',', '', $wage);
 
-    preg_match_all('/[0-9]+/', $salary, $matches);
+    preg_match_all('/[0-9]+/', $wage, $matches);
 
     $numbers = array();
     foreach ($matches[0] as $key => $match) {
-      $salary = str_replace($match, number_format($match, 0, '.', ','), $salary);
+      $wage = str_replace($match, number_format($match, 0, '.', ','), $wage);
     }
 
     $addBaht = true;
-    if(strlen($salary) > 3) {
+    if(strlen($wage) > 3) {
 
-      $_salary = substr($salary, -3);
+      $_wage = substr($wage, -3);
       for ($i=0; $i < 3; $i++) { 
         
-        if((ord($_salary[$i]) < 48) || (ord($_salary[$i]) > 57)) {
+        if((ord($_wage[$i]) < 48) || (ord($_wage[$i]) > 57)) {
           $addBaht = false;
           break;
         }
@@ -130,10 +135,10 @@ class Job extends Model
     }
 
     if($addBaht) {
-      $salary .= ' บาท';
+      $wage .= ' บาท';
     }
 
-    return $salary;
+    return $wage;
 
   }
 
@@ -173,7 +178,7 @@ class Job extends Model
       'id' => $this->id,
       'name' => $this->name,
       '_short_name' => $string->truncString($this->name,60),
-      '_salary' => $this->getSalary(),
+      '_wage' => $this->getSalary(),
       'shopName' => $shop->name
     );
 
@@ -181,20 +186,21 @@ class Job extends Model
 
   public function buildModelData() {
 
-    $this->salary = $this->getSalary($this->salary);
+    $this->wage = $this->getSalary($this->wage);
 
     $recruitment = json_decode($this->recruitment,true);
 
     return array(
       'id' => $this->id,
       'name' => $this->name,
-      '_salary' => $this->salary,
+      '_wage' => $this->wage,
       'description' => !empty($this->description) ? $this->description : '-',
       'qualification' => !empty($this->qualification) ? $this->qualification : '-',
       'benefit' => !empty($this->benefit) ? $this->benefit : '-',
       '_recruitment_custom' => $recruitment['c'],
       'recruitment_custom_detail' => $this->recruitment_custom_detail,
       '_employmentTypeName' => $this->employmentType->name,
+      '_wageType' => $this->wageType->name
     );
 
   }
@@ -218,7 +224,7 @@ class Job extends Model
       'title' => $string->truncString($this->name,90),
       'description' => $string->truncString($this->description,250),
       'data' => array(
-        'salary' => array(
+        'wage' => array(
           'title' => 'อัตราค่าจ้าง',
           'value' => $this->getSalary()
         ),

@@ -83,15 +83,22 @@
 
     <div class="form-row">
       <?php 
-        echo Form::label('salary', 'เงินเดือน (บาท)', array(
+        echo Form::label('wage', 'อัตราค่าจ้าง (บาท)', array(
           'class' => 'required'
         ));
-        echo Form::text('salary', null, array(
-          'placeholder' => 'เงินเดือน',
+        echo Form::text('wage', null, array(
+          'placeholder' => 'อัตราค่าจ้าง',
           'autocomplete' => 'off'
         ));
       ?>
       <p class="notice info">สามารถกรอกเป็นประโยคได้ เช่น 10000 - 20000 บาท, ตามประสบการณ์ หรือ สามารถต่อรองได้</p>
+    </div>
+
+    <div class="form-row">
+      <?php 
+        echo Form::label('wage', 'ประเภทอัตราค่าจ้าง');
+        echo Form::select('wage_type_id', $_fieldData['wageTypes']);
+      ?>
     </div>
 
     <div class="form-row">

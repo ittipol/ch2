@@ -49,8 +49,8 @@
                     <div class="card-sub-info">
 
                       <div class="card-sub-info">
-                        <h5>เงินเดือน</h5>
-                        <div class="text-emphasize">{{$item['_salary']}}</div>
+                        <h5>อัตราค่าจ้าง</h5>
+                        <div class="text-emphasize">{{$item['_wage']}}</div>
                       </div>
 
                     </div>

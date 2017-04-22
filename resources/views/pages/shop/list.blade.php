@@ -41,8 +41,18 @@
 
           @if(!empty($data['openHours']))
           <div class="floating-data shop-open-hours">
-            <div class="shop-open-sign {{$data['openHours']['status']}}">
+            <div class="additional-option shop-open-sign  after-text-icon {{$data['openHours']['status']}}">
               {{$data['openHours']['text']}}
+              <div class="additional-option-content">
+                <div class="shop-time-table-wrapper">
+                @foreach($data['openHours']['timeTable'] as $time)
+                  <div class="shop-time-table clearfix">
+                    <div class="shop-time-table-day pull-left">{{$time['day']}}</div>
+                    <div class="shop-time-table-time pull-left">{{$time['openHour']}}</div>
+                  </div>
+                @endforeach
+                </div>
+              </div>
             </div>
           </div>
           @endif

@@ -105,6 +105,7 @@ class FilterHelper {
       if($len < 2) {
         continue;
       }elseif($len < 3) {
+        array_push($or,array('lookups.name','like','%'.$word.'%'));
         array_push($or,array('lookups.keyword_1','like','%'.$word.'%'));
         array_push($or,array('lookups.keyword_2','like','%'.$word.'%'));
         array_push($or,array('lookups.keyword_3','like','%'.$word.'%'));
@@ -112,7 +113,6 @@ class FilterHelper {
         continue;
       }
 
-      // if($isAddress && preg_match($zipcodePattern, $word, $matches)) {
       if($isAddress && $validation->isZipcode($word)) {
         $isAddress = false;
         array_push($or,array('lookups.address','like','%'.$word.'%'));

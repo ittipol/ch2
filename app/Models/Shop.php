@@ -280,6 +280,51 @@ class Shop extends Model
     return $image->getImageUrl();
   }
 
+  // public function getOpenHoursText() {
+
+  //   $openHours = $this->getRelatedData('OpenHour',array(
+  //     'conditions' => array(
+  //       array('active','=',1)
+  //     ),
+  //     'fields' => array('time'),
+  //     'first' => true
+  //   ));
+
+  //   if(empty($openHours)) {
+  //     return null;
+  //   }
+
+  //   $date = new Date;
+
+  //   $openHours = json_decode($openHours->time,true);
+
+  //   $today = date('N');
+  //   $_openHours = array(
+  //     'text' => 'วันนี้ปิดทำการ',
+  //     'status' => 'shop-closed', 
+  //   );
+
+  //   foreach ($openHours as $key => $time) {
+
+  //     $startTime = explode(':', $time['start_time']);
+  //     $endTime = explode(':', $time['end_time']);
+
+  //     $_time = 'ปิด';
+  //     if($time['open']){
+  //       $_time = $startTime[0].':'.$startTime[1].' - '.$endTime[0].':'.$endTime[1];
+  //     }
+
+  //     if(($today == $key) && $time['open']) {
+  //       $_openHours['text'] = 'วันนี้เปิดทำการเวลา '.$_time;
+  //       $_openHours['status'] = 'shop-open';
+  //     }
+
+  //   }
+
+  //   return $_openHours;
+
+  // }
+
   public function getOpenHours() {
 
     $openHours = $this->getRelatedData('OpenHour',array(
@@ -300,7 +345,7 @@ class Shop extends Model
 
     $today = date('N');
     $_openHours = array(
-      'text' => 'วันนี้ปิดทำการ',
+      'text' => 'วันนี้ปิด',
       'status' => 'shop-closed', 
       'timeTable' => array()
     );
@@ -316,7 +361,7 @@ class Shop extends Model
       }
 
       if(($today == $key) && $time['open']) {
-        $_openHours['text'] = 'วันนี้เปิดทำการเวลา '.$_time;
+        $_openHours['text'] = 'วันนี้เปิดเวลา '.$_time;
         $_openHours['status'] = 'shop-open';
       }
 

@@ -200,8 +200,8 @@
                 <div class="card-title">{{$data['_short_name']}}</div>
               </a>
               <div class="card-sub-info">
-                <h5>เงินเดือน</h5>
-                {{$data['_salary']}}
+                <h5>อัตราค่าจ้าง</h5>
+                {{$data['_wage']}}
               </div>
             </div>
    

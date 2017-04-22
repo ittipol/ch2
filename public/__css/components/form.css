@@ -239,9 +239,9 @@ form .input-addon-group {
 	margin-top: 10px;
 }
 
-form .input-addon-group .input-addon:not(:last-child) {
-	/*margin-right: 10px;*/
-}
+/*form .input-addon-group .input-addon:not(:last-child) {
+
+}*/
 
 form .input-addon > select:last-child {
   position: relative;
@@ -441,6 +441,10 @@ form textarea.person-experience-textarea {
 	.input-group .input-item:not(:first-child) {
 		margin-top: 10px;
 		margin-left: 0;
+	}
+
+	form label.choice-box {
+		width: 100%;
 	}
 
 }

@@ -32,7 +32,16 @@ class AdditionalOption {
 
       $(div).slideDown(220);
 
-      div.style.left = (left - (div.offsetWidth - this.offsetWidth))+'px';
+      let _left = left - (div.offsetWidth - this.offsetWidth);
+
+      if((_left-20) > 0) { console.log('x');
+        div.style.left = _left+'px';
+      }else{ console.log('z');
+        div.style.left = left+'px';
+      }
+
+      // div.style.left = (left - (div.offsetWidth - this.offsetWidth))+'px';
+      // div.style.left = left;
 
       setTimeout(function(){
         _this.obj = div;

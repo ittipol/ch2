@@ -405,6 +405,12 @@ class JobController extends Controller
       'index' => 'employmentTypes'
     ));
 
+    $model->formHelper->loadFieldData('WageType',array(
+      'key' =>'id',
+      'field' => 'name',
+      'index' => 'wageTypes'
+    ));
+
     $model->formHelper->setData('branches',request()->get('shop')->getRelatedShopData('Branch'));
 
     $this->data = $model->formHelper->build();
@@ -420,7 +426,7 @@ class JobController extends Controller
 
     if($model->fill($request->all())->save()) {
       MessageHelper::display('ลงประกาศแล้ว','success');
-      return Redirect::to('shop/'.$request->shopSlug.'/job');
+      return Redirect::to('shop/'.$request->shopSlug.'/manage/job');
     }else{
       return Redirect::back();
     }
@@ -440,6 +446,12 @@ class JobController extends Controller
       'key' =>'id',
       'field' => 'name',
       'index' => 'employmentTypes'
+    ));
+
+    $model->formHelper->loadFieldData('WageType',array(
+      'key' =>'id',
+      'field' => 'name',
+      'index' => 'wageTypes'
     ));
 
     $relateToBranch = $model->getRelatedData('RelateToBranch',array(
@@ -837,7 +849,7 @@ class JobController extends Controller
     }
 
     if(empty(request()->get('job_position_description'))) {
-      return Redirect::back()->withErrors(['เงินเดือน วันที่เริ่มทำงาน หรือข้อตกลงต่างๆ ของตำแหน่งงานนี้ห้ามว่าง']);
+      return Redirect::back()->withErrors(['อัตราค่าจ้าง วันที่เริ่มทำงาน หรือข้อตกลงต่างๆ ของตำแหน่งงานนี้ห้ามว่าง']);
     }
 
     $jobApplyingStatus = Service::loadModel('JobApplyingStatus')->getIdByAlias('job-applying-passed');

@@ -24,14 +24,16 @@
 
 .card .floating-data {
 	position: absolute;
-	top: 5px;
-	right: 5px;
+	top: 0;
+	right: 0;
 }
 
 .card .floating-data.shop-open-hours {
-	padding: 10px;
-	background-color: rgba(20,27,32,.85);
 	color: #fff;
+	background-color: rgba(20,27,32,.85);
+	width: 100%;
+	text-align: right;
+	padding: 10px;
 }
 
 .card .card-pin-top {
@@ -195,7 +197,7 @@
 	background-color: #E0E0E0;
 }
 
-.card .additional-option {
+.card .button-group .additional-option {
 	width: 45px;
 	height: 40px;
 	padding-top: 8px;
@@ -205,7 +207,7 @@
 	background-color: #BDBDBD;
 }
 
-.card .additional-option .dot {
+.card .button-group .additional-option .dot {
 	margin: 3px auto;
 	background-color: #fff;
 }
@@ -213,7 +215,7 @@
 @media only screen and (max-width : 480px) {
 
 	.card {
-		width: 320px;
+		width: 300px;
 		margin: 0 auto 20px;
 	}
 
