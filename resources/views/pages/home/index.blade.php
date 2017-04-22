@@ -24,7 +24,7 @@
         <div class="notice-box large">
 
           <div class="notice-box-image">
-            <div class="image" style="background-image:url(/images/banners/WP_20161129_003.jpg)"></div>
+            <div class="image" style="background-image:url(/images/banners/banner_1.jpg)"></div>
           </div>
 
           <div class="notice-box-info">
@@ -35,7 +35,7 @@
           </div>
 
           <a href="#" class="button floating-button">
-            เพิ่มร้านสินค้า
+            สร้างร้านค้า
           </a>
 
         </div>
@@ -45,7 +45,7 @@
         <div class="notice-box large">
 
           <div class="notice-box-image text-center">
-            <div class="image" style="background-image:url(/images/banners/besiness.jpg)"></div>
+            <div class="image" style="background-image:url(/images/banners/banner_4.jpg)"></div>
           </div>
 
           <div class="notice-box-info">
@@ -66,7 +66,7 @@
         <div class="notice-box large">
 
           <div class="notice-box-image text-center">
-            <div class="image" style="background-image:url(/images/a1.jpg)"></div>
+            <div class="image" style="background-image:url(/images/banners/banner_3.jpg)"></div>
           </div>
 
           <div class="notice-box-info">
@@ -150,7 +150,7 @@
         <div class="notice-box large">
 
           <div class="notice-box-image text-center">
-            <div class="image" style="background-image:url(/images/a3.jpg)"></div>
+            <div class="image" style="background-image:url(/images/banners/banner_5.jpg)"></div>
           </div>
 
           <div class="notice-box-info">
@@ -214,7 +214,7 @@
         <div class="notice-box small">
 
           <div class="notice-box-image">
-            <div class="image" style="background-image:url(/images/store.jpg)"></div>
+            <div class="image" style="background-image:url(/images/banners/banner_4.jpg)"></div>
           </div>
 
           <a href="#" class="button floating-button">
@@ -285,7 +285,7 @@
         <div class="notice-box small">
 
           <div class="notice-box-image">
-            <div class="image" style="background-image:url(/images/banners/WP_20161129_004.jpg)"></div>
+            <div class="image" style="background-image:url(/images/banners/banner_3.jpg)"></div>
           </div>
 
           <a href="#" class="button floating-button">

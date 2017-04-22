@@ -108,6 +108,14 @@ class Product extends Model
         'value' => 'name:desc'
       ),
       array(
+        'name' => 'ราคา ต่ำไปสูง',
+        'value' => 'price:asc'
+      ),
+      array(
+        'name' => 'ราคา สูงไปต่ำ',
+        'value' => 'price:desc'
+      ),
+      array(
         'name' => 'วันที่เก่าที่สุดไปหาใหม่ที่สุด',
         'value' => 'created_at:asc'
       ),

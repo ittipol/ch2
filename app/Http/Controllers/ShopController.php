@@ -16,6 +16,50 @@ class ShopController extends Controller
     parent::__construct();
   }
 
+  public function index() {
+
+    $model = request()->get('shop');
+
+    $shopRelateToModel = Service::loadModel('ShopRelateTo');
+
+    // shop pin message
+
+    // Get 12 lastest product
+    $products = Service::loadModel('Product')
+    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
+    ->where('shop_relate_to.model','like','Product')
+    ->where('shop_relate_to.shop_id','=',$model->id)
+    ->select('products.*')
+    ->take(12)
+    ->orderBy('products.created_at','desc')
+    ->get();
+
+    $_products = array();
+    foreach ($products as $product) {
+      $_products[] = $product->buildPaginationData();
+    }
+
+    // dd($_products);
+
+    // $productModel = Service::loadModel('Product');
+    // $productModel->paginator->criteria(array(
+    //   'joins' => array('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id'),
+    //   'conditions' => array(
+    //     array('shop_relate_to.model','like','Product'),
+    //     array('shop_relate_to.shop_id','=',$model->id)
+    //   ),
+    //   'fields' => array('products.*'),
+    //   'order' => array('products.created_at','desc')
+    // ));
+    // $model->paginator->setPage(1);
+
+    // dd($products);
+
+    $this->setData('products',$_products);
+
+    return $this->view('pages.shop.index');
+  }
+
   public function about() {
 
     $model = request()->get('shop');
@@ -90,9 +134,9 @@ class ShopController extends Controller
 
   public function manage() {
 
-    $shopRelateToModel = Service::loadModel('ShopRelateTo');
-
     $model = request()->get('shop');
+
+    $shopRelateToModel = Service::loadModel('ShopRelateTo');
 
     $this->setData('totalProduct',$shopRelateToModel
     ->where([

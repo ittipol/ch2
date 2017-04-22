@@ -241,6 +241,8 @@ Route::group(['middleware' => 'auth'], function () {
 });
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
 
+  Route::get('shop/{shopSlug}','ShopController@index')->name('shop.index');
+
   Route::get('shop/{shopSlug}/about','ShopController@about')->name('shop.about');
 
   Route::get('shop/{shopSlug}/manage','ShopController@manage')->name('shop.manage');

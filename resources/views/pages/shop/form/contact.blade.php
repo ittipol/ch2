@@ -94,16 +94,6 @@
       </div>
     </div>
 
-    <div class="form-row">
-      <?php 
-        echo Form::label('Contact[line]', 'Line ID');
-      ?>
-      <div id="line_id_input" class="text-group">
-        <div class="text-group-panel"></div>
-        <a href="javascript:void(0);" class="text-add">เพิ่ม +</a>
-      </div>
-    </div>
-
   </div>
 
   <?php
@@ -151,13 +141,6 @@
       websiteInput.load({!!$_oldInput['website']!!});
     @else
       websiteInput.load();
-    @endif
-
-    const lindIdInput = new TextInputList('line_id_input','line','Line ID');
-    @if(!empty($_oldInput['line']))
-      lindIdInput.load({!!$_oldInput['line']!!});
-    @else
-      lindIdInput.load();
     @endif
 
   });
