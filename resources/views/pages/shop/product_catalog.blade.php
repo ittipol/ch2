@@ -19,13 +19,13 @@
 
     <div class="tile-nav small">
       <div class="tile-nav-image">
-        <a href="{{request()->get('shopUrl')}}product/catalog/add">
+        <a href="{{request()->get('shopUrl')}}product_catalog/add">
           <img src="/images/common/plus.png">
         </a>
       </div>
       <div class="tile-nav-info">
-        <a href="{{request()->get('shopUrl')}}product/catalog/add">
-          <h4 class="tile-nav-title">เพิ่มแคตตาล็อกสินค้า</h4>
+        <a href="{{request()->get('shopUrl')}}product_catalog/add">
+          <h4 class="tile-nav-title">สร้างแคตตาล็อกสินค้า</h4>
         </a>
       </div>
     </div>
@@ -73,8 +73,8 @@
                 <div class="dot"></div>
                 <div class="dot"></div>
                 <div class="additional-option-content">
-                  <a href="{{$data['deleteUrl']}}">แก้ไขข้อมูลทั่วไป</a>
-                  <a href="{{$data['deleteUrl']}}">เพิ่ม/ลบสินค้าในแคตตาล็อก</a>
+                  <a href="{{$data['editUrl']}}">แก้ไขข้อมูลทั่วไป</a>
+                  <a href="{{$data['catalogEditUrl']}}">เพิ่ม/ลบสินค้าในแคตตาล็อก</a>
                   <a href="{{$data['deleteUrl']}}">ลบแคตตาล็อก</a>
                 </div>
               </div>
@@ -99,7 +99,7 @@
       <div>
         <h3>แคตตาล็อกสินค้า</h3>
         <p>ยังไม่มีแคตตาล็อกสินค้า</p>
-        <a href="{{request()->get('shopUrl')}}/product/catalog/add" class="button">เพิ่มแคตตาล็อกสินค้า</a>
+        <a href="{{request()->get('shopUrl')}}/product_catalog/add" class="button">สร้างแคตตาล็อกสินค้า</a>
       </div>
     </div>
 

@@ -32,12 +32,12 @@
 
     <div class="tile-nav small">
       <div class="tile-nav-image">
-        <a href="{{request()->get('shopUrl')}}manage/product/catalog">
+        <a href="{{request()->get('shopUrl')}}manage/product_catalog">
           <img src="/images/common/plus.png">
         </a>
       </div>
       <div class="tile-nav-info">
-        <a href="{{request()->get('shopUrl')}}manage/product/catalog">
+        <a href="{{request()->get('shopUrl')}}manage/product_catalog">
           <h4 class="tile-nav-title">แคตตาล็อกสินค้า</h4>
         </a>
       </div>

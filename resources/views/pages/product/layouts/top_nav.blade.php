@@ -4,14 +4,11 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{$_shop_product_menu}}" class="btn btn-secondary">กลับไปยังหน้าจัดการสินค้า</a>
+          <a href="{{request()->get('shopUrl')}}manage/product/{{request()->id}}" class="btn btn-secondary">กลับไปยังหน้าจัดการสินค้า</a>
           <button class="btn btn-secondary additional-option">
-            จัดการ...
+            ...
             <div class="additional-option-content">
-              <a href="{{$_shop_product_url}}">สินค้า</a>
-              <a href="{{$_shop_job_url}}">ประกาศงาน</a>
-              <a href="{{$_shop_advertising_url}}">การโฆษณา</a>
-              <a href="{{$_shop_branch_url}}">สาขา</a>
+              <a href="{{request()->get('shopUrl')}}manage/product">ไปยังหน้าหลักจัดการสินค้า</a>
             </div>
           </button>
         </div>

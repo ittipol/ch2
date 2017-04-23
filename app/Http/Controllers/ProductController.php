@@ -497,18 +497,18 @@ class ProductController extends Controller
 
     $this->setData('imageUrl',$imageUrl);
 
-    $this->setData('productDetailUrl','product/detail/'.$model->id);
-    $this->setData('productEditUrl',request()->get('shopUrl').'product/edit/'.$model->id);
-    $this->setData('productStatusUrl',request()->get('shopUrl').'product_status/edit/'.$model->id);
-    $this->setData('productSpecificationEditUrl',request()->get('shopUrl').'product_specification/edit/'.$model->id);
-    $this->setData('productCategoryEditUrl',request()->get('shopUrl').'product_category/edit/'.$model->id);
-    $this->setData('productMinimumEditUrl',request()->get('shopUrl').'product_minimum/edit/'.$model->id);
-    $this->setData('productStockEditUrl',request()->get('shopUrl').'product_stock/edit/'.$model->id);
-    $this->setData('productPriceEditUrl',request()->get('shopUrl').'product_price/edit/'.$model->id);
-    $this->setData('productShippingUrl',request()->get('shopUrl').'product_shipping/edit/'.$model->id);
-    $this->setData('productNotificationEditUrl',request()->get('shopUrl').'product_notification/edit/'.$model->id);
-    $this->setData('productSalePromotionUrl',request()->get('shopUrl').'product_sale_promotion/'.$model->id);
-    $this->setData('productBranchUrl',request()->get('shopUrl').'product_branch/'.$model->id);
+    // $this->setData('productDetailUrl','product/detail/'.$model->id);
+    // $this->setData('productEditUrl',request()->get('shopUrl').'product/edit/'.$model->id);
+    // $this->setData('productStatusUrl',request()->get('shopUrl').'product/status/edit/'.$model->id);
+    // $this->setData('productSpecificationEditUrl',request()->get('shopUrl').'product/specification/edit/'.$model->id);
+    // $this->setData('productCategoryEditUrl',request()->get('shopUrl').'product/category/edit/'.$model->id);
+    // $this->setData('productMinimumEditUrl',request()->get('shopUrl').'product/minimum/edit/'.$model->id);
+    // $this->setData('productStockEditUrl',request()->get('shopUrl').'product/stock/edit/'.$model->id);
+    // $this->setData('productPriceEditUrl',request()->get('shopUrl').'product/price/edit/'.$model->id);
+    // $this->setData('productSalePromotionUrl',request()->get('shopUrl').'product/sale_promotion/'.$model->id);
+    // $this->setData('productShippingUrl',request()->get('shopUrl').'product/shipping/edit/'.$model->id);
+    // $this->setData('productNotificationEditUrl',request()->get('shopUrl').'product/notification/edit/'.$model->id);
+    // $this->setData('productBranchUrl',request()->get('shopUrl').'product/branch/'.$model->id);
 
     $this->setData('categoryPaths',$model->getCategoryPaths());
 

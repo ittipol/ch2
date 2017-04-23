@@ -246,11 +246,23 @@ class CheckForPersonHasShopPermission
           'permission' => 'edit',
           'modelName' => 'Order'
         ),
-        'shop.product.catalog.manage' => array(
+        'shop.product_catalog.manage' => array(
           'permission' => true
         ),
-        'shop.product.catalog.add' => array(
+        'shop.product_catalog.menu' => array(
+          'permission' => 'edit',
+          'modelName' => 'ProductCatalog'
+        ),
+        'shop.product_catalog.add' => array(
           'permission' => 'add',
+          'modelName' => 'ProductCatalog'
+        ),
+        'shop.product_catalog.edit' => array(
+          'permission' => 'edit',
+          'modelName' => 'ProductCatalog'
+        ),
+        'shop.product_catalog.product_list.edit' => array(
+          'permission' => 'edit',
           'modelName' => 'ProductCatalog'
         ),
       );

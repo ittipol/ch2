@@ -22,26 +22,70 @@ class RelateToBranch extends Model
 
   public function __saveRelatedData($model,$options = array()) {
 
-    if(!empty($options['value']['branch_id'])) {
-
-      // check branch is in shop first
+    // if(!empty($options['value']['branch_id'])) {
   
-      if($model->state == 'update') {
-        $this->where(array(
-          array('model','like',$model->modelName),
-          array('model_id','=',$model->id),
-        ))->delete();
-      }
-      
-      foreach ($options['value']['branch_id'] as $branchId) {
-        
-        $this->newInstance()->fill(array(
-          'model' => $model->modelName,
-          'model_id' => $model->id,
-          'branch_id' => $branchId
-        ))->save();
+    //   if($model->state == 'update') {
+    //     $this->where(array(
+    //       array('model','like',$model->modelName),
+    //       array('model_id','=',$model->id),
+    //     ))->delete();
+    //   }
 
+    //   if(empty($options['value']['branch_id'])) {
+    //     return true;
+    //   }
+      
+    //   foreach ($options['value']['branch_id'] as $branchId) {
+        
+    //     $this->newInstance()->fill(array(
+    //       'model' => $model->modelName,
+    //       'model_id' => $model->id,
+    //       'branch_id' => $branchId
+    //     ))->save();
+
+    //   }
+
+    // }
+
+    $shopRelateToModel = new ShopRelateTo;
+
+    if($model->exists) {
+      $this->where(array(
+        array('model','like',$model->modelName),
+        array('model_id','=',$model->id),
+      ))->delete();
+    }
+
+    if(empty($options['value']['branch_id'])) {
+      return true;
+    }
+
+    $shopId = $shopRelateToModel
+    ->select('shop_id')
+    ->where([
+      ['model','like',$model->modelName],
+      ['model_id','=',$model->id]
+    ])->first()->shop_id;
+    
+    foreach ($options['value']['branch_id'] as $branchId) {
+      
+      $exist = $shopRelateToModel
+      ->select('model_id')
+      ->where([
+        ['shop_id','=',$shopId],
+        ['model','=','Branch'],
+        ['model_id','=',$branchId]
+      ])->exists();
+
+      if(!$exist) {
+        continue;
       }
+
+      $this->newInstance()->fill(array(
+        'model' => $model->modelName,
+        'model_id' => $model->id,
+        'branch_id' => $branchId
+      ))->save();
 
     }
 

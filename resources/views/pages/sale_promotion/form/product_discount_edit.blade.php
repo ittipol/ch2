@@ -1,6 +1,27 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
+<div class="sub-header-nav">
+  <div class="sub-header-nav-fixed-top">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <div class="btn-group pull-right">
+          <a href="{{request()->get('shopUrl')}}product_sale_promotion/{{request()->product_id}}" class="btn btn-secondary">กลับไปยังหน้าโปรโมชั่นการขาย</a>
+          <button class="btn btn-secondary additional-option">
+            ...
+            <div class="additional-option-content">
+              <a href="{{request()->get('shopUrl')}}manage/product/{{request()->product_id}}">ไปยังหน้าจัดการสินค้า</a>
+              <a href="{{request()->get('shopUrl')}}manage/product">ไปยังหน้าหลักจัดการสินค้า</a>
+            </div>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="top-header-wrapper top-header-border">
   <div class="container">
     <div class="top-header">

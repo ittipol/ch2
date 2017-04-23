@@ -694,9 +694,11 @@ class ShopController extends Controller
       'order' => array('id','DESC')
     ));
     $model->paginator->setPage($page);
-    $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/manage/product/catalog');
-    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/manage/product/catalog/{id}','menuUrl');
-    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/product/catalog/delete/{id}','deleteUrl');
+    $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/manage/product_catalog');
+    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/manage/product_catalog/{id}','menuUrl');
+    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/product_catalog/edit/{id}','editUrl');
+    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/product_catalog/product_list/edit/{id}','catalogEditUrl');
+    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/product_catalog/delete/{id}','deleteUrl');
 
     $this->data = $model->paginator->build();
 

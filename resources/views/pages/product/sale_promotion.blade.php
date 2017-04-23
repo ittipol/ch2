@@ -36,8 +36,6 @@
 
   </div>
 
-  <!-- <div class="line"></div> -->
-
   @if(!empty($salePromotions))
 
     <div class="space-top-bottom-20">
@@ -89,11 +87,11 @@
   @else
 
     <div class="list-empty-message text-center space-top-20">
-      <img class="space-bottom-20" src="/images/common/tag.png">
+      <img src="/images/common/not-found.png">
       <div>
         <h3>โปรโมชั่น</h3>
         <p>สินค้านี้ยังไม่มีโปรโมชั่น</p>
-        <a href="{{$productDiscountAdd}}" class="button">เพิ่มโปรโมชั่นส่วนลด</a>
+        <a href="{{$productDiscountAdd}}" class="button">เพิ่มโปรโมชั่นลดราคาสินค้า</a>
       </div>
     </div>
 

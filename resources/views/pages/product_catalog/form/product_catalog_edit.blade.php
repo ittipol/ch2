@@ -1,7 +1,26 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-@include('pages.product.layouts.top_nav')
+<div class="sub-header-nav">
+  <div class="sub-header-nav-fixed-top">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <div class="btn-group pull-right">
+          <a href="{{request()->get('shopUrl')}}manage/product_catalog" class="btn btn-secondary">กลับไปยังหน้าจัดการแคตตาล็อกสินค้า</a>
+          <button class="btn btn-secondary additional-option">
+            ...
+            <div class="additional-option-content">
+              <a href="{{request()->get('shopUrl')}}manage/product">กลับไปยังหน้าหลักจัดการสินค้า</a>
+              <a href="{{request()->get('shopUrl')}}manage">ไปยังหน้าจัดการหลัก</a>
+            </div>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="container">
   
@@ -9,7 +28,7 @@
     <div class="row">
       <div class="col-md-8 col-xs-12">
         <div class="title">
-          ข้อมูลทั้วไปของสินค้า
+          แก้ไขข้อมมูลแคตตาล็อกสินค้า
         </div>
       </div>
     </div>
@@ -33,11 +52,11 @@
 
     <div class="form-row">
       <?php 
-        echo Form::label('name', 'ชื่อสินค้า', array(
+        echo Form::label('name', 'ชื่อแคตตาล็อก', array(
           'class' => 'required'
         ));
         echo Form::text('name', null, array(
-          'placeholder' => 'ชื่อสินค้า',
+          'placeholder' => 'ชื่อแคตตาล็อก',
           'autocomplete' => 'off'
         ));
       ?>
@@ -45,32 +64,21 @@
 
     <div class="form-row">
       <?php 
-        echo Form::label('description', 'รายละเอียดของสินค้า');
+        echo Form::label('description', 'คำอธิบายของแคตตาล็อก');
         echo Form::textarea('description');
       ?>
     </div>
-
-    <div class="form-row">
-      <?php 
-        echo Form::label('product_unit', 'หน่วยสินค้า', array(
-          'class' => 'required'
-        ));
-        echo Form::text('product_unit', null, array(
-          'placeholder' => 'หน่วยสินค้า (ชิ้น, ตัว, เครื่อง, หลัง)',
-          'autocomplete' => 'off'
-        ));
-      ?>
-    </div>
-
+    
   </div>
 
   <div class="form-section">
 
     <div class="title">
-      รูปภาพ
+      รูปภาพแบนเนอร์ (1200 x 300)
     </div>
 
     <div class="form-row">
+      <p class="error-message">*** หากรูปภาพแบนเนอร์มีขนาดเล็กกว่าขนาดที่แนะนำ รูปภาพแบนเนอร์จะถูกขยายให้เต็มกรอบเมื่อแสดงรูปภาพ</p>
       <div id="_image_group"></div>
     </div>
 
@@ -107,12 +115,12 @@
 
   $(document).ready(function(){
 
-    const images = new Images('_image_group','photo',10,'description');
+    const images = new Images('_image_group','banner',1,'banner');
     images.load({!!$_formData['Image']!!});
 
     const tagging = new Tagging();
     tagging.load({!!$_formData['Tagging']!!});
-    
+
     const form = new Form();
     form.load();
     

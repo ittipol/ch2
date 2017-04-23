@@ -28,16 +28,23 @@
     <div class="row">
       <div class="col-md-8 col-xs-12">
         <div class="title">
-          สร้างแคตตาล็อกสินค้า
+          เพิ่ม/ลบสินค้าในแคตตาล็อก
         </div>
       </div>
     </div>
   </div>
 
+  <h5>ชื่อแคตตาล็อก</h5>
+  <h4>{{$_formData['name']}}</h4>
+
   @include('components.form_error') 
 
   <?php 
-    echo Form::open(['id' => 'main_form','method' => 'post', 'enctype' => 'multipart/form-data']);
+    echo Form::model($_formData, [
+      'id' => 'main_form',
+      'method' => 'PATCH',
+      'enctype' => 'multipart/form-data'
+    ]);
   ?>
 
   <?php
@@ -45,25 +52,6 @@
   ?>
 
   <div class="form-section">
-
-    <div class="form-row">
-      <?php 
-        echo Form::label('name', 'ชื่อแคตตาล็อก', array(
-          'class' => 'required'
-        ));
-        echo Form::text('name', null, array(
-          'placeholder' => 'ชื่อแคตตาล็อก',
-          'autocomplete' => 'off'
-        ));
-      ?>
-    </div>
-
-    <div class="form-row">
-      <?php 
-        echo Form::label('description', 'คำอธิบายของแคตตาล็อก');
-        echo Form::textarea('description');
-      ?>
-    </div>
 
     <div class="form-row">
       <?php 
@@ -95,36 +83,8 @@
 
   </div>
 
-  <div class="form-section">
-
-    <div class="title">
-      รูปภาพแบนเนอร์ (1200 x 300)
-    </div>
-
-    <div class="form-row">
-      <p class="error-message">*** หากรูปภาพแบนเนอร์มีขนาดเล็กกว่าขนาดที่แนะนำ รูปภาพแบนเนอร์จะถูกขยายให้เต็มกรอบเมื่อแสดงรูปภาพ</p>
-      <div id="_image_group"></div>
-    </div>
-
-  </div>
-
-  <div class="form-section">
-
-    <div class="title">
-      แท๊ก
-    </div>
-
-    <div class="form-row">
-      <?php 
-        echo Form::label('_tags', 'แท๊กที่เกี่ยวข้องกับสินค้านี้');
-      ?>
-      <div id="_tags" class="tag"></div>
-    </div>
-
-  </div>
-
   <?php
-    echo Form::submit('สร้างแคตตาล็อกสินค้า', array(
+    echo Form::submit('บันทึก', array(
       'class' => 'button'
     ));
   ?>
@@ -138,15 +98,6 @@
 <script type="text/javascript">
 
   $(document).ready(function(){
-
-    const images = new Images('_image_group','banner',1,'banner');
-    images.load();
-
-    const tagging = new Tagging();
-    tagging.load();
-    @if(!empty($_oldInput['Tagging']))
-      tagging.setTags('{!!$_oldInput['Tagging']!!}');
-    @endif
 
     const form = new Form();
     form.load();

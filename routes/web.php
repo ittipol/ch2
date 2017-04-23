@@ -277,52 +277,58 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::get('shop/{shopSlug}/manage/product','ShopController@product')->name('shop.product.manage');
   Route::get('shop/{shopSlug}/manage/product/{id}','ProductController@menu')->name('shop.product.manage.menu');
 
-  Route::get('shop/{shopSlug}/manage/product/catalog','ShopController@productCatalog')->name('shop.product.catalog.manage');
-  Route::get('shop/{shopSlug}/manage/product/catalog/{id}','ProductCatalogController@menu')->name('shop.product.catalog.menu');
-
-  Route::get('shop/{shopSlug}/product/catalog/add','ProductCatalogController@add')->name('shop.product.catalog.add');
-  Route::post('shop/{shopSlug}/product/catalog/add','ProductCatalogController@addingSubmit')->name('shop.product.catalog.add');
-
   Route::get('shop/{shopSlug}/product/add','ProductController@add')->name('shop.product.add');
   Route::post('shop/{shopSlug}/product/add','ProductController@addingSubmit')->name('shop.product.add');
 
   Route::get('shop/{shopSlug}/product/edit/{id}','ProductController@edit')->name('shop.product.edit');
   Route::patch('shop/{shopSlug}/product/edit/{id}','ProductController@editingSubmit')->name('shop.product.edit');
 
-  Route::get('shop/{shopSlug}/product_status/edit/{id}','ProductController@statusEdit')->name('shop.product_status.edit');
-  Route::patch('shop/{shopSlug}/product_status/edit/{id}','ProductController@statusEditingSubmit')->name('shop.product_status.edit');
+  Route::get('shop/{shopSlug}/product/status/edit/{id}','ProductController@statusEdit')->name('shop.product_status.edit');
+  Route::patch('shop/{shopSlug}/product/status/edit/{id}','ProductController@statusEditingSubmit')->name('shop.product_status.edit');
 
-  Route::get('shop/{shopSlug}/product_specification/edit/{id}','ProductController@specificationEdit')->name('shop.product_specification.edit');
-  Route::patch('shop/{shopSlug}/product_specification/edit/{id}','ProductController@specificationEditingSubmit')->name('shop.product_specification.edit');
+  Route::get('shop/{shopSlug}/product/specification/edit/{id}','ProductController@specificationEdit')->name('shop.product_specification.edit');
+  Route::patch('shop/{shopSlug}/product/specification/edit/{id}','ProductController@specificationEditingSubmit')->name('shop.product_specification.edit');
 
-  Route::get('shop/{shopSlug}/product_category/edit/{id}','ProductController@categoryEdit')->name('shop.product_category.edit');
-  Route::patch('shop/{shopSlug}/product_category/edit/{id}','ProductController@categoryEditingSubmit')->name('shop.product_category.edit');
+  Route::get('shop/{shopSlug}/product/category/edit/{id}','ProductController@categoryEdit')->name('shop.product_category.edit');
+  Route::patch('shop/{shopSlug}/product/category/edit/{id}','ProductController@categoryEditingSubmit')->name('shop.product_category.edit');
 
-  Route::get('shop/{shopSlug}/product_minimum/edit/{id}','ProductController@minimumEdit')->name('shop.product_minimum.edit');
-  Route::patch('shop/{shopSlug}/product_minimum/edit/{id}','ProductController@minimumEditingSubmit')->name('shop.product_minimum.edit');
+  Route::get('shop/{shopSlug}/product/minimum/edit/{id}','ProductController@minimumEdit')->name('shop.product_minimum.edit');
+  Route::patch('shop/{shopSlug}/product/minimum/edit/{id}','ProductController@minimumEditingSubmit')->name('shop.product_minimum.edit');
 
-  Route::get('shop/{shopSlug}/product_stock/edit/{id}','ProductController@stockEdit')->name('shop.product_stock.edit');
-  Route::patch('shop/{shopSlug}/product_stock/edit/{id}','ProductController@stockEditingSubmit')->name('shop.product_stock.edit');
+  Route::get('shop/{shopSlug}/product/stock/edit/{id}','ProductController@stockEdit')->name('shop.product_stock.edit');
+  Route::patch('shop/{shopSlug}/product/stock/edit/{id}','ProductController@stockEditingSubmit')->name('shop.product_stock.edit');
 
-  Route::get('shop/{shopSlug}/product_price/edit/{id}','ProductController@priceEdit')->name('shop.product_price.edit');
-  Route::patch('shop/{shopSlug}/product_price/edit/{id}','ProductController@priceEditingSubmit')->name('shop.product_price.edit');
+  Route::get('shop/{shopSlug}/product/price/edit/{id}','ProductController@priceEdit')->name('shop.product_price.edit');
+  Route::patch('shop/{shopSlug}/product/price/edit/{id}','ProductController@priceEditingSubmit')->name('shop.product_price.edit');
 
-  Route::get('shop/{shopSlug}/product_shipping/edit/{id}','ProductController@shippingEdit')->name('shop.product_shipping.edit');
-  Route::patch('shop/{shopSlug}/product_shipping/edit/{id}','ProductController@shippingEditingSubmit')->name('shop.product_shipping.edit');
+  Route::get('shop/{shopSlug}/product/shipping/edit/{id}','ProductController@shippingEdit')->name('shop.product_shipping.edit');
+  Route::patch('shop/{shopSlug}/product/shipping/edit/{id}','ProductController@shippingEditingSubmit')->name('shop.product_shipping.edit');
 
-  Route::get('shop/{shopSlug}/product_notification/edit/{id}','ProductController@notificationEdit')->name('shop.product_notification.edit');
-  Route::patch('shop/{shopSlug}/product_notification/edit/{id}','ProductController@notificationEditingSubmit')->name('shop.product_notification.edit');
+  Route::get('shop/{shopSlug}/product/notification/edit/{id}','ProductController@notificationEdit')->name('shop.product_notification.edit');
+  Route::patch('shop/{shopSlug}/product/notification/edit/{id}','ProductController@notificationEditingSubmit')->name('shop.product_notification.edit');
 
-  Route::get('shop/{shopSlug}/product_sale_promotion/{id}','ProductController@salePromotion')->name('shop.product_sale_promotion');
+  Route::get('shop/{shopSlug}/product/sale_promotion/{id}','ProductController@salePromotion')->name('shop.product_sale_promotion');
 
-  Route::get('shop/{shopSlug}/product_discount/add/product_id:{product_id}','ProductDiscountController@add')->name('shop.product_discount.add');
-  Route::post('shop/{shopSlug}/product_discount/add/product_id:{product_id}','ProductDiscountController@addingSubmit')->name('shop.product_discount.add');
+  Route::get('shop/{shopSlug}/product/discount/add/product_id:{product_id}','ProductDiscountController@add')->name('shop.product_discount.add');
+  Route::post('shop/{shopSlug}/product/discount/add/product_id:{product_id}','ProductDiscountController@addingSubmit')->name('shop.product_discount.add');
 
-  Route::get('shop/{shopSlug}/product_discount/edit/{id}/product_id:{product_id}','ProductDiscountController@edit')->name('shop.product_discount.edit');
-  Route::patch('shop/{shopSlug}/product_discount/edit/{id}/product_id:{product_id}','ProductDiscountController@editingSubmit')->name('shop.product_discount.edit');
+  Route::get('shop/{shopSlug}/product/discount/edit/{id}/product_id:{product_id}','ProductDiscountController@edit')->name('shop.product_discount.edit');
+  Route::patch('shop/{shopSlug}/product/discount/edit/{id}/product_id:{product_id}','ProductDiscountController@editingSubmit')->name('shop.product_discount.edit');
 
-  Route::get('shop/{shopSlug}/product_branch/{id}','ProductController@branchEdit')->name('shop.product_branch.edit');
-  Route::patch('shop/{shopSlug}/product_branch/{id}','ProductController@branchEditingSubmit')->name('shop.product_branch.edit');
+  Route::get('shop/{shopSlug}/product/branch/{id}','ProductController@branchEdit')->name('shop.product_branch.edit');
+  Route::patch('shop/{shopSlug}/product/branch/{id}','ProductController@branchEditingSubmit')->name('shop.product_branch.edit');
+
+  Route::get('shop/{shopSlug}/manage/product_catalog','ShopController@productCatalog')->name('shop.product_catalog.manage');
+  Route::get('shop/{shopSlug}/manage/product_catalog/{id}','ProductCatalogController@menu')->name('shop.product_catalog.menu');
+
+  Route::get('shop/{shopSlug}/product_catalog/add','ProductCatalogController@add')->name('shop.product_catalog.add');
+  Route::post('shop/{shopSlug}/product_catalog/add','ProductCatalogController@addingSubmit')->name('shop.product_catalog.add');
+
+  Route::get('shop/{shopSlug}/product_catalog/edit/{id}','ProductCatalogController@edit')->name('shop.product_catalog.edit');
+  Route::patch('shop/{shopSlug}/product_catalog/edit/{id}','ProductCatalogController@editingSubmit')->name('shop.product_catalog.edit');
+
+  Route::get('shop/{shopSlug}/product_catalog/product_list/edit/{id}','ProductCatalogController@productCatalogEdit')->name('shop.product_catalog.product_list.edit');
+  Route::patch('shop/{shopSlug}/product_catalog/product_list/edit/{id}','ProductCatalogController@productCatalogEditingSubmit')->name('shop.product_catalog.product_list.edit');
 
 });
 
