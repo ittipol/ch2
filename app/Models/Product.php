@@ -13,7 +13,7 @@ class Product extends Model
   protected $table = 'products';
   protected $fillable = ['name','description','product_model','sku','quantity','quantity_available','minimum','product_unit','price','weight','weight_unit_id','length','length_unit_id','width','height','specifications','message_out_of_order','shipping_calculate_from','flag_message_from','flag_message','active','person_id'];
   protected $modelRelations = array('Image','Tagging','ProductToCategory','RelateToBranch','ShopRelateTo');
-  protected $directory = true;
+  // protected $directory = true;
 
   public $formHelper = true;
   public $modelData = true;

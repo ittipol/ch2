@@ -192,7 +192,7 @@ class Item extends Model
     $string = new String;
 
     return array(
-      'id' => $this->id,
+      // 'id' => $this->id,
       'name' => $this->name,
       '_short_name' => $string->truncString($this->name,45),
       '_price' => $currency->format($this->price),

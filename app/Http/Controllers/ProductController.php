@@ -498,15 +498,15 @@ class ProductController extends Controller
     $this->setData('imageUrl',$imageUrl);
 
     $this->setData('productDetailUrl','product/detail/'.$model->id);
-    $this->setData('productEditUrl',request()->get('shopUrl').'product_edit/'.$model->id);
-    $this->setData('productStatusUrl',request()->get('shopUrl').'product_status_edit/'.$model->id);
-    $this->setData('productSpecificationEditUrl',request()->get('shopUrl').'product_specification_edit/'.$model->id);
-    $this->setData('productCategoryEditUrl',request()->get('shopUrl').'product_category_edit/'.$model->id);
-    $this->setData('productMinimumEditUrl',request()->get('shopUrl').'product_minimum_edit/'.$model->id);
-    $this->setData('productStockEditUrl',request()->get('shopUrl').'product_stock_edit/'.$model->id);
-    $this->setData('productPriceEditUrl',request()->get('shopUrl').'product_price_edit/'.$model->id);
-    $this->setData('productShippingUrl',request()->get('shopUrl').'product_shipping_edit/'.$model->id);
-    $this->setData('productNotificationEditUrl',request()->get('shopUrl').'product_notification_edit/'.$model->id);
+    $this->setData('productEditUrl',request()->get('shopUrl').'product/edit/'.$model->id);
+    $this->setData('productStatusUrl',request()->get('shopUrl').'product_status/edit/'.$model->id);
+    $this->setData('productSpecificationEditUrl',request()->get('shopUrl').'product_specification/edit/'.$model->id);
+    $this->setData('productCategoryEditUrl',request()->get('shopUrl').'product_category/edit/'.$model->id);
+    $this->setData('productMinimumEditUrl',request()->get('shopUrl').'product_minimum/edit/'.$model->id);
+    $this->setData('productStockEditUrl',request()->get('shopUrl').'product_stock/edit/'.$model->id);
+    $this->setData('productPriceEditUrl',request()->get('shopUrl').'product_price/edit/'.$model->id);
+    $this->setData('productShippingUrl',request()->get('shopUrl').'product_shipping/edit/'.$model->id);
+    $this->setData('productNotificationEditUrl',request()->get('shopUrl').'product_notification/edit/'.$model->id);
     $this->setData('productSalePromotionUrl',request()->get('shopUrl').'product_sale_promotion/'.$model->id);
     $this->setData('productBranchUrl',request()->get('shopUrl').'product_branch/'.$model->id);
 
@@ -517,11 +517,8 @@ class ProductController extends Controller
   }
 
   public function add() {
-
     $model = Service::loadModel('Product');
-
     $this->data = $model->formHelper->build();
-
     return $this->view('pages.product.form.product_add');
   }
 
@@ -782,18 +779,7 @@ class ProductController extends Controller
   }
  
   public function notificationEditingSubmit(CustomFormRequest $request) {
-
     return $this->_save(Service::loadModel('Product')->find($this->param['id']),$request->all());
-
-    // $model = Service::loadModel('Product')->find($this->param['id']);
-
-    // if($model->fill($request->all())->save()) {
-    //   MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
-    //   return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
-    // }else{
-    //   return Redirect::back();
-    // }
-
   }
 
   public function salePromotion() {

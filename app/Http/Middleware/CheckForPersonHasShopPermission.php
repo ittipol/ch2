@@ -245,29 +245,36 @@ class CheckForPersonHasShopPermission
         'shop.order.status.update' => array(
           'permission' => 'edit',
           'modelName' => 'Order'
-        )
+        ),
+        'shop.product.catalog.manage' => array(
+          'permission' => true
+        ),
+        'shop.product.catalog.add' => array(
+          'permission' => 'add',
+          'modelName' => 'ProductCatalog'
+        ),
       );
 
       if(empty($name) || !isset($pages[$name])) {
         return $this->errorPage('ไม่อนุญาตให้เข้าถึงหน้านี้ได้');
       }
 
+      $shopId = Service::loadModel('Slug')
+      ->where('slug','like',$request->shopSlug)
+      ->select('model_id')
+      ->first()
+      ->model_id;
+
+      $person = Service::loadModel('PersonToShop')->getData(array(
+        'conditions' => array(
+          ['person_id','=',session()->get('Person.id')],
+          ['shop_id','=',$shopId],
+        ),
+        'fields' => array('role_id'),
+        'first' => true
+      ));
+
       if(!empty($pages[$name]['permission'])) {
-
-        $shopId = Service::loadModel('Slug')
-        ->where('slug','like',$request->shopSlug)
-        ->select('model_id')
-        ->first()
-        ->model_id;
-
-        $person = Service::loadModel('PersonToShop')->getData(array(
-          'conditions' => array(
-            ['person_id','=',session()->get('Person.id')],
-            ['shop_id','=',$shopId],
-          ),
-          'fields' => array('role_id'),
-          'first' => true
-        ));
 
         if(empty($person)) {
           return $this->errorPage('ไม่อนุญาตให้แก้ไขร้านค้านี้ได้');
@@ -347,6 +354,11 @@ class CheckForPersonHasShopPermission
         }
 
       }
+
+      $request->attributes->add([
+        'shopRole' => $person->role->name,
+        'shopPermission' => $person->role->getPermission(),
+      ]);
 
       return $next($request);
     }

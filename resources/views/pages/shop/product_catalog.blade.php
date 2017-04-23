@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col-lg-6 col-sm-12">
         <div class="title">
-          งาน
+          แคตตาล็อกสินค้า
         </div>
       </div>
     </div>
@@ -19,29 +19,13 @@
 
     <div class="tile-nav small">
       <div class="tile-nav-image">
-        <a href="{{$jobPostUrl}}">
+        <a href="{{request()->get('shopUrl')}}product/catalog/add">
           <img src="/images/common/plus.png">
         </a>
       </div>
       <div class="tile-nav-info">
-        <a href="{{$jobPostUrl}}">
-          <h4 class="tile-nav-title">ลงประกาศงาน</h4>
-        </a>
-      </div>
-    </div>
-
-    <div class="tile-nav small">
-      <div class="tile-nav-image">
-        <a href="{{$jobApplyListUrl}}">
-          <img src="/images/common/resume.png">
-        </a>
-      </div>
-      <div class="tile-nav-info">
-
-        <div class="tile-flag-count">{{$countJobApplying}}</div>
-        
-        <a href="{{$jobApplyListUrl}}">
-          <h4 class="tile-nav-title">รายชื่อผู้ที่สมัครงาน</h4>
+        <a href="{{request()->get('shopUrl')}}product/catalog/add">
+          <h4 class="tile-nav-title">เพิ่มแคตตาล็อกสินค้า</h4>
         </a>
       </div>
     </div>
@@ -60,24 +44,28 @@
 
         <div class="col-lg-3 col-sm-4 col-xs-12">
           <div class="card">
+
+            @if(!empty($data['flag']))
+              <div class="flag-wrapper">
+                <div class="flag sale-promotion">{{$data['flag']}}</div>
+              </div>
+            @endif
+
             <div class="image-tile">
-              <a href="{{$data['detailUrl']}}">
+              <a href="{{$data['menuUrl']}}">
                 <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
               </a>
             </div>
             <div class="card-info">
-              <a href="{{$data['detailUrl']}}">
-                <div class="card-title">{{$data['_short_name']}}</div>
+              <a href="{{$data['menuUrl']}}">
+                <div class="card-title">{{$data['name']}}</div>
               </a>
-              <div class="card-sub-info">
-                <div class="text-emphasize">{{$data['_wage']}}</div>
-              </div>
             </div>
-            
+
             <div class="button-group">
 
-              <a href="{{$data['editUrl']}}">
-                <div class="button wide-button">แก้ไข</div>
+              <a href="{{$data['menuUrl']}}">
+                <div class="button wide-button">จัดการแคตตาล็อกนี้</div>
               </a>
 
               <div class="additional-option">
@@ -85,11 +73,12 @@
                 <div class="dot"></div>
                 <div class="dot"></div>
                 <div class="additional-option-content">
-                  <a href="{{$data['detailUrl']}}">แสดงรายละเอียด</a>
-                  <a href="{{$data['deleteUrl']}}">ลบ</a>
+                  <a href="{{$data['deleteUrl']}}">แก้ไขข้อมูลทั่วไป</a>
+                  <a href="{{$data['deleteUrl']}}">เพิ่ม/ลบสินค้าในแคตตาล็อก</a>
+                  <a href="{{$data['deleteUrl']}}">ลบแคตตาล็อก</a>
                 </div>
               </div>
-          
+            
             </div>
 
           </div>
@@ -108,9 +97,9 @@
     <div class="list-empty-message text-center space-top-20">
       <img src="/images/common/not-found.png">
       <div>
-        <h3>ประกาศงาน</h3>
-        <p>ยังไม่มีประกาศงาน</p>
-        <a href="{{$jobPostUrl}}" class="button">ลงประกาศงาน</a>
+        <h3>แคตตาล็อกสินค้า</h3>
+        <p>ยังไม่มีแคตตาล็อกสินค้า</p>
+        <a href="{{request()->get('shopUrl')}}/product/catalog/add" class="button">เพิ่มแคตตาล็อกสินค้า</a>
       </div>
     </div>
 

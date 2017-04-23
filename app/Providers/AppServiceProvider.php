@@ -113,23 +113,12 @@ class AppServiceProvider extends ServiceProvider
       
       view()->composer('pages.shop.layouts.header', function($view){
 
-        $string = new String;
-
         $url = new Url;
+        $string = new String;
 
         $shop = request()->get('shop');
 
-        $personToShop = Service::loadModel('PersonToShop');
-        $person = $personToShop->getData(array(
-          'conditions' => array(
-            ['person_id','=',session()->get('Person.id')],
-            ['shop_id','=',$shop->id],
-          ),
-          'fields' => array('role_id'),
-          'first' => true
-        ));
-
-        view()->share('_shop_permission',$person->role->getPermission());
+        view()->share('_shop_permission',request()->get('shopPermission'));
 
         view()->share('_shop_id',$shop->id);
         view()->share('_shop_name',$shop->name);

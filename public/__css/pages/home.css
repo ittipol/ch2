@@ -1,4 +1,4 @@
-.banner {
+.primary-banner {
 	position: relative;
 	height: 500px;
 	background-color: #ccc;
@@ -9,26 +9,24 @@
 	margin-bottom: 40px;
 }
 
-.banner .banner-overlay-message {
+.primary-banner .banner-overlay-message {
 	position: absolute;
 	top: 100px;
 }
 
-.banner .banner-primary-title {
+.primary-banner .primary-banner-title {
 	color: #fff;
 	font-size: 40px;
 	width: 60%;
 }
 
-.banner .banner-description {
+.primary-banner .banner-description {
 	color: #fff;
 	font-size: 18px;
 	width: 80%;
 }
 
 .content-panel {
-	/*background-color: #F2F3F7;*/
-	/*border-top: 5px solid #0071c5;*/
 	margin-bottom: -20px;
 }
 

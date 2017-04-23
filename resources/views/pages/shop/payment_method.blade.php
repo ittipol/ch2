@@ -97,7 +97,7 @@
   @else
 
     <div class="list-empty-message text-center space-top-20">
-      <img class="space-bottom-20" src="/images/common/payment.png">
+      <img src="/images/common/not-found.png">
       <div>
         <h3>วิธีการชำระเงิน</h3>
         <p>ยังไม่มีวิธีการชำระเงิน เพิ่มวิธีการชำระเงินของคุณ เพื่อใช่ในการกำหนดวิธีการชำระเงินให้กับลูกค้าในหน้าการยืนยันการสั่งซื้อ</p>

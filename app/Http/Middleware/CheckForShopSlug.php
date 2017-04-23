@@ -40,8 +40,8 @@ class CheckForShopSlug
 
     // get permission
     $request->attributes->add([
-      'shopId' => $id,
       'shop' => $shop,
+      'shopId' => $id,
       'shopUrl' => $url->url('shop/'.$request->shopSlug)
     ]);
 

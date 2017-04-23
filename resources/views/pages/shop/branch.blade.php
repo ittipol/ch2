@@ -87,10 +87,10 @@
   @else
 
     <div class="list-empty-message text-center space-top-20">
-      <img class="space-bottom-20" src="/images/common/building.png">
+      <img src="/images/common/not-found.png">
       <div>
         <h3>สาขา</h3>
-        <p>ยังไม่มีสาขา เพิ่มสาขาเพื่อมให้ผู้ทราบถึงสินค้า งานบริการ หรืออื่นๆ ในแต่ละสาขาของคุณ</p>
+        <p>ยังไม่มีสาขา</p>
         <a href="{{$branchAddUrl}}" class="button">เพิ่มสาขา</a>
       </div>
     </div>

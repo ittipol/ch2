@@ -1,10 +1,10 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<div class="banner">
+<div class="primary-banner">
   <div class="container">
     <div class="banner-overlay-message">
-      <h2 class="banner-primary-title">เริ่มต้นธุรกิจของคุณและเชื่อมต่อธุรกิจของคุณกับผู้คน</h2>
+      <h2 class="primary-banner-title">เริ่มต้นธุรกิจของคุณและเชื่อมต่อธุรกิจของคุณกับผู้คน</h2>
       <p class="banner-description">สร้างธุรกิจของคุณ จัดการธุรกิจของคุณไปในทิศทางที่คุณต้องการ และให้เราทำหน้าที่เชื่อมต่อธุรกิจของคุณกับผู้คนอีกมากมาย</p>
       <a href="{{URL::to('community/shop/create')}}" class="button">เริ่มต้นธุรกิจของคุณ</a>
     </div>

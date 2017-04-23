@@ -31,6 +31,19 @@
     </div>
 
     <div class="tile-nav small">
+      <div class="tile-nav-image">
+        <a href="{{request()->get('shopUrl')}}manage/product/catalog">
+          <img src="/images/common/plus.png">
+        </a>
+      </div>
+      <div class="tile-nav-info">
+        <a href="{{request()->get('shopUrl')}}manage/product/catalog">
+          <h4 class="tile-nav-title">แคตตาล็อกสินค้า</h4>
+        </a>
+      </div>
+    </div>
+
+    <div class="tile-nav small">
       <div class="tile-flag-count">{{$countOrder}}</div>
 
       <div class="tile-nav-image">
@@ -158,11 +171,11 @@
   @else
 
     <div class="list-empty-message text-center space-top-20">
-      <img class="space-bottom-20" src="/images/common/tag.png">
+      <img src="/images/common/not-found.png">
       <div>
         <h3>สินค้า</h3>
-        <p>ยังไม่มีสินค้า เพิ่มสินค้า เพื่อขายสินค้าของคุณ</p>
-        <a href="{{$productPostUrl}}" class="button">เพิ่มสินค้า</a>
+        <p>ยังไม่มีสินค้า</p>
+        <a href="{{request()->get('shopUrl')}}product/add" class="button">เพิ่มสินค้า</a>
       </div>
     </div>
 

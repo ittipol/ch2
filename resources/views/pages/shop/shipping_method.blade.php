@@ -182,7 +182,7 @@
   @else
 
     <div class="list-empty-message text-center space-top-20">
-      <img class="space-bottom-20" src="/images/common/truck.png">
+      <img src="/images/common/not-found.png">
       <div>
         <h3>วิธีการจัดส่งสินค้า</h3>
         <p>ยังไม่มีวิธีการจัดส่งสินค้า เพิ่มวิธีการจัดส่งสินค้าของคุณ เพื่อให้ลูกค้าสามารถเลือกวิธีการจัดส่งสินค้าได้</p>

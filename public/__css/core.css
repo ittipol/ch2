@@ -151,6 +151,18 @@ a.button:visited {
 	margin-bottom: 240px !important;
 }
 
+.padding-10 {
+	padding: 10px !important;
+}
+
+.padding-15 {
+	padding: 15px !important;
+}
+
+.padding-20 {
+	padding: 20px !important;
+}
+
 .no-margin {
 	margin: 0 !important;
 }

@@ -18,6 +18,8 @@ class ShopController extends Controller
 
   public function index() {
 
+    $url = new Url;
+
     $model = request()->get('shop');
 
     $shopRelateToModel = Service::loadModel('ShopRelateTo');
@@ -36,10 +38,11 @@ class ShopController extends Controller
 
     $_products = array();
     foreach ($products as $product) {
-      $_products[] = $product->buildPaginationData();
+      $_products[] = array_merge($product->buildPaginationData(),array(
+        '_imageUrl' => $product->getCacheImageUrl('list'),
+        'detailUrl' => $url->url('shop/'.$this->param['shopSlug'].'/product/'.$product->id)
+      ));
     }
-
-    // dd($_products);
 
     // $productModel = Service::loadModel('Product');
     // $productModel->paginator->criteria(array(
@@ -56,6 +59,7 @@ class ShopController extends Controller
     // dd($products);
 
     $this->setData('products',$_products);
+    $this->setData('permission',request()->get('shopPermission'));
 
     return $this->view('pages.shop.index');
   }
@@ -218,7 +222,7 @@ class ShopController extends Controller
     $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/manage/product');
     $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/manage/product/{id}','menuUrl');
     $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/product/delete/{id}','deleteUrl');
-    $model->paginator->setUrl('product/detail/{id}','detailUrl');
+    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/product/{id}','detailUrl');
 
     $this->data = $model->paginator->build();
 
@@ -669,6 +673,34 @@ class ShopController extends Controller
       return Redirect::back();
     }
 
+  }
+
+  public function productCatalog() {
+
+    $url = new Url;
+    
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
+
+    $model = Service::loadModel('ProductCatalog');
+    $model->paginator->criteria(array(
+      'joins' => array('shop_relate_to', 'shop_relate_to.model_id', '=', $model->getTable().'.id'),
+      'conditions' => array(
+        array('shop_relate_to.model','like',$model->modelName),
+        array('shop_relate_to.shop_id','=',request()->get('shopId'))
+      ),
+      'order' => array('id','DESC')
+    ));
+    $model->paginator->setPage($page);
+    $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/manage/product/catalog');
+    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/manage/product/catalog/{id}','menuUrl');
+    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/product/catalog/delete/{id}','deleteUrl');
+
+    $this->data = $model->paginator->build();
+
+    return $this->view('pages.shop.product_catalog');
   }
 
 }

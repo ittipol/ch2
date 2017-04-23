@@ -10,7 +10,8 @@
 	margin-bottom: 20px;
 	position: relative;
 	background-color: #fff;
-	border: 2px solid #FDD835;
+	/*border: 2px solid #FDD835;*/
+	border: 2px solid #EEEEEE;
 }
 
 .card .overlay-top-info {
@@ -45,7 +46,8 @@
 
 .card .card-info {
 	position: relative;
-  background-color: #FFD54F;
+  /*background-color: #FFD54F;*/
+  background-color: #F5F5F5;
   padding: 15px 10px;
 }
 
@@ -76,9 +78,9 @@
 .card .card-title {
   text-decoration: none;
   font-size: 16px;
-  color: #666;
+  color: #333;
   cursor: pointer;
-  height: 50px;
+  height: 48px;
   line-height: 24px;
   overflow: hidden;
 }
@@ -193,8 +195,10 @@
 	margin: 0;
 	padding: 0;
 	line-height: 40px;
-	color: #000;
-	background-color: #E0E0E0;
+	/*color: #000;
+	background-color: #E0E0E0;*/
+	color: #fff;
+	background-color: #546E7A;
 }
 
 .card .button-group .additional-option {
@@ -204,7 +208,8 @@
 	position: absolute;
 	top: 0;
 	right: 0;
-	background-color: #BDBDBD;
+	/*background-color: #BDBDBD;*/
+	background-color: #37474F;
 }
 
 .card .button-group .additional-option .dot {

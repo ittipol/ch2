@@ -139,6 +139,10 @@ class Person extends Model
 
   public function getProfileImageUrl($size = null) {
 
+    if(empty($size)) {
+      $size = 'xsm';
+    }
+
     $cache = new Cache;
 
     $image = Image::select('id','model','model_id','filename','image_type_id')->find($this->profile_image_id);

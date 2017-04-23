@@ -277,6 +277,12 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::get('shop/{shopSlug}/manage/product','ShopController@product')->name('shop.product.manage');
   Route::get('shop/{shopSlug}/manage/product/{id}','ProductController@menu')->name('shop.product.manage.menu');
 
+  Route::get('shop/{shopSlug}/manage/product/catalog','ShopController@productCatalog')->name('shop.product.catalog.manage');
+  Route::get('shop/{shopSlug}/manage/product/catalog/{id}','ProductCatalogController@menu')->name('shop.product.catalog.menu');
+
+  Route::get('shop/{shopSlug}/product/catalog/add','ProductCatalogController@add')->name('shop.product.catalog.add');
+  Route::post('shop/{shopSlug}/product/catalog/add','ProductCatalogController@addingSubmit')->name('shop.product.catalog.add');
+
   Route::get('shop/{shopSlug}/product/add','ProductController@add')->name('shop.product.add');
   Route::post('shop/{shopSlug}/product/add','ProductController@addingSubmit')->name('shop.product.add');
 

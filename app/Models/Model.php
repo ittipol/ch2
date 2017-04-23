@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model as BaseModel;
 use App\library\service;
 use App\library\currency;
 use App\library\string;
+use App\library\cache;
 use App\library\formHelper;
 use App\library\modelData;
 use App\library\paginator;
@@ -145,7 +146,7 @@ class Model extends BaseModel
         $model = Service::loadModel($modelName);
 
         if(!method_exists($model,'__saveRelatedData')) {
-          return false;
+          continue;
         }
 
         $model->__saveRelatedData($this,$data);
@@ -458,6 +459,27 @@ class Model extends BaseModel
       'model' => $this->modelName,
       'model_id' => $this->id
     ));
+
+  }
+
+  public function getCacheImageUrl($size = null) {
+
+    if(empty($size)) {
+      $size = 'list';
+    }
+
+    $cache = new Cache;
+
+    $image = $this->getRelatedData('Image',array(
+      'first' => true
+    ));
+
+    $imageUrl = '/images/common/no-img.png';
+    if(!empty($image)) {
+      $imageUrl = $cache->getCacheImageUrl($image,$size);
+    }
+
+    return $imageUrl;
 
   }
 

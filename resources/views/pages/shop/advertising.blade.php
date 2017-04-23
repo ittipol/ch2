@@ -92,10 +92,10 @@
   @else
 
     <div class="list-empty-message text-center space-top-20">
-      <img class="space-bottom-20" src="/images/common/megaphone.png">
+      <img src="/images/common/not-found.png">
       <div>
         <h3>โฆษณา</h3>
-        <p>ยังไม่มีประกาศงานของคุณ เพิ่มประกาศงานของคุณเพื่อค้นหาพนักงานใหม่</p>
+        <p>ยังไม่มีโฆษณา</p>
         <a href="{{$advertisingPostUrl}}" class="button">ลงโฆษณา</a>
       </div>
     </div>
