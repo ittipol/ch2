@@ -33,6 +33,11 @@ class Cache
       'height' => 250,
       'fx' => 'getImageSizeByRatio',
     ),
+    // 'banner' => array(
+    //   'width' => 1200,
+    //   'height' => 300,
+    //   'fx' => 'getImageSizeByRatio',
+    // ),
   );
 
   public function __construct($image = null) {

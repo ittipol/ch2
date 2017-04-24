@@ -275,11 +275,11 @@ class ItemController extends Controller
 
     if($model->delete()) {
       MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
-      return Redirect::to('account/item');
     }else{
       MessageHelper::display('ไม่สามารถลบข้อมูลนี้ได้','error');
-      return Redirect::to('account/item');
     }
+
+    return Redirect::to('account/item');
 
   }
 

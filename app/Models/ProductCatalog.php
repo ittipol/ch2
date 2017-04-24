@@ -39,13 +39,39 @@ class ProductCatalog extends Model
     )
   );
 
-  // public function 
+  public function getTotalProductInCatalog() {
+    return ProductToProductCatalog::where('product_catalog_id','=',$this->id)->count();
+  }
+
+  public function getProductsInCatalog($build = false) {
+
+    $products = Product::join('product_to_product_catalogs', 'product_to_product_catalogs.product_id', '=', 'products.id')
+    ->where('product_to_product_catalogs.product_catalog_id','=',$this->id)
+    ->select('products.*')
+    ->orderBy('products.name','asc');
+
+    if(!$products->exists()) {
+      return null;
+    }
+
+    if(!$build) {
+      return $products->get();
+    }
+
+    $_products = array();
+    foreach ($products->get() as $product) {
+      $_products[] = $product->buildModelData();
+    }
+
+    return $_products;
+
+  }
 
   public function buildPaginationData() {
 
     return array(
       'name' => $this->name,
-      'totalProduct' => ProductToProductCatalog::where('product_catalog_id','=',$this->id)->count()
+      // 'totalProduct' => $this->getTotalProductInCatalog()
     );
     
   }

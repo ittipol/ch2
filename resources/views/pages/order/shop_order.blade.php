@@ -42,11 +42,9 @@
     @foreach($_pagination['data'] as $data)
       <div class="list-h-item clearfix">
 
-        <div class="list-image pull-left">
-          <a href="{{$data['detailUrl']}}">
-            <img src="/images/icons/bag-white.png">
-          </a>
-        </div>
+        <a href="{{$data['detailUrl']}}" class="list-image pull-left">
+          <img src="/images/icons/bag-white.png">
+        </a>
 
         <div class="col-md-11 col-xs-8">
 

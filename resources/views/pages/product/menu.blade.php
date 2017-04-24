@@ -66,6 +66,16 @@
         </div>
 
       </div>
+
+      <div class="additional-option">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="additional-option-content">
+          <a href="{{request()->get('shopUrl')}}product/{{$_modelData['id']}}">รายละเอียดสินค้า</a>
+          <a href="{{request()->get('shopUrl')}}product/delete/{{$_modelData['id']}}">ลบสินค้า</a>
+        </div>
+      </div>
       
     </div>
   </div>

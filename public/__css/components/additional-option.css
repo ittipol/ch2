@@ -141,17 +141,13 @@
   transition: all .3s ease-in-out;
 }
 
-/*.global-nav .additional-option:hover {
-  background-color: #3F51B5;
-}*/
-
 .global-nav .additional-option .dot {
   background-color: #fff;
 }
 
 .top-header-wrapper .additional-option {
   position: absolute;
-  top: 16px;
+  top: 35px;
   right: 5px;
   width: 40px;
 }

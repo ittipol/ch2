@@ -270,6 +270,38 @@ label.list-box > input[type="checkbox"] {
   right: 0;
 }
 
+.list-h .list-h-item.list-h-md .list-image {
+	width: 40px;
+  height: 40px;
+  border-radius: 40px;
+}
+
+.list-h .list-h-item.list-h-md .list-image img {
+	width: 40px;
+  height: 40px;
+}
+
+.list-h .list-h-item.list-h-md .primary-info.single-info {
+	line-height: 40px;
+}
+
+.list-h .list-h-item.list-h-sm .list-image {
+	width: 30px;
+  height: 30px;
+  border-radius: 30px;
+}
+
+.list-h .list-h-item.list-h-sm .list-image img {
+	width: 30px;
+  height: 30px;
+  padding: 8px;
+}
+
+.list-h .list-h-item.list-h-sm .primary-info.single-info {
+	line-height: 30px;
+	font-size: 15px;
+}
+
 @media only screen and (max-width : 768px) {
 	.list .list-content-wrapper .info {
 		width: 60%;

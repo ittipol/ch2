@@ -5,15 +5,90 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
 use App\library\messageHelper;
-// use App\library\filterHelper;
-// use App\library\url;
+use App\library\filterHelper;
+use App\library\url;
 // use App\library\cache;
 use Redirect;
 use Session;
 
 class ProductCatalogController extends Controller
 {
+
+  public function listView() {
+
+    $productCatalog = Service::loadModel('ProductCatalog')->find($this->param['id']);
+
+    $model = Service::loadModel('Product');
+    $filterHelper = new FilterHelper($model);
+
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
+
+    $filters = '';
+    if(!empty($this->query['fq'])) {
+      $filters = $this->query['fq'];
+    }
+
+    $sort = '';
+    if(!empty($this->query['sort'])) {
+      $sort = $this->query['sort'];
+    }
+
+    $filterHelper->setFilters($filters);
+    $filterHelper->setSorting($sort);
+
+    $conditions = $filterHelper->buildFilters();
+    $order = $filterHelper->buildSorting();
+
+    $conditions[] = array(
+      array('product_to_product_catalogs.product_catalog_id','=',$productCatalog->id),
+    );
+
+    $criteria = array();
+
+    $criteria = array_merge($criteria,array(
+      'joins' => array('product_to_product_catalogs', 'product_to_product_catalogs.product_id', '=', 'products.id')
+    ));
+
+    $criteria = array_merge($criteria,array(
+      'conditions' => $conditions
+    ));
+
+    if(!empty($order)) {
+      $criteria = array_merge($criteria,$order);
+    }
+
+    $model->paginator->criteria($criteria);
+    $model->paginator->setPage($page);
+    $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/product');
+    $model->paginator->setUrl('shop/'.request()->shopSlug.'/product/{id}','detailUrl');
+    $model->paginator->setQuery('sort',$sort);
+    $model->paginator->setQuery('fq',$filters);
+
+    $searchOptions = array(
+      'filters' => $filterHelper->getFilterOptions(),
+      'sort' => $filterHelper->getSortingOptions()
+    );
+
+    // $displayingFilters = array(
+    //   'filters' => $filterHelper->getDisplayingFilterOptions(),
+    //   'sort' => $filterHelper->getDisplayingSorting()
+    // );
+
+    $this->data = $model->paginator->build();
+    $this->setData('title',$productCatalog->name);
+    $this->setData('searchOptions',$searchOptions);
+    // $this->setData('displayingFilters',$displayingFilters);
+    
+    return $this->view('pages.product_catalog.list');
+
+  }
+
   public function menu() {
+
+    $url = new Url;
     
     $model = Service::loadModel('ProductCatalog')->find($this->param['id']);
 
@@ -21,7 +96,32 @@ class ProductCatalogController extends Controller
     //   'first' => true
     // ));
 
+    // $imageUrl = '/images/common/no-img.png';
+    // if(!empty($image)) {
+    //   $imageUrl = $image->getImageUrl();
+    // }
+
+    $products = Service::loadModel('Product')
+    ->join('product_to_product_catalogs', 'product_to_product_catalogs.product_id', '=', 'products.id')
+    ->where('product_to_product_catalogs.product_catalog_id','=',$model->id)
+    ->select('products.id','products.name')
+    ->orderBy('products.name','asc');
+
+    $_products = array();
+    if($products->exists()) {
+      foreach ($products->get() as $product) {
+        $_products[] = array(
+          'name' => $product->name,
+          'detailUrl' => $url->url('shop/'.$this->param['shopSlug'].'/product/'.$product->id),
+          'deleteUrl' => $url->url('shop/'.$this->param['shopSlug'].'/product_catalog/delete/product/'.$model->id.'/product_id:'.$product->id),
+        );
+      }
+    }
+
     $this->data = $model->modelData->build();
+    $this->setData('totalProduct',$model->getTotalProductInCatalog());
+    $this->setData('products',$_products);
+    // $this->setData('imageUrl',$imageUrl);
 
     return $this->view('pages.product_catalog.menu');
 
@@ -29,24 +129,7 @@ class ProductCatalogController extends Controller
 
   public function add() {
     $model = Service::loadModel('ProductCatalog');
-
-    // $products = Service::loadModel('Product')
-    // ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
-    // ->where('shop_relate_to.model','like','Product')
-    // ->where('shop_relate_to.shop_id','=',request()->get('shopId'))
-    // ->select('products.id','name')
-    // ->orderBy('products.name','asc')
-    // ->get();
-
-    // $_products = array();
-    // foreach ($products as $products) {
-    //   $_products[$products['id']] = $products['name'];
-    // }
-
-    // $model->formHelper->setData('products',$_products);
-
     $this->data = $model->formHelper->build();
-
     return $this->view('pages.product_catalog.form.product_catalog_add');
   }
 
@@ -89,7 +172,7 @@ class ProductCatalogController extends Controller
 
     if($model->fill($request->all())->save()) {
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/manage/product_catalog');
+      return Redirect::to('shop/'.request()->shopSlug.'/manage/product_catalog/'.$this->param['id']);
     }else{
       return Redirect::back();
     }
@@ -104,7 +187,7 @@ class ProductCatalogController extends Controller
     ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
     ->where('shop_relate_to.model','like','Product')
     ->where('shop_relate_to.shop_id','=',request()->get('shopId'))
-    ->select('products.id','name')
+    ->select('products.id','products.name')
     ->orderBy('products.name','asc')
     ->get();
 
@@ -143,11 +226,47 @@ class ProductCatalogController extends Controller
 
     if(Service::loadModel('ProductToProductCatalog')->__saveRelatedData($model,$options)) {
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/manage/product_catalog');
+      return Redirect::to('shop/'.request()->shopSlug.'/manage/product_catalog/'.$this->param['id']);
     }else{
       return Redirect::back();
     }
 
+  }
+
+  public function delete() {
+
+    $model = Service::loadModel('ProductCatalog')->find($this->param['id']);
+
+    if($model->delete()) {
+      MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
+    }else{
+      MessageHelper::display('ไม่สามารถลบข้อมูลนี้ได้','error');
+    }
+
+    return Redirect::to('shop/'.request()->shopSlug.'/manage/product_catalog/');
+  }
+
+  public function deleteProduct() {
+    
+    $model = Service::loadModel('ProductToProductCatalog')->where([
+      ['product_catalog_id','=',$this->param['id']],
+      ['product_id','=',$this->param['product_id']]
+    ]);
+
+    if(!$model->exists()) {
+      $this->error = array(
+        'message' => 'ขออภัย ไม่พบประกาศนี้ หรือข้อมูลนี้อาจถูกลบแล้ว'
+      );
+      return $this->error();
+    }
+
+    if($model->delete()) {
+      MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
+    }else{
+      MessageHelper::display('ไม่สามารถลบข้อมูลนี้ได้','error');
+    }
+
+    return Redirect::to('shop/'.request()->shopSlug.'/manage/product_catalog/'.$this->param['id']);
   }
 
 }

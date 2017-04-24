@@ -82,11 +82,9 @@
               @foreach($paymentMethods as $paymentMethod)
               <div class="list-h-item clearfix">
 
-                <div class="list-image pull-left">
-                  <a data-right-side-panel="1" data-right-side-panel-target="#payment_method_{{$paymentMethod['id']}}">
-                    <img src="/images/icons/payment-white.png">
-                  </a>
-                </div>
+                <a data-right-side-panel="1" data-right-side-panel-target="#payment_method_{{$paymentMethod['id']}}" class="list-image pull-left">
+                  <img src="/images/icons/payment-white.png">
+                </a>
 
                 <div class="col-md-11 col-xs-8">
 

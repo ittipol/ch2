@@ -211,12 +211,21 @@ a.button:visited {
 }
 
 .top-header {
-	/*margin: 0 auto;
-	padding: 20px 0 0;*/
+	margin: 0 auto;
+	padding: 20px 0 0;
+	position: relative;
 }
 
 .top-header .header-info {
 	margin-top: 30px;
+}
+
+.top-header .product-catalog-banner {
+	width: 100%;
+	height: 300px;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
 .top-header .header-primary-image {

@@ -318,6 +318,8 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::get('shop/{shopSlug}/product/branch/{id}','ProductController@branchEdit')->name('shop.product_branch.edit');
   Route::patch('shop/{shopSlug}/product/branch/{id}','ProductController@branchEditingSubmit')->name('shop.product_branch.edit');
 
+  Route::get('shop/{shopSlug}/product_catalog/{id}','ProductCatalogController@listView')->name('shop.product_catalog.list');
+
   Route::get('shop/{shopSlug}/manage/product_catalog','ShopController@productCatalog')->name('shop.product_catalog.manage');
   Route::get('shop/{shopSlug}/manage/product_catalog/{id}','ProductCatalogController@menu')->name('shop.product_catalog.menu');
 
@@ -329,6 +331,10 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
   Route::get('shop/{shopSlug}/product_catalog/product_list/edit/{id}','ProductCatalogController@productCatalogEdit')->name('shop.product_catalog.product_list.edit');
   Route::patch('shop/{shopSlug}/product_catalog/product_list/edit/{id}','ProductCatalogController@productCatalogEditingSubmit')->name('shop.product_catalog.product_list.edit');
+
+  Route::get('shop/{shopSlug}/product_catalog/delete/{id}','ProductCatalogController@delete')->name('shop.product_catalog.delete');
+
+  Route::get('shop/{shopSlug}/product_catalog/delete/product/{id}/product_id:{product_id}','ProductCatalogController@deleteProduct')->name('shop.product_catalog.delete.product');
 
 });
 

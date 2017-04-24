@@ -317,14 +317,14 @@ class ProductController extends Controller
       'sort' => $filterHelper->getSortingOptions()
     );
 
-    $displayingFilters = array(
-      'filters' => $filterHelper->getDisplayingFilterOptions(),
-      'sort' => $filterHelper->getDisplayingSorting()
-    );
+    // $displayingFilters = array(
+    //   'filters' => $filterHelper->getDisplayingFilterOptions(),
+    //   'sort' => $filterHelper->getDisplayingSorting()
+    // );
 
     $this->data = $model->paginator->build();
     $this->setData('searchOptions',$searchOptions);
-    $this->setData('displayingFilters',$displayingFilters);
+    // $this->setData('displayingFilters',$displayingFilters);
 
     return $this->view('pages.product.shop_product_list');
 
@@ -494,22 +494,7 @@ class ProductController extends Controller
     }
 
     $this->data = $model->modelData->build();
-
     $this->setData('imageUrl',$imageUrl);
-
-    // $this->setData('productDetailUrl','product/detail/'.$model->id);
-    // $this->setData('productEditUrl',request()->get('shopUrl').'product/edit/'.$model->id);
-    // $this->setData('productStatusUrl',request()->get('shopUrl').'product/status/edit/'.$model->id);
-    // $this->setData('productSpecificationEditUrl',request()->get('shopUrl').'product/specification/edit/'.$model->id);
-    // $this->setData('productCategoryEditUrl',request()->get('shopUrl').'product/category/edit/'.$model->id);
-    // $this->setData('productMinimumEditUrl',request()->get('shopUrl').'product/minimum/edit/'.$model->id);
-    // $this->setData('productStockEditUrl',request()->get('shopUrl').'product/stock/edit/'.$model->id);
-    // $this->setData('productPriceEditUrl',request()->get('shopUrl').'product/price/edit/'.$model->id);
-    // $this->setData('productSalePromotionUrl',request()->get('shopUrl').'product/sale_promotion/'.$model->id);
-    // $this->setData('productShippingUrl',request()->get('shopUrl').'product/shipping/edit/'.$model->id);
-    // $this->setData('productNotificationEditUrl',request()->get('shopUrl').'product/notification/edit/'.$model->id);
-    // $this->setData('productBranchUrl',request()->get('shopUrl').'product/branch/'.$model->id);
-
     $this->setData('categoryPaths',$model->getCategoryPaths());
 
     return $this->view('pages.product.menu');
