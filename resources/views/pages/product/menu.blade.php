@@ -40,7 +40,10 @@
           </a>
 
           @if(!empty($_modelData['promotion']))
-            <h4>{{$_modelData['promotion']['_reduced_price']}}</h4>
+            <h4>
+              {{$_modelData['promotion']['_reduced_price']}}
+              <span class="product-discount-tag">{{$_modelData['promotion']['percentDiscount']}}</span>
+            </h4>
             <h5 class="text-line-through">{{$_modelData['_price']}}</h5>
           @else
             <h4>{{$_modelData['_price']}}</h4>
@@ -71,35 +74,43 @@
 <div class="container">
 
   @if(Session::has('product_added'))
-    <div class="alert alert-info">
-      <h4><strong>โปรดตรวจสอบและเพิ่มข้อมูลสินค้าให้ครบถ้วนก่อนการขายสินค้านี้</strong></h4> 
-      ข้อมูลบางส่วนที่จำเป็นของสินค้านี้อาจยังไม่ได้ถูกเพิ่ม โปรดตรวจสอบและเพิ่มข้อมูลของสินค้าก่อนการขายสินค้า
+    <div class="secondary-message-box info space-bottom-30">
+      <div class="secondary-message-box-inner">
+        <h3>โปรดตรวจสอบและเพิ่มข้อมูลสินค้าให้ครบถ้วนก่อนการขายสินค้านี้</h3>
+        <p>ข้อมูลบางส่วนที่จำเป็นของสินค้านี้อาจยังไม่ได้ถูกเพิ่ม โปรดตรวจสอบและเพิ่มข้อมูลของสินค้าก่อนการขายสินค้า</p>
+      </div>
     </div>
   @endif
 
   @if($_modelData['active'])
-    <div class="alert alert-success">
-      <h4><strong>สถานะการขาย</strong>: {{$_modelData['_active']}}</h4> 
-      สามารถสั่งซื้อสินค้านี้ได้แล้ว
+    <div class="secondary-message-box success space-bottom-30">
+      <div class="secondary-message-box-inner">
+        <h3>สถานะการขาย: {{$_modelData['_active']}}</h3>
+        <p>ลูกค้าสามารถสั่งซื้อสินค้านี้ได้แล้ว</p>
+      </div>
     </div>
   @else
-    <div class="alert alert-danger">
-      <h4><strong>สถานะการขาย</strong>: {{$_modelData['_active']}}</h4>
-      <p>ไม่สามารถสั่งซื้อสินค้านี้ได้เมื่ออยู่ในสถานะ "ปิดการขาย"</p>
-      <br/>
-      <p>เปิดการขายสินค้านี้โดยไปยังหน้า "สถานะสินค้า" และเลือก "เปิดการขายสินค้านี้" <a href="{{$productStatusUrl}}">ไปยังหน้าสถานะสินค้า</a></p>
+    <div class="secondary-message-box error space-bottom-30">
+      <div class="secondary-message-box-inner">
+        <h3>สถานะการขาย: {{$_modelData['_active']}}</h3>
+        <p>เปิดการขายสินค้านี้โดยไปยังหน้า "สถานะสินค้า" และเลือก "เปิดการขายสินค้านี้" <a href="{{request()->get('shopUrl')}}product/status/edit/{{$_modelData['id']}}">ไปยังหน้าสถานะสินค้า</a></p>
+      </div>
     </div>
   @endif
 
   @if($_modelData['quantity'] == 0)
-  <div class="alert alert-danger">
-    <h4>สินค้าหมด</h4>
-    สินค้านี้จะไม่สามารถสั่งซื้อได้จนกว่าจะเพิ่มจำนวนสินค้า <a href="{{$productStockEditUrl}}">ไปยังหน้าปรับสินค้า</a>
+  <div class="secondary-message-box error space-bottom-30">
+    <div class="secondary-message-box-inner">
+      <h3>สินค้าหมด</h3>
+      <p>สินค้านี้จะไม่สามารถสั่งซื้อได้จนกว่าจะเพิ่มจำนวนสินค้า <a href="{{request()->get('shopUrl')}}product/stock/edit/{{$_modelData['id']}}">ไปยังหน้าปรับสินค้า</a></p>
+    </div>
   </div>
   @elseif(false && $_modelData['quantity'] < 11)
-  <div class="alert alert-warning">
-    <h4>สินค้าใกล้หมด</h4>
-    โปรดเพิ่มจำนวนสินค้าของคุณ เพื่อให้ลูกค้าสามารถสั่งซื้อสินค้านี้ได้ <a href="{{$productStockEditUrl}}">ไปยังหน้าปรับสินค้า</a>
+  <div class="secondary-message-box warning space-bottom-30">
+    <div class="secondary-message-box-inner">
+      <h3>สินค้าใกล้หมด</h3>
+      <p>โปรดเพิ่มจำนวนสินค้าของคุณ เพื่อให้ลูกค้าสามารถสั่งซื้อสินค้านี้ได้ <a href="{{request()->get('shopUrl')}}product/stock/edit/{{$_modelData['id']}}">ไปยังหน้าปรับสินค้า</a></p>
+    </div>
   </div>
   @endif
   

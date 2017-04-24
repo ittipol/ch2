@@ -39,10 +39,13 @@ class ProductCatalog extends Model
     )
   );
 
+  // public function 
+
   public function buildPaginationData() {
 
     return array(
       'name' => $this->name,
+      'totalProduct' => ProductToProductCatalog::where('product_catalog_id','=',$this->id)->count()
     );
     
   }

@@ -57,8 +57,12 @@ class ProductCatalogController extends Controller
     $request->request->add(['ShopRelateTo' => array('shop_id' => request()->get('shopId'))]);
 
     if($model->fill($request->all())->save()) {
+
+      session()->flash('product_catalog_added', true);
+
       MessageHelper::display('ข้อมูลถูกเพิ่มแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/manage/product_catalog');
+      return Redirect::to('shop/'.request()->shopSlug.'/product_catalog/product_list/edit/'.$model->id);
+      // return Redirect::to('shop/'.request()->shopSlug.'/manage/product_catalog');
     }else{
       return Redirect::back();
     }
@@ -154,7 +158,7 @@ class ProductCatalogController extends Controller
 
     $this->data = $model->formHelper->build();
 
-    return $this->view('pages.product_catalog.form.product_in_catalog_edit');
+    return $this->view('pages.product_catalog.form.product_list_edit');
 
   }
 

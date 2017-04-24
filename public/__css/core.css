@@ -282,3 +282,11 @@ a.button:visited {
 	max-width: 760px;
 	line-height: 22px;
 }
+
+.product-discount-tag {
+	padding: 4px 8px;
+	font-size: 18px;
+	white-space: nowrap;
+	background-color: #FFCDD2;
+	color: #D50000;
+}
