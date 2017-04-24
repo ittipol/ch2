@@ -30,20 +30,20 @@ class ProductCatalogController extends Controller
   public function add() {
     $model = Service::loadModel('ProductCatalog');
 
-    $products = Service::loadModel('Product')
-    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
-    ->where('shop_relate_to.model','like','Product')
-    ->where('shop_relate_to.shop_id','=',request()->get('shopId'))
-    ->select('products.id','name')
-    ->orderBy('products.name','asc')
-    ->get();
+    // $products = Service::loadModel('Product')
+    // ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
+    // ->where('shop_relate_to.model','like','Product')
+    // ->where('shop_relate_to.shop_id','=',request()->get('shopId'))
+    // ->select('products.id','name')
+    // ->orderBy('products.name','asc')
+    // ->get();
 
-    $_products = array();
-    foreach ($products as $products) {
-      $_products[$products['id']] = $products['name'];
-    }
+    // $_products = array();
+    // foreach ($products as $products) {
+    //   $_products[$products['id']] = $products['name'];
+    // }
 
-    $model->formHelper->setData('products',$_products);
+    // $model->formHelper->setData('products',$_products);
 
     $this->data = $model->formHelper->build();
 
@@ -76,34 +76,6 @@ class ProductCatalogController extends Controller
     $model->formHelper->loadData(array(
       'json' => array('Image','Tagging')
     ));
-
-    // $products = Service::loadModel('Product')
-    // ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
-    // ->where('shop_relate_to.model','like','Product')
-    // ->where('shop_relate_to.shop_id','=',request()->get('shopId'))
-    // ->select('products.id','name')
-    // ->orderBy('products.name','asc')
-    // ->get();
-
-    // $_products = array();
-    // foreach ($products as $products) {
-    //   $_products[$products['id']] = $products['name'];
-    // }
-
-    // $productsInCatalog = $model->getRelatedData('ProductToProductCatalog',array(
-    //   'fields' => array('product_id')
-    // ));
-
-    // $ProductToProductCatalog = array();
-    // if(!empty($productsInCatalog)) {
-    //   foreach ($productsInCatalog as $value) {
-    //     $ProductToProductCatalog['product_id'][] = $value->product->id;
-    //   }
-    // }
-
-    // $model->formHelper->setFormData('ProductToProductCatalog',$ProductToProductCatalog);
-
-    // $model->formHelper->setData('products',$_products);
 
     $this->data = $model->formHelper->build();
 
@@ -153,7 +125,6 @@ class ProductCatalogController extends Controller
     }
 
     $model->formHelper->setFormData('ProductToProductCatalog',$ProductToProductCatalog);
-
     $model->formHelper->setData('products',$_products);
 
     $this->data = $model->formHelper->build();

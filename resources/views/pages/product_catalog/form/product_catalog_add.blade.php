@@ -65,34 +65,6 @@
       ?>
     </div>
 
-    <div class="form-row">
-      <?php 
-        echo Form::label('', 'สินค้าในแคตตาล็อก', array(
-          'class' => 'required'
-        ));
-      ?>
-      <div class="form-item-group">
-        <div class="form-item-group-inner">
-          <div class="row">
-            <?php 
-              foreach ($_fieldData['products'] as $id => $name):
-            ?>
-              <div class="col-sm-12">
-                <label class="choice-box">
-                  <?php
-                    echo Form::checkbox('ProductToProductCatalog[product_id][]', $id);
-                  ?>
-                  <div class="inner">{{$name}}</div>
-                </label>
-              </div>
-            <?php
-              endforeach;
-            ?>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
 
   <div class="form-section">
