@@ -399,6 +399,18 @@ class ProductController extends Controller
       }
     }
 
+    $productCatalogs = $model->getProductCatalogs();
+
+    $_productCatalogs = array();
+    if(!empty($productCatalogs)) {
+      foreach ($productCatalogs as $productCatalog) {
+        $_productCatalogs[] = array(
+          'name' => $productCatalog->name,
+          'detailUrl' => $url->url('shop/'.$slug.'/product_catalog/'.$productCatalog->id),
+        );
+      }
+    }
+
     $this->data = $model->modelData->build();
 
     $this->setData('shop',$shop->modelData->build(true));
@@ -406,7 +418,7 @@ class ProductController extends Controller
     $this->setData('shopCoverUrl',$shop->getCoverUrl());
     $this->setData('shopUrl','shop/'.$slug);
     $this->setData('categoryPaths',$model->getCategoryPaths());
-
+    $this->setData('productCatalogs',$_productCatalogs);
     $this->setData('branchLocations',json_encode($branchLocations));
     $this->setData('hasBranchLocation',$hasBranchLocation);
 
@@ -462,15 +474,21 @@ class ProductController extends Controller
       }
     }
 
+    $productCatalogs = $model->getProductCatalogs();
+
+    $_productCatalogs = array();
+    if(!empty($productCatalogs)) {
+      foreach ($productCatalogs as $productCatalog) {
+        $_productCatalogs[] = array(
+          'name' => $productCatalog->name,
+          'detailUrl' => $url->url('shop/'.request()->shopSlug.'/product_catalog/'.$productCatalog->id),
+        );
+      }
+    }
+
     $this->data = $model->modelData->build();
-
-    // $this->setData('shop',$shop->modelData->build(true));
-    // $this->setData('shopImageUrl',$shop->getProfileImageUrl());
-    // $this->setData('shopCoverUrl',$shop->getCoverUrl());
-    // $this->setData('shopUrl',request()->get('shopUrl'));
-
     $this->setData('categoryPaths',$model->getCategoryPaths());
-
+    $this->setData('productCatalogs',$_productCatalogs);
     $this->setData('branchLocations',json_encode($branchLocations));
     $this->setData('hasBranchLocation',$hasBranchLocation);
 

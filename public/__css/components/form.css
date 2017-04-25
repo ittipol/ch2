@@ -253,10 +253,6 @@ form .input-addon-group {
 	margin-top: 10px;
 }
 
-/*form .input-addon-group .input-addon:not(:last-child) {
-
-}*/
-
 form .input-addon > select:last-child {
   position: relative;
   top: 1px;

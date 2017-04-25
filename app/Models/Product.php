@@ -315,6 +315,20 @@ class Product extends Model
   //   return $measurement->convertToGram($this->weightUnit->unit,$this->weight);
   // }
 
+  public function getProductCatalogs() {
+
+    $productCatalogs = ProductCatalog::join('product_to_product_catalogs', 'product_to_product_catalogs.product_catalog_id', '=', 'product_catalogs.id')
+    ->where('product_to_product_catalogs.product_id','=',$this->id)
+    ->select('product_catalogs.*')
+    ->orderBy('product_catalogs.name','asc');
+
+    if(!$productCatalogs->exists()) {
+      return null;
+    }
+
+    return $productCatalogs->get();
+  }
+
   public function buildModelData() {
 
     $currency = new Currency;

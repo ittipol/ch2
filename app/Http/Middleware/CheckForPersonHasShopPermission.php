@@ -135,7 +135,9 @@ class CheckForPersonHasShopPermission
           'modelName' => 'Order'
         ),
         'shop.product.list' => true,
-        'shop.product.detail' => true,
+        'shop.product.detail' => array(
+          'modelName' => 'Product'
+        ),
         'shop.product.manage' => array(
           'permission' => true
         ),

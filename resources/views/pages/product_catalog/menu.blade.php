@@ -40,7 +40,7 @@
         <div class="dot"></div>
         <div class="additional-option-content">
           <a href="{{request()->get('shopUrl')}}product_catalog/{{$_modelData['id']}}">ไปยังหน้าแคตตาล็อก</a>
-          <a href="{{request()->get('shopUrl')}}product_catalog/delete/{{$_modelData['id']}}">ลบแคตตาล็อก</a>
+          <a href="{{request()->get('shopUrl')}}product_catalog/delete/{{$_modelData['id']}}" data-modal="1" data-modal-title="ต้องการลบแคตตาล็อกใช่หรือไม่">ลบแคตตาล็อก</a>
         </div>
       </div>
       
@@ -97,7 +97,7 @@
             <div class="dot"></div>
             <div class="dot"></div>
             <div class="additional-option-content">
-              <a href="{{$data['deleteUrl']}}">นำสินค้านี้ออก</a>
+              <a href="{{$data['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการนำสินค้า {{$data['name']}} ออกใช่หรือไม่">นำสินค้าออก</a>
             </div>
           </div>
 

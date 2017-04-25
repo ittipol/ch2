@@ -77,10 +77,20 @@ class ProductCatalogController extends Controller
     //   'sort' => $filterHelper->getDisplayingSorting()
     // );
 
+    $image = $productCatalog->getRelatedData('Image',array(
+      'first' => true
+    ));
+
+    $imageUrl = '/images/common/no-img.png';
+    if(!empty($image)) {
+      $imageUrl = $image->getImageUrl();
+    }
+
     $this->data = $model->paginator->build();
-    $this->setData('title',$productCatalog->name);
+    $this->setData('productCatalog',$productCatalog->buildModelData());
     $this->setData('searchOptions',$searchOptions);
     // $this->setData('displayingFilters',$displayingFilters);
+    $this->setData('imageUrl',$imageUrl);
     
     return $this->view('pages.product_catalog.list');
 

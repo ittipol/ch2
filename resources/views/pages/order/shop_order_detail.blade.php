@@ -149,11 +149,13 @@
       <a class="button" data-right-side-panel="1" data-right-side-panel-target="#customer_message">แสดงข้อความจากผู้ซื้อ</a>
     </div>
 
-    <div id="customer_message" class="right-size-panel">
+    <div id="customer_message" class="right-size-panel description">
       <div class="right-size-panel-inner">
-          <h3>ข้อความจากผู้ซื้อ</h3>
+          <h4>ข้อความจากผู้ซื้อ</h4>
           <div class="line space-bottom-10"></div>
-          {!!$order['customer_message']!!}
+          <div class="right-size-panel-description">
+            {!!$order['customer_message']!!}
+          </div>
         <div class="right-size-panel-close-button"></div>
       </div>
     </div>

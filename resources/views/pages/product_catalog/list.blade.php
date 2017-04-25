@@ -24,11 +24,33 @@
 <div class="container list space-top-30">
 
   <h4 class="no-margin">แคตตาล็อกสินค้า</h4>
-  <h3>{{$title}}</h3>
-  <div class="line"></div>
+  <h3>{{$productCatalog['name']}}</h3>
+
+  @if(!empty($imageUrl))
+    <div class="product-catalog-banner" style="background-image:url({{$imageUrl}});"></div>
+  @else
+    <div class="line"></div>
+  @endif
+
   <div class="text-right space-top-bottom-20">
+    @if(!empty($productCatalog['description']))
+    <a class="button" data-right-side-panel="1" data-right-side-panel-target="#catalog_description">คำอธิบายแคตตาล็อก</a>
+    @endif
     <a class="button" data-right-side-panel="1" data-right-side-panel-target="#filter_expand_panel">ตัวกรอง</a>
   </div>
+
+  @if(!empty($productCatalog['description']))
+  <div id="catalog_description" class="right-size-panel description">
+    <div class="right-size-panel-inner">
+        <h4>คำอธิบายแคตตาล็อก</h4>
+        <div class="line space-bottom-10"></div>
+        <div class="right-size-panel-description">
+          {!!$productCatalog['description']!!}
+        </div>
+      <div class="right-size-panel-close-button"></div>
+    </div>
+  </div>
+  @endif
 
   <div id="filter_expand_panel" class="right-size-panel filter">
     <div class="right-size-panel-inner">
@@ -99,8 +121,7 @@
   <div class="list-empty-message text-center space-top-20">
     <img class="space-bottom-20" src="/images/common/not-found.png">
     <div>
-      <h3>ไม่พบสินค้า</h3>
-      <p>ขออภัย ไม่พบสินค้าที่คุณกำลังหา</p>
+      <h3>ยังไม่มีสินค้าในแคตตาล็อก</h3>
     </div>
   </div>
 

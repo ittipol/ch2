@@ -67,11 +67,21 @@ class ProductCatalog extends Model
 
   }
 
+  public function buildModelData() {
+
+    return array(
+      'id' => $this->id,
+      'name' => $this->name,
+      'description' => nl2br($this->description)
+    );
+    
+  }
+
   public function buildPaginationData() {
 
     return array(
       'name' => $this->name,
-      // 'totalProduct' => $this->getTotalProductInCatalog()
+      'totalProduct' => $this->getTotalProductInCatalog()
     );
     
   }

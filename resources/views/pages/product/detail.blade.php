@@ -254,6 +254,27 @@
   </div>
   @endif
 
+  @if(!empty($productCatalogs))
+  <h4 class="space-top-50">แคตตาล็อกสินค้าที่เกี่ยวข้อง</h4>
+  <div class="list-h">
+  @foreach($productCatalogs as $data)
+    <div class="list-h-item list-h-sm clearfix">
+
+      <a href="{{$data['detailUrl']}}" class="list-image pull-left">
+        <img src="/images/icons/tag-white.png">
+      </a>
+
+      <div class="col-md-11 col-xs-8">
+        <a href="{{$data['detailUrl']}}">
+          <h4 class="primary-info single-info">{{$data['name']}}</h4>
+        </a>
+      </div>
+
+    </div>
+  @endforeach
+  </div>
+  @endif
+
 </div>
 
 <script type="text/javascript">

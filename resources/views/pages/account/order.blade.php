@@ -68,7 +68,7 @@
   @else
 
   <div class="list-empty-message text-center space-top-20">
-    <img class="space-bottom-20" src="/images/common/not-found.png">
+    <img src="/images/common/not-found.png">
     <div>
       <h3>ยังไม่มีรายการสั่งซื้อสินค้า</h3>
       <a href="{{URL::to('product/shelf')}}" class="button">เลือกซื้อสินค้า</a>

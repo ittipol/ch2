@@ -64,7 +64,7 @@
 
     <div class="form-row">
       <?php 
-        echo Form::label('description', 'คำอธิบายของแคตตาล็อก');
+        echo Form::label('description', 'คำอธิบายแคตตาล็อก');
         echo Form::textarea('description');
       ?>
     </div>

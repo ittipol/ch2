@@ -220,14 +220,6 @@ a.button:visited {
 	margin-top: 30px;
 }
 
-.top-header .product-catalog-banner {
-	width: 100%;
-	height: 300px;
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-}
-
 .top-header .header-primary-image {
 	width: 250px;
 	margin: 0 auto;
@@ -298,4 +290,20 @@ a.button:visited {
 	white-space: nowrap;
 	background-color: #FFCDD2;
 	color: #D50000;
+}
+
+.product-catalog-banner {
+	width: 100%;
+	height: 300px;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+@media only screen and (max-width : 480px) {
+
+	.product-catalog-banner {
+		height: 120px;
+	}
+
 }

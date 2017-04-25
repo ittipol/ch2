@@ -25,11 +25,9 @@
             <label class="item-row" id="edit_shop_profile_image_button">
               อัพโหลดรูปภาพ
             </label>
-            @if(!empty($_shop_profileImage))
             <a class="item-row">
               ลบรุปภาพโปรไฟล์
             </a>
-            @endif
           </div>
         </div>
         @endif
@@ -74,11 +72,9 @@
         <label class="item-row" id="edit_shop_cover_button">
           อัพโหลดรูปภาพ
         </label>
-        @if(!empty($_shop_cover))
         <a class="item-row">
           ลบรุปภาพหน้าปก
         </a>
-        @endif
       </div>
     </div>
     @endif
