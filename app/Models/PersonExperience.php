@@ -268,10 +268,6 @@ class PersonExperience extends Model
 
     }
 
-    // $personCareerObjective = PersonCareerObjective::select('career_objective')
-    // ->where('person_experience_id','=',$this->id)
-    // ->first();
-
     // Get lastest working exp.
     $workingExperience = PersonWorkingExperience::where('person_id','=',$person->id)
     ->orderBy('created_at','desc')

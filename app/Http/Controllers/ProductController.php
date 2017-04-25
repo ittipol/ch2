@@ -76,17 +76,8 @@ class ProductController extends Controller
       $_products = array();
       foreach ($products as $product) {
 
-        $image = $product->getRelatedData('Image',array(
-          'first' => true
-        ));
-
-        $imageUrl = null;
-        if(!empty($image)) {
-          $imageUrl = $cache->getCacheImageUrl($image,'list');
-        }
-
         $_products['items'][] = array_merge($product->buildPaginationData(),array(
-          '_imageUrl' => $imageUrl,
+          '_imageUrl' => $this->getImage('list'),
           'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
         ));
         
@@ -502,17 +493,8 @@ class ProductController extends Controller
 
     $model = Service::loadModel('Product')->find($this->param['id']);
 
-    $image = $model->getRelatedData('Image',array(
-      'first' => true
-    ));
-
-    $imageUrl = null;
-    if(!empty($image)) {
-      $imageUrl = $cache->getCacheImageUrl($image,'list');
-    }
-
     $this->data = $model->modelData->build();
-    $this->setData('imageUrl',$imageUrl);
+    $this->setData('imageUrl',$this->getImage('list'));
     $this->setData('categoryPaths',$model->getCategoryPaths());
 
     return $this->view('pages.product.menu');

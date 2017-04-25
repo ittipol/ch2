@@ -151,20 +151,11 @@ class ProductCatalogController extends Controller
     //   'sort' => $filterHelper->getDisplayingSorting()
     // );
 
-    $image = $productCatalog->getRelatedData('Image',array(
-      'first' => true
-    ));
-
-    $imageUrl = null;
-    if(!empty($image)) {
-      $imageUrl = $image->getImageUrl();
-    }
-
     $this->data = $model->paginator->build();
     $this->setData('productCatalog',$productCatalog->buildModelData());
     $this->setData('searchOptions',$searchOptions);
     // $this->setData('displayingFilters',$displayingFilters);
-    $this->setData('imageUrl',$imageUrl);
+    $this->setData('imageUrl',$this->getImage());
     
     return $this->view('pages.product_catalog.product_list');
 
@@ -175,15 +166,6 @@ class ProductCatalogController extends Controller
     $url = new Url;
     
     $model = Service::loadModel('ProductCatalog')->find($this->param['id']);
-
-    // $image = $model->getRelatedData('Image',array(
-    //   'first' => true
-    // ));
-
-    // $imageUrl = null;
-    // if(!empty($image)) {
-    //   $imageUrl = $image->getImageUrl();
-    // }
 
     $products = Service::loadModel('Product')
     ->join('product_to_product_catalogs', 'product_to_product_catalogs.product_id', '=', 'products.id')
@@ -205,7 +187,6 @@ class ProductCatalogController extends Controller
     $this->data = $model->modelData->build();
     $this->setData('totalProduct',$model->getTotalProductInCatalog());
     $this->setData('products',$_products);
-    // $this->setData('imageUrl',$imageUrl);
 
     return $this->view('pages.product_catalog.menu');
 

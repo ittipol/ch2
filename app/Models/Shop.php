@@ -354,7 +354,7 @@ class Shop extends Model
     $productCatalogs = ProductCatalog::join('shop_relate_to', 'shop_relate_to.model_id', '=', 'product_catalogs.id')
     ->where('shop_relate_to.model','like','ProductCatalog')
     ->where('shop_relate_to.shop_id','=',$this->id)
-    ->take(5)
+    ->take(4)
     ->orderBy('product_catalogs.created_at','desc');
 
     if(!$productCatalogs->exists()) {

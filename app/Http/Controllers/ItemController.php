@@ -43,17 +43,8 @@ class ItemController extends Controller
       $_items = array();
       foreach ($items as $item) {
 
-        $image = $item->getRelatedData('Image',array(
-          'first' => true
-        ));
-
-        $imageUrl = null;
-        if(!empty($image)) {
-          $imageUrl = $cache->getCacheImageUrl($image,'list');
-        }
-
         $_items['items'][] = array_merge($item->buildPaginationData(),array(
-          '_imageUrl' => $imageUrl,
+          '_imageUrl' => $this->getImage('list'),
           'detailUrl' => $url->setAndParseUrl('item/detail/{id}',array('id'=>$item->id))
         ));
         

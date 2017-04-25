@@ -13,35 +13,17 @@
       <div class="col-sm-3 col-sm-12">
         
         <div class="box">
-          Menu
+          <div>สินค้า</div>
+          <div>งาน</div>
+          <div>โฆษณา</div>
+          <div class="line"></div>
+          <div>แคตตาล็อกสินค้า</div>
         </div>
 
       </div>
 
       <div class="col-sm-9 col-sm-12">
 
-        @if(!empty($permission['edit']) && $permission['edit'])
-        <div class="box">
-          <div class="box-header">
-            <h4 class="box-header-title">
-              <img class="icon-before-title" src="/images/icons/edit-blue.png">ปักหมุดข้อความ
-            </h4>
-          </div>
-          <?php 
-            echo Form::open([
-              'url' => $pinnedMessageAddUrl,
-              'method' => 'post'
-            ]);
-          ?>
-          <textarea class="pin-message-input"></textarea>
-          <?php
-            echo Form::close();
-          ?>
-          <div class="box-footer text-right">
-            <a href="" class="button">โพสต์</a>
-          </div>
-        </div>
-        @endif
 
       </div>
 
@@ -49,24 +31,29 @@
 
     @if(!empty($permission['edit']) && $permission['edit'])
     <div class="box">
+      <?php 
+        echo Form::open([
+          'url' => request()->get('shopUrl').'pinned_message/add',
+          // 'id' => 'pinned_message_form',
+          'method' => 'post'
+        ]);
+      ?>
       <div class="box-header">
         <h4 class="box-header-title">
           <img class="icon-before-title" src="/images/icons/edit-blue.png">ปักหมุดข้อความ
         </h4>
       </div>
-      <?php 
-        echo Form::open([
-          'url' => $pinnedMessageAddUrl,
-          'method' => 'post'
-        ]);
-      ?>
       <textarea class="pin-message-input"></textarea>
+      <div class="box-footer text-right">
+        <?php
+          echo Form::submit('โพสต์' , array(
+            'class' => 'button'
+          ));
+        ?>
+      </div>
       <?php
         echo Form::close();
       ?>
-      <div class="box-footer text-right">
-        <a href="" class="button">โพสต์</a>
-      </div>
     </div>
     @endif
 
@@ -144,24 +131,40 @@
         </h4>
       </div>
 
-      <div class="box-content padding-left-right-15">
+      <div class="box-content padding-15">
         @if(!empty($productCatalogs))
-        <div class="list-h">
-        @foreach($productCatalogs as $data)
-          <div class="list-h-item list-h-sm clearfix">
+        <div class="row">
 
-            <a href="{{$data['detailUrl']}}" class="list-image pull-left">
-              <img src="/images/icons/tag-white.png">
-            </a>
+          @foreach($productCatalogs as $data)
 
-            <div class="col-md-11 col-xs-8">
-              <a href="{{$data['detailUrl']}}">
-                <h4 class="primary-info single-info">{{$data['name']}}</h4>
-              </a>
+          <div class="col-md-6 col-xs-12">
+            <div class="card">
+
+              <div class="image-tile cover">
+                <a href="{{$data['detailUrl']}}">
+                  <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+                </a>
+              </div>
+              
+              <div class="card-info">
+                <a href="{{$data['detailUrl']}}">
+                  <div class="card-title">{{$data['name']}}</div>
+                </a>
+              </div>
+
+              <div class="button-group">
+
+                <a href="{{$data['detailUrl']}}">
+                  <div class="button wide-button">แสดงสินค้าในแคตตาล็อก</div>
+                </a>
+              
+              </div>
+              
             </div>
-
           </div>
-        @endforeach
+
+          @endforeach
+
         </div>
         @endif
       </div>
@@ -174,6 +177,29 @@
 </div>
 
 <script type="text/javascript">
+
+  class PinnedMessage {
+
+    contructor() {
+
+    }
+
+    load() {
+      this.bind();
+    }
+
+    bind() {
+
+    }
+
+  }
+
+  $(document).ready(function(){
+
+    const pinnedMessage = new PinnedMessage();
+    pinnedMessage.load();
+
+  });
 
 </script>
 

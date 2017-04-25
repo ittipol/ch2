@@ -52,6 +52,7 @@ class ShopController extends Controller
       foreach ($productCatalogs as $productCatalog) {
         $_productCatalogs[] = array(
           'name' => $productCatalog->name,
+          '_imageUrl' => $productCatalog->getCacheImageUrl('list'),
           'detailUrl' => $url->url('shop/'.$this->param['shopSlug'].'/product_catalog/'.$productCatalog->id),
         );
       }
@@ -60,7 +61,6 @@ class ShopController extends Controller
     $this->setData('products',$_products);
     $this->setData('permission',request()->get('shopPermission'));
     $this->setData('productCatalogs',$_productCatalogs);
-    $this->setData('pinnedMessageAddUrl',$url->url('shop/'.$this->param['shopSlug'].'/pinned_message/add'));
 
     return $this->view('pages.shop.index');
   }

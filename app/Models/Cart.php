@@ -232,16 +232,6 @@ class Cart extends Model
       return null;
     }
 
-    $image = $product->getRelatedData('Image',array(
-      'fields' => array('id','model','model_id','filename','image_type_id'),
-      'first' => true
-    ));
-
-    $imageUrl = null;
-    if(!empty($image)) {
-      $imageUrl = $cache->getCacheImageUrl($image,'sm');
-    }
-
     return array_merge(array(
       'id' => $product->id,
       'name' => $product->name,
@@ -254,7 +244,7 @@ class Cart extends Model
       'subTotal' => $this->getProductSubTotal($product,$quantity,true),
       'shippingCost' => $this->getProductShippingCost($product,$quantity,true),
       'total' => $this->getProductTotal($product,$quantity,true),
-      'imageUrl' => $imageUrl,
+      'imageUrl' => $this->getImage('sm'),
       'productDetailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id' => $product->id)),
     ),$this->checkProductError($product,$quantity));
 

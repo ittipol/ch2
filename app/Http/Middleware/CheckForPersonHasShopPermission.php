@@ -281,6 +281,9 @@ class CheckForPersonHasShopPermission
           'permission' => 'delete',
           'modelName' => 'ProductCatalog'
         ),
+        'shop.pinned_message.add' => array(
+          'permission' => 'add',
+        ),
       );
 
       if(empty($name) || !isset($pages[$name])) {

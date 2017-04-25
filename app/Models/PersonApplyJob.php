@@ -108,20 +108,20 @@ class PersonApplyJob extends Model
       $imageUrl = $cache->getCacheImageUrl($image,'list');
     }
 
-    $jobImage = $this->job->getRelatedData('Image',array(
-      'first' => true
-    ));
+    // $jobImage = $this->job->getRelatedData('Image',array(
+    //   'first' => true
+    // ));
 
-    $jobImageUrl = null;
-    if(!empty($jobImage)) {
-      $jobImageUrl = $cache->getCacheImageUrl($jobImage,'list');
-    }
+    // $jobImageUrl = null;
+    // if(!empty($jobImage)) {
+    //   $jobImageUrl = $cache->getCacheImageUrl($jobImage,'list');
+    // }
 
     return array(
       'personName' => $this->person->name,
       '_imageUrl' => $imageUrl,
       '_jobNameShort' => $string->truncString($this->job->name,45),
-      '_jobImageUrl' => $jobImageUrl,
+      '_jobImageUrl' => $this->job->getImage('list'),
       'createdDate' => $date->covertDateTimeToSting($this->created_at->format('Y-m-d H:i:s')),
     );
 

@@ -40,17 +40,8 @@ class AdvertisingController extends Controller
       $_advertisings = array();
       foreach ($advertisings as $advertising) {
         
-        $image = $advertising->getRelatedData('Image',array(
-          'first' => true
-        ));
-
-        $imageUrl = null;
-        if(!empty($image)) {
-          $imageUrl = $cache->getCacheImageUrl($image,'list');
-        }
-
         $_advertisings['items'][] = array_merge($advertising->buildPaginationData(),array(
-          '_imageUrl' => $imageUrl,
+          '_imageUrl' => $this->getImage('list'),
           'detailUrl' => $url->setAndParseUrl('advertising/detail/{id}',array('id'=>$advertising->id))
         ));
 

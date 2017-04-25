@@ -121,18 +121,8 @@ class Order extends Model
     $_orderProducts = array();
     foreach ($orderProducts as $orderProduct) {
 
-      $image = Product::select('id')->find($orderProduct->product_id)->getRelatedData('Image',array(
-        'fields' => array('id','model','model_id','filename','image_type_id'),
-        'first' => true
-      ));
-
-      $imageUrl = null;
-      if(!empty($image)) {
-        $imageUrl = $cache->getCacheImageUrl($image,'sm');
-      }
-
       $_orderProducts[] = array_merge($orderProduct->buildModelData(),array(
-        'imageUrl' => $imageUrl,
+        'imageUrl' => $this->getImage('sm'),
         'productDetailUrl' => $url->setAndParseUrl('product/detail/{product_id}',array('product_id' => $orderProduct->product_id))
       ));
 

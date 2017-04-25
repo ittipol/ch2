@@ -582,6 +582,7 @@ class Model extends BaseModel
     $cache = new Cache;
 
     $image = $this->getRelatedData('Image',array(
+      'fields' => array('model','model_id','filename','image_type_id'),
       'first' => true
     ));
 
