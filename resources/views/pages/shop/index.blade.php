@@ -8,6 +8,45 @@
 
   <div class="container">
 
+    <div class="row">
+
+      <div class="col-sm-3 col-sm-12">
+        
+        <div class="box">
+          Menu
+        </div>
+
+      </div>
+
+      <div class="col-sm-9 col-sm-12">
+
+        @if(!empty($permission['edit']) && $permission['edit'])
+        <div class="box">
+          <div class="box-header">
+            <h4 class="box-header-title">
+              <img class="icon-before-title" src="/images/icons/edit-blue.png">ปักหมุดข้อความ
+            </h4>
+          </div>
+          <?php 
+            echo Form::open([
+              'url' => $pinnedMessageAddUrl,
+              'method' => 'post'
+            ]);
+          ?>
+          <textarea class="pin-message-input"></textarea>
+          <?php
+            echo Form::close();
+          ?>
+          <div class="box-footer text-right">
+            <a href="" class="button">โพสต์</a>
+          </div>
+        </div>
+        @endif
+
+      </div>
+
+    </div>
+
     @if(!empty($permission['edit']) && $permission['edit'])
     <div class="box">
       <div class="box-header">
@@ -15,7 +54,16 @@
           <img class="icon-before-title" src="/images/icons/edit-blue.png">ปักหมุดข้อความ
         </h4>
       </div>
+      <?php 
+        echo Form::open([
+          'url' => $pinnedMessageAddUrl,
+          'method' => 'post'
+        ]);
+      ?>
       <textarea class="pin-message-input"></textarea>
+      <?php
+        echo Form::close();
+      ?>
       <div class="box-footer text-right">
         <a href="" class="button">โพสต์</a>
       </div>
@@ -25,7 +73,7 @@
     <div class="box">
       <div class="box-header">
         <h4 class="box-header-title">
-          <img class="icon-before-title" src="/images/icons/edit-blue.png">สินค้า
+          <img class="icon-before-title" src="/images/icons/tag-blue.png">สินค้า
         </h4>
       </div>
 
@@ -87,11 +135,46 @@
       </div>
 
     </div>
-
     <a href="{{request()->get('shopUrl')}}product" class="button wide-button">แสดงสินค้าทั้งหมด</a>
+
+    <div class="box">
+      <div class="box-header">
+        <h4 class="box-header-title">
+          <img class="icon-before-title" src="/images/icons/tag-blue.png">แคตตาล็อกสินค้า
+        </h4>
+      </div>
+
+      <div class="box-content padding-left-right-15">
+        @if(!empty($productCatalogs))
+        <div class="list-h">
+        @foreach($productCatalogs as $data)
+          <div class="list-h-item list-h-sm clearfix">
+
+            <a href="{{$data['detailUrl']}}" class="list-image pull-left">
+              <img src="/images/icons/tag-white.png">
+            </a>
+
+            <div class="col-md-11 col-xs-8">
+              <a href="{{$data['detailUrl']}}">
+                <h4 class="primary-info single-info">{{$data['name']}}</h4>
+              </a>
+            </div>
+
+          </div>
+        @endforeach
+        </div>
+        @endif
+      </div>
+
+    </div>
+    <a href="{{request()->get('shopUrl')}}product_catalog" class="button wide-button">แสดงแคตตาล็อกสินค้าทั้งหมด</a>
 
   </div>
 
 </div>
+
+<script type="text/javascript">
+
+</script>
 
 @stop

@@ -22,7 +22,7 @@ class ShopController extends Controller
 
     $model = request()->get('shop');
 
-    $shopRelateToModel = Service::loadModel('ShopRelateTo');
+    // $shopRelateToModel = Service::loadModel('ShopRelateTo');
 
     // shop pin message
 
@@ -32,7 +32,7 @@ class ShopController extends Controller
     ->where('shop_relate_to.model','like','Product')
     ->where('shop_relate_to.shop_id','=',$model->id)
     ->select('products.*')
-    ->take(12)
+    ->take(6)
     ->orderBy('products.created_at','desc')
     ->get();
 
@@ -44,22 +44,23 @@ class ShopController extends Controller
       ));
     }
 
-    // $productModel = Service::loadModel('Product');
-    // $productModel->paginator->criteria(array(
-    //   'joins' => array('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id'),
-    //   'conditions' => array(
-    //     array('shop_relate_to.model','like','Product'),
-    //     array('shop_relate_to.shop_id','=',$model->id)
-    //   ),
-    //   'fields' => array('products.*'),
-    //   'order' => array('products.created_at','desc')
-    // ));
-    // $model->paginator->setPage(1);
+    // Get Product Catalog
+    $productCatalogs = $model->getProductCatalogs();
 
-    // dd($products);
+    $_productCatalogs = array();
+    if(!empty($productCatalogs)) {
+      foreach ($productCatalogs as $productCatalog) {
+        $_productCatalogs[] = array(
+          'name' => $productCatalog->name,
+          'detailUrl' => $url->url('shop/'.$this->param['shopSlug'].'/product_catalog/'.$productCatalog->id),
+        );
+      }
+    }
 
     $this->setData('products',$_products);
     $this->setData('permission',request()->get('shopPermission'));
+    $this->setData('productCatalogs',$_productCatalogs);
+    $this->setData('pinnedMessageAddUrl',$url->url('shop/'.$this->param['shopSlug'].'/pinned_message/add'));
 
     return $this->view('pages.shop.index');
   }
@@ -703,6 +704,10 @@ class ShopController extends Controller
     $this->data = $model->paginator->build();
 
     return $this->view('pages.shop.product_catalog');
+  }
+
+  public function pinnedMessageAddingSubmit() {
+    dd('dsd');
   }
 
 }

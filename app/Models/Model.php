@@ -474,7 +474,7 @@ class Model extends BaseModel
       'first' => true
     ));
 
-    $imageUrl = '/images/common/no-img.png';
+    $imageUrl = null;
     if(!empty($image)) {
       $imageUrl = $cache->getCacheImageUrl($image,$size);
     }
@@ -562,7 +562,7 @@ class Model extends BaseModel
       '_short_name' => $string->truncString($this->name,45),
       'description' => !empty($this->description) ? $this->description : '-',
       '_short_description' => $string->truncString($this->description,200),
-      '_imageUrl' => '/images/common/no-img.png'
+      '_imageUrl' => null
     );
 
   }
@@ -576,5 +576,25 @@ class Model extends BaseModel
   //     return $this->fill($value)->save();
   //   }
   // }
+
+  public function getImage($size = null) {
+
+    $cache = new Cache;
+
+    $image = $this->getRelatedData('Image',array(
+      'first' => true
+    ));
+
+    if(empty($image)) {
+      return null;
+    }
+
+    if(empty($size)) {
+      return $image->getImageUrl();
+    }
+
+    return $cache->getCacheImageUrl($image,$size);
+
+  }
 
 }

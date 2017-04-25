@@ -318,7 +318,8 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::get('shop/{shopSlug}/product/branch/edit/{id}','ProductController@branchEdit')->name('shop.product_branch.edit');
   Route::patch('shop/{shopSlug}/product/branch/edit/{id}','ProductController@branchEditingSubmit')->name('shop.product_branch.edit');
 
-  Route::get('shop/{shopSlug}/product_catalog/{id}','ProductCatalogController@listView')->name('shop.product_catalog.list');
+  Route::get('shop/{shopSlug}/product_catalog','ProductCatalogController@listView')->name('shop.product_catalog');
+  Route::get('shop/{shopSlug}/product_catalog/{id}','ProductCatalogController@productListView')->name('shop.product_catalog.list');
 
   Route::get('shop/{shopSlug}/manage/product_catalog','ShopController@productCatalog')->name('shop.product_catalog.manage');
   Route::get('shop/{shopSlug}/manage/product_catalog/{id}','ProductCatalogController@menu')->name('shop.product_catalog.menu');

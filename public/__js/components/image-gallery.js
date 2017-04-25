@@ -1,7 +1,7 @@
 class ImageGallery {
   constructor(displayDescription = false) {
     this.images = null;
-    this.noImg = '/images/common/no-img.png';
+    this.noImg = null;
     this.displayDescription = displayDescription;
     this.currentImage = 0;
     this.totalImage = 0;

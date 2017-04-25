@@ -280,51 +280,6 @@ class Shop extends Model
     return $image->getImageUrl();
   }
 
-  // public function getOpenHoursText() {
-
-  //   $openHours = $this->getRelatedData('OpenHour',array(
-  //     'conditions' => array(
-  //       array('active','=',1)
-  //     ),
-  //     'fields' => array('time'),
-  //     'first' => true
-  //   ));
-
-  //   if(empty($openHours)) {
-  //     return null;
-  //   }
-
-  //   $date = new Date;
-
-  //   $openHours = json_decode($openHours->time,true);
-
-  //   $today = date('N');
-  //   $_openHours = array(
-  //     'text' => 'วันนี้ปิดทำการ',
-  //     'status' => 'shop-closed', 
-  //   );
-
-  //   foreach ($openHours as $key => $time) {
-
-  //     $startTime = explode(':', $time['start_time']);
-  //     $endTime = explode(':', $time['end_time']);
-
-  //     $_time = 'ปิด';
-  //     if($time['open']){
-  //       $_time = $startTime[0].':'.$startTime[1].' - '.$endTime[0].':'.$endTime[1];
-  //     }
-
-  //     if(($today == $key) && $time['open']) {
-  //       $_openHours['text'] = 'วันนี้เปิดทำการเวลา '.$_time;
-  //       $_openHours['status'] = 'shop-open';
-  //     }
-
-  //   }
-
-  //   return $_openHours;
-
-  // }
-
   public function getOpenHours() {
 
     $openHours = $this->getRelatedData('OpenHour',array(
@@ -391,12 +346,23 @@ class Shop extends Model
 
     return array(
       'name' => $this->name,
-      // 'description' => nl2br($this->description),
-      // 'brand_story' => nl2br($this->brand_story),
-      // 'mission' => nl2br($this->mission),
-      // 'vision' => nl2br($this->vision),
       '_short_description' => $string->truncString($this->description,250,true),
     );
+  }
+
+  public function getProductCatalogs() {
+    $productCatalogs = ProductCatalog::join('shop_relate_to', 'shop_relate_to.model_id', '=', 'product_catalogs.id')
+    ->where('shop_relate_to.model','like','ProductCatalog')
+    ->where('shop_relate_to.shop_id','=',$this->id)
+    ->take(5)
+    ->orderBy('product_catalogs.created_at','desc');
+
+    if(!$productCatalogs->exists()) {
+      return null;
+    }
+
+    return $productCatalogs->get();
+
   }
 
   public function buildPaginationData() {
@@ -405,7 +371,7 @@ class Shop extends Model
 
     $profileImage = $this->getProfileImageUrl();
     if(empty($profileImage)) {
-      $profileImage = '/images/common/no-img.png';
+      $profileImage = null;
     }
 
     $cover = Image::select('id','model','model_id','filename','image_type_id')->find($this->cover_image_id);
@@ -413,7 +379,7 @@ class Shop extends Model
     if(!empty($cover)) {
       $cover = $cache->getCacheImageUrl($cover,'list');
     }else{
-      $cover = '/images/common/no-img.png';
+      $cover = null;
     }
 
     return array(
@@ -433,7 +399,7 @@ class Shop extends Model
 
     $image = Image::select('id','model','model_id','filename','image_type_id')->find($this->cover_image_id);
 
-    $_imageUrl = '/images/common/no-img.png';
+    $_imageUrl = null;
     if(!empty($image)) {
       $_imageUrl = $cache->getCacheImageUrl($image,'list');
     }

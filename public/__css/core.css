@@ -163,6 +163,11 @@ a.button:visited {
 	padding: 20px !important;
 }
 
+.padding-left-right-15 {
+	padding-left: 15px !important;
+	padding-right: 15px !important;
+}
+
 .no-margin {
 	margin: 0 !important;
 }

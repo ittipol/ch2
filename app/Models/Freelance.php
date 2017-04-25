@@ -113,17 +113,7 @@ class Freelance extends Model
   public function buildLookupData() {
 
     $string = new String;
-    $cache = new Cache;
     $url = new url;
-
-    $image = $this->getRelatedData('Image',array(
-      'first' => true
-    ));
-
-    $_imageUrl = '/images/common/no-img.png';
-    if(!empty($image)) {
-      $_imageUrl = $cache->getCacheImageUrl($image,'list');
-    }
 
     return array(
       'title' => $string->truncString($this->name,90),
@@ -135,7 +125,7 @@ class Freelance extends Model
         )
       ),
       'detailUrl' => $url->setAndParseUrl('freelance/detail/{id}',array('id' => $this->id)),
-      'image' => $_imageUrl,
+      'image' => $this->getImage('list'),
       'isDataTitle' => 'งานฟรีแลนซ์'
     );
 

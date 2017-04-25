@@ -35,14 +35,12 @@
 	background-color: #CFD8DC;
 }
 
-
-/*.box .notice img {
-	width: 150px;
-	height: 150px;
-}*/
-
 .box textarea {
 	border: none;
 	outline: none;
 	height: 140px;
+}
+
+.box .list-h .list-h-item:last-child {
+	border-bottom: 0;
 } 

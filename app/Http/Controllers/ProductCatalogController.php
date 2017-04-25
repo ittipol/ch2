@@ -13,8 +13,82 @@ use Session;
 
 class ProductCatalogController extends Controller
 {
-
   public function listView() {
+
+    // $productCatalogs = ProductCatalog::join('shop_relate_to', 'shop_relate_to.model_id', '=', 'product_catalogs.id')
+    // ->where('shop_relate_to.model','like','ProductCatalog')
+    // ->where('shop_relate_to.shop_id','=',request()->get('shopId'))
+    // ->orderBy('product_catalogs.created_at','desc');
+
+    $model = Service::loadModel('ProductCatalog');
+    $filterHelper = new FilterHelper($model);
+
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
+
+    $filters = '';
+    if(!empty($this->query['fq'])) {
+      $filters = $this->query['fq'];
+    }
+
+    $sort = '';
+    if(!empty($this->query['sort'])) {
+      $sort = $this->query['sort'];
+    }
+
+    $filterHelper->setFilters($filters);
+    $filterHelper->setSorting($sort);
+
+    $conditions = $filterHelper->buildFilters();
+    $order = $filterHelper->buildSorting();
+
+    $conditions[] = array(
+      array('shop_relate_to.model','like','ProductCatalog'),
+      array('shop_relate_to.shop_id','=',request()->get('shopId'))
+    );
+
+    $criteria = array();
+
+    $criteria = array_merge($criteria,array(
+      'joins' => array('shop_relate_to', 'shop_relate_to.model_id', '=', 'product_catalogs.id')
+    ));
+
+    $criteria = array_merge($criteria,array(
+      'conditions' => $conditions
+    ));
+
+    if(!empty($order)) {
+      $criteria = array_merge($criteria,$order);
+    }
+
+    $model->paginator->criteria($criteria);
+    $model->paginator->setPage($page);
+    $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/product');
+    $model->paginator->setUrl('shop/'.request()->shopSlug.'/product/{id}','detailUrl');
+    $model->paginator->setQuery('sort',$sort);
+    $model->paginator->setQuery('fq',$filters);
+
+    $searchOptions = array(
+      'filters' => $filterHelper->getFilterOptions(),
+      'sort' => $filterHelper->getSortingOptions()
+    );
+
+    // $displayingFilters = array(
+    //   'filters' => $filterHelper->getDisplayingFilterOptions(),
+    //   'sort' => $filterHelper->getDisplayingSorting()
+    // );
+
+    $this->data = $model->paginator->build();
+    $this->setData('searchOptions',$searchOptions);
+    // $this->setData('displayingFilters',$displayingFilters);
+    
+    return $this->view('pages.product_catalog.list');
+
+  }
+
+  public function productListView() {
 
     $productCatalog = Service::loadModel('ProductCatalog')->find($this->param['id']);
 
@@ -81,7 +155,7 @@ class ProductCatalogController extends Controller
       'first' => true
     ));
 
-    $imageUrl = '/images/common/no-img.png';
+    $imageUrl = null;
     if(!empty($image)) {
       $imageUrl = $image->getImageUrl();
     }
@@ -92,7 +166,7 @@ class ProductCatalogController extends Controller
     // $this->setData('displayingFilters',$displayingFilters);
     $this->setData('imageUrl',$imageUrl);
     
-    return $this->view('pages.product_catalog.list');
+    return $this->view('pages.product_catalog.product_list');
 
   }
 
@@ -106,7 +180,7 @@ class ProductCatalogController extends Controller
     //   'first' => true
     // ));
 
-    // $imageUrl = '/images/common/no-img.png';
+    // $imageUrl = null;
     // if(!empty($image)) {
     //   $imageUrl = $image->getImageUrl();
     // }

@@ -2,6 +2,10 @@
 
 namespace App\Models;
 
+use App\library\string;
+use App\library\cache;
+use App\library\url;
+
 class ProductCatalog extends Model
 {
   protected $table = 'product_catalogs';
@@ -37,6 +41,29 @@ class ProductCatalog extends Model
       'owner' => 'Shop',
       'defaultAccessLevel' => 99
     )
+  );
+
+  protected $sortingFields = array(
+    'title' => 'จัดเรียงตาม',
+    'options' => array(
+      array(
+        'name' => 'ตัวอักษร A - Z ก - ฮ',
+        'value' => 'name:asc'
+      ),
+      array(
+        'name' => 'ตัวอักษร Z - A ฮ - ก',
+        'value' => 'name:desc'
+      ),
+      array(
+        'name' => 'วันที่เก่าที่สุดไปหาใหม่ที่สุด',
+        'value' => 'created_at:asc'
+      ),
+      array(
+        'name' => 'วันที่ใหม่ที่สุดไปหาเก่าที่สุด',
+        'value' => 'created_at:desc'
+      ),
+    ),
+    'default' => 'created_at:desc'
   );
 
   public function getTotalProductInCatalog() {
@@ -84,5 +111,39 @@ class ProductCatalog extends Model
       'totalProduct' => $this->getTotalProductInCatalog()
     );
     
+  }
+
+  public function buildLookupData() {
+
+    $string = new String;
+    $url = new url;
+
+    $shop = ShopRelateTo::select('shop_id')
+    ->where(array(
+      array('model','like','Branch'),
+      array('model_id','=',$this->id)
+    ))
+    ->first()
+    ->shop;
+
+    $slug = $shop->getRelatedData('Slug',array(
+      'fields' => array('slug'),
+      'first' => true
+    ))->slug;
+
+    return array(
+      'title' => $string->truncString($this->name,90),
+      'description' => $string->truncString($this->description,250),
+      'data' => array(
+        'branch' => array(
+        'title' => 'แคตตาล็อกสินค้าจาก',
+          'value' => $shop->name
+        )
+      ),
+      'detailUrl' => $url->url('shop/product_catalog/'.$this->id),
+      'image' => $this->getImage('list'),
+      'isDataTitle' => 'แคตตาล็อกสินค้า'
+    );
+
   }
 }

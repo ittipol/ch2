@@ -126,7 +126,7 @@ class Order extends Model
         'first' => true
       ));
 
-      $imageUrl = '/images/common/no-img.png';
+      $imageUrl = null;
       if(!empty($image)) {
         $imageUrl = $cache->getCacheImageUrl($image,'sm');
       }

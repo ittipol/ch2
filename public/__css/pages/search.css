@@ -126,8 +126,10 @@
 	top: 0;
 	left: 0;
 	margin: 0;
-	background-color: #E64A19;
 	color: #fff;
+	background-color: #006064;
+	width: 250px;
+	text-align: right;
 }
 
 .search .list .list-content-wrapper .result-data-content {

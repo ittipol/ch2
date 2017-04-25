@@ -115,17 +115,7 @@ class Branch extends Model
   public function buildLookupData() {
 
     $string = new String;
-    $cache = new Cache;
     $url = new url;
-
-    $image = $this->getRelatedData('Image',array(
-      'first' => true
-    ));
-
-    $_imageUrl = '/images/common/no-img.png';
-    if(!empty($image)) {
-      $_imageUrl = $cache->getCacheImageUrl($image,'list');
-    }
 
     $shop = ShopRelateTo::select('shop_id')
     ->where(array(
@@ -166,7 +156,7 @@ class Branch extends Model
         )
       ),
       'detailUrl' => $url->url('shop/'.$slug.'/branch/'.$this->id),
-      'image' => $_imageUrl,
+      'image' => $this->getImage('list'),
       'isDataTitle' => 'สาขา'
     );
     

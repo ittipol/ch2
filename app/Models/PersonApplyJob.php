@@ -99,7 +99,7 @@ class PersonApplyJob extends Model
 
     $personExperience = $this->person->personExperience;
 
-    $imageUrl = '/images/common/no-img.png';
+    $imageUrl = null;
     if(!empty($this->person->profile_image_id)) {
       $image = $image
       ->select(array('model','model_id','filename','image_type_id'))
@@ -112,7 +112,7 @@ class PersonApplyJob extends Model
       'first' => true
     ));
 
-    $jobImageUrl = '/images/common/no-img.png';
+    $jobImageUrl = null;
     if(!empty($jobImage)) {
       $jobImageUrl = $cache->getCacheImageUrl($jobImage,'list');
     }

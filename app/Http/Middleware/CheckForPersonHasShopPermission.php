@@ -257,6 +257,7 @@ class CheckForPersonHasShopPermission
           'permission' => 'edit',
           'modelName' => 'ProductCatalog'
         ),
+        'shop.product_catalog' => true,
         'shop.product_catalog.list' => array(
           'modelName' => 'ProductCatalog'
         ),
@@ -301,14 +302,16 @@ class CheckForPersonHasShopPermission
         'first' => true
       ));
 
-      if(!empty($pages[$name]['permission'])) {
-
-        if(empty($person)) {
-          return $this->errorPage('ไม่อนุญาตให้แก้ไขร้านค้านี้ได้');
-        }
-
+      if(!empty($person)) {
         $permissions = $person->role->getPermission();
         $role = $person->role->name;
+      }
+
+      if(!empty($pages[$name]['permission'])) {
+
+        // if(empty($person)) {
+        //   return $this->errorPage('ไม่อนุญาตให้แก้ไขร้านค้านี้ได้');
+        // }
 
         // check permission
         if(($pages[$name]['permission'] !== true) && empty($permissions[$pages[$name]['permission']])) {

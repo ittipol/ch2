@@ -206,7 +206,7 @@ class Paginator {
           'first' => true
         ));
 
-        $_data['_imageUrl'] = '/images/common/no-img.png';
+        $_data['_imageUrl'] = null;
         if(!empty($image)) {
           $_data['_imageUrl'] = $cache->getCacheImageUrl($image,'list');
         }
@@ -268,7 +268,7 @@ class Paginator {
       //     'first' => true
       //   ));
 
-      //   $_data['_imageUrl'] = '/images/common/no-img.png';
+      //   $_data['_imageUrl'] = null;
       //   if(!empty($image)) {
       //     $_data['_imageUrl'] = $cache->getCacheImageUrl($image,'list');
       //   }
@@ -355,7 +355,7 @@ class Paginator {
           'first' => true
         ));
 
-        $_data['_imageUrl'] = '/images/common/no-img.png';
+        $_data['_imageUrl'] = null;
         if(!empty($image)) {
           $_data['_imageUrl'] = $cache->getCacheImageUrl($image,'list');
         }

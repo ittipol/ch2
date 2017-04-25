@@ -390,17 +390,7 @@ class RealEstate extends Model
 
     $currency = new Currency;
     $string = new String;
-    $cache = new Cache;
     $url = new url;
-
-    $image = $this->getRelatedData('Image',array(
-      'first' => true
-    ));
-
-    $_imageUrl = '/images/common/no-img.png';
-    if(!empty($image)) {
-      $_imageUrl = $cache->getCacheImageUrl($image,'list');
-    }
 
     $needBroker = '';
     if($this->need_broker) {
@@ -421,7 +411,7 @@ class RealEstate extends Model
         )
       ),
       'detailUrl' => $url->setAndParseUrl('real-estate/detail/{id}',array('id' => $this->id)),
-      'image' => $_imageUrl,
+      'image' => $this->getImage('list'),
       'isDataTitle' => 'ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์'
     );
 

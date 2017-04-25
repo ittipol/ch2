@@ -537,17 +537,7 @@ class Product extends Model
 
     $currency = new Currency;
     $string = new String;
-    $cache = new Cache;
     $url = new url;
-
-    $image = $this->getRelatedData('Image',array(
-      'first' => true
-    ));
-
-    $_imageUrl = '/images/common/no-img.png';
-    if(!empty($image)) {
-      $_imageUrl = $cache->getCacheImageUrl($image,'list');
-    }
 
     return array(
       'title' => $string->truncString($this->name,90),
@@ -564,7 +554,7 @@ class Product extends Model
         )
       ),
       'detailUrl' => $url->setAndParseUrl('item/detail/{id}',array('id' => $this->id)),
-      'image' => $_imageUrl,
+      'image' => $this->getImage('list'),
       'isDataTitle' => 'สินค้า'
     );
 
