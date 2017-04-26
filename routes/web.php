@@ -337,7 +337,7 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
   Route::get('shop/{shopSlug}/product_catalog/delete/product/{id}/product_id:{product_id}','ProductCatalogController@deleteProduct')->name('shop.product_catalog.delete.product');
 
-  Route::post('shop/{shopSlug}/pinned_message/add','ShopController@pinnedMessageAddingSubmit')->name('shop.pinned_message.add');
+  Route::post('shop/{shopSlug}/timeline/post','ShopController@pinnedMessageAddingSubmit')->name('shop.timeline.post');
 
 });
 

@@ -140,7 +140,7 @@ class ProductCatalog extends Model
           'value' => $shop->name
         )
       ),
-      'detailUrl' => $url->url('shop/product_catalog/'.$this->id),
+      'detailUrl' => $url->url('shop/'.$slug.'/product_catalog/'.$this->id),
       'image' => $this->getImage('list'),
       'isDataTitle' => 'แคตตาล็อกสินค้า'
     );

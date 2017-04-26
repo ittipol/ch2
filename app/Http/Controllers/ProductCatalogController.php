@@ -15,11 +15,6 @@ class ProductCatalogController extends Controller
 {
   public function listView() {
 
-    // $productCatalogs = ProductCatalog::join('shop_relate_to', 'shop_relate_to.model_id', '=', 'product_catalogs.id')
-    // ->where('shop_relate_to.model','like','ProductCatalog')
-    // ->where('shop_relate_to.shop_id','=',request()->get('shopId'))
-    // ->orderBy('product_catalogs.created_at','desc');
-
     $model = Service::loadModel('ProductCatalog');
     $filterHelper = new FilterHelper($model);
 
@@ -155,7 +150,7 @@ class ProductCatalogController extends Controller
     $this->setData('productCatalog',$productCatalog->buildModelData());
     $this->setData('searchOptions',$searchOptions);
     // $this->setData('displayingFilters',$displayingFilters);
-    $this->setData('imageUrl',$this->getImage());
+    $this->setData('imageUrl',$productCatalog->getImage());
     
     return $this->view('pages.product_catalog.product_list');
 

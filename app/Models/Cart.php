@@ -244,7 +244,7 @@ class Cart extends Model
       'subTotal' => $this->getProductSubTotal($product,$quantity,true),
       'shippingCost' => $this->getProductShippingCost($product,$quantity,true),
       'total' => $this->getProductTotal($product,$quantity,true),
-      'imageUrl' => $this->getImage('sm'),
+      'imageUrl' => $product->getImage('sm'),
       'productDetailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id' => $product->id)),
     ),$this->checkProductError($product,$quantity));
 

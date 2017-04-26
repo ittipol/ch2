@@ -83,7 +83,7 @@
 
               <div class="flag data-form-flag">{{$result['isDataTitle']}}</div>
 
-              <div class="list-content image">
+              <div class="list-content image-tile">
                 <a href="{{$result['detailUrl']}}">
                   <div class="primary-image" style="background-image:url({{$result['image']}});"></div>
                 </a>

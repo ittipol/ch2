@@ -41,7 +41,7 @@ class RealEstateController extends Controller
       foreach ($realEsates as $realEsate) {
 
         $_realEsates['items'][] = array_merge($realEsate->buildPaginationData(),array(
-          '_imageUrl' => $this->getImage('list'),
+          '_imageUrl' => $realEsate->getImage('list'),
           'detailUrl' => $url->setAndParseUrl('real-estate/detail/{id}',array('id'=>$realEsate->id))
         ));
         

@@ -44,7 +44,7 @@ class ItemController extends Controller
       foreach ($items as $item) {
 
         $_items['items'][] = array_merge($item->buildPaginationData(),array(
-          '_imageUrl' => $this->getImage('list'),
+          '_imageUrl' => $item->getImage('list'),
           'detailUrl' => $url->setAndParseUrl('item/detail/{id}',array('id'=>$item->id))
         ));
         

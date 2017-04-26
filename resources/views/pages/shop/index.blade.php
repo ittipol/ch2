@@ -8,42 +8,29 @@
 
   <div class="container">
 
-    <div class="row">
-
-      <div class="col-sm-3 col-sm-12">
-        
-        <div class="box">
-          <div>สินค้า</div>
-          <div>งาน</div>
-          <div>โฆษณา</div>
-          <div class="line"></div>
-          <div>แคตตาล็อกสินค้า</div>
-        </div>
-
-      </div>
-
-      <div class="col-sm-9 col-sm-12">
-
-
-      </div>
-
-    </div>
-
     @if(!empty($permission['edit']) && $permission['edit'])
     <div class="box">
       <?php 
         echo Form::open([
-          'url' => request()->get('shopUrl').'pinned_message/add',
+          'url' => request()->get('shopUrl').'timeline/post',
           // 'id' => 'pinned_message_form',
           'method' => 'post'
         ]);
       ?>
       <div class="box-header">
         <h4 class="box-header-title">
-          <img class="icon-before-title" src="/images/icons/edit-blue.png">ปักหมุดข้อความ
+          <img class="icon-before-title" src="/images/icons/edit-blue.png">ข้อความร้านค้า
         </h4>
       </div>
-      <textarea class="pin-message-input"></textarea>
+
+      <div>
+        <?php 
+          echo Form::textarea('message',null,array(
+            'class' => 'timeline-message-input'
+          ));
+        ?>
+      </div>
+
       <div class="box-footer text-right">
         <?php
           echo Form::submit('โพสต์' , array(
@@ -56,6 +43,59 @@
       ?>
     </div>
     @endif
+
+    <div id="pinned_message_panel">
+
+      @if(!empty($pinnedMessages))
+
+        @foreach($pinnedMessages as $timeline)
+          <div class="box timeline">
+            <div class="box-header">
+              <h4 class="box-header-title">
+                <div class="primary-title">
+                  <span class="post-owner-name">{{$timeline['owner']}}</span>
+                  {{$timeline['title']}}
+                </div>
+                <div class="secondary-title">{{$timeline['createdDate']}}</div>
+              </h4>
+            </div>
+
+            <div class="line"></div>
+
+            <div class="box-content padding-15">
+              <div class="timeline-message">{!!$timeline['message']!!}</div>
+
+              @if(!empty($timeline['relatedData']))
+              <a href="{{$timeline['relatedData']['detailUrl']}}" class="timeline-content clearfix">
+                <div class="image-tile pull-left">
+                  <div class="timeline-content-image" style="background-image:url({{$timeline['relatedData']['image']}});"></div>
+                </div>
+                <div class="timeline-content-info pull-left">
+                  <div class="title">{{$timeline['relatedData']['title']}}</div>
+                  <div class="description">{{$timeline['relatedData']['description']}}</div>
+                </div>
+              </a>
+              @endif
+
+            </div>
+
+            <div class="additional-option">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="additional-option-content">
+                <a href="">เพิ่มประกาศสินค้า</a>
+              </div>
+            </div>
+
+          </div>
+        @endforeach
+
+      @endif
+
+    </div>
+
+    <div class="line space-top-bottom-100"></div>
 
     <div class="box">
       <div class="box-header">
@@ -178,7 +218,7 @@
 
 <script type="text/javascript">
 
-  class PinnedMessage {
+  class Timeline {
 
     contructor() {
 
@@ -196,7 +236,7 @@
 
   $(document).ready(function(){
 
-    const pinnedMessage = new PinnedMessage();
+    const pinnedMessage = new Timeline();
     pinnedMessage.load();
 
   });

@@ -38,7 +38,7 @@ class FreelanceController extends Controller
       foreach ($freelances as $freelance) {
 
         $_freelances['items'][] = array_merge($freelance->buildPaginationData(),array(
-          '_imageUrl' => $this->getImage('list'),
+          '_imageUrl' => $freelance->getImage('list'),
           'detailUrl' => $url->setAndParseUrl('freelance/detail/{id}',array('id'=>$freelance->id))
         ));
         

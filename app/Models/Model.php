@@ -250,6 +250,21 @@ class Model extends BaseModel
 
   }
 
+  public function getBy($value,$field,$first=true) {
+
+    if(!Schema::hasColumn($this->getTable(), $field)){
+      return false;
+    }
+
+    return $this->getData(array(
+      'conditions' => array(
+        [$field,'=',$value]
+      ),
+      'first' => $first
+    ));
+
+  }
+
   public function getData($options = array()) {
 
     $model = $this->newInstance();

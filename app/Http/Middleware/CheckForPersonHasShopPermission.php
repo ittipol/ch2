@@ -281,7 +281,7 @@ class CheckForPersonHasShopPermission
           'permission' => 'delete',
           'modelName' => 'ProductCatalog'
         ),
-        'shop.pinned_message.add' => array(
+        'shop.timeline.post' => array(
           'permission' => 'add',
         ),
       );

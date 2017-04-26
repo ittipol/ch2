@@ -42,8 +42,12 @@
 	margin-top: 50px;
 }
 
-.list .list-content-wrapper .image {
+.list .list-content-wrapper .image-tile {
 	width: 250px;
+	background-image: url(/images/common/image.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 200px;
 }
 
 .list .list-content-wrapper .info {

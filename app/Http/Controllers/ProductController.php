@@ -77,7 +77,7 @@ class ProductController extends Controller
       foreach ($products as $product) {
 
         $_products['items'][] = array_merge($product->buildPaginationData(),array(
-          '_imageUrl' => $this->getImage('list'),
+          '_imageUrl' => $product->getImage('list'),
           'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
         ));
         
@@ -494,7 +494,7 @@ class ProductController extends Controller
     $model = Service::loadModel('Product')->find($this->param['id']);
 
     $this->data = $model->modelData->build();
-    $this->setData('imageUrl',$this->getImage('list'));
+    $this->setData('imageUrl',$model->getImage('list'));
     $this->setData('categoryPaths',$model->getCategoryPaths());
 
     return $this->view('pages.product.menu');
@@ -515,10 +515,14 @@ class ProductController extends Controller
 
     if($model->fill($request->all())->save()) {
 
+      // $timelineHelper = new TimelineHelper;
+      // $timelineHelper->setModel($model);
+      // $timelineHelper->create('add-new-product');
+
       session()->flash('product_added', true);
 
       MessageHelper::display('ข้อมูลถูกเพิ่มแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/product/'.$model->id);
+      return Redirect::to('shop/'.request()->shopSlug.'/manage/product/'.$model->id);
     }else{
       return Redirect::back();
     }

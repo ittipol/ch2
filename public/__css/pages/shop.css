@@ -1,5 +1,6 @@
 .shop-content-wrapper {
-	background-color: rgb(237,241,242);
+	/*background-color: rgb(237,241,242);*/
+	background-color: #ececec;
 }
 
 .shop-notice {
@@ -277,9 +278,9 @@
 		width: 100%;
 	}
 
-}
+	.shop-main-nav .nav-group > .nav {
+		width: 100%;
+		text-align: center;
+	}
 
-/* Custom, iPhone Retina */ 
-@media only screen and (max-width : 320px) {
-    
 }

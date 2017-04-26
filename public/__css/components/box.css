@@ -1,9 +1,12 @@
 .box {
 	background-color: #fff;
 	border: 1px solid #DCDEE3;
-/*	border-top-width: 3px;
-	border-top-color: #0071c5;*/
-	margin-top: 60px;
+	margin-top: 40px;
+	position: relative;
+}
+
+.box .line {
+	background-color: #ccc;
 }
 
 .box.fixed-height {
@@ -16,7 +19,7 @@
 
 .box .box-header {
 	padding: 15px;
-	border-bottom: 1px solid #ccc;
+	/*border-bottom: 1px solid #ccc;*/
 }
 
 .box .box-header .box-header-title {
@@ -35,12 +38,94 @@
 	background-color: #CFD8DC;
 }
 
-.box textarea {
+.box textarea.timeline-message-input {
 	border: none;
 	outline: none;
 	height: 140px;
+	font-size: 18px;
+	padding: 15px;
 }
 
 .box .list-h .list-h-item:last-child {
 	border-bottom: 0;
-} 
+}
+
+.box .box-header-title .primary-title {
+	font-size: 20px;
+}
+
+.box .box-header-title .secondary-title {
+	color: #999;
+	font-size: 15px;
+	margin-top: 5px;
+}
+
+.box.timeline .post-owner-name {
+	color: #0071c5;
+}
+
+.box.timeline .timeline-message {
+	font-size: 18px;
+}
+
+.box.timeline .timeline-content {
+	margin-top: 15px;
+	background-color: #B2DFDB;
+	border: 1px solid #4DB6AC;
+	display: block;
+}
+
+.box.timeline .image-tile {
+	width: 150px;
+	background-image: url(/images/common/image.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 150px;
+	background-color: #fff;
+}
+
+.box.timeline .timeline-content-image {
+	width: 150px;
+	height: 150px;
+	background-size: 120px auto;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.box.timeline .timeline-content-info {
+	margin-left: 30px;
+	padding: 10px 0;
+	width: 75%;
+}
+
+.box.timeline .timeline-content-info .title {
+	font-size: 24px;
+	color: #333;
+}
+
+.box.timeline .timeline-content-info .description {
+	color: #777;
+}
+
+.box.timeline .additional-option {
+	position: absolute;
+	top: 10px;
+	right: 5px;
+	width: 40px;
+}
+
+@media only screen and (max-width : 768px) {
+  .box.timeline .timeline-content-info {
+    width: 70%;
+  }
+}
+
+@media only screen and (max-width : 480px) {
+	.box.timeline .timeline-content-image {
+		width: 100%;
+	}
+
+	.box.timeline .timeline-content-info {
+	  width: 80%;
+	}
+}

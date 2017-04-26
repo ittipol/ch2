@@ -28,9 +28,22 @@
 	font-weight: bold;
 }
 
-.global-cart-panel .product-image img {
+.global-cart-panel .image-tile {
 	width: 70px;
 	height: 70px;
+	background-image: url(/images/common/image.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 70px;
+}
+
+.global-cart-panel .product-image {
+	width: 70px;
+	height: 70px;
+	margin: 0 auto;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 60px;
 }
 
 .global-cart-panel .product-info {

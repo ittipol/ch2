@@ -29,9 +29,11 @@
       <div class="row">
 
         <div class="col-md-4 col-sm-12">
-          <a href="{{request()->get('shopUrl')}}product/{{$_modelData['id']}}">
-            <img class="header-primary-image" src="{{$imageUrl}}">
-          </a>
+          <div class="image-tile">
+            <a href="{{request()->get('shopUrl')}}product/{{$_modelData['id']}}">
+              <div class="header-primary-image" style="background-image:url({{$imageUrl}});"></div>
+            </a>
+          </div>
         </div>
 
         <div class="header-info col-md-8 col-sm-12">
@@ -73,7 +75,7 @@
         <div class="dot"></div>
         <div class="additional-option-content">
           <a href="{{request()->get('shopUrl')}}product/{{$_modelData['id']}}">รายละเอียดสินค้า</a>
-          <a href="{{request()->get('shopUrl')}}product/delete/{{$_modelData['id']}}">ลบสินค้า</a>
+          <a href="{{request()->get('shopUrl')}}product/delete/{{$_modelData['id']}}" data-modal="1" data-modal-title="ต้องการลบสินค้า {{$_modelData['name']}} ใช่หรือไม่">ลบสินค้า</a>
         </div>
       </div>
       

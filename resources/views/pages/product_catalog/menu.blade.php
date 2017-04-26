@@ -40,7 +40,7 @@
         <div class="dot"></div>
         <div class="additional-option-content">
           <a href="{{request()->get('shopUrl')}}product_catalog/{{$_modelData['id']}}">ไปยังหน้าแคตตาล็อก</a>
-          <a href="{{request()->get('shopUrl')}}product_catalog/delete/{{$_modelData['id']}}" data-modal="1" data-modal-title="ต้องการลบแคตตาล็อกใช่หรือไม่">ลบแคตตาล็อก</a>
+          <a href="{{request()->get('shopUrl')}}product_catalog/delete/{{$_modelData['id']}}" data-modal="1" data-modal-title="ต้องการลบแคตตาล็อก {{$_modelData['name']}} ใช่หรือไม่">ลบแคตตาล็อก</a>
         </div>
       </div>
       

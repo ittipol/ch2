@@ -147,12 +147,14 @@ class Product extends Model
 
       if($product->state == 'create') {
         $product->active = 0;
+
+        if(empty($product->quantity)) {
+          $product->quantity = 0;
+        }
+
       }
 
       if(!$product->exists){
-        // if(empty($product->active)) {
-        //   $product->active = 0;
-        // }
         // 1 = seller (person)
         // 2 = system
         $product->shipping_calculate_from = 1;
@@ -535,9 +537,9 @@ class Product extends Model
 
   public function buildLookupData() {
 
-    $currency = new Currency;
-    $string = new String;
     $url = new url;
+    $string = new String;
+    $currency = new Currency;
 
     return array(
       'title' => $string->truncString($this->name,90),
@@ -553,9 +555,24 @@ class Product extends Model
           )
         )
       ),
-      'detailUrl' => $url->setAndParseUrl('item/detail/{id}',array('id' => $this->id)),
+      'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id' => $this->id)),
       'image' => $this->getImage('list'),
       'isDataTitle' => 'สินค้า'
+    );
+
+  }
+
+  public function buildTimelineData() {
+
+    $url = new url;
+    $string = new String;
+
+    return array(
+      'title' => $string->truncString($this->name,90),
+      'description' => $string->truncString($this->description,250),
+      // 'data' => array()
+      'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id' => $this->id)),
+      'image' => $this->getImage('list')
     );
 
   }

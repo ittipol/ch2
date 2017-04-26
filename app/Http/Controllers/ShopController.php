@@ -7,6 +7,7 @@ use App\library\service;
 use App\library\url;
 use App\library\messageHelper;
 use App\library\filterHelper;
+use App\library\timelineHelper;
 use Redirect;
 
 class ShopController extends Controller
@@ -22,11 +23,25 @@ class ShopController extends Controller
 
     $model = request()->get('shop');
 
-    // $shopRelateToModel = Service::loadModel('ShopRelateTo');
+    // $pinnedMessages = Service::loadModel('Timeline')->getPinnedMessage('Shop',request()->get('shopId'));
+    
+    // shop pinned message
+    $pinnedMessages = Service::loadModel('Timeline')
+    ->where([
+      ['model','like','Shop'],
+      ['model_id','=',request()->get('shopId')],
+      ['pinned','=',1],
+      ['type','=','text']
+    ])
+    ->orderBy('created_at','desc');
 
-    // shop pin message
+    $_pinnedMessages = array();
+    if($pinnedMessages->exists()) {
+      foreach ($pinnedMessages->get() as $pinnedMessage) {
+        $_pinnedMessages[] = $pinnedMessage->buildModelData();
+      }
+    }
 
-    // Get 12 lastest product
     $products = Service::loadModel('Product')
     ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
     ->where('shop_relate_to.model','like','Product')
@@ -61,6 +76,7 @@ class ShopController extends Controller
     $this->setData('products',$_products);
     $this->setData('permission',request()->get('shopPermission'));
     $this->setData('productCatalogs',$_productCatalogs);
+    $this->setData('pinnedMessages',$_pinnedMessages);
 
     return $this->view('pages.shop.index');
   }
@@ -707,7 +723,26 @@ class ShopController extends Controller
   }
 
   public function pinnedMessageAddingSubmit() {
-    dd('dsd');
+
+    $model = Service::loadModel('Timeline');
+
+    // ตรึงข้อความไว้ยังหน้าแรก
+
+    $model->model = 'Shop';
+    $model->model_id = request()->get('shopId');
+    $model->title = 'โพสต์ข้อความ';
+    $model->message = request()->get('message');
+    $model->pinned = 1;
+    $model->type = 'text';
+
+    if($model->save()) {
+      MessageHelper::display('ข้อความถูกโพสต์แล้ว','success');
+    }else{
+      MessageHelper::display('เกิดข้ิผิดพลาด ไม่สามารถโพสต์ข้อความได้','error');
+    }
+
+    return Redirect::to('shop/'.request()->shopSlug);
+
   }
 
 }
