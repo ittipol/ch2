@@ -148,6 +148,10 @@ class CheckForPersonHasShopPermission
           'permission' => 'edit',
           'modelName' => 'Product'
         ),
+        'shop.product.delete' => array(
+          'permission' => 'delete',
+          'modelName' => 'Product'
+        ),
         'shop.product_status.edit' => array(
           'permission' => 'edit',
           'modelName' => 'Product'

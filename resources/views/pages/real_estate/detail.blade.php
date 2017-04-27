@@ -103,14 +103,7 @@
 
   @if (Auth::check() && (Session::get('Person.id') == $_modelData['person_id']))
   <div class="text-right">
-    <a data-right-side-panel="1" data-right-side-panel-target="#cancel_panel" class="button">ยกเลิกประกาศ</a>
-  </div>
-
-  <div id="cancel_panel" class="right-size-panel filter">
-    <div class="right-size-panel-inner">
-   
-      <div class="right-size-panel-close-button"></div>
-    </div>
+    <a href="{{$deleteUrl}}" class="button" data-modal="1" data-modal-title="ต้องการยกเลิกประกาศ {{$_modelData['name']}} ใช่หรือไม่">ยกเลิกประกาศ</a>
   </div>
   @endif
 

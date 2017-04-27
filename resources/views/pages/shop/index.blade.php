@@ -44,7 +44,7 @@
     </div>
     @endif
 
-    <div id="pinned_message_panel">
+    <div id="timelines_panel">
 
       @if(!empty($pinnedMessages))
 
@@ -84,7 +84,8 @@
               <div class="dot"></div>
               <div class="dot"></div>
               <div class="additional-option-content">
-                <a href="">เพิ่มประกาศสินค้า</a>
+                <a href="">ยกเลิกการตรึงข้อความ</a>
+                <a href="">ลบข้อความ</a>
               </div>
             </div>
 

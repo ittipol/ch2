@@ -151,7 +151,7 @@
                 <div class="dot"></div>
                 <div class="additional-option-content">
                   <a href="{{$data['detailUrl']}}">แสดงสินค้านี้</a>
-                  <a href="{{$data['deleteUrl']}}">ลบ</a>
+                  <a href="{{$data['deleteUrl']}}" data-modal="1" data-modal-title="ต้องลบ {{$data['name']}} ใช่หรือไม่">ลบ</a>
                 </div>
               </div>
             

@@ -45,8 +45,16 @@
 	margin-top: -60px;
 }
 
-.content-panel .content-section .primary-image-tile {
-	/*width: 250px;*/
+.content-panel .content-section .image-tile {
+	width: 100%;
+	height: 250px;
+	background-image: url(/images/common/image.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 200px;
+}
+
+.content-panel .content-section .primary-image {
 	height: 250px;
 	background-position: center;
 	background-size: auto;
@@ -54,7 +62,6 @@
 }
 
 .content-panel .info-box {
-	/*border: 1px solid #ccc;*/
 	background-color: #fff;
 	margin-bottom: 20px;
 	border-bottom: 5px solid #FDD835;
@@ -62,7 +69,6 @@
 
 .content-panel .info-box .primary-info-section {
 	padding: 20px;
-	/*background-color: #0071c5;*/
 	color: #000;
 }
 

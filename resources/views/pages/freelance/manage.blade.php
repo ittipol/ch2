@@ -28,32 +28,6 @@
       </div>
     </div>
 
-    <div class="tile-nav small">
-      <div class="tile-nav-image">
-        <a href="{{URL::to('person/freelance/post')}}">
-          <img src="/images/common/plus.png">
-        </a>
-      </div>
-      <div class="tile-nav-info">
-        <a href="{{URL::to('person/freelance/post')}}">
-          <h4 class="tile-nav-title">จัดการคิวงานงานฟรีแลนซ์</h4>
-        </a>
-      </div>
-    </div>
-
-    <div class="tile-nav small">
-      <div class="tile-nav-image">
-        <a href="{{URL::to('person/freelance/post')}}">
-          <img src="/images/common/plus.png">
-        </a>
-      </div>
-      <div class="tile-nav-info">
-        <a href="{{URL::to('person/freelance/post')}}">
-          <h4 class="tile-nav-title">เพิ่มคิวงานฟรีแลนซ์</h4>
-        </a>
-      </div>
-    </div>
-
   </div>
 
   <div class="line"></div>
@@ -91,7 +65,7 @@
                 <div class="dot"></div>
                 <div class="additional-option-content">
                   <a href="{{$data['editUrl']}}">แก้ไข</a>
-                  <a href="{{$data['deleteUrl']}}">ลบ</a>
+                  <a href="{{$data['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการลบ {{$data['name']}} ใช่หรือไม่">ลบ</a>
                 </div>
               </div>
 

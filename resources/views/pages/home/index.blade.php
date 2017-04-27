@@ -243,9 +243,11 @@
 
             <div class="col-md-4 col-xs-12">
               <div class="info-box">
-                <a href="{{$product['detailUrl']}}">
-                  <div class="primary-image-tile" style="background-image:url({{$product['_imageUrl']}});"></div>
-                </a>
+                <div class="image-tile">
+                  <a href="{{$product['detailUrl']}}">
+                    <div class="primary-image" style="background-image:url({{$product['_imageUrl']}});"></div>
+                  </a>
+                </div>
                 <div class="primary-info-section">
                   <a href="{{$product['detailUrl']}}">
                     <h4 class="title">{{$product['_short_name']}}</h4>
@@ -315,9 +317,11 @@
 
             <div class="col-md-4 col-xs-12">
               <div class="info-box">
-                <a href="{{$job['detailUrl']}}">
-                  <div class="primary-image-tile" style="background-image:url({{$job['_imageUrl']}});"></div>
-                </a>
+                <div class="image-tile">
+                  <a href="{{$job['detailUrl']}}">
+                    <div class="primary-image" style="background-image:url({{$job['_imageUrl']}});"></div>
+                  </a>
+                </div>
                 <div class="primary-info-section">
                   <a href="{{$job['detailUrl']}}">
                     <h4 class="title">{{$job['name']}}</h4>
@@ -385,9 +389,11 @@
 
             <div class="col-md-4 col-xs-12">
               <div class="info-box">
-                <a href="{{$advertising['detailUrl']}}">
-                  <div class="primary-image-tile" style="background-image:url({{$advertising['_imageUrl']}});"></div>
-                </a>
+                <div class="image-tile">
+                  <a href="{{$advertising['detailUrl']}}">
+                    <div class="primary-image" style="background-image:url({{$advertising['_imageUrl']}});"></div>
+                  </a>
+                </div>
                 <div class="primary-info-section">
                   <a href="{{$advertising['detailUrl']}}">
                     <h4 class="title">{{$advertising['name']}}</h4>
@@ -458,9 +464,11 @@
 
             <div class="col-md-4 col-xs-12">
               <div class="info-box">
-                <a href="{{$item['detailUrl']}}">
-                  <div class="primary-image-tile" style="background-image:url({{$item['_imageUrl']}});"></div>
-                </a>
+                <div class="image-tile">
+                  <a href="{{$item['detailUrl']}}">
+                    <div class="primary-image" style="background-image:url({{$item['_imageUrl']}});"></div>
+                  </a>
+                </div>
                 <div class="primary-info-section">
                   <a href="{{$item['detailUrl']}}">
                     <h4 class="title">{{$item['name']}}</h4>
@@ -529,9 +537,11 @@
 
             <div class="col-md-4 col-xs-12">
               <div class="info-box">
-                <a href="{{$realEstate['detailUrl']}}">
-                  <div class="primary-image-tile" style="background-image:url({{$realEstate['_imageUrl']}});"></div>
-                </a>
+                <div class="image-tile">
+                  <a href="{{$realEstate['detailUrl']}}">
+                    <div class="primary-image" style="background-image:url({{$realEstate['_imageUrl']}});"></div>
+                  </a>
+                </div>
                 <div class="primary-info-section">
                   <a href="{{$realEstate['detailUrl']}}">
                     <h4 class="title">{{$realEstate['_short_name']}}</h4>

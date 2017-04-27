@@ -85,7 +85,7 @@
 }
 
 .box.timeline .timeline-content-image {
-	width: 150px;
+	width: 100%;
 	height: 150px;
 	background-size: 120px auto;
 	background-position: center;
@@ -121,9 +121,13 @@
 }
 
 @media only screen and (max-width : 480px) {
-	.box.timeline .timeline-content-image {
+	.box.timeline .image-tile {
 		width: 100%;
 	}
+
+	/*.box.timeline .timeline-content-image {
+		width: 100%;
+	}*/
 
 	.box.timeline .timeline-content-info {
 	  width: 80%;

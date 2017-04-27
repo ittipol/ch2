@@ -144,8 +144,8 @@ class AccountController extends Controller
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl('account/item');
     $model->paginator->setUrl('item/detail/{id}','detailUrl');
-    $model->paginator->setUrl('account/item_edit/{id}','editUrl');
-    $model->paginator->setUrl('account/item_delete/{id}','deleteUrl');
+    $model->paginator->setUrl('account/item/edit/{id}','editUrl');
+    $model->paginator->setUrl('account/item/delete/{id}','deleteUrl');
 
     $this->data = $model->paginator->build();
 
@@ -169,10 +169,10 @@ class AccountController extends Controller
       )
     ));
     $model->paginator->setPage($page);
-    $model->paginator->setPagingUrl('account/real_estate');
+    $model->paginator->setPagingUrl('account/real-estate');
     $model->paginator->setUrl('real-estate/detail/{id}','detailUrl');
-    $model->paginator->setUrl('account/real_estate_edit/{id}','editUrl');
-    $model->paginator->setUrl('account/real_estate_delete/{id}','deleteUrl');
+    $model->paginator->setUrl('account/real-estate/edit/{id}','editUrl');
+    $model->paginator->setUrl('account/real-estate/delete/{id}','deleteUrl');
 
     $this->data = $model->paginator->build();
 

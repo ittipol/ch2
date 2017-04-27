@@ -105,7 +105,8 @@ class Freelance extends Model
       'description' => !empty($this->description) ? $this->description : '-',
       'defaultWage' => $currency->format($this->default_wage),
       '_short_name' => $string->truncString($this->name,60),
-      '_freelanceType' => FreelanceType::select(array('name'))->find($this->freelance_type_id)->name
+      '_freelanceType' => FreelanceType::select(array('name'))->find($this->freelance_type_id)->name,
+      'person_id' => $this->person_id
     );
     
   }

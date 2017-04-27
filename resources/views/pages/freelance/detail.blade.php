@@ -7,7 +7,7 @@
   <div class="container">
     <div class="top-header">
       <div class="detail-title">
-        <h4 class="sub-title">ฟรีแลนซ์</h4>
+        <h4 class="sub-title">งานฟรีแลนซ์</h4>
         <h2 class="title">{{$_modelData['name']}}</h2>
         <div class="tag-group">
           <a class="tag-box">{{$_modelData['_freelanceType']}}</a>
@@ -102,7 +102,7 @@
 
             <div class="line space-top-bottom-20"></div>
 
-            <a href="{{$experienceDetailUrl}}" class="button wide-button">แสดงประวัติการทำงานฟรีแลนซ์</a>
+            <a href="{{$experienceDetailUrl}}" class="button wide-button">แสดงประวัติการทำงาน</a>
 
           </div>
         </div>

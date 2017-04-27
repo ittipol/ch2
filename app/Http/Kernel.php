@@ -56,6 +56,6 @@ class Kernel extends HttpKernel
         'person.shop.permission' => \App\Http\Middleware\CheckForPersonHasShopPermission::class,
         'shop' => \App\Http\Middleware\CheckForShopSlug::class,
         'data.access.permission' => \App\Http\Middleware\CheckForDataAccessPermission::class,
-        'editing.permission' => \App\Http\Middleware\CheckForEditingPermission::class,
+        'data.owner' => \App\Http\Middleware\CheckForDataOwner::class,
     ];
 }

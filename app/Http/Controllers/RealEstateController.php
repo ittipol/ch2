@@ -9,6 +9,7 @@ use App\library\filterHelper;
 use App\library\url;
 use App\library\cache;
 use Redirect;
+use Auth;
 
 class RealEstateController extends Controller
 {
@@ -145,6 +146,11 @@ class RealEstateController extends Controller
 
     $this->data = $model->modelData->build();
 
+    if(Auth::check() && (session()->get('Person.id') == $model->person_id)) {
+      $url = new Url;
+      $this->setData('deleteUrl',$url->url('account/real-estate/delete/'.$model->id));
+    }
+
     return $this->view('pages.real_estate.detail');
 
   }
@@ -276,6 +282,20 @@ class RealEstateController extends Controller
       return Redirect::back();
     }
     
+  }
+
+  public function delete() {
+
+    $model = Service::loadModel('RealEstate')->find($this->param['id']);
+
+    if($model->delete()) {
+      MessageHelper::display('ยกเลิกการประกาศแล้ว','success');
+    }else{
+      MessageHelper::display('ไม่สามารถยกเลิกการประกาศได้','error');
+    }
+
+    return Redirect::to('account/real-estate');
+
   }
 
 }

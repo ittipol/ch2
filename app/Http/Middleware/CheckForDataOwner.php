@@ -7,7 +7,7 @@ use App\library\service;
 use Closure;
 use Route;
 
-class CheckForEditingPermission
+class CheckForDataOwner
 {
     /**
      * Handle an incoming request.
@@ -22,17 +22,25 @@ class CheckForEditingPermission
         return redirect('home');
       }
 
-      // Need Chenge
-      // Get Page name from DB
 
       $pages = array(
         'item.edit' => array(
+          // 'action' => 'edit',
+          'modelName' => 'Item'
+        ),
+        'item.delete' => array(
           'modelName' => 'Item'
         ),
         'real_estate.edit' => array(
           'modelName' => 'RealEstate'
         ),
+        'real_estate.delete' => array(
+          'modelName' => 'RealEstate'
+        ),
         'freelance.edit' => array(
+          'modelName' => 'Freelance'
+        ),
+        'freelance.delete' => array(
           'modelName' => 'Freelance'
         ),
       );
@@ -48,7 +56,7 @@ class CheckForEditingPermission
       if(empty($model) || ($model->person_id != session()->get('Person.id'))) {
         return response(view('errors.error',array(
           'error'=>array(
-            'message'=>'ขออภัย ไม่สามารถแก้ไขข้อมูลนี้ได้ หรือข้อมูลนี้อาจถูกลบแล้ว'
+            'message'=>'ขออภัย ไม่สามารถแก้ไขข้อมูลนี้ได้หรือข้อมูลนี้อาจถูกลบแล้ว'
           ))
         ));
       }

@@ -101,7 +101,7 @@
         </div>
 
         <div class="list-item">
-          <a href="{{URL::to('account/real_estate')}}">
+          <a href="{{URL::to('account/real-estate')}}">
             <img class="icon" src="/images/common/building.png" >
             <h4>ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</h4>
           </a>

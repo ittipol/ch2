@@ -89,7 +89,7 @@ Route::group(['middleware' => 'auth'], function () {
   // Route::patch('account/theme','PersonExperienceController@themeEditingSubmit')->name('account.theme.edit');
 
   Route::get('account/item', 'AccountController@item')->name('account.item');
-  Route::get('account/real_estate', 'AccountController@realEstate')->name('account.real_estate');
+  Route::get('account/real-estate', 'AccountController@realEstate')->name('account.real_estate');
   Route::get('account/shop', 'AccountController@shop')->name('account.shop');
   Route::get('account/order', 'AccountController@order')->name('account.order');
   Route::get('account/notification', 'AccountController@notification')->name('account.notification');
@@ -186,10 +186,10 @@ Route::group(['middleware' => ['auth','person.experience']], function () {
   Route::get('person/freelance/post','FreelanceController@add')->name('freelance.add');
   Route::post('person/freelance/post','FreelanceController@addingSubmit')->name('freelance.add');
 
-  Route::get('person/freelance/edit/{id}','FreelanceController@edit')->name('freelance.edit')->middleware('editing.permission');;
-  Route::patch('person/freelance/edit/{id}','FreelanceController@editingSubmit')->name('freelance.edit')->middleware('editing.permission');;
+  Route::get('person/freelance/edit/{id}','FreelanceController@edit')->name('freelance.edit')->middleware('data.owner');;
+  Route::patch('person/freelance/edit/{id}','FreelanceController@editingSubmit')->name('freelance.edit')->middleware('data.owner');
 
-  Route::get('person/freelance/delete/{id}','FreelanceController@delete')->name('freelance.delete');
+  Route::get('person/freelance/delete/{id}','FreelanceController@delete')->name('freelance.delete')->middleware('data.owner');
 
 });
 
@@ -282,6 +282,8 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
   Route::get('shop/{shopSlug}/product/edit/{id}','ProductController@edit')->name('shop.product.edit');
   Route::patch('shop/{shopSlug}/product/edit/{id}','ProductController@editingSubmit')->name('shop.product.edit');
+
+  Route::get('shop/{shopSlug}/product/delete/{id}','ProductController@delete')->name('shop.product.delete');
 
   Route::get('shop/{shopSlug}/product/status/edit/{id}','ProductController@statusEdit')->name('shop.product_status.edit');
   Route::patch('shop/{shopSlug}/product/status/edit/{id}','ProductController@statusEditingSubmit')->name('shop.product_status.edit');
@@ -464,10 +466,10 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('item/post','ItemController@add')->name('item.post');
   Route::post('item/post','ItemController@addingSubmit')->name('item.post');
 
-  Route::get('account/item/edit/{id}','ItemController@edit')->name('item.edit')->middleware('editing.permission');
-  Route::patch('account/item/edit/{id}','ItemController@editingSubmit')->name('item.edit')->middleware('editing.permission');
+  Route::get('account/item/edit/{id}','ItemController@edit')->name('item.edit')->middleware('data.owner');
+  Route::patch('account/item/edit/{id}','ItemController@editingSubmit')->name('item.edit')->middleware('data.owner');
 
-  Route::get('account/item_delete/{id}','ItemController@delete')->name('item.delete');
+  Route::get('account/item/delete/{id}','ItemController@delete')->name('item.delete')->middleware('data.owner');
 });
 
 // Real Estate
@@ -479,10 +481,10 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('real-estate/post','RealEstateController@add')->name('real_estate.post');
   Route::post('real-estate/post','RealEstateController@addingSubmit')->name('real_estate.post');
 
-  Route::get('account/real_estate/edit/{id}','RealEstateController@edit')->name('real_estate.edit')->middleware('editing.permission');
-  Route::patch('account/real_estate/edit/{id}','RealEstateController@editingSubmit')->name('real_estate.edit')->middleware('editing.permission');
+  Route::get('account/real-estate/edit/{id}','RealEstateController@edit')->name('real_estate.edit')->middleware('data.owner');
+  Route::patch('account/real-estate/edit/{id}','RealEstateController@editingSubmit')->name('real_estate.edit')->middleware('data.owner');
 
-  Route::get('account/real_estate_delete/{id}','RealEstateController@delete');
+  Route::get('account/real-estate/delete/{id}','RealEstateController@delete')->name('real_estate.delete')->middleware('data.owner');;
 });
 
 Route::group(['prefix' => 'api/v1', 'middleware' => 'api'], function () {

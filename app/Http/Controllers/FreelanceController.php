@@ -247,8 +247,18 @@ class FreelanceController extends Controller
 
   }
 
-  public function queueAdd() {
-    
+  public function delete() {
+
+    $model = Service::loadModel('Freelance')->find($this->param['id']);
+
+    if($model->delete()) {
+      MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
+    }else{
+      MessageHelper::display('ไม่สามารถลบข้อมูลได้','error');
+    }
+
+    return Redirect::to('person/freelance');
+
   }
 
 }

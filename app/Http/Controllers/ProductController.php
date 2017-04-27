@@ -850,4 +850,18 @@ class ProductController extends Controller
     return $this->_save(Service::loadModel('Product')->find($this->param['id']),$request->all());
   }
 
+  public function delete() {
+
+    $model = Service::loadModel('Product')->find($this->param['id']);
+
+    if($model->delete()) {
+      MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
+    }else{
+      MessageHelper::display('ไม่สามารถลบข้อมูลได้','error');
+    }
+
+    return Redirect::to('shop/'.request()->shopSlug.'/manage/product/');
+
+  }
+
 }

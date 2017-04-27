@@ -9,6 +9,7 @@ use App\library\filterHelper;
 use App\library\url;
 use App\library\cache;
 use Redirect;
+use Auth;
 
 class ItemController extends Controller
 {
@@ -151,6 +152,11 @@ class ItemController extends Controller
 
     $this->data = $model->modelData->build();
 
+    if(Auth::check() && (session()->get('Person.id') == $model->person_id)) {
+      $url = new Url;
+      $this->setData('deleteUrl',$url->url('account/item/delete/'.$model->id));
+    }
+
     return $this->view('pages.item.detail');
 
   }
@@ -257,17 +263,10 @@ class ItemController extends Controller
 
     $model = Service::loadModel('Item')->find($this->param['id']);
 
-    if(empty($model)) {
-      $this->error = array(
-        'message' => 'ขออภัย ไม่พบประกาศนี้ หรือข้อมูลนี้อาจถูกลบแล้ว'
-      );
-      return $this->error();
-    }
-
     if($model->delete()) {
-      MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
+      MessageHelper::display('ยกเลิกการประกาศแล้ว','success');
     }else{
-      MessageHelper::display('ไม่สามารถลบข้อมูลนี้ได้','error');
+      MessageHelper::display('ไม่สามารถยกเลิกการประกาศได้','error');
     }
 
     return Redirect::to('account/item');

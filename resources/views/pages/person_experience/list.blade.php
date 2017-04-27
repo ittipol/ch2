@@ -21,7 +21,7 @@
   </div>
 </div>
 
-<div class="container list">
+<div class="container list space-top-30">
 
   <h3>ประวัติการทำงานบุคคล</h3>
   <div class="line"></div>
