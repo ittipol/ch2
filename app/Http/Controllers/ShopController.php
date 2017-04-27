@@ -38,7 +38,10 @@ class ShopController extends Controller
     $_pinnedMessages = array();
     if($pinnedMessages->exists()) {
       foreach ($pinnedMessages->get() as $pinnedMessage) {
-        $_pinnedMessages[] = $pinnedMessage->buildModelData();
+        $_pinnedMessages[] = array_merge($pinnedMessage->buildModelData(),array(
+          'cancelPinnedUrl' => $url->url('shop/'.$this->param['shopSlug'].'/timeline/pinned/cancel/'.$pinnedMessage->id),
+          'deleteUrl' => $url->url('shop/'.$this->param['shopSlug'].'/timeline/delete/'.$pinnedMessage->id),
+        ));
       }
     }
 
@@ -722,7 +725,7 @@ class ShopController extends Controller
     return $this->view('pages.shop.product_catalog');
   }
 
-  public function pinnedMessageAddingSubmit() {
+  public function postMessage() {
 
     $model = Service::loadModel('Timeline');
 
@@ -742,6 +745,35 @@ class ShopController extends Controller
     }
 
     return Redirect::to('shop/'.request()->shopSlug);
+
+  }
+
+  public function cancelMessage() {
+
+    $model = Service::loadModel('Timeline')->find($this->param['id']);
+    $model->pinned = 0;
+
+    if($model->save()) {
+      MessageHelper::display('ยกเลิกการตรึงข้อความแล้ว','success');
+    }else{
+      MessageHelper::display('ไม่สามารถยกเลิกการตรึงข้อความแล้ว','error');
+    }
+
+    return Redirect::to('shop/'.$this->param['shopSlug']);
+
+  }
+
+  public function deleteMessage() {
+
+    $model = Service::loadModel('Timeline')->find($this->param['id']);
+    
+    if($model->delete()) {
+      MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
+    }else{
+      MessageHelper::display('ไม่สามารถลบข้อมูลนี้ได้','error');
+    }
+
+    return Redirect::to('shop/'.$this->param['shopSlug']);
 
   }
 

@@ -13,7 +13,7 @@
 
 <div class="container">
 
-  <h3 class="article-title color-teal">คุณสมบัติที่น่าสนใจ</h3>
+  <!-- <h3 class="article-title color-teal">คุณสมบัติที่น่าสนใจ</h3>
   <div class="line only-space space-bottom-20"></div>
 
   <div class="notice-box-wrapper">
@@ -192,7 +192,7 @@
 
   </div>
 
-  <div class="line grey space-top-bottom-120"></div>
+  <div class="line grey space-top-bottom-120"></div> -->
 
   <h2 class="article-title color-pink">บริษัทและร้านค้า</h2>
   <div class="line only-space space-bottom-50"></div>
@@ -206,7 +206,7 @@
 
   <div class="line only-space space-bottom-20"></div>
 
-  <div class="notice-box-wrapper">
+  <!-- <div class="notice-box-wrapper">
 
     <div class="row">
 
@@ -226,7 +226,7 @@
 
     </div>
 
-  </div>
+  </div> -->
 
   <div class="line only-space space-bottom-40"></div>
 
@@ -279,7 +279,7 @@
 
   <div class="line only-space space-bottom-20"></div>
 
-  <div class="notice-box-wrapper">
+  <!-- <div class="notice-box-wrapper">
 
     <div class="row">
 
@@ -299,7 +299,7 @@
 
     </div>
 
-  </div>
+  </div> -->
 
   <div class="line only-space space-bottom-40"></div>
 
@@ -352,7 +352,7 @@
 
   <div class="line only-space space-bottom-20"></div>
 
-  <div class="notice-box-wrapper">
+  <!-- <div class="notice-box-wrapper">
 
     <div class="row">
 
@@ -372,7 +372,7 @@
 
     </div>
 
-  </div>
+  </div> -->
 
   <div class="line only-space space-bottom-40"></div>
 
@@ -427,7 +427,7 @@
 
   <div class="line only-space space-bottom-20"></div>
 
-  <div class="notice-box-wrapper">
+  <!-- <div class="notice-box-wrapper">
 
     <div class="row">
 
@@ -447,7 +447,7 @@
 
     </div>
 
-  </div>
+  </div> -->
 
   <div class="line only-space space-bottom-40"></div>
 
@@ -500,7 +500,7 @@
 
   <div class="line only-space space-bottom-20"></div>
 
-  <div class="notice-box-wrapper">
+  <!-- <div class="notice-box-wrapper">
 
     <div class="row">
 
@@ -520,7 +520,7 @@
 
     </div>
 
-  </div>
+  </div> -->
 
   <div class="line only-space space-bottom-40"></div>
 

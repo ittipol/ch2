@@ -237,9 +237,26 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
 // community / Shop
 Route::get('community/shop','ShopController@listView');
-// Route::get('community/shop_feature','ShopController@feature');
-Route::group(['middleware' => ['auth','shop']], function () {
+
+Route::group(['middleware' => ['shop','person.shop.permission']], function () {
   Route::get('shop/{shopSlug}','ShopController@index')->name('shop.index');
+
+  Route::get('shop/{shopSlug}/about','ShopController@about')->name('shop.about');
+
+  Route::get('shop/{shopSlug}/product','ProductController@shopProductlistView')->name('shop.product.list');
+  Route::get('shop/{shopSlug}/product/{id}','ProductController@shopProductDetail')->name('shop.product.detail');
+
+  Route::get('shop/{shopSlug}/product_catalog','ProductCatalogController@listView')->name('shop.product_catalog');
+  Route::get('shop/{shopSlug}/product_catalog/{id}','ProductCatalogController@productListView')->name('shop.product_catalog.list');
+
+  Route::get('shop/{shopSlug}/job','JobController@shopJoblistView')->name('shop.job.list');
+  Route::get('shop/{shopSlug}/job/{id}','JobController@shopJobDetail')->name('shop.job.detail');
+
+  Route::get('shop/{shopSlug}/advertising','AdvertisingController@shopAdvertisinglistView')->name('shop.advertising.list');
+  Route::get('shop/{shopSlug}/advertising/{id}','AdvertisingController@shopAdvertisingDetail')->name('shop.advertising.detail');
+
+  Route::get('shop/{shopSlug}/branch','BranchController@listView')->name('shop.branch.list');
+  Route::get('shop/{shopSlug}/branch/{id}','BranchController@detail')->name('shop.branch.detail');
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -247,10 +264,6 @@ Route::group(['middleware' => 'auth'], function () {
   Route::post('community/shop/create','ShopController@creatingSubmit')->name('shop.create');
 });
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
-
-  Route::get('shop/{shopSlug}','ShopController@index')->name('shop.index');
-
-  Route::get('shop/{shopSlug}/about','ShopController@about')->name('shop.about');
 
   Route::get('shop/{shopSlug}/manage','ShopController@manage')->name('shop.manage');
   
@@ -277,9 +290,8 @@ Route::get('product/detail/{id}','ProductController@detail')->name('product.deta
 
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
 
-
-  Route::get('shop/{shopSlug}/product','ProductController@shopProductlistView')->name('shop.product.list');
-  Route::get('shop/{shopSlug}/product/{id}','ProductController@shopProductDetail')->name('shop.product.detail');
+  // Route::get('shop/{shopSlug}/product','ProductController@shopProductlistView')->name('shop.product.list');
+  // Route::get('shop/{shopSlug}/product/{id}','ProductController@shopProductDetail')->name('shop.product.detail');
 
   Route::get('shop/{shopSlug}/manage/product','ShopController@product')->name('shop.product.manage');
   Route::get('shop/{shopSlug}/manage/product/{id}','ProductController@menu')->name('shop.product.manage.menu');
@@ -327,8 +339,8 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::get('shop/{shopSlug}/product/branch/edit/{id}','ProductController@branchEdit')->name('shop.product_branch.edit');
   Route::patch('shop/{shopSlug}/product/branch/edit/{id}','ProductController@branchEditingSubmit')->name('shop.product_branch.edit');
 
-  Route::get('shop/{shopSlug}/product_catalog','ProductCatalogController@listView')->name('shop.product_catalog');
-  Route::get('shop/{shopSlug}/product_catalog/{id}','ProductCatalogController@productListView')->name('shop.product_catalog.list');
+  // Route::get('shop/{shopSlug}/product_catalog','ProductCatalogController@listView')->name('shop.product_catalog');
+  // Route::get('shop/{shopSlug}/product_catalog/{id}','ProductCatalogController@productListView')->name('shop.product_catalog.list');
 
   Route::get('shop/{shopSlug}/manage/product_catalog','ShopController@productCatalog')->name('shop.product_catalog.manage');
   Route::get('shop/{shopSlug}/manage/product_catalog/{id}','ProductCatalogController@menu')->name('shop.product_catalog.menu');
@@ -346,7 +358,9 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
   Route::get('shop/{shopSlug}/product_catalog/delete/product/{id}/product_id:{product_id}','ProductCatalogController@deleteProduct')->name('shop.product_catalog.delete.product');
 
-  Route::post('shop/{shopSlug}/timeline/post','ShopController@pinnedMessageAddingSubmit')->name('shop.timeline.post');
+  Route::post('shop/{shopSlug}/timeline/post','ShopController@postMessage')->name('shop.timeline.post');
+  Route::get('shop/{shopSlug}/timeline/pinned/cancel/{id}','ShopController@cancelMessage')->name('shop.timeline.pinned.cancel');
+  Route::get('shop/{shopSlug}/timeline/delete/{id}','ShopController@deleteMessage')->name('shop.timeline.delete');
 
 });
 
@@ -354,8 +368,6 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
 
   Route::get('shop/{shopSlug}/payment_method','ShopController@paymentMethod')->name('shop.payment_method');
-
-  // Route::get('shop/{shopSlug}/payment_method/{id}','PaymentMethodController@detail')->name('shop.payment_method.detail');
 
   Route::get('shop/{shopSlug}/payment_method/add','PaymentMethodController@add')->name('shop.payment_method.add');
   Route::post('shop/{shopSlug}/payment_method/add','PaymentMethodController@addingSubmit')->name('shop.payment_method.add');
@@ -371,8 +383,6 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
 
   Route::get('shop/{shopSlug}/shipping_method','ShopController@ShippingMethod')->name('shop.shipping_method');
-
-  // Route::get('shop/{shopSlug}/shipping_method/{id}','ShippingMethodController@detail')->name('shop.shipping_method.detail');
 
   Route::get('shop/{shopSlug}/shipping_method/add','ShippingMethodController@add')->name('shop.shipping_method.add');
   Route::post('shop/{shopSlug}/shipping_method/add','ShippingMethodController@addingSubmit')->name('shop.shipping_method.add');
@@ -393,8 +403,8 @@ Route::get('job/detail/{id}','JobController@detail')->name('job.detail');
 
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
 
-  Route::get('shop/{shopSlug}/job','JobController@shopJoblistView')->name('shop.job.list');
-  Route::get('shop/{shopSlug}/job/{id}','JobController@shopJobDetail')->name('shop.job.detail');
+  // Route::get('shop/{shopSlug}/job','JobController@shopJoblistView')->name('shop.job.list');
+  // Route::get('shop/{shopSlug}/job/{id}','JobController@shopJobDetail')->name('shop.job.detail');
 
   Route::get('shop/{shopSlug}/manage/job','ShopController@job')->name('shop.job.manage');
 
@@ -426,23 +436,6 @@ Route::group(['middleware' => ['auth','person.experience']], function () {
   Route::patch('job/apply/{id}','JobController@applyingSubmit');
 });
 
-// Branch
-Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
-
-  Route::get('shop/{shopSlug}/manage/branch','ShopController@branch')->name('shop.branch.manage');
-
-  Route::get('shop/{shopSlug}/branch','BranchController@listView')->name('shop.branch.list');
-  Route::get('shop/{shopSlug}/branch/{id}','BranchController@detail')->name('shop.branch.detail');
-
-  Route::get('shop/{shopSlug}/branch/add','BranchController@add')->name('shop.branch.add');
-  Route::post('shop/{shopSlug}/branch/add','BranchController@addingSubmit')->name('shop.branch.add');
-
-  Route::get('shop/{shopSlug}/branch/edit/{id}','BranchController@edit')->name('shop.branch.edit');
-  Route::patch('shop/{shopSlug}/branch/edit/{id}','BranchController@editingSubmit')->name('shop.branch.edit');
-
-  Route::get('shop/{shopSlug}/branch/delete/{id}','BranchController@delete')->name('shop.branch.delete');
-});
-
 // Advertising
 Route::get('advertising/board','AdvertisingController@board');
 Route::get('advertising/board/{advertising_type_id}','AdvertisingController@listView')->name('advertising.list');
@@ -450,8 +443,8 @@ Route::get('advertising/detail/{id}','AdvertisingController@detail')->name('adve
 
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
 
-  Route::get('shop/{shopSlug}/advertising','AdvertisingController@shopAdvertisinglistView')->name('shop.advertising.list');
-  Route::get('shop/{shopSlug}/advertising/{id}','AdvertisingController@shopAdvertisingDetail')->name('shop.advertising.detail');
+  // Route::get('shop/{shopSlug}/advertising','AdvertisingController@shopAdvertisinglistView')->name('shop.advertising.list');
+  // Route::get('shop/{shopSlug}/advertising/{id}','AdvertisingController@shopAdvertisingDetail')->name('shop.advertising.detail');
 
   Route::get('shop/{shopSlug}/manage/advertising','ShopController@advertising')->name('shop.advertising.manage');
   
@@ -463,6 +456,23 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
   Route::get('shop/{shopSlug}/advertising/delete/{id}','AdvertisingController@delete')->name('shop.advertising.delete');
 
+});
+
+// Branch
+Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
+
+  Route::get('shop/{shopSlug}/manage/branch','ShopController@branch')->name('shop.branch.manage');
+
+  // Route::get('shop/{shopSlug}/branch','BranchController@listView')->name('shop.branch.list');
+  // Route::get('shop/{shopSlug}/branch/{id}','BranchController@detail')->name('shop.branch.detail');
+
+  Route::get('shop/{shopSlug}/branch/add','BranchController@add')->name('shop.branch.add');
+  Route::post('shop/{shopSlug}/branch/add','BranchController@addingSubmit')->name('shop.branch.add');
+
+  Route::get('shop/{shopSlug}/branch/edit/{id}','BranchController@edit')->name('shop.branch.edit');
+  Route::patch('shop/{shopSlug}/branch/edit/{id}','BranchController@editingSubmit')->name('shop.branch.edit');
+
+  Route::get('shop/{shopSlug}/branch/delete/{id}','BranchController@delete')->name('shop.branch.delete');
 });
 
 // Person Post Item

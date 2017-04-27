@@ -52,7 +52,13 @@ class Timeline extends Model
 
     $relatedData = null;
     if(!empty($this->related) && !empty($this->related)) {
-      $relatedData = Service::loadModel($this->related)->find($this->related_id)->buildTimelineData();
+
+      $model = Service::loadModel($this->related)->find($this->related_id);
+
+      if(!empty($model) && method_exists($model,'buildTimelineData')) {
+        $relatedData = $model->buildTimelineData();
+      }
+      
     }
 
     return array(

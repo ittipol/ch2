@@ -84,19 +84,19 @@
               <div class="dot"></div>
               <div class="dot"></div>
               <div class="additional-option-content">
-                <a href="">ยกเลิกการตรึงข้อความ</a>
-                <a href="">ลบข้อความ</a>
+                <a href="{{$timeline['cancelPinnedUrl']}}">ยกเลิกการตรึงข้อความ</a>
+                <a href="{{$timeline['deleteUrl']}}"  data-modal="1" data-modal-title="ต้องการลบข้อความใช่หรือไม่">ลบข้อความ</a>
               </div>
             </div>
 
           </div>
         @endforeach
 
+        <div class="line space-top-bottom-100"></div>
+
       @endif
 
     </div>
-
-    <div class="line space-top-bottom-100"></div>
 
     <div class="box">
       <div class="box-header">
