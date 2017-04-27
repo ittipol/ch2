@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="btn-group pull-right">
-          <a href="{{$_shop_payment_method}}" class="btn btn-secondary">กลับไปยังหน้าวิธีการชำระเงิน</a>
+          <a href="{{$_shop_payment_method}}" class="btn btn-secondary">กลับไปหน้าวิธีการชำระเงิน</a>
           <button class="btn btn-secondary additional-option">
             จัดการ...
             <div class="additional-option-content">

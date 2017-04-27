@@ -7,12 +7,12 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{request()->get('shopUrl')}}manage/product" class="btn btn-secondary">กลับไปยังหน้าหลักจัดการสินค้า</a>
+          <a href="{{request()->get('shopUrl')}}manage/product" class="btn btn-secondary">กลับไปหน้าหลักจัดการสินค้า</a>
           <button class="btn btn-secondary additional-option">
             ...
             <div class="additional-option-content">
               <a href="{{request()->get('shopUrl')}}manage/job">ไปยังหน้าหลักจัดการประกาศงาน</a>
-              <a href="{{request()->get('shopUrl')}}manage/advertising">กลับไปยังหน้าหลักจัดการโฆษณา</a>
+              <a href="{{request()->get('shopUrl')}}manage/advertising">กลับไปหน้าหลักจัดการโฆษณา</a>
             </div>
           </button>
         </div>
@@ -39,7 +39,7 @@
         <div class="dot"></div>
         <div class="dot"></div>
         <div class="additional-option-content">
-          <a href="{{request()->get('shopUrl')}}product_catalog/{{$_modelData['id']}}">ไปยังหน้าแคตตาล็อก</a>
+          <a href="{{request()->get('shopUrl')}}product_catalog/{{$_modelData['id']}}">แสดงแคตตาล็อกนี้</a>
           <a href="{{request()->get('shopUrl')}}product_catalog/delete/{{$_modelData['id']}}" data-modal="1" data-modal-title="ต้องการลบแคตตาล็อก {{$_modelData['name']}} ใช่หรือไม่">ลบแคตตาล็อก</a>
         </div>
       </div>

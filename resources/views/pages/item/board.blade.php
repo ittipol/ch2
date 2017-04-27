@@ -7,14 +7,7 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{URL::to('item/post')}}" class="btn btn-secondary">เพิ่มประกาศเช่า-ซื้อ-ขายสินค้า</a>
-          <button class="btn btn-secondary additional-option">
-            ...
-            <div class="additional-option-content">
-              <a href="{{URL::to('real_estate/board')}}">ไปยังหน้าหลักของประกาศอสังหาริมทรัพย์</a>
-              <a href="{{URL::to('real_estate/post')}}">เพิ่มประกาศเช่า-ซื้อ-ขายอสังหาริมทรัพย์</a>
-            </div>
-          </button>
+          <a href="{{URL::to('item/post')}}" class="btn btn-secondary">เพิ่มประกาศ</a>
         </div>
 
       </div>

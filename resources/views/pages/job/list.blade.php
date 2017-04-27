@@ -7,7 +7,7 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{URL::to('job/board')}}" class="btn btn-secondary">กลับไปยังหน้าหลักการประกาศงาน</a>
+          <a href="{{URL::to('job/board')}}" class="btn btn-secondary">กลับไปหน้าหลักการประกาศงาน</a>
         </div>
 
       </div>

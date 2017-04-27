@@ -185,6 +185,11 @@ a.button:visited {
 	line-height: 22px !important;
 }
 
+.breadcrumb {
+	padding: 0;
+	background-color: #fff;
+}
+
 .global-overlay {
 	position: fixed;
 	top: 0;

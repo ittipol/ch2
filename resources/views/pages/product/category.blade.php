@@ -1,10 +1,36 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
+
+<div class="sub-header-nav">
+  <div class="sub-header-nav-fixed-top">
+    <div class="row">
+      <div class="col-xs-12">
+        @if(!empty($categoryName))
+        <div class="btn-group pull-right">
+          <a href="{{$parentCategoryUrl}}" class="btn btn-secondary">กลับไปหน้าประเภทสินค้าหลักของหมวดนี้</a>
+          <button class="btn btn-secondary additional-option">
+            ...
+            <div class="additional-option-content">
+              <a href="{{URL::to('product/category')}}" class="btn btn-secondary">ไปยังหน้าภาพรวมประเภทสินค้า</a>
+            </div>
+          </button>
+        </div>
+        @else
+        <div class="btn-group pull-right">
+          <a href="{{URL::to('product/shelf')}}" class="btn btn-secondary">สินค้าจากร้านค้า</a>
+        </div>
+        @endif
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class="top-header-wrapper top-header-border">
   <div class="container">
     <div class="top-header">
-      <h4>สินค้า</h4>
       <h2>หมวดสินค้า</h2>
     </div>
   </div>
@@ -57,7 +83,7 @@
 
     <div class="list-empty-message text-center space-top-20">
       <div>
-        <h4>ไม่มีหมวดสินค้าย่อยของ{{$categoryName}}</h4>
+        <h4>ไม่มีหมวดสินค้าย่อย</h4>
       </div>
     </div>
 

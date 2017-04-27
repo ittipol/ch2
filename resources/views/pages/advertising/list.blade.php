@@ -7,7 +7,7 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{URL::to('advertising/board')}}" class="btn btn-secondary">กลับไปยังหน้าหลักโฆษณา</a>
+          <a href="{{URL::to('advertising/board')}}" class="btn btn-secondary">กลับไปหน้าหลักโฆษณา</a>
         </div>
 
       </div>

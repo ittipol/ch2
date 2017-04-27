@@ -1,6 +1,20 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
+<div class="sub-header-nav">
+  <div class="sub-header-nav-fixed-top">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <div class="btn-group pull-right">
+          <a href="{{URL::to('person/experience')}}" class="btn btn-secondary">กลับไปหน้าภาพรวมประวัติการทำงาน</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="top-header-wrapper top-header-border">
   <div class="container">
     <div class="top-header">
@@ -46,7 +60,7 @@
             <div class="dot"></div>
             <div class="additional-option-content">
               <a href="{{$privateWebsite['editUrl']}}">แก้ไข</a>
-              <a data-modal="1" href="{{$privateWebsite['deleteUrl']}}">ลบ</a>
+              <a href="{{$privateWebsite['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการลบใช่หรือไม่">ลบ</a>
             </div>
           </div>
         </div>

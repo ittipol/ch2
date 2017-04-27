@@ -1,7 +1,19 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+<div class="sub-header-nav">
+  <div class="sub-header-nav-fixed-top">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <div class="btn-group pull-right">
+          <a href="{{URL::to('freelance/board')}}" class="btn btn-secondary">กลับไปหน้าภาพรวมงานฟรีแลนซ์</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="top-header-wrapper top-header-border">
   <div class="container">

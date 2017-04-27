@@ -36,39 +36,63 @@
 
   @if(!empty($_pagination['data']))
 
-    <div class="list-h">
-    @foreach($_pagination['data'] as $data)
-      <div class="list-h-item clearfix">
+    <div class="grid-card">
 
-        <a href="{{$data['detailUrl']}}" class="list-image pull-left">
-          <img src="/images/icons/bag-white.png">
-        </a>
+      <div class="row">
 
-        <div class="col-md-11 col-xs-8">
+        @foreach($_pagination['data'] as $data)
 
-          <a href="{{$data['detailUrl']}}">
-            <h4 class="primary-info">{{$data['name']}}</h4>
-          </a>
-          <div class="secondary-info">จำนวนสินค้าในแคตตาล็อก: {{$data['totalProduct']}}</div>
+        <div class="col-lg-3 col-sm-4 col-xs-12">
+          <div class="card">
 
-        </div>
-        
-        <div class="additional-option">
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="additional-option-content">
-            <a href="{{$data['menuUrl']}}">จัดการแคตตาล็อกนี้</a>
-            <a href="{{$data['catalogEditUrl']}}">เพิ่ม/ลบสินค้าในแคตตาล็อก</a>
-            <a href="{{$data['deleteUrl']}}">ลบแคตตาล็อก</a>
+            <div class="image-tile cover">
+              <a href="{{$data['detailUrl']}}">
+                <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+              </a>
+            </div>
+            <div class="card-info">
+              <a href="{{$data['detailUrl']}}">
+                <div class="card-title">{{$data['name']}}</div>
+              </a>
+              <div class="card-sub-info">
+
+                <div class="card-sub-info-row">
+                  <h5>จำนวนสินค้าในแคตตาล็อก</h5>
+                  {{$data['totalProduct']}}
+                </div>
+
+              </div>
+            </div>
+
+            <div class="button-group">
+
+              <a href="{{$data['menuUrl']}}">
+                <div class="button wide-button">จัดการแคตตาล็อกนี้</div>
+              </a>
+
+              <div class="additional-option">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="additional-option-content">
+                  <a href="{{$data['detailUrl']}}">แสดงแคตตาล็อกนี้</a>
+                  <a href="{{$data['catalogEditUrl']}}">เพิ่ม/ลบสินค้าในแคตตาล็อก</a>
+                  <a href="{{$data['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการลบแคตตาล็อก {{$data['name']}} ใช่หรือไม่">ลบแคตตาล็อก</a>
+                </div>
+              </div>
+            
+            </div>
+
           </div>
         </div>
 
-      </div>
-    @endforeach
-    </div>
+        @endforeach
 
-    @include('components.pagination')
+      </div>
+
+      @include('components.pagination') 
+
+    </div>
 
   @else
 

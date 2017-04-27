@@ -95,13 +95,6 @@ class PersonPrivateWebsiteController extends Controller
 
     $model = Service::loadModel('PersonPrivateWebsite')->where('id','=',$this->param['id'])->first();
 
-    if(empty($model) || ($model->person_id != session()->get('Person.id'))) {
-      $this->error = array(
-        'message' => 'ขออภัย ไม่สามารถแก้ไขข้อมูลนี้ได้ หรือข้อมูลนี้อาจถูกลบแล้ว'
-      );
-      return $this->error();
-    }
-
     $model->formHelper->loadFieldData('WebsiteType',array(
       'key' =>'id',
       'field' => 'name',
@@ -136,6 +129,20 @@ class PersonPrivateWebsiteController extends Controller
       return Redirect::back()->withErrors(['เกิดข้อผิดพลาด ไม่สามารถบันถึกได้']);
     }
     
+  }
+
+  public function delete() {
+
+    $model = Service::loadModel('PersonPrivateWebsite')->find($this->param['id']);
+
+    if($model->delete()) {
+      MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
+    }else{
+      MessageHelper::display('ไม่สามารถลบข้อมูลนี้ได้','error');
+    }
+
+    return Redirect::to('person/private_website/list');
+
   }
 
 }

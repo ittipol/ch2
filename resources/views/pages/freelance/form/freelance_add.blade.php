@@ -1,6 +1,20 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
+<div class="sub-header-nav">
+  <div class="sub-header-nav-fixed-top">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <div class="btn-group pull-right">
+          <a href="{{URL::to('experience/profile/edit')}}" class="btn btn-secondary">กลับไปหน้างานฟรีแลนซ์ที่ประกาศ</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container">
   
   <div class="container-header">

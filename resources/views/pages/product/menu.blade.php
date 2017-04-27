@@ -7,12 +7,12 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{request()->get('shopUrl')}}manage/product" class="btn btn-secondary">กลับไปยังหน้าหลักจัดการสินค้า</a>
+          <a href="{{request()->get('shopUrl')}}manage/product" class="btn btn-secondary">กลับไปหน้าหลักจัดการสินค้า</a>
           <button class="btn btn-secondary additional-option">
             ...
             <div class="additional-option-content">
               <a href="{{request()->get('shopUrl')}}manage/job">ไปยังหน้าหลักจัดการประกาศงาน</a>
-              <a href="{{request()->get('shopUrl')}}manage/advertising">กลับไปยังหน้าหลักจัดการโฆษณา</a>
+              <a href="{{request()->get('shopUrl')}}manage/advertising">กลับไปหน้าหลักจัดการโฆษณา</a>
             </div>
           </button>
         </div>
@@ -74,7 +74,7 @@
         <div class="dot"></div>
         <div class="dot"></div>
         <div class="additional-option-content">
-          <a href="{{request()->get('shopUrl')}}product/{{$_modelData['id']}}">รายละเอียดสินค้า</a>
+          <a href="{{request()->get('shopUrl')}}product/{{$_modelData['id']}}">แสดงสินค้านี้</a>
           <a href="{{request()->get('shopUrl')}}product/delete/{{$_modelData['id']}}" data-modal="1" data-modal-title="ต้องการลบสินค้า {{$_modelData['name']}} ใช่หรือไม่">ลบสินค้า</a>
         </div>
       </div>
@@ -158,7 +158,9 @@
         <h4>หมวดสินค้า</h4>
       </a>
       <div class="list-item-group-info">
-        <h5><b>หมวดสินค้า</b>: {{$_modelData['_categoryPathName']}}</h5>
+        <h5>
+          <b>หมวดสินค้า</b>: @if(!empty($categoryPathName)) {{$categoryPathName}} @else - @endif
+        </h5>
       </div>
     </div>
 

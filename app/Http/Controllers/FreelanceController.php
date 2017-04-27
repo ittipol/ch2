@@ -231,7 +231,7 @@ class FreelanceController extends Controller
 
     $this->data = $model->formHelper->build();
 
-    return $this->view('pages.freelance.form.freelance/edit');
+    return $this->view('pages.freelance.form.freelance_edit');
   }
 
   public function editingSubmit(CustomFormRequest $request) {

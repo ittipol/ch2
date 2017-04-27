@@ -9,7 +9,7 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{request()->get('shopUrl')}}product" class="btn btn-secondary">กลับไปยังหน้าหลักสินค้า</a>
+          <a href="{{request()->get('shopUrl')}}product" class="btn btn-secondary">กลับไปหน้าหลักสินค้า</a>
           <button class="btn btn-secondary additional-option">
             ...
             <div class="additional-option-content">

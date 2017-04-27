@@ -253,18 +253,37 @@ class Product extends Model
 
   }
 
+  // public function getParentCategory() {
+
+  //   $productToCategory = ProductToCategory::where('product_id','=',$this->id)->select('category_id');
+
+  //   if(!$productToCategory->exists()) {
+  //     return null;
+  //   }
+
+  //   return Category::find($productToCategory->first()->category->parent_id)
+  // }
+
   public function getCategory() {
 
-    $productToCategory = ProductToCategory::where('product_id','=',$this->id)
-    ->select('category_id')
-    ->first();
+    $productToCategory = ProductToCategory::where('product_id','=',$this->id)->select('category_id');
 
-    $categoryName = '';
-    if(!empty($productToCategory)) {
-      $categoryName = $productToCategory->category->name;
+    if(!$productToCategory->exists()) {
+      return null;
     }
 
-    return $categoryName;
+    return $productToCategory->first()->category;
+  }
+
+  public function getCategoryName() {
+
+    $productToCategory = ProductToCategory::where('product_id','=',$this->id)->select('category_id');
+
+    if(!$productToCategory->exists()) {
+      return '';
+    }
+
+    return $productToCategory->first()->category->name;
 
   }
 
@@ -272,18 +291,15 @@ class Product extends Model
 
     $url = new Url;
 
-    $categoryModel = new Category;
+    $productToCategory = ProductToCategory::where('product_id','=',$this->id)->select('category_id');
 
-    $productToCategory = ProductToCategory::where('product_id','=',$this->id)
-    ->select('category_id')
-    ->first();
-
-    $categoryPaths = array();
-    if(!empty($productToCategory)) {
-      $categoryPaths = $categoryModel->getCategoryPaths($productToCategory->category_id);
+    if(!$productToCategory->exists()) {
+      return null;
     }
 
-    return $categoryPaths;
+    $categoryModel = new Category;
+
+    return $categoryModel->getCategoryPaths($productToCategory->first()->category_id);
 
   }
 
@@ -335,8 +351,8 @@ class Product extends Model
 
     $currency = new Currency;
 
-    $categoryName = $this->getCategory();
-    $categoryPathName = $this->getCategoryPathName();
+    // $categoryName = $this->getCategoryName();
+    // $categoryPathName = $this->getCategoryPathName();
 
     $specifications = array();
 
@@ -399,7 +415,6 @@ class Product extends Model
       '_shipping_calculate_from' => $shippingCalculateFrom,
       'active' => $this->active,
       '_active' => $this->active ? 'เปิดการขายสินค้า' : 'ปิดการขาย',
-      '_categoryPathName' => !empty($categoryPathName) ? $categoryPathName : '-',
       'promotion' => $this->getPromotion(),
       'flag' => $this->getProductFlag(),
     ),$this->getShippingCostText());

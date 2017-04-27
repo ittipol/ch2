@@ -135,8 +135,6 @@ class PersonExperienceController extends Controller
 
     $url = new Url;
 
-    // $model = Service::loadModel('PersonExperience');
-
     $profile = Service::loadModel('PersonExperience')
     ->select(array('id','active'))
     ->where('person_id','=',Session::get('Person.id'))
@@ -151,8 +149,8 @@ class PersonExperienceController extends Controller
     // Get skill
     $skills = Service::loadModel('PersonSkill')->where('person_experience_id','=',$profile->id)->get();
 
-    $url->setUrl('experience/skill_edit/{id}','editUrl');
-    $url->setUrl('experience/skill_delete/{id}','deleteUrl');
+    $url->setUrl('experience/skill/edit/{id}','editUrl');
+    $url->setUrl('experience/skill/delete/{id}','deleteUrl');
 
     $_skills = array();
     foreach ($skills as $skill) {
@@ -165,8 +163,8 @@ class PersonExperienceController extends Controller
     $languageSkills = Service::loadModel('PersonLanguageSkill')->where('person_experience_id','=',$profile->id)->get();
 
     $url->clearUrls();
-    $url->setUrl('experience/language_skill_edit/{id}','editUrl');
-    $url->setUrl('experience/language_skill_delete/{id}','deleteUrl');
+    $url->setUrl('experience/language_skill/edit/{id}','editUrl');
+    $url->setUrl('experience/language_skill/delete/{id}','deleteUrl');
 
     $_languageSkills = array();
     foreach ($languageSkills as $languageSkill) {
@@ -197,8 +195,8 @@ class PersonExperienceController extends Controller
       ->get();
 
       $url->clearUrls();
-      $url->setUrl('experience/'.$alias.'_edit/{id}','editUrl');
-      $url->setUrl('experience/'.$alias.'_delete/{id}','deleteUrl');
+      $url->setUrl('experience/'.$alias.'/edit/{id}','editUrl');
+      $url->setUrl('experience/'.$alias.'/delete/{id}','deleteUrl');
 
       $details = array();
       foreach ($experienceDetails as $experienceDetail) {

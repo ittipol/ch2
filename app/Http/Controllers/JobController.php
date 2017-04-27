@@ -1214,4 +1214,17 @@ class JobController extends Controller
     $this->setData('sendAs',$sendAs);
   }
 
+  public function delete() {
+
+    $model = Service::loadModel('Job')->find($this->param['id']);
+
+    if($model->delete()) {
+      MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
+    }else{
+      MessageHelper::display('ไม่สามารถลบข้อมูลนี้ได้','error');
+    }
+
+    return Redirect::to('shop/'.request()->shopSlug.'/manage/job');
+  }
+
 }

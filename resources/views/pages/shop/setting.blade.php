@@ -7,7 +7,7 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{request()->get('shopUrl')}}manage" class="btn btn-secondary">กลับไปยังหน้าจัดการหลัก</a>
+          <a href="{{request()->get('shopUrl')}}manage" class="btn btn-secondary">กลับไปหน้าจัดการหลัก</a>
         </div>
 
       </div>

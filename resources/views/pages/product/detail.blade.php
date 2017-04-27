@@ -3,26 +3,6 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 
-<div class="sub-header-nav">
-  <div class="sub-header-nav-fixed-top">
-    <div class="row">
-      <div class="col-xs-12">
-
-        <div class="btn-group pull-right">
-          <a href="{{URL::to('item/post')}}" class="btn btn-secondary">ไปยังหน้าสินค้าหลัก</a>
-          <button class="btn btn-secondary additional-option">
-            ...
-            <div class="additional-option-content">
-              <a href="{{URL::to('product/category')}}">ไปยังหน้าแสดงหมวดสินค้า</a>
-            </div>
-          </button>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="top-header-wrapper top-header-border">
   <div class="container">
     <div class="top-header">

@@ -1,26 +1,6 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<div class="sub-header-nav">
-  <div class="sub-header-nav-fixed-top">
-    <div class="row">
-      <div class="col-xs-12">
-
-        <div class="btn-group pull-right">
-          <a href="{{URL::to('job/board')}}" class="btn btn-secondary">เพิ่มประวัติการทำงาน</a>
-          <button class="btn btn-secondary additional-option">
-            ...
-            <div class="additional-option-content">
-              <a href="{{URL::to('freelance/board')}}">งานฟรีแลนซ์</a>
-            </div>
-          </button>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="container list space-top-30">
 
   <h3>ประวัติการทำงานบุคคล</h3>

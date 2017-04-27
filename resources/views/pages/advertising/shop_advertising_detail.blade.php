@@ -9,7 +9,7 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{request()->get('shopUrl')}}advertising" class="btn btn-secondary">กลับไปยังหน้าหลักโฆษณา</a>
+          <a href="{{request()->get('shopUrl')}}advertising" class="btn btn-secondary">กลับไปหน้าหลักโฆษณา</a>
           <button class="btn btn-secondary additional-option">
             ...
             <div class="additional-option-content">

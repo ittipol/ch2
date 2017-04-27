@@ -9,12 +9,12 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{request()->get('shopUrl')}}setting" class="btn btn-secondary">กลับไปยังหน้าข้อมูลร้านค้า</a>
+          <a href="{{request()->get('shopUrl')}}setting" class="btn btn-secondary">กลับไปหน้าข้อมูลร้านค้า</a>
 
           <button class="btn btn-secondary additional-option">
             ...
             <div class="additional-option-content">
-              <a href="{{request()->get('shopUrl')}}manage">กลับไปยังหน้าจัดการหลัก</a>
+              <a href="{{request()->get('shopUrl')}}manage">กลับไปหน้าจัดการหลัก</a>
             </div>
           </button>
 

@@ -138,6 +138,18 @@ class Category extends Model
 
   }
 
+  public function getParentCategoryId($id) {
+
+    $category = $this->select('parent_id')->where('id','=',$id);
+
+    if(!$category->exists()) {
+      return null;
+    }
+
+    return $category->first()->parent_id;
+
+  }
+
   public function getParentCategory($id) {
 
     $category = $this->select('parent_id')->where('id','=',$id);
@@ -163,6 +175,15 @@ class Category extends Model
     ->whereIn('product_to_categories.category_id',$ids)
     ->count();
 
+  }
+
+  public function hadCatagory($categoryId = null) {
+
+    if(empty($categoryId)) {
+      return false;
+    }
+
+    return $this->where('id','=',$categoryId)->exists();
   }
 
 }

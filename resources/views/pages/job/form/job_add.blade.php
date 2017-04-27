@@ -7,7 +7,7 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{request()->get('shopUrl')}}manage/job" class="btn btn-secondary">กลับไปยังหน้าหลักจัดการประกาศงาน</a>
+          <a href="{{request()->get('shopUrl')}}manage/job" class="btn btn-secondary">กลับไปหน้าหลักจัดการประกาศงาน</a>
           <button class="btn btn-secondary additional-option">
             ...
             <div class="additional-option-content">

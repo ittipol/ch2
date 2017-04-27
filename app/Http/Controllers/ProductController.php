@@ -118,39 +118,48 @@ class ProductController extends Controller
       $categoryId = $this->param['category_id'];
     }
 
-    $categories = $categoryModel->getSubCategories($categoryId,false);
-
-    if(empty($categories)) {
+    if(!empty($categoryId) && !$categoryModel->hadCatagory($categoryId)) {
       $this->error = array(
         'message' => 'ขออภัย ไม่พบหมวดสินค้า'
       );
       return $this->error();
     }
 
+    $categories = $categoryModel->getSubCategories($categoryId,false);
+
     $_categories = array();
-    foreach ($categories as $category) {
+    if(!empty($categories)) {
+      foreach ($categories as $category) {
 
-      $subCategories = $categoryModel->select('id','name')->where('parent_id','=',$category->id)->get();
+        $subCategories = $categoryModel->select('id','name')->where('parent_id','=',$category->id)->get();
 
-      $_subCategories = array();
-      foreach ($subCategories as $subCategory) {
-        $_subCategories[] = array(
-          'name' => $subCategory->name,
-          'url' =>  $url->setAndParseUrl('product/category/{category_id}',array('category_id'=>$subCategory->id))
+        $_subCategories = array();
+        foreach ($subCategories as $subCategory) {
+          $_subCategories[] = array(
+            'name' => $subCategory->name,
+            'url' =>  $url->setAndParseUrl('product/category/{category_id}',array('category_id'=>$subCategory->id))
+          );
+        }
+
+        $_categories[] = array(
+          'categoryName' => $category->name,
+          'subCategories' => $_subCategories,
+          'productShelfUrl' => $url->setAndParseUrl('product/shelf/{category_id}',array('category_id'=>$category->id)),
         );
+
       }
-
-      $_categories[] = array(
-        'categoryName' => $category->name,
-        'subCategories' => $_subCategories,
-        'productShelfUrl' => $url->setAndParseUrl('product/shelf/{category_id}',array('category_id'=>$category->id)),
-      );
-
+    }
+    
+    if(!empty($categoryId)) {
+      // $parentId = $categoryModel->getParentCategoryId($categoryId);
+      $this->setData('parentCategoryUrl',$url->url('product/category/'.$categoryModel->getParentCategoryId($categoryId)));
+      // $this->setData('parentCategoryName',$categoryModel->getCategoryName($parentId));
     }
 
+    $this->setData('categoryId',$categoryId);
     $this->setData('categoryName',$categoryModel->getCategoryName($categoryId));
     $this->setData('categories',$_categories);
-    $this->setData('productShelfUrl',$url->setAndParseUrl('product/shelf/{category_id}',array('category_id'=>$categoryId)));
+    $this->setData('productShelfUrl',$url->url('product/shelf/'.$categoryId));
 
     return $this->view('pages.product.category');
 
@@ -495,6 +504,7 @@ class ProductController extends Controller
 
     $this->data = $model->modelData->build();
     $this->setData('imageUrl',$model->getImage('list'));
+    $this->setData('categoryPathName',$model->getCategoryPathName());
     $this->setData('categoryPaths',$model->getCategoryPaths());
 
     return $this->view('pages.product.menu');

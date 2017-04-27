@@ -170,7 +170,7 @@ class BranchController extends Controller
 
     if($model->fill($request->all())->save()) {
       MessageHelper::display('สาขา '.$model->name.' ถูกเพิ่มแล้ว','success');
-      return Redirect::to(route('shop.branch.detail', ['shopSlug' => request()->shopSlug,'id' => $model->id]));
+      return Redirect::to('shop/'.$request->shopSlug.'/manage/branch');
     }else{
       return Redirect::back();
     }
@@ -207,7 +207,7 @@ class BranchController extends Controller
     if($model->fill($request->all())->save()) {
 
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to(route('shop.branch.detail', ['shopSlug' => request()->shopSlug,'id' => $model->id]));
+      return Redirect::to('shop/'.$request->shopSlug.'/manage/branch');
     }else{
       return Redirect::back();
     }
@@ -216,6 +216,15 @@ class BranchController extends Controller
 
   public function delete() {
 
+    $model = Service::loadModel('Branch')->find($this->param['id']);
+
+    if($model->delete()) {
+      MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
+    }else{
+      MessageHelper::display('ไม่สามารถลบข้อมูลนี้ได้','error');
+    }
+
+    return Redirect::to('shop/'.request()->shopSlug.'/manage/branch');
   }
 
 }

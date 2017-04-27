@@ -9,7 +9,7 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{request()->get('shopUrl')}}branch" class="btn btn-secondary">กลับไปยังหน้าหลักสาขา</a>
+          <a href="{{request()->get('shopUrl')}}branch" class="btn btn-secondary">กลับไปหน้าหลักสาขา</a>
           <button class="btn btn-secondary additional-option">
             ...
             <div class="additional-option-content">
@@ -217,7 +217,7 @@
   @else
 
     <div class="list-empty-message text-center space-top-20">
-      <img class="space-bottom-20" src="/images/common/career.png">
+      <img class="space-bottom-20" src="/images/common/not-found.png">
       <div>
         <p>ไม่พบงานที่กำลังเปิดรับในสาขานี้</p>
       </div>

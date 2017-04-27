@@ -292,6 +292,10 @@
 	background-color: #00aeef;
 }
 
+.content-box dt {
+	margin-bottom: 4px;
+}
+
 .quantity-box .quantity-text-input {
 	width: 49%;
 }

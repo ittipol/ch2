@@ -48,13 +48,6 @@ class PersonLanguageSkillController extends Controller
 
     $model = Service::loadModel('PersonLanguageSkill')->where('id','=',$this->param['id'])->first();
 
-    if(empty($model) || ($model->person_id != session()->get('Person.id'))) {
-      $this->error = array(
-        'message' => 'ขออภัย ไม่สามารถแก้ไขข้อมูลนี้ได้ หรือข้อมูลนี้อาจถูกลบแล้ว'
-      );
-      return $this->error();
-    }
-
     $this->getLanguages(false);
     $this->mergeData($model->formHelper->build());
 
@@ -65,13 +58,6 @@ class PersonLanguageSkillController extends Controller
   public function editingSubmit() {
 
     $model = Service::loadModel('PersonLanguageSkill')->where('id','=',$this->param['id'])->first();
-
-    if(empty($model) || ($model->person_id != session()->get('Person.id'))) {
-      $this->error = array(
-        'message' => 'ขออภัย ไม่สามารถแก้ไขข้อมูลนี้ได้ หรือข้อมูลนี้อาจถูกลบแล้ว'
-      );
-      return $this->error();
-    }
 
     if($model->fill(request()->all())->save()) {
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
@@ -124,6 +110,19 @@ class PersonLanguageSkillController extends Controller
       $this->setData('levels',$levels);
     }
     
+  }
+
+  public function delete() {
+
+    $model = Service::loadModel('PersonLanguageSkill')->find($this->param['id']);
+
+    if($model->delete()) {
+      MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
+    }else{
+      MessageHelper::display('ไม่สามารถลบข้อมูลนี้ได้','error');
+    }
+
+    return Redirect::to('experience/profile/edit');
   }
 
 }

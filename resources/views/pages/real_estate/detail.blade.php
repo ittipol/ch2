@@ -9,13 +9,12 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{URL::to('item/post')}}" class="btn btn-secondary">เพิ่มประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</a>
+          <a href="{{URL::to('real-estate/board')}}/{{$_modelData['announcement_type_id']}}" class="btn btn-secondary">กลับไปหน้าประกาศ{{$_modelData['_realEstateTypeName']}}</a>
           <button class="btn btn-secondary additional-option">
             ...
             <div class="additional-option-content">
-              <a href="{{URL::to('real-estate/board')}}">ไปยังหน้าหลักของประกาศอสังหาริมทรัพย์</a>
-              <a href="{{URL::to('item/board')}}">ไปยังหน้าหลักของประกาศสินค้า</a>
-              <a href="{{URL::to('item/post')}}">เพิ่มประกาศเช่า-ซื้อ-ขายสินค้า</a>
+              <a href="{{URL::to('real-estate/board')}}" class="btn btn-secondary">ไปยังหน้าภาพรวมประกาศ</a>
+              <a href="{{URL::to('real-estate/post')}}">เพิ่มประกาศ</a>
             </div>
           </button>
         </div>

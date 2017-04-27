@@ -44,13 +44,6 @@ class PersonWorkingExperienceController extends Controller
 
     $model = Service::loadModel('PersonWorkingExperience')->find($this->param['id']);
 
-    if(empty($model) || ($model->person_id != session()->get('Person.id'))) {
-      $this->error = array(
-        'message' => 'ขออภัย ไม่สามารถแก้ไขข้อมูลนี้ได้ หรือข้อมูลนี้อาจถูกลบแล้ว'
-      );
-      return $this->error();
-    }
-
     $date = new Date;
 
     for ($i=1; $i <= 12; $i++) { 
@@ -79,13 +72,6 @@ class PersonWorkingExperienceController extends Controller
 
     $model = Service::loadModel('PersonWorkingExperience')->find($this->param['id']);
 
-    if(empty($model) || ($model->person_id != session()->get('Person.id'))) {
-      $this->error = array(
-        'message' => 'ขออภัย ไม่สามารถแก้ไขข้อมูลนี้ได้ หรือข้อมูลนี้อาจถูกลบแล้ว'
-      );
-      return $this->error();
-    }
-
     if($model->fill($request->all())->save()) {
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('experience/profile/edit');
@@ -93,6 +79,19 @@ class PersonWorkingExperienceController extends Controller
       return Redirect::back();
     }
     
+  }
+
+  public function delete() {
+
+    $model = Service::loadModel('PersonWorkingExperience')->find($this->param['id']);
+
+    if($model->delete()) {
+      MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
+    }else{
+      MessageHelper::display('ไม่สามารถลบข้อมูลนี้ได้','error');
+    }
+
+    return Redirect::to('experience/profile/edit');
   }
 
 }

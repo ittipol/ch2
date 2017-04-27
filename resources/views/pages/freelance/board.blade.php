@@ -4,7 +4,7 @@
 <div class="top-header-wrapper top-header-border">
   <div class="container">
     <div class="top-header">
-      <h2>ฟรีแลนซ์</h2>
+      <h2>งานฟรีแลนซ์</h2>
     </div>
   </div>
 </div>

@@ -7,11 +7,11 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{request()->get('shopUrl')}}manage/product_catalog" class="btn btn-secondary">กลับไปยังหน้าจัดการแคตตาล็อกสินค้า</a>
+          <a href="{{request()->get('shopUrl')}}manage/product_catalog" class="btn btn-secondary">กลับไปหน้าจัดการแคตตาล็อกสินค้า</a>
           <button class="btn btn-secondary additional-option">
             ...
             <div class="additional-option-content">
-              <a href="{{request()->get('shopUrl')}}manage/product">กลับไปยังหน้าหลักจัดการสินค้า</a>
+              <a href="{{request()->get('shopUrl')}}manage/product">กลับไปหน้าหลักจัดการสินค้า</a>
               <a href="{{request()->get('shopUrl')}}manage">ไปยังหน้าจัดการหลัก</a>
             </div>
           </button>

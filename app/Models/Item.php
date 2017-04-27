@@ -167,9 +167,12 @@ class Item extends Model
 
     $currency = new Currency;
 
+    $categoryId = null;
     $categoryName = '';
     if(!empty($this->itemToCategory)) {
-      $categoryName = $this->itemToCategory->category->name;
+      $category = $this->itemToCategory->category;
+      $categoryId = $category->id;
+      $categoryName = $category->name;
     }
 
     return array(
@@ -180,6 +183,7 @@ class Item extends Model
       '_price' => $currency->format($this->price),
       '_used' => $this->used ? 'สินค้าใหม่' : 'สินค้ามือสอง',
       '_announcementTypeName' => $this->announcementType->name,
+      '_categoryId' => $categoryId,
       '_categoryName' => $categoryName,
       'person_id' => $this->person_id
     );

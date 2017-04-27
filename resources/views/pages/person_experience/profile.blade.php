@@ -1,6 +1,20 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
+<div class="sub-header-nav">
+  <div class="sub-header-nav-fixed-top">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <div class="btn-group pull-right">
+          <a href="{{URL::to('person/experience')}}" class="btn btn-secondary">กลับไปหน้าภาพรวมประวัติการทำงาน</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="top-header-wrapper top-header-border">
   <div class="container">
     <div class="top-header">
@@ -66,7 +80,7 @@
   <div class="clearfix">
     <div class="tile-nav xs pull-left">
       <div class="tile-nav-image">
-        <a href="{{URL::to('experience/working_add')}}">
+        <a href="{{URL::to('experience/working/add')}}">
           <img src="/images/common/plus.png">
         </a>
       </div>
@@ -88,7 +102,7 @@
             <div class="dot"></div>
             <div class="additional-option-content">
               <a href="{{$detail['editUrl']}}">แก้ไข</a>
-              <a data-modal="1" href="{{$detail['deleteUrl']}}">ลบ</a>
+              <a href="{{$detail['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการลบใช่หรือไม่">ลบ</a>
             </div>
           </div>
         </div>
@@ -102,7 +116,7 @@
   <div class="clearfix">
     <div class="tile-nav xs pull-left">
       <div class="tile-nav-image">
-        <a href="{{URL::to('experience/internship_add')}}">
+        <a href="{{URL::to('experience/internship/add')}}">
           <img src="/images/common/plus.png">
         </a>
       </div>
@@ -124,7 +138,7 @@
             <div class="dot"></div>
             <div class="additional-option-content">
               <a href="{{$detail['editUrl']}}">แก้ไข</a>
-              <a data-modal="1" href="{{$detail['deleteUrl']}}">ลบ</a>
+              <a href="{{$detail['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการลบใช่หรือไม่">ลบ</a>
             </div>
           </div>
         </div>
@@ -138,7 +152,7 @@
   <div class="clearfix">
     <div class="tile-nav xs pull-left">
       <div class="tile-nav-image">
-        <a href="{{URL::to('experience/education_add')}}">
+        <a href="{{URL::to('experience/education/add')}}">
           <img src="/images/common/plus.png">
         </a>
       </div>
@@ -160,7 +174,7 @@
             <div class="dot"></div>
             <div class="additional-option-content">
               <a href="{{$detail['editUrl']}}">แก้ไข</a>
-              <a data-modal="1" href="{{$detail['deleteUrl']}}">ลบ</a>
+              <a href="{{$detail['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการลบใช่หรือไม่">ลบ</a>
             </div>
           </div>
         </div>
@@ -174,7 +188,7 @@
   <div class="clearfix">
     <div class="tile-nav xs pull-left">
       <div class="tile-nav-image">
-        <a href="{{URL::to('experience/project_add')}}">
+        <a href="{{URL::to('experience/project/add')}}">
           <img src="/images/common/plus.png">
         </a>
       </div>
@@ -196,7 +210,7 @@
             <div class="dot"></div>
             <div class="additional-option-content">
               <a href="{{$detail['editUrl']}}">แก้ไข</a>
-              <a data-modal="1" href="{{$detail['deleteUrl']}}">ลบ</a>
+              <a href="{{$detail['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการลบใช่หรือไม่">ลบ</a>
             </div>
           </div>
         </div>
@@ -210,7 +224,7 @@
   <div class="clearfix">
     <div class="tile-nav xs pull-left">
       <div class="tile-nav-image">
-        <a href="{{URL::to('experience/certificate_add')}}">
+        <a href="{{URL::to('experience/certificate/add')}}">
           <img src="/images/common/plus.png">
         </a>
       </div>
@@ -232,7 +246,7 @@
             <div class="dot"></div>
             <div class="additional-option-content">
               <a href="{{$detail['editUrl']}}">แก้ไข</a>
-              <a data-modal="1" href="{{$detail['deleteUrl']}}">ลบ</a>
+              <a href="{{$detail['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการลบใช่หรือไม่">ลบ</a>
             </div>
           </div>
         </div>
@@ -246,7 +260,7 @@
   <div class="clearfix">
     <div class="tile-nav xs pull-left">
       <div class="tile-nav-image">
-        <a href="{{URL::to('experience/skill_add')}}">
+        <a href="{{URL::to('experience/skill/add')}}">
           <img src="/images/common/plus.png">
         </a>
       </div>
@@ -267,7 +281,7 @@
             <div class="dot"></div>
             <div class="additional-option-content">
               <a href="{{$skill['editUrl']}}">แก้ไข</a>
-              <a data-modal="1" href="{{$skill['deleteUrl']}}">ลบ</a>
+              <a href="{{$skill['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการลบใช่หรือไม่">ลบ</a>
             </div>
           </div>
         </div>
@@ -281,7 +295,7 @@
   <div class="clearfix">
     <div class="tile-nav xs pull-left">
       <div class="tile-nav-image">
-        <a href="{{URL::to('experience/language_skill_add')}}">
+        <a href="{{URL::to('experience/language_skill/add')}}">
           <img src="/images/common/plus.png">
         </a>
       </div>
@@ -303,7 +317,7 @@
             <div class="dot"></div>
             <div class="additional-option-content">
               <a href="{{$languageSkill['editUrl']}}">แก้ไข</a>
-              <a data-modal="1" href="{{$languageSkill['deleteUrl']}}">ลบ</a>
+              <a href="{{$languageSkill['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการลบใช่หรือไม่">ลบ</a>
             </div>
           </div>
         </div>

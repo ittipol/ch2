@@ -22,7 +22,6 @@ class CheckForDataOwner
         return redirect('home');
       }
 
-
       $pages = array(
         'item.edit' => array(
           // 'action' => 'edit',
@@ -42,6 +41,54 @@ class CheckForDataOwner
         ),
         'freelance.delete' => array(
           'modelName' => 'Freelance'
+        ),
+        'private_website.edit' => array(
+          'modelName' => 'PersonPrivateWebsite'
+        ),
+        'private_website.delete' => array(
+          'modelName' => 'PersonPrivateWebsite'
+        ),
+        'person_experience.working.edit' => array(
+          'modelName' => 'PersonWorkingExperience'
+        ),
+        'person_experience.internship.edit' => array(
+          'modelName' => 'PersonInternship'
+        ),
+        'person_experience.education.edit' => array(
+          'modelName' => 'PersonEducation'
+        ),
+        'person_experience.project.edit' => array(
+          'modelName' => 'PersonProject'
+        ),
+        'person_experience.certificate.edit' => array(
+          'modelName' => 'PersonCertificate'
+        ),
+        'person_experience.skill.edit' => array(
+          'modelName' => 'PersonSkill'
+        ),
+        'person_experience.language_skill.edit' => array(
+          'modelName' => 'PersonLanguageSkill'
+        ),
+        'person_experience.working.delete' => array(
+          'modelName' => 'PersonWorkingExperience'
+        ),
+        'person_experience.internship.delete' => array(
+          'modelName' => 'PersonInternship'
+        ),
+        'person_experience.education.delete' => array(
+          'modelName' => 'PersonEducation'
+        ),
+        'person_experience.project.delete' => array(
+          'modelName' => 'PersonProject'
+        ),
+        'person_experience.certificate.delete' => array(
+          'modelName' => 'PersonCertificate'
+        ),
+        'person_experience.skill.delete' => array(
+          'modelName' => 'PersonSkill'
+        ),
+        'person_experience.language_skill.delete' => array(
+          'modelName' => 'PersonLanguageSkill'
         ),
       );
 

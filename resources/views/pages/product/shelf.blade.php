@@ -1,6 +1,20 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
+<div class="sub-header-nav">
+  <div class="sub-header-nav-fixed-top">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <div class="btn-group pull-right">
+          <a href="{{URL::to('product/category')}}" class="btn btn-secondary">หมวดสินค้า</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="top-header-wrapper top-header-border">
   <div class="container">
     <div class="top-header">
@@ -10,10 +24,6 @@
 </div>
 
 <div class="container">
-
-  <div class="text-right">
-    <a href="{{URL::to('product/category')}}" class="button">แสดงหมวดสินค้า</a>
-  </div>
 
   @foreach($shelfs as $shelf)
     <div class="shelf">
