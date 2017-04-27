@@ -120,7 +120,9 @@ class CheckForPersonHasShopPermission
           'modelName' => 'Product'
         ),
         'shop.advertising.list' => true,
-        'shop.advertising.detail' => true,
+        'shop.advertising.detail' => array(
+          'modelName' => 'Advertising'
+        ),
         'shop.advertising.manage' => array(
           'permission' => true
         ),

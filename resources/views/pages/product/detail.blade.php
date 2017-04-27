@@ -115,7 +115,7 @@
               <p>{{$shop['_short_description']}}</p>
             </div>
 
-            <a href="{{URL::to($shopUrl)}}" class="button wide-button">ไปยังร้านค้านี้</a>
+            <a href="{{URL::to($shopUrl)}}" class="button wide-button">ไปยังบริษัทหรือร้านค้า</a>
           </div>
         </div>
 

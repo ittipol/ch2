@@ -1,25 +1,7 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<div class="sub-header-nav">
-  <div class="sub-header-nav-fixed-top">
-    <div class="row">
-      <div class="col-xs-12">
-
-        <div class="btn-group pull-right">
-          <a href="{{URL::to('product/shelf')}}" class="btn btn-secondary">กลับไปหน้าหลักสินค้า</a>
-          <button class="btn btn-secondary additional-option">
-            ...
-            <div class="additional-option-content">
-              <a href="{{URL::to('product/category')}}">ไปยังหน้าแสดงหมวดสินค้า</a>
-            </div>
-          </button>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
+@include('pages.shop.layouts.fixed_top_nav')
 
 <div class="container list space-top-30">
 

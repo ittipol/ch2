@@ -1,7 +1,6 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-@include('pages.shop.layouts.top_nav')
 @include('pages.shop.layouts.header')
 
 <div class="shop-content-wrapper">
