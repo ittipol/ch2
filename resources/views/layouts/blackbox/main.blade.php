@@ -21,6 +21,7 @@
     @include('layouts.blackbox.components.global-account')
   @endif
 
+  @include('layouts.blackbox.components.global-additional-nav')
   @include('layouts.blackbox.components.global-search')
   @include('layouts.blackbox.components.global-notification')
   @include('layouts.blackbox.components.global-cart')

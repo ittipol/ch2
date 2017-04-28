@@ -1,0 +1,43 @@
+<div class="global-panel global-additional-nav-panel">
+
+  <div class="panel-header additional-nav-panel-header">
+    <div class="panel-header-title">เพิ่มเติม</div>
+    <div class="panel-close-button additional-nav-panel-close-button"></div>
+  </div>
+
+  <div class="additional-nav-content">
+    <div class="additional-nav-content-inner">
+
+      <h4>เพิ่ม...</h4>
+      <div class="line"></div>
+      <div class="list-item-group">
+        <div class="list-item">
+          <a href="">
+            <img class="icon" src="/images/common/plus.png" >
+            <h4>ประกาศซื้อ-เช่า-ขายสินค้า</h4>
+          </a>
+        </div>
+
+        <div class="list-item">
+          <a href="">
+            <img class="icon" src="/images/common/plus.png" >
+            <h4>ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</h4>
+          </a>
+        </div>
+      </div>
+
+      <h4>ร้านค้า</h4>
+      <div class="line"></div>
+      <div class="list-item-group">
+        <div class="list-item">
+          <a href="">
+            <img class="icon" src="/images/common/plus.png" >
+            <h4>สร้างร้านค้า</h4>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

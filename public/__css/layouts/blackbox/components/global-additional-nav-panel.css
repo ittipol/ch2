@@ -1,0 +1,13 @@
+.additional-nav-content {
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.global-additional-nav-panel > .additional-nav-content > .additional-nav-content-inner {
+	padding: 80px 20px 20px;
+}
+
+.global-additional-nav-panel .list-item-group > .list-item {
+	border: 0;
+}

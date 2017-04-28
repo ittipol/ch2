@@ -41,7 +41,7 @@ class AdvertisingController extends Controller
       foreach ($advertisings as $advertising) {
         
         $_advertisings['items'][] = array_merge($advertising->buildPaginationData(),array(
-          '_imageUrl' => $this->getImage('list'),
+          '_imageUrl' => $advertising->getImage('list'),
           'detailUrl' => $url->setAndParseUrl('advertising/detail/{id}',array('id'=>$advertising->id))
         ));
 

@@ -39,13 +39,13 @@
 
       <div class="sperate"></div>
 
-      <label class="header-button additional-button" for="additional_panel_trigger">
+      <label class="header-button additional-button" for="additional_nav_panel_trigger">
         <div class="dot-group">
           <div class="dot"></div>
           <div class="dot"></div>
           <div class="dot"></div>
         </div>
-        <input type="checkbox" id="additional_panel_trigger" class="additional-trigger">
+        <input type="checkbox" id="additional_nav_panel_trigger" class="additional-trigger">
       </label>
 
     </div>

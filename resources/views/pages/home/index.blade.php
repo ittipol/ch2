@@ -13,563 +13,317 @@
 
 <div class="container">
 
-  <!-- <h3 class="article-title color-teal">คุณสมบัติที่น่าสนใจ</h3>
-  <div class="line only-space space-bottom-20"></div>
+  <h2 class="article-title color-pink space-bottom-50">บริษัทและร้านค้า</h2>
 
-  <div class="notice-box-wrapper">
-
-    <div class="row">
-
-      <div class="col-sm-6 col-xs-12">
-        <div class="notice-box large">
-
-          <div class="notice-box-image">
-            <div class="image" style="background-image:url(/images/banners/banner_1.jpg)"></div>
-          </div>
-
-          <div class="notice-box-info">
-            <h2>สร้างธุรกิจในแบบที่คุณต้องการ</h2>
-            <div class="notice-box-description">
-              สร้างธุรกิจของคุณ เพิ่มช่องทางการขายสินค้า ค้นหาพนักงานให้กับธุรกิจของคุณ รวมถึงการโฆษณาแบรนด์ ธุรกิจ หรืองานบริการของคุณ
-            </div>
-          </div>
-
-          <a href="#" class="button floating-button">
-            สร้างร้านค้า
-          </a>
-
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-xs-12">
-        <div class="notice-box large">
-
-          <div class="notice-box-image text-center">
-            <div class="image" style="background-image:url(/images/banners/banner_4.jpg)"></div>
-          </div>
-
-          <div class="notice-box-info">
-            <h2>เลือกซื้อสินค้าจากร้านค้า</h2>
-            <div class="notice-box-description">
-              สินค้าต่างๆจากร้านค้าที่เปิดให้คุณเลือกซื้อได้ทุกเวลาที่ต้องการ
-            </div>
-          </div>
-
-          <a href="#" class="button floating-button">
-            ไปยังหน้าสินค้า
-          </a>
-
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-xs-12">
-        <div class="notice-box large">
-
-          <div class="notice-box-image text-center">
-            <div class="image" style="background-image:url(/images/banners/banner_3.jpg)"></div>
-          </div>
-
-          <div class="notice-box-info">
-            <h2>ค้าหาตำแหน่งงานที่ต้องการ</h2>
-            <div class="notice-box-description">
-              ตำแหน่งงานมากมายจากบริษัทที่หลากหลายให้ผู้ที่กำลังค้าหางานได้มีโอกาสเลือกตำแหน่งงานที่ต้องการหรือเหมาะสมมากที่สุด
-            </div>
-          </div>
-
-          <a href="#" class="button floating-button">
-            ไปยังหน้าประกาศงาน
-          </a>
-
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-xs-12">
-        <div class="notice-box large">
-
-          <div class="notice-box-image text-center">
-            <div class="image" style="background-image:url(/images/banners/WP_20161129_004.jpg)"></div>
-          </div>
-
-          <div class="notice-box-info">
-            <h2>โฆษณาจากบริษัทและร้านค้า</h2>
-            <div class="notice-box-description">
-              ติดตามข่าวสารและการโฆษณาต่างๆจากบริษัทและร้านค้า ไม่ว่าจะเป็นสินค้า การบริการใหม่ๆ หรือร้านที่เปิดใหม่ และอื่นๆอีกมากมาย
-            </div>
-          </div>
-
-          <a href="#" class="button floating-button">
-            ไปยังหน้าโฆษณาจากบริษัทและร้านค้า
-          </a>
-
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-xs-12">
-        <div class="notice-box large">
-
-          <div class="notice-box-image text-center">
-            <div class="image" style="background-image:url(/images/a2.jpg)"></div>
-          </div>
-
-          <div class="notice-box-info">
-            <h2>ประกาศซื้อ-เช่า-ขายสินค้า</h2>
-            <div class="notice-box-description">
-              ไม่ว่าสินค้านั้นจะเป็นสินใหม่หรือเก่า และไม่ได้ใช้สินค้านั้นแล้วสามารถประกาศขายได้จากที่นี้ รวมถึงต้องการซื้อหรือเช่า
-            </div>
-          </div>
-
-          <a href="#" class="button floating-button">
-            ไปยังหน้าประกาศซื้อ-เช่า-ขายสินค้า
-          </a>
-
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-xs-12">
-        <div class="notice-box large">
-
-          <div class="notice-box-image text-center">
-            <div class="image" style="background-image:url(/images/banners/WP_20161129_004.jpg)"></div>
-          </div>
-
-          <div class="notice-box-info">
-            <h2>ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</h2>
-            <div class="notice-box-description">
-              อสังหาริมทรัพย์ที่ต้องการขาย หรือ ต้องการให้เช่า หรือ ต้องการประกาศซื้อ สามารถประกาศได้จากที่นี้
-            </div>
-          </div>
-
-          <a href="#" class="button floating-button">
-            ไปยังหน้าประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์
-          </a>
-
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-xs-12">
-        <div class="notice-box large">
-
-          <div class="notice-box-image text-center">
-            <div class="image" style="background-image:url(/images/banners/banner_5.jpg)"></div>
-          </div>
-
-          <div class="notice-box-info">
-            <h2>เพิ่มโอกาสได้งานใหม่</h2>
-            <div class="notice-box-description">
-              เพิ่มประวัติการทำงานและทักษะ เพื่อให้บุลคลที่ต้องการหาพนักงานใหม่ๆ สามารถค้นหาประวัติการทำงานของคุณได้ เพื่อเพิ่มโอกาสการทำงานของคุณ
-            </div>
-          </div>
-
-          <a href="#" class="button floating-button">
-            ไปยังหน้าเพิ่มประวัติการทำงาน
-          </a>
-
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-xs-12">
-        <div class="notice-box large">
-
-          <div class="notice-box-image text-center">
-            <div class="image" style="background-image:url(/images/banners/WP_20161129_004.jpg)"></div>
-          </div>
-
-          <div class="notice-box-info">
-            <h2>งานฟรีแลนซ์</h2>
-            <div class="notice-box-description">
-              หากคุณคือฟรีแลนซ์และต้องการประกาศให้ผู้คนทราบถึงงานฟรีแลนซ์ของคุณ สามารถประกาศได้จจากที่นี้
-            </div>
-          </div>
-
-          <a href="#" class="button floating-button">
-            ไปยังหน้างานฟรีแลนซ์
-          </a>
-
-        </div>
-      </div>
-
+  <h3 class="article-title color-teal space-bottom-20">สร้างร้านค้าของคุณ</h3>
+  <div class="article-content space-bottom-20">
+    <div class="paragraph">สร้างธุรกิจของคุณ จัดการธุรกิจของคุณไปในทิศทางที่คุณต้องการ และให้เราทำหน้าที่เชื่อมต่อธุรกิจของคุณกับผู้คนอีกมากมาย</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <a href="{{URL::to('community/shop/create')}}" class="button wide-button">สร้างร้านค้า</a>
     </div>
-
   </div>
 
-  <div class="line grey space-top-bottom-120"></div> -->
+  <div class="line only-space space-bottom-120"></div>
 
-  <h2 class="article-title color-pink">บริษัทและร้านค้า</h2>
-  <div class="line only-space space-bottom-50"></div>
-
-  <h3 class="article-title color-teal">สินค้าจากร้านค้า</h3>
-  <div class="line only-space space-bottom-20"></div>
-
-  <div class="article-content">
+  <h3 class="article-title color-teal space-bottom-20">สินค้าจากร้านค้า</h3>
+  <div class="article-content space-bottom-20">
     <div class="paragraph">สินค้าแต่ละรายการจะถูกจัดวางไปยังหมวดมู่สินค้าโดยผู้ขายจะเป็นผู้กำหนดหมวดหมู่ให้กับสินค้า โดยมีหมวดหมู่สินค้ามากกว่า 2500 หมวดหมู่ที่จะทำให้การเลือกซื้อสินค้าสะดวกและรวดเร็ว</div>
   </div>
 
-  <div class="line only-space space-bottom-20"></div>
-
-  <!-- <div class="notice-box-wrapper">
-
-    <div class="row">
-
-      <div class="col-xs-12">
-        <div class="notice-box small">
-
-          <div class="notice-box-image">
-            <div class="image" style="background-image:url(/images/banners/banner_4.jpg)"></div>
-          </div>
-
-          <a href="#" class="button floating-button">
-            เลือกซื้อสินค้า
-          </a>
-
-        </div>
-      </div>
-
-    </div>
-
-  </div> -->
-
-  <!-- <div class="line only-space space-bottom-40"></div> -->
+  @if(!empty($products))
 
   <div class="content-panel row">
 
-    <div class="col-md-12">
-      <div class="content-section">
+    @foreach($products as $data)
 
-        <div class="row">
+    <div class="col-sm-4 col-xs-12">
+      <div class="card">
 
-          @if(empty($products))
+        @if(!empty($data['flag']))
+        <div class="flag-wrapper">
+          <div class="flag sale-promotion">{{$data['flag']}}</div>
+        </div>
+        @endif
+        
+        <div class="image-tile">
+          <a href="{{$data['detailUrl']}}">
+            <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+          </a>
+        </div>
+        
+        <div class="card-info">
+          <a href="{{$data['detailUrl']}}">
+            <div class="card-title">{{$data['name']}}</div>
+          </a>
+          <div class="card-sub-info">
 
-            @foreach($products as $product)
-
-            <div class="col-md-4 col-xs-12">
-              <div class="info-box">
-                <div class="image-tile">
-                  <a href="{{$product['detailUrl']}}">
-                    <div class="primary-image" style="background-image:url({{$product['_imageUrl']}});"></div>
-                  </a>
-                </div>
-                <div class="primary-info-section">
-                  <a href="{{$product['detailUrl']}}">
-                    <h4 class="title">{{$product['_short_name']}}</h4>
-                  </a>
-                  <div class="price">{{$product['_price']}}</div>
-                </div>
-              </div>
+            <div class="card-sub-info-row product-price-section">
+              @if(!empty($data['promotion']))
+                <span class="product-price">{{$data['promotion']['_reduced_price']}}</span>
+                <span class="product-price-discount-tag">{{$data['promotion']['percentDiscount']}}</span>
+                <h5 class="origin-price">{{$data['_price']}}</h5>
+              @else
+                <span class="product-price">{{$data['_price']}}</span>
+              @endif
             </div>
 
-            @endforeach
+          </div>
+        </div>
 
-          @else
+        <div class="button-group">
 
-            <div class="empty">
-              สินค้าแต่ละรายการจะถูกจัดวางไปยังหมวดมู่สินค้าโดยผู้ขายจะเป็นผู้กำหนดหมวดหมู่ให้กับสินค้า โดยมีหมวดหมู่สินค้ามากกว่า 2500 หมวดหมู่ที่จะทำให้การเลือกซื้อสินค้าสะดวกและรวดเร็ว
-            </div>
-
-          @endif
-
+          <a href="{{$data['detailUrl']}}">
+            <div class="button wide-button">แสดงรายละเอียด</div>
+          </a>
+        
         </div>
 
       </div>
     </div>
 
+    @endforeach
+
+  </div>
+
+  @endif
+
+  <div class="row">
+    <div class="col-xs-12 text-right">
+      <a href="{{URL::to('product/shelf')}}" class="button">เลือกซื้อสินค้า</a>
+    </div>
   </div>
 
   <div class="line only-space space-bottom-120"></div>
 
-  <h3 class="article-title color-teal">ประกาศงาน</h3>
-  <div class="line only-space space-bottom-20"></div>
-
-  <div class="article-content">
+  <h3 class="article-title color-teal space-bottom-20">ประกาศงาน</h3>
+  <div class="article-content space-bottom-20">
     <div class="paragraph">งานที่ประกาศจะถูกแบ่งรูปแบบการจ้างงานอย่างชัดเจน รวมถึงรายละเอียดงาน คุณสมบัติผู้สมัคร และอื่นๆ และยังมีระบบสมัครงานพร้อมการแจ้งเตือนที่ผู้สมัครสามารถติดตามการสมัครงานได้ตลอดเวลา</div>
   </div>
 
-  <div class="line only-space space-bottom-20"></div>
-
-  <!-- <div class="notice-box-wrapper">
-
-    <div class="row">
-
-      <div class="col-xs-12">
-        <div class="notice-box small">
-
-          <div class="notice-box-image">
-            <div class="image" style="background-image:url(/images/banners/banner_3.jpg)"></div>
-          </div>
-
-          <a href="#" class="button floating-button">
-            ค้นหางาน
-          </a>
-
-        </div>
-      </div>
-
-    </div>
-
-  </div> -->
-
-  <!-- <div class="line only-space space-bottom-40"></div> -->
+  @if(!empty($jobs))
 
   <div class="content-panel row">
 
-    <div class="col-md-12">
+    @foreach($jobs as $data)
 
-      <div class="content-section">
+    <div class="col-sm-4 col-xs-12">
+      <div class="card">
+        <div class="image-tile">
+          <a href="{{$data['detailUrl']}}">
+            <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+          </a>
+        </div>
 
-        <div class="row">
+        <div class="card-info">
+          <a href="{{$data['detailUrl']}}">
+            <div class="card-title">{{$data['_short_name']}}</div>
+          </a>
+          <div class="card-sub-info">
+            <h5>อัตราค่าจ้าง</h5>
+            <div class="text-emphasize">{{$data['_wage']}}</div>
+          </div>
+        </div>
 
-          @if(!empty($jobs))
+        <div class="button-group">
 
-            @foreach($jobs as $job)
-
-            <div class="col-md-4 col-xs-12">
-              <div class="info-box">
-                <div class="image-tile">
-                  <a href="{{$job['detailUrl']}}">
-                    <div class="primary-image" style="background-image:url({{$job['_imageUrl']}});"></div>
-                  </a>
-                </div>
-                <div class="primary-info-section">
-                  <a href="{{$job['detailUrl']}}">
-                    <h4 class="title">{{$job['name']}}</h4>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            @endforeach
-
-          @endif
-
+          <a href="{{$data['detailUrl']}}">
+            <div class="button wide-button">แสดงรายละเอียด</div>
+          </a>
+        
         </div>
 
       </div>
     </div>
 
+    @endforeach
+
+  </div>
+
+  @endif
+
+  <div class="row">
+    <div class="col-xs-12 text-right">
+      <a href="{{URL::to('job/board')}}" class="button">ค้นหางาน</a>
+    </div>
   </div>
 
   <div class="line only-space space-bottom-120"></div>
 
-  <h3 class="article-title color-teal">โฆษณาจากบริษัทและร้านค้า</h3>
-  <div class="line only-space space-bottom-20"></div>
-
-  <div class="article-content">
+  <h3 class="article-title color-teal space-bottom-20">โฆษณาจากบริษัทและร้านค้า</h3>
+  <div class="article-content  space-bottom-20">
     <div class="paragraph">ติดตามข่าวสารและการโฆษณาต่างๆจากบริษัทและร้านค้า เพื่อเป็นสื่อสารสิ่งต่างๆไปยังลูกค้า ไม่ว่าจะเป็นสินค้าใหม่ การบริการใหม่ๆ หรือร้านที่เพิ่มเปิดใหม่ และอื่นๆอีกมากมาย</div>
   </div>
 
-  <div class="line only-space space-bottom-20"></div>
-
-  <!-- <div class="notice-box-wrapper">
-
-    <div class="row">
-
-      <div class="col-xs-12">
-        <div class="notice-box small">
-
-          <div class="notice-box-image">
-            <div class="image" style="background-image:url(/images/banners/WP_20161129_004.jpg)"></div>
-          </div>
-
-          <a href="#" class="button floating-button">
-            แสดงโฆษณา
-          </a>
-
-        </div>
-      </div>
-
-    </div>
-
-  </div> -->
-
-  <div class="line only-space space-bottom-40"></div>
+  @if(!empty($advertisings))
 
   <div class="content-panel row">
 
-    <div class="col-md-12">
-      <div class="content-section">
+    @foreach($advertisings as $data)
 
-        <div class="row">
+    <div class="col-sm-4 col-xs-12">
+      <div class="card">
+        <div class="image-tile">
+          <a href="{{$data['detailUrl']}}">
+            <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+          </a>
+        </div>
 
-          @if(!empty($advertisings))
+        <div class="card-info">
+          <a href="{{$data['detailUrl']}}">
+            <div class="card-title">{{$data['_short_name']}}</div>
+          </a>
+          <div class="card-sub-info">
+            <div>ประเภทโฆษณา</div>
+            {{$data['_advertisingType']}}
+          </div>
+        </div>
 
-            @foreach($advertisings as $advertising)
+        <div class="button-group">
 
-            <div class="col-md-4 col-xs-12">
-              <div class="info-box">
-                <div class="image-tile">
-                  <a href="{{$advertising['detailUrl']}}">
-                    <div class="primary-image" style="background-image:url({{$advertising['_imageUrl']}});"></div>
-                  </a>
-                </div>
-                <div class="primary-info-section">
-                  <a href="{{$advertising['detailUrl']}}">
-                    <h4 class="title">{{$advertising['name']}}</h4>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            @endforeach
-
-          @endif
-
+          <a href="{{$data['detailUrl']}}">
+            <div class="button wide-button">แสดงรายละเอียด</div>
+          </a>
+        
         </div>
 
       </div>
     </div>
 
+    @endforeach 
+
+  </div>
+
+  @endif
+
+  <div class="row">
+    <div class="col-xs-12 text-right">
+      <a href="{{URL::to('advertising/board')}}" class="button">แสดงโฆษณา</a>
+    </div>
   </div>
 
   <div class="line grey space-top-bottom-120"></div>
 
-  <h2 class="article-title color-pink">ประกาศซื้อ-เช่า-ขาย</h2>
-  <div class="line only-space space-bottom-50"></div>
+  <h2 class="article-title color-pink space-bottom-50">ประกาศซื้อ-เช่า-ขาย</h2>
 
-  <h3 class="article-title color-teal">ประกาศซื้อ-เช่า-ขายสินค้า</h3>
-  <div class="line only-space space-bottom-20"></div>
-
-  <div class="article-content">
+  <h3 class="article-title color-teal space-bottom-20">ประกาศซื้อ-เช่า-ขายสินค้า</h3>
+  <div class="article-content space-bottom-20">
     <div class="paragraph">สินใหม่หรือเก่าที่ถูกประกาศจะถูกแบ่งหมวดหมู่และจุดประสงค์ของการประกาศ เพื่อให้การประกาศสามารถบ่งบอกจุดประสงค์ไปยังผู้ที่เข้ามาดูประกาศ</div>
   </div>
 
-  <div class="line only-space space-bottom-20"></div>
-
-  <!-- <div class="notice-box-wrapper">
-
-    <div class="row">
-
-      <div class="col-xs-12">
-        <div class="notice-box small">
-
-          <div class="notice-box-image">
-            <div class="image" style="background-image:url(/images/banners/WP_20161129_004.jpg)"></div>
-          </div>
-
-          <a href="#" class="button floating-button">
-            เลือกดูประกาศสินค้า
-          </a>
-
-        </div>
-      </div>
-
-    </div>
-
-  </div> -->
-
-  <div class="line only-space space-bottom-40"></div>
+  @if(!empty($items))
 
   <div class="content-panel row">
 
-    <div class="col-md-12">
-      <div class="content-section">
+    @foreach($items as $data)
 
-        <div class="row">
+    <div class="col-sm-4 col-xs-12">
+      <div class="card">
 
-          @if(!empty($items))
-
-            @foreach($items as $item)
-
-            <div class="col-md-4 col-xs-12">
-              <div class="info-box">
-                <div class="image-tile">
-                  <a href="{{$item['detailUrl']}}">
-                    <div class="primary-image" style="background-image:url({{$item['_imageUrl']}});"></div>
-                  </a>
-                </div>
-                <div class="primary-info-section">
-                  <a href="{{$item['detailUrl']}}">
-                    <h4 class="title">{{$item['name']}}</h4>
-                  </a>
-                  <div class="price">{{$item['_price']}}</div>
-                </div>
-              </div>
-            </div>
-
-            @endforeach
-
-          @endif
-
+        <div class="flag-wrapper">
+          <div class="flag">{{$data['_announcementTypeName']}}</div>
         </div>
 
+        <div class="image-tile">
+          <a href="{{$data['detailUrl']}}">
+            <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+          </a>
+        </div>
+        
+        <div class="card-info">
+          <a href="{{$data['detailUrl']}}">
+            <div class="card-title">{{$data['_short_name']}}</div>
+          </a>
+          <div class="card-sub-info">
+            <h5>ราคา{{$data['_announcementTypeName']}}</h5>
+            <div class="text-emphasize">{{$data['_price']}}</div>
+          </div>
+        </div>
+
+        <div class="button-group">
+
+          <a href="{{$data['detailUrl']}}">
+            <div class="button wide-button">แสดงรายละเอียด</div>
+          </a>
+        
+        </div>
+        
       </div>
     </div>
 
+    @endforeach
+
+  </div>
+
+  @endif
+
+  <div class="row">
+    <div class="col-xs-12 text-right">
+      <a href="{{URL::to('item/board')}}" class="button">แสดงประกาศสินค้า</a>
+    </div>
   </div>
 
   <div class="line only-space space-bottom-120"></div>
 
-  <h3 class="article-title color-teal">ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</h3>
-  <div class="line only-space space-bottom-20"></div>
-
-  <div class="article-content">
+  <h3 class="article-title color-teal space-bottom-20">ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</h3>
+  <div class="article-content space-bottom-20">
     <div class="paragraph">อสังหาริมทรัพย์ที่ประกาศจะถูกแบ่งประเภทอย่างชัดเจนและจุดประสงค์ของการประกาศที่บอกว่าการประกาศนี้ต้องการซื้อ เช่า หรือขาย</div>
   </div>
 
-  <div class="line only-space space-bottom-20"></div>
-
-  <!-- <div class="notice-box-wrapper">
-
-    <div class="row">
-
-      <div class="col-xs-12">
-        <div class="notice-box small">
-
-          <div class="notice-box-image">
-            <div class="image" style="background-image:url(/images/banners/WP_20161129_004.jpg)"></div>
-          </div>
-
-          <a href="#" class="button floating-button">
-            เลือกดูประกาศอสังหาริมทรัพย์
-          </a>
-
-        </div>
-      </div>
-
-    </div>
-
-  </div> -->
-
-  <div class="line only-space space-bottom-40"></div>
+  @if(!empty($realEstates))
 
   <div class="content-panel row">
 
-    <div class="col-md-12">
-      <div class="content-section">
+    @foreach($realEstates as $realEstate)
 
-        <div class="row">
+    <div class="col-sm-4 col-xs-12">
+      <div class="card">
 
-          @if(!empty($realEstates))
-
-            @foreach($realEstates as $realEstate)
-
-            <div class="col-md-4 col-xs-12">
-              <div class="info-box">
-                <div class="image-tile">
-                  <a href="{{$realEstate['detailUrl']}}">
-                    <div class="primary-image" style="background-image:url({{$realEstate['_imageUrl']}});"></div>
-                  </a>
-                </div>
-                <div class="primary-info-section">
-                  <a href="{{$realEstate['detailUrl']}}">
-                    <h4 class="title">{{$realEstate['_short_name']}}</h4>
-                  </a>
-                  <div class="price">{{$realEstate['_price']}}</div>
-                  <div class="secondary-info-section">
-                    <h5>ประเภท</h5>
-                    {{$realEstate['_realEstateTypeName']}}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            @endforeach
-
+        <div class="flag-wrapper">
+          <div class="flag">{{$data['_announcementTypeName']}}</div>
+          @if(!empty($data['need_broker']))
+          <div class="flag">{{$data['_need_broker']}}</div>
           @endif
+        </div>
 
+        <div class="image-tile">
+          <a href="{{$data['detailUrl']}}">
+            <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+          </a>
+        </div>
+
+        <div class="card-info">
+          <a href="{{$data['detailUrl']}}">
+            <div class="card-title">{{$data['_short_name']}}</div>
+          </a>
+          <div class="card-sub-info">
+            <h5>ราคา{{$data['_announcementTypeName']}}</h5>
+            <div class="text-emphasize">{{$data['_price']}}</div>
+          </div>
+        </div>
+
+        <div class="button-group">
+
+          <a href="{{$data['detailUrl']}}">
+            <div class="button wide-button">แสดงรายละเอียด</div>
+          </a>
+        
         </div>
 
       </div>
     </div>
 
+    @endforeach
+
+  </div>
+
+  @endif
+
+  <div class="row">
+    <div class="col-xs-12 text-right">
+      <a href="{{URL::to('real-estate/board')}}" class="button">แสดงประกาศอสังหาริมทรัพย์</a>
+    </div>
   </div>
 
 </div>

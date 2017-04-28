@@ -59,15 +59,6 @@
 
           <li class="item">
             <a href="javascript:void(0)">ประกาศซื้อ-เช่า-ขาย</a>
-            <div class="additional-option">
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="additional-option-content">
-                <a href="{{URL::to('item/post')}}">เพิ่มประกาศสินค้า</a>
-                <a href="{{URL::to('real_estate/post')}}">เพิ่มประกาศอสังหาริมทรัพย์</a>
-              </div>
-            </div>
             <ul class="submenu">
               <li class="submenu-item">
                 <a href="{{URL::to('item/board')}}">ประกาศซื้อ-เช่า-ขายสินค้า</a>

@@ -198,7 +198,7 @@ class Item extends Model
     return array(
       // 'id' => $this->id,
       'name' => $this->name,
-      '_short_name' => $string->truncString($this->name,45),
+      '_short_name' => $string->truncString($this->name,80),
       '_price' => $currency->format($this->price),
       '_announcementTypeName' => $this->announcementType->name,
     );
@@ -212,7 +212,7 @@ class Item extends Model
     $url = new url;
     
     return array(
-      'title' => $string->truncString($this->name,90),
+      'title' => $string->truncString($this->name,100),
       'description' => $string->truncString($this->description,250),
       'flags' => array(
         'ประกาศ'.$this->announcementType->name

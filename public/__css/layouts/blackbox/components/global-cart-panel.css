@@ -2,7 +2,7 @@
 	height: 100%;
 	overflow-x: hidden;
 	overflow-y: auto;
-	transition: height .2s ease-out;
+	/*transition: height .2s ease-out;*/
 }
 
 .global-cart-panel > .product-list-table > .product-list-table-inner {

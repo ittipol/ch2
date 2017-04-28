@@ -122,6 +122,7 @@
     '__css/layouts/blackbox/components/global-notification-panel.css',
     '__css/layouts/blackbox/components/global-search-panel.css',
     '__css/layouts/blackbox/components/global-cart-panel.css',
+    '__css/layouts/blackbox/components/global-additional-nav-panel.css',
     '__css/layouts/blackbox/components/header.css',
     '__css/layouts/blackbox/components/footer.css',
     '__css/layouts/blackbox/responsive.css'
