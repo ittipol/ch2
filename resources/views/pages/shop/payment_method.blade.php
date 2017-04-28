@@ -1,25 +1,7 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<div class="sub-header-nav">
-  <div class="sub-header-nav-fixed-top">
-    <div class="row">
-      <div class="col-xs-12">
-
-        <div class="btn-group pull-right">
-          <a href="{{request()->get('shopUrl')}}manage/product" class="btn btn-secondary">กลับไปหน้าหลักจัดการสินค้า</a>
-          <button class="btn btn-secondary additional-option">
-            ...
-            <div class="additional-option-content">
-              <a href="{{request()->get('shopUrl')}}manage">ไปยังหน้าจัดการหลัก</a>
-            </div>
-          </button>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
+@include('pages.shop.layouts.fixed_top_nav_admin')
 
 <div class="top-header-wrapper top-header-border">
   <div class="container">
@@ -38,7 +20,7 @@
     <div class="tile-nav small">
       <div class="tile-nav-image">
           <a href="{{$paymentMethodAddUrl}}">
-            <img src="/images/common/payment.png">
+            <img src="/images/common/plus.png">
           </a>
       </div>
       <div class="tile-nav-info">
@@ -60,16 +42,14 @@
 
         <a href="{{$data['detailUrl']}}" class="list-image pull-left">
           <img src="/images/icons/payment-white.png">
-        </div>
+        </a>
 
         <div class="col-md-11 col-xs-8">
 
           <div class="row">
 
             <div class="col-xs-12 list-content">
-              <a href="{{$data['detailUrl']}}">
-                <h4 class="primary-info single-info">{{$data['name']}}</h4>
-              </a>
+              <h4 class="primary-info single-info">{{$data['name']}}</h4>
             </div>
 
           </div>

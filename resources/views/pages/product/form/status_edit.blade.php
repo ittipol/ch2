@@ -1,7 +1,7 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-@include('pages.product.layouts.top_nav')
+@include('pages.product.layouts.fixed_top_nav')
 
 <div class="container">
   

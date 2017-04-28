@@ -1,7 +1,10 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<div class="container list">
+<div class="container list list space-top-30">
+
+  <h3>บริษัทหรือร้านค้าของคุณ</h3>
+  <div class="line space-bottom-50"></div>
 
   @if(!empty($_pagination['data']))
 
@@ -33,8 +36,8 @@
               <div class="dot"></div>
               <div class="dot"></div>
               <div class="additional-option-content">
-                <a href="{{$data['shopManageUrl']}}">ไปยังหน้าจัดการ</a>
-                <a href="{{$data['shopSettingUrl']}}">ตั้งค่า</a>
+                <a href="{{$data['shopManageUrl']}}">ภาพรวมร้านค้า</a>
+                <a href="{{$data['shopSettingUrl']}}">ข้อมูลร้านค้า</a>
               </div>
             </div>
           

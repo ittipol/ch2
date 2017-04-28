@@ -228,7 +228,7 @@
 
   </div> -->
 
-  <div class="line only-space space-bottom-40"></div>
+  <!-- <div class="line only-space space-bottom-40"></div> -->
 
   <div class="content-panel row">
 
@@ -237,7 +237,7 @@
 
         <div class="row">
 
-          @if(!empty($products))
+          @if(empty($products))
 
             @foreach($products as $product)
 
@@ -258,6 +258,12 @@
             </div>
 
             @endforeach
+
+          @else
+
+            <div class="empty">
+              สินค้าแต่ละรายการจะถูกจัดวางไปยังหมวดมู่สินค้าโดยผู้ขายจะเป็นผู้กำหนดหมวดหมู่ให้กับสินค้า โดยมีหมวดหมู่สินค้ามากกว่า 2500 หมวดหมู่ที่จะทำให้การเลือกซื้อสินค้าสะดวกและรวดเร็ว
+            </div>
 
           @endif
 
@@ -301,7 +307,7 @@
 
   </div> -->
 
-  <div class="line only-space space-bottom-40"></div>
+  <!-- <div class="line only-space space-bottom-40"></div> -->
 
   <div class="content-panel row">
 

@@ -7,14 +7,7 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{request()->get('shopUrl')}}manage/product" class="btn btn-secondary">กลับไปหน้าหลักจัดการสินค้า</a>
-          <button class="btn btn-secondary additional-option">
-            ...
-            <div class="additional-option-content">
-              <a href="{{request()->get('shopUrl')}}manage/job">ไปยังหน้าหลักจัดการประกาศงาน</a>
-              <a href="{{request()->get('shopUrl')}}manage/advertising">กลับไปหน้าหลักจัดการโฆษณา</a>
-            </div>
-          </button>
+          <a href="{{request()->get('shopUrl')}}manage/product_catalog" class="btn btn-secondary">กลับไปหน้ารายการแคตตาล็อกสินค้า</a>
         </div>
 
       </div>

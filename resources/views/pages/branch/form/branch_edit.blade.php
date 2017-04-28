@@ -3,6 +3,20 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 
+<div class="sub-header-nav">
+  <div class="sub-header-nav-fixed-top">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <div class="btn-group pull-right">
+          <a href="{{request()->get('shopUrl')}}manage/branch" class="btn btn-secondary">กลับไปหน้ารายการสาขา</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container">
 
   <div class="container-header">

@@ -83,6 +83,12 @@
 	padding: 20px;
 }
 
+.list-empty-message img.sm {
+	width: 40px;
+	height: 40px;
+	padding: 0;
+}
+
 .list-empty-message h4 {
 	line-height: 22px;
 }
@@ -253,6 +259,7 @@ label.list-box > input[type="checkbox"] {
 
 .list-h .primary-info {
 	margin: 2px 0;
+	line-height: 22px;
 }
 
 .list-h .primary-info.single-info {

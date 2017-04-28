@@ -138,6 +138,7 @@ form .input-error {
 
 .image-panel.banner {
 	width: 100%;
+	margin: 0;
 }
 
 .image-panel input[type="text"] {

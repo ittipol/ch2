@@ -1,19 +1,7 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<div class="sub-header-nav">
-  <div class="sub-header-nav-fixed-top">
-    <div class="row">
-      <div class="col-xs-12">
-
-        <div class="btn-group pull-right">
-          <a href="{{request()->get('shopUrl')}}manage" class="btn btn-secondary">กลับไปหน้าจัดการหลัก</a>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
+@include('pages.shop.layouts.fixed_top_nav_admin')
 
 <div class="container">
   <div class="container-header">

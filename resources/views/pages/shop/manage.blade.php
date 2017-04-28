@@ -1,7 +1,7 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-@include('pages.shop.layouts.top_nav') 
+@include('pages.shop.layouts.fixed_top_nav_admin')
 @include('pages.shop.layouts.header') 
 
 <div class="shop-content-wrapper">
@@ -11,8 +11,7 @@
     <div class="container">
     
       <div class="shop-notice-header">
-        <h3>จัดการร้านค้า</h3>
-        <p>กรุณาเพิ่มข้อมูลของร้านค้า ก่อนการใช้งาน</p>
+        <h3>ภาพรวมร้านค้า</h3>
       </div>
 
       <div class="shop-notice-content">

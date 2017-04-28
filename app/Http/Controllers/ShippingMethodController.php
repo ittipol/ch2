@@ -121,11 +121,11 @@ class ShippingMethodController extends Controller
 
     if($model->delete()) {
       MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
-      return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
     }else{
       MessageHelper::display('ไม่สามารถลบข้อมูลนี้ได้','error');
-      return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
     }
+
+    return Redirect::to(route('shop.shipping_method', ['shopSlug' => request()->shopSlug]));
 
   }
 

@@ -1,25 +1,7 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<div class="sub-header-nav">
-  <div class="sub-header-nav-fixed-top">
-    <div class="row">
-      <div class="col-xs-12">
-
-        <div class="btn-group pull-right">
-          <a href="{{request()->get('shopUrl')}}manage/job" class="btn btn-secondary">กลับไปหน้าหลักจัดการประกาศงาน</a>
-          <button class="btn btn-secondary additional-option">
-            ...
-            <div class="additional-option-content">
-              <a href="{{request()->get('shopUrl')}}manage">ไปยังหน้าจัดการหลัก</a>
-            </div>
-          </button>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
+@include('pages.shop.layouts.fixed_top_nav_admin')
 
 <div class="container list space-top-30">
 
@@ -53,7 +35,7 @@
           </div>
           <div class="card-info">
             <div class="card-sub-info">
-              <h5>ตำแหน่งงาน</h5>
+              <h5>สมัครงานตำแหน่ง</h5>
               {{$data['_jobNameShort']}}
             </div>
             <div class="card-sub-info">
@@ -83,7 +65,7 @@
   @else
 
   <div class="list-empty-message text-center space-top-20">
-    <img class="space-bottom-20" src="/images/common/resume.png">
+    <img src="/images/common/not-found.png">
     <div>
       <h3>ยังไม่มีรายชื่อผู้สมัครงาน</h3>
     </div>

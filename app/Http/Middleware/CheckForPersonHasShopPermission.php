@@ -148,6 +148,10 @@ class CheckForPersonHasShopPermission
           'permission' => true,
           'modelName' => 'Order'
         ),
+        'shop.order.delete' => array(
+          'permission' => 'delete',
+          'modelName' => 'Order'
+        ),
         'shop.product.list' => true,
         'shop.product.detail' => array(
           'modelName' => 'Product'
@@ -336,14 +340,12 @@ class CheckForPersonHasShopPermission
         $role = $person->role->name;
       }
 
+      // check permission
       if(!empty($pages[$name]['permission'])) {
 
-        // check permission
-        // if(($pages[$name]['permission'] !== true) && empty($permissions[$pages[$name]['permission']])) {
-        //   return $this->errorPage('ไม่อนุญาตให้แก้ไขร้านค้านี้ได้');
-        // }
-
-        if(empty($permissions[$pages[$name]['permission']])) {
+        if(($pages[$name]['permission'] === true) && empty($permissions)) {
+          return $this->errorPage('ไม่อนุญาตให้แก้ไขร้านค้านี้ได้');
+        }elseif(($pages[$name]['permission'] !== true) && empty($permissions[$pages[$name]['permission']])) {
           return $this->errorPage('ไม่อนุญาตให้แก้ไขร้านค้านี้ได้');
         }
 
@@ -423,7 +425,7 @@ class CheckForPersonHasShopPermission
       }
 
       $request->attributes->add([
-        'shopRole' => $role,
+        // 'shopRole' => $role,
         'shopPermission' => $permissions,
       ]);
 

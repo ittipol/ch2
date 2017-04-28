@@ -727,14 +727,19 @@ class ShopController extends Controller
 
   public function postMessage() {
 
-    $model = Service::loadModel('Timeline');
+    $message = trim(request()->get('message'));
 
-    // ตรึงข้อความไว้ยังหน้าแรก
+    if(empty($message)) {
+      MessageHelper::displayWithDesc('ไม่พบข้อความที่ต้องการโพสต์','กรุณากรอกข้อความ','error');
+      return Redirect::to('shop/'.request()->shopSlug);
+    }
+
+    $model = Service::loadModel('Timeline');
 
     $model->model = 'Shop';
     $model->model_id = request()->get('shopId');
     $model->title = 'โพสต์ข้อความ';
-    $model->message = request()->get('message');
+    $model->message = $message;
     $model->pinned = 1;
     $model->type = 'text';
 

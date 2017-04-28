@@ -64,8 +64,8 @@
 .content-panel .info-box {
 	background-color: #fff;
 	margin-bottom: 20px;
-	border-bottom: 5px solid #FDD835;
-	/*border-bottom: 5px solid #4caf50;*/
+	/*border-bottom: 5px solid #FDD835;*/
+	border-bottom: 5px solid #fb8c00;
 }
 
 .content-panel .info-box .primary-info-section {
@@ -117,4 +117,14 @@
   	font-size: 35px;
   	width: 90%;
   }
+
+	.primary-banner .banner-overlay-message {
+		top: 80px;
+	}
+
+	.primary-banner .primary-banner-title {
+		font-size: 36px;
+		width: 80%;
+	}
+
 }

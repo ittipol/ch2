@@ -85,7 +85,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('account/profile/edit', 'AccountController@profileEdit')->name('account.profile.edit');
   Route::patch('account/profile/edit','AccountController@profileEditingSubmit')->name('account.profile.edit');
 
-  Route::get('account/theme', 'AccountController@theme')->name('account.theme.edit');
+  // Route::get('account/theme', 'AccountController@theme')->name('account.theme.edit');
   // Route::patch('account/theme','PersonExperienceController@themeEditingSubmit')->name('account.theme.edit');
 
   Route::get('account/item', 'AccountController@item')->name('account.item');
@@ -232,6 +232,8 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::get('shop/{shopSlug}/order/payment/detail/{id}', 'OrderController@paymentDetail')->name('shop.order.payment.detail');
 
   Route::patch('shop/{shopSlug}/order/status/update/{id}', 'OrderController@updateOrderStatus')->name('shop.order.status.update');
+
+  Route::get('shop/{shopSlug}/order/delete/{id}','OrderController@delete')->name('shop.order.delete');
 
 });
 

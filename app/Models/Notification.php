@@ -169,7 +169,7 @@ class Notification extends Model
         break;
 
       case 'PersonApplyJob':
-          $image = '/images/icons/career-white.png';
+          $image = '/images/icons/resume-white.png';
         break;
 
       case 'Message':

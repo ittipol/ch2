@@ -301,6 +301,7 @@ class OrderController extends Controller
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl(request()->get('shopUrl').'order');
     $model->paginator->setUrl(request()->get('shopUrl').'order/{id}','detailUrl');
+    $model->paginator->setUrl(request()->get('shopUrl').'order/delete/{id}','deleteUrl');
     $model->paginator->setQuery('sort',$sort);
     $model->paginator->setQuery('fq',$filters);
 
@@ -721,6 +722,19 @@ class OrderController extends Controller
 
     return Redirect::to(request()->get('shopUrl').'order/'.$model->id);
 
+  }
+
+  public function delete() {
+
+    $model = Service::loadModel('Order')->find($this->param['id']);
+
+    if($model->delete()) {
+      MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
+    }else{
+      MessageHelper::display('ไม่สามารถลบข้อมูลนี้ได้','error');
+    }
+
+    return Redirect::to('shop/'.request()->shopSlug.'/order');
   }
 
 }

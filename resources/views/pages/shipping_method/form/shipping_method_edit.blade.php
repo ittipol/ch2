@@ -1,7 +1,19 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-@include('pages.shipping_method.layouts.top_nav')
+<div class="sub-header-nav">
+  <div class="sub-header-nav-fixed-top">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <div class="btn-group pull-right">
+          <a href="{{request()->get('shopUrl')}}shipping_method" class="btn btn-secondary">กลับไปหน้าวิธีการจัดส่งสินค้า</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="container">
 
@@ -9,7 +21,7 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="title">
-          วิธีการจัดส่งสินค้า
+          แก้ไขวิธีการจัดส่งสินค้า
         </div>
       </div>
     </div>

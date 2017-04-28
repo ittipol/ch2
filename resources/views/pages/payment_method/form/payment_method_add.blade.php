@@ -1,7 +1,19 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-@include('pages.payment_method.layouts.top_nav')
+<div class="sub-header-nav">
+  <div class="sub-header-nav-fixed-top">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <div class="btn-group pull-right">
+          <a href="{{request()->get('shopUrl')}}payment_method" class="btn btn-secondary">กลับไปหน้าวิธีการชำระเงิน</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="container">
 

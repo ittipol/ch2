@@ -8,7 +8,7 @@
           <button class="btn btn-secondary additional-option">
             ...
             <div class="additional-option-content">
-              <a href="{{request()->get('shopUrl')}}manage/product">ไปยังหน้าหลักจัดการสินค้า</a>
+              <a href="{{request()->get('shopUrl')}}manage/product">ไปหน้ารายการสินค้า</a>
             </div>
           </button>
         </div>

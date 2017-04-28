@@ -1,25 +1,7 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<div class="sub-header-nav">
-  <div class="sub-header-nav-fixed-top">
-    <div class="row">
-      <div class="col-xs-12">
-
-        <div class="btn-group pull-right">
-          <a href="{{request()->get('shopUrl')}}manage/product" class="btn btn-secondary">กลับไปหน้าหลักจัดการสินค้า</a>
-          <button class="btn btn-secondary additional-option">
-            ...
-            <div class="additional-option-content">
-              <a href="{{request()->get('shopUrl')}}manage">ไปยังหน้าจัดการหลัก</a>
-            </div>
-          </button>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
+@include('pages.shop.layouts.fixed_top_nav_admin')
 
 <div class="container space-top-30 list">
 
@@ -77,7 +59,7 @@
           <div class="dot"></div>
           <div class="additional-option-content">
             <a href="{{$data['detailUrl']}}">แสดงรายละเอียด</a>
-            <a href="">ลบ</a>
+            <a href="{{$data['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการลบเลขที่การสั่งซื้อ {{$data['invoice_number']}} ใช่หรือไม่">ลบ</a>
           </div>
         </div>
 

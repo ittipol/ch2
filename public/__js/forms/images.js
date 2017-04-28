@@ -350,7 +350,7 @@ class Images {
 		html += '<label id="'+this.code+'_'+this.runningNumber+'" class="image-label">';
 		html += '<input id="'+this.code+'_image_'+this.runningNumber+'" class="image-input" type="file">';
 		html +=	'<div class="preview-image" style="background-image:url('+image._url+')"></div>';
-		html += '<a href="javscript:void(0);" class="'+this.code+'-remove-btn" data-id="'+image.id+'" style="display:block;">×</a>';
+		html += '<a href="javscript:void(0);" class="image-remove-btn" data-id="'+image.id+'" style="display:block;">×</a>';
 		html += '<p class="error-message"></p>';
 		html += '<div class="progress-bar"><div class="status"></div></div>'
 		html += '</label>';

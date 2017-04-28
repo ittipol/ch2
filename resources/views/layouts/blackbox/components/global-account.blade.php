@@ -105,10 +105,12 @@
             <div class="dot"></div>
             <div class="dot"></div>
             <div class="additional-option-content">
-              <a href="{{$shop['url']}}manage/product">จัดการสินค้า</a>
+              <a href="{{$shop['url']}}manage/product">สินค้า</a>
+              <a href="{{$shop['url']}}manage/product_catalog">แคตตาล็อกสินค้า</a>
               <a href="{{$shop['url']}}manage/job">ประกาศงาน</a>
-              <a href="{{$shop['url']}}manage/advertising">จัดการโฆษณา</a>
-              <a href="{{$shop['url']}}setting">ตั้งค่า</a>
+              <a href="{{$shop['url']}}manage/advertising">โฆษณา</a>
+              <a href="{{$shop['url']}}manage/branch">สาขา</a>
+              <a href="{{$shop['url']}}setting">ข้อมูลร้านค้า</a>
             </div>
           </div>
         </div>

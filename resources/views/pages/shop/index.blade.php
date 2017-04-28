@@ -12,7 +12,7 @@
       <?php 
         echo Form::open([
           'url' => request()->get('shopUrl').'timeline/post',
-          // 'id' => 'pinned_message_form',
+          'id' => 'timeline_post_form',
           'method' => 'post'
         ]);
       ?>
@@ -25,7 +25,7 @@
       <div>
         <?php 
           echo Form::textarea('message',null,array(
-            'class' => 'timeline-message-input'
+            'id' => 'timeline_post_input'
           ));
         ?>
       </div>
@@ -59,8 +59,6 @@
               </h4>
             </div>
 
-            <div class="line"></div>
-
             <div class="box-content padding-15">
               <div class="timeline-message">{!!$timeline['message']!!}</div>
 
@@ -91,6 +89,27 @@
           </div>
         @endforeach
 
+        <div class="box timeline">
+          <div class="box-header">
+            <h4 class="box-header-title">
+              <div class="primary-title">
+                <span class="post-owner-name">xxx</span>
+                สร้างร้านค้า
+              </div>
+              <div class="secondary-title">9999</div>
+            </h4>
+          </div>
+
+          <div class="box-content padding-15">
+
+            <div class="tl-template">
+              <div class="tl-img tl-shop-created"></div>
+              <div class="tl-txt">สร้างร้านค้า</div>
+            </div>
+
+          </div>
+        </div>
+
         <div class="line space-top-bottom-100"></div>
 
       @endif
@@ -103,6 +122,8 @@
           <img class="icon-before-title" src="/images/icons/tag-blue.png">สินค้า
         </h4>
       </div>
+
+      @if(!empty($products))
 
       <div class="box-content padding-15">
 
@@ -161,8 +182,21 @@
 
       </div>
 
+      <a href="{{request()->get('shopUrl')}}product" class="button wide-button">แสดงสินค้าทั้งหมด</a>
+
+      @else
+
+      <div class="list-empty-message text-center space-top-bottom-20">
+        <img class="sm" src="/images/icons/tag-blue.png">
+        <div>
+          <h3>ยังไม่มีสินค้า</h3>
+        </div>
+      </div>
+
+      @endif
+
     </div>
-    <a href="{{request()->get('shopUrl')}}product" class="button wide-button">แสดงสินค้าทั้งหมด</a>
+    
 
     <div class="box">
       <div class="box-header">
@@ -170,6 +204,8 @@
           <img class="icon-before-title" src="/images/icons/tag-blue.png">แคตตาล็อกสินค้า
         </h4>
       </div>
+
+      @if(!empty($products))
 
       <div class="box-content padding-15">
         @if(!empty($productCatalogs))
@@ -209,8 +245,20 @@
         @endif
       </div>
 
+      <a href="{{request()->get('shopUrl')}}product_catalog" class="button wide-button">แสดงแคตตาล็อกสินค้าทั้งหมด</a>
+      
+      @else
+
+      <div class="list-empty-message text-center space-top-bottom-20">
+        <img class="sm" src="/images/icons/tag-blue.png">
+        <div>
+          <h3>ยังไม่มีแคตตาล็อกสินค้า</h3>
+        </div>
+      </div>
+
+      @endif
+
     </div>
-    <a href="{{request()->get('shopUrl')}}product_catalog" class="button wide-button">แสดงแคตตาล็อกสินค้าทั้งหมด</a>
 
   </div>
 
@@ -220,9 +268,7 @@
 
   class Timeline {
 
-    contructor() {
-
-    }
+    contructor() {}
 
     load() {
       this.bind();
@@ -230,14 +276,26 @@
 
     bind() {
 
+      $('#timeline_post_form').on('submit',function(){
+
+        let message = document.getElementById('timeline_post_input').value.trim();
+
+        if(message.length == 0) {
+          const notificationBottom = new NotificationBottom('ไม่พบข้อความที่ต้องการโพสต์','กรุณากรอกข้อความ','error');
+          notificationBottom.load();
+          return false;
+        }
+
+      });
+
     }
 
   }
 
   $(document).ready(function(){
 
-    const pinnedMessage = new Timeline();
-    pinnedMessage.load();
+    const timeline = new Timeline();
+    timeline.load();
 
   });
 

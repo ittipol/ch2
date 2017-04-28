@@ -19,7 +19,6 @@
 
 .box .box-header {
 	padding: 15px;
-	/*border-bottom: 1px solid #ccc;*/
 }
 
 .box .box-header .box-header-title {
@@ -38,7 +37,7 @@
 	background-color: #CFD8DC;
 }
 
-.box textarea.timeline-message-input {
+.box textarea#timeline_post_input {
 	border: none;
 	outline: none;
 	height: 140px;
@@ -58,6 +57,10 @@
 	color: #999;
 	font-size: 15px;
 	margin-top: 5px;
+}
+
+.box.timeline .box-header {
+	border-bottom: 1px solid #ccc;
 }
 
 .box.timeline .post-owner-name {
