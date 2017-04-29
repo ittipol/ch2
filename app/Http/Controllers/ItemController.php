@@ -157,6 +157,8 @@ class ItemController extends Controller
       $this->setData('deleteUrl',$url->url('account/item/delete/'.$model->id));
     }
 
+    $this->setPageTitle($this->data['_modelData']['name']);
+
     return $this->view('pages.item.detail');
 
   }

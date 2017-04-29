@@ -243,26 +243,6 @@
     </dd>
   </div>
 
-  <!-- <div class="line space-top-bottom-20"></div>
-
-  <div class="row">
-
-    <div class="col-sm-12 margin-section section-border-left">
-
-      <div class="space-top-bottom-10 section-inner">
-        
-        <h4>รายละเอียดอสังหาริมทรัพย์</h4>
-        <div class="line space-bottom-20"></div>
-        <div>
-          {!!$_modelData['description']!!}
-        </div>
-
-      </div>
-
-    </div>
-
-  </div> -->
-
   <div class="row detail-info-section space-bottom-30">
     <div class="col-xs-12">
 
@@ -275,8 +255,10 @@
     </div>
   </div>
 
+  @if(!empty($_modelData['Address']['_geographic']))
   <h4>ตำแหน่งบนแผนที่</h4>
   <div id="map"></div>
+  @endif
 
 </div>
 
@@ -285,9 +267,11 @@
     imageGallery = new ImageGallery(true);
     imageGallery.load({!!$_modelData['Image']!!});
 
+    @if(!empty($_modelData['Address']['_geographic']))
     const map = new Map(false,false,false);
     map.initialize();
     map.setLocation({!!$_modelData['Address']['_geographic']!!});
+    @endif
   });
 </script>
 

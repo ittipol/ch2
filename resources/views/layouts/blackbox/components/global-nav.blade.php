@@ -3,7 +3,7 @@
     <div class="navigation-top">
 
       <div class="logo">
-        <a class="logo-link" href="{{URL::to('/')}}">Chonburi Square</a>
+        <a class="logo-link" href="{{URL::to('/')}}">navisquare</a>
       </div>
 
     </div>

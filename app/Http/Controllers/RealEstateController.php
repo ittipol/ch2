@@ -151,6 +151,8 @@ class RealEstateController extends Controller
       $this->setData('deleteUrl',$url->url('account/real-estate/delete/'.$model->id));
     }
 
+    $this->setPageTitle($this->data['_modelData']['name']);
+
     return $this->view('pages.real_estate.detail');
 
   }

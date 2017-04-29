@@ -6,7 +6,7 @@
   <!-- CSS & JS -->
   @include('scripts.script')
   <!-- Title  -->
-  <title>Chonburi Square</title>
+  <title>{{$_page_title}}</title>
 </head>
 <body>
 

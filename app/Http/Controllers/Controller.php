@@ -18,6 +18,7 @@ class Controller extends BaseController
 
   protected $slug;
   protected $data = array();
+  protected $pageTitle = 'navisquare จุดเริ่มต้นสำหรับคุณ';
   protected $param;
   protected $query;
   protected $entity;
@@ -41,6 +42,10 @@ class Controller extends BaseController
     return view('errors.error',$data);
   }
 
+  protected function setPageTitle($pageTitle) {
+    $this->pageTitle = $pageTitle.' - navisquare';
+  }
+
   protected function setData($index,$value) {
     $this->data[$index] = $value;
   }
@@ -51,12 +56,14 @@ class Controller extends BaseController
 
   protected function view($view = null) {
 
-    if(empty($view)) {
-      $this->error = array(
-        'message' => 'ขออภัย หน้านี้ไม่พร้อมใช้งาน'
-      );
-      return $this->error();
-    }
+    // if(empty($view)) {
+    //   $this->error = array(
+    //     'message' => 'ขออภัย หน้านี้ไม่พร้อมใช้งาน'
+    //   );
+    //   return $this->error();
+    // }
+
+    $this->data['_page_title'] = $this->pageTitle;
 
   	return view($view,$this->data);
   }
