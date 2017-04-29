@@ -18,8 +18,8 @@ class Map {
     let _this = this;
 
     let options = {
-        zoom: 10,
-        center: new google.maps.LatLng(13.180610774683,101.0019493103),
+        zoom: 9,
+        center: new google.maps.LatLng(13.78473654934021,100.50567626953125),
         mapTypeId: google.maps.MapTypeId.ROADMAP
     }
     let map = new google.maps.Map(document.getElementById("map"), options);
@@ -153,8 +153,8 @@ class Map {
     let _this = this;
 
     let options = {
-        zoom: 13,
-        center: new google.maps.LatLng(13.297587657705135,100.94727516174316),
+        zoom: 8,
+        center: new google.maps.LatLng(13.78473654934021,100.50567626953125),
         mapTypeId: google.maps.MapTypeId.ROADMAP
     }
     this.map = new google.maps.Map(document.getElementById("map"), options);

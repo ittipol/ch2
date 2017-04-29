@@ -126,7 +126,7 @@
         <p>ติดต่อผู้{{$_modelData['_announcementTypeName']}}</p>
 
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-6">
             <div class="item-info-row">
               @if(!empty($_modelData['Contact']['phone_number']))
               <h4 class="title-with-icon phone">{{$_modelData['Contact']['phone_number']}}</h4>
@@ -135,21 +135,12 @@
               @endif
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-6">
             <div class="item-info-row">
               @if(!empty($_modelData['Contact']['email']))
               <h4 class="title-with-icon email">{{$_modelData['Contact']['email']}}</h4>
               @else
               <h4 class="title-with-icon email">-</h4>
-              @endif
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="item-info-row">
-              @if(!empty($_modelData['Contact']['line']))
-              <h4 class="title-with-icon line-app">{{$_modelData['Contact']['line']}}</h4>
-              @else
-              <h4 class="title-with-icon line-app">-</h4>
               @endif
             </div>
           </div>

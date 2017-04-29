@@ -159,17 +159,6 @@
       ?>
     </div>
 
-    <div class="form-row">
-      <?php 
-        echo Form::label('Address[sub_district_id]', 'ตำบล', array(
-          'class' => 'required'
-        ));
-        echo Form::select('Address[sub_district_id]', array() , null, array(
-          'id' => 'sub_district'
-        ));
-      ?>
-    </div>
-
   </div>
 
   <?php
@@ -217,14 +206,6 @@
       emailInput.load({!!$_formData['Contact']['email']!!});
     @else
       emailInput.load();
-    @endif
-
-    const lindIdInput = new TextInputList('line_id_input','Contact[line]','Line ID');
-    // lindIdInput.disableCreatingInput();
-    @if(!empty($_formData['Contact']['line']))
-      lindIdInput.load({!!$_formData['Contact']['line']!!});
-    @else
-      lindIdInput.load();
     @endif
 
     const form = new Form();

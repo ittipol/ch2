@@ -14,7 +14,7 @@ use Session;
 class Image extends Model
 {
   protected $table = 'images';
-  protected $fillable = ['original_image_id','model','model_id','path','filename','description','image_type_id','person_id'];
+  protected $fillable = ['model','model_id','path','filename','description','image_type_id','person_id'];
   private $maxFileSizes = 2097152;
   private $acceptedFileTypes = ['image/jpg','image/jpeg','image/png', 'image/pjpeg'];
 

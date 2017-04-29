@@ -12,16 +12,16 @@
       <div class="line"></div>
       <div class="list-item-group">
         <div class="list-item">
-          <a href="">
+          <a href="{{URL::to('item/post')}}">
             <img class="icon" src="/images/common/plus.png" >
-            <h4>ประกาศซื้อ-เช่า-ขายสินค้า</h4>
+            <span>ประกาศซื้อ-เช่า-ขายสินค้า</span>
           </a>
         </div>
 
         <div class="list-item">
-          <a href="">
+          <a href="{{URL::to('real-estate/post')}}">
             <img class="icon" src="/images/common/plus.png" >
-            <h4>ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</h4>
+            <span>ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</span>
           </a>
         </div>
       </div>
@@ -30,9 +30,9 @@
       <div class="line"></div>
       <div class="list-item-group">
         <div class="list-item">
-          <a href="">
+          <a href="{{URL::to('community/shop/create')}}">
             <img class="icon" src="/images/common/plus.png" >
-            <h4>สร้างร้านค้า</h4>
+            <span>สร้างร้านค้า</span>
           </a>
         </div>
       </div>

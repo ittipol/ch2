@@ -138,15 +138,6 @@
               @endif
             </div>
           </div>
-          <div class="col-xs-12">
-            <div class="item-info-row">
-              @if(!empty($_modelData['Contact']['line']))
-              <h4 class="title-with-icon line-app">{{$_modelData['Contact']['line']}}</h4>
-              @else
-              <h4 class="title-with-icon line-app">-</h4>
-              @endif
-            </div>
-          </div>
         </div>
 
       </div>
@@ -159,19 +150,6 @@
         <div class="flag">ประกาศ{{$_modelData['_announcementTypeName']}}</div>
         <div class="flag">{{$_modelData['_used']}}</div>
       </div>
-
-      <!-- <div class="margin-section section-border-left no-margin">
-
-        <div class="space-top-bottom-10 section-inner">
-          
-          <h4>รายละเอียด {{$_modelData['name']}}</h4>   
-          <div>
-            {!!$_modelData['description']!!}
-          </div>
-
-        </div>
-
-      </div> -->
 
       <div class="detail-info-section no-margin">
         <h4>รายละเอียด {{$_modelData['name']}}</h4>

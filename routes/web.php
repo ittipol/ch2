@@ -520,7 +520,8 @@ Route::group(['prefix' => 'api/v1', 'middleware' => ['api','auth']], function ()
 
 Route::group(['middleware' => ['api','auth']], function () {
   Route::post('upload_image', 'ApiController@uploadImage');
-  Route::post('upload_profile_image', 'ApiController@uploadProfileImage')->name('Api.upload.profile_image');
+  Route::post('upload_profile_image', 'ApiController@uploadProfileImage')->name('api.upload.profile_image');
+  Route::post('delete_profile_image', 'ApiController@deleteProfileImage')->name('api.delete.profile_image');
 
   Route::post('upload_file_attachment', 'ApiController@uploadAttachedFile');
   Route::post('clear_file_attachment', 'ApiController@clearAttachedFile');

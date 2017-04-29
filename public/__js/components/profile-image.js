@@ -39,9 +39,13 @@ class ProfileImage {
 				_this.removePreview();
 			});
 
+			$(document).on('click', '.'+this.code+'-remove-btn', function(){
+				_this.deleteImage();
+			});
+
 	}
 
-	setElem(buttonId,PanelId,acceptBtn,cancelBtn) {
+	setElem(buttonId,PanelId,acceptBtn,cancelBtn,removeBtn) {
 
 		document.getElementById(PanelId).setAttribute('id',this.code+'_image_panel');
 
@@ -55,6 +59,10 @@ class ProfileImage {
 		_class = document.getElementById(cancelBtn).getAttribute('class');
 		document.getElementById(cancelBtn).setAttribute('class',_class+' '+this.code+'-cancel-btn');
 		document.getElementById(cancelBtn).setAttribute('id',this.code+'_cancel_button');
+
+		_class = document.getElementById(removeBtn).getAttribute('class');
+		document.getElementById(removeBtn).setAttribute('class',_class+' '+this.code+'-remove-btn');
+		document.getElementById(removeBtn).setAttribute('id',this.code+'_remove_button');
 
 
 	}
@@ -137,7 +145,6 @@ class ProfileImage {
 	}
 
 	createForm() {
-
 		let formData = new FormData();
 		formData.append('_token', this.token);  
 		formData.append('model', this.target);
@@ -145,16 +152,26 @@ class ProfileImage {
 		formData.append('imageToken', this.code);
 		formData.append('imageType', this.type);
 		formData.append('image', this.file);
-
 		return formData;
-
 	}
 
-	uploadImage(input,data) {
+	createDeleteImageForm() {
+		let formData = new FormData();
+		formData.append('_token', this.token);  
+		formData.append('model', this.target);
+		formData.append('model_id', this.id);
+		formData.append('imageToken', this.code);
+		formData.append('imageType', this.type);
+		return formData;
+	}
+
+	uploadImage() {
 
 		if(!this.proceed) {
 			return false;
 		}
+
+		this.proceed = false;
 
 		let _this = this;
 
@@ -167,9 +184,6 @@ class ProfileImage {
 	    cache: false,
 	    processData:false,
 	    beforeSend: function( xhr ) {
-
-	    	this.proceed = false;
-
 	    	$('.'+_this.code+'-accept-btn').fadeOut(180);
 	    	$('.'+_this.code+'-cancel-btn').fadeOut(180);
 	    },
@@ -180,8 +194,6 @@ class ProfileImage {
 
 	  	if(response.success){
 
-	  		this.proceed = false;
-
 	  		const notificationBottom = new NotificationBottom('บันทึกเรียบร้อยแล้ว','','success');
 	  		notificationBottom.setDelay(3000);
 	  		notificationBottom.load();
@@ -189,6 +201,60 @@ class ProfileImage {
 	  		$('.shop-cover-edit-button').fadeIn(280);
 	  		$('.shop-profile-image-edit-button').fadeIn(280);
 	  		
+
+	  	}else{
+
+	  		if(typeof response.message == 'object') {
+					const notificationBottom = new NotificationBottom(response.message.title,'',response.message.type);	
+					notificationBottom.load();
+	  		}
+
+	  	}
+	  	
+	  });
+
+	  request.fail(function (jqXHR, textStatus, errorThrown){
+
+	    console.error(
+	        "The following error occurred: "+
+	        textStatus, errorThrown
+	    );
+	  });
+
+	}
+
+	deleteImage() {
+
+		if(this.proceed) {
+			return false;
+		}
+
+		this.proceed = false;
+
+		let _this = this;
+
+		let request = $.ajax({
+	    url: "/delete_profile_image",
+	    type: "POST",
+	    data: this.createDeleteImageForm(),
+	    dataType: 'json',
+	    contentType: false,
+	    cache: false,
+	    processData:false,
+	    beforeSend: function( xhr ) {},
+	    mimeType:"multipart/form-data",
+	  });
+
+	  request.done(function (response, textStatus, jqXHR){
+
+	  	if(response.success){
+
+	  		$('#'+_this.code+'_image_panel').removeClass('display-preview');
+	  		$('#'+_this.code+'_image_panel').css('background-image', '');
+
+	  		const notificationBottom = new NotificationBottom('รูปภาพถูกลบแล้ว','','success');
+	  		notificationBottom.setDelay(3000);
+	  		notificationBottom.load();
 
 	  	}else{
 

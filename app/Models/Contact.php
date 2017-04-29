@@ -129,7 +129,7 @@ class Contact extends Model
     $fax = '';
     $email = '';
     $website = '';
-    $line = '';
+    // $line = '';
 
     if(!empty($this->phone_number)) {
       $phoneNumber = implode(', ',json_decode($this->phone_number,true));        
@@ -147,16 +147,16 @@ class Contact extends Model
       $website = implode(', ',json_decode($this->website,true));        
     }
 
-    if(!empty($this->line)) {
-      $line = implode(', ',json_decode($this->line,true));        
-    }
+    // if(!empty($this->line)) {
+    //   $line = implode(', ',json_decode($this->line,true));        
+    // }
 
     return array(
       'phone_number' => $phoneNumber,
       'fax' => $fax,
       'email' => $email,
       'website' => $website,
-      'line' => $line
+      // 'line' => $line
     );
   }
   

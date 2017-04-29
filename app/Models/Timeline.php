@@ -8,16 +8,17 @@ use App\library\date;
 class Timeline extends Model
 {
   protected $table = 'timelines';
-  protected $fillable = ['model','model_id','message','pinned','type','related','related_id','person_id'];
+  protected $fillable = ['model','model_id','message','pinned','timeline_post_type_id','related','related_id','person_id'];
 
   public function getPinnedMessage($modelName,$modelId) {
+
+    // Service::loadModel('TimelinePostType')->getIdByalias('text')
 
     $pinnedMessages = $this
     ->where([
       ['model','like',$modelName],
       ['model_id','=',$modelId],
       ['pinned','=',1],
-      ['type','=','text']
     ])
     ->orderBy('created_at','desc');
 

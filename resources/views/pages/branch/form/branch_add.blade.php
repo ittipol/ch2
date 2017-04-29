@@ -132,15 +132,6 @@
       </div>
 
       <div class="form-row">
-        <?php 
-          echo Form::label('Address[sub_district_id]', 'ตำบล');
-          echo Form::select('Address[sub_district_id]', array() , null, array(
-            'id' => 'sub_district'
-          ));
-        ?>
-      </div>
-
-      <div class="form-row">
         <?php echo Form::label('', 'ระบุตำแหน่บนแผนที่'); ?>
         <input id="pac-input" class="controls" type="text" placeholder="Search Box">
         <div id="map"></div>

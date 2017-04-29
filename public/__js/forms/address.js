@@ -5,10 +5,7 @@ class Address {
 	}
 
 	load() {
-
 		this.bind();
-
-		// this.getSubDistrict($('#district').val());
 		this.getDistrict($('#province').val());
 	}
 
@@ -20,9 +17,9 @@ class Address {
 	    _this.getDistrict($(this).val());
 	  });
 
-	  $('#district').on('change',function(){
-	    _this.getSubDistrict($(this).val());
-	  });
+	  // $('#district').on('change',function(){
+	  //   _this.getSubDistrict($(this).val());
+	  // });
 
 	} 
 
@@ -30,9 +27,9 @@ class Address {
 		this.districtId = districtId;
 	}
 
-	setSubDistrictId(subDistrictId) {
-		this.subDistrictId = subDistrictId;
-	}
+	// setSubDistrictId(subDistrictId) {
+	// 	this.subDistrictId = subDistrictId;
+	// }
 
 	getDistrict(provinceId){
 
@@ -60,7 +57,7 @@ class Address {
 	      $('#district').append(option.attr("value", key).text(value));
 	    });
 
-	    _this.getSubDistrict($('#district').val());
+	    // _this.getSubDistrict($('#district').val());
 	    
 	  });
 
@@ -71,52 +68,50 @@ class Address {
 	    );
 	  });
 
-	  // request.always(function () {});
 	}
 
-	getSubDistrict(districtId){
+	// getSubDistrict(districtId){
 
-	  let _this = this;
+	//   let _this = this;
 
-	  let CSRF_TOKEN = $('input[name="_token"]').val();        
+	//   let CSRF_TOKEN = $('input[name="_token"]').val();        
 
-	  let request = $.ajax({
-	    url: "/api/v1/get_sub_district/"+districtId,
-	    type: "get",
-	    dataType:'json'
-	  });
+	//   let request = $.ajax({
+	//     url: "/api/v1/get_sub_district/"+districtId,
+	//     type: "get",
+	//     dataType:'json'
+	//   });
 
-	  request.done(function (response, textStatus, jqXHR){
+	//   request.done(function (response, textStatus, jqXHR){
 
-	    $('#sub_district').empty();
+	//     $('#sub_district').empty();
 
-	    if(Object.keys(response).length > 0) {
-	    	$.each(response, function(key,value) {
-	    	  let option = $("<option></option>");
+	//     if(Object.keys(response).length > 0) {
+	//     	$.each(response, function(key,value) {
+	//     	  let option = $("<option></option>");
 
-	    	  if(key == _this.subDistrictId){
-	    	    option.prop('selected',true);
-	    	    _this.subDistrictId = null;
-	    	  }
+	//     	  if(key == _this.subDistrictId){
+	//     	    option.prop('selected',true);
+	//     	    _this.subDistrictId = null;
+	//     	  }
 	    	  
-	    	  $('#sub_district').append(option.attr("value", key).text(value));
-	    	});	
-	    }else{
-	    	let option = $("<option></option>");
-	    	$('#sub_district').append(option.attr("value", '0').text('-'));
-	    }
+	//     	  $('#sub_district').append(option.attr("value", key).text(value));
+	//     	});	
+	//     }else{
+	//     	let option = $("<option></option>");
+	//     	$('#sub_district').append(option.attr("value", '0').text('-'));
+	//     }
 
 	    
-	  });
+	//   });
 
-	  request.fail(function (jqXHR, textStatus, errorThrown){
-	    console.error(
-	        "The following error occurred: "+
-	        textStatus, errorThrown
-	    );
-	  });
-
-	  // request.always(function () {});
-	}
+	//   request.fail(function (jqXHR, textStatus, errorThrown){
+	//     console.error(
+	//         "The following error occurred: "+
+	//         textStatus, errorThrown
+	//     );
+	//   });
+	  
+	// }
 
 }

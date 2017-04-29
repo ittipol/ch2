@@ -23,24 +23,21 @@ class ShopController extends Controller
 
     $model = request()->get('shop');
 
-    // $pinnedMessages = Service::loadModel('Timeline')->getPinnedMessage('Shop',request()->get('shopId'));
-    
-    // shop pinned message
-    $pinnedMessages = Service::loadModel('Timeline')
+    $pinnedPosts = Service::loadModel('Timeline')
     ->where([
       ['model','like','Shop'],
       ['model_id','=',request()->get('shopId')],
       ['pinned','=',1],
-      ['type','=','text']
+      ['timeline_post_type_id','=',Service::loadModel('TimelinePostType')->getIdByalias('text')]
     ])
-    ->orderBy('created_at','desc');
+    ->orderBy('timeline_date','desc');
 
-    $_pinnedMessages = array();
-    if($pinnedMessages->exists()) {
-      foreach ($pinnedMessages->get() as $pinnedMessage) {
-        $_pinnedMessages[] = array_merge($pinnedMessage->buildModelData(),array(
-          'cancelPinnedUrl' => $url->url('shop/'.$this->param['shopSlug'].'/timeline/pinned/cancel/'.$pinnedMessage->id),
-          'deleteUrl' => $url->url('shop/'.$this->param['shopSlug'].'/timeline/delete/'.$pinnedMessage->id),
+    $_pinnedPosts = array();
+    if($pinnedPosts->exists()) {
+      foreach ($pinnedPosts->get() as $pinnedPost) {
+        $_pinnedPosts[] = array_merge($pinnedPost->buildModelData(),array(
+          'cancelPinnedUrl' => $url->url('shop/'.$this->param['shopSlug'].'/timeline/pinned/cancel/'.$pinnedPost->id),
+          'deleteUrl' => $url->url('shop/'.$this->param['shopSlug'].'/timeline/delete/'.$pinnedPost->id),
         ));
       }
     }
@@ -79,7 +76,7 @@ class ShopController extends Controller
     $this->setData('products',$_products);
     $this->setData('permission',request()->get('shopPermission'));
     $this->setData('productCatalogs',$_productCatalogs);
-    $this->setData('pinnedMessages',$_pinnedMessages);
+    $this->setData('pinnedMessages',$_pinnedPosts);
 
     return $this->view('pages.shop.index');
   }
@@ -741,7 +738,7 @@ class ShopController extends Controller
     $model->title = 'โพสต์ข้อความ';
     $model->message = $message;
     $model->pinned = 1;
-    $model->type = 'text';
+    $model->timeline_post_type_id = Service::loadModel('TimelinePostType')->getIdByalias('text');
 
     if($model->save()) {
       MessageHelper::display('ข้อความถูกโพสต์แล้ว','success');

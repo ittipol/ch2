@@ -11,3 +11,7 @@
 .global-additional-nav-panel .list-item-group > .list-item {
 	border: 0;
 }
+
+.global-additional-nav-panel .list-item-group > .list-item img {
+	width: 20px;
+}

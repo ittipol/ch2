@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="title">
-          ลงประกาศ ซื้อ ขาย ให้เช่าอสังหาริมทรัพย์
+          ลงประกาศอสังหาริมทรัพย์
         </div>
       </div>
     </div>
@@ -424,6 +424,7 @@
         ?>
         <div id="phone_number_input" class="text-group">
           <div class="text-group-panel"></div>
+          <a href="javascript:void(0);" class="text-add">เพิ่ม +</a>
         </div>
       </div>
 
@@ -433,15 +434,7 @@
         ?>
         <div id="email_input" class="text-group">
           <div class="text-group-panel"></div>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <?php 
-          echo Form::label('Contact[line]', 'Line ID');
-        ?>
-        <div id="line_id_input" class="text-group">
-          <div class="text-group-panel"></div>
+          <a href="javascript:void(0);" class="text-add">เพิ่ม +</a>
         </div>
       </div>
 
@@ -467,15 +460,6 @@
           echo Form::label('Address[district_id]', 'อำเภอ');
           echo Form::select('Address[district_id]', array() ,null, array(
             'id' => 'district'
-          ));
-        ?>
-      </div>
-
-      <div class="form-row">
-        <?php 
-          echo Form::label('Address[sub_district_id]', 'ตำบล');
-          echo Form::select('Address[sub_district_id]', array() , null, array(
-            'id' => 'sub_district'
           ));
         ?>
       </div>
@@ -521,7 +505,7 @@
     @endif
 
     const phoneNumberInput = new TextInputList('phone_number_input','Contact[phone_number]','หมายเลขโทรศัพท์');
-    phoneNumberInput.disableCreatingInput();
+    // phoneNumberInput.disableCreatingInput();
     @if(!empty($_oldInput['Contact']['phone_number']))
       phoneNumberInput.load({!!$_oldInput['Contact']['phone_number']!!});
     @else
@@ -529,19 +513,11 @@
     @endif
 
     const emailInput = new TextInputList('email_input','Contact[email]','อีเมล');
-    emailInput.disableCreatingInput();
+    // emailInput.disableCreatingInput();
     @if(!empty($_oldInput['Contact']['email']))
       emailInput.load({!!$_oldInput['Contact']['email']!!});
     @else
       emailInput.load();
-    @endif
-
-    const lindIdInput = new TextInputList('line_id_input','Contact[line]','Line ID');
-    lindIdInput.disableCreatingInput();
-    @if(!empty($_oldInput['Contact']['line']))
-      lindIdInput.load({!!$_oldInput['Contact']['line']!!});
-    @else
-      lindIdInput.load();
     @endif
 
     const realEstate = new RealEstate();

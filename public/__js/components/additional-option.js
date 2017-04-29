@@ -34,7 +34,7 @@ class AdditionalOption {
 
       let _left = left - (div.offsetWidth - this.offsetWidth);
 
-      if((_left-20) > 0) { console.log('x');
+      if((_left-20) > 0) {
         div.style.left = _left+'px';
       }else{ console.log('z');
         div.style.left = left+'px';

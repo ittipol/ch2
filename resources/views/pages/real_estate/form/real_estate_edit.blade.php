@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="title">
-          ลงประกาศ ซื้อ ขาย ให้เช่าอสังหาริมทรัพย์
+          แก้ไขประกาศอสังหาริมทรัพย์
         </div>
       </div>
     </div>
@@ -428,6 +428,7 @@
         ?>
         <div id="phone_number_input" class="text-group">
           <div class="text-group-panel"></div>
+          <a href="javascript:void(0);" class="text-add">เพิ่ม +</a>
         </div>
       </div>
 
@@ -437,15 +438,7 @@
         ?>
         <div id="email_input" class="text-group">
           <div class="text-group-panel"></div>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <?php 
-          echo Form::label('Contact[line]', 'Line ID');
-        ?>
-        <div id="line_id_input" class="text-group">
-          <div class="text-group-panel"></div>
+          <a href="javascript:void(0);" class="text-add">เพิ่ม +</a>
         </div>
       </div>
 
@@ -471,15 +464,6 @@
           echo Form::label('Address[district_id]', 'อำเภอ');
           echo Form::select('Address[district_id]', array() ,null, array(
             'id' => 'district'
-          ));
-        ?>
-      </div>
-
-      <div class="form-row">
-        <?php 
-          echo Form::label('Address[sub_district_id]', 'ตำบล');
-          echo Form::select('Address[sub_district_id]', array() , null, array(
-            'id' => 'sub_district'
           ));
         ?>
       </div>
@@ -514,7 +498,6 @@
 
     const address = new Address();
     address.setDistrictId({{$_formData['Address']['district_id']}});
-    address.setSubDistrictId({{$_formData['Address']['sub_district_id']}});
     address.load();
 
     const map = new Map();
@@ -525,16 +508,12 @@
     tagging.load({!!$_formData['Tagging']!!});
 
     const phoneNumberInput = new TextInputList('phone_number_input','Contact[phone_number]','หมายเลขโทรศัพท์');
-    phoneNumberInput.disableCreatingInput();
+    // phoneNumberInput.disableCreatingInput();
     phoneNumberInput.load({!!$_formData['Contact']['phone_number']!!});
 
     const emailInput = new TextInputList('email_input','Contact[email]','อีเมล');
-    emailInput.disableCreatingInput();
+    // emailInput.disableCreatingInput();
     emailInput.load({!!$_formData['Contact']['email']!!});
-
-    const lindIdInput = new TextInputList('line_id_input','Contact[line]','Line ID');
-    lindIdInput.disableCreatingInput();
-    lindIdInput.load({!!$_formData['Contact']['line']!!});
     
     const realEstate = new RealEstate();
     realEstate.load();

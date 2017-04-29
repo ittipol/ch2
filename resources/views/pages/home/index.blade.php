@@ -275,7 +275,7 @@
 
   <div class="content-panel row">
 
-    @foreach($realEstates as $realEstate)
+    @foreach($realEstates as $data)
 
     <div class="col-sm-4 col-xs-12">
       <div class="card">

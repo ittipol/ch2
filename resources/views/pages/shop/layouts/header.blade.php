@@ -25,7 +25,7 @@
             <label class="item-row" id="edit_shop_profile_image_button">
               อัพโหลดรูปภาพ
             </label>
-            <a class="item-row">
+            <a id="remove_shop_profile_image_button" class="item-row">
               ลบรุปภาพโปรไฟล์
             </a>
           </div>
@@ -72,7 +72,7 @@
         <label class="item-row" id="edit_shop_cover_button">
           อัพโหลดรูปภาพ
         </label>
-        <a class="item-row">
+        <a id="remove_shop_cover_button" class="item-row">
           ลบรุปภาพหน้าปก
         </a>
       </div>
@@ -110,11 +110,11 @@
   $(document).ready(function(){
     const cover = new ProfileImage('{{ csrf_token() }}','Shop',{{$_shop_id}},'cover');
     cover.load();
-    cover.setElem('edit_shop_cover_button','shop_cover','accept_shop_cover_button','cancel_shop_cover_button');
+    cover.setElem('edit_shop_cover_button','shop_cover','accept_shop_cover_button','cancel_shop_cover_button','remove_shop_cover_button');
   
     const profileImage = new ProfileImage('{{ csrf_token() }}','Shop',{{$_shop_id}},'profile-image');
     profileImage.load();
-    profileImage.setElem('edit_shop_profile_image_button','shop_logo','accept_shop_profile_image_button','cancel_shop_profile_image_button');
+    profileImage.setElem('edit_shop_profile_image_button','shop_logo','accept_shop_profile_image_button','cancel_shop_profile_image_button','remove_shop_profile_image_button');
   });
   @endif
 

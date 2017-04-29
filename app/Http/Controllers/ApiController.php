@@ -283,7 +283,9 @@ class ApiController extends Controller
       return $this->getGeneralError();
     }
 
-    $imageModel = Service::loadModel('Image')->find($model->{$field});
+    $imageModel = Service::loadModel('Image')
+    ->select('id','model','model_id','path','filename','description','image_type_id')
+    ->find($model->{$field});
 
     if(empty($imageModel)) {
       $imageModel = Service::loadModel('Image');
@@ -300,6 +302,84 @@ class ApiController extends Controller
         'success' => true
       );
     };
+
+    return response()->json($result);
+
+  }
+
+  public function deleteProfileImage() {
+
+    if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+      $this->error = array(
+        'message' => 'ขออภัย ไม่อนุญาตให้เข้าถึงหน้านี้ได้'
+      );
+      return $this->error();
+    }
+
+    $result = array(
+      'success' => false,
+    );
+
+    $acceptedModels = array(
+      'Shop',
+      'Person'
+    );
+
+    $acceptedType = array(
+      'cover',
+      'profile-image'
+    );
+
+    if(!in_array(Input::get('model'), $acceptedModels) || !in_array(Input::get('imageType'), $acceptedType)) {
+      return $this->getGeneralError();
+    }
+
+    $model = Service::loadModel(Input::get('model'))->find(Input::get('model_id'));
+
+    $permission = true;
+    switch (Input::get('model')) {
+      case 'Shop':
+        $permission = $model->checkPersonHasShopPermission();
+        break;
+    }
+
+    if(!$permission) {
+      return $this->getGeneralError();
+    }
+
+    switch (Input::get('imageType')) {
+      case 'profile-image':
+        $field = 'profile_image_id';
+        break;
+      
+      case 'cover':
+        $field = 'cover_image_id';
+        break;
+    }
+
+    if(!Schema::hasColumn($model->getTable(), $field)) {
+      return $this->getGeneralError();
+    }
+
+    $imageModel = Service::loadModel('Image')
+    ->select('id','model','model_id','path','filename','description','image_type_id')
+    ->find($model->{$field});
+
+    if(empty($imageModel)) {
+      return array(
+      'success' => false,
+        'message' => array(
+          'type' => 'error',
+          'title' => 'กรุณาอัพโหลดรูปภาพ'
+        )
+      );
+    }
+
+    if($imageModel->delete()) {
+      $result = array(
+        'success' => true
+      );
+    }
 
     return response()->json($result);
 
