@@ -194,11 +194,11 @@ class Job extends Model
       'id' => $this->id,
       'name' => $this->name,
       '_wage' => $this->wage,
-      'description' => !empty($this->description) ? $this->description : '-',
-      'qualification' => !empty($this->qualification) ? $this->qualification : '-',
-      'benefit' => !empty($this->benefit) ? $this->benefit : '-',
+      'description' => !empty($this->description) ? nl2br($this->description) : '-',
+      'qualification' => !empty($this->qualification) ? nl2br($this->qualification) : '-',
+      'benefit' => !empty($this->benefit) ? nl2br($this->benefit) : '-',
       '_recruitment_custom' => $recruitment['c'],
-      'recruitment_custom_detail' => $this->recruitment_custom_detail,
+      'recruitment_custom_detail' => nl2br($this->recruitment_custom_detail),
       '_employmentTypeName' => $this->employmentType->name,
       '_wageType' => $this->wageType->name
     );

@@ -99,7 +99,8 @@ class Branch extends Model
 
   public function buildModelData() {
     return array(
-      'name' => $this->name
+      'name' => $this->name,
+      'description' => !empty($this->description) ? nl2br($this->description) : '-',
     );
   }
 

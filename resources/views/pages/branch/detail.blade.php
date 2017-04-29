@@ -117,8 +117,6 @@
     </div>
   </div>
 
-  <div class="line space-top-bottom-20"></div>
-
   <div class="row">
 
     <div class="col-xs-4">
@@ -139,7 +137,7 @@
         <p>ติดต่อสาขา</p>
 
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-6">
             <div class="item-info-row">
               @if(!empty($_modelData['Contact']['phone_number']))
               <h4 class="title-with-icon phone">{{$_modelData['Contact']['phone_number']}}</h4>
@@ -148,21 +146,12 @@
               @endif
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-6">
             <div class="item-info-row">
               @if(!empty($_modelData['Contact']['email']))
               <h4 class="title-with-icon email">{{$_modelData['Contact']['email']}}</h4>
               @else
               <h4 class="title-with-icon email">-</h4>
-              @endif
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="item-info-row">
-              @if(!empty($_modelData['Contact']['line']))
-              <h4 class="title-with-icon line-app">{{$_modelData['Contact']['line']}}</h4>
-              @else
-              <h4 class="title-with-icon line-app">-</h4>
               @endif
             </div>
           </div>
@@ -172,6 +161,14 @@
 
     </div>
 
+  </div>
+
+  <div class="detail-info-section">
+    <h4>รายละเอียดสาขา</h4>
+    <div class="line"></div> 
+    <div class="detail-info">
+      {!!$_modelData['description']!!}
+    </div>
   </div>
 
   <h4>ตำแหน่งบนแผนที่</h4>

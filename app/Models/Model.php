@@ -371,7 +371,7 @@ class Model extends BaseModel
     $model = Service::loadModel($modelName);
     $field = $this->modelAlias.'_id';
 
-    if(Schema::hasColumn($model->getTable(), $field)) {
+    if(($field != 'person_id') && Schema::hasColumn($model->getTable(), $field)) {
       $conditions = array(
         [$field,'=',$this->id],
       );

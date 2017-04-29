@@ -65,6 +65,8 @@ class RealEstateController extends Controller
 
     $this->setData('boards',$boards);
 
+    $this->setPageTitle('ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์');
+
     return $this->view('pages.real_estate.board');
 
   }
@@ -116,15 +118,17 @@ class RealEstateController extends Controller
       'sort' => $filterHelper->getSortingOptions()
     );
 
-    $displayingFilters = array(
-      'filters' => $filterHelper->getDisplayingFilterOptions(),
-      'sort' => $filterHelper->getDisplayingSorting()
-    );
+    // $displayingFilters = array(
+    //   'filters' => $filterHelper->getDisplayingFilterOptions(),
+    //   'sort' => $filterHelper->getDisplayingSorting()
+    // );
 
     $this->data = $model->paginator->build();
     $this->setData('title',$title);
     $this->setData('searchOptions',$searchOptions);
-    $this->setData('displayingFilters',$displayingFilters);
+    // $this->setData('displayingFilters',$displayingFilters);
+
+    $this->setPageTitle($title.' - ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์');
 
     return $this->view('pages.real_estate.list');
   }
@@ -151,7 +155,7 @@ class RealEstateController extends Controller
       $this->setData('deleteUrl',$url->url('account/real-estate/delete/'.$model->id));
     }
 
-    $this->setPageTitle($this->data['_modelData']['name']);
+    $this->setPageTitle($this->data['_modelData']['name'].' - ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์');
 
     return $this->view('pages.real_estate.detail');
 
@@ -201,8 +205,10 @@ class RealEstateController extends Controller
       'index' => 'facility'
     ));
 
-    $this->mergeData($model->formHelper->build());
-    $this->mergeData(array('defaultAnnouncementType' => 2));
+    $this->data = $model->formHelper->build();
+    $this->setData('defaultAnnouncementType',2);
+
+    $this->setPageTitle('ลงประกาศอสังหาริมทรัพย์');
 
     return $this->view('pages.real_estate.form.real_estate_add');
   }

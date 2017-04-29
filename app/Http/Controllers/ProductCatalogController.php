@@ -60,8 +60,8 @@ class ProductCatalogController extends Controller
 
     $model->paginator->criteria($criteria);
     $model->paginator->setPage($page);
-    $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/product');
-    $model->paginator->setUrl('shop/'.request()->shopSlug.'/product/{id}','detailUrl');
+    $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/product_catalog');
+    $model->paginator->setUrl('shop/'.request()->shopSlug.'/product_catalog/{id}','detailUrl');
     $model->paginator->setQuery('sort',$sort);
     $model->paginator->setQuery('fq',$filters);
 
@@ -78,6 +78,8 @@ class ProductCatalogController extends Controller
     $this->data = $model->paginator->build();
     $this->setData('searchOptions',$searchOptions);
     // $this->setData('displayingFilters',$displayingFilters);
+
+    $this->setPageTitle('แคตตาล็อกสินค้า - '.request()->get('shop')->name);
     
     return $this->view('pages.product_catalog.list');
 
@@ -146,11 +148,15 @@ class ProductCatalogController extends Controller
     //   'sort' => $filterHelper->getDisplayingSorting()
     // );
 
+    $productCatalogData = $productCatalog->buildModelData();
+
     $this->data = $model->paginator->build();
-    $this->setData('productCatalog',$productCatalog->buildModelData());
+    $this->setData('productCatalog',$productCatalogData);
     $this->setData('searchOptions',$searchOptions);
     // $this->setData('displayingFilters',$displayingFilters);
     $this->setData('imageUrl',$productCatalog->getImage());
+
+    $this->setPageTitle($productCatalogData['name'].' - แคตตาล็อกสินค้า - '.request()->get('shop')->name);
     
     return $this->view('pages.product_catalog.product_list');
 

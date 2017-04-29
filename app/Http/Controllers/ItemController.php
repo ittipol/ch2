@@ -68,6 +68,8 @@ class ItemController extends Controller
 
     $this->setData('boards',$boards);
 
+    $this->setPageTitle('ประกาศซื้อ-เช่า-ขายสินค้า');
+
     return $this->view('pages.item.board');
 
   }
@@ -132,6 +134,8 @@ class ItemController extends Controller
     $this->setData('searchOptions',$searchOptions);
     // $this->setData('displayingFilters',$displayingFilters);
 
+    $this->setPageTitle($title.' - ประกาศซื้อ-เช่า-ขายสินค้า');
+
     return $this->view('pages.item.list');
   }
 
@@ -157,7 +161,7 @@ class ItemController extends Controller
       $this->setData('deleteUrl',$url->url('account/item/delete/'.$model->id));
     }
 
-    $this->setPageTitle($this->data['_modelData']['name']);
+    $this->setPageTitle($this->data['_modelData']['name'].' - ประกาศซื้อ-เช่า-ขายสินค้า');
 
     return $this->view('pages.item.detail');
 
@@ -191,6 +195,8 @@ class ItemController extends Controller
 
     $this->data = $model->formHelper->build();
     $this->setData('defaultAnnouncementType',2);
+
+    $this->setPageTitle('ลงประกาศสินค้า');
 
     return $this->view('pages.item.form.item_add');
   }

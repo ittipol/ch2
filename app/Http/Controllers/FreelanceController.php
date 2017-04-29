@@ -61,6 +61,8 @@ class FreelanceController extends Controller
 
     $this->setData('boards',$boards);
 
+    $this->setPageTitle('งานฟรีแลนซ์');
+
     return $this->view('pages.freelance.board');
 
   }
@@ -111,15 +113,17 @@ class FreelanceController extends Controller
       'sort' => $filterHelper->getSortingOptions()
     );
 
-    $displayingFilters = array(
-      'filters' => $filterHelper->getDisplayingFilterOptions(),
-      'sort' => $filterHelper->getDisplayingSorting()
-    );
+    // $displayingFilters = array(
+    //   'filters' => $filterHelper->getDisplayingFilterOptions(),
+    //   'sort' => $filterHelper->getDisplayingSorting()
+    // );
 
     $this->data = $model->paginator->build();
     $this->setData('title',$title);
     $this->setData('searchOptions',$searchOptions);
-    $this->setData('displayingFilters',$displayingFilters);
+    // $this->setData('displayingFilters',$displayingFilters);
+
+    $this->setPageTitle($title.' - บริษัทและร้านค้า');
     
     return $this->view('pages.freelance.list');
 
@@ -153,6 +157,8 @@ class FreelanceController extends Controller
     $this->setData('profile',$person->modelData->build(true));
     $this->setData('profileImageUrl',$person->getProfileImageUrl());
     $this->setData('experienceDetailUrl',$url->setAndParseUrl('experience/profile/{id}',array('id' => $person->personExperience->id)));
+
+    $this->setPageTitle($this->data['_modelData']['name'].' - งานฟรีแลนซ์');
 
     return $this->view('pages.freelance.detail');
 

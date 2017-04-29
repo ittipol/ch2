@@ -64,6 +64,8 @@ class AdvertisingController extends Controller
 
     $this->setData('boards',$boards);
 
+    $this->setPageTitle('โฆษณา');
+
     return $this->view('pages.advertising.board');
 
   }
@@ -123,6 +125,8 @@ class AdvertisingController extends Controller
     $this->setData('title',$title);
     $this->setData('searchOptions',$searchOptions);
     // $this->setData('displayingFilters',$displayingFilters);
+
+    $this->setPageTitle('โฆษณา'.$title);
 
     return $this->view('pages.advertising.list');
   }
@@ -197,6 +201,8 @@ class AdvertisingController extends Controller
     $this->data = $model->paginator->build();
     $this->setData('searchOptions',$searchOptions);
     // $this->setData('displayingFilters',$displayingFilters);
+
+    $this->setPageTitle('โฆษณา - '.request()->get('shop')->name);
 
     return $this->view('pages.advertising.shop_advertising_list');
 
@@ -277,6 +283,8 @@ class AdvertisingController extends Controller
     $this->setData('branchLocations',json_encode($branchLocations));
     $this->setData('hasBranchLocation',$hasBranchLocation);
 
+    $this->setPageTitle($this->data['_modelData']['name'].'- โฆษณา');
+
     return $this->view('pages.advertising.detail');
 
   }
@@ -328,6 +336,8 @@ class AdvertisingController extends Controller
     $this->data = $model->modelData->build();
     $this->setData('branchLocations',json_encode($branchLocations));
     $this->setData('hasBranchLocation',$hasBranchLocation);
+
+    $this->setPageTitle($this->data['_modelData']['name'].' - โฆษณา - '.request()->get('shop')->name);
 
     return $this->view('pages.advertising.shop_advertising_detail');
 

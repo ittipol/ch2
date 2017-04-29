@@ -89,11 +89,10 @@ input[type="password"] {
   top: 50%;
   left: 50%;
   width: 350px;
-  margin-top: -240.5px;
+  margin-top: -200px;
   margin-left: -175px;
   padding: 0;
   z-index: 9;
-  /*color: #fff;*/
 }
 
 .login-form-box .text-center,

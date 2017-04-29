@@ -23,7 +23,7 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="title">
-          สาขา
+          แก้ไขสาขา
         </div>
       </div>
     </div>
@@ -87,6 +87,7 @@
         ?>
         <div id="phone_number_input" class="text-group">
           <div class="text-group-panel"></div>
+          <a href="javascript:void(0);" class="text-add">เพิ่ม +</a>
         </div>
       </div>
 
@@ -96,6 +97,7 @@
         ?>
         <div id="email_input" class="text-group">
           <div class="text-group-panel"></div>
+          <a href="javascript:void(0);" class="text-add">เพิ่ม +</a>
         </div>
       </div>
 
@@ -166,7 +168,6 @@
 
     const address = new Address();
     address.setDistrictId({{$_formData['Address']['district_id']}});
-    address.setSubDistrictId({{$_formData['Address']['sub_district_id']}});
     address.load();
 
     const map = new Map();
@@ -174,11 +175,11 @@
     map.setLocation({!!$_formData['Address']['_geographic']!!});
 
     const phoneNumberInput = new TextInputList('phone_number_input','Contact[phone_number]','หมายเลขโทรศัพท์');
-    phoneNumberInput.disableCreatingInput();
+    // phoneNumberInput.disableCreatingInput();
     phoneNumberInput.load({!!$_formData['Contact']['phone_number']!!});
 
     const emailInput = new TextInputList('email_input','Contact[email]','อีเมล');
-    emailInput.disableCreatingInput();
+    // emailInput.disableCreatingInput();
     emailInput.load({!!$_formData['Contact']['email']!!});
     
     const realEstate = new RealEstate();

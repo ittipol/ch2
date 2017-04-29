@@ -81,15 +81,16 @@ class PersonExperienceController extends Controller
       'sort' => $filterHelper->getSortingOptions()
     );
 
-    $displayingFilters = array(
-      'filters' => $filterHelper->getDisplayingFilterOptions(),
-      'sort' => $filterHelper->getDisplayingSorting()
-    );
-
+    // $displayingFilters = array(
+    //   'filters' => $filterHelper->getDisplayingFilterOptions(),
+    //   'sort' => $filterHelper->getDisplayingSorting()
+    // );
 
     $this->data = $model->paginator->buildPermissionData();
     $this->setData('searchOptions',$searchOptions);
-    $this->setData('displayingFilters',$displayingFilters);
+    // $this->setData('displayingFilters',$displayingFilters);
+
+    $this->setPageTitle('ประวัติการทำงานบุคคล');
 
     return $this->view('pages.person_experience.list');
   }
@@ -107,6 +108,8 @@ class PersonExperienceController extends Controller
     $this->data = $personExperience->getPersonExperience();
     $this->setData('profile',$person->modelData->build(true));
     $this->setData('profileImageUrl',$person->getProfileImageUrl());
+
+    $this->setPageTitle('ประวัติการทำงานบุคคล');
 
     return $this->view('pages.person_experience.detail');
 

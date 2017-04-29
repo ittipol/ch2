@@ -239,21 +239,10 @@
       @if($alreadyApply)
 
         @if(($personApplyJob['job_applying_status_id'] == 4) || ($personApplyJob['job_applying_status_id'] == 5))
-          <div class="secondary-message-box space-bottom-30">
-            <div class="secondary-message-box-inner">
-              <div class="text-center">
-                <h3>คุณเคยสมัครงานนี้แล้ว</h3>
-                <p>ดูเหมือนว่าผลลัพธ์การสมัครอาจจยังไม่เป็นตามที่คุณต้องกการ คุณต้องกการสมัครงานนี้อีกครั้งหรือไม่?</p>
-              </div>
-            </div>
-            <div class="message-box-button-group clearfix">
-              <div class="flat-button">
-                <a href="{{$jobApplyUrl}}" class="button">
-                  สมัครงานนี้
-                </a>
-              </div>
-            </div>
-          </div>
+          <a class="button wide-button" href="{{$jobApplyUrl}}">
+            <img src="/images/icons/edit-white.png">
+            สมัครงานนี้
+          </a>
         @elseif($personApplyJob['job_applying_status_id'] == 3)
           <h4 class="sign success wide space-bottom-20">ยินดีด้วยคุณผ่านการสมัครงานนี้แล้ว</h4>
           <a class="button pull-right" href="{{$jobApplyUrl}}">

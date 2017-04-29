@@ -102,6 +102,8 @@ class ProductController extends Controller
 
     $this->setData('shelfs',$shelfs);
 
+    $this->setPageTitle('สินค้า');
+
     return $this->view('pages.product.shelf');
 
   }
@@ -151,16 +153,22 @@ class ProductController extends Controller
     }
     
     if(!empty($categoryId)) {
-      // $parentId = $categoryModel->getParentCategoryId($categoryId);
       $this->setData('parentCategoryUrl',$url->url('product/category/'.$categoryModel->getParentCategoryId($categoryId)));
-      // $this->setData('parentCategoryName',$categoryModel->getCategoryName($parentId));
     }
 
+    $categoryName = $categoryModel->getCategoryName($categoryId);
+
     $this->setData('categoryId',$categoryId);
-    $this->setData('categoryName',$categoryModel->getCategoryName($categoryId));
+    $this->setData('categoryName',$categoryName);
     $this->setData('categories',$_categories);
     $this->setData('productShelfUrl',$url->url('product/shelf/'.$categoryId));
 
+    if(empty($categoryName)) {
+      $this->setPageTitle('หมวดสินค้า');
+    }else{
+      $this->setPageTitle($categoryName.' - หมวดสินค้า');
+    }
+    
     return $this->view('pages.product.category');
 
   }
@@ -241,10 +249,10 @@ class ProductController extends Controller
       'sort' => $filterHelper->getSortingOptions()
     );
 
-    $displayingFilters = array(
-      'filters' => $filterHelper->getDisplayingFilterOptions(),
-      'sort' => $filterHelper->getDisplayingSorting()
-    );
+    // $displayingFilters = array(
+    //   'filters' => $filterHelper->getDisplayingFilterOptions(),
+    //   'sort' => $filterHelper->getDisplayingSorting()
+    // );
 
     $parent = $categoryModel->getParentCategory($categoryId);
     
@@ -252,9 +260,11 @@ class ProductController extends Controller
     $this->setData('title',$title);
     $this->setData('categories',$categoryModel->getCategoriesWithSubCategories($categoryId));
     $this->setData('searchOptions',$searchOptions);
-    $this->setData('displayingFilters',$displayingFilters);
+    // $this->setData('displayingFilters',$displayingFilters);
     $this->setData('categoryPaths',$categoryModel->getCategoryPaths($categoryId));
     $this->setData('parentCategoryName',$parent['name']);
+
+    $this->setPageTitle($title.' - สินค้า');
 
     return $this->view('pages.product.list');
 
@@ -325,6 +335,8 @@ class ProductController extends Controller
     $this->data = $model->paginator->build();
     $this->setData('searchOptions',$searchOptions);
     // $this->setData('displayingFilters',$displayingFilters);
+
+    $this->setPageTitle('สินค้า - '.request()->get('shop')->name);
 
     return $this->view('pages.product.shop_product_list');
 
@@ -422,6 +434,8 @@ class ProductController extends Controller
     $this->setData('branchLocations',json_encode($branchLocations));
     $this->setData('hasBranchLocation',$hasBranchLocation);
 
+    $this->setPageTitle($this->data['_modelData']['name'].'- สินค้า');
+
     return $this->view('pages.product.detail');
 
   }
@@ -491,6 +505,8 @@ class ProductController extends Controller
     $this->setData('productCatalogs',$_productCatalogs);
     $this->setData('branchLocations',json_encode($branchLocations));
     $this->setData('hasBranchLocation',$hasBranchLocation);
+
+    $this->setPageTitle($this->data['_modelData']['name'].' - สินค้า - '.request()->get('shop')->name);
 
     return $this->view('pages.product.shop_product_detail');
 

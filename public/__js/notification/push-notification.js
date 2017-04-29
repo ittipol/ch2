@@ -82,6 +82,11 @@ class PushNotification {
 
 	  	if(response.updated) {
 	  		$('#notification_count').text(response.count);
+
+	  		if($('#notification_panel').find('.notification-empty').length == 1) {
+	  			$('#notification_panel').find('.notification-empty').remove();
+	  		}
+
 	  		$('#notification_panel').prepend(response.html);
 	  		_this.popup(response.title);
 

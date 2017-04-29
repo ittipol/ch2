@@ -78,6 +78,8 @@ class ShopController extends Controller
     $this->setData('productCatalogs',$_productCatalogs);
     $this->setData('pinnedMessages',$_pinnedPosts);
 
+    $this->setPageTitle(request()->get('shop')->name);
+
     return $this->view('pages.shop.index');
   }
 
@@ -89,6 +91,8 @@ class ShopController extends Controller
     $this->data = $model->modelData->build();
     $this->setData('openHours',$model->getOpenHours());
     $this->setData('about',$model->getShopAbout());
+
+    $this->setPageTitle('เกี่ยวกับ - '.request()->get('shop')->name);
 
     return $this->view('pages.shop.about');
 
@@ -140,14 +144,16 @@ class ShopController extends Controller
       'sort' => $filterHelper->getSortingOptions()
     );
 
-    $displayingFilters = array(
-      'filters' => $filterHelper->getDisplayingFilterOptions(),
-      'sort' => $filterHelper->getDisplayingSorting()
-    );
+    // $displayingFilters = array(
+    //   'filters' => $filterHelper->getDisplayingFilterOptions(),
+    //   'sort' => $filterHelper->getDisplayingSorting()
+    // );
 
     $this->data = $model->paginator->build();
     $this->setData('searchOptions',$searchOptions);
-    $this->setData('displayingFilters',$displayingFilters);
+    // $this->setData('displayingFilters',$displayingFilters);
+
+    $this->setPageTitle('บริษัทและร้านค้า');
 
     return $this->view('pages.shop.list');
 
@@ -214,6 +220,8 @@ class ShopController extends Controller
     // ])
     // ->count());
 
+    $this->setPageTitle(request()->get('shop')->name);
+
     return $this->view('pages.shop.manage');
   }
 
@@ -248,6 +256,8 @@ class ShopController extends Controller
       ['order_status_id','=',1]
     ])->count());
 
+    $this->setPageTitle(request()->get('shop')->name);
+
     return $this->view('pages.shop.product');
   }
 
@@ -279,6 +289,8 @@ class ShopController extends Controller
     $this->data = $model->paginator->build();
 
     $this->setData('paymentMethodAddUrl',request()->get('shopUrl').'payment_method/add');
+
+    $this->setPageTitle(request()->get('shop')->name);
 
     return $this->view('pages.shop.payment_method');
   }
@@ -319,6 +331,8 @@ class ShopController extends Controller
 
     $this->setData('shippingMethodAddUrl',request()->get('shopUrl').'shipping_method/add');
     $this->setData('addPickingupItemUrl',request()->get('shopUrl').'pickingup_item');
+
+    $this->setPageTitle(request()->get('shop')->name);
 
     return $this->view('pages.shop.shipping_method');
 
@@ -370,6 +384,8 @@ class ShopController extends Controller
     $this->setData('jobPostUrl',request()->get('shopUrl').'job/add');
     $this->setData('jobApplyListUrl',request()->get('shopUrl').'job_applying');
 
+    $this->setPageTitle(request()->get('shop')->name);
+
     return $this->view('pages.shop.job');
   }
 
@@ -409,6 +425,8 @@ class ShopController extends Controller
     }
     
     $this->setData('branchAddUrl',request()->get('shopUrl').'branch/add');
+
+    $this->setPageTitle(request()->get('shop')->name);
 
     return $this->view('pages.shop.branch');
   }
@@ -452,6 +470,8 @@ class ShopController extends Controller
 
     $this->setData('advertisingPostUrl',request()->get('shopUrl').'advertising/add');
 
+    $this->setPageTitle(request()->get('shop')->name);
+
     return $this->view('pages.shop.advertising');
 
   }
@@ -461,6 +481,8 @@ class ShopController extends Controller
     $model = Service::loadModel('Shop');
 
     $this->mergeData($model->formHelper->build());
+
+    $this->setPageTitle('สร้างร้านค้า');
 
     return $this->view('pages.shop.form.shop_create');
   }

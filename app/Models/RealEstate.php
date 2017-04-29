@@ -335,7 +335,7 @@ class RealEstate extends Model
       'announcement_type_id' => $this->announcement_type_id,
       'real_estate_type_id' => $this->real_estate_type_id,
       'name' => $this->name,
-      'description' => !empty($this->description) ? $this->description : '-',
+      'description' => !empty($this->description) ? nl2br($this->description) : '-',
       'need_broker' => $this->need_broker,
       '_need_broker' => $this->need_broker ? 'ต้องการตัวแทนขาย' : 'ไม่ต้องการตัวแทนขาย',
       '_furniture' => $furniture,

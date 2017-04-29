@@ -43,7 +43,7 @@ class Controller extends BaseController
   }
 
   protected function setPageTitle($pageTitle) {
-    $this->pageTitle = $pageTitle.' - navisquare';
+    $this->pageTitle = $pageTitle;
   }
 
   protected function setData($index,$value) {

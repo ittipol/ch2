@@ -93,7 +93,7 @@
 
   @if(!empty($privateWebsites))
   <div class="person-experience-info">
-    <h4>เว็บไซต์ส่วนตัวของผู้สมัคร</h4>
+    <h4>เว็บไซต์ส่วนตัว</h4>
     <div class="line"></div>
     <div class="row">
     @foreach($privateWebsites as $privateWebsite)

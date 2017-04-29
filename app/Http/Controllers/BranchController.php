@@ -78,14 +78,16 @@ class BranchController extends Controller
       'sort' => $filterHelper->getSortingOptions()
     );
 
-    $displayingFilters = array(
-      'filters' => $filterHelper->getDisplayingFilterOptions(),
-      'sort' => $filterHelper->getDisplayingSorting()
-    );
+    // $displayingFilters = array(
+    //   'filters' => $filterHelper->getDisplayingFilterOptions(),
+    //   'sort' => $filterHelper->getDisplayingSorting()
+    // );
 
     $this->data = $model->paginator->build();
     $this->setData('searchOptions',$searchOptions);
-    $this->setData('displayingFilters',$displayingFilters);
+    // $this->setData('displayingFilters',$displayingFilters);
+
+    $this->setPageTitle('สาขา - '.request()->get('shop')->name);
 
     return $this->view('pages.branch.list');
 
@@ -138,6 +140,8 @@ class BranchController extends Controller
     $this->setData('shopImageUrl',$shop->getProfileImageUrl());
     $this->setData('shopCoverUrl',$shop->getCoverUrl());
     $this->setData('shopUrl',request()->get('shopUrl'));
+
+    $this->setPageTitle($this->data['_modelData']['name'].' - สาขา - '.request()->get('shop')->name);
 
     return $this->view('pages.branch.detail');
 

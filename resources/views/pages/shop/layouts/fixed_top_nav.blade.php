@@ -4,7 +4,7 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{request()->get('shopUrl')}}" class="btn btn-secondary">หน้าแรกร้านค้า</a>
+          <a href="{{request()->get('shopUrl')}}" class="btn btn-secondary">หน้าหลักร้านค้า</a>
           <button class="btn btn-secondary additional-option">
             ...
             <div class="additional-option-content">

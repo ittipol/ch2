@@ -182,11 +182,6 @@
     @if(!empty($_formData['Address']['district_id']))
       address.setDistrictId({{$_formData['Address']['district_id']}});
     @endif
-
-    @if(!empty($_formData['Address']['sub_district_id']))
-      address.setSubDistrictId({{$_formData['Address']['sub_district_id']}});
-    @endif
-
     address.load();
 
     const images = new Images('_profile_image','profile-image',1);

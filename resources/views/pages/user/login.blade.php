@@ -6,7 +6,7 @@
   <div class="login-form-box">
 
     <div class="login-form-inner">
-      <h3><a class="logo" href="{{URL::to('/')}}">CHONBURI SQUARE</a></h3>
+      <h3><a class="logo" href="{{URL::to('/')}}">Square Roof</a></h3>
 
       @if(!empty($errors->all()))
       <div class="form-error-messages space-bottom-20">
@@ -50,13 +50,6 @@
             ));
           ?>
         </div>
-
-        <div class="line space-top-bottom-10"></div>
-
-        <a href="#" class="fb-button">
-          <img src="/images/common/fb-logo.png">
-          เข้าสู่ระบบด้วย Facebook
-        </a>
 
         <h4 class="text-center">ไม่ใช่สมาชิก <a href="{{URL::to('register')}}">สมัครสมาชิก</a></h4>
 

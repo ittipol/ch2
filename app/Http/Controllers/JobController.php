@@ -75,6 +75,8 @@ class JobController extends Controller
 
     $this->setData('boards',$boards);
 
+    $this->setPageTitle('ประกาศงาน');
+
     return $this->view('pages.job.board');
 
   }
@@ -134,6 +136,8 @@ class JobController extends Controller
     $this->setData('title',$title);
     $this->setData('searchOptions',$searchOptions);
     // $this->setData('displayingFilters',$displayingFilters);
+
+    $this->setPageTitle($title.' - ประกาศงาน');
     
     return $this->view('pages.job.list');
   }
@@ -195,14 +199,16 @@ class JobController extends Controller
       'sort' => $filterHelper->getSortingOptions()
     );
 
-    $displayingFilters = array(
-      'filters' => $filterHelper->getDisplayingFilterOptions(),
-      'sort' => $filterHelper->getDisplayingSorting()
-    );
+    // $displayingFilters = array(
+    //   'filters' => $filterHelper->getDisplayingFilterOptions(),
+    //   'sort' => $filterHelper->getDisplayingSorting()
+    // );
 
     $this->data = $model->paginator->build();
     $this->setData('searchOptions',$searchOptions);
-    $this->setData('displayingFilters',$displayingFilters);
+    // $this->setData('displayingFilters',$displayingFilters);
+
+    $this->setPageTitle('ประกาศงาน - '.request()->get('shop')->name);
 
     return $this->view('pages.job.shop_job_list');
 
@@ -302,6 +308,8 @@ class JobController extends Controller
     }
 
     $this->setData('alreadyApply',$personApplyJob->exists());
+
+    $this->setPageTitle($this->data['_modelData']['name'].'- ประกาศงาน');
     
     return $this->view('pages.job.detail');
 
@@ -390,6 +398,8 @@ class JobController extends Controller
     }
 
     $this->setData('alreadyApply',$personApplyJob->exists());
+
+    $this->setPageTitle($this->data['_modelData']['name'].' - ประกาศงาน - '.request()->get('shop')->name);
     
     return $this->view('pages.job.shop_job_detail');
 

@@ -28,10 +28,26 @@
 </div>
 
 
+<!-- <div class="top-header-wrapper top-header-border">
+  <div class="container">
+    <div class="top-header">
+      <h5>หมวดสินค้า</h5>
+      <h2>{{$categoryName}}</h2>
+    </div>
+  </div>
+</div> -->
+
 <div class="top-header-wrapper top-header-border">
   <div class="container">
     <div class="top-header">
-      <h2>หมวดสินค้า</h2>
+      <div class="detail-title">
+        @if(!empty($categoryName))
+        <h4 class="sub-title">หมวดสินค้า</h4>
+        <h2 class="title">{{$categoryName}}</h2>
+        @else
+        <h2 class="title">หมวดสินค้า</h2>
+        @endif
+      </div>
     </div>
   </div>
 </div>
@@ -39,10 +55,8 @@
 <div class="container">
 
   @if(!empty($categoryName))
-    <h3>{{$categoryName}}</h3>
-    <div class="line"></div>
     <div class="text-right">
-      <a href="{{$productShelfUrl}}" class="button space-top-bottom-20">แสดงสินค้าทั้งหมด</a>
+      <a href="{{$productShelfUrl}}" class="button">แสดงสินค้าทั้งหมด</a>
     </div>
   @endif
 

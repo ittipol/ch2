@@ -83,6 +83,7 @@
         ?>
         <div id="phone_number_input" class="text-group">
           <div class="text-group-panel"></div>
+          <a href="javascript:void(0);" class="text-add">เพิ่ม +</a>
         </div>
       </div>
 
@@ -92,6 +93,7 @@
         ?>
         <div id="email_input" class="text-group">
           <div class="text-group-panel"></div>
+          <a href="javascript:void(0);" class="text-add">เพิ่ม +</a>
         </div>
       </div>
 
@@ -167,7 +169,7 @@
     map.initialize();
 
     const phoneNumberInput = new TextInputList('phone_number_input','Contact[phone_number]','หมายเลขโทรศัพท์');
-    phoneNumberInput.disableCreatingInput();
+    // phoneNumberInput.disableCreatingInput();
     @if(!empty($_oldInput['Contact']['phone_number']))
       phoneNumberInput.load({!!$_oldInput['Contact']['phone_number']!!});
     @else
@@ -175,7 +177,7 @@
     @endif
 
     const emailInput = new TextInputList('email_input','Contact[email]','อีเมล');
-    emailInput.disableCreatingInput();
+    // emailInput.disableCreatingInput();
     @if(!empty($_oldInput['Contact']['email']))
       emailInput.load({!!$_oldInput['Contact']['email']!!});
     @else
