@@ -67,21 +67,6 @@
             </ul>
           </li>
 
-          <li class="line space-top-bottom-10"></li>
-
-          <li class="item">
-            <a href="{{URL::to('how_to_use')}}">วิธีการใช้งาน</a>
-          </li>
-          <li class="item">
-            <a href="#">แจ้งปัญหาการใช้งาน</a>
-          </li>
-          <li class="item">
-            <a href="#">ข้อเสนอแนะ</a>
-          </li>
-          <li class="item">
-            <a href="{{URL::to('contact')}}">ติดต่อเรา</a>
-          </li>
-
         </ul>
       </div>
     </div>

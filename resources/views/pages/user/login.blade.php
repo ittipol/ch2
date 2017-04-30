@@ -6,7 +6,7 @@
   <div class="login-form-box">
 
     <div class="login-form-inner">
-      <h3><a class="logo" href="{{URL::to('/')}}">Square Roof</a></h3>
+      <h3><a class="logo" href="{{URL::to('/')}}">Sunday square</a></h3>
 
       @if(!empty($errors->all()))
       <div class="form-error-messages space-bottom-20">
