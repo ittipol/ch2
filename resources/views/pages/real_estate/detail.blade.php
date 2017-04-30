@@ -100,7 +100,7 @@
 
   </div>
 
-  @if (Auth::check() && (Session::get('Person.id') == $_modelData['person_id']))
+  @if (Auth::check() && (Session::get('Person.id') == $_modelData['created_by']))
   <div class="text-right">
     <a href="{{$deleteUrl}}" class="button" data-modal="1" data-modal-title="ต้องการยกเลิกประกาศ {{$_modelData['name']}} ใช่หรือไม่">ยกเลิกประกาศ</a>
   </div>

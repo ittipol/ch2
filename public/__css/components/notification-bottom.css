@@ -22,7 +22,6 @@
 }
 
 .notification-bottom.info {
-	/*background-color: rgb(222,255,255);*/
 	background-color: #E3F2FD;
 	border-color: rgb(69,127,170);
 	color: rgb(69,127,170);
@@ -49,10 +48,6 @@
 .notification-bottom-inner {
 	padding: 10px 20px;
 }
-
-/*.notification-bottom a.button:hover {
-	color: #ffffff;
-}*/
 
 .notification-bottom .close-btn {
 	position: absolute;
@@ -96,7 +91,6 @@
 	margin-right: 10px;
 }
 
-/* Medium Devices, Desktops */
 @media only screen and (max-width : 992px) {
 
   .notification-bottom {
@@ -109,7 +103,6 @@
 
 }
 
-/* Extra Small Devices, Phones */ 
 @media only screen and (max-width : 480px) {
 
 	.notification-bottom .message .title {
@@ -118,7 +111,6 @@
 
 }
 
-/* Custom, iPhone Retina */ 
 @media only screen and (max-width : 320px) {
 	.notification-bottom {
 		width: 230px;

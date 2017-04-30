@@ -288,7 +288,7 @@ class JobController extends Controller
 
     // Get person apply job
     $personApplyJob = Service::loadModel('PersonApplyJob')->where(array(
-      array('person_id','=',session()->get('Person.id')),
+      array('created_by','=',session()->get('Person.id')),
       array('job_id','=',$this->param['id'])
     ));
 
@@ -378,7 +378,7 @@ class JobController extends Controller
 
     // Get person apply job
     $personApplyJob = Service::loadModel('PersonApplyJob')->where(array(
-      array('person_id','=',session()->get('Person.id')),
+      array('created_by','=',session()->get('Person.id')),
       array('job_id','=',$this->param['id'])
     ));
 
@@ -512,7 +512,7 @@ class JobController extends Controller
     $model = Service::loadModel('PersonApplyJob');
 
     $_model = $model->where(array(
-      array('person_id','=',session()->get('Person.id')),
+      array('created_by','=',session()->get('Person.id')),
       array('job_id','=',$this->param['id'])
     ));
 
@@ -597,7 +597,7 @@ class JobController extends Controller
     $model = Service::loadModel('PersonApplyJob');
 
     $_model = $model->where(array(
-      array('person_id','=',session()->get('Person.id')),
+      array('created_by','=',session()->get('Person.id')),
       array('job_id','=',$this->param['id'])
     ));
 
@@ -693,7 +693,7 @@ class JobController extends Controller
     $model->paginator->setPage($page);
     $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/job_applying');
     $model->paginator->setUrl('shop/'.request()->shopSlug.'/job_applying/detail/{id}','detailUrl');
-    $model->paginator->setUrl('experience/detail/{person_id}','experienceDetailUrl');
+    $model->paginator->setUrl('experience/detail/{created_by}','experienceDetailUrl');
     $model->paginator->setQuery('sort',$sort);
     $model->paginator->setQuery('fq',$filters);
 
@@ -1024,7 +1024,7 @@ class JobController extends Controller
 
     $model = Service::loadModel('PersonApplyJob')->find($this->param['id']);
 
-    if(empty($model) || ($model->person_id != session()->get('Person.id'))) {
+    if(empty($model) || ($model->created_by != session()->get('Person.id'))) {
       $this->error = array(
         'message' => 'ขออภัย ไม่พบประกาศ หรือข้อมูลอาจถูกลบแล้ว'
       );

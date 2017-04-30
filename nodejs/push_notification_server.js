@@ -1,11 +1,10 @@
-var socket = require( 'socket.io' );
-var express = require( 'express' );
-var http = require( 'http' );
-var app = express();
-var server = http.createServer( app );
-var io = socket.listen( server );
-
-var db = require('./db');
+let socket = require( 'socket.io' );
+let express = require( 'express' );
+let http = require( 'http' );
+let app = express();
+let server = http.createServer( app );
+let io = socket.listen( server );
+let db = require('./db');
 
 io.sockets.on('connection', function(socket){
 

@@ -424,28 +424,13 @@
 	background-color: #ececec;
 }
 
-/*==========  Non-Mobile First Method  ==========*/
-
-/* Large Devices, Wide Screens */
-@media only screen and (max-width : 1200px) {
-
-}
-
-/* Medium Devices, Desktops */
 @media only screen and (max-width : 992px) {
 	.quantity-box {
 		margin-top: 20px;
 	}
 }
 
-/* Small Devices, Tablets */
-@media only screen and (max-width : 768px) {
-
-}
-
-/* Extra Small Devices, Phones */ 
 @media only screen and (max-width : 480px) {
-
 	.detail .info-section .section:not(:first-child) {
 		border-top: 1px solid #bababa;
 		border-left: 0;
@@ -454,15 +439,5 @@
 	.order-status .order-status-box {
 		width: 100%;
 	}
-
-}
-
-/* Custom */ 
-@media only screen and (max-width : 360px) {
-
-}
-
-/* Custom, iPhone Retina */ 
-@media only screen and (max-width : 320px) {
 
 }

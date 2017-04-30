@@ -9,7 +9,7 @@ use App\library\date;
 class PersonApplyJob extends Model
 {
   protected $table = 'person_apply_jobs';
-  protected $fillable = ['person_id','job_id','shop_id','applicant_message','job_position_description','job_applying_status_id','times'];
+  protected $fillable = ['created_by','job_id','shop_id','applicant_message','job_position_description','job_applying_status_id','times'];
   protected $modelRelations = array('JobApplyToBranch','AttachedFile');
 
   protected $modelRelationDataOption = array(
@@ -38,7 +38,7 @@ class PersonApplyJob extends Model
   );
 
   public function person() {
-    return $this->hasOne('App\Models\Person','id','person_id');
+    return $this->hasOne('App\Models\Person','id','created_by');
   }
 
   public function job() {

@@ -30,7 +30,7 @@
 
       <div class="row">
         <div class="col-xs-4">
-          <a href="{{URL::to('account/profile_edit')}}">
+          <a href="{{URL::to('account/profile/edit')}}">
             <div class="account-tile-button text-center">
               <img class="icon" src="/images/common/pencil.png">
               <h5>แก้ไขโปรไฟล์</h5>

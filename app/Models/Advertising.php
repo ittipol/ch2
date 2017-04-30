@@ -9,7 +9,7 @@ use App\library\url;
 class Advertising extends Model
 {
   public $table = 'advertisings';
-  protected $fillable = ['advertising_type_id','name','description','person_id'];
+  protected $fillable = ['advertising_type_id','name','description','created_by'];
   protected $modelRelations = array('Image','Tagging','RelateToBranch','ShopRelateTo');
   protected $directory = true;
 

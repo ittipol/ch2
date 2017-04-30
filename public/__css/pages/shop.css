@@ -1,6 +1,7 @@
 .shop-content-wrapper {
-	/*background-color: rgb(237,241,242);*/
 	background-color: #ececec;
+	padding-bottom: 150px;
+	margin-bottom: -150px;
 }
 
 .shop-notice {
@@ -83,6 +84,7 @@
 	height: 100%;
 	background-color: #bababa;
 	border-radius: 200px;
+	overflow: hidden;
 }
 
 .shop-top-haeder-wrapper .shop-logo {
@@ -93,7 +95,6 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto 100%;
-  overflow: hidden;
 }
 
 .shop-top-haeder-wrapper .shop-overlap-panel {
@@ -175,10 +176,6 @@
   background-color: #ccc;
 }
 
-/*.shop-open-sign::before {
-	display: block;
-}*/
-
 .shop-open-sign.shop-open::before {
 	background-color: rgb(28,156,1);
 	box-shadow: 0 0 10px 2px rgba(28,156,1,.85);
@@ -220,7 +217,6 @@
 	padding: 10px;
 }
 
-/* Large Devices, Wide Screens */
 @media only screen and (max-width : 1200px) {
 
 	.shop-header-overlay {
@@ -238,9 +234,7 @@
 
 }
 
-/* Medium Devices, Desktops */
 @media only screen and (max-width : 992px) {
-
 	.shop-logo {
 		margin-bottom: 0;
 	}
@@ -248,15 +242,8 @@
 	.shop-cover {
 		background-size: 100%;
 	}
-
-	/*.shop-description {
-		width: 90%;
-		padding: 0 0 20px 45px;
-	}*/
-
 }
 
-/* Small Devices, Tablets */
 @media only screen and (max-width : 768px) {
 	.shop-cover {
 		background-size: auto 100%;
@@ -268,7 +255,6 @@
 
 }
 
-/* Extra Small Devices, Phones */ 
 @media only screen and (max-width : 480px) {
 	.shop-description h2 {
 		font-size: 22px;
@@ -282,5 +268,4 @@
 		width: 100%;
 		text-align: center;
 	}
-
 }

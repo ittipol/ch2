@@ -64,7 +64,7 @@
         
       </div>
 
-      <h4>{{date('Y')}} CHONBURI SQUARE</h4>
+      <h4>{{date('Y')}} Sunday Square</h4>
 
     </div>
 

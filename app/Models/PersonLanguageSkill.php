@@ -5,7 +5,7 @@ namespace App\Models;
 class PersonLanguageSkill extends Model
 {
   protected $table = 'person_language_skills';
-  protected $fillable = ['person_experience_id','person_id','language_id','language_skill_level_id'];
+  protected $fillable = ['person_experience_id','created_by','language_id','language_skill_level_id'];
 
   public $formHelper = true;
 

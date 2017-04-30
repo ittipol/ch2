@@ -3,7 +3,7 @@
     <div class="navigation-top">
 
       <div class="logo">
-        <a class="logo-link" href="{{URL::to('/')}}">navi-square</a>
+        <a class="logo-link" href="{{URL::to('/')}}">Sunday Square</a>
       </div>
 
     </div>

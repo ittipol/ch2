@@ -4,7 +4,6 @@
 
 .pagination .paging {
 	color: #000;
-	/*background-color: #ececec;*/
 	float: left;
 	text-decoration: none;
 	text-align: center;
@@ -14,8 +13,6 @@
 
 .pagination a.paging:hover,
 .pagination a.paging.selected{
-	/*color: #fff;*/
-	/*background-color: rgb(249,91,73);*/
 	background-color: #BDBDBD;
 }
 

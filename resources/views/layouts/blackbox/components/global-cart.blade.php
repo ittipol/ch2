@@ -4,6 +4,14 @@
     <div class="panel-header-title">ตระกร้าสินค้า</div>
     <div class="panel-close-button cart-panel-close-button"></div>
   </div>
+
+  <div class="cart-header-nav">
+    <div class="cart-header-nav-inner">
+      <div class="text-right">
+        <a href="{{URL::to('cart')}}" class="flat-button">แสดงสินค้าในตระกร้า</a>
+      </div>
+    </div>
+  </div>
   
   <div class="product-list-table">
     <div class="product-list-table-inner">

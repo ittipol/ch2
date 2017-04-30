@@ -10,7 +10,7 @@ use App\library\date;
 class Order extends Model
 {
   protected $table = 'orders';
-  protected $fillable = ['invoice_prefix','invoice_number','shop_id','person_id','person_name','shipping_address','payment_detail','customer_message','order_status_id','order_free_shipping','order_shipping_cost','shipping_cost_detail','pick_up_order'];
+  protected $fillable = ['invoice_prefix','invoice_number','shop_id','created_by','person_name','shipping_address','payment_detail','customer_message','order_status_id','order_free_shipping','order_shipping_cost','shipping_cost_detail','pick_up_order'];
   protected $modelRelations = array('OrderProduct','OrderTotal','OrderShipping','OrderPaymentConfirm','OrderHistory','PaymentMethodToOrder');
 
   public $formHelper = true;

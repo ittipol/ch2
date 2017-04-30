@@ -9,7 +9,7 @@ use App\library\url;
 class ProductCatalog extends Model
 {
   protected $table = 'product_catalogs';
-  protected $fillable = ['name','description','person_id'];
+  protected $fillable = ['name','description','created_by'];
   protected $modelRelations = array('Image','Tagging','ProductToProductCatalog','ShopRelateTo');
 
   public $formHelper = true;

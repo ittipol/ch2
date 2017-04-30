@@ -328,7 +328,7 @@ class CheckForPersonHasShopPermission
 
       $person = Service::loadModel('PersonToShop')->getData(array(
         'conditions' => array(
-          ['person_id','=',session()->get('Person.id')],
+          ['created_by','=',session()->get('Person.id')],
           ['shop_id','=',$shopId],
         ),
         'fields' => array('role_id'),

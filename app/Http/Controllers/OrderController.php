@@ -20,7 +20,7 @@ class OrderController extends Controller
 
     $model = Service::loadModel('Order')->where([
       ['id','=',$this->param['id']],
-      ['person_id','=',session()->get('Person.id')]
+      ['created_by','=',session()->get('Person.id')]
     ])->first();
 
     if(empty($model)) {
@@ -98,7 +98,7 @@ class OrderController extends Controller
 
     $order = Service::loadModel('Order')->where([
       ['id','=',$this->param['id']],
-      ['person_id','=',session()->get('Person.id')]
+      ['created_by','=',session()->get('Person.id')]
     ])->first();
 
     if(empty($order)) {
@@ -194,7 +194,7 @@ class OrderController extends Controller
 
     $order = Service::loadModel('Order')->where([
       ['id','=',$this->param['id']],
-      ['person_id','=',session()->get('Person.id')]
+      ['created_by','=',session()->get('Person.id')]
     ])->first();
 
     if(empty($order)) {

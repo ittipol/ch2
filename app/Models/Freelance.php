@@ -10,7 +10,7 @@ use App\library\url;
 class Freelance extends Model
 {
   public $table = 'freelances';
-  protected $fillable = ['freelance_type_id','name','default_wage','description','person_id'];
+  protected $fillable = ['freelance_type_id','name','default_wage','description','created_by'];
   protected $modelRelations = array('Image','Tagging');
   protected $directory = true;
 
@@ -106,7 +106,7 @@ class Freelance extends Model
       'defaultWage' => $currency->format($this->default_wage),
       '_short_name' => $string->truncString($this->name,60),
       '_freelanceType' => FreelanceType::select(array('name'))->find($this->freelance_type_id)->name,
-      'person_id' => $this->person_id
+      'created_by' => $this->created_by
     );
     
   }

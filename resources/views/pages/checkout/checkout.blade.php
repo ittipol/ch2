@@ -194,16 +194,6 @@
                     <div class="shipping-method-detail-panel"></div>
                   </div>
 
-                  <!-- <div class="text-right">
-                    <a 
-                    class="button shipping-method-detail-button" 
-                    data-right-side-panel="1" 
-                    data-right-side-panel-target="#shipping_method_expand_panel"
-                    data-group="{{$value['shop']['id']}}"
-                    data-shipping-method="{{$shippingMethod['id']}}"
-                    >รายละเอียดการจัดส่ง</a>
-                  </div> -->
-
                 </div>
 
               @endforeach
@@ -240,13 +230,6 @@
       <?php
         echo Form::close();
       ?>
-
-      <!-- <div id="shipping_method_expand_panel" class="right-size-panel filter">
-        <div class="right-size-panel-inner">
-          <div id="shipping_method_panel"></div>
-          <div class="right-size-panel-close-button"></div>
-        </div>
-      </div> -->
 
     @else
 

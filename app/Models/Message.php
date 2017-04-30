@@ -9,7 +9,7 @@ use App\library\date;
 class Message extends Model
 {
   protected $table = 'messages';
-  protected $fillable = ['model','model_id','parent_id','message','sender','sender_id','receiver','receiver_id','person_id'];
+  protected $fillable = ['model','model_id','parent_id','message','sender','sender_id','receiver','receiver_id','created_by'];
   protected $modelRelations = array('AttachedFile');
 
   public $formHelper = true;
@@ -69,7 +69,7 @@ class Message extends Model
 
         $personIds = array();
         foreach ($records as $record) {
-          $personIds[] = $record->person_id; 
+          $personIds[] = $record->created_by; 
         }
 
 

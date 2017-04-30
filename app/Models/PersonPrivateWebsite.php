@@ -5,7 +5,7 @@ namespace App\Models;
 class PersonPrivateWebsite extends Model
 {
   protected $table = 'person_private_websites';
-  protected $fillable = ['person_experience_id','person_id','website_type_id','website_url'];
+  protected $fillable = ['person_experience_id','created_by','website_type_id','website_url'];
 
   public $formHelper = true;
   public $modelData = true;

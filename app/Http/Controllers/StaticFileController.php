@@ -23,6 +23,7 @@ class StaticFileController extends Controller
         // 'Pragma' => 'no-cache',
         // 'Cache-Control' => 'no-cache, must-revalidate',
         // 'Cache-Control' => 'pre-check=0, post-check=0, max-age=0',
+        'Cache-Control' => 'public, max-age=86400',
         'Content-Type' => mime_content_type($path),
         // 'Content-length' => filesize($path),
       );
@@ -50,6 +51,7 @@ class StaticFileController extends Controller
         // 'Pragma' => 'no-cache',
         // 'Cache-Control' => 'no-cache, must-revalidate',
         // 'Cache-Control' => 'pre-check=0, post-check=0, max-age=0',
+        'Cache-Control' => 'public, max-age=86400',
         'Content-Type' => mime_content_type($path),
         // 'Content-length' => filesize($path),
       );

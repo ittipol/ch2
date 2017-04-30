@@ -81,7 +81,7 @@ class CartController extends Controller
     if($total) { // not empty
 
       $totalShopProductEmpty = $cartModel::where([
-        ['person_id','=',session()->get('Person.id')],
+        ['created_by','=',session()->get('Person.id')],
         ['shop_id','=',$shopId]
       ])->exists();
 

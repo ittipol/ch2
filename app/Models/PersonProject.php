@@ -7,7 +7,7 @@ use App\library\date;
 class PersonProject extends Model
 {
   protected $table = 'person_projects';
-  protected $fillable = ['person_id','name','description'];
+  protected $fillable = ['created_by','name','description'];
   protected $modelRelations = array('PersonExperienceDetail');
 
   public $formHelper = true;

@@ -7,7 +7,7 @@ use App\library\date;
 class PersonEducation extends Model
 {
   protected $table = 'person_educations';
-  protected $fillable = ['person_id','academy','description','graduated'];
+  protected $fillable = ['created_by','academy','description','graduated'];
   protected $modelRelations = array('PersonExperienceDetail');
 
   public $formHelper = true;

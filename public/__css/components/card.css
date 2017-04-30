@@ -10,7 +10,6 @@
 	margin-bottom: 20px;
 	position: relative;
 	background-color: #fff;
-	/*border: 2px solid #FDD835;*/
 	border: 2px solid #EEEEEE;
 }
 
@@ -46,7 +45,6 @@
 
 .card .card-info {
 	position: relative;
-  /*background-color: #FFD54F;*/
   background-color: #F5F5F5;
   padding: 15px 10px;
 }
@@ -197,8 +195,6 @@
 	margin: 0;
 	padding: 0;
 	line-height: 40px;
-	/*color: #000;
-	background-color: #E0E0E0;*/
 	color: #fff;
 	background-color: #546E7A;
 }
@@ -210,7 +206,6 @@
 	position: absolute;
 	top: 0;
 	right: 0;
-	/*background-color: #BDBDBD;*/
 	background-color: #37474F;
 }
 
@@ -220,17 +215,14 @@
 }
 
 @media only screen and (max-width : 480px) {
-
 	.card {
 		width: 300px;
 		margin: 0 auto 20px;
 	}
-
 }
 
 
 @media only screen and (max-width : 320px) {
-
 	.card {
 		width: 300px;
 		margin: 0 auto 20px;

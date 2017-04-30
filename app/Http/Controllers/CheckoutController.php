@@ -14,9 +14,12 @@ class CheckoutController extends Controller
     $address = Service::loadModel('Address')->where([
       ['model','like','Person'],
       ['model_id','=',session()->get('Person.id')]
-    ])
-    ->first()
-    ->getAddress();
+    ]);
+
+    $_address = null;
+    if($address->exists()) {
+      $_address = $address->first()->getAddress();
+    }
 
     $productSummaries = Service::loadModel('Cart')->getProductSummary();
 
@@ -28,7 +31,7 @@ class CheckoutController extends Controller
     }
 
     $this->setData('data',Service::loadModel('Cart')->getProductSummary());
-    $this->setData('shippingAddress',$address);
+    $this->setData('shippingAddress',$_address);
     $this->setData('shippingMethods',$shippingMethods);
 
     return $this->view('pages.checkout.checkout');
@@ -153,7 +156,7 @@ class CheckoutController extends Controller
         'invoice_prefix' => $orderModel->getInvoicePrefix(),
         'invoice_number' => $orderModel->getInvoiceNumber($shopId),
         'shop_id' => $shopId,
-        'person_id' => $personId,
+        'created_by' => $personId,
         'person_name' => $personName,
         'shipping_address' => $shops[$shopId]['shipping_address'],
         'customer_message' => $shops[$shopId]['message'],
@@ -253,7 +256,7 @@ class CheckoutController extends Controller
       // delete products in cart
       $cartModel->where([
         ['shop_id','=',$shopId],
-        ['person_id','=',$personId]
+        ['created_by','=',$personId]
       ])->delete();
 
       // Add Order History

@@ -5,7 +5,7 @@ namespace App\Models;
 class PaymentMethod extends Model
 {
   public $table = 'payment_methods';
-  protected $fillable = ['name','description','person_id'];
+  protected $fillable = ['name','description','created_by'];
   protected $modelRelations = array('PaymentMethodToOrder','ShopRelateTo');
 
   public $formHelper = true;
@@ -62,13 +62,13 @@ class PaymentMethod extends Model
     ->exists();
   }
 
-  public function buildModelData() {}
+  // public function buildModelData() {}
 
   public function buildPaginationData() {
     return array(
       'id' => $this->id,
       'name' => $this->name,
-      'description' => $this->description,
+      'description' => nl2br($this->description),
     );
   }
 

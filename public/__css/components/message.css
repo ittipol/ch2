@@ -32,34 +32,6 @@
 	background-color: #C8E6C9;
 }
 
-/*.secondary-message-box .secondary-message-box-inner.clean {
-	color: #000;
-	background-color: #fff;
-}
-
-.secondary-message-box .secondary-message-box-inner.error {
-	color: #D50000;
-	background-color: #FFEBEE;
-}
-
-.secondary-message-box .secondary-message-box-inner.warning {
-	color: #FF8F00;
-	background-color: #FFECB3;
-}
-
-.secondary-message-box .secondary-message-box-inner.info {
-	color: #1565C0;
-	background-color: #E3F2FD;
-}
-
-.secondary-message-box .secondary-message-box-inner.success {
-	color: #2E7D32;
-	background-color: #C8E6C9;
-}*/
-
-
-
-
 .secondary-message-box h3 {
 	margin: 10px 0;
 }

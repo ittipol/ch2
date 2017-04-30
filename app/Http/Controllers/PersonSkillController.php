@@ -24,7 +24,7 @@ class PersonSkillController extends Controller
 
     $personExperience = Service::loadModel('PersonExperience')
     ->select(array('id'))
-    ->where('person_id','=',session()->get('Person.id'))
+    ->where('created_by','=',session()->get('Person.id'))
     ->first();
 
     foreach (request()->get('skills') as $value) {

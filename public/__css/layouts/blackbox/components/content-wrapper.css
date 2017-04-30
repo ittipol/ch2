@@ -1,15 +1,10 @@
-#container {
-	/*position: relative;
-	top: 0;
-	left: 0;*/
-}
-
 .content-wrapper {
 	position: relative;
 	top: 0;
 	left: 0;
 	padding-left: 280px;
 	transition: left .2s ease-out;
+	margin-bottom: 150px;
 }
 
 .content-wrapper-overlay {

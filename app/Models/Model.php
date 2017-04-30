@@ -74,8 +74,8 @@ class Model extends BaseModel
         //   $model->ip_address = Service::ipAddress();
         // }
 
-        if(Schema::hasColumn($model->getTable(), 'person_id') && empty($model->person_id)) {
-          $model->person_id = Session::get('Person.id');
+        if(Schema::hasColumn($model->getTable(), 'created_by') && empty($model->created_by)) {
+          $model->created_by = Session::get('Person.id');
         }
 
       }else{
@@ -371,7 +371,7 @@ class Model extends BaseModel
     $model = Service::loadModel($modelName);
     $field = $this->modelAlias.'_id';
 
-    if(($field != 'person_id') && Schema::hasColumn($model->getTable(), $field)) {
+    if(($field != 'created_by') && Schema::hasColumn($model->getTable(), $field)) {
       $conditions = array(
         [$field,'=',$this->id],
       );

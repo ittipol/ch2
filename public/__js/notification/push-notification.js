@@ -99,10 +99,8 @@ class PushNotification {
 	}
 
 	popup(title) {
-
 		const notificationBottom = new NotificationBottom(title);
 		notificationBottom.load();
-
 	}
 
 }

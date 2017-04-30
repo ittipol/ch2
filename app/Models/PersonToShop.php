@@ -5,7 +5,7 @@ namespace App\Models;
 class PersonToShop extends Model
 {
   public $table = 'person_to_shops';
-  protected $fillable = ['shop_id','person_id','role_id'];
+  protected $fillable = ['shop_id','created_by','role_id'];
 
   public function role() {
     return $this->hasOne('App\Models\Role','id','role_id');
@@ -16,14 +16,14 @@ class PersonToShop extends Model
   }
 
   public function person() {
-    return $this->hasOne('App\Models\Person','id','person_id');
+    return $this->hasOne('App\Models\Person','id','created_by');
   }
 
   public function saveSpecial($value) {
 
     $record = $this->getData(array(
       'conditions' => array(
-        ['person_id','=',$value['person_id']],
+        ['created_by','=',$value['created_by']],
         ['shop_id','=',$value['shop_id']],
         ['role_id','=',$value['role_id']]
       )

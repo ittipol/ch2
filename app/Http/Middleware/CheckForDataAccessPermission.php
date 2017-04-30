@@ -65,9 +65,9 @@ class CheckForDataAccessPermission
       switch ($pageLevel) {
         case 1:
           // only me can see
-          $model = Service::loadModel($pages[$name]['modelName'])->select(array('person_id'))->find($request->id);
+          $model = Service::loadModel($pages[$name]['modelName'])->select(array('created_by'))->find($request->id);
 
-          if(!Auth::check() || empty($model) || ($model->person_id != session()->get('Person.id'))) {
+          if(!Auth::check() || empty($model) || ($model->created_by != session()->get('Person.id'))) {
             $hasPermission = false;
           }
 

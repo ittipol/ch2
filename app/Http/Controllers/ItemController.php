@@ -156,7 +156,7 @@ class ItemController extends Controller
 
     $this->data = $model->modelData->build();
 
-    if(Auth::check() && (session()->get('Person.id') == $model->person_id)) {
+    if(Auth::check() && (session()->get('Person.id') == $model->created_by)) {
       $url = new Url;
       $this->setData('deleteUrl',$url->url('account/item/delete/'.$model->id));
     }

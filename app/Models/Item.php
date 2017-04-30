@@ -10,7 +10,7 @@ use App\library\url;
 class Item extends Model
 {
   protected $table = 'items';
-  protected $fillable = ['name','announcement_detail','description','price','announcement_type_id','used','person_id'];
+  protected $fillable = ['name','announcement_detail','description','price','announcement_type_id','used','created_by'];
   protected $modelRelations = array('Image','Address','Tagging','Contact','ItemToCategory');
   protected $directory = true;
 
@@ -185,7 +185,7 @@ class Item extends Model
       '_announcementTypeName' => $this->announcementType->name,
       '_categoryId' => $categoryId,
       '_categoryName' => $categoryName,
-      'person_id' => $this->person_id
+      'created_by' => $this->created_by
     );
 
   }

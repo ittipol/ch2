@@ -493,7 +493,7 @@ class ShopController extends Controller
 
     if($model->where([
         ['name','like',$request->get('name')],
-        ['person_id','=',session()->get('Person.id')]
+        ['created_by','=',session()->get('Person.id')]
       ])
       ->exists()) {
 

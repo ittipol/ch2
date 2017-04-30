@@ -98,9 +98,9 @@ class CheckForDataOwner
         return $next($request);
       }
 
-      $model = Service::loadModel($pages[$name]['modelName'])->select(array('id','person_id'))->find($request->id);
+      $model = Service::loadModel($pages[$name]['modelName'])->select(array('id','created_by'))->find($request->id);
 
-      if(empty($model) || ($model->person_id != session()->get('Person.id'))) {
+      if(empty($model) || ($model->created_by != session()->get('Person.id'))) {
         return response(view('errors.error',array(
           'error'=>array(
             'message'=>'ขออภัย ไม่สามารถแก้ไขข้อมูลนี้ได้หรือข้อมูลนี้อาจถูกลบแล้ว'

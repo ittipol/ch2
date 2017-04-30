@@ -14,7 +14,7 @@ use Session;
 class Image extends Model
 {
   protected $table = 'images';
-  protected $fillable = ['model','model_id','path','filename','description','image_type_id','person_id'];
+  protected $fillable = ['model','model_id','path','filename','description','image_type_id','created_by'];
   private $maxFileSizes = 2097152;
   private $acceptedFileTypes = ['image/jpg','image/jpeg','image/png', 'image/pjpeg'];
 
@@ -140,7 +140,7 @@ class Image extends Model
     ->where([
       ['model','=',$model->modelName],
       ['model_id','=',$model->id],
-      ['person_id','=',Session::get('Person.id')]
+      ['created_by','=',Session::get('Person.id')]
     ])
     ->get();
 
@@ -184,7 +184,7 @@ class Image extends Model
     if(!empty($image['id'])) {
       $imageInstance = $imageInstance->where([
         ['id','=',$image['id']],
-        ['person_id','=',Session::get('Person.id')]
+        ['created_by','=',Session::get('Person.id')]
       ])->first();
 
       if(empty($imageInstance)) {

@@ -51,7 +51,7 @@ class UserController extends Controller
     if(Auth::attempt($data)){
 
       // Ger person
-      $person = Person::select(array('id','name','profile_image_id','theme'))->find(Auth::user()->id);
+      $person = Person::select(array('id','name','profile_image_id'))->where('user_id','=',Auth::user()->id)->first();
 
       // Update Token
       // User for pushing notification
@@ -61,7 +61,7 @@ class UserController extends Controller
       // Store data
       Session::put('Person.id',$person->id);
       Session::put('Person.name',$person->name);
-      Session::put('Person.theme',$person->theme);
+      // Session::put('Person.theme',$person->theme);
       Session::put('Person.token',$person->token);
 
       if(empty($person->profile_image_id)) {
@@ -84,7 +84,7 @@ class UserController extends Controller
         foreach ($products as $product) {
   
           $cart = $cartModel->where([
-            ['person_id','=',$person->id],
+            ['created_by','=',$person->id],
             ['product_id','=',$product['productId']]
           ])->first();
 
@@ -92,7 +92,7 @@ class UserController extends Controller
             $cart->increment('quantity', $product['quantity']);
           }else{
             $value = array(
-              'person_id' => $person->id,
+              'created_by' => $person->id,
               'shop_id' => $product['shopId'],
               'product_id' => $product['productId'],
               'quantity' => $product['quantity']

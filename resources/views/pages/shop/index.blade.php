@@ -147,10 +147,10 @@
         </h4>
       </div>
 
-      @if(!empty($products))
+      @if(!empty($productCatalogs))
 
       <div class="box-content padding-15">
-        @if(!empty($productCatalogs))
+
         <div class="row">
 
           @foreach($productCatalogs as $data)
@@ -184,7 +184,7 @@
           @endforeach
 
         </div>
-        @endif
+
       </div>
 
       <a href="{{request()->get('shopUrl')}}product_catalog" class="button wide-button">แสดงแคตตาล็อกสินค้าทั้งหมด</a>

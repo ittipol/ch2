@@ -11,7 +11,7 @@ use Session;
 class Shop extends Model
 {
   protected $table = 'shops';
-  protected $fillable = ['name','description','brand_story','mission','vision','profile_image_id','cover_image_id','person_id'];
+  protected $fillable = ['name','description','brand_story','mission','vision','profile_image_id','cover_image_id','created_by'];
   protected $modelRelations = array('Image','Address','Contact','OfficeHour');
   public $errorType;
 
@@ -140,7 +140,7 @@ class Shop extends Model
         $personToShop = new PersonToShop;
         $personToShop->saveSpecial(array(
           'shop_id' => $model->id,
-          'person_id' => Session::get('Person.id'),
+          'created_by' => Session::get('Person.id'),
           'role_id' => $role->getIdByalias('admin')
         ));
 
@@ -186,7 +186,7 @@ class Shop extends Model
     $personToShop = new PersonToShop;
 
     return $personToShop->where(array(
-      ['person_id','=',session()->get('Person.id')],
+      ['created_by','=',session()->get('Person.id')],
       ['shop_id','=',$id]
     ))->exists();
 

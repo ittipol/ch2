@@ -117,7 +117,7 @@ class ApiController extends Controller
 
       $result = array(
         'success' => true,
-        'description' => !empty($shippingMethod->description) ? $shippingMethod->description : 'ไม่ระบุรายระเอียดวิธีการจัดส่งสินค้า <strong>'.$shippingMethod->name.'</strong>'
+        'description' => !empty($shippingMethod->description) ? nl2br($shippingMethod->description) : 'ไม่ระบุรายระเอียดวิธีการจัดส่งสินค้า <strong>'.$shippingMethod->name.'</strong>'
       );
 
     }

@@ -9,7 +9,7 @@ use App\library\url;
 class Notification extends Model
 {
   protected $table = 'notifications';
-  protected $fillable = ['model','model_id','notification_event_id','title','sender','sender_id','receiver','receiver_id','type','unread','notify','person_id'];
+  protected $fillable = ['model','model_id','notification_event_id','title','sender','sender_id','receiver','receiver_id','type','unread','notify','created_by'];
 
   public $formHelper = true;
   public $modelData = true;

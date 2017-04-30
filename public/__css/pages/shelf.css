@@ -51,10 +51,8 @@
 	height: 24px;
 }
 
-/* Small Devices, Tablets */
 @media only screen and (max-width : 1200px) {
 	.shelf .product-all-tile {
 		height: 100px;
-		/*margin-top: 20px;*/
 	}
 }

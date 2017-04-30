@@ -77,8 +77,8 @@ class MessageHelper
 
         $receiver = 'Person';
 
-        if(Schema::hasColumn($this->model->getTable(), 'person_id')) {
-          $receiverId = $this->model->person_id;
+        if(Schema::hasColumn($this->model->getTable(), 'created_by')) {
+          $receiverId = $this->model->created_by;
         }
 
         break;

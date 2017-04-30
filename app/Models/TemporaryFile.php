@@ -9,7 +9,7 @@ use Session;
 class TemporaryFile extends Model
 {
   protected $table = 'temporary_files';
-  protected $fillable = ['model','filename','token','filename','filesize','alias','person_id'];
+  protected $fillable = ['model','filename','token','filename','filesize','alias','created_by'];
   private $temporaryPath = 'temporary/';
 
   public function __construct() {
@@ -90,7 +90,7 @@ class TemporaryFile extends Model
     return $this->where([
       ['model','=',$modelName],
       ['token','=',$token],
-      ['person_id','=',Session::get('Person.id')]
+      ['created_by','=',Session::get('Person.id')]
     ])->exists();
   }
 
@@ -99,7 +99,7 @@ class TemporaryFile extends Model
       ['model','=',$modelName],
       ['token','=',$token],
       ['filename','=',$filename],
-      ['person_id','=',Session::get('Person.id')]
+      ['created_by','=',Session::get('Person.id')]
     ])->delete();
   }
 
@@ -107,7 +107,7 @@ class TemporaryFile extends Model
     return $this->where([
       ['model','=',$modelName],
       ['token','=',$token],
-      ['person_id','=',Session::get('Person.id')]
+      ['created_by','=',Session::get('Person.id')]
     ])->delete();
   }
 

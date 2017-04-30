@@ -9,7 +9,7 @@ use File;
 class AttachedFile extends Model
 {
   protected $table = 'attached_files';
-  protected $fillable = ['model','model_id','path','filename','filesize','alias','person_id'];
+  protected $fillable = ['model','model_id','path','filename','filesize','alias','created_by'];
   protected $modelRelations = array('AttachedFileAccessPermission');
 
   protected $storagePath = 'app/public/attached_files/';
@@ -193,7 +193,7 @@ class AttachedFile extends Model
         $attachedFileAccessPermission->newInstance()
         ->fill(array(
           'model' => 'Person',
-          'model_id' => $model->person_id,
+          'model_id' => $model->created_by,
           'attached_file_id' => $file->id
         ))
         ->save();
@@ -229,7 +229,7 @@ class AttachedFile extends Model
 
           $personIds = array();
           foreach ($records as $record) {
-            $personIds[] = $record->person_id; 
+            $personIds[] = $record->created_by; 
           }
 
 

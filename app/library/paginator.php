@@ -133,7 +133,7 @@ class Paginator {
     }
 
     if($this->onlyMyData) {
-      $model = $model->where('person_id','=',Session::get('Person.id'));
+      $model = $model->where('created_by','=',Session::get('Person.id'));
     }
 
     if(!empty($criteria['fields'])){
@@ -304,7 +304,7 @@ class Paginator {
     // <-- Code here -->
     // $query->orWhere(function($query) use($table,$personIds) {
     //   $query->where('access_levels.level', '=', 5)
-    //         ->whereIn($table.'.person_id', $personIds);
+    //         ->whereIn($table.'.created_by', $personIds);
     // })
 
     // only me can access
@@ -318,11 +318,11 @@ class Paginator {
     //       ->orWhere('access_levels.level','=',5)
     //       ->orWhere(function($query) use($table,$personIds) {
     //         $query->where('access_levels.level', '=', 2)
-    //               ->whereIn($table.'.person_id', $personIds);
+    //               ->whereIn($table.'.created_by', $personIds);
     //       })
     //       ->orWhere(function($query) use($table) {
     //         $query->where('access_levels.level', '=', 1)
-    //               ->where($table.'.person_id', '=', session()->get('Person.id'));
+    //               ->where($table.'.created_by', '=', session()->get('Person.id'));
     //       });
 
     return $query;

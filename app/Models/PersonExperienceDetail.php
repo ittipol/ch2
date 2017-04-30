@@ -7,7 +7,7 @@ use App\library\date;
 class PersonExperienceDetail extends Model
 {
   protected $table = 'person_experience_details';
-  protected $fillable = ['person_experience_id','model','model_id','person_id','experience_type_id','start_year','start_month','start_day','end_year','end_month','end_day','current'];
+  protected $fillable = ['person_experience_id','model','model_id','created_by','experience_type_id','start_year','start_month','start_day','end_year','end_month','end_day','current'];
 
   public function personWorkingExperience() {
     return $this->hasOne('App\Models\PersonWorkingExperience','id','model_id');
@@ -41,7 +41,7 @@ class PersonExperienceDetail extends Model
         $personExperience = new PersonExperience;
         $personExperience = $personExperience
         ->select(array('id'))
-        ->where('person_id','=',session()->get('Person.id'))
+        ->where('created_by','=',session()->get('Person.id'))
         ->first();
 
         $model->person_experience_id = $personExperience->id;

@@ -47,7 +47,7 @@
   @endforeach
 
   <a href="{{URL::to('product/shelf')}}" class="button half-button space-top-20">เลือกซื้อสินค้า</a>
-  <a href="{{URL::to('cart')}}" class="button half-button space-top-20">ตระกร้าสินค้า</a>
+  <a href="{{URL::to('checkout')}}" class="button half-button space-top-20">ดำเนินการสั่งซื้อสินค้า</a>
 
 @else
   

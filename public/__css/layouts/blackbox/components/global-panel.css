@@ -47,9 +47,7 @@
 }
 
 @media only screen and (max-width : 480px) {
-  
 	.global-panel {
 		width: 100%;
 	}
-
 }

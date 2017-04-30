@@ -31,7 +31,7 @@ class FilterHelper {
         )
       ),
       'joins' => array(
-        'person_experiences_join_people' => array('people', 'people.id', '=', 'person_experiences.person_id')
+        'person_experiences_join_people' => array('people', 'people.id', '=', 'person_experiences.created_by')
       )
     )
   );

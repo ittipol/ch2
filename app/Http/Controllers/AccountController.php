@@ -83,9 +83,15 @@ class AccountController extends Controller
     if($model->fill($request->all())->save()) {
 
       Session::put('Person.name',$model->name);
-      Session::put('Person.theme',$model->theme);
-      Session::put('Person.profile_image_xs',$model->getProfileImageUrl('xs'));
-      Session::put('Person.profile_image',$model->getProfileImageUrl('xsm'));
+      // Session::put('Person.theme',$model->theme);
+
+      if(empty($person->profile_image_id)) {
+        Session::put('Person.profile_image_xs','/images/common/avatar.png');
+        Session::put('Person.profile_image','/images/common/avatar.png');
+      }else{
+        Session::put('Person.profile_image_xs',$model->getProfileImageUrl('xs'));
+        Session::put('Person.profile_image',$model->getProfileImageUrl('xsm'));
+      }
 
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('account');
@@ -229,7 +235,7 @@ class AccountController extends Controller
 
     $model->paginator->criteria(array(
       'conditions' => array(
-        array('person_id','=',session()->get('Person.id'))
+        array('created_by','=',session()->get('Person.id'))
       ),
       'order' => array('created_at','desc')
     ));
@@ -255,7 +261,7 @@ class AccountController extends Controller
     $model->paginator->disableGetImage();
     $model->paginator->criteria(array(
       'conditions' => array(
-        array('person_id','=',session()->get('Person.id'))
+        array('created_by','=',session()->get('Person.id'))
       ),
       'order' => array('created_at','desc')
     ));
@@ -279,7 +285,7 @@ class AccountController extends Controller
 
     $model->paginator->criteria(array(
       'conditions' => array(
-        array('person_id','=',session()->get('Person.id'))
+        array('created_by','=',session()->get('Person.id'))
       ),
       'order' => array('created_at','desc')
     ));

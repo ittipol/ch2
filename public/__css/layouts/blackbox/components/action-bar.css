@@ -102,7 +102,6 @@ ul.action-bar-nav li label {
 
 ul.action-bar-nav li.icon {display: none;}
 
-/* Large Devices, Wide Screens */
 @media only screen and (max-width : 1200px) {
 
   .action-bar .search-input {
@@ -140,7 +139,6 @@ ul.action-bar-nav li.icon {display: none;}
 
 }
 
-/* Extra Small Devices, Phones */ 
 @media only screen and (max-width : 480px) {
   .action-bar .search-input {
     width: 250px;

@@ -54,6 +54,7 @@ Route::get('/debug_notification',function(){
 
 // 
 Route::get('/','HomeController@index');
+Route::get('/home','HomeController@index');
 
 Route::get('logout',function(){
   Auth::logout();

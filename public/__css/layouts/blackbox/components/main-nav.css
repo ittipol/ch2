@@ -5,7 +5,6 @@
 	z-index: 80;
 	width: 280px;
   height: 100%;
-  /*background-color: rgb(53,71,89);*/
   background-color: #fff;
   border-right: 1px solid #ddd;
   transition: left .2s ease-out;
@@ -16,10 +15,6 @@
 }
 
 .global-nav .navigation-top {
-  /*line-height: 62px;
-  border-bottom: 1px solid #fff;
-  background-color: #01579B;*/
-
   line-height: 63px;
   border-bottom: 1px solid #ddd;
   background-color: #fff;
@@ -31,10 +26,9 @@
 }
 
 .navigation-top a.logo-link {
-	/*color: #fff;*/
-  color: #009688;
-	font-size: 18px;
-  /*text-transform: uppercase;*/
+  /*color: #009688;*/
+  color: #E91E63;
+	font-size: 20px;
 }
 
 .navigation-top .account-info {
@@ -79,7 +73,6 @@
 
 .navigation-primary-menu {
   height: 90%;
-  /*padding-bottom: 8px;*/
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -103,7 +96,6 @@
 	position: relative;
   padding: 10px 0 10px 20px;
   display: block;
-  /*color: #fff;*/
   color: #000;
   cursor: pointer;
   text-decoration: none;
@@ -115,7 +107,6 @@
 .navigation-primary-menu ul > li a:hover,
 .navigation-primary-menu ul > li a.active { 
 	color: #fff;
-  /*background-color: #fff;*/
   background-color: rgb(164,61,51);
 }
 
@@ -137,7 +128,6 @@
 }
 
 .global-nav .line {
-  /*background-color: #fff;*/
   background-color: #ccc;
   width: 85%;
   margin-right: auto;

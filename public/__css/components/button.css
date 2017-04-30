@@ -1,11 +1,8 @@
 .button {
 	color: #fff;
 	text-decoration: none !important;
-	/*background-color: #3F51B5;*/
 	background-color: #2979FF;
-	/*background-color: rgb(47,97,186);*/
 	padding: 10px 25px;
-	/*margin-bottom: 5px;*/
 	border: 0;
 	display: inline-block;
 	cursor: pointer;
@@ -44,32 +41,6 @@ a.button:hover {
 	width: 100%;
 	text-align: center;
 }
-
-/*.floating-button {
-	position: fixed;
-	bottom: 120px;
-	right: 220px;
-	width: 60px;
-	height: 60px;
-	border-radius: 60px;
-	background-color: #2196F3;
-	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-	cursor: pointer;
-}*/
-
-/*.floating-button .dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 6px;
-  background-color: #fff;
-  margin: 10px auto;
-}*/
-
-/*.cover-edit-button input[type="file"] {
-	opacity: 0;
-	position: absolute;
-	z-index: -1;
-}*/
 
 .icon-button-round {
   width: 50px;

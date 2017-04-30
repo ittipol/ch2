@@ -54,7 +54,7 @@
       inputField.load();
 
       @if(Auth::check())
-        const pushNotification = new PushNotification({{ Session::get("Person.id") }},'{{ Session::get("Person.token") }}')
+        const pushNotification = new PushNotification({{Session::get("Person.id") }},'{{ Session::get("Person.token") }}')
         pushNotification.load();
       @endif
 

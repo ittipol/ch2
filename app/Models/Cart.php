@@ -10,7 +10,7 @@ use Auth;
 class Cart extends Model
 {
   protected $table = 'carts';
-  protected $fillable = ['person_id','shop_id','product_id','quantity'];
+  protected $fillable = ['created_by','shop_id','product_id','quantity'];
 
   private $checkError = true;
 
@@ -52,7 +52,7 @@ class Cart extends Model
     if(Auth::check()) {
 
       $cart = Cart::where([
-        ['person_id','=',session()->get('Person.id')],
+        ['created_by','=',session()->get('Person.id')],
         ['product_id','=',$productId]
       ])
       ->select('id')
@@ -64,7 +64,7 @@ class Cart extends Model
       }else{
 
         $value = array(
-          'person_id' => session()->get('Person.id'),
+          'created_by' => session()->get('Person.id'),
           'shop_id' => $shop->id,
           'product_id' => $productId,
           'quantity' => $quantity
@@ -107,7 +107,7 @@ class Cart extends Model
     if(Auth::check()) {
 
       $cart = Cart::where([
-        ['person_id','=',session()->get('Person.id')],
+        ['created_by','=',session()->get('Person.id')],
         ['product_id','=',$id]
       ])->first();
 
@@ -136,7 +136,7 @@ class Cart extends Model
 
     if(Auth::check()) {
       $cart = Cart::where([
-        ['person_id','=',session()->get('Person.id')],
+        ['created_by','=',session()->get('Person.id')],
         ['product_id','=',$id]
       ])
       ->select('id')
@@ -615,7 +615,7 @@ class Cart extends Model
 
   public function hasProducts() {
     if(Auth::check()) {
-      return $this->where('person_id','=',session()->get('Person.id'))->exists();
+      return $this->where('created_by','=',session()->get('Person.id'))->exists();
     }else {
       return count(session()->get('cart')) ? true : false;
     }
@@ -629,12 +629,12 @@ class Cart extends Model
 
       if(empty($shopId)) {
         $_products = $this
-        ->where('person_id','=',session()->get('Person.id'))
+        ->where('created_by','=',session()->get('Person.id'))
         ->select('product_id','quantity','shop_id')
         ->get();
       }else{
         $_products = $this->where([
-          ['person_id','=',session()->get('Person.id')],
+          ['created_by','=',session()->get('Person.id')],
           ['shop_id','=',$shopId]
         ])
         ->select('product_id','quantity','shop_id')

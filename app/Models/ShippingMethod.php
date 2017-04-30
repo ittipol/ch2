@@ -7,7 +7,7 @@ use App\library\currency;
 class ShippingMethod extends Model
 {
   protected $table = 'shipping_methods';
-  protected $fillable = ['name','shipping_service_id','description','shipping_service_cost_type_id','free_service','service_cost','shipping_time','special','special_shipping_method_id','sort','person_id'];
+  protected $fillable = ['name','shipping_service_id','description','shipping_service_cost_type_id','free_service','service_cost','shipping_time','special','special_shipping_method_id','sort','created_by'];
   protected $modelRelations = array('RelateToBranch','ShopRelateTo');
 
   public $formHelper = true;

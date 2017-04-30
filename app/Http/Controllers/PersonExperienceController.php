@@ -51,7 +51,7 @@ class PersonExperienceController extends Controller
     $criteria = array();
 
     $criteria = array_merge($criteria,array(
-      'joins' => array('people', 'people.id', '=', 'person_experiences.person_id')
+      'joins' => array('people', 'people.id', '=', 'person_experiences.created_by')
     ));
 
     if(!empty($conditions)) {
@@ -140,13 +140,13 @@ class PersonExperienceController extends Controller
 
     $profile = Service::loadModel('PersonExperience')
     ->select(array('id','active'))
-    ->where('person_id','=',Session::get('Person.id'))
+    ->where('created_by','=',Session::get('Person.id'))
     ->first();
 
     // Get career objective
     $careerObjective = Service::loadModel('PersonCareerObjective')
     ->select(array('id','career_objective'))
-    ->where('person_id','=',Session::get('Person.id'))
+    ->where('created_by','=',Session::get('Person.id'))
     ->first();
 
     // Get skill
@@ -274,7 +274,7 @@ class PersonExperienceController extends Controller
 
   public function profileEditingSubmit() {
 
-    $model = Service::loadModel('PersonExperience')->where('person_id','=',Session::get('Person.id'))->first();
+    $model = Service::loadModel('PersonExperience')->where('created_by','=',Session::get('Person.id'))->first();
 
     $saved = Service::loadModel('DataAccessPermission')->__saveRelatedData($model,array(
       'value' => array(
@@ -296,7 +296,7 @@ class PersonExperienceController extends Controller
 
     $model = Service::loadModel('PersonCareerObjective')
     ->select(array('id','career_objective'))
-    ->where('person_id','=',Session::get('Person.id'))
+    ->where('created_by','=',Session::get('Person.id'))
     ->first();
 
     $this->data = $model->formHelper->build();
@@ -310,7 +310,7 @@ class PersonExperienceController extends Controller
 
     $model = Service::loadModel('PersonCareerObjective')
     ->select(array('id','career_objective'))
-    ->where('person_id','=',Session::get('Person.id'))
+    ->where('created_by','=',Session::get('Person.id'))
     ->first();
 
     if($model->fill(request()->all())->save()) {

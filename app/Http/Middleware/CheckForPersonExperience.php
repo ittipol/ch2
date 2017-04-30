@@ -19,8 +19,8 @@ class CheckForPersonExperience
   {
     $personExperience = new PersonExperience;
     if(!$personExperience->checkExistByPersonId()) {
-      MessageHelper::display('ไม่พบประวัติการทำงานของคุณ','info');
-      return redirect('experience');
+      MessageHelper::display('กรุณาเพิ่มประวัติการทำงานเพื่อใช้ในการสมัครงาน','info');
+      return redirect('person/experience');
     }
 
     return $next($request);

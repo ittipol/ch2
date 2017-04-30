@@ -147,7 +147,6 @@
   cursor: pointer; 
 }
 
-/* Extra Small Devices, Phones */ 
 @media only screen and (max-width : 480px) {
   #pac-input {
     top: 45px !important;

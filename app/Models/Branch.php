@@ -9,7 +9,7 @@ use App\library\url;
 class Branch extends Model
 {
   public $table = 'branches';
-  protected $fillable = ['name','description','person_id'];
+  protected $fillable = ['name','description','created_by'];
   protected $modelRelations = array('Image','Address','Contact','ShopRelateTo','RelateToBranch');
   protected $directory = true;
 

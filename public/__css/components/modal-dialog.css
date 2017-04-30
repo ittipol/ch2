@@ -44,7 +44,6 @@
 }
 
 @media only screen and (max-width : 768px) {
-
 	.modal-box {
 		width: 500px;
 	}
@@ -52,9 +51,7 @@
 }
 
 @media only screen and (max-width : 480px) {
-  
 	.modal-box {
 		width: 100%;
 	}
-
 }

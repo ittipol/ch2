@@ -5,7 +5,7 @@ namespace App\Models;
 class Address extends Model
 {
   protected $table = 'addresses';
-  protected $fillable = ['model','model_id','address','province_id','district_id','sub_district_id','description','latitude','longitude','person_id'];
+  protected $fillable = ['model','model_id','address','province_id','district_id','sub_district_id','description','latitude','longitude','created_by'];
 
   public $formHelper = true;
 

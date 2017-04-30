@@ -8,7 +8,7 @@ use App\library\cache;
 class Person extends Model
 {
   protected $table = 'people';
-  protected $fillable = ['user_id','name','gender','birth_date','profile_image_id','cover_image_id','theme','token'];
+  protected $fillable = ['user_id','name','gender','birth_date','profile_image_id','cover_image_id','token'];
   protected $modelRelations = array('Image','Address','Contact');
 
   public $formHelper = true;
@@ -50,7 +50,7 @@ class Person extends Model
   }
 
   public function personExperience() {
-    return $this->hasOne('App\Models\PersonExperience','person_id','id');
+    return $this->hasOne('App\Models\PersonExperience','created_by','id');
   }
 
   public function __saveRelatedData($model,$options = array()) {

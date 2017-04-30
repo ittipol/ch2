@@ -16,7 +16,7 @@ class PersonPrivateWebsiteController extends Controller
 
     $profile = Service::loadModel('PersonExperience')
     ->select(array('id','active'))
-    ->where('person_id','=',Session::get('Person.id'))
+    ->where('created_by','=',Session::get('Person.id'))
     ->first();
     
     $privateWebsites = Service::loadModel('PersonPrivateWebsite')
@@ -70,7 +70,7 @@ class PersonPrivateWebsiteController extends Controller
 
     $personExperience = Service::loadModel('PersonExperience')
     ->select(array('id'))
-    ->where('person_id','=',session()->get('Person.id'))
+    ->where('created_by','=',session()->get('Person.id'))
     ->first();
 
     foreach (request()->get('private_websites') as $value) {
@@ -111,7 +111,7 @@ class PersonPrivateWebsiteController extends Controller
 
     $model = Service::loadModel('PersonPrivateWebsite')->where('id','=',$this->param['id'])->first();
 
-    if(empty($model) || ($model->person_id != session()->get('Person.id'))) {
+    if(empty($model) || ($model->created_by != session()->get('Person.id'))) {
       $this->error = array(
         'message' => 'ขออภัย ไม่สามารถแก้ไขข้อมูลนี้ได้ หรือข้อมูลนี้อาจถูกลบแล้ว'
       );

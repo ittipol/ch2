@@ -65,7 +65,7 @@ class AppServiceProvider extends ServiceProvider
 
           $records = Service::loadModel('PersonToShop')
           ->select(array('shop_id'))
-          ->where('person_id','=',session()->get('Person.id'))
+          ->where('created_by','=',session()->get('Person.id'))
           ->get();
 
           $slugModel = Service::loadModel('Slug');

@@ -67,13 +67,7 @@
 }
 
 @media only screen and (max-width : 480px) {
-  
-	/*.global-notification-panel {
-		width: 100%;
-	}*/
-
 	.global-notification-panel .notification-info {
 		width: 79%;
 	}
-
 }

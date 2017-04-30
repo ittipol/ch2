@@ -10,7 +10,7 @@ use App\library\url;
 class PersonExperience extends Model
 {
   protected $table = 'person_experiences';
-  protected $fillable = ['person_id','active'];
+  protected $fillable = ['created_by','active'];
   protected $directory = true;
 
   public $formHelper = true;
@@ -112,7 +112,7 @@ class PersonExperience extends Model
   );
 
   public function person() {
-    return $this->hasOne('App\Models\Person','id','person_id');
+    return $this->hasOne('App\Models\Person','id','created_by');
   }
 
   public static function boot() {
@@ -147,11 +147,11 @@ class PersonExperience extends Model
   }
 
   public function getByPersonId() {
-    return $this->where('person_id','=',session()->get('Person.id'))->first();
+    return $this->where('created_by','=',session()->get('Person.id'))->first();
   }
 
   public function checkExistByPersonId() {
-    return $this->where('person_id','=',session()->get('Person.id'))->exists();
+    return $this->where('created_by','=',session()->get('Person.id'))->exists();
   }
 
   public function getPersonExperience() {
@@ -256,7 +256,7 @@ class PersonExperience extends Model
     $string = new String;
     $cache = new Cache;
 
-    $person = Person::find($this->person_id);
+    $person = Person::find($this->created_by);
 
     $imageUrl = null;
     if(!empty($person->profile_image_id)) {
@@ -269,7 +269,7 @@ class PersonExperience extends Model
     }
 
     // Get lastest working exp.
-    $workingExperience = PersonWorkingExperience::where('person_id','=',$person->id)
+    $workingExperience = PersonWorkingExperience::where('created_by','=',$person->id)
     ->orderBy('created_at','desc')
     ->select('position')
     ->first();

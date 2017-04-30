@@ -318,15 +318,15 @@ class NotificationHelper {
               }
 
               foreach ($people as $person) {
-                $receivers[$person->person_id] = $person->person_id;
+                $receivers[$person->created_by] = $person->created_by;
               }
 
             break;
 
           case 'person':
            
-              if(Schema::hasColumn($this->model->getTable(), 'person_id')) {
-                $receivers[$this->model->person_id] = $this->model->person_id;
+              if(Schema::hasColumn($this->model->getTable(), 'created_by')) {
+                $receivers[$this->model->created_by] = $this->model->created_by;
               }
 
             break;
@@ -352,7 +352,7 @@ class NotificationHelper {
         if(Schema::hasColumn($this->model->getTable(), 'shop_id')) {
           $people = Service::loadModel('PersonToShop')
           ->where('shop_id','=',$this->model->shop_id)
-          ->select('person_id')
+          ->select('created_by')
           ->get();
         }else{
 
@@ -362,7 +362,7 @@ class NotificationHelper {
               if($this->model->receiver == 'Shop') {
                 $people = Service::loadModel('PersonToShop')
                 ->where('shop_id','=',$this->model->receiver_id)
-                ->select('person_id')
+                ->select('created_by')
                 ->get();
               }
 
