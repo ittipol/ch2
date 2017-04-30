@@ -66,7 +66,6 @@
 @if($combine)
 <script type="text/javascript" src="{{ URL::asset('js/8fcf1793a14f7d35.js') }}"></script>
 @endif
-<script type="text/javascript" src="{{ URL::asset('js/node_modules/socket.io.js') }}"></script>
 
 @if(!$combine)
 @foreach ($jsFiles as $js)

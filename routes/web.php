@@ -35,10 +35,10 @@ Route::get('/debug',function(){
 
 });
 
-Route::get('/debug_notification',function(){
-  $notification = new App\Models\Notification;
-  $notification->getUnreadNotification();
-});
+// Route::get('/debug_notification',function(){
+//   $notification = new App\Models\Notification;
+//   $notification->getUnreadNotification();
+// });
 
 // 
 
@@ -62,15 +62,14 @@ Route::get('logout',function(){
   return redirect('/');
 });
 
-// Login
+// Login & Register
 Route::group(['middleware' => 'guest'], function () {
   Route::get('login','UserController@login');
   Route::post('login','UserController@auth');
-});
 
-// Register
-Route::get('register','UserController@registerForm')->middleware('guest');
-Route::post('register','UserController@register')->middleware('guest');
+  Route::get('register','UserController@registerForm');
+  Route::post('register','UserController@register');
+});
 
 Route::get('safe_image/{file}', 'StaticFileController@serveImages');
 Route::get('redirect', 'UrlController@redirect');

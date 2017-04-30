@@ -5,14 +5,12 @@
   @include('scripts.meta') 
   <!-- CSS & JS -->
   @include('scripts.script')
-  <!-- Title  -->
-  <title>Chonburi Square</title>
-  <!-- use only in default layout -->
   <link rel="stylesheet" href="{{ URL::asset('__css/layouts/default/header.css') }}" />
   <link rel="stylesheet" href="{{ URL::asset('__css/layouts/default/footer.css') }}" />
   <link rel="stylesheet" href="{{ URL::asset('__css/pages/user/register.css') }}" />
   <link rel="stylesheet" href="{{ URL::asset('__css/pages/user/login.css') }}" />
-  
+  <!-- Title  -->
+  <title>{{$_page_title}}</title>
 </head>
 <body>
 
