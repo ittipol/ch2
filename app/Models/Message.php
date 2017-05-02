@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\library\service;
-use App\library\string;
+use App\library\stringHelper;
 use App\library\date;
 
 class Message extends Model
@@ -43,7 +43,7 @@ class Message extends Model
 
   public function getMessage() {
 
-    $string = new String;
+    $string = new stringHelper;
 
     return $string->truncString($this->message,40,true);
   }

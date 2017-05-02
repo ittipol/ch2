@@ -87,6 +87,10 @@
 
         </div>
 
+      </div>
+
+      <div class="col-md-6 col-xs-12">
+
         <div class="shop-about-content">
           <h4>คำอธิบายเกี่ยวกับ</h4>
           <div class="line"></div>
@@ -100,10 +104,6 @@
           </div>
 
         </div>
-
-      </div>
-
-      <div class="col-md-6 col-xs-12">
 
         @if(!empty($about['brand_story']))
         <div class="shop-about-content">

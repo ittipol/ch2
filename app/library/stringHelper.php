@@ -2,7 +2,7 @@
 
 namespace App\library;
 
-class String
+class stringHelper
 {
   public function truncString($string,$len,$stripTag = true){
 

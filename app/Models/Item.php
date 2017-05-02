@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\library\currency;
-use App\library\string;
+use App\library\stringHelper;
 use App\library\cache;
 use App\library\url;
 
@@ -193,7 +193,7 @@ class Item extends Model
   public function buildPaginationData() {
 
     $currency = new Currency;
-    $string = new String;
+    $string = new stringHelper;
 
     return array(
       // 'id' => $this->id,
@@ -208,7 +208,7 @@ class Item extends Model
   public function buildLookupData() {
 
     $currency = new Currency;
-    $string = new String;
+    $string = new stringHelper;
     $url = new url;
     
     return array(

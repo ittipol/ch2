@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use App\library\service;
 use App\library\url;
 use App\library\cache;
-use App\library\string;
+use App\library\stringHelper;
 use App\library\currency;
 use Route;
 use Auth;
@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
       view()->composer('pages.shop.layouts.header', function($view){
 
         $url = new Url;
-        $string = new String;
+        $string = new stringHelper;
 
         $shop = request()->get('shop');
 

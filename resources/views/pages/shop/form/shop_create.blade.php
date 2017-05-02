@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-lg-7 col-sm-12">
           <div class="title">
-            ชุมชน
+            สร้างร้านค้า
           </div>
           <p>สร้างบริษัท ร้านค้าหรือธุรกิจของคุณ เชื่อมต่อธุรกิจของคุณกับผู้คนที่หลากหลาย เพิ่มช่องทางการขายสินค้า เพิ่มมูลค่าของแบรนด์ และอื่นๆ อีกมากมาย</p>
         </div>
@@ -43,17 +43,6 @@
     </div>
 
     <div class="line space-top-bottom-30"></div>
-
-    <div class="container-header">
-      <div class="row">
-        <div class="col-lg-7 col-sm-12">
-          <div class="title">
-            เพิ่มบริษัท ร้านค้า หรือธุรกิจของคุณ
-          </div>
-          <p>รวมสร้างชุมชน นำสินค้าของคุณมาขายในชุมชน ค้นหาพนักงานให้กับธุรกิจของคุณ รวมถึงการโฆษณาแบรนด์ ธุรกิจ หรืองานบริการของคุณ</p>
-        </div>
-      </div>
-    </div>
 
     <?php 
       echo Form::open(['id' => 'main_form','method' => 'post', 'enctype' => 'multipart/form-data']);

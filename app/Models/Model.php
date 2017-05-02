@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 use App\library\service;
 use App\library\currency;
-use App\library\string;
+use App\library\stringHelper;
 use App\library\cache;
 use App\library\formHelper;
 use App\library\modelData;
@@ -37,7 +37,7 @@ class Model extends BaseModel
   
   public function __construct(array $attributes = []) {
 
-    $string = new String;
+    $string = new stringHelper;
     
     $this->modelName = class_basename(get_class($this));
     $this->modelAlias = $string->generateUnderscoreName($this->modelName);
@@ -570,7 +570,7 @@ class Model extends BaseModel
 
   public function buildLookupData() {
 
-    $string = new String;
+    $string = new stringHelper;
 
     return array(
       'name' => $this->name,

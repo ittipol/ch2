@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\library\string;
+use App\library\stringHelper;
 use App\library\cache;
 use App\library\url;
 use App\library\date;
@@ -342,7 +342,7 @@ class Shop extends Model
 
   public function buildModelData() {
 
-    $string = new String;
+    $string = new stringHelper;
 
     return array(
       'name' => $this->name,
@@ -393,7 +393,7 @@ class Shop extends Model
 
   public function buildLookupData() {
 
-    $string = new String;
+    $string = new stringHelper;
     $cache = new Cache;
     $url = new url;
 

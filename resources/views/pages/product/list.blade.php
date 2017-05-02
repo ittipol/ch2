@@ -7,7 +7,7 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{URL::to('product/shelf')}}" class="btn btn-secondary">กลับไปหน้าสินค้าจากร้านค้า</a>
+          <a href="{{URL::to('product/shelf')}}" class="btn btn-secondary">กลับไปหน้าภาพรวมสินค้า</a>
         </div>
 
       </div>

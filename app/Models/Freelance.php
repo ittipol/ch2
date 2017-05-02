@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\library\currency;
-use App\library\string;
+use App\library\stringHelper;
 use App\library\cache;
 use App\library\url;
 
@@ -84,7 +84,7 @@ class Freelance extends Model
 
   public function buildPaginationData() {
 
-    $string = new String;
+    $string = new stringHelper;
 
     return array(
       'id' => $this->id,
@@ -96,7 +96,7 @@ class Freelance extends Model
 
   public function buildModelData() {
 
-    $string = new String;
+    $string = new stringHelper;
     $currency = new Currency;
 
     return array(
@@ -113,7 +113,7 @@ class Freelance extends Model
 
   public function buildLookupData() {
 
-    $string = new String;
+    $string = new stringHelper;
     $url = new url;
 
     return array(

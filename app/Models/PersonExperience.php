@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\library\service;
-use App\library\string;
+use App\library\stringHelper;
 use App\library\cache;
 use App\library\url;
 
@@ -253,7 +253,7 @@ class PersonExperience extends Model
   public function buildPaginationData() {
 
     $image = new Image;
-    $string = new String;
+    $string = new stringHelper;
     $cache = new Cache;
 
     $person = Person::find($this->created_by);

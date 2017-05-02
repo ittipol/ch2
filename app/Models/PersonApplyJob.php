@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\library\cache;
-use App\library\string;
+use App\library\stringHelper;
 use App\library\date;
 
 class PersonApplyJob extends Model
@@ -94,7 +94,7 @@ class PersonApplyJob extends Model
 
     $image = new Image;
     $cache = new Cache;
-    $string = new String;
+    $string = new stringHelper;
     $date = new Date;
 
     $personExperience = $this->person->personExperience;

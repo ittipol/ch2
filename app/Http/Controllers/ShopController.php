@@ -21,6 +21,8 @@ class ShopController extends Controller
 
     $url = new Url;
 
+    $permission = request()->get('shopPermission');
+
     $model = request()->get('shop');
 
     $pinnedPosts = Service::loadModel('Timeline')
@@ -35,10 +37,17 @@ class ShopController extends Controller
     $_pinnedPosts = array();
     if($pinnedPosts->exists()) {
       foreach ($pinnedPosts->get() as $pinnedPost) {
-        $_pinnedPosts[] = array_merge($pinnedPost->buildModelData(),array(
-          'cancelPinnedUrl' => $url->url('shop/'.$this->param['shopSlug'].'/timeline/pinned/cancel/'.$pinnedPost->id),
-          'deleteUrl' => $url->url('shop/'.$this->param['shopSlug'].'/timeline/delete/'.$pinnedPost->id),
-        ));
+
+        $options = array();
+        if(!empty($permission['edit']) && $permission['edit']) {
+          $options['cancelPinUrl'] = $url->url('shop/'.$this->param['shopSlug'].'/timeline/pinned/cancel/'.$pinnedPost->id);
+        }
+
+        if(!empty($permission['delete']) && $permission['delete']) {
+          $options['deleteUrl'] = $url->url('shop/'.$this->param['shopSlug'].'/timeline/delete/'.$pinnedPost->id);
+        }
+
+        $_pinnedPosts[] = array_merge($pinnedPost->buildModelData(),$options);
       }
     }
 
@@ -74,7 +83,7 @@ class ShopController extends Controller
     }
 
     $this->setData('products',$_products);
-    $this->setData('permission',request()->get('shopPermission'));
+    $this->setData('permission',$permission);
     $this->setData('productCatalogs',$_productCatalogs);
     $this->setData('pinnedMessages',$_pinnedPosts);
 

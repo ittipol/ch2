@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\library\service;
-// use App\library\string;
+// use App\library\stringHelper;
 use Closure;
 use Route;
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\library\service;
-use App\library\string;
+use App\library\stringHelper;
 use App\library\filterHelper;
 
 class SearchController extends Controller

@@ -2,7 +2,10 @@
   <div class="box-header">
     <h4 class="box-header-title">
       <div class="primary-title">
-        <span class="post-owner-name">{{$timeline['owner']}}</span>
+        <span class="post-owner-name">
+          <img class="icon-before-title" src="/images/icons/message-blue.png">
+          {{$timeline['owner']}}
+        </span>
         {{$timeline['title']}}
       </div>
       <div class="secondary-title">{{$timeline['createdDate']}}</div>
@@ -26,14 +29,20 @@
 
   </div>
 
+  @if(!empty($timeline['cancelPinUrl']) || !empty($timeline['deleteUrl']))
   <div class="additional-option">
     <div class="dot"></div>
     <div class="dot"></div>
     <div class="dot"></div>
     <div class="additional-option-content">
-      <a href="{{$timeline['cancelPinnedUrl']}}">ยกเลิกการตรึงข้อความ</a>
+      @if(!empty($timeline['cancelPinUrl']))
+      <a href="{{$timeline['cancelPinUrl']}}">ยกเลิกการตรึงข้อความ</a>
+      @endif
+      @if(!empty($timeline['deleteUrl']))
       <a href="{{$timeline['deleteUrl']}}"  data-modal="1" data-modal-title="ต้องการลบข้อความใช่หรือไม่">ลบข้อความ</a>
+      @endif
     </div>
   </div>
+  @endif
 
 </div>

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\library\currency;
-use App\library\string;
+use App\library\stringHelper;
 use App\library\date;
 use App\library\cache;
 use App\library\url;
@@ -423,7 +423,7 @@ class Product extends Model
 
   public function buildPaginationData() {
 
-    $string = new String;
+    $string = new stringHelper;
     $currency = new Currency;
     
     return array(
@@ -553,7 +553,7 @@ class Product extends Model
   public function buildLookupData() {
 
     $url = new url;
-    $string = new String;
+    $string = new stringHelper;
     $currency = new Currency;
 
     return array(
@@ -580,7 +580,7 @@ class Product extends Model
   public function buildTimelineData() {
 
     $url = new url;
-    $string = new String;
+    $string = new stringHelper;
 
     return array(
       'title' => $string->truncString($this->name,90),

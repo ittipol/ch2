@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\library\string;
+use App\library\stringHelper;
 use App\library\url;
 use File;
 
@@ -107,7 +107,7 @@ class AttachedFile extends Model
 
   public function getFullDirPath($modelName = '',$modelId = '') {
     
-    $string = new String;
+    $string = new stringHelper;
 
     if(empty($modelName)) {
       $modelName = $this->model;
@@ -274,7 +274,7 @@ class AttachedFile extends Model
 
   public function buildModelData() {
 
-    $string = new String;
+    $string = new stringHelper;
 
     return array(
       'filename' => $string->truncString($this->filename,20),

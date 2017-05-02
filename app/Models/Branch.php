@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\library\string;
+use App\library\stringHelper;
 use App\library\cache;
 use App\library\url;
 
@@ -115,7 +115,7 @@ class Branch extends Model
 
   public function buildLookupData() {
 
-    $string = new String;
+    $string = new stringHelper;
     $url = new url;
 
     $shop = ShopRelateTo::select('shop_id')

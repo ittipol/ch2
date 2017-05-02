@@ -55,10 +55,22 @@
             </ul>
           </li>
 
+          <!-- <li class="item">
+            <a href="{{URL::to('product/shelf')}}">สินค้าจากร้านค้า</a>
+          </li>
+
+          <li class="item">
+            <a href="{{URL::to('job/board')}}">ประกาศงาน</a>
+          </li>
+
+          <li class="item">
+            <a href="{{URL::to('advertising/board')}}">โฆษณาจากบริษัทและร้านค้า</a>
+          </li> -->
+
           <li class="line space-top-bottom-10"></li>
 
           <li class="item">
-            <a href="javascript:void(0)">ประกาศซื้อ-เช่า-ขาย</a>
+            <a href="javascript:void(0)">บอร์ดประกาศ</a>
             <ul class="submenu">
               <li class="submenu-item">
                 <a href="{{URL::to('item/board')}}">ประกาศซื้อ-เช่า-ขายสินค้า</a>
@@ -66,6 +78,14 @@
               </li>
             </ul>
           </li>
+
+          <!-- <li class="item">
+            <a href="{{URL::to('item/board')}}">ประกาศซื้อ-เช่า-ขายสินค้า</a>
+          </li>
+
+          <li class="item">
+            <a href="{{URL::to('real-estate/shop')}}">ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</a>
+          </li> -->
 
           <li class="line space-top-bottom-10"></li>
 
