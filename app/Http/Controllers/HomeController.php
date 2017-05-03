@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
 
   public function catPath() {
-
+exit('Error!');
     ini_set('max_execution_time', 200000);
 
     $page = 1;
@@ -70,13 +70,13 @@ class HomeController extends Controller
   }
 
   public function addXxx() {
-
+exit('Error!');
     return $this->view('addCat');
 
   }
 
   public function addXxxSub() {
-
+exit('Error!');
     $parentId = request()->get('pid');
     $str = request()->get('description');
 
@@ -297,11 +297,6 @@ dd('ccc');
   }
 
   public function index() {
-
-    $product = Service::loadModel('Product')
-    ->orderBy('created_at','desc')
-    ->first();
-    $this->setData('product',$product->buildModelData());
 
     $product = Service::loadModel('Product');
     $product->paginator->setPerPage(3);

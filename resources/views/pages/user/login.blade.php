@@ -78,10 +78,10 @@
 
       if(w > 992) {
 
-        $('body').addClass('login-bg');
+        // $('body').addClass('login-bg');
 
         let background = new Image();
-        background.src = '/images/login.jpg';
+        background.src = '/images/banners/_login.jpg';
 
         let windowWidth = window.innerWidth;
         // let windowHeight = window.innerHeight;
