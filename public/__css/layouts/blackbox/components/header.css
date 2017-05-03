@@ -187,10 +187,16 @@ header img.icon-header {
 	background-size: auto 100%;
 }
 
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width : 1367px) {
 	header .hamburger-button {
 		display: none;
 	}
+}
+
+@media only screen and (min-width: 1200px) {
+	/*header .hamburger-button {
+		display: none;
+	}*/
 }
 
 @media only screen and (max-width : 1200px) {
