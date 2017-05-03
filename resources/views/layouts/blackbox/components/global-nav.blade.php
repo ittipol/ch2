@@ -26,21 +26,21 @@
               <a href="{{URL::to('register')}}">สมัครสมาชิก</a>
             </li>
 
-          @else
-
-            <li class="item">
-              <a href="{{URL::to('experience/profile/list')}}">ประวัติการทำงานบุคคล</a>
-            </li>
-
-            <li class="item">
-              <a href="{{URL::to('freelance/board')}}">งานฟรีแลนซ์</a>
-            </li>
-
-            <li class="item">
-              <a href="{{URL::to('community/shop')}}">บริษัทและร้านค้า</a>
-            </li>
+            <li class="line space-top-bottom-10"></li>
 
           @endif
+
+          <li class="item">
+            <a href="{{URL::to('experience/profile/list')}}">ประวัติการทำงานบุคคล</a>
+          </li>
+
+          <li class="item">
+            <a href="{{URL::to('freelance/board')}}">งานฟรีแลนซ์</a>
+          </li>
+
+          <li class="item">
+            <a href="{{URL::to('community/shop')}}">บริษัทและร้านค้า</a>
+          </li>
 
           <li class="line space-top-bottom-10"></li>
 

@@ -9,14 +9,14 @@ class HomeController extends Controller
 {
 
   public function catPath() {
-exit;
-    // ini_set('max_execution_time', 20000);
 
-    $page = 23;
+    ini_set('max_execution_time', 200000);
+
+    $page = 1;
     $perPage = 100;
     $total = Service::loadModel('Category')->count();
 
-    $count = 1;
+    // $count = 1;
 
     do {
 
@@ -57,9 +57,9 @@ exit;
 
       $page++;
 
-      if($count++ > 10) {
-        break;
-      }
+      // if($count++ > 10) {
+      //   break;
+      // }
 
     } while (($offset + $perPage) < $total);
 
@@ -71,7 +71,7 @@ exit;
 
   public function addXxx() {
 
-    return view('addCat');
+    return $this->view('addCat');
 
   }
 

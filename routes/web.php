@@ -11,29 +11,20 @@
 |
 */
 
-//
+// Route::get('cp','HomeController@catPath');
 
-Route::get('cp','HomeController@catPath');
+// Route::get('ac','HomeController@addXxx');
+// Route::post('ac','HomeController@addXxxSub');
 
-Route::get('ac','HomeController@addXxx');
-Route::post('ac','HomeController@addXxxSub');
+// Route::get('cat','HomeController@addCat');
 
-Route::get('cat','HomeController@addCat');
-// Route::get('lan','HomeController@lanAdd');
+// Route::get('/clear-cache', function() {
+//     $exitCode = Artisan::call('cache:clear');
+// });
 
-Route::get('/debug',function(){
-  // session()->forget('cart');
-  dd(session()->all());
-
-  // dd(\Cookie::get('carts'));
-
-  // foreach (session()->get('Shop') as $key => $value) {
-  //   dd($value);
-  // }
-
-  // return view('pages.announcement.create');
-
-});
+// Route::get('/debug',function(){
+//   dd(session()->all());
+// });
 
 // Route::get('/debug_notification',function(){
 //   $notification = new App\Models\Notification;
