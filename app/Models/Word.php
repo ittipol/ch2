@@ -5,7 +5,7 @@ namespace App\Models;
 class Word extends Model
 {
   public $table = 'words';
-  protected $fillable = ['word','description'];
+  protected $fillable = ['word'];
 
   public function __construct() {  
     parent::__construct();

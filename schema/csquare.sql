@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2017 at 06:26 AM
+-- Generation Time: May 04, 2017 at 05:30 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -11995,7 +11995,8 @@ INSERT INTO `data_access_permissions` (`id`, `model`, `model_id`, `access_level`
 (113, 'Branch', 68, 99, 'Shop', 21),
 (114, 'Item', 127, 99, 'Person', 1),
 (115, 'Product', 24, 99, 'Shop', 3),
-(116, 'PersonExperience', 3, 99, 'Person', 13);
+(116, 'PersonExperience', 3, 99, 'Person', 13),
+(117, 'Product', 26, 99, 'Shop', 3);
 
 -- --------------------------------------------------------
 
@@ -13283,7 +13284,8 @@ INSERT INTO `images` (`id`, `model`, `model_id`, `path`, `filename`, `descriptio
 (261, 'Branch', 67, NULL, '1493471500783044437295838491085.jpg', NULL, 1, 1, '2017-04-29 20:11:47', '2017-04-29 20:11:47'),
 (262, 'Item', 127, NULL, '1493533166955674773196545730667.jpg', NULL, 1, 1, '2017-04-30 13:19:37', '2017-04-30 13:19:37'),
 (263, 'Item', 127, NULL, '149353316944304979826518216788.jpg', NULL, 1, 1, '2017-04-30 13:19:37', '2017-04-30 13:19:37'),
-(264, 'Product', 24, NULL, '1493543139557366124073800746399.jpg', NULL, 1, 1, '2017-04-30 16:05:42', '2017-04-30 16:05:42');
+(264, 'Product', 24, NULL, '1493543139557366124073800746399.jpg', NULL, 1, 1, '2017-04-30 16:05:42', '2017-04-30 16:05:42'),
+(265, 'Product', 26, NULL, '1493911712775850955083759930667.jpg', NULL, 1, 1, '2017-05-04 22:28:35', '2017-05-04 22:28:35');
 
 -- --------------------------------------------------------
 
@@ -13995,7 +13997,8 @@ INSERT INTO `lookups` (`id`, `model`, `model_id`, `name`, `keyword_1`, `keyword_
 (70, 'Branch', 67, 'Sq1', 'Gamer Shop', NULL, NULL, NULL, NULL, 'คลองสาน 10600 กรุงเทพมหานคร', NULL, 1, '2017-04-29 20:11:48', '2017-04-29 20:11:48'),
 (71, 'Branch', 68, 'Asok', 'Gamer Shop', NULL, NULL, NULL, NULL, 'คลองขลุง 62120 กำแพงเพชร', NULL, 1, '2017-04-29 20:17:42', '2017-04-29 20:17:42'),
 (72, 'Item', 127, 'ss', 'ขาย', 'เฟอร์นิเจอร์และของใช้ภายในบ้าน', 'สินค้ามือสอง', '12000', NULL, 'คลองสาน 10600 กรุงเทพมหานคร', NULL, 1, '2017-04-30 13:19:38', '2017-04-30 13:19:38'),
-(73, 'Product', 24, 'LCD TV 50"', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-04-30 16:05:43', '2017-04-30 16:05:43');
+(73, 'Product', 24, 'LCD TV 50"', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-04-30 16:05:43', '2017-04-30 16:05:43'),
+(74, 'Product', 26, 'nnnn', NULL, NULL, NULL, NULL, NULL, NULL, 'abc', 1, '2017-05-04 22:28:36', '2017-05-04 22:28:36');
 
 -- --------------------------------------------------------
 
@@ -14928,7 +14931,7 @@ CREATE TABLE `people` (
 --
 
 INSERT INTO `people` (`id`, `user_id`, `name`, `gender`, `birth_date`, `profile_image_id`, `cover_image_id`, `token`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Venom Skake', 'm', '2007-09-05', 228, NULL, 'cL1qB4a7KlpGd65kBLDXbCY7wrwRq5jzM4li6XN5AhP68HDC7VeLh522yFDDX', '2016-12-08 12:57:33', '2017-05-01 18:25:26'),
+(1, 1, 'Venom Skake', 'm', '2007-09-05', 228, NULL, 'Y9ZeJT0RV7zUjnrF6kUhBgBI5op1PsjKE4kCA7D6HE00BAQNy6LBEl6t3NWT3', '2016-12-08 12:57:33', '2017-05-04 22:24:40'),
 (11, 11, 'ABC DEF', NULL, NULL, 0, NULL, NULL, '2017-01-22 13:18:36', '2017-01-22 13:18:36'),
 (12, 12, 'Zero Major', 'f', '1991-03-12', NULL, NULL, '40K2fHLYDOQoH3uIzTcxvNuHBydDLz8FVeFLHfKyjGC5U9DBcYECiCZdtH6Qj', '2017-04-17 10:29:10', '2017-04-29 19:46:34'),
 (13, 2, 'สทชาย แดง', NULL, NULL, NULL, NULL, 'iUKt6b0lM1XEoD1XKA2NFLgyOgY48hjrIKp4E2wvmpe7H82ubwjz3inZVQqOI', '2017-04-30 16:49:31', '2017-04-30 20:39:27');
@@ -15339,7 +15342,9 @@ INSERT INTO `products` (`id`, `name`, `description`, `product_model`, `sku`, `qu
 (21, 'Forerunner 935', '<h3>Premium GPS Running/Triathlon Watch with Wrist-based Heart Rate&sup1;</h3>\r\n\r\n<ul>\r\n	<li>Offers advanced running and multisport features in a comfortable watch you can wear all day, and it only weighs 49 grams</li>\r\n	<li>Provides elevation changes with a built-in barometer; altimeter and electronic compass help you keep your bearings</li>\r\n	<li>Evaluates your training status to indicate if you&rsquo;re undertraining or overdoing it and offers additional performance monitoring features</li>\r\n	<li>Provides advanced dynamics&sup2; for running, cycling and swimming, including ground contact time balance, stride length and more</li>\r\n	<li>Battery life: up to 2 weeks in watch mode, up to 24 hours in GPS mode or up to 50 hours in UltraTrac&trade; mode</li>\r\n</ul>\r\n\r\n<p>Who cares that Forerunner 935 gives you rich data like running dynamics, wrist-based heart rate, training status, FTP and VO2 max? A dedicated athlete like you who&rsquo;s ready to beat yesterday. This premium GPS running/triathlon watch helps you fine-tune your training and recovery to be a better athlete.</p>\r\n\r\n<h3>Fits Your Wrist and Your Fashion Sense</h3>\r\n\r\n<p>Forerunner 935 GPS running/triathlon watch features a lightweight, comfortable design you&rsquo;ll be happy to wear all day. The 935 is compatible with our line of easy-to-swap&nbsp;QuickFit&trade; bands. With a band to suit every event, you can easily change from sporty silicone to classic leather and even high-end metal.</p>\r\n\r\n<h3>Monitor Your Performance, Training and Recovery</h3>\r\n\r\n<p>Just how effective is your current training plan? Forerunner 935 will help you monitor your training and recovery so you can better prepare for a race or training cycle. Training status is a new performance monitoring tool that automatically evaluates your recent exercise history and performance indicators to let you know if you&rsquo;re training productively, peaking or overreaching. The new anaerobic training effect metric opens a window of insight to a critical dimension of training, telling you how your training is improving your ability to push the limits. You can even view your overall training load, which measures your exercise volume from the last 7 days and compares it to the optimal range for your fitness and recent training history.</p>\r\n\r\n<h3>Analyze Your Technique</h3>\r\n\r\n<p>We&rsquo;re making it easier to get the data you need to improve your form. Let Forerunner 935 measure crucial running metrics&sup2; that you can use to analyze your performance. Biomechanical measurements such as cadence, stride length, ground contact time and balance, vertical oscillation and vertical ratio are the key to understanding your form so you can bring your best on race day. These metrics are available with the addition of a compatible heart rate strap&sup2; or the compact Running Dynamics Pod, which clips right onto your waistband. Also, take advantage of feature sets to help with cycling and even swim training. In the water, Forerunner 935 will track your distance, pace, stroke count and more.</p>\r\n\r\n<h3>Go Longer Between Charges</h3>\r\n\r\n<p>Outlast your longest workout with a battery you can rely on, even in the middle of an iron-distance triathlon or ultramarathon. Forerunner 935 features up to 24 hours of battery life in GPS mode and up to 50 hours in UltraTrac battery saver mode. When you&rsquo;re just using it as your day-to-day smartwatch, you&rsquo;ll get up to 2 weeks from a single charge.</p>\r\n\r\n<h3>Run, Sprint, Swim, Bike, Tri</h3>\r\n\r\n<p>Your routine is anything but routine. Forerunner 935 lets you change things up with ease thanks to built-in activity profiles for running (indoor/outdoor), cycling (indoor/outdoor), swimming (pool/open water), cross-country skiing, paddle sports, trail running, hiking, strength training and many more.</p>\r\n\r\n<p>For brick workouts and du/triathlon races, the auto multisport feature lets you switch sports with just one button press. The 935 is compatible with advanced workouts for running, cycling &mdash; and even pool swimming. Create your own custom workouts and download for free from Garmin Connect&trade; online fitness community. Then review your past efforts on the app or share them with family and friends for added motivation.</p>', '', '', 33, 'เรือน', 1, '20000.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, NULL, NULL, 1, 1, '2017-04-03 17:16:06', '2017-04-30 17:02:05'),
 (22, 'PS4 Pro', '', '', '', 43, 'เครื่อง', 1, '19990.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, NULL, NULL, 1, 1, '2017-04-05 18:09:18', '2017-04-05 18:30:03'),
 (23, 'NIKE FREE RN MOTION FLYKNIT 2017', 'NATURAL FLEXIBILITY. ADAPTIVE FIT.\r\nThe Nike Free RN Motion Flyknit 2017 Men''s Running Shoe features an incredibly flexible sole that lets you move naturally and a revolutionary two-strap system for snug, lace-free comfort.\r\n\r\nSEAMLESS COMFORT\r\nNike Flyknit fabric wraps your ankle and foot for a snug yet stretchy feel. A two-strap system lets you customize the fit and eliminates any pressure from traditional laces.\r\n\r\nLIGHTWEIGHT CUSHIONING\r\nSoft and firm foam combine for lightweight cushioning that promotes a smooth ride.\r\n\r\nCOMPLETE FLEXIBILITY\r\nThe lightweight, low-profile Nike Free sole flexes with your foot for a comfortable, natural ride.\r\n\r\nPRODUCT DETAILS\r\nAnatomical rounded heel enables natural movement\r\nWeight: 8.25 ounces (men''s size 10)\r\nOffset: 4mm\r\n\r\nFLYKNIT ORIGINS\r\nNike Flyknit technology was inspired by feedback from runners seeking a shoe with the snug (and virtually unnoticed) fit of a sock. Nike embarked on a four-year mission with teams of programmers, engineers and designers to create the technology needed to make the knit upper with static properties for structure and durability. Then the precise placement of support, flexibility and breathability—all in one layer—was refined. The result is a featherweight, formfitting and virtually seamless upper.\r\n\r\nNIKE FREE ORIGINS\r\nAfter learning that Stanford athletes had been training barefoot, three of Nike''s most innovative and creative employees set out to develop a shoe that felt natural and weightless, similar to bare feet. The team spent four years studying the biomechanics of runners'' feet in motion. The results yielded a profound understanding of the foot''s natural landing angle, pressure and toe position, allowing Nike designers to build an unconventional and flexible running shoe from the inside out.', '', '', 46, 'คู่', 1, '15990.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, NULL, NULL, 1, 1, '2017-04-05 18:32:07', '2017-04-20 17:15:06'),
-(24, 'LCD TV 50"', '', '', '', 98, 'เครื่อง', 1, '35000.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, NULL, NULL, 1, 1, '2017-04-30 16:05:42', '2017-04-30 20:39:54');
+(24, 'LCD TV 50"', '', '', '', 98, 'เครื่อง', 1, '35000.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, NULL, NULL, 1, 1, '2017-04-30 16:05:42', '2017-04-30 20:39:54'),
+(25, 'xxx', '', '', '', 111, 'xxx', 1, '1000.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, NULL, NULL, 0, 1, '2017-05-04 22:25:19', '2017-05-04 22:25:19'),
+(26, 'nnnn', '', '', '', 1111, 'ตัว', 1, '1111.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, NULL, NULL, 0, 1, '2017-05-04 22:28:35', '2017-05-04 22:28:35');
 
 -- --------------------------------------------------------
 
@@ -15549,7 +15554,8 @@ INSERT INTO `product_to_categories` (`product_id`, `category_id`) VALUES
 (21, 374),
 (22, 774),
 (23, 774),
-(24, 1064);
+(24, 1064),
+(26, 937);
 
 -- --------------------------------------------------------
 
@@ -16324,6 +16330,7 @@ INSERT INTO `shop_relate_to` (`shop_id`, `model`, `model_id`) VALUES
 (3, 'Product', 19),
 (3, 'Product', 20),
 (3, 'Product', 24),
+(3, 'Product', 26),
 (3, 'ProductCatalog', 11),
 (3, 'ProductCatalog', 17),
 (3, 'ProductCatalog', 21),
@@ -16700,7 +16707,8 @@ INSERT INTO `taggings` (`id`, `model`, `model_id`, `word_id`, `created_at`) VALU
 (124, 'Product', 17, 93, '2017-03-28 19:21:25'),
 (125, 'Product', 17, 94, '2017-03-28 19:21:25'),
 (126, 'Product', 18, 95, '2017-04-03 10:19:08'),
-(127, 'ProductCatalog', 17, 96, '2017-04-23 14:47:38');
+(127, 'ProductCatalog', 17, 96, '2017-04-23 14:47:38'),
+(128, 'Product', 26, 1, '2017-05-04 22:28:36');
 
 -- --------------------------------------------------------
 
@@ -17657,7 +17665,7 @@ INSERT INTO `weight_units` (`id`, `name`, `unit`) VALUES
 --
 
 CREATE TABLE `words` (
-  `id` int(11) NOT NULL,
+  `id` int(11) UNSIGNED NOT NULL,
   `word` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -17667,104 +17675,7 @@ CREATE TABLE `words` (
 --
 
 INSERT INTO `words` (`id`, `word`, `created_at`) VALUES
-(1, 'aaa', '2017-01-20 13:09:25'),
-(2, 'bbb', '2017-01-20 13:10:46'),
-(3, 'PS4', '2017-01-20 13:54:12'),
-(4, 'game', '2017-01-20 13:54:13'),
-(5, 'console', '2017-01-20 13:54:13'),
-(6, 'Playstation 4', '2017-01-20 20:57:19'),
-(7, 'เครื่องปั่น', '2017-01-21 09:33:33'),
-(8, 'ผลไม้', '2017-01-21 09:33:33'),
-(9, 'เครื่องดื่ม', '2017-01-21 09:33:33'),
-(10, 'เตารีด', '2017-01-21 12:03:58'),
-(11, 'aj', '2017-01-21 12:03:58'),
-(12, 'Waterproof', '2017-01-21 15:20:04'),
-(13, 'Bluetooth 4.0 BLE', '2017-01-21 15:20:04'),
-(14, 'หูฟัง', '2017-01-21 18:34:04'),
-(15, 'gaming gear', '2017-01-21 18:34:04'),
-(16, 'Headphone', '2017-01-21 18:37:52'),
-(17, 'Microphone', '2017-01-21 18:37:52'),
-(18, 'Wireless', '2017-01-21 18:37:52'),
-(19, 'ขายขาด', '2017-01-23 13:18:01'),
-(20, 'ด่วน', '2017-01-23 13:18:01'),
-(21, 'พระราม 9', '2017-01-24 13:12:13'),
-(22, 'MRTเพชรบุรี', '2017-01-24 13:12:13'),
-(23, 'ps', '2017-01-25 12:30:30'),
-(24, 'xv', '2017-01-25 13:14:45'),
-(25, 'ff', '2017-01-25 13:14:45'),
-(26, 'รองเท้าวิ่ง', '2017-01-26 23:00:05'),
-(27, 'php', '2017-01-31 13:02:54'),
-(28, 'full stack', '2017-01-31 13:02:54'),
-(29, 'tester', '2017-01-31 13:02:54'),
-(30, 'home', '2017-01-31 17:42:37'),
-(31, 'town', '2017-01-31 17:42:37'),
-(32, 'bts', '2017-01-31 17:42:37'),
-(33, 't1', '2017-01-31 19:36:28'),
-(34, 't2', '2017-01-31 19:36:28'),
-(35, 't3', '2017-01-31 19:36:28'),
-(36, 'Cat', '2017-01-31 20:49:56'),
-(37, 'Dog', '2017-01-31 20:49:56'),
-(38, 'xxx', '2017-02-04 05:16:33'),
-(39, 'jjj', '2017-02-04 05:16:33'),
-(40, 'hhh', '2017-02-07 15:33:01'),
-(41, 'kkk', '2017-02-07 15:33:01'),
-(42, 'mee', '2017-02-13 10:11:20'),
-(43, 'hell', '2017-02-13 10:27:43'),
-(44, 'heven', '2017-02-13 10:27:43'),
-(45, 'HR', '2017-02-13 11:07:49'),
-(46, 'website', '2017-02-15 11:01:56'),
-(47, 'online', '2017-02-15 11:01:56'),
-(48, 'เขียน', '2017-02-15 11:01:56'),
-(49, 'เว็บ', '2017-02-15 11:01:56'),
-(50, 'abbbb', '2017-02-18 22:00:47'),
-(51, '1', '2017-02-18 22:08:06'),
-(52, 'กล้อง', '2017-02-19 08:58:51'),
-(53, 'DSLR', '2017-02-19 08:58:51'),
-(54, 'smart phone', '2017-02-19 10:51:50'),
-(55, 'computer', '2017-02-19 14:55:11'),
-(56, 'workstation', '2017-02-19 14:55:11'),
-(57, 'fish', '2017-02-19 14:58:13'),
-(58, 'oil', '2017-02-19 14:58:13'),
-(59, 'batman', '2017-02-19 14:59:28'),
-(60, 'toy', '2017-02-19 14:59:28'),
-(61, 'DC', '2017-02-19 14:59:28'),
-(62, 'Final Fantasy', '2017-02-19 19:39:01'),
-(63, '15', '2017-02-19 19:39:01'),
-(64, 'vii', '2017-02-19 20:04:13'),
-(65, 'fifal fantasy', '2017-02-19 20:04:13'),
-(66, 'โมเดล', '2017-02-19 20:18:00'),
-(67, 'ของสะสม', '2017-02-19 20:18:00'),
-(68, 'Noc', '2017-02-19 20:18:00'),
-(69, 'โโ', '2017-02-19 20:18:01'),
-(70, 'holiday pack', '2017-02-19 21:02:48'),
-(71, 'ps4 slim', '2017-02-19 21:02:48'),
-(72, '500 gb', '2017-02-19 21:02:48'),
-(73, 'joy', '2017-02-19 21:06:59'),
-(74, 'controller', '2017-02-19 21:06:59'),
-(75, 'fitbit', '2017-02-19 21:39:05'),
-(76, 'flex', '2017-02-19 21:39:05'),
-(77, 'smart track', '2017-02-19 21:39:05'),
-(78, 'it', '2017-02-19 21:39:06'),
-(79, 'gadget', '2017-02-19 21:39:06'),
-(80, 'condo', '2017-02-20 14:03:25'),
-(81, 'วาดรูป', '2017-02-20 15:49:43'),
-(82, 'graphic', '2017-02-20 15:49:43'),
-(83, 'ออกแบบ', '2017-02-20 15:49:43'),
-(84, 'logo', '2017-02-20 15:49:43'),
-(85, 'สินค้า', '2017-02-20 15:49:43'),
-(86, 'smart watch', '2017-03-01 11:49:07'),
-(87, 'tracking', '2017-03-01 11:49:07'),
-(88, 'shoe', '2017-03-16 12:56:37'),
-(89, 'nike', '2017-03-16 12:56:37'),
-(90, 'iphone', '2017-03-26 13:13:53'),
-(91, 'apple', '2017-03-26 13:14:32'),
-(92, 'iphone 7', '2017-03-26 13:16:56'),
-(93, 'Air max', '2017-03-28 19:21:25'),
-(94, '2017', '2017-03-28 19:21:25'),
-(95, 'เสื้อ', '2017-04-03 10:19:08'),
-(96, 'ip7', '2017-04-23 14:47:38'),
-(97, 'play4', '2017-04-23 18:12:12'),
-(98, 'pp7', '2017-04-24 12:00:51');
+(1, 'abc', '2017-05-04 22:28:36');
 
 --
 -- Indexes for dumped tables
@@ -18438,7 +18349,7 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT for table `data_access_permissions`
 --
 ALTER TABLE `data_access_permissions`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 --
 -- AUTO_INCREMENT for table `districts`
 --
@@ -18478,7 +18389,7 @@ ALTER TABLE `freelance_working_statuses`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=265;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=266;
 --
 -- AUTO_INCREMENT for table `image_types`
 --
@@ -18528,7 +18439,7 @@ ALTER TABLE `length_units`
 -- AUTO_INCREMENT for table `lookups`
 --
 ALTER TABLE `lookups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 --
 -- AUTO_INCREMENT for table `messages`
 --
@@ -18663,7 +18574,7 @@ ALTER TABLE `person_working_experiences`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `product_catalogs`
 --
@@ -18778,12 +18689,12 @@ ALTER TABLE `sub_districts`
 -- AUTO_INCREMENT for table `taggings`
 --
 ALTER TABLE `taggings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 --
 -- AUTO_INCREMENT for table `temporary_files`
 --
 ALTER TABLE `temporary_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 --
 -- AUTO_INCREMENT for table `timelines`
 --
@@ -18794,6 +18705,11 @@ ALTER TABLE `timelines`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `words`
+--
+ALTER TABLE `words`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
