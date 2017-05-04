@@ -134,7 +134,7 @@
           </div>
 
           <div class="shipping-method-input space-top-30">
-            <h5>เลือกวิธีการจัดส่งสินค้า</h5>
+            <h5>ช่องทางการจัดส่ง</h5>
 
             @if(!empty($shippingMethods[$value['shop']['id']]))
 

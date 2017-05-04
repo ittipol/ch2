@@ -79,9 +79,9 @@ class CheckoutController extends Controller
         if($shippingMethodModel->hasShippingMethod($cartProduct['shopId'])) {
 
           if(!isset($shops[$cartProduct['shopId']]['shipping_method_id'])) {
-            return Redirect::back()->withErrors('ยังไม่ได้เลือกวิธีการจัดส่งสินค้า');
+            return Redirect::back()->withErrors('ยังไม่ได้เลือกช่องทางการจัดส่ง');
           }elseif(!$shippingMethodModel->checkShippingMethodExistById($shops[$cartProduct['shopId']]['shipping_method_id'],$cartProduct['shopId'])){
-            return Redirect::back()->withErrors('เกิดข้อผิดพลาดในการเลือกวิธีการจัดส่งสินค้า');
+            return Redirect::back()->withErrors('เกิดข้อผิดพลาดในการเลือกช่องทางการจัดส่ง');
           }
          
         }
