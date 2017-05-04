@@ -33,7 +33,7 @@
     <div class="tile-nav small">
       <div class="tile-nav-image">
         <a href="{{request()->get('shopUrl')}}manage/product_catalog">
-          <img src="/images/common/book.png">
+          <img src="/images/common/tag.png">
         </a>
       </div>
       <div class="tile-nav-info">

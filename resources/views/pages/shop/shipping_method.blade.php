@@ -39,6 +39,7 @@
       echo Form::open(['url' => $addPickingupItemUrl, 'method' => 'post', 'enctype' => 'multipart/form-data']);
     ?>
     <div class="secondary-message-box info space-top-bottom-20">
+      <div class="secondary-message-box-inner">
       <h3>เปิดการใช้งานตัวเลือก "รับสินค้าเอง"</h3>
       <p>*** หากคุณมีหน้าร้าน สามารถที่จะเพิ่มตัวเลือกให้ลูกค้าสามารถรับสินค้าที่หน้าร้านเองได้</p>
       <?php
@@ -48,6 +49,7 @@
           'data-modal-title' => 'ต้องการเพิ่มตัวเลือก "รับสินค้าเอง" ใช่หรือไม่'
         ));
       ?>
+      </div>
     </div>
     <?php
       echo Form::close();
