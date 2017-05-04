@@ -42,7 +42,7 @@
 
       @foreach($_pagination['data'] as $data)
 
-      <div class="col-lg-3 col-sm-4 col-xs-6">
+      <div class="col-lg-3 col-xs-6">
         <div class="card">
 
           <div class="flag-wrapper">

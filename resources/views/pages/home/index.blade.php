@@ -38,7 +38,7 @@
 
     @foreach($products as $data)
 
-    <div class="col-sm-4 col-xs-12">
+    <div class="col-lg-3 col-sm-6 col-xs-6">
       <div class="card">
 
         @if(!empty($data['flag']))
@@ -108,7 +108,7 @@
 
     @foreach($jobs as $data)
 
-    <div class="col-sm-4 col-xs-12">
+    <div class="col-lg-3 col-xs-6">
       <div class="card">
         <div class="image-tile">
           <a href="{{$data['detailUrl']}}">
@@ -162,7 +162,7 @@
 
     @foreach($advertisings as $data)
 
-    <div class="col-sm-4 col-xs-12">
+    <div class="col-lg-3 col-sm-6 col-xs-6">
       <div class="card">
         <div class="image-tile">
           <a href="{{$data['detailUrl']}}">
@@ -218,7 +218,7 @@
 
     @foreach($items as $data)
 
-    <div class="col-sm-4 col-xs-12">
+    <div class="col-lg-3 col-sm-6 col-xs-6">
       <div class="card">
 
         <div class="flag-wrapper">
@@ -277,7 +277,7 @@
 
     @foreach($realEstates as $data)
 
-    <div class="col-sm-4 col-xs-12">
+    <div class="col-lg-3 col-sm-6 col-xs-6">
       <div class="card">
 
         <div class="flag-wrapper">

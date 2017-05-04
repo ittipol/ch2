@@ -299,35 +299,35 @@ dd('ccc');
   public function index() {
 
     $product = Service::loadModel('Product');
-    $product->paginator->setPerPage(3);
+    $product->paginator->setPerPage(4);
     $product->paginator->criteria(array(
       'order' => array('created_at','DESC')
     ));
     $product->paginator->setUrl('product/detail/{id}','detailUrl');
 
     $job = Service::loadModel('Job');
-    $job->paginator->setPerPage(3);
+    $job->paginator->setPerPage(4);
     $job->paginator->criteria(array(
       'order' => array('created_at','DESC')
     ));
     $job->paginator->setUrl('job/detail/{id}','detailUrl');
 
     $advertising = Service::loadModel('Advertising');
-    $advertising->paginator->setPerPage(3);
+    $advertising->paginator->setPerPage(4);
     $advertising->paginator->criteria(array(
       'order' => array('created_at','DESC')
     ));
     $advertising->paginator->setUrl('advertising/detail/{id}','detailUrl');
 
     $item = Service::loadModel('Item');
-    $item->paginator->setPerPage(3);
+    $item->paginator->setPerPage(4);
     $item->paginator->criteria(array(
       'order' => array('created_at','DESC')
     ));
     $item->paginator->setUrl('item/detail/{id}','detailUrl');
 
     $realEstate = Service::loadModel('RealEstate');
-    $realEstate->paginator->setPerPage(3);
+    $realEstate->paginator->setPerPage(4);
     $realEstate->paginator->criteria(array(
       'order' => array('created_at','DESC')
     ));

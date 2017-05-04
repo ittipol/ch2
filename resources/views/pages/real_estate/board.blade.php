@@ -44,7 +44,7 @@
 
             @foreach($board['data']['items'] as $item)
 
-              <div class="col-lg-3 col-sm-4 col-xs-6">
+              <div class="col-lg-3 col-xs-6">
 
                 <div class="card">
 
