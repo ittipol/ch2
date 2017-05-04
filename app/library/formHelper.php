@@ -237,6 +237,10 @@ class FormHelper {
 
     }
 
+    if(!empty(Input::old('Address.district_id'))) {
+      $oldInput['Address']['district_id'] = Input::old('Address.district_id');
+    }
+
     if(!empty(Input::old('Image'))) {
 
       foreach (Input::old('Image') as $token => $value) {

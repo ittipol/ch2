@@ -496,6 +496,9 @@
     map.initialize();
 
     const address = new Address();
+    @if(!empty($_oldInput['Address']['district_id']))
+      address.setDistrictId({{$_oldInput['Address']['district_id']}});
+    @endif
     address.load();
 
     const tagging = new Tagging();

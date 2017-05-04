@@ -215,17 +215,19 @@
 }
 
 @media only screen and (max-width : 480px) {
+	/*.card {
+		width: 300px;
+		margin: 0 auto 20px;
+	}*/
+
+	.card .image-tile .card-image {
+		background-size: 100% auto;
+	}
+}
+
+/*@media only screen and (max-width : 320px) {
 	.card {
 		width: 300px;
 		margin: 0 auto 20px;
 	}
-}
-
-
-@media only screen and (max-width : 320px) {
-	.card {
-		width: 300px;
-		margin: 0 auto 20px;
-	}
-
-}
+}*/

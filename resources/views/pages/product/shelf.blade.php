@@ -41,7 +41,7 @@
           <div class="row">
 
             @foreach($shelf['products']['items'] as $product)
-              <div class="col-lg-3 col-sm-4 col-xs-12">
+              <div class="col-lg-3 col-sm-4 col-xs-6">
 
                 <div class="card">
 
@@ -82,7 +82,7 @@
             @endforeach
 
             @if(!empty($shelf['products']['all']))
-              <div class="col-lg-3 col-xs-12">
+              <div class="col-xs-12">
                 <a href="{{$shelf['productShelfUrl']}}" class="product-all-tile">
                   <span>
                     แสดงสินค้าทั้งหมด<br>

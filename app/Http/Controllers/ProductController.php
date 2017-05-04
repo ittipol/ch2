@@ -70,7 +70,7 @@ class ProductController extends Controller
       $products = $products
       ->select('products.*')
       ->orderBy('products.created_at','desc')
-      ->take(3)
+      ->take(4)
       ->get();
 
       $_products = array();
@@ -83,9 +83,9 @@ class ProductController extends Controller
         
       }
 
-      if($total > 3) {
+      if($total > 4) {
         $_products['all'] = array(
-          'title' => '+'.($total-3)
+          'title' => '+'.($total-4)
         );
       }
 

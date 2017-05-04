@@ -35,7 +35,7 @@ class RealEstateController extends Controller
 
       $realEsates = $realEsates
       ->orderBy('created_at','desc')
-      ->take(3)
+      ->take(4)
       ->get();
 
       $_realEsates = array();
@@ -48,9 +48,9 @@ class RealEstateController extends Controller
         
       }
 
-      if($total > 3) {
+      if($total > 4) {
         $_realEsates['all'] = array(
-          'title' => '+'.($total-3)
+          'title' => '+'.($total-4)
         );
       }
 

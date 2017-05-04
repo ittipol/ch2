@@ -15,9 +15,9 @@
 }
 
 .global-nav .navigation-top {
-  line-height: 63px;
-  border-bottom: 1px solid #ddd;
-  background-color: #fff;
+  line-height: 62px;
+  /*border-bottom: 1px solid #ddd;*/
+  background-color: #C62828;
 }
 
 .navigation-top .logo {
@@ -26,8 +26,8 @@
 }
 
 .navigation-top a.logo-link {
-  /*color: #009688;*/
-  color: #E91E63;
+  /*color: #E91E63;*/
+  color: #fff;
 	font-size: 20px;
 }
 

@@ -38,7 +38,7 @@ class ItemController extends Controller
       $items = $items
       ->select('items.*')
       ->orderBy('items.created_at','desc')
-      ->take(3)
+      ->take(4)
       ->get();
 
       $_items = array();
@@ -51,9 +51,9 @@ class ItemController extends Controller
         
       }
 
-      if($total > 3) {
+      if($total > 4) {
         $_items['all'] = array(
-          'title' => '+'.($total-3)
+          'title' => '+'.($total-4)
         );
       }
 

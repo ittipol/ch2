@@ -34,7 +34,7 @@ class AdvertisingController extends Controller
 
       $advertisings = $advertisings
       ->orderBy('created_at','desc')
-      ->take(3)
+      ->take(4)
       ->get();
 
       $_advertisings = array();
@@ -47,9 +47,9 @@ class AdvertisingController extends Controller
 
       }
 
-      if($total > 3) {
+      if($total > 4) {
         $_advertisings['all'] = array(
-          'title' => '+'.($total-3)
+          'title' => '+'.($total-4)
         );
       }
 

@@ -44,7 +44,7 @@
 
             @foreach($board['data']['items'] as $item)
 
-              <div class="col-lg-3 col-sm-4 col-xs-12">
+              <div class="col-lg-3 col-sm-4 col-xs-6">
 
                 <div class="card">
 
@@ -78,7 +78,7 @@
             @endforeach
 
             @if(!empty($board['data']['all']))
-              <div class="col-lg-3 col-xs-12">
+              <div class="col-xs-12">
                 <a href="{{$board['itemBoardUrl']}}" class="product-all-tile">
                   <span>
                     แสดงประกาศทั้งหมด<br>
