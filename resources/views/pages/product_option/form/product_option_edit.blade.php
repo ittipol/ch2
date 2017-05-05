@@ -26,7 +26,7 @@
   <div class="container-header">
     <div class="row">
       <div class="col-lg-6 col-sm-12">
-        <div class="title">เพิ่มตัวเลือกสินค้า</div>
+        <div class="title">แก้ไขตัวเลือกสินค้า</div>
       </div>
     </div>
   </div>
@@ -45,7 +45,11 @@
   </div>
 
   <?php 
-    echo Form::open(['id' => 'main_form','method' => 'post', 'enctype' => 'multipart/form-data']);
+    echo Form::model($_formData, [
+      'id' => 'main_form',
+      'method' => 'PATCH',
+      'enctype' => 'multipart/form-data'
+    ]);
   ?>
 
   <?php
@@ -149,7 +153,7 @@
   </div>
 
   <?php
-    echo Form::submit('เพิ่มตัวเลือกสินค้า', array(
+    echo Form::submit('บันทึก', array(
       'class' => 'button'
     ));
   ?>
@@ -165,7 +169,7 @@
   $(document).ready(function(){
 
     const images = new Images('_image_group','photo',1);
-    images.load();
+    images.load({!!$_formData['Image']!!});
 
     const form = new Form();
     form.load();

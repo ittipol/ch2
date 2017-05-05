@@ -41,16 +41,16 @@
 <div class="container detail">
 
   @if(!empty($_modelData['flag']))
-    <div class="flag-wrapper">
+    <!-- <div class="flag-wrapper">
       <div class="flag sale-promotion">{{$_modelData['flag']}}</div>
-    </div>
+    </div> -->
   @endif
 
   <div class="image-gallery">
 
     <div class="row">
 
-      <div class="col-sm-12 image-gallary-display">
+      <div class="col-md-9 col-xs-12 image-gallary-display">
 
         <div class="image-description">
          <div class="image-description-inner">
@@ -85,6 +85,66 @@
 
         </div>
         
+      </div>
+
+      <div class="col-md-3 col-xs-12">
+
+        <h3>{{$_modelData['name']}}</h3>
+
+        <div class="item-info">
+
+          <div class="item-info-row">
+            <p>ราคา</p>
+            @if(!empty($_modelData['promotion']))
+              <span class="text-emphasize">{{$_modelData['promotion']['_reduced_price']}}<span class="sub-info-text"> / {{$_modelData['product_unit']}}</span></span>
+              <span class="product-price-discount-tag">{{$_modelData['promotion']['percentDiscount']}}</span>
+              <h5 class="origin-price">{{$_modelData['_price']}}</h5>
+            @else
+              <span class="text-emphasize">{{$_modelData['_price']}}<span class="sub-info-text"> / {{$_modelData['product_unit']}}</span></span>
+            @endif
+          </div>
+
+          <div class="item-info-row">
+            <p>จำนวนการสั่งซื้อขั้นต่ำ</p>
+            <h4 class="text-emphasize">{{$_modelData['minimum']}}<span class="sub-info-text"> {{$_modelData['product_unit']}} / การสั่งซื้อ</span></h4>
+          </div>
+
+          @if($_modelData['shipping_calculate_from'] == 2)
+          <div class="item-info-row">
+            <p>ค่าจัดส่งสินค้า</p>
+            <h4 class="text-emphasize">{{$_modelData['shippingCostText']}}
+              @if(!empty($_modelData['shippingCostAppendText']))
+                <span class="sub-info-text"> / {{$_modelData['shippingCostAppendText']}}</span>
+              @endif
+            </h4>
+            <p class="text-emphasize-green space-top-10">{{$_modelData['freeShippingMessage']}}</p>
+          </div>
+          @endif
+
+        </div>
+
+        <div class="quantity-box">
+        @if($_modelData['active'] && ($_modelData['quantity'] == 0))
+          <h4 class="error-message">{{$_modelData['message_out_of_order']}}</h4>
+        @elseif($_modelData['active'])
+
+          @if($_modelData['quantity'] < 11)
+            <h5 class="text-warning">เหลือเพียง {{$_modelData['quantity']}} {{$_modelData['product_unit']}}</h5>
+          @else
+            <h5 class="text-success">มีสินค้า</h5>
+          @endif
+
+          <div class="clearfix">
+            <input id="product_quantity" class="quantity-text-input pull-left" type="text" name="quantity" value="{{$_modelData['minimum']}}" autocomplete="off" placeholder="จำนวนสินค้าที่สั่งซื้อ" role="number" />
+            <a id="add_to_cart_button" class="button add-to-cart-button pull-right">ใส่ตระกร้า</a>
+          </div>
+
+        @else
+          <h4 class="error-message">ยังไม่เปิดขายสินค้า</h4>
+          <p>สินค้านี้ถูกปิดการสั่งซื้อชั่วคราวจากผู้ขาย</p>
+        @endif
+        </div>
+
       </div>
 
     </div>
@@ -161,31 +221,27 @@
       </div>
     </div>
 
+    <div class="col-md-6 col-xs-12 quantity-box">
     @if($_modelData['active'] && ($_modelData['quantity'] == 0))
-      <div class="col-md-6 col-xs-12 quantity-box">
-        <h4 class="error-message">{{$_modelData['message_out_of_order']}}</h4>
-      </div>
+      <h4 class="error-message">{{$_modelData['message_out_of_order']}}</h4>
     @elseif($_modelData['active'])
 
-      <div class="col-md-6 col-xs-12 quantity-box">
+      @if($_modelData['quantity'] < 11)
+        <h5 class="text-warning">เหลือเพียง {{$_modelData['quantity']}} {{$_modelData['product_unit']}}</h5>
+      @else
+        <h5 class="text-success">มีสินค้า</h5>
+      @endif
 
-        @if($_modelData['quantity'] < 11)
-          <h5 class="text-warning">เหลือเพียง {{$_modelData['quantity']}} {{$_modelData['product_unit']}}</h5>
-        @else
-          <h5 class="text-success">มีสินค้า</h5>
-        @endif
-
-        <div class="clearfix">
-          <input id="product_quantity" class="quantity-text-input pull-left" type="text" name="quantity" value="{{$_modelData['minimum']}}" autocomplete="off" placeholder="จำนวนสินค้าที่สั่งซื้อ" role="number" />
-          <a id="add_to_cart_button" class="button add-to-cart-button pull-right">ใส่ตระกร้า</a>
-        </div>
+      <div class="clearfix">
+        <input id="product_quantity" class="quantity-text-input pull-left" type="text" name="quantity" value="{{$_modelData['minimum']}}" autocomplete="off" placeholder="จำนวนสินค้าที่สั่งซื้อ" role="number" />
+        <a id="add_to_cart_button" class="button add-to-cart-button pull-right">ใส่ตระกร้า</a>
       </div>
+
     @else
-      <div class="col-md-6 col-xs-12 quantity-box">
-        <h4 class="error-message">ยังไม่เปิดขายสินค้า</h4>
-        <p>สินค้านี้ถูกปิดการสั่งซื้อชั่วคราวจากผู้ขาย</p>
-      </div>
+      <h4 class="error-message">ยังไม่เปิดขายสินค้า</h4>
+      <p>สินค้านี้ถูกปิดการสั่งซื้อชั่วคราวจากผู้ขาย</p>
     @endif
+    </div>
     
   </div>
 

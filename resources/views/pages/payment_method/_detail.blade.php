@@ -31,7 +31,7 @@
 
     <div class="row">
 
-      <div class="col-sm-12 image-gallary-display">
+      <div class="col-xs-12 image-gallary-display">
         <div class="image-gallary-display-inner">
 
           <div class="image-gallary-panel">

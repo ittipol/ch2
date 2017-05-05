@@ -107,14 +107,14 @@
   <div class="secondary-message-box error space-bottom-30">
     <div class="secondary-message-box-inner">
       <h3>สินค้าหมด</h3>
-      <p>สินค้านี้จะไม่สามารถสั่งซื้อได้จนกว่าจะเพิ่มจำนวนสินค้า <a href="{{request()->get('shopUrl')}}product/stock/edit/{{$_modelData['id']}}">ไปยังหน้าปรับสินค้า</a></p>
+      <p>สินค้านี้จะไม่สามารถสั่งซื้อได้จนกว่าจะเพิ่มจำนวนสินค้า <a href="{{request()->get('shopUrl')}}product/stock/edit/{{$_modelData['id']}}">ไปยังหน้าปรับจำนวนสินค้า</a></p>
     </div>
   </div>
   @elseif(false && $_modelData['quantity'] < 11)
   <div class="secondary-message-box warning space-bottom-30">
     <div class="secondary-message-box-inner">
       <h3>สินค้าใกล้หมด</h3>
-      <p>โปรดเพิ่มจำนวนสินค้าของคุณ เพื่อให้ลูกค้าสามารถสั่งซื้อสินค้านี้ได้ <a href="{{request()->get('shopUrl')}}product/stock/edit/{{$_modelData['id']}}">ไปยังหน้าปรับสินค้า</a></p>
+      <p>โปรดเพิ่มจำนวนสินค้าของคุณ เพื่อให้ลูกค้าสามารถสั่งซื้อสินค้านี้ได้ <a href="{{request()->get('shopUrl')}}product/stock/edit/{{$_modelData['id']}}">ไปยังหน้าปรับจำนวนสินค้า</a></p>
     </div>
   </div>
   @endif

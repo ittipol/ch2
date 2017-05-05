@@ -26,7 +26,7 @@
 
     <div class="row">
 
-      <div class="col-sm-12 image-gallary-display">
+      <div class="col-xs-12 image-gallary-display">
 
         <div class="image-description">
          <div class="image-description-inner">

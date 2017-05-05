@@ -83,16 +83,16 @@ class CheckoutController extends Controller
           }elseif(!$shippingMethodModel->checkShippingMethodExistById($shops[$cartProduct['shopId']]['shipping_method_id'],$cartProduct['shopId'])){
             return Redirect::back()->withErrors('เกิดข้อผิดพลาดในการเลือกช่องทางการจัดส่ง');
           }
+
+          $specialShippingMethodId = $shippingMethodModel
+          ->select('special_shipping_method_id')
+          ->find($shops[$cartProduct['shopId']]['shipping_method_id'])
+          ->special_shipping_method_id;
+
+          if(($specialShippingMethodId == $pickUpMethodId) && empty($shops[$cartProduct['shopId']]['branch_id'])) {
+            return Redirect::back()->withErrors('ยังไม่ได้ระบุสาขาที่คุณต้องการเข้ารับสินค้า');
+          }
          
-        }
-
-        $specialShippingMethodId = $shippingMethodModel
-        ->select('special_shipping_method_id')
-        ->find($shops[$cartProduct['shopId']]['shipping_method_id'])
-        ->special_shipping_method_id;
-
-        if(($specialShippingMethodId == $pickUpMethodId) && empty($shops[$cartProduct['shopId']]['branch_id'])) {
-          return Redirect::back()->withErrors('ยังไม่ได้ระบุสาขาที่คุณต้องการเข้ารับสินค้า');
         }
 
         // allocate product quantity

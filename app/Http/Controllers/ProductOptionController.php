@@ -51,4 +51,34 @@ class ProductOptionController extends Controller
     return $this->view('pages.product_option.form.product_option_edit');
 
   }
+
+  public function editingSubmit(CustomFormRequest $request) {
+    
+    $model = Service::loadModel('ProductOption')->find($this->param['id']);
+
+    $request->request->add(['product_id' => $this->param['product_id']]);
+
+    if($model->fill($request->all())->save()) {
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
+      return Redirect::to('shop/'.request()->shopSlug.'/product/option/'.$this->param['product_id']);
+    }else{
+      return Redirect::back();
+    }
+
+  }
+
+  public function delete() {
+
+    $model = Service::loadModel('ProductOption')->find($this->param['id']);
+
+    if($model->delete()) {
+      MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
+    }else{
+      MessageHelper::display('ไม่สามารถลบข้อมูลได้','error');
+    }
+
+    return Redirect::to('shop/'.request()->shopSlug.'/product/option/'.$this->param['product_id']);
+
+  }
+  
 }

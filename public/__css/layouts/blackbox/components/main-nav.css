@@ -106,7 +106,7 @@
 .navigation-primary-menu ul > li a.active { 
 	color: #fff;
   /*background-color: rgb(164,61,51);*/
-  background-color: rgb(212,22,48);
+  background-color: #009688;
 }
 
 .navigation-primary-menu ul > li a.active::before {
