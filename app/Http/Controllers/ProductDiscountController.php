@@ -105,33 +105,33 @@ class ProductDiscountController extends Controller
     }
 
     // Get Promotion dates
-    // $promotionDates = Service::loadModel('ProductSalePromotion')
-    // ->where('date_start','>=',$today)
-    // ->where(function($query) use($dateEndInput) {
-    //   $query->where('date_end','<=',$dateEndInput)
-    //         ->orWhere('date_start','<=',$dateEndInput);
-    // })
-    // ->where('model','like',$model->modelName)
-    // ->where('model_id','=',$model->id)
-    // ->orderBy('date_start','ASC')
-    // ->select('date_start','date_end')
-    // ->get();
+    $promotionDates = Service::loadModel('ProductSalePromotion')
+    ->where('date_start','>=',$today)
+    ->where(function($query) use($dateEndInput) {
+      $query->where('date_end','<=',$dateEndInput)
+            ->orWhere('date_start','<=',$dateEndInput);
+    })
+    ->where('model','like',$model->modelName)
+    ->where('product_id','=',$this->param['product_id'])
+    ->orderBy('date_start','ASC')
+    ->select('date_start','date_end')
+    ->get();
 
-    // $hasError = false;
-    // foreach ($promotionDates as $promotionDate) {
+    $hasError = false;
+    foreach ($promotionDates as $promotionDate) {
 
-    //   $dateStartTs = strtotime($promotionDate->date_start);
-    //   $dateEndTs = strtotime($promotionDate->date_end);
+      $dateStartTs = strtotime($promotionDate->date_start);
+      $dateEndTs = strtotime($promotionDate->date_end);
 
-    //   if(($dateStartTs <= $dateStartInputTs) && ($dateEndTs >= $dateStartInputTs) || ($dateStartTs <= $dateEndInputTs) && ($dateEndTs >= $dateEndInputTs)) {
-    //     $hasError = true;
-    //   }
+      if(($dateStartTs <= $dateStartInputTs) && ($dateEndTs >= $dateStartInputTs) || ($dateStartTs <= $dateEndInputTs) && ($dateEndTs >= $dateEndInputTs)) {
+        $hasError = true;
+      }
 
-    //   if($hasError) {
-    //     return Redirect::back()->withErrors(['ไม่สามารถกำหนดระยะเวลานี้ได้ ระยะเวลาโปรโมชั่นที่กำหนดนั้นถูกกำหนดแล้ว']);
-    //   }
+      if($hasError) {
+        return Redirect::back()->withErrors(['ไม่สามารถกำหนดระยะเวลานี้ได้ ระยะเวลาโปรโมชั่นที่กำหนดได้ถูกกำหนดแล้ว']);
+      }
 
-    // }
+    }
 
     $price = Service::loadModel('Product')
     ->select('price')
@@ -155,7 +155,7 @@ class ProductDiscountController extends Controller
 
     if($model->fill($request->all())->save()) {
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/product_sale_promotion/'.$this->param['product_id']);
+      return Redirect::to('shop/'.request()->shopSlug.'/product/sale_promotion/'.$this->param['product_id']);
     }else{
       return Redirect::back();
     }
@@ -168,7 +168,7 @@ class ProductDiscountController extends Controller
 
     if(!empty($activePromotion) && ($activePromotion->model_id == $this->param['id'])) {
       MessageHelper::display('ไม่อนุญาตให้แก้ไขข้อมูลนี้ได้','error');
-      return Redirect::to('shop/'.request()->shopSlug.'/product_sale_promotion/'.$this->param['product_id']);
+      return Redirect::to('shop/'.request()->shopSlug.'/product/sale_promotion/'.$this->param['product_id']);
     }
 
     $currency = new Currency;
@@ -259,10 +259,6 @@ class ProductDiscountController extends Controller
     $this->setData('month',$month);
     $this->setData('year',$year);
 
-    // $this->setData('currentDay',date('j'));
-    // $this->setData('currentMonth',date('n'));
-    // $this->setData('currentYear',$currentYear);
-
     $this->setData('hours',$hours);
     $this->setData('mins',$mins);
 
@@ -298,9 +294,10 @@ class ProductDiscountController extends Controller
               ->orWhere('date_start','<=',$dateEndInput);
       })
       ->where('model','like',$model->modelName)
-      ->where('model_id','=',$model->id)
+      ->where('model_id','!=',$model->id)
+      ->where('product_id','=',$this->param['product_id'])
       ->orderBy('date_start','ASC')
-      ->select('date_start','date_end')
+      ->select('id','date_start','date_end')
       ->get();
 
       $hasError = false;
@@ -314,7 +311,7 @@ class ProductDiscountController extends Controller
         }
 
         if($hasError) {
-          return Redirect::back()->withErrors(['ไม่สามารถกำหนดระยะเวลานี้ได้ ระยะเวลาโปรโมชั่นที่กำหนดนั้นถูกกำหนดแล้ว']);
+          return Redirect::back()->withErrors(['ไม่สามารถกำหนดระยะเวลานี้ได้ ระยะเวลาโปรโมชั่นที่กำหนดได้ถูกกำหนดแล้ว']);
         }
 
       }
@@ -367,11 +364,25 @@ class ProductDiscountController extends Controller
 
     if($model->fill($request->all())->save()) {
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/product_sale_promotion/'.$this->param['product_id']);
+      return Redirect::to('shop/'.request()->shopSlug.'/product/sale_promotion/'.$this->param['product_id']);
     }else{
       return Redirect::back();
     }
     
+  }
+
+  public function delete() {
+
+    $model = Service::loadModel('ProductDiscount')->find($this->param['id']);
+
+    if($model->delete()) {
+      MessageHelper::display('ยกเลิกการประกาศแล้ว','success');
+    }else{
+      MessageHelper::display('ไม่สามารถยกเลิกการประกาศได้','error');
+    }
+
+    return Redirect::to('shop/'.request()->shopSlug.'/product/sale_promotion/'.$this->param['product_id']);
+
   }
 
 }

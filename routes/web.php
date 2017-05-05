@@ -321,7 +321,15 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::get('shop/{shopSlug}/product/notification/edit/{id}','ProductController@notificationEdit')->name('shop.product_notification.edit');
   Route::patch('shop/{shopSlug}/product/notification/edit/{id}','ProductController@notificationEditingSubmit')->name('shop.product_notification.edit');
 
-  Route::get('shop/{shopSlug}/product/option/{id}','ProductController@productOption')->name('shop.product_product_option');
+  Route::get('shop/{shopSlug}/product/option/{id}','ProductController@productOption')->name('shop.product_option');
+
+  Route::get('shop/{shopSlug}/product/option/add/product_id:{product_id}','ProductOptionController@add')->name('shop.product_option.add');
+  Route::post('shop/{shopSlug}/product/option/add/product_id:{product_id}','ProductOptionController@addingSubmit')->name('shop.product_option.add');
+
+  Route::get('shop/{shopSlug}/product/option/edit/{id}/product_id:{product_id}','ProductOptionController@edit')->name('shop.product_option.edit');
+  Route::patch('shop/{shopSlug}/product/option/edit/{id}/product_id:{product_id}','ProductOptionController@editingSubmit')->name('shop.product_option.edit');
+
+  Route::get('shop/{shopSlug}/product/option/delete/{id}/product_id:{product_id}','ProductOptionController@delete')->name('shop.product_option.delete');
 
   Route::get('shop/{shopSlug}/product/sale_promotion/{id}','ProductController@salePromotion')->name('shop.product_sale_promotion');
 
@@ -330,6 +338,8 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
   Route::get('shop/{shopSlug}/product/discount/edit/{id}/product_id:{product_id}','ProductDiscountController@edit')->name('shop.product_discount.edit');
   Route::patch('shop/{shopSlug}/product/discount/edit/{id}/product_id:{product_id}','ProductDiscountController@editingSubmit')->name('shop.product_discount.edit');
+
+  Route::get('shop/{shopSlug}/product/discount/delete/{id}/product_id:{product_id}','ProductDiscountController@delete')->name('shop.product_discount.delete');
 
   Route::get('shop/{shopSlug}/product/branch/edit/{id}','ProductController@branchEdit')->name('shop.product_branch.edit');
   Route::patch('shop/{shopSlug}/product/branch/edit/{id}','ProductController@branchEditingSubmit')->name('shop.product_branch.edit');

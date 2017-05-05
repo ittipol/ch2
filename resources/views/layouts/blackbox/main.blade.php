@@ -7,7 +7,11 @@
   @include('scripts.script')
   <script type="text/javascript" src="{{ URL::asset('js/node_modules/socket.io.js') }}"></script>
   <!-- Title  -->
+  @if(!empty($_page_title))
   <title>{{$_page_title}}</title>
+  @else
+  <title>Sunday Square | จุดเริ่มต้นสำหรับคุณ</title>
+  @endif
 </head>
 <body>
 

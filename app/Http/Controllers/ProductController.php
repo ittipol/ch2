@@ -819,6 +819,7 @@ class ProductController extends Controller
     $model->paginator->setUrl('shop/'.request()->shopSlug.'/product/option/delete/{id}/product_id:'.$this->param['id'],'deleteUrl');
 
     $this->data = $model->paginator->build();
+    $this->setData('productOptionAdd',request()->get('shopUrl').'product/option/add/product_id:'.$this->param['id']);
 
     return $this->view('pages.product.product_option');
   }
@@ -852,11 +853,11 @@ class ProductController extends Controller
           'active' => false,
           'remainingDays' => $salePromotion->calRemainingDays(),
           'data' => array_merge($salePromotion->buildModelData(),$salePromotion->{lcfirst($salePromotion->model)}->buildModelData()),
-          'editUrl' => $url->setAndParseUrl(request()->get('shopUrl').'product_discount/edit/{id}/product_id:{product_id}',array(
+          'editUrl' => $url->setAndParseUrl(request()->get('shopUrl').'product/discount/edit/{id}/product_id:{product_id}',array(
             'id' => $salePromotion->model_id,
             'product_id' => $model->id
           )),
-          'deleteUrl' => $url->setAndParseUrl(request()->get('shopUrl').'product_discount/delete/{id}/product_id:{product_id}',array(
+          'deleteUrl' => $url->setAndParseUrl(request()->get('shopUrl').'product/discount/delete/{id}/product_id:{product_id}',array(
             'id' => $salePromotion->model_id,
             'product_id' => $model->id
           )),
@@ -866,7 +867,7 @@ class ProductController extends Controller
 
     $this->setData('salePromotions',$_salePromotions);
     $this->setData('originalPrice',$model->getOriginalPrice(true));
-    $this->setData('productDiscountAdd',request()->get('shopUrl').'product_discount/add/product_id:'.$model->id);
+    $this->setData('productDiscountAdd',request()->get('shopUrl').'product/discount/add/product_id:'.$model->id);
 
     return $this->view('pages.product.sale_promotion');
 

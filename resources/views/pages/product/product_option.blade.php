@@ -16,6 +16,25 @@
 
     </div>
 
+    <div class="tile-nav-group space-top-bottom-20 clearfix">
+
+      <div class="tile-nav small">
+        <div class="tile-nav-image">
+          <a href="{{$productOptionAdd}}">
+            <img src="/images/common/plus.png">
+          </a>
+        </div>
+        <div class="tile-nav-info">
+          <a href="{{$productOptionAdd}}">
+            <h4 class="tile-nav-title">เพิ่มตัวเลือกสินค้า</h4>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="line"></div>
+
     @if(!empty($_pagination['data']))
 
       <div class="grid-card">
@@ -62,7 +81,7 @@
                   <div class="dot"></div>
                   <div class="dot"></div>
                   <div class="additional-option-content">
-                    <a href="{{$data['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการลบตัวเลือก {{$data['name']}} ใช่หรือไม่">ลบสินค้า</a>
+                    <a href="{{$data['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการลบตัวเลือก {{$data['name']}} ใช่หรือไม่">ลบ</a>
                   </div>
                 </div>
               

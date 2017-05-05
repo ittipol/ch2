@@ -25,7 +25,7 @@ class ProductOption extends Model
       'quantity' => 'numeric',
     ),
     'messages' => array(
-      'name.required' => 'ชื่อสินค้าห้ามว่าง',
+      'name.required' => 'ชื่อตัวเลือกห้ามว่าง',
       'price.regex' => 'จำนวนราคาไม่ถูกต้อง',
       'quantity.numeric' => 'โปรดกรอกจำนวนสินค้าด้วยตัวเลข',
     )

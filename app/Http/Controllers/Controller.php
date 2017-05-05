@@ -18,7 +18,7 @@ class Controller extends BaseController
 
   protected $slug;
   protected $data = array();
-  protected $pageTitle = 'Sunday Square | จุดเริ่มต้นสำหรับคุณ';
+  protected $pageTitle = null;
   protected $param;
   protected $query;
   protected $entity;

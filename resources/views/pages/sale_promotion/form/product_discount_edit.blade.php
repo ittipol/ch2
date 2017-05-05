@@ -7,7 +7,7 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{request()->get('shopUrl')}}product_sale_promotion/{{request()->product_id}}" class="btn btn-secondary">กลับไปหน้าโปรโมชั่นการขาย</a>
+          <a href="{{request()->get('shopUrl')}}product/sale_promotion/{{request()->product_id}}" class="btn btn-secondary">กลับไปหน้าโปรโมชั่นการขาย</a>
           <button class="btn btn-secondary additional-option">
             ...
             <div class="additional-option-content">
@@ -125,11 +125,13 @@
       ระยะเวลาโปรโมชั่นลดราคา
     </div>
 
-    <div class="alert alert-danger space-top-20" role="alert">
-      <h4>โปรดอ่านก่อนการกำหนดระยะเวลาโปรโมขั่น</h4>
-      <p class="error-message">* โปรโมชั่นจะถูกใช้งานทันทีเมื่อถึงระยะที่ได้กำหนดไว้</p>
-      <p class="error-message">* ไม่สามารถเพิ่มโปรโมชั่นในระยะเวลาที่ได้เคยกำหนดไว้แล้วได้</p>
-      <p class="error-message">* เมื่อโปรโมชั่นถูกใช้งานจะไม่สามารถ <strong>แก้ไข</strong> หรือ <strong>ลบ</strong> โปรโมชั่นนั้นได้</p>
+    <div class="secondary-message-box info space-bottom-30">
+      <div class="secondary-message-box-inner">
+        <h3>โปรดอ่านก่อนการกำหนดระยะเวลาโปรโมขั่น</h3>
+        <p>*** โปรโมชั่นจะถูกใช้งานทันทีเมื่อถึงระยะที่ได้กำหนดไว้</p>
+        <p>*** ไม่สามารถเพิ่มโปรโมชั่นในระยะเวลาที่ได้เคยกำหนดไว้แล้วได้</p>
+        <p>*** เมื่อโปรโมชั่นถูกใช้งานจะไม่สามารถ <strong>แก้ไข</strong> หรือ <strong>ลบ</strong> โปรโมชั่นนั้นได้</p>
+      </div>
     </div>
 
     <div class="form-row">

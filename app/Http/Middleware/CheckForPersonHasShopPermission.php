@@ -225,6 +225,14 @@ class CheckForPersonHasShopPermission
             'param' => 'product_id'
           )
         ),
+        'shop.product_discount.delete' => array(
+          'permission' => 'delete',
+          'modelName' => 'ProductDiscount',
+          'parent' => array(
+            'modelName' => 'Product',
+            'param' => 'product_id'
+          )
+        ),
         'shop.payment_method' => array(
           'permission' => true
         ),
@@ -314,10 +322,31 @@ class CheckForPersonHasShopPermission
           'permission' => 'delete',
           'modelName' => 'Timeline'
         ),
-        'shop.product_product_option' => array(
+        'shop.product_option' => array(
           'permission' => true,
           'modelName' => 'Product'
         ),
+        'shop.product_option.add' => array(
+          'permission' => 'add',
+          'parent' => array(
+            'modelName' => 'Product',
+            'param' => 'product_id'
+          )
+        ),
+        'shop.product_option.edit' => array(
+          'permission' => 'edit',
+          'parent' => array(
+            'modelName' => 'Product',
+            'param' => 'product_id'
+          )
+        ),
+        'shop.product_option.delete' => array(
+          'permission' => 'delete',
+          'parent' => array(
+            'modelName' => 'Product',
+            'param' => 'product_id'
+          )
+        )
       );
 
       if(empty($name) || !isset($pages[$name])) {

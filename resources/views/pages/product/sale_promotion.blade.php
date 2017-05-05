@@ -75,7 +75,7 @@
             <div class="dot"></div>
             <div class="additional-option-content">
               <a href="{{$salePromotion['editUrl']}}">แก้ไข</a>
-              <a href="{{$salePromotion['deleteUrl']}}">ลบ</a>
+              <a href="{{$salePromotion['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการลบใช่หรือไม่">ลบ</a>
             </div>
           </div>
 
