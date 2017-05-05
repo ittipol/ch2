@@ -22,7 +22,7 @@
 
   <div class="row">
 
-    <div class="image-gallery col-md-9 col-xs-12">
+    <div class="image-gallery space-top-20 col-md-9 col-xs-12">
 
       @if(!empty($_modelData['flag']))
         <div class="flag-wrapper">
