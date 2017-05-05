@@ -13,7 +13,6 @@ class Product extends Model
   protected $table = 'products';
   protected $fillable = ['name','description','product_model','sku','quantity','quantity_available','minimum','product_unit','price','weight','weight_unit_id','length','length_unit_id','width','height','specifications','message_out_of_order','shipping_calculate_from','flag_message_from','flag_message','active','created_by'];
   protected $modelRelations = array('Image','Tagging','ProductToCategory','RelateToBranch','ShopRelateTo');
-  // protected $directory = true;
 
   public $formHelper = true;
   public $modelData = true;
@@ -527,6 +526,15 @@ class Product extends Model
 
   }
 
+  public function getProductOptions() {
+
+    return $this->getRelatedData('ProductOption',array(
+      'fields' => array('product_id','name','quantity','price'),
+      'order' => array('created_at','asc'),
+    ));
+
+  }
+
   public function getPromotion($salePromotionTypeAlias = null) {
 
     $now = date('Y-m-d H:i:s');
@@ -538,7 +546,7 @@ class Product extends Model
         array('date_end','>=',$now)
       ),
       'fields' => array('model','model_id','date_start','date_end'),
-      'order' => array('date_start','ASC'),
+      'order' => array('date_start','asc'),
       'first' => true
     ));
 

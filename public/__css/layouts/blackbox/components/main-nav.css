@@ -16,8 +16,7 @@
 
 .global-nav .navigation-top {
   line-height: 62px;
-  /*border-bottom: 1px solid #ddd;*/
-  background-color: #C62828;
+  border-bottom: 1px solid #ddd;
 }
 
 .navigation-top .logo {
@@ -26,8 +25,7 @@
 }
 
 .navigation-top a.logo-link {
-  /*color: #E91E63;*/
-  color: #fff;
+  color: rgb(212,22,48);
 	font-size: 20px;
 }
 
@@ -107,7 +105,8 @@
 .navigation-primary-menu ul > li a:hover,
 .navigation-primary-menu ul > li a.active { 
 	color: #fff;
-  background-color: rgb(164,61,51);
+  /*background-color: rgb(164,61,51);*/
+  background-color: rgb(212,22,48);
 }
 
 .navigation-primary-menu ul > li a.active::before {

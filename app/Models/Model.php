@@ -27,7 +27,7 @@ class Model extends BaseModel
   protected $sortingFields = array();
   protected $behavior;
   protected $validation;
-  protected $directory = false;
+  // protected $directory = false;
   protected $directoryPath;
   protected $imageCache = array();
 

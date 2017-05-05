@@ -146,6 +146,13 @@
     </div>
 
     <div class="list-item">
+      <a href="{{request()->get('shopUrl')}}product/option/{{$_modelData['id']}}">
+        <img class="icon" src="/images/common/pencil.png" >
+        <h4>ตัวเลือกสินค้า</h4>
+      </a>
+    </div>
+
+    <div class="list-item">
       <a href="{{request()->get('shopUrl')}}product/category/edit/{{$_modelData['id']}}">
         <img class="icon" src="/images/common/pencil.png" >
         <h4>หมวดสินค้า</h4>
@@ -185,7 +192,7 @@
     </div>
 
     <div class="list-item">
-      <a href="{{request()->get('shopUrl')}}product/sale_promotion/edit/{{$_modelData['id']}}">
+      <a href="{{request()->get('shopUrl')}}product/sale_promotion/{{$_modelData['id']}}">
         <img class="icon" src="/images/common/pencil.png" >
         <h4>โปรโมชั่นการขาย</h4>
       </a>
@@ -194,7 +201,7 @@
     <div class="list-item">
       <a href="{{request()->get('shopUrl')}}product/shipping/edit/{{$_modelData['id']}}">
         <img class="icon" src="/images/common/pencil.png" >
-        <h4>การคำนวณขนส่งสินค้า</h4>
+        <h4>การคำนวณค่าขนส่งสินค้า</h4>
       </a>
       <div class="list-item-group-info">
         <h5><b>วิธีการคำนวณค่าขนส่ง</b>: {{$_modelData['_shipping_calculate_from']}}</h5>

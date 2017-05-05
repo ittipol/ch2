@@ -314,6 +314,10 @@ class CheckForPersonHasShopPermission
           'permission' => 'delete',
           'modelName' => 'Timeline'
         ),
+        'shop.product_product_option' => array(
+          'permission' => true,
+          'modelName' => 'Product'
+        ),
       );
 
       if(empty($name) || !isset($pages[$name])) {

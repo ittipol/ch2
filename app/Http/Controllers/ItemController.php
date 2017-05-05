@@ -78,11 +78,6 @@ class ItemController extends Controller
 
     $model = Service::loadModel('Item');
     $filterHelper = new FilterHelper($model);
-    
-    $page = 1;
-    if(!empty($this->query['page'])) {
-      $page = $this->query['page'];
-    }
 
     $page = 1;
     if(!empty($this->query['page'])) {

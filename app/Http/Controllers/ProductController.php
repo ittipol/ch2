@@ -797,6 +797,32 @@ class ProductController extends Controller
     return $this->_save(Service::loadModel('Product')->find($this->param['id']),$request->all());
   }
 
+  public function productOption() {
+
+    $url = new Url;
+    
+    $model = Service::loadModel('ProductOption');
+    
+    $page = 1;
+    if(!empty($this->query['page'])) {
+      $page = $this->query['page'];
+    }
+
+    $model->paginator->criteria(array(
+      'conditions' => array(
+        array('product_id','=',$this->param['id']) 
+      )
+    ));
+    $model->paginator->setPage($page);
+    $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/product/option'.$this->param['id']);
+    $model->paginator->setUrl('shop/'.request()->shopSlug.'/product/option/edit/{id}/product_id:'.$this->param['id'],'editUrl');
+    $model->paginator->setUrl('shop/'.request()->shopSlug.'/product/option/delete/{id}/product_id:'.$this->param['id'],'deleteUrl');
+
+    $this->data = $model->paginator->build();
+
+    return $this->view('pages.product.product_option');
+  }
+
   public function salePromotion() {
 
     $url = new Url;

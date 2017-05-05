@@ -321,6 +321,8 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::get('shop/{shopSlug}/product/notification/edit/{id}','ProductController@notificationEdit')->name('shop.product_notification.edit');
   Route::patch('shop/{shopSlug}/product/notification/edit/{id}','ProductController@notificationEditingSubmit')->name('shop.product_notification.edit');
 
+  Route::get('shop/{shopSlug}/product/option/{id}','ProductController@productOption')->name('shop.product_product_option');
+
   Route::get('shop/{shopSlug}/product/sale_promotion/{id}','ProductController@salePromotion')->name('shop.product_sale_promotion');
 
   Route::get('shop/{shopSlug}/product/discount/add/product_id:{product_id}','ProductDiscountController@add')->name('shop.product_discount.add');

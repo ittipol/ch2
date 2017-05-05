@@ -12,7 +12,6 @@ class Item extends Model
   protected $table = 'items';
   protected $fillable = ['name','announcement_detail','description','price','announcement_type_id','used','created_by'];
   protected $modelRelations = array('Image','Address','Tagging','Contact','ItemToCategory');
-  protected $directory = true;
 
   public $formHelper = true;
   public $modelData = true;
