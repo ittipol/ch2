@@ -3,52 +3,32 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 
-<!-- <div class="top-header-wrapper top-header-border">
-  <div class="container">
-    <div class="top-header">
-      <div class="detail-title">
-        <div class="row">
-          <div class="col-xs-11">
-            <h2 class="title">{{$_modelData['name']}}</h2>
-            @if(!empty($_modelData['Tagging']))
-              <div class="tag-group">
-                @foreach ($_modelData['Tagging'] as $tagging)
-                  <a class="tag-box">{{$tagging['_word']}}</a>
-                @endforeach
-              </div>
-            @endif
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-
 <div class="container">
 
   @if(!empty($categoryPaths))
-  <!-- <ol class="breadcrumb">
+  <ol class="breadcrumb space-top-20 space-bottom-10">
     @foreach($categoryPaths as $path)
     <li class="breadcrumb-item">
       <a href="{{$path['url']}}">{{$path['name']}}</a>
     </li>
     @endforeach
-  </ol> -->
+  </ol>
+  <div class="line"></div>
   @endif
 
 </div>
 
 <div class="container detail">
 
-  @if(!empty($_modelData['flag']))
-    <!-- <div class="flag-wrapper">
-      <div class="flag sale-promotion">{{$_modelData['flag']}}</div>
-    </div> -->
-  @endif
-
   <div class="row">
 
     <div class="image-gallery col-md-9 col-xs-12">
+
+      @if(!empty($_modelData['flag']))
+        <div class="flag-wrapper">
+          <div class="flag sale-promotion">{{$_modelData['flag']}}</div>
+        </div>
+      @endif
 
       <div class="image-gallary-display">
 
