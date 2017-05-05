@@ -335,6 +335,7 @@ class CheckForPersonHasShopPermission
         ),
         'shop.product_option.edit' => array(
           'permission' => 'edit',
+          'modelName' => 'ProductOption',
           'parent' => array(
             'modelName' => 'Product',
             'param' => 'product_id'
@@ -342,6 +343,7 @@ class CheckForPersonHasShopPermission
         ),
         'shop.product_option.delete' => array(
           'permission' => 'delete',
+          'modelName' => 'ProductOption',
           'parent' => array(
             'modelName' => 'Product',
             'param' => 'product_id'

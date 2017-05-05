@@ -222,4 +222,8 @@
 	.card .image-tile .card-image {
 		background-size: 100% auto;
 	}
+
+	.card .button-group .additional-option {
+		width: 35px;
+	}
 }

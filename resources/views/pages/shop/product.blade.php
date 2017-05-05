@@ -89,7 +89,7 @@
   <div class="line"></div>
 
   @if(!empty($_pagination['data']))
-
+  
     <div class="grid-card">
 
       <div class="row">

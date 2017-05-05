@@ -78,7 +78,7 @@ class FilterHelper {
 
     $validation = new validation;
 
-    $wordModel = Service::loadModel('word');
+    $wordModel = Service::loadModel('Word');
     $province = Service::loadModel('Province');
     $district = Service::loadModel('District');
     $subDistrict = Service::loadModel('SubDistrict');

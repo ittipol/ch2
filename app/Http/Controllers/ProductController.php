@@ -547,7 +547,7 @@ class ProductController extends Controller
 
       session()->flash('product_added', true);
 
-      MessageHelper::display('ข้อมูลถูกเพิ่มแล้ว','success');
+      MessageHelper::display('สินค้าถูกเพิ่มแล้ว','success');
       return Redirect::to('shop/'.request()->shopSlug.'/manage/product/'.$model->id);
     }else{
       return Redirect::back();

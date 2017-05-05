@@ -13,7 +13,7 @@
 
 <div class="container">
 
-  @include('components.form_error') 
+  @include('components.form_error')
 
   <?php 
     echo Form::open(['id' => 'main_form','method' => 'post', 'enctype' => 'multipart/form-data']);
