@@ -7,7 +7,7 @@
           <button class="btn btn-secondary additional-option">
             จัดการ...
             <div class="additional-option-content">
-              <a href="{{$_shop_product_url}}">สินค้าในร้านค้า</a>
+              <a href="{{$_shop_product_url}}">สินค้าจากร้านค้า</a>
               <a href="{{$_shop_job_url}}">การประกาศงานงาน</a>
               <a href="{{$_shop_advertising_url}}">การโฆษณา</a>
             </div>
