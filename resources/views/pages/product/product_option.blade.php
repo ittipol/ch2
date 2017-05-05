@@ -26,6 +26,19 @@
         </div>
         <div class="tile-nav-info">
           <a href="{{$productOptionAdd}}">
+            <h4 class="tile-nav-title">เพิ่มหัวข้อตัวเลือกสินค้า</h4>
+          </a>
+        </div>
+      </div>
+
+      <div class="tile-nav small">
+        <div class="tile-nav-image">
+          <a href="{{$productOptionAdd}}">
+            <img src="/images/common/plus.png">
+          </a>
+        </div>
+        <div class="tile-nav-info">
+          <a href="{{$productOptionAdd}}">
             <h4 class="tile-nav-title">เพิ่มตัวเลือกสินค้า</h4>
           </a>
         </div>

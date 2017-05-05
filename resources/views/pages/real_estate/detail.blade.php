@@ -154,7 +154,7 @@
   <div class="line space-top-bottom-20"></div>
 
   <div class="row">
-    <div class="list-description col-md-6 col-sm-12">
+    <div class="list-description col-md-6 col-xs-12">
       <dl class="list-description-item row">
         <dt class="col-sm-4">ประเภท</dt>
         <dd class="col-sm-8">{{$_modelData['_realEstateTypeName']}}</dd>
@@ -171,7 +171,7 @@
       </dl>
     </div>
 
-    <div class="list-description col-md-6 col-sm-12">
+    <div class="list-description col-md-6 col-xs-12">
       <dl class="list-description-item row">
         <dt class="col-sm-4">เฟอร์นิเจอร์</dt>
         <dd class="col-sm-8">{{$_modelData['_furniture']}}</dd>

@@ -60,11 +60,11 @@
           'class' => 'required'
         ));
       ?>
-      <div class="form-item-group no-padding no-border-bottom">
+      <div class="form-item-group no-padding">
         <div class="form-item-group-inner">
           <div class="row">
             <div class="col-sm-12">
-              <label class="choice-box">
+              <label class="choice-box no-border-bottom">
                 <?php
                   echo Form::radio('display_type', 1, true);
                 ?> 
@@ -73,7 +73,7 @@
             </div>
 
             <div class="col-sm-12">
-              <label class="choice-box">
+              <label class="choice-box no-border-bottom">
                 <?php
                   echo Form::radio('display_type', 2);
                 ?> 
@@ -82,7 +82,7 @@
             </div>
 
             <div class="col-sm-12">
-              <label class="choice-box">
+              <label class="choice-box no-border-bottom">
                 <?php
                   echo Form::radio('display_type', 3);
                 ?> 

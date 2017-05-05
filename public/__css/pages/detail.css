@@ -64,8 +64,12 @@
 }
 
 .detail-info-section .detail-info {
-	/*margin-top: 10px;*/
 	margin: 10px 0 20px;
+}
+
+.detail-info-section .detail-info.description {
+	font-size: 18px;
+	padding: 0 10px;
 }
 
 .tag-group .tag-box {

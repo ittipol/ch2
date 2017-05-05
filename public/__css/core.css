@@ -146,6 +146,14 @@ a.button:visited {
 	padding: 0 !important;
 }
 
+.no-border {
+	border: 0 !important;
+}
+
+.no-border-bottom {
+	border-bottom: 0 !important;
+}
+
 .elem-center {
 	margin: 0 auto !important;
 	display: block;

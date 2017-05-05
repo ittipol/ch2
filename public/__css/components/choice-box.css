@@ -4,10 +4,6 @@
 	border-bottom: 1px solid #bababa;
 }
 
-.form-item-group.no-border-bottom label.choice-box {
-	border-bottom: 0;
-}
-
 label.choice-box {
 	position: relative;
 }
