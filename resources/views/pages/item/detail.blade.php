@@ -31,11 +31,11 @@
 
   <h4 class="title-with-icon location-pin">{{$_modelData['Address']['_short_address']}}</h4>
 
-  <div class="image-gallery">
+  <div class="row">
 
-    <div class="row">
+    <div class="image-gallery space-top-30 col-xs-12">
 
-      <div class="col-xs-12 image-gallary-display">
+      <div class="image-gallary-display">
 
         <div class="image-description">
          <div class="image-description-inner">
@@ -70,16 +70,17 @@
 
       </div>
 
-    </div>
-
-    @if(!empty($_modelData['Image']))
-    <div class="row">
-      <div class="col-sm-12">
-        <div id="image_gallery_list" class="image-gallery-list clearfix"></div>
+      @if(!empty($_modelData['Image']))
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="image_gallery_list" class="image-gallery-list clearfix"></div>
+        </div>
       </div>
+      @endif
+
+      <div class="line only-space space-top-bottom-20"></div>
+
     </div>
-    <div class="line space-top-bottom-20"></div>
-    @endif
 
   </div>
 

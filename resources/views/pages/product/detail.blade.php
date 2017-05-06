@@ -22,7 +22,7 @@
 
   <div class="row">
 
-    <div class="image-gallery space-top-20 col-md-9 col-xs-12">
+    <div class="image-gallery space-top-30 col-sm-8 col-xs-12">
 
       @if(!empty($_modelData['flag']))
         <div class="flag-wrapper">
@@ -79,7 +79,7 @@
 
     </div>
 
-    <div class="col-md-3 col-xs-12">
+    <div class="col-sm-4 col-xs-12 space-top-10">
 
       <h3>{{$_modelData['name']}}</h3>
 
@@ -143,7 +143,7 @@
 
   <div class="row">
     
-    <div class="col-md-8 col-xs-12">
+    <div class="col-sm-8 col-xs-12">
 
       <div class="detail-info-section">
         <h4 class="article-title color-teal">รายละเอียดสินค้า</h4>
@@ -172,7 +172,7 @@
 
     </div>
 
-    <div class="col-md-4 col-xs-12">
+    <div class="col-sm-4 col-xs-12">
       
       <div class="content-box content-box-bg" style="background-image:url({{$shopCoverUrl}})">
         <div class="content-box-inner">
@@ -192,8 +192,6 @@
                 <a href="{{URL::to($shopUrl)}}" class="button wide-button">ไปยังบริษัทหรือร้านค้า</a>
               </div>
             </div>
-
-            <!-- <div class="col-md-6 col-xs-12"></div> -->
 
           </div>
         </div>
@@ -227,7 +225,7 @@
 
   @if($hasBranchLocation)
   <h4 class="article-title color-teal">สาขาที่ขายสินค้า</h4>   
-  <div class="line space-bottom-20"></div>
+  <div class="line"></div>
   <div class="row">
     <div class="col-xs-12">
 

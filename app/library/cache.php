@@ -29,8 +29,8 @@ class Cache
     //   'fx' => '',
     // ),
     'list' => array(
-      'width' => 250,
-      'height' => 250,
+      'width' => 400,
+      'height' => 300,
       'fx' => 'getImageSizeByRatio',
     ),
     // 'banner' => array(
@@ -145,11 +145,31 @@ class Cache
 
   public function getImageSizeByRatio($originalWidth,$originalHeight,$width,$height) {
 
-    if (($originalWidth > $originalHeight) && (abs($originalWidth - $originalHeight) > 280)){
-      $width = (int)ceil($originalWidth*($height/$originalHeight));
-    } else if (($originalWidth < $originalHeight) && (abs($originalWidth - $originalHeight) > 280)){
-      $height = (int)ceil($originalHeight*($width/$originalWidth));
+    // if (($originalWidth > $originalHeight) && (abs($originalWidth - $originalHeight) > 280)){
+    //   $width = (int)ceil($originalWidth*($height/$originalHeight));
+    // } else if (($originalWidth < $originalHeight) && (abs($originalWidth - $originalHeight) > 280)){
+    //   $height = (int)ceil($originalHeight*($width/$originalWidth));
+    // }
+
+    if(($originalHeight > $originalWidth) && (($originalHeight - $originalWidth) > 250)) {
+      if($originalHeight > $height) {
+        $width = (int)ceil($originalWidth * ($height / $originalHeight));
+      }else{
+        $height = (int)ceil($originalHeight * ($width / $originalWidth));
+      }
+    }elseif(($originalWidth > $originalHeight) && (($originalWidth - $originalHeight) > 250)) {
+      if($originalWidth > $width) {
+        $width = (int)ceil($originalWidth * ($height / $originalHeight));
+      }else{
+        $height = (int)ceil($originalHeight * ($width / $originalWidth));
+      }
     }
+
+    // if (($originalWidth > $originalHeight) && (abs($originalWidth - $originalHeight) > 250)){
+    //   $width = (int)ceil($originalWidth*($height/$originalHeight));
+    // } else if (($originalWidth < $originalHeight) && (abs($originalWidth - $originalHeight) > 400)){
+    //   $height = (int)ceil($originalHeight*($width/$originalWidth));
+    // }
 
     return array($width,$height);
   }

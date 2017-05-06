@@ -72,6 +72,10 @@
 	padding: 0 10px;
 }
 
+.detail .info-description {
+	font-size: 15px;
+}
+
 .tag-group .tag-box {
   color: #222222;
   font-size: 12px;
@@ -89,7 +93,7 @@
 
 .detail .item-info h4 {
 	margin: 5px 0 0;
-	font-size: 20px;
+	font-size: 18px;
 }
 
 .detail .item-info .item-info-row:nth-child(n+2) {
@@ -209,11 +213,12 @@
 }
 
 .detail .margin-section {
+	width: 95%;
 	margin: 20px;
 }
 
 .detail .margin-section .section-inner {
-	padding: 10px;
+	/*padding: 10px;*/
 }
 
 .detail .margin-section h4 {
@@ -227,6 +232,14 @@
 
 .detail .section-border-left {
 	border-left: 1px solid #bababa;
+}
+
+.detail .description-feild {
+	background-color: #ececec;
+}
+
+.detail .description-feild .description-feild-inner {
+	padding: 15px;
 }
 
 .detail .margin-section .line {

@@ -3,30 +3,18 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 
-<div class="top-header-wrapper top-header-border">
-  <div class="container">
-    <div class="top-header">
-      <div class="detail-title">
-        <h4 class="sub-title">งาน</h4>
-        <h2 class="title">{{$_modelData['name']}}</h2>
-        <div class="tag-group">
-          <a class="tag-box">{{$_modelData['_advertisingType']}}</a>
-          @foreach ($_modelData['Tagging'] as $tagging)
-            <a class="tag-box">{{$tagging['_word']}}</a>
-          @endforeach
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="container">
+  <h3 class="title">{{$_modelData['name']}}</h3>
+  <div class="line"></div>
 </div>
 
 <div class="detail container">
 
-  <div class="image-gallery">
+  <div class="row">
 
-    <div class="row">
+    <div class="image-gallery space-top-30 col-xs-12">
 
-      <div class="col-xs-12 image-gallary-display">
+      <div class="image-gallary-display">
 
         <div class="image-description">
          <div class="image-description-inner">
@@ -43,7 +31,7 @@
             <div id="next_image_description" class="next-image-description-icon pull-left"></div>
           </div>
         </div>
-        
+
         <div class="image-gallary-display-inner">
           <div class="image-gallary-panel">
             <img id="image_display">
@@ -59,16 +47,19 @@
             </div>
         </div>
 
-    </div>
-
-    @if(!empty($_modelData['Image']))
-    <div class="row">
-      <div class="col-sm-12">
-        <div id="image_gallery_list" class="image-gallery-list clearfix"></div>
       </div>
+
+      @if(!empty($_modelData['Image']))
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="image_gallery_list" class="image-gallery-list clearfix"></div>
+        </div>
+      </div>
+      @endif
+
+      <div class="line space-top-bottom-20"></div>
+
     </div>
-    <div class="line space-top-bottom-20"></div>
-    @endif
 
   </div>
 
@@ -96,36 +87,25 @@
       </div>
     </div>
   </div>
-
+  
   <div class="row">
     <div class="col-xs-12">
       <p>ประเภทโฆษณา</p>
       <h4>{{$_modelData['_advertisingType']}}</h4>
-    </div>
-  </div>
-  
-  <div class="row">
 
-    <div class="col-sm-12 margin-section section-border-left">
-
-      <div class="space-top-bottom-10 section-inner">
-        
-        <h4>รายละเอียดโฆษณา</h4>  
-        <div>
+      <div class="detail-info-section">
+        <h4 class="article-title color-teal">รายละเอียดสินค้า</h4>
+        <div class="line"></div> 
+        <div class="detail-info description">
           {!!$_modelData['description']!!}
         </div>
-
       </div>
 
     </div>
-
   </div>
 
   @if($hasBranchLocation)
-
-    <div class="line space-top-bottom-20"></div>
-    
-    <h4>สาขาที่ลงโฆษณานี้</h4>   
+    <h4 class="article-title color-teal">สาขาที่ลงโฆษณานี้</h4>   
     <div class="row">
       <div class="col-xs-12">
 

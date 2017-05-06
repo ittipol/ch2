@@ -56,6 +56,10 @@ class Tagging extends Model
 
   public function buildModelData() {
     
+    if(empty($this->word)) {
+      return null;
+    }
+
     return array(
       '_word_id' => $this->word->id,
       '_word' => $this->word->word

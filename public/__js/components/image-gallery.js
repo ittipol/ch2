@@ -200,7 +200,7 @@ class ImageGallery {
 
       if(imgWidth > frameWidth) {
 
-        let imgH = Math.ceil(imgHeight * (frameWidth / imgWidth));
+        // let imgH = Math.ceil(imgHeight * (frameWidth / imgWidth));
         let imgW = Math.ceil(imgWidth * (frameheight / imgHeight));
 
         if(imgW > frameWidth) {
@@ -220,6 +220,7 @@ class ImageGallery {
 
         $('#image_display').css({
           'height': '100%',
+          'margin-top': 0,
           // 'margin-left': -((imgW - frameWidth) / 2)
         });
 
