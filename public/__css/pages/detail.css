@@ -35,7 +35,7 @@
 
 .detail .flag-wrapper .flag {
 	position: absolute;
-	top: 20px;
+	top: 0;
 	right: 10px;
 	z-index: 8;
 }
@@ -68,7 +68,7 @@
 }
 
 .detail-info-section .detail-info.description {
-	font-size: 18px;
+	font-size: 15px;
 	padding: 0 10px;
 }
 

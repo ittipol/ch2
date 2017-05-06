@@ -239,7 +239,7 @@
 
       <h4>รายละเอียดอสังหาริมทรัพย์</h4>
       <div class="line"></div> 
-      <div class="detail-info">
+      <div class="detail-info description">
         {!!$_modelData['description']!!}
       </div>
 

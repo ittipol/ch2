@@ -205,10 +205,18 @@ class Image extends Model
       }
     }
 
-    if(!$imageInstance->exists) { // new record
+    if($imageInstance->exists) {
+      $cache->deleteCacheDirectory(pathinfo($imageInstance->filename, PATHINFO_FILENAME));
+    }
+
+    // Set image name
+    $imageInstance->filename = $image['filename'];
+
+     // new record
+    if(!$imageInstance->exists) {
       $imageInstance->model = $model->modelName;
       $imageInstance->model_id = $model->id;
-      $imageInstance->filename = $image['filename'];
+      // $imageInstance->filename = $image['filename'];
       $imageInstance->image_type_id = $imageType->getIdByalias($options['type']);
     }
 
@@ -225,9 +233,11 @@ class Image extends Model
       mkdir($toPath,0777,true);
     }
 
-    if(!empty($path) && $this->moveImage($path,$imageInstance->getImagePath())) {
-      $cache->deleteCacheDirectory(pathinfo($imageInstance->filename, PATHINFO_FILENAME));
-    }
+    // if(!empty($path) && $this->moveImage($path,$imageInstance->getImagePath())) {
+    //   $cache->deleteCacheDirectory(pathinfo($imageInstance->filename, PATHINFO_FILENAME));
+    // }
+
+    $this->moveImage($path,$imageInstance->getImagePath());
 
     return $imageInstance->id;
 
