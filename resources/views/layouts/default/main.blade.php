@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="{{ URL::asset('__css/pages/user/register.css') }}" />
   <link rel="stylesheet" href="{{ URL::asset('__css/pages/user/login.css') }}" />
   <!-- Title  -->
-  <title>{{$_page_title}}</title>
+  @include('page_title')
 </head>
 <body>
 

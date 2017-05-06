@@ -434,7 +434,7 @@ class Order extends Model
 
   public function getOrderShippingMethod() {
 
-    $orderShipping = $this->getRelatedData('orderShipping',array(
+    $orderShipping = $this->getRelatedData('OrderShipping',array(
       'first' => true
     ));
     
