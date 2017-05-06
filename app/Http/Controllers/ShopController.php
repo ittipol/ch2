@@ -471,7 +471,7 @@ class ShopController extends Controller
       $advertising->paginator->setPagingUrl('shop/'.request()->shopSlug.'/manage/advertising');
       $advertising->paginator->setUrl('shop/'.$this->param['shopSlug'].'/advertising/edit/{id}','editUrl');
       $advertising->paginator->setUrl('shop/'.$this->param['shopSlug'].'/advertising/delete/{id}','deleteUrl');
-      $advertising->paginator->setUrl('advertising/detail/{id}','detailUrl');
+      $advertising->paginator->setUrl('shop/'.request()->shopSlug.'/advertising/{id}','detailUrl');
 
       $this->data = $advertising->paginator->build();
 

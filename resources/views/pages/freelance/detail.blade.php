@@ -15,30 +15,18 @@
   </div>
 </div>
 
-<div class="top-header-wrapper top-header-border">
-  <div class="container">
-    <div class="top-header">
-      <div class="detail-title">
-        <h4 class="sub-title">งานฟรีแลนซ์</h4>
-        <h2 class="title">{{$_modelData['name']}}</h2>
-        <div class="tag-group">
-          <a class="tag-box">{{$_modelData['_freelanceType']}}</a>
-          @foreach ($_modelData['Tagging'] as $tagging)
-            <a class="tag-box">{{$tagging['_word']}}</a>
-          @endforeach
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="container">
+  <h3 class="title">{{$_modelData['name']}}</h3>
+  <div class="line"></div>
 </div>
 
 <div class="detail container">
 
-  <div class="image-gallery">
+  <div class="row">
 
-    <div class="row">
+    <div class="image-gallery space-top-30 col-xs-12">
 
-      <div class="col-xs-12 image-gallary-display">
+      <div class="image-gallary-display">
 
         <div class="image-description">
          <div class="image-description-inner">
@@ -55,7 +43,7 @@
             <div id="next_image_description" class="next-image-description-icon pull-left"></div>
           </div>
         </div>
-        
+
         <div class="image-gallary-display-inner">
           <div class="image-gallary-panel">
             <img id="image_display">
@@ -73,16 +61,17 @@
 
       </div>
 
-    </div>
-
-    @if(!empty($_modelData['Image']))
-    <div class="row">
-      <div class="col-sm-12">
-        <div id="image_gallery_list" class="image-gallery-list clearfix"></div>
+      @if(!empty($_modelData['Image']))
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="image_gallery_list" class="image-gallery-list clearfix"></div>
+        </div>
       </div>
+      @endif
+
+      <div class="line only-space space-top-bottom-20"></div>
+
     </div>
-    <div class="line space-top-bottom-20"></div>
-    @endif
 
   </div>
 

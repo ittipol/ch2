@@ -5,31 +5,10 @@
 
 @include('pages.shop.layouts.fixed_top_nav')
 
-<div class="top-header-wrapper top-header-border">
-  <div class="container">
-    <div class="top-header">
-      <div class="detail-title">
-        <div class="row">
-          <div class="col-xs-11">
-            <h2 class="title">{{$_modelData['name']}}</h2>
-            @if(!empty($_modelData['Tagging']))
-              <div class="tag-group">
-                @foreach ($_modelData['Tagging'] as $tagging)
-                  <a class="tag-box">{{$tagging['_word']}}</a>
-                @endforeach
-              </div>
-            @endif
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="container">
 
   @if(!empty($categoryPaths))
-  <ol class="breadcrumb">
+  <ol class="breadcrumb space-top-20 space-bottom-10">
     @foreach($categoryPaths as $path)
     <li class="breadcrumb-item">
       <a href="{{$path['url']}}">{{$path['name']}}</a>
@@ -37,22 +16,24 @@
     @endforeach
   </ol>
   @endif
+  <h3 class="title">{{$_modelData['name']}}</h3>
+  <div class="line"></div>
 
 </div>
 
 <div class="container detail">
 
-  @if(!empty($_modelData['flag']))
-    <div class="flag-wrapper">
-      <div class="flag sale-promotion">{{$_modelData['flag']}}</div>
-    </div>
-  @endif
+  <div class="row">
 
-  <div class="image-gallery">
+    <div class="image-gallery space-top-30 col-sm-8 col-xs-12">
 
-    <div class="row">
+      @if(!empty($_modelData['flag']))
+        <div class="flag-wrapper">
+          <div class="flag sale-promotion">{{$_modelData['flag']}}</div>
+        </div>
+      @endif
 
-      <div class="col-xs-12 image-gallary-display">
+      <div class="image-gallary-display">
 
         <div class="image-description">
          <div class="image-description-inner">
@@ -89,22 +70,20 @@
         
       </div>
 
-    </div>
-
-    @if(!empty($_modelData['Image']))
-    <div class="row">
-      <div class="col-sm-12">
-        <div id="image_gallery_list" class="image-gallery-list clearfix"></div>
+      @if(!empty($_modelData['Image']))
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="image_gallery_list" class="image-gallery-list clearfix"></div>
+        </div>
       </div>
+      @endif
+
+      <div class="line only-space space-top-bottom-20"></div>
+
     </div>
-    <div class="line space-top-bottom-20"></div>
-    @endif
 
-  </div>
+    <div class="col-sm-4 col-xs-12 space-top-30">
 
-  <div class="row">
-
-    <div class="col-md-6 col-xs-12">
       <div class="item-info">
 
         <div class="item-info-row">
@@ -136,15 +115,11 @@
         @endif
 
       </div>
-    </div>
 
-    @if($_modelData['active'] && ($_modelData['quantity'] == 0))
-      <div class="col-md-6 col-xs-12 quantity-box">
+      <div class="quantity-box">
+      @if($_modelData['active'] && ($_modelData['quantity'] == 0))
         <h4 class="error-message">{{$_modelData['message_out_of_order']}}</h4>
-      </div>
-    @elseif($_modelData['active'])
-
-      <div class="col-md-6 col-xs-12 quantity-box">
+      @elseif($_modelData['active'])
 
         @if($_modelData['quantity'] < 11)
           <h5 class="text-warning">เหลือเพียง {{$_modelData['quantity']}} {{$_modelData['product_unit']}}</h5>
@@ -156,43 +131,102 @@
           <input id="product_quantity" class="quantity-text-input pull-left" type="text" name="quantity" value="{{$_modelData['minimum']}}" autocomplete="off" placeholder="จำนวนสินค้าที่สั่งซื้อ" role="number" />
           <a id="add_to_cart_button" class="button add-to-cart-button pull-right">ใส่ตระกร้า</a>
         </div>
-      </div>
-    @else
-      <div class="col-md-6 col-xs-12 quantity-box">
+
+      @else
         <h4 class="error-message">ยังไม่เปิดขายสินค้า</h4>
         <p>สินค้านี้ถูกปิดการสั่งซื้อชั่วคราวจากผู้ขาย</p>
+      @endif
       </div>
-    @endif
-    
-  </div>
 
-  <div class="detail-info-section">
-    <h4>รายละเอียด {{$_modelData['name']}}</h4>
-    <div class="line"></div> 
-    <div class="detail-info">
-      {!!$_modelData['description']!!}
     </div>
+
   </div>
 
-  @if(!empty($_modelData['specifications']))
-  <div class="detail-info-section">
-    <h4>ข้อมูลจำเพาะของ {{$_modelData['name']}}</h4>  
-    <table class="table table-striped  ">
-      <tbody>
-        @foreach($_modelData['specifications'] as $specification)
-          <tr>
-            <td>{{$specification['title']}}</td>
-            <td>{{$specification['value']}}</td>
-          </tr>
-        @endforeach
-      </tbody>
-    </table>
+  <div class="row">
+    
+    <div class="col-sm-8 col-xs-12">
+
+      <div class="detail-info-section">
+        <h4 class="article-title color-teal">รายละเอียดสินค้า</h4>
+        <div class="line"></div> 
+        <div class="detail-info description">
+          {!!$_modelData['description']!!}
+        </div>
+      </div>
+
+      @if(!empty($_modelData['specifications']))
+      <div class="detail-info-section">
+        <h4 class="article-title color-teal">ข้อมูลจำเพาะ</h4>  
+        <div class="line"></div> 
+        <table class="table table-striped">
+          <tbody>
+            @foreach($_modelData['specifications'] as $specification)
+              <tr>
+                <td>{{$specification['title']}}</td>
+                <td>{{$specification['value']}}</td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+      @endif
+
+    </div>
+
+    <div class="col-sm-4 col-xs-12">
+      
+      <div class="content-box content-box-bg" style="background-image:url({{$shopCoverUrl}})">
+        <div class="content-box-inner">
+          <div class="row">
+
+            <div class="col-md-10 col-xs-12">
+              <div class="content-box-panel overlay-bg">
+                <div>
+                  <h5>บริษัทหรือร้านค้าที่ขายสินค้านี้</h5>
+                  <h3>
+                    <a href="{{request()->get('shopUrl')}}">{{$shop['name']}}</a>
+                  </h3>
+                  <div class="line space-top-bottom-20"></div>
+                  <p>{{$shop['_short_description']}}</p>
+                </div>
+
+                <a href="{{request()->get('shopUrl')}}" class="button wide-button">ไปยังบริษัทหรือร้านค้า</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      @if(!empty($productCatalogs))
+      <h4 class="article-title color-teal space-top-50">แคตตาล็อกสินค้าที่เกี่ยวข้อง</h4>
+      <div class="line"></div> 
+      <div class="list-h">
+      @foreach($productCatalogs as $data)
+        <div class="list-h-item list-h-sm no-border clearfix">
+
+          <a href="{{$data['detailUrl']}}" class="list-image pull-left">
+            <img src="/images/icons/tag-white.png">
+          </a>
+
+          <div class="col-md-11 col-xs-8">
+            <a href="{{$data['detailUrl']}}">
+              <h4 class="primary-info single-info">{{$data['name']}}</h4>
+            </a>
+          </div>
+
+        </div>
+      @endforeach
+      </div>
+      @endif
+
+    </div>
+
   </div>
-  @endif
 
   @if($hasBranchLocation)
-  <h4>สาขาที่ขายสินค้า</h4>
-  <div class="line space-top-bottom-20"></div>
+  <h4 class="article-title color-teal">สาขาที่ขายสินค้า</h4>   
+  <div class="line"></div>
   <div class="row">
     <div class="col-xs-12">
 
@@ -208,27 +242,6 @@
       </div>
 
     </div> 
-  </div>
-  @endif
-
-  @if(!empty($productCatalogs))
-  <h4 class="space-top-50">แคตตาล็อกสินค้าที่เกี่ยวข้อง</h4>
-  <div class="list-h">
-  @foreach($productCatalogs as $data)
-    <div class="list-h-item list-h-sm clearfix">
-
-      <a href="{{$data['detailUrl']}}" class="list-image pull-left">
-        <img src="/images/icons/tag-white.png">
-      </a>
-
-      <div class="col-md-11 col-xs-8">
-        <a href="{{$data['detailUrl']}}">
-          <h4 class="primary-info single-info">{{$data['name']}}</h4>
-        </a>
-      </div>
-
-    </div>
-  @endforeach
   </div>
   @endif
 

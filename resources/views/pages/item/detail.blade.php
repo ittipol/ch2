@@ -140,7 +140,7 @@
       </div>
 
       <div class="detail-info-section no-margin">
-        <h4 class="article-title color-teal">รายละเอียด {{$_modelData['name']}}</h4>
+        <h4>รายละเอียด {{$_modelData['name']}}</h4>
         <div class="line"></div> 
         <div class="detail-info description">
           {!!$_modelData['description']!!}

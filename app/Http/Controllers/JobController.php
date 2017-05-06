@@ -372,7 +372,13 @@ class JobController extends Controller
 
     }
 
+    $shop = request()->get('shop');
+
     $this->data = $model->modelData->build();
+    $this->setData('shop',$shop->modelData->build(true));
+    $this->setData('shopImageUrl',$shop->getProfileImageUrl());
+    $this->setData('shopCoverUrl',$shop->getCoverUrl());
+    // $this->setData('shopUrl',request()->get('shopUrl'));
     $this->setData('branchLocations',json_encode($branchLocations));
     $this->setData('hasBranchLocation',$hasBranchLocation);
 

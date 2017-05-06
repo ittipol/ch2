@@ -13,8 +13,9 @@
     </li>
     @endforeach
   </ol>
-  <div class="line"></div>
   @endif
+  <h3 class="title">{{$_modelData['name']}}</h3>
+  <div class="line"></div>
 
 </div>
 
@@ -79,9 +80,7 @@
 
     </div>
 
-    <div class="col-sm-4 col-xs-12 space-top-10">
-
-      <h3>{{$_modelData['name']}}</h3>
+    <div class="col-sm-4 col-xs-12 space-top-30">
 
       <div class="item-info">
 

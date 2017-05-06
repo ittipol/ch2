@@ -424,7 +424,6 @@ class ProductController extends Controller
     }
 
     $this->data = $model->modelData->build();
-
     $this->setData('shop',$shop->modelData->build(true));
     $this->setData('shopImageUrl',$shop->getProfileImageUrl());
     $this->setData('shopCoverUrl',$shop->getCoverUrl());
@@ -500,7 +499,13 @@ class ProductController extends Controller
       }
     }
 
+    $shop = request()->get('shop');
+
     $this->data = $model->modelData->build();
+    $this->setData('shop',$shop->modelData->build(true));
+    $this->setData('shopImageUrl',$shop->getProfileImageUrl());
+    $this->setData('shopCoverUrl',$shop->getCoverUrl());
+    // $this->setData('shopUrl',request()->get('shopUrl'));
     $this->setData('categoryPaths',$model->getCategoryPaths());
     $this->setData('productCatalogs',$_productCatalogs);
     $this->setData('branchLocations',json_encode($branchLocations));

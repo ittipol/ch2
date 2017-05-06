@@ -87,8 +87,27 @@
       </div>
     </div>
   </div>
-  
+
   <div class="row">
+
+    <div class="col-md-3 col-xs-12 space-top-20">
+      <p>ประเภทโฆษณา</p>
+      <h4>{{$_modelData['_advertisingType']}}</h4>
+    </div>
+
+    <div class="col-md-9 col-xs-12">
+      <div class="detail-info-section">
+        <h4 class="article-title color-teal">รายละเอียดสินค้า</h4>
+        <div class="line"></div> 
+        <div class="detail-info description">
+          {!!$_modelData['description']!!}
+        </div>
+      </div>
+    </div>
+
+  </div>
+  
+  <!-- <div class="row">
     <div class="col-xs-12">
       <p>ประเภทโฆษณา</p>
       <h4>{{$_modelData['_advertisingType']}}</h4>
@@ -102,10 +121,11 @@
       </div>
 
     </div>
-  </div>
+  </div> -->
 
   @if($hasBranchLocation)
-    <h4 class="article-title color-teal">สาขาที่ลงโฆษณานี้</h4>   
+    <h4 class="article-title color-teal">สาขาที่ลงโฆษณานี้</h4> 
+    <div class="line"></div>  
     <div class="row">
       <div class="col-xs-12">
 

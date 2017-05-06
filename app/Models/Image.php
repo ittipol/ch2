@@ -196,6 +196,13 @@ class Image extends Model
     $path = '';
     if(!empty($image['filename'])) {
 
+      if($imageInstance->exists) {
+        $cache->deleteCacheDirectory(pathinfo($imageInstance->filename, PATHINFO_FILENAME));
+      }
+
+      // Set image name
+      $imageInstance->filename = $image['filename'];
+
       $path = $temporaryFile->getFilePath($image['filename'],array(
         'directoryName' => $model->modelName.'_'.$options['token'].'_'.$options['type']
       ));
@@ -203,15 +210,9 @@ class Image extends Model
       if(!file_exists($path)) {
         return false;
       }
+
     }
-
-    if($imageInstance->exists) {
-      $cache->deleteCacheDirectory(pathinfo($imageInstance->filename, PATHINFO_FILENAME));
-    }
-
-    // Set image name
-    $imageInstance->filename = $image['filename'];
-
+    
      // new record
     if(!$imageInstance->exists) {
       $imageInstance->model = $model->modelName;
@@ -244,6 +245,11 @@ class Image extends Model
   }
 
   public function moveImage($oldPath,$to) {
+
+    if(empty($oldPath)) {
+      return false;
+    }
+
     return File::move($oldPath, $to);
   }
 

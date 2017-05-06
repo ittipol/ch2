@@ -24,24 +24,9 @@
   </div>
 </div>
 
-<div class="top-header-wrapper top-header-border">
-  <div class="container">
-    <div class="top-header">
-      <div class="detail-title">
-        <h4 class="sub-title">ประกาศ{{$_modelData['_announcementTypeName']}}</h4>
-        <h2 class="title">{{$_modelData['name']}}</h2>
-        <div class="tag-group">
-          <a class="tag-box">{{$_modelData['_realEstateTypeName']}}</a>
-          @if($_modelData['need_broker'])
-          <a class="tag-box">{{$_modelData['_need_broker']}}</a>
-          @endif
-          @foreach ($_modelData['Tagging'] as $tagging)
-            <a class="tag-box">{{$tagging['_word']}}</a>
-          @endforeach
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="container">
+  <h3 class="title">{{$_modelData['name']}}</h3>
+  <div class="line"></div>
 </div>
 
 <div class="detail container">
@@ -95,7 +80,7 @@
       </div>
       @endif
 
-      <div class="line only-space space-top-bottom-20"></div>
+      <div class="line space-top-bottom-20"></div>
 
     </div>
 
@@ -109,7 +94,7 @@
 
   <div class="row">
 
-    <div class="col-xs-6">
+    <div class="col-md-3 col-xs-12">
 
       <div class="item-info">
 
@@ -119,15 +104,13 @@
         </div>
 
       </div>
-    </div>
 
-    <div class="col-xs-6">
       <div class="item-info">
 
         <p>ติดต่อผู้{{$_modelData['_announcementTypeName']}}</p>
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-xs-12">
             <div class="item-info-row">
               @if(!empty($_modelData['Contact']['phone_number']))
               <h4 class="title-with-icon phone">{{$_modelData['Contact']['phone_number']}}</h4>
@@ -136,7 +119,7 @@
               @endif
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-xs-12">
             <div class="item-info-row">
               @if(!empty($_modelData['Contact']['email']))
               <h4 class="title-with-icon email">{{$_modelData['Contact']['email']}}</h4>
@@ -148,77 +131,84 @@
         </div>
 
       </div>
+
+    </div>
+
+    <div class="col-md-9 col-xs-12">
+
+      <div class="flag-group space-bottom-20">
+        <div class="flag">ประกาศ{{$_modelData['_announcementTypeName']}}</div>
+        <div class="flag">{{$_modelData['_realEstateTypeName']}}</div>
+      </div>
+
+      <div class="row">
+        <div class="list-description col-md-6 col-xs-12">
+          <dl class="list-description-item row">
+            <dt class="col-sm-4">ประเภท</dt>
+            <dd class="col-sm-8">{{$_modelData['_realEstateTypeName']}}</dd>
+          </dl>
+
+          <dl class="list-description-item row">
+            <dt class="col-sm-4">พื้นที่ใช้สอย</dt>
+            <dd class="col-sm-8">{{$_modelData['_homeArea']}}</dd>
+          </dl>
+
+          <dl class="list-description-item row">
+            <dt class="col-sm-4">พื้นที่ที่ดิน</dt>
+            <dd class="col-sm-8">{{$_modelData['_landArea']}}</dd>
+          </dl>
+        </div>
+
+        <div class="list-description col-md-6 col-xs-12">
+          <dl class="list-description-item row">
+            <dt class="col-sm-4">เฟอร์นิเจอร์</dt>
+            <dd class="col-sm-8">{{$_modelData['_furniture']}}</dd>
+          </dl>
+        </div>
+      </div>
+
     </div>
 
   </div>
 
-  <div class="line space-top-bottom-20"></div>
-
-  <div class="row">
-    <div class="list-description col-md-6 col-xs-12">
-      <dl class="list-description-item row">
-        <dt class="col-sm-4">ประเภท</dt>
-        <dd class="col-sm-8">{{$_modelData['_realEstateTypeName']}}</dd>
-      </dl>
-
-      <dl class="list-description-item row">
-        <dt class="col-sm-4">พื้นที่ใช้สอย</dt>
-        <dd class="col-sm-8">{{$_modelData['_homeArea']}}</dd>
-      </dl>
-
-      <dl class="list-description-item row">
-        <dt class="col-sm-4">พื้นที่ที่ดิน</dt>
-        <dd class="col-sm-8">{{$_modelData['_landArea']}}</dd>
-      </dl>
-    </div>
-
-    <div class="list-description col-md-6 col-xs-12">
-      <dl class="list-description-item row">
-        <dt class="col-sm-4">เฟอร์นิเจอร์</dt>
-        <dd class="col-sm-8">{{$_modelData['_furniture']}}</dd>
-      </dl>
-    </div>
-  </div>
-
-  <div class="line only-space space-top-bottom-30"></div>
-
-  <div class="row">
-    <dt class="col-sm-3">คุณสมบัติ</dt>
-    <dd class="col-sm-9">
+  <div class="space-top-20">
+    <h4>คุณสมบัติ</h4>
+    <div class="line space-bottom-20"></div>
+    <div class="row">
     @foreach($_modelData['_indoors'] as $indoor)
       <div class="col-lg-4 col-md-4 col-sm-6">
         <div class="title-with-icon space {{$indoor['room']}}"><b>{{$indoor['value']}}</b> {{$indoor['name']}}</div>
       </div>
     @endforeach
-    </dd>
+    </div>
   </div>
 
   <div class="line only-space space-top-bottom-30"></div>
 
-  <div class="row">
-    <dt class="col-sm-3">จุดเด่น</dt>
-    <dd class="col-sm-9">
+  <div class="space-top-20">
+    <h4>จุดเด่น</h4>
+    <div class="line space-bottom-20"></div>
+    <div class="row">
     @if(!empty($_modelData['_features']))
       @foreach($_modelData['_features'] as $feature)
-
       <div class="col-lg-4 col-md-4 col-sm-6">
         <div class="title-with-icon space tick-green">{{$feature['name']}}</div>
       </div>
-
       @endforeach
     @else
       <div class="col-lg-4 col-md-4 col-sm-6">
         <div class="">-</div>
       </div>
     @endif
-    </dd>
+    </div>
   </div>
 
   <div class="line only-space space-top-bottom-30"></div>
 
-  <div class="row">
-    <dt class="col-sm-3">สิ่งอำนวยความสะดวก</dt>
-    <dd class="col-sm-9">
+  <div class="space-top-20">
+    <h4>สิ่งอำนวยความสะดวก</h4>
+    <div class="line space-bottom-20"></div>
+    <div class="row">
     @if(!empty($_modelData['_facilities']))
       @foreach($_modelData['_facilities'] as $facility)
 
@@ -232,7 +222,7 @@
         <div class="">-</div>
       </div>
     @endif
-    </dd>
+    </div>
   </div>
 
   <div class="row detail-info-section space-bottom-30">
@@ -249,6 +239,7 @@
 
   @if(!empty($_modelData['Address']['_geographic']))
   <h4>ตำแหน่งบนแผนที่</h4>
+  <div class="line"></div>
   <div id="map"></div>
   @endif
 

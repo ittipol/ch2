@@ -26,26 +26,20 @@
   </div>
 </div>
 
-<div class="top-header-wrapper top-header-border">
-  <div class="container">
-    <div class="top-header">
-      <div class="detail-title">
-        <h4 class="sub-title">สาขา</h4>
-        <h2 class="title">{{$_modelData['name']}}</h2>
-      </div>
-    </div>
-  </div>
+<div class="container">
+  <h3 class="title">{{$_modelData['name']}}</h3>
+  <div class="line"></div>
 </div>
 
 <div class="detail container">
 
   <h4 class="title-with-icon location-pin">{{$_modelData['Address']['_short_address']}}</h4>
 
-  <div class="image-gallery">
+  <div class="row">
 
-    <div class="row">
+    <div class="image-gallery space-top-30 col-xs-12">
 
-      <div class="col-xs-12 image-gallary-display">
+      <div class="image-gallary-display">
 
         <div class="image-description">
          <div class="image-description-inner">
@@ -62,33 +56,35 @@
             <div id="next_image_description" class="next-image-description-icon pull-left"></div>
           </div>
         </div>
-        
-        <div class="image-gallary-display-inner">
 
+        <div class="image-gallary-display-inner">
           <div class="image-gallary-panel">
             <img id="image_display">
           </div>
 
-          <div class="display-image-description-icon additional-option icon">
-            <img src="/images/icons/additional-white.png">
-            <div class="additional-option-content">
-              <a class="image-description-display-button">แสดงคำอธิบายรูปภาพ</a>
+          <div class="additional-option">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="additional-option-content">
+                <a class="image-description-display-button">คำอธิบายรูปภาพ</a>
+              </div>
             </div>
-          </div>
+        </div>
 
+      </div>
+
+      @if(!empty($_modelData['Image']))
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="image_gallery_list" class="image-gallery-list clearfix"></div>
         </div>
       </div>
+      @endif
+
+      <div class="line only-space space-top-bottom-20"></div>
 
     </div>
-
-    @if(!empty($_modelData['Image']))
-    <div class="row">
-      <div class="col-sm-12">
-        <div id="image_gallery_list" class="image-gallery-list clearfix"></div>
-      </div>
-    </div>
-    <div class="line space-top-bottom-20"></div>
-    @endif
 
   </div>
 
@@ -119,25 +115,19 @@
 
   <div class="row">
 
-    <div class="col-xs-4">
-      <div class="item-info">
+    <div class="col-md-3 col-xs-12 space-top-20">
 
+      <div class="item-info">
         <div class="item-info-row">
           <p>ชื่อสาขา</p>
           <h4>{{$_modelData['name']}}</h4>
         </div>
-
       </div>
-    </div>
 
-    <div class="col-xs-8">
-      
       <div class="item-info">
-
         <p>ติดต่อสาขา</p>
-
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-xs-12">
             <div class="item-info-row">
               @if(!empty($_modelData['Contact']['phone_number']))
               <h4 class="title-with-icon phone">{{$_modelData['Contact']['phone_number']}}</h4>
@@ -146,7 +136,7 @@
               @endif
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-xs-12">
             <div class="item-info-row">
               @if(!empty($_modelData['Contact']['email']))
               <h4 class="title-with-icon email">{{$_modelData['Contact']['email']}}</h4>
@@ -156,22 +146,26 @@
             </div>
           </div>
         </div>
+      </div>
 
+    </div>
+
+    <div class="col-md-9 col-xs-12">
+
+      <div class="detail-info-section">
+        <h4>รายละเอียดสาขา</h4>
+        <div class="line"></div> 
+        <div class="detail-info">
+          {!!$_modelData['description']!!}
+        </div>
       </div>
 
     </div>
 
   </div>
 
-  <div class="detail-info-section">
-    <h4>รายละเอียดสาขา</h4>
-    <div class="line"></div> 
-    <div class="detail-info">
-      {!!$_modelData['description']!!}
-    </div>
-  </div>
-
   <h4>ตำแหน่งบนแผนที่</h4>
+  <div class="line"></div>
   <div id="map"></div>
 
   <div class="line space-top-bottom-20"></div>
