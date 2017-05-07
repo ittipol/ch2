@@ -331,6 +331,27 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
   Route::get('shop/{shopSlug}/product/option/delete/{id}/product_id:{product_id}','ProductOptionController@delete')->name('shop.product_option.delete');
 
+
+
+
+
+
+
+
+
+  Route::get('shop/{shopSlug}/product/option_value/add/product_option_id:{product_option_id}/product_id:{product_id}','ProductOptionController@optionValueAdd')->name('shop.product_option.value.add');
+  Route::post('shop/{shopSlug}/product/option_value/add/product_option_id:{product_option_id}/product_id:{product_id}','ProductOptionController@optionValueAddingSubmit')->name('shop.product_option.value.add');
+
+  Route::get('shop/{shopSlug}/product/option_value/edit/{id}/product_option_id:{product_option_id}/product_id:{product_id}','ProductOptionController@optionValueEdit')->name('shop.product_option.value.edit');
+  Route::patch('shop/{shopSlug}/product/option_value/edit/{id}/product_option_id:{product_option_id}/product_id:{product_id}','ProductOptionController@optionValueEditingSubmit')->name('shop.product_option.value.edit');
+
+  Route::get('shop/{shopSlug}/product/option_value/delete/{id}/product_option_id:{product_option_id}/product_id:{product_id}','ProductOptionController@optionValueDelete')->name('shop.product_option.value.delete');
+
+
+
+
+
+
   Route::get('shop/{shopSlug}/product/sale_promotion/{id}','ProductController@salePromotion')->name('shop.product_sale_promotion');
 
   Route::get('shop/{shopSlug}/product/discount/add/product_id:{product_id}','ProductDiscountController@add')->name('shop.product_discount.add');

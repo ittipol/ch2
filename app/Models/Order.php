@@ -121,8 +121,13 @@ class Order extends Model
     $_orderProducts = array();
     foreach ($orderProducts as $orderProduct) {
 
+      $imageUrl = null;
+      if(!empty($orderProduct->product)) {
+        $imageUrl = $orderProduct->product->getImage('sm');
+      }
+
       $_orderProducts[] = array_merge($orderProduct->buildModelData(),array(
-        'imageUrl' => $this->getImage('sm'),
+        'imageUrl' => $imageUrl,
         'productDetailUrl' => $url->setAndParseUrl('product/detail/{product_id}',array('product_id' => $orderProduct->product_id))
       ));
 

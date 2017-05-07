@@ -69,7 +69,8 @@
 
 .detail-info-section .detail-info.description {
 	font-size: 15px;
-	padding: 0 10px;
+	padding: 10px;
+	background-color: #E0F2F1;
 }
 
 .detail .info-description {

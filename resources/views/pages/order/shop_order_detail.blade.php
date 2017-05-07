@@ -302,9 +302,9 @@
 
           <div class="product-list-box clearfix">
 
-            <div class="product-image pull-left">
+            <div class="image-tile pull-left">
               <a href="{{$product['productDetailUrl']}}">
-                <img src="{{$product['imageUrl']}}">
+                <div class="product-image" style="background-image:url({{$product['imageUrl']}});"></div>
               </a>
             </div>
 

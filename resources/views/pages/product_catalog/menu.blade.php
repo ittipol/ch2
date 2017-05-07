@@ -39,12 +39,12 @@
       
     </div>
 
+    <div class="line"></div>
+
   </div>
 </div>
 
 <div class="container">
-
-  <div class="line"></div>
 
   <div class="list-item-group no-padding">
 

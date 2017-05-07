@@ -3,7 +3,6 @@ class Product {
   constructor(token,productId) {
     this.token = token;
     this.productId = productId;
-    // this.minimumOrder = minimumOrder;
     this.allowedClick = true;
   }
 
@@ -27,20 +26,6 @@ class Product {
         setTimeout(function(){_this.allowedClick = true},600);
 
       }
-
-      // let quantity = $('#product_quantity').val();
-
-      // if(_this.minimumOrder > quantity) {
-
-      //   const notificationBottom = new NotificationBottom('ไม่สามารถสั่งซื้อได้','จำนวนการสั่งซื้อของคุณน้อยกว่าจำนวนการสั่งซื้อขั้นต่ำของสินค้านี้','error');
-      //   notificationBottom.setDelay(5000);
-      //   notificationBottom.load();
-
-      // }else{
-
-      //   const cart = new GlobalCart(_this.token);
-      //   cart.cartAdd(_this.productId,quantity);
-      // }
 
     });
   

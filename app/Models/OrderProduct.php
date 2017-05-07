@@ -31,8 +31,15 @@ class OrderProduct extends Model
     $product = $this->product;
 
     $totalWeight = 'ยังไม่ระบุน้ำหนัก';
-    if(!empty($product->weight) && !empty($product->weight_unit_id)) {
-      $totalWeight = ($this->quantity * $product->weight).' '.$product->weightUnit->name;
+    $productUnit = '';
+    if(!empty($product)) {
+
+      if(!empty($product->weight) && !empty($product->weight_unit_id)) {
+        $totalWeight = ($this->quantity * $product->weight).' '.$product->weightUnit->name;
+      }
+
+      $productUnit = $product->product_unit;
+
     }
 
     return array(
@@ -43,7 +50,7 @@ class OrderProduct extends Model
       'quantity' => $this->quantity,
       '_total' => $currency->format($this->total),
       'totalWeight' => $totalWeight,
-      'product_unit' => $product->product_unit,
+      'product_unit' => $productUnit,
       'free_shipping' => $this->free_shipping,
       'shipping_cost' => $this->shipping_cost,
       'shippingCostText' => $shippingCostText,

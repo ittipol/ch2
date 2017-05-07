@@ -7,11 +7,21 @@
   border-bottom: 2px solid #D50000;
 }
 
-.cart .product-image img {
+.cart .product-list-table .image-tile {
 	width: 100px;
 	height: 100px;
-	padding: 10px;
-	background-color: #fff;
+	background-image: url(/images/common/image.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 75px;
+}
+
+.cart .product-image {
+	width: 100px;
+	height: 100px;
+	background-position: center;
+	background-size: auto 100%;
+	background-repeat: no-repeat;
 }
 
 .cart .shop-name {

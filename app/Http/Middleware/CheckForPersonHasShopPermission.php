@@ -348,6 +348,47 @@ class CheckForPersonHasShopPermission
             'modelName' => 'Product',
             'param' => 'product_id'
           )
+        ),
+        'shop.product_option.value.add' => array(
+          'permission' => 'add',
+          'check' => array(
+            'modelName' => 'ProductOption',
+            'field' => 'product_id',
+            'param' => 'product_id',
+            'param_id' => 'product_option_id'
+          ),
+          'parent' => array(
+            'modelName' => 'Product',
+            'param' => 'product_id'
+          )
+        ),
+        'shop.product_option.value.edit' => array(
+          'permission' => 'edit',
+          'modelName' => 'ProductOptionValue',
+          'check' => array(
+            'modelName' => 'ProductOption',
+            'field' => 'product_id',
+            'param' => 'product_id',
+            'param_id' => 'product_option_id'
+          ),
+          'parent' => array(
+            'modelName' => 'Product',
+            'param' => 'product_id'
+          )
+        ),
+        'shop.product_option.value.delete' => array(
+          'permission' => 'delete',
+          'modelName' => 'ProductOptionValue',
+          'check' => array(
+            'modelName' => 'ProductOption',
+            'field' => 'product_id',
+            'param' => 'product_id',
+            'param_id' => 'product_option_id'
+          ),
+          'parent' => array(
+            'modelName' => 'Product',
+            'param' => 'product_id'
+          )
         )
       );
 
@@ -387,6 +428,7 @@ class CheckForPersonHasShopPermission
       }
 
       // check data
+      $exists = false;
       if(!empty($request->id)) {
 
         $_model = Service::loadModel($pages[$name]['modelName'])->find($request->id);
@@ -395,7 +437,6 @@ class CheckForPersonHasShopPermission
           return $this->errorPage('ไม่พบข้อมูลนี้ในร้านค้า');
         }
 
-        $exists = false;
         if(Schema::hasColumn($_model->getTable(), 'shop_id') && ($_model->shop_id == $shopId)) {
           $exists = true;
         }elseif(Schema::hasColumn($_model->getTable(), 'model') && Schema::hasColumn($_model->getTable(), 'model_id')) {
@@ -417,47 +458,54 @@ class CheckForPersonHasShopPermission
             ])->exists();
           }
 
-          // $__model = Service::loadModel($_model->model)->find($_model->model_id);
-        
-          // if(Schema::hasColumn($__model->getTable(), 'shop_id') && ($__model->shop_id == $shopId)) {
-          //   $exists = true;
-          // }else{
-          //   $exists = Service::loadModel('ShopRelateTo')
-          //   ->select('shop_id')
-          //   ->where([
-          //     ['model','like',$_model->model],
-          //     ['model_id','=',$_model->model_id],
-          //     ['shop_id','=',$shopId],
-          //   ])->exists();
-          // }
-
         }else{
-
-          if(!empty($pages[$name]['parent'])) {
-            $exists = Service::loadModel('ShopRelateTo')
-            ->select('shop_id')
-            ->where([
-              ['model','like',$pages[$name]['parent']['modelName']],
-              ['model_id','=',$request->{$pages[$name]['parent']['param']}],
-              ['shop_id','=',$shopId],
-            ])->exists();
-          }else{
-            $exists = Service::loadModel('ShopRelateTo')
-            ->select('shop_id')
-            ->where([
-              ['model','like',$pages[$name]['modelName']],
-              ['model_id','=',$request->id],
-              ['shop_id','=',$shopId],
-            ])->exists();
-          }
-
+          $exists = Service::loadModel('ShopRelateTo')
+          ->select('shop_id')
+          ->where([
+            ['model','like',$pages[$name]['modelName']],
+            ['model_id','=',$request->id],
+            ['shop_id','=',$shopId],
+          ])->exists();
         }
+
+      }
+
+      if($exists) {
+        $request->attributes->add([
+          // 'shopRole' => $role,
+          'shopPermission' => $permissions,
+        ]);
+
+        return $next($request);
+      }
+
+      if(!empty($pages[$name]['check'])) {
+        $exists = Service::loadModel($pages[$name]['check']['modelName'])
+        ->select('id')
+        ->where([
+          ['id','=',$request->{$pages[$name]['check']['param_id']}],
+          [$pages[$name]['check']['field'],'=',$request->{$pages[$name]['check']['param']}],
+        ])->exists();
 
         if(!$exists) {
           return $this->errorPage('ไม่พบข้อมูลนี้ในร้านค้า');
         }
-
       }
+
+      if(!empty($pages[$name]['parent'])) {
+        $exists = Service::loadModel('ShopRelateTo')
+        ->select('shop_id')
+        ->where([
+          ['model','like',$pages[$name]['parent']['modelName']],
+          ['model_id','=',$request->{$pages[$name]['parent']['param']}],
+          ['shop_id','=',$shopId],
+        ])->exists();
+
+        if(!$exists) {
+          return $this->errorPage('ไม่พบข้อมูลนี้ในร้านค้า');
+        }
+      }
+
 
       $request->attributes->add([
         // 'shopRole' => $role,

@@ -806,27 +806,44 @@ class ProductController extends Controller
 
     $url = new Url;
     
-    $model = Service::loadModel('ProductOption');
-    
-    $page = 1;
-    if(!empty($this->query['page'])) {
-      $page = $this->query['page'];
+    $productOption = Service::loadModel('ProductOption')->select('id','name')->where('product_id','=',$this->param['id']);
+
+    if(!$productOption->exists()) {  
+      $this->setData('productOptionAdd',request()->get('shopUrl').'product/option/add/product_id:'.$this->param['id']);
+      return $this->view('pages.product.product_option');
     }
 
-    $model->paginator->criteria(array(
-      'conditions' => array(
-        array('product_id','=',$this->param['id']) 
-      )
+    $productOption = $productOption->first();
+
+    $data = array_merge($productOption->buildModelData(),array(
+      'editUrl' => request()->get('shopUrl').'/product/option/edit/'.$productOption->id.'/product_id:'.$this->param['id'],
+      'deleteUrl' => request()->get('shopUrl').'/product/option/delete/'.$productOption->id.'/product_id:'.$this->param['id']
     ));
-    $model->paginator->setPage($page);
-    $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/product/option'.$this->param['id']);
-    $model->paginator->setUrl('shop/'.request()->shopSlug.'/product/option/edit/{id}/product_id:'.$this->param['id'],'editUrl');
-    $model->paginator->setUrl('shop/'.request()->shopSlug.'/product/option/delete/{id}/product_id:'.$this->param['id'],'deleteUrl');
 
-    $this->data = $model->paginator->build();
-    $this->setData('productOptionAdd',request()->get('shopUrl').'product/option/add/product_id:'.$this->param['id']);
+    // Get Product option values
+    $productOptionValues = Service::loadModel('ProductOptionValue')->where('product_option_id','=',$productOption->id);
 
-    return $this->view('pages.product.product_option');
+    $_productOptionValues = array();
+    if($productOptionValues->exists()) {
+      foreach ($productOptionValues->get() as $value) {
+        $_productOptionValues[] = array_merge($value->buildPaginationData(),
+          array(
+            'editUrl' => request()->get('shopUrl').'product/option_value/edit/'.$value->id.'/product_option_id:'.$productOption->id.'/product_id:'.$this->param['id'],
+            'deleteUrl' => request()->get('shopUrl').'product/option_value/delete/'.$value->id.'/product_option_id:'.$productOption->id.'/product_id:'.$this->param['id'],
+          )
+        );
+      }
+    }
+
+    // Count option value
+    $this->setData('totalOptionValue',$productOption->getTotalOptionValueInProductOption());
+
+    $this->setData('productOption',$data);
+    $this->setData('productOptionValues',$_productOptionValues);
+
+    $this->setData('productOptionValueAdd',request()->get('shopUrl').'product/option_value/add/product_option_id:'.$productOption->id.'/product_id:'.$this->param['id']);
+
+    return $this->view('pages.product_option.product_option_menu');
   }
 
   public function salePromotion() {
@@ -913,6 +930,12 @@ class ProductController extends Controller
     $model = Service::loadModel('Product')->find($this->param['id']);
 
     if($model->delete()) {
+
+      // delete product in cart
+      Service::loadModel('Cart')
+      ->where('product_id','=',$this->param['id'])
+      ->delete();
+
       MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
     }else{
       MessageHelper::display('ไม่สามารถลบข้อมูลได้','error');
