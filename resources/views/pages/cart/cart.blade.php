@@ -49,6 +49,13 @@
                       <a href="{{$product['productDetailUrl']}}">
                         <h4 class="product-title product-text">{{$product['name']}}</h4>
                       </a>
+
+                      @if(!empty($product['productOption']))
+                        <div class="product-option">
+                          <span class="product-option-name">{{$product['productOption']['productOptionName']}}:</span>
+                          <span class="product-option-value-name">{{$product['productOption']['valueName']}}</span>
+                        </div>
+                      @endif
                     </div>
 
                     <div class="col-md-2 col-xs-12 product-info-container">
@@ -74,7 +81,7 @@
                         placeholder="จำนวนสินค้าที่สั่งซื้อ" 
                         role="number"
                         data-id="{{$product['id']}}"
-                        data-minimum="{{$product['minimum']}}" />
+                        data-option-value-id="{{$product['productOptionValueId']}}" />
                         <button class="cart-quantity-update-button">
                           <img src="/images/icons/edit-blue.png">
                         </button>
@@ -91,7 +98,7 @@
 
                   </div>
 
-                  <a class="delete-product-button" data-id="{{$product['id']}}" role="button">×</a>
+                  <a class="delete-product-button" data-id="{{$product['id']}}" data-option-value-id="{{$product['productOptionValueId']}}" role="button">×</a>
 
                 </div>
 

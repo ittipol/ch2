@@ -14,9 +14,15 @@ class ProductOptionController extends Controller
 
     $model = Service::loadModel('ProductOption');
 
+    // check if already exist
+    if($model->where('product_id','=',$this->param['product_id'])->exists()) {
+      // MessageHelper::display('เพิ่มหัวข้อคุณลักษณะแล้ว','info');
+      return Redirect::to('shop/'.request()->shopSlug.'/product/option/'.$this->param['product_id']);
+    }
+
     $this->data = $model->formHelper->build();
 
-    $this->setPageTitle('เพิ่มหัวข้อตัวเลือกสินค้า');
+    $this->setPageTitle('เพิ่มหัวข้อคุณลักษณะสินค้า');
 
     return $this->view('pages.product_option.form.product_option_add');
 
@@ -29,7 +35,7 @@ class ProductOptionController extends Controller
     $request->request->add(['product_id' => $this->param['product_id']]);
 
     if($model->fill($request->all())->save()) {
-      MessageHelper::display('หัวข้อตัวเลือกสินค้าถูกเพิ่มแล้ว','success');
+      MessageHelper::display('หัวข้อคุณลักษณะสินค้าถูกเพิ่มแล้ว','success');
       return Redirect::to('shop/'.request()->shopSlug.'/product/option/'.$this->param['product_id']);
     }else{
       return Redirect::back();
@@ -43,7 +49,7 @@ class ProductOptionController extends Controller
 
     $this->data = $model->formHelper->build();
 
-    $this->setPageTitle('แก้ไขหัวข้อตัวเลือกสินค้า');
+    $this->setPageTitle('แก้ไขหัวข้อคุณลักษณะสินค้า');
 
     return $this->view('pages.product_option.form.product_option_edit');
 

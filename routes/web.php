@@ -13,7 +13,8 @@
 
 Route::get('aa', function() {
   $model = new App\Models\Cart;
-  dd($model->addProduct(26,1,1));
+  // dd($model->addProduct(26,1,1));
+  dd($model->updateQuantity(26,3,1));
 });
 
 Route::get('ct', function() {

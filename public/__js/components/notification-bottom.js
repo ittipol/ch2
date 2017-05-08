@@ -5,6 +5,7 @@ class NotificationBottom {
       this.desc = desc;
       this.type = type;
       this.size = size;
+      this.handle = null;
       this.delay = 5000;
       this.alwaysVisible = alwaysVisible;
       this.allowedClose = allowedClose;
@@ -79,12 +80,19 @@ class NotificationBottom {
 
     document.getElementById('notification_bottom').style.opacity = 0;
     document.getElementById('notification_bottom').style.bottom = 0;
-    // document.getElementById('notification_bottom').style.right = '50px';
 
     if(this.alwaysVisible){
       $('#notification_bottom').animate({bottom:80,right:50,opacity:1},500,'swing');
     }else{
-      $('#notification_bottom').animate({bottom:80,right:50,opacity:1},500,'swing').delay(this.delay).fadeOut(220);
+
+      $('#notification_bottom').animate({bottom:80,right:50,opacity:1},500,'swing');
+
+      clearTimeout(this.handle);
+
+      this.handle = setTimeout(function(){
+        $('#notification_bottom').fadeOut(220);
+      },this.delay);
+ 
     }
     
   }

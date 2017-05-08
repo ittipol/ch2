@@ -114,6 +114,24 @@
 
       </div>
 
+      @if(!empty($productOptionValues))
+      <div class="product-option-value">
+        @foreach($productOptionValues as $productOptionValue)
+          <h5>{{$productOptionValue['name']}}</h5>
+          @foreach($productOptionValue['options'] as $value)
+            <label>
+              <?php
+                echo Form::radio('product-option-value-'.$productOptionValue['id'], $value['id'], null, array(
+                  'class' => 'product-option-value'
+                ));
+              ?>
+              <div class="product-option-value-box">{{$value['name']}}</div>
+            </label>
+          @endforeach
+        @endforeach
+      </div>
+      @endif
+
       <div class="quantity-box">
       @if($_modelData['active'] && ($_modelData['quantity'] == 0))
         <h4 class="error-message">{{$_modelData['message_out_of_order']}}</h4>
@@ -182,13 +200,13 @@
                 <div>
                   <h5>บริษัทหรือร้านค้าที่ขายสินค้านี้</h5>
                   <h3>
-                    <a href="{{URL::to($shopUrl)}}">{{$shop['name']}}</a>
+                    <a href="{{request()->get('shopUrl')}}">{{$shop['name']}}</a>
                   </h3>
                   <div class="line space-top-bottom-20"></div>
                   <p>{{$shop['_short_description']}}</p>
                 </div>
 
-                <a href="{{URL::to($shopUrl)}}" class="button wide-button">ไปยังบริษัทหรือร้านค้า</a>
+                <a href="{{request()->get('shopUrl')}}" class="button wide-button">ไปยังบริษัทหรือร้านค้า</a>
               </div>
             </div>
 

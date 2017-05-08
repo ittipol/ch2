@@ -430,6 +430,7 @@ class ProductController extends Controller
     $this->setData('shopUrl','shop/'.$slug);
     $this->setData('categoryPaths',$model->getCategoryPaths());
     $this->setData('productCatalogs',$_productCatalogs);
+    $this->setData('productOptionValues',$model->getProductOptionValues());
     $this->setData('branchLocations',json_encode($branchLocations));
     $this->setData('hasBranchLocation',$hasBranchLocation);
 
@@ -817,8 +818,8 @@ class ProductController extends Controller
     $productOption = $productOption->first();
 
     $data = array_merge($productOption->buildModelData(),array(
-      'editUrl' => request()->get('shopUrl').'/product/option/edit/'.$productOption->id.'/product_id:'.$this->param['id'],
-      'deleteUrl' => request()->get('shopUrl').'/product/option/delete/'.$productOption->id.'/product_id:'.$this->param['id']
+      'editUrl' => request()->get('shopUrl').'product/option/edit/'.$productOption->id.'/product_id:'.$this->param['id'],
+      'deleteUrl' => request()->get('shopUrl').'product/option/delete/'.$productOption->id.'/product_id:'.$this->param['id']
     ));
 
     // Get Product option values

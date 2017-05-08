@@ -26,7 +26,7 @@
   <div class="container-header">
     <div class="row">
       <div class="col-lg-6 col-sm-12">
-        <div class="title">แก้ไขหัวข้อตัวเลือกสินค้า</div>
+        <div class="title">แก้ไขหัวข้อคุณลักษณะสินค้า</div>
       </div>
     </div>
   </div>
@@ -52,11 +52,11 @@
 
     <div class="form-row">
       <?php 
-        echo Form::label('name', 'ชื่อหัวข้อตัวเลือก', array(
+        echo Form::label('name', 'ชื่อหัวข้อคุณลักษณะ', array(
           'class' => 'required'
         ));
         echo Form::text('name', null, array(
-          'placeholder' => 'ชื่อหัวข้อตัวเลือก',
+          'placeholder' => 'ชื่อหัวข้อคุณลักษณะ',
           'autocomplete' => 'off'
         ));
       ?>

@@ -17,7 +17,7 @@ class ProductOption extends Model
       'name' => 'required|max:255',
     ),
     'messages' => array(
-      'name.required' => 'ชื่อหัวข้อตัวเลือกห้ามว่าง',
+      'name.required' => 'ชื่อหัวข้อคุณลักษณะห้ามว่าง',
     )
   );
 

@@ -9,7 +9,7 @@
       <div class="row">
         <div class="col-lg-6 col-sm-12">
           <div class="title">
-            หัวข้อตัวเลือกสินค้า
+            หัวข้อคุณลักษณะสินค้า
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@
           <div class="dot"></div>
           <div class="additional-option-content">
             <a href="{{$productOption['editUrl']}}">แก้ไข</a>
-            <a href="{{$productOption['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการลบหัวข้อตัวเลือก {{$productOption['name']}} ใช่หรือไม่">ลบ</a>
+            <a href="{{$productOption['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการลบหัวข้อคุณลักษณะ {{$productOption['name']}} ใช่หรือไม่">ลบ</a>
           </div>
         </div>
         

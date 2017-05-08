@@ -31,20 +31,27 @@ class CartController extends Controller
     $productId = Input::get('productId');
     $quantity = Input::get('quantity');
 
-    $updated = $cartModel->updateQuantity($productId,$quantity);
-
-    if($updated['hasError']) {
-      $result = $updated;
-    }else{
-      $product = $cartModel->getProduct($productId);
-
-      $result = array(
-        'success' => $updated,
-        'productTotal' => $cartModel->getProductTotal($product,$quantity,true),
-        'shippingCostTotal' => $cartModel->getProductShippingCost($product,$quantity,true),
-        'summaries' => $cartModel->getSummary($cartModel->getShopId($productId))
-      );
+    $productOptionValueId = null;
+    if(!empty(Input::get('productOptionValueId'))) {
+      $productOptionValueId = Input::get('productOptionValueId');
     }
+
+    $product = $cartModel->getProduct($productId,$productOptionValueId);
+
+    $error = $cartModel->checkProductError($product,$quantity);
+
+    if($error['hasError']) {
+      return $error;
+    }
+
+    $updated = $cartModel->updateQuantity($productId,$quantity,$productOptionValueId);
+
+    $result = array(
+      'success' => $updated,
+      'productTotal' => $cartModel->getProductTotal($product,$quantity,true),
+      'shippingCostTotal' => $cartModel->getProductShippingCost($product,$quantity,true),
+      'summaries' => $cartModel->getSummary($cartModel->getShopId($productId))
+    );
 
     return response()->json($result);
 
@@ -62,10 +69,16 @@ class CartController extends Controller
     $cartModel = Service::loadModel('Cart');
 
     $productId = Input::get('productId');
+
+    $productOptionValueId = null;
+    if(!empty(Input::get('productOptionValueId'))) {
+      $productOptionValueId = Input::get('productOptionValueId');
+    }
+
     $shopId = $cartModel->getShopId($productId);
 
     // Delete
-    $success = $cartModel->deleteProduct($productId);
+    $success = $cartModel->deleteProduct($productId,$productOptionValueId);
 
     if(!$success) {
       $result = array(

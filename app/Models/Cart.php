@@ -35,16 +35,14 @@ class Cart extends Model
 
   public function addProduct($productId,$quantity,$productOptionValueId = null) {
 
-    // $product = $this->getProduct($productId);
-
-    $product = $this->getCartProductInfo($productId,$productOptionValueId);
+    $product = $this->getProduct($productId,$productOptionValueId);
 
     if($product->hasProductOption()) {
       if(empty($productOptionValueId)) {
         return array(
           'hasError' => true,
           'errorType' => 5,
-          'errorMessage' => 'โปรดเลือกตัวเลือกสินค้า'
+          'errorMessage' => 'โปรดเลือกคุณลักษณะสินค้า'
         );
       }
 
@@ -123,26 +121,29 @@ class Cart extends Model
 
   }
 
-  public function updateQuantity($id, $quantity) {
+  public function updateQuantity($id,$quantity,$productOptionValueId = null) {
 
-    $product = $this->getProduct($id);
+    // $product = $this->getProduct($id,$productOptionValueId);
 
-    $error = $this->checkProductError($product,$quantity);
+    // $error = $this->checkProductError($product,$quantity);
 
-    if($error['hasError']) {
-      return $error;
-    }
+    // if($error['hasError']) {
+    //   return $error;
+    // }
 
     if(Auth::check()) {
 
       $cart = Cart::where([
-        ['created_by','=',session()->get('Person.id')],
-        ['product_id','=',$id]
-      ])->first();
+        ['product_id','=',$id],
+        ['product_option_value_id','=',$productOptionValueId],
+        ['created_by','=',session()->get('Person.id')]
+      ])
+      ->select('id');
 
       $updated = false;
-      if(!empty($cart)) {
-        $cart['quantity'] = $quantity;
+      if($cart->exists()) {
+        $cart = $cart->first();
+        $cart->quantity = $quantity;
         $updated = $cart->save();
       }
 
@@ -161,19 +162,20 @@ class Cart extends Model
   }
 
 
-  public function deleteProduct($id) {
+  public function deleteProduct($id,$productOptionValueId = null) {
 
     if(Auth::check()) {
+
       $cart = Cart::where([
-        ['created_by','=',session()->get('Person.id')],
-        ['product_id','=',$id]
+        ['product_id','=',$id],
+        ['product_option_value_id','=',$productOptionValueId],
+        ['created_by','=',session()->get('Person.id')]
       ])
-      ->select('id')
-      ->first();
+      ->select('id');
 
       $success = false;
-      if(!empty($cart)) {
-        $success = $cart->delete();
+      if($cart->exists()) {
+        $success = $cart->first()->delete();
       }
     }else{
       session()->forget('cart.'.$id);
@@ -218,13 +220,13 @@ class Cart extends Model
       $error = array(
         'hasError' => true,
         'errorType' => 4,
-        'errorMessage' => 'ไม่สามารถสั่งซื้อสินค้านี้ได้ สินค้ามีจำนวนน้อยกว่าจำนวนที่คุณสั่งซื้อ'
+        'errorMessage' => 'ไม่สามารถสั่งซื้อสินค้าได้ สินค้ามีจำนวนน้อยกว่าจำนวนที่สั่งซื้อ'
       );
     }elseif($product->minimum > $quantity) {
       $error = array(
         'hasError' => true,
         'errorType' => 5,
-        'errorMessage' => 'ไม่สามารถสั่งซื้อสินค้านี้ได้ จำนวนสินค้าที่คุณสั่งซื้อน้อยกว่าจำนวนสั่งซื้อขั้นต่ำ'
+        'errorMessage' => 'ไม่สามารถสั่งซื้อสินค้าได้ จำนวนสินค้าที่คุณสั่งซื้อน้อยกว่าจำนวนสั่งซื้อขั้นต่ำ'
       );
     }
 
@@ -304,7 +306,7 @@ class Cart extends Model
 
   }
 
-  public function getCartProductInfo($productId,$productOptionValueId = null) {
+  public function getProduct($productId,$productOptionValueId = null) {
 
     $product = Product::select('id','name','price','minimum','product_unit','shipping_calculate_from','quantity','weight','active')
     ->find($productId);
@@ -313,22 +315,25 @@ class Cart extends Model
       return null;
     }
 
+    $product->attributes['productOption'] = null;
+    $product->attributes['productOptionValueId'] = $productOptionValueId;
     if(!empty($productOptionValueId)) {
-      $option = ProductOptionValue::select('product_option_id','name','use_quantity','quantity','use_price','price')->find($productOptionValueId);
+
+      $productOptionValue = ProductOptionValue::select('product_option_id','name','use_quantity','quantity','use_price','price')->find($productOptionValueId);
       
-      $productOption = ProductOption::select('name')->find($option->product_option_id);
+      $productOption = ProductOption::select('name')->find($productOptionValue->product_option_id);
 
       $product->attributes['productOption'] = array(
         'productOptionName' => $productOption->name,
-        'valueName' => $option->name
+        'valueName' => $productOptionValue->name
       );
       
-      if($option->use_price) {
-        $product->price = $product->price + $option->price;
+      if($productOptionValue->use_price) {
+        $product->price = $product->price + $productOptionValue->price;
       }
 
-      if($option->use_quantity) {
-        $product->quantity = $option->quantity;
+      if($productOptionValue->use_quantity) {
+        $product->quantity = $productOptionValue->quantity;
       }
 
     }
@@ -344,13 +349,11 @@ class Cart extends Model
     $url = new Url;
     $cache = new Cache;
 
-    $product = $this->getCartProductInfo($productId,$productOptionValueId);
+    $product = $this->getProduct($productId,$productOptionValueId);
 
     if(empty($product)) {
       return null;
     }
-
-    // $product['productOption']
 
     return array_merge(array(
       'id' => $product->id,
@@ -364,6 +367,8 @@ class Cart extends Model
       'subTotal' => $this->getProductSubTotal($product,$quantity,true),
       'shippingCost' => $this->getProductShippingCost($product,$quantity,true),
       'total' => $this->getProductTotal($product,$quantity,true),
+      'productOptionValueId' => $product->productOptionValueId,
+      'productOption' => $product->productOption,
       'imageUrl' => $product->getImage('sm'),
       'productDetailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id' => $product->id)),
     ),$this->checkProductError($product,$quantity));
@@ -384,52 +389,52 @@ class Cart extends Model
 
 
 
-  public function getProduct($productId) {
+  // public function getProduct($productId) {
 
-    $product = Product::where([
-      ['id','=',$productId],
-    ])
-    ->select('id','name','price','minimum','product_unit','shipping_calculate_from','quantity','weight','active')
-    ->first();
+  //   $product = Product::where([
+  //     ['id','=',$productId],
+  //   ])
+  //   ->select('id','name','price','minimum','product_unit','shipping_calculate_from','quantity','weight','active')
+  //   ->first();
 
-    if(empty($product)) {
-      return null;
-    }
+  //   if(empty($product)) {
+  //     return null;
+  //   }
 
-    $product->attributes['promotion'] = $product->getPromotion();
+  //   $product->attributes['promotion'] = $product->getPromotion();
 
-    return $product;
+  //   return $product;
 
-  }
+  // }
 
-  public function getProductInfo($productId,$quantity) {
+  // public function getProductInfo($productId,$quantity) {
 
-    $url = new Url;
-    $cache = new Cache;
+  //   $url = new Url;
+  //   $cache = new Cache;
 
-    $product = $this->getProduct($productId);
+  //   $product = $this->getProduct($productId);
 
-    if(empty($product)) {
-      return null;
-    }
+  //   if(empty($product)) {
+  //     return null;
+  //   }
 
-    return array_merge(array(
-      'id' => $product->id,
-      'name' => $product->name,
-      'minimum' => $product->minimum,
-      'quantity' => $quantity,
-      'product_unit' => $product->product_unit,
-      'shipping_calculate_from' => $product->shipping_calculate_from,
-      'price' => $this->getPrice($product,true),
-      'savingPrice' => $this->getSavingPrice($product,$quantity,true),
-      'subTotal' => $this->getProductSubTotal($product,$quantity,true),
-      'shippingCost' => $this->getProductShippingCost($product,$quantity,true),
-      'total' => $this->getProductTotal($product,$quantity,true),
-      'imageUrl' => $product->getImage('sm'),
-      'productDetailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id' => $product->id)),
-    ),$this->checkProductError($product,$quantity));
+  //   return array_merge(array(
+  //     'id' => $product->id,
+  //     'name' => $product->name,
+  //     'minimum' => $product->minimum,
+  //     'quantity' => $quantity,
+  //     'product_unit' => $product->product_unit,
+  //     'shipping_calculate_from' => $product->shipping_calculate_from,
+  //     'price' => $this->getPrice($product,true),
+  //     'savingPrice' => $this->getSavingPrice($product,$quantity,true),
+  //     'subTotal' => $this->getProductSubTotal($product,$quantity,true),
+  //     'shippingCost' => $this->getProductShippingCost($product,$quantity,true),
+  //     'total' => $this->getProductTotal($product,$quantity,true),
+  //     'imageUrl' => $product->getImage('sm'),
+  //     'productDetailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id' => $product->id)),
+  //   ),$this->checkProductError($product,$quantity));
 
-  }
+  // }
 
   public function getPrice($product,$format = false) {
     $currency = new Currency;
@@ -632,7 +637,7 @@ class Cart extends Model
     if(!empty($carts)) {
 
       foreach ($carts as $cart) {
-        $product = $product = $this->getProduct($cart['productId']);
+        $product = $this->getProduct($cart['productId']);
 
         $result = $this->getSavingPrice($product,$cart['quantity']);
 
@@ -663,7 +668,7 @@ class Cart extends Model
     if(!empty($carts)) {
 
       foreach ($carts as $cart) {
-        $product = $product = $this->getProduct($cart['productId']);
+        $product = $this->getProduct($cart['productId']);
 
         $result = $this->getProductSubTotal($product,$cart['quantity']);
 
@@ -694,7 +699,7 @@ class Cart extends Model
     if(!empty($carts)) {
 
       foreach ($carts as $cart) {
-        $product = $product = $this->getProduct($cart['productId']);
+        $product = $this->getProduct($cart['productId']);
 
         $result = $this->getProductShippingCost($product,$cart['quantity']);
 
@@ -725,7 +730,7 @@ class Cart extends Model
     if(!empty($carts)) {
 
       foreach ($carts as $cart) {
-        $product = $product = $this->getProduct($cart['productId']);
+        $product = $this->getProduct($cart['productId']);
 
         $result = $this->getProductTotal($product,$cart['quantity']);
 

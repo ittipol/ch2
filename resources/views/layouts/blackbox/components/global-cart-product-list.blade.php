@@ -25,7 +25,16 @@
         <h4 class="product-title">
           <a href="{{$product['productDetailUrl']}}">{{$product['name']}}</a>
         </h4>
+
+        @if(!empty($product['productOption']))
+          <div class="product-option">
+            <span class="product-option-name">{{$product['productOption']['productOptionName']}}:</span>
+            <span class="product-option-value-name">{{$product['productOption']['valueName']}}</span>
+          </div>
+        @endif
+
         <div class="line grey space-bottom-5"></div>
+
         <div>
           ราคาสินค้า: <span class="product-price">{{$product['price']}}</span> x {{$product['quantity']}}
         </div>
@@ -41,7 +50,7 @@
 
     </div>
 
-    <a class="delete-product-button" data-id="{{$product['id']}}" data-global-cart="1" role="button">×</a>
+    <a class="delete-product-button" data-id="{{$product['id']}}" data-option-value-id="{{$product['productOptionValueId']}}" data-global-cart="1" role="button">×</a>
 
   </div>
   @endforeach

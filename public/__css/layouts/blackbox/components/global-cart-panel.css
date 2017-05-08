@@ -73,6 +73,14 @@
 	width: 90%;
 }
 
+.global-cart-panel .product-info .product-option {
+	margin-bottom: 10px;
+}
+
+.global-cart-panel .product-info .product-option-name {
+	color: #999;
+}
+
 .global-cart-panel .product-price {
 	color: #0071c5;
 	font-weight: bold;
@@ -85,7 +93,6 @@
 	width: 100%;
 	height: 100%;
 	background-color: rgba(20,27,32,.6);
-	/*border: 2px solid #D50000;*/
 	z-index: 5;
 }
 

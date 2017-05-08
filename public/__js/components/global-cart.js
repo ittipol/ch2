@@ -17,7 +17,7 @@ class GlobalCart {
 
 		// For global cart panel & cart page
 		$(document).on('click','.delete-product-button',function(){
-		  _this.cartDelete($(this).data('id'),this);
+		  _this.cartDelete($(this).data('id'),this,$(this).data('option-value-id'));
 		});
 
 		$(document).on('keydown','.cart .cart-summary-quantity-input',function(){
@@ -34,21 +34,12 @@ class GlobalCart {
 			if(_this.requestUpdateQuantity) {
 				_this.requestUpdateQuantity = false;
 
-				let quantity = $(this).val();
-				let minimum = $(this).data('minimum');
+				let quantity = $(this).val().trim();
 
 				if((quantity == '') || (quantity == 0)) {
 					$(this).val(_this.tempQuantity);
-				}else if(minimum > quantity){
-
-					$(this).val(_this.tempQuantity);
-
-					const notificationBottom = new NotificationBottom('ไม่สามารถสั่งซื้อได้','จำนวนการสั่งซื้อของคุณน้อยกว่าจำนวนการสั่งซื้อขั้นต่ำของสินค้านี้','error');
-					notificationBottom.setDelay(5000);
-					notificationBottom.load();
-
 				}else{
-					_this.updateQuantity($(this).data('id'),quantity);
+					_this.updateQuantity($(this).data('id'),quantity,$(this).data('option-value-id'));
 				}
 
 			}
@@ -56,14 +47,14 @@ class GlobalCart {
 
 	}
 
-	updateQuantity(productId,quantity) {
+	updateQuantity(productId,quantity,productOption = null) {
 
 		let _this = this;
 
 		let request = $.ajax({
 	    url: "/update_quantity",
 	    type: "POST",
-	    data: this.createAddForm(productId,quantity),
+	    data: this.createAddForm(productId,quantity,productOption),
 	    dataType: 'json',
 	    contentType: false,
 	    cache: false,
@@ -96,7 +87,7 @@ class GlobalCart {
 	    	$('#_product_'+productId).find('.product-total-amount').text(response.productTotal);
 	    	$('#_product_'+productId).find('.product-shipping-cost-amount').text(response.shippingCostTotal);
 	    	$('#_product_'+productId).find('.product-error-message').remove();
-console.log('xxxx');
+
 	    	let parent = $('#_product_'+productId).parent().parent();
 
 	    	parent.find('.sub-total').find('.amount').text(response.summaries.subTotal.value);
@@ -192,7 +183,7 @@ console.log('xxxx');
 
 	}
 
-	cartDelete(productId,obj) {
+	cartDelete(productId,obj,productOption = null) {
 
 		this.allowedInput = false;
 
@@ -201,7 +192,7 @@ console.log('xxxx');
 	  let request = $.ajax({
 	    url: "/cart_delete",
 	    type: "POST",
-	    data: this.createDeleteForm(productId),
+	    data: this.createDeleteForm(productId,productOption),
 	    dataType: 'json',
 	    contentType: false,
 	    cache: false,
@@ -344,18 +335,22 @@ console.log('xxxx');
 		formData.append('quantity', quantity);
 
 		if(productOption !== null) {
-			formData.append('productOption', productOption);
+			formData.append('productOptionValueId', productOption);
 		}
 
 		return formData;
 
 	}
 
-	createDeleteForm(productId) {
+	createDeleteForm(productId,productOption = null) {
 
 	  let formData = new FormData();
 	  formData.append('_token', this.token);
 	  formData.append('productId', productId);
+
+	  if(productOption !== null) {
+	  	formData.append('productOptionValueId', productOption);
+	  }
 
 	  return formData;
 

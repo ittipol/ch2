@@ -55,6 +55,10 @@
 	position: relative;
 }
 
+.cart .product-info .product-option {
+	margin-top: 10px;
+}
+
 .cart .quantity-input-panel {
 	position: relative;
 	width: 80%;
@@ -181,5 +185,9 @@
 @media only screen and (max-width : 480px) {
 	.cart .quantity-input-panel {
 		width: 90%;
+	}
+
+	.cart .product-info .product-option {
+		margin-top: 0;
 	}
 }
