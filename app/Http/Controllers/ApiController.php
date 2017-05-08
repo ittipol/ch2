@@ -410,7 +410,12 @@ class ApiController extends Controller
     $productId = Input::get('productId');
     $quantity = Input::get('quantity');
 
-    $saved = $cartModel->addProduct($productId,$quantity);
+    $productOption = null;
+    if(!empty(Input::get('productOption'))) {
+      $productOption = json_decode(Input::get('productOption'),true);
+    }
+
+    $saved = $cartModel->addProduct($productId,$quantity,$productOption);
 
     if($saved['hasError']) {
       $result = $saved;

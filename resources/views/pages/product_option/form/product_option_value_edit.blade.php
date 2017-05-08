@@ -113,28 +113,45 @@
 
     <div class="form-row">
       <?php 
-        echo Form::label('price', 'ราคาบวกเพิ่ม');
+        echo Form::label('price', 'ราคาบวกเพิ่มเติม');
       ?>
+      <label class="choice-box">
+        <?php
+          echo Form::checkbox('use_price', 1, null, array(
+            'id' => 'use_price_chkbox'
+          ));
+        ?>
+        <div class="inner">เปิดใช้ราคาบวกเพิ่มเติม</div>
+      </label>
       <p class="error-message">*** หากกำหนดจะนำราคาของตัวเลือกไปบวกกับราคาหลักเพื่อเป็นราคาจริง</p>
       <p class="error-message">*** หากไม่ได้กำหนดจะใช้ราคาที่กำหนดไว้ของสินค้านั้นๆ</p>
       <?php
         echo Form::text('price', null, array(
-          'placeholder' => 'ราคาบวกเพิ่ม',
-          'autocomplete' => 'off'
+          'placeholder' => 'ราคาบวกเพิ่มเติม',
+          'autocomplete' => 'off',
+          'id' => 'price_input'
         ));
       ?>
     </div>
 
     <div class="form-row">
       <?php 
-        echo Form::label('quantity', 'จำนวนสินค้า');
+        echo Form::label('use_quantity', 'จำนวนสินค้าแยกของตัวเลือก');
       ?>
+      <label class="choice-box">
+        <?php
+          echo Form::checkbox('use_quantity', 1, null, array(
+            'id' => 'use_quantity_chkbox'
+          ));
+        ?>
+        <div class="inner">เปิดใช้จำนวนสินค้าแยกของตัวเลือก</div>
+      </label>
       <p class="error-message">*** หากไม่ได้กำหนดจะใช้จำนวนสินค้าที่กำหนดไว้ของสินค้านั้นๆ</p>
       <?php
         echo Form::text('quantity', null, array(
-          'placeholder' => 'จำนวนสินค้า',
+          'placeholder' => 'จำนวนสินค้าแยกของตัวเลือก',
           'autocomplete' => 'off',
-          'id' => 'quantity_input_box'
+          'id' => 'quantity_input'
         ));
       ?>
     </div>
@@ -168,6 +185,9 @@
 <script type="text/javascript">
 
   $(document).ready(function(){
+
+    const productOptionValue = new ProductOptionValue();
+    productOptionValue.load();
 
     const images = new Images('_image_group','photo',1);
     images.load({!!$_formData['Image']!!});

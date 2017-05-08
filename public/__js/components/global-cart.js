@@ -126,7 +126,7 @@ console.log('xxxx');
 
 	}
 
-	cartAdd(productId,quantity) {
+	cartAdd(productId,quantity,productOption = null) {
 
     this.allowedInput = false;
 
@@ -135,7 +135,7 @@ console.log('xxxx');
 		let request = $.ajax({
 	    url: "/cart_add",
 	    type: "POST",
-	    data: this.createAddForm(productId,quantity),
+	    data: this.createAddForm(productId,quantity,productOption),
 	    dataType: 'json',
 	    contentType: false,
 	    cache: false,
@@ -336,12 +336,16 @@ console.log('xxxx');
 
 	}
 
-	createAddForm(productId,quantity) {
+	createAddForm(productId,quantity,productOption = null) {
 
 		let formData = new FormData();
 		formData.append('_token', this.token);
 		formData.append('productId', productId);
-		formData.append('quantity', quantity); 
+		formData.append('quantity', quantity);
+
+		if(productOption !== null) {
+			formData.append('productOption', productOption);
+		}
 
 		return formData;
 

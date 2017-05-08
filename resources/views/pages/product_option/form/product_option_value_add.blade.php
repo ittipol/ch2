@@ -180,55 +180,10 @@
 
 <script type="text/javascript">
 
-  class ProductOption {
-
-    constructor() {
-
-    }
-
-    load() {
-
-      if($('#use_price_chkbox').is(':checked')) {
-        $('#price_input').prop('disabled',false);
-      }else{
-        $('#price_input').prop('disabled',true);
-      }
-
-      if($('#use_quantity_chkbox').is(':checked')) {
-        $('#quantity_input').prop('disabled',false);
-      }else{
-        $('#quantity_input').prop('disabled',true);
-      }
-
-      this.bind();
-    }
-
-    bind() {
-
-      $('#use_price_chkbox').on('click',function(){
-        if($(this).is(':checked')) {
-          $('#price_input').prop('disabled',false);
-        }else{
-          $('#price_input').prop('disabled',true).val('');
-        }
-      });
-
-      $('#use_quantity_chkbox').on('click',function(){
-        if($(this).is(':checked')) {
-          $('#quantity_input').prop('disabled',false);
-        }else{
-          $('#quantity_input').prop('disabled',true).val('');
-        }
-      });
-
-    }
-
-  }
-
   $(document).ready(function(){
 
-    const productOption = new ProductOption();
-    productOption.load();
+    const productOptionValue = new ProductOptionValue();
+    productOptionValue.load();
 
     const images = new Images('_image_group','photo',1);
     images.load();

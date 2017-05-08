@@ -11,6 +11,16 @@
 |
 */
 
+Route::get('aa', function() {
+  $model = new App\Models\Cart;
+  dd($model->addProduct(26,1,1));
+});
+
+Route::get('ct', function() {
+  $model = new App\Models\Cart;
+  dd($model->getProducts());
+});
+
 // Route::get('cp','HomeController@catPath');
 
 // Route::get('ac','HomeController@addXxx');
@@ -22,9 +32,9 @@
 //     $exitCode = Artisan::call('cache:clear');
 // });
 
-// Route::get('/debug',function(){
-//   dd(session()->all());
-// });
+Route::get('/debug',function(){
+  dd(session()->all());
+});
 
 // Route::get('/debug_notification',function(){
 //   $notification = new App\Models\Notification;

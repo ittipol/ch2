@@ -116,6 +116,24 @@
 
       </div>
 
+      @if(!empty($productOptionValues))
+      <div class="product-option-value">
+        @foreach($productOptionValues as $productOptionValue)
+          <h5>{{$productOptionValue['name']}}</h5>
+          @foreach($productOptionValue['options'] as $value)
+            <label>
+              <?php
+                echo Form::radio('product-option-value-'.$productOptionValue['id'], $value['id'], null, array(
+                  'class' => 'product-option-value'
+                ));
+              ?>
+              <div class="product-option-value-box">{{$value['name']}}</div>
+            </label>
+          @endforeach
+        @endforeach
+      </div>
+      @endif
+
       <div class="quantity-box">
       @if($_modelData['active'] && ($_modelData['quantity'] == 0))
         <h4 class="error-message">{{$_modelData['message_out_of_order']}}</h4>

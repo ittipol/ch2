@@ -51,7 +51,7 @@
 
       <div class="list-item">
         <a href="{{$productOptionValueAdd}}">
-          <img class="icon" src="/images/common/pencil.png">
+          <img class="icon" src="/images/common/plus.png">
           <h4>เพิ่มตัวเลือกของ "{{$productOption['name']}}"</h4>
         </a>
       </div>

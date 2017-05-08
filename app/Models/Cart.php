@@ -10,11 +10,11 @@ use Auth;
 class Cart extends Model
 {
   protected $table = 'carts';
-  protected $fillable = ['created_by','shop_id','product_id','quantity'];
+  protected $fillable = ['shop_id','product_id','product_option_value_id','quantity','created_by'];
 
   private $checkError = true;
 
-  protected $Totaltypes = array(
+  protected $totalTypes = array(
     'subTotal' => array(
       'title' => 'มูลค่าสินค้า',
       'class' => 'sub-total'
@@ -33,9 +33,29 @@ class Cart extends Model
     )
   );
 
-  public function addProduct($productId, $quantity) {
+  public function addProduct($productId,$quantity,$productOptionValueId = null) {
 
-    $product = $this->getProduct($productId);
+    // $product = $this->getProduct($productId);
+
+    $product = $this->getCartProductInfo($productId,$productOptionValueId);
+
+    if($product->hasProductOption()) {
+      if(empty($productOptionValueId)) {
+        return array(
+          'hasError' => true,
+          'errorType' => 5,
+          'errorMessage' => 'โปรดเลือกตัวเลือกสินค้า'
+        );
+      }
+
+      if(!$product->checkProductOptionValue($productOptionValueId)) {
+        return array(
+          'hasError' => true,
+          'errorType' => 6,
+          'errorMessage' => 'ตัวเลือกไม่ถูกต้อง'
+        );
+      }
+    }
 
     $error = $this->checkProductError($product,$quantity);
 
@@ -51,26 +71,31 @@ class Cart extends Model
 
     if(Auth::check()) {
 
-      $cart = Cart::where([
+      $cart = $this->where([
+        ['product_id','=',$productId],
+        ['product_option_value_id','=',$productOptionValueId],
         ['created_by','=',session()->get('Person.id')],
-        ['product_id','=',$productId]
       ])
-      ->select('id')
-      ->first();
+      ->select('id');
 
-      if(!empty($cart)) {
+      if($cart->exists()) {
         // update quantity
-        $saved = $cart->increment('quantity', $quantity);
+        $saved = $cart->first()->increment('quantity', $quantity);
       }else{
 
         $value = array(
-          'created_by' => session()->get('Person.id'),
           'shop_id' => $shop->id,
           'product_id' => $productId,
-          'quantity' => $quantity
+          'quantity' => $quantity,
+          'created_by' => session()->get('Person.id'),
         );
 
-        $saved = Cart::fill($value)->save();
+        if(!empty($productOptionValueId)) {
+          $value['product_option_value_id'] = $productOptionValueId; 
+        }
+
+        $saved = $this->fill($value)->save();
+
       }
 
     }else{
@@ -80,10 +105,14 @@ class Cart extends Model
         $product['quantity'] += $quantity;
         session()->put('cart.'.$productId,$product);
       }else{
+
+        // productOptionValueId
+
         session()->put('cart.'.$productId,array(
           'shopId' => $shop->id,
           'productId' => $productId,
-          'quantity' => $quantity
+          'quantity' => $quantity,
+          'product_option' => $productOption
         ));
       }
       
@@ -202,6 +231,158 @@ class Cart extends Model
     return $error;
 
   }
+
+  public function getCart($shopId = null) {
+
+    $products = null;
+
+    if(Auth::check()) {
+
+      if(empty($shopId)) {
+        $_products = $this
+        ->where('created_by','=',session()->get('Person.id'))
+        ->select('product_id','quantity','shop_id','product_option_value_id')
+        ->get();
+      }else{
+        $_products = $this->where([
+          ['created_by','=',session()->get('Person.id')],
+          ['shop_id','=',$shopId]
+        ])
+        ->select('product_id','quantity','shop_id','product_option_value_id')
+        ->get();
+      }
+
+      foreach ($_products as $product) {
+        $products[] = array(
+          'shopId' => $product->shop_id,
+          'productId' => $product->product_id,
+          'quantity' => $product->quantity,
+          'productOptionValueId' => $product->product_option_value_id
+        );
+      }
+
+    }else{
+
+      if(empty($shopId)) {
+        $products = session()->get('cart');
+      }else{
+        $_products = session()->get('cart');
+
+        foreach ($_products as $product) {
+          if($product['shopId'] == $shopId) {
+            $products[] = $product;
+          }
+        }
+      }
+
+    }
+
+    return $products;
+
+  }
+
+  public function getProducts($shopId = null) {
+
+    $carts = $this->getCart($shopId);
+
+    $products = array();
+    if(!empty($carts)) {
+
+      foreach ($carts as $cart) {
+
+        $product = $this->buildCartProductInfo($cart['productId'],$cart['quantity'],$cart['productOptionValueId']);
+
+        if(!empty($product)) {
+          $products[] = $product;
+        }
+  
+      }
+
+    }
+
+    return $products;
+
+  }
+
+  public function getCartProductInfo($productId,$productOptionValueId = null) {
+
+    $product = Product::select('id','name','price','minimum','product_unit','shipping_calculate_from','quantity','weight','active')
+    ->find($productId);
+
+    if(empty($product)) {
+      return null;
+    }
+
+    if(!empty($productOptionValueId)) {
+      $option = ProductOptionValue::select('product_option_id','name','use_quantity','quantity','use_price','price')->find($productOptionValueId);
+      
+      $productOption = ProductOption::select('name')->find($option->product_option_id);
+
+      $product->attributes['productOption'] = array(
+        'productOptionName' => $productOption->name,
+        'valueName' => $option->name
+      );
+      
+      if($option->use_price) {
+        $product->price = $product->price + $option->price;
+      }
+
+      if($option->use_quantity) {
+        $product->quantity = $option->quantity;
+      }
+
+    }
+
+    $product->attributes['promotion'] = $product->getPromotion();
+
+    return $product;
+
+  }
+
+  public function buildCartProductInfo($productId,$quantity,$productOptionValueId = null) {
+
+    $url = new Url;
+    $cache = new Cache;
+
+    $product = $this->getCartProductInfo($productId,$productOptionValueId);
+
+    if(empty($product)) {
+      return null;
+    }
+
+    // $product['productOption']
+
+    return array_merge(array(
+      'id' => $product->id,
+      'name' => $product->name,
+      'minimum' => $product->minimum,
+      'quantity' => $quantity,
+      'product_unit' => $product->product_unit,
+      'shipping_calculate_from' => $product->shipping_calculate_from,
+      'price' => $this->getPrice($product,true),
+      'savingPrice' => $this->getSavingPrice($product,$quantity,true),
+      'subTotal' => $this->getProductSubTotal($product,$quantity,true),
+      'shippingCost' => $this->getProductShippingCost($product,$quantity,true),
+      'total' => $this->getProductTotal($product,$quantity,true),
+      'imageUrl' => $product->getImage('sm'),
+      'productDetailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id' => $product->id)),
+    ),$this->checkProductError($product,$quantity));
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   public function getProduct($productId) {
 
@@ -565,29 +746,6 @@ class Cart extends Model
 
   }
 
-  public function getProducts($shopId = null) {
-
-    $carts = $this->getCart($shopId);
-
-    $products = array();
-    if(!empty($carts)) {
-
-      foreach ($carts as $cart) {
-
-        $product = $this->getProductInfo($cart['productId'],$cart['quantity']);
-
-        if(!empty($product)) {
-          $products[] = $product;
-        }
-  
-      }
-
-    }
-
-    return $products;
-
-  }
-
   public function productCount() {
 
     $carts = $this->getCart();
@@ -621,54 +779,6 @@ class Cart extends Model
     }
   }
 
-  public function getCart($shopId = null) {
-
-    $products = null;
-
-    if(Auth::check()) {
-
-      if(empty($shopId)) {
-        $_products = $this
-        ->where('created_by','=',session()->get('Person.id'))
-        ->select('product_id','quantity','shop_id')
-        ->get();
-      }else{
-        $_products = $this->where([
-          ['created_by','=',session()->get('Person.id')],
-          ['shop_id','=',$shopId]
-        ])
-        ->select('product_id','quantity','shop_id')
-        ->get();
-      }
-      
-      foreach ($_products as $product) {
-        $products[] = array(
-          'shopId' => $product->shop_id,
-          'productId' => $product->product_id,
-          'quantity' => $product->quantity
-        );
-      }
-
-    }else{
-
-      if(empty($shopId)) {
-        $products = session()->get('cart');
-      }else{
-        $_products = session()->get('cart');
-
-        foreach ($_products as $product) {
-          if($product['shopId'] == $shopId) {
-            $products[] = $product;
-          }
-        }
-      }
-
-    }
-
-    return $products;
-
-  }
-
   public function getShopId($productId) {
     return ShopRelateTo::where([
       ['model','like','Product'],
@@ -681,20 +791,20 @@ class Cart extends Model
 
   public function getTitle($alias) {
 
-    if(empty($this->Totaltypes[$alias]['title'])) {
+    if(empty($this->totalTypes[$alias]['title'])) {
       return null;
     }
 
-    return $this->Totaltypes[$alias]['title'];
+    return $this->totalTypes[$alias]['title'];
   }
 
   public function getClass($alias) {
 
-    if(empty($this->Totaltypes[$alias]['class'])) {
+    if(empty($this->totalTypes[$alias]['class'])) {
       return null;
     }
 
-    return $this->Totaltypes[$alias]['class'];
+    return $this->totalTypes[$alias]['class'];
   }
 
   public function enableCheckingError() {

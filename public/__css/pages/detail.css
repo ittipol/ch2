@@ -314,6 +314,28 @@
 	margin-bottom: 4px;
 }
 
+.product-option-value .product-option-value-box {
+	color: #444;
+	border: 2px solid #ccc;
+	font-size: 12px;
+	padding: 5px 12px;
+	cursor: pointer;
+}
+
+.product-option-value .product-option-value-box:hover {
+	color: #FF5722;
+	border-color: #FF5722;
+}
+
+.product-option-value input[type="radio"]:checked + .product-option-value-box {
+	color: #FF5722;
+	border-color: #FF5722;
+}
+
+.product-option-value label input[type="radio"], .product-option-value label input[type="checkbox"] {
+	display: none;
+}
+
 .quantity-box .quantity-text-input {
 	width: 49%;
 }

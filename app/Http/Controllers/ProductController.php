@@ -508,6 +508,7 @@ class ProductController extends Controller
     // $this->setData('shopUrl',request()->get('shopUrl'));
     $this->setData('categoryPaths',$model->getCategoryPaths());
     $this->setData('productCatalogs',$_productCatalogs);
+    $this->setData('productOptionValues',$model->getProductOptionValues());
     $this->setData('branchLocations',json_encode($branchLocations));
     $this->setData('hasBranchLocation',$hasBranchLocation);
 

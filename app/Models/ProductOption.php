@@ -25,6 +25,17 @@ class ProductOption extends Model
     return ProductOptionValue::where('product_option_id','=',$this->id)->count();
   }
 
+  public function getOptionValue() {
+    $optionValues =  ProductOptionValue::where('product_option_id','=',$this->id);
+
+    if(!$optionValues->exists()) {
+      return null;
+    }
+
+    return $optionValues->get();    
+
+  }
+
   public function buildModelData() {
 
     return array(

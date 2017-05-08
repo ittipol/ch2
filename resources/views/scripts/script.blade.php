@@ -32,6 +32,7 @@
     '__js/forms/product.js',
     '__js/forms/product-discount.js',
     '__js/forms/shipping-method.js',
+    '__js/forms/product-option-value.js',
     '__js/components/input-field.js',
     '__js/components/notification-bottom.js',
     '__js/components/additional-option.js',

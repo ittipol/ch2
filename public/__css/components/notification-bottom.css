@@ -91,7 +91,7 @@
 	margin-right: 10px;
 }
 
-@media only screen and (max-width : 992px) {
+/*@media only screen and (max-width : 992px) {
 
   .notification-bottom {
   	width: 280px;
@@ -101,9 +101,17 @@
   	padding: 5px 20px;
   }
 
-}
+}*/
 
 @media only screen and (max-width : 480px) {
+
+	.notification-bottom {
+  	width: 280px;
+  }
+
+  .notification-bottom .button-group .button {
+  	padding: 5px 20px;
+  }
 
 	.notification-bottom .message .title {
 		font-size: 15px;

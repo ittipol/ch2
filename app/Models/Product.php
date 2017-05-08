@@ -346,6 +346,68 @@ class Product extends Model
     return $productCatalogs->get();
   }
 
+  public function checkProductOptionValue($optionValueId) {
+    return ProductOption::join('product_option_values', 'product_option_values.product_option_id', '=', 'product_options.id')
+    ->where('product_option_values.id','=',$optionValueId)
+    ->exists();
+  }
+
+  public function getTotalProductOption() {
+    return ProductOption::where('product_id','=',$this->id)->count();
+  }
+
+  public function getProductOptions() {
+
+    $productOptions = ProductOption::where('product_id','=',$this->id);
+
+    if(!$productOptions->exists()) {
+      return null;
+    }
+
+    return $productOptions->get();
+  }
+
+  public function getProductOptionValues() {
+
+    $productOptions = ProductOption::where('product_id','=',$this->id);
+
+    if(!$productOptions->exists()) {
+      return null;
+    }
+
+    $_optionValues = array();
+    foreach ($productOptions->get() as $value) {
+    
+      $options = $value->getOptionValue();
+
+      if(empty($options)) {
+        continue;
+      }
+
+      $data['id'] = $value->id;
+      $data['name'] = $value->name;
+
+      foreach ($options as $option) {
+        $data['options'][] = array(
+          'id' => $option->id,
+          'name' => $option->name,
+          // 'price' => $option->price,
+          'realPrice' => $this->price + $option->price
+        );
+      }
+
+      $_optionValues[] = $data;
+
+    }
+
+    return $_optionValues;
+
+  }
+
+  public function hasProductOption() {
+    return $productOptions = ProductOption::where('product_id','=',$this->id)->exists();
+  }
+
   public function buildModelData() {
 
     $currency = new Currency;
@@ -481,9 +543,11 @@ class Product extends Model
       
       case 2:
 
-          if($this->isNewItem()) {
-            $flagMessage = 'สินค้ามาใหม่';
-          }elseif($this->hasPromotion()){
+          // if($this->isNewItem()) {
+          //   $flagMessage = 'สินค้ามาใหม่';
+          // }
+
+          if($this->hasPromotion()){
             $flagMessage = 'สินค้าโปรโมชั่น';
           }
 
@@ -523,15 +587,6 @@ class Product extends Model
     }
 
     return true;
-
-  }
-
-  public function getProductOptions() {
-
-    return $this->getRelatedData('ProductOption',array(
-      'fields' => array('product_id','name','quantity','price'),
-      'order' => array('created_at','asc'),
-    ));
 
   }
 

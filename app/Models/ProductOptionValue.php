@@ -39,6 +39,10 @@ class ProductOptionValue extends Model
     '3' => 'แสดงชื่อตัวเลือกพร้อมรูปภาพ',
   );
 
+  public function productOption() {
+    return $this->hasOne('App\Models\ProductOption','id','product_option_id');
+  }
+
   public static function boot() {
 
     parent::boot();
@@ -89,13 +93,13 @@ class ProductOptionValue extends Model
   public function buildPaginationData() {
 
     $quantity = $this->quantity;
-    if($this->quantity === null) {
-      $quantity = 'ไม่ได้ระบุ';
+    if($this->use_quantity == 0) {
+      $quantity = 'ใช้จำนวนหลัก';
     }
 
     $price = $this->price;
-    if($this->price === null) {
-      $price = 'ไม่ได้ระบุ';
+    if($this->use_price == 0) {
+      $price = 'ใช้ราคาหลัก';
     }
 
     return array(
