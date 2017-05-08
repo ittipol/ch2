@@ -10,6 +10,8 @@ use Redirect;
 class CheckoutController extends Controller
 {
   public function checkout() {
+
+    $cartModel = Service::loadModel('Cart');
     
     $address = Service::loadModel('Address')->where([
       ['model','like','Person'],
@@ -21,7 +23,7 @@ class CheckoutController extends Controller
       $_address = $address->first()->getAddress();
     }
 
-    $productSummaries = Service::loadModel('Cart')->getProductSummary();
+    $productSummaries = $cartModel->getProductSummary();
 
     $shippingMethodModel = Service::loadModel('ShippingMethod');
 
@@ -30,7 +32,7 @@ class CheckoutController extends Controller
       $shippingMethods[$productSummary['shop']['id']] = $shippingMethodModel->getShippingMethodChoice($productSummary['shop']['id']);
     }
 
-    $this->setData('data',Service::loadModel('Cart')->getProductSummary());
+    $this->setData('data',$cartModel->getProductSummary());
     $this->setData('shippingAddress',$_address);
     $this->setData('shippingMethods',$shippingMethods);
 
@@ -65,16 +67,16 @@ class CheckoutController extends Controller
           return Redirect::back()->withErrors(['ที่อยู่สำหรับการจัดส่งไม่ได้ถูกกรอก กรุณาตรวจสอบและกรอกที่อยู่สำหรับการจัดส่งให้ครบถ้วน']);
         }
 
-        $_product = $productModel
-        ->select('id','name','quantity','minimum','active')
-        ->find($cartProduct['productId']);
+        // $_product = $productModel
+        // ->select('id','name','quantity','minimum','active')
+        // ->find($cartProduct['productId']);
 
-        $error = $cartModel->checkProductError($_product,$cartProduct['quantity']);
+        // $error = $cartModel->checkProductError($_product,$cartProduct['quantity']);
 
-        if($error['hasError']) {
-          $this->rollback($checkoutProducts);
-          return Redirect::back()->withErrors($this->errorMessage($error['errorType']));
-        }
+        // if($error['hasError']) {
+        //   $this->rollback($checkoutProducts);
+        //   return Redirect::back()->withErrors($this->errorMessage($error['errorType']));
+        // }
 
         if($shippingMethodModel->hasShippingMethod($cartProduct['shopId'])) {
 
@@ -95,13 +97,16 @@ class CheckoutController extends Controller
          
         }
 
-        // allocate product quantity
-        $_product->decrement('quantity',$cartProduct['quantity']);
+        $_product = $productModel
+        ->select('id','name','quantity','minimum','active')
+        ->find($cartProduct['productId']);
 
-        $checkoutProducts[$cartProduct['shopId']][] = array(
-          'productId' => $cartProduct['productId'],
-          'quantity' => $cartProduct['quantity'],
-        );
+        // allocate product quantity
+        $result = $this->allocateProductQuantity($cartProduct,$_product);
+
+        if(!empty($result)) {
+          $checkoutProducts[$cartProduct['shopId']][] = $result;
+        }
 
       }
     }
@@ -194,9 +199,11 @@ class CheckoutController extends Controller
 
       foreach ($products as $product) {
 
-        $_product = $productModel
-        ->select('id','name','price','shipping_calculate_from','quantity','weight')
-        ->find($product['productId']);
+        $_product = $cartModel->getProduct($product['productId'],$product['productOptionValueId']);
+
+        // $_product = $productModel
+        // ->select('id','name','price','shipping_calculate_from','weight')
+        // ->find($product['productId']);
 
         $shipping = array();
         if(isset($shops[$shopId]['shipping_method_id']) && ($shippingMethod->shipping_service_cost_type_id == 3)) {
@@ -228,6 +235,9 @@ class CheckoutController extends Controller
           'order_id' => $order->id,
           'product_id' => $product['productId'],
           'product_name' => $_product->name,
+          'product_option_value_id' => $_product['productOptionValueId'],
+          'product_option_name' => !empty($_product->productOption['productOptionName']) ? $_product->productOption['productOptionName'] : null,
+          'product_option_value_name' => !empty($_product->productOption['valueName']) ? $_product->productOption['valueName'] : null,
           'full_price' => $_product->price,
           'price' => $_product->getPrice(),
           'quantity' => $product['quantity'],
@@ -253,7 +263,7 @@ class CheckoutController extends Controller
 
       }
 
-      // delete products in cart
+      // Delete products in cart
       $cartModel->where([
         ['shop_id','=',$shopId],
         ['created_by','=',$personId]
@@ -278,17 +288,80 @@ class CheckoutController extends Controller
 
   }
 
+  private function allocateProductQuantity($cart,$product) {
+
+    // type
+    // 1 = product
+    // 2 = product option value
+
+    if(empty($cart['productOptionValueId'])) {
+      $product->decrement('quantity',$cart['quantity']);
+
+      return array(
+        'productId' => $product->id,
+        'productOptionValueId' => null,
+        'quantity' => $cart['quantity'],
+        'type' => 1,
+      );
+
+    }else{
+      $productOptionValue = Service::loadModel('ProductOptionValue')
+      ->select('id','quantity')
+      ->find($cart['productOptionValueId']);
+
+      if(empty($productOptionValue)) {
+        return false;
+      }
+
+      $productOptionValue->decrement('quantity',$cart['quantity']);
+
+      return array(
+        'productId' => $product->id,
+        'productOptionValueId' => $productOptionValue->id,
+        'quantity' => $cart['quantity'],
+        'type' => 2,
+      );
+
+    }
+
+  }
+
   private function rollback($checkoutProducts) {
 
     $productModel = Service::loadModel('Product');
+    $productOptionValueModel = Service::loadModel('ProductOptionValue');
 
     foreach ($checkoutProducts as $shopId => $checkoutProduct) {
+
       foreach ($checkoutProduct as $product) {
-        $productModel
-        ->find($product['productId'])
-        ->increment('quantity',$product['quantity']);
+
+        switch ($product['type']) {
+          case 1:
+              
+              $model = $productModel->find($product['productId']);
+
+              if(!empty($model)) {
+                $model->increment('quantity',$product['quantity']);
+              }
+
+            break;
+          
+          case 2:
+      
+              $model = $productOptionValueModel->find($product['productOptionValueId']);
+
+              if(!empty($model)) {
+                $model->increment('quantity',$product['quantity']);
+              }
+
+            break;
+        }
+
+        
       }
+
     }
+
   }
 
   public function success() {

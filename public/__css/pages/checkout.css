@@ -8,6 +8,10 @@
 	position: relative;
 }
 
+.checkout .product-option {
+	margin-bottom: 10px;
+}
+
 .checkout .product-error-message {
 	color: #D50000;
 	font-weight: bold;

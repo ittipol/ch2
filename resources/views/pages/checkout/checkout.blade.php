@@ -62,6 +62,12 @@
                         <h4 class="product-title">{{$product['name']}}</h4>                      
                       </a>
 
+                      @if(!empty($product['productOption']))
+                        <div class="product-option">
+                          <span class="product-option-name">{{$product['productOption']['productOptionName']}}:</span>
+                          <span class="product-option-value-name">{{$product['productOption']['valueName']}}</span>
+                        </div>
+                      @endif
 
                       @if(!empty($product['hasError']))
                         <p class="product-error-message">

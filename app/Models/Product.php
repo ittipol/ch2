@@ -236,12 +236,22 @@ class Product extends Model
 
     $currency = new Currency;
 
-    $promotion = $this->getPromotion();
+    // $promotion = $this->getPromotion();
 
     $price = $this->price;
 
-    if(!empty($promotion)) {
-      $price = $promotion['reduced_price'];
+    // if(!empty($promotion)) {
+    //   $price = $promotion['reduced_price'];
+    // }
+
+    if(!empty($this->promotion)) {
+      $price = $this->promotion['reduced_price'];
+    }else{
+      $promotion = $this->getPromotion();
+
+      if(!empty($promotion)) {
+        $price = $promotion['reduced_price'];
+      }
     }
 
     if($format) {

@@ -314,6 +314,12 @@
                 <a href="{{$product['productDetailUrl']}}">
                   <h4 class="product-text">{{$product['product_name']}}</h4>
                 </a>
+                @if(!empty($product['productOption']))
+                  <div class="product-option">
+                    <span class="product-option-name">{{$product['productOption']['productOptionName']}}:</span>
+                    <span class="product-option-value-name">{{$product['productOption']['valueName']}}</span>
+                  </div>
+                @endif
               </div>
 
               <div class="col-md-3 col-xs-12 product-info-container">

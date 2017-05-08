@@ -8,7 +8,7 @@ use App\library\cache;
 class OrderProduct extends Model
 {
   protected $table = 'order_products';
-  protected $fillable = ['order_id','product_id','product_name','full_price','price','quantity','free_shipping','shipping_cost','tax','total'];
+  protected $fillable = ['order_id','product_id','product_name','product_option_value_id','product_option_name','product_option_value_name','full_price','price','quantity','free_shipping','shipping_cost','tax','total'];
   public $timestamps  = false;
 
   public function product() {
@@ -42,6 +42,14 @@ class OrderProduct extends Model
 
     }
 
+    $productOption = null;
+    if(!empty($this->product_option_value_id)) {
+      $productOption = array(
+        'productOptionName' => $this->product_option_name,
+        'valueName' => $this->product_option_value_name,
+      );
+    }
+
     return array(
       'id' => $this->id,
       'product_id' => $this->product_id,
@@ -54,6 +62,7 @@ class OrderProduct extends Model
       'free_shipping' => $this->free_shipping,
       'shipping_cost' => $this->shipping_cost,
       'shippingCostText' => $shippingCostText,
+      'productOption' => $productOption
     );
 
   }
