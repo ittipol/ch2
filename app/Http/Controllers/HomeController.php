@@ -7,47 +7,46 @@ use App\library\service;
 
 class HomeController extends Controller
 {
+  // public function addC() {
+  //   $cartModel = Service::loadModel('Cart');
+  //   // $model->addProduct(26,20,1);
+  //   // $model->updateQuantity(26,44,3);
+  //   // $model->deleteProduct(26,3);
 
-  public function addC() {
-    $cartModel = Service::loadModel('Cart');
-    // $model->addProduct(26,20,1);
-    // $model->updateQuantity(26,44,3);
-    // $model->deleteProduct(26,3);
+  //   $products = session()->get('cart');
 
-    $products = session()->get('cart');
+  //   if(!empty($products)) {
 
-    if(!empty($products)) {
+  //     // foreach ($products as $product) {
+  //     //   foreach ($product['items'] as $value) {
 
-      // foreach ($products as $product) {
-      //   foreach ($product['items'] as $value) {
-
-      //     $cart = $cartModel->where([
-      //       ['product_id','=',$product['productId']],
-      //       ['product_option_value_id','=',$value['productOptionValueId']],
-      //       ['created_by','=',$person],
-      //     ])->first();
+  //     //     $cart = $cartModel->where([
+  //     //       ['product_id','=',$product['productId']],
+  //     //       ['product_option_value_id','=',$value['productOptionValueId']],
+  //     //       ['created_by','=',$person],
+  //     //     ])->first();
 
 
-      //     if(!empty($cart)) {
-      //       $cart->increment('quantity', $value['quantity']);
-      //     }else{
-      //       $_value = array(
-      //         'created_by' => $person,
-      //         'shop_id' => $product['shopId'],
-      //         'product_id' => $product['productId'],
-      //         'product_option_value_id' => $value['productOptionValueId'],
-      //         'quantity' => $value['quantity']
-      //       );
+  //     //     if(!empty($cart)) {
+  //     //       $cart->increment('quantity', $value['quantity']);
+  //     //     }else{
+  //     //       $_value = array(
+  //     //         'created_by' => $person,
+  //     //         'shop_id' => $product['shopId'],
+  //     //         'product_id' => $product['productId'],
+  //     //         'product_option_value_id' => $value['productOptionValueId'],
+  //     //         'quantity' => $value['quantity']
+  //     //       );
 
-      //       $cartModel->newInstance()->fill($_value)->save();
-      //     }
-          
-      //   }
-      // }
+  //     //       $cartModel->newInstance()->fill($_value)->save();
+  //     //     }
 
-    }
+  //     //   }
+  //     // }
 
-  }
+  //   }
+
+  // }
 
   // public function co() {
   //   $cartModel = Service::loadModel('Cart');
