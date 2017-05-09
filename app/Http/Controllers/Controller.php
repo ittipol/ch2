@@ -19,7 +19,10 @@ class Controller extends BaseController
 
   protected $slug;
   protected $data = array();
+
   protected $pageTitle = null;
+  protected $pageDescription = null;
+
   protected $param;
   protected $query;
   protected $entity;
@@ -38,7 +41,7 @@ class Controller extends BaseController
   }
 
   protected function setPageDescription($pageDescription) {
-    // $this->pageTitle = $pageTitle;
+    $this->pageDescription = $pageDescription;
   }
 
   protected function setPageKeyword($pageKeyword) {

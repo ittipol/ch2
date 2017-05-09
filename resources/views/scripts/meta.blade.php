@@ -13,7 +13,7 @@
 <meta property="og:title" content="Sunday Square | จุดเริ่มต้นสำหรับคุณ" />
 @endif        
 <meta property="og:type" content="product" />
-<meta property="og:image" content="/images/sunday-square.png" />
+<meta property="og:image" content="{{Request::root()}}/images/sunday-square.png" />
 <meta property="og:url" content="{{$_page_url}}" />
 <meta property="og:description" content="" />
 
@@ -25,4 +25,4 @@
 <meta name="twitter:title" content="Sunday Square | จุดเริ่มต้นสำหรับคุณ" />
 @endif    
 <meta name="twitter:description" content="" />
-<meta name="twitter:image" content="/images/sunday-square.png" />
+<meta name="twitter:image" content="{{Request::root()}}/images/sunday-square.png" />
