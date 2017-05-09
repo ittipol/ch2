@@ -130,7 +130,16 @@
                   'data-quantity-text' => $value['quantityText']
                 ));
               ?>
-              <div class="product-option-value-box">{{$value['name']}}</div>
+              <div class="product-option-value-box product-option-display-{{$value['display_type']}}">
+                @if(($value['display_type'] == 2) || ($value['display_type'] == 3))
+                <div class="image-tile">
+                  <div class="product-option-value-image" style="background-image:url({{$value['imageUrl']}});"></div>
+                </div>
+                @endif
+                @if(($value['display_type'] == 1) || ($value['display_type'] == 3))
+                <div class="product-option-value-name">{{$value['name']}}</div>
+                @endif
+              </div>
             </label>
           @endforeach
         @endforeach

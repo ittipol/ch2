@@ -358,23 +358,19 @@ class Image extends Model
   }
 
   public function buildModelData() {
-
     return array(
       'filename' => $this->filename,
       'description' => $this->description ? $this->description : '-',
       '_url' => $this->getImageUrl()
     );
-
   }
 
   public function buildFormData() {
-
     return array(
       'id' => $this->id,
       'description' => $this->description ? $this->description : '',
       '_url' => $this->getImageUrl()
     );
-
   }
 
   public function saveImage($model,$image,$options = array()) {

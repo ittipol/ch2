@@ -318,7 +318,8 @@
 	color: #444;
 	border: 2px solid #ccc;
 	font-size: 12px;
-	padding: 5px 12px;
+	/*padding: 5px 12px;*/
+	overflow: hidden;
 	cursor: pointer;
 }
 
@@ -334,6 +335,35 @@
 
 .product-option-value label input[type="radio"], .product-option-value label input[type="checkbox"] {
 	display: none;
+}
+
+.product-option-value .image-tile {
+	width: 50px;
+	height: 50px;
+	background-image: url(/images/common/image.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 50px;
+}
+
+.product-option-value .product-option-value-image {
+	width: 50px;
+	height: 50px;
+	background-position: center;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+}
+
+.product-option-value .product-option-display-1 .product-option-value-name {
+	padding: 5px 15px;
+}
+
+.product-option-value .product-option-display-3 {
+	padding: 5px;
+}
+
+.product-option-value .product-option-display-3 .product-option-value-name {
+	margin-top: 5px;
 }
 
 .quantity-box .quantity-text-input {

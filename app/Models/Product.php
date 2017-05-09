@@ -401,6 +401,23 @@ class Product extends Model
 
       foreach ($options as $option) {
 
+        $name = null;
+        $image = null;
+        switch ($option->display_type) {
+          case 1:
+              $name = $option->name;
+            break;
+
+          case 2:
+              $image = $option->getImage('productOption');
+            break;
+          
+          case 3:
+              $name = $option->name;
+              $image = $option->getImage('productOption');
+            break;
+        }
+
         if($option->use_quantity) {
           $_quantity = $option->quantity;
         }else{
@@ -418,10 +435,11 @@ class Product extends Model
 
         $data['options'][] = array(
           'id' => $option->id,
-          'name' => $option->name,
-          // 'price' => $option->price,
+          'name' => $name,
+          'imageUrl' => $image,
           'realPrice' => $currency->format($this->price + $option->price),
-          'quantityText' => $quantityText
+          'quantityText' => $quantityText,
+          'display_type' => $option->display_type
         );
       }
 

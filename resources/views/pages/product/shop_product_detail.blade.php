@@ -91,9 +91,12 @@
           @if(!empty($_modelData['promotion']))
             <span class="text-emphasize">{{$_modelData['promotion']['_reduced_price']}}<span class="sub-info-text"> / {{$_modelData['product_unit']}}</span></span>
             <span class="product-price-discount-tag">{{$_modelData['promotion']['percentDiscount']}}</span>
-            <h5 class="origin-price">{{$_modelData['_price']}}</h5>
+            <h5 id="_price" class="origin-price">{{$_modelData['_price']}}</h5>
           @else
-            <span class="text-emphasize">{{$_modelData['_price']}}<span class="sub-info-text"> / {{$_modelData['product_unit']}}</span></span>
+            <span class="text-emphasize">
+              <span id="_price">{{$_modelData['_price']}}</span>
+              <span class="sub-info-text"> / {{$_modelData['product_unit']}}</span>
+            </span>
           @endif
         </div>
 
@@ -124,10 +127,12 @@
             <label>
               <?php
                 echo Form::radio('product-option-value-'.$productOptionValue['id'], $value['id'], null, array(
-                  'class' => 'product-option-value'
+                  'class' => 'product-option-rdobox',
+                  'data-price' => $value['realPrice'],
+                  'data-quantity-text' => $value['quantityText']
                 ));
               ?>
-              <div class="product-option-value-box">{{$value['name']}}</div>
+              <div class="product-option-value-name">{{$value['name']}}</div>
             </label>
           @endforeach
         @endforeach
@@ -135,16 +140,9 @@
       @endif
 
       <div class="quantity-box">
-      @if($_modelData['active'] && ($_modelData['quantity'] == 0))
-        <h4 class="error-message">{{$_modelData['message_out_of_order']}}</h4>
-      @elseif($_modelData['active'])
+      @if($_modelData['active'])
 
-        @if($_modelData['quantity'] < 11)
-          <h5 class="text-warning">เหลือเพียง {{$_modelData['quantity']}} {{$_modelData['product_unit']}}</h5>
-        @else
-          <h5 class="text-success">มีสินค้า</h5>
-        @endif
-
+        <h5 id="_quantity_text">{{$_modelData['quantityText']}}</h5>
         <div class="clearfix">
           <input id="product_quantity" class="quantity-text-input pull-left" type="text" name="quantity" value="{{$_modelData['minimum']}}" autocomplete="off" placeholder="จำนวนสินค้าที่สั่งซื้อ" role="number" />
           <a id="add_to_cart_button" class="button add-to-cart-button pull-right">ใส่ตระกร้า</a>

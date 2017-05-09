@@ -28,6 +28,11 @@ class Cache
     //   'height' => 250,
     //   'fx' => '',
     // ),
+    'productOption' => array(
+      'width' => 100,
+      'height' => 50,
+      'fx' => 'getImageSizeByRatio',
+    ),
     'list' => array(
       'width' => 400,
       'height' => 300,
