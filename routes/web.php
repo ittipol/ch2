@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('aa','HomeController@addC');
+// Route::get('aa','HomeController@addC');
 // Route::get('co','HomeController@co');
 
 // Route::get('aa', function() {
@@ -36,13 +36,13 @@ Route::get('aa','HomeController@addC');
 //     $exitCode = Artisan::call('cache:clear');
 // });
 
-Route::get('/debug',function(){
-  dd(session()->all());
-});
+// Route::get('/debug',function(){
+//   dd(session()->all());
+// });
 
-Route::get('/clear',function(){
-  Session::flush();
-});
+// Route::get('/clear',function(){
+//   Session::flush();
+// });
 
 // Route::get('/debug_notification',function(){
 //   $notification = new App\Models\Notification;
