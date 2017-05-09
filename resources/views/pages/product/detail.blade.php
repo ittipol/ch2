@@ -207,13 +207,13 @@
                 <div>
                   <h5>บริษัทหรือร้านค้าที่ขายสินค้านี้</h5>
                   <h3>
-                    <a href="{{request()->get('shopUrl')}}">{{$shop['name']}}</a>
+                    <a href="{{$shopUrl}}">{{$shop['name']}}</a>
                   </h3>
                   <div class="line space-top-bottom-20"></div>
                   <p>{{$shop['_short_description']}}</p>
                 </div>
 
-                <a href="{{request()->get('shopUrl')}}" class="button wide-button">ไปยังบริษัทหรือร้านค้า</a>
+                <a href="{{$shopUrl}}" class="button wide-button">ไปยังบริษัทหรือร้านค้า</a>
               </div>
             </div>
 

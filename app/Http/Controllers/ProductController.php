@@ -373,6 +373,8 @@ class ProductController extends Controller
       'fields' => array('slug')
     ))->slug;
 
+    $shopUrl = $url->url('shop/'.$slug);
+
     $branchIds = $model->getRelatedData('RelateToBranch',array(
       'list' => 'branch_id',
       'fields' => array('branch_id'),
@@ -403,10 +405,7 @@ class ProductController extends Controller
           'address' => $branch->name,
           'latitude' => $graphics['latitude'],
           'longitude' => $graphics['longitude'],
-          'detailUrl' => $url->setAndParseUrl('shop/{shopSlug}/branch/{id}',array(
-            'shopSlug' => $slug,
-            'id' => $branch->id
-          ))
+          'detailUrl' => $shopUrl.'/product_catalog/'.$branch->id
         );
       }
     }
@@ -418,7 +417,7 @@ class ProductController extends Controller
       foreach ($productCatalogs as $productCatalog) {
         $_productCatalogs[] = array(
           'name' => $productCatalog->name,
-          'detailUrl' => $url->url('shop/'.$slug.'/product_catalog/'.$productCatalog->id),
+          'detailUrl' => $shopUrl.'/product_catalog/'.$productCatalog->id
         );
       }
     }
@@ -427,7 +426,7 @@ class ProductController extends Controller
     $this->setData('shop',$shop->modelData->build(true));
     $this->setData('shopImageUrl',$shop->getProfileImageUrl());
     $this->setData('shopCoverUrl',$shop->getCoverUrl());
-    $this->setData('shopUrl','shop/'.$slug);
+    $this->setData('shopUrl',$shopUrl);
     $this->setData('categoryPaths',$model->getCategoryPaths());
     $this->setData('productCatalogs',$_productCatalogs);
     $this->setData('productOptionValues',$model->getProductOptionValues());

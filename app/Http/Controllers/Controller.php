@@ -11,6 +11,7 @@ use App\library\service;
 use App\library\entity;
 use Session;
 use Route;
+use Request;
 
 class Controller extends BaseController
 {
@@ -32,6 +33,22 @@ class Controller extends BaseController
     $this->param = Route::current()->parameters();
   }
 
+  protected function setPageTitle($pageTitle) {
+    $this->pageTitle = $pageTitle;
+  }
+
+  protected function setPageDescription($pageDescription) {
+    // $this->pageTitle = $pageTitle;
+  }
+
+  protected function setPageKeyword($pageKeyword) {
+    // $this->pageTitle = $pageTitle;
+  }
+
+  protected function setPageImage($pageImage) {
+    // $this->pageTitle = $pageTitle;
+  }
+
   protected function error() {
     $data = array();
 
@@ -40,10 +57,6 @@ class Controller extends BaseController
     }
 
     return view('errors.error',$data);
-  }
-
-  protected function setPageTitle($pageTitle) {
-    $this->pageTitle = $pageTitle;
   }
 
   protected function setData($index,$value) {
@@ -64,28 +77,31 @@ class Controller extends BaseController
     // }
 
     $this->data['_page_title'] = $this->pageTitle;
+    $this->data['_page_url'] = Request::fullUrl();
+    // Request::fullUrl()
+    // Request::url()
 
   	return view($view,$this->data);
   }
 
-  protected function arrayMerge(array & $array1, array & $array2)
-  {
-      $merged = $array1;
+  // protected function arrayMerge(array & $array1, array & $array2)
+  // {
+  //     $merged = $array1;
 
-      foreach ($array2 as $key => & $value)
-      {
-          if (is_array($value) && isset($merged[$key]) && is_array($merged[$key]))
-          {
-              $merged[$key] = $this->arrayMerge($merged[$key], $value);
-          } else if (is_numeric($key))
-          {
-               if (!in_array($value, $merged))
-                  $merged[] = $value;
-          } else
-              $merged[$key] = $value;
-      }
+  //     foreach ($array2 as $key => & $value)
+  //     {
+  //         if (is_array($value) && isset($merged[$key]) && is_array($merged[$key]))
+  //         {
+  //             $merged[$key] = $this->arrayMerge($merged[$key], $value);
+  //         } else if (is_numeric($key))
+  //         {
+  //              if (!in_array($value, $merged))
+  //                 $merged[] = $value;
+  //         } else
+  //             $merged[$key] = $value;
+  //     }
 
-      return $merged;
-  }
+  //     return $merged;
+  // }
 
 }

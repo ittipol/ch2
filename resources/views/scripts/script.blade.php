@@ -3,8 +3,6 @@
   require 'minify/minify-css.php';
 ?>
 
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCk5a17EumB5aINUjjRhWCvC1AgfxqrDQk&libraries=places"></script> -->
-
 <?php
   $combine = false;
 ?>
