@@ -16,16 +16,6 @@ use Redirect;
 
 class UserController extends Controller
 {
-
-  // public function account(){
-
-
-  // }
-
-  // public function profile(){
-      
-  // }
-
   public function login() {
 
     $this->data = array(
@@ -82,25 +72,29 @@ class UserController extends Controller
       if(!empty($products)) {
 
         foreach ($products as $product) {
-  
-          $cart = $cartModel->where([
-            ['created_by','=',$person->id],
-            ['product_id','=',$product['productId']]
-          ])->first();
+          foreach ($product['items'] as $value) {
 
-          if(!empty($cart)) {
-            $cart->increment('quantity', $product['quantity']);
-          }else{
-            $value = array(
-              'created_by' => $person->id,
-              'shop_id' => $product['shopId'],
-              'product_id' => $product['productId'],
-              'quantity' => $product['quantity']
-            );
+            $cart = $cartModel->where([
+              ['product_id','=',$product['productId']],
+              ['product_option_value_id','=',$value['productOptionValueId']],
+              ['created_by','=',$person->id]
+            ])->first();
 
-            $cartModel->newInstance()->fill($value)->save();
+            if(!empty($cart)) {
+              $cart->increment('quantity', $value['quantity']);
+            }else{
+              $_value = array(
+                'shop_id' => $product['shopId'],
+                'product_id' => $product['productId'],
+                'product_option_value_id' => $value['productOptionValueId'],
+                'quantity' => $value['quantity'],
+                'created_by' => $person->id
+              );
+
+              $cartModel->newInstance()->fill($_value)->save();
+            }
+            
           }
-
         }
 
       }

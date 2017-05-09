@@ -11,16 +11,19 @@
 |
 */
 
-Route::get('aa', function() {
-  $model = new App\Models\Cart;
-  // dd($model->addProduct(26,1,1));
-  dd($model->updateQuantity(26,3,1));
-});
+Route::get('aa','HomeController@addC');
+// Route::get('co','HomeController@co');
 
-Route::get('ct', function() {
-  $model = new App\Models\Cart;
-  dd($model->getProducts());
-});
+// Route::get('aa', function() {
+//   $model = new App\Models\Cart;
+//   dd($model->addProduct(26,1,1));
+//   // dd($model->updateQuantity(26,3,1));
+// });
+
+// Route::get('ct', function() {
+//   $model = new App\Models\Cart;
+//   dd($model->getProducts());
+// });
 
 // Route::get('cp','HomeController@catPath');
 
@@ -35,6 +38,10 @@ Route::get('ct', function() {
 
 Route::get('/debug',function(){
   dd(session()->all());
+});
+
+Route::get('/clear',function(){
+  Session::flush();
 });
 
 // Route::get('/debug_notification',function(){

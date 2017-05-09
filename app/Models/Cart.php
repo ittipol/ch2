@@ -98,20 +98,31 @@ class Cart extends Model
 
     }else{
 
-      if(session()->has('cart.'.$productId)) {
-        $product = session()->get('cart.'.$productId);
+      if(empty($productOptionValueId)) {
+        $productOptionValueId = 0;
+      }
+
+      if(session()->has('cart.'.$productId.'.items.'.$productOptionValueId)) {
+        $product = session()->get('cart.'.$productId.'.items.'.$productOptionValueId);
         $product['quantity'] += $quantity;
-        session()->put('cart.'.$productId,$product);
+        session()->put('cart.'.$productId.'.items.'.$productOptionValueId,$product);
       }else{
 
-        // productOptionValueId
+        if(!session()->has('cart.'.$productId)) {
+          session()->put('cart.'.$productId,array(
+            'shopId' => $shop->id,
+            'productId' => $productId
+          ));
+        }
 
-        session()->put('cart.'.$productId,array(
-          'shopId' => $shop->id,
-          'productId' => $productId,
+        session()->put('cart.'.$productId.'.items.'.$productOptionValueId,array(
+          // 'shopId' => $shop->id,
+          // 'productId' => $productId,
           'quantity' => $quantity,
-          'product_option' => $productOption
+          'productOptionValueId' => ($productOptionValueId == 0) ? null : $productOptionValueId,
         ));
+
+
       }
       
       $saved = true;
@@ -149,9 +160,15 @@ class Cart extends Model
 
     }else{
 
-      $product = session()->get('cart.'.$id);
-      $product['quantity'] = $quantity;
-      session()->put('cart.'.$id,$product);
+      if(empty($productOptionValueId)) {
+        $productOptionValueId = 0;
+      }
+
+      if(session()->has('cart.'.$id.'.items.'.$productOptionValueId)) {
+        $ewewx = session()->get('cart.'.$id.'.items.'.$productOptionValueId);
+        $product['quantity'] = $quantity;
+        session()->put('cart.'.$id.'.items.'.$productOptionValueId,$product);
+      }
 
       $updated = true;
 
@@ -178,7 +195,12 @@ class Cart extends Model
         $success = $cart->first()->delete();
       }
     }else{
-      session()->forget('cart.'.$id);
+
+      if(empty($productOptionValueId)) {
+        $productOptionValueId = 0;
+      }
+
+      session()->forget('cart.'.$id.'.items.'.$productOptionValueId);
       $success = true;
     }
 
@@ -266,13 +288,42 @@ class Cart extends Model
     }else{
 
       if(empty($shopId)) {
-        $products = session()->get('cart');
+        $_products = session()->get('cart');
+
+        if(empty($_products)) {
+          return null;
+        }
+
+        foreach ($_products as $product) {
+          foreach ($product['items'] as $value) {
+            $products[] = array(
+              'shopId' => $product['shopId'],
+              'productId' => $product['productId'],
+              'quantity' => $value['quantity'],
+              'productOptionValueId' => $value['productOptionValueId']
+            );
+          }
+        }
+
       }else{
         $_products = session()->get('cart');
 
         foreach ($_products as $product) {
           if($product['shopId'] == $shopId) {
-            $products[] = $product;
+
+            foreach ($_products as $product) {
+              foreach ($product['items'] as $value) {
+                $products[] = array(
+                  'shopId' => $product['shopId'],
+                  'productId' => $product['productId'],
+                  'quantity' => $value['quantity'],
+                  'productOptionValueId' => $value['productOptionValueId']
+                );
+              }
+            }
+
+            break;
+
           }
         }
       }
@@ -763,13 +814,13 @@ class Cart extends Model
     if(!empty($carts)) {
       foreach ($carts as $cart) {
 
-        $product = $this->getProduct($cart['productId']);
+        // $product = $this->getProduct($cart['productId']);
 
-        $error = $this->checkProductError($product,$cart['quantity']);
+        // $error = $this->checkProductError($product,$cart['quantity']);
 
-        if($error['hasError']) {
-          continue;
-        }
+        // if($error['hasError']) {
+        //   continue;
+        // }
 
         $count += $cart['quantity'];
         
