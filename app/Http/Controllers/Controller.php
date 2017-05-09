@@ -22,6 +22,7 @@ class Controller extends BaseController
 
   protected $pageTitle = null;
   protected $pageDescription = null;
+  protected $pageImage = null;
 
   protected $param;
   protected $query;
@@ -44,12 +45,10 @@ class Controller extends BaseController
     $this->pageDescription = $pageDescription;
   }
 
-  protected function setPageKeyword($pageKeyword) {
-    // $this->pageTitle = $pageTitle;
-  }
+  // protected function setPageKeyword($pageKeyword) {}
 
   protected function setPageImage($pageImage) {
-    // $this->pageTitle = $pageTitle;
+    $this->pageImage = $pageImage;
   }
 
   protected function error() {
@@ -80,6 +79,9 @@ class Controller extends BaseController
     // }
 
     $this->data['_page_title'] = $this->pageTitle;
+    $this->data['_page_description'] = $this->pageDescription;
+    $this->data['_page_image'] = $this->pageImage;
+
     $this->data['_page_url'] = Request::fullUrl();
     // Request::fullUrl()
     // Request::url()

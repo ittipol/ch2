@@ -4,7 +4,7 @@ namespace App\library;
 
 class stringHelper
 {
-  public function truncString($string,$len,$stripTag = true){
+  public function truncString($string,$len,$stripTag = true,$cleanText = false){
 
     $string = iconv(mb_detect_encoding($string, mb_detect_order(), true), "UTF-8", $string);
     mb_internal_encoding('UTF-8');
@@ -15,6 +15,10 @@ class stringHelper
 
     if($stripTag){
       $string = strip_tags($string);
+    }
+
+    if($cleanText) {
+      $string = preg_replace('/\s+/', ' ', $string);
     }
 
     $_string = $string;

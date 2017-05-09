@@ -3,19 +3,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<meta name="description" content="">
-<meta name="keywords" content="" />
+@if(!empty($_page_description))
+<meta name="description" content="{{$_page_description}}">
+@endif
 
 <!-- Facebook -->
+<meta property="og:url" content="{{$_page_url}}" />
+<meta property="og:type" content="product" />
 @if(!empty($_page_title))
 <meta property="og:title" content="{{$_page_title}}" />
 @else
 <meta property="og:title" content="Sunday Square | จุดเริ่มต้นสำหรับคุณ" />
 @endif        
-<meta property="og:type" content="product" />
+@if(!empty($_page_image))
+<meta property="og:image" content="{{Request::root()}}{{$_page_image}}" />
+@else
 <meta property="og:image" content="{{Request::root()}}/images/sunday-square.png" />
-<meta property="og:url" content="{{$_page_url}}" />
-<meta property="og:description" content="" />
+@endif  
+@if(!empty($_page_description))
+<meta property="og:description" content="{{$_page_description}}" />
+@endif
 
 <!-- Twitter -->          
 <meta name="twitter:card" content="summary" />
@@ -24,5 +31,11 @@
 @else
 <meta name="twitter:title" content="Sunday Square | จุดเริ่มต้นสำหรับคุณ" />
 @endif    
-<meta name="twitter:description" content="" />
+@if(!empty($_page_image))
+<meta name="twitter:image" content="{{Request::root()}}{{$_page_image}}" />
+@else
 <meta name="twitter:image" content="{{Request::root()}}/images/sunday-square.png" />
+@endif
+@if(!empty($_page_description))
+<meta name="twitter:description" content="{{$_page_description}}" />
+@endif

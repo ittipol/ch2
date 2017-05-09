@@ -455,6 +455,11 @@ class Product extends Model
     return $productOptions = ProductOption::where('product_id','=',$this->id)->exists();
   }
 
+  public function getShortDescription() {
+    $string = new stringHelper;
+    return $string->truncString($this->description,200,true,true);
+  }
+
   public function buildModelData() {
 
     $currency = new Currency;

@@ -434,6 +434,8 @@ class ProductController extends Controller
     $this->setData('hasBranchLocation',$hasBranchLocation);
 
     $this->setPageTitle($this->data['_modelData']['name'].' - สินค้า');
+    $this->setPageImage($model->getImage('list'));
+    $this->setPageDescription($model->getShortDescription());
 
     return $this->view('pages.product.detail');
 
