@@ -13,7 +13,7 @@ class PersonLanguageSkillController extends Controller
     $model = Service::loadModel('PersonLanguageSkill');
 
     $this->getLanguages();
-    $this->mergeData($model->formHelper->build());
+    $this->data = $model->formHelper->build();
 
     return $this->view('pages.person_experience.form.pereson_language_skill_add');
 
@@ -49,7 +49,7 @@ class PersonLanguageSkillController extends Controller
     $model = Service::loadModel('PersonLanguageSkill')->where('id','=',$this->param['id'])->first();
 
     $this->getLanguages(false);
-    $this->mergeData($model->formHelper->build());
+    $this->data = $model->formHelper->build();
 
     return $this->view('pages.person_experience.form.pereson_language_skill_edit');
 

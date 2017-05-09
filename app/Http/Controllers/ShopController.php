@@ -489,7 +489,7 @@ class ShopController extends Controller
 
     $model = Service::loadModel('Shop');
 
-    $this->mergeData($model->formHelper->build());
+    $this->data = $model->formHelper->build();
 
     $this->setPageTitle('สร้างร้านค้า');
 

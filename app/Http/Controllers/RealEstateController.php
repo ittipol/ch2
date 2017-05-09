@@ -273,7 +273,7 @@ class RealEstateController extends Controller
       'json' => array('Image','Tagging')
     ));
 
-    $this->mergeData($model->formHelper->build());
+    $this->data = $model->formHelper->build();
 
     return $this->view('pages.real_estate.form.real_estate_edit');
 
