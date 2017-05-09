@@ -74,13 +74,26 @@ class ProductOptionController extends Controller
 
     $model = Service::loadModel('ProductOption')->find($this->param['id']);
 
+    $productOptionValues = Service::loadModel('ProductOptionValue')
+    ->select('id')
+    ->where('product_option_id','=',$this->param['id']);
+
+    $productOptionValueIds = array();
+    if($productOptionValues->exists()) {
+      foreach ($productOptionValues->get() as $value) {
+        $productOptionValueIds[] = $value->id;
+      }
+    }
+
     if($model->delete()) {
 
       // delete product in cart
-      // Service::loadModel('Cart')
-      // ->where('product_option_id','=',$this->param['id'])
-      // ->delete();
-
+      if(!empty($productOptionValueIds)) {
+        Service::loadModel('Cart')
+        ->whereIn('product_option_value_id',$productOptionValueIds)
+        ->delete();
+      }
+      
       MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
     }else{
       MessageHelper::display('ไม่สามารถลบข้อมูลได้','error');
@@ -150,12 +163,13 @@ class ProductOptionController extends Controller
 
     $model = Service::loadModel('ProductOptionValue')->find($this->param['id']);
 
+
     if($model->delete()) {
 
       // delete product in cart
-      // Service::loadModel('Cart')
-      // ->where('product_option_id','=',$this->param['id'])
-      // ->delete();
+      Service::loadModel('Cart')
+      ->where('product_option_value_id','=',$this->param['id'])
+      ->delete();
 
       MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
     }else{

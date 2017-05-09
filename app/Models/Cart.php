@@ -320,20 +320,24 @@ class Cart extends Model
     if(!empty($productOptionValueId)) {
 
       $productOptionValue = ProductOptionValue::select('product_option_id','name','use_quantity','quantity','use_price','price')->find($productOptionValueId);
-      
-      $productOption = ProductOption::select('name')->find($productOptionValue->product_option_id);
 
-      $product->attributes['productOption'] = array(
-        'productOptionName' => $productOption->name,
-        'valueName' => $productOptionValue->name
-      );
-      
-      if($productOptionValue->use_price) {
-        $product->price = $product->price + $productOptionValue->price;
-      }
+      if(!empty($productOptionValue)) {
 
-      if($productOptionValue->use_quantity) {
-        $product->quantity = $productOptionValue->quantity;
+        $productOption = ProductOption::select('name')->find($productOptionValue->product_option_id);
+
+        $product->attributes['productOption'] = array(
+          'productOptionName' => $productOption->name,
+          'valueName' => $productOptionValue->name
+        );
+        
+        if($productOptionValue->use_price) {
+          $product->price = $product->price + $productOptionValue->price;
+        }
+
+        if($productOptionValue->use_quantity) {
+          $product->quantity = $productOptionValue->quantity;
+        }
+
       }
 
     }

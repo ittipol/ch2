@@ -97,16 +97,23 @@ class CheckoutController extends Controller
          
         }
 
-        $_product = $productModel
-        ->select('id','name','quantity','minimum','active')
-        ->find($cartProduct['productId']);
+        // $_product = $productModel
+        // ->select('id','name','quantity','minimum','active')
+        // ->find($cartProduct['productId']);
 
         // allocate product quantity
-        $result = $this->allocateProductQuantity($cartProduct,$_product);
+        $result = $this->allocateProductQuantity($cartProduct);
 
-        if(!empty($result)) {
+        if(!empty($result['errorType'])) {
+          $this->rollback($checkoutProducts);
+          return Redirect::back()->withErrors($this->errorMessage($error['errorType']));
+        }else{
           $checkoutProducts[$cartProduct['shopId']][] = $result;
         }
+
+        // if(!empty($result)) {
+        //   $checkoutProducts[$cartProduct['shopId']][] = $result;
+        // }
 
       }
     }
@@ -288,13 +295,52 @@ class CheckoutController extends Controller
 
   }
 
-  private function allocateProductQuantity($cart,$product) {
+  private function allocateProductQuantity($cart) {
 
     // type
     // 1 = product
     // 2 = product option value
 
+    $product = Service::loadModel('Product')
+    ->select('id','name','quantity','minimum','active')
+    ->find($cart['productId']);
+
+    if(empty($product)) {
+      return array(
+        // 'hasError' => true,
+        'errorType' => 1,
+        // 'errorMessage' => 'ไม่พบสินค้า'
+      );
+    }elseif(!$product->active){
+      return array(
+        // 'hasError' => true,
+        'errorType' => 2,
+        // 'errorMessage' => 'สินค้าถูกปิดการสั่งซื้อชั่วคราว'
+      );
+    }elseif($product->minimum > $cart['quantity']) {
+      return array(
+        // 'hasError' => true,
+        'errorType' => 5,
+        // 'errorMessage' => 'ไม่สามารถสั่งซื้อสินค้าได้ จำนวนสินค้าที่คุณสั่งซื้อน้อยกว่าจำนวนสั่งซื้อขั้นต่ำ'
+      );
+    }
+
     if(empty($cart['productOptionValueId'])) {
+
+      if($product->quantity == 0) {
+        return array(
+          // 'hasError' => true,
+          'errorType' => 3,
+          // 'errorMessage' => 'สินค้าหมด'
+        );
+      }elseif($cart['quantity'] > $product->quantity) {
+        return array(
+          // 'hasError' => true,
+          'errorType' => 4,
+          // 'errorMessage' => 'ไม่สามารถสั่งซื้อสินค้าได้ สินค้ามีจำนวนน้อยกว่าจำนวนที่สั่งซื้อ'
+        );
+      }
+
       $product->decrement('quantity',$cart['quantity']);
 
       return array(
@@ -306,14 +352,54 @@ class CheckoutController extends Controller
 
     }else{
       $productOptionValue = Service::loadModel('ProductOptionValue')
-      ->select('id','quantity')
+      ->select('id','use_quantity','quantity')
       ->find($cart['productOptionValueId']);
 
       if(empty($productOptionValue)) {
-        return false;
+        return array(
+          // 'hasError' => true,
+          'errorType' => 6,
+          // 'errorMessage' => 'ไม่พบตัวเลือกสินค้า'
+        );
       }
 
-      $productOptionValue->decrement('quantity',$cart['quantity']);
+      if($productOptionValue->use_quantity) {
+
+        if($productOptionValue->quantity == 0) {
+          return array(
+            // 'hasError' => true,
+            'errorType' => 3,
+            // 'errorMessage' => 'สินค้าหมด'
+          );
+        }elseif($quantity > $productOptionValue->quantity) {
+          return array(
+            // 'hasError' => true,
+            'errorType' => 4,
+            // 'errorMessage' => 'ไม่สามารถสั่งซื้อสินค้าได้ สินค้ามีจำนวนน้อยกว่าจำนวนที่สั่งซื้อ'
+          );
+        }
+
+        $productOptionValue->decrement('quantity',$cart['quantity']);
+
+      }else{
+
+        if($product->quantity == 0) {
+          return array(
+            // 'hasError' => true,
+            'errorType' => 3,
+            // 'errorMessage' => 'สินค้าหมด'
+          );
+        }elseif($cart['quantity'] > $product->quantity) {
+          return array(
+            // 'hasError' => true,
+            'errorType' => 4,
+            // 'errorMessage' => 'ไม่สามารถสั่งซื้อสินค้าได้ สินค้ามีจำนวนน้อยกว่าจำนวนที่สั่งซื้อ'
+          );
+        }
+
+        $product->decrement('quantity',$cart['quantity']);
+
+      }
 
       return array(
         'productId' => $product->id,

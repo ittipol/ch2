@@ -21,15 +21,14 @@ class Product {
         _this.allowedClick = false;
 
         let productOption = null;
-        if(typeof $('.product-option-value:checked').val() != 'undefined') {
+        if(typeof $('.product-option-rdobox:checked').val() != 'undefined') {
 
           // let data = [];
-          // data.push($('.product-option-value:checked').val());
+          // data.push($('.product-option-rdobox:checked').val());
           // productOption = JSON.stringify(data);
-          productOption = $('.product-option-value:checked').val();
+          productOption = $('.product-option-rdobox:checked').val();
 
         }
-
         const cart = new GlobalCart(_this.token);
         cart.cartAdd(_this.productId,$('#product_quantity').val(),productOption);
 
@@ -37,6 +36,11 @@ class Product {
 
       }
 
+    });
+
+    $('.product-option-rdobox').on('change',function(){
+      $('#_price').text($(this).data('price'));
+      $('#_quantity_text').text($(this).data('quantity-text'));
     });
   
   }

@@ -385,6 +385,8 @@ class Product extends Model
       return null;
     }
 
+    $currency = new Currency;
+
     $_optionValues = array();
     foreach ($productOptions->get() as $value) {
     
@@ -398,11 +400,28 @@ class Product extends Model
       $data['name'] = $value->name;
 
       foreach ($options as $option) {
+
+        if($option->use_quantity) {
+          $_quantity = $option->quantity;
+        }else{
+          $_quantity = $this->quantity;
+        }
+
+        $quantityText = null;
+        if($_quantity == 0) {
+          $quantityText = $this->message_out_of_order ? $this->message_out_of_order : 'สินค้าหมด';
+        }elseif($_quantity < 11) {
+          $quantityText = 'เหลือเพียง '.$_quantity.' '.$this->product_unit;
+        }else{
+          $quantityText = 'มีสินค้า';
+        }
+
         $data['options'][] = array(
           'id' => $option->id,
           'name' => $option->name,
           // 'price' => $option->price,
-          'realPrice' => $this->price + $option->price
+          'realPrice' => $currency->format($this->price + $option->price),
+          'quantityText' => $quantityText
         );
       }
 
@@ -421,9 +440,6 @@ class Product extends Model
   public function buildModelData() {
 
     $currency = new Currency;
-
-    // $categoryName = $this->getCategoryName();
-    // $categoryPathName = $this->getCategoryPathName();
 
     $specifications = array();
 
@@ -471,14 +487,24 @@ class Product extends Model
       $shippingCalculateFrom = 'คำนวนค่าส่งสินค้าจากผู้ขาย';
     }
 
+    $quantityText = null;
+    if($this->quantity == 0) {
+      $quantityText = $this->message_out_of_order ? $this->message_out_of_order : 'สินค้าหมด';
+    }elseif($this->quantity < 11) {
+      $quantityText = 'เหลือเพียง '.$this->quantity.' '.$this->product_unit;
+    }else{
+      $quantityText = 'มีสินค้า';
+    }
+
     return array_merge(array(
       'id' => $this->id,
       'name' => $this->name,
       'description' => !empty($this->description) ? nl2br($this->description) : '-',
       'sku' => $this->sku,
       '_price' => $currency->format($this->price),
+      'quantityText' => $quantityText,
       'quantity' => $this->quantity,
-      'message_out_of_order' => $this->message_out_of_order ? $this->message_out_of_order : 'สินค้าหมด',
+      // 'message_out_of_order' => $this->message_out_of_order ? $this->message_out_of_order : 'สินค้าหมด',
       'minimum' => $this->minimum,
       'product_unit' => $this->product_unit,
       'specifications' => $specifications,

@@ -59,7 +59,7 @@
     </div>
 
     <div>
-      <h3>ตัวเลือก{{$productOption['name']}}</h3>
+      <h3>ตัวเลือก "{{$productOption['name']}}"</h3>
 
       <h2>{{$totalOptionValue}}</h2>
       <h5>รายการตัวเลือก</h5>
