@@ -27,34 +27,6 @@
     </div>
   </div>
 
-  <div class="displaying-filters">
-
-    @foreach($displayingFilters['filters'] as $filters)
-
-      @if(!empty($filters['display']))
-
-        <h5>{{$filters['title']}}</h5>
-
-        @foreach($filters['display'] as $display)
-          <div class="filter-tag">{{$display}}</div>
-        @endforeach
-
-      @endif
-
-    @endforeach
-
-    @if(!empty($displayingFilters['sort']['display']))
-
-      <h5>{{$displayingFilters['sort']['title']}}</h5>
-
-      @foreach($displayingFilters['sort']['display'] as $display)
-        <div class="filter-tag">{{$display}}</div>
-      @endforeach
-
-    @endif
-
-  </div>
-
   <div class="text-right space-top-20">
     <a class="button" data-right-side-panel="1" data-right-side-panel-target="#filter_expand_panel">
       ตัวกรอง

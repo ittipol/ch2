@@ -12,46 +12,46 @@ class Lookup extends Model
 
   public $paginator = true;
 
-  protected $filterOptions = array(
-    'model' => array(
-      'input' => 'checkbox',
-      'title' => 'แสดงข้อมูล',
-      'options' => array(
-        array(
-          'name' => 'บริษัทและร้านค้า',
-          'value' => 'model:Shop'
-        ),
-        array(
-          'name' => 'สินค้าจากร้านค้า',
-          'value' => 'model:Product'
-        ),
-        array(
-          'name' => 'แคตตาล็อกสินค้า',
-          'value' => 'model:ProductCatalog'
-        ),
-        array(
-          'name' => 'ประกาศงาน',
-          'value' => 'model:Job'
-        ),
-        array(
-          'name' => 'โฆษณาจากบริษัทและร้านค้า',
-          'value' => 'model:Advertising'
-        ),
-        array(
-          'name' => 'ประกาศซื้อ-เช่า-ขายสินค้า',
-          'value' => 'model:Item'
-        ),
-        array(
-          'name' => 'ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์',
-          'value' => 'model:RealEstate'
-        ),
-        array(
-          'name' => 'งานฟรีแลนซ์',
-          'value' => 'model:Freelance'
-        )
-      )
-    )
-  );
+  // protected $filterOptions = array(
+  //   'model' => array(
+  //     'input' => 'checkbox',
+  //     'title' => 'แสดงข้อมูล',
+  //     'options' => array(
+  //       array(
+  //         'name' => 'บริษัทและร้านค้า',
+  //         'value' => 'model:Shop'
+  //       ),
+  //       array(
+  //         'name' => 'สินค้าจากร้านค้า',
+  //         'value' => 'model:Product'
+  //       ),
+  //       array(
+  //         'name' => 'แคตตาล็อกสินค้า',
+  //         'value' => 'model:ProductCatalog'
+  //       ),
+  //       array(
+  //         'name' => 'ประกาศงาน',
+  //         'value' => 'model:Job'
+  //       ),
+  //       array(
+  //         'name' => 'โฆษณาจากบริษัทและร้านค้า',
+  //         'value' => 'model:Advertising'
+  //       ),
+  //       array(
+  //         'name' => 'ประกาศซื้อ-เช่า-ขายสินค้า',
+  //         'value' => 'model:Item'
+  //       ),
+  //       array(
+  //         'name' => 'ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์',
+  //         'value' => 'model:RealEstate'
+  //       ),
+  //       array(
+  //         'name' => 'งานฟรีแลนซ์',
+  //         'value' => 'model:Freelance'
+  //       )
+  //     )
+  //   )
+  // );
 
   protected $sortingFields = array(
     'title' => 'จัดเรียงตาม',
