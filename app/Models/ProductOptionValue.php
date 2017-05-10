@@ -57,6 +57,10 @@ class ProductOptionValue extends Model
         $productOptionValue->quantity = 0;
       }
 
+      if($productOptionValue->state == 'create') {
+        $productOptionValue->active = 1;
+      }
+
     });
 
   }

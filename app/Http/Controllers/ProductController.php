@@ -517,7 +517,7 @@ class ProductController extends Controller
     $this->setPageTitle($this->data['_modelData']['name'].' - สินค้า - '.request()->get('shop')->name);
     $this->setPageImage($model->getImage('list'));
     $this->setPageDescription($model->getShortDescription());
-    
+
     return $this->view('pages.product.shop_product_detail');
 
   }
@@ -539,7 +539,11 @@ class ProductController extends Controller
 
   public function add() {
     $model = Service::loadModel('Product');
+
     $this->data = $model->formHelper->build();
+
+    $this->setPageTitle('เพิ่มสินค้า - '.request()->get('shop')->name);
+
     return $this->view('pages.product.form.product_add');
   }
 
@@ -574,6 +578,8 @@ class ProductController extends Controller
     ));
 
     $this->data = $model->formHelper->build();
+
+    $this->setPageTitle('แก้ไขสินค้า - '.request()->get('shop')->name);
 
     return $this->view('pages.product.form.product_edit');
 
