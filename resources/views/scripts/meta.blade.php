@@ -26,8 +26,6 @@
 @endif  
 @if(!empty($_page_description))
 <meta property="og:description" content="{{$_page_description}}" />
-@else
-<meta property="og:description" content="สร้างค้าออนไลน์ในแบบของคุณ เปิดโอกาสและเพิ่มช่องทางการขายสินค้าให้กับธุรกิจของคุณ ไม่ว่าจะเป็นธุรกิจ SME ธุรกิจขนาดกลาง หรือบุคคลทั่วไปที่ต้องการขายสินค้า" />
 @endif
 
 <!-- Twitter -->          
@@ -44,6 +42,4 @@
 @endif
 @if(!empty($_page_description))
 <meta name="twitter:description" content="{{$_page_description}}" />
-@else
-<meta name="สร้างค้าออนไลน์ในแบบของคุณ เปิดโอกาสและเพิ่มช่องทางการขายสินค้าให้กับธุรกิจของคุณ ไม่ว่าจะเป็นธุรกิจ SME ธุรกิจขนาดกลาง หรือบุคคลทั่วไปที่ต้องการขายสินค้า" />
 @endif
