@@ -158,7 +158,9 @@ class Shop extends Model
 
         $tel = $attributes['Contact']['phone_number'];
         unset($attributes['Contact']['phone_number']);
-        $attributes['Contact']['phone_number'][0] = $tel;
+        $attributes['Contact']['phone_number'][0] = array(
+          'value' => $tel
+        );
 
       }
 

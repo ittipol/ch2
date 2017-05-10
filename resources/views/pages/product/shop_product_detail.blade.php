@@ -172,7 +172,7 @@
     <div class="col-sm-8 col-xs-12">
 
       <div class="detail-info-section">
-        <h4 class="article-title color-teal">รายละเอียดสินค้า</h4>
+        <h4>รายละเอียดสินค้า</h4>
         <div class="line"></div> 
         <div class="detail-info description">
           {!!$_modelData['description']!!}
@@ -181,7 +181,7 @@
 
       @if(!empty($_modelData['specifications']))
       <div class="detail-info-section">
-        <h4 class="article-title color-teal">ข้อมูลจำเพาะ</h4>  
+        <h4>ข้อมูลจำเพาะ</h4>  
         <div class="line"></div> 
         <table class="table table-striped">
           <tbody>
@@ -250,7 +250,7 @@
   </div>
 
   @if($hasBranchLocation)
-  <h4 class="article-title color-teal">สาขาที่ขายสินค้า</h4>   
+  <h4>สาขาที่ขายสินค้า</h4>   
   <div class="line"></div>
   <div class="row">
     <div class="col-xs-12">
