@@ -36,9 +36,9 @@
 //     $exitCode = Artisan::call('cache:clear');
 // });
 
-Route::get('/debug',function(){
-  dd(session()->all());
-});
+// Route::get('/debug',function(){
+//   dd(session()->all());
+// });
 
 // Route::get('/clear',function(){
 //   Session::flush();
