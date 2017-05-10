@@ -88,6 +88,8 @@ class ShopController extends Controller
     $this->setData('pinnedMessages',$_pinnedPosts);
 
     $this->setPageTitle(request()->get('shop')->name);
+    $this->setPageImage(request()->get('shop')->getProfileImageUrl());
+    $this->setPageDescription(request()->get('shop')->getShortDescription());
 
     return $this->view('pages.shop.index');
   }
@@ -102,6 +104,11 @@ class ShopController extends Controller
     $this->setData('about',$model->getShopAbout());
 
     $this->setPageTitle('เกี่ยวกับ - '.request()->get('shop')->name);
+
+    $this->setPageTitle(request()->get('shop')->name);
+    $this->setPageImage(request()->get('shop')->getProfileImageUrl());
+    $this->setPageDescription(request()->get('shop')->getShortDescription());
+
 
     return $this->view('pages.shop.about');
 

@@ -613,4 +613,16 @@ class Model extends BaseModel
 
   }
 
+  public function getShortDescription($description = null) {
+
+    if(empty($description) && !empty($this->description)) {
+      $description = $this->description;
+    }elseif(empty($description)) {
+      return null;
+    }
+
+    $string = new stringHelper;
+    return $string->truncString($description,200,true,true);
+  }
+
 }
