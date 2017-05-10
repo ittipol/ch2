@@ -835,7 +835,24 @@ class Cart extends Model
     if(Auth::check()) {
       return $this->where('created_by','=',session()->get('Person.id'))->exists();
     }else {
-      return count(session()->get('cart')) ? true : false;
+
+      $products = session()->get('cart');
+
+      $hasProduct = false;
+      if(!empty($products)) {
+
+        foreach ($products as $product) {
+          $hasProduct = !empty($product['items']);
+        }
+
+      }
+
+      if(!$hasProduct) {
+        session()->forget('cart');
+      }
+
+      return $hasProduct;
+      // return count(session()->get('cart')) ? true : false;
     }
   }
 
