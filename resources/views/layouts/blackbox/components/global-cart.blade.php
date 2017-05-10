@@ -15,7 +15,7 @@
   
   <div class="product-list-table">
     <div class="product-list-table-inner">
-      <div id="global_cart_panel">
+      <div class="product-list-table-content" id="global_cart_panel">
         @include('layouts.blackbox.components.global-cart-product-list')
       </div>
     </div>

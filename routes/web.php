@@ -25,7 +25,7 @@
 //   dd($model->getProducts());
 // });
 
-// Route::get('cp','HomeController@catPath');
+Route::get('cp','HomeController@catPath');
 
 // Route::get('ac','HomeController@addXxx');
 // Route::post('ac','HomeController@addXxxSub');

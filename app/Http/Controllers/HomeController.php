@@ -54,7 +54,7 @@ class HomeController extends Controller
   // }
 
   public function catPath() {
-exit('Error!');
+// exit('Error!');
     ini_set('max_execution_time', 200000);
 
     $page = 1;

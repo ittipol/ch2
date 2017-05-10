@@ -289,6 +289,10 @@
 }
 
 .content-box .content-box-panel.overlay-bg {
+	background-color: rgba(66,133,244,.7);
+}
+
+.detail .content-box .content-box-panel.overlay-bg {
 	background-color: rgba(20,27,32,.85);
 }
 

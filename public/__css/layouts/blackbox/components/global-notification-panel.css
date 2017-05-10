@@ -1,8 +1,8 @@
 .global-notification-panel .notification-header-nav {
 	position: absolute;
-	top: 64px;
+	top: 50px;
 	height: 50px;
-	background-color: #ececec;
+	background-color: rgb(245,245,245);
 	width: 100%;
 }
 
@@ -22,12 +22,15 @@
 }
 
 .global-notification-panel > .notification-list-table > .notification-list-table-inner {
-	padding: 114px 0 20px;
+	padding: 114px 15px 20px;
 }
 
 .global-notification-panel .notification-item {
 	padding: 10px 20px;
-	border-bottom: 1px solid #ccc;
+	margin-bottom: 15px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	/*box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);*/
 }
 
 .global-notification-panel .notification-image > a {

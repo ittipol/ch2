@@ -13,7 +13,7 @@
 	position: relative;
 	padding: 100px 0 20px;
 	position: relative;
-	background-color: #448AFF;
+	background-color: rgb(66,133,244);
 }
 
 .global-account-panel .account-info .account-image-frame {
@@ -42,8 +42,8 @@
 
 .global-account-panel .account-info .additional-option {
 	position: absolute;
-	top: 15px;
-	right: 55px;
+	top: 10px;
+	right: 45px;
 	width: 40px;
 	height: 40px;
 }
@@ -80,4 +80,8 @@
 	width: 100px;
 	height: 100px;
 	padding: 10px;
+}
+
+.global-account-panel .panel-close-button {
+	background-image: url(/images/icons/close-white.png);
 }

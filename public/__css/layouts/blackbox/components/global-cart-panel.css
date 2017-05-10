@@ -1,8 +1,8 @@
 .global-cart-panel .cart-header-nav {
 	position: absolute;
-	top: 64px;
+	top: 50px;
 	height: 50px;
-	background-color: #ececec;
+	background-color: rgb(245,245,245);
 	width: 100%;
 }
 
@@ -21,12 +21,19 @@
 }
 
 .global-cart-panel > .product-list-table > .product-list-table-inner {
-	padding: 114px 20px 20px;
+	padding: 114px 0 20px;
+}
+
+.global-cart-panel > .product-list-table > .product-list-table-inner > .product-list-table-content {
+	padding: 0 20px;
 }
 
 .global-cart-panel > .product-list-table .product-list-table-row {
 	position: relative;
-	padding: 10px;
+	padding: 10px 20px;
+	border: 1px solid #ccc;
+	margin-bottom: 15px;
+	background-color: #fff;
 }
 
 .global-cart-panel .product-list-table-row .delete-product-button {

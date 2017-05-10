@@ -196,7 +196,7 @@
 	padding: 0;
 	line-height: 40px;
 	color: #fff;
-	background-color: #546E7A;
+	background-color: rgb(217,74,56);
 }
 
 .card .button-group .additional-option {
@@ -206,7 +206,7 @@
 	position: absolute;
 	top: 0;
 	right: 0;
-	background-color: #37474F;
+	background-color: #C62828;
 }
 
 .card .button-group .additional-option .dot {

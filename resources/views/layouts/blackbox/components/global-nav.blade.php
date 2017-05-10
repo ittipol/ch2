@@ -3,7 +3,7 @@
     <div class="navigation-top">
 
       <div class="logo">
-        <a class="logo-link" href="{{URL::to('/')}}">Sunday Square</a>
+        <a class="logo-link" href="{{URL::to('/')}}">SUNDAY SQUARE</a>
       </div>
 
     </div>
@@ -42,7 +42,7 @@
           </li>
 
           <li class="item">
-            <a href="{{URL::to('community/shop')}}">
+            <a href="{{URL::to('community/shop/create')}}">
               <img class="icon" src="/images/icons/plus-header.png">
               <span>สร้างร้านค้า</span>
             </a>
