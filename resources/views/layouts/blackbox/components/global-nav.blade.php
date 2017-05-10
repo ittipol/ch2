@@ -23,11 +23,17 @@
           @if (!Auth::check())
 
             <li class="item">
-              <a href="{{URL::to('login')}}">เข้าสู่ระบบ</a>
+              <a href="{{URL::to('login')}}">
+                <img class="icon" src="/images/icons/secure-header.png">
+                <span>เข้าสู่ระบบ</span>
+              </a>
             </li>
 
             <li class="item">
-              <a href="{{URL::to('register')}}">สมัครสมาชิก</a>
+              <a href="{{URL::to('register')}}">
+                <img class="icon" src="/images/icons/resume-header.png">
+                <span>สมัครสมาชิก</span>
+              </a>
             </li>
 
           @endif

@@ -4,7 +4,7 @@
 ?>
 
 <?php
-  $combine = true;
+  $combine = false;
 ?>
 
 <?php
