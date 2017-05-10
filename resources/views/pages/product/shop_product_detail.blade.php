@@ -1,7 +1,7 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUdwm6VWiEE-1ZrVgY3bh1sNX21_deHZw&libraries=places" type="text/javascript"></script> -->
 
 @include('pages.shop.layouts.fixed_top_nav')
 
@@ -132,7 +132,16 @@
                   'data-quantity-text' => $value['quantityText']
                 ));
               ?>
-              <div class="product-option-value-name">{{$value['name']}}</div>
+              <div class="product-option-value-box product-option-display-{{$value['display_type']}}">
+                @if(($value['display_type'] == 2) || ($value['display_type'] == 3))
+                <div class="image-tile">
+                  <div class="product-option-value-image" style="background-image:url({{$value['imageUrl']}});"></div>
+                </div>
+                @endif
+                @if(($value['display_type'] == 1) || ($value['display_type'] == 3))
+                <div class="product-option-value-name">{{$value['name']}}</div>
+                @endif
+              </div>
             </label>
           @endforeach
         @endforeach
