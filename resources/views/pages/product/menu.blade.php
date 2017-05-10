@@ -217,12 +217,12 @@
       </div>
     </div>
 
-    <div class="list-item">
+    <!-- <div class="list-item">
       <a href="{{request()->get('shopUrl')}}product/branch/edit/{{$_modelData['id']}}">
         <img class="icon" src="/images/common/pencil.png" >
         <h4>สาขาที่ขายสินค้า</h4>
       </a>
-    </div>
+    </div> -->
 
     <div class="list-item">
       <a href="{{request()->get('shopUrl')}}product/notification/edit/{{$_modelData['id']}}">

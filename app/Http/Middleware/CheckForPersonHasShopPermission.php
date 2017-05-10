@@ -30,7 +30,7 @@ class CheckForPersonHasShopPermission
       $pages = array(
         'shop.index' => true,
         'shop.about' => true,
-        'shop.manage' => array(
+        'shop.overview' => array(
           'permission' => true
         ),
         'shop.setting' => array(

@@ -44,10 +44,11 @@ header .hamburger-button {
 	top: 0;
 	left: 0;
 	z-index: 2;
+	font-size: 22px;
 	width: 64px;
 	line-height: 64px;
 	cursor: pointer;
-	color: #fff;
+	color: rgb(66,133,244);
 	text-align: center;
 }
 
@@ -55,8 +56,8 @@ header .badge {
 	position: absolute;
 	top: 10px;
 	right: 0;
-	background-color: red;
-	width: 22px;
+	background-color: rgb(66,133,244);
+	min-width: 22px;
 	height: 22px;
 	border-radius: 22px;
 	padding: 5px 0;
@@ -127,7 +128,7 @@ header img.icon-header {
 	width: 100%;
 	height: 64px;
 	position: relative;
-	z-index: 80;
+	z-index: 78;
 }
 
 .header-fixed-top {
@@ -136,12 +137,11 @@ header img.icon-header {
 	left: 0;
 	width: 100%;
 	height: 64px;
-	/*background-color: #0071c5;*/
-	/*background-color: rgb(212,22,48);*/
-	background-color: #009688;
-	z-index: 80;
+	background-color: #fff;
+	/*z-index: 78;*/
 	padding: 0 15px;
 	transition: left .2s ease-out;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .global-header .nav-fixed-top {
@@ -156,7 +156,7 @@ header img.icon-header {
 .global-header .global-header-content-right {
 	position: absolute;
 	top: 0;
-	right: 0;
+	right: 5px;
 	height: 64px;
 }
 
@@ -174,9 +174,9 @@ header img.icon-header {
 }
 
 .global-header .avatar {
-  width: 35px;
-  height: 35px;
-  border-radius: 35px;
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
   margin: 14px auto 0;
   overflow: hidden;
   background-color: #fff;

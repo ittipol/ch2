@@ -66,9 +66,37 @@
         </div>
 
         <div class="list-item">
+          <a href="{{URL::to('person/experience')}}">
+            <img class="icon" src="/images/common/pencil.png" >
+            <h4>เพิ่มประวัติการทำงาน</h4>
+          </a>
+        </div>
+
+        <div class="list-item">
+          <a href="{{URL::to('person/freelance')}}">
+            <img class="icon" src="/images/common/home-office.png" >
+            <h4>งานฟรีแลนซ์ที่ประกาศ</h4>
+          </a>
+        </div>
+
+        <div class="list-item">
           <a href="{{URL::to('account/shop')}}">
-            <img class="icon" src="/images/common/building.png" >
+            <img class="icon" src="/images/common/shop.png" >
             <h4>บริษัทหรือร้านค้าของคุณ</h4>
+          </a>
+        </div>
+
+        <div class="list-item">
+          <a href="{{URL::to('account/item')}}">
+            <img class="icon" src="/images/common/megaphone.png" >
+            <h4>ประกาศซื้อ-เช่า-ขายสินค้า</h4>
+          </a>
+        </div>
+
+        <div class="list-item">
+          <a href="{{URL::to('account/real-estate')}}">
+            <img class="icon" src="/images/common/megaphone.png" >
+            <h4>ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</h4>
           </a>
         </div>
 
@@ -76,6 +104,13 @@
           <a href="{{URL::to('account/order')}}">
             <img class="icon" src="/images/common/bag.png" >
             <h4>รายการสั่งซื้อสินค้า</h4>
+          </a>
+        </div>
+
+        <div class="list-item">
+          <a href="{{URL::to('account/job_applying')}}">
+            <img class="icon" src="/images/common/resume.png" >
+            <h4>งานที่สมัคร</h4>
           </a>
         </div>
 

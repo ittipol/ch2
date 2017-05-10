@@ -19,42 +19,6 @@
                 <div class="site-map-link">
                   <a href="{{URL::to('product/shelf')}}">สินค้าจากร้านค้า</a>
                 </div>
-                <div class="site-map-link">
-                  <a href="{{URL::to('job/board')}}">ประกาศงาน</a>
-                </div>
-                <div class="site-map-link">
-                  <a href="{{URL::to('advertising/board')}}">โฆษณาจากบริษัทและร้านค้า</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <h4 class="site-map-title">บอร์ดประกาศ</h4>
-              <div class="site-map-content">
-                <div class="site-map-link">
-                  <a href="{{URL::to('item/board')}}">ประกาศซื้อ-เช่า-ขายสินค้า</a>
-                </div>
-                <div class="site-map-link">
-                  <a href="{{URL::to('real-estate/board')}}">ประกาศซื้อ-เช่า-ขายอสังหาริมทรัพย์</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <h4 class="site-map-title">ประวัติการทำงาน</h4>
-              <div class="site-map-content">
-                <div class="site-map-link">
-                  <a href="{{URL::to('experience/profile/list')}}">ประวัติการทำงานบุคคล</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <h4 class="site-map-title">ฟรีแลนซ์</h4>
-              <div class="site-map-content">
-                <div class="site-map-link">
-                  <a href="{{URL::to('freelance/board')}}">งานฟรีแลนซ์</a>
-                </div>
               </div>
             </div>
 

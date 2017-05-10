@@ -168,7 +168,7 @@ class ShopController extends Controller
 
   }
 
-  public function manage() {
+  public function overview() {
 
     $model = request()->get('shop');
 
@@ -180,23 +180,23 @@ class ShopController extends Controller
       ['model','like','Product']
     ])->count());
 
-    $this->setData('totalJob',$shopRelateToModel
-    ->where([
-      ['shop_id','=',$model->id],
-      ['model','like','Job']
-    ])->count());
+    // $this->setData('totalJob',$shopRelateToModel
+    // ->where([
+    //   ['shop_id','=',$model->id],
+    //   ['model','like','Job']
+    // ])->count());
 
-    $this->setData('totalAdvertising',$shopRelateToModel
-    ->where([
-      ['shop_id','=',$model->id],
-      ['model','like','Advertising']
-    ])->count());
+    // $this->setData('totalAdvertising',$shopRelateToModel
+    // ->where([
+    //   ['shop_id','=',$model->id],
+    //   ['model','like','Advertising']
+    // ])->count());
 
-    $this->setData('totalBranch',$shopRelateToModel
-    ->where([
-      ['shop_id','=',$model->id],
-      ['model','like','Branch']
-    ])->count());
+    // $this->setData('totalBranch',$shopRelateToModel
+    // ->where([
+    //   ['shop_id','=',$model->id],
+    //   ['model','like','Branch']
+    // ])->count());
 
     $orderModel = Service::loadModel('Order');
 
@@ -209,29 +209,22 @@ class ShopController extends Controller
       ['order_status_id','=',1]
     ])->count());
 
-    $personApplyJobModel = Service::loadModel('PersonApplyJob');
+    // $personApplyJobModel = Service::loadModel('PersonApplyJob');
 
-    $this->setData('totalJobApplying',$personApplyJobModel
-    ->where('shop_id','=',$model->id)
-    ->count());
+    // $this->setData('totalJobApplying',$personApplyJobModel
+    // ->where('shop_id','=',$model->id)
+    // ->count());
 
-    $this->setData('countNewJobApplying',$personApplyJobModel
-    ->where([
-      ['shop_id','=',$model->id],
-      ['job_applying_status_id','=',1]
-    ])
-    ->count());
-
-    // $this->setData('countActiveJobApplying',$personApplyJobModel
+    // $this->setData('countNewJobApplying',$personApplyJobModel
     // ->where([
     //   ['shop_id','=',$model->id],
-    //   ['job_applying_status_id','=',2]
+    //   ['job_applying_status_id','=',1]
     // ])
     // ->count());
 
     $this->setPageTitle(request()->get('shop')->name);
 
-    return $this->view('pages.shop.manage');
+    return $this->view('pages.shop.overview');
   }
 
   public function product() {
@@ -527,7 +520,7 @@ class ShopController extends Controller
       ))->slug;
 
       MessageHelper::display('บริษัท ร้านค้า หรือธุรกิจถูกเพิ่มเข้าสู่ชุมชนแล้ว','success');
-      return Redirect::to(route('shop.manage', ['slug' => $slug]));
+      return Redirect::to(route('shop.overview', ['slug' => $slug]));
     }else{
       return Redirect::back();
     }

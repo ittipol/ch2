@@ -97,23 +97,27 @@ Route::group(['middleware' => 'auth'], function () {
   // Route::get('account/theme', 'AccountController@theme')->name('account.theme.edit');
   // Route::patch('account/theme','PersonExperienceController@themeEditingSubmit')->name('account.theme.edit');
 
-  Route::get('account/item', 'AccountController@item')->name('account.item');
-  Route::get('account/real-estate', 'AccountController@realEstate')->name('account.real_estate');
+  // Route::get('account/item', 'AccountController@item')->name('account.item');
+
+  // Route::get('account/real-estate', 'AccountController@realEstate')->name('account.real_estate');
+
   Route::get('account/shop', 'AccountController@shop')->name('account.shop');
+
   Route::get('account/order', 'AccountController@order')->name('account.order');
+
   Route::get('account/notification', 'AccountController@notification')->name('account.notification');
 
-  Route::get('account/job_applying', 'AccountController@jobApplying');
-  Route::get('account/job_applying/{id}', 'JobController@accountJobApplyingDetail');
+  // Route::get('account/job_applying', 'AccountController@jobApplying');
+  // Route::get('account/job_applying/{id}', 'JobController@accountJobApplyingDetail');
 
-  Route::post('account/job_applying/job_position_accept/{id}', 'JobController@jobPositionAccept');
-  Route::post('account/job_applying/job_position_decline/{id}', 'JobController@jobPositionDecline');
+  // Route::post('account/job_applying/job_position_accept/{id}', 'JobController@jobPositionAccept');
+  // Route::post('account/job_applying/job_position_decline/{id}', 'JobController@jobPositionDecline');
 
-  Route::post('account/job_applying/new_message/{id}','JobController@jobApplyingMessageSend');
+  // Route::post('account/job_applying/new_message/{id}','JobController@jobApplyingMessageSend');
 
-  Route::post('account/job_applying/message_reply/{id}','JobController@jobApplyingMessageReplySend');
+  // Route::post('account/job_applying/message_reply/{id}','JobController@jobApplyingMessageReplySend');
 
-  Route::get('get_file_attachment/{id}', 'StaticFileController@attachedFile');
+  // Route::get('get_file_attachment/{id}', 'StaticFileController@attachedFile');
 
 });
 
@@ -121,93 +125,92 @@ Route::group(['middleware' => 'auth'], function () {
 // Route::get('announcement/create','AnnouncementController@create');
 
 // Experience
-Route::get('experience/profile/list','PersonExperienceController@listView')->name('person_experience.list');
-Route::get('experience/profile/{id}','PersonExperienceController@detail')->name('person_experience.detail')->middleware('data.access.permission');
+// Route::get('experience/profile/list','PersonExperienceController@listView')->name('person_experience.list');
+// Route::get('experience/profile/{id}','PersonExperienceController@detail')->name('person_experience.detail')->middleware('data.access.permission');
 
-Route::group(['middleware' => 'auth'], function () {
-  Route::get('person/experience','PersonExperienceController@manage')->name('person_experience.manage');
-  Route::post('person/experience','PersonExperienceController@start')->name('person_experience.start');
-});
-Route::group(['middleware' => ['auth','person.experience']], function () {
+// Route::group(['middleware' => 'auth'], function () {
+//   Route::get('person/experience','PersonExperienceController@manage')->name('person_experience.manage');
+//   Route::post('person/experience','PersonExperienceController@start')->name('person_experience.start');
+// });
+// Route::group(['middleware' => ['auth','person.experience']], function () {
 
-  Route::get('experience/profile/edit','PersonExperienceController@profile')->name('person_experience.profile');
-  Route::patch('experience/profile/edit','PersonExperienceController@profileEditingSubmit')->name('person_experience.profile.edit');
+//   Route::get('experience/profile/edit','PersonExperienceController@profile')->name('person_experience.profile');
+//   Route::patch('experience/profile/edit','PersonExperienceController@profileEditingSubmit')->name('person_experience.profile.edit');
 
-  Route::get('person/private_website/list','PersonPrivateWebsiteController@listView');
-  Route::get('person/private_website/add','PersonPrivateWebsiteController@add');
-  Route::post('person/private_website/add','PersonPrivateWebsiteController@addingSubmit');
-  Route::get('person/private_website/edit/{id}','PersonPrivateWebsiteController@edit')->name('private_website.edit')->middleware('data.owner');
-  Route::patch('person/private_website/edit/{id}','PersonPrivateWebsiteController@editingSubmit')->name('private_website.edit')->middleware('data.owner');
-  Route::get('person/private_website/delete/{id}','PersonPrivateWebsiteController@delete')->name('private_website.delete')->middleware('data.owner');
+//   Route::get('person/private_website/list','PersonPrivateWebsiteController@listView');
+//   Route::get('person/private_website/add','PersonPrivateWebsiteController@add');
+//   Route::post('person/private_website/add','PersonPrivateWebsiteController@addingSubmit');
+//   Route::get('person/private_website/edit/{id}','PersonPrivateWebsiteController@edit')->name('private_website.edit')->middleware('data.owner');
+//   Route::patch('person/private_website/edit/{id}','PersonPrivateWebsiteController@editingSubmit')->name('private_website.edit')->middleware('data.owner');
+//   Route::get('person/private_website/delete/{id}','PersonPrivateWebsiteController@delete')->name('private_website.delete')->middleware('data.owner');
 
-  Route::get('experience/career_objective','PersonExperienceController@careerObjectiveEdit');
-  Route::patch('experience/career_objective','PersonExperienceController@careerObjectiveEditingSubmit');
+//   Route::get('experience/career_objective','PersonExperienceController@careerObjectiveEdit');
+//   Route::patch('experience/career_objective','PersonExperienceController@careerObjectiveEditingSubmit');
 
-  Route::get('experience/working/add','PersonWorkingExperienceController@add');
-  Route::post('experience/working/add','PersonWorkingExperienceController@addingSubmit');
-  Route::get('experience/working/edit/{id}','PersonWorkingExperienceController@edit')->name('person_experience.working.edit')->middleware('data.owner');
-  Route::patch('experience/working/edit/{id}','PersonWorkingExperienceController@editingSubmit')->name('person_experience.working.edit')->middleware('data.owner');
-  Route::get('experience/working/delete/{id}','PersonWorkingExperienceController@delete')->name('person_experience.working.delete')->middleware('data.owner');
+//   Route::get('experience/working/add','PersonWorkingExperienceController@add');
+//   Route::post('experience/working/add','PersonWorkingExperienceController@addingSubmit');
+//   Route::get('experience/working/edit/{id}','PersonWorkingExperienceController@edit')->name('person_experience.working.edit')->middleware('data.owner');
+//   Route::patch('experience/working/edit/{id}','PersonWorkingExperienceController@editingSubmit')->name('person_experience.working.edit')->middleware('data.owner');
+//   Route::get('experience/working/delete/{id}','PersonWorkingExperienceController@delete')->name('person_experience.working.delete')->middleware('data.owner');
 
-  Route::get('experience/internship/add','PersonInternshipController@add');
-  Route::post('experience/internship/add','PersonInternshipController@addingSubmit');
-  Route::get('experience/internship/edit/{id}','PersonInternshipController@edit')->name('person_experience.internship.edit')->middleware('data.owner');
-  Route::patch('experience/internship/edit/{id}','PersonInternshipController@editingSubmit')->name('person_experience.internship.edit')->middleware('data.owner');
-  Route::get('experience/internship/delete/{id}','PersonInternshipController@delete')->name('person_experience.internship.delete')->middleware('data.owner');
+//   Route::get('experience/internship/add','PersonInternshipController@add');
+//   Route::post('experience/internship/add','PersonInternshipController@addingSubmit');
+//   Route::get('experience/internship/edit/{id}','PersonInternshipController@edit')->name('person_experience.internship.edit')->middleware('data.owner');
+//   Route::patch('experience/internship/edit/{id}','PersonInternshipController@editingSubmit')->name('person_experience.internship.edit')->middleware('data.owner');
+//   Route::get('experience/internship/delete/{id}','PersonInternshipController@delete')->name('person_experience.internship.delete')->middleware('data.owner');
 
-  Route::get('experience/education/add','PersonEducationController@add');
-  Route::post('experience/education/add','PersonEducationController@addingSubmit');
-  Route::get('experience/education/edit/{id}','PersonEducationController@edit')->name('person_experience.education.edit')->middleware('data.owner');
-  Route::patch('experience/education/edit/{id}','PersonEducationController@editingSubmit')->name('person_experience.education.edit')->middleware('data.owner');
-  Route::get('experience/education/delete/{id}','PersonEducationController@delete')->name('person_experience.education.delete')->middleware('data.owner');
+//   Route::get('experience/education/add','PersonEducationController@add');
+//   Route::post('experience/education/add','PersonEducationController@addingSubmit');
+//   Route::get('experience/education/edit/{id}','PersonEducationController@edit')->name('person_experience.education.edit')->middleware('data.owner');
+//   Route::patch('experience/education/edit/{id}','PersonEducationController@editingSubmit')->name('person_experience.education.edit')->middleware('data.owner');
+//   Route::get('experience/education/delete/{id}','PersonEducationController@delete')->name('person_experience.education.delete')->middleware('data.owner');
 
-  Route::get('experience/project/add','PersonProjectController@add');
-  Route::post('experience/project/add','PersonProjectController@addingSubmit');
-  Route::get('experience/project/edit/{id}','PersonProjectController@edit')->name('person_experience.project.edit')->middleware('data.owner');
-  Route::patch('experience/project/edit/{id}','PersonProjectController@editingSubmit')->name('person_experience.project.edit')->middleware('data.owner');
-  Route::get('experience/project/delete/{id}','PersonProjectController@delete')->name('person_experience.project.delete')->middleware('data.owner');
+//   Route::get('experience/project/add','PersonProjectController@add');
+//   Route::post('experience/project/add','PersonProjectController@addingSubmit');
+//   Route::get('experience/project/edit/{id}','PersonProjectController@edit')->name('person_experience.project.edit')->middleware('data.owner');
+//   Route::patch('experience/project/edit/{id}','PersonProjectController@editingSubmit')->name('person_experience.project.edit')->middleware('data.owner');
+//   Route::get('experience/project/delete/{id}','PersonProjectController@delete')->name('person_experience.project.delete')->middleware('data.owner');
 
-  Route::get('experience/certificate/add','PersonCertificateController@add');
-  Route::post('experience/certificate/add','PersonCertificateController@addingSubmit');
-  Route::get('experience/certificate/edit/{id}','PersonCertificateController@edit')->name('person_experience.certificate.edit')->middleware('data.owner');
-  Route::patch('experience/certificate/edit/{id}','PersonCertificateController@editingSubmit')->name('person_experience.certificate.edit')->middleware('data.owner');
-  Route::get('experience/certificate/delete/{id}','PersonCertificateController@delete')->name('person_experience.certificate.delete')->middleware('data.owner');
+//   Route::get('experience/certificate/add','PersonCertificateController@add');
+//   Route::post('experience/certificate/add','PersonCertificateController@addingSubmit');
+//   Route::get('experience/certificate/edit/{id}','PersonCertificateController@edit')->name('person_experience.certificate.edit')->middleware('data.owner');
+//   Route::patch('experience/certificate/edit/{id}','PersonCertificateController@editingSubmit')->name('person_experience.certificate.edit')->middleware('data.owner');
+//   Route::get('experience/certificate/delete/{id}','PersonCertificateController@delete')->name('person_experience.certificate.delete')->middleware('data.owner');
 
-  Route::get('experience/skill/add','PersonSkillController@add');
-  Route::post('experience/skill/add','PersonSkillController@addingSubmit');
-  Route::get('experience/skill/edit/{id}','PersonSkillController@edit')->name('person_experience.skill.edit')->middleware('data.owner');
-  Route::patch('experience/skill/edit/{id}','PersonSkillController@editingSubmit')->name('person_experience.skill.edit')->middleware('data.owner');
-  Route::get('experience/skill/delete/{id}','PersonSkillController@delete')->name('person_experience.skill.delete')->middleware('data.owner');
+//   Route::get('experience/skill/add','PersonSkillController@add');
+//   Route::post('experience/skill/add','PersonSkillController@addingSubmit');
+//   Route::get('experience/skill/edit/{id}','PersonSkillController@edit')->name('person_experience.skill.edit')->middleware('data.owner');
+//   Route::patch('experience/skill/edit/{id}','PersonSkillController@editingSubmit')->name('person_experience.skill.edit')->middleware('data.owner');
+//   Route::get('experience/skill/delete/{id}','PersonSkillController@delete')->name('person_experience.skill.delete')->middleware('data.owner');
 
-  Route::get('experience/language_skill/add','PersonLanguageSkillController@add');
-  Route::post('experience/language_skill/add','PersonLanguageSkillController@addingSubmit');
-  Route::get('experience/language_skill/edit/{id}','PersonLanguageSkillController@edit')->name('person_experience.language_skill.edit')->middleware('data.owner');
-  Route::patch('experience/language_skill/edit/{id}','PersonLanguageSkillController@editingSubmit')->name('person_experience.language_skill.edit')->middleware('data.owner');
-  Route::get('experience/language_skill/delete/{id}','PersonLanguageSkillController@delete')->name('person_experience.language_skill.delete')->middleware('data.owner');
+//   Route::get('experience/language_skill/add','PersonLanguageSkillController@add');
+//   Route::post('experience/language_skill/add','PersonLanguageSkillController@addingSubmit');
+//   Route::get('experience/language_skill/edit/{id}','PersonLanguageSkillController@edit')->name('person_experience.language_skill.edit')->middleware('data.owner');
+//   Route::patch('experience/language_skill/edit/{id}','PersonLanguageSkillController@editingSubmit')->name('person_experience.language_skill.edit')->middleware('data.owner');
+//   Route::get('experience/language_skill/delete/{id}','PersonLanguageSkillController@delete')->name('person_experience.language_skill.delete')->middleware('data.owner');
 
-});
+// });
 
 // Freelance
-Route::get('freelance/board','FreelanceController@board');
-Route::get('freelance/board/{freelance_type_id}','FreelanceController@listView');
-Route::get('freelance/detail/{id}','FreelanceController@detail')->name('freelance.detail');
+// Route::get('freelance/board','FreelanceController@board');
+// Route::get('freelance/board/{freelance_type_id}','FreelanceController@listView');
+// Route::get('freelance/detail/{id}','FreelanceController@detail')->name('freelance.detail');
 
-Route::group(['middleware' => ['auth','person.experience']], function () {
+// Route::group(['middleware' => ['auth','person.experience']], function () {
 
-  Route::get('person/freelance','FreelanceController@manage')->name('person.freelance.manage');
+//   Route::get('person/freelance','FreelanceController@manage')->name('person.freelance.manage');
 
-  Route::get('person/freelance/queue/manage','FreelanceController@queueManage')->name('person.freelance.queue.manage');
-  Route::get('person/freelance/queue/add','FreelanceController@queueAdd')->name('person.freelance.queue.add');
+//   Route::get('person/freelance/queue/manage','FreelanceController@queueManage')->name('person.freelance.queue.manage');
+//   Route::get('person/freelance/queue/add','FreelanceController@queueAdd')->name('person.freelance.queue.add');
 
-  Route::get('person/freelance/post','FreelanceController@add')->name('freelance.add');
-  Route::post('person/freelance/post','FreelanceController@addingSubmit')->name('freelance.add');
+//   Route::get('person/freelance/post','FreelanceController@add')->name('freelance.add');
+//   Route::post('person/freelance/post','FreelanceController@addingSubmit')->name('freelance.add');
 
-  Route::get('person/freelance/edit/{id}','FreelanceController@edit')->name('freelance.edit')->middleware('data.owner');;
-  Route::patch('person/freelance/edit/{id}','FreelanceController@editingSubmit')->name('freelance.edit')->middleware('data.owner');
+//   Route::get('person/freelance/edit/{id}','FreelanceController@edit')->name('freelance.edit')->middleware('data.owner');;
+//   Route::patch('person/freelance/edit/{id}','FreelanceController@editingSubmit')->name('freelance.edit')->middleware('data.owner');
 
-  Route::get('person/freelance/delete/{id}','FreelanceController@delete')->name('freelance.delete')->middleware('data.owner');
-
-});
+//   Route::get('person/freelance/delete/{id}','FreelanceController@delete')->name('freelance.delete')->middleware('data.owner');
+// });
 
 // Cart
 Route::get('cart','CartController@index')->name('cart');
@@ -243,7 +246,6 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::patch('shop/{shopSlug}/order/status/update/{id}', 'OrderController@updateOrderStatus')->name('shop.order.status.update');
 
   Route::get('shop/{shopSlug}/order/delete/{id}','OrderController@delete')->name('shop.order.delete');
-
 });
 
 // community / Shop
@@ -260,14 +262,14 @@ Route::group(['middleware' => ['shop','person.shop.permission']], function () {
   Route::get('shop/{shopSlug}/product_catalog','ProductCatalogController@listView')->name('shop.product_catalog');
   Route::get('shop/{shopSlug}/product_catalog/{id}','ProductCatalogController@productListView')->name('shop.product_catalog.list');
 
-  Route::get('shop/{shopSlug}/job','JobController@shopJoblistView')->name('shop.job.list');
-  Route::get('shop/{shopSlug}/job/{id}','JobController@shopJobDetail')->name('shop.job.detail');
+  // Route::get('shop/{shopSlug}/job','JobController@shopJoblistView')->name('shop.job.list');
+  // Route::get('shop/{shopSlug}/job/{id}','JobController@shopJobDetail')->name('shop.job.detail');
 
-  Route::get('shop/{shopSlug}/advertising','AdvertisingController@shopAdvertisinglistView')->name('shop.advertising.list');
-  Route::get('shop/{shopSlug}/advertising/{id}','AdvertisingController@shopAdvertisingDetail')->name('shop.advertising.detail');
+  // Route::get('shop/{shopSlug}/advertising','AdvertisingController@shopAdvertisinglistView')->name('shop.advertising.list');
+  // Route::get('shop/{shopSlug}/advertising/{id}','AdvertisingController@shopAdvertisingDetail')->name('shop.advertising.detail');
 
-  Route::get('shop/{shopSlug}/branch','BranchController@listView')->name('shop.branch.list');
-  Route::get('shop/{shopSlug}/branch/{id}','BranchController@detail')->name('shop.branch.detail');
+  // Route::get('shop/{shopSlug}/branch','BranchController@listView')->name('shop.branch.list');
+  // Route::get('shop/{shopSlug}/branch/{id}','BranchController@detail')->name('shop.branch.detail');
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -275,8 +277,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::post('community/shop/create','ShopController@creatingSubmit')->name('shop.create');
 });
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
-
-  Route::get('shop/{shopSlug}/manage','ShopController@manage')->name('shop.manage');
+  Route::get('shop/{shopSlug}/overview','ShopController@overview')->name('shop.overview');
   
   Route::get('shop/{shopSlug}/setting','ShopController@setting')->name('shop.setting');
 
@@ -300,9 +301,6 @@ Route::get('product/category/{category_id?}','ProductController@category')->name
 Route::get('product/detail/{id}','ProductController@detail')->name('product.detail');
 
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
-
-  // Route::get('shop/{shopSlug}/product','ProductController@shopProductlistView')->name('shop.product.list');
-  // Route::get('shop/{shopSlug}/product/{id}','ProductController@shopProductDetail')->name('shop.product.detail');
 
   Route::get('shop/{shopSlug}/manage/product','ShopController@product')->name('shop.product.manage');
   Route::get('shop/{shopSlug}/manage/product/{id}','ProductController@menu')->name('shop.product.manage.menu');
@@ -349,14 +347,6 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
   Route::get('shop/{shopSlug}/product/option/delete/{id}/product_id:{product_id}','ProductOptionController@delete')->name('shop.product_option.delete');
 
-
-
-
-
-
-
-
-
   Route::get('shop/{shopSlug}/product/option_value/add/product_option_id:{product_option_id}/product_id:{product_id}','ProductOptionController@optionValueAdd')->name('shop.product_option.value.add');
   Route::post('shop/{shopSlug}/product/option_value/add/product_option_id:{product_option_id}/product_id:{product_id}','ProductOptionController@optionValueAddingSubmit')->name('shop.product_option.value.add');
 
@@ -364,11 +354,6 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::patch('shop/{shopSlug}/product/option_value/edit/{id}/product_option_id:{product_option_id}/product_id:{product_id}','ProductOptionController@optionValueEditingSubmit')->name('shop.product_option.value.edit');
 
   Route::get('shop/{shopSlug}/product/option_value/delete/{id}/product_option_id:{product_option_id}/product_id:{product_id}','ProductOptionController@optionValueDelete')->name('shop.product_option.value.delete');
-
-
-
-
-
 
   Route::get('shop/{shopSlug}/product/sale_promotion/{id}','ProductController@salePromotion')->name('shop.product_sale_promotion');
 
@@ -380,11 +365,8 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
   Route::get('shop/{shopSlug}/product/discount/delete/{id}/product_id:{product_id}','ProductDiscountController@delete')->name('shop.product_discount.delete');
 
-  Route::get('shop/{shopSlug}/product/branch/edit/{id}','ProductController@branchEdit')->name('shop.product_branch.edit');
-  Route::patch('shop/{shopSlug}/product/branch/edit/{id}','ProductController@branchEditingSubmit')->name('shop.product_branch.edit');
-
-  // Route::get('shop/{shopSlug}/product_catalog','ProductCatalogController@listView')->name('shop.product_catalog');
-  // Route::get('shop/{shopSlug}/product_catalog/{id}','ProductCatalogController@productListView')->name('shop.product_catalog.list');
+  // Route::get('shop/{shopSlug}/product/branch/edit/{id}','ProductController@branchEdit')->name('shop.product_branch.edit');
+  // Route::patch('shop/{shopSlug}/product/branch/edit/{id}','ProductController@branchEditingSubmit')->name('shop.product_branch.edit');
 
   Route::get('shop/{shopSlug}/manage/product_catalog','ShopController@productCatalog')->name('shop.product_catalog.manage');
   Route::get('shop/{shopSlug}/manage/product_catalog/{id}','ProductCatalogController@menu')->name('shop.product_catalog.menu');
@@ -410,7 +392,6 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
 // Payment Method
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
-
   Route::get('shop/{shopSlug}/payment_method','ShopController@paymentMethod')->name('shop.payment_method');
 
   Route::get('shop/{shopSlug}/payment_method/add','PaymentMethodController@add')->name('shop.payment_method.add');
@@ -420,12 +401,10 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::patch('shop/{shopSlug}/payment_method/edit/{id}','PaymentMethodController@editingSubmit')->name('shop.payment_method.edit');
 
   Route::get('shop/{shopSlug}/payment_method/delete/{id}','PaymentMethodController@delete')->name('shop.payment_method.delete');
-
 });
 
 // Shipping Method
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
-
   Route::get('shop/{shopSlug}/shipping_method','ShopController@ShippingMethod')->name('shop.shipping_method');
 
   Route::get('shop/{shopSlug}/shipping_method/add','ShippingMethodController@add')->name('shop.shipping_method.add');
@@ -437,118 +416,103 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::get('shop/{shopSlug}/shipping_method/delete/{id}','ShippingMethodController@delete')->name('shop.shipping_method.delete');
 
   Route::post('shop/{shopSlug}/pickingup_item','ShippingMethodController@pickingUpItem')->name('shop.shipping_method.pickingup_item');
-
 });
 
 // Job
-Route::get('job/board','JobController@board');
-Route::get('job/board/{employment_type_id}','JobController@listView');
-Route::get('job/detail/{id}','JobController@detail')->name('job.detail');
+// Route::get('job/board','JobController@board');
+// Route::get('job/board/{employment_type_id}','JobController@listView');
+// Route::get('job/detail/{id}','JobController@detail')->name('job.detail');
 
-Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
+// Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
+//   Route::get('shop/{shopSlug}/manage/job','ShopController@job')->name('shop.job.manage');
 
-  // Route::get('shop/{shopSlug}/job','JobController@shopJoblistView')->name('shop.job.list');
-  // Route::get('shop/{shopSlug}/job/{id}','JobController@shopJobDetail')->name('shop.job.detail');
+//   Route::get('shop/{shopSlug}/job_applying','JobController@jobApplyingList')->name('shop.job.applying_list');
+//   Route::get('shop/{shopSlug}/job_applying/detail/{id}','JobController@jobApplyingDetail')->name('shop.job.applying_detail');
 
-  Route::get('shop/{shopSlug}/manage/job','ShopController@job')->name('shop.job.manage');
-
-  Route::get('shop/{shopSlug}/job_applying','JobController@jobApplyingList')->name('shop.job.applying_list');
-  Route::get('shop/{shopSlug}/job_applying/detail/{id}','JobController@jobApplyingDetail')->name('shop.job.applying_detail');
-
-  Route::post('shop/{shopSlug}/job_applying/new_message/{id}','JobController@jobApplyingMessageSend')->name('shop.job.applying.new_message');
+//   Route::post('shop/{shopSlug}/job_applying/new_message/{id}','JobController@jobApplyingMessageSend')->name('shop.job.applying.new_message');
   
-  Route::post('shop/{shopSlug}/job_applying/message_reply','JobController@jobApplyingMessageReplySend')->name('shop.job.applying.message_reply');
+//   Route::post('shop/{shopSlug}/job_applying/message_reply','JobController@jobApplyingMessageReplySend')->name('shop.job.applying.message_reply');
 
-  Route::post('shop/{shopSlug}/job_applying/accept/{id}','JobController@jobApplyingAccept')->name('shop.job.applying.accept');
-  Route::post('shop/{shopSlug}/job_applying/passed/{id}','JobController@jobApplyingPassed')->name('shop.job.applying.passed');
-  Route::post('shop/{shopSlug}/job_applying/not_pass/{id}','JobController@jobApplyingNotPass')->name('shop.job.applying.not_pass');
-  Route::post('shop/{shopSlug}/job_applying/canceled/{id}','JobController@jobApplyingCancel')->name('shop.job.applying.canceled');
+//   Route::post('shop/{shopSlug}/job_applying/accept/{id}','JobController@jobApplyingAccept')->name('shop.job.applying.accept');
+//   Route::post('shop/{shopSlug}/job_applying/passed/{id}','JobController@jobApplyingPassed')->name('shop.job.applying.passed');
+//   Route::post('shop/{shopSlug}/job_applying/not_pass/{id}','JobController@jobApplyingNotPass')->name('shop.job.applying.not_pass');
+//   Route::post('shop/{shopSlug}/job_applying/canceled/{id}','JobController@jobApplyingCancel')->name('shop.job.applying.canceled');
 
-  Route::get('shop/{shopSlug}/job/add','JobController@add')->name('shop.job.add');
-  Route::post('shop/{shopSlug}/job/add','JobController@addingSubmit')->name('shop.job.add');
+//   Route::get('shop/{shopSlug}/job/add','JobController@add')->name('shop.job.add');
+//   Route::post('shop/{shopSlug}/job/add','JobController@addingSubmit')->name('shop.job.add');
 
-  Route::get('shop/{shopSlug}/job/edit/{id}','JobController@edit')->name('shop.job.edit');
-  Route::patch('shop/{shopSlug}/job/edit/{id}','JobController@editingSubmit')->name('shop.job.edit');
+//   Route::get('shop/{shopSlug}/job/edit/{id}','JobController@edit')->name('shop.job.edit');
+//   Route::patch('shop/{shopSlug}/job/edit/{id}','JobController@editingSubmit')->name('shop.job.edit');
 
-  Route::get('shop/{shopSlug}/job/delete/{id}','JobController@delete')->name('shop.job.delete');
+//   Route::get('shop/{shopSlug}/job/delete/{id}','JobController@delete')->name('shop.job.delete');
+// });
 
-});
-
-Route::group(['middleware' => ['auth','person.experience']], function () {
-  Route::get('job/apply/{id}','JobController@apply');
-  Route::post('job/apply/{id}','JobController@applyingSubmit');
-  Route::patch('job/apply/{id}','JobController@applyingSubmit');
-});
+// Route::group(['middleware' => ['auth','person.experience']], function () {
+//   Route::get('job/apply/{id}','JobController@apply');
+//   Route::post('job/apply/{id}','JobController@applyingSubmit');
+//   Route::patch('job/apply/{id}','JobController@applyingSubmit');
+// });
 
 // Advertising
-Route::get('advertising/board','AdvertisingController@board');
-Route::get('advertising/board/{advertising_type_id}','AdvertisingController@listView')->name('advertising.list');
-Route::get('advertising/detail/{id}','AdvertisingController@detail')->name('advertising.detail');
+// Route::get('advertising/board','AdvertisingController@board');
+// Route::get('advertising/board/{advertising_type_id}','AdvertisingController@listView')->name('advertising.list');
+// Route::get('advertising/detail/{id}','AdvertisingController@detail')->name('advertising.detail');
 
-Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
-
-  // Route::get('shop/{shopSlug}/advertising','AdvertisingController@shopAdvertisinglistView')->name('shop.advertising.list');
-  // Route::get('shop/{shopSlug}/advertising/{id}','AdvertisingController@shopAdvertisingDetail')->name('shop.advertising.detail');
-
-  Route::get('shop/{shopSlug}/manage/advertising','ShopController@advertising')->name('shop.advertising.manage');
+// Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
+//   Route::get('shop/{shopSlug}/manage/advertising','ShopController@advertising')->name('shop.advertising.manage');
   
-  Route::get('shop/{shopSlug}/advertising/add','AdvertisingController@add')->name('shop.advertising.add');
-  Route::post('shop/{shopSlug}/advertising/add','AdvertisingController@addingSubmit')->name('shop.advertising.add');
+//   Route::get('shop/{shopSlug}/advertising/add','AdvertisingController@add')->name('shop.advertising.add');
+//   Route::post('shop/{shopSlug}/advertising/add','AdvertisingController@addingSubmit')->name('shop.advertising.add');
 
-  Route::get('shop/{shopSlug}/advertising/edit/{id}','AdvertisingController@edit')->name('shop.advertising.edit');
-  Route::patch('shop/{shopSlug}/advertising/edit/{id}','AdvertisingController@editingSubmit')->name('shop.advertising.edit');
+//   Route::get('shop/{shopSlug}/advertising/edit/{id}','AdvertisingController@edit')->name('shop.advertising.edit');
+//   Route::patch('shop/{shopSlug}/advertising/edit/{id}','AdvertisingController@editingSubmit')->name('shop.advertising.edit');
 
-  Route::get('shop/{shopSlug}/advertising/delete/{id}','AdvertisingController@delete')->name('shop.advertising.delete');
-
-});
+//   Route::get('shop/{shopSlug}/advertising/delete/{id}','AdvertisingController@delete')->name('shop.advertising.delete');
+// });
 
 // Branch
-Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
+// Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
+//   Route::get('shop/{shopSlug}/manage/branch','ShopController@branch')->name('shop.branch.manage');
 
-  Route::get('shop/{shopSlug}/manage/branch','ShopController@branch')->name('shop.branch.manage');
+//   Route::get('shop/{shopSlug}/branch/add','BranchController@add')->name('shop.branch.add');
+//   Route::post('shop/{shopSlug}/branch/add','BranchController@addingSubmit')->name('shop.branch.add');
 
-  // Route::get('shop/{shopSlug}/branch','BranchController@listView')->name('shop.branch.list');
-  // Route::get('shop/{shopSlug}/branch/{id}','BranchController@detail')->name('shop.branch.detail');
+//   Route::get('shop/{shopSlug}/branch/edit/{id}','BranchController@edit')->name('shop.branch.edit');
+//   Route::patch('shop/{shopSlug}/branch/edit/{id}','BranchController@editingSubmit')->name('shop.branch.edit');
 
-  Route::get('shop/{shopSlug}/branch/add','BranchController@add')->name('shop.branch.add');
-  Route::post('shop/{shopSlug}/branch/add','BranchController@addingSubmit')->name('shop.branch.add');
-
-  Route::get('shop/{shopSlug}/branch/edit/{id}','BranchController@edit')->name('shop.branch.edit');
-  Route::patch('shop/{shopSlug}/branch/edit/{id}','BranchController@editingSubmit')->name('shop.branch.edit');
-
-  Route::get('shop/{shopSlug}/branch/delete/{id}','BranchController@delete')->name('shop.branch.delete');
-});
+//   Route::get('shop/{shopSlug}/branch/delete/{id}','BranchController@delete')->name('shop.branch.delete');
+// });
 
 // Person Post Item
-Route::get('item/board','ItemController@board');
-Route::get('item/board/{category_id}','ItemController@listView')->name('item.board');
-Route::get('item/list','ItemController@listView')->name('item.list');
-Route::get('item/detail/{id}','ItemController@detail')->name('item.detail');
+// Route::get('item/board','ItemController@board');
+// Route::get('item/board/{category_id}','ItemController@listView')->name('item.board');
+// Route::get('item/list','ItemController@listView')->name('item.list');
+// Route::get('item/detail/{id}','ItemController@detail')->name('item.detail');
 
-Route::group(['middleware' => 'auth'], function () {
-  Route::get('item/post','ItemController@add')->name('item.post');
-  Route::post('item/post','ItemController@addingSubmit')->name('item.post');
+// Route::group(['middleware' => 'auth'], function () {
+//   Route::get('item/post','ItemController@add')->name('item.post');
+//   Route::post('item/post','ItemController@addingSubmit')->name('item.post');
 
-  Route::get('account/item/edit/{id}','ItemController@edit')->name('item.edit')->middleware('data.owner');
-  Route::patch('account/item/edit/{id}','ItemController@editingSubmit')->name('item.edit')->middleware('data.owner');
+//   Route::get('account/item/edit/{id}','ItemController@edit')->name('item.edit')->middleware('data.owner');
+//   Route::patch('account/item/edit/{id}','ItemController@editingSubmit')->name('item.edit')->middleware('data.owner');
 
-  Route::get('account/item/delete/{id}','ItemController@delete')->name('item.delete')->middleware('data.owner');
-});
+//   Route::get('account/item/delete/{id}','ItemController@delete')->name('item.delete')->middleware('data.owner');
+// });
 
 // Real Estate
-Route::get('real-estate/board','RealEstateController@board');
-Route::get('real-estate/board/{real_estate_type_id}','RealEstateController@listView');
-Route::get('real-estate/detail/{id}','RealEstateController@detail')->name('real_estate.detail');
+// Route::get('real-estate/board','RealEstateController@board');
+// Route::get('real-estate/board/{real_estate_type_id}','RealEstateController@listView');
+// Route::get('real-estate/detail/{id}','RealEstateController@detail')->name('real_estate.detail');
 
-Route::group(['middleware' => 'auth'], function () {
-  Route::get('real-estate/post','RealEstateController@add')->name('real_estate.post');
-  Route::post('real-estate/post','RealEstateController@addingSubmit')->name('real_estate.post');
+// Route::group(['middleware' => 'auth'], function () {
+//   Route::get('real-estate/post','RealEstateController@add')->name('real_estate.post');
+//   Route::post('real-estate/post','RealEstateController@addingSubmit')->name('real_estate.post');
 
-  Route::get('account/real-estate/edit/{id}','RealEstateController@edit')->name('real_estate.edit')->middleware('data.owner');
-  Route::patch('account/real-estate/edit/{id}','RealEstateController@editingSubmit')->name('real_estate.edit')->middleware('data.owner');
+//   Route::get('account/real-estate/edit/{id}','RealEstateController@edit')->name('real_estate.edit')->middleware('data.owner');
+//   Route::patch('account/real-estate/edit/{id}','RealEstateController@editingSubmit')->name('real_estate.edit')->middleware('data.owner');
 
-  Route::get('account/real-estate/delete/{id}','RealEstateController@delete')->name('real_estate.delete')->middleware('data.owner');;
-});
+//   Route::get('account/real-estate/delete/{id}','RealEstateController@delete')->name('real_estate.delete')->middleware('data.owner');;
+// });
 
 Route::group(['prefix' => 'api/v1', 'middleware' => 'api'], function () {
   Route::get('get_district/{provinceId}', 'ApiController@GetDistrict');
@@ -565,8 +529,8 @@ Route::group(['middleware' => ['api','auth']], function () {
   Route::post('upload_profile_image', 'ApiController@uploadProfileImage')->name('api.upload.profile_image');
   Route::post('delete_profile_image', 'ApiController@deleteProfileImage')->name('api.delete.profile_image');
 
-  Route::post('upload_file_attachment', 'ApiController@uploadAttachedFile');
-  Route::post('clear_file_attachment', 'ApiController@clearAttachedFile');
+  // Route::post('upload_file_attachment', 'ApiController@uploadAttachedFile');
+  // Route::post('clear_file_attachment', 'ApiController@clearAttachedFile');
 
   Route::get('notification_update', 'ApiController@notificationUpdate');
   Route::get('notification_read', 'ApiController@notificationRead');

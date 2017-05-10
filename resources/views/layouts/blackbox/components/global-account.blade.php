@@ -39,37 +39,10 @@
         </div>
 
         <div class="col-xs-4">
-          <a href="{{URL::to('person/experience')}}">
-            <div class="account-tile-button text-center">
-              <img class="icon" src="/images/common/resume.png">
-              <h5>เพิ่มประวัติการทำงาน</h5>
-            </div>
-          </a>
-        </div>
-
-        <div class="col-xs-4">
-          <a href="{{URL::to('person/freelance')}}">
-            <div class="account-tile-button text-center">
-              <img class="icon" src="/images/common/home-office.png">
-              <h5>ฟรีแลนซ์</h5>
-            </div>
-          </a>
-        </div>
-
-        <div class="col-xs-4">
           <a href="{{URL::to('account/order')}}">
             <div class="account-tile-button text-center">
               <img class="icon" src="/images/common/bag.png">
               <h5>รายการสั่งซื้อสินค้า</h5>
-            </div>
-          </a>
-        </div>
-
-        <div class="col-xs-4">
-          <a href="{{URL::to('account/item')}}">
-            <div class="account-tile-button text-center">
-              <img class="icon" src="/images/common/tag.png">
-              <h5>ประกาศซื้อ-เช่า-ขายสินค้า</h5>
             </div>
           </a>
         </div>
@@ -105,11 +78,9 @@
             <div class="dot"></div>
             <div class="dot"></div>
             <div class="additional-option-content">
+              <a href="{{$shop['url']}}overview">ภาพรวม</a>
               <a href="{{$shop['url']}}manage/product">สินค้า</a>
               <a href="{{$shop['url']}}manage/product_catalog">แคตตาล็อกสินค้า</a>
-              <a href="{{$shop['url']}}manage/job">ประกาศงาน</a>
-              <a href="{{$shop['url']}}manage/advertising">โฆษณา</a>
-              <a href="{{$shop['url']}}manage/branch">สาขา</a>
               <a href="{{$shop['url']}}setting">ข้อมูลร้านค้า</a>
             </div>
           </div>

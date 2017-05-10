@@ -102,7 +102,7 @@ class ProductController extends Controller
 
     $this->setData('shelfs',$shelfs);
 
-    $this->setPageTitle('สินค้า');
+    $this->setPageTitle('สินค้าจากร้านค้า');
 
     return $this->view('pages.product.shelf');
 
@@ -139,14 +139,14 @@ class ProductController extends Controller
         foreach ($subCategories as $subCategory) {
           $_subCategories[] = array(
             'name' => $subCategory->name,
-            'url' =>  $url->setAndParseUrl('product/category/{category_id}',array('category_id'=>$subCategory->id))
+            'url' =>  $url->url('product/category/'.$subCategory->id)
           );
         }
 
         $_categories[] = array(
           'categoryName' => $category->name,
           'subCategories' => $_subCategories,
-          'productShelfUrl' => $url->setAndParseUrl('product/shelf/{category_id}',array('category_id'=>$category->id)),
+          'productShelfUrl' =>  $url->url('product/shelf/'.$category->id)
         );
 
       }

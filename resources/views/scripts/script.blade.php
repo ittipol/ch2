@@ -12,6 +12,7 @@
   $jsFiles = array(
     '__js/jquery-3.1.1.min.js',
     '__js/jquery.validate.min.js',
+    '__js/analyticstracking.js',
     '__js/blackbox/blackbox.js',
     '__js/library/token.js',
     '__js/map/map.js',

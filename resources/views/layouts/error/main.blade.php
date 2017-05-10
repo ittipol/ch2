@@ -6,8 +6,7 @@
   <!-- CSS & JS -->
   @include('scripts.script')
   <!-- Title  -->
-  <title>Chonburi Square</title>
-
+  @include('page_title')
 </head>
 <body>
 

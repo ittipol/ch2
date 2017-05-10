@@ -95,9 +95,6 @@
           <a href="{{request()->get('shopUrl')}}about" class="nav">เกี่ยวกับ</a>
           <a href="{{request()->get('shopUrl')}}product" class="nav">สินค้า</a>
           <a href="{{request()->get('shopUrl')}}product_catalog" class="nav">แคตตาล็อกสินค้า</a>
-          <a href="{{request()->get('shopUrl')}}job" class="nav">ประกาศงาน</a>
-          <a href="{{request()->get('shopUrl')}}advertising" class="nav">โฆษณา</a>
-          <a href="{{request()->get('shopUrl')}}branch" class="nav">สาขา</a>
         </div>
       </div>
     </div>

@@ -10,7 +10,9 @@
 @endif
 
 <!-- Facebook -->
+@if(!empty($_page_url))
 <meta property="og:url" content="{{$_page_url}}" />
+@endif
 <meta property="og:type" content="product" />
 @if(!empty($_page_title))
 <meta property="og:title" content="{{$_page_title}}" />
