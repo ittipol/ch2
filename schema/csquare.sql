@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2017 at 11:52 AM
+-- Generation Time: May 10, 2017 at 08:03 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -499,7 +499,6 @@ CREATE TABLE `carts` (
 
 INSERT INTO `carts` (`id`, `shop_id`, `product_id`, `product_option_value_id`, `quantity`, `created_by`, `created_at`, `updated_at`) VALUES
 (1, 3, 26, 1, 1, 1, '2017-05-09 16:50:32', '2017-05-09 16:50:32'),
-(2, 22, 27, NULL, 3, 1, '2017-05-09 16:50:32', '2017-05-09 16:50:32'),
 (3, 3, 24, NULL, 10, 1, '2017-05-09 16:50:32', '2017-05-09 16:50:32');
 
 -- --------------------------------------------------------
@@ -2910,7 +2909,7 @@ INSERT INTO `categories` (`id`, `parent_id`, `name`, `description`, `active`) VA
 (2386, 2384, 'ผลไม้', NULL, 1),
 (2387, NULL, 'อาหารสดและเครื่องปรุงอาหาร', NULL, 1),
 (2388, 2387, 'เนื้อหมู ไก่ ปลา อาหารทะเลสด', NULL, 1),
-(2389, NULL, 'ผลิตภัณฑ์อาหาร', NULL, 1),
+(2389, NULL, 'ผลิตภัณฑ์อาหารและอาหารแปรรูป', NULL, 1),
 (2390, 2389, 'อาหารแช่เย็นและอาหารแช่แข็ง', NULL, 1),
 (2391, 2389, 'อาหารกระป๋องและอาหารแห้ง', NULL, 1),
 (2392, 2391, 'อาหารกระป๋อง', NULL, 1),
@@ -2918,8 +2917,7 @@ INSERT INTO `categories` (`id`, `parent_id`, `name`, `description`, `active`) VA
 (2394, 2389, 'อาหารกล่องและอาหารสำเร็จรูป', NULL, 1),
 (2395, 2394, 'อาหารกล่อง', NULL, 1),
 (2396, 2394, 'อาหารสำเร็จรูป', NULL, 1),
-(2397, NULL, 'อาหาร', NULL, 1),
-(2398, 2397, 'อาหาร', NULL, 1),
+(2397, NULL, 'อาหารและอาหารกล่อง', NULL, 1),
 (2399, 2398, 'ก๋วยเตี๋ยว', NULL, 1),
 (2400, 2398, 'ส้มตำ', NULL, 1),
 (2401, 2398, 'สลัด', NULL, 1),
@@ -2930,7 +2928,6 @@ INSERT INTO `categories` (`id`, `parent_id`, `name`, `description`, `active`) VA
 (2406, 2398, 'พิซซ่า', NULL, 1),
 (2407, 2398, 'ซูชิ', NULL, 1),
 (2408, 2398, 'ราเมง', NULL, 1),
-(2409, 2397, 'อาหารจานเดียว', NULL, 1),
 (2410, 2397, 'ฟาสต์ฟู้ด', NULL, 1),
 (2411, 2397, 'อาหารเช้า', NULL, 1),
 (2412, 2397, 'อาหารเพื่อสุขภาพ', NULL, 1),
@@ -3030,10 +3027,10 @@ INSERT INTO `categories` (`id`, `parent_id`, `name`, `description`, `active`) VA
 (2506, 1631, 'แผ่นรองนั่งฝาชักโครก', NULL, 1),
 (2507, 1631, 'แผ่นยางกันลื่นในอ่างอาบน้ำ', NULL, 1),
 (2508, 1605, 'อุปกรณ์อาบน้ำ', NULL, 1),
-(2509, 2508, 'ฝักบัวและที่แขวน', NULL, 1);
-INSERT INTO `categories` (`id`, `parent_id`, `name`, `description`, `active`) VALUES
+(2509, 2508, 'ฝักบัวและที่แขวน', NULL, 1),
 (2510, 2508, 'ขันน้ำ', NULL, 1),
-(2511, 1605, 'อ่างอาบน้ำ', NULL, 1),
+(2511, 1605, 'อ่างอาบน้ำ', NULL, 1);
+INSERT INTO `categories` (`id`, `parent_id`, `name`, `description`, `active`) VALUES
 (2512, 1645, 'ผ้าเช็ดเท้า', NULL, 1),
 (2513, 1605, 'ผ้าเช็ดตัวและเสื้อคลุมอาบน้ำ', NULL, 1),
 (2514, 2513, 'ผ้าเช็ดตัวอาบน้ำ', NULL, 1),
@@ -11201,40 +11198,26 @@ INSERT INTO `category_paths` (`category_id`, `path_id`, `level`) VALUES
 (2396, 2394, 1),
 (2396, 2396, 2),
 (2397, 2397, 0),
-(2398, 2397, 0),
-(2398, 2398, 1),
-(2399, 2397, 0),
-(2399, 2398, 1),
-(2399, 2399, 2),
-(2400, 2397, 0),
-(2400, 2398, 1),
-(2400, 2400, 2),
-(2401, 2397, 0),
-(2401, 2398, 1),
-(2401, 2401, 2),
-(2402, 2397, 0),
-(2402, 2398, 1),
-(2402, 2402, 2),
-(2403, 2397, 0),
-(2403, 2398, 1),
-(2403, 2403, 2),
-(2404, 2397, 0),
-(2404, 2398, 1),
-(2404, 2404, 2),
-(2405, 2397, 0),
-(2405, 2398, 1),
-(2405, 2405, 2),
-(2406, 2397, 0),
-(2406, 2398, 1),
-(2406, 2406, 2),
-(2407, 2397, 0),
-(2407, 2398, 1),
-(2407, 2407, 2),
-(2408, 2397, 0),
-(2408, 2398, 1),
-(2408, 2408, 2),
-(2409, 2397, 0),
-(2409, 2409, 1),
+(2399, 2398, 0),
+(2399, 2399, 1),
+(2400, 2398, 0),
+(2400, 2400, 1),
+(2401, 2398, 0),
+(2401, 2401, 1),
+(2402, 2398, 0),
+(2402, 2402, 1),
+(2403, 2398, 0),
+(2403, 2403, 1),
+(2404, 2398, 0),
+(2404, 2404, 1),
+(2405, 2398, 0),
+(2405, 2405, 1),
+(2406, 2398, 0),
+(2406, 2406, 1),
+(2407, 2398, 0),
+(2407, 2407, 1),
+(2408, 2398, 0),
+(2408, 2408, 1),
 (2410, 2397, 0),
 (2410, 2410, 1),
 (2411, 2397, 0),
@@ -14430,7 +14413,7 @@ CREATE TABLE `people` (
 --
 
 INSERT INTO `people` (`id`, `user_id`, `name`, `gender`, `birth_date`, `profile_image_id`, `cover_image_id`, `token`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Venom Skake', 'm', '2007-09-05', 228, NULL, 'yx4qq6qchUwncKCLDL0kYjAwEE1QN4S9Xwlbq4pjsCy1iW2RylNRj8p0aNkae', '2016-12-08 12:57:33', '2017-05-09 16:50:32'),
+(1, 1, 'Venom Skake', 'm', '2007-09-05', 228, NULL, 'cUzEIMkbFzCgBgnaJKWuNEpjZFhfcibmjVVgfvsTbqgjGbOYs1yYATtnLn8t8', '2016-12-08 12:57:33', '2017-05-10 12:01:56'),
 (11, 11, 'ABC DEF', NULL, NULL, 0, NULL, NULL, '2017-01-22 13:18:36', '2017-01-22 13:18:36'),
 (12, 12, 'Zero Major', 'f', '1991-03-12', NULL, NULL, '40K2fHLYDOQoH3uIzTcxvNuHBydDLz8FVeFLHfKyjGC5U9DBcYECiCZdtH6Qj', '2017-04-17 10:29:10', '2017-04-29 19:46:34'),
 (13, 2, 'สทชาย แดง', NULL, NULL, NULL, NULL, 'iUKt6b0lM1XEoD1XKA2NFLgyOgY48hjrIKp4E2wvmpe7H82ubwjz3inZVQqOI', '2017-04-30 16:49:31', '2017-04-30 20:39:27');
@@ -14672,6 +14655,7 @@ CREATE TABLE `person_private_websites` (
   `person_experience_id` int(11) UNSIGNED NOT NULL,
   `created_by` int(11) UNSIGNED NOT NULL,
   `website_type_id` int(11) UNSIGNED NOT NULL,
+  `protocal` tinyint(1) DEFAULT NULL,
   `website_url` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -14681,10 +14665,10 @@ CREATE TABLE `person_private_websites` (
 -- Dumping data for table `person_private_websites`
 --
 
-INSERT INTO `person_private_websites` (`id`, `person_experience_id`, `created_by`, `website_type_id`, `website_url`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 'www.ggg.xyz', '2017-04-07 14:44:35', '2017-04-07 15:54:00'),
-(2, 1, 1, 1, 'www.cheon-abc.net', '2017-04-07 14:45:04', '2017-04-07 15:11:37'),
-(3, 1, 1, 1, 'www.xxx.com', '2017-04-07 14:45:20', '2017-04-07 14:45:20');
+INSERT INTO `person_private_websites` (`id`, `person_experience_id`, `created_by`, `website_type_id`, `protocal`, `website_url`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 1, NULL, 'www.ggg.xyz', '2017-04-07 14:44:35', '2017-04-07 15:54:00'),
+(2, 1, 1, 1, NULL, 'www.cheon-abc.net', '2017-04-07 14:45:04', '2017-04-07 15:11:37'),
+(3, 1, 1, 1, NULL, 'www.xxx.com', '2017-04-07 14:45:20', '2017-04-07 14:45:20');
 
 -- --------------------------------------------------------
 
@@ -16445,7 +16429,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `receive_email`, `remember_token`, `api_token`, `created_at`, `updated_at`) VALUES
-(1, '1', '$2y$10$JzjB5lnDBSuvrCk5BeGdYOKlkrilHaRILTNaLuo6k9o0PcfKWZRc6', NULL, '4MJ9tU7iWMWcTGdI6wPEZ8DQv8dUmyJY6H3RyCiNJdXxcgbnmllPK6pznuGl', '', '2016-12-08 12:57:33', '2017-05-09 16:49:43'),
+(1, '1', '$2y$10$JzjB5lnDBSuvrCk5BeGdYOKlkrilHaRILTNaLuo6k9o0PcfKWZRc6', NULL, 'InfOAFx4SWAempgU9X1Ew55VY4URyv7qiXhlmUxSMsHcf1WNn3d2Ok92xE5x', '', '2016-12-08 12:57:33', '2017-05-10 11:49:53'),
 (2, 'red@mail.com', '$2y$10$rfmeXtTn5rY.7qQBXq7KT.4pvZAKPovCv2ULHuN8hk33q.WUw2qEe', NULL, 'Z9ZCrpwSZKd1EoqO4Y6iuUjNADPVRj6rY9XdP2AQItsEmN1Zne47SUftNbyJ', 'xfd8CNXmOd7zONzVX5FXfjTn9nmVnDjOxURfUZV2kv1kXWZUEqFVfrdVB1rhc', '2017-04-30 16:49:30', '2017-04-30 16:56:46');
 
 -- --------------------------------------------------------
@@ -18273,7 +18257,7 @@ ALTER TABLE `taggings`
 -- AUTO_INCREMENT for table `temporary_files`
 --
 ALTER TABLE `temporary_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 --
 -- AUTO_INCREMENT for table `timelines`
 --
