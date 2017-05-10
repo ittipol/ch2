@@ -131,6 +131,10 @@ class UserController extends Controller
   	$user->fill($request->all());
 
     if($user->save()){
+
+      Auth::logout();
+      Session::flush();
+
       $message = new MessageHelper;
       $message->registerSuccess();
     }

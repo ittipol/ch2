@@ -3,7 +3,7 @@
 
 <div class="register-wrapper">
 	<div class="header-container">
-		<h3><a class="logo" href="{{URL::to('/')}}">CHONBURI SQUARE</a></h3>
+		<h3><a class="logo" href="{{URL::to('/')}}">SUNDAY SQUARE</a></h3>
 		<p>สมัครสามชิก</p>
 	</div>
 
