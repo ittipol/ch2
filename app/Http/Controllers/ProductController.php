@@ -860,24 +860,39 @@ class ProductController extends Controller
   public function salePromotion() {
 
     $url = new Url;
+    $now = date('Y-m-d H:i:s');
     
     $model = Service::loadModel('Product')->find($this->param['id']);
 
-    $promotion = $model->getPromotion();
+    $promotion = $model->getRelatedData('ProductSalePromotion',array(
+      'conditions' => array(
+        array('sale_promotion_type_id','=',1),
+        array('date_start','<=',$now),
+        array('date_end','>=',$now)
+      ),
+      'fields' => array('model','model_id','date_start','date_end'),
+      'order' => array('date_start','asc'),
+      'first' => true
+    ));
+
+    // $promotion = $model->getPromotion();
 
     $_salePromotions = array();
     if(!empty($promotion)) {
       $_salePromotions[] = array(
         'active' => true,
-        'data' => $promotion
+        'data' => array_merge($promotion->buildModelData(),$promotion->{lcfirst($promotion->model)}->buildModelData()),
+        'editUrl' => request()->get('shopUrl').'product/discount/edit/'.$promotion->model_id.'/product_id:'.$model->id,
+        'deleteUrl' => request()->get('shopUrl').'product/discount/delete/'.$promotion->model_id.'/product_id:'.$model->id
       );
     }
 
     $salePromotions = $model->getRelatedData('ProductSalePromotion',array(
       'conditions' => array(
-        array('date_start','>',date('Y-m-d H:i:s')),
+        array('date_start','>',$now),
       ),
-      'order' => array('date_start','ASC'),
+      'fields' => array('id','model','model_id','date_start','date_end'),
+      'order' => array('date_start','asc'),
     ));
 
     if(!empty($salePromotions)) {

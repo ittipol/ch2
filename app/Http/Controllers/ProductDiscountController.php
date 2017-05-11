@@ -38,7 +38,7 @@ class ProductDiscountController extends Controller
       $month[$i] = $date->getMonthName($i);
     }
 
-    for ($i=$currentYear; $i <= $currentYear + 1; $i++) { 
+    for ($i=$currentYear; $i <= $currentYear + 6; $i++) { 
       $year[$i] = $i+543;
     }
 
@@ -164,12 +164,12 @@ class ProductDiscountController extends Controller
 
   public function edit() {
 
-    $activePromotion = Service::loadModel('ProductSalePromotion')->getActivePromotion($this->param['product_id']);
+    // $activePromotion = Service::loadModel('ProductSalePromotion')->getActivePromotion($this->param['product_id']);
 
-    if(!empty($activePromotion) && ($activePromotion->model_id == $this->param['id'])) {
-      MessageHelper::display('ไม่อนุญาตให้แก้ไขข้อมูลนี้ได้','error');
-      return Redirect::to('shop/'.request()->shopSlug.'/product/sale_promotion/'.$this->param['product_id']);
-    }
+    // if(!empty($activePromotion) && ($activePromotion->model_id == $this->param['id'])) {
+    //   MessageHelper::display('ไม่อนุญาตให้แก้ไขข้อมูลนี้ได้','error');
+    //   return Redirect::to('shop/'.request()->shopSlug.'/product/sale_promotion/'.$this->param['product_id']);
+    // }
 
     $currency = new Currency;
     $date = new Date;
@@ -197,7 +197,7 @@ class ProductDiscountController extends Controller
       $month[$i] = $date->getMonthName($i);
     }
 
-    for ($i=$currentYear; $i <= $currentYear + 1; $i++) { 
+    for ($i=$currentYear; $i <= $currentYear + 6; $i++) { 
       $year[$i] = $i+543;
     }
 

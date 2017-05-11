@@ -57,6 +57,16 @@
           <h5>ประเภทโปรโมชั่น: {{$salePromotion['data']['salePromotionType']}}</h5>
           <h5>ระยะเวลา: {{$salePromotion['data']['_date_start']}} - {{$salePromotion['data']['_date_end']}}</h5>
 
+          <div class="additional-option">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="additional-option-content">
+              <a href="{{$salePromotion['editUrl']}}">แก้ไข</a>
+              <a href="{{$salePromotion['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการลบใช่หรือไม่">ลบ</a>
+            </div>
+          </div>
+
         </div>
       @else
         <div class="list-box">
