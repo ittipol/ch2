@@ -253,6 +253,11 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 // community / Shop
 Route::get('shop/','ShopController@listView');
 
+Route::group(['middleware' => 'auth'], function () {
+  Route::get('shop/create','ShopController@create')->name('shop.create');
+  Route::post('shop/create','ShopController@creatingSubmit')->name('shop.create');
+});
+
 Route::group(['middleware' => ['shop','person.shop.permission']], function () {
   Route::get('shop/{shopSlug}','ShopController@index')->name('shop.index');
 
@@ -272,11 +277,6 @@ Route::group(['middleware' => ['shop','person.shop.permission']], function () {
 
   // Route::get('shop/{shopSlug}/branch','BranchController@listView')->name('shop.branch.list');
   // Route::get('shop/{shopSlug}/branch/{id}','BranchController@detail')->name('shop.branch.detail');
-});
-
-Route::group(['middleware' => 'auth'], function () {
-  Route::get('shop/create','ShopController@create')->name('shop.create');
-  Route::post('shop/create','ShopController@creatingSubmit')->name('shop.create');
 });
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
   Route::get('shop/{shopSlug}/overview','ShopController@overview')->name('shop.overview');
@@ -299,8 +299,8 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 });
 
 // PRODUCT
-Route::get('product/shelf','ProductController@shelf')->name('product.shelf.all');
-Route::get('product/shelf/{category_id}','ProductController@listView')->name('product.shelf');
+Route::get('product','ProductController@shelf')->name('product.shelf.all');
+Route::get('product/{category_id}','ProductController@listView')->name('product.shelf');
 Route::get('product/category/{category_id?}','ProductController@category')->name('product.category');
 Route::get('product/detail/{id}','ProductController@detail')->name('product.detail');
 

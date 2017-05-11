@@ -94,7 +94,7 @@ class ProductController extends Controller
         'subCategories' => $_subCategories,
         'products' => $_products,
         'total' => $total,
-        'productShelfUrl' => $url->setAndParseUrl('product/shelf/{category_id}',array('category_id'=>$category->id)),
+        'productShelfUrl' => $url->setAndParseUrl('product/{category_id}',array('category_id'=>$category->id)),
         'categoryUrl' => $url->setAndParseUrl('product/category/{category_id}',array('category_id'=>$category->id))
       );
 
@@ -146,7 +146,7 @@ class ProductController extends Controller
         $_categories[] = array(
           'categoryName' => $category->name,
           'subCategories' => $_subCategories,
-          'productShelfUrl' =>  $url->url('product/shelf/'.$category->id)
+          'productShelfUrl' =>  $url->url('product/'.$category->id)
         );
 
       }
@@ -161,7 +161,7 @@ class ProductController extends Controller
     $this->setData('categoryId',$categoryId);
     $this->setData('categoryName',$categoryName);
     $this->setData('categories',$_categories);
-    $this->setData('productShelfUrl',$url->url('product/shelf/'.$categoryId));
+    $this->setData('productShelfUrl',$url->url('product/'.$categoryId));
 
     if(empty($categoryName)) {
       $this->setPageTitle('หมวดสินค้า');
@@ -232,7 +232,7 @@ class ProductController extends Controller
 
     $model->paginator->criteria($criteria);
     $model->paginator->setPage($page);
-    $model->paginator->setPagingUrl('product/shelf/'.$categoryId);
+    $model->paginator->setPagingUrl('product/'.$categoryId);
     $model->paginator->setUrl('product/detail/{id}','detailUrl');
     $model->paginator->setQuery('sort',$sort);
     $model->paginator->setQuery('fq',$filters);

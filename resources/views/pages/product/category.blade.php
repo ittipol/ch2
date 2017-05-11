@@ -18,7 +18,7 @@
         </div>
         @else
         <div class="btn-group pull-right">
-          <a href="{{URL::to('product/shelf')}}" class="btn btn-secondary">สินค้าจากร้านค้า</a>
+          <a href="{{URL::to('product')}}" class="btn btn-secondary">สินค้าจากร้านค้า</a>
         </div>
         @endif
 

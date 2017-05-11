@@ -17,7 +17,7 @@
                   <a href="{{URL::to('shop/create')}}">สร้างร้านค้า</a>
                 </div>
                 <div class="site-map-link">
-                  <a href="{{URL::to('product/shelf')}}">สินค้าจากร้านค้า</a>
+                  <a href="{{URL::to('product')}}">สินค้าจากร้านค้า</a>
                 </div>
                 <div class="site-map-link">
                   <a href="{{URL::to('job/board')}}">ประกาศงาน</a>

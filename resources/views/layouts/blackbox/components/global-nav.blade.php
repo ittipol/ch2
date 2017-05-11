@@ -31,7 +31,7 @@
 
             <li class="item">
               <a href="{{URL::to('register')}}">
-                <img class="icon" src="/images/icons/resume-header.png">
+                <img class="icon" src="/images/icons/key-header.png">
                 <span>สมัครสมาชิก</span>
               </a>
             </li>
@@ -50,14 +50,14 @@
           <li class="item">
             <a href="{{URL::to('shop/create')}}">
               <img class="icon" src="/images/icons/plus-header.png">
-              <span>สร้างร้านค้า</span>
+              <span>สร้างบริษัทหรือร้านค้า</span>
             </a>
           </li>
 
           <li class="line space-top-bottom-10"></li>
 
           <li class="item">
-            <a href="{{URL::to('product/shelf')}}">
+            <a href="{{URL::to('product')}}">
               <img class="icon" src="/images/icons/tag-header.png">
               <span>สินค้าจากบริษัทและร้านค้า</span>
             </a>
@@ -73,8 +73,8 @@
           <li class="line space-top-bottom-10"></li>
 
           <li class="item">
-            <a href="{{URL::to('product/category')}}">
-              <img class="icon" src="/images/icons/layer-header.png">
+            <a href="{{URL::to('job')}}">
+              <img class="icon" src="/images/icons/document-header.png">
               <span>งานจากบริษัทและร้านค้า</span>
             </a>
           </li>

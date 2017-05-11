@@ -96,26 +96,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
       });
-
-      // view()->composer('layouts.blackbox.components.global-nav', function($view){
-      //   $categoryModel = Service::loadModel('Category');
-      //     $categoryModel = Service::loadModel('Category');
-      //     $categories = $categoryModel->getSubCategories(null,false);
-        
-      //   $_categories = array();
-      //   foreach ($categories as $category) {
-
-      //     $_categories[] = array(
-      //       'name' => $category->name,
-      //       'url' => url('product/shelf/'.$category->id),
-      //     );
-
-      //   }
-
-      //   $view->with('_categories',$_categories);
-
-      // });
-
+      
     }
 
     /**

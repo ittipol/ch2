@@ -43,7 +43,7 @@ class Category extends Model
     foreach ($categories->get() as $category) {
       $_categories[] = array(
         'name' => $category->name,
-        'url' => $url->setAndParseUrl('product/shelf/{id}',array('id' => $category->id)),
+        'url' => $url->setAndParseUrl('product/{id}',array('id' => $category->id)),
       );
     }
 
@@ -65,7 +65,7 @@ class Category extends Model
 
         $_categories[] = array(
           'name' => $_category->name,
-          'url' => $url->setAndParseUrl('product/shelf/{id}',array('id' => $_category->id)),
+          'url' => $url->setAndParseUrl('product/{id}',array('id' => $_category->id)),
           'total' => $this->countProduct($_category->id),
           'subCategories' => array()
         );
@@ -88,7 +88,7 @@ class Category extends Model
 
               $__subCategories[] = array(
                 'name' => $_subCategories->name,
-                'url' => $url->setAndParseUrl('product/shelf/{id}',array('id' => $_subCategories->id)),
+                'url' => $url->setAndParseUrl('product/{id}',array('id' => $_subCategories->id)),
                 'total' => $this->countProduct($_subCategories->id)
               );
             }
@@ -98,7 +98,7 @@ class Category extends Model
 
         $_categories[] = array(
           'name' => $_category->name,
-          'url' => $url->setAndParseUrl('product/shelf/{id}',array('id' => $_category->id)),
+          'url' => $url->setAndParseUrl('product/{id}',array('id' => $_category->id)),
           'total' => $this->countProduct($_category->id),
           'subCategories' => $__subCategories
         );
@@ -129,7 +129,7 @@ class Category extends Model
       $categoryPaths[] = array(
         // 'id' => $path->path->id,
         'name' => $path->path->name,
-        'url' => $url->setAndParseUrl('product/shelf/{category_id}',array('category_id'=>$path->path->id)),
+        'url' => $url->setAndParseUrl('product/{category_id}',array('category_id'=>$path->path->id)),
         'hasChild' => $hasChild
       );
     }
