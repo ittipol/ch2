@@ -67,7 +67,7 @@
 
         <div class="list-item">
           <a href="{{URL::to('account/shop')}}">
-            <img class="icon" src="/images/icons/building-header.png" >
+            <img class="icon" src="/images/common/building.png" >
             <h4>บริษัทหรือร้านค้าของคุณ</h4>
           </a>
         </div>
