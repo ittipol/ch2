@@ -342,6 +342,7 @@ class OrderController extends Controller
 
     if($model->order_status_id == 1) {
       $this->setData('orderConfirmUrl',request()->get('shopUrl').'order/confirm/'.$model->id);
+      $this->setData('orderCancelUrl',request()->get('shopUrl').'order/cancel/'.$model->id);
     }elseif($model->order_status_id == 2) {
 
       $hasOrderPaymentConfirm = $model->hasOrderPaymentConfirm();
@@ -645,6 +646,46 @@ class OrderController extends Controller
 
   }
 
+  public function shopOrderCancel() {
+
+    $model = Service::loadModel('Order')->where([
+      ['id','=',$this->param['id']],
+      ['shop_id','=',request()->get('shopId')]
+    ])->first();
+
+    if($model->order_status_id != 1) {
+      MessageHelper::display('ยังไม่สามารถเปลี่ยนแปลงการสั่งซื้อได้','error');
+      return Redirect::to(request()->get('shopUrl').'order/'.$model->id);
+    }
+    
+    $model->order_status_id = 6;
+
+    if($model->save()) {
+
+      $OrderHistoryModel = Service::loadModel('OrderHistory');
+      $OrderHistoryModel->order_id = $model->id;
+      $OrderHistoryModel->order_status_id = $model->order_status_id;
+      $OrderHistoryModel->message = request()->get('message');
+      $OrderHistoryModel->save();
+
+      $notificationHelper = new NotificationHelper;
+      $notificationHelper->setModel($model);
+      $notificationHelper->create('order-cancel',array(
+        'sender' => array(
+          'model' => 'Shop',
+          'id' => request()->get('shopId')
+        )
+      ));
+
+      MessageHelper::display('ยกเลิกการสั่งซื้อแล้ว','success');
+    }else{
+      MessageHelper::display('ไม่สามารถยกเลิกการสั่งซื้อได้','error');
+    }
+
+    return Redirect::to(request()->get('shopUrl').'order/'.$model->id);
+
+  }
+
   public function paymentConfirm() {
     
     $model = Service::loadModel('Order')->where([
@@ -667,7 +708,7 @@ class OrderController extends Controller
 
       MessageHelper::display('ยืนยันการชำระเงินเรียบร้อยแล้ว','success');
     }else{
-      MessageHelper::display('เกิดข้อผิดพลาด ไม่สามารถยืนยันการชำระเงินได้','error');
+      MessageHelper::display('ไม่สามารถยืนยันการชำระเงินได้','error');
     }
 
     return Redirect::to(request()->get('shopUrl').'order/'.$model->id);
@@ -681,8 +722,8 @@ class OrderController extends Controller
       ['shop_id','=',request()->get('shopId')]
     ])->first();
 
-    if($model->order_status_id == 1 && $model->order_status_id == 2) {
-      MessageHelper::display('ยังไม่สามารถเปลี่ยนแปลงการสั่งซื้อได้','error');
+    if($model->order_status_id == 1 || $model->order_status_id == 2) {
+      MessageHelper::display('ไม่สามารถเปลี่ยนแปลงการสั่งซื้อได้','error');
       return Redirect::to(request()->get('shopUrl').'order/'.$model->id);
     }
 
@@ -717,7 +758,7 @@ class OrderController extends Controller
 
       MessageHelper::display('ยืนยันการชำระเงินเรียบร้อยแล้ว','success');
     }else{
-      MessageHelper::display('เกิดข้อผิดพลาด ไม่สามารถยืนยันการชำระเงินได้','error');
+      MessageHelper::display('ไม่สามารถยืนยันการชำระเงินได้','error');
     }
 
     return Redirect::to(request()->get('shopUrl').'order/'.$model->id);

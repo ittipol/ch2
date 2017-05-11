@@ -11,7 +11,7 @@
           <button class="btn btn-secondary additional-option">
             ...
             <div class="additional-option-content">
-              <a href="{{URL::to('community/shop/create')}}">เพิ่มบริษัทหรือร้านค้า</a>
+              <a href="{{URL::to('shop/create')}}">เพิ่มบริษัทหรือร้านค้า</a>
             </div>
           </button>
         </div>
@@ -68,7 +68,7 @@
     <img class="space-bottom-20" src="/images/common/not-found.png">
     <div>
       <h3>ยังไม่มีข้อมูลตำแหน่งงาน</h3>
-      <a href="{{URL::to('community/shop/create')}}" class="button">เพิ่มบริษัทหรือร้านค้าของคุณ เพื่อเพิ่มตำแหน่งงาน</a>
+      <a href="{{URL::to('shop/create')}}" class="button">เพิ่มบริษัทหรือร้านค้าของคุณ เพื่อเพิ่มตำแหน่งงาน</a>
     </div>
   </div>
 

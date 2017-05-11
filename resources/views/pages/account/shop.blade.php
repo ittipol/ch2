@@ -59,7 +59,7 @@
     <div>
       <h3>ยังไม่มีข้อมูลนี้</h3>
       <p>ขออภัย ยังไม่มีข้อมูลร้านค้าในชุมชนของคุณ</p>
-      <a href="{{URL::to('community/shop/create')}}" class="button">เพิ่มร้านค้าในชุมชนของคุณ</a>
+      <a href="{{URL::to('shop/create')}}" class="button">เพิ่มร้านค้าในชุมชนของคุณ</a>
     </div>
   </div>
 

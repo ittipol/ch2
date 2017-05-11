@@ -152,6 +152,10 @@ class CheckForPersonHasShopPermission
           'permission' => true,
           'modelName' => 'Order'
         ),
+        'shop.order.cancel' => array(
+          'permission' => true,
+          'modelName' => 'Order'
+        ),
         'shop.order.delete' => array(
           'permission' => 'delete',
           'modelName' => 'Order'

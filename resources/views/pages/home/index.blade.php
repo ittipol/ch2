@@ -6,7 +6,8 @@
     <div class="banner-overlay-message">
       <h2 class="primary-banner-title">เริ่มต้นธุรกิจของคุณและเชื่อมต่อธุรกิจของคุณกับผู้คน</h2>
       <p class="banner-description">สร้างธุรกิจของคุณ จัดการธุรกิจของคุณไปในทิศทางที่คุณต้องการ และให้เราทำหน้าที่เชื่อมต่อธุรกิจของคุณกับผู้คนอีกมากมาย</p>
-      <a href="{{URL::to('community/shop/create')}}" class="button">เริ่มต้นธุรกิจของคุณ</a>
+      <a href="{{URL::to('shop/create')}}" class="button">เริ่มต้นธุรกิจของคุณ</a>
+      <a href="{{URL::to('product/shelf')}}" class="button">เลือกซื้อสินค้า</a>
     </div>
   </div>
 </div>
@@ -21,7 +22,7 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <a href="{{URL::to('community/shop/create')}}" class="button wide-button">สร้างร้านค้า</a>
+      <a href="{{URL::to('shop/create')}}" class="button wide-button">สร้างร้านค้า</a>
     </div>
   </div>
 

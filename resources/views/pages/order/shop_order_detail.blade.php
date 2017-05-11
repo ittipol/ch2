@@ -46,13 +46,50 @@
       <div class="secondary-message-box-inner">
         <h3>รอการยืนยันการสั่งซื้อจากผู้ขาย</h3>
         <p>กรุณายืนยันการสั้งซื้อนี้ เพื่อเป็นการยืนยันการสั่งซื้อว่าถูกต้องและสามารถที่จะดำเนินการชำระเงินได้</p>
+        <p>หรือสามารถยกเลิกการสั่งซื้อนี้หากหารสั่งซื้อไม่ถูกต้อง</p>
       </div>
-      <div class="message-box-button-group clearfix">
+      <div class="message-box-button-group two-button clearfix">
         <div class="flat-button">
           <a href="{{$orderConfirmUrl}}" class="button">ยืนยันการสั่งซื้อ</a>
         </div>
+        <div class="flat-button">
+          <a class="button danger" data-right-side-panel="1" data-right-side-panel-target="#order_cancel_panel">
+            ยกเลิกการสั่วซื้อ
+          </a>
+        </div>
       </div>
     </div>
+
+    <div id="order_cancel_panel" class="right-size-panel form">
+      <div class="right-size-panel-inner">
+        
+        <h3>ยกเลิกการสั่งซื้อ</h3>
+        <div class="line space-bottom-20"></div>
+        <?php 
+          echo Form::model([], [
+            'url' => $orderCancelUrl,
+            'method' => 'PATCH',
+            'enctype' => 'multipart/form-data'
+          ]);
+        ?>
+
+        <div class="form-row">
+          <h5>ข้อความถึงผู้ซื้อ</h5>
+          <?php
+            echo Form::textarea('message');
+          ?>
+        </div>
+        <?php 
+          echo Form::submit('บันทึก' , array(
+            'class' => 'button space-top-20'
+          ));
+          echo Form::close();
+        ?>
+
+        <div class="right-size-panel-close-button"></div>
+      </div>
+    </div>
+
   @elseif($order['order_status_id'] == 2)
 
     @if($hasOrderPaymentConfirm)
@@ -111,11 +148,18 @@
 
     @endif
 
+  @elseif($order['order_status_id'] == 6)
+    <div class="secondary-message-box info space-bottom-30">
+      <div class="secondary-message-box-inner">
+        <h3>การสั่งซื้อถูกยกเลิก</h3>
+      </div>
+    </div>
   @endif
 
+  @if($order['order_status_id'] != 6)
   <div class="row">
 
-    <div class="col-sm-12">
+    <div class="col-xs-12">
       
       <div class="order-progress-bar">
         <div class="status"></div>
@@ -157,30 +201,11 @@
     </div>
 
   </div>
-
-  <div class="row">
-    <div class="col-sm-12 text-right">
-      <a class="button" data-right-side-panel="1" data-right-side-panel-target="#customer_message">แสดงข้อความจากผู้ซื้อ</a>
-    </div>
-
-    <div id="customer_message" class="right-size-panel description">
-      <div class="right-size-panel-inner">
-          <h4>ข้อความจากผู้ซื้อ</h4>
-          <div class="line space-bottom-10"></div>
-          <div class="right-size-panel-description">
-            {!!$order['customer_message']!!}
-          </div>
-        <div class="right-size-panel-close-button"></div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="line space-top-bottom-20"></div>
+  @endif
 
   <div class="row">
 
-    <div class="col-md-4 col-sm-12">
+    <div class="col-md-4 col-xs-12">
 
       <div class="detail-group">
         <h4>รายละเอียดการสั่งซื้อ</h4>
@@ -213,7 +238,7 @@
 
     </div>
 
-    <div class="col-md-4 col-sm-12">
+    <div class="col-md-4 col-xs-12">
 
       <div class="detail-group">
         <h4>วิธีการจัดส่งสินค้า</h4>
@@ -257,7 +282,7 @@
 
     </div>
 
-    <div class="col-md-4 col-sm-12">
+    <div class="col-md-4 col-xs-12">
 
       @if($order['pick_up_order'])
       <div class="detail-info-section no-margin">
@@ -281,6 +306,16 @@
 
     </div>
 
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-xs-12">
+      <h4>ข้อความจากผู้ซื้อ</h4>
+      <div class="line"></div>
+      <div>
+        {!!$order['customer_message']!!}
+      </div>
+    </div>
   </div>
 
   <div class="cart space-top-30">

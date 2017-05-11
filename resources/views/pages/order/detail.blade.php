@@ -122,8 +122,15 @@
 
     @endif
 
+  @elseif($order['order_status_id'] == 6)
+    <div class="secondary-message-box info space-bottom-30">
+      <div class="secondary-message-box-inner">
+        <h3>การสั่งซื้อถูกยกเลิก</h3>
+      </div>
+    </div>
   @endif
 
+  @if($order['order_status_id'] != 6)
   <div class="row">
 
     <div class="col-sm-12">
@@ -150,6 +157,7 @@
     </div>
 
   </div>
+  @endif
 
   <div class="row">
 

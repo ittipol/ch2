@@ -12,7 +12,7 @@
       <div class="line"></div>
       <div class="list-item-group">
         <div class="list-item">
-          <a href="{{URL::to('community/shop/create')}}">
+          <a href="{{URL::to('shop/create')}}">
             <img class="icon" src="/images/common/plus.png" >
             <span>สร้างร้านค้า</span>
           </a>

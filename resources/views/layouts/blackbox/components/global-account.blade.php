@@ -89,7 +89,7 @@
 
         <div class="list-h-item clearfix">
           <div class="col-md-11 col-xs-8">
-            <a href="{{URL::to('community/shop/create')}}">+ เพิ่มร้านค้า</a>
+            <a href="{{URL::to('shop/create')}}">+ เพิ่มร้านค้า</a>
           </div>
         </div>
 
@@ -102,7 +102,7 @@
           <div>
             <h3>ยังไม่มีร้านค้า</h3>
             <p>เพิ่มร้านค้าของคุณ เพื่อการขายสินค้า การประกาศงาน และการโฆษณาสินค้า แบรนด์ หรือร้านค้าของคุณ</p>
-            <a href="{{URL::to('community/shop/create')}}" class="button">สร้างร้านค้า</a>
+            <a href="{{URL::to('shop/create')}}" class="button">สร้างร้านค้า</a>
           </div>
         </div>
 

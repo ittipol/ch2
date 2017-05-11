@@ -147,7 +147,7 @@ class ShopController extends Controller
       'conditions' => $conditions
     ),$order));
     $model->paginator->setPage($page);
-    $model->paginator->setPagingUrl('community/shop');
+    $model->paginator->setPagingUrl('shop');
     $model->paginator->setUrl('shop/{slug}','shopUrl');
     $model->paginator->setQuery('sort',$sort);
     $model->paginator->setQuery('fq',$filters);

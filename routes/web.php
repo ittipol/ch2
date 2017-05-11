@@ -239,6 +239,8 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::get('shop/{shopSlug}/order/confirm/{id}','OrderController@shopOrderConfirm')->name('shop.order.confirm');
   Route::post('shop/{shopSlug}/order/confirm/{id}','OrderController@shopOrderConfirmSubmit')->name('shop.order.confirm');
 
+  Route::patch('shop/{shopSlug}/order/cancel/{id}','OrderController@shopOrderCancel')->name('shop.order.cancel');
+
   Route::patch('shop/{shopSlug}/order/payment/confirm/{id}', 'OrderController@paymentConfirm')->name('shop.order.payment.confirm');
 
   Route::get('shop/{shopSlug}/order/payment/detail/{id}', 'OrderController@paymentDetail')->name('shop.order.payment.detail');
@@ -249,7 +251,7 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 });
 
 // community / Shop
-Route::get('community/shop','ShopController@listView');
+Route::get('shop/','ShopController@listView');
 
 Route::group(['middleware' => ['shop','person.shop.permission']], function () {
   Route::get('shop/{shopSlug}','ShopController@index')->name('shop.index');
@@ -273,8 +275,8 @@ Route::group(['middleware' => ['shop','person.shop.permission']], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-  Route::get('community/shop/create','ShopController@create')->name('shop.create');
-  Route::post('community/shop/create','ShopController@creatingSubmit')->name('shop.create');
+  Route::get('shop/create','ShopController@create')->name('shop.create');
+  Route::post('shop/create','ShopController@creatingSubmit')->name('shop.create');
 });
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
   Route::get('shop/{shopSlug}/overview','ShopController@overview')->name('shop.overview');

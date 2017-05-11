@@ -371,7 +371,7 @@ class CheckoutController extends Controller
             'errorType' => 3,
             // 'errorMessage' => 'สินค้าหมด'
           );
-        }elseif($quantity > $productOptionValue->quantity) {
+        }elseif($cart['quantity'] > $productOptionValue->quantity) {
           return array(
             // 'hasError' => true,
             'errorType' => 4,
