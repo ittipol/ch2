@@ -350,39 +350,39 @@ dd('ccc');
     ));
     $product->paginator->setUrl('product/detail/{id}','detailUrl');
 
-    $job = Service::loadModel('Job');
-    $job->paginator->setPerPage(4);
-    $job->paginator->criteria(array(
-      'order' => array('created_at','DESC')
-    ));
-    $job->paginator->setUrl('job/detail/{id}','detailUrl');
+    // $job = Service::loadModel('Job');
+    // $job->paginator->setPerPage(4);
+    // $job->paginator->criteria(array(
+    //   'order' => array('created_at','DESC')
+    // ));
+    // $job->paginator->setUrl('job/detail/{id}','detailUrl');
 
-    $advertising = Service::loadModel('Advertising');
-    $advertising->paginator->setPerPage(4);
-    $advertising->paginator->criteria(array(
-      'order' => array('created_at','DESC')
-    ));
-    $advertising->paginator->setUrl('advertising/detail/{id}','detailUrl');
+    // $advertising = Service::loadModel('Advertising');
+    // $advertising->paginator->setPerPage(4);
+    // $advertising->paginator->criteria(array(
+    //   'order' => array('created_at','DESC')
+    // ));
+    // $advertising->paginator->setUrl('advertising/detail/{id}','detailUrl');
 
-    $item = Service::loadModel('Item');
-    $item->paginator->setPerPage(4);
-    $item->paginator->criteria(array(
-      'order' => array('created_at','DESC')
-    ));
-    $item->paginator->setUrl('item/detail/{id}','detailUrl');
+    // $item = Service::loadModel('Item');
+    // $item->paginator->setPerPage(4);
+    // $item->paginator->criteria(array(
+    //   'order' => array('created_at','DESC')
+    // ));
+    // $item->paginator->setUrl('item/detail/{id}','detailUrl');
 
-    $realEstate = Service::loadModel('RealEstate');
-    $realEstate->paginator->setPerPage(4);
-    $realEstate->paginator->criteria(array(
-      'order' => array('created_at','DESC')
-    ));
-    $realEstate->paginator->setUrl('real-estate/detail/{id}','detailUrl');
+    // $realEstate = Service::loadModel('RealEstate');
+    // $realEstate->paginator->setPerPage(4);
+    // $realEstate->paginator->criteria(array(
+    //   'order' => array('created_at','DESC')
+    // ));
+    // $realEstate->paginator->setUrl('real-estate/detail/{id}','detailUrl');
 
     $this->setData('products',$product->paginator->getPaginationData());
-    $this->setData('jobs',$job->paginator->getPaginationData());
-    $this->setData('advertisings',$advertising->paginator->getPaginationData());
-    $this->setData('items',$item->paginator->getPaginationData());
-    $this->setData('realEstates',$realEstate->paginator->getPaginationData());
+    // $this->setData('jobs',$job->paginator->getPaginationData());
+    // $this->setData('advertisings',$advertising->paginator->getPaginationData());
+    // $this->setData('items',$item->paginator->getPaginationData());
+    // $this->setData('realEstates',$realEstate->paginator->getPaginationData());
 
     return $this->view('pages.home.index');
   }

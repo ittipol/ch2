@@ -534,11 +534,10 @@ class ShopController extends Controller
 
   public function setting() {
 
-    $this->setData('profileImageUrl',request()->get('shopUrl').'profile_image');
-    $this->setData('descriptionUrl',request()->get('shopUrl').'description');
-    $this->setData('addressUrl',request()->get('shopUrl').'address');
-    $this->setData('contactUrl',request()->get('shopUrl').'contact');
-    $this->setData('openHoursUrl',request()->get('shopUrl').'opening_hours');
+    // $this->setData('descriptionUrl',request()->get('shopUrl').'description');
+    // $this->setData('addressUrl',request()->get('shopUrl').'address');
+    // $this->setData('contactUrl',request()->get('shopUrl').'contact');
+    // $this->setData('openHoursUrl',request()->get('shopUrl').'opening_hours');
 
     return $this->view('pages.shop.setting');
 
@@ -806,6 +805,19 @@ class ShopController extends Controller
 
     return Redirect::to('shop/'.$this->param['shopSlug']);
 
+  }
+
+  public function delete() {
+
+    $model = request()->get('shop');
+
+    if($model->delete()) {
+      MessageHelper::display(request()->get('shop')->name.' ถูกลบแล้ว','success');
+    }else{
+      MessageHelper::display('ไม่สามารถลบร้านค้าแล้วได้','error');
+    }
+
+    return Redirect::to('/');
   }
 
 }

@@ -75,6 +75,10 @@ class AppServiceProvider extends ServiceProvider
 
             $shop = $record->shop;
 
+            if(empty($shop)) {
+              continue;
+            }
+
             $slug = $slugModel->where(array(
               array('model','like','Shop'),
               array('model_id','=',$shop->id)

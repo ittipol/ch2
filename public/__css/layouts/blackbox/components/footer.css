@@ -1,6 +1,5 @@
 footer {
 	border-top: 1px solid #bababa;
-	/*margin-top: 150px;*/
 }
 
 .footer {
@@ -8,14 +7,17 @@ footer {
 	padding: 20px 20px 10px;
 }
 
+.footer-content > img {
+	width: 20px;
+	height: 20px;
+}
+
+.footer-content span {
+	margin-left: 5px;
+}
+
 @media only screen and (min-width : 1367px) {
 	footer {
 		padding-left: 280px;
 	}
-}
-
-@media only screen and (min-width : 1201px) {
-	/*footer {
-		padding-left: 280px;
-	}*/
 }

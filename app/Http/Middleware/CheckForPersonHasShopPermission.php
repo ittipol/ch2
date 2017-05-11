@@ -31,10 +31,14 @@ class CheckForPersonHasShopPermission
         'shop.index' => true,
         'shop.about' => true,
         'shop.overview' => array(
-          'permission' => true
+          'permission' => true,
         ),
         'shop.setting' => array(
           'permission' => true
+        ),
+        'shop.delete' => array(
+          'permission' => true,
+          'role' => 'admin'
         ),
         'shop.edit.description' => array(
           'permission' => 'edit'
@@ -422,6 +426,10 @@ class CheckForPersonHasShopPermission
         if(($pages[$name]['permission'] === true) && empty($permissions)) {
           return $this->errorPage('ไม่อนุญาตให้แก้ไขร้านค้านี้ได้');
         }elseif(($pages[$name]['permission'] !== true) && empty($permissions[$pages[$name]['permission']])) {
+          return $this->errorPage('ไม่อนุญาตให้แก้ไขร้านค้านี้ได้');
+        }
+
+        if(!empty($pages[$name]['role']) && ($pages[$name]['role'] != $role)) {
           return $this->errorPage('ไม่อนุญาตให้แก้ไขร้านค้านี้ได้');
         }
 

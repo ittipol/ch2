@@ -292,6 +292,8 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
   Route::get('shop/{shopSlug}/opening_hours','ShopController@openingHours')->name('shop.edit.opening_hours');
   Route::patch('shop/{shopSlug}/opening_hours','ShopController@openingHoursSubmit')->name('shop.edit.opening_hours');
+
+  Route::get('shop/{shopSlug}/delete','ShopController@delete')->name('shop.delete');
 });
 
 // PRODUCT
