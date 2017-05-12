@@ -127,7 +127,7 @@ class Category extends Model
       }
 
       $categoryPaths[] = array(
-        // 'id' => $path->path->id,
+        'id' => $path->path->id,
         'name' => $path->path->name,
         'url' => $url->setAndParseUrl('product/{category_id}',array('category_id'=>$path->path->id)),
         'hasChild' => $hasChild
