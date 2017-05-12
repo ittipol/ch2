@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-class EmploymentType extends Model
+class CareerType extends Model
 {
-  public $table = 'employment_types';
+  public $table = 'career_types';
   protected $fillable = ['name'];
   public $timestamps  = false;
 
@@ -22,5 +22,5 @@ class EmploymentType extends Model
 
     return $type->first()->name;
   }
-  
+
 }

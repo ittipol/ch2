@@ -25,6 +25,8 @@
 //   dd($model->getProducts());
 // });
 
+Route::get('car','HomeController@addCareer');
+
 // Route::get('cp','HomeController@catPath');
 
 // Route::get('ac','HomeController@addXxx');
