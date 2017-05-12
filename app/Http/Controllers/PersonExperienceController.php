@@ -133,7 +133,7 @@ class PersonExperienceController extends Controller
 
     $this->data = $person->personExperience->getPersonExperience();
     $this->setData('profile',$person->modelData->build(true));
-    $this->setData('profileImageUrl',$person->getProfileImageUrl());
+    $this->setData('profileImageUrl',session()->get('Person.profile_image'));
     $this->setData('experienceDetailUrl',$url->setAndParseUrl('experience/profile/{id}',array('id' => $person->personExperience->id)));
 
     return $this->view('pages.person_experience.manage');

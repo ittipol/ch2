@@ -31,7 +31,9 @@
   <div class="line"></div>
   <div class="text-right space-top-bottom-20">
     <a class="button" data-right-side-panel="1" data-right-side-panel-target="#category_expand_panel">หมวดสินค้า</a>
+    @if(!empty($_pagination['data']))
     <a class="button" data-right-side-panel="1" data-right-side-panel-target="#filter_expand_panel">ตัวกรอง</a>
+    @endif
   </div>
 
   <div id="category_expand_panel" class="right-size-panel category">
@@ -71,14 +73,14 @@
     </div>
   </div>
 
-  <div id="filter_expand_panel" class="right-size-panel filter">
-    <div class="right-size-panel-inner">
-      @include('components.filter_expand_panel')
-      <div class="right-size-panel-close-button"></div>
-    </div>
-  </div>
-
   @if(!empty($_pagination['data']))
+
+    <div id="filter_expand_panel" class="right-size-panel filter">
+      <div class="right-size-panel-inner">
+        @include('components.filter_expand_panel')
+        <div class="right-size-panel-close-button"></div>
+      </div>
+    </div>
 
     <div class="row">
 

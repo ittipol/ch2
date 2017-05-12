@@ -82,10 +82,10 @@ class NotificationBottom {
     document.getElementById('notification_bottom').style.bottom = 0;
 
     if(this.alwaysVisible){
-      $('#notification_bottom').animate({bottom:80,right:50,opacity:1},500,'swing');
+      $('#notification_bottom').animate({bottom:50,right:50,opacity:1},500,'swing');
     }else{
 
-      $('#notification_bottom').animate({bottom:80,right:50,opacity:1},500,'swing');
+      $('#notification_bottom').animate({bottom:50,right:50,opacity:1},500,'swing');
 
       clearTimeout(this.handle);
 

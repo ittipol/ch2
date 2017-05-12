@@ -64,7 +64,7 @@
 
         <div class="col-md-6 col-xs-12">
           <div class="content-box-panel overlay-bg">
-            <h5>โปรไฟล์</h5>
+            <h5>โปรไฟล์ของคุณ</h5>
 
             <div class="row">
 
