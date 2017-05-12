@@ -25,7 +25,7 @@
 //   dd($model->getProducts());
 // });
 
-Route::get('car','HomeController@addCareer');
+// Route::get('car','HomeController@addCareer');
 
 // Route::get('cp','HomeController@catPath');
 
@@ -109,17 +109,17 @@ Route::group(['middleware' => 'auth'], function () {
 
   Route::get('account/notification', 'AccountController@notification')->name('account.notification');
 
-  // Route::get('account/job_applying', 'AccountController@jobApplying');
-  // Route::get('account/job_applying/{id}', 'JobController@accountJobApplyingDetail');
+  Route::get('account/job_applying', 'AccountController@jobApplying');
+  Route::get('account/job_applying/{id}', 'JobController@accountJobApplyingDetail');
 
-  // Route::post('account/job_applying/job_position_accept/{id}', 'JobController@jobPositionAccept');
-  // Route::post('account/job_applying/job_position_decline/{id}', 'JobController@jobPositionDecline');
+  Route::post('account/job_applying/job_position_accept/{id}', 'JobController@jobPositionAccept');
+  Route::post('account/job_applying/job_position_decline/{id}', 'JobController@jobPositionDecline');
 
-  // Route::post('account/job_applying/new_message/{id}','JobController@jobApplyingMessageSend');
+  Route::post('account/job_applying/new_message/{id}','JobController@jobApplyingMessageSend');
 
-  // Route::post('account/job_applying/message_reply/{id}','JobController@jobApplyingMessageReplySend');
+  Route::post('account/job_applying/message_reply/{id}','JobController@jobApplyingMessageReplySend');
 
-  // Route::get('get_file_attachment/{id}', 'StaticFileController@attachedFile');
+  Route::get('get_file_attachment/{id}', 'StaticFileController@attachedFile');
 
 });
 
@@ -271,8 +271,8 @@ Route::group(['middleware' => ['shop','person.shop.permission']], function () {
   Route::get('shop/{shopSlug}/product_catalog','ProductCatalogController@listView')->name('shop.product_catalog');
   Route::get('shop/{shopSlug}/product_catalog/{id}','ProductCatalogController@productListView')->name('shop.product_catalog.list');
 
-  // Route::get('shop/{shopSlug}/job','JobController@shopJoblistView')->name('shop.job.list');
-  // Route::get('shop/{shopSlug}/job/{id}','JobController@shopJobDetail')->name('shop.job.detail');
+  Route::get('shop/{shopSlug}/job','JobController@shopJoblistView')->name('shop.job.list');
+  Route::get('shop/{shopSlug}/job/{id}','JobController@shopJobDetail')->name('shop.job.detail');
 
   // Route::get('shop/{shopSlug}/advertising','AdvertisingController@shopAdvertisinglistView')->name('shop.advertising.list');
   // Route::get('shop/{shopSlug}/advertising/{id}','AdvertisingController@shopAdvertisingDetail')->name('shop.advertising.detail');
@@ -425,33 +425,33 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 });
 
 // Job
-// Route::get('job/board','JobController@board');
-// Route::get('job/board/{employment_type_id}','JobController@listView');
-// Route::get('job/detail/{id}','JobController@detail')->name('job.detail');
+Route::get('job','JobController@board');
+Route::get('job/{employment_type_id}','JobController@listView');
+Route::get('job/detail/{id}','JobController@detail')->name('job.detail');
 
-// Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
-//   Route::get('shop/{shopSlug}/manage/job','ShopController@job')->name('shop.job.manage');
+Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
+  Route::get('shop/{shopSlug}/manage/job','ShopController@job')->name('shop.job.manage');
 
-//   Route::get('shop/{shopSlug}/job_applying','JobController@jobApplyingList')->name('shop.job.applying_list');
-//   Route::get('shop/{shopSlug}/job_applying/detail/{id}','JobController@jobApplyingDetail')->name('shop.job.applying_detail');
+  Route::get('shop/{shopSlug}/job_applying','JobController@jobApplyingList')->name('shop.job.applying_list');
+  Route::get('shop/{shopSlug}/job_applying/detail/{id}','JobController@jobApplyingDetail')->name('shop.job.applying_detail');
 
-//   Route::post('shop/{shopSlug}/job_applying/new_message/{id}','JobController@jobApplyingMessageSend')->name('shop.job.applying.new_message');
+  Route::post('shop/{shopSlug}/job_applying/new_message/{id}','JobController@jobApplyingMessageSend')->name('shop.job.applying.new_message');
   
-//   Route::post('shop/{shopSlug}/job_applying/message_reply','JobController@jobApplyingMessageReplySend')->name('shop.job.applying.message_reply');
+  Route::post('shop/{shopSlug}/job_applying/message_reply','JobController@jobApplyingMessageReplySend')->name('shop.job.applying.message_reply');
 
-//   Route::post('shop/{shopSlug}/job_applying/accept/{id}','JobController@jobApplyingAccept')->name('shop.job.applying.accept');
-//   Route::post('shop/{shopSlug}/job_applying/passed/{id}','JobController@jobApplyingPassed')->name('shop.job.applying.passed');
-//   Route::post('shop/{shopSlug}/job_applying/not_pass/{id}','JobController@jobApplyingNotPass')->name('shop.job.applying.not_pass');
-//   Route::post('shop/{shopSlug}/job_applying/canceled/{id}','JobController@jobApplyingCancel')->name('shop.job.applying.canceled');
+  Route::post('shop/{shopSlug}/job_applying/accept/{id}','JobController@jobApplyingAccept')->name('shop.job.applying.accept');
+  Route::post('shop/{shopSlug}/job_applying/passed/{id}','JobController@jobApplyingPassed')->name('shop.job.applying.passed');
+  Route::post('shop/{shopSlug}/job_applying/not_pass/{id}','JobController@jobApplyingNotPass')->name('shop.job.applying.not_pass');
+  Route::post('shop/{shopSlug}/job_applying/canceled/{id}','JobController@jobApplyingCancel')->name('shop.job.applying.canceled');
 
-//   Route::get('shop/{shopSlug}/job/add','JobController@add')->name('shop.job.add');
-//   Route::post('shop/{shopSlug}/job/add','JobController@addingSubmit')->name('shop.job.add');
+  Route::get('shop/{shopSlug}/job/add','JobController@add')->name('shop.job.add');
+  Route::post('shop/{shopSlug}/job/add','JobController@addingSubmit')->name('shop.job.add');
 
-//   Route::get('shop/{shopSlug}/job/edit/{id}','JobController@edit')->name('shop.job.edit');
-//   Route::patch('shop/{shopSlug}/job/edit/{id}','JobController@editingSubmit')->name('shop.job.edit');
+  Route::get('shop/{shopSlug}/job/edit/{id}','JobController@edit')->name('shop.job.edit');
+  Route::patch('shop/{shopSlug}/job/edit/{id}','JobController@editingSubmit')->name('shop.job.edit');
 
-//   Route::get('shop/{shopSlug}/job/delete/{id}','JobController@delete')->name('shop.job.delete');
-// });
+  Route::get('shop/{shopSlug}/job/delete/{id}','JobController@delete')->name('shop.job.delete');
+});
 
 // Route::group(['middleware' => ['auth','person.experience']], function () {
 //   Route::get('job/apply/{id}','JobController@apply');

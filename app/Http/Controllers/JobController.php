@@ -68,7 +68,7 @@ class JobController extends Controller
         'typeName' => $type->name,
         'data' => $_jobs,
         'total' => $total,
-        'itemBoardUrl' => $url->setAndParseUrl('job/board/{employment_type_id}',array('employment_type_id'=>$type->id)),
+        'itemBoardUrl' => $url->setAndParseUrl('job/{employment_type_id}',array('employment_type_id'=>$type->id)),
       );
 
     }
@@ -115,7 +115,7 @@ class JobController extends Controller
       'conditions' => $conditions
     ),$order));
     $model->paginator->setPage($page);
-    $model->paginator->setPagingUrl('job/board/'.$this->param['employment_type_id']);
+    $model->paginator->setPagingUrl('job/'.$this->param['employment_type_id']);
     $model->paginator->setUrl('job/detail/{id}','detailUrl');
     $model->paginator->setQuery('sort',$sort);
     $model->paginator->setQuery('fq',$filters);
@@ -421,10 +421,10 @@ class JobController extends Controller
       'index' => 'employmentTypes'
     ));
 
-    $model->formHelper->loadFieldData('WageType',array(
+    $model->formHelper->loadFieldData('CareerType',array(
       'key' =>'id',
       'field' => 'name',
-      'index' => 'wageTypes'
+      'index' => 'careerTypes'
     ));
 
     $model->formHelper->setData('branches',request()->get('shop')->getRelatedShopData('Branch'));
@@ -464,10 +464,10 @@ class JobController extends Controller
       'index' => 'employmentTypes'
     ));
 
-    $model->formHelper->loadFieldData('WageType',array(
+    $model->formHelper->loadFieldData('CareerType',array(
       'key' =>'id',
       'field' => 'name',
-      'index' => 'wageTypes'
+      'index' => 'careerTypes'
     ));
 
     $relateToBranch = $model->getRelatedData('RelateToBranch',array(

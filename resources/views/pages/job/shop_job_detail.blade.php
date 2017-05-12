@@ -105,7 +105,7 @@
           <div class="item-info">
             <div class="item-info-row">
               <p>อัตราค่าจ้าง</p>
-              <span class="text-emphasize">{{$_modelData['_wage']}}<span class="sub-info-text"> / {{$_modelData['_wageType']}}</span></span>
+              <span class="text-emphasize">{{$_modelData['_wage']}}</span>
             </div>
           </div>
         </div>

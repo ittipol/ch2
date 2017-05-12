@@ -90,8 +90,10 @@
 
     <div class="form-row">
       <?php 
-        echo Form::label('wage', 'ประเภทอัตราค่าจ้าง');
-        echo Form::select('wage_type_id', $_fieldData['wageTypes']);
+        echo Form::label('career', 'สาขาอาชีพ', array(
+          'class' => 'required'
+        ));
+        echo Form::select('career_type_id', $_fieldData['careerTypes']);
       ?>
     </div>
 
@@ -163,7 +165,7 @@
 
       <label class="choice-box">
         <input type="checkbox" checked disabled >
-        <div class="inner">รับสมัครผ่านชุมชน CHONBURI SQUARE</div>
+        <div class="inner">รับสมัครผ่านเว็บไชต์ Sunday Square</div>
       </label>
       <br>
       <label class="choice-box">
@@ -172,7 +174,7 @@
             'id' => 'recruitment_custom'
           ));
         ?>
-        <div class="inner">เพิ่มวิธีการสมัครงานนี้</div>
+        <div class="inner">ระบุวิธีสมัครงานนี้</div>
       </label>
 
       <?php 

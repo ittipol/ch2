@@ -20,7 +20,7 @@
                   <a href="{{URL::to('product')}}">สินค้าจากร้านค้า</a>
                 </div>
                 <div class="site-map-link">
-                  <a href="{{URL::to('job/board')}}">ประกาศงาน</a>
+                  <a href="{{URL::to('job')}}">ประกาศงาน</a>
                 </div>
                 <div class="site-map-link">
                   <a href="{{URL::to('advertising/board')}}">โฆษณาจากบริษัทและร้านค้า</a>

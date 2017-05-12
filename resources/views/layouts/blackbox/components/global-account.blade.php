@@ -81,6 +81,7 @@
               <a href="{{$shop['url']}}overview">ภาพรวม</a>
               <a href="{{$shop['url']}}manage/product">สินค้า</a>
               <a href="{{$shop['url']}}manage/product_catalog">แคตตาล็อกสินค้า</a>
+              <a href="{{$shop['url']}}manage/job">ประกาศงาน</a>
               <a href="{{$shop['url']}}setting">ข้อมูลร้านค้า</a>
             </div>
           </div>
