@@ -4,7 +4,9 @@
 <div class="top-header-wrapper top-header-border">
   <div class="container">
     <div class="top-header">
-      <h2>งานจากบริษัทและร้านค้า</h2>
+      <div class="detail-title">
+        <h2 class="title">งานจากบริษัทและร้านค้า</h2>
+      </div>
     </div>
   </div>
 </div>
@@ -67,7 +69,7 @@
               <div class="col-xs-12">
                 <a href="{{$board['itemBoardUrl']}}" class="product-all-tile">
                   <span>
-                    แสดงประกาศงานทั้งหมด<br>
+                    แสดงตำแหน่งงานทั้งหมด<br>
                     {{$board['data']['all']['title']}}
                   </span>
                 </a>
@@ -80,7 +82,7 @@
 
             <div class="list-empty-message text-center space-top-20">
               <div>
-                <h4>ยังไม่มีประกาศอสังหาริมทรัพย์ประเภท{{$board['typeName']}}</h4>
+                <h4>ยังไม่มีตำแหน่งงานประเภท{{$board['typeName']}}</h4>
               </div>
             </div>
 

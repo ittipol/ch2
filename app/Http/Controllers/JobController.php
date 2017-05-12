@@ -36,32 +36,35 @@ class JobController extends Controller
 
       $jobs = $jobs
       ->orderBy('created_at','desc')
-      ->take(4)
-      ->get();
+      ->take(4);
 
       $_jobs = array();
-      foreach ($jobs as $job) {
+      if($jobs->exists()) {
 
-        $image = $job->getRelatedData('Image',array(
-          'first' => true
-        ));
+        foreach ($jobs->get() as $job) {
 
-        $imageUrl = '/images/common/no-img.png';
-        if(!empty($image)) {
-          $imageUrl = $cache->getCacheImageUrl($image,'list');
+          $image = $job->getRelatedData('Image',array(
+            'first' => true
+          ));
+
+          $imageUrl = '/images/common/no-img.png';
+          if(!empty($image)) {
+            $imageUrl = $cache->getCacheImageUrl($image,'list');
+          }
+
+          $_jobs['items'][] = array_merge($job->buildPaginationData(),array(
+            '_imageUrl' => $imageUrl,
+            'detailUrl' => $url->setAndParseUrl('job/detail/{id}',array('id'=>$job->id))
+          ));
+          
         }
 
-        $_jobs['items'][] = array_merge($job->buildPaginationData(),array(
-          '_imageUrl' => $imageUrl,
-          'detailUrl' => $url->setAndParseUrl('job/detail/{id}',array('id'=>$job->id))
-        ));
-        
-      }
+        if($total > 4) {
+          $_jobs['all'] = array(
+            'title' => '+'.($total-4)
+          );
+        }
 
-      if($total > 4) {
-        $_jobs['all'] = array(
-          'title' => '+'.($total-4)
-        );
       }
 
       $boards[] = array(
@@ -255,28 +258,28 @@ class JobController extends Controller
 
     $branchLocations = array();
     $hasBranchLocation = false;
-    foreach ($branches as $branch) {
+    // foreach ($branches as $branch) {
 
-      $address = $branch->modelData->loadAddress();
+    //   $address = $branch->modelData->loadAddress();
 
-      if(!empty($address)){
+    //   if(!empty($address)){
 
-        $hasBranchLocation = true;
+    //     $hasBranchLocation = true;
 
-        $graphics = json_decode($address['_geographic'],true);
+    //     $graphics = json_decode($address['_geographic'],true);
         
-        $branchLocations[] = array(
-          'id' => $branch->id,
-          'address' => $branch->name,
-          'latitude' => $graphics['latitude'],
-          'longitude' => $graphics['longitude'],
-          'detailUrl' => $url->setAndParseUrl('shop/{shopSlug}/branch/{id}',array(
-            'shopSlug' => $slug,
-            'id' => $branch->id
-          ))
-        );
-      }
-    }
+    //     $branchLocations[] = array(
+    //       'id' => $branch->id,
+    //       'address' => $branch->name,
+    //       'latitude' => $graphics['latitude'],
+    //       'longitude' => $graphics['longitude'],
+    //       'detailUrl' => $url->setAndParseUrl('shop/{shopSlug}/branch/{id}',array(
+    //         'shopSlug' => $slug,
+    //         'id' => $branch->id
+    //       ))
+    //     );
+    //   }
+    // }
 
     $this->data = $model->modelData->build();
     $this->setData('shop',$shop->modelData->build(true));
@@ -309,7 +312,9 @@ class JobController extends Controller
 
     $this->setData('alreadyApply',$personApplyJob->exists());
 
-    $this->setPageTitle($this->data['_modelData']['name'].'- ประกาศงาน');
+    $this->setPageTitle($this->data['_modelData']['name'].' - งาน');
+    $this->setPageImage($model->getImage('list'));
+    $this->setPageDescription($model->getShortDescription());
     
     return $this->view('pages.job.detail');
 
@@ -348,29 +353,29 @@ class JobController extends Controller
 
     $branchLocations = array();
     $hasBranchLocation = false;
-    foreach ($branches as $branch) {
+    // foreach ($branches as $branch) {
 
-      $address = $branch->modelData->loadAddress();
+    //   $address = $branch->modelData->loadAddress();
 
-      if(!empty($address)){
+    //   if(!empty($address)){
 
-        $hasBranchLocation = true;
+    //     $hasBranchLocation = true;
 
-        $graphics = json_decode($address['_geographic'],true);
+    //     $graphics = json_decode($address['_geographic'],true);
         
-        $branchLocations[] = array(
-          'id' => $branch->id,
-          'address' => $branch->name,
-          'latitude' => $graphics['latitude'],
-          'longitude' => $graphics['longitude'],
-          'detailUrl' => $url->setAndParseUrl('shop/{shopSlug}/branch/{id}',array(
-            'shopSlug' => request()->shopSlug,
-            'id' => $branch->id
-          ))
-        );
-      }
+    //     $branchLocations[] = array(
+    //       'id' => $branch->id,
+    //       'address' => $branch->name,
+    //       'latitude' => $graphics['latitude'],
+    //       'longitude' => $graphics['longitude'],
+    //       'detailUrl' => $url->setAndParseUrl('shop/{shopSlug}/branch/{id}',array(
+    //         'shopSlug' => request()->shopSlug,
+    //         'id' => $branch->id
+    //       ))
+    //     );
+    //   }
 
-    }
+    // }
 
     $shop = request()->get('shop');
 
@@ -405,7 +410,9 @@ class JobController extends Controller
 
     $this->setData('alreadyApply',$personApplyJob->exists());
 
-    $this->setPageTitle($this->data['_modelData']['name'].' - ประกาศงาน - '.request()->get('shop')->name);
+    $this->setPageTitle($this->data['_modelData']['name'].' - งาน - '.request()->get('shop')->name);
+    $this->setPageImage($model->getImage('list'));
+    $this->setPageDescription($model->getShortDescription());
     
     return $this->view('pages.job.shop_job_detail');
 

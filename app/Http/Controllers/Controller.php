@@ -38,7 +38,7 @@ class Controller extends BaseController
   }
 
   protected function setPageTitle($pageTitle) {
-    $this->pageTitle = $pageTitle.' - Sunday Square';
+    $this->pageTitle = $pageTitle.' | Sunday Square';
   }
 
   protected function setPageDescription($pageDescription) {

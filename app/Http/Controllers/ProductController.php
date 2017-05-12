@@ -70,23 +70,26 @@ class ProductController extends Controller
       $products = $products
       ->select('products.*')
       ->orderBy('products.created_at','desc')
-      ->take(4)
-      ->get();
+      ->take(4);
 
       $_products = array();
-      foreach ($products as $product) {
+      if($products->exists()) {
 
-        $_products['items'][] = array_merge($product->buildPaginationData(),array(
-          '_imageUrl' => $product->getImage('list'),
-          'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
-        ));
-        
-      }
+        foreach ($products->get() as $product) {
 
-      if($total > 4) {
-        $_products['all'] = array(
-          'title' => '+'.($total-4)
-        );
+          $_products['items'][] = array_merge($product->buildPaginationData(),array(
+            '_imageUrl' => $product->getImage('list'),
+            'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
+          ));
+          
+        }
+
+        if($total > 4) {
+          $_products['all'] = array(
+            'title' => '+'.($total-4)
+          );
+        }
+
       }
 
       $shelfs[] = array(
@@ -390,25 +393,25 @@ class ProductController extends Controller
 
     $branchLocations = array();
     $hasBranchLocation = false;
-    foreach ($branches as $branch) {
+    // foreach ($branches as $branch) {
 
-      $address = $branch->modelData->loadAddress();
+    //   $address = $branch->modelData->loadAddress();
 
-      if(!empty($address)){
+    //   if(!empty($address)){
 
-        $hasBranchLocation = true;
+    //     $hasBranchLocation = true;
 
-        $graphics = json_decode($address['_geographic'],true);
+    //     $graphics = json_decode($address['_geographic'],true);
         
-        $branchLocations[] = array(
-          'id' => $branch->id,
-          'address' => $branch->name,
-          'latitude' => $graphics['latitude'],
-          'longitude' => $graphics['longitude'],
-          'detailUrl' => $shopUrl.'/product_catalog/'.$branch->id
-        );
-      }
-    }
+    //     $branchLocations[] = array(
+    //       'id' => $branch->id,
+    //       'address' => $branch->name,
+    //       'latitude' => $graphics['latitude'],
+    //       'longitude' => $graphics['longitude'],
+    //       'detailUrl' => $shopUrl.'/product_catalog/'.$branch->id
+    //     );
+    //   }
+    // }
 
     $productCatalogs = $model->getProductCatalogs();
 
@@ -466,28 +469,28 @@ class ProductController extends Controller
 
     $branchLocations = array();
     $hasBranchLocation = false;
-    foreach ($branches as $branch) {
+    // foreach ($branches as $branch) {
 
-      $address = $branch->modelData->loadAddress();
+    //   $address = $branch->modelData->loadAddress();
 
-      if(!empty($address)){
+    //   if(!empty($address)){
 
-        $hasBranchLocation = true;
+    //     $hasBranchLocation = true;
 
-        $graphics = json_decode($address['_geographic'],true);
+    //     $graphics = json_decode($address['_geographic'],true);
         
-        $branchLocations[] = array(
-          'id' => $branch->id,
-          'address' => $branch->name,
-          'latitude' => $graphics['latitude'],
-          'longitude' => $graphics['longitude'],
-          'detailUrl' => $url->setAndParseUrl('shop/{shopSlug}/branch/{id}',array(
-            'shopSlug' => request()->shopSlug,
-            'id' => $branch->id
-          ))
-        );
-      }
-    }
+    //     $branchLocations[] = array(
+    //       'id' => $branch->id,
+    //       'address' => $branch->name,
+    //       'latitude' => $graphics['latitude'],
+    //       'longitude' => $graphics['longitude'],
+    //       'detailUrl' => $url->setAndParseUrl('shop/{shopSlug}/branch/{id}',array(
+    //         'shopSlug' => request()->shopSlug,
+    //         'id' => $branch->id
+    //       ))
+    //     );
+    //   }
+    // }
 
     $productCatalogs = $model->getProductCatalogs();
 

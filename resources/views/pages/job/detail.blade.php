@@ -106,6 +106,12 @@
               <span class="text-emphasize">{{$_modelData['_wage']}}</span>
             </div>
           </div>
+          <div class="item-info">
+            <div class="item-info-row">
+              <p>สาขาอาชีพ</p>
+              <h4>{{$_modelData['_careerType']}}</h4>
+            </div>
+          </div>
         </div>
 
         <div class="col-sm-4 col-xs-12">
@@ -199,7 +205,7 @@
             <div class="col-md-10 col-xs-12">
               <div class="content-box-panel overlay-bg">
                 <div>
-                  <h5>บริษัทหรือร้านค้าที่ขายสินค้านี้</h5>
+                  <h5>บริษัทหรือร้านค้าที่ประกาศงานนี้</h5>
                   <h3>
                     <a href="{{URL::to($shopUrl)}}">{{$shop['name']}}</a>
                   </h3>

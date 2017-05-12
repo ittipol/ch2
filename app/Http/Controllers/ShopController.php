@@ -185,11 +185,11 @@ class ShopController extends Controller
       ['model','like','Product']
     ])->count());
 
-    // $this->setData('totalJob',$shopRelateToModel
-    // ->where([
-    //   ['shop_id','=',$model->id],
-    //   ['model','like','Job']
-    // ])->count());
+    $this->setData('totalJob',$shopRelateToModel
+    ->where([
+      ['shop_id','=',$model->id],
+      ['model','like','Job']
+    ])->count());
 
     // $this->setData('totalAdvertising',$shopRelateToModel
     // ->where([
@@ -214,18 +214,18 @@ class ShopController extends Controller
       ['order_status_id','=',1]
     ])->count());
 
-    // $personApplyJobModel = Service::loadModel('PersonApplyJob');
+    $personApplyJobModel = Service::loadModel('PersonApplyJob');
 
-    // $this->setData('totalJobApplying',$personApplyJobModel
-    // ->where('shop_id','=',$model->id)
-    // ->count());
+    $this->setData('totalJobApplying',$personApplyJobModel
+    ->where('shop_id','=',$model->id)
+    ->count());
 
-    // $this->setData('countNewJobApplying',$personApplyJobModel
-    // ->where([
-    //   ['shop_id','=',$model->id],
-    //   ['job_applying_status_id','=',1]
-    // ])
-    // ->count());
+    $this->setData('countNewJobApplying',$personApplyJobModel
+    ->where([
+      ['shop_id','=',$model->id],
+      ['job_applying_status_id','=',1]
+    ])
+    ->count());
 
     $this->setPageTitle(request()->get('shop')->name);
 

@@ -77,6 +77,20 @@ class Job extends Model
     parent::__construct();
   }
 
+  public static function boot() {
+
+    parent::boot();
+
+    Job::saving(function($job){
+
+      if($job->state == 'create') {
+        $job->active = 1;
+      }
+
+    });
+
+  }
+
   public function employmentType() {
     return $this->hasOne('App\Models\EmploymentType','id','employment_type_id');
   }
@@ -200,7 +214,8 @@ class Job extends Model
       '_recruitment_custom' => $recruitment['c'],
       'recruitment_custom_detail' => nl2br($this->recruitment_custom_detail),
       '_employmentTypeName' => $this->employmentType->name,
-      '_careerType' => $this->careerType->name
+      '_careerType' => $this->careerType->name,
+      'active' => $this->active,
     );
 
   }

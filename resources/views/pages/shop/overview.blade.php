@@ -111,6 +111,59 @@
       <div class="col-lg-6 col-md-12 col-xs-12">
         <div class="box">
           <div class="box-inner">
+            <h3>งาน</h3>
+
+            <div>
+              <h1>{{$totalJob}}</h1>
+              <div>ตำแหน่งที่ประกาศ</div>
+            </div>
+
+            <a href="{{request()->get('shopUrl')}}manage/job" class="button wide-button space-top-bottom-20">
+              จัดการประกาศงาน
+            </a>
+
+            <div class="line"></div>
+
+            <div class="tile-nav-group space-top-20 clearfix">
+
+              <div class="tile-nav small">
+                <div class="tile-nav-image">
+                  <a href="{{request()->get('shopUrl')}}job/add">
+                    <img src="/images/common/plus.png">
+                  </a>
+                </div>
+                <div class="tile-nav-info">
+                  <a href="{{request()->get('shopUrl')}}job/add">
+                    <h4 class="tile-nav-title">ลงประกาศงาน</h4>
+                  </a>
+                </div>
+              </div>
+
+              <div class="tile-nav small">
+                <div class="tile-nav-image">
+                  <a href="{{request()->get('shopUrl')}}job_applying">
+                    <img src="/images/common/resume.png">
+                  </a>
+                </div>
+                <div class="tile-nav-info">
+
+                  <div class="tile-flag-count">{{$countNewJobApplying}}</div>
+                  
+                  <a href="{{request()->get('shopUrl')}}job_applying">
+                    <h4 class="tile-nav-title">รายชื่อผู้สมัครงาน</h4>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-md-12 col-xs-12">
+        <div class="box">
+          <div class="box-inner">
             <h3>การสั่งซื้อ</h3>
 
             <div>
@@ -131,7 +184,34 @@
         </div>
       </div>
 
-  </div>
+      <div class="col-lg-6 col-md-12 col-xs-12">
+        <div class="box">
+          <div class="box-inner">
+            <h3>การสมัครงาน</h3>
+
+            <div>
+              <h1>{{$totalJobApplying}}</h1>
+              <div>การสมัครงาน</div>
+            </div>
+
+            <div class="clearfix">
+
+              <div class="pull-left">
+                <h1>{{$countNewJobApplying}}</h1>
+                <div>การสมัครงานใหม่</div>
+              </div>
+
+            </div>
+
+            <a href="{{request()->get('shopUrl')}}job_applying" class="button wide-button space-top-bottom-20">
+              จัดการการสมัครงาน
+            </a>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
 
 </div>
 
