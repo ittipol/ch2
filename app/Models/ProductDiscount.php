@@ -56,9 +56,6 @@ class ProductDiscount extends Model
       if(!$this->exists) {
         $salePromotionType = new SalePromotionType;
         $attributes['ProductSalePromotion']['sale_promotion_type_id'] = $salePromotionType->getIdByalias('discount');
-
-        $salePromotionTargetGroup = new SalePromotionTargetGroup;
-        $attributes['ProductSalePromotion']['sale_promotion_target_group_id'] = $salePromotionTargetGroup->getIdByalias('consumer');
       }      
 
       unset($attributes['date_start']);

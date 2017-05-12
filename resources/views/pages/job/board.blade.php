@@ -4,7 +4,7 @@
 <div class="top-header-wrapper top-header-border">
   <div class="container">
     <div class="top-header">
-      <h2>ประกาศงาน</h2>
+      <h2>งานจากบริษัทและร้านค้า</h2>
     </div>
   </div>
 </div>

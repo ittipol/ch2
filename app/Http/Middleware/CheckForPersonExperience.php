@@ -20,7 +20,7 @@ class CheckForPersonExperience
     $personExperience = new PersonExperience;
     if(!$personExperience->checkExistByPersonId()) {
       MessageHelper::display('กรุณาเพิ่มประวัติการทำงานเพื่อใช้ในการสมัครงาน','info');
-      return redirect('person/experience');
+      return redirect('resume');
     }
 
     return $next($request);

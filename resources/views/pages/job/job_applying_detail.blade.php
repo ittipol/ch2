@@ -497,6 +497,8 @@
         </div>
       </div>
 
+      @if($hasResume)
+
       @if(!empty($privateWebsites))
       <div class="person-private-website-content">
         <h4>เว็บไซต์ส่วนตัวของผู้สมัคร</h4>
@@ -515,7 +517,7 @@
       </div>
       @endif
 
-      <h3 class="space-bottom-10">ประวัติการทำงานของผู้สมัคร</h3>
+      <h3 class="space-bottom-10">เรซูเม่</h3>
 
       <div class="person-experience-content">
 
@@ -647,7 +649,10 @@
 
       </div>
 
+      @endif
+      
     </div>
+    
 
   </div>
 

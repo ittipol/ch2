@@ -5,7 +5,7 @@
   <div class="container">
     <div class="top-header">
       <div class="detail-title">
-        <h2 class="title">ประวัติการทำงาน</h2>
+        <h2 class="title">เรซูเม่</h2>
       </div>
     </div>
   </div>
@@ -17,12 +17,25 @@
 
     <div class="tile-nav small">
       <div class="tile-nav-image">
-        <a href="{{URL::to('experience/profile/edit')}}">
+        <a href="{{URL::to('resume/profile/edit')}}">
+          <img src="/images/common/pencil.png">
+        </a>
+      </div>
+      <div class="tile-nav-info">
+        <a href="{{URL::to('resume/profile/edit')}}">
+          <h4 class="tile-nav-title">แก้ไขโปรไฟล์</h4>
+        </a>
+      </div>
+    </div>
+
+    <div class="tile-nav small">
+      <div class="tile-nav-image">
+        <a href="{{URL::to('resume/edit')}}">
           <img src="/images/common/resume.png">
         </a>
       </div>
       <div class="tile-nav-info">
-        <a href="{{URL::to('experience/profile/edit')}}">
+        <a href="{{URL::to('resume/edit')}}">
           <h4 class="tile-nav-title">เพิ่มประวัติการทำงานและทักษะ</h4>
         </a>
       </div>
@@ -41,22 +54,85 @@
       </div>
     </div>
 
-    <div class="tile-nav small">
-      <div class="tile-nav-image">
-        <a href="{{URL::to('person/freelance')}}">
-          <img src="/images/common/career.png">
-        </a>
-      </div>
-      <div class="tile-nav-info">
-        <a href="{{URL::to('person/freelance')}}">
-          <h4 class="tile-nav-title">ฟรีแลนซ์</h4>
-        </a>
-      </div>
-    </div>
-
   </div>
 
   <div class="line"></div>
+
+  <div class="content-box">
+    <div class="content-box-inner">
+      <div class="row">
+
+        <div class="col-md-6 col-xs-12">
+          <div class="content-box-panel overlay-bg">
+            <h5>โปรไฟล์</h5>
+
+            <div class="row">
+
+              <div class="col-sm-12">
+                <div class="image-frame elem-center">
+                  @if(!empty($profileImageUrl))
+                  <div class="content-box-main-image" style="background-image:url({{$profileImageUrl}});"></div>
+                  @endif
+                </div>
+              </div>
+
+              <div class="col-sm-12">
+                <div class="profile-info text-center space-top-20">
+                  <h3>{{$profile['name']}}</h3>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="line space-top-bottom-20"></div>
+
+            <div class="content-box-main-sub-content clearfix">
+              
+              <div class="main-sub-content">
+                <div><strong>เพศ</strong>: {{$profile['gender']}}</div>
+              </div>
+
+              <div class="main-sub-content">
+                <div><strong>วันเกิด</strong>: {{$profile['birthDate']}}</div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xs-12">
+
+          <div class="profile-contact-info">
+
+            <h4>ติดต่อ</h4>
+            <div class="line space-top-bottom-10"></div>
+
+            <dl>
+              <dt>หมายเลขโทรศัพท์</dt>
+              @if(!empty($profile['Contact']['phone_number']))
+              <dd>{{$profile['Contact']['phone_number']}}</dd>
+              @else
+              <dd>-</dd>
+              @endif
+            </dl>
+
+            <dl>
+              <dt>อีเมล</dt>
+              @if(!empty($profile['Contact']['email']))
+              <dd>{{$profile['Contact']['email']}}</dd>
+              @else
+              <dd>-</dd>
+              @endif
+            </dl>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
 
   <h3 class="space-bottom-10">ประวัติการทำงานและทักษะ</h3>
   <div class="person-experience-content">
@@ -206,7 +282,7 @@
 
   </div>
 
-  <a href="{{$experienceDetailUrl}}" class="button">ไปยังหน้าแสดงประวัติการทำงาน</a>
+  <a href="{{$experienceDetailUrl}}" class="button">ไปยังหน้าแสดงเรซูเม่</a>
   
 </div>
 

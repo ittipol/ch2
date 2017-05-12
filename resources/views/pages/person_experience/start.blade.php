@@ -3,14 +3,14 @@
 
 <div class="container">
   <div class="list-empty-message text-center space-top-40">
-    <img class="space-bottom-20" src="/images/common/career.png">
+    <img src="/images/common/resume.png">
     <div>
-      <h3>ประสบการณ์การทำงานของคุณ</h3>
-      <p>ยังไม่มีประสบการณ์การทำงาน เพิ่มประสบการณ์การทำงานเพื่อเพิ่มโอกาสในการทำงานและประสบความสำเร็จในสายอาชีพของคุณ</p>
+      <h3>เรซูเม่</h3>
+      <p>เรซูเม่จะทำหน้าที่บ่งบอกตัวต้นและความสามารถของคุณรวมถึงช่วยเพิ่มโอกาสในการทำงานและประสบความสำเร็จในสายอาชีพของคุณ</p>
       <?php
         echo Form::open(['method' => 'post', 'enctype' => 'multipart/form-data']);
 
-        echo Form::submit('เพิ่มประสบการณ์การทำงาน' , array(
+        echo Form::submit('สร้างเรซูเม่' , array(
           'class' => 'button'
         ));
 

@@ -90,7 +90,7 @@ class PersonExperienceController extends Controller
     $this->setData('searchOptions',$searchOptions);
     // $this->setData('displayingFilters',$displayingFilters);
 
-    $this->setPageTitle('ประวัติการทำงานบุคคล');
+    $this->setPageTitle('เรซูเม่');
 
     return $this->view('pages.person_experience.list');
   }
@@ -109,7 +109,7 @@ class PersonExperienceController extends Controller
     $this->setData('profile',$person->modelData->build(true));
     $this->setData('profileImageUrl',$person->getProfileImageUrl());
 
-    $this->setPageTitle('ประวัติการทำงานบุคคล');
+    $this->setPageTitle('เรซูเม่');
 
     return $this->view('pages.person_experience.detail');
 
@@ -127,14 +127,95 @@ class PersonExperienceController extends Controller
 
     $person = Service::loadModel('Person')->find(Session::get('Person.id'));
 
+    $person->modelData->loadData(array(
+      'models' => array('Address','Contact')
+    ));
+
     $this->data = $person->personExperience->getPersonExperience();
+    $this->setData('profile',$person->modelData->build(true));
+    $this->setData('profileImageUrl',$person->getProfileImageUrl());
     $this->setData('experienceDetailUrl',$url->setAndParseUrl('experience/profile/{id}',array('id' => $person->personExperience->id)));
 
     return $this->view('pages.person_experience.manage');
 
   }
 
-  public function profile() {
+  public function profileEdit() {
+
+    $model = Service::loadModel('Person')->find(Session::get('Person.id'));
+
+    $model->formHelper->loadFieldData('Province',array(
+      'key' =>'id',
+      'field' => 'name',
+      'index' => 'provinces',
+      'order' => array(
+        array('top','ASC'),
+        array('id','ASC')
+      )
+    ));
+
+    $date = new Date;
+
+    $currentYear = date('Y');
+    
+    $day = array();
+    $month = array();
+    $year = array();
+
+    for ($i=1; $i <= 31; $i++) { 
+      $day[$i] = $i;
+    }
+
+    for ($i=1; $i <= 12; $i++) { 
+      $month[$i] = $date->getMonthName($i);
+    }
+
+    for ($i=1957; $i <= $currentYear; $i++) { 
+      $year[$i] = $i+543;
+    }
+
+    $model->formHelper->loadData(array(
+      'model' => array(
+        'Address','Contact'
+      )
+    ));
+
+    $this->data = $model->formHelper->build();
+    $this->setData('profileImage',json_encode($model->getProfileImage()));
+    $this->setData('day',$day);
+    $this->setData('month',$month);
+    $this->setData('year',$year);
+
+    return $this->view('pages.account.form.profile_edit');
+
+  }
+
+  public function profileEditingSubmit(CustomFormRequest $request) {
+
+    $model = Service::loadModel('Person')->find(Session::get('Person.id'));
+
+    if($model->fill($request->all())->save()) {
+
+      Session::put('Person.name',$model->name);
+      // Session::put('Person.theme',$model->theme);
+
+      if(empty($person->profile_image_id)) {
+        Session::put('Person.profile_image_xs','/images/common/avatar.png');
+        Session::put('Person.profile_image','/images/common/avatar.png');
+      }else{
+        Session::put('Person.profile_image_xs',$model->getProfileImageUrl('xs'));
+        Session::put('Person.profile_image',$model->getProfileImageUrl('xsm'));
+      }
+
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
+      return Redirect::to('resume');
+    }else{
+      return Redirect::back();
+    }
+
+  }
+
+  public function resume() {
 
     $url = new Url;
 
@@ -268,11 +349,11 @@ class PersonExperienceController extends Controller
 
     }
 
-    return Redirect::to('person/experience');
+    return Redirect::to('resume');
 
   }
 
-  public function profileEditingSubmit() {
+  public function resumeEditingSubmit() {
 
     $model = Service::loadModel('PersonExperience')->where('created_by','=',Session::get('Person.id'))->first();
 
@@ -284,10 +365,10 @@ class PersonExperienceController extends Controller
 
     if($saved) {
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('experience/profile/edit');
+      return Redirect::to('resume/edit');
     }else{
       MessageHelper::display('เกิดข้อผิดพลาด ไม่สามารถบันทึกได้','error');
-      return Redirect::to('experience/profile/edit');
+      return Redirect::to('resume/edit');
     }
 
   }
@@ -315,7 +396,7 @@ class PersonExperienceController extends Controller
 
     if($model->fill(request()->all())->save()) {
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('experience/profile/edit');
+      return Redirect::to('resume/edit');
     }else{
       return Redirect::back();
     }

@@ -11,7 +11,7 @@
           <button class="btn btn-secondary additional-option">
             ...
             <div class="additional-option-content">
-              <a href="{{URL::to('person/experience')}}">ไปยังหน้าภาพรวมประวัติการทำงาน</a>
+              <a href="{{URL::to('resume')}}">ไปยังหน้าภาพรวมประวัติการทำงาน</a>
             </div>
           </button>
         </div>

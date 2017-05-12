@@ -7,7 +7,7 @@ use App\library\date;
 class ProductSalePromotion extends Model
 {
   protected $table = 'product_sale_promotions';
-  protected $fillable = ['product_id','sale_promotion_target_group_id','sale_promotion_type_id','model','model_id','date_start','date_end'];
+  protected $fillable = ['product_id','sale_promotion_type_id','model','model_id','date_start','date_end'];
 
   public function productDiscount() {
     return $this->hasOne('App\Models\ProductDiscount','id','model_id');

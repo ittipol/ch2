@@ -102,7 +102,7 @@ class ProductController extends Controller
 
     $this->setData('shelfs',$shelfs);
 
-    $this->setPageTitle('สินค้าจากร้านค้า');
+    $this->setPageTitle('สินค้าจากบริษัทและร้านค้า');
 
     return $this->view('pages.product.shelf');
 

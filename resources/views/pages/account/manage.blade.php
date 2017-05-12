@@ -61,7 +61,21 @@
         <div class="list-item">
           <a href="{{URL::to('account/profile/edit')}}">
             <img class="icon" src="/images/common/pencil.png" >
-            <h4>แก้ไขโปรไฟล์</h4>
+            <h4>โปรไฟล์</h4>
+          </a>
+        </div>
+
+        <div class="list-item">
+          <a href="{{URL::to('resume')}}">
+            <img class="icon" src="/images/common/resume.png" >
+            <h4>เรซูเม่</h4>
+          </a>
+        </div>
+
+        <div class="list-item">
+          <a href="{{URL::to('account/job_applying')}}">
+            <img class="icon" src="/images/common/document.png" >
+            <h4>งานที่สมัคร</h4>
           </a>
         </div>
 

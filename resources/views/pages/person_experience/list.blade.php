@@ -57,7 +57,7 @@
     <img class="space-bottom-20" src="/images/common/not-found.png">
     <div>
       <h3>ไม่พบประวัติการทำงานรายบุคคล</h3>
-      <a href="{{URL::to('person/experience')}}" class="button">เพิ่มข้อมูลประวัติการทำงาน</a>
+      <a href="{{URL::to('resume')}}" class="button">เพิ่มข้อมูลประวัติการทำงาน</a>
     </div>
   </div>
 

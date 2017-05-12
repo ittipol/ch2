@@ -73,11 +73,15 @@ class PersonPrivateWebsiteController extends Controller
     ->where('created_by','=',session()->get('Person.id'))
     ->first();
 
+    $hasData = false;
     foreach (request()->get('private_websites') as $value) {
 
       $websiteUrl = trim($value['value']);
 
       if(!empty($websiteUrl)) {
+
+        $hasData = true;
+
         $model->newInstance()->fill(array(
           'person_experience_id' => $personExperience->id,
           'website_url' => $websiteUrl,
@@ -86,7 +90,9 @@ class PersonPrivateWebsiteController extends Controller
       }
     }
 
-    MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
+    if($hasData) {
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
+    }
     return Redirect::to('person/private_website/list');
 
   }

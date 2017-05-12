@@ -75,7 +75,7 @@ class JobController extends Controller
 
     $this->setData('boards',$boards);
 
-    $this->setPageTitle('ประกาศงาน');
+    $this->setPageTitle('งานจากบริษัทและร้านค้า');
 
     return $this->view('pages.job.board');
 
@@ -740,23 +740,23 @@ class JobController extends Controller
       'models' => array('Address','Contact')
     ));
 
-    // relate to branches
-    $total = Service::loadModel('relateToBranch')
-    ->where(array(
-      array('model','like','Job'),
-      array('model_id','=',$model->job_id)
-    ))
-    ->count();
+    // // relate to branches
+    // $total = Service::loadModel('relateToBranch')
+    // ->where(array(
+    //   array('model','like','Job'),
+    //   array('model_id','=',$model->job_id)
+    // ))
+    // ->count();
 
-    // Get branch
-    $branches = Service::loadModel('JobApplyToBranch')
-    ->where('person_apply_job_id','=',$this->param['id'])
-    ->get();
+    // // Get branch
+    // $branches = Service::loadModel('JobApplyToBranch')
+    // ->where('person_apply_job_id','=',$this->param['id'])
+    // ->get();
 
-    $_branches = array();
-    foreach ($branches as $branch) {
-      $_branches[] = $branch->branch->name;
-    }
+    // $_branches = array();
+    // foreach ($branches as $branch) {
+    //   $_branches[] = $branch->branch->name;
+    // }
 
     $attachedFiles = $model->getRelatedData('AttachedFile',array(
       'fileds' => array('id','filename','filesize')
@@ -784,15 +784,22 @@ class JobController extends Controller
       }  
     }
 
-    $this->data = $person->personExperience->getPersonExperience();
+    if(!empty($person->personExperience)) {
+      $this->data = $person->personExperience->getPersonExperience();
+      $this->setData('hasResume',true);
+    }else{
+      $this->setData('hasResume',false);
+    }
+
     $this->setData('jobName',$model->job->name);
     $this->setData('personApplyJob',$model->modelData->build(true));
     $this->setData('messageFromApplicant',$model->getMessage());
     $this->setData('jobApplyHistory',$model->getJobApplyHistory(true));
     $this->setData('profile',$person->modelData->build(true));
     $this->setData('profileImageUrl',$person->getProfileImageUrl('xsm'));
-    $this->setData('hasBranch',!empty($total) ? true : false);
-    $this->setData('branches',$_branches);
+    $this->setData('hasBranch',false);
+    // $this->setData('hasBranch',!empty($total) ? true : false);
+    // $this->setData('branches',$_branches);
     $this->setData('attachedFiles',$_attachedFiles);
     $this->setData('messages',$_messages);
 

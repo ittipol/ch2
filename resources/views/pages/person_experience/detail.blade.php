@@ -5,7 +5,7 @@
   <div class="container">
     <div class="top-header">
       <div class="detail-title">
-        <h2 class="title">ประวัติการทำงานและทักษะ</h2>
+        <h2 class="title">เรซูเม่</h2>
         <div class="tag-group">
         </div>
       </div>

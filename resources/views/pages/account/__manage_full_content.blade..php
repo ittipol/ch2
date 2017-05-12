@@ -66,7 +66,7 @@
         </div>
 
         <div class="list-item">
-          <a href="{{URL::to('person/experience')}}">
+          <a href="{{URL::to('resume')}}">
             <img class="icon" src="/images/common/pencil.png" >
             <h4>เพิ่มประวัติการทำงาน</h4>
           </a>

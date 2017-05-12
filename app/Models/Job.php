@@ -200,7 +200,7 @@ class Job extends Model
       '_recruitment_custom' => $recruitment['c'],
       'recruitment_custom_detail' => nl2br($this->recruitment_custom_detail),
       '_employmentTypeName' => $this->employmentType->name,
-      '_wageType' => $this->careerType->name
+      '_careerType' => $this->careerType->name
     );
 
   }

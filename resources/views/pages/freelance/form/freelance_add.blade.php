@@ -7,7 +7,7 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{URL::to('experience/profile/edit')}}" class="btn btn-secondary">กลับไปหน้างานฟรีแลนซ์ที่ประกาศ</a>
+          <a href="{{URL::to('resume/edit')}}" class="btn btn-secondary">กลับไปหน้างานฟรีแลนซ์ที่ประกาศ</a>
         </div>
 
       </div>

@@ -25,7 +25,7 @@
 //   dd($model->getProducts());
 // });
 
-// Route::get('car','HomeController@addCareer');
+Route::get('car','HomeController@addCareer');
 
 // Route::get('cp','HomeController@catPath');
 
@@ -123,75 +123,76 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
-// Announcement
-// Route::get('announcement/create','AnnouncementController@create');
-
 // Experience
-// Route::get('experience/profile/list','PersonExperienceController@listView')->name('person_experience.list');
-// Route::get('experience/profile/{id}','PersonExperienceController@detail')->name('person_experience.detail')->middleware('data.access.permission');
+Route::get('experience/profile/list','PersonExperienceController@listView')->name('person_experience.list');
+Route::get('experience/profile/{id}','PersonExperienceController@detail')->name('person_experience.detail')->middleware('data.access.permission');
 
-// Route::group(['middleware' => 'auth'], function () {
-//   Route::get('person/experience','PersonExperienceController@manage')->name('person_experience.manage');
-//   Route::post('person/experience','PersonExperienceController@start')->name('person_experience.start');
-// });
-// Route::group(['middleware' => ['auth','person.experience']], function () {
+Route::group(['middleware' => 'auth'], function () {
+  Route::get('resume','PersonExperienceController@manage')->name('person_experience.manage');
+  Route::post('resume','PersonExperienceController@start')->name('person_experience.start');
+});
 
-//   Route::get('experience/profile/edit','PersonExperienceController@profile')->name('person_experience.profile');
-//   Route::patch('experience/profile/edit','PersonExperienceController@profileEditingSubmit')->name('person_experience.profile.edit');
+Route::group(['middleware' => ['auth','person.experience']], function () {
 
-//   Route::get('person/private_website/list','PersonPrivateWebsiteController@listView');
-//   Route::get('person/private_website/add','PersonPrivateWebsiteController@add');
-//   Route::post('person/private_website/add','PersonPrivateWebsiteController@addingSubmit');
-//   Route::get('person/private_website/edit/{id}','PersonPrivateWebsiteController@edit')->name('private_website.edit')->middleware('data.owner');
-//   Route::patch('person/private_website/edit/{id}','PersonPrivateWebsiteController@editingSubmit')->name('private_website.edit')->middleware('data.owner');
-//   Route::get('person/private_website/delete/{id}','PersonPrivateWebsiteController@delete')->name('private_website.delete')->middleware('data.owner');
+  Route::get('resume/profile/edit', 'PersonExperienceController@profileEdit');
+  Route::patch('resume/profile/edit','PersonExperienceController@profileEditingSubmit');
 
-//   Route::get('experience/career_objective','PersonExperienceController@careerObjectiveEdit');
-//   Route::patch('experience/career_objective','PersonExperienceController@careerObjectiveEditingSubmit');
+  Route::get('resume/edit','PersonExperienceController@resume')->name('person_experience.profile');
+  Route::patch('resume/edit','PersonExperienceController@resumeEditingSubmit')->name('person_experience.profile.edit');
 
-//   Route::get('experience/working/add','PersonWorkingExperienceController@add');
-//   Route::post('experience/working/add','PersonWorkingExperienceController@addingSubmit');
-//   Route::get('experience/working/edit/{id}','PersonWorkingExperienceController@edit')->name('person_experience.working.edit')->middleware('data.owner');
-//   Route::patch('experience/working/edit/{id}','PersonWorkingExperienceController@editingSubmit')->name('person_experience.working.edit')->middleware('data.owner');
-//   Route::get('experience/working/delete/{id}','PersonWorkingExperienceController@delete')->name('person_experience.working.delete')->middleware('data.owner');
+  Route::get('person/private_website/list','PersonPrivateWebsiteController@listView');
+  Route::get('person/private_website/add','PersonPrivateWebsiteController@add');
+  Route::post('person/private_website/add','PersonPrivateWebsiteController@addingSubmit');
+  Route::get('person/private_website/edit/{id}','PersonPrivateWebsiteController@edit')->name('private_website.edit')->middleware('data.owner');
+  Route::patch('person/private_website/edit/{id}','PersonPrivateWebsiteController@editingSubmit')->name('private_website.edit')->middleware('data.owner');
+  Route::get('person/private_website/delete/{id}','PersonPrivateWebsiteController@delete')->name('private_website.delete')->middleware('data.owner');
 
-//   Route::get('experience/internship/add','PersonInternshipController@add');
-//   Route::post('experience/internship/add','PersonInternshipController@addingSubmit');
-//   Route::get('experience/internship/edit/{id}','PersonInternshipController@edit')->name('person_experience.internship.edit')->middleware('data.owner');
-//   Route::patch('experience/internship/edit/{id}','PersonInternshipController@editingSubmit')->name('person_experience.internship.edit')->middleware('data.owner');
-//   Route::get('experience/internship/delete/{id}','PersonInternshipController@delete')->name('person_experience.internship.delete')->middleware('data.owner');
+  Route::get('experience/career_objective','PersonExperienceController@careerObjectiveEdit');
+  Route::patch('experience/career_objective','PersonExperienceController@careerObjectiveEditingSubmit');
 
-//   Route::get('experience/education/add','PersonEducationController@add');
-//   Route::post('experience/education/add','PersonEducationController@addingSubmit');
-//   Route::get('experience/education/edit/{id}','PersonEducationController@edit')->name('person_experience.education.edit')->middleware('data.owner');
-//   Route::patch('experience/education/edit/{id}','PersonEducationController@editingSubmit')->name('person_experience.education.edit')->middleware('data.owner');
-//   Route::get('experience/education/delete/{id}','PersonEducationController@delete')->name('person_experience.education.delete')->middleware('data.owner');
+  Route::get('experience/working/add','PersonWorkingExperienceController@add');
+  Route::post('experience/working/add','PersonWorkingExperienceController@addingSubmit');
+  Route::get('experience/working/edit/{id}','PersonWorkingExperienceController@edit')->name('person_experience.working.edit')->middleware('data.owner');
+  Route::patch('experience/working/edit/{id}','PersonWorkingExperienceController@editingSubmit')->name('person_experience.working.edit')->middleware('data.owner');
+  Route::get('experience/working/delete/{id}','PersonWorkingExperienceController@delete')->name('person_experience.working.delete')->middleware('data.owner');
 
-//   Route::get('experience/project/add','PersonProjectController@add');
-//   Route::post('experience/project/add','PersonProjectController@addingSubmit');
-//   Route::get('experience/project/edit/{id}','PersonProjectController@edit')->name('person_experience.project.edit')->middleware('data.owner');
-//   Route::patch('experience/project/edit/{id}','PersonProjectController@editingSubmit')->name('person_experience.project.edit')->middleware('data.owner');
-//   Route::get('experience/project/delete/{id}','PersonProjectController@delete')->name('person_experience.project.delete')->middleware('data.owner');
+  Route::get('experience/internship/add','PersonInternshipController@add');
+  Route::post('experience/internship/add','PersonInternshipController@addingSubmit');
+  Route::get('experience/internship/edit/{id}','PersonInternshipController@edit')->name('person_experience.internship.edit')->middleware('data.owner');
+  Route::patch('experience/internship/edit/{id}','PersonInternshipController@editingSubmit')->name('person_experience.internship.edit')->middleware('data.owner');
+  Route::get('experience/internship/delete/{id}','PersonInternshipController@delete')->name('person_experience.internship.delete')->middleware('data.owner');
 
-//   Route::get('experience/certificate/add','PersonCertificateController@add');
-//   Route::post('experience/certificate/add','PersonCertificateController@addingSubmit');
-//   Route::get('experience/certificate/edit/{id}','PersonCertificateController@edit')->name('person_experience.certificate.edit')->middleware('data.owner');
-//   Route::patch('experience/certificate/edit/{id}','PersonCertificateController@editingSubmit')->name('person_experience.certificate.edit')->middleware('data.owner');
-//   Route::get('experience/certificate/delete/{id}','PersonCertificateController@delete')->name('person_experience.certificate.delete')->middleware('data.owner');
+  Route::get('experience/education/add','PersonEducationController@add');
+  Route::post('experience/education/add','PersonEducationController@addingSubmit');
+  Route::get('experience/education/edit/{id}','PersonEducationController@edit')->name('person_experience.education.edit')->middleware('data.owner');
+  Route::patch('experience/education/edit/{id}','PersonEducationController@editingSubmit')->name('person_experience.education.edit')->middleware('data.owner');
+  Route::get('experience/education/delete/{id}','PersonEducationController@delete')->name('person_experience.education.delete')->middleware('data.owner');
 
-//   Route::get('experience/skill/add','PersonSkillController@add');
-//   Route::post('experience/skill/add','PersonSkillController@addingSubmit');
-//   Route::get('experience/skill/edit/{id}','PersonSkillController@edit')->name('person_experience.skill.edit')->middleware('data.owner');
-//   Route::patch('experience/skill/edit/{id}','PersonSkillController@editingSubmit')->name('person_experience.skill.edit')->middleware('data.owner');
-//   Route::get('experience/skill/delete/{id}','PersonSkillController@delete')->name('person_experience.skill.delete')->middleware('data.owner');
+  Route::get('experience/project/add','PersonProjectController@add');
+  Route::post('experience/project/add','PersonProjectController@addingSubmit');
+  Route::get('experience/project/edit/{id}','PersonProjectController@edit')->name('person_experience.project.edit')->middleware('data.owner');
+  Route::patch('experience/project/edit/{id}','PersonProjectController@editingSubmit')->name('person_experience.project.edit')->middleware('data.owner');
+  Route::get('experience/project/delete/{id}','PersonProjectController@delete')->name('person_experience.project.delete')->middleware('data.owner');
 
-//   Route::get('experience/language_skill/add','PersonLanguageSkillController@add');
-//   Route::post('experience/language_skill/add','PersonLanguageSkillController@addingSubmit');
-//   Route::get('experience/language_skill/edit/{id}','PersonLanguageSkillController@edit')->name('person_experience.language_skill.edit')->middleware('data.owner');
-//   Route::patch('experience/language_skill/edit/{id}','PersonLanguageSkillController@editingSubmit')->name('person_experience.language_skill.edit')->middleware('data.owner');
-//   Route::get('experience/language_skill/delete/{id}','PersonLanguageSkillController@delete')->name('person_experience.language_skill.delete')->middleware('data.owner');
+  Route::get('experience/certificate/add','PersonCertificateController@add');
+  Route::post('experience/certificate/add','PersonCertificateController@addingSubmit');
+  Route::get('experience/certificate/edit/{id}','PersonCertificateController@edit')->name('person_experience.certificate.edit')->middleware('data.owner');
+  Route::patch('experience/certificate/edit/{id}','PersonCertificateController@editingSubmit')->name('person_experience.certificate.edit')->middleware('data.owner');
+  Route::get('experience/certificate/delete/{id}','PersonCertificateController@delete')->name('person_experience.certificate.delete')->middleware('data.owner');
 
-// });
+  Route::get('experience/skill/add','PersonSkillController@add');
+  Route::post('experience/skill/add','PersonSkillController@addingSubmit');
+  Route::get('experience/skill/edit/{id}','PersonSkillController@edit')->name('person_experience.skill.edit')->middleware('data.owner');
+  Route::patch('experience/skill/edit/{id}','PersonSkillController@editingSubmit')->name('person_experience.skill.edit')->middleware('data.owner');
+  Route::get('experience/skill/delete/{id}','PersonSkillController@delete')->name('person_experience.skill.delete')->middleware('data.owner');
+
+  Route::get('experience/language_skill/add','PersonLanguageSkillController@add');
+  Route::post('experience/language_skill/add','PersonLanguageSkillController@addingSubmit');
+  Route::get('experience/language_skill/edit/{id}','PersonLanguageSkillController@edit')->name('person_experience.language_skill.edit')->middleware('data.owner');
+  Route::patch('experience/language_skill/edit/{id}','PersonLanguageSkillController@editingSubmit')->name('person_experience.language_skill.edit')->middleware('data.owner');
+  Route::get('experience/language_skill/delete/{id}','PersonLanguageSkillController@delete')->name('person_experience.language_skill.delete')->middleware('data.owner');
+
+});
 
 // Freelance
 // Route::get('freelance/board','FreelanceController@board');
@@ -453,11 +454,11 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   Route::get('shop/{shopSlug}/job/delete/{id}','JobController@delete')->name('shop.job.delete');
 });
 
-// Route::group(['middleware' => ['auth','person.experience']], function () {
-//   Route::get('job/apply/{id}','JobController@apply');
-//   Route::post('job/apply/{id}','JobController@applyingSubmit');
-//   Route::patch('job/apply/{id}','JobController@applyingSubmit');
-// });
+Route::group(['middleware' => 'auth'], function () {
+Route::get('job/apply/{id}','JobController@apply');
+  Route::post('job/apply/{id}','JobController@applyingSubmit');
+  Route::patch('job/apply/{id}','JobController@applyingSubmit');
+});
 
 // Advertising
 // Route::get('advertising/board','AdvertisingController@board');

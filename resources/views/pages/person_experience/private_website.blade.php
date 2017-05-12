@@ -7,7 +7,7 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{URL::to('person/experience')}}" class="btn btn-secondary">กลับไปหน้าภาพรวมประวัติการทำงาน</a>
+          <a href="{{URL::to('resume')}}" class="btn btn-secondary">กลับไปหน้าภาพรวมประวัติการทำงาน</a>
         </div>
 
       </div>

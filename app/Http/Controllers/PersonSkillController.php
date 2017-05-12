@@ -40,7 +40,7 @@ class PersonSkillController extends Controller
     }
 
     MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
-    return Redirect::to('experience/profile/edit');
+    return Redirect::to('resume/edit');
 
   }
 
@@ -60,7 +60,7 @@ class PersonSkillController extends Controller
 
     if($model->fill(request()->all())->save()) {
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('experience/profile/edit');
+      return Redirect::to('resume/edit');
     }else{
       return Redirect::back();
     }
@@ -77,7 +77,7 @@ class PersonSkillController extends Controller
       MessageHelper::display('ไม่สามารถลบข้อมูลนี้ได้','error');
     }
 
-    return Redirect::to('experience/profile/edit');
+    return Redirect::to('resume/edit');
   }
 
 }
