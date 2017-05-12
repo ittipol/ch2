@@ -100,20 +100,6 @@ class Blackbox {
 
     });
 
-    // $('#additional_nav_panel_trigger').on('click',function(){
-
-    //   if($(this).is(':checked')) {
-    //     $('.global-additional-nav-panel').addClass('panel-opened');
-    //     $('.content-wrapper-overlay').addClass('isvisible');
-    //     $('body').css('overflow-y','hidden');
-    //   }else{
-    //     $('.global-additional-nav-panel').removeClass('panel-opened');
-    //     $('.content-wrapper-overlay').removeClass('isvisible');
-    //     $('body').css('overflow-y','auto');
-    //   }
-
-    // });
-
     // Overlay screen
     $('.content-wrapper-overlay').on('click',function(){
 
@@ -128,9 +114,6 @@ class Blackbox {
       }else if($('#account_panel_trigger').is(':checked')) {
         $('#account_panel_trigger').trigger('click');
       }
-      // else if($('#additional_nav_panel_trigger').is(':checked')) {
-      //   $('#additional_nav_panel_trigger').trigger('click');
-      // }
 
     });
 
@@ -157,12 +140,6 @@ class Blackbox {
         $('#notification_panel_trigger').trigger('click');
       }
     });
-
-    // $('.additional-nav-panel-close-button').on('click',function(){
-    //   if($('#additional_nav_panel_trigger').is(':checked')) {
-    //     $('#additional_nav_panel_trigger').trigger('click');
-    //   }
-    // });
 
     // $(document).scroll(function() {
     //   $(this).scrollTop();
