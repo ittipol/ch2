@@ -19,6 +19,7 @@
 
 .box .box-header {
 	padding: 15px;
+	position: relative;
 }
 
 .box .box-header .box-header-title {
@@ -29,6 +30,12 @@
 	width: 25px;
 	height: 25px;
 	margin-right: 5px;
+}
+
+.box-header .flat-button {
+	position: absolute;
+	top: 18px;
+	right: 20px;
 }
 
 .box .box-footer {

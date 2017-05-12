@@ -63,6 +63,7 @@
         <h4 class="box-header-title">
           <img class="icon-before-title" src="/images/icons/tag-blue.png">สินค้า
         </h4>
+        <a href="{{request()->get('shopUrl')}}product" class="flat-button">แสดงทั้งหมด</a>
       </div>
 
       @if(!empty($products))
@@ -124,8 +125,6 @@
 
       </div>
 
-      <a href="{{request()->get('shopUrl')}}product" class="button wide-button">แสดงสินค้าทั้งหมด</a>
-
       @else
 
       <div class="list-empty-message text-center space-top-bottom-20">
@@ -145,6 +144,9 @@
         <h4 class="box-header-title">
           <img class="icon-before-title" src="/images/icons/tag-blue.png">แคตตาล็อกสินค้า
         </h4>
+
+        <a href="{{request()->get('shopUrl')}}product_catalog" class="flat-button">แสดงทั้งหมด</a>
+
       </div>
 
       @if(!empty($productCatalogs))
@@ -186,8 +188,6 @@
         </div>
 
       </div>
-
-      <a href="{{request()->get('shopUrl')}}product_catalog" class="button wide-button">แสดงแคตตาล็อกสินค้าทั้งหมด</a>
       
       @else
 
