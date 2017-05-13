@@ -395,7 +395,7 @@
 
     <div class="secondary-message-box info">
       <div class="secondary-message-box-inner">
-        <h3>กำหนดวิธีการชำระเงินของการสั่งซื้อนี้</h3>
+        <h3>ระบุวิธีการชำระเงินของการสั่งซื้อนี้</h3>
         <p>กรุณาเลือกวิธีการชำระเงินอย่างน้อย 1 วิธีให้กับการสั่งซื้อนี้</p>
       </div>
     </div>
@@ -405,7 +405,7 @@
       <div>
         <label class="choice-box">
           <?php
-            echo Form::checkbox('payment_method[]', $id);
+            echo Form::checkbox('payment_method[]', $id, true);
           ?> 
           <div class="inner"><?php echo $name; ?></div>
         </label>
