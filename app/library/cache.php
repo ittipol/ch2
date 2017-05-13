@@ -34,8 +34,8 @@ class Cache
       'fx' => 'getImageSizeByRatio',
     ),
     'list' => array(
-      'width' => 400,
-      'height' => 300,
+      'width' => 500,
+      'height' => 400,
       'fx' => 'getImageSizeByRatio',
     ),
     // 'banner' => array(
