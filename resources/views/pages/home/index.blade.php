@@ -69,10 +69,10 @@
   </div>
 
   <h3 class="space-bottom-20">ชุดเดรสสุภาพสตรี</h3>
-  @if(!empty($shirts))
+  @if(!empty($dresses))
   <div class="content-panel row">
 
-    @foreach($shirts as $data)
+    @foreach($dresses as $data)
     <div class="col-md-3 col-xs-6">
       <div class="card sm">
 
