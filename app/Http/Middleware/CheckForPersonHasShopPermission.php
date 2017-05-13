@@ -165,8 +165,7 @@ class CheckForPersonHasShopPermission
           'modelName' => 'Product'
         ),
         'shop.product.manage' => array(
-          'permission' => true,
-          'modelName' => 'Product'
+          'permission' => true
         ),
         'shop.product.add' => array(
           'permission' => 'add'
@@ -497,6 +496,8 @@ class CheckForPersonHasShopPermission
           ]);
 
           return $next($request);
+        }else{
+          return $this->errorPage('ไม่พบข้อมูลนี้ในร้านค้า');
         }
 
       }
@@ -521,11 +522,11 @@ class CheckForPersonHasShopPermission
           ['model','like',$pages[$name]['parent']['modelName']],
           ['model_id','=',$request->{$pages[$name]['parent']['param']}],
           ['shop_id','=',$shopId],
-        ])->exists();  
-      }
+        ])->exists(); 
 
-      if(!$exists) {
-        return $this->errorPage('ไม่พบข้อมูลนี้ในร้านค้า');
+        if(!$exists) {
+          return $this->errorPage('ไม่พบข้อมูลนี้ในร้านค้า');
+        } 
       }
 
       $request->attributes->add([
