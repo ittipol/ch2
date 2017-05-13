@@ -16,6 +16,14 @@ footer {
 	margin-left: 5px;
 }
 
+.site-map .site-map-content {
+	margin-bottom: 20px;
+}
+
+.site-map .site-map-link {
+	margin-bottom: 3px;
+}
+
 @media only screen and (min-width : 1367px) {
 	footer {
 		padding-left: 280px;

@@ -391,18 +391,24 @@ dd('end');
 
   public function index() {
 
-    $url = new url;
-
-    $product = Service::loadModel('Product');
-    // $product->paginator->setPerPage(4);
-    // $product->paginator->criteria(array(
-    //   'order' => array('created_at','DESC')
-    // ));
-    // $product->paginator->setUrl('product/detail/{id}','detailUrl');
-
     // 80
     // test 771
-    $categoryPaths = Service::loadModel('CategoryPath')->where('path_id','=',80)->get();
+
+    // 108
+    // $categoryPaths = Service::loadModel('CategoryPath')->where('path_id','=',108)->get();
+
+    $this->setData('shirts',$this->getProductData(80));
+    $this->setData('dresses',$this->getProductData(108));
+
+    return $this->view('pages.home.index');
+  }
+
+  private function getProductData($c) {
+
+    $url = new url;
+    $product = Service::loadModel('Product');
+
+    $categoryPaths = Service::loadModel('CategoryPath')->where('path_id','=',$c)->get();
 
     $ids = array();
     foreach ($categoryPaths as $categoryPath) {
@@ -414,14 +420,14 @@ dd('end');
     ->whereIn('product_to_categories.category_id',$ids)
     ->select('products.*')
     ->orderBy('products.created_at','desc')
-    ->take(8);
+    ->take(4);
 
-    $_products = array();
+    $data = array();
     if($products->exists()) {
 
       foreach ($products->get() as $product) {
 
-        $_products[] = array_merge($product->buildPaginationData(),array(
+        $data[] = array_merge($product->buildPaginationData(),array(
           '_imageUrl' => $product->getImage('list'),
           'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
         ));
@@ -430,9 +436,8 @@ dd('end');
 
     }
 
-    $this->setData('products',$_products);
+    return $data;
 
-    return $this->view('pages.home.index');
   }
 
 }
