@@ -9,11 +9,12 @@ class PushNotification {
 	}
 
 	load() {
-		this.socket = io.connect( 'http://localhost:8080' );
+		// this.socket = io.connect('http://localhost:8080');
 
-		this.subscribe();
-		this.check();
-		this.updateNotification();
+		// Use when start node server
+		// this.subscribe();
+		// this.check();
+		// this.updateNotification();
 	
 		this.bind();
 	}
@@ -35,8 +36,6 @@ class PushNotification {
 				  type: "get",
 				  dataType:'json'
 				});
-
-				// request.done(function (response, textStatus, jqXHR){});
 
 			}
 

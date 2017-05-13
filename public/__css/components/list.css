@@ -69,11 +69,11 @@
 }
 
 .lists .primary-image {
-	width: 250px;
+	width: 100%;
 	height: 250px;
 	background-position: center;
 	background-repeat: no-repeat;
-	background-size: auto 250px;
+	background-size: auto 100%;
 }
 
 .list-empty-message img {
@@ -326,7 +326,9 @@ label.list-box > input[type="checkbox"] {
 		width: 100%;
 	}
 
-	.lists .primary-image {
+	.list .list-content-wrapper .list-content {
+		float: none;
+		/*margin: 0 auto;*/
 		width: auto;
 	}
 

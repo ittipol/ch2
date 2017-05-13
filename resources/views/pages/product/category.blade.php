@@ -18,7 +18,7 @@
         </div>
         @else
         <div class="btn-group pull-right">
-          <a href="{{URL::to('product')}}" class="btn btn-secondary">สินค้าจากร้านค้า</a>
+          <a href="{{URL::to('product')}}" class="btn btn-secondary">สินค้าจากบริษัทและร้านค้า</a>
         </div>
         @endif
 
@@ -26,16 +26,6 @@
     </div>
   </div>
 </div>
-
-
-<!-- <div class="top-header-wrapper top-header-border">
-  <div class="container">
-    <div class="top-header">
-      <h5>หมวดสินค้า</h5>
-      <h2>{{$categoryName}}</h2>
-    </div>
-  </div>
-</div> -->
 
 <div class="top-header-wrapper top-header-border">
   <div class="container">

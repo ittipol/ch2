@@ -689,7 +689,7 @@ class Product extends Model
       ),
       'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id' => $this->id)),
       'image' => $this->getImage('list'),
-      'isDataTitle' => 'สินค้าจากร้านค้า'
+      'isDataTitle' => 'สินค้าจากบริษัทและร้านค้า'
     );
 
   }

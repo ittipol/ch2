@@ -498,6 +498,15 @@
 	background-color: #ececec;
 }
 
+.order-histroty-list {
+	background-color: #ececec;
+	border: 1px solid #ddd;
+}
+
+.order-histroty-list .order-histroty-list-inner {
+	padding: 15px;
+}
+
 @media only screen and (max-width : 992px) {
 	.quantity-box {
 		margin-top: 20px;

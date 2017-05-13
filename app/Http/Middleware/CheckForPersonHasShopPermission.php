@@ -101,46 +101,46 @@ class CheckForPersonHasShopPermission
           'permission' => true,
           'modelName' => 'Message'
         ),
-        'shop.branch.manage' => array(
-          'permission' => true
-        ),
-        'shop.branch.list' => true,
-        'shop.branch.detail' => array(
-          'modelName' => 'Branch'
-        ),
-        'shop.branch.add' => array(
-          'permission' => 'add'
-        ),
-        'shop.branch.edit' => array(
-          'permission' => 'edit',
-          'modelName' => 'Branch'
-        ),
-        'shop.branch.delete' => array(
-          'permission' => 'delete',
-          'modelName' => 'Branch'
-        ),
+        // 'shop.branch.manage' => array(
+        //   'permission' => true
+        // ),
+        // 'shop.branch.list' => true,
+        // 'shop.branch.detail' => array(
+        //   'modelName' => 'Branch'
+        // ),
+        // 'shop.branch.add' => array(
+        //   'permission' => 'add'
+        // ),
+        // 'shop.branch.edit' => array(
+        //   'permission' => 'edit',
+        //   'modelName' => 'Branch'
+        // ),
+        // 'shop.branch.delete' => array(
+        //   'permission' => 'delete',
+        //   'modelName' => 'Branch'
+        // ),
         'shop.product.manage.menu' => array(
           'permission' => 'edit',
           'modelName' => 'Product'
         ),
-        'shop.advertising.list' => true,
-        'shop.advertising.detail' => array(
-          'modelName' => 'Advertising'
-        ),
-        'shop.advertising.manage' => array(
-          'permission' => true
-        ),
-        'shop.advertising.add' => array(
-          'permission' => 'add'
-        ),
-        'shop.advertising.edit' => array(
-          'permission' => 'edit',
-          'modelName' => 'Advertising'
-        ),
-        'shop.advertising.delete' => array(
-          'permission' => 'delete',
-          'modelName' => 'Advertising'
-        ),
+        // 'shop.advertising.list' => true,
+        // 'shop.advertising.detail' => array(
+        //   'modelName' => 'Advertising'
+        // ),
+        // 'shop.advertising.manage' => array(
+        //   'permission' => true
+        // ),
+        // 'shop.advertising.add' => array(
+        //   'permission' => 'add'
+        // ),
+        // 'shop.advertising.edit' => array(
+        //   'permission' => 'edit',
+        //   'modelName' => 'Advertising'
+        // ),
+        // 'shop.advertising.delete' => array(
+        //   'permission' => 'delete',
+        //   'modelName' => 'Advertising'
+        // ),
         'shop.order' => array(
           'permission' => true
         ),
@@ -467,12 +467,12 @@ class CheckForPersonHasShopPermission
           if(($_model->model == 'Shop') && ($_model->model_id != $shopId)) {
             $exists = false;
           }
-          elseif(Schema::hasColumn($__model->getTable(), 'shop_id') && ($__model->select('shop_id')->find($_model->model_id)->shop_id != $shopId)) {
-            $exists = false;
-            dd('Check::debug');
-          }
+          // elseif(Schema::hasColumn($__model->getTable(), 'shop_id') && ($__model->select('shop_id')->find($_model->model_id)->shop_id != $shopId)) {
+          //   $exists = false;
+          //   dd('Check::debug');
+          // }
           else{
-            $exists = Service::loadModel('ShopRelateTo')
+            $exists = !Service::loadModel('ShopRelateTo')
             ->select('shop_id')
             ->where([
               ['model','like',$_model->model],
@@ -482,7 +482,7 @@ class CheckForPersonHasShopPermission
           }
 
         }else{
-          $exists = Service::loadModel('ShopRelateTo')
+          $exists = !Service::loadModel('ShopRelateTo')
           ->select('shop_id')
           ->where([
             ['model','like',$pages[$name]['modelName']],

@@ -72,7 +72,7 @@
 
     <div class="col-md-8 col-sm-12">
 
-      <div class="detail-info-section">
+      <div class="detail-info-section no-margin">
         <h4>รายละเอียดเพิ่มเติม</h4>
         <div class="line"></div> 
         <div class="detail-info">
@@ -83,6 +83,9 @@
     </div>
 
   </div>
+
+  <h4>รูปภาพ</h4>
+  <div class="line"></div>
 
   <div class="image-gallery">
 
@@ -124,14 +127,11 @@
 
     </div>
 
-    @if(!empty($_modelData['Image']))
     <div class="row">
       <div class="col-sm-12">
         <div id="image_gallery_list" class="image-gallery-list clearfix"></div>
       </div>
     </div>
-    <div class="line space-top-bottom-20"></div>
-    @endif
 
   </div>
 

@@ -375,14 +375,17 @@
     <div class="line"></div>
 
     @foreach($orderHistories as $orderHistory)
-      <div class="space-bottom-20">
-        <h4>{{$orderHistory['orderStatus']}}</h4>
-        <h5>{{$orderHistory['createdDate']}}</h5>
-        @if(!empty($orderHistory['message']))
-        <div>
-          {!!$orderHistory['message']!!}
+      <div class="order-histroty-list space-top-20">
+        <div class="order-histroty-list-inner">
+          <h4>{{$orderHistory['orderStatus']}}</h4>
+          <h5>เมื่อ {{$orderHistory['createdDate']}}</h5>
+          @if(!empty($orderHistory['message']))
+          <h5 class="space-top-20"><strong>รายละเอียด</strong></h5>
+          <div>
+            {!!$orderHistory['message']!!}
+          </div>
+          @endif
         </div>
-        @endif
       </div>
     @endforeach
 

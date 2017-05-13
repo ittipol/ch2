@@ -5,7 +5,7 @@
   @include('scripts.meta') 
   <!-- CSS & JS -->
   @include('scripts.script')
-  <script type="text/javascript" src="{{ URL::asset('js/node_modules/socket.io.js') }}"></script>
+  <!--<script type="text/javascript" src="{{ URL::asset('js/node_modules/socket.io.js') }}"></script>-->
   <!-- Title  -->
   @include('page_title')
 </head>

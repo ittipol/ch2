@@ -9,8 +9,8 @@
 	width: 700px;
 	height: 100%;
 	opacity: 1;
-	color: #fff;
-	background-color: #00695C;
+	color: #222;
+	background-color: #ececec;
 	padding: 0;
 	z-index: 90;
 	overflow: hidden;
@@ -31,17 +31,17 @@
 	background-color: #fff;
 }
 
-.right-size-panel .line {
+/*.right-size-panel .line {
 	background-color: #fff;
-}
+}*/
 
-.right-size-panel.form .line {
+/*.right-size-panel.form .line {
 	background-color: #0071c5;
 }
 
 .right-size-panel.description .line {
 	background-color: #0071c5;
-}
+}*/
 
 .right-size-panel .right-size-panel-inner {
 	padding: 30px 30px 80px;

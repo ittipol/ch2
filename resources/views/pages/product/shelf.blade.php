@@ -17,7 +17,7 @@
   <div class="container">
     <div class="top-header">
       <div class="detail-title">
-        <h2 class="title">สินค้าจากร้านค้า</h2>
+        <h2 class="title">สินค้าจากบริษัทและร้านค้า</h2>
       </div>
     </div>
   </div>
