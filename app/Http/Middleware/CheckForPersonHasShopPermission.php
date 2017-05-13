@@ -425,6 +425,15 @@ class CheckForPersonHasShopPermission
         $role = $person->role->name;
       }
 
+      if(!is_array($pages[$name]) && ($pages[$name] == true)) {
+        $request->attributes->add([
+          // 'shopRole' => $role,
+          'shopPermission' => $permissions,
+        ]);
+
+        return $next($request);
+      }
+
       // check permission
       if(!empty($pages[$name]['permission'])) {
 
@@ -481,15 +490,15 @@ class CheckForPersonHasShopPermission
           ])->exists();
         }
 
-      }
+        if($exists) {
+          $request->attributes->add([
+            // 'shopRole' => $role,
+            'shopPermission' => $permissions,
+          ]);
 
-      if($exists) {
-        $request->attributes->add([
-          // 'shopRole' => $role,
-          'shopPermission' => $permissions,
-        ]);
+          return $next($request);
+        }
 
-        return $next($request);
       }
 
       if(!empty($pages[$name]['check'])) {
@@ -512,13 +521,12 @@ class CheckForPersonHasShopPermission
           ['model','like',$pages[$name]['parent']['modelName']],
           ['model_id','=',$request->{$pages[$name]['parent']['param']}],
           ['shop_id','=',$shopId],
-        ])->exists();
+        ])->exists();  
       }
 
       if(!$exists) {
         return $this->errorPage('ไม่พบข้อมูลนี้ในร้านค้า');
       }
-
 
       $request->attributes->add([
         // 'shopRole' => $role,
