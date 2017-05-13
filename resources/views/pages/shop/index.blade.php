@@ -160,9 +160,9 @@
           <div class="col-md-6 col-xs-12">
             <div class="card">
 
-              <div class="image-tile cover">
+              <div class="image-tile">
                 <a href="{{$data['detailUrl']}}">
-                  <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+                  <div class="card-image cover" style="background-image:url({{$data['_imageUrl']}});"></div>
                 </a>
               </div>
               

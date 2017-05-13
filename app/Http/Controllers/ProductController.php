@@ -70,12 +70,21 @@ class ProductController extends Controller
       $products = $products
       ->select('products.*')
       ->orderBy('products.created_at','desc')
-      ->take(4);
+      ->take(3);
 
       $_products = array();
       if($products->exists()) {
 
         foreach ($products->get() as $product) {
+
+          $_image = $product->getImage('list',true);
+
+          // $imageUrl = null;
+          // $orientation = null;
+          // if(!empty($_image)) {
+          //   $imageUrl = $_image['url'];
+          //   $orientation = $_image['orientation'];
+          // }
 
           $_products['items'][] = array_merge($product->buildPaginationData(),array(
             '_imageUrl' => $product->getImage('list'),
@@ -84,9 +93,9 @@ class ProductController extends Controller
           
         }
 
-        if($total > 4) {
+        if($total > 3) {
           $_products['all'] = array(
-            'title' => '+'.($total-4)
+            'title' => '+'.($total-3)
           );
         }
 

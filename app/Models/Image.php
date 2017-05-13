@@ -7,14 +7,14 @@ use App\library\stringHelper;
 use App\library\url;
 use App\library\cache;
 use App\library\imageTool;
-use App\library\handleImageFile;
+// use App\library\handleImageFile;
 use File;
 use Session;
 
 class Image extends Model
 {
   protected $table = 'images';
-  protected $fillable = ['model','model_id','path','filename','description','image_type_id','created_by'];
+  protected $fillable = ['model','model_id','path','filename','description','image_type_id','orientation','created_by'];
   private $maxFileSizes = 2097152;
   private $acceptedFileTypes = ['image/jpg','image/jpeg','image/png', 'image/pjpeg'];
 
@@ -211,6 +211,10 @@ class Image extends Model
         return false;
       }
 
+      // Orientation   
+      $imageInstance->orientation = $this->getOrientation($path);
+      $imageInstance->image_type_id = $imageType->getIdByalias($options['type']);
+
     }
     
      // new record
@@ -218,7 +222,7 @@ class Image extends Model
       $imageInstance->model = $model->modelName;
       $imageInstance->model_id = $model->id;
       // $imageInstance->filename = $image['filename'];
-      $imageInstance->image_type_id = $imageType->getIdByalias($options['type']);
+      // $imageInstance->image_type_id = $imageType->getIdByalias($options['type']);
     }
 
     if(!empty($image['description'])) {
@@ -411,6 +415,48 @@ class Image extends Model
     }
 
     return $this->id;
+
+  }
+
+  public function getOrientation($path) {
+
+    if(empty($path) || !file_exists($path)) {
+      return null;
+    }
+
+    list($width, $height) = getimagesize($path);
+
+    // 1 = Portrait
+    // 2 = landscape
+    // 3 = square
+
+    if($width < $height) {
+      return 1;
+    }elseif($width > $height) {
+      return 2;
+    }
+
+    return 3;
+
+  }
+
+  public function getOrientationText($orientation = null) {
+
+    switch ($orientation) {
+      case 1:
+          return 'portrait-image';
+        break;
+      
+      case 2:
+          return 'landscape-image';
+        break;
+
+      case 3:
+          return 'square-image';
+        break;
+    }
+
+    return null;
 
   }
 

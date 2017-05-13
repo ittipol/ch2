@@ -29,13 +29,13 @@ class Cache
     //   'fx' => '',
     // ),
     'productOption' => array(
-      'width' => 100,
+      'width' => 50,
       'height' => 50,
       'fx' => 'getImageSizeByRatio',
     ),
     'list' => array(
-      'width' => 500,
-      'height' => 400,
+      'width' => 380,
+      'height' => 380,
       'fx' => 'getImageSizeByRatio',
     ),
     // 'banner' => array(
@@ -84,7 +84,7 @@ class Cache
     $width = $value['width'];
     $height = $value['height'];
 
-    if(!empty($value['fx']) && method_exists($this,$value['fx'])) {
+    if(!empty($value['fx'])) {
       list($width,$height) = $this->getImageSizeByRatio($originalWidth,$originalHeight,$width,$height);
     }
 
@@ -92,7 +92,6 @@ class Cache
     $cachePath = $url->addSlash($this->cachePath.$filename);
     $cacheFile = $cachePath.$newFilename;
 
-    // if(!file_exists($cacheFile) && !$this->cache($model,$alias)) {
     if(!file_exists($cacheFile) && !$this->_cacheImage($path,$width,$height,$cachePath,$cacheFile)) {
       return false;
     }
@@ -150,31 +149,25 @@ class Cache
 
   public function getImageSizeByRatio($originalWidth,$originalHeight,$width,$height) {
 
-    // if (($originalWidth > $originalHeight) && (abs($originalWidth - $originalHeight) > 280)){
-    //   $width = (int)ceil($originalWidth*($height/$originalHeight));
-    // } else if (($originalWidth < $originalHeight) && (abs($originalWidth - $originalHeight) > 280)){
-    //   $height = (int)ceil($originalHeight*($width/$originalWidth));
+    // if($height > $width) {
+    //   $width = (int)ceil($originalWidth * ($height / $originalHeight));
+    // }else{
+    //   $height = (int)ceil($originalHeight * ($width / $originalWidth));
     // }
 
-    if(($originalHeight > $originalWidth) && (($originalHeight - $originalWidth) > 250)) {
+    if(($originalHeight > $originalWidth) && (($originalHeight - $originalWidth) > 200)) {
       if($originalHeight > $height) {
         $width = (int)ceil($originalWidth * ($height / $originalHeight));
       }else{
         $height = (int)ceil($originalHeight * ($width / $originalWidth));
       }
-    }elseif(($originalWidth > $originalHeight) && (($originalWidth - $originalHeight) > 250)) {
+    }elseif(($originalWidth > $originalHeight) && (($originalWidth - $originalHeight) > 200)) {
       if($originalWidth > $width) {
         $width = (int)ceil($originalWidth * ($height / $originalHeight));
       }else{
         $height = (int)ceil($originalHeight * ($width / $originalWidth));
       }
     }
-
-    // if (($originalWidth > $originalHeight) && (abs($originalWidth - $originalHeight) > 250)){
-    //   $width = (int)ceil($originalWidth*($height/$originalHeight));
-    // } else if (($originalWidth < $originalHeight) && (abs($originalWidth - $originalHeight) > 400)){
-    //   $height = (int)ceil($originalHeight*($width/$originalWidth));
-    // }
 
     return array($width,$height);
   }

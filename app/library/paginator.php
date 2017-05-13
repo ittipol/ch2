@@ -261,20 +261,6 @@ class Paginator {
     $data = array();
     foreach ($records as $record) {
 
-      // $_data = array();
-      // if($this->getImage) {
-
-      //   $image = $record->getRelatedData('Image',array(
-      //     'first' => true
-      //   ));
-
-      //   $_data['_imageUrl'] = null;
-      //   if(!empty($image)) {
-      //     $_data['_imageUrl'] = $cache->getCacheImageUrl($image,'list');
-      //   }
-
-      // }
-
       $data[] = array_merge(
         // $_data,
         $record->buildPaginationData(),
@@ -350,6 +336,8 @@ class Paginator {
 
       $_data = array();
       if($this->getImage) {
+
+        // $record->getImage('list'),
 
         $image = $record->getRelatedData('Image',array(
           'first' => true

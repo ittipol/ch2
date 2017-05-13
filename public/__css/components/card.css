@@ -67,8 +67,20 @@
 	background-repeat: no-repeat;
 }
 
-.card .image-tile.cover .card-image {
+.card .image-tile .card-image.cover {
 	background-size: cover;
+}
+
+.card .image-tile .card-image.portrait-image {
+	background-size: auto 100%;
+}
+
+.card .image-tile .card-image.landscape-image {
+	background-size: 100% auto;
+}
+
+.card .image-tile .card-image.square-image {
+	background-size: 100%;
 }
 
 .card .image-tile .card-image.round {
@@ -228,7 +240,7 @@
 
 	.card .image-tile .card-image {
 		height: 270px;
-		background-size: 100% auto;
+		background-size: 120% auto;
 	}
 
 	.card .button-group .additional-option {
