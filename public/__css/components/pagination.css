@@ -13,7 +13,8 @@
 
 .pagination a.paging:hover,
 .pagination a.paging.selected{
-	background-color: #BDBDBD;
+	background-color: rgb(66,133,244);
+	color: #fff;
 }
 
 .pagination .paging.icon {

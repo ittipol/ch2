@@ -17,14 +17,7 @@
 
   <h2 class="article-title color-pink space-bottom-50">แฟชั่นสุภาพสตรี</h2>
 
-  <h3 class="article-title color-teal space-bottom-20">แฟชั่นสุภาพสตรี</h3>
-
-  <div class="line only-space space-bottom-120"></div>
-
-  <h3 class="article-title color-teal space-bottom-20">สินค้าจากร้านค้า</h3>
-  <div class="article-content space-bottom-20">
-    <div class="paragraph">สินค้าแต่ละรายการจะถูกจัดวางไปยังหมวดมู่สินค้าโดยผู้ขายจะเป็นผู้กำหนดหมวดหมู่ให้กับสินค้า โดยมีหมวดหมู่สินค้ามากกว่า 2500 หมวดหมู่ที่จะทำให้การเลือกซื้อสินค้าสะดวกและรวดเร็ว</div>
-  </div>
+  <h3 class="article-title color-teal space-bottom-20">เสื้อผ้าสุภาพสตรี</h3>
 
   @if(!empty($products))
 
@@ -32,8 +25,8 @@
 
     @foreach($products as $data)
 
-    <div class="col-lg-3 col-sm-6 col-xs-6">
-      <div class="card">
+    <div class="col-md-3 col-xs-6">
+      <div class="card sm">
 
         @if(!empty($data['flag']))
         <div class="flag-wrapper">
@@ -64,14 +57,6 @@
             </div>
 
           </div>
-        </div>
-
-        <div class="button-group">
-
-          <a href="{{$data['detailUrl']}}">
-            <div class="button wide-button">แสดงรายละเอียด</div>
-          </a>
-        
         </div>
 
       </div>

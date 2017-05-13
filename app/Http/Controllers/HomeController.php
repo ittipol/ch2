@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\library\service;
+use App\library\url;
 
 class HomeController extends Controller
 {
@@ -390,46 +391,46 @@ dd('end');
 
   public function index() {
 
+    $url = new url;
+
     $product = Service::loadModel('Product');
-    $product->paginator->setPerPage(4);
-    $product->paginator->criteria(array(
-      'order' => array('created_at','DESC')
-    ));
-    $product->paginator->setUrl('product/detail/{id}','detailUrl');
-
-    // $job = Service::loadModel('Job');
-    // $job->paginator->setPerPage(4);
-    // $job->paginator->criteria(array(
+    // $product->paginator->setPerPage(4);
+    // $product->paginator->criteria(array(
     //   'order' => array('created_at','DESC')
     // ));
-    // $job->paginator->setUrl('job/detail/{id}','detailUrl');
+    // $product->paginator->setUrl('product/detail/{id}','detailUrl');
 
-    // $advertising = Service::loadModel('Advertising');
-    // $advertising->paginator->setPerPage(4);
-    // $advertising->paginator->criteria(array(
-    //   'order' => array('created_at','DESC')
-    // ));
-    // $advertising->paginator->setUrl('advertising/detail/{id}','detailUrl');
+    // 80
+    // test 771
+    $categoryPaths = Service::loadModel('CategoryPath')->where('path_id','=',80)->get();
 
-    // $item = Service::loadModel('Item');
-    // $item->paginator->setPerPage(4);
-    // $item->paginator->criteria(array(
-    //   'order' => array('created_at','DESC')
-    // ));
-    // $item->paginator->setUrl('item/detail/{id}','detailUrl');
+    $ids = array();
+    foreach ($categoryPaths as $categoryPath) {
+      $ids[] = $categoryPath->category_id;
+    }
 
-    // $realEstate = Service::loadModel('RealEstate');
-    // $realEstate->paginator->setPerPage(4);
-    // $realEstate->paginator->criteria(array(
-    //   'order' => array('created_at','DESC')
-    // ));
-    // $realEstate->paginator->setUrl('real-estate/detail/{id}','detailUrl');
+    $products = $product
+    ->join('product_to_categories', 'product_to_categories.product_id', '=', 'products.id')
+    ->whereIn('product_to_categories.category_id',$ids)
+    ->select('products.*')
+    ->orderBy('products.created_at','desc')
+    ->take(8);
 
-    $this->setData('products',$product->paginator->getPaginationData());
-    // $this->setData('jobs',$job->paginator->getPaginationData());
-    // $this->setData('advertisings',$advertising->paginator->getPaginationData());
-    // $this->setData('items',$item->paginator->getPaginationData());
-    // $this->setData('realEstates',$realEstate->paginator->getPaginationData());
+    $_products = array();
+    if($products->exists()) {
+
+      foreach ($products->get() as $product) {
+
+        $_products[] = array_merge($product->buildPaginationData(),array(
+          '_imageUrl' => $product->getImage('list'),
+          'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
+        ));
+        
+      }
+
+    }
+
+    $this->setData('products',$_products);
 
     return $this->view('pages.home.index');
   }

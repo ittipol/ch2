@@ -77,15 +77,6 @@ class ProductController extends Controller
 
         foreach ($products->get() as $product) {
 
-          $_image = $product->getImage('list',true);
-
-          // $imageUrl = null;
-          // $orientation = null;
-          // if(!empty($_image)) {
-          //   $imageUrl = $_image['url'];
-          //   $orientation = $_image['orientation'];
-          // }
-
           $_products['items'][] = array_merge($product->buildPaginationData(),array(
             '_imageUrl' => $product->getImage('list'),
             'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
