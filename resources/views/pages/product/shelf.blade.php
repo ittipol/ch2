@@ -41,7 +41,7 @@
           <div class="row">
 
             @foreach($shelf['products']['items'] as $product)
-              <div class="col-lg-4 col-xs-6">
+              <div class="col-md-4 col-xs-6">
 
                 <div class="card">
 
