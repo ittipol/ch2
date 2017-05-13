@@ -15,17 +15,9 @@
 
 <div class="container">
 
-  <h2 class="article-title color-pink space-bottom-50">บริษัทและร้านค้า</h2>
+  <h2 class="article-title color-pink space-bottom-50">แฟชั่นสุภาพสตรี</h2>
 
-  <h3 class="article-title color-teal space-bottom-20">สร้างร้านค้าของคุณ</h3>
-  <div class="article-content space-bottom-20">
-    <div class="paragraph">สร้างธุรกิจของคุณ จัดการธุรกิจของคุณไปในทิศทางที่คุณต้องการ และให้เราทำหน้าที่เชื่อมต่อธุรกิจของคุณกับผู้คนอีกมากมาย</div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <a href="{{URL::to('shop/create')}}" class="button wide-button">สร้างร้านค้า</a>
-    </div>
-  </div>
+  <h3 class="article-title color-teal space-bottom-20">แฟชั่นสุภาพสตรี</h3>
 
   <div class="line only-space space-bottom-120"></div>
 

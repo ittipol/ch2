@@ -7,10 +7,11 @@
 }
 
 .card {
+	width: 360px;
 	margin-bottom: 20px;
 	position: relative;
 	background-color: #fff;
-	border: 2px solid #EEEEEE;
+	border: 2px solid #ddd;
 }
 
 .card .overlay-top-info {
@@ -45,7 +46,7 @@
 
 .card .card-info {
 	position: relative;
-  background-color: #F5F5F5;
+  background-color: #fff;
   padding: 15px 10px;
 }
 
@@ -59,7 +60,7 @@
 
 .card .image-tile .card-image {
 	width: 100%;
-	height: 250px;
+	height: 360px;
 	margin: 0 auto;
 	background-position: center;
 	background-size: auto 100%;
@@ -214,12 +215,19 @@
 	background-color: #fff;
 }
 
+@media only screen and (max-width : 1200px) {
+  .card {
+  	width: auto;
+  }
+}
+
 @media only screen and (max-width : 480px) {
 	.card .image-tile {
 		background-size: 140px;
 	}
 
 	.card .image-tile .card-image {
+		height: 270px;
 		background-size: 100% auto;
 	}
 

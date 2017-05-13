@@ -7,7 +7,7 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{URL::to('shop/create')}}" class="btn btn-secondary">เพิ่มบริษัทหรือร้านค้า</a>
+          <a href="{{URL::to('shop/create')}}" class="btn btn-secondary">สร้างบริษัทหรือร้านค้า</a>
         </div>
 
       </div>

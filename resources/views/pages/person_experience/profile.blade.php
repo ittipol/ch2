@@ -28,36 +28,6 @@
 </div>
 
 <div class="container">
-
-  <?php 
-    echo Form::model($_formData, [
-      'id' => 'main_form',
-      'method' => 'PATCH',
-      'enctype' => 'multipart/form-data'
-    ]);
-  ?>
-
-  <h4>ใครบ้างที่สามารถเห็นประวัติการทำงานของฉันได้</h4>
-  <div class="input-group clearfix">
-    <div class="input-item">
-      <?php
-        echo Form::select('access_level', $accessLevels);
-      ?>
-    </div>
-    <div class="input-item">
-      <?php
-        echo Form::submit('บันทึก' , array(
-          'class' => 'button'
-        ));
-      ?>
-    </div>
-  </div>
-
-  <?php
-    echo Form::close();
-  ?>
-
-  <div class="line grey space-top-bottom-20"></div>
   
   <h4>จุดมุ่งหมายในอาชีพ</h4>
   <div class="clearfix">
