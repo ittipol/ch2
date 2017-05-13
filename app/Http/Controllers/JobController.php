@@ -410,7 +410,7 @@ class JobController extends Controller
 
     $this->setData('alreadyApply',$personApplyJob->exists());
 
-    $this->setPageTitle($this->data['_modelData']['name'].' - งาน - '.request()->get('shop')->name);
+    $this->setPageTitle($this->data['_modelData']['name'].' - งาน @ '.request()->get('shop')->name);
     $this->setPageImage($model->getImage('list'));
     $this->setPageDescription($model->getShortDescription());
     

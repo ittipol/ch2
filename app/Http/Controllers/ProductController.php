@@ -517,7 +517,7 @@ class ProductController extends Controller
     $this->setData('branchLocations',json_encode($branchLocations));
     $this->setData('hasBranchLocation',$hasBranchLocation);
 
-    $this->setPageTitle($this->data['_modelData']['name'].' - สินค้า - '.request()->get('shop')->name);
+    $this->setPageTitle($this->data['_modelData']['name'].' - สินค้า @ '.request()->get('shop')->name);
     $this->setPageImage($model->getImage('list'));
     $this->setPageDescription($model->getShortDescription());
 
