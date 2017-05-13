@@ -336,18 +336,7 @@ class Paginator {
 
       $_data = array();
       if($this->getImage) {
-
-        // $record->getImage('list'),
-
-        $image = $record->getRelatedData('Image',array(
-          'first' => true
-        ));
-
-        $_data['_imageUrl'] = null;
-        if(!empty($image)) {
-          $_data['_imageUrl'] = $cache->getCacheImageUrl($image,'list');
-        }
-
+        $_data['_imageUrl'] = $record->getImage('list');
       }
 
       $data[] = array_merge(

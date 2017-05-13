@@ -11,7 +11,7 @@
 	height: 60px;
 	margin: 4px;
 	padding: 2px;
-	border: 5px solid rgb(208,212,214);
+	border: 2px solid rgb(208,212,214);
 	background-color: #fff;
 	text-align: center;
 	cursor: pointer;
@@ -19,7 +19,7 @@
 }
 
 .image-gallery .image-gallery-list .preview-image:hover {
-	border-color: #0071c5;
+	border-color: rgb(66,133,244);
 }
 
 .image-gallery .image-gallery-list .preview-image img {

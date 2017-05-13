@@ -14,7 +14,7 @@ use Session;
 class Image extends Model
 {
   protected $table = 'images';
-  protected $fillable = ['model','model_id','path','filename','description','image_type_id','orientation','created_by'];
+  protected $fillable = ['model','model_id','path','filename','description','image_type_id','created_by'];
   private $maxFileSizes = 2097152;
   private $acceptedFileTypes = ['image/jpg','image/jpeg','image/png', 'image/pjpeg'];
 
@@ -211,8 +211,6 @@ class Image extends Model
         return false;
       }
 
-      // Orientation   
-      $imageInstance->orientation = $this->getOrientation($path);
       $imageInstance->image_type_id = $imageType->getIdByalias($options['type']);
 
     }
@@ -418,46 +416,46 @@ class Image extends Model
 
   }
 
-  public function getOrientation($path) {
+  // public function getOrientation($path) {
 
-    if(empty($path) || !file_exists($path)) {
-      return null;
-    }
+  //   if(empty($path) || !file_exists($path)) {
+  //     return null;
+  //   }
 
-    list($width, $height) = getimagesize($path);
+  //   list($width, $height) = getimagesize($path);
 
-    // 1 = Portrait
-    // 2 = landscape
-    // 3 = square
+  //   // 1 = Portrait
+  //   // 2 = landscape
+  //   // 3 = square
 
-    if($width < $height) {
-      return 1;
-    }elseif($width > $height) {
-      return 2;
-    }
+  //   if($width < $height) {
+  //     return 1;
+  //   }elseif($width > $height) {
+  //     return 2;
+  //   }
 
-    return 3;
+  //   return 3;
 
-  }
+  // }
 
-  public function getOrientationText($orientation = null) {
+  // public function getOrientationText($orientation = null) {
 
-    switch ($orientation) {
-      case 1:
-          return 'portrait-image';
-        break;
+  //   switch ($orientation) {
+  //     case 1:
+  //         return 'portrait-image';
+  //       break;
       
-      case 2:
-          return 'landscape-image';
-        break;
+  //     case 2:
+  //         return 'landscape-image';
+  //       break;
 
-      case 3:
-          return 'square-image';
-        break;
-    }
+  //     case 3:
+  //         return 'square-image';
+  //       break;
+  //   }
 
-    return null;
+  //   return null;
 
-  }
+  // }
 
 }

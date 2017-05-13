@@ -82,7 +82,7 @@
             @endforeach
 
             @if(!empty($shelf['products']['all']))
-              <div class="col-xs-12">
+              <div class="col-sm-12 col-xs-6">
                 <a href="{{$shelf['productShelfUrl']}}" class="product-all-tile">
                   <span>
                     แสดงสินค้าทั้งหมด<br>

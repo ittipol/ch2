@@ -14,26 +14,26 @@
 // Route::get('aa','HomeController@addC');
 // Route::get('co','HomeController@co');
 
-Route::get('imm', function() {
-  $model = new App\Models\Image;
+// Route::get('imm', function() {
+//   $model = new App\Models\Image;
 
-  foreach ($model->get() as $value) {
+//   foreach ($model->get() as $value) {
 
-    $path = $value->getImagePath();
+//     $path = $value->getImagePath();
 
-    $xxx = $model->getOrientation($path);
+//     $xxx = $model->getOrientation($path);
 
-    if(empty($xxx)) {
-      continue;
-    }
+//     if(empty($xxx)) {
+//       continue;
+//     }
 
-    $value->orientation = $xxx;
-    $value->save();
-  }
+//     $value->orientation = $xxx;
+//     $value->save();
+//   }
 
-  dd('DONE');
+//   dd('DONE');
 
-});
+// });
 
 // Route::get('aa', function() {
 //   $model = new App\Models\Cart;

@@ -592,12 +592,12 @@ class Model extends BaseModel
   //   }
   // }
 
-  public function getImage($size = null,$orientation = false) {
+  public function getImage($size = null) {
 
     $cache = new Cache;
 
     $image = $this->getRelatedData('Image',array(
-      'fields' => array('model','model_id','filename','image_type_id','orientation'),
+      'fields' => array('model','model_id','filename','image_type_id'),
       'first' => true
     ));
 
@@ -606,20 +606,10 @@ class Model extends BaseModel
     }
 
     if(empty($size)) {
-      $path = $image->getImageUrl();
-    }else{
-      $path = $cache->getCacheImageUrl($image,$size);
+      return $image->getImageUrl();
     }
 
-    if($orientation) {
-      return array(
-        'url' => $path,
-        // 'orientation' => $image->orientation
-        'orientation' => $image->getOrientationText($image->orientation)
-      );
-    }
-
-    return $path;
+    return $cache->getCacheImageUrl($image,$size);
 
   }
 

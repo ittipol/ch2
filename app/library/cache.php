@@ -155,13 +155,13 @@ class Cache
     //   $height = (int)ceil($originalHeight * ($width / $originalWidth));
     // }
 
-    if(($originalHeight > $originalWidth) && (($originalHeight - $originalWidth) > 200)) {
+    if(($originalHeight > $originalWidth) && (($originalHeight - $originalWidth) > 250)) {
       if($originalHeight > $height) {
         $width = (int)ceil($originalWidth * ($height / $originalHeight));
       }else{
         $height = (int)ceil($originalHeight * ($width / $originalWidth));
       }
-    }elseif(($originalWidth > $originalHeight) && (($originalWidth - $originalHeight) > 200)) {
+    }elseif(($originalWidth > $originalHeight) && (($originalWidth - $originalHeight) > 250)) {
       if($originalWidth > $width) {
         $width = (int)ceil($originalWidth * ($height / $originalHeight));
       }else{

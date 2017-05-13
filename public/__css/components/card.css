@@ -71,7 +71,7 @@
 	background-size: cover;
 }
 
-.card .image-tile .card-image.portrait-image {
+/*.card .image-tile .card-image.portrait-image {
 	background-size: auto 100%;
 }
 
@@ -81,7 +81,7 @@
 
 .card .image-tile .card-image.square-image {
 	background-size: 100%;
-}
+}*/
 
 .card .image-tile .card-image.round {
 	width: 250px;
@@ -239,8 +239,8 @@
 	}
 
 	.card .image-tile .card-image {
-		height: 270px;
-		background-size: 120% auto;
+		height: 200px;
+		background-size: 90% auto;
 	}
 
 	.card .button-group .additional-option {
