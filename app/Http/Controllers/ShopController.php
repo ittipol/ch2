@@ -87,7 +87,7 @@ class ShopController extends Controller
     $this->setData('productCatalogs',$_productCatalogs);
     $this->setData('pinnedMessages',$_pinnedPosts);
 
-    $this->setPageTitle(request()->get('shop')->name);
+    $this->setPageTitle(request()->get('shop')->name,false);
     $this->setPageImage(request()->get('shop')->getProfileImageUrl());
     $this->setPageDescription(request()->get('shop')->getShortDescription());
 
@@ -103,7 +103,7 @@ class ShopController extends Controller
     $this->setData('openHours',$model->getOpenHours());
     $this->setData('about',$model->getShopAbout());
 
-    $this->setPageTitle('เกี่ยวกับ - '.request()->get('shop')->name);
+    $this->setPageTitle('เกี่ยวกับ - '.request()->get('shop')->name,false);
     $this->setPageImage(request()->get('shop')->getProfileImageUrl());
     $this->setPageDescription(request()->get('shop')->getShortDescription());
 

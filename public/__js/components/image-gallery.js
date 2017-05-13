@@ -151,7 +151,7 @@ class ImageGallery {
 
     image.onload = function() {
       _this.alignCenter(image.width,image.height);
-      $('#image_display').css('display','inline-block');
+      // $('#image_display').css('display','inline-block');
     }
 
     $('#image_display').css('display','none').attr('src',url);
@@ -206,6 +206,7 @@ class ImageGallery {
         if(imgW > frameWidth) {
           $('#image_display').css({
             'height': '100%',
+            'margin-top': 0,
             'margin-left': -((imgW - frameWidth) / 2)
           });
         }else{
@@ -230,12 +231,15 @@ class ImageGallery {
           'width': 'auto',
           'height': 'auto',
           'margin-top': (frameheight-imgHeight) / 2,
-          // 'margin-left': (frameWidth-imgWidth) / 2
+          'margin-left': 0,
         });
 
       }
 
     }
+
+
+    $('#image_display').fadeIn(150)
 
   }
 

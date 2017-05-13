@@ -37,8 +37,15 @@ class Controller extends BaseController
     $this->param = Route::current()->parameters();
   }
 
-  protected function setPageTitle($pageTitle) {
-    $this->pageTitle = $pageTitle.' | Sunday Square';
+  protected function setPageTitle($pageTitle,$include = true) {
+    
+
+    if($include) {
+      $pageTitle = $pageTitle.' | Sunday Square';
+    }
+
+    $this->pageTitle = $pageTitle;
+
   }
 
   protected function setPageDescription($pageDescription) {
