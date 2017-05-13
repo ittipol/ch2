@@ -8,9 +8,9 @@
           <button class="btn btn-secondary additional-option">
             จัดการ...
             <div class="additional-option-content">
-              <a href="{{request()->get('shopUrl')}}manage/product">จัดการสินค้า</a>
-              <a href="{{request()->get('shopUrl')}}manage/product_catalog">จัดการแคตตาล็อกสินค้า</a>
-              <a href="{{request()->get('shopUrl')}}manage/job">จัดการงาน</a>
+              <a href="{{request()->get('shopUrl')}}manage/product">สินค้า</a>
+              <a href="{{request()->get('shopUrl')}}manage/product_catalog">แคตตาล็อกสินค้า</a>
+              <a href="{{request()->get('shopUrl')}}manage/job">งาน</a>
               <a href="{{request()->get('shopUrl')}}setting">ข้อมูลร้านค้า</a>
             </div>
           </button>

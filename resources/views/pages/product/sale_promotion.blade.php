@@ -70,7 +70,7 @@
         </div>
       @else
         <div class="list-box">
-          <h4>โปรโมชั่นจะทำงานในอีก {{$salePromotion['remainingDays']}}</h4>
+          <h4>โปรโมชั่นจะเริ่มทำงานในอีก {{$salePromotion['remainingDays']}}</h4>
           <div class="text-center space-top-bottom-30">
             <h4>ราคาสินค้าปกติ: {{$originalPrice}}</h4>
             <h4>ราคาสินค้าหลังลดราคา: {{$salePromotion['data']['_reduced_price']}}</h4>
