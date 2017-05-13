@@ -165,7 +165,8 @@ class CheckForPersonHasShopPermission
           'modelName' => 'Product'
         ),
         'shop.product.manage' => array(
-          'permission' => true
+          'permission' => true,
+          'modelName' => 'Product'
         ),
         'shop.product.add' => array(
           'permission' => 'add'
@@ -512,10 +513,10 @@ class CheckForPersonHasShopPermission
           ['model_id','=',$request->{$pages[$name]['parent']['param']}],
           ['shop_id','=',$shopId],
         ])->exists();
+      }
 
-        if(!$exists) {
-          return $this->errorPage('ไม่พบข้อมูลนี้ในร้านค้า');
-        }
+      if(!$exists) {
+        return $this->errorPage('ไม่พบข้อมูลนี้ในร้านค้า');
       }
 
 

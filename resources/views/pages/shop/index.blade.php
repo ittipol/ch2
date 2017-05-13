@@ -74,7 +74,7 @@
 
           @foreach($products as $data)
 
-          <div class="col-lg-4 col-sm-4 col-xs-12">
+          <div class="col-sm-4 col-xs-6">
             <div class="card">
 
               @if(!empty($data['flag']))

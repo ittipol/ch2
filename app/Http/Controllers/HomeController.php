@@ -391,16 +391,19 @@ dd('end');
 
   public function index() {
 
-    // 80
-    // test 771
+    $url = new url;
 
-    // 108
-    // $categoryPaths = Service::loadModel('CategoryPath')->where('path_id','=',108)->get();
+    // Get Shop
 
     $this->setData('shirts',$this->getProductData(80));
     $this->setData('dresses',$this->getProductData(108));
     $this->setData('bags',$this->getProductData(171));
     $this->setData('shoes',$this->getProductData(176));
+
+    $this->setData('moreShirtUrl',$url->url('product/80'));
+    $this->setData('moreDressUrl',$url->url('product/108'));
+    $this->setData('moreBagUrl',$url->url('product/171'));
+    $this->setData('moreShoeUrl',$url->url('product/176'));
 
     return $this->view('pages.home.index');
   }

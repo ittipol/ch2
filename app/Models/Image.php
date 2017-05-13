@@ -7,7 +7,7 @@ use App\library\stringHelper;
 use App\library\url;
 use App\library\cache;
 use App\library\imageTool;
-// use App\library\handleImageFile;
+use App\library\handleImageFile;
 use File;
 use Session;
 
