@@ -326,9 +326,12 @@ label.list-box > input[type="checkbox"] {
 		width: 100%;
 	}
 
+	.lists .primary-image {
+		height: 300px;
+	}
+
 	.list .list-content-wrapper .list-content {
 		float: none;
-		/*margin: 0 auto;*/
 		width: auto;
 	}
 
