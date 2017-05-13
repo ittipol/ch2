@@ -15,7 +15,7 @@
 
 <div class="container">
 
-  <h2 class="article-title color-teal space-bottom-50">แฟชั่นสุภาพสตรี</h2>
+  <h2 class="article-title color-teal space-bottom-50">สินค้าสำหรับสุภาพสตรี</h2>
 
   <h3 class="space-bottom-20">เสื้อผ้าสุภาพสตรี</h3>
   @if(!empty($shirts))
@@ -113,7 +113,108 @@
     
   </div>
   @endif
+  <div class="row">
+    <div class="col-xs-12 text-right">
+      <a href="{{URL::to('product')}}" class="flat-button">เพิ่มเติม</a>
+    </div>
+  </div>
 
+  <h3 class="space-bottom-20">กระเป๋า</h3>
+  @if(!empty($bags))
+  <div class="content-panel row">
+
+    @foreach($bags as $data)
+    <div class="col-md-3 col-xs-6">
+      <div class="card sm">
+
+        @if(!empty($data['flag']))
+        <div class="flag-wrapper">
+          <div class="flag sale-promotion">{{$data['flag']}}</div>
+        </div>
+        @endif
+        
+        <div class="image-tile">
+          <a href="{{$data['detailUrl']}}">
+            <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+          </a>
+        </div>
+        
+        <div class="card-info">
+          <a href="{{$data['detailUrl']}}">
+            <div class="card-title">{{$data['name']}}</div>
+          </a>
+          <div class="card-sub-info">
+
+            <div class="card-sub-info-row product-price-section">
+              @if(!empty($data['promotion']))
+                <span class="product-price">{{$data['promotion']['_reduced_price']}}</span>
+                <span class="product-price-discount-tag">{{$data['promotion']['percentDiscount']}}</span>
+                <h5 class="origin-price">{{$data['_price']}}</h5>
+              @else
+                <span class="product-price">{{$data['_price']}}</span>
+              @endif
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    @endforeach
+    
+  </div>
+  @endif
+  <div class="row">
+    <div class="col-xs-12 text-right">
+      <a href="{{URL::to('product')}}" class="flat-button">เพิ่มเติม</a>
+    </div>
+  </div>
+
+  <h3 class="space-bottom-20">รองเท้า</h3>
+  @if(!empty($shoes))
+  <div class="content-panel row">
+
+    @foreach($shoes as $data)
+    <div class="col-md-3 col-xs-6">
+      <div class="card sm">
+
+        @if(!empty($data['flag']))
+        <div class="flag-wrapper">
+          <div class="flag sale-promotion">{{$data['flag']}}</div>
+        </div>
+        @endif
+        
+        <div class="image-tile">
+          <a href="{{$data['detailUrl']}}">
+            <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+          </a>
+        </div>
+        
+        <div class="card-info">
+          <a href="{{$data['detailUrl']}}">
+            <div class="card-title">{{$data['name']}}</div>
+          </a>
+          <div class="card-sub-info">
+
+            <div class="card-sub-info-row product-price-section">
+              @if(!empty($data['promotion']))
+                <span class="product-price">{{$data['promotion']['_reduced_price']}}</span>
+                <span class="product-price-discount-tag">{{$data['promotion']['percentDiscount']}}</span>
+                <h5 class="origin-price">{{$data['_price']}}</h5>
+              @else
+                <span class="product-price">{{$data['_price']}}</span>
+              @endif
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    @endforeach
+    
+  </div>
+  @endif
   <div class="row">
     <div class="col-xs-12 text-right">
       <a href="{{URL::to('product')}}" class="flat-button">เพิ่มเติม</a>
