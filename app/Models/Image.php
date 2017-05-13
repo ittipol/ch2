@@ -384,9 +384,11 @@ class Image extends Model
     if(!$this->exists) {
       $this->model = $model->modelName;
       $this->model_id = $model->id;
-      $this->filename = $filename = $image->getFileName();
+      // $this->filename = $image->getFileName();
       $this->image_type_id = $imageType->getIdByalias($options['type']);
     }
+
+    $this->filename = $image->getFileName();
 
     if(!empty($options['description'])) {
       $this->description = $options['description'];
