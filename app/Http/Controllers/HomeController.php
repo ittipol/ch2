@@ -397,6 +397,36 @@ dd('end');
 
     // $this->setData('shirts',$this->getProductData(771));
     // $this->setData('bags',$this->getProductData(771));
+
+    // Shop
+    $shop = Service::loadModel('Shop')->find(5);
+    $slug = Service::loadModel('Slug')->where(array(
+      array('model','like','Shop'),
+      array('model_id','=',5)
+    ))->first()->slug;
+
+    $this->setData('shopName',$shop->name);
+    $this->setData('shopUrl',$url->url('shop/'.$slug));
+    $this->setData('shopProductUrl',$url->url('shop/'.$slug.'/product'));
+
+    $products = Service::loadModel('Product')
+    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
+    ->where([
+      ['shop_relate_to.model','like','Product'],
+      ['shop_relate_to.shop_id','=',5]
+    ])
+    ->take(4)
+    ->get();
+
+    $_products = array();
+    foreach ($products as $product) {
+      $_products[] = array_merge($product->buildPaginationData(),array(
+        '_imageUrl' => $product->getImage('list'),
+        'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
+      ));
+    }
+
+    $this->setData('products',$_products);
     
     $this->setData('shirts',$this->getProductData(80));
     $this->setData('dresses',$this->getProductData(108));

@@ -238,11 +238,12 @@
     </div>
   </div>
 
-  <h4 class="space-bottom-20">ชุดเครื่องนอน</h4>
-  @if(!empty($bedSheets))
+  <h4 class="space-bottom-20">ร้านค้าแนะนำ</h4>
+  <h3>{{$shopName}}</h3>
+  @if(!empty($products))
   <div class="content-panel row">
 
-    @foreach($bedSheets as $data)
+    @foreach($products as $data)
     <div class="col-md-3 col-xs-6">
       <div class="card sm">
 
@@ -285,7 +286,7 @@
   @endif
   <div class="row">
     <div class="col-xs-12 text-right">
-      <a href="{{$moreBedSheetUrl}}" class="flat-button">เพิ่มเติม</a>
+      <a href="{{$shopProductUrl}}" class="flat-button">เยี่ยมชมร้านค้า</a>
     </div>
   </div>
 
