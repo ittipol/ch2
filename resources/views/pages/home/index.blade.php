@@ -248,7 +248,7 @@
 
 
 
-  <h3>{{$shopName3}}</h3>
+  <h3><img class="icon" src="/images/icons/building-header.png">{{$shopName3}}</h3>
   <p>อุปกรณ์เสริมเครื่องเกม ราคาถูกสุดๆ ลดกระหน่ำยิ่งกว่าล้างสต็อก รับประกันสินค้าคุณภาพ ที่นี้ที่เดียวที่ HappyPlay</p>
   <div class="space-bottom-10">
     <a href="{{$shopProductUrl1}}" class="flat-button">เยี่ยมชมร้านค้า</a>
@@ -305,7 +305,7 @@
 
 
 
-  <h3>{{$shopName2}}</h3>
+  <h3><img class="icon" src="/images/icons/building-header.png">{{$shopName2}}</h3>
   <p>รองเท้าดีไซน์เก๋ๆ ลดราคา 100 บาททั้งร้าน</p>
   <div class="space-bottom-10">
     <a href="{{$shopProductUrl2}}" class="flat-button">เยี่ยมชมร้านค้า</a>
@@ -364,7 +364,7 @@
 
 
 
-  <h3>{{$shopName1}}</h3>
+  <h3><img class="icon" src="/images/icons/building-header.png">{{$shopName1}}</h3>
   <p>ขนมเปี้ยะอร่อยๆ ราคาถูก ส่งฟรีในชลบุรี</p>
   <div class="space-bottom-10">
     <a href="{{$shopProductUrl1}}" class="flat-button">เยี่ยมชมร้านค้า</a>

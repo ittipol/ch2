@@ -24,6 +24,11 @@ a.button:visited {
 	background-color: #ccc;
 }
 
+h3 > img {
+	width: 30px;
+	margin-right: 5px;
+}
+
 .text-strike {
 	text-align: center;
 }
