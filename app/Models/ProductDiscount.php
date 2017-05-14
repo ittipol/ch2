@@ -82,7 +82,7 @@ class ProductDiscount extends Model
 
     return array(
       'reduced_price' => $this->reduced_price,
-      '_reduced_price' => $currency->format($this->reduced_price),
+      '_reduced_price' => '-'.$currency->format($this->reduced_price),
       'percentDiscount' => $percentDiscount.'%',
       'salePromotionType' => $salePromotionType
     );
