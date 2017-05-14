@@ -396,8 +396,13 @@ h3 > img {
 	color: #999;
 }
 
-@media only screen and (max-width : 480px) {
+@media only screen and (max-width : 1200px) {
+	.product-banner .section-left {
+		margin-bottom: 10px;
+	}
+}
 
+@media only screen and (max-width : 480px) {
 	.product-banner .section-right {
 		width: auto;
 		float: none;
@@ -408,4 +413,7 @@ h3 > img {
 		width: 58%;
 	}
 
+	.product-banner .section-left {
+		width: 100%;
+	}
 }
