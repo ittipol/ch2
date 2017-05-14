@@ -20,7 +20,7 @@
   <div class="product-banner clearfix">
     <div class="section-left">
       <div class="section-left-inner">
-        เสื้อผ้าผู้หญิง
+        เสื้อผ้าผู้หญิง ลดสูงสุด 21%
       </div>
     </div>
     <div class="section-right">
@@ -104,7 +104,7 @@
   <div class="product-banner clearfix">
     <div class="section-left">
       <div class="section-left-inner">
-        กระเป๋า
+        กระเป๋า ลดสูงสุด 25%
       </div>
     </div>
     <div class="section-right">
@@ -146,7 +146,7 @@
   <div class="product-banner clearfix">
     <div class="section-left">
       <div class="section-left-inner">
-        รองเท้า
+        รองเท้า ลดสูงสุด 17%
       </div>
     </div>
     <div class="section-right">
@@ -244,7 +244,7 @@
 
 
 
-  <h4 class="space-bottom-20">ร้านค้าแนะนำ</h4>
+  <h3 class="space-bottom-20">ร้านค้าแนะนำ</h3>
 
 
 
