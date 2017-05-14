@@ -393,27 +393,25 @@ dd('end');
 
     $url = new url;
 
-    // Get Shop
 
-    // $this->setData('shirts',$this->getProductData(771));
-    // $this->setData('bags',$this->getProductData(771));
+
 
     // Shop
-    $shop = Service::loadModel('Shop')->find(5);
+    $shop = Service::loadModel('Shop')->find(3);
     $slug = Service::loadModel('Slug')->where(array(
       array('model','like','Shop'),
-      array('model_id','=',5)
+      array('model_id','=',3)
     ))->first()->slug;
 
-    $this->setData('shopName',$shop->name);
-    $this->setData('shopUrl',$url->url('shop/'.$slug));
-    $this->setData('shopProductUrl',$url->url('shop/'.$slug.'/product'));
+    $this->setData('shopName1',$shop->name);
+    $this->setData('shopUrl1',$url->url('shop/'.$slug));
+    $this->setData('shopProductUrl1',$url->url('shop/'.$slug.'/product'));
 
     $products = Service::loadModel('Product')
     ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
     ->where([
       ['shop_relate_to.model','like','Product'],
-      ['shop_relate_to.shop_id','=',5]
+      ['shop_relate_to.shop_id','=',3]
     ])
     ->take(4)
     ->get();
@@ -425,8 +423,42 @@ dd('end');
         'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
       ));
     }
+    $this->setData('products1',$_products);
 
-    $this->setData('products',$_products);
+
+
+
+
+    $shop = Service::loadModel('Shop')->find(1);
+    $slug = Service::loadModel('Slug')->where(array(
+      array('model','like','Shop'),
+      array('model_id','=',1)
+    ))->first()->slug;
+
+    $this->setData('shopName2',$shop->name);
+    $this->setData('shopUrl2',$url->url('shop/'.$slug));
+    $this->setData('shopProductUrl2',$url->url('shop/'.$slug.'/product'));
+
+    $products = Service::loadModel('Product')
+    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
+    ->where([
+      ['shop_relate_to.model','like','Product'],
+      ['shop_relate_to.shop_id','=',1]
+    ])
+    ->take(4)
+    ->get();
+
+    $_products = array();
+    foreach ($products as $product) {
+      $_products[] = array_merge($product->buildPaginationData(),array(
+        '_imageUrl' => $product->getImage('list'),
+        'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
+      ));
+    }
+    $this->setData('products2',$_products);
+
+
+
     
     $this->setData('shirts',$this->getProductData(80));
     $this->setData('dresses',$this->getProductData(108));

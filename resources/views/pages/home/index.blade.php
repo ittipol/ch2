@@ -187,7 +187,7 @@
 
   <div class="line space-top-bottom-30"></div>
 
-  <h3 class="article-titl space-bottom-50">ตกแต่งที่นอนของคุณด้วยชุดเครื่องนอนสวยๆ ลดสูงสุด 30%</h3>
+  <h3 class="article-titl space-bottom-20">ตกแต่งที่นอนของคุณด้วยชุดเครื่องนอนสวยๆ ลดสูงสุด 30%</h3>
   <div class="content-panel row">
 
     @foreach($bedSheets as $data)
@@ -238,12 +238,25 @@
 
   <div class="line space-top-bottom-30"></div>
 
+
+
+
+
+
+
   <h4 class="space-bottom-20">ร้านค้าแนะนำ</h4>
-  <h3>{{$shopName}}</h3>
-  @if(!empty($products))
+
+
+
+  <h3>{{$shopName2}}</h3>
+  <p>ลดราคา 100 บาททั้งร้าน</p>
+  <div class="space-bottom-10">
+    <a href="{{$shopProductUrl2}}" class="flat-button">เยี่ยมชมร้านค้า</a>
+  </div>
+  @if(!empty($products2))
   <div class="content-panel row">
 
-    @foreach($products as $data)
+    @foreach($products2 as $data)
     <div class="col-md-3 col-xs-6">
       <div class="card sm">
 
@@ -286,9 +299,76 @@
   @endif
   <div class="row">
     <div class="col-xs-12 text-right">
-      <a href="{{$shopProductUrl}}" class="flat-button">เยี่ยมชมร้านค้า</a>
+      <a href="{{$shopProductUrl2}}" class="flat-button">เพิ่มเติม</a>
     </div>
   </div>
+
+
+
+
+
+  <h3>{{$shopName1}}</h3>
+  <div class="space-bottom-10">
+    <a href="{{$shopProductUrl1}}" class="flat-button">เยี่ยมชมร้านค้า</a>
+  </div>
+  @if(!empty($products1))
+  <div class="content-panel row">
+
+    @foreach($products1 as $data)
+    <div class="col-md-3 col-xs-6">
+      <div class="card sm">
+
+        @if(!empty($data['flag']))
+        <div class="flag-wrapper">
+          <div class="flag sale-promotion">{{$data['flag']}}</div>
+        </div>
+        @endif
+        
+        <div class="image-tile">
+          <a href="{{$data['detailUrl']}}">
+            <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+          </a>
+        </div>
+        
+        <div class="card-info">
+          <a href="{{$data['detailUrl']}}">
+            <div class="card-title">{{$data['name']}}</div>
+          </a>
+          <div class="card-sub-info">
+
+            <div class="card-sub-info-row product-price-section">
+              @if(!empty($data['promotion']))
+                <span class="product-price">{{$data['promotion']['_reduced_price']}}</span>
+                <span class="product-price-discount-tag">{{$data['promotion']['percentDiscount']}}</span>
+                <h5 class="origin-price">{{$data['_price']}}</h5>
+              @else
+                <span class="product-price">{{$data['_price']}}</span>
+              @endif
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    @endforeach
+    
+  </div>
+  @endif
+  <div class="row">
+    <div class="col-xs-12 text-right">
+      <a href="{{$shopProductUrl1}}" class="flat-button">เพิ่มเติม</a>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
 
   <div class="line space-top-bottom-100"></div>
 
