@@ -27,7 +27,7 @@
       
       <div class="row">
         @foreach($shirts as $data)
-        <div class="product-banner-content col-xs-6">
+        <div class="product-banner-content col-md-6 col-xs-12">
           <div class="image-tile pull-left">
             <a href="{{$data['detailUrl']}}">
               <div class="product-banner-image" style="background-image:url({{$data['_imageUrl']}});"></div>
@@ -53,6 +53,61 @@
 
     </div>
   </div>
+
+
+  <div class="only-space space-top-bottom-100"></div>
+
+
+  <div class="product-banner clearfix">
+    <div class="section-left">
+      <div class="section-left-inner">
+        กระเป๋า
+      </div>
+    </div>
+    <div class="section-right">
+      
+      <div class="row">
+        @foreach($bags as $data)
+        <div class="product-banner-content col-md-6 col-xs-12">
+          <div class="image-tile pull-left">
+            <a href="{{$data['detailUrl']}}">
+              <div class="product-banner-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+            </a>
+          </div>
+          <div class="product-banner-info pull-left">
+            <div class="product-title">{{$data['name']}}</div>
+
+            <div>
+              @if(!empty($data['promotion']))
+                <span class="product-price">{{$data['promotion']['_reduced_price']}}</span>
+                <span class="product-price-discount-tag">{{$data['promotion']['percentDiscount']}}</span>
+                <h5 class="origin-price">{{$data['_price']}}</h5>
+              @else
+                <span class="product-price">{{$data['_price']}}</span>
+              @endif
+            </div>
+
+          </div>
+        </div>
+        @endforeach
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   <h4 class="space-bottom-20">เสื้อผ้าและชุดเซ็ท</h4>
   @if(!empty($shirts))

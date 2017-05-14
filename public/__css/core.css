@@ -316,15 +316,22 @@ a.button:visited {
 
 
 
+.product-banner {
+	border-bottom: 1px solid #E91E63;
+}
+
 .product-banner .section-left {
 	width: 225px;
-	height: 360px;
-	background-color: #AD1457;
+	/*height: 360px;*/
+	background-color: #E91E63;
 	float: left;
+	/*background-size: 100% auto;
+	background-position: top center;
+	background-repeat: no-repeat;*/
 }
 
 .product-banner .section-left-inner {
-	padding: 15px;
+	padding: 10px;
 	font-size: 18px;
 	color: #fff;
 }
@@ -339,12 +346,13 @@ a.button:visited {
 	width: 150px;
 	height: 150px;
 	background-position: center;
-	background-size: auto 90%;
+	background-size: auto 95%;
 	background-repeat: no-repeat;
 }
 
 .product-banner .product-banner-content {
 	margin-bottom: 20px;
+	/*border-bottom: 1px solid #E91E63;*/
 }
 
 .product-banner .product-price-section {
@@ -352,7 +360,8 @@ a.button:visited {
 }
 
 .product-banner .product-banner-info {
-	width: 63%;
+	width: 60%;
+	margin-top: 20px;
 	margin-left: 10px;
 }
 
@@ -380,4 +389,18 @@ a.button:visited {
 	text-decoration: line-through;
 	font-size: 12px;
 	color: #999;
+}
+
+@media only screen and (max-width : 480px) {
+
+	.product-banner .section-right {
+		width: auto;
+		float: none;
+		margin-left: 0;
+	}
+
+	.product-banner .product-banner-info {
+		width: 58%;
+	}
+
 }
