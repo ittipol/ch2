@@ -419,19 +419,6 @@
     </div>
   </div>
 
-
-
-
-
-
-
-
-
-
-  <div class="line space-top-bottom-100"></div>
-
-  <a href="" class="button wide-button">ดูสินค้าทั้งหมด</a>
-
 </div>
 
 @stop
