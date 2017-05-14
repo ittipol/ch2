@@ -187,7 +187,7 @@
 
   <div class="line space-top-bottom-30"></div>
 
-  <h3 class="article-titl space-bottom-20">ตกแต่งที่นอนของคุณด้วยชุดเครื่องนอนสวยๆ ลดสูงสุด 30%</h3>
+  <h3 class="article-titl space-bottom-20">ตกแต่งที่นอนของคุณด้วยชุดเครื่องนอนสวยๆ ลดสูงสุด 20%</h3>
   <div class="content-panel row">
 
     @foreach($bedSheets as $data)
