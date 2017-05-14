@@ -395,7 +395,7 @@ dd('end');
 
     // Get Shop
 
-    $this->setData('shirts',$this->getProductData(81));
+    $this->setData('shirts',$this->getProductData(80));
     // $this->setData('shirts',$this->getProductData(80));
     $this->setData('dresses',$this->getProductData(108));
     $this->setData('bags',$this->getProductData(171));
