@@ -188,26 +188,31 @@
   <div class="line space-top-bottom-30"></div>
 
   <h3 class="article-titl space-bottom-50">ตกแต่งที่นอนของคุณด้วยชุดเครื่องนอนสวยๆ ลดสูงสุด 30%</h3>
-  <div class="product-banner clearfix">
-    <div class="section-left">
-      <div class="section-left-inner">
-        ชุดเครื่องนอน
-      </div>
-    </div>
-    <div class="section-right">
-      
-      <div class="row">
-        @foreach($bedSheets as $data)
-        <div class="product-banner-content col-md-6 col-xs-12">
-          <div class="image-tile pull-left">
-            <a href="{{$data['detailUrl']}}">
-              <div class="product-banner-image" style="background-image:url({{$data['_imageUrl']}});"></div>
-            </a>
-          </div>
-          <div class="product-banner-info pull-left">
-            <div class="product-title">{{$data['name']}}</div>
+  <div class="content-panel row">
 
-            <div>
+    @foreach($bedSheets as $data)
+    <div class="col-md-3 col-xs-6">
+      <div class="card sm">
+
+        @if(!empty($data['flag']))
+        <div class="flag-wrapper">
+          <div class="flag sale-promotion">{{$data['flag']}}</div>
+        </div>
+        @endif
+        
+        <div class="image-tile">
+          <a href="{{$data['detailUrl']}}">
+            <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+          </a>
+        </div>
+        
+        <div class="card-info">
+          <a href="{{$data['detailUrl']}}">
+            <div class="card-title">{{$data['name']}}</div>
+          </a>
+          <div class="card-sub-info">
+
+            <div class="card-sub-info-row product-price-section">
               @if(!empty($data['promotion']))
                 <span class="product-price">{{$data['promotion']['_reduced_price']}}</span>
                 <span class="product-price-discount-tag">{{$data['promotion']['percentDiscount']}}</span>
@@ -219,10 +224,11 @@
 
           </div>
         </div>
-        @endforeach
-      </div>
 
+      </div>
     </div>
+    @endforeach
+    
   </div>
   <div class="row space-bottom-50">
     <div class="col-xs-12 text-right">
