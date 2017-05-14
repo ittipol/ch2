@@ -408,6 +408,7 @@ dd('end');
     $this->setData('moreDressUrl',$url->url('product/108'));
     $this->setData('moreBagUrl',$url->url('product/171'));
     $this->setData('moreShoeUrl',$url->url('product/176'));
+    $this->setData('moreBedSheetUrl',$url->url('product/1260'));
 
     return $this->view('pages.home.index');
   }
