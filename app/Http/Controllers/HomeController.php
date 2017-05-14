@@ -396,7 +396,7 @@ dd('end');
 
 
 
-    // Shop
+    // Shop 1
     $shop = Service::loadModel('Shop')->find(5);
     $slug = Service::loadModel('Slug')->where(array(
       array('model','like','Shop'),
@@ -428,7 +428,7 @@ dd('end');
 
 
 
-
+    // Shop 2
     $shop = Service::loadModel('Shop')->find(1);
     $slug = Service::loadModel('Slug')->where(array(
       array('model','like','Shop'),
@@ -456,6 +456,38 @@ dd('end');
       ));
     }
     $this->setData('products2',$_products);
+
+
+
+
+    // Shop 3
+    $shop = Service::loadModel('Shop')->find(6);
+    $slug = Service::loadModel('Slug')->where(array(
+      array('model','like','Shop'),
+      array('model_id','=',6)
+    ))->first()->slug;
+
+    $this->setData('shopName3',$shop->name);
+    $this->setData('shopUrl3',$url->url('shop/'.$slug));
+    $this->setData('shopProductUrl3',$url->url('shop/'.$slug.'/product'));
+
+    $products = Service::loadModel('Product')
+    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
+    ->where([
+      ['shop_relate_to.model','like','Product'],
+      ['shop_relate_to.shop_id','=',6]
+    ])
+    ->take(4)
+    ->get();
+
+    $_products = array();
+    foreach ($products as $product) {
+      $_products[] = array_merge($product->buildPaginationData(),array(
+        '_imageUrl' => $product->getImage('list'),
+        'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
+      ));
+    }
+    $this->setData('products3',$_products);
 
 
 
