@@ -62,7 +62,7 @@
   <div class="product-banner clearfix">
     <div class="section-left">
       <div class="section-left-inner">
-        ชุดเดรส
+        ชุดเดรส ลดสูงสุด 22%
       </div>
     </div>
     <div class="section-right">
@@ -249,6 +249,7 @@
 
 
   <h3>{{$shopName3}}</h3>
+  <p>อุปกรณ์เสริมเครื่องเกม ราคาถูกสุดๆ ลดกระหน่ำยิ่งกว่าล้างสต็อก ที่นี้ที่เดียวที่ HappyPlay</p>
   <div class="space-bottom-10">
     <a href="{{$shopProductUrl1}}" class="flat-button">เยี่ยมชมร้านค้า</a>
   </div>
@@ -364,6 +365,7 @@
 
 
   <h3>{{$shopName1}}</h3>
+  <p>ขนมเปี้ยะอร่อยๆ ราคาถูก ส่งฟรีในชลบุรี</p>
   <div class="space-bottom-10">
     <a href="{{$shopProductUrl1}}" class="flat-button">เยี่ยมชมร้านค้า</a>
   </div>
