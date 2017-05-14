@@ -187,7 +187,7 @@
 
   <div class="line space-top-bottom-30"></div>
 
-  <h3 class="article-titl space-bottom-50">ตกแต่งที่นอนของคุณด้วยชุดเครื่องนอนสวยๆ ลดสูง 30%</h3>
+  <h3 class="article-titl space-bottom-50">ตกแต่งที่นอนของคุณด้วยชุดเครื่องนอนสวยๆ ลดสูงสุด 30%</h3>
   <div class="product-banner clearfix">
     <div class="section-left">
       <div class="section-left-inner">
@@ -229,6 +229,8 @@
       <a href="{{$moreBedSheetUrl}}" class="flat-button">เพิ่มเติม</a>
     </div>
   </div>
+
+  <div class="line space-top-bottom-30"></div>
 
   <h4 class="space-bottom-20">ร้านค้าแนะนำ</h4>
   <h3>{{$shopName}}</h3>
