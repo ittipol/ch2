@@ -248,11 +248,13 @@
 
 
 
-  <h3>{{$shopName2}} <a href="{{$shopProductUrl2}}" class="flat-button">เยี่ยมชมร้านค้า</a></h3>
+  <a href="{{$shopProductUrl2}}">
+    <h3>{{$shopName2}}</h3>
+  </a>
   <!-- <div class="space-bottom-10">
     <a href="{{$shopProductUrl2}}" class="flat-button">เยี่ยมชมร้านค้า</a>
   </div> -->
-  <p>ลดราคา 100 บาททั้งร้าน</p>
+  <p>รองเท้าดีไซน์เก๋ๆ ลดราคา 100 บาททั้งร้าน</p>
   @if(!empty($products2))
   <div class="content-panel row">
 
