@@ -239,7 +239,7 @@ class ImageGallery {
     }
 
 
-    $('#image_display').stop().delay(230).fadeIn(250)
+    $('#image_display').stop().delay(100).fadeIn(150)
 
   }
 

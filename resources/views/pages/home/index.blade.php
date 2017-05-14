@@ -17,7 +17,7 @@
 
   <h2 class="article-title color-teal space-bottom-50">สินค้ายอดนิยมสำหรับสุภาพสตรี</h2>
 
-  <h3 class="space-bottom-20">เสื้อผ้าและชุดเซ็ท</h3>
+  <h4 class="space-bottom-20">เสื้อผ้าและชุดเซ็ท</h4>
   @if(!empty($shirts))
   <div class="content-panel row">
 
@@ -68,7 +68,7 @@
     </div>
   </div>
 
-  <h3 class="space-bottom-20">ชุดเดรส</h3>
+  <h4 class="space-bottom-20">ชุดเดรส</h4>
   @if(!empty($dresses))
   <div class="content-panel row">
 
@@ -119,7 +119,7 @@
     </div>
   </div>
 
-  <h3 class="space-bottom-20">กระเป๋า</h3>
+  <h4 class="space-bottom-20">กระเป๋า</h4>
   @if(!empty($bags))
   <div class="content-panel row">
 
@@ -170,7 +170,7 @@
     </div>
   </div>
 
-  <h3 class="space-bottom-20">รองเท้า</h3>
+  <h4 class="space-bottom-20">รองเท้า</h4>
   @if(!empty($shoes))
   <div class="content-panel row">
 

@@ -226,8 +226,6 @@ class OrderController extends Controller
       return Redirect::to('account/order/'.$order->id);
     }
 
-    Service::loadModel('PaymentMethod')->checkPaymentMethodExistById($request->get('payment_method_id'),$order->shop_id);
-
     if(!Service::loadModel('PaymentMethod')->checkPaymentMethodExistById($request->get('payment_method_id'),$order->shop_id)) {
       return Redirect::back()->withErrors(['พบวิธีการชำระเงินที่เลือกไม่ถูกต้อง'])->withInput(request()->all());
     }
