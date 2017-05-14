@@ -15,7 +15,7 @@
 
 <div class="container">
 
-  <h2 class="article-title color-teal space-bottom-50">สินค้าแนะนำสุภาพสตรี</h2>
+  <h3 class="article-titl space-bottom-50">สินค้าแนะนำสุภาพสตรี</h3>
 
   <div class="product-banner clearfix">
     <div class="section-left">
@@ -53,10 +53,11 @@
 
     </div>
   </div>
-
-
-  <div class="only-space space-top-bottom-100"></div>
-
+  <div class="row space-bottom-50">
+    <div class="col-xs-12 text-right">
+      <a href="{{$moreDressUrl}}" class="flat-button">เพิ่มเติม</a>
+    </div>
+  </div>
 
   <div class="product-banner clearfix">
     <div class="section-left">
@@ -92,6 +93,11 @@
         @endforeach
       </div>
 
+    </div>
+  </div>
+  <div class="row space-bottom-50">
+    <div class="col-xs-12 text-right">
+      <a href="{{$moreDressUrl}}" class="flat-button">เพิ่มเติม</a>
     </div>
   </div>
 
