@@ -24,7 +24,7 @@
 
       @foreach($_pagination['data'] as $data)
 
-      <div class="col-md-6 col-xs-12">
+      <div class="col-md-4 col-xs-6">
         <div class="card">
 
           <div class="image-tile">

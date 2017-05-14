@@ -433,6 +433,9 @@ class CheckForPersonHasShopPermission
         return $next($request);
       }
 
+      //
+      $passed = false;
+
       // check permission
       if(!empty($pages[$name]['permission'])) {
 
@@ -446,10 +449,11 @@ class CheckForPersonHasShopPermission
           return $this->errorPage('ไม่อนุญาตให้แก้ไขร้านค้านี้ได้');
         }
 
+        $passed = true;
+
       }
 
-      // check data
-      $exists = true;
+      // check data owner
       if(!empty($request->id)) {
 
         $_model = Service::loadModel($pages[$name]['modelName'])->find($request->id);
@@ -458,21 +462,21 @@ class CheckForPersonHasShopPermission
           return $this->errorPage('ไม่พบข้อมูลนี้ในร้านค้า');
         }
 
-        if(Schema::hasColumn($_model->getTable(), 'shop_id') && ($_model->shop_id != $shopId)) {
-          $exists = false;
+        if(Schema::hasColumn($_model->getTable(), 'shop_id') && ($_model->shop_id == $shopId)) {
+          $passed = true;
         }elseif(Schema::hasColumn($_model->getTable(), 'model') && Schema::hasColumn($_model->getTable(), 'model_id')) {
 
           $__model = Service::loadModel($_model->model);
 
-          if(($_model->model == 'Shop') && ($_model->model_id != $shopId)) {
-            $exists = false;
+          if(($_model->model == 'Shop') && ($_model->model_id == $shopId)) {
+            $passed = true;
           }
-          // elseif(Schema::hasColumn($__model->getTable(), 'shop_id') && ($__model->select('shop_id')->find($_model->model_id)->shop_id != $shopId)) {
-          //   $exists = false;
+          // elseif(Schema::hasColumn($__model->getTable(), 'shop_id') && ($__model->select('shop_id')->find($_model->model_id)->shop_id == $shopId)) {
+          //   $passed = true;
           //   dd('Check::debug');
           // }
           else{
-            $exists = !Service::loadModel('ShopRelateTo')
+            $passed = Service::loadModel('ShopRelateTo')
             ->select('shop_id')
             ->where([
               ['model','like',$_model->model],
@@ -482,7 +486,7 @@ class CheckForPersonHasShopPermission
           }
 
         }else{
-          $exists = !Service::loadModel('ShopRelateTo')
+          $passed = Service::loadModel('ShopRelateTo')
           ->select('shop_id')
           ->where([
             ['model','like',$pages[$name]['modelName']],
@@ -494,7 +498,7 @@ class CheckForPersonHasShopPermission
       }
 
       if(!empty($pages[$name]['parent'])) {
-        $exists = Service::loadModel('ShopRelateTo')
+        $passed = Service::loadModel('ShopRelateTo')
         ->select('shop_id')
         ->where([
           ['model','like',$pages[$name]['parent']['modelName']],
@@ -504,7 +508,7 @@ class CheckForPersonHasShopPermission
       }
 
       if(!empty($pages[$name]['check'])) {
-        $exists = Service::loadModel($pages[$name]['check']['modelName'])
+        $passed = Service::loadModel($pages[$name]['check']['modelName'])
         ->select('id')
         ->where([
           ['id','=',$request->{$pages[$name]['check']['param_id']}],
@@ -512,7 +516,7 @@ class CheckForPersonHasShopPermission
         ])->exists();
       }
 
-      if(!$exists) {
+      if(!$passed) {
         return $this->errorPage('ไม่พบข้อมูลนี้ในร้านค้า');
       }
 

@@ -43,10 +43,15 @@ class OrderController extends Controller
 
       if(!$hasOrderPaymentConfirm) {
 
-        $paymentMethodToOrders = $model->getRelatedData('PaymentMethodToOrder');
+        // $paymentMethodToOrders = $model->getRelatedData('PaymentMethodToOrder');
+        // $paymentMethods = array();
+        // foreach ($paymentMethodToOrders as $paymentMethodToOrder) {
+        //   $paymentMethods[] = $paymentMethodToOrder->paymentMethod->buildPaginationData();
+        // }
+
         $paymentMethods = array();
-        foreach ($paymentMethodToOrders as $paymentMethodToOrder) {
-          $paymentMethods[] = $paymentMethodToOrder->paymentMethod->buildPaginationData();
+        foreach (Service::loadModel('PaymentMethod')->getPaymentMethod($model->shop_id) as $paymentMethod) {
+          $paymentMethods[] = $paymentMethod->buildPaginationData();
         }
 
         $this->setData('paymentMethods',$paymentMethods);
@@ -120,11 +125,16 @@ class OrderController extends Controller
       return Redirect::to('account/order/'.$order->id);
     }
 
-    $paymentMethodToOrders = $order->getRelatedData('PaymentMethodToOrder');
+    // $paymentMethodToOrders = $order->getRelatedData('PaymentMethodToOrder');
+    // $paymentMethods = array();
+    // foreach ($paymentMethodToOrders as $paymentMethodToOrder) {
+    //   $paymentMethod = $paymentMethodToOrder->paymentMethod;
+    //   $paymentMethods[$paymentMethod->id] = $paymentMethod->name;
+    // }
+
     $paymentMethods = array();
-    foreach ($paymentMethodToOrders as $paymentMethodToOrder) {
-      $paymentMethod = $paymentMethodToOrder->paymentMethod;
-      $paymentMethods[$paymentMethod->id] = $paymentMethod->name;
+    foreach (Service::loadModel('PaymentMethod')->getPaymentMethod($order->shop_id) as $_paymentMethod) {
+      $paymentMethods[$_paymentMethod['id']] = $_paymentMethod['name'];
     }
 
     $date = new Date;
@@ -211,10 +221,16 @@ class OrderController extends Controller
 
     $model = Service::loadModel('OrderPaymentConfirm');
 
-    // if($model->where('order_id','=',$order->id)->exists()) {
-    //   MessageHelper::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
-    //   return Redirect::to('account/order/'.$order->id);
-    // }
+    if($model->where('order_id','=',$order->id)->exists()) {
+      MessageHelper::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
+      return Redirect::to('account/order/'.$order->id);
+    }
+
+    Service::loadModel('PaymentMethod')->checkPaymentMethodExistById($request->get('payment_method_id'),$order->shop_id);
+
+    if(!Service::loadModel('PaymentMethod')->checkPaymentMethodExistById($request->get('payment_method_id'),$order->shop_id)) {
+      return Redirect::back()->withErrors(['พบวิธีการชำระเงินที่เลือกไม่ถูกต้อง'])->withInput(request()->all());
+    }
 
     // Set order id
     $model->order_id = $order->id;
@@ -467,15 +483,19 @@ class OrderController extends Controller
     $shippingMethodModel = Service::loadModel('ShippingMethod');
 
     // check input payment_method
-    if(empty(request()->get('payment_method'))) {
-      return Redirect::back()->withErrors(['กรุณาเลือกวิธีการชำระเงินให้กับการสั่งซื้อนี้'])->withInput(request()->all());
-    }
+    // if(empty(request()->get('payment_method'))) {
+    //   return Redirect::back()->withErrors(['กรุณาเลือกวิธีการชำระเงินให้กับการสั่งซื้อนี้'])->withInput(request()->all());
+    // }
+
     // check payment method has exists
-    foreach (request()->get('payment_method') as $id) {
-      if(!$paymentMethodModel->checkPaymentMethodExistById($id,request()->get('shopId'))) {
-        return Redirect::back()->withErrors(['พบวิธีการชำระเงินที่เลือกไม่ถูกต้อง'])->withInput(request()->all());
+    if(!empty(request()->get('payment_method'))) {
+      foreach (request()->get('payment_method') as $id) {
+        if(!$paymentMethodModel->checkPaymentMethodExistById($id,request()->get('shopId'))) {
+          return Redirect::back()->withErrors(['พบวิธีการชำระเงินที่เลือกไม่ถูกต้อง'])->withInput(request()->all());
+        }
       }
     }
+    
     // check shipping method has exists
     if(empty($model->getOrderShippingMethod()) && !$shippingMethodModel->checkShippingMethodExistById(request()->get('shipping_method_id'),request()->get('shopId'))) {
       return Redirect::back()->withErrors(['พบวิธีการจัดส่งที่เลือกไม่ถูกต้อง'])->withInput(request()->all());
@@ -605,16 +625,16 @@ class OrderController extends Controller
     }
 
     // Add payment method to order 
-    $paymentMethodToOrderModel = Service::loadModel('PaymentMethodToOrder');
-    foreach (request()->get('payment_method') as $id) {
-      $paymentMethodToOrderModel
-      ->newInstance()
-      ->fill(array(
-        'payment_method_id' => $id,
-        'order_id' => $model->id
-      ))
-      ->save();
-    }
+    // $paymentMethodToOrderModel = Service::loadModel('PaymentMethodToOrder');
+    // foreach (request()->get('payment_method') as $id) {
+    //   $paymentMethodToOrderModel
+    //   ->newInstance()
+    //   ->fill(array(
+    //     'payment_method_id' => $id,
+    //     'order_id' => $model->id
+    //   ))
+    //   ->save();
+    // }
 
     // shipping cost detail
     if(!empty(request()->get('shipping_cost_detail'))) {
@@ -687,15 +707,32 @@ class OrderController extends Controller
   }
 
   public function paymentConfirm() {
-    
-    $model = Service::loadModel('Order')->where([
-      ['id','=',$this->param['id']],
-      ['shop_id','=',request()->get('shopId')]
-    ])->first();
+dd('ds');
+    // $model = Service::loadModel('Order')->where([
+    //   ['id','=',$this->param['id']],
+    //   ['shop_id','=',request()->get('shopId')]
+    // ])->first();
+
+    $model = Service::loadModel('Order')->find($this->param['id']);
 
     if($model->order_status_id != 2) {
       MessageHelper::display('รายการสั่งซื้อยืนยันการชำระเงินแล้ว','error');
       return Redirect::to(request()->get('shopUrl').'order');
+    }
+
+    $orderPaymentConfirm = Service::loadModel('OrderPaymentConfirm')->where('order_id','=',$this->param['id']);
+
+    if(!$orderPaymentConfirm->exists()) {
+      MessageHelper::display('ไม่สามารถยืนยันการชำระเงินได้','error');
+      Redirect::to(request()->get('shopUrl').'order/'.$model->id);
+    }
+
+    $orderPaymentConfirm = $orderPaymentConfirm->first();
+    $orderPaymentConfirm->confirmed = 1;
+    
+    if(!$orderPaymentConfirm->save()) {
+      MessageHelper::display('ไม่สามารถยืนยันการชำระเงินได้','error');
+      Redirect::to(request()->get('shopUrl').'order/'.$model->id);
     }
 
     $model->order_status_id = 3;

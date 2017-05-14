@@ -55,7 +55,6 @@
           <div class="dot"></div>
           <div class="additional-option-content">
             <a href="{{$data['detailUrl']}}">แสดงรายละเอียด</a>
-            <a href="">ลบ</a>
           </div>
         </div>
 

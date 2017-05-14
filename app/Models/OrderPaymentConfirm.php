@@ -8,7 +8,7 @@ use App\library\date;
 class OrderPaymentConfirm extends Model
 {
   protected $table = 'order_payment_confirms';
-  protected $fillable = ['order_id','payment_method_id','payment_amount','payment_date','description'];
+  protected $fillable = ['order_id','payment_method_id','payment_amount','payment_date','description','confirmed'];
   protected $modelRelations = array('Image');
 
   public $formHelper = true;
@@ -39,6 +39,18 @@ class OrderPaymentConfirm extends Model
     return $this->hasOne('App\Models\PaymentMethod','id','payment_method_id');
   }
 
+  public static function boot() {
+
+    parent::boot();
+
+    OrderPaymentConfirm::saving(function($orderPaymentConfirm){
+      if($orderPaymentConfirm->state == 'create') {
+        $orderPaymentConfirm->confirmed = 0;
+      }
+    });
+
+  }
+
   public function buildModelData() {
 
     $currency = new Currency;
@@ -53,5 +65,4 @@ class OrderPaymentConfirm extends Model
     );
   }
 
-  public function setUpdatedAt($value) {}
 }

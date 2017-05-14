@@ -425,6 +425,21 @@ class ProductController extends Controller
       }
     }
 
+    $shippingMethods = Service::loadModel('ShippingMethod')
+    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'shipping_methods.id')
+    ->where([
+      ['shop_relate_to.model','like','ShippingMethod'],
+      ['shop_relate_to.shop_id','=',$shop->id]
+    ])
+    ->select('shipping_methods.*');
+
+    $_shippingMethods = array();
+    if($shippingMethods->exists()) {
+      foreach ($shippingMethods->get() as $shippingMethod) {
+        $_shippingMethods[] = $shippingMethod->buildModelData();
+      }
+    }
+
     $this->data = $model->modelData->build();
     $this->setData('shop',$shop->modelData->build(true));
     $this->setData('shopImageUrl',$shop->getProfileImageUrl());
@@ -435,6 +450,7 @@ class ProductController extends Controller
     $this->setData('productOptionValues',$model->getProductOptionValues());
     $this->setData('branchLocations',json_encode($branchLocations));
     $this->setData('hasBranchLocation',$hasBranchLocation);
+    $this->setData('shippingMethods',$_shippingMethods);
 
     $this->setPageTitle($this->data['_modelData']['name'].' - สินค้า');
     $this->setPageImage($model->getImage('list'));
@@ -505,6 +521,21 @@ class ProductController extends Controller
     }
 
     $shop = request()->get('shop');
+
+    $shippingMethods = Service::loadModel('ShippingMethod')
+    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'shipping_methods.id')
+    ->where([
+      ['shop_relate_to.model','like','ShippingMethod'],
+      ['shop_relate_to.shop_id','=',$shop->id]
+    ])
+    ->select('shipping_methods.*');
+
+    $_shippingMethods = array();
+    if($shippingMethods->exists()) {
+      foreach ($shippingMethods->get() as $shippingMethod) {
+        $_shippingMethods[] = $shippingMethod->buildModelData();
+      }
+    }
 
     $this->data = $model->modelData->build();
     $this->setData('shop',$shop->modelData->build(true));

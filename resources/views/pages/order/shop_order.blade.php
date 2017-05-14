@@ -59,7 +59,6 @@
           <div class="dot"></div>
           <div class="additional-option-content">
             <a href="{{$data['detailUrl']}}">แสดงรายละเอียด</a>
-            <a href="{{$data['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการลบเลขที่การสั่งซื้อ {{$data['invoice_number']}} ใช่หรือไม่">ลบ</a>
           </div>
         </div>
 
