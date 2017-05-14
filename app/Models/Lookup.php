@@ -124,6 +124,11 @@ class Lookup extends Model
     $_words = array();
     if(!empty($taggings)){
       foreach ($taggings as $tagging) {
+
+        if(empty($tagging->word)) {
+          continue;
+        }
+
         $_words[] = $tagging->word->word;
       }
     }

@@ -11,7 +11,7 @@ use App\library\url;
 class Product extends Model
 {
   protected $table = 'products';
-  protected $fillable = ['name','description','product_model','sku','quantity','quantity_available','minimum','product_unit','price','weight','weight_unit_id','length','length_unit_id','width','height','specifications','message_out_of_order','shipping_calculate_from','flag_message_from','flag_message','active','created_by'];
+  protected $fillable = ['name','description','product_model','sku','quantity','quantity_available','minimum','product_unit','price','weight','weight_unit_id','length','length_unit_id','width','height','specifications','message_out_of_order','shipping_calculate_from','flag_message_from','flag_message','active','product_selling','created_by'];
   protected $modelRelations = array('Image','Tagging','ProductToCategory','RelateToBranch','ShopRelateTo','ProductOption','ProductSalePromotion','ProductShipping');
 
   public $formHelper = true;
@@ -126,6 +126,10 @@ class Product extends Model
     'default' => 'created_at:desc'
   );
 
+  // product_selling
+  // 1 = retail
+  // 2 = wholesale
+
   public function __construct() {  
     parent::__construct();
   }
@@ -146,6 +150,7 @@ class Product extends Model
 
       if($product->state == 'create') {
         $product->active = 0;
+        $product->product_selling = 1;
 
         if(empty($product->quantity)) {
           $product->quantity = 0;

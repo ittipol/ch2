@@ -39,7 +39,6 @@ class Controller extends BaseController
 
   protected function setPageTitle($pageTitle,$include = true) {
     
-
     if($include) {
       $pageTitle = $pageTitle.' | Sunday Square';
     }

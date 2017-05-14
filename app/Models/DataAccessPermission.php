@@ -50,19 +50,22 @@ class DataAccessPermission extends Model
         
         case 'Shop':
 
-          $shopId = ShopRelateTo::select('shop_id')
+          $shop = ShopRelateTo::select('shop_id')
           ->where([
             ['model','like',$model->modelName],
             ['model_id','=',$model->id]
-          ])->first()->shop_id;
+          ]);
+
+          $value['owner_id'] = null;
+          if($shop->exists()) {
+            $value['owner_id'] = $shop->first()->shop_id;
+          }
 
           // $shopId = Slug::select('model_id')
           // ->where([
           //   ['slug','like',$this->param['shopSlug']],
           //   ['model','like','Shop']
           // ])->first()->model_id;
-
-          $value['owner_id'] = $shopId;
           break;
       }
 
