@@ -402,6 +402,7 @@ dd('end');
     $this->setData('dresses',$this->getProductData(108));
     $this->setData('bags',$this->getProductData(171));
     $this->setData('shoes',$this->getProductData(176));
+    $this->setData('bedSheets',$this->getProductData(1260));
 
     $this->setData('moreShirtUrl',$url->url('product/80'));
     $this->setData('moreDressUrl',$url->url('product/108'));

@@ -55,7 +55,7 @@
   </div>
   <div class="row space-bottom-50">
     <div class="col-xs-12 text-right">
-      <a href="{{$moreDressUrl}}" class="flat-button">เพิ่มเติม</a>
+      <a href="{{$moreShirtUrl}}" class="flat-button">เพิ่มเติม</a>
     </div>
   </div>
 
@@ -101,11 +101,93 @@
     </div>
   </div>
 
+  <div class="line space-top-bottom-30"></div>
 
+  <div class="product-banner clearfix">
+    <div class="section-left">
+      <div class="section-left-inner">
+        กระเป๋า
+      </div>
+    </div>
+    <div class="section-right">
+      
+      <div class="row">
+        @foreach($bags as $data)
+        <div class="product-banner-content col-md-6 col-xs-12">
+          <div class="image-tile pull-left">
+            <a href="{{$data['detailUrl']}}">
+              <div class="product-banner-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+            </a>
+          </div>
+          <div class="product-banner-info pull-left">
+            <div class="product-title">{{$data['name']}}</div>
 
+            <div>
+              @if(!empty($data['promotion']))
+                <span class="product-price">{{$data['promotion']['_reduced_price']}}</span>
+                <span class="product-price-discount-tag">{{$data['promotion']['percentDiscount']}}</span>
+                <h5 class="origin-price">{{$data['_price']}}</h5>
+              @else
+                <span class="product-price">{{$data['_price']}}</span>
+              @endif
+            </div>
 
+          </div>
+        </div>
+        @endforeach
+      </div>
 
+    </div>
+  </div>
+  <div class="row space-bottom-50">
+    <div class="col-xs-12 text-right">
+      <a href="{{$moreBagUrl}}" class="flat-button">เพิ่มเติม</a>
+    </div>
+  </div>
 
+  <div class="line space-top-bottom-30"></div>
+
+  <div class="product-banner clearfix">
+    <div class="section-left">
+      <div class="section-left-inner">
+        รองเท้า
+      </div>
+    </div>
+    <div class="section-right">
+      
+      <div class="row">
+        @foreach($shoes as $data)
+        <div class="product-banner-content col-md-6 col-xs-12">
+          <div class="image-tile pull-left">
+            <a href="{{$data['detailUrl']}}">
+              <div class="product-banner-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+            </a>
+          </div>
+          <div class="product-banner-info pull-left">
+            <div class="product-title">{{$data['name']}}</div>
+
+            <div>
+              @if(!empty($data['promotion']))
+                <span class="product-price">{{$data['promotion']['_reduced_price']}}</span>
+                <span class="product-price-discount-tag">{{$data['promotion']['percentDiscount']}}</span>
+                <h5 class="origin-price">{{$data['_price']}}</h5>
+              @else
+                <span class="product-price">{{$data['_price']}}</span>
+              @endif
+            </div>
+
+          </div>
+        </div>
+        @endforeach
+      </div>
+
+    </div>
+  </div>
+  <div class="row space-bottom-50">
+    <div class="col-xs-12 text-right">
+      <a href="{{$moreShoeUrl}}" class="flat-button">เพิ่มเติม</a>
+    </div>
+  </div>
 
   <div class="line space-top-bottom-30"></div>
 
@@ -113,11 +195,18 @@
 
 
 
-  <h4 class="space-bottom-20">กระเป๋า</h4>
-  @if(!empty($bags))
+
+
+
+
+
+
+
+  <h4 class="space-bottom-20">ชุดเครื่องนอน</h4>
+  @if(!empty($bedSheets))
   <div class="content-panel row">
 
-    @foreach($bags as $data)
+    @foreach($bedSheets as $data)
     <div class="col-md-3 col-xs-6">
       <div class="card sm">
 
@@ -161,57 +250,6 @@
   <div class="row">
     <div class="col-xs-12 text-right">
       <a href="{{$moreBagUrl}}" class="flat-button">เพิ่มเติม</a>
-    </div>
-  </div>
-
-  <h4 class="space-bottom-20">รองเท้า</h4>
-  @if(!empty($shoes))
-  <div class="content-panel row">
-
-    @foreach($shoes as $data)
-    <div class="col-md-3 col-xs-6">
-      <div class="card sm">
-
-        @if(!empty($data['flag']))
-        <div class="flag-wrapper">
-          <div class="flag sale-promotion">{{$data['flag']}}</div>
-        </div>
-        @endif
-        
-        <div class="image-tile">
-          <a href="{{$data['detailUrl']}}">
-            <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
-          </a>
-        </div>
-        
-        <div class="card-info">
-          <a href="{{$data['detailUrl']}}">
-            <div class="card-title">{{$data['name']}}</div>
-          </a>
-          <div class="card-sub-info">
-
-            <div class="card-sub-info-row product-price-section">
-              @if(!empty($data['promotion']))
-                <span class="product-price">{{$data['promotion']['_reduced_price']}}</span>
-                <span class="product-price-discount-tag">{{$data['promotion']['percentDiscount']}}</span>
-                <h5 class="origin-price">{{$data['_price']}}</h5>
-              @else
-                <span class="product-price">{{$data['_price']}}</span>
-              @endif
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-    @endforeach
-    
-  </div>
-  @endif
-  <div class="row">
-    <div class="col-xs-12 text-right">
-      <a href="{{$moreShoeUrl}}" class="flat-button">เพิ่มเติม</a>
     </div>
   </div>
 

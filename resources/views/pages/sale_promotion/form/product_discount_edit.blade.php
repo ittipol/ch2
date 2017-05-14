@@ -264,6 +264,9 @@
     const productDiscount = new ProductDiscount({{$price}});
     productDiscount.load();
 
+    const form = new Form();
+    form.load();
+
   });
 
 </script>

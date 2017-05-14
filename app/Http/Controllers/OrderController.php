@@ -430,7 +430,7 @@ class OrderController extends Controller
 
     if($paymentMethodNotExist && $shippingMethodNotExist) {
       MessageHelper::display('ไม่พบวิธีการชำระเงินและวิธีการจัดส่ง กรุณาเพิ่มวิธีการชำระเงินและวิธีการจัดส่งในร้านค้าของคุณ','error');
-      return Redirect::to('shop/'.request()->shopSlug.'/product');
+      return Redirect::to('shop/'.request()->shopSlug.'/manage/product');
     }elseif($paymentMethodNotExist) {
       MessageHelper::display('ไม่พบวิธีการชำระเงิน กรุณาเพิ่มวิธีการชำระเงินในร้านค้าของคุณ','error');
       return Redirect::to('shop/'.request()->shopSlug.'/payment_method');
