@@ -393,14 +393,14 @@ dd('end');
 
     $url = new url;
 
-    // 
+    // 5 1 6 
 
 
     // Shop 1
-    $shop = Service::loadModel('Shop')->find(6);
+    $shop = Service::loadModel('Shop')->find(5);
     $slug = Service::loadModel('Slug')->where(array(
       array('model','like','Shop'),
-      array('model_id','=',6)
+      array('model_id','=',5)
     ))->first()->slug;
 
     $this->setData('shopName1',$shop->name);
@@ -411,7 +411,7 @@ dd('end');
     ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
     ->where([
       ['shop_relate_to.model','like','Product'],
-      ['shop_relate_to.shop_id','=',6]
+      ['shop_relate_to.shop_id','=',5]
     ])
     ->take(4)
     ->get();
@@ -461,10 +461,10 @@ dd('end');
 
 
     // Shop 3
-    $shop = Service::loadModel('Shop')->find(5);
+    $shop = Service::loadModel('Shop')->find(6);
     $slug = Service::loadModel('Slug')->where(array(
       array('model','like','Shop'),
-      array('model_id','=',5)
+      array('model_id','=',6)
     ))->first()->slug;
 
     $this->setData('shopName3',$shop->name);
@@ -475,7 +475,7 @@ dd('end');
     ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
     ->where([
       ['shop_relate_to.model','like','Product'],
-      ['shop_relate_to.shop_id','=',5]
+      ['shop_relate_to.shop_id','=',6]
     ])
     ->take(4)
     ->get();
