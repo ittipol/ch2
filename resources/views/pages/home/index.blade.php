@@ -4,9 +4,9 @@
 <div class="primary-banner">
   <div class="container">
     <div class="banner-overlay-message">
-      <!-- <h2 class="primary-banner-title">เริ่มต้นธุรกิจของคุณและเชื่อมต่อธุรกิจของคุณกับผู้คน</h2> -->
       <h2 class="primary-banner-title">สร้างร้านค้าของคุณหรือเลือกซื้อสินค้าที่คุณต้องการ</h2>
-      <p class="banner-description">สร้างธุรกิจของคุณ จัดการธุรกิจของคุณไปในทิศทางที่คุณต้องการ และให้เราทำหน้าที่เชื่อมต่อธุรกิจของคุณกับผู้คนอีกมากมาย</p>
+      <p class="banner-description">เว็บไซต์ที่คุณสามารถสร้างธุรกิจของคุณได้ฟรีบนโลกออนไลน์ โดยไม่มีค่าใช้จ่าย
+และเรายังทำการตลาด เพื่อให้ธุรกิจของคุณเชื่อมต่อไปยังคนนับล้านบนอินเตอร์เน็ต</p>
       <a href="{{URL::to('shop/create')}}" class="button">สร้างร้านค้า</a>
       <a href="{{URL::to('product')}}" class="button">เลือกซื้อสินค้า</a>
     </div>
