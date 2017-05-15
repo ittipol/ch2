@@ -184,12 +184,14 @@
 .card .flag-wrapper {
 	position: absolute;
 	top: 0;
-	right: -1px;
+	right: 0;
+	width: 100%;
 }
 
 .card .flag {
   padding: 6px 25px;
-  background-color: #FF1744;
+  background-color: #009688;
+  width: 100%;
   color: #fff;
   font-size: 14px;
   display: inline-block;
