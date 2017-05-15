@@ -306,7 +306,7 @@
 
 
   <h3><img class="icon" src="/images/icons/building-header.png">{{$shopName2}}</h3>
-  <p>รองเท้าดีไซน์เก๋ๆ ลดราคา 100 บาททั้งร้าน</p>
+  <p>รองเท้าดีไซน์เก๋ๆ คุณภาพดี ลดราคา 100 บาททั้งร้าน</p>
   <div class="space-bottom-10">
     <a href="{{$shopProductUrl2}}" class="flat-button">เยี่ยมชมร้านค้า</a>
   </div>
