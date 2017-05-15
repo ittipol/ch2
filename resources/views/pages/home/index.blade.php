@@ -251,7 +251,7 @@
   <h3><img class="icon" src="/images/icons/building-header.png">{{$shopName3}}</h3>
   <p>อุปกรณ์เสริมเครื่องเกม ราคาถูกสุดๆ ลดกระหน่ำยิ่งกว่าล้างสต็อก รับประกันสินค้าคุณภาพ ที่นี้ที่เดียวที่ HappyPlay</p>
   <div class="space-bottom-10">
-    <a href="{{$shopProductUrl3}}" class="flat-button">เยี่ยมชมร้านค้า</a>
+    <a href="{{$shopUrl3}}" class="flat-button">เยี่ยมชมร้านค้า</a>
   </div>
   @if(!empty($products3))
   <div class="content-panel row">
