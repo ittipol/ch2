@@ -80,8 +80,9 @@
             <div class="additional-option-content">
               <a href="{{$shop['url']}}overview">ภาพรวมร้านค้า</a>
               <a href="{{$shop['url']}}manage/product">จัดการสินค้า</a>
-              <a href="{{$shop['url']}}manage/product_catalog">จัดการแคตตาล็อกสินค้า</a>
-              <a href="{{$shop['url']}}manage/job">จัดการงาน</a>
+              <a href="{{$shop['url']}}product/add">เพิ่มสินค้า</a>
+              <!-- <a href="{{$shop['url']}}manage/product_catalog">จัดการแคตตาล็อกสินค้า</a>
+              <a href="{{$shop['url']}}manage/job">จัดการงาน</a> -->
               <a href="{{$shop['url']}}setting">ข้อมูลร้านค้า</a>
             </div>
           </div>
