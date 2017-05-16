@@ -26,8 +26,7 @@
 	margin-top: 20px;
 	padding: 0;
 	background-color: #90949c;
-	/*border-bottom: 5px solid #1A237E;*/
-	/*border: 1px solid #607D8B;*/
+	border: 1px solid #ddd;
 	overflow: hidden;
 	position: relative;
 	z-index: 8;
