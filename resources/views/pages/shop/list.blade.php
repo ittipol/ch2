@@ -36,7 +36,7 @@
 
       @foreach($_pagination['data'] as $data)
 
-      <div class="col-md-6 col-xs-6">
+      <div class="col-md-6 col-xs-12">
         <div class="card sm">
 
           @if(!empty($data['openHours']))
