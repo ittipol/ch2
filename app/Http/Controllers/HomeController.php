@@ -399,7 +399,7 @@ dd('end');
     // new product
     $products = $productModel
     ->orderBy('created_at','desc')
-    ->take(4);
+    ->take(8);
 
     $_products = array();
     if($products->exists()) {
