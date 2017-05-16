@@ -397,9 +397,10 @@ dd('end');
     // new product
     $products = $product
     ->orderBy('created_at','desc')
-    ->take(4);
+    ->take(4)
+    ->get();
 
-    $this->setData('latestProducts',$this->getProductData(80));
+    $this->setData('latestProducts',$products);
 
     // 5 1 6 
 

@@ -15,7 +15,7 @@
 
 <div class="container">
 
-  <h3 class="article-titl space-bottom-50">สินค้ารใหม่</h3>
+  <h3 class="article-titl space-bottom-50">สินค้าใหม่</h3>
   @if(!empty($latestProducts))
   <div class="content-panel row">
 
