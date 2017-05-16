@@ -15,7 +15,7 @@
 
 <div class="container">
 
-  <h3 class="article-titl space-bottom-50">สินค้าใหม่</h3>
+  <h3 class="article-titl space-bottom-20">สินค้าใหม่</h3>
   @if(!empty($latestProducts))
   <div class="content-panel row">
 
@@ -59,6 +59,9 @@
     @endforeach
     
   </div>
+
+  <div class="line space-top-bottom-80"></div>
+
   @endif
 
   <h3 class="article-titl space-bottom-50">แฟชั่นสุภาพสตรี</h3>

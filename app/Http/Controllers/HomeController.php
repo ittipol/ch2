@@ -418,13 +418,13 @@ dd('end');
     $this->setData('latestProducts',$_products);
 
     // 5 1 6 
-
+    $shopIds = array(1,1,1);
 
     // Shop 1
-    $shop = $shopModel->find(5);
+    $shop = $shopModel->find($shopIds[0]);
     $slug = $slugModel->where(array(
       array('model','like','Shop'),
-      array('model_id','=',5)
+      array('model_id','=',$shopIds[0])
     ))->first()->slug;
 
     $this->setData('shopName1',$shop->name);
@@ -435,7 +435,7 @@ dd('end');
     ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
     ->where([
       ['shop_relate_to.model','like','Product'],
-      ['shop_relate_to.shop_id','=',5]
+      ['shop_relate_to.shop_id','=',$shopIds[0]]
     ])
     ->take(4)
     ->get();
@@ -453,10 +453,10 @@ dd('end');
 
 
     // Shop 2
-    $shop = $shopModel->find(1);
+    $shop = $shopModel->find($shopIds[1]);
     $slug = $slugModel->where(array(
       array('model','like','Shop'),
-      array('model_id','=',1)
+      array('model_id','=',$shopIds[1])
     ))->first()->slug;
 
     $this->setData('shopName2',$shop->name);
@@ -467,7 +467,7 @@ dd('end');
     ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
     ->where([
       ['shop_relate_to.model','like','Product'],
-      ['shop_relate_to.shop_id','=',1]
+      ['shop_relate_to.shop_id','=',$shopIds[1]]
     ])
     ->take(4)
     ->get();
@@ -485,10 +485,10 @@ dd('end');
 
 
     // Shop 3
-    $shop = $shopModel->find(6);
+    $shop = $shopModel->find($shopIds[2]);
     $slug = $slugModel->where(array(
       array('model','like','Shop'),
-      array('model_id','=',6)
+      array('model_id','=',$shopIds[2])
     ))->first()->slug;
 
     $this->setData('shopName3',$shop->name);
@@ -499,7 +499,7 @@ dd('end');
     ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
     ->where([
       ['shop_relate_to.model','like','Product'],
-      ['shop_relate_to.shop_id','=',6]
+      ['shop_relate_to.shop_id','=',$shopIds[2]]
     ])
     ->take(4)
     ->get();
