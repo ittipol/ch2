@@ -158,7 +158,7 @@
           @foreach($productCatalogs as $data)
 
           <div class="col-md-6 col-xs-12">
-            <div class="card">
+            <div class="card sm">
 
               <div class="image-tile">
                 <a href="{{$data['detailUrl']}}">

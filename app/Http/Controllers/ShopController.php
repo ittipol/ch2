@@ -533,14 +533,7 @@ class ShopController extends Controller
   }
 
   public function setting() {
-
-    // $this->setData('descriptionUrl',request()->get('shopUrl').'description');
-    // $this->setData('addressUrl',request()->get('shopUrl').'address');
-    // $this->setData('contactUrl',request()->get('shopUrl').'contact');
-    // $this->setData('openHoursUrl',request()->get('shopUrl').'opening_hours');
-
     return $this->view('pages.shop.setting');
-
   }
 
   public function description() {
@@ -559,7 +552,7 @@ class ShopController extends Controller
 
     if($model->fill(request()->all())->save()) {
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/manage');
+      return Redirect::to('shop/'.request()->shopSlug.'/overview');
     }else{
       return Redirect::back();
     }
@@ -571,7 +564,10 @@ class ShopController extends Controller
     $openHours = '';
     $sameTime = 0;
 
-    $model = Service::loadModel('OpenHour')->where('shop_id','=',request()->get('shopId'))->first();
+    $model = Service::loadModel('OpenHour')->where([
+      ['model','=','Shop'],
+      ['model_id','=',request()->get('shopId')]
+    ])->first();
 
     if(!empty($model)) {
 
@@ -611,16 +607,20 @@ class ShopController extends Controller
 
   public function openingHoursSubmit() {
 
-    $model = Service::loadModel('OpenHour')->where('shop_id','=',request()->get('shopId'))->first();
+    $model = Service::loadModel('OpenHour')->where([
+      ['model','=','Shop'],
+      ['model_id','=',request()->get('shopId')]
+    ])->first();
 
     if(empty($model)) {
       $model = Service::loadModel('OpenHour');
-      $model->shop_id = request()->get('shopId');
+      $model->model = 'Shop';
+      $model->model_id = request()->get('shopId');
     }
 
     if($model->fill(request()->all())->save()) {
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/manage');
+      return Redirect::to('shop/'.request()->shopSlug.'/overview');
     }else{
       return Redirect::back();
     }
@@ -672,7 +672,7 @@ class ShopController extends Controller
 
     if($model->fill(request()->all())->save()) {
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/manage');
+      return Redirect::to('shop/'.request()->shopSlug.'/overview');
     }else{
       return Redirect::back();
     }
@@ -713,7 +713,7 @@ class ShopController extends Controller
 
     if($model->fill(request()->all())->save()) {
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/manage');
+      return Redirect::to('shop/'.request()->shopSlug.'/overview');
     }else{
       return Redirect::back();
     }
