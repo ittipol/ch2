@@ -59,7 +59,7 @@
 
           <div class="image-tile">
             <a href="{{$data['shopUrl']}}">
-              <div class="card-image" style="background-image:url({{$data['cover']}});"></div>
+              <div class="card-image cover" style="background-image:url({{$data['cover']}});"></div>
             </a>
           </div>
           <div class="card-info">
