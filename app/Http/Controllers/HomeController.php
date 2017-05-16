@@ -418,7 +418,7 @@ dd('end');
     $this->setData('latestProducts',$_products);
 
     // 5 1 6 
-    $shopIds = array(1,1,1);
+    $shopIds = array(5,1,6);
 
     // Shop 1
     $shop = $shopModel->find($shopIds[0]);
