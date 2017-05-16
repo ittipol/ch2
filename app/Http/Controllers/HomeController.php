@@ -392,6 +392,14 @@ dd('end');
   public function index() {
 
     $url = new url;
+    $product = Service::loadModel('Product');
+
+    // new product
+    $products = $product
+    ->orderBy('created_at','desc')
+    ->take(4);
+
+    $this->setData('latestProducts',$this->getProductData(80));
 
     // 5 1 6 
 

@@ -19,7 +19,7 @@
       <div class="box-header">
         <h4 class="box-header-title">
           <img class="icon-before-title" src="/images/icons/edit-blue.png">ข้อความร้านค้า
-          <div class="secondary-title">ตรึงข้อความยังหน้าแรก</div>
+          <div class="secondary-title">ระบุรายละเอียดธุรกิจของคุณ เพื่อให้คนเข้าใจสิ่งที่คุณนำเสนอ</div>
         </h4>
       </div>
 
