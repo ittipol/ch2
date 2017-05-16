@@ -16,6 +16,7 @@
 
 .card.sm {
 	width: auto;
+	margin-bottom: 30px;
 }
 
 .card .overlay-top-info {
