@@ -3,7 +3,7 @@
 
 <div class="container list list space-top-30">
 
-  <h3>บริษัทหรือร้านค้าของคุณ</h3>
+  <h3>ร้านค้าของฉัน</h3>
   <div class="line space-bottom-50"></div>
 
   @if(!empty($_pagination['data']))
@@ -12,7 +12,7 @@
 
       @foreach($_pagination['data'] as $data)
 
-      <div class="col-lg-3 col-xs-6">
+      <div class="col-lg-3 col-sm-4 col-xs-6">
         <div class="card sm">
           <div class="image-tile">
             <a href="{{$data['shopUrl']}}">

@@ -171,12 +171,29 @@
     
     <div class="col-sm-8 col-xs-12">
 
-      <div class="detail-info-section">
-        <h4>รายละเอียดสินค้า</h4>
-        <div class="line"></div> 
-        <div class="detail-info description">
-          {!!$_modelData['description']!!}
+      <div class="tabs clearfix">
+        <label>
+          <input class="tab" type="radio" name="tabs"  data-tab="product_description_tab">
+          <span>รายละเอียดสินค้า</span>
+        </label>
+        <label>
+          <input class="tab" type="radio" name="tabs" data-tab="shipping_method_tab">
+          <span>ช่องทางการจัดส่ง</span>
+        </label>
+      </div>
+
+      <div id="product_description_tab" class="tab-content">
+        <div class="detail-info-section">
+          <h4>รายละเอียดสินค้า</h4>
+          <div class="line"></div> 
+          <div class="detail-info description">
+            {!!$_modelData['description']!!}
+          </div>
         </div>
+      </div>
+
+      <div id="shipping_method_tab" class="tab-content">
+        xxx
       </div>
 
       @if(!empty($_modelData['specifications']))
@@ -207,7 +224,6 @@
             <div class="col-md-10 col-xs-12">
               <div class="content-box-panel overlay-bg">
                 <div>
-                  <h5>บริษัทหรือร้านค้าที่ขายสินค้านี้</h5>
                   <h3>
                     <a href="{{request()->get('shopUrl')}}">{{$shop['name']}}</a>
                   </h3>
@@ -250,7 +266,7 @@
   </div>
 
   @if($hasBranchLocation)
-  <h4>สาขาที่ขายสินค้า</h4>   
+  <!-- <h4>สาขาที่ขายสินค้า</h4>   
   <div class="line"></div>
   <div class="row">
     <div class="col-xs-12">
@@ -267,7 +283,7 @@
       </div>
 
     </div> 
-  </div>
+  </div> -->
   @endif
 
 </div>

@@ -49,12 +49,14 @@
             </a>
           </li>
 
+          @if (Auth::check())
           <li class="item">
             <a href="{{URL::to('account/shop')}}">
               <img class="icon" src="/images/icons/shop-header.png">
               <span>ร้านค้าของฉัน</span>
             </a>
           </li>
+          @endif
 
           <li class="item">
             <a href="{{URL::to('shop/create')}}">

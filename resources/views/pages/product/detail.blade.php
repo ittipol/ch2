@@ -169,14 +169,6 @@
     
     <div class="col-sm-8 col-xs-12">
 
-      <div class="detail-info-section">
-        <h4>รายละเอียดสินค้า</h4>
-        <div class="line"></div> 
-        <div class="detail-info description">
-          {!!$_modelData['description']!!}
-        </div>
-      </div>
-
       @if(!empty($_modelData['specifications']))
       <div class="detail-info-section">
         <h4>ข้อมูลจำเพาะ</h4>  
@@ -194,6 +186,61 @@
       </div>
       @endif
 
+      <div class="tabs clearfix">
+        <label>
+          <input class="tab" type="radio" name="tabs"  data-tab="product_description_tab">
+          <span>รายละเอียดสินค้า</span>
+        </label>
+        <label>
+          <input class="tab" type="radio" name="tabs" data-tab="shipping_method_tab">
+          <span>ช่องทางการจัดส่ง</span>
+        </label>
+      </div>
+
+      <div id="product_description_tab" class="tab-content">
+
+        <div class="detail-info-section">
+       <!--    <h4>รายละเอียดสินค้า</h4>
+          <div class="line"></div>  -->
+          <div class="detail-info description">
+            {!!$_modelData['description']!!}
+          </div>
+        </div>
+
+      </div>
+
+      <div id="shipping_method_tab" class="tab-content">
+        
+        @if(!empty($shippingMethods))        
+        <div class="detail-info description">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>ชื่อวิธีการจัดส่ง</th>
+                <th>ผู้ให้บริการการจัดส่ง</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($shippingMethods as $shippingMethod)
+                <tr>
+                  <td>{{$shippingMethod['name']}}</td>
+                  <td>{{$shippingMethod['shippingService']}}</td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+        @else
+          <div class="list-empty-message text-center space-top-20">
+            <img class="not-found-image" src="/images/common/not-found.png">
+            <div>
+              <h3>ยังไม่มีการระบุจากทางร้าน</h3>
+            </div>
+          </div>
+        @endif
+
+      </div>
+
     </div>
 
     <div class="col-sm-4 col-xs-12">
@@ -205,7 +252,6 @@
             <div class="col-md-10 col-xs-12">
               <div class="content-box-panel overlay-bg">
                 <div>
-                  <h5>บริษัทหรือร้านค้าที่ขายสินค้านี้</h5>
                   <h3>
                     <a href="{{$shopUrl}}">{{$shop['name']}}</a>
                   </h3>
@@ -283,6 +329,9 @@
     const map = new Map(false,false,false);
     map.setLocations({!!$branchLocations!!});
     @endif
+
+    const tabs = new Tabs('product_description_tab');
+    tabs.load();
 
   });
 </script>
