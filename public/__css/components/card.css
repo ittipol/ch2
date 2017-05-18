@@ -249,4 +249,8 @@
 	.card .button-group .additional-option {
 		width: 35px;
 	}
+
+	.card .card-desciption {
+		display: none;
+	}
 }

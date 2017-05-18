@@ -191,7 +191,7 @@ class AccountController extends Controller
     $personToShop = $model = Service::loadModel('PersonToShop')
     ->getData(array(
       'conditions' => array(
-        array('Person_id','=',session()->get('Person.id'))
+        array('created_by','=',session()->get('Person.id'))
       ),
       'fields' => array('shop_id'),
       'list' => 'shop_id'

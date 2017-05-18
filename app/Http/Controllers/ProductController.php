@@ -440,6 +440,12 @@ class ProductController extends Controller
       }
     }
 
+    // Related Product (shop)
+    
+
+    // Related Product (all shop) 
+
+
     $this->data = $model->modelData->build();
     $this->setData('shop',$shop->modelData->build(true));
     $this->setData('shopImageUrl',$shop->getProfileImageUrl());

@@ -13,34 +13,19 @@
       @foreach($_pagination['data'] as $data)
 
       <div class="col-lg-3 col-xs-6">
-        <div class="card">
+        <div class="card sm">
           <div class="image-tile">
             <a href="{{$data['shopUrl']}}">
-              <div class="card-image" style="background-image:url({{$data['cover']}});"></div>
+              <div class="card-image" style="background-image:url({{$data['profileImage']}});"></div>
             </a>
           </div>
           <div class="card-info">
             <a href="{{$data['shopUrl']}}">
               <div class="card-title">{{$data['name']}}</div>
             </a>
-          </div>
-          
-          <div class="button-group">
-
-            <a href="{{$data['shopUrl']}}">
-              <div class="button wide-button">ไปยังร้านค้า</div>
-            </a>
-
-            <div class="additional-option">
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="additional-option-content">
-                <a href="{{$data['shopManageUrl']}}">ภาพรวมร้านค้า</a>
-                <a href="{{$data['shopSettingUrl']}}">ข้อมูลร้านค้า</a>
-              </div>
+            <div class="card-desciption">
+              {!!$data['description']!!}
             </div>
-          
           </div>
           
         </div>

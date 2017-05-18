@@ -36,7 +36,7 @@
 
       @foreach($_pagination['data'] as $data)
 
-      <div class="col-md-6 col-xs-12">
+      <div class="col-lg-3 col-xs-6">
         <div class="card sm">
 
           @if(!empty($data['openHours']))
@@ -59,21 +59,16 @@
 
           <div class="image-tile">
             <a href="{{$data['shopUrl']}}">
-              <div class="card-image cover" style="background-image:url({{$data['cover']}});"></div>
+              <div class="card-image cover" style="background-image:url({{$data['profileImage']}});"></div>
             </a>
           </div>
           <div class="card-info">
             <a href="{{$data['shopUrl']}}">
               <div class="card-title">{{$data['name']}}</div>
             </a>
-          </div>
-
-          <div class="button-group">
-
-            <a href="{{$data['shopUrl']}}">
-              <div class="button wide-button">ไปยังร้านค้า</div>
-            </a>
-          
+            <div class="card-desciption">
+              {!!$data['description']!!}
+            </div>
           </div>
           
         </div>

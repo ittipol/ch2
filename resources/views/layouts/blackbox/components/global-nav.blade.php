@@ -50,6 +50,13 @@
           </li>
 
           <li class="item">
+            <a href="{{URL::to('account/shop')}}">
+              <img class="icon" src="/images/icons/shop-header.png">
+              <span>ร้านค้าของฉัน</span>
+            </a>
+          </li>
+
+          <li class="item">
             <a href="{{URL::to('shop/create')}}">
               <img class="icon" src="/images/icons/plus-header.png">
               <span>สร้างบริษัทหรือร้านค้า</span>

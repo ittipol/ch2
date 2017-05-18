@@ -370,24 +370,26 @@ class Shop extends Model
   public function buildPaginationData() {
 
     $cache = new Cache;
+    $string = new stringHelper;
 
     $profileImage = $this->getProfileImageUrl();
     if(empty($profileImage)) {
       $profileImage = null;
     }
 
-    $cover = Image::select('id','model','model_id','filename','image_type_id')->find($this->cover_image_id);
+    // $cover = Image::select('id','model','model_id','filename','image_type_id')->find($this->cover_image_id);
 
-    if(!empty($cover)) {
-      $cover = $cache->getCacheImageUrl($cover,'list');
-    }else{
-      $cover = null;
-    }
+    // if(!empty($cover)) {
+    //   $cover = $cache->getCacheImageUrl($cover,'list');
+    // }else{
+    //   $cover = null;
+    // }
 
     return array(
       'name' => $this->name,
-      // 'profileImage' => $profileImage,
-      'cover' => $cover,
+      'description' => $string->truncString($this->description,150),
+      'profileImage' => $profileImage,
+      // 'cover' => $cover,
       'openHours' => $this->getOpenHours()
     );
 

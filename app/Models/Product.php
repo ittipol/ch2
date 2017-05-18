@@ -593,25 +593,25 @@ class Product extends Model
   public function getProductFlag() {
 
     $flagMessage = '';
-    switch ($this->flag_message_from) {
-      case 1:
+    // switch ($this->flag_message_from) {
+    //   case 1:
         
-        $flagMessage = $this->flag_message;
+    //     $flagMessage = $this->flag_message;
 
-        break;
+    //     break;
       
-      case 2:
+    //   case 2:
 
-          // if($this->isNewItem()) {
-          //   $flagMessage = 'สินค้ามาใหม่';
-          // }
+    //       // if($this->isNewItem()) {
+    //       //   $flagMessage = 'สินค้ามาใหม่';
+    //       // }
 
-          if($this->hasPromotion()){
-            $flagMessage = 'สินค้าโปรโมชั่น';
-          }
+    //       if($this->hasPromotion()){
+    //         $flagMessage = 'สินค้าโปรโมชั่น';
+    //       }
 
-        break;
-    }
+    //     break;
+    // }
 
     return $flagMessage;
 
