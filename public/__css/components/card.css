@@ -73,7 +73,7 @@
 }
 
 .card.sm .image-tile .card-image {
-	height: 160px;
+	height: 250px;
 }
 
 .card .image-tile .card-image.cover {
@@ -244,6 +244,10 @@
 	.card .image-tile .card-image {
 		height: 200px;
 		background-size: 90% auto;
+	}
+
+	.card.sm .image-tile .card-image {
+		height: 160px;
 	}
 
 	.card .button-group .additional-option {
