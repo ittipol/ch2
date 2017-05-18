@@ -102,7 +102,7 @@
   <div class="form-section">
 
     <div class="title">
-      กำหนดข้อมูลจำเพาะของสินค้า
+      ระบุข้อมูลจำเพาะสินค้าเพิ่มเติม
     </div>
 
     <div class="form-row">

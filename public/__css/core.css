@@ -29,6 +29,10 @@ h3 > img {
 	margin-right: 10px;
 }
 
+/*.table tbody tr:nth-child(even) {
+  background-color: #dfebed;
+}
+*/
 .text-strike {
 	text-align: center;
 }
