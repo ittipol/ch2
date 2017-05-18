@@ -332,6 +332,9 @@
     map.setLocations({!!$branchLocations!!});
     @endif
 
+    const tabs = new Tabs('product_description_tab');
+    tabs.load();
+
   });
 </script>
 
