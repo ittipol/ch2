@@ -86,7 +86,7 @@
 
       @foreach($_pagination['data'] as $data)
 
-      <div class="col-md-3 col-sm-4 col-xs-6">
+      <div class="col-md-3 col-xs-6">
         <div class="card sm">
 
           @if(!empty($data['flag']))
