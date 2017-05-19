@@ -24,15 +24,15 @@ a.button:visited {
 	background-color: #ccc;
 }
 
+.list-empty-message h3 {
+	font-size: 16px;
+}
+
 h3 > img {
 	width: 30px;
 	margin-right: 10px;
 }
 
-/*.table tbody tr:nth-child(even) {
-  background-color: #dfebed;
-}
-*/
 .text-strike {
 	text-align: center;
 }

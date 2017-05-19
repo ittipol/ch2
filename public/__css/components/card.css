@@ -81,7 +81,7 @@
 }
 
 .card.xs .image-tile .card-image {
-	height: 120px;
+	height: 165px;
 }
 
 .card .image-tile .card-image.cover {
@@ -101,6 +101,10 @@
   height: 48px;
   line-height: 24px;
   overflow: hidden;
+}
+
+.card.xs .card-title {
+	font-size: 14px;
 }
 
 .card .card-name {

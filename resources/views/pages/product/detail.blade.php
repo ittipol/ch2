@@ -312,7 +312,7 @@
   </div> -->
   @endif
 
-  <h3 class="space-top-50">สินค้าที่อื่นๆที่เกี่ยวข้อง</h3>
+  <h3 class="space-top-50">สินค้าอื่นๆที่เกี่ยวข้อง</h3>
   <div class="line space-bottom-20"></div>
 
   <h4 class="space-bottom-20">จากผู้ขายรายนี้</h4>
@@ -359,9 +359,15 @@
       @endforeach
     </div>
 
+  @else
+
+    <div class="list-empty-message text-center">
+      <h3>ยังไม่มีสินค้าอื่นๆที่เกี่ยวข้องให้แสดง</h3>
+    </div>
+
   @endif
 
-  <div class="line space-bottom-40"></div>
+  <div class="line space-top-20 space-bottom-40"></div>
 
   <h4 class="space-bottom-20">จากผู้ขายรายอื่น</h4>
   @if(!empty($realatedProducts))
@@ -405,6 +411,12 @@
         </div>
 
       @endforeach
+    </div>
+
+  @else
+
+    <div class="list-empty-message text-center">
+      <h3>ยังไม่มีสินค้าอื่นๆที่เกี่ยวข้องให้แสดง</h3>
     </div>
 
   @endif
