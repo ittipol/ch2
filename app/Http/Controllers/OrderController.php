@@ -131,7 +131,7 @@ class OrderController extends Controller
     //   $paymentMethod = $paymentMethodToOrder->paymentMethod;
     //   $paymentMethods[$paymentMethod->id] = $paymentMethod->name;
     // }
-
+dd($order->shop_id);
     $paymentMethods = array();
     foreach (Service::loadModel('PaymentMethod')->getPaymentMethod($order->shop_id) as $_paymentMethod) {
       $paymentMethods[$_paymentMethod['id']] = $_paymentMethod['name'];
