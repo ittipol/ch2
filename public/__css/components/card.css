@@ -8,15 +8,15 @@
 
 .card {
 	width: 360px;
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 	position: relative;
 	background-color: #fff;
 	border: 2px solid #ddd;
 }
 
-.card.sm {
+.card.sm,
+.card.xs {
 	width: auto;
-	margin-bottom: 30px;
 }
 
 .card .overlay-top-info {
@@ -63,6 +63,10 @@
   background-size: 200px;
 }
 
+.card.xs .image-tile {
+	background-size: 100px;
+}
+
 .card .image-tile .card-image {
 	width: 100%;
 	height: 360px;
@@ -74,6 +78,10 @@
 
 .card.sm .image-tile .card-image {
 	height: 250px;
+}
+
+.card.xs .image-tile .card-image {
+	height: 120px;
 }
 
 .card .image-tile .card-image.cover {
@@ -246,7 +254,8 @@
 		background-size: 90% auto;
 	}
 
-	.card.sm .image-tile .card-image {
+	.card.sm .image-tile .card-image,
+	.card.xs .image-tile .card-image {
 		height: 160px;
 	}
 

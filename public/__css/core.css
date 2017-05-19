@@ -64,6 +64,11 @@ h3 > img {
 	margin-bottom: 30px !important;
 }
 
+.space-top-bottom-40 {
+	margin-top: 40px !important;
+	margin-bottom: 40px !important;
+}
+
 .space-top-bottom-80 {
 	margin-top: 80px !important;
 	margin-bottom: 80px !important;

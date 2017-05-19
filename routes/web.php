@@ -276,7 +276,7 @@ Route::group(['middleware' => ['shop','person.shop.permission']], function () {
   Route::get('shop/{shopSlug}/about','ShopController@about')->name('shop.about');
 
   Route::get('shop/{shopSlug}/product','ProductController@shopProductlistView')->name('shop.product.list');
-  Route::get('shop/{shopSlug}/product/{id}','ProductController@shopProductDetail')->name('shop.product.detail');
+  Route::get('shop/{shopSlug}/product/{id}','ProductController@detail')->name('shop.product.detail');
 
   Route::get('shop/{shopSlug}/product_catalog','ProductCatalogController@listView')->name('shop.product_catalog');
   Route::get('shop/{shopSlug}/product_catalog/{id}','ProductCatalogController@productListView')->name('shop.product_catalog.list');

@@ -1,7 +1,9 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUdwm6VWiEE-1ZrVgY3bh1sNX21_deHZw&libraries=places" type="text/javascript"></script> -->
+@if(!empty(request()->get('shop')))
+@include('pages.shop.layouts.fixed_top_nav')
+@endif
 
 <div class="container">
 
@@ -198,15 +200,11 @@
       </div>
 
       <div id="product_description_tab" class="tab-content">
-
         <div class="detail-info-section">
-       <!--    <h4>รายละเอียดสินค้า</h4>
-          <div class="line"></div>  -->
           <div class="detail-info description">
             {!!$_modelData['description']!!}
           </div>
         </div>
-
       </div>
 
       <div id="shipping_method_tab" class="tab-content">
@@ -268,7 +266,7 @@
       </div>
 
       @if(!empty($productCatalogs))
-      <h4 class="article-title color-teal space-top-50">แคตตาล็อกสินค้าที่เกี่ยวข้อง</h4>
+      <h4 class="space-top-50">แคตตาล็อกสินค้าที่เกี่ยวข้อง</h4>
       <div class="line"></div> 
       <div class="list-h">
       @foreach($productCatalogs as $data)
@@ -294,7 +292,7 @@
   </div>
 
   @if($hasBranchLocation)
-  <h4>สาขาที่ขายสินค้า</h4>   
+  <!-- <h4>สาขาที่ขายสินค้า</h4>   
   <div class="line"></div>
   <div class="row">
     <div class="col-xs-12">
@@ -311,13 +309,141 @@
       </div>
 
     </div> 
-  </div>
+  </div> -->
+  @endif
+
+  <h3 class="space-top-50">สินค้าที่อื่นๆที่เกี่ยวข้อง</h3>
+  <div class="line space-bottom-20"></div>
+
+  <h4 class="space-bottom-20">จากผู้ขายรายนี้</h4>
+  @if(!empty($shopRealatedProducts))
+
+    <div class="realated-roducts">
+      @foreach($shopRealatedProducts as $product)
+
+        <div class="card xs no-border no-margin">
+
+          @if(!empty($product['flag']))
+          <div class="flag-wrapper">
+            <div class="flag sale-promotion">{{$product['flag']}}</div>
+          </div>
+          @endif
+          
+          <div class="image-tile">
+            <a href="{{$product['detailUrl']}}">
+              <div class="card-image" style="background-image:url({{$product['_imageUrl']}});"></div>
+            </a>
+          </div>
+          
+          <div class="card-info">
+            <a href="{{$product['detailUrl']}}">
+              <div class="card-title">{{$product['name']}}</div>
+            </a>
+            <div class="card-sub-info">
+
+              <div class="card-sub-info-row product-price-section">
+                @if(!empty($product['promotion']))
+                  <span class="product-price">{{$product['promotion']['_reduced_price']}}</span>
+                  <span class="product-price-discount-tag">{{$product['promotion']['percentDiscount']}}</span>
+                  <h5 class="origin-price">{{$product['_price']}}</h5>
+                @else
+                  <span class="product-price">{{$product['_price']}}</span>
+                @endif
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      @endforeach
+    </div>
+
+  @endif
+
+  <div class="line space-bottom-40"></div>
+
+  <h4 class="space-bottom-20">จากผู้ขายรายอื่น</h4>
+  @if(!empty($realatedProducts))
+
+    <div class="realated-roducts">
+      @foreach($realatedProducts as $product)
+
+        <div class="card xs no-border no-margin">
+
+          @if(!empty($product['flag']))
+          <div class="flag-wrapper">
+            <div class="flag sale-promotion">{{$product['flag']}}</div>
+          </div>
+          @endif
+          
+          <div class="image-tile">
+            <a href="{{$product['detailUrl']}}">
+              <div class="card-image" style="background-image:url({{$product['_imageUrl']}});"></div>
+            </a>
+          </div>
+          
+          <div class="card-info">
+            <a href="{{$product['detailUrl']}}">
+              <div class="card-title">{{$product['name']}}</div>
+            </a>
+            <div class="card-sub-info">
+
+              <div class="card-sub-info-row product-price-section">
+                @if(!empty($product['promotion']))
+                  <span class="product-price">{{$product['promotion']['_reduced_price']}}</span>
+                  <span class="product-price-discount-tag">{{$product['promotion']['percentDiscount']}}</span>
+                  <h5 class="origin-price">{{$product['_price']}}</h5>
+                @else
+                  <span class="product-price">{{$product['_price']}}</span>
+                @endif
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      @endforeach
+    </div>
+
   @endif
 
 </div>
 
 <script type="text/javascript">
   $(document).ready(function(){
+
+    $('.realated-roducts').slick({
+      dots: true,
+      infinite: false,
+      speed: 300,
+      slidesToShow: 6,
+      slidesToScroll: 6,
+      responsive: [
+        {
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 4,
+            slidesToScroll: 4,
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 4,
+            slidesToScroll: 4
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2
+          }
+        }
+      ]
+    });
 
     const imageGallery = new ImageGallery(true);
     imageGallery.load({!!$_modelData['Image']!!});

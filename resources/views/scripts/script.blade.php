@@ -11,7 +11,7 @@
 
   $jsFiles = array(
     '__js/jquery-3.1.1.min.js',
-    '__js/jquery.validate.min.js',
+    // '__js/jquery.validate.min.js',
     '__js/blackbox/blackbox.js',
     '__js/library/token.js',
     '__js/map/map.js',
@@ -44,6 +44,7 @@
     '__js/components/right-side-panel.js',
     '__js/components/filter.js',
     '__js/components/job-applying-message.js',
+    '__js/components/carousel.js',
     '__js/notification/push-notification.js',
   );
 
@@ -109,6 +110,7 @@
     '__css/components/notice.css',
     '__css/components/timeline.css',
     '__css/components/user-review.css',
+    '__css/components/carousel.css',
     '__css/pages/home.css',
     '__css/pages/shop.css',
     '__css/pages/account.css',
@@ -129,7 +131,9 @@
     '__css/layouts/blackbox/components/global-additional-nav-panel.css',
     '__css/layouts/blackbox/components/header.css',
     '__css/layouts/blackbox/components/footer.css',
-    '__css/layouts/blackbox/responsive.css'
+    '__css/layouts/blackbox/responsive.css',
+    '__css/slick.css',
+    '__css/slick-theme.css'
   );
 
   if($combine){

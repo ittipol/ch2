@@ -441,10 +441,56 @@ class ProductController extends Controller
     }
 
     // Related Product (shop)
-    
+    $productToCategory = Service::loadModel('ProductToCategory')->where('product_id','=',$model->id)->select('category_id');
+    $categoryPaths = Service::loadModel('CategoryPath')->where('category_id','=',$productToCategory->first()->category_id);
 
-    // Related Product (all shop) 
+    $pathIds = array();
+    if($categoryPaths->exists()) {
+      foreach ($categoryPaths->get() as $path) {
+        $pathIds[] = $path->path_id;
+      }
+    }
 
+    $relatedProducts = $model
+    ->join('product_to_categories', 'product_to_categories.product_id', '=', 'products.id')
+    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
+    ->whereIn('product_to_categories.category_id',$pathIds)
+    ->where([
+      ['shop_relate_to.model','like','Product'],
+      ['shop_relate_to.shop_id','=',$shop->id]
+    ])
+    ->take(20);
+
+    $_shopRealatedProducts = array();
+    if(!empty($relatedProducts)) {
+      foreach ($relatedProducts->get() as $product) {
+        $_shopRealatedProducts[] = array_merge($product->buildPaginationData(),array(
+          '_imageUrl' => $product->getImage('list'),
+          'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
+        ));
+      }
+    }    
+
+    // Related Product (all shop)
+    $relatedProducts = $model
+    ->join('product_to_categories', 'product_to_categories.product_id', '=', 'products.id')
+    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
+    ->whereIn('product_to_categories.category_id',$pathIds)
+    ->where([
+      ['shop_relate_to.model','like','Product'],
+      ['shop_relate_to.shop_id','!=',$shop->id]
+    ])
+    ->take(20);
+
+    $_realatedProducts = array();
+    if(!empty($relatedProducts)) {
+      foreach ($relatedProducts->get() as $product) {
+        $_realatedProducts[] = array_merge($product->buildPaginationData(),array(
+          '_imageUrl' => $product->getImage('list'),
+          'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
+        ));
+      }
+    }
 
     $this->data = $model->modelData->build();
     $this->setData('shop',$shop->modelData->build(true));
@@ -458,7 +504,10 @@ class ProductController extends Controller
     $this->setData('hasBranchLocation',$hasBranchLocation);
     $this->setData('shippingMethods',$_shippingMethods);
 
-    $this->setPageTitle($this->data['_modelData']['name'].' - สินค้า');
+    $this->setData('shopRealatedProducts',$_shopRealatedProducts);
+    $this->setData('realatedProducts',$_realatedProducts);
+
+    $this->setPageTitle($this->data['_modelData']['name'].' - สินค้า @ '.$shop->name);
     $this->setPageImage($model->getImage('list'));
     $this->setPageDescription($model->getShortDescription());
 
@@ -466,101 +515,101 @@ class ProductController extends Controller
 
   }
 
-  public function shopProductDetail() {
+  // public function shopProductDetail() {
 
-    $url = new Url;
+  //   $url = new Url;
 
-    $model = Service::loadModel('Product')->find($this->param['id']);
+  //   $model = Service::loadModel('Product')->find($this->param['id']);
 
-    $model->modelData->loadData(array(
-      'json' => array('Image')
-    ));
+  //   $model->modelData->loadData(array(
+  //     'json' => array('Image')
+  //   ));
 
-    $branchIds = $model->getRelatedData('RelateToBranch',array(
-      'list' => 'branch_id',
-      'fields' => array('branch_id'),
-    ));
+  //   $branchIds = $model->getRelatedData('RelateToBranch',array(
+  //     'list' => 'branch_id',
+  //     'fields' => array('branch_id'),
+  //   ));
 
-    $branches = array();
-    if(!empty($branchIds)){
-      $branches = Service::loadModel('Branch')
-      ->select(array('id','name'))
-      ->whereIn('id',$branchIds)
-      ->get();
-    }
+  //   $branches = array();
+  //   if(!empty($branchIds)){
+  //     $branches = Service::loadModel('Branch')
+  //     ->select(array('id','name'))
+  //     ->whereIn('id',$branchIds)
+  //     ->get();
+  //   }
 
-    $branchLocations = array();
-    $hasBranchLocation = false;
-    // foreach ($branches as $branch) {
+  //   $branchLocations = array();
+  //   $hasBranchLocation = false;
+  //   // foreach ($branches as $branch) {
 
-    //   $address = $branch->modelData->loadAddress();
+  //   //   $address = $branch->modelData->loadAddress();
 
-    //   if(!empty($address)){
+  //   //   if(!empty($address)){
 
-    //     $hasBranchLocation = true;
+  //   //     $hasBranchLocation = true;
 
-    //     $graphics = json_decode($address['_geographic'],true);
+  //   //     $graphics = json_decode($address['_geographic'],true);
         
-    //     $branchLocations[] = array(
-    //       'id' => $branch->id,
-    //       'address' => $branch->name,
-    //       'latitude' => $graphics['latitude'],
-    //       'longitude' => $graphics['longitude'],
-    //       'detailUrl' => $url->setAndParseUrl('shop/{shopSlug}/branch/{id}',array(
-    //         'shopSlug' => request()->shopSlug,
-    //         'id' => $branch->id
-    //       ))
-    //     );
-    //   }
-    // }
+  //   //     $branchLocations[] = array(
+  //   //       'id' => $branch->id,
+  //   //       'address' => $branch->name,
+  //   //       'latitude' => $graphics['latitude'],
+  //   //       'longitude' => $graphics['longitude'],
+  //   //       'detailUrl' => $url->setAndParseUrl('shop/{shopSlug}/branch/{id}',array(
+  //   //         'shopSlug' => request()->shopSlug,
+  //   //         'id' => $branch->id
+  //   //       ))
+  //   //     );
+  //   //   }
+  //   // }
 
-    $productCatalogs = $model->getProductCatalogs();
+  //   $productCatalogs = $model->getProductCatalogs();
 
-    $_productCatalogs = array();
-    if(!empty($productCatalogs)) {
-      foreach ($productCatalogs as $productCatalog) {
-        $_productCatalogs[] = array(
-          'name' => $productCatalog->name,
-          'detailUrl' => $url->url('shop/'.request()->shopSlug.'/product_catalog/'.$productCatalog->id),
-        );
-      }
-    }
+  //   $_productCatalogs = array();
+  //   if(!empty($productCatalogs)) {
+  //     foreach ($productCatalogs as $productCatalog) {
+  //       $_productCatalogs[] = array(
+  //         'name' => $productCatalog->name,
+  //         'detailUrl' => $url->url('shop/'.request()->shopSlug.'/product_catalog/'.$productCatalog->id),
+  //       );
+  //     }
+  //   }
 
-    $shop = request()->get('shop');
+  //   $shop = request()->get('shop');
 
-    $shippingMethods = Service::loadModel('ShippingMethod')
-    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'shipping_methods.id')
-    ->where([
-      ['shop_relate_to.model','like','ShippingMethod'],
-      ['shop_relate_to.shop_id','=',$shop->id]
-    ])
-    ->select('shipping_methods.*');
+  //   $shippingMethods = Service::loadModel('ShippingMethod')
+  //   ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'shipping_methods.id')
+  //   ->where([
+  //     ['shop_relate_to.model','like','ShippingMethod'],
+  //     ['shop_relate_to.shop_id','=',$shop->id]
+  //   ])
+  //   ->select('shipping_methods.*');
 
-    $_shippingMethods = array();
-    if($shippingMethods->exists()) {
-      foreach ($shippingMethods->get() as $shippingMethod) {
-        $_shippingMethods[] = $shippingMethod->buildModelData();
-      }
-    }
+  //   $_shippingMethods = array();
+  //   if($shippingMethods->exists()) {
+  //     foreach ($shippingMethods->get() as $shippingMethod) {
+  //       $_shippingMethods[] = $shippingMethod->buildModelData();
+  //     }
+  //   }
 
-    $this->data = $model->modelData->build();
-    $this->setData('shop',$shop->modelData->build(true));
-    $this->setData('shopImageUrl',$shop->getProfileImageUrl());
-    $this->setData('shopCoverUrl',$shop->getCoverUrl());
-    // $this->setData('shopUrl',request()->get('shopUrl'));
-    $this->setData('categoryPaths',$model->getCategoryPaths());
-    $this->setData('productCatalogs',$_productCatalogs);
-    $this->setData('productOptionValues',$model->getProductOptionValues());
-    $this->setData('branchLocations',json_encode($branchLocations));
-    $this->setData('hasBranchLocation',$hasBranchLocation);
+  //   $this->data = $model->modelData->build();
+  //   $this->setData('shop',$shop->modelData->build(true));
+  //   $this->setData('shopImageUrl',$shop->getProfileImageUrl());
+  //   $this->setData('shopCoverUrl',$shop->getCoverUrl());
+  //   // $this->setData('shopUrl',request()->get('shopUrl'));
+  //   $this->setData('categoryPaths',$model->getCategoryPaths());
+  //   $this->setData('productCatalogs',$_productCatalogs);
+  //   $this->setData('productOptionValues',$model->getProductOptionValues());
+  //   $this->setData('branchLocations',json_encode($branchLocations));
+  //   $this->setData('hasBranchLocation',$hasBranchLocation);
 
-    $this->setPageTitle($this->data['_modelData']['name'].' - สินค้า @ '.request()->get('shop')->name);
-    $this->setPageImage($model->getImage('list'));
-    $this->setPageDescription($model->getShortDescription());
+  //   $this->setPageTitle($this->data['_modelData']['name'].' - สินค้า @ '.request()->get('shop')->name);
+  //   $this->setPageImage($model->getImage('list'));
+  //   $this->setPageDescription($model->getShortDescription());
 
-    return $this->view('pages.product.shop_product_detail');
+  //   return $this->view('pages.product.shop_product_detail');
 
-  }
+  // }
 
   public function menu() {
 

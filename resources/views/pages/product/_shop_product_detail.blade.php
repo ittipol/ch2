@@ -1,8 +1,6 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUdwm6VWiEE-1ZrVgY3bh1sNX21_deHZw&libraries=places" type="text/javascript"></script> -->
-
 @include('pages.shop.layouts.fixed_top_nav')
 
 <div class="container">
