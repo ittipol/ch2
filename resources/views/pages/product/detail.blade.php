@@ -318,7 +318,7 @@
   <h4 class="space-bottom-20">จากผู้ขายรายนี้</h4>
   @if(!empty($shopRealatedProducts))
 
-    <div class="realated-roducts space-bottom-20">
+    <div class="realated-roducts">
       @foreach($shopRealatedProducts as $product)
 
         <div class="card xs no-border no-margin">
@@ -361,18 +361,18 @@
 
   @else
 
-    <div class="list-empty-message text-center space-bottom-40">
+    <div class="list-empty-message text-center">
       <h3>ยังไม่มีสินค้าอื่นๆที่เกี่ยวข้องให้แสดง</h3>
     </div>
 
   @endif
 
-  <div class="line space-bottom-40"></div>
+  <div class="line space-top-bottom-20"></div>
 
   <h4 class="space-bottom-20">จากผู้ขายรายอื่น</h4>
   @if(!empty($realatedProducts))
 
-    <div class="realated-roducts space-bottom-20">
+    <div class="realated-roducts">
       @foreach($realatedProducts as $product)
 
         <div class="card xs no-border no-margin">
@@ -415,7 +415,7 @@
 
   @else
 
-    <div class="list-empty-message text-center space-bottom-20">
+    <div class="list-empty-message text-center">
       <h3>ยังไม่มีสินค้าอื่นๆที่เกี่ยวข้องให้แสดง</h3>
     </div>
 
