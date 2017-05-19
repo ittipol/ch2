@@ -142,6 +142,16 @@
 	border-left: 1px solid #ccc;
 }
 
+.product-shipping-cost-input-section .image-tile {
+	width: 80px;
+	height: 80px;
+	background-image: url(/images/common/image.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50px;
+  background-color: #aaa;
+}
+
 .shipping-cost-input-box {
 	margin-bottom: 10px;
 	padding: 10px;

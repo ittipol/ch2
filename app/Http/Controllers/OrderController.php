@@ -196,7 +196,7 @@ class OrderController extends Controller
 
     $this->setData('hours',$hours);
     $this->setData('mins',$mins);
-    
+    dd('sdfsdf');
     return $this->view('pages.order.payment_inform');
   }
 
@@ -439,10 +439,10 @@ class OrderController extends Controller
       return Redirect::to('shop/'.request()->shopSlug.'/shipping_method');
     }
 
-    $_paymentMethods = array();
-    foreach ($paymentMethodModel->getPaymentMethod(request()->get('shopId')) as $paymentMethod) {
-      $_paymentMethods[$paymentMethod['id']] = $paymentMethod['name'];
-    }
+    // $_paymentMethods = array();
+    // foreach ($paymentMethodModel->getPaymentMethod(request()->get('shopId')) as $paymentMethod) {
+    //   $_paymentMethods[$paymentMethod['id']] = $paymentMethod['name'];
+    // }
 
     $orderShippingMethod = $model->getOrderShippingMethod();
     if(empty($orderShippingMethod)) {
@@ -457,7 +457,7 @@ class OrderController extends Controller
     $this->setData('hasProductNotSetShippingCost',$model->checkHasProductNotSetShippingCost());
     $this->setData('hasProductHasShippingCost',$model->checkHasProductHasShippingCost());
 
-    $this->setData('paymentMethods',$_paymentMethods);
+    // $this->setData('paymentMethods',$_paymentMethods);
 
     return $this->view('pages.order.shop_order_confirm');
 

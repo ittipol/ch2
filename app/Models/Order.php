@@ -319,6 +319,16 @@ class Order extends Model
       $total += $orderProduct->getOrderTotal();
     }
 
+    // $total += $this->getOrderShippingCost($orderProducts,$format);
+
+    if(!empty($this->order_shipping_cost)) {
+      $total += $this->order_shipping_cost;
+    }
+
+    foreach ($orderProducts as $orderProduct) {
+      $total += $orderProduct->getOrderShippingCost();
+    }
+
     if($format) {
       return $currency->format($total);
     }

@@ -257,7 +257,7 @@ class CheckoutController extends Controller
       // $totals = $cartModel->getSummary($shopId);
       $totals = $order->getSummary();
 
-      foreach ($totals as $alias => $value) {
+      foreach($totals as $alias => $value) {
 
         $orderTotalModel
         ->newInstance()

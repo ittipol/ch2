@@ -28,9 +28,9 @@
 
           <div class="product-list-box clearfix">
 
-            <div class="product-image pull-left">
+            <div class="image-tile pull-left">
               <a href="{{$product['productDetailUrl']}}">
-                <img src="{{$product['imageUrl']}}">
+                <div class="product-image" style="background-image:url({{$product['imageUrl']}});"></div>
               </a>
             </div>
 
@@ -271,7 +271,9 @@
                   <div class="clearfix">
 
                     <div class="text-center pull-left">
-                      <img src="{{$orderProduct['imageUrl']}}">
+                      <div class="image-tile">
+                        <div class="product-image" style="background-image:url({{$orderProduct['imageUrl']}});"></div>
+                      </div>
                     </div>
 
                     <div class="col-xs-8">
@@ -333,7 +335,9 @@
                 <div class="clearfix">
 
                   <div class="text-center pull-left">
-                    <img src="{{$orderProduct['imageUrl']}}">
+                    <div class="image-tile">
+                      <div class="product-image" style="background-image:url({{$orderProduct['imageUrl']}});"></div>
+                    </div>
                   </div>
 
                   <div class="col-xs-8">
@@ -387,32 +391,6 @@
     <?php 
       echo Form::textarea('shipping_cost_detail');
     ?>
-  </div>
-
-  <div class="space-top-30">
-    <h4 class="required">วิธีการชำระเงิน</h4>
-    <div class="line"></div>
-
-    <div class="secondary-message-box info">
-      <div class="secondary-message-box-inner">
-        <h3>ระบุวิธีการชำระเงินของการสั่งซื้อนี้</h3>
-        <p>กรุณาเลือกวิธีการชำระเงินอย่างน้อย 1 วิธีให้กับการสั่งซื้อนี้</p>
-      </div>
-    </div>
-
-    <div class="payment-method-input-section">
-      @foreach ($paymentMethods as $id => $name)
-      <div>
-        <label class="choice-box">
-          <?php
-            echo Form::checkbox('payment_method[]', $id, true);
-          ?> 
-          <div class="inner"><?php echo $name; ?></div>
-        </label>
-      </div>
-      @endforeach
-    </div>
-
   </div>
 
   <div class="space-top-30">
