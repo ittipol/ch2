@@ -100,31 +100,31 @@ class OrderController extends Controller
   }
 
   public function paymentInform() {
-dd('sdsds');
+dd('sdfsdf');
     $order = Service::loadModel('Order')->where([
       ['id','=',$this->param['id']],
       ['created_by','=',session()->get('Person.id')]
     ])->first();
-echo 'a';
+
     if(empty($order)) {
       $this->error = array(
         'message' => 'ขออภัย ไม่พบประกาศนี้ หรือข้อมูลนี้อาจถูกลบแล้ว'
       );
       return $this->error();
     }
-echo 'b';
+
     if($order->order_status_id != Service::loadModel('OrderStatus')->getIdByalias('pending-customer-payment')) {
       MessageHelper::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
       return Redirect::to('account/order/'.$order->id);
     }
-echo 'c';
+
     $model = Service::loadModel('OrderPaymentConfirm');
 
     if($model->where('order_id','=',$order->id)->exists()) {
       MessageHelper::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
       return Redirect::to('account/order/'.$order->id);
     }
-echo 'd';
+
     // $paymentMethodToOrders = $order->getRelatedData('PaymentMethodToOrder');
     // $paymentMethods = array();
     // foreach ($paymentMethodToOrders as $paymentMethodToOrder) {
@@ -136,7 +136,7 @@ echo 'd';
     foreach (Service::loadModel('PaymentMethod')->getPaymentMethod($order->shop_id) as $_paymentMethod) {
       $paymentMethods[$_paymentMethod['id']] = $_paymentMethod['name'];
     }
-dd('xxx');
+
     $date = new Date;
 
     $currentYear = date('Y');
