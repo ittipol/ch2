@@ -461,7 +461,8 @@ class ProductController extends Controller
       ->whereIn('product_to_categories.category_id',$pathIds)
       ->where([
         ['shop_relate_to.model','like','Product'],
-        ['shop_relate_to.shop_id','=',$shop->id]
+        ['shop_relate_to.shop_id','=',$shop->id],
+        ['product_id','!=',$model->id]
       ])
       ->select('products.*')
       ->take(16);
