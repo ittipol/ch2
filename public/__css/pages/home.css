@@ -1,8 +1,8 @@
 .primary-banner {
 	position: relative;
 	height: 500px;
-	background-color: #ccc;
-	background-image: url(/images/banners/main.jpg);
+	background-color: #607D8B;
+	/*background-image: url(/images/banners/main.jpg);*/
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -17,7 +17,7 @@
 .primary-banner .primary-banner-title {
 	color: #fff;
 	font-size: 40px;
-	width: 60%;
+	width: 80%;
 }
 
 .primary-banner .banner-description {
