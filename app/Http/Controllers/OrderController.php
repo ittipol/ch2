@@ -105,26 +105,26 @@ class OrderController extends Controller
       ['id','=',$this->param['id']],
       ['created_by','=',session()->get('Person.id')]
     ])->first();
-
+echo 'a';
     if(empty($order)) {
       $this->error = array(
         'message' => 'ขออภัย ไม่พบประกาศนี้ หรือข้อมูลนี้อาจถูกลบแล้ว'
       );
       return $this->error();
     }
-
+echo 'b';
     if($order->order_status_id != Service::loadModel('OrderStatus')->getIdByalias('pending-customer-payment')) {
       MessageHelper::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
       return Redirect::to('account/order/'.$order->id);
     }
-
+echo 'c';
     $model = Service::loadModel('OrderPaymentConfirm');
 
     if($model->where('order_id','=',$order->id)->exists()) {
       MessageHelper::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
       return Redirect::to('account/order/'.$order->id);
     }
-
+echo 'd';
     // $paymentMethodToOrders = $order->getRelatedData('PaymentMethodToOrder');
     // $paymentMethods = array();
     // foreach ($paymentMethodToOrders as $paymentMethodToOrder) {
@@ -136,7 +136,7 @@ class OrderController extends Controller
     foreach (Service::loadModel('PaymentMethod')->getPaymentMethod($order->shop_id) as $_paymentMethod) {
       $paymentMethods[$_paymentMethod['id']] = $_paymentMethod['name'];
     }
-
+dd('xxx');
     $date = new Date;
 
     $currentYear = date('Y');
@@ -196,7 +196,7 @@ class OrderController extends Controller
 
     $this->setData('hours',$hours);
     $this->setData('mins',$mins);
-    dd('sdfsdf');
+    
     return $this->view('pages.order.payment_inform');
   }
 
