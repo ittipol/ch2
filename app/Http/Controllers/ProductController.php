@@ -442,55 +442,58 @@ class ProductController extends Controller
 
     // Related Product (shop)
     $productToCategory = Service::loadModel('ProductToCategory')->where('product_id','=',$model->id)->select('category_id');
-    $categoryPaths = Service::loadModel('CategoryPath')->where('category_id','=',$productToCategory->first()->category_id);
-
-    $pathIds = array();
-    if($categoryPaths->exists()) {
-      foreach ($categoryPaths->get() as $path) {
-        $pathIds[] = $path->path_id;
-      }
-    }
-
-    $relatedProducts = $model
-    ->join('product_to_categories', 'product_to_categories.product_id', '=', 'products.id')
-    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
-    ->whereIn('product_to_categories.category_id',$pathIds)
-    ->where([
-      ['shop_relate_to.model','like','Product'],
-      ['shop_relate_to.shop_id','=',$shop->id]
-    ])
-    ->select('products.*')
-    ->take(16);
-
-    $_shopRealatedProducts = array();
-    if(!empty($relatedProducts)) {
-      foreach ($relatedProducts->get() as $product) {
-        $_shopRealatedProducts[] = array_merge($product->buildPaginationData(),array(
-          '_imageUrl' => $product->getImage('list'),
-          'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
-        ));
-      }
-    }    
-
-    // Related Product (all shop)
-    $relatedProducts = $model
-    ->join('product_to_categories', 'product_to_categories.product_id', '=', 'products.id')
-    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
-    ->whereIn('product_to_categories.category_id',$pathIds)
-    ->where([
-      ['shop_relate_to.model','like','Product'],
-      ['shop_relate_to.shop_id','!=',$shop->id]
-    ])
-    ->select('products.*')
-    ->take(16);
 
     $_realatedProducts = array();
-    if(!empty($relatedProducts)) {
-      foreach ($relatedProducts->get() as $product) {
-        $_realatedProducts[] = array_merge($product->buildPaginationData(),array(
-          '_imageUrl' => $product->getImage('list'),
-          'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
-        ));
+    $_shopRealatedProducts = array();
+    if($productToCategory->exists()) {
+      $categoryPaths = Service::loadModel('CategoryPath')->where('category_id','=',$productToCategory->first()->category_id);
+
+      $pathIds = array();
+      if($categoryPaths->exists()) {
+        foreach ($categoryPaths->get() as $path) {
+          $pathIds[] = $path->path_id;
+        }
+      }
+
+      $relatedProducts = $model
+      ->join('product_to_categories', 'product_to_categories.product_id', '=', 'products.id')
+      ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
+      ->whereIn('product_to_categories.category_id',$pathIds)
+      ->where([
+        ['shop_relate_to.model','like','Product'],
+        ['shop_relate_to.shop_id','=',$shop->id]
+      ])
+      ->select('products.*')
+      ->take(16);
+
+      if(!empty($relatedProducts)) {
+        foreach ($relatedProducts->get() as $product) {
+          $_shopRealatedProducts[] = array_merge($product->buildPaginationData(),array(
+            '_imageUrl' => $product->getImage('list'),
+            'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
+          ));
+        }
+      }    
+
+      // Related Product (all shop)
+      $relatedProducts = $model
+      ->join('product_to_categories', 'product_to_categories.product_id', '=', 'products.id')
+      ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
+      ->whereIn('product_to_categories.category_id',$pathIds)
+      ->where([
+        ['shop_relate_to.model','like','Product'],
+        ['shop_relate_to.shop_id','!=',$shop->id]
+      ])
+      ->select('products.*')
+      ->take(16);
+
+      if(!empty($relatedProducts)) {
+        foreach ($relatedProducts->get() as $product) {
+          $_realatedProducts[] = array_merge($product->buildPaginationData(),array(
+            '_imageUrl' => $product->getImage('list'),
+            'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
+          ));
+        }
       }
     }
 
