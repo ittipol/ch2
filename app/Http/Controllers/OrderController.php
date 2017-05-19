@@ -100,7 +100,7 @@ class OrderController extends Controller
   }
 
   public function paymentInform() {
-
+dd('sdsds');
     $order = Service::loadModel('Order')->where([
       ['id','=',$this->param['id']],
       ['created_by','=',session()->get('Person.id')]
