@@ -239,8 +239,8 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
   Route::get('account/order/{id}', 'OrderController@detail')->name('account.order.detail');
   
-  Route::get('order/payment/inform/{id}', 'orderController@paymentInform')->name('account.order.payment_inform');
-  Route::post('order/payment/inform/{id}', 'orderController@paymentInformSubmit')->name('account.order.payment_inform');
+  Route::get('order/payment/inform/{id}', 'OrderController@paymentInform');
+  Route::post('order/payment/inform/{id}', 'OrderController@paymentInformSubmit');
 
 });
 

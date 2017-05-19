@@ -99,106 +99,106 @@ class OrderController extends Controller
 
   }
 
-  // public function paymentInform() {
+  public function paymentInform() {
 
-  //   $order = Service::loadModel('Order')->where([
-  //     ['id','=',$this->param['id']],
-  //     ['created_by','=',session()->get('Person.id')]
-  //   ])->first();
+    $order = Service::loadModel('Order')->where([
+      ['id','=',$this->param['id']],
+      ['created_by','=',session()->get('Person.id')]
+    ])->first();
 
-  //   if(empty($order)) {
-  //     $this->error = array(
-  //       'message' => 'ขออภัย ไม่พบประกาศนี้ หรือข้อมูลนี้อาจถูกลบแล้ว'
-  //     );
-  //     return $this->error();
-  //   }
+    if(empty($order)) {
+      $this->error = array(
+        'message' => 'ขออภัย ไม่พบประกาศนี้ หรือข้อมูลนี้อาจถูกลบแล้ว'
+      );
+      return $this->error();
+    }
 
-  //   if($order->order_status_id != Service::loadModel('OrderStatus')->getIdByalias('pending-customer-payment')) {
-  //     MessageHelper::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
-  //     return Redirect::to('account/order/'.$order->id);
-  //   }
+    if($order->order_status_id != Service::loadModel('OrderStatus')->getIdByalias('pending-customer-payment')) {
+      MessageHelper::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
+      return Redirect::to('account/order/'.$order->id);
+    }
 
-  //   $model = Service::loadModel('OrderPaymentConfirm');
+    $model = Service::loadModel('OrderPaymentConfirm');
 
-  //   if($model->where('order_id','=',$order->id)->exists()) {
-  //     MessageHelper::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
-  //     return Redirect::to('account/order/'.$order->id);
-  //   }
+    if($model->where('order_id','=',$order->id)->exists()) {
+      MessageHelper::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
+      return Redirect::to('account/order/'.$order->id);
+    }
 
-  //   // $paymentMethodToOrders = $order->getRelatedData('PaymentMethodToOrder');
-  //   // $paymentMethods = array();
-  //   // foreach ($paymentMethodToOrders as $paymentMethodToOrder) {
-  //   //   $paymentMethod = $paymentMethodToOrder->paymentMethod;
-  //   //   $paymentMethods[$paymentMethod->id] = $paymentMethod->name;
-  //   // }
+    // $paymentMethodToOrders = $order->getRelatedData('PaymentMethodToOrder');
+    // $paymentMethods = array();
+    // foreach ($paymentMethodToOrders as $paymentMethodToOrder) {
+    //   $paymentMethod = $paymentMethodToOrder->paymentMethod;
+    //   $paymentMethods[$paymentMethod->id] = $paymentMethod->name;
+    // }
 
-  //   $paymentMethods = array();
-  //   foreach (Service::loadModel('PaymentMethod')->getPaymentMethod($order->shop_id) as $_paymentMethod) {
-  //     $paymentMethods[$_paymentMethod['id']] = $_paymentMethod['name'];
-  //   }
+    $paymentMethods = array();
+    foreach (Service::loadModel('PaymentMethod')->getPaymentMethod($order->shop_id) as $_paymentMethod) {
+      $paymentMethods[$_paymentMethod['id']] = $_paymentMethod['name'];
+    }
 
-  //   $date = new Date;
+    $date = new Date;
 
-  //   $currentYear = date('Y');
+    $currentYear = date('Y');
     
-  //   $day = array();
-  //   $month = array();
-  //   $year = array();
+    $day = array();
+    $month = array();
+    $year = array();
 
-  //   for ($i=1; $i <= 31; $i++) { 
-  //     $day[$i] = $i;
-  //   }
+    for ($i=1; $i <= 31; $i++) { 
+      $day[$i] = $i;
+    }
 
-  //   for ($i=1; $i <= 12; $i++) { 
-  //     $month[$i] = $date->getMonthName($i);
-  //   }
+    for ($i=1; $i <= 12; $i++) { 
+      $month[$i] = $date->getMonthName($i);
+    }
 
-  //   for ($i=$currentYear; $i <= $currentYear + 1; $i++) { 
-  //     $year[$i] = $i+543;
-  //   }
+    for ($i=$currentYear; $i <= $currentYear + 1; $i++) { 
+      $year[$i] = $i+543;
+    }
 
-  //   // Time
-  //   $hours = array();
-  //   $mins = array();
+    // Time
+    $hours = array();
+    $mins = array();
 
-  //   for ($i=0; $i <= 23; $i++) { 
+    for ($i=0; $i <= 23; $i++) { 
 
-  //     if($i < 10) {
-  //       $hours['0'.$i] = $i;
-  //     }else{
-  //       $hours[$i] = $i;
-  //     }
+      if($i < 10) {
+        $hours['0'.$i] = $i;
+      }else{
+        $hours[$i] = $i;
+      }
 
-  //   }
+    }
 
-  //   for ($i=0; $i <= 59; $i++) {
+    for ($i=0; $i <= 59; $i++) {
 
-  //     if($i < 10) {
-  //       $mins['0'.$i] = '0'.$i;
-  //     }else{
-  //       $mins[$i] = $i;
-  //     }
+      if($i < 10) {
+        $mins['0'.$i] = '0'.$i;
+      }else{
+        $mins[$i] = $i;
+      }
       
-  //   }
+    }
 
-  //   $this->data = $model->formHelper->build();
-  //   $this->setData('invoiceNumber',$order->invoice_number);
+    $this->data = $model->formHelper->build();
+    $this->setData('invoiceNumber',$order->invoice_number);
 
-  //   $this->setData('paymentMethods',$paymentMethods);
+    $this->setData('paymentMethods',$paymentMethods);
 
-  //   $this->setData('day',$day);
-  //   $this->setData('month',$month);
-  //   $this->setData('year',$year);
+    $this->setData('day',$day);
+    $this->setData('month',$month);
+    $this->setData('year',$year);
 
-  //   $this->setData('currentDay',date('j'));
-  //   $this->setData('currentMonth',date('n'));
-  //   $this->setData('currentYear',$currentYear);
+    $this->setData('currentDay',date('j'));
+    $this->setData('currentMonth',date('n'));
+    $this->setData('currentYear',$currentYear);
 
-  //   $this->setData('hours',$hours);
-  //   $this->setData('mins',$mins);
+    $this->setData('hours',$hours);
+    $this->setData('mins',$mins);
     
-  //   return $this->view('pages.order.payment_inform');
-  // }
+    return $this->view('pages.order.payment_inform');
+  }
 
   public function paymentInformSubmit(CustomFormRequest $request) {
 
