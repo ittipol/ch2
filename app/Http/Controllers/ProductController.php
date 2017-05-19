@@ -459,7 +459,8 @@ class ProductController extends Controller
       ['shop_relate_to.model','like','Product'],
       ['shop_relate_to.shop_id','=',$shop->id]
     ])
-    ->take(20);
+    ->select('products.*')
+    ->take(16);
 
     $_shopRealatedProducts = array();
     if(!empty($relatedProducts)) {
@@ -480,7 +481,8 @@ class ProductController extends Controller
       ['shop_relate_to.model','like','Product'],
       ['shop_relate_to.shop_id','!=',$shop->id]
     ])
-    ->take(20);
+    ->select('products.*')
+    ->take(16);
 
     $_realatedProducts = array();
     if(!empty($relatedProducts)) {
