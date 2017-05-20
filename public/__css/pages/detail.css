@@ -424,11 +424,12 @@
 	width: 20%;
 	float: left;
 	text-align: center;
+	background-color: #E3F2FD;
 }
 
 .order-status .order-status-box.current,
 .order-status .order-status-box.passed {
-	background-color: #E3F2FD;
+	background-color: #BBDEFB;
 }
 
 .order-status .order-status-box .image {

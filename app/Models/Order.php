@@ -325,9 +325,9 @@ class Order extends Model
       $total += $this->order_shipping_cost;
     }
 
-    foreach ($orderProducts as $orderProduct) {
-      $total += $orderProduct->getOrderShippingCost();
-    }
+    // foreach ($orderProducts as $orderProduct) {
+    //   $total += $orderProduct->getOrderShippingCost();
+    // }
 
     if($format) {
       return $currency->format($total);

@@ -36,7 +36,7 @@ class PaymentMethod extends Model
       ['shop_relate_to.model','like',$this->modelName],
       ['shop_relate_to.shop_id','=',$shopId]
     ])
-    ->select($this->getTable().'.id',$this->getTable().'.name')
+    ->select($this->getTable().'.*')
     ->orderBy($this->getTable().'.name','ASC')
     ->get();
   }

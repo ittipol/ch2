@@ -28,7 +28,8 @@ a.button:visited {
 	font-size: 16px;
 }
 
-h3 > img {
+h3 > img,
+h4 > img {
 	width: 30px;
 	margin-right: 10px;
 }
@@ -102,6 +103,10 @@ h3 > img {
 
 .space-top-50 {
 	margin-top: 50px !important;
+}
+
+.space-top-100 {
+	margin-top: 100px !important;
 }
 
 .space-bottom-5 {

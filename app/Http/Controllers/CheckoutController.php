@@ -212,6 +212,9 @@ class CheckoutController extends Controller
         // ->select('id','name','price','shipping_calculate_from','weight')
         // ->find($product['productId']);
 
+        $price = $_product->getPrice();
+        $total = $price * $product['quantity'];
+
         $shipping = array();
         if(isset($shops[$shopId]['shipping_method_id']) && ($shippingMethod->shipping_service_cost_type_id == 3)) {
           $shipping = array(
@@ -229,9 +232,13 @@ class CheckoutController extends Controller
               'free_shipping' => 1
             );
           }else{
+            $shippingCost = $productShipping->calShippingCost($_product,$product['quantity']);
+
             $shipping = array(
-              'shipping_cost' => $productShipping->calShippingCost($_product,$product['quantity'])
+              'shipping_cost' => $shippingCost
             );
+
+            $total += $shippingCost;
           }
 
         }
@@ -246,7 +253,7 @@ class CheckoutController extends Controller
           'product_option_name' => !empty($_product->productOption['productOptionName']) ? $_product->productOption['productOptionName'] : null,
           'product_option_value_name' => !empty($_product->productOption['valueName']) ? $_product->productOption['valueName'] : null,
           'full_price' => $_product->price,
-          'price' => $_product->getPrice(),
+          'price' => $price,
           'quantity' => $product['quantity'],
           'total' => $cartModel->getProductTotal($_product,$product['quantity']),
         ),$shipping))

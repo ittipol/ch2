@@ -42,11 +42,10 @@
   @endif
 
   @if($order['order_status_id'] == 1)
+
     <div class="secondary-message-box info space-bottom-30">
       <div class="secondary-message-box-inner">
-        <h3>รอการยืนยันการสั่งซื้อจากผู้ขาย</h3>
-        <p>กรุณายืนยันการสั้งซื้อนี้ เพื่อเป็นการยืนยันการสั่งซื้อว่าถูกต้องและสามารถที่จะดำเนินการชำระเงินได้</p>
-        <p>หรือสามารถยกเลิกการสั่งซื้อนี้หากหารสั่งซื้อไม่ถูกต้อง</p>
+        <h3>การสั่งซื้อใหม่</h3>
       </div>
       <div class="message-box-button-group two-button clearfix">
         <div class="flat-button">
@@ -54,7 +53,7 @@
         </div>
         <div class="flat-button">
           <a class="button danger" data-right-side-panel="1" data-right-side-panel-target="#order_cancel_panel">
-            ยกเลิกการสั่วซื้อ
+            ยกเลิกการสั่งซื้อ
           </a>
         </div>
       </div>
@@ -102,15 +101,12 @@
         ]);
       ?>
 
+      <div>
+        <h3>ลูกค้าแจ้งการชำระเงินแล้ว</h3>
+      </div>
+
       <div class="secondary-message-box info space-bottom-30">
-
-        <div class="list-empty-message text-center space-bottom-20">
-          <img class="space-bottom-20" src="/images/common/payment.png">
-          <div>
-            <h3>ลูกค้ายืนยันการชำระเงินเลขที่การสั่งซื้อ {{$order['invoice_number']}} แล้ว</h3>
-          </div>
-        </div>
-
+ 
         <div class="message-box-button-group two-button clearfix">
           <div class="flat-button">
             <a href="{{$paymentDetailUrl}}" class="button">รายละเอียดแจ้งการชำระเงิน</a>
@@ -179,7 +175,7 @@
       </div>
 
       @if(isset($updateOrderStatusUrl))
-      <div class="secondary-message-box info space-bottom-30">
+      <div class="secondary-message-box info space-top-30 space-bottom-30">
         <div class="message-box-button-group clearfix">
           <div class="flat-button">
             <a class="button" data-right-side-panel="1" data-right-side-panel-target="#order_status">เปลี่ยนสถานะการสั่งซื้อ</a>
@@ -196,14 +192,14 @@
 
       @endif
 
-      <div class="line space-top-bottom-20"></div>
+      <!-- <div class="line space-top-bottom-20"></div> -->
 
     </div>
 
   </div>
   @endif
 
-  <div class="row">
+  <div class="row space-top-50">
 
     <div class="col-md-4 col-xs-12">
 
@@ -318,12 +314,19 @@
     </div>
   </div>
 
+  <div class="line space-top-bottom-80"></div>
+
+  <h3>
+    <img src="/images/icons/tag-blue.png">
+    สรุปรายการสั่งซื้อ
+  </h3>
+
   <div class="cart space-top-30">
 
     <div class="product-list-table">
 
       <h4>รายการสินค้า</h4>
-      <div class="line"></div>
+      <div class="line grey"></div>
 
       <div class="product-list-wrapper">
         @foreach($orderProducts as $product)
@@ -386,14 +389,35 @@
         @endforeach
       </div>
 
+      <div class="shipping-method-input space-top-30">
+
+        <h4>การจัดส่ง</h4>
+        <div class="line grey"></div>
+
+        <div class="shipping-method-choice">
+          <label class="choice-box">
+
+            <div class="inner">
+              <div class="row">
+
+                <div class="col-md-4 col-xs-12">
+                  <div>ค่าจัดส่ง</div>
+                  <div class="shipping-cost">
+                    {{$orderShippingCosts['orderShippingCost']}}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </label>
+
+        </div>
+      </div>
+
       <div class="shipping-cost-summary">
-        <h4>ค่าจัดส่งสินค้าของการสั่งซื้อนี้</h4>
-        <h5>ค่าจัดส่งต่อการสั่งซื้อ: <strong>{{$orderShippingCosts['orderShippingCost']}}</strong></h5>
+        <h4>สรุปค่าจัดส่ง</h4>
+        <h5>ค่าจัดส่ง: <strong>{{$orderShippingCosts['orderShippingCost']}}</strong></h5>
         <h5>ค่าจัดส่งรวมของสินค้าแต่ละรายการ: <strong>{{$orderShippingCosts['productsShippingCost']}}</strong></h5>
-        @if($order['order_status_id'] == 1)
-          <p class="error-message">*** ค่าจัดส่งของการสั่งซื้อนี้ยังไม่ใช่จำนวนสุทธิที่ต้องชำระ</p>
-          <p class="error-message">*** อาจมีการเปลี่ยนแปลงหลังจากรายการสั่งซื้อถูกยืนยันจากผู้ขาย</p>
-        @endif
         @if(!empty($order['shipping_cost_detail']))
           <a data-right-side-panel="1" data-right-side-panel-target="#shipping_cost_detail" role="button"><strong>แสดงรายละเอียดค่าจัดส่ง</strong></a>
           <div id="shipping_cost_detail" class="right-size-panel">
@@ -422,6 +446,29 @@
       </div>
 
     </div>
+
+  </div>
+
+  <div class="line space-top-bottom-80"></div>
+
+  <h3><img src="/images/icons/message-blue.png">ประวัติการสั่งซื้อ</h3>
+  <div class="space-top-30">
+    <h4>รายละเอียด</h4>
+
+    @foreach($orderHistories as $orderHistory)
+      <div class="order-histroty-list space-top-20">
+        <div class="order-histroty-list-inner">
+          <h4>{{$orderHistory['orderStatus']}}</h4>
+          <h5>เมื่อ {{$orderHistory['createdDate']}}</h5>
+          @if(!empty($orderHistory['message']))
+          <h5 class="space-top-20"><strong>รายละเอียด</strong></h5>
+          <div>
+            {!!$orderHistory['message']!!}
+          </div>
+          @endif
+        </div>
+      </div>
+    @endforeach
 
   </div>
 

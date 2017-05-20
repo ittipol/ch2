@@ -14,13 +14,13 @@
 <div class="container">
 
   @if($order['order_status_id'] == 1)
+
   <div class="secondary-message-box info space-bottom-30">
     <div class="secondary-message-box-inner">
       <h3>รายการสั่งซื้อยังไม่ถูกยืนยันจากผู้ขาย</h3>
-      <p>*** ค่าจัดส่งของการสั่งซื้อนี้ยังไม่ใช่จำนวนสุทธิที่ต้องชำระ</p>
-      <p>*** โปรดรอการยืนยันการสั่งซื้อจากผู้ขายก่อนการชำระเงิน</p>
     </div>
   </div>
+
   @elseif($order['order_status_id'] == 2)
 
     @if($hasOrderPaymentConfirm)
@@ -37,31 +37,17 @@
       <div class="secondary-message-box success">
         <div class="secondary-message-box-inner">
           <h3>ผู้ขายยืนยันการสั่งซื้อแล้ว</h3>
-          <p>*** การสั่งซื้อนี้สามารถชำระเงินได้แล้ว</p>
         </div>
       </div>
 
-      <div class="secondary-message-box info space-bottom-30">
-        <div class="secondary-message-box-inner">
-          <div class="list-empty-message text-center">
-            <img class="space-bottom-20" src="/images/common/payment.png">
-            <div>
-              <h3>จำนวนเงินที่ต้องชำระ {{$orderTotals['total']['value']}}</h3>
-              <p>โปรดชำระเงินตามจำนวนที่ได้ระบุไว้</p>
-            </div>
-          </div>
-        </div>
-        <div class="message-box-button-group clearfix">
-          <div class="flat-button">
-            <a href="{{URL::to($paymentInformUrl)}}" class="button">แจ้งการชำระเงิน</a>
-          </div>
-        </div>
+      <div>
+        <h3>จำนวนเงินที่ต้องชำระ <strong>{{$orderTotals['total']['value']}}</strong></h3>
       </div>
 
       <div class="row">
 
         @if(!empty($orderConfirmMessage))
-        <div class="col-sm-12 space-bottom-30">
+        <div class="col-xs-12 space-bottom-30">
           <div class="detail-info-section no-margin">
             <h4>ข้อความจากผู้ขาย</h4>
             <div class="line"></div>
@@ -72,51 +58,58 @@
         </div>
         @endif
 
-        <div class="col-sm-12 space-bottom-30">
+        <div class="col-xs-12">
 
           <div class="detail-info-section no-margin">
-            <h4>วิธีการชำระเงินการสั่งซื้อนี้</h4>
-            <div class="line"></div>
+            <h4>วิธีการชำระเงิน</h4>
+            <div class="line space-bottom-30"></div>
 
-            <div class="list-h">
+            <div class="row">
               @foreach($paymentMethods as $paymentMethod)
-              <div class="list-h-item clearfix">
+                
+                <div class="col-md-12 col-xs-12">
+                  <div class="card sm">
 
-                <a data-right-side-panel="1" data-right-side-panel-target="#payment_method_{{$paymentMethod['id']}}" class="list-image pull-left">
-                  <img src="/images/icons/payment-white.png">
-                </a>
-
-                <div class="col-md-11 col-xs-8">
-
-                  <div class="row">
-
-                    <div class="col-xs-12 list-content">
+                    <div class="card-info">
                       <a data-right-side-panel="1" data-right-side-panel-target="#payment_method_{{$paymentMethod['id']}}">
-                        <h4 class="primary-info single-info">{{$paymentMethod['name']}}</h4>
+                        <h4 class="no-margin">
+                          <img src="/images/common/payment.png">
+                          {{$paymentMethod['name']}}
+                        </h4>
                       </a>
+
+                      <div class="card-sub-info">
+                        {!!$paymentMethod['description']!!}
+                      </div>
+  
                     </div>
 
                   </div>
-
                 </div>
 
-              </div>
-
-              <div id="payment_method_{{$paymentMethod['id']}}" class="right-size-panel">
-                <div class="right-size-panel-inner">
-                    <h3>{{$paymentMethod['name']}}</h3>
-                    <div class="line space-bottom-10"></div>
-                    <h5>รายละเอียดการชำระเงิน</h5>
-                    {!!$paymentMethod['description']!!}
-                  <div class="right-size-panel-close-button"></div>
+                <div id="payment_method_{{$paymentMethod['id']}}" class="right-size-panel">
+                  <div class="right-size-panel-inner">
+                      <h3>{{$paymentMethod['name']}}</h3>
+                      <div class="line space-bottom-10"></div>
+                      {!!$paymentMethod['description']!!}
+                    <div class="right-size-panel-close-button"></div>
+                  </div>
                 </div>
-              </div>
 
               @endforeach
             </div>
-            
+
           </div>
 
+        </div>
+
+      </div>
+
+      <div class="secondary-message-box info space-bottom-30">
+        <div class="message-box-button-group clearfix">
+          <div class="flat-button">
+            <a href="{{URL::to($paymentInformUrl)}}" class="button">แจ้งการชำระเงิน</a>
+          </div>
         </div>
       </div>
 
@@ -133,7 +126,7 @@
   @if($order['order_status_id'] != 6)
   <div class="row">
 
-    <div class="col-sm-12">
+    <div class="col-xs-12">
       
       <div class="order-progress-bar">
         <div class="status"></div>
@@ -152,16 +145,14 @@
         @endforeach
       </div>
 
-      <div class="line space-top-bottom-20"></div>
-
     </div>
 
   </div>
   @endif
 
-  <div class="row">
+  <div class="row space-top-50">
 
-    <div class="col-md-4 col-sm-12">
+    <div class="col-md-4 col-xs-12">
 
       <div class="detail-group">
         <h4>รายละเอียดการสั่งซื้อ</h4>
@@ -195,7 +186,7 @@
 
     </div>
 
-    <div class="col-md-4 col-sm-12">
+    <div class="col-md-4 col-xs-12">
 
       <div class="detail-group">
         <h4>วิธีการจัดส่งสินค้า</h4>
@@ -237,7 +228,7 @@
 
     </div>
 
-    <div class="col-md-4 col-sm-12">
+    <div class="col-md-4 col-xs-12">
 
       @if($order['pick_up_order'])
       <div class="detail-info-section no-margin">
@@ -263,12 +254,19 @@
 
   </div>
 
+  <div class="line space-top-bottom-80"></div>
+
+  <h3>
+    <img src="/images/icons/tag-blue.png">
+    สรุปรายการสั่งซื้อ
+  </h3>
+
   <div class="cart space-top-30">
 
     <div class="product-list-table">
 
       <h4>รายการสินค้า</h4>
-      <div class="line"></div>
+      <div class="line grey"></div>
 
       <div class="product-list-wrapper">
         @foreach($orderProducts as $product)
@@ -318,7 +316,7 @@
 
               <div class="col-md-2 col-xs-12 product-info-container">
                 <div class="product-text">
-                  <h5>มูลค่าสินค้า</h5>
+                  <h5>มูลค่ารวม</h5>
                   <h4>{{$product['_total']}}</h4>
                 </div>
               </div>
@@ -331,14 +329,35 @@
         @endforeach
       </div>
 
+      <div class="shipping-method-input space-top-30">
+
+        <h4>การจัดส่ง</h4>
+        <div class="line grey"></div>
+
+        <div class="shipping-method-choice">
+          <label class="choice-box">
+
+            <div class="inner">
+              <div class="row">
+
+                <div class="col-md-4 col-xs-12">
+                  <div>ค่าจัดส่ง</div>
+                  <div class="shipping-cost">
+                    {{$orderShippingCosts['orderShippingCost']}}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </label>
+
+        </div>
+      </div>
+
       <div class="shipping-cost-summary">
-        <h4>ค่าจัดส่งสินค้าของการสั่งซื้อนี้</h4>
-        <h5>ค่าจัดส่งต่อการสั่งซื้อ: <strong>{{$orderShippingCosts['orderShippingCost']}}</strong></h5>
+        <h4>สรุปค่าจัดส่ง</h4>
+        <h5>ค่าจัดส่ง: <strong>{{$orderShippingCosts['orderShippingCost']}}</strong></h5>
         <h5>ค่าจัดส่งรวมของสินค้าแต่ละรายการ: <strong>{{$orderShippingCosts['productsShippingCost']}}</strong></h5>
-        @if($order['order_status_id'] == 1)
-          <p class="error-message">*** ค่าจัดส่งของการสั่งซื้อนี้ยังไม่ใช่จำนวนสุทธิที่ต้องชำระ</p>
-          <p class="error-message">*** อาจมีการเปลี่ยนแปลงหลังจากรายการสั่งซื้อถูกยืนยันจากผู้ขาย</p>
-        @endif
         @if(!empty($order['shipping_cost_detail']))
           <a data-right-side-panel="1" data-right-side-panel-target="#shipping_cost_detail" role="button"><strong>แสดงรายละเอียดค่าจัดส่ง</strong></a>
           <div id="shipping_cost_detail" class="right-size-panel">
@@ -353,6 +372,14 @@
       </div>
 
     </div>
+
+    @if($order['order_status_id'] == 1)
+    <div class="secondary-message-box error space-top-20">
+      <div class="secondary-message-box-inner">
+        <p>*** โปรดรอการยืนยันจากผู้ขายก่อนการชำระเงิน</p>
+      </div>
+    </div>
+    @endif
 
     <div class="cart-summary clearfix">
 
@@ -370,9 +397,11 @@
 
   </div>
 
-  <div>
-    <h4>ประวัติการสั่งซื้อ</h4>
-    <div class="line"></div>
+  <div class="line space-top-bottom-80"></div>
+
+  <h3><img src="/images/icons/message-blue.png">ประวัติการสั่งซื้อ</h3>
+  <div class="space-top-30">
+    <h4>รายละเอียด</h4>
 
     @foreach($orderHistories as $orderHistory)
       <div class="order-histroty-list space-top-20">

@@ -403,6 +403,7 @@ class OrderController extends Controller
     $this->setData('orderShippingMethod',$model->getOrderShippingMethod());
     $this->setData('orderStatuses',$model->getOrderStatuses());
     $this->setData('orderShippingCosts',$model->getOrderShippingCostSummary());
+    $this->setData('orderHistories',$model->getOrderHistories());
     $this->setData('percent',$model->getOrderProgress());
     $this->setData('hasPaymentMethod',$hasPaymentMethod);
 

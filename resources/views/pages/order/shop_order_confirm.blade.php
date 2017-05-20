@@ -255,7 +255,7 @@
 
       @if($hasProductHasShippingCost)
 
-      <h4>สินค้าที่คิดค่าจัดส่งแล้ว</h4>
+      <h4>สินค้าที่คิดค่าจัดส่งไว้แล้ว</h4>
       <div class="product-shipping-cost-input-section">
         <div class="row">
           @foreach($orderProducts as $orderProduct)
