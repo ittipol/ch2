@@ -705,7 +705,7 @@ class OrderController extends Controller
   }
 
   public function paymentConfirm() {
-dd('ds');
+
     // $model = Service::loadModel('Order')->where([
     //   ['id','=',$this->param['id']],
     //   ['shop_id','=',request()->get('shopId')]
