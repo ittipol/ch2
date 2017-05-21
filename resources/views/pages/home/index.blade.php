@@ -27,7 +27,12 @@
 
     @foreach($recommendedShops as $data)
 
-      <h3><img src="{{$data['shop']['profileImage']}}">{{$data['shop']['name']}}</h3>
+      <h3>
+        @if(!empty($data['shop']['profileImage']))
+        <img src="{{$data['shop']['profileImage']}}">
+        @endif
+        {{$data['shop']['name']}}
+      </h3>
 
       <div class="row">
         
@@ -154,6 +159,8 @@
     @endforeach
 
   </div> -->
+
+  <div class="line space-top-bottom-80"></div>
 
   <div class="row space-bottom-30">
     <div class="col-xs-12 text-right">
