@@ -540,8 +540,8 @@ dd('end');
     $productModel = Service::loadModel('Product');
     $shopModel = Service::loadModel('Shop');
 
-    $shopIds = array(3,21,24,23);
-    // $shopIds = array(7,6,8);
+    // $shopIds = array(3,21,24,23);
+    $shopIds = array(7,6,8);
 
     // Recommended shop
     $shops = $shopModel
