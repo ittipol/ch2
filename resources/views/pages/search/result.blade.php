@@ -169,7 +169,7 @@
       <div class="list-empty-message text-center space-top-20">
         <img class="space-bottom-20 not-found-image" src="/images/common/not-found.png">
         <div>
-          <h3>ขออภัย ไม่พบผลลัพธ์ที่ตรงกับคำค้นหา</h3>
+          <h3>ไม่พบผลลัพธ์ที่ตรงกับคำค้นหา</h3>
           <p>โปรดลองค้นหาอีกครั้งด้วยคำค้นหาที่แตกต่างจากคำค้นหานี้</p>
         </div>
       </div>

@@ -35,9 +35,6 @@
 
     $(document).ready(function(){
 
-      const notificationBottom = new NotificationBottom('ขออภัย<br/>เว็บไซต์อยู่ระหว่างการปรับปรุงใช้งาน','','','small',true);
-      notificationBottom.load();
-
       const blackbox = new Blackbox;
       blackbox.load();
 

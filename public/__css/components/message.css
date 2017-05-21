@@ -3,6 +3,14 @@
 	background-color: #ececec;
 }
 
+.secondary-message-box.fixed {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+	z-index: 999;
+}
+
 .secondary-message-box .secondary-message-box-inner {
 	padding: 15px;
 } 

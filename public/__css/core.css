@@ -25,7 +25,8 @@ a.button:visited {
 }
 
 .list-empty-message h3 {
-	font-size: 16px;
+	/*font-size: 16px;*/
+	margin: 0 0 20px 0;
 }
 
 h3 > img,
@@ -295,12 +296,20 @@ h4 > img {
 	color: #0071c5;
 }
 
-.article-title.color-teal {
+.color-teal {
 	color: #00897b;
 }
 
-.article-title.color-pink {
+.color-pink {
 	color: #ad1457;
+}
+
+.color-orange {
+	color: #fb8c00;
+}
+
+.color-blue {
+	color: rgb(66,133,244);
 }
 
 .article-content .paragraph {
@@ -315,6 +324,11 @@ h4 > img {
 	background-color: #FFCDD2;
 	color: #D50000;
 }
+
+
+
+
+
 
 .product-catalog-banner {
 	width: 100%;
@@ -341,17 +355,12 @@ h4 > img {
 
 
 .product-banner {
-	/*border-bottom: 1px solid #E91E63;*/
 }
 
 .product-banner .section-left {
 	width: 225px;
-	/*height: 360px;*/
 	background-color: #E91E63;
 	float: left;
-	/*background-size: 100% auto;
-	background-position: top center;
-	background-repeat: no-repeat;*/
 }
 
 .product-banner .section-left-inner {
@@ -395,7 +404,6 @@ h4 > img {
 }
 
 .product-banner .product-price {
-	/*color: #0071c5;*/
 	color: #EF6C00;
 	font-size: 18px;
 	font-weight: bold;

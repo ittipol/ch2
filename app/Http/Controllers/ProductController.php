@@ -123,7 +123,7 @@ class ProductController extends Controller
       $categoryId = $this->param['category_id'];
     }
 
-    if(!empty($categoryId) && !$categoryModel->hadCatagory($categoryId)) {
+    if(!empty($categoryId) && !$categoryModel->hasCatagory($categoryId)) {
       $this->error = array(
         'message' => 'ขออภัย ไม่พบหมวดสินค้า'
       );

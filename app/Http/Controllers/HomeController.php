@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\library\service;
 use App\library\url;
+use App\library\stringHelper;
 
 class HomeController extends Controller
 {
@@ -389,149 +390,263 @@ dd('end');
 // dd('dene');
 //   }
 
-  public function index() {
+  // public function index() {
 
-    $url = new url;
-    $productModel = Service::loadModel('Product');
-    $shopModel = Service::loadModel('Shop');
-    $slugModel = Service::loadModel('Slug');
+  //   $url = new url;
+  //   $productModel = Service::loadModel('Product');
+  //   $shopModel = Service::loadModel('Shop');
+  //   $slugModel = Service::loadModel('Slug');
 
-    // new product
-    $products = $productModel
-    ->orderBy('created_at','desc')
-    ->take(8);
+  //   // new product
+  //   $products = $productModel
+  //   ->orderBy('created_at','desc')
+  //   ->take(8);
 
-    $_products = array();
-    if($products->exists()) {
+  //   $_products = array();
+  //   if($products->exists()) {
 
-      foreach ($products->get() as $product) {
+  //     foreach ($products->get() as $product) {
 
-        $_products[] = array_merge($product->buildPaginationData(),array(
-          '_imageUrl' => $product->getImage('list'),
-          'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
-        ));
+  //       $_products[] = array_merge($product->buildPaginationData(),array(
+  //         '_imageUrl' => $product->getImage('list'),
+  //         'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
+  //       ));
         
-      }
+  //     }
 
-    }
+  //   }
 
-    $this->setData('latestProducts',$_products);
+  //   $this->setData('latestProducts',$_products);
 
-    // 5 1 6 
-    $shopIds = array(5,1,6);
+  //   // 5 1 6 
+  //   $shopIds = array(5,1,6);
 
-    // Shop 1
-    $shop = $shopModel->find($shopIds[0]);
-    $slug = $slugModel->where(array(
-      array('model','like','Shop'),
-      array('model_id','=',$shopIds[0])
-    ))->first()->slug;
+  //   // Shop 1
+  //   $shop = $shopModel->find($shopIds[0]);
+  //   $slug = $slugModel->where(array(
+  //     array('model','like','Shop'),
+  //     array('model_id','=',$shopIds[0])
+  //   ))->first()->slug;
 
-    $this->setData('shopName1',$shop->name);
-    $this->setData('shopUrl1',$url->url('shop/'.$slug));
-    $this->setData('shopProductUrl1',$url->url('shop/'.$slug.'/product'));
+  //   $this->setData('shopName1',$shop->name);
+  //   $this->setData('shopUrl1',$url->url('shop/'.$slug));
+  //   $this->setData('shopProductUrl1',$url->url('shop/'.$slug.'/product'));
 
-    $products = $productModel
-    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
-    ->where([
-      ['shop_relate_to.model','like','Product'],
-      ['shop_relate_to.shop_id','=',$shopIds[0]]
-    ])
-    ->take(4)
-    ->get();
+  //   $products = $productModel
+  //   ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
+  //   ->where([
+  //     ['shop_relate_to.model','like','Product'],
+  //     ['shop_relate_to.shop_id','=',$shopIds[0]]
+  //   ])
+  //   ->take(4)
+  //   ->get();
 
-    $_products = array();
-    foreach ($products as $product) {
-      $_products[] = array_merge($product->buildPaginationData(),array(
-        '_imageUrl' => $product->getImage('list'),
-        'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
-      ));
-    }
-    $this->setData('products1',$_products);
-
-
-
-
-    // Shop 2
-    $shop = $shopModel->find($shopIds[1]);
-    $slug = $slugModel->where(array(
-      array('model','like','Shop'),
-      array('model_id','=',$shopIds[1])
-    ))->first()->slug;
-
-    $this->setData('shopName2',$shop->name);
-    $this->setData('shopUrl2',$url->url('shop/'.$slug));
-    $this->setData('shopProductUrl2',$url->url('shop/'.$slug.'/product'));
-
-    $products = $productModel
-    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
-    ->where([
-      ['shop_relate_to.model','like','Product'],
-      ['shop_relate_to.shop_id','=',$shopIds[1]]
-    ])
-    ->take(4)
-    ->get();
-
-    $_products = array();
-    foreach ($products as $product) {
-      $_products[] = array_merge($product->buildPaginationData(),array(
-        '_imageUrl' => $product->getImage('list'),
-        'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
-      ));
-    }
-    $this->setData('products2',$_products);
+  //   $_products = array();
+  //   foreach ($products as $product) {
+  //     $_products[] = array_merge($product->buildPaginationData(),array(
+  //       '_imageUrl' => $product->getImage('list'),
+  //       'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
+  //     ));
+  //   }
+  //   $this->setData('products1',$_products);
 
 
 
 
-    // Shop 3
-    $shop = $shopModel->find($shopIds[2]);
-    $slug = $slugModel->where(array(
-      array('model','like','Shop'),
-      array('model_id','=',$shopIds[2])
-    ))->first()->slug;
+  //   // Shop 2
+  //   $shop = $shopModel->find($shopIds[1]);
+  //   $slug = $slugModel->where(array(
+  //     array('model','like','Shop'),
+  //     array('model_id','=',$shopIds[1])
+  //   ))->first()->slug;
 
-    $this->setData('shopName3',$shop->name);
-    $this->setData('shopUrl3',$url->url('shop/'.$slug));
-    $this->setData('shopProductUrl3',$url->url('shop/'.$slug.'/product'));
+  //   $this->setData('shopName2',$shop->name);
+  //   $this->setData('shopUrl2',$url->url('shop/'.$slug));
+  //   $this->setData('shopProductUrl2',$url->url('shop/'.$slug.'/product'));
 
-    $products = $productModel
-    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
-    ->where([
-      ['shop_relate_to.model','like','Product'],
-      ['shop_relate_to.shop_id','=',$shopIds[2]]
-    ])
-    ->take(4)
-    ->get();
+  //   $products = $productModel
+  //   ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
+  //   ->where([
+  //     ['shop_relate_to.model','like','Product'],
+  //     ['shop_relate_to.shop_id','=',$shopIds[1]]
+  //   ])
+  //   ->take(4)
+  //   ->get();
 
-    $_products = array();
-    foreach ($products as $product) {
-      $_products[] = array_merge($product->buildPaginationData(),array(
-        '_imageUrl' => $product->getImage('list'),
-        'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
-      ));
-    }
-    $this->setData('products3',$_products);
+  //   $_products = array();
+  //   foreach ($products as $product) {
+  //     $_products[] = array_merge($product->buildPaginationData(),array(
+  //       '_imageUrl' => $product->getImage('list'),
+  //       'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
+  //     ));
+  //   }
+  //   $this->setData('products2',$_products);
+
+
+
+
+  //   // Shop 3
+  //   $shop = $shopModel->find($shopIds[2]);
+  //   $slug = $slugModel->where(array(
+  //     array('model','like','Shop'),
+  //     array('model_id','=',$shopIds[2])
+  //   ))->first()->slug;
+
+  //   $this->setData('shopName3',$shop->name);
+  //   $this->setData('shopUrl3',$url->url('shop/'.$slug));
+  //   $this->setData('shopProductUrl3',$url->url('shop/'.$slug.'/product'));
+
+  //   $products = $productModel
+  //   ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
+  //   ->where([
+  //     ['shop_relate_to.model','like','Product'],
+  //     ['shop_relate_to.shop_id','=',$shopIds[2]]
+  //   ])
+  //   ->take(4)
+  //   ->get();
+
+  //   $_products = array();
+  //   foreach ($products as $product) {
+  //     $_products[] = array_merge($product->buildPaginationData(),array(
+  //       '_imageUrl' => $product->getImage('list'),
+  //       'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
+  //     ));
+  //   }
+  //   $this->setData('products3',$_products);
 
 
 
     
-    $this->setData('shirts',$this->getProductData(80));
-    $this->setData('dresses',$this->getProductData(108));
-    $this->setData('bags',$this->getProductData(171));
-    $this->setData('shoes',$this->getProductData(176));
-    $this->setData('bedSheets',$this->getProductData(1260));
+  //   $this->setData('shirts',$this->getProductData(80));
+  //   $this->setData('dresses',$this->getProductData(108));
+  //   $this->setData('bags',$this->getProductData(171));
+  //   $this->setData('shoes',$this->getProductData(176));
+  //   $this->setData('bedSheets',$this->getProductData(1260));
 
-    $this->setData('moreShirtUrl',$url->url('product/80'));
-    $this->setData('moreDressUrl',$url->url('product/108'));
-    $this->setData('moreBagUrl',$url->url('product/171'));
-    $this->setData('moreShoeUrl',$url->url('product/176'));
-    $this->setData('moreBedSheetUrl',$url->url('product/1260'));
+  //   $this->setData('moreShirtUrl',$url->url('product/80'));
+  //   $this->setData('moreDressUrl',$url->url('product/108'));
+  //   $this->setData('moreBagUrl',$url->url('product/171'));
+  //   $this->setData('moreShoeUrl',$url->url('product/176'));
+  //   $this->setData('moreBedSheetUrl',$url->url('product/1260'));
+
+  //   return $this->view('pages.home.index');
+  // }
+
+  public function index() {
+
+    $url = new Url;
+    $string = new stringHelper;
+
+    $productModel = Service::loadModel('Product');
+    $shopModel = Service::loadModel('Shop');
+
+    // $shopIds = array(3,21,24,23);
+    $shopIds = array(7,6,8);
+
+    // Recommended shop
+    $shops = $shopModel
+    ->whereIn('id',$shopIds)
+    ->get();
+
+    $_shops = array();
+    foreach ($shops as $shop) {
+
+      $slug = $shop->getRelatedData('Slug',array(
+        'first' => true,
+        'fields' => array('slug')
+      ))->slug;
+
+      $products = $productModel
+      ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
+      ->where([
+        ['shop_relate_to.model','like','Product'],
+        ['shop_relate_to.shop_id','=',$shop->id]
+      ])
+      ->take(16)
+      ->get();
+
+      $_products = array();
+      foreach ($products as $product) {
+        $_products[] = array_merge($product->buildPaginationData(),array(
+          '_imageUrl' => $product->getImage('list'),
+          'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
+        ));
+      }
+
+      $_shops[] = array(
+        'shop' => array(
+          'name' => $shop->name,
+          'description' => $string->truncString($shop->description,80),
+          'profileImage' => $shop->getProfileImageUrl(),
+          'shopUrl' => $url->url('shop/'.$slug),
+          'shopProductUrl' => $url->url('shop/'.$slug.'/product'),
+        ),
+        'products' => $_products
+      );
+
+    }
+
+    // Get Other Shop
+    $shops = $shopModel
+    ->whereNotIn('id',$shopIds)
+    ->take(4)
+    ->get();
+
+    $_otherShops = array();
+    foreach ($shops as $shop) {
+      $slug = $shop->getRelatedData('Slug',array(
+        'first' => true,
+        'fields' => array('slug')
+      ))->slug;
+
+      $_otherShops[] = array(
+        'name' => $shop->name,
+        'description' => $string->truncString($shop->description,80),
+        'profileImage' => $shop->getProfileImageUrl(),
+        'shopUrl' => $url->url('shop/'.$slug)
+      );
+
+    }
+
+    $this->setData('recommendedShops',$_shops);
+    $this->setData('otherShops',$_otherShops);
+
+    // Get Products
+    $products = array(
+      array(
+        'id' => 79,
+        'label' => 'เสื้อผ้าและเครื่องแต่งกาย'
+      ),
+      array(
+        'id' => 377,
+        'label' => 'สุขภาพและความงาม'
+      ),
+      array(
+        'id' => 771,
+        'label' => 'Gaming'
+      )
+    );
+
+    $__products = array();
+    foreach ($products as $product) {
+      $__products[] = array(
+        'label' => $product['label'],
+        'data' => $this->getProductData($product['id'],16)
+      );
+    }
+
+    $this->setData('recommendedProducts',$__products);
+
+    $this->setData('shirts',$this->getProductData(80,7));
+    $this->setData('dresses',$this->getProductData(108,16));
+    $this->setData('bags',$this->getProductData(171,16));
+    $this->setData('shoes',$this->getProductData(176,16));
 
     return $this->view('pages.home.index');
+
   }
 
-  private function getProductData($c) {
+  private function getProductData($c,$limit = 4) {
 
     $url = new url;
     $product = Service::loadModel('Product');
@@ -548,7 +663,7 @@ dd('end');
     ->whereIn('product_to_categories.category_id',$ids)
     ->select('products.*')
     ->orderBy('products.created_at','desc')
-    ->take(4);
+    ->take($limit);
 
     $data = array();
     if($products->exists()) {

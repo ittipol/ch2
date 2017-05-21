@@ -318,7 +318,7 @@
   <h4 class="space-bottom-20">จากผู้ขายรายนี้</h4>
   @if(!empty($shopRealatedProducts))
 
-    <div class="realated-roducts">
+    <div class="realated-products">
       @foreach($shopRealatedProducts as $product)
 
         <div class="card xs no-border no-margin">
@@ -372,7 +372,7 @@
   <h4 class="space-bottom-20">จากผู้ขายรายอื่น</h4>
   @if(!empty($realatedProducts))
 
-    <div class="realated-roducts">
+    <div class="realated-products">
       @foreach($realatedProducts as $product)
 
         <div class="card xs no-border no-margin">
@@ -426,7 +426,7 @@
 <script type="text/javascript">
   $(document).ready(function(){
 
-    $('.realated-roducts').slick({
+    $('.realated-products').slick({
       dots: true,
       infinite: false,
       speed: 300,

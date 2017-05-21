@@ -387,7 +387,7 @@ class Shop extends Model
 
     return array(
       'name' => $this->name,
-      'description' => $string->truncString($this->description,150),
+      'description' => $string->truncString($this->description,80),
       'profileImage' => $profileImage,
       // 'cover' => $cover,
       'openHours' => $this->getOpenHours()

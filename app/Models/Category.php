@@ -177,7 +177,7 @@ class Category extends Model
 
   }
 
-  public function hadCatagory($categoryId = null) {
+  public function hasCatagory($categoryId = null) {
 
     if(empty($categoryId)) {
       return false;

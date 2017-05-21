@@ -65,7 +65,7 @@
 
 .card.xs .image-tile {
 	background-size: 100px;
-	width: 165px;
+	/*width: 165px;*/
 }
 
 .card .image-tile .card-image {
@@ -247,6 +247,25 @@
   .card .image-tile .card-image {
   	height: 300px;
   }
+
+  .col-sm-3 > .card.sm .image-tile .card-image {
+  	height: 200px;
+  }
+}
+
+@media only screen and (max-width : 768px) {
+
+	.card.sm .image-tile .card-image {
+		height: 200px;
+	}
+
+	.col-sm-3 > .card.sm .image-tile .card-image {
+		height: 150px;
+	}
+
+	.col-sm-3 > .card.sm .card-desciption {
+		display: none;
+	}
 }
 
 @media only screen and (max-width : 480px) {

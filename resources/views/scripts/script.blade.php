@@ -131,9 +131,7 @@
     '__css/layouts/blackbox/components/global-additional-nav-panel.css',
     '__css/layouts/blackbox/components/header.css',
     '__css/layouts/blackbox/components/footer.css',
-    '__css/layouts/blackbox/responsive.css',
-    '__css/slick.css',
-    '__css/slick-theme.css'
+    '__css/layouts/blackbox/responsive.css'
   );
 
   if($combine){

@@ -131,8 +131,8 @@
 
   @else
 
-  <div class="list-empty-message text-center space-top-20">
-    <img class="space-bottom-20" src="/images/common/not-found.png">
+  <div class="list-empty-message text-center">
+    <img src="/images/common/not-found.png">
     <div>
       <h3>ยังไม่มีสินค้า</h3>
     </div>
