@@ -624,6 +624,10 @@ dd('end');
       array(
         'id' => 771,
         'label' => 'Gaming'
+      ),
+      array(
+        'id' => 1261,
+        'label' => 'ห้องนอน'
       )
     );
 
