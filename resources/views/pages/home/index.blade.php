@@ -29,12 +29,14 @@
 
       @foreach($recommendedShops as $data)
 
-        <h3>
-          @if(!empty($data['shop']['profileImage']))
-          <img src="{{$data['shop']['profileImage']}}">
-          @endif
-          {{$data['shop']['name']}}
-        </h3>
+        <a href="{{$data['shop']['shopUrl']}}">
+          <h3>
+            @if(!empty($data['shop']['profileImage']))
+            <img src="{{$data['shop']['profileImage']}}">
+            @endif
+            {{$data['shop']['name']}}
+          </h3>
+        </a>
         <p>{!!$data['shop']['description']!!}</p>
         <div class="line space-bottom-20"></div>
 
@@ -508,7 +510,7 @@
     });
 
     $('.multiple-product').slick({
-      
+
       dots: true,
       infinite: false,
       speed: 300,
