@@ -27,91 +27,87 @@
 
       <h3>ร้านค้า</h3>
 
-      <div>
+      @foreach($recommendedShops as $data)
 
-        @foreach($recommendedShops as $data)
+        <h3>
+          @if(!empty($data['shop']['profileImage']))
+          <img src="{{$data['shop']['profileImage']}}">
+          @endif
+          {{$data['shop']['name']}}
+        </h3>
+        <p>{!!$data['shop']['description']!!}</p>
+        <div class="line space-bottom-20"></div>
 
-          <h3>
-            @if(!empty($data['shop']['profileImage']))
-            <img src="{{$data['shop']['profileImage']}}">
-            @endif
-            {{$data['shop']['name']}}
-          </h3>
-          <p>{!!$data['shop']['description']!!}</p>
-          <div class="line space-bottom-20"></div>
+        <div class="row">
+          <div class="col-xs-12">
 
-          <div class="row">
-            <div class="col-xs-12">
+            @if(!empty($data['products']))
 
-              @if(!empty($data['products']))
+              <div class="multiple-product">
 
-                <div class="multiple-product">
+                @foreach($data['products'] as $product)
 
-                  @foreach($data['products'] as $product)
+                  <div class="card xs no-border no-margin">
 
-                    <div class="card xs no-border no-margin">
+                    @if(!empty($product['flag']))
+                    <div class="flag-wrapper">
+                      <div class="flag sale-promotion">{{$product['flag']}}</div>
+                    </div>
+                    @endif
+                    
+                    <div class="image-tile">
+                      <a href="{{$product['detailUrl']}}">
+                        <div class="card-image" style="background-image:url({{$product['_imageUrl']}});"></div>
+                      </a>
+                    </div>
+                    
+                    <div class="card-info">
+                      <a href="{{$product['detailUrl']}}">
+                        <div class="card-title">{{$product['name']}}</div>
+                      </a>
+                      <div class="card-sub-info">
 
-                      @if(!empty($product['flag']))
-                      <div class="flag-wrapper">
-                        <div class="flag sale-promotion">{{$product['flag']}}</div>
-                      </div>
-                      @endif
-                      
-                      <div class="image-tile">
-                        <a href="{{$product['detailUrl']}}">
-                          <div class="card-image" style="background-image:url({{$product['_imageUrl']}});"></div>
-                        </a>
-                      </div>
-                      
-                      <div class="card-info">
-                        <a href="{{$product['detailUrl']}}">
-                          <div class="card-title">{{$product['name']}}</div>
-                        </a>
-                        <div class="card-sub-info">
-
-                          <div class="card-sub-info-row product-price-section">
-                            @if(!empty($product['promotion']))
-                              <span class="product-price">{{$product['promotion']['_reduced_price']}}</span>
-                              <span class="product-price-discount-tag">{{$product['promotion']['percentDiscount']}}</span>
-                              <h5 class="origin-price">{{$product['_price']}}</h5>
-                            @else
-                              <span class="product-price">{{$product['_price']}}</span>
-                            @endif
-                          </div>
-
+                        <div class="card-sub-info-row product-price-section">
+                          @if(!empty($product['promotion']))
+                            <span class="product-price">{{$product['promotion']['_reduced_price']}}</span>
+                            <span class="product-price-discount-tag">{{$product['promotion']['percentDiscount']}}</span>
+                            <h5 class="origin-price">{{$product['_price']}}</h5>
+                          @else
+                            <span class="product-price">{{$product['_price']}}</span>
+                          @endif
                         </div>
-                      </div>
 
+                      </div>
                     </div>
 
-                  @endforeach
-
-                </div>
-
-                <div class="row space-bottom-30">
-                  <div class="col-xs-12 text-right">
-                    <a href="{{$data['shop']['shopProductUrl']}}" class="flat-button">ดูสินค้าเพิ่มเติม</a>
                   </div>
+
+                @endforeach
+
+              </div>
+
+              <div class="row space-bottom-30">
+                <div class="col-xs-12 text-right">
+                  <a href="{{$data['shop']['shopProductUrl']}}" class="flat-button">ดูสินค้าเพิ่มเติม</a>
                 </div>
+              </div>
 
-              @else
+            @else
 
-                <div class="list-empty-message text-center">
-                  <img class="not-found-image" src="/images/common/not-found.png">
-                  <div>
-                    <h3>ยังไม่มีสินค้า</h3>
-                  </div>
+              <div class="list-empty-message text-center">
+                <img class="not-found-image" src="/images/common/not-found.png">
+                <div>
+                  <h3>ยังไม่มีสินค้า</h3>
                 </div>
+              </div>
 
-              @endif
-
-            </div>
+            @endif
 
           </div>
 
-        @endforeach
+        </div>
 
-      </div>
+      @endforeach
 
     </div>
 
@@ -177,7 +173,7 @@
               เสื้อผ้า
             </div>
 
-            <div class="multiple-product-2 color-type-2">
+            <div class="multiple-product-2 color-type-1">
 
               @foreach($shirts as $product)
 
@@ -483,18 +479,16 @@
 
   </div>
 
-  <div class="main-row">
+  <!-- <div class="main-row">
 
     <div class="container">
-
-      <!-- <a href="" class="button wide-button">ดูสินค้าทั้งหมด</a> -->
 
       <h4>ต้องการสร้างร้านค้า?</h4>
       <a href="" class="button wide-button">สร้างร้านค้า</a>
 
     </div>
 
-  </div>
+  </div> -->
 
 </div>
 
@@ -514,6 +508,7 @@
     });
 
     $('.multiple-product').slick({
+      
       dots: true,
       infinite: false,
       speed: 300,

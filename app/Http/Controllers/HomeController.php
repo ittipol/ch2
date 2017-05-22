@@ -540,9 +540,9 @@ dd('end');
     $productModel = Service::loadModel('Product');
     $shopModel = Service::loadModel('Shop');
 
-    // $shopIds = array(3,21,24,23);
+    $shopIds = array(3,21,24,23);
     // $shopIds = array(3,21);
-    $shopIds = array(7,6,8);
+    // $shopIds = array(7,6,8);
 
     $usedIds = array();
     $len = count($shopIds)-1;
@@ -657,15 +657,15 @@ dd('end');
 
     $this->setData('recommendedProducts',$__products);
 
-    $this->setData('shirts',$this->getProductData(80,7));
-    $this->setData('dresses',$this->getProductData(108,16));
-    $this->setData('bags',$this->getProductData(171,16));
-    $this->setData('shoes',$this->getProductData(176,16));
+    // $this->setData('shirts',$this->getProductData(80,7));
+    // $this->setData('dresses',$this->getProductData(108,16));
+    // $this->setData('bags',$this->getProductData(171,16));
+    // $this->setData('shoes',$this->getProductData(176,16));
 
-    // $this->setData('shirts',$this->getProductData(771,7));
-    // $this->setData('dresses',$this->getProductData(771,16));
-    // $this->setData('bags',$this->getProductData(771,16));
-    // $this->setData('shoes',$this->getProductData(771,16));
+    $this->setData('shirts',$this->getProductData(771,7));
+    $this->setData('dresses',$this->getProductData(771,16));
+    $this->setData('bags',$this->getProductData(771,16));
+    $this->setData('shoes',$this->getProductData(771,16));
 
     return $this->view('pages.home.index');
 

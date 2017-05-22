@@ -193,12 +193,10 @@
 	border: 1px solid #ddd;
 }
 
-/*@media only screen and (max-width : 1366px) {
-  .slider-banner,
-  .slider-banner .slider-banner-item {
-  	height: 450px;
-  }
-}*/
+.multiple-product {
+	height: 317px;
+	overflow: hidden;
+}
 
 @media only screen and (max-width : 1200px) {
   .slider-banner,
