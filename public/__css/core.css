@@ -25,7 +25,7 @@ a.button:visited {
 }
 
 .list-empty-message h3 {
-	/*font-size: 16px;*/
+	font-size: 18px;
 	margin: 0 0 20px 0;
 }
 
@@ -330,7 +330,7 @@ h4 > img {
 
 
 
-.product-catalog-banner {
+/*.product-catalog-banner {
 	width: 100%;
 	height: 300px;
 	background-size: cover;
@@ -461,9 +461,9 @@ h4 > img {
 	}
 }
 
-/* Custom, iPhone Retina */ 
+
 @media only screen and (max-width : 380px) {
   .product-banner .product-banner-info {
   	width: 53%;
   }
-}
+}*/
