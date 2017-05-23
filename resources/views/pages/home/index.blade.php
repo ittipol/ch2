@@ -308,9 +308,9 @@
 
               </div>
 
-              <!-- <div class="text-right">
+              <div class="text-right">
                 <a href="{{$product['moreUrl']}}">ดูสินค้าเพิ่มเติม</a>
-              </div> -->
+              </div>
 
               @else
 
