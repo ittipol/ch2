@@ -32,9 +32,9 @@
 
             @foreach($board['data']['items'] as $item)
 
-              <div class="col-md-4 col-xs-6">
+              <div class="col-md-3 col-xs-6">
 
-                <div class="card">
+                <div class="card sm">
 
                   <div class="image-tile">
                     <a href="{{$item['detailUrl']}}">

@@ -36,7 +36,7 @@ class JobController extends Controller
 
       $jobs = $jobs
       ->orderBy('created_at','desc')
-      ->take(3);
+      ->take(4);
 
       $_jobs = array();
       if($jobs->exists()) {
@@ -59,9 +59,9 @@ class JobController extends Controller
           
         }
 
-        if($total > 3) {
+        if($total > 4) {
           $_jobs['all'] = array(
-            'title' => '+'.($total-3)
+            'title' => '+'.($total-4)
           );
         }
 
