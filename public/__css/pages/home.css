@@ -105,33 +105,37 @@
 .channel-column {
 	background-color: #fff;
 	/*padding: 15px;*/
-	margin-bottom: 20px;
+	margin-bottom: 30px;
+	/*border: 1px solid #E65100;*/
 }
 
 .channel-column .title {
 	color: #fff;
-	font-size: 16px;
+	font-size: 18px;
 	text-align: left;
 	width: 100%;
 	margin-bottom: 30px;
-	padding: 10px 15px;
-	/*background-color: #E65100;*/
+	padding: 10px 0;
 }
 
 .channel-column .title.color-type-1 {
-	background-color: #EF5350;
+	border-top: 1px solid #EF5350;
+	color: #EF5350;
 }
 
 .channel-column .title.color-type-2 {
-	background-color: #EC407A;
+	border-top: 1px solid #EC407A;
+	color: #EC407A;
 }
 
 .channel-column .title.color-type-3 {
-	background-color: #AB47BC;
+	border-top: 1px solid #AB47BC;
+	color: #AB47BC;
 }
 
 .channel-column .title.color-type-4 {
-	background-color: #7E57C2;
+	border-top: 1px solid #7E57C2;
+	color: #7E57C2;
 }
 
 .color-type-1 .slick-prev, 
@@ -170,6 +174,11 @@
 	background-color: #7E57C2;
 }
 
+.multiple-product-box .slick-prev,
+.multiple-product-box .slick-next {
+	background-color: #00897b;
+}
+
 .main-content {
 	margin-bottom: -150px;
 }
@@ -184,18 +193,106 @@
 	background-color: #ececec;
 }
 
+.main-row.teal{
+	background-color: #009688;
+}
+
+.main-row.light-teal{
+	background-color: #B2DFDB;
+}
+
+.main-row.blue {
+	background-color: #2196F3;
+}
+
+.main-row.amber {
+	background-color: #FFD54F;
+}
+
+.main-row.light-orange {
+	background-color: #FFCC80;
+}
+
+.main-row.green {
+	background-color: #00C853;
+}
+
 .multiple-product-box {
 	width: 100%;
 	height: 400px;
 	padding: 15px;
 	margin-bottom: 30px;
 	background-color: #fff;
-	border: 1px solid #ddd;
+	border: 1px solid #80CBC4;
 }
 
 .multiple-product {
 	height: 317px;
 	overflow: hidden;
+}
+
+
+/* Shop */
+.shop-content-section {
+	margin-bottom: 20px;
+}
+
+.shop-content-section .shop-default-cover-bg {
+	background-repeat: no-repeat;
+}
+
+.shop-content-section .shop-cover-frame {
+	width: 100%;
+	height: 200px;
+	border: 1px solid #ddd;
+	background-color: #90949c;
+}
+
+.shop-content-section .shop-cover {
+	width: 100%;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 10;
+}
+
+.shop-content-section .shop-main-info {
+	padding: 0;
+	border: 0;
+}
+
+.shop-content-section .shop-main-info-inner {
+	padding: 0 15px;
+	margin-top: -110px;
+}
+
+.shop-content-section .shop-logo-frame {
+	width: 130px;
+	height: 130px;
+}
+
+.shop-content-section .shop-logo-frame-inner {
+	width: 100%;
+	height: 100%;
+	background-color: #bababa;
+	border: 1px solid #CFD8DC;
+	overflow: hidden;
+}
+
+.shop-content-section .shop-logo {
+	width: 100%;
+	height: 100%;
+	border: 5px solid #fff;
+	background-image: url(/images/common/image.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: auto 100%;
+}
+
+.shop-content-section .shop-product {
+	padding: 15px;
+	height: 360px;
 }
 
 @media only screen and (max-width : 1200px) {

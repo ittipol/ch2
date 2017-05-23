@@ -308,9 +308,18 @@ h4 > img {
 	color: #fb8c00;
 }
 
-.color-blue {
-	color: rgb(66,133,244);
+.color-white {
+	color: #fff !important;
 }
+
+.color-blue {
+	color: rgb(66,133,244) !important;
+}
+
+.border-color-amber {
+	border-color: #FFCA28 !important;
+}
+
 
 .article-content .paragraph {
 	max-width: 760px;

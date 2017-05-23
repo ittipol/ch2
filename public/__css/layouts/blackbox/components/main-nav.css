@@ -5,7 +5,8 @@
 	z-index: 80;
 	width: 280px;
   height: 100%;
-  background-color: #CFD8DC;
+  /*background-color: #CFD8DC;*/
+  background-color: #E1F5FE;
   border-right: 1px solid #ddd;
   transition: left .2s ease-out;
 }
@@ -18,11 +19,6 @@
   line-height: 64px;
   background-color: #fff;
 }
-
-/*.navigation-top .logo {
-  text-align: left;
-  padding-left: 20px;
-}*/
 
 .navigation-top a.logo-link {
   color: rgb(66,133,244);
@@ -103,7 +99,7 @@
 	position: relative;
   padding: 10px 0 10px 20px;
   display: block;
-  color: #000;
+  color: #009688;
   cursor: pointer;
   text-decoration: none;
   font-weight: 400;
@@ -113,9 +109,9 @@
 
 .navigation-primary-menu ul > li a:hover,
 .navigation-primary-menu ul > li a.active { 
-	/*color: #fff;*/
-  /*background-color: #009688;*/
-  background-color: #B0BEC5;
+  /*background-color: #B0BEC5;*/
+  color: #fff;
+  background-color: #4DB6AC;
 }
 
 .navigation-primary-menu ul > li a.active::before {

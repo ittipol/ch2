@@ -69,7 +69,8 @@
 }
 
 .card .image-tile .card-image {
-	width: 100%;
+	/*width: 100%;*/
+	width: 90%;
 	height: 360px;
 	margin: 0 auto;
 	background-position: center;

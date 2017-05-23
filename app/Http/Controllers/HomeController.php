@@ -593,6 +593,7 @@ dd('end');
           'name' => $shop->name,
           'description' => $string->truncString($shop->description,80),
           'profileImage' => $shop->getProfileImageUrl(),
+          'coverImage' => $shop->getCoverUrl(),
           'shopUrl' => $url->url('shop/'.$slug),
           'shopProductUrl' => $url->url('shop/'.$slug.'/product'),
         ),
@@ -637,12 +638,20 @@ dd('end');
         'label' => 'สุขภาพและความงาม'
       ),
       array(
+        'id' => 651,
+        'label' => 'อิเล็กทรอนิกส์'
+      ),
+      array(
         'id' => 771,
         'label' => 'Gaming'
       ),
       array(
         'id' => 1261,
         'label' => 'ห้องนอน'
+      ),
+      array(
+        'id' => 2452,
+        'label' => 'ขนมขบเคี้ยว'
       )
     );
 
