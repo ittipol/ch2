@@ -290,6 +290,10 @@
 	background-size: auto 100%;
 }
 
+.shop-content-section .shop-name {
+	display: inline-block;
+}
+
 .shop-content-section .shop-product {
 	padding: 15px;
 	height: 360px;

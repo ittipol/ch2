@@ -540,8 +540,13 @@ dd('end');
     $productModel = Service::loadModel('Product');
     $shopModel = Service::loadModel('Shop');
 
+    // Get Shop id
+    // $shopModel->where([
+    //   ['description','!=',null]
+    // ])
+    // ->select('id');
+
     // $shopIds = array(3,21,24,23);
-    // $shopIds = array(3,21);
     $shopIds = array(3,7,6,8);
 
     $usedIds = array();
