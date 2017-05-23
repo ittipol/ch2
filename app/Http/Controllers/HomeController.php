@@ -657,15 +657,15 @@ dd('end');
 
     $this->setData('recommendedProducts',$__products);
 
-    // $this->setData('shirts',$this->getProductData(80,7));
-    // $this->setData('dresses',$this->getProductData(108,16));
-    // $this->setData('bags',$this->getProductData(171,16));
-    // $this->setData('shoes',$this->getProductData(176,16));
+    $this->setData('shirts',$this->getProductData(80,7));
+    $this->setData('dresses',$this->getProductData(108,16));
+    $this->setData('bags',$this->getProductData(171,16));
+    $this->setData('shoes',$this->getProductData(176,16));
 
-    $this->setData('shirts',$this->getProductData(771,7));
-    $this->setData('dresses',$this->getProductData(771,16));
-    $this->setData('bags',$this->getProductData(771,16));
-    $this->setData('shoes',$this->getProductData(771,16));
+    // $this->setData('shirts',$this->getProductData(771,7));
+    // $this->setData('dresses',$this->getProductData(771,16));
+    // $this->setData('bags',$this->getProductData(771,16));
+    // $this->setData('shoes',$this->getProductData(771,16));
 
     return $this->view('pages.home.index');
 
