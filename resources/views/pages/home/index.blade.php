@@ -152,101 +152,6 @@
 
   </div>
 
-<!--   <div class="main-row">
-
-    <div class="container">
-
-      <h3>ร้านค้า</h3>
-
-      @foreach($recommendedShops as $data)
-
-        <a href="{{$data['shop']['shopUrl']}}">
-          <h3>
-            @if(!empty($data['shop']['profileImage']))
-            <img src="{{$data['shop']['profileImage']}}">
-            @endif
-            {{$data['shop']['name']}}
-          </h3>
-        </a>
-        <p>{!!$data['shop']['description']!!}</p>
-        <div class="line space-bottom-20"></div>
-
-        <div class="row">
-
-          <div class="col-xs-12">
-
-            @if(!empty($data['products']))
-
-              <div class="multiple-product">
-
-                @foreach($data['products'] as $product)
-
-                  <div class="card xs no-border no-margin">
-
-                    @if(!empty($product['flag']))
-                    <div class="flag-wrapper">
-                      <div class="flag sale-promotion">{{$product['flag']}}</div>
-                    </div>
-                    @endif
-                    
-                    <div class="image-tile">
-                      <a href="{{$product['detailUrl']}}">
-                        <div class="card-image" style="background-image:url({{$product['_imageUrl']}});"></div>
-                      </a>
-                    </div>
-                    
-                    <div class="card-info">
-                      <a href="{{$product['detailUrl']}}">
-                        <div class="card-title">{{$product['name']}}</div>
-                      </a>
-                      <div class="card-sub-info">
-
-                        <div class="card-sub-info-row product-price-section">
-                          @if(!empty($product['promotion']))
-                            <span class="product-price">{{$product['promotion']['_reduced_price']}}</span>
-                            <span class="product-price-discount-tag">{{$product['promotion']['percentDiscount']}}</span>
-                            <h5 class="origin-price">{{$product['_price']}}</h5>
-                          @else
-                            <span class="product-price">{{$product['_price']}}</span>
-                          @endif
-                        </div>
-
-                      </div>
-                    </div>
-
-                  </div>
-
-                @endforeach
-
-              </div>
-
-              <div class="row space-bottom-30">
-                <div class="col-xs-12 text-right">
-                  <a href="{{$data['shop']['shopProductUrl']}}" class="flat-button">ดูสินค้าเพิ่มเติม</a>
-                </div>
-              </div>
-
-            @else
-
-              <div class="list-empty-message text-center">
-                <img class="not-found-image" src="/images/common/not-found.png">
-                <div>
-                  <h3>ยังไม่มีสินค้า</h3>
-                </div>
-              </div>
-
-            @endif
-
-          </div>
-
-        </div>
-
-      @endforeach
-
-    </div>
-
-  </div> -->
-
   <div class="main-row light-teal">
 
     <div class="container">
@@ -339,7 +244,7 @@
 
     <div class="container">
 
-      <h3>สินค้าสำหรับสุภาพสตรี</h3>
+      <h3>สินค้าโปรโมชั่นสำหรับสุภาพสตรี</h3>
 
       <div class="row">
 
