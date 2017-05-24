@@ -7,8 +7,10 @@
   height: 100%;
   /*background-color: #E1F5FE;*/
   /*border-right: 1px solid #009688;*/
-  background-color: #4DB6AC;
+  /*background-color: #4DB6AC;*/
+  background-color: #009688;
   border-right: 1px solid #26A69A;
+  /*background-color: rgb(112,146,190);*/
   transition: left .2s ease-out;
 }
 
