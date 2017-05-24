@@ -10,7 +10,7 @@
 
           <div class="row">
 
-            <div class="col-md-3">
+            <div class="col-md-2 col-xs-12">
               <h4 class="site-map-title">บริษัทและร้านค้า</h4>
               <div class="site-map-content">
                 <div class="site-map-link">
@@ -21,6 +21,15 @@
                 </div>
                 <div class="site-map-link">
                   <a href="{{URL::to('job')}}">งาน</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-2 col-xs-12">
+              <h4 class="site-map-title">การช่วยเหลือ</h4>
+              <div class="site-map-content">
+                <div class="site-map-link">
+                  <a href="{{URL::to('manual/seller')}}">วิธีการใช้งาน</a>
                 </div>
               </div>
             </div>

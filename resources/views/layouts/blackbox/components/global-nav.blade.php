@@ -4,7 +4,7 @@
 
       <div class="logo">
         <a class="logo-link" href="{{URL::to('/')}}">
-          <img src="/images/logo.png">
+          <img src="/images/logo2.png">
         </a>
       </div>
 

@@ -5,9 +5,10 @@
 	z-index: 80;
 	width: 280px;
   height: 100%;
-  /*background-color: #CFD8DC;*/
-  background-color: #E1F5FE;
-  border-right: 1px solid #ddd;
+  /*background-color: #E1F5FE;*/
+  /*border-right: 1px solid #009688;*/
+  background-color: #4DB6AC;
+  border-right: 1px solid #26A69A;
   transition: left .2s ease-out;
 }
 
@@ -16,8 +17,10 @@
 }
 
 .global-nav .navigation-top {
-  line-height: 64px;
-  background-color: #fff;
+  width: 100%;
+  height: 64px;
+  /*background-color: #fff;*/
+  overflow: hidden;
 }
 
 .navigation-top a.logo-link {
@@ -99,7 +102,8 @@
 	position: relative;
   padding: 10px 0 10px 20px;
   display: block;
-  color: #009688;
+  /*color: #009688;*/
+  color: #fff;
   cursor: pointer;
   text-decoration: none;
   font-weight: 400;
@@ -109,7 +113,6 @@
 
 .navigation-primary-menu ul > li a:hover,
 .navigation-primary-menu ul > li a.active { 
-  /*background-color: #B0BEC5;*/
   color: #fff;
   background-color: #4DB6AC;
 }
@@ -126,14 +129,13 @@
 
 .navigation-primary-menu ul.submenu > li > a { 
 	position: relative;
-  /*padding: 8px 0 8px 40px;*/
   padding: 8px 30px 8px 30px;
   font-size: 14px;
   line-height: 18px;
 }
 
 .global-nav .line {
-  background-color: #B0BEC5;
+  background-color: #fff;
   width: 85%;
   margin-right: auto;
   margin-left: auto;

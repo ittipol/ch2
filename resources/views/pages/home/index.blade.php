@@ -157,7 +157,7 @@
 
   </div>
 
-  <div class="main-row light-teal">
+  <div class="main-row light-green">
 
     <div class="container">
 
@@ -171,7 +171,7 @@
 
           <div class="multiple-product-box">
 
-            <h4 class="color-teal space-bottom-20">{{$product['label']}}</h4>
+            <h4 class="space-bottom-20">{{$product['label']}}</h4>
 
             @if(!empty($product['data']))
 
@@ -478,12 +478,6 @@
     </div>
 
   </div>
-
-<!--   <div class="main-row green">
-    <div class="container">
-      <a class="button wide-button">ดูสินค้าทั้งหมด</a>
-    </div>
-  </div> -->
 
   <div class="main-row amber">
 

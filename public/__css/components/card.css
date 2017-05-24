@@ -65,7 +65,7 @@
 
 .card.xs .image-tile {
 	background-size: 100px;
-	/*width: 165px;*/
+	width: 165px;
 }
 
 .card .image-tile .card-image {

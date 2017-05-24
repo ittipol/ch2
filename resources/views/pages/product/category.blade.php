@@ -27,7 +27,7 @@
   </div>
 </div>
 
-<div class="top-header-wrapper top-header-border">
+<!-- <div class="top-header-wrapper top-header-border">
   <div class="container">
     <div class="top-header">
       <div class="detail-title">
@@ -40,24 +40,30 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
-<div class="container">
+<div class="container space-top-30">
 
-  @if(!empty($categoryName))
-    <div class="text-right">
-      <a href="{{$productShelfUrl}}" class="button">แสดงสินค้าทั้งหมด</a>
-    </div>
-  @endif
+  <div class="space-bottom-50">
+    @if(!empty($categoryName))
+    <h3>{{$categoryName}}</h3>
+    @else
+    <h3>หมวดสินค้า</h3>
+    @endif
+
+    @if(!empty($categoryName))
+      <a href="{{$productShelfUrl}}">ดูสินค้าทั้งหมด</a>
+    @endif
+  </div>
 
   @if(!empty($categories))
 
     @foreach($categories as $category)
-      <div class="shelf">
+      <div class="shelf space-bottom-50">
 
-        <h3>{{$category['categoryName']}}</h3>
+        <h4><strong>{{$category['categoryName']}}</strong></h4>
         <div class="space-bottom-10">
-          <a href="{{$category['productShelfUrl']}}">แสดงสินค้าหมวด{{$category['categoryName']}}</a>
+          <a href="{{$category['productShelfUrl']}}">ดูสินค้าหมวดนี้</a>
         </div>
 
         @if(!empty($category['subCategories']))
@@ -67,7 +73,7 @@
             <div class="sub-category">
               <div class="row">
                 @foreach($category['subCategories'] as $subCategory)
-                  <div class="col-lg-4 col-sm-6 col-xs-12">
+                  <div class="col-lg-4 col-sm-6 col-xs-6">
                     <a href="{{$subCategory['url']}}" class="sub-category-text">{{$subCategory['name']}}</a>
                   </div>
                 @endforeach
@@ -80,7 +86,7 @@
 
       </div>
 
-      <div class="line space-top-bottom-20"></div>
+      <!-- <div class="line space-top-bottom-20"></div> -->
     @endforeach
 
   @else
