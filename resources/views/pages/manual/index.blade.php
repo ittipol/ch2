@@ -26,7 +26,7 @@
 
         <div class="nav-group space-bottom-30">
           <a href="{{URL::to('manual/search')}}">การค้นหา</a>
-          <a href="">การแจ้งเตือน</a>
+          <a href="{{URL::to('manual/notification')}}">การแจ้งเตือน</a>
         </div>
       </div>
 
@@ -36,8 +36,8 @@
         </h5>
 
         <div class="nav-group space-bottom-30">
-          <a href="">แก้ไขข้อมูลผู้ใช้</a>
-          <a href="">ร้านค้าของคุณ</a>
+          <a href="{{URL::to('manual/profile-edit')}}">แก้ไขโปรไฟล์</a>
+          <a href="{{URL::to('manual/my-shop')}}">ร้านค้าของคุณ</a>
         </div>
       </div>
 

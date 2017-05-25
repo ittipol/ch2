@@ -20,6 +20,18 @@ class ManualController extends Controller
       case 'search':
           $goto = 'pages.manual.search';
         break;
+
+      case 'notification':
+          $goto = 'pages.manual.notification';
+        break;
+
+      case 'profile-edit':
+          $goto = 'pages.manual.profile-edit';
+        break;
+
+      case 'my-shop':
+          $goto = 'pages.manual.my-shop';
+        break;
       
       default:
           abort(404);

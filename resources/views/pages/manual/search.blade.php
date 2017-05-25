@@ -5,23 +5,31 @@
 
     <h3 class="space-bottom-50">การค้นหา</h3>
 
-    <div>
+    <div class="row">
 
-      การค้นหาโดยจะเป็นการค้นหาข้อมูล สินค้า ร้านค้า และ อื่นๆ ภายในเว็บไซต์
-      <br><br>
+      <div class="col-xs-12">
 
-      <strong>ค้นหาข้อมูล</strong><br>
-      เมนูด้านบนคลิกรูปแว่นขยาย จะแสดงหน้าการค้นหา<br><br>
-      <img src="/images/manual/search/top-bar.png">
-      <br><br>
+        <div class="overflow-hidden">
 
-      กรอกคำค้นหาที่ต้องลงไป จากนั้นคลิกที่แว่นขยายเพื่อค้นหา<br><br>
-      <img src="/images/manual/search/search-keyword.png">
-      <br><br>
+          การค้นหาโดยจะเป็นการค้นหาข้อมูล สินค้า ร้านค้า และ อื่นๆ ภายในเว็บไซต์
+          <br><br>
 
-      จะแสดงผลลัพธ์การค้นหาที่ตรงกับคำค้นหา<br><br>
-      <img src="/images/manual/search/search-result.png">
-      <br><br>
+          <strong>ค้นหาข้อมูล</strong><br>
+          เมนูด้านบนคลิกรูปแว่นขยาย จะแสดงหน้าการค้นหา<br><br>
+          <img src="/images/manual/search/top-bar.png">
+          <br><br>
+
+          กรอกคำค้นหาที่ต้องลงไป จากนั้นคลิกที่แว่นขยายเพื่อค้นหา<br><br>
+          <img src="/images/manual/search/search-keyword.png">
+          <br><br>
+
+          จะแสดงผลลัพธ์การค้นหาที่ตรงกับคำค้นหา<br><br>
+          <img src="/images/manual/search/search-result.png">
+          <br><br>
+
+        </div>
+
+      </div>
 
     </div>
 
