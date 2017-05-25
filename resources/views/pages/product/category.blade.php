@@ -27,21 +27,6 @@
   </div>
 </div>
 
-<!-- <div class="top-header-wrapper top-header-border">
-  <div class="container">
-    <div class="top-header">
-      <div class="detail-title">
-        @if(!empty($categoryName))
-        <h4 class="sub-title">หมวดสินค้า</h4>
-        <h2 class="title">{{$categoryName}}</h2>
-        @else
-        <h2 class="title">หมวดสินค้า</h2>
-        @endif
-      </div>
-    </div>
-  </div>
-</div> -->
-
 <div class="container space-top-30">
 
   <div class="space-bottom-50">
@@ -86,7 +71,6 @@
 
       </div>
 
-      <!-- <div class="line space-top-bottom-20"></div> -->
     @endforeach
 
   @else

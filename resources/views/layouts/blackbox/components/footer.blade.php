@@ -29,7 +29,7 @@
               <h4 class="site-map-title">การช่วยเหลือ</h4>
               <div class="site-map-content">
                 <div class="site-map-link">
-                  <a href="{{URL::to('manual/seller')}}">วิธีการใช้งาน</a>
+                  <a href="{{URL::to('manual')}}">วิธีการใช้งาน</a>
                 </div>
               </div>
             </div>

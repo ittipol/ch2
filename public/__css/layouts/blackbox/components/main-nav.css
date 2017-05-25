@@ -8,9 +8,11 @@
   /*background-color: #E1F5FE;*/
   /*border-right: 1px solid #009688;*/
   /*background-color: #4DB6AC;*/
-  background-color: #009688;
-  border-right: 1px solid #26A69A;
+  /*background-color: #009688;
+  border-right: 1px solid #26A69A;*/
   /*background-color: rgb(112,146,190);*/
+  background-color: #fff;
+  border-right: 1px solid #e0e0e0;
   transition: left .2s ease-out;
 }
 
@@ -20,8 +22,9 @@
 
 .global-nav .navigation-top {
   width: 100%;
-  height: 64px;
-  /*background-color: #fff;*/
+  /*height: 64px;*/
+  height: 128px;
+  background-color: #009688;
   overflow: hidden;
 }
 
@@ -105,7 +108,7 @@
   padding: 10px 0 10px 20px;
   display: block;
   /*color: #009688;*/
-  color: #fff;
+  color: #212121;
   cursor: pointer;
   text-decoration: none;
   font-weight: 400;

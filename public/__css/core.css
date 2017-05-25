@@ -334,7 +334,9 @@ h4 > img {
 	color: #D50000;
 }
 
-
+.nav-group > a {
+	display: block;
+}
 
 
 
@@ -394,10 +396,10 @@ h4 > img {
 
 .product-banner .product-banner-content {
 	margin-bottom: 20px;
-	/*border-bottom: 1px solid #E91E63;*/
-}
+	border-bottom: 1px solid #E91E63;
+}*/
 
-.product-banner .product-price-section {
+/*.product-banner .product-price-section {
 	height: 44px;
 }
 
