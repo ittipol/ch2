@@ -98,7 +98,7 @@ Route::get('redirect', 'UrlController@redirect');
 Route::get('search','SearchController@index')->name('search');
 
 // Manual
-Route::get('manual','ManualController@index');
+Route::get('manual/{pageSlug?}','ManualController@index');
 
 // Account
 Route::group(['middleware' => 'auth'], function () {

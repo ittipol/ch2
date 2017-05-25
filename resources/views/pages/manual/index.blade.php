@@ -1,7 +1,7 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-  <div class="container list space-top-30">
+  <div class="container space-top-30">
 
     <h3 class="space-bottom-50">วิธีการใช้งาน</h3>
   
@@ -15,7 +15,7 @@
         </h5>
 
         <div class="nav-group space-bottom-30">
-          <a href="">เมนู & ตัวนำทาง</a>
+          <a href="{{URL::to('manual/ui-and-nav')}}">เมนู & ตัวนำทางหลัก</a>
         </div>
       </div>
 
@@ -25,7 +25,7 @@
         </h5>
 
         <div class="nav-group space-bottom-30">
-          <a href="">การค้นหา</a>
+          <a href="{{URL::to('manual/search')}}">การค้นหา</a>
           <a href="">การแจ้งเตือน</a>
         </div>
       </div>
@@ -115,7 +115,7 @@
 
         <div class="nav-group space-bottom-30">
           <a href="">ตรวจสอบรายการสั้่งซื้อ</a>
-          <a href="">การชำระเงิน</a>
+          <a href="">การชำระเงิน & การแจ้งการชำระเงิน</a>
         </div>
       </div>
 
