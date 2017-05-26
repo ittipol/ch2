@@ -56,7 +56,7 @@
           <a href="{{URL::to('manual/creating-shop')}}">สร้างร่านค้า</a>
           <a href="{{URL::to('manual/adding-shipping-method')}}">เพิ่มตัวเลือกวิธีการจัดส่ง</a>
           <a href="{{URL::to('manual/adding-payment-method')}}">เพิ่มตัวเลือกการชำระเงิน</a>
-          <a href="{{URL::to('manual/shop-edit')}}">แก้ไขข้อมูลร้านค้า</a>
+          <a href="{{URL::to('manual/shop-setting')}}">ข้อมูลร้านค้า</a>
         </div>
       </div>
 

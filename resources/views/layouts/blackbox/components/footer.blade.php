@@ -40,7 +40,7 @@
 
       </div>  
 
-      <div>
+      <div class="space-bottom-10">
         <script src="https://www.trustmarkthai.com/callbackData/initialize.js?t=a607e37-18-5-02406eaaca8327021ea37a100431cb5f865fe9" id="dbd-init"></script><div id="Certificate-banners"></div>
       </div>
       <!-- <div class="row space-bottom-40">

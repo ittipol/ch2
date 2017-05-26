@@ -52,9 +52,9 @@ class ManualController extends Controller
           $title = 'เพิ่มตัวเลือกการชำระเงิน';
         break;
 
-      case 'shop-edit':
-          $goto = 'pages.manual.shop-edit';
-          $title = 'แก้ไขข้อมูลร้านค้า';
+      case 'shop-setting':
+          $goto = 'pages.manual.shop-setting';
+          $title = 'ข้อมูลร้านค้า';
         break;
 
       case 'adding-product':
