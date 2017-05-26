@@ -7,9 +7,18 @@ footer {
 	padding: 20px 20px 10px;
 }
 
-.footer-content > img {
-	width: 20px;
-	height: 20px;
+.footer-content {
+	height: 40px;
+}
+
+.footer-content > h4 {
+	line-height: 40px;
+}
+
+.footer-content img.social-logo {
+	width: 25px;
+	height: 25px;
+	margin-top: 10px;
 }
 
 .footer-content span {

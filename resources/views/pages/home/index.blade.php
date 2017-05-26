@@ -1,12 +1,6 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<div class="secondary-message-box error fixed">
-  <div class="secondary-message-box-inner">
-    <h4 class="text-center">ขออภัย เว็บไซต์อยู่ระหว่างการปรับปรุงใช้งาน</h4>
-  </div>
-</div>
-
 <div class="slider-banner">
   <div class="slider-banner-item color-type-1">
     <div class="slider-banner-image" style="background-image: url(/images/xxx3.jpg);"></div>

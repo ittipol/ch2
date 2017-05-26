@@ -40,9 +40,10 @@
 
       </div>  
 
-      <script src="https://www.trustmarkthai.com/callbackData/initialize.js?t=a607e37-18-5-02406eaaca8327021ea37a100431cb5f865fe9" id="dbd-init"></script><div id="Certificate-banners"></div>
-
-      <div class="row space-bottom-40">
+      <div class="space-bottom-20">
+        <script src="https://www.trustmarkthai.com/callbackData/initialize.js?t=a607e37-18-5-02406eaaca8327021ea37a100431cb5f865fe9" id="dbd-init"></script><div id="Certificate-banners"></div>
+      </div>
+      <!-- <div class="row space-bottom-40">
         <div class="col-md-3 col-xs-12">
           <h5><strong>ติดต่อเรา</strong></h5>
           <div class="footer-content">
@@ -50,9 +51,22 @@
             <span>Sunday Square</span>
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <h4>{{date('Y')}} Sunday Square</h4>
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="footer-content">
+            <h4 class="no-margin">{{date('Y')}} Sunday Square</h4>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="footer-content pull-right">
+            <a href="">
+              <img class="social-logo" src="/images/common/fb-logo.png">
+            </a>
+          </div>
+        </div>
+      </div>
 
     </div>
 
