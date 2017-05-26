@@ -40,6 +40,8 @@
 
       </div>  
 
+      <script src="https://www.trustmarkthai.com/callbackData/initialize.js?t=a607e37-18-5-02406eaaca8327021ea37a100431cb5f865fe9" id="dbd-init"></script><div id="Certificate-banners"></div>
+
       <div class="row space-bottom-40">
         <div class="col-md-3 col-xs-12">
           <h5><strong>ติดต่อเรา</strong></h5>
