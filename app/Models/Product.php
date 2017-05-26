@@ -167,6 +167,11 @@ class Product extends Model
 
     });
 
+    Product::deleted(function($product) {
+       // delete product in cart
+       Cart::where('product_id','=',$product->id)->delete();
+    });
+
   }
 
   public function fill(array $attributes) {

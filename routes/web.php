@@ -60,6 +60,11 @@
 //   $notification->getUnreadNotification();
 // });
 
+// Route::get('/cc',function(){
+//   $cart = new App\Models\Cart;
+//   $cart->productCount();
+// });
+
 // 
 
 // 

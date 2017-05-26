@@ -368,7 +368,16 @@ class ProductController extends Controller
     $shop = $model->getRelatedData('ShopRelateTo',array(
       'first' => true,
       'fields' => array('shop_id')
-    ))->shop;
+    ));
+
+    if(empty($shop)) {
+      $this->error = array(
+        'message' => 'ไม่พบข้อมูล'
+      );
+      return $this->error();
+    }
+
+    $shop = $shop->shop;
 
     // Get Slug
     $slug = $shop->getRelatedData('Slug',array(
@@ -1051,12 +1060,6 @@ class ProductController extends Controller
     $model = Service::loadModel('Product')->find($this->param['id']);
 
     if($model->delete()) {
-
-      // delete product in cart
-      Service::loadModel('Cart')
-      ->where('product_id','=',$this->param['id'])
-      ->delete();
-
       MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
     }else{
       MessageHelper::display('ไม่สามารถลบข้อมูลได้','error');

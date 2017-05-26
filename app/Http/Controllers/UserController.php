@@ -66,6 +66,9 @@ class UserController extends Controller
 
       // Update cart
       $cartModel = Service::loadModel('Cart');
+      $productModel = Service::loadModel('Product');
+      $productOptionValueModel = Service::loadModel('ProductOptionValue');
+
       $products = session()->get('cart');
       session()->forget('cart');
 
@@ -74,9 +77,30 @@ class UserController extends Controller
         foreach ($products as $product) {
           foreach ($product['items'] as $value) {
 
+            // check products exist
+            $data = $productModel->select('id')->find($product['productId']);
+
+            if(empty($data)) {
+              continue;
+            }
+
+            // check product options exist
+            $productOptionValueId = null;
+            if(!empty($value['productOptionValueId'])) {
+
+              $data = $productOptionValueModel->select('id')->find($value['productOptionValueId']);
+
+              if(empty($data)) {
+                continue;
+              }
+
+              $productOptionValueId = $value['productOptionValueId'];
+
+            }
+            
             $cart = $cartModel->where([
               ['product_id','=',$product['productId']],
-              ['product_option_value_id','=',$value['productOptionValueId']],
+              ['product_option_value_id','=',$productOptionValueId],
               ['created_by','=',$person->id]
             ])->first();
 
@@ -86,7 +110,7 @@ class UserController extends Controller
               $_value = array(
                 'shop_id' => $product['shopId'],
                 'product_id' => $product['productId'],
-                'product_option_value_id' => $value['productOptionValueId'],
+                'product_option_value_id' => $productOptionValueId,
                 'quantity' => $value['quantity'],
                 'created_by' => $person->id
               );

@@ -265,18 +265,26 @@ class Cart extends Model
       if(empty($shopId)) {
         $_products = $this
         ->where('created_by','=',session()->get('Person.id'))
-        ->select('product_id','quantity','shop_id','product_option_value_id')
+        ->select('id','product_id','quantity','shop_id','product_option_value_id')
         ->get();
       }else{
         $_products = $this->where([
           ['created_by','=',session()->get('Person.id')],
           ['shop_id','=',$shopId]
         ])
-        ->select('product_id','quantity','shop_id','product_option_value_id')
+        ->select('id','product_id','quantity','shop_id','product_option_value_id')
         ->get();
       }
 
       foreach ($_products as $product) {
+
+        // $data = Product::select('id')->find($product->product_id);
+
+        // if(empty($data)) {
+        //   $product->delete();
+        //   continue;
+        // }
+
         $products[] = array(
           'shopId' => $product->shop_id,
           'productId' => $product->product_id,
@@ -296,6 +304,21 @@ class Cart extends Model
 
         foreach ($_products as $product) {
           foreach ($product['items'] as $value) {
+
+            // $data = Product::select('id')->find($product['productId']);
+
+            // if(empty($data)) {
+              
+            //   $productOptionValueId = 0;
+            //   if(!empty($value['productOptionValueId'])) {
+            //     $productOptionValueId = $value['productOptionValueId'];
+            //   }
+
+            //   session()->forget('cart.'.$product['productId'].'.items.'.$productOptionValueId);
+
+            //   continue;
+            // }
+
             $products[] = array(
               'shopId' => $product['shopId'],
               'productId' => $product['productId'],
@@ -313,6 +336,21 @@ class Cart extends Model
 
             foreach ($_products as $product) {
               foreach ($product['items'] as $value) {
+
+                // $data = Product::select('id')->find($product['productId']);
+
+                // if(empty($data)) {
+                  
+                //   $productOptionValueId = 0;
+                //   if(!empty($value['productOptionValueId'])) {
+                //     $productOptionValueId = $value['productOptionValueId'];
+                //   }
+
+                //   session()->forget('cart.'.$product['productId'].'.items.'.$productOptionValueId);
+
+                //   continue;
+                // }
+                
                 $products[] = array(
                   'shopId' => $product['shopId'],
                   'productId' => $product['productId'],
@@ -859,13 +897,17 @@ class Cart extends Model
   }
 
   public function getShopId($productId) {
-    return ShopRelateTo::where([
+    $data = ShopRelateTo::where([
       ['model','like','Product'],
       ['model_id','=',$productId]
     ])
-    ->select('shop_id')
-    ->first()
-    ->shop_id;
+    ->select('shop_id');
+
+    if(!$data->exists()) {
+      return null;
+    }
+
+    return $data->first()->shop_id;
   }
 
   public function getTitle($alias) {
