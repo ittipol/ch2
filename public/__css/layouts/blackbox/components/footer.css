@@ -8,17 +8,18 @@ footer {
 }
 
 .footer-content {
-	height: 40px;
+	height: 30px;
 }
 
 .footer-content > h4 {
-	line-height: 40px;
+	line-height: 30px;
+	font-size: 14px;
 }
 
 .footer-content img.social-logo {
 	width: 25px;
 	height: 25px;
-	margin-top: 10px;
+	margin-top: 2px;
 }
 
 .footer-content span {

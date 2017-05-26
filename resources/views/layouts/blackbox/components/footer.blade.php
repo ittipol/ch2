@@ -40,7 +40,7 @@
 
       </div>  
 
-      <div class="space-bottom-20">
+      <div>
         <script src="https://www.trustmarkthai.com/callbackData/initialize.js?t=a607e37-18-5-02406eaaca8327021ea37a100431cb5f865fe9" id="dbd-init"></script><div id="Certificate-banners"></div>
       </div>
       <!-- <div class="row space-bottom-40">
@@ -63,6 +63,9 @@
           <div class="footer-content pull-right">
             <a href="">
               <img class="social-logo" src="/images/common/fb-logo.png">
+            </a>
+            <a href="">
+              <img class="social-logo" src="/images/common/yt-logo.png">
             </a>
           </div>
         </div>
