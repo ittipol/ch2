@@ -2,6 +2,7 @@
 @section('content')
 
 @include('pages.shop.layouts.header')
+@include('pages.shop.layouts.main-nav')
 
 <div class="shop-content-wrapper">
 

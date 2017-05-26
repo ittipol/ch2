@@ -424,11 +424,23 @@ class Model extends BaseModel
       }
 
       if($this->modelName == 'Image') {
-        // delete Dir
         $this->deleteDirectory($model);
       }
 
     }else{
+
+      if($this->checkHasFieldModelAndModelId()) {
+        foreach ($_model->get() as $value) {
+
+          $__model = Service::loadModel($value->model)->select('id')->find($value->model_id);
+
+          if(!empty($__model)) {
+            $__model->delete();
+          }
+
+        }
+      }
+
       $_model->delete();
     }
 

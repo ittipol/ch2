@@ -31,7 +31,7 @@
 
         <div class="header-info col-md-8 col-sm-12">
           <a href="{{request()->get('shopUrl')}}product/{{$_modelData['id']}}">
-            <h2>{{$_modelData['name']}}</h2>
+            <h3>{{$_modelData['name']}}</h3>
           </a>
 
           @if(!empty($_modelData['promotion']))

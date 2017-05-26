@@ -197,6 +197,10 @@ class AccountController extends Controller
       'list' => 'shop_id'
     ));
 
+    if(empty($personToShop)) {
+      return $this->view('pages.account.shop');
+    }
+
     $page = 1;
     if(!empty($this->query['page'])) {
       $page = $this->query['page'];

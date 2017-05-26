@@ -6,6 +6,7 @@ class ShopRelateTo extends Model
 {
   public $table = 'shop_relate_to';
   protected $fillable = ['shop_id','model','model_id'];
+  protected $modelRelations = array('Product','Branch','ShippingMethod','PaymentMethod','Job','Advertising');
   public $timestamps  = false;
 
   public function product() {

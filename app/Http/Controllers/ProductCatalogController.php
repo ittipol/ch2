@@ -321,7 +321,7 @@ class ProductCatalogController extends Controller
 
     if(!$model->exists()) {
       $this->error = array(
-        'message' => 'ขออภัย ไม่พบประกาศนี้ หรือข้อมูลนี้อาจถูกลบแล้ว'
+        'message' => 'ไม่พบข้อมูล'
       );
       return $this->error();
     }

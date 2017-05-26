@@ -16,7 +16,9 @@
 
       <div class="shop-notice-content">
         <div class="shop-notice-row">
-          <a href="{{request()->get('shopUrl')}}setting"><h4 class="text-center">เพิ่มข้อมูลของร้านค้า</h4></a>
+          <a href="{{request()->get('shopUrl')}}setting">
+            <h4 class="text-center">เพิ่มข้อมูลของร้านค้า</h4>
+          </a>
         </div>
       </div>
 

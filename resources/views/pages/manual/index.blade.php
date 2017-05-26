@@ -37,7 +37,7 @@
 
         <div class="nav-group space-bottom-30">
           <a href="{{URL::to('manual/profile-edit')}}">แก้ไขโปรไฟล์</a>
-          <a href="{{URL::to('manual/my-shop')}}">ร้านค้าของคุณ</a>
+          <a href="{{URL::to('manual/my-shop')}}">ร้านค้าของฉัน</a>
         </div>
       </div>
 
@@ -53,10 +53,10 @@
         </h5>
 
         <div class="nav-group space-bottom-30">
-          <a href="">สร้างร่านค้า</a>
-          <a href="">เพิ่มตัวเลือกวิธีการจัดส่ง</a>
-          <a href="">เพิ่มตัวเลือกการชำระเงิน</a>
-          <a href="">แก้ไขข้อมูลร้านค้า</a>
+          <a href="{{URL::to('manual/creating-shop')}}">สร้างร่านค้า</a>
+          <a href="{{URL::to('manual/adding-shipping-method')}}">เพิ่มตัวเลือกวิธีการจัดส่ง</a>
+          <a href="{{URL::to('manual/adding-payment-method')}}">เพิ่มตัวเลือกการชำระเงิน</a>
+          <a href="{{URL::to('manual/shop-edit')}}">แก้ไขข้อมูลร้านค้า</a>
         </div>
       </div>
 
@@ -66,7 +66,7 @@
         </h5>
 
         <div class="nav-group space-bottom-30">
-          <a href="">เพิ่มสินค้า</a>
+          <a href="{{URL::to('manual/adding-product')}}">เพิ่มสินค้า</a>
           <a href="">แก้ไขข้อมูลสินค้า & ข้อมูลจำเพาะ</a>
           <a href="">เพิ่มตัวเลือกคุณลักษณะสินค้า</a>
           <a href="">แก้ไขหมวดหมู่สินค้า</a>

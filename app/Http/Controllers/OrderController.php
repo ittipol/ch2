@@ -25,7 +25,7 @@ class OrderController extends Controller
 
     if(empty($model)) {
       $this->error = array(
-        'message' => 'ขออภัย ไม่พบประกาศนี้ หรือข้อมูลนี้อาจถูกลบแล้ว'
+        'message' => 'ไม่พบข้อมูล'
       );
       return $this->error();
     }
@@ -108,7 +108,7 @@ class OrderController extends Controller
 
     if(empty($order)) {
       $this->error = array(
-        'message' => 'ขออภัย ไม่พบประกาศนี้ หรือข้อมูลนี้อาจถูกลบแล้ว'
+        'message' => 'ไม่พบข้อมูล'
       );
       return $this->error();
     }

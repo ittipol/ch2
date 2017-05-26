@@ -42,9 +42,8 @@
   <div class="list-empty-message text-center space-top-20">
     <img class="space-bottom-20" src="/images/common/not-found.png">
     <div>
-      <h3>ยังไม่มีข้อมูลนี้</h3>
-      <p>ขออภัย ยังไม่มีข้อมูลร้านค้าในชุมชนของคุณ</p>
-      <a href="{{URL::to('shop/create')}}" class="button">เพิ่มร้านค้าในชุมชนของคุณ</a>
+      <h3>ยังไม่มีร้านค้า</h3>
+      <a href="{{URL::to('shop/create')}}" class="button">สร้างร้านค้า</a>
     </div>
   </div>
 

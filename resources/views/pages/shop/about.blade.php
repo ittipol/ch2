@@ -4,6 +4,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUdwm6VWiEE-1ZrVgY3bh1sNX21_deHZw&libraries=places" type="text/javascript"></script>
 
 @include('pages.shop.layouts.header')
+@include('pages.shop.layouts.main-nav')
 
 <div class="shop-about-wrapper">
 

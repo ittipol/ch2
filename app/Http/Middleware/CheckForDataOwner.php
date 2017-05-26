@@ -23,25 +23,24 @@ class CheckForDataOwner
       }
 
       $pages = array(
-        'item.edit' => array(
-          // 'action' => 'edit',
-          'modelName' => 'Item'
-        ),
-        'item.delete' => array(
-          'modelName' => 'Item'
-        ),
-        'real_estate.edit' => array(
-          'modelName' => 'RealEstate'
-        ),
-        'real_estate.delete' => array(
-          'modelName' => 'RealEstate'
-        ),
-        'freelance.edit' => array(
-          'modelName' => 'Freelance'
-        ),
-        'freelance.delete' => array(
-          'modelName' => 'Freelance'
-        ),
+        // 'item.edit' => array(
+        //   'modelName' => 'Item'
+        // ),
+        // 'item.delete' => array(
+        //   'modelName' => 'Item'
+        // ),
+        // 'real_estate.edit' => array(
+        //   'modelName' => 'RealEstate'
+        // ),
+        // 'real_estate.delete' => array(
+        //   'modelName' => 'RealEstate'
+        // ),
+        // 'freelance.edit' => array(
+        //   'modelName' => 'Freelance'
+        // ),
+        // 'freelance.delete' => array(
+        //   'modelName' => 'Freelance'
+        // ),
         'private_website.edit' => array(
           'modelName' => 'PersonPrivateWebsite'
         ),
