@@ -193,16 +193,20 @@
 	background-color: #ececec;
 }
 
-.main-row.teal{
+.main-row.teal {
 	background-color: #009688;
 }
 
-.main-row.light-teal{
-	background-color: #B2DFDB;
+.main-row.light-teal {
+	background-color: #E0F2F1;
 }
 
 .main-row.blue {
 	background-color: #2196F3;
+}
+
+.main-row.blue-2 {
+	background-color: rgb(112,146,190);
 }
 
 .main-row.amber {
@@ -227,7 +231,7 @@
 	padding: 15px;
 	margin-bottom: 30px;
 	background-color: #fff;
-	border: 1px solid #80CBC4;
+	border: 2px solid #80CBC4;
 }
 
 .multiple-product {

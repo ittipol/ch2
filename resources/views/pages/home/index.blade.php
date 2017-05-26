@@ -151,7 +151,7 @@
 
   </div>
 
-  <div class="main-row light-green">
+  <div class="main-row light-teal">
 
     <div class="container">
 
