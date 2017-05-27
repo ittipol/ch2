@@ -275,13 +275,9 @@ class NotificationHelper {
     return $value;
   }
 
-  public function setSender() {
+  public function setSender() {}
 
-  }
-
-  public function setReceiver() {
-    
-  }
+  public function setReceiver() {}
 
   public function getSender($options = array()) {
 

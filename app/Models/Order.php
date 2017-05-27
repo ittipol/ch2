@@ -488,6 +488,18 @@ class Order extends Model
 
   }
 
+  public function getShopName() {
+
+    $shop = Shop::select('name')->find($this->shop_id);
+
+    if(empty($shop)) {
+      return null;
+    }
+
+    return $shop->name;
+
+  }
+
   public function buildModelData() {
 
     $currency = new Currency;
