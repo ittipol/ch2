@@ -63,12 +63,13 @@ class AppServiceProvider extends ServiceProvider
 
           $url = new Url;
 
+          $orderModel = Service::loadModel('Order');
+          $slugModel = Service::loadModel('Slug');
+
           $records = Service::loadModel('PersonToShop')
           ->select(array('shop_id'))
           ->where('created_by','=',session()->get('Person.id'))
           ->get();
-
-          $slugModel = Service::loadModel('Slug');
 
           $shops = array();
           foreach ($records as $record) {
@@ -84,8 +85,18 @@ class AppServiceProvider extends ServiceProvider
               array('model_id','=',$shop->id)
             ))->first()->slug;
 
+            // Get new orders
+            // $total = $orderModel->where([
+            //   ['shop_id','=',$shop->id],
+            //   ['order_status_id','=',1]
+            // ])->count();
+
             $shops[] = array(
               'name' => $shop->name,
+              'totalNewOrder' => $orderModel->where([
+                ['shop_id','=',$shop->id],
+                ['order_status_id','=',1]
+              ])->count(),
               'url' => $url->url('shop/'.$slug)
             );
 

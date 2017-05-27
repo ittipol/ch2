@@ -13,6 +13,11 @@ textarea {
 	resize: none;
 }
 
+textarea.sm {
+	width: 80%;
+	height: 200px;
+}
+
 textarea.small-textarea {
 	height: 80px;
 }

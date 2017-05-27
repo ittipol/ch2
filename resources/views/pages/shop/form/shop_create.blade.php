@@ -55,6 +55,15 @@
       </div>
 
       <div class="form-row">
+        <?php 
+          echo Form::label('description', 'คำอธิบายสั้นๆ เพื่ออธิบายถึงบริษัท ร้านค้า หรือธุรกิจของคุณ');
+          echo Form::textarea('description',null,array(
+            'class' => 'sm'
+          ));
+        ?>
+      </div>
+
+      <div class="form-row">
       <?php 
         echo Form::label('Contact[phone_number]', 'หมายเลขโทรศัพท์', array(
             'class' => 'required'

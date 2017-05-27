@@ -268,7 +268,7 @@ h4 > img {
 	background-color: #448AFF;
 }
 
-.sign {
+/*.sign {
 	display: inline-block;
 	padding: 10px 20px;
 	margin: 0;
@@ -286,7 +286,7 @@ h4 > img {
 
 .sign.success {
 	background-color: #388E3C;
-}
+}*/
 
 .hide-element {
 	display: none;
@@ -342,7 +342,27 @@ h4 > img {
 	display: block;
 }
 
+.inline-flag-group {
+	margin-top: 5px;
+}
 
+.inline-flag {
+	color: #222;
+	/*background-color: #D50000;*/
+	/*padding: 5px 10px*/
+	display: inline-block;
+}
+
+.inline-flag > img {
+	height: 20px;
+	margin-top: -5px;
+}
+
+.inline-flag .flag-count {
+	color: #fff;
+  background-color: #D50000;
+  padding: 5px 10px;
+}
 
 
 /*.product-catalog-banner {

@@ -71,6 +71,13 @@
         <div class="list-h-item clearfix">
           <div class="col-md-11 col-xs-8">
             <a href="{{$shop['url']}}">{{$shop['name']}}</a>
+            <div class="inline-flag-group">
+              <a href="" class="inline-flag">
+                <!-- <img src="/images/icons/bag-blue.png"> -->
+                รายการสั่งซื้อใหม่:
+                <span class="flag-count">{{$shop['totalNewOrder']}}</span>
+              </a>
+            </div>
           </div>
 
           <div class="additional-option">
