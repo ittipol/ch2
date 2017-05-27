@@ -85,11 +85,7 @@ class AppServiceProvider extends ServiceProvider
               array('model_id','=',$shop->id)
             ))->first()->slug;
 
-            // Get new orders
-            // $total = $orderModel->where([
-            //   ['shop_id','=',$shop->id],
-            //   ['order_status_id','=',1]
-            // ])->count();
+            $shopUrl = $url->url('shop/'.$slug);
 
             $shops[] = array(
               'name' => $shop->name,
@@ -97,7 +93,8 @@ class AppServiceProvider extends ServiceProvider
                 ['shop_id','=',$shop->id],
                 ['order_status_id','=',1]
               ])->count(),
-              'url' => $url->url('shop/'.$slug)
+              'url' => $shopUrl,
+              'orderUrl' => $shopUrl.'order?fq=order_status_id:1&sort=created_at:desc'
             );
 
           }

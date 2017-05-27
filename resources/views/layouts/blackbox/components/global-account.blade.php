@@ -72,8 +72,7 @@
           <div class="col-md-11 col-xs-8">
             <a href="{{$shop['url']}}">{{$shop['name']}}</a>
             <div class="inline-flag-group">
-              <a href="" class="inline-flag">
-                <!-- <img src="/images/icons/bag-blue.png"> -->
+              <a href="{{$shop['orderUrl']}}" class="inline-flag">
                 รายการสั่งซื้อใหม่:
                 <span class="flag-count">{{$shop['totalNewOrder']}}</span>
               </a>
