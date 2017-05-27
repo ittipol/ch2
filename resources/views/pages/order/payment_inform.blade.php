@@ -106,7 +106,7 @@
   </div>
 
   <?php
-    echo Form::submit('ยืนยันการชำระเงิน' , array(
+    echo Form::submit('แจ้งการชำระเงิน' , array(
       'class' => 'button'
     ));
   ?>

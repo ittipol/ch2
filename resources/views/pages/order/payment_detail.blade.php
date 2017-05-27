@@ -85,7 +85,7 @@
   </div>
 
   <h4>รูปภาพ</h4>
-  <div class="line"></div>
+  <div class="line space-bottom-30"></div>
 
   <div class="image-gallery">
 
