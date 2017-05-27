@@ -54,7 +54,7 @@
           <br><br>
 
           8.วิธีการจัดส่งสินค้าจะเป็นตัวเลือกเพื่อให้ลูกค้าเลือกในหน้าสั่งซื้อสินค้า<br><br>
-          <!-- <img src="/images/manual/adding-shipping-method/shipping-method-adding-2.png"> -->
+          <img src="/images/manual/adding-shipping-method/shipping-method-option.png">
 
         </div>
 

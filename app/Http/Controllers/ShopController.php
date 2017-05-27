@@ -254,6 +254,7 @@ class ShopController extends Controller
     $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/manage/product');
     $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/manage/product/{id}','menuUrl');
     $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/product/delete/{id}','deleteUrl');
+    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/product/status/edit/{id}','productStatusUrl');
     $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/product/{id}','detailUrl');
 
     $this->data = $model->paginator->build();
