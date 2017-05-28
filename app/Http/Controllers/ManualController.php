@@ -72,6 +72,26 @@ class ManualController extends Controller
           $title = 'เพิ่มตัวเลือกคุณลักษณะสินค้า';
         break;
 
+      case 'product-category-edit':
+          $goto = 'pages.manual.product-category-edit';
+          $title = 'แก้ไขหมวดหมู่สินค้า';
+        break;
+
+      case 'product-minimum-edit':
+          $goto = 'pages.manual.product-minimum-edit';
+          $title = 'การสั่งซื้อขั้นต่ำ';
+        break;
+
+      case 'product-quantity-edit':
+          $goto = 'pages.manual.product-quantity-edit';
+          $title = 'จำนวนสินค้า';
+        break;
+
+      case 'product-price-edit':
+          $goto = 'pages.manual.product-price-edit';
+          $title = 'ราคาสินค้า';
+        break;
+
       default:
           abort(404);
         break;
