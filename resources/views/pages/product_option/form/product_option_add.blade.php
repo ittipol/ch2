@@ -62,7 +62,7 @@
   </div>
 
   <?php
-    echo Form::submit('เพิ่มตัวเลือกสินค้า', array(
+    echo Form::submit('เพิ่มหัวข้อคุณลักษณะ', array(
       'class' => 'button'
     ));
   ?>

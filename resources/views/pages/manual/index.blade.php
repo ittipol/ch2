@@ -67,15 +67,15 @@
 
         <div class="nav-group space-bottom-30">
           <a href="{{URL::to('manual/adding-product')}}">เพิ่มสินค้า</a>
-          <a href="">แก้ไขข้อมูลสินค้า & ข้อมูลจำเพาะ</a>
-          <a href="">เพิ่มตัวเลือกคุณลักษณะสินค้า</a>
-          <a href="">แก้ไขหมวดหมู่สินค้า</a>
-          <a href="">การสั่งซื้อขั้นต่ำ</a>
-          <a href="">จำนวนสินค้า</a>
-          <a href="">ราคาสินค้า</a>
-          <a href="">โปรโมชั่นการขาย</a>
-          <a href="">การคำนวณขนส่งสินค้า</a>
-          <a href="">ข้อความและการแจ้งเตือน</a>
+          <a href="{{URL::to('manual/product-detail-edit')}}">แก้ไขข้อมูลสินค้า & ข้อมูลจำเพาะ</a>
+          <a href="{{URL::to('manual/adding-product-attribute')}}">เพิ่มตัวเลือกคุณลักษณะสินค้า</a>
+          <a href="{{URL::to('manual/product-category-edit')}}">แก้ไขหมวดหมู่สินค้า</a>
+          <a href="{{URL::to('manual/product-minimum-edit')}}">การสั่งซื้อขั้นต่ำ</a>
+          <a href="{{URL::to('manual/product-quantity-edit')}}">จำนวนสินค้า</a>
+          <a href="{{URL::to('manual/product-price-edit')}}">ราคาสินค้า</a>
+          <a href="{{URL::to('manual/product-promotion-edit')}}">โปรโมชั่นการขาย</a>
+          <a href="{{URL::to('manual/product-shipping-edit')}}">การคำนวณขนส่งสินค้า</a>
+          <a href="{{URL::to('manual/product-notification-edit')}}">ข้อความและการแจ้งเตือน</a>
         </div>
       </div>
 

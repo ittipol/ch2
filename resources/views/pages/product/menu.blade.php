@@ -134,7 +134,7 @@
     <div class="list-item">
       <a href="{{request()->get('shopUrl')}}product/edit/{{$_modelData['id']}}">
         <img class="icon" src="/images/common/pencil.png" >
-        <h4>ข้อมูลทั้วไปของสินค้า</h4>
+        <h4>ข้อมูลทั่วไปของสินค้า</h4>
       </a>
     </div>
 
