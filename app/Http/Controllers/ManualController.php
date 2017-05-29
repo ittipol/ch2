@@ -47,14 +47,19 @@ class ManualController extends Controller
           $title = 'เพิ่มตัวเลือกวิธีการจัดส่ง';
         break;
 
+      case 'shop-setting':
+          $goto = 'pages.manual.shop-setting';
+          $title = 'ข้อมูลร้านค้า';
+        break;
+
       case 'adding-payment-method':
           $goto = 'pages.manual.adding-payment-method';
           $title = 'เพิ่มตัวเลือกการชำระเงิน';
         break;
 
-      case 'shop-setting':
-          $goto = 'pages.manual.shop-setting';
-          $title = 'ข้อมูลร้านค้า';
+      case 'shop-profile-image':
+          $goto = 'pages.manual.shop-profile-image';
+          $title = 'รูปถาพโปรไฟล์ร้านค้า & รูปหน้าปก';
         break;
 
       case 'adding-product':
@@ -90,6 +95,21 @@ class ManualController extends Controller
       case 'product-price-edit':
           $goto = 'pages.manual.product-price-edit';
           $title = 'ราคาสินค้า';
+        break;
+
+      case 'product-promotion-edit':
+          $goto = 'pages.manual.product-promotion-edit';
+          $title = 'โปรโมชั่นการขาย';
+        break;
+
+      case 'product-shipping-edit':
+          $goto = 'pages.manual.product-shipping-edit';
+          $title = 'การคำนวณขนส่งสินค้า';
+        break;
+
+      case 'product-notification-edit':
+          $goto = 'pages.manual.product-notification-edit';
+          $title = 'ข้อความและการแจ้งเตือน';
         break;
 
       default:

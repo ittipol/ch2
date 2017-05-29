@@ -54,6 +54,7 @@
 
         <div class="nav-group space-bottom-30">
           <a href="{{URL::to('manual/creating-shop')}}">สร้างร่านค้า</a>
+          <a href="{{URL::to('manual/shop-profile-image')}}">รูปถาพโปรไฟล์ร้านค้า & รูปหน้าปก</a>
           <a href="{{URL::to('manual/adding-shipping-method')}}">เพิ่มตัวเลือกวิธีการจัดส่ง</a>
           <a href="{{URL::to('manual/adding-payment-method')}}">เพิ่มตัวเลือกการชำระเงิน</a>
           <a href="{{URL::to('manual/shop-setting')}}">ข้อมูลร้านค้า</a>
@@ -85,9 +86,9 @@
         </h5>
 
         <div class="nav-group space-bottom-30">
-          <a href="">สร้างแคตตาล็อกสินค้า</a>
-          <a href="">แก้ไขแคตตาล็อกสินค้า</a>
-          <a href="">เพิ่ม / ลบสินค้าในแคตตาล็อก</a>
+          <a href="{{URL::to('manual/adding-product-catalog')}}">สร้างแคตตาล็อกสินค้า</a>
+          <a href="{{URL::to('manual/product-catalog-edit')}}">แก้ไขแคตตาล็อกสินค้า</a>
+          <a href="{{URL::to('manual/product-catalog-product-edit')}}">เพิ่ม / ลบสินค้าในแคตตาล็อก</a>
         </div>
       </div>
 

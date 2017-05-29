@@ -81,12 +81,20 @@
   background-size: auto 100%;
 }
 
-.slider-banner .slider-banner-item.color-type-1 {
+/*.slider-banner .slider-banner-item.color-type-1 {
 	background-color: rgb(212,22,48);
+}*/
+
+.slider-banner .slider-banner-item.color-type-1 {
+	background-color: rgb(57,180,213);
 }
 
-.slider-banner .slider-banner-item.color-type-2 {
+/*.slider-banner .slider-banner-item.color-type-2 {
 	background-color: rgb(255,217,118);
+}*/
+
+.slider-banner .slider-banner-item.color-type-2 {
+	background-color: rgb(118,76,204);
 }
 
 .slider-banner .slider-banner-item.color-type-3 {
