@@ -290,7 +290,7 @@ Route::group(['middleware' => ['shop','person.shop.permission']], function () {
   Route::get('shop/{shopSlug}/product_catalog/{id}','ProductCatalogController@productListView')->name('shop.product_catalog.list');
 
   Route::get('shop/{shopSlug}/job','JobController@shopJoblistView')->name('shop.job.list');
-  Route::get('shop/{shopSlug}/job/{id}','JobController@shopJobDetail')->name('shop.job.detail');
+  Route::get('shop/{shopSlug}/job/{id}','JobController@detail')->name('shop.job.detail');
 
   // Route::get('shop/{shopSlug}/advertising','AdvertisingController@shopAdvertisinglistView')->name('shop.advertising.list');
   // Route::get('shop/{shopSlug}/advertising/{id}','AdvertisingController@shopAdvertisingDetail')->name('shop.advertising.detail');

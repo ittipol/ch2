@@ -89,9 +89,11 @@ class FilterHelper {
     $pattern = '/\s[+\'\'\\\\\/:;()*\-^&!<>\[\]\|]\s/';
     $_q = preg_replace($pattern, ' ', $q);
 
-    $wordGroupPattern = '/([\wก-๙]+|[(\"|\')]{1}[\wก-๙]+[(\+|\s)]{1}[\wก-๙]+[(\"|\')]{1})/';
-    $wordGroupPattern = '/([\w\เก-๙]+|[(\"|\')]{1}[\w\เก-๙]+[(\+|\s)]{1}[\w\เก-๙]+[(\"|\')]{1})/';
-    preg_match_all($wordGroupPattern, $_q, $words);
+    // $wordGroupPattern = '/([\wก-๙]+|[(\"|\')]{1}[\wก-๙]+[(\+|\s)]{1}[\wก-๙]+[(\"|\')]{1})/';
+    // $wordGroupPattern = '/([\w\เก-๙]+|[(\"|\')]{1}[\w\เก-๙]+[(\+|\s)]{1}[\w\เก-๙]+[(\"|\')]{1})/';
+    // preg_match_all($wordGroupPattern, $_q, $words);
+
+    $words[0] = explode(' ', $q);
 
     $isAddress = false;
 

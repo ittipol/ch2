@@ -4,6 +4,15 @@ namespace App\Http\Controllers;
 
 class ManualController extends Controller
 {
+  public function __construct() { 
+    parent::__construct();
+
+    $this->setPageTitle('วิธีการใช้งาน');
+    $this->setPageDescription('วิธีการใช้งานเว็บไซต์ การใช้งานทั่วไป การใช้งานสำหรับผู้ขาย การใช้งานสำหรับผู้ซื้อ');
+    $this->setMetaKeywords('ผู้ขาย,ผู้ซื้อ,ร้านค้า,ร้านค้าออนไลน์,วิธีการใช้งาน,คู่มือการใช้งาน,การช่วยเหลือ,ตระกร้าสินค้า,การแจ้งเตือน,การค้นหา');
+
+  }
+
   public function index() {
     
     if(empty($this->param['pageSlug'])) {
@@ -118,6 +127,10 @@ class ManualController extends Controller
     }
     
     $this->setPageTitle($title);
+    $this->setPageDescription('วิธีการใช้งาน '.$title);
+
+    $this->botAllowed();
+
     return $this->view($goto);
 
   }

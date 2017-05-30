@@ -13,6 +13,15 @@ use Session;
 
 class ProductCatalogController extends Controller
 {
+  public function __construct() { 
+    parent::__construct();
+
+    $this->setPageTitle('แคตตาล็อกสินค้า');
+    $this->setPageDescription('แคตตาล็อกสินค้าที่รวบรวมและแสดงสินค้าโดยตรงจากบริษัทและร้านค้าต่างๆ เพื่อความสะดวกและรวดเร็วต่อการค้นหาสินค้าภายในร้านค้า');
+    $this->setMetaKeywords('สินค้า,ร้านค้า,ร้านค้าออนไลน์,แคตตาล็อก,แคตตาล็อกสินค้า');
+
+  }
+
   public function listView() {
 
     $model = Service::loadModel('ProductCatalog');
@@ -80,6 +89,8 @@ class ProductCatalogController extends Controller
     // $this->setData('displayingFilters',$displayingFilters);
 
     $this->setPageTitle('แคตตาล็อกสินค้า - '.request()->get('shop')->name);
+
+    $this->botAllowed();
     
     return $this->view('pages.product_catalog.list');
 
@@ -157,7 +168,10 @@ class ProductCatalogController extends Controller
     $this->setData('imageUrl',$productCatalog->getImage());
 
     $this->setPageTitle($productCatalogData['name'].' - แคตตาล็อกสินค้า - '.request()->get('shop')->name);
+    $this->setPageDescription($productCatalog->description);
     
+    $this->botAllowed();
+
     return $this->view('pages.product_catalog.product_list');
 
   }

@@ -1,7 +1,11 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+ -->
+@if(!empty(request()->get('shop')))
+@include('pages.shop.layouts.fixed_top_nav')
+@endif
 
 <div class="container">
   <h3 class="title">{{$_modelData['name']}}</h3>

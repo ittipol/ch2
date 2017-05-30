@@ -76,6 +76,12 @@ class SearchController extends Controller
     $this->setData('count',$lookup->paginator->getCount());
     $this->setData('searchOptions',$searchOptions);
     // $this->setData('displayingFilters',$displayingFilters);
+
+    $this->setPageTitle($q);
+    $this->setPageDescription('ค้นหาสินค้า ร้านค้า งาน และอื่นๆ');
+    $this->setMetaKeywords(implode(',', explode(' ', $q)));
+
+    $this->botAllowed();
  
     return $this->view('pages.search.result');
 

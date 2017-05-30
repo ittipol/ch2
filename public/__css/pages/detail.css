@@ -508,6 +508,14 @@
 	padding: 15px;
 }
 
+.product-catalog-banner {
+	width: 100%;
+	height: 300px;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
 @media only screen and (max-width : 992px) {
 	.quantity-box {
 		margin-top: 20px;

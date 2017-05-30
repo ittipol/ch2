@@ -17,6 +17,11 @@ class ProductController extends Controller
 {
   public function __construct() { 
     parent::__construct();
+
+    $this->setPageTitle('สินค้าจากบริษัทและร้านค้า');
+    $this->setPageDescription('สินค้าโดยตรงจากบริษัทและร้านค้าต่างๆ ที่มีให้เลือกมากมาย พร้อมด้วยหมวดหมู่สินค้ามากกว่า 2500 รายการซึ่งจะทำสินค้าถูกจัดเรียงอย่างเป็นระบบเพื่อความสะดวกและรวดเร็วต่อการค้นหาสินค้า');
+    $this->setMetaKeywords('สินค้า,ร้านค้า,ร้านค้าออนไลน์');
+
   }
 
   private function _save($model,$attributes = array()) {
@@ -106,6 +111,9 @@ class ProductController extends Controller
     $this->setData('shelfs',$shelfs);
 
     $this->setPageTitle('สินค้าจากบริษัทและร้านค้า');
+    $this->setMetaKeywords('สินค้า,ร้านค้า,ร้านค้าออนไลน์,เสื้อผ้า,คอมพิวเตอร์,มือถือ');
+
+    $this->botAllowed();
 
     return $this->view('pages.product.shelf');
 
@@ -171,7 +179,24 @@ class ProductController extends Controller
     }else{
       $this->setPageTitle($categoryName.' - หมวดสินค้า');
     }
+
+    $this->setPageDescription('หมวดหมู่สินค้ามากกว่า 2500 รายการซึ่งจะทำสินค้าถูกจัดเรียงอย่างเป็นระบบเพื่อความสะดวกและรวดเร็วต่อการค้นหาสินค้า');
     
+    if(!empty($categoryName)) {
+      $__categories = array();
+      $__categories[] = $categoryName;
+
+      foreach ($_categories as $_category) {
+        $__categories[] = $_category['categoryName'];
+      }
+
+      $this->setMetaKeywords(implode(',', $__categories));
+    }else{
+      $this->setMetaKeywords('หมวดหมู่สินค้า,ประเภทสินค้า,เสื้อผ้า, คอมพิวเตอร์, มือถือ');
+    }
+
+    $this->botAllowed();
+
     return $this->view('pages.product.category');
 
   }
@@ -258,16 +283,29 @@ class ProductController extends Controller
     // );
 
     $parent = $categoryModel->getParentCategory($categoryId);
+    $categoryPaths = $categoryModel->getCategoryPaths($categoryId);
     
     $this->data = $model->paginator->build();
     $this->setData('title',$title);
     $this->setData('categories',$categoryModel->getCategoriesWithSubCategories($categoryId));
     $this->setData('searchOptions',$searchOptions);
     // $this->setData('displayingFilters',$displayingFilters);
-    $this->setData('categoryPaths',$categoryModel->getCategoryPaths($categoryId));
+    $this->setData('categoryPaths',$categoryPaths);
     $this->setData('parentCategoryName',$parent['name']);
 
     $this->setPageTitle($title.' - สินค้า');
+
+    if(!empty($categoryPaths)) {
+      $__categories = array();
+
+      foreach ($categoryPaths as $_category) {
+        $__categories[] = $_category['name'];
+      }
+
+      $this->setMetaKeywords(implode(',', $__categories));
+    }
+
+    $this->botAllowed();
 
     return $this->view('pages.product.list');
 
@@ -340,6 +378,9 @@ class ProductController extends Controller
     // $this->setData('displayingFilters',$displayingFilters);
 
     $this->setPageTitle('สินค้า - '.request()->get('shop')->name);
+    $this->setPageDescription('สินค้าจาก '.request()->get('shop')->name);
+
+    $this->botAllowed();
 
     return $this->view('pages.product.shop_product_list');
 
@@ -509,6 +550,24 @@ class ProductController extends Controller
     }
 
     // Get Tagging for creating keywords
+    $taggings = $model->getRelatedData('Tagging',array(
+      'fields' => array('word_id')
+    ));
+
+    $categoryPaths = $model->getCategoryPaths();
+
+    $_keywords = array();
+    if(!empty($taggings)) {
+      foreach ($taggings as $tagging) {
+        $_keywords[] = $tagging->word->word; 
+      }
+    }
+
+    if(!empty($categoryPaths)) {
+      foreach ($categoryPaths as $_category) {
+        $_keywords[] = $_category['name'];
+      }
+    }
 
     $this->data = $model->modelData->build();
     $this->setData('shop',$shop->modelData->build(true));
@@ -525,11 +584,15 @@ class ProductController extends Controller
     $this->setData('shopRealatedProducts',$_shopRealatedProducts);
     $this->setData('realatedProducts',$_realatedProducts);
 
-    // dd($this->data['_modelData']['Tagging']);
-
     $this->setPageTitle($this->data['_modelData']['name'].' - สินค้า @ '.$shop->name);
     $this->setPageImage($model->getImage('list'));
     $this->setPageDescription($model->getShortDescription());
+
+    if(!empty($_keywords)) {
+      $this->setMetaKeywords(implode(',', $_keywords));
+    }
+
+    $this->botAllowed();
 
     return $this->view('pages.product.detail');
 

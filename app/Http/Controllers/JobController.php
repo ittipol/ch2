@@ -16,6 +16,11 @@ class JobController extends Controller
 {
   public function __construct() { 
     parent::__construct();
+
+    $this->setPageTitle('งานจากบริษัทและร้านค้า');
+    $this->setPageDescription('งานโดยตรงจากบริษัทต่างๆ ที่มีให้เลือกมากมาย พร้อมด้วยระบบการสมัครงานออนไลน์และการสร้างเรซูเม่ออนไลน์ที่จะทำให้สะดวกและรวดเร็ว');
+    $this->setMetaKeywords('งาน,ตำแหน่งงาน,ประกาศงาน,สมัครงาน,สมัครงานออนไลน์,เรซูเม่,เรซูเม่ออนไลน์');
+
   }
 
   public function board() {
@@ -80,6 +85,8 @@ class JobController extends Controller
 
     $this->setPageTitle('งานจากบริษัทและร้านค้า');
 
+    $this->botAllowed();
+
     return $this->view('pages.job.board');
 
   }
@@ -141,6 +148,8 @@ class JobController extends Controller
     // $this->setData('displayingFilters',$displayingFilters);
 
     $this->setPageTitle($title.' - ประกาศงาน');
+
+    $this->botAllowed();
     
     return $this->view('pages.job.list');
   }
@@ -295,7 +304,6 @@ class JobController extends Controller
       array('job_id','=',$this->param['id'])
     ));
 
-
     if($personApplyJob->exists()) {
 
       $personApplyJob = $personApplyJob->first();
@@ -312,111 +320,133 @@ class JobController extends Controller
 
     $this->setData('alreadyApply',$personApplyJob->exists());
 
-    $this->setPageTitle($this->data['_modelData']['name'].' - งาน');
+    $_keywords = null;
+    if(!empty($taggings)) {
+      foreach ($taggings as $tagging) {
+        $_keywords[] = $tagging->word->word; 
+      }
+    }
+
+    if(!empty($this->data['_modelData']['_careerType'])) {
+      $_careerType = str_replace(' ', '', $this->data['_modelData']['_careerType']);
+      $_keywords[] = str_replace('/', ',', $_careerType);
+    }
+
+    if(!empty($this->data['_modelData']['_employmentTypeName'])) {
+      $_keywords[] = $this->data['_modelData']['_employmentTypeName'];
+    }
+
+    $this->setPageTitle($this->data['_modelData']['name'].' - งาน @ '.$shop->name);
     $this->setPageImage($model->getImage('list'));
-    $this->setPageDescription($model->getShortDescription());
+    $this->setPageDescription($model->description);
+
+    if(!empty($_keywords)) {
+      $this->setMetaKeywords(implode(',', $_keywords));
+    }
+
+    $this->botAllowed();
     
     return $this->view('pages.job.detail');
 
   }
 
-  public function shopJobDetail() {
+  // public function shopJobDetail() {
 
-    $url = new Url;
+  //   $url = new Url;
 
-    $model = Service::loadModel('Job')->find($this->param['id']);
+  //   $model = Service::loadModel('Job')->find($this->param['id']);
 
-    if(empty($model)) {
-      $this->error = array(
-        'message' => 'ไม่พบประกาศ'
-      );
-      return $this->error();
-    }
+  //   if(empty($model)) {
+  //     $this->error = array(
+  //       'message' => 'ไม่พบประกาศ'
+  //     );
+  //     return $this->error();
+  //   }
 
-    $model->modelData->loadData(array(
-      'models' => array('Image','Tagging'),
-      'json' => array('Image')
-    ));
+  //   $model->modelData->loadData(array(
+  //     'models' => array('Image','Tagging'),
+  //     'json' => array('Image')
+  //   ));
 
-    $branchIds = $model->getRelatedData('RelateToBranch',array(
-      'list' => 'branch_id',
-      'fields' => array('branch_id'),
-    ));
+  //   $branchIds = $model->getRelatedData('RelateToBranch',array(
+  //     'list' => 'branch_id',
+  //     'fields' => array('branch_id'),
+  //   ));
 
-    $branches = array();
-    if(!empty($branchIds)){
-      $branches = Service::loadModel('Branch')
-      ->select(array('id','name'))
-      ->whereIn('id',$branchIds)
-      ->get();
-    }
+  //   $branches = array();
+  //   if(!empty($branchIds)){
+  //     $branches = Service::loadModel('Branch')
+  //     ->select(array('id','name'))
+  //     ->whereIn('id',$branchIds)
+  //     ->get();
+  //   }
 
-    $branchLocations = array();
-    $hasBranchLocation = false;
-    // foreach ($branches as $branch) {
+  //   $branchLocations = array();
+  //   $hasBranchLocation = false;
+  //   // foreach ($branches as $branch) {
 
-    //   $address = $branch->modelData->loadAddress();
+  //   //   $address = $branch->modelData->loadAddress();
 
-    //   if(!empty($address)){
+  //   //   if(!empty($address)){
 
-    //     $hasBranchLocation = true;
+  //   //     $hasBranchLocation = true;
 
-    //     $graphics = json_decode($address['_geographic'],true);
+  //   //     $graphics = json_decode($address['_geographic'],true);
         
-    //     $branchLocations[] = array(
-    //       'id' => $branch->id,
-    //       'address' => $branch->name,
-    //       'latitude' => $graphics['latitude'],
-    //       'longitude' => $graphics['longitude'],
-    //       'detailUrl' => $url->setAndParseUrl('shop/{shopSlug}/branch/{id}',array(
-    //         'shopSlug' => request()->shopSlug,
-    //         'id' => $branch->id
-    //       ))
-    //     );
-    //   }
+  //   //     $branchLocations[] = array(
+  //   //       'id' => $branch->id,
+  //   //       'address' => $branch->name,
+  //   //       'latitude' => $graphics['latitude'],
+  //   //       'longitude' => $graphics['longitude'],
+  //   //       'detailUrl' => $url->setAndParseUrl('shop/{shopSlug}/branch/{id}',array(
+  //   //         'shopSlug' => request()->shopSlug,
+  //   //         'id' => $branch->id
+  //   //       ))
+  //   //     );
+  //   //   }
 
-    // }
+  //   // }
 
-    $shop = request()->get('shop');
+  //   $shop = request()->get('shop');
 
-    $this->data = $model->modelData->build();
-    $this->setData('shop',$shop->modelData->build(true));
-    $this->setData('shopImageUrl',$shop->getProfileImageUrl());
-    $this->setData('shopCoverUrl',$shop->getCoverUrl());
-    // $this->setData('shopUrl',request()->get('shopUrl'));
-    $this->setData('branchLocations',json_encode($branchLocations));
-    $this->setData('hasBranchLocation',$hasBranchLocation);
+  //   $this->data = $model->modelData->build();
+  //   $this->setData('shop',$shop->modelData->build(true));
+  //   $this->setData('shopImageUrl',$shop->getProfileImageUrl());
+  //   $this->setData('shopCoverUrl',$shop->getCoverUrl());
+  //   // $this->setData('shopUrl',request()->get('shopUrl'));
+  //   $this->setData('branchLocations',json_encode($branchLocations));
+  //   $this->setData('hasBranchLocation',$hasBranchLocation);
 
-    // Get person apply job
-    $personApplyJob = Service::loadModel('PersonApplyJob')->where(array(
-      array('created_by','=',session()->get('Person.id')),
-      array('job_id','=',$this->param['id'])
-    ));
+  //   // Get person apply job
+  //   $personApplyJob = Service::loadModel('PersonApplyJob')->where(array(
+  //     array('created_by','=',session()->get('Person.id')),
+  //     array('job_id','=',$this->param['id'])
+  //   ));
 
 
-    if($personApplyJob->exists()) {
+  //   if($personApplyJob->exists()) {
 
-      $personApplyJob = $personApplyJob->first();
+  //     $personApplyJob = $personApplyJob->first();
 
-      $this->setData('personApplyJob',$personApplyJob->buildModelData());
+  //     $this->setData('personApplyJob',$personApplyJob->buildModelData());
 
-      if(($personApplyJob->job_applying_status_id == 4) || ($personApplyJob->job_applying_status_id == 5)) {
-        $this->setData('jobApplyUrl',$url->setAndParseUrl('job/apply/{id}',array('id' => $this->param['id'])));
-      }
+  //     if(($personApplyJob->job_applying_status_id == 4) || ($personApplyJob->job_applying_status_id == 5)) {
+  //       $this->setData('jobApplyUrl',$url->setAndParseUrl('job/apply/{id}',array('id' => $this->param['id'])));
+  //     }
 
-    }else{
-      $this->setData('jobApplyUrl',$url->setAndParseUrl('job/apply/{id}',array('id' => $this->param['id'])));
-    }
+  //   }else{
+  //     $this->setData('jobApplyUrl',$url->setAndParseUrl('job/apply/{id}',array('id' => $this->param['id'])));
+  //   }
 
-    $this->setData('alreadyApply',$personApplyJob->exists());
+  //   $this->setData('alreadyApply',$personApplyJob->exists());
 
-    $this->setPageTitle($this->data['_modelData']['name'].' - งาน @ '.request()->get('shop')->name);
-    $this->setPageImage($model->getImage('list'));
-    $this->setPageDescription($model->getShortDescription());
+  //   $this->setPageTitle($this->data['_modelData']['name'].' - งาน @ '.request()->get('shop')->name);
+  //   $this->setPageImage($model->getImage('list'));
+  //   $this->setPageDescription($model->getShortDescription());
     
-    return $this->view('pages.job.shop_job_detail');
+  //   return $this->view('pages.job.shop_job_detail');
 
-  }
+  // }
 
   public function add() {
 

@@ -38,7 +38,7 @@
       @foreach($_pagination['data'] as $data)
 
       <div class="col-lg-3 col-xs-6">
-        <div class="card">
+        <div class="card sm">
           <div class="image-tile">
             <a href="{{$data['detailUrl']}}">
               <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>

@@ -681,6 +681,8 @@ dd('end');
     // $this->setData('bags',$this->getProductData(771,16));
     // $this->setData('shoes',$this->getProductData(771,16));
 
+    $this->botAllowed();
+
     return $this->view('pages.home.index');
 
   }

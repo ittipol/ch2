@@ -474,7 +474,14 @@ class Lookup extends Model
   }
 
   public function buildPaginationData() {
-    return Service::loadModel($this->model)->find($this->model_id)->buildLookupData();
+
+    $data = Service::loadModel($this->model)->find($this->model_id);
+
+    if(empty($data)) {
+      return null;
+    }
+
+    return $data->buildLookupData();
   }
 
 }

@@ -15,6 +15,11 @@ class ShopController extends Controller
 
   public function __construct() { 
     parent::__construct();
+
+    $this->setPageTitle('บริษัทและร้านค้า');
+    $this->setPageDescription('สร้างร้านค้าออนไลน์ในแบบของคุณ เปิดโอกาสและเพิ่มช่องทางการขายสินค้าให้กับธุรกิจของคุณ เพื่อให้ธุรกิจของคุณเชื่อมต่อไปยังคนนับล้านบนอินเตอร์เน็ต');
+    $this->setMetaKeywords('ร้านค้า,ร้านค้าออนไลน์,สินค้า,งาน,ตำแหน่งงาน,ประกาศงาน');
+
   }
 
   public function index() {
@@ -89,7 +94,9 @@ class ShopController extends Controller
 
     $this->setPageTitle(request()->get('shop')->name,false);
     $this->setPageImage(request()->get('shop')->getProfileImageUrl());
-    $this->setPageDescription(request()->get('shop')->getShortDescription());
+    $this->setPageDescription(request()->get('shop')->description);
+
+    $this->botAllowed();
 
     return $this->view('pages.shop.index');
   }
@@ -106,7 +113,9 @@ class ShopController extends Controller
     $this->setPageTitle('เกี่ยวกับ - '.request()->get('shop')->name,false);
     $this->setPageImage(request()->get('shop')->getProfileImageUrl());
     $this->setPageDescription(request()->get('shop')->getShortDescription());
+    $this->setMetaKeywords('เวลาทำการ,ที่อยู่,การติดต่อ,หมายเลขโทรศัพท์,คำอธิบายเกี่ยวกับ,เรื่องราว,Brand Story,พันธกิจ');
 
+    $this->botAllowed();
 
     return $this->view('pages.shop.about');
 
@@ -168,6 +177,8 @@ class ShopController extends Controller
     // $this->setData('displayingFilters',$displayingFilters);
 
     $this->setPageTitle('บริษัทและร้านค้า');
+
+    $this->botAllowed();
 
     return $this->view('pages.shop.list');
 
@@ -491,6 +502,9 @@ class ShopController extends Controller
     $this->data = $model->formHelper->build();
 
     $this->setPageTitle('สร้างร้านค้า');
+    $this->setMetaKeywords('สร้างร้านค้า,สร้างร้านค้าออนไลน์,ร้านค้าออนไลน์,บริษัท,ร้านค้า,ธุรกิจ');
+
+    $this->botAllowed();
 
     return $this->view('pages.shop.form.shop_create');
   }

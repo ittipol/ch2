@@ -26,6 +26,8 @@ class Controller extends BaseController
   protected $metaImage = null;
   protected $metaKeywords = null;
 
+  protected $botDisallowed = true;
+
   protected $param;
   protected $query;
   protected $entity;
@@ -39,8 +41,12 @@ class Controller extends BaseController
     $this->param = Route::current()->parameters();
   }
 
-  protected function setPageTitle($pageTitle,$include = true) {
+  protected function setPageTitle($pageTitle = null,$include = true) {
     
+    if(empty($pageTitle)) {
+      return false;
+    }
+
     if($include) {
       $pageTitle = $pageTitle.' | Sunday Square';
     }
@@ -49,29 +55,36 @@ class Controller extends BaseController
 
   }
 
-  protected function setPageDescription($metaDescription) {
+  protected function setPageDescription($metaDescription = null) {
+
+    if(empty($metaDescription)) {
+      return false;
+    }
 
     $string = new stringHelper;
-
     $this->metaDescription = $string->truncString($metaDescription,120);
   }
 
-  protected function setPageKeyword($metaKeywords) {
+  protected function setMetaKeywords($metaKeywords = null) {
 
+    if(empty($metaKeywords)) {
+      return false;
+    }
+
+    $this->metaKeywords = $metaKeywords;
   }
 
-  protected function setPageImage($metaImage) {
+  protected function setPageImage($metaImage = null) {
+
+    if(empty($metaKeywords)) {
+      return false;
+    }
+
     $this->metaImage = $metaImage;
   }
 
-  protected function error() {
-    $data = array();
-
-    if(!empty($this->error)) {
-      $data['error'] = $this->error;
-    }
-
-    return view('errors.error',$data);
+  protected function botAllowed() {
+    $this->botDisallowed = false;
   }
 
   protected function setData($index,$value) {
@@ -96,11 +109,23 @@ class Controller extends BaseController
     $this->data['_page_image'] = $this->metaImage;
     $this->data['_meta_keywords'] = $this->metaKeywords;
 
+    $this->data['_bot_disallowed'] = $this->botDisallowed;
+
     $this->data['_page_url'] = Request::fullUrl();
     // Request::fullUrl()
     // Request::url()
 
   	return view($view,$this->data);
+  }
+
+  protected function error() {
+    $data = array();
+
+    if(!empty($this->error)) {
+      $data['error'] = $this->error;
+    }
+
+    return view('errors.error',$data);
   }
 
   // protected function arrayMerge(array & $array1, array & $array2)

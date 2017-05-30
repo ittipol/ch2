@@ -261,8 +261,13 @@ class Paginator {
     $data = array();
     foreach ($records as $record) {
 
+      $_data = $record->buildPaginationData();
+
+      if(empty($_data)) {
+        continue;
+      }
+
       $data[] = array_merge(
-        // $_data,
         $record->buildPaginationData(),
         $this->parseUrl($record->getRecordForParseUrl())
       );

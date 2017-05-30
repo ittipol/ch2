@@ -184,16 +184,21 @@ class Job extends Model
     $string = new stringHelper;
 
     // get Company name
-    $shop = $this->getRelatedData('ShopRelateTo',array(
+    $shopRelateTo = $this->getRelatedData('ShopRelateTo',array(
       'first' => true,
-    ))->shop;
+    ));
+
+    $shopName = null;
+    if(!empty($shopRelateTo)) {
+      $shopName = $shopRelateTo->shop->name;
+    }
 
     return array(
       'id' => $this->id,
       'name' => $this->name,
       '_short_name' => $string->truncString($this->name,60),
       '_wage' => $this->getSalary(),
-      'shopName' => $shop->name
+      'shopName' => $shopName
     );
 
   }

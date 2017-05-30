@@ -5,7 +5,7 @@
 
 <div class="container list space-top-30">
 
-  <h3>แคตตาล็อกสินค้า</h3>
+  <h3>แคตตาล็อกสินค้าจาก {{request()->get('shop')->name}}</h3>
   <div class="line"></div>
   <div class="text-right space-top-bottom-20">
     <a class="button" data-right-side-panel="1" data-right-side-panel-target="#filter_expand_panel">ตัวกรอง</a>

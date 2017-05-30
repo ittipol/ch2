@@ -3,6 +3,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
+@if(!isset($_bot_disallowed) || $_bot_disallowed)
+<meta name="robots" content="noindex,nofollow">
+@endif
+
 @if(!empty($_page_description))
 <meta name="description" content="{{$_page_description}}">
 @else
@@ -12,10 +16,10 @@
 @if(!empty($_meta_keywords))
 <meta name="keywords" content="{{$_meta_keywords}}">
 @else
-<meta name="keywords" content="สร้างร้านค้าออนไลน์,ร้านค้าออนไลน์,ขายของออนไลน์">
+<meta name="keywords" content="สร้างร้านค้า,สร้างร้านค้าออนไลน์,ร้านค้าออนไลน์,ขายของออนไลน์,สินค้า">
 @endif
 
-<meta name="Search Engines" content="www.google.com, www.google.com.vn, www.altaVista.com, www.aol.com, www.infoseek.com, www.excite.com, www.hotbot.com, www.lycos.com, www.magellan.com, www.looksmart.com, www.cnet.com, www.voila.com, www.yahoo.com, www.alltheweb.com, www.msn.com, www.netscape.com, www.nomade.com">
+<!-- <meta name="Search Engines" content="www.google.com, www.google.com.vn, www.altaVista.com, www.aol.com, www.infoseek.com, www.excite.com, www.hotbot.com, www.lycos.com, www.magellan.com, www.looksmart.com, www.cnet.com, www.voila.com, www.yahoo.com, www.alltheweb.com, www.msn.com, www.netscape.com, www.nomade.com"> -->
 
 <!-- Facebook -->
 @if(!empty($_page_url))
