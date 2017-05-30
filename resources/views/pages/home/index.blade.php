@@ -6,7 +6,7 @@
     <div class="slider-banner-image" style="background-image: url(/images/test.jpg);"></div>
   </div>
   <div class="slider-banner-item color-type-2">
-    <div class="slider-banner-image" style="background-image: url(/images/xxx2.jpg);"></div>
+    <div class="slider-banner-image" style="background-image: url();"></div>
   </div>
   <div class="slider-banner-item color-type-3">
     <div class="slider-banner-image" style="background-image: url(/images/xxx5.jpg);"></div>
