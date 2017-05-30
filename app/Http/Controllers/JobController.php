@@ -231,7 +231,7 @@ class JobController extends Controller
     }
 
     $model->modelData->loadData(array(
-      'models' => array('Image','Tagging'),
+      'models' => array('Image'),
       'json' => array('Image')
     ));
 

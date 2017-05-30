@@ -9,7 +9,13 @@
 <meta name="description" content="สร้างร้านค้าออนไลน์ในแบบของคุณ เปิดโอกาสและเพิ่มช่องทางการขายสินค้าให้กับธุรกิจของคุณ เพื่อให้ธุรกิจของคุณเชื่อมต่อไปยังคนนับล้านบนอินเตอร์เน็ต">
 @endif
 
-<meta name="keywords" content="สร้างร้านค้าออนไลน์,ร้านค้าออนไลน์,สินค้า">
+@if(!empty($_meta_keywords))
+<meta name="keywords" content="{{$_meta_keywords}}">
+@else
+<meta name="keywords" content="สร้างร้านค้าออนไลน์,ร้านค้าออนไลน์,ขายของออนไลน์">
+@endif
+
+<meta name="Search Engines" content="www.google.com, www.google.com.vn, www.altaVista.com, www.aol.com, www.infoseek.com, www.excite.com, www.hotbot.com, www.lycos.com, www.magellan.com, www.looksmart.com, www.cnet.com, www.voila.com, www.yahoo.com, www.alltheweb.com, www.msn.com, www.netscape.com, www.nomade.com">
 
 <!-- Facebook -->
 @if(!empty($_page_url))

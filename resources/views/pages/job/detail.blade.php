@@ -141,7 +141,7 @@
   <div class="row">
     <div class="col-xs-12 margin-section section-border-left">
       <div class="space-top-bottom-10 section-inner">
-        <h4 class="article-title color-teal">คุณสมบัติผู้สมัคร</h4>   
+        <h4 class="article-title">คุณสมบัติผู้สมัคร</h4>   
         <div>
           {!!$_modelData['qualification']!!}
         </div>
@@ -152,7 +152,7 @@
   <div class="row">
     <div class="col-xs-12 margin-section section-border-left">
       <div class="space-top-bottom-10 section-inner">
-        <h4 class="article-title color-teal">รายละเอียดงาน</h4>   
+        <h4 class="article-title">รายละเอียดงาน</h4>   
         <div>
           {!!$_modelData['description']!!}
         </div>
@@ -163,7 +163,7 @@
   <div class="row">
     <div class="col-xs-12 margin-section section-border-left">
       <div class="space-top-bottom-10 section-inner">
-        <h4 class="article-title color-teal">สวัสดิการ</h4>   
+        <h4 class="article-title">สวัสดิการ</h4>   
         <div>
           {!!$_modelData['benefit']!!}
         </div>
@@ -172,7 +172,7 @@
   </div>
 
   @if($hasBranchLocation)
-  <h4 class="article-title color-teal">สาขาที่กำลังเปิดรับสมัครงานนี้</h4>
+  <h4 class="article-title">สาขาที่กำลังเปิดรับสมัครงานนี้</h4>
   <div class="line"></div>
   <div class="row">
     <div class="col-xs-12">

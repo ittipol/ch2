@@ -6,9 +6,10 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use App\library\token;
-use App\library\service;
-use App\library\entity;
+// use App\library\token;
+// use App\library\service;
+// use App\library\entity;
+use App\library\stringHelper;
 use Session;
 use Route;
 use Request;
@@ -21,8 +22,9 @@ class Controller extends BaseController
   protected $data = array();
 
   protected $pageTitle = null;
-  protected $pageDescription = null;
-  protected $pageImage = null;
+  protected $metaDescription = null;
+  protected $metaImage = null;
+  protected $metaKeywords = null;
 
   protected $param;
   protected $query;
@@ -47,14 +49,19 @@ class Controller extends BaseController
 
   }
 
-  protected function setPageDescription($pageDescription) {
-    $this->pageDescription = $pageDescription;
+  protected function setPageDescription($metaDescription) {
+
+    $string = new stringHelper;
+
+    $this->metaDescription = $string->truncString($metaDescription,120);
   }
 
-  // protected function setPageKeyword($pageKeyword) {}
+  protected function setPageKeyword($metaKeywords) {
 
-  protected function setPageImage($pageImage) {
-    $this->pageImage = $pageImage;
+  }
+
+  protected function setPageImage($metaImage) {
+    $this->metaImage = $metaImage;
   }
 
   protected function error() {
@@ -85,8 +92,9 @@ class Controller extends BaseController
     // }
 
     $this->data['_page_title'] = $this->pageTitle;
-    $this->data['_page_description'] = $this->pageDescription;
-    $this->data['_page_image'] = $this->pageImage;
+    $this->data['_page_description'] = $this->metaDescription;
+    $this->data['_page_image'] = $this->metaImage;
+    $this->data['_meta_keywords'] = $this->metaKeywords;
 
     $this->data['_page_url'] = Request::fullUrl();
     // Request::fullUrl()

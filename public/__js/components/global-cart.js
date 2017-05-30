@@ -148,7 +148,7 @@ class GlobalCart {
 
 					$('#loading_icon').removeClass('display');
 				  $('.global-overlay').removeClass('isvisible');
-				},1000);
+				},500);
 
 			}else if(response.success) {
 
@@ -164,7 +164,7 @@ class GlobalCart {
 
 		  		$('#loading_icon').removeClass('display');
 		  	  $('.global-overlay').removeClass('isvisible');
-		  	},1000);
+		  	},500);
 		  	
 		  }
 

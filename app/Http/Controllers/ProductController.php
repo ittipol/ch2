@@ -361,6 +361,7 @@ class ProductController extends Controller
     }
 
     $model->modelData->loadData(array(
+      'models' => array('Image'),
       'json' => array('Image')
     ));
 
@@ -507,6 +508,8 @@ class ProductController extends Controller
       }
     }
 
+    // Get Tagging for creating keywords
+
     $this->data = $model->modelData->build();
     $this->setData('shop',$shop->modelData->build(true));
     $this->setData('shopImageUrl',$shop->getProfileImageUrl());
@@ -521,6 +524,8 @@ class ProductController extends Controller
 
     $this->setData('shopRealatedProducts',$_shopRealatedProducts);
     $this->setData('realatedProducts',$_realatedProducts);
+
+    // dd($this->data['_modelData']['Tagging']);
 
     $this->setPageTitle($this->data['_modelData']['name'].' - สินค้า @ '.$shop->name);
     $this->setPageImage($model->getImage('list'));
