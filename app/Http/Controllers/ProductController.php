@@ -19,7 +19,7 @@ class ProductController extends Controller
     parent::__construct();
 
     $this->setPageTitle('สินค้าจากบริษัทและร้านค้า');
-    $this->setPageDescription('สินค้าโดยตรงจากบริษัทและร้านค้าต่างๆ ที่มีให้เลือกมากมาย พร้อมด้วยหมวดหมู่สินค้ามากกว่า 2500 รายการซึ่งจะทำสินค้าถูกจัดเรียงอย่างเป็นระบบเพื่อความสะดวกและรวดเร็วต่อการค้นหาสินค้า');
+    $this->setPageDescription('สินค้าโดยตรงจากบริษัทและร้านค้าที่มีให้เลือกมากมายที่ให้เลือกซื้อ พร้อมหมวดหมู่สินค้ามากกว่า 2500 รายการที่จะทำให้การค้นหาสินค้าสะดวกและรวดเร็ว');
     $this->setMetaKeywords('สินค้า,ร้านค้า,ร้านค้าออนไลน์');
 
   }
@@ -180,7 +180,7 @@ class ProductController extends Controller
       $this->setPageTitle($categoryName.' - หมวดสินค้า');
     }
 
-    $this->setPageDescription('หมวดหมู่สินค้ามากกว่า 2500 รายการซึ่งจะทำสินค้าถูกจัดเรียงอย่างเป็นระบบเพื่อความสะดวกและรวดเร็วต่อการค้นหาสินค้า');
+    
     
     if(!empty($categoryName)) {
       $__categories = array();
@@ -190,8 +190,10 @@ class ProductController extends Controller
         $__categories[] = $_category['categoryName'];
       }
 
+      $this->setPageDescription('หมวดสินค้า '.implode(' ', $__categories) .' ยังมีหมวดหมู่สินค้ามากกว่า 2500 รายการ และสินค้าอีกมากมายในหมวดหมู่อื่นๆที่พร้อมให้คุณได้เลือกซื้อ');
       $this->setMetaKeywords(implode(',', $__categories));
     }else{
+      $this->setPageDescription('หมวดหมู่สินค้าที่มากกว่า 2500 รายการที่ทำให้สินค้าถูกวางในตำแหน่งที่เหมาะสมเพื่อความสะดวกและรวดเร็วในการค้นหาและเลือกซื้อ');
       $this->setMetaKeywords('หมวดหมู่สินค้า,ประเภทสินค้า,เสื้อผ้า, คอมพิวเตอร์, มือถือ');
     }
 
@@ -294,6 +296,13 @@ class ProductController extends Controller
     $this->setData('parentCategoryName',$parent['name']);
 
     $this->setPageTitle($title.' - สินค้า');
+    
+
+    if(!empty($parent)) {
+      $this->setPageDescription('เลือกซื้อ '.$title.' และสินค้า '.$parent->name.' อื่นๆที่มีให้เลือกมากมายและหลากหลายจากบริษัทและร้านค้าในราคาที่คุ่มค่าพร้อมให้คุณเป็นเจ้าของ');
+    }else{
+      $this->setPageDescription('เลือกซื้อ '.$title.' และสินค้าอื่นๆที่น่าสนใจ ที่มีให้เลือกมากมายและหลากหลายจากบริษัทและร้านค้าในราคาที่คุ่มค่าพร้อมให้คุณเป็นเจ้าของ');
+    }
 
     if(!empty($categoryPaths)) {
       $__categories = array();

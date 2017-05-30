@@ -62,7 +62,7 @@ class Controller extends BaseController
     }
 
     $string = new stringHelper;
-    $this->metaDescription = $string->truncString($metaDescription,120);
+    $this->metaDescription = $string->truncString($metaDescription,200);
   }
 
   protected function setMetaKeywords($metaKeywords = null) {

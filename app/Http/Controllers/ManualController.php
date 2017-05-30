@@ -121,6 +121,11 @@ class ManualController extends Controller
           $title = 'ข้อความและการแจ้งเตือน';
         break;
 
+      case 'adding-product-catalog':
+          $goto = 'pages.manual.adding-product-catalog';
+          $title = 'สร้างแคตตาล็อกสินค้า';
+        break;
+
       default:
           abort(404);
         break;
