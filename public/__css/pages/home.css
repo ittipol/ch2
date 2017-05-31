@@ -71,7 +71,6 @@
 
 .slider-banner .slider-banner-item img {
 	width: 100%;
-	/*height: 100%;*/
 }
 
 .slider-banner .slider-banner-item .slider-banner-image {
@@ -82,24 +81,17 @@
   background-size: auto 100%;
 }
 
-/*.slider-banner .slider-banner-item.color-type-1 {
-	background-color: rgb(212,22,48);
-}*/
-
 .slider-banner .slider-banner-item.color-type-1 {
-	background-color: rgb(57,180,213);
+	background-color: rgb(255,217,118);
+	/*background-color: rgb(165,235,255);*/
 }
 
-/*.slider-banner .slider-banner-item.color-type-2 {
-	background-color: rgb(255,217,118);
-}*/
-
 .slider-banner .slider-banner-item.color-type-2 {
-	background-color: rgb(118,76,204);
+	background-color: rgb(34,177,76);
 }
 
 .slider-banner .slider-banner-item.color-type-3 {
-	background-color: rgb(118,76,204);
+	background-color: rgb(41,121,255);
 }
 
 .slider-banner .slick-dots {

@@ -3,13 +3,13 @@
 
 <div class="slider-banner">
   <div class="slider-banner-item color-type-1">
-    <div class="slider-banner-image" style="background-image: url(/images/test.jpg);"></div>
-  </div>
-  <div class="slider-banner-item color-type-2">
     <div class="slider-banner-image" style="background-image: url();"></div>
   </div>
+  <div class="slider-banner-item color-type-2">
+    <div class="slider-banner-image" style="background-image: url(/images/banners/bn1.png);"></div>
+  </div>
   <div class="slider-banner-item color-type-3">
-    <div class="slider-banner-image" style="background-image: url(/images/xxx5.jpg);"></div>
+    <div class="slider-banner-image" style="background-image: url(/images/banners/bn4.png);"></div>
   </div>
 </div>
 
@@ -526,7 +526,7 @@
       dots: true,
       slidesToShow: 1,
       slidesToScroll: 1,
-      autoplay: true,
+      autoplay: false,
       autoplaySpeed: 5000,
       infinite: true,
       arrows:false,

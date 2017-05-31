@@ -26,7 +26,14 @@
           3.คลิกที่ "แคตตาล็อกสินค้า" เพื่อไปยังหน้าแคตตาล็อกสินค้า<br><br>
           <img src="/images/manual/adding-product-catalog/adding-product-catalog-1.png">
 
+          <br><br>
+
           4.คลิกที่ "สร้างแคตตาล็อกสินค้า" เพื่อไปยังหน้าสร้างแคตตาล็อกสินค้า<br><br>
+          <img src="/images/manual/adding-product-catalog/adding-product-catalog-1.png">
+
+          <br><br>
+
+          5.กรอกชื่องแคตตาล็อกสินค้า รายละเอียด รูปภาพแบนเนอร์ สินค้าในแคตตาล็อก เมื่อเสร็จสิ้นแล้วคลิกที่ "" เพื่อบันทึกแคตตาล็อกสินค้า<br><br>
           <img src="/images/manual/adding-product-catalog/adding-product-catalog-1.png">
 
         </div>
