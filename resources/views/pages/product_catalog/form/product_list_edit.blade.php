@@ -72,9 +72,7 @@
 
     <div class="form-row">
       <?php 
-        echo Form::label('', 'รายการสินค้า', array(
-          'class' => 'required'
-        ));
+        echo Form::label('', 'รายการสินค้า');
       ?>
       <div class="form-item-group">
         <div class="form-item-group-inner">

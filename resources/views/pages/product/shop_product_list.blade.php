@@ -58,14 +58,6 @@
             </div>
           </div>
 
-          <div class="button-group">
-
-            <a href="{{$data['detailUrl']}}">
-              <div class="button wide-button">รายละเอียดสินค้า</div>
-            </a>
-          
-          </div>
-
         </div>
       </div>
 
@@ -80,8 +72,7 @@
   <div class="list-empty-message text-center space-top-20">
     <img class="space-bottom-20" src="/images/common/not-found.png">
     <div>
-      <h3>ไม่พบสินค้า</h3>
-      <p>ขออภัย ไม่พบสินค้าที่คุณกำลังหา</p>
+      <h3>ยังไม่มีสินค้า</h3>
     </div>
   </div>
 

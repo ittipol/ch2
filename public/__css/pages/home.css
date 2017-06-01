@@ -93,6 +93,10 @@
 	background-color: rgb(41,121,255);
 }
 
+.slider-banner .slider-banner-item.color-type-4 {
+	background-color: rgb(252,110,81);
+}
+
 .slider-banner .slick-dots {
 	position: absolute;
 	bottom: 15px;

@@ -2,14 +2,17 @@
 @section('content')
 
 <div class="slider-banner">
-  <div class="slider-banner-item color-type-1">
-    <div class="slider-banner-image" style="background-image: url(/images/banners/banner_1.png);"></div>
-  </div>
-  <div class="slider-banner-item color-type-2">
-    <div class="slider-banner-image" style="background-image: url(/images/banners/bn1.png);"></div>
+  <div class="slider-banner-item color-type-4">
+    <div class="slider-banner-image" style="background-image: url(/images/banners/bn6.png);"></div>
   </div>
   <div class="slider-banner-item color-type-3">
     <div class="slider-banner-image" style="background-image: url(/images/banners/bn4.png);"></div>
+  </div>
+  <div class="slider-banner-item color-type-2">
+    <div class="slider-banner-image" style="background-image: url(/images/banners/bn5.png);"></div>
+  </div>
+  <div class="slider-banner-item color-type-1">
+    <div class="slider-banner-image" style="background-image: url(/images/banners/banner_1.png);"></div>
   </div>
 </div>
 
@@ -526,7 +529,7 @@
       dots: true,
       slidesToShow: 1,
       slidesToScroll: 1,
-      autoplay: false,
+      autoplay: true,
       autoplaySpeed: 5000,
       infinite: true,
       arrows:false,
