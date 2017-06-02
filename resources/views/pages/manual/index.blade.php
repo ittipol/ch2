@@ -104,8 +104,18 @@
         </h5>
 
         <div class="nav-group space-bottom-30">
-          <a href="">เลือกซื้อสินค้า</a>
-          <a href="">การสั่งซื้อ</a>
+          <a href="{{URL::to('manual/buying-product')}}">เลือกซื้อสินค้า</a>
+          <a href="{{URL::to('manual/checking-out-product')}}">ดำเนินการสั่งซื้อสินค้า</a>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-sm-6 col-xs-12">
+        <h5>
+          <strong>ตระกร้าสินค้า</strong>
+        </h5>
+
+        <div class="nav-group space-bottom-30">
+          <a href="{{URL::to('manual/cart-product-edit')}}">แก้ไข & ลบสินค้าในตระกร้าสินค้า</a>
         </div>
       </div>
 
@@ -115,8 +125,8 @@
         </h5>
 
         <div class="nav-group space-bottom-30">
-          <a href="">ตรวจสอบรายการสั้่งซื้อ</a>
-          <a href="">การชำระเงิน & การแจ้งการชำระเงิน</a>
+          <a href="{{URL::to('manual/checking-order')}}">ตรวจสอบรายการสั้่งซื้อ</a>
+          <a href="{{URL::to('manual/payment-inform')}}">การชำระเงิน & การแจ้งการชำระเงิน</a>
         </div>
       </div>
 

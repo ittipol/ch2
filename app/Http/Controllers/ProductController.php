@@ -558,20 +558,9 @@ class ProductController extends Controller
       }
     }
 
-    // Get Tagging for creating keywords
-    $taggings = $model->getRelatedData('Tagging',array(
-      'fields' => array('word_id')
-    ));
-
     $categoryPaths = $model->getCategoryPaths();
 
     $_keywords = array();
-    if(!empty($taggings)) {
-      foreach ($taggings as $tagging) {
-        $_keywords[] = $tagging->word->word; 
-      }
-    }
-
     if(!empty($categoryPaths)) {
       foreach ($categoryPaths as $_category) {
         $_keywords[] = $_category['name'];
@@ -583,7 +572,7 @@ class ProductController extends Controller
     $this->setData('shopImageUrl',$shop->getProfileImageUrl());
     $this->setData('shopCoverUrl',$shop->getCoverUrl());
     $this->setData('shopUrl',$shopUrl);
-    $this->setData('categoryPaths',$model->getCategoryPaths());
+    $this->setData('categoryPaths',$categoryPaths);
     $this->setData('productCatalogs',$_productCatalogs);
     $this->setData('productOptionValues',$model->getProductOptionValues());
     $this->setData('branchLocations',json_encode($branchLocations));
@@ -593,9 +582,24 @@ class ProductController extends Controller
     $this->setData('shopRealatedProducts',$_shopRealatedProducts);
     $this->setData('realatedProducts',$_realatedProducts);
 
-    $this->setPageTitle($this->data['_modelData']['name'].' - สินค้า @ '.$shop->name);
+    $this->setPageTitle($this->data['_modelData']['name'].' - ร้าน '.$shop->name);
     $this->setPageImage($model->getImage('list'));
-    $this->setPageDescription($model->getShortDescription());
+
+    if(empty($model->description)) {
+      $this->setPageDescription($model->getCategoryName().' '.$model->name.' สินค้าจากร้าน '.$shop->name);
+    }else{
+      $this->setPageDescription($model->description);
+    }
+
+    $taggings = $model->getRelatedData('Tagging',array(
+      'fields' => array('word_id')
+    ));
+    
+    if(!empty($taggings)) {
+      foreach ($taggings as $tagging) {
+        $_keywords[] = $tagging->word->word; 
+      }
+    }
 
     if(!empty($_keywords)) {
       $this->setMetaKeywords(implode(',', $_keywords));

@@ -22,108 +22,116 @@ class ManualController extends Controller
 
     switch ($this->param['pageSlug']) {
       case 'ui-and-nav':
-          $goto = 'pages.manual.ui-and-nav';
           $title = 'เมนู & ตัวนำทางหลัก';
         break;
 
       case 'search':
-          $goto = 'pages.manual.search';
           $title = 'การค้นหา';
         break;
 
       case 'notification':
-          $goto = 'pages.manual.notification';
           $title = 'การแจ้งเตือน';
         break;
 
       case 'profile-edit':
-          $goto = 'pages.manual.profile-edit';
           $title = 'แก้ไขโปรไฟล์';
         break;
 
-      case 'my-shop':
-          $goto = 'pages.manual.my-shop';
+      case 'my-shop':          
           $title = 'ร้านค้าของคุณ';
         break;
 
       case 'creating-shop':
-          $goto = 'pages.manual.creating-shop';
           $title = 'สร้างร่านค้า';
         break;
 
       case 'adding-shipping-method':
-          $goto = 'pages.manual.adding-shipping-method';
           $title = 'เพิ่มตัวเลือกวิธีการจัดส่ง';
         break;
 
       case 'shop-setting':
-          $goto = 'pages.manual.shop-setting';
           $title = 'ข้อมูลร้านค้า';
         break;
 
       case 'adding-payment-method':
-          $goto = 'pages.manual.adding-payment-method';
           $title = 'เพิ่มตัวเลือกการชำระเงิน';
         break;
 
       case 'shop-profile-image':
-          $goto = 'pages.manual.shop-profile-image';
           $title = 'รูปถาพโปรไฟล์ร้านค้า & รูปหน้าปก';
         break;
 
       case 'adding-product':
-          $goto = 'pages.manual.adding-product';
           $title = 'เพิ่มสินค้า';
         break;
       
       case 'product-detail-edit':
-          $goto = 'pages.manual.product-detail-edit';
           $title = 'แก้ไขข้อมูลสินค้า & ข้อมูลจำเพาะ';
         break;
 
       case 'adding-product-attribute':
-          $goto = 'pages.manual.adding-product-attribute';
           $title = 'เพิ่มตัวเลือกคุณลักษณะสินค้า';
         break;
 
       case 'product-category-edit':
-          $goto = 'pages.manual.product-category-edit';
           $title = 'แก้ไขหมวดหมู่สินค้า';
         break;
 
       case 'product-minimum-edit':
-          $goto = 'pages.manual.product-minimum-edit';
           $title = 'การสั่งซื้อขั้นต่ำ';
         break;
 
       case 'product-quantity-edit':
-          $goto = 'pages.manual.product-quantity-edit';
           $title = 'จำนวนสินค้า';
         break;
 
       case 'product-price-edit':
-          $goto = 'pages.manual.product-price-edit';
           $title = 'ราคาสินค้า';
         break;
 
       case 'product-promotion-edit':
-          $goto = 'pages.manual.product-promotion-edit';
           $title = 'โปรโมชั่นการขาย';
         break;
 
       case 'product-shipping-edit':
-          $goto = 'pages.manual.product-shipping-edit';
           $title = 'การคำนวณขนส่งสินค้า';
         break;
 
       case 'product-notification-edit':
-          $goto = 'pages.manual.product-notification-edit';
           $title = 'ข้อความและการแจ้งเตือน';
         break;
 
       case 'adding-product-catalog':
-          $goto = 'pages.manual.adding-product-catalog';
           $title = 'สร้างแคตตาล็อกสินค้า';
+        break;
+
+      case 'product-catalog-edit':
+          $title = 'แก้ไขแคตตาล็อกสินค้า';
+        break;
+
+      case 'product-catalog-product-edit':
+          $title = 'เพิ่ม / ลบสินค้าในแคตตาล็อก';
+        break;
+
+      case 'buying-product':
+          $title = 'เลือกซื้อสินค้า';
+        break;
+
+      case 'checking-out-product':
+          $title = 'ดำเนินการสั่งซื้อสินค้า';
+        break;
+
+      case 'checking-order':
+          
+          $title = 'ตรวจสอบรายการสั้่งซื้อ';
+        break;
+
+      case 'payment-inform':
+          $title = 'การชำระเงิน & การแจ้งการชำระเงิน';
+        break;
+
+      case 'cart-product-edit':
+          $title = 'แก้ไข & ลบสินค้าในตระกร้าสินค้า';
         break;
 
       default:
@@ -136,7 +144,10 @@ class ManualController extends Controller
 
     $this->botAllowed();
 
-    return $this->view($goto);
+    $this->setData('title',$title);
+    $this->setData('page','pages.manual.manual_page.'.$this->param['pageSlug']);
+
+    return $this->view('pages.manual.panel');
 
   }
 }
