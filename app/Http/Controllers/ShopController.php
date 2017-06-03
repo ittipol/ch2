@@ -285,6 +285,25 @@ class ShopController extends Controller
     $model = Service::loadModel('PaymentMethod');
 
     $url = new Url;
+
+    // Get Payment method types
+    $paymentMethodTypes = Service::loadModel('PaymentMethodType')->get();
+
+    foreach ($paymentMethodTypes as $paymentMethodType) {
+      
+      // Get Payment method
+      $paymentMethods = $model->where('payment_method_type_id','=',$paymentMethodType->id);
+
+      $_paymentMethods = array();
+      if($paymentMethods->exists()) {
+
+        foreach ($paymentMethods->get() as $paymentMethod) {
+          $buildModelData->buildModelData();
+        }
+
+      }
+
+    }
     
     $page = 1;
     if(!empty($this->query['page'])) {

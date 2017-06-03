@@ -34,7 +34,21 @@ class PaymentMethodController extends Controller
   public function add() {
     $model = Service::loadModel('PaymentMethod');
 
+    // Get Banks
+
+    // Get Payment method types
+    $paymentMethodTypes = array(
+      'โอนเงินผ่านธนาคาร',
+      'โอนเงินผ่านระบบพร้อมเพย์',
+      'ชำระเงินผ่าน PayPal',
+      // 'ชำระเงินผ่านบัญชีออนไลน์',
+      // 'ชำระเงินผ่านเคาน์เตอร์เซอร์วิส',
+      // 'เงินสด',
+      // 'อื่นๆ'
+    );
+
     $this->data = $model->formHelper->build();
+    $this->setData('paymentMethodTypes',$paymentMethodTypes);
 
     return $this->view('pages.payment_method.form.payment_method_add');
   }

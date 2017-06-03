@@ -1,0 +1,7 @@
+CREATE TABLE `csquare`.`payment_method_types` ( `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+INSERT INTO `payment_method_types` (`id`, `name`) VALUES (NULL, 'โอนเงินผ่านธนาคาร');
+
+ALTER TABLE `payment_methods` ADD `payment_method_type_id` INT(11) UNSIGNED NOT NULL AFTER `id`;
+
+TRUNCATE payment_methods;

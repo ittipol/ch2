@@ -5,7 +5,7 @@ namespace App\Models;
 class PaymentMethod extends Model
 {
   public $table = 'payment_methods';
-  protected $fillable = ['name','description','created_by'];
+  protected $fillable = ['payment_method_type_id','name','description','created_by'];
   protected $modelRelations = array('PaymentMethodToOrder','ShopRelateTo');
 
   public $formHelper = true;

@@ -41,6 +41,15 @@
 
     <div class="form-row">
       <?php 
+        echo Form::label('career', 'ประเภทการชำระเงิน', array(
+          'class' => 'required'
+        ));
+        echo Form::select('career_type_id', $paymentMethodTypes);
+      ?>
+    </div>
+
+    <div class="form-row">
+      <?php 
         echo Form::label('name', 'ชื่อวิธีการชำระเงิน', array(
           'class' => 'required'
         ));
@@ -49,6 +58,8 @@
           'autocomplete' => 'off'
         ));
       ?>
+      <p class="notice info">โปรดกรอกชื่อวิธีการชำระเงินให้เกิดความเข้าใจและเกิดความแตกต่างในแต่ละการชำระเงินที่กำหนด</p>
+      <p class="notice info">ชื่อวิธีการชำระเงิน จะถูกแสดงไปยังลูกค้าและเป็นตัวเลือกในหน้าการแจ้งการชำระเงิน</p>
     </div>
 
     <div class="form-row">
