@@ -122,7 +122,6 @@ class ManualController extends Controller
         break;
 
       case 'checking-order':
-          
           $title = 'ตรวจสอบรายการสั้่งซื้อ';
         break;
 

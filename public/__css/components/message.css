@@ -26,7 +26,7 @@
 }
 
 .secondary-message-box.warning {
-	color: #FF8F00;
+	color: #EF6C00;
 	background-color: #FFECB3;
 }
 
@@ -104,6 +104,22 @@
 
 .secondary-message-box .message-box-button-group .button.warning {
 	background-color: #EF6C00;
+}
+
+.secondary-message-box .message-box-button-group .button.blue {
+	background-color: #2979FF;
+}
+
+.secondary-message-box .message-box-button-group .button.red {
+	background-color: #F44336;
+}
+
+.secondary-message-box .message-box-button-group .button.green {
+	background-color: #4CAF50;
+}
+
+.secondary-message-box .secondary-message-box-inner h4 {
+	line-height: 24px;
 }
 
 .message-content .message {

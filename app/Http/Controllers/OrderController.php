@@ -355,8 +355,9 @@ class OrderController extends Controller
     $this->setData('orderTotals',$model->orderTotals());
 
     if($model->order_status_id == 1) {
+
       $this->setData('orderConfirmUrl',request()->get('shopUrl').'order/confirm/'.$model->id);
-      $this->setData('orderCancelUrl',request()->get('shopUrl').'order/cancel/'.$model->id);
+
     }elseif($model->order_status_id == 2) {
 
       $hasOrderPaymentConfirm = $model->hasOrderPaymentConfirm();
@@ -368,11 +369,12 @@ class OrderController extends Controller
 
       $this->setData('hasOrderPaymentConfirm',$hasOrderPaymentConfirm);
 
-    }elseif($model->order_status_id < 5) {
+    }
 
-      $nextOrderStatuses = $model->getNextOrderStatuses();
+    if(($model->order_status_id > 1) && ($model->order_status_id < 5)) {
+
       $_orderStatuses = array();
-      foreach ($nextOrderStatuses as $orderStatus) {
+      foreach ($model->getNextOrderStatuses() as $orderStatus) {
         $_orderStatuses[$orderStatus->id] = $orderStatus->name;
       }
 
@@ -382,7 +384,7 @@ class OrderController extends Controller
     }
 
     if(!$hasPaymentMethod) {
-      $this->setData('PaymentMethodAddUrl',request()->get('shopUrl').'payment_method');
+      $this->setData('paymentMethodAddUrl',request()->get('shopUrl').'payment_method');
     }
 
     if($model->pick_up_order) {
@@ -406,6 +408,8 @@ class OrderController extends Controller
     $this->setData('orderHistories',$model->getOrderHistories());
     $this->setData('percent',$model->getOrderProgress());
     $this->setData('hasPaymentMethod',$hasPaymentMethod);
+
+    $this->setData('orderCancelUrl',request()->get('shopUrl').'order/cancel/'.$model->id);
 
     return $this->view('pages.order.shop_order_detail');
 
@@ -672,11 +676,11 @@ class OrderController extends Controller
       ['shop_id','=',request()->get('shopId')]
     ])->first();
 
-    if($model->order_status_id != 1) {
-      MessageHelper::display('ยังไม่สามารถเปลี่ยนแปลงการสั่งซื้อได้','error');
+    if($model->order_status_id == 6) {
+      MessageHelper::display('ยกเลิกการสั่งซื้อแล้ว','error');
       return Redirect::to(request()->get('shopUrl').'order/'.$model->id);
     }
-    
+
     $model->order_status_id = 6;
 
     if($model->save()) {
@@ -738,6 +742,12 @@ class OrderController extends Controller
 
     if($model->save()) {
 
+      $OrderHistoryModel = Service::loadModel('OrderHistory');
+      $OrderHistoryModel->order_id = $model->id;
+      $OrderHistoryModel->order_status_id = $model->order_status_id;
+      $OrderHistoryModel->message = request()->get('message');
+      $OrderHistoryModel->save();
+
       $notificationHelper = new NotificationHelper;
       $notificationHelper->setModel($model);
       $notificationHelper->create('order-payment-confirm');
@@ -758,7 +768,7 @@ class OrderController extends Controller
       ['shop_id','=',request()->get('shopId')]
     ])->first();
 
-    if($model->order_status_id == 1 || $model->order_status_id == 2) {
+    if($model->order_status_id == 1) {
       MessageHelper::display('ไม่สามารถเปลี่ยนแปลงการสั่งซื้อได้','error');
       return Redirect::to(request()->get('shopUrl').'order/'.$model->id);
     }

@@ -17,7 +17,7 @@
 
   <div class="secondary-message-box info space-bottom-30">
     <div class="secondary-message-box-inner">
-      <h3>รายการสั่งซื้อยังไม่ถูกยืนยันจากผู้ขาย</h3>
+      <h4>รายการสั่งซื้อยังไม่ถูกยืนยันจากผู้ขาย</h4>
     </div>
   </div>
 
@@ -25,20 +25,19 @@
 
     @if($hasOrderPaymentConfirm)
 
-      <div class="secondary-message-box success">
+      <div class="secondary-message-box info space-bottom-20">
         <div class="secondary-message-box-inner">
-          <h3>ยืนยันการชำระเงินเลขที่การสั่งซื้อ {{$order['invoice_number']}} แล้ว</h3>
-          <p>*** โปรดรอการตรวจสอบการชำระเงินจากผู้ขาย</p>
+          <h4>ยืนยันการชำระเงินแล้ว โปรดรอการตรวจสอบการชำระเงินจากผู้ขาย</h4>
         </div>
       </div>
 
     @else
 
-      <div class="secondary-message-box success">
+      <!-- <div class="secondary-message-box success">
         <div class="secondary-message-box-inner">
-          <h3>ผู้ขายยืนยันการสั่งซื้อแล้ว</h3>
+          <h4>ผู้ขายยืนยันการสั่งซื้อแล้ว</h4>
         </div>
-      </div>
+      </div> -->
 
       <div>
         <h3>จำนวนเงินที่ต้องชำระ <strong>{{$orderTotals['total']['value']}}</strong></h3>
@@ -89,7 +88,7 @@
 
                 <div id="payment_method_{{$paymentMethod['id']}}" class="right-size-panel">
                   <div class="right-size-panel-inner">
-                      <h3>{{$paymentMethod['name']}}</h3>
+                      <h4>{{$paymentMethod['name']}}</h4>
                       <div class="line space-bottom-10"></div>
                       {!!$paymentMethod['description']!!}
                     <div class="right-size-panel-close-button"></div>
@@ -116,11 +115,7 @@
     @endif
 
   @elseif($order['order_status_id'] == 6)
-    <div class="secondary-message-box info space-bottom-30">
-      <div class="secondary-message-box-inner">
-        <h3>การสั่งซื้อถูกยกเลิก</h3>
-      </div>
-    </div>
+    @include('pages.order.layouts.order_cancel')
   @endif
 
   @if($order['order_status_id'] != 6)
@@ -409,7 +404,7 @@
           <h4>{{$orderHistory['orderStatus']}}</h4>
           <h5>เมื่อ {{$orderHistory['createdDate']}}</h5>
           @if(!empty($orderHistory['message']))
-          <h5 class="space-top-20"><strong>รายละเอียด</strong></h5>
+          <h5 class="space-top-20"><strong>ข้อความ</strong></h5>
           <div>
             {!!$orderHistory['message']!!}
           </div>

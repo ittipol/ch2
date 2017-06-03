@@ -1,6 +1,18 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
+<div class="sub-header-nav">
+  <div class="sub-header-nav-fixed-top">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="btn-group pull-right">
+          <a href="{{request()->get('shopUrl')}}order/{{$order['id']}}" class="btn btn-secondary">กลับไปหน้ารายละเอียดการสั่งซื้อ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="top-header-wrapper top-header-border">
   <div class="container">
     <div class="top-header">
@@ -14,27 +26,13 @@
 
 <div class="detail container">
 
-  <?php 
-    echo Form::model([], [
-      'url' => $paymentConfirmUrl,
-      'method' => 'PATCH',
-      'enctype' => 'multipart/form-data'
-    ]);
-  ?>
-
   <div class="text-right space-bottom-20">
-    <?php
-      echo Form::submit('ยืนยันการชำระเงิน' , array(
-        'class' => 'button',
-        'data-modal' => 1,
-        'data-modal-title' => 'ต้องการยืนยันการชำระเงินเลขที่การสั่งซื้อ '.$order['invoice_number'].' ใช่หรือไม่'
-      ));
-    ?>
+    <a class="button" data-right-side-panel="1" data-right-side-panel-target="#payment_confirm_panel">
+      ยืนยันการชำระเงิน
+    </a>
   </div>
 
-  <?php
-    echo Form::close();
-  ?>
+  @include('pages.order.components.payment_confirm_form')
 
   <div class="row">
 

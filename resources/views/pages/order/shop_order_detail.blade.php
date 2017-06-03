@@ -5,11 +5,9 @@
   <div class="sub-header-nav-fixed-top">
     <div class="row">
       <div class="col-xs-12">
-
         <div class="btn-group pull-right">
           <a href="{{request()->get('shopUrl')}}order" class="btn btn-secondary">กลับไปหน้ารายการสั่งซื้อสินค้า</a>
         </div>
-
       </div>
     </div>
   </div>
@@ -27,129 +25,31 @@
 
 <div class="container">
 
-  @if(!$hasPaymentMethod)
-    <div class="secondary-message-box error space-bottom-30">
-      <div class="secondary-message-box-inner">
-        <h3>ไม่พบวิธีการชำระเงินชองคุณ</h3>
-        <p>กรุณาเพิ่มวิธีการชำระเงินของคุณอย่างน้อย 1 วิธี เพื่อใช่ในการกำหนดวิธีการชำระเงินให้กับลูกค้า</p>
-      </div>
-      <div class="message-box-button-group clearfix">
-        <div class="flat-button">
-          <a href="{{$PaymentMethodAddUrl}}" class="button">เพิ่มวิธีการชำระเงินชองคุณ</a>
-        </div>
-      </div>
+  @if($order['order_status_id'] != 6)
+    <div class="text-right space-bottom-30">
+      <a class="button danger" data-right-side-panel="1" data-right-side-panel-target="#order_cancel_panel">
+        ยกเลิกการสั่งซื้อ
+      </a>
     </div>
+    @include('pages.order.components.order_cancel_form')
+  @endif
+  
+  @if(!$hasPaymentMethod)
+    @include('pages.order.layouts.payment_method_not_found')
   @endif
 
   @if($order['order_status_id'] == 1)
 
-    <div class="secondary-message-box info space-bottom-30">
-      <div class="secondary-message-box-inner">
-        <h3>การสั่งซื้อใหม่</h3>
-      </div>
-      <div class="message-box-button-group two-button clearfix">
-        <div class="flat-button">
-          <a href="{{$orderConfirmUrl}}" class="button">ยืนยันการสั่งซื้อ</a>
-        </div>
-        <div class="flat-button">
-          <a class="button danger" data-right-side-panel="1" data-right-side-panel-target="#order_cancel_panel">
-            ยกเลิกการสั่งซื้อ
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div id="order_cancel_panel" class="right-size-panel form">
-      <div class="right-size-panel-inner">
-        
-        <h3>ยกเลิกการสั่งซื้อ</h3>
-        <div class="line space-bottom-20"></div>
-        <?php 
-          echo Form::model([], [
-            'url' => $orderCancelUrl,
-            'method' => 'PATCH',
-            'enctype' => 'multipart/form-data'
-          ]);
-        ?>
-
-        <div class="form-row">
-          <h5>ข้อความถึงผู้ซื้อ</h5>
-          <?php
-            echo Form::textarea('message');
-          ?>
-        </div>
-        <?php 
-          echo Form::submit('บันทึก' , array(
-            'class' => 'button space-top-20'
-          ));
-          echo Form::close();
-        ?>
-
-        <div class="right-size-panel-close-button"></div>
-      </div>
-    </div>
+    @include('pages.order.layouts.new_order')
 
   @elseif($order['order_status_id'] == 2)
 
-    @if($hasOrderPaymentConfirm)
-
-      <?php 
-        echo Form::model([], [
-          'url' => $paymentConfirmUrl,
-          'method' => 'PATCH',
-          'enctype' => 'multipart/form-data'
-        ]);
-      ?>
-
-      <div>
-        <h3>ลูกค้าแจ้งการชำระเงินแล้ว</h3>
-      </div>
-
-      <div class="secondary-message-box info space-bottom-30">
- 
-        <div class="message-box-button-group two-button clearfix">
-          <div class="flat-button">
-            <a href="{{$paymentDetailUrl}}" class="button">รายละเอียดแจ้งการชำระเงิน</a>
-          </div>
-          <div class="flat-button">
-            <?php
-              echo Form::submit('ยืนยันการชำระเงิน' , array(
-                'class' => 'button',
-                'data-modal' => 1,
-                'data-modal-title' => 'ต้องการยืนยันการชำระเงินเลขที่การสั่งซื้อ '.$order['invoice_number'].' ใช่หรือไม่'
-              ));
-            ?>
-          </div>
-        </div>
-
-      </div>
-
-      <?php
-        echo Form::close();
-      ?>
-
-    @else
-
-      <div class="secondary-message-box success space-bottom-30">
-        <div class="secondary-message-box-inner">
-          <h3>ยืนยันการสั่งซื้อแล้ว</h3>
-        </div>
-      </div>
-
-      <div class="secondary-message-box info space-bottom-30">
-        <div class="secondary-message-box-inner">
-          <h3>โปรดรอการแจ้งการชำระเงินจากลูกค้า</h3>
-        </div>
-      </div>
-
-    @endif
+    @include('pages.order.layouts.waiting_order')
 
   @elseif($order['order_status_id'] == 6)
-    <div class="secondary-message-box info space-bottom-30">
-      <div class="secondary-message-box-inner">
-        <h3>การสั่งซื้อถูกยกเลิก</h3>
-      </div>
-    </div>
+
+    @include('pages.order.layouts.order_cancel')
+
   @endif
 
   @if($order['order_status_id'] != 6)
@@ -174,25 +74,19 @@
         @endforeach
       </div>
 
-      @if(isset($updateOrderStatusUrl))
-      <div class="secondary-message-box info space-top-30 space-bottom-30">
-        <div class="message-box-button-group clearfix">
-          <div class="flat-button">
-            <a class="button" data-right-side-panel="1" data-right-side-panel-target="#order_status">เปลี่ยนสถานะการสั่งซื้อ</a>
+      @if($order['order_status_id'] > 1)
+
+        <div class="secondary-message-box info space-top-30 space-bottom-30">
+          <div class="message-box-button-group clearfix">
+            <div class="flat-button">
+              <a class="button red" data-right-side-panel="1" data-right-side-panel-target="#order_status">เปลี่ยนสถานะการสั่งซื้อ</a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div id="order_status" class="right-size-panel form">
-        <div class="right-size-panel-inner">
-          @include('pages.order.components.order_status_edit')
-          <div class="right-size-panel-close-button"></div>
-        </div>
-      </div>
+        @include('pages.order.components.order_status_edit_form')
 
       @endif
-
-      <!-- <div class="line space-top-bottom-20"></div> -->
 
     </div>
 
@@ -461,7 +355,7 @@
           <h4>{{$orderHistory['orderStatus']}}</h4>
           <h5>เมื่อ {{$orderHistory['createdDate']}}</h5>
           @if(!empty($orderHistory['message']))
-          <h5 class="space-top-20"><strong>รายละเอียด</strong></h5>
+          <h5 class="space-top-20"><strong>ข้อความ</strong></h5>
           <div>
             {!!$orderHistory['message']!!}
           </div>

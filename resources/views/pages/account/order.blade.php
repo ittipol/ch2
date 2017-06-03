@@ -29,9 +29,9 @@
 
             <div class="col-md-4 col-xs-12 list-content">
               <a href="{{$data['detailUrl']}}">
-                <h4 class="primary-info">{{$data['shopName']}}</h4>
+                <h4 class="primary-info">เลขที่การสั่งซื้อ {{$data['invoice_number']}}</h4>
               </a>
-              <div class="secondary-info">เลขที่การสั่งซื้อ: {{$data['invoice_number']}}</div>
+              <div class="secondary-info">ร้านค้า: {{$data['shopName']}}</div>
               <div class="secondary-info">สั่งซื้อเมื่อ: {{$data['orderedDate']}}</div>
             </div>
 
