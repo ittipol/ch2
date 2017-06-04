@@ -32,32 +32,111 @@ class PaymentMethodController extends Controller
   }
 
   public function add() {
+
     $model = Service::loadModel('PaymentMethod');
 
-    // Get Banks
-
-    // Get Payment method types
-    $paymentMethodTypes = array(
-      'โอนเงินผ่านธนาคาร',
-      'โอนเงินผ่านระบบพร้อมเพย์',
-      'ชำระเงินผ่าน PayPal',
-      // 'ชำระเงินผ่านบัญชีออนไลน์',
-      // 'ชำระเงินผ่านเคาน์เตอร์เซอร์วิส',
-      // 'เงินสด',
-      // 'อื่นๆ'
-    );
-
     $this->data = $model->formHelper->build();
-    $this->setData('paymentMethodTypes',$paymentMethodTypes);
 
-    return $this->view('pages.payment_method.form.payment_method_add');
+    switch ($this->param['type']) {
+      case 'bank-transfer':
+          $page = 'bank_transfer_add';
+        break;
+      
+      case 'promptpay':
+          $page = 'promptpay_add';
+        break;
+
+      case 'paypal':
+          $page = 'paypal_add';
+        break;
+
+      default:
+          return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
+        break;
+
+    }
+
+    // Get Payment method type
+    $paymentMethodType = Service::loadModel('PaymentMethodType')->getByAlias($this->param['type']);
+    $serviceProviders = $paymentMethodType->getServiceProvider();
+
+    $_serviceProviders = array();
+    if(!empty($serviceProviders)) {
+      foreach ($serviceProviders as $serviceProvider) {
+        $_serviceProviders[$serviceProvider->id] = $serviceProvider->name;
+      }
+    }
+
+    $this->setData('serviceProviders',$_serviceProviders);
+
+    return $this->view('pages.payment_method.form.'.$page);
   }
 
   public function addingSubmit(CustomFormRequest $request) {
+
     $model = Service::loadModel('PaymentMethod');
 
-    $request->request->add(['ShopRelateTo' => array('shop_id' => request()->get('shopId'))]);
+    $errorMessages = array();
 
+    switch ($this->param['type']) {
+      case 'bank-transfer':
+
+          if(empty($request->get('branch_name'))) {
+            $errorMessages[] = 'ชื่อสาขาห้ามว่าง';
+          }
+
+          if(empty($request->get('account_number'))) {
+            $errorMessages[] = 'เลขที่บัญชีห้ามว่าง';
+          }
+
+          $json = array(
+            'branch_name' => $request->get('branch_name'),
+            'account_number' => $request->get('account_number'),
+          );
+
+        break;
+      
+      case 'promptpay':
+
+        break;
+
+      case 'paypal':
+
+        break;
+
+      default:
+          return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
+        break;
+
+    }
+
+    $paymentMethodType = Service::loadModel('PaymentMethodType')->getByAlias($this->param['type']);
+
+    if(empty($request->get('payment_service_provider_id'))) {
+      $errorMessages[] = 'ผู้ให้บริการห้ามว่าง';
+    }else{
+      
+      $exist = Service::loadModel('PaymentServiceProviderToPaymentMethodType')
+      ->where([
+        ['payment_service_provider_id','=',$request->get('payment_service_provider_id')],
+        ['payment_method_type_id','=',$paymentMethodType->id]
+      ])->exists();
+
+      if(!$exist) {
+        $errorMessages[] = 'ผู้ให้บริการไม่ถูกต้อง';
+      }
+
+    }
+
+    if(!empty($errorMessages)) {
+      return Redirect::back()->withErrors([$errorMessages]);
+    }
+
+    $json = json_encode($json);
+
+    $request->request->add(['data' => $json]);
+    $request->request->add(['ShopRelateTo' => array('shop_id' => request()->get('shopId'))]);
+    dd($request->all());
     if($model->fill($request->all())->save()) {
       MessageHelper::display('วิธีการชำระเงินถูกเพิ่มแล้ว','success');
       return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));

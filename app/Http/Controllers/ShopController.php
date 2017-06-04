@@ -289,46 +289,38 @@ class ShopController extends Controller
     // Get Payment method types
     $paymentMethodTypes = Service::loadModel('PaymentMethodType')->get();
 
+    $_paymentMethods = array();
     foreach ($paymentMethodTypes as $paymentMethodType) {
       
       // Get Payment method
       $paymentMethods = $model->where('payment_method_type_id','=',$paymentMethodType->id);
 
-      $_paymentMethods = array();
+      $data = array();
       if($paymentMethods->exists()) {
 
         foreach ($paymentMethods->get() as $paymentMethod) {
-          $buildModelData->buildModelData();
+          $data[] = $buildModelData->buildModelData();
         }
 
       }
 
+      $_paymentMethods[] = array(
+        'name' => $paymentMethodType->name,
+        'addUrl' => request()->get('shopUrl').'payment_method/add/'.$paymentMethodType->alias,
+        'data' => $data
+      );
+
     }
-    
-    $page = 1;
-    if(!empty($this->query['page'])) {
-      $page = $this->query['page'];
-    }
-
-    $model->paginator->criteria(array(
-      'joins' => array('shop_relate_to', 'shop_relate_to.model_id', '=', $model->getTable().'.id'),
-      'conditions' => array(
-        array('shop_relate_to.model','like',$model->modelName),
-        array('shop_relate_to.shop_id','=',request()->get('shopId'))
-      ),
-      'order' => array('id','DESC')
-    ));
-    $model->paginator->setPage($page);
-    $model->paginator->setPagingUrl('shop/'.request()->shopSlug.'/payment_method');
-    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/payment_method/{id}','detailUrl');
-    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/payment_method/edit/{id}','editUrl');
-    $model->paginator->setUrl('shop/'.$this->param['shopSlug'].'/payment_method/delete/{id}','deleteUrl');
-
-    $this->data = $model->paginator->build();
-
-    $this->setData('paymentMethodAddUrl',request()->get('shopUrl').'payment_method/add');
 
     $this->setPageTitle(request()->get('shop')->name);
+
+    $this->setData('paymentMethods',$_paymentMethods);
+    $this->setData('hasPaymentMethod',$model
+    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $model->getTable().'.id')
+    ->where([
+      ['shop_relate_to.model','like',$model->modelName],
+      ['shop_relate_to.shop_id','=',request()->get('shopId')]
+    ])->exists());
 
     return $this->view('pages.shop.payment_method');
   }

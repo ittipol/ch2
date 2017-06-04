@@ -13,7 +13,7 @@ class ShippingMethodController extends Controller
   public function add() {
     $model = Service::loadModel('ShippingMethod');
 
-    $model->formHelper->loadFieldData('ShippingService',array(
+    $model->formHelper->loadFieldData('ShippingServiceProvider',array(
       'key' =>'id',
       'field' => 'name',
       'index' => 'shippingServices',
@@ -54,7 +54,7 @@ class ShippingMethodController extends Controller
 
     $model = Service::loadModel('ShippingMethod')->find($this->param['id']);
 
-    $model->formHelper->loadFieldData('ShippingService',array(
+    $model->formHelper->loadFieldData('ShippingServiceProvider',array(
       'key' =>'id',
       'field' => 'name',
       'index' => 'shippingServices',

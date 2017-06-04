@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('zzzwww','HomeController@addBanks');
+
 // Route::get('aa','HomeController@addC');
 // Route::get('co','HomeController@co');
 
@@ -418,8 +420,8 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
   Route::get('shop/{shopSlug}/payment_method','ShopController@paymentMethod')->name('shop.payment_method');
 
-  Route::get('shop/{shopSlug}/payment_method/add','PaymentMethodController@add')->name('shop.payment_method.add');
-  Route::post('shop/{shopSlug}/payment_method/add','PaymentMethodController@addingSubmit')->name('shop.payment_method.add');
+  Route::get('shop/{shopSlug}/payment_method/add/{type}','PaymentMethodController@add')->name('shop.payment_method.add');
+  Route::post('shop/{shopSlug}/payment_method/add/{type}','PaymentMethodController@addingSubmit')->name('shop.payment_method.add');
 
   Route::get('shop/{shopSlug}/payment_method/edit/{id}','PaymentMethodController@edit')->name('shop.payment_method.edit');
   Route::patch('shop/{shopSlug}/payment_method/edit/{id}','PaymentMethodController@editingSubmit')->name('shop.payment_method.edit');

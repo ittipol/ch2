@@ -18,16 +18,16 @@ class PaymentMethod extends Model
     )
   );
 
-  protected $validation = array(
-    'rules' => array(
-      'name' => 'required|max:255',
-      'description' => 'required',
-    ),
-    'messages' => array(
-      'name.required' => 'ชื่อวิธีการชำระเงินห้ามว่าง',
-      'description.required' => 'รายละเอียดวิธีการชำระเงินห้ามว่าง',
-    )
-  );
+  // protected $validation = array(
+  //   'rules' => array(
+  //     'name' => 'required|max:255',
+  //     'description' => 'required',
+  //   ),
+  //   'messages' => array(
+  //     'name.required' => 'ชื่อวิธีการชำระเงินห้ามว่าง',
+  //     'description.required' => 'รายละเอียดวิธีการชำระเงินห้ามว่าง',
+  //   )
+  // );
 
   public function getPaymentMethod($shopId) {
     return $this

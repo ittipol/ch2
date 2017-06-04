@@ -15,75 +15,52 @@
 
 <div class="container">
 
-  <div class="tile-nav-group space-top-bottom-20 clearfix">
-
-    <div class="tile-nav small">
-      <div class="tile-nav-image">
-          <a href="{{$paymentMethodAddUrl}}">
-            <img src="/images/common/plus.png">
-          </a>
-      </div>
-      <div class="tile-nav-info">
-        <a href="{{$paymentMethodAddUrl}}">
-          <h4 class="tile-nav-title">เพิ่มวิธีการชำระเงิน</h4>
-        </a>
+  @if(!$hasPaymentMethod)
+    <div class="secondary-message-box warning space-bottom-30">
+      <div class="secondary-message-box-inner">
+        <h4>ยังไม่มีวิธีการชำระเงิน</h4>
+        <p>เพิ่มวิธีการชำระเงินอย่างน้อย 1 วิธี เพื่อใช่เป็นตัวเลือกการชำระเงินให้กับลูกค้า</p>
       </div>
     </div>
-
-  </div>
-
-  <div class="line"></div>
-
-  @if(!empty($_pagination['data']))
-
-    <div class="list-h">
-    @foreach($_pagination['data'] as $data)
-      <div class="list-h-item clearfix">
-
-        <a href="{{$data['detailUrl']}}" class="list-image pull-left">
-          <img src="/images/icons/payment-white.png">
-        </a>
-
-        <div class="col-md-11 col-xs-8">
-
-          <div class="row">
-
-            <div class="col-xs-12 list-content">
-              <h4 class="primary-info single-info">{{$data['name']}}</h4>
-            </div>
-
-          </div>
-
-        </div>
-        
-        <div class="additional-option">
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="additional-option-content">
-            <a href="{{$data['editUrl']}}">แก้ไข</a>
-            <a href="{{$data['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการลบใช่หรือไม่">ลบ</a>
-          </div>
-        </div>
-
-      </div>
-    @endforeach
-    </div>
-
-    @include('components.pagination')
-
-  @else
-
-    <div class="list-empty-message text-center space-top-20">
-      <img src="/images/common/not-found.png">
-      <div>
-        <h3>วิธีการชำระเงิน</h3>
-        <p>ยังไม่มีวิธีการชำระเงิน เพิ่มวิธีการชำระเงินของคุณ เพื่อใช่ในการกำหนดวิธีการชำระเงินให้กับลูกค้าในหน้าการยืนยันการสั่งซื้อ</p>
-        <a href="{{$paymentMethodAddUrl}}" class="button">เพิ่มวิธีการชำระเงิน</a>
-      </div>
-    </div>
-
   @endif
+
+  <h4>รายการวิธีการชำระเงิน</h4>
+  <div class="line space-bottom-20"></div>
+
+  @foreach($paymentMethods as $paymentMethod)
+
+    <div class="space-bottom-50">
+
+      <h4>{{$paymentMethod['name']}}</h4>
+
+      <div class="clearfix">
+        <div class="tile-nav xs pull-left">
+          <div class="tile-nav-image">
+            <a href="{{$paymentMethod['addUrl']}}">
+              <img src="/images/common/plus.png">
+            </a>
+          </div>
+        </div>
+        <a href="{{$paymentMethod['addUrl']}}" class="tile-nav-title pull-left">เพิ่มตัวเลือก{{$paymentMethod['name']}}</a>
+      </div>
+
+      @if(!empty($paymentMethod['data']))
+
+        @foreach($paymentMethod['data'] as $data)
+
+          
+
+        @endforeach
+
+      @else
+
+        <h5 class="text-center">ยังไม่มีตัวเลือก{{$paymentMethod['name']}}</h5>
+
+      @endif
+
+    </div>
+
+  @endforeach
 
 </div>
 

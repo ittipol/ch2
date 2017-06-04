@@ -1,7 +1,39 @@
-CREATE TABLE `csquare`.`payment_method_types` ( `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
-
-INSERT INTO `payment_method_types` (`id`, `name`) VALUES (NULL, 'โอนเงินผ่านธนาคาร');
+TRUNCATE payment_methods;
 
 ALTER TABLE `payment_methods` ADD `payment_method_type_id` INT(11) UNSIGNED NOT NULL AFTER `id`;
 
-TRUNCATE payment_methods;
+CREATE TABLE `payment_method_types` ( `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `payment_method_types` ADD `alias` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `name`;
+
+INSERT INTO `payment_method_types` (`id`, `name`, `alias`) VALUES (NULL, 'โอนเงินผ่านธนาคาร', 'bank-transfer');
+INSERT INTO `payment_method_types` (`id`, `name`, `alias`) VALUES (NULL, 'โอนเงินผ่านระบบพร้อมเพย์', 'promptpay');
+INSERT INTO `payment_method_types` (`id`, `name`, `alias`) VALUES (NULL, 'ชำระเงินผ่าน PayPal', 'paypal');
+
+CREATE TABLE `payment_service_providers` ( `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT , `payment_service_provider_type_id` INT(11) UNSIGNED NOT NULL , `name` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL , `logo` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+CREATE TABLE `payment_service_provider_types` ( `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `payment_service_provider_types` ADD `alias` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `name`;
+
+INSERT INTO `payment_service_provider_types` (`id`, `name`, `alias`) VALUES (NULL, 'ธนาคาร', 'bank');
+
+DROP TABLE shipping_services;
+
+CREATE TABLE `shipping_service_providers` ( `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL , `sort` TINYINT(1) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+INSERT INTO `shipping_service_providers` (`id`, `name`, `sort`) VALUES
+(1, 'ไปรษณีย์ไทย', 1),
+(2, 'Kerry Express', 1),
+(3, 'Nim Express', 1),
+(4, 'DHL', 1),
+(5, 'UPS', 1),
+(6, 'aCommerce', 1),
+(7, 'dpxlogistics', 1),
+(8, 'Shipyours', 1),
+(9, 'MYCLOUD', 1),
+(10, 'Alphafast', 1),
+(11, 'lalamove', 1),
+(12, 'บริการขนส่งของทางร้าน', 9);
+
+CREATE TABLE `csquare`.`payment_service_provider_to_payment_method_types` ( `payment_service_provider_id` INT(11) UNSIGNED NOT NULL , `payment_method_type_id` INT(11) UNSIGNED NOT NULL , PRIMARY KEY (`payment_service_provider_id`, `payment_method_type_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
