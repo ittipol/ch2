@@ -24,8 +24,8 @@
     </div>
   @endif
 
-  <h4>รายการวิธีการชำระเงิน</h4>
-  <div class="line space-bottom-20"></div>
+ <!--  <h4>รายการวิธีการชำระเงิน</h4>
+  <div class="line space-bottom-20"></div> -->
 
   @foreach($paymentMethods as $paymentMethod)
 
@@ -34,27 +34,66 @@
       <h4>{{$paymentMethod['name']}}</h4>
 
       <div class="clearfix">
-        <div class="tile-nav xs pull-left">
+        <div class="tile-nav xs transparent-bg pull-left">
           <div class="tile-nav-image">
             <a href="{{$paymentMethod['addUrl']}}">
               <img src="/images/common/plus.png">
             </a>
           </div>
         </div>
-        <a href="{{$paymentMethod['addUrl']}}" class="tile-nav-title pull-left">เพิ่มตัวเลือก{{$paymentMethod['name']}}</a>
+        <a href="{{$paymentMethod['addUrl']}}" class="tile-nav-title pull-left">เพิ่มวิธี{{$paymentMethod['name']}}</a>
       </div>
+
+      <div class="line grey space-top-20"></div>
 
       @if(!empty($paymentMethod['data']))
 
-        @foreach($paymentMethod['data'] as $data)
+        <h2>1</h2>
+        <h5>รายการ</h5>
 
-          
+        <div class="list-h">
 
-        @endforeach
+          @foreach($paymentMethod['data'] as $data)
+
+            <div class="list-h-item clearfix">
+
+              <a class="list-image pull-left">
+                <img src="/images/icons/payment-white.png">
+              </a>
+
+              <div class="col-md-11 col-xs-8">
+
+                <div class="row">
+
+                  <div class="col-md-4 col-xs-12 list-content">
+                    <a href="">
+                      <h4 class="primary-info single-info">{{$data['name']}}</h4>
+                    </a>
+                  </div>
+
+                </div>
+
+              </div>
+              
+              <div class="additional-option">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="additional-option-content">
+                  <a href="{{$data['editUrl']}}">แก้ไข</a>
+                  <a href="{{$data['deleteUrl']}}" data-modal="1" data-modal-title="ต้องการลบใช่หรือไม่">ลบ</a>
+                </div>
+              </div>
+
+            </div>
+
+          @endforeach
+
+        </div>
 
       @else
 
-        <h5 class="text-center">ยังไม่มีตัวเลือก{{$paymentMethod['name']}}</h5>
+        <h5 class="text-center space-top-20">ยังไม่มีวิธี{{$paymentMethod['name']}}</h5>
 
       @endif
 

@@ -76,97 +76,16 @@ class PaymentMethodController extends Controller
 
     $model = Service::loadModel('PaymentMethod');
 
-    $errorMessages = array();
+    // Checking error
+    $errorMessages = $this->checkFormError($this->param['type'],$request->all());
 
-    // Check errors
-    switch ($this->param['type']) {
-      case 'bank-transfer':
-
-          if(empty($request->get('branch_name'))) {
-            $errorMessages[] = 'ชื่อสาขาห้ามว่าง';
-          }
-
-          if(empty($request->get('account_number'))) {
-            $errorMessages[] = 'เลขที่บัญชีห้ามว่าง';
-          }
-
-        break;
-      
-      case 'promptpay':
-
-        break;
-
-      case 'paypal':
-
-        break;
-
-      default:
-          return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
-        break;
-
-    }
-
-    $paymentMethodType = Service::loadModel('PaymentMethodType')->getByAlias($this->param['type']);
-
-    $paymentServiceProviderId = null;
-    if($paymentMethodType->hasPaymentServiceProvider()) {
-
-      if(empty($request->get('payment_service_provider_id'))) {
-        $errorMessages[] = 'ผู้ให้บริการห้ามว่าง';
-      }else{
-        $exist = Service::loadModel('PaymentServiceProviderToPaymentMethodType')
-        ->where([
-          ['payment_service_provider_id','=',$request->get('payment_service_provider_id')],
-          ['payment_method_type_id','=',$paymentMethodType->id]
-        ])->exists();
-
-        if($exist) {
-          $paymentServiceProviderId = $request->get('payment_service_provider_id');
-        }else{
-          $errorMessages[] = 'ผู้ให้บริการไม่ถูกต้อง';
-        }
-
-      }
-
-    }
-
-    if(!empty($errorMessages)) {
+    if($errorMessages === false) {
+      return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
+    }elseif(!empty($errorMessages)) {
       return Redirect::back()->withErrors([$errorMessages]);
     }
 
-    // build data
-    switch ($this->param['type']) {
-      case 'bank-transfer':
-
-          $additionalData = array(
-            'branch_name' => $request->get('branch_name'),
-            'account_number' => $request->get('account_number'),
-          );
-
-          $providerName = Service::loadModel('PaymentServiceProvider')->select('name')->find($request->get('payment_service_provider_id'))->name;
-
-          $name = $providerName.' สาขา '.$request->get('branch_name');
-
-        break;
-      
-      case 'promptpay':
-
-        break;
-
-      case 'paypal':
-
-        break;
-
-      default:
-          return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
-        break;
-
-    }
-
-    $model->name = $name;
-    $model->payment_method_type_id = $paymentMethodType->id;
-    $model->payment_service_provider_id = $paymentServiceProviderId;
-    $model->additional_data = json_encode($additionalData);
+    $model->buildPaymentMethodName($this->param['type'],$request->all());
 
     $request->request->add(['ShopRelateTo' => array('shop_id' => request()->get('shopId'))]);
 
@@ -187,11 +106,57 @@ class PaymentMethodController extends Controller
 
     $this->data = $model->formHelper->build();
 
-    return $this->view('pages.payment_method.form.payment_method_edit');
+    $paymentMethodType = Service::loadModel('PaymentMethodType')->find($model->payment_method_type_id);
+
+    switch ($paymentMethodType->alias) {
+      case 'bank-transfer':
+          $page = 'bank_transfer_edit';
+        break;
+      
+      case 'promptpay':
+          $page = 'promptpay_edit';
+        break;
+
+      case 'paypal':
+          $page = 'paypal_edit';
+        break;
+
+      default:
+          return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
+        break;
+
+    }
+
+    // Get Payment method type
+    $serviceProviders = $paymentMethodType->getServiceProvider();
+
+    $_serviceProviders = array();
+    if(!empty($serviceProviders)) {
+      foreach ($serviceProviders as $serviceProvider) {
+        $_serviceProviders[$serviceProvider->id] = $serviceProvider->name;
+      }
+    }
+
+    $this->setData('serviceProviders',$_serviceProviders);
+
+    return $this->view('pages.payment_method.form.'.$page);
   }
 
   public function editingSubmit(CustomFormRequest $request) {
     $model = Service::loadModel('PaymentMethod')->find($this->param['id']);
+
+    $paymentMethodType = Service::loadModel('PaymentMethodType')->find($model->payment_method_type_id);
+
+    // Checking error
+    $errorMessages = $this->checkFormError($paymentMethodType->alias,$request->all());
+
+    if($errorMessages === false) {
+      return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
+    }elseif(!empty($errorMessages)) {
+      return Redirect::back()->withErrors([$errorMessages]);
+    }
+
+    $model->buildPaymentMethodName($paymentMethodType->alias,$request->all());
 
     if($model->fill($request->all())->save()) {
 
@@ -215,4 +180,63 @@ class PaymentMethodController extends Controller
     }
 
   }
+
+  private function checkFormError($paymentMethodType,$value) {
+
+    $errorMessages = array();
+
+    switch ($paymentMethodType) {
+      case 'bank-transfer':
+
+          if(empty($value['branch_name'])) {
+            $errorMessages[] = 'ชื่อสาขาห้ามว่าง';
+          }
+
+          if(empty($value['account_number'])) {
+            $errorMessages[] = 'เลขที่บัญชีห้ามว่าง';
+          }
+
+        break;
+      
+      case 'promptpay':
+
+        break;
+
+      case 'paypal':
+
+        break;
+
+      default:
+          // return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
+          return false;
+        break;
+
+    }
+
+    $paymentMethodType = Service::loadModel('PaymentMethodType')->getByAlias($paymentMethodType);
+
+    if($paymentMethodType->hasPaymentServiceProvider()) {
+
+      if(empty($value['payment_service_provider_id'])) {
+        $errorMessages[] = 'ผู้ให้บริการห้ามว่าง';
+      }else{
+        $exist = Service::loadModel('PaymentServiceProviderToPaymentMethodType')
+        ->where([
+          ['payment_service_provider_id','=',$value['payment_service_provider_id']],
+          ['payment_method_type_id','=',$paymentMethodType->id]
+        ])->exists();
+
+        if(!$exist) {
+          $errorMessages[] = 'ผู้ให้บริการไม่ถูกต้อง';
+        }
+
+      }
+
+    }
+
+    return $errorMessages;
+
+  }
+
+
 }

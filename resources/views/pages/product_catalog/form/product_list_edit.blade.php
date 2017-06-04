@@ -70,6 +70,8 @@
 
   <div class="form-section">
 
+    @if(!empty($_fieldData['products'])) 
+
     <div class="form-row">
       <?php 
         echo Form::label('', 'รายการสินค้า');
@@ -95,6 +97,19 @@
         </div>
       </div>
     </div>
+
+    @else
+
+    <div class="line"></div>
+
+    <div class="list-empty-message text-center space-top-20">
+      <img class="space-bottom-20 not-found-image" src="/images/common/not-found.png">
+      <div>
+        <h3>ยังไม่สินค้า</h3>
+      </div>
+    </div>
+
+    @endif
 
   </div>
 

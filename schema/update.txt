@@ -2,6 +2,10 @@ TRUNCATE payment_methods;
 
 ALTER TABLE `payment_methods` ADD `payment_method_type_id` INT(11) UNSIGNED NOT NULL AFTER `id`;
 
+ALTER TABLE `payment_methods` ADD `payment_service_provider_id` INT(11) UNSIGNED NULL DEFAULT NULL AFTER `payment_method_type_id`;
+
+ALTER TABLE `payment_methods` ADD `additional_data` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `description`;
+
 CREATE TABLE `payment_method_types` ( `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 ALTER TABLE `payment_method_types` ADD `alias` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `name`;

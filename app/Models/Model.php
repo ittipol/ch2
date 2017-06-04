@@ -68,7 +68,7 @@ class Model extends BaseModel
 
       if(!$model->exists){
 
-        $model->state = 'create';
+        // $model->state = 'create';
 
         // if((Schema::hasColumn($model->getTable(), 'ip_address')) && (empty($model->ip_address))) {
         //   $model->ip_address = Service::ipAddress();

@@ -6,7 +6,7 @@ class PaymentMethod extends Model
 {
   public $table = 'payment_methods';
   protected $fillable = ['payment_method_type_id','name','description','additional_data','created_by'];
-  protected $modelRelations = array('PaymentMethodToOrder','ShopRelateTo');
+  protected $modelRelations = array('ShopRelateTo');
 
   public $formHelper = true;
   public $modelData = true;
@@ -28,6 +28,20 @@ class PaymentMethod extends Model
   //     'description.required' => 'รายละเอียดวิธีการชำระเงินห้ามว่าง',
   //   )
   // );
+
+  // public static function boot() {
+
+  //   parent::boot();
+
+  //   PaymentMethod::saving(function($paymentMethod){
+
+  //     dd($paymentMethod->getAttributes());
+
+  //     $this->buildPaymentMethodName($paymentMethod->payment_method_type_id);
+
+  //   });
+
+  // }
 
   public function getPaymentMethod($shopId) {
     return $this
@@ -64,9 +78,30 @@ class PaymentMethod extends Model
 
   public function buildModelData() {
 
+    $providerName = null;
+    if(!empty($this->payment_service_provider_id)) {
+      $providerName = PaymentServiceProvider::select('name')->find($this->payment_service_provider_id)->name;
+    }
+
     $additionalData = json_decode($this->additional_data,true);
-dd($additionalData);
-    dd('hesx');
+
+    if(empty($additionalData)) {
+      return array(
+        'name' => $this->name,
+        'description' => $this->description,
+        'providerName' => $providerName
+      );
+    }
+
+    return array_merge(
+      array(
+        'name' => $this->name,
+        'description' => $this->description,
+        'providerName' => $providerName
+      ),
+      $additionalData
+    );
+
   }
 
   public function buildPaginationData() {
@@ -75,6 +110,51 @@ dd($additionalData);
       'name' => $this->name,
       'description' => nl2br($this->description),
     );
+  }
+
+  public function buildFormData() {
+
+    $additionalData = json_decode($this->additional_data,true);
+
+    if(empty($additionalData)) {
+      return $this->getAttributes();
+    }
+
+    return array_merge(
+      $this->getAttributes(),
+      $additionalData
+    );
+  }
+
+  public function buildPaymentMethodName($paymentMethodType,$value) {
+
+    switch ($paymentMethodType) {
+      case 'bank-transfer':
+
+          $this->name = PaymentServiceProvider::select('name')->find($value['payment_service_provider_id'])->name.' สาขา '.$value['branch_name'];
+          
+          $this->additional_data = json_encode(array(
+            'branch_name' => $value['branch_name'],
+            'account_number' => $value['account_number'],
+          ));
+
+        break;
+      
+      case 'promptpay':
+
+        break;
+
+      case 'paypal':
+
+        break;
+    }
+
+    if(!$this->exists) {
+      $this->payment_method_type_id = PaymentMethodType::select('id')->where('alias','like',$paymentMethodType)->first()->id;      
+    }
+
+    $this->payment_service_provider_id = !empty($value['payment_service_provider_id']) ? $value['payment_service_provider_id'] : null;
+
   }
 
 }

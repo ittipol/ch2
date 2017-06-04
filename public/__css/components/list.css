@@ -242,18 +242,18 @@ label.list-box > input[type="checkbox"] {
 }
 
 .list-h .list-image {
-	width: 50px;
-  height: 50px;
-  border-radius: 50px;
+	width: 40px;
+  height: 40px;
+  border-radius: 40px;
   overflow: hidden;
   display: block;
 }
 
 .list-h .list-image img {
-	width: 50px;
-	height: 50px;
-	background-color: #009688;
-	padding: 10px;
+	width: 40px;
+	height: 40px;
+	background-color: rgb(66,98,154);
+	padding: 8px;
 }
 
 .list-h .primary-info {
@@ -263,8 +263,8 @@ label.list-box > input[type="checkbox"] {
 }
 
 .list-h .primary-info.single-info {
-	line-height: 50px;
 	margin: 0;
+	line-height: 40px;
 }
 
 .list-h .secondary-info {
@@ -321,6 +321,10 @@ label.list-box > input[type="checkbox"] {
 
 
 @media only screen and (max-width : 480px) {
+
+	.list-h .primary-info.single-info {
+		line-height: 22px;
+	}
   
 	.list .list-content-wrapper .image {
 		width: 100%;

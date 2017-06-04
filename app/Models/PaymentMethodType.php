@@ -5,7 +5,7 @@ namespace App\Models;
 class PaymentMethodType extends Model
 {
   public $table = 'payment_method_types';
-  protected $fillable = ['name'];
+  protected $fillable = ['name','alias'];
 
   public function getServiceProvider() {
     $paymentServiceProvider = new PaymentServiceProvider();

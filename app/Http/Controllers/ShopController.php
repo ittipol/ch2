@@ -299,8 +299,13 @@ class ShopController extends Controller
       if($paymentMethods->exists()) {
 
         foreach ($paymentMethods->get() as $paymentMethod) {
-          dd($paymentMethod->buildModelData());
-          $data[] = $paymentMethod->buildModelData();
+          $data[] = array_merge(
+            $paymentMethod->buildModelData(),
+            array(
+              'editUrl' => request()->get('shopUrl').'payment_method/edit/'.$paymentMethod->id,
+              'deleteUrl' => request()->get('shopUrl').'payment_method/delete/'.$paymentMethod->id
+            )
+          );
         }
 
       }
