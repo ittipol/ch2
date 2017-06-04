@@ -5,7 +5,7 @@ namespace App\Models;
 class PaymentMethod extends Model
 {
   public $table = 'payment_methods';
-  protected $fillable = ['payment_method_type_id','name','description','created_by'];
+  protected $fillable = ['payment_method_type_id','name','description','additional_data','created_by'];
   protected $modelRelations = array('PaymentMethodToOrder','ShopRelateTo');
 
   public $formHelper = true;
@@ -62,7 +62,12 @@ class PaymentMethod extends Model
     ->exists();
   }
 
-  // public function buildModelData() {}
+  public function buildModelData() {
+
+    $additionalData = json_decode($this->additional_data,true);
+dd($additionalData);
+    dd('hesx');
+  }
 
   public function buildPaginationData() {
     return array(

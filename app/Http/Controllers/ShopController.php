@@ -299,7 +299,8 @@ class ShopController extends Controller
       if($paymentMethods->exists()) {
 
         foreach ($paymentMethods->get() as $paymentMethod) {
-          $data[] = $buildModelData->buildModelData();
+          dd($paymentMethod->buildModelData());
+          $data[] = $paymentMethod->buildModelData();
         }
 
       }

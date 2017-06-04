@@ -11,4 +11,9 @@ class PaymentMethodType extends Model
     $paymentServiceProvider = new PaymentServiceProvider();
     return $paymentServiceProvider->getServiceProviderByPaymentMethodTypeId($this->id);
   }
+
+  public function hasPaymentServiceProvider() {
+    $providerToType = new PaymentServiceProviderToPaymentMethodType;
+    return $providerToType->where('payment_method_type_id','=',$this->id)->exists();
+  }
 }

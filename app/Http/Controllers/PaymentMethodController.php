@@ -78,6 +78,7 @@ class PaymentMethodController extends Controller
 
     $errorMessages = array();
 
+    // Check errors
     switch ($this->param['type']) {
       case 'bank-transfer':
 
@@ -88,11 +89,6 @@ class PaymentMethodController extends Controller
           if(empty($request->get('account_number'))) {
             $errorMessages[] = 'เลขที่บัญชีห้ามว่าง';
           }
-
-          $json = array(
-            'branch_name' => $request->get('branch_name'),
-            'account_number' => $request->get('account_number'),
-          );
 
         break;
       
@@ -112,18 +108,24 @@ class PaymentMethodController extends Controller
 
     $paymentMethodType = Service::loadModel('PaymentMethodType')->getByAlias($this->param['type']);
 
-    if(empty($request->get('payment_service_provider_id'))) {
-      $errorMessages[] = 'ผู้ให้บริการห้ามว่าง';
-    }else{
-      
-      $exist = Service::loadModel('PaymentServiceProviderToPaymentMethodType')
-      ->where([
-        ['payment_service_provider_id','=',$request->get('payment_service_provider_id')],
-        ['payment_method_type_id','=',$paymentMethodType->id]
-      ])->exists();
+    $paymentServiceProviderId = null;
+    if($paymentMethodType->hasPaymentServiceProvider()) {
 
-      if(!$exist) {
-        $errorMessages[] = 'ผู้ให้บริการไม่ถูกต้อง';
+      if(empty($request->get('payment_service_provider_id'))) {
+        $errorMessages[] = 'ผู้ให้บริการห้ามว่าง';
+      }else{
+        $exist = Service::loadModel('PaymentServiceProviderToPaymentMethodType')
+        ->where([
+          ['payment_service_provider_id','=',$request->get('payment_service_provider_id')],
+          ['payment_method_type_id','=',$paymentMethodType->id]
+        ])->exists();
+
+        if($exist) {
+          $paymentServiceProviderId = $request->get('payment_service_provider_id');
+        }else{
+          $errorMessages[] = 'ผู้ให้บริการไม่ถูกต้อง';
+        }
+
       }
 
     }
@@ -132,11 +134,42 @@ class PaymentMethodController extends Controller
       return Redirect::back()->withErrors([$errorMessages]);
     }
 
-    $json = json_encode($json);
+    // build data
+    switch ($this->param['type']) {
+      case 'bank-transfer':
 
-    $request->request->add(['data' => $json]);
+          $additionalData = array(
+            'branch_name' => $request->get('branch_name'),
+            'account_number' => $request->get('account_number'),
+          );
+
+          $providerName = Service::loadModel('PaymentServiceProvider')->select('name')->find($request->get('payment_service_provider_id'))->name;
+
+          $name = $providerName.' สาขา '.$request->get('branch_name');
+
+        break;
+      
+      case 'promptpay':
+
+        break;
+
+      case 'paypal':
+
+        break;
+
+      default:
+          return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
+        break;
+
+    }
+
+    $model->name = $name;
+    $model->payment_method_type_id = $paymentMethodType->id;
+    $model->payment_service_provider_id = $paymentServiceProviderId;
+    $model->additional_data = json_encode($additionalData);
+
     $request->request->add(['ShopRelateTo' => array('shop_id' => request()->get('shopId'))]);
-    dd($request->all());
+
     if($model->fill($request->all())->save()) {
       MessageHelper::display('วิธีการชำระเงินถูกเพิ่มแล้ว','success');
       return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
