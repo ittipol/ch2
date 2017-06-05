@@ -21,7 +21,7 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="title">
-          เพิ่มวิธีชำระเงินผ่าน PayPal
+          แก้ไขวิธีชำระเงินผ่าน PayPal
         </div>
       </div>
     </div>

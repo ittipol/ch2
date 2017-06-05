@@ -21,7 +21,7 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="title">
-          เพิ่มวิธีโอนเงินผ่านธนาคาร
+          แก้ไขวิธีโอนเงินผ่านธนาคาร
         </div>
       </div>
     </div>
@@ -47,6 +47,30 @@
         'class' => 'required'
       ));
       echo Form::select('payment_service_provider_id', $serviceProviders);
+    ?>
+  </div>
+
+  <div class="form-row">
+    <?php 
+      echo Form::label('account_name', 'ชื่อบัญชี', array(
+        'class' => 'required'
+      ));
+      echo Form::text('account_name', null, array(
+        'placeholder' => 'ชื่อบัญชี',
+        'autocomplete' => 'off'
+      ));
+    ?>
+  </div>
+
+  <div class="form-row">
+    <?php 
+      echo Form::label('account_type', 'ประเภทบัญชี', array(
+        'class' => 'required'
+      ));
+      echo Form::text('account_type', null, array(
+        'placeholder' => 'ประเภทบัญชี',
+        'autocomplete' => 'off'
+      ));
     ?>
   </div>
 
