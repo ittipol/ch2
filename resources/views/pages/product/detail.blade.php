@@ -312,7 +312,10 @@
   </div> -->
   @endif
 
-  <h3 class="space-top-50">สินค้าอื่นๆที่เกี่ยวข้อง</h3>
+  <h3 class="space-top-50">
+    <img src="/images/icons/tag-blue.png">
+    สินค้าอื่นๆที่เกี่ยวข้อง
+  </h3>
   <div class="line space-bottom-20"></div>
 
   <h4 class="space-bottom-20">จากผู้ขายรายนี้</h4>
@@ -420,6 +423,8 @@
     </div>
 
   @endif
+
+  @include('pages.product._user_review')
 
 </div>
 

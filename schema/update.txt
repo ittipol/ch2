@@ -45,3 +45,5 @@ CREATE TABLE `csquare`.`payment_service_provider_to_payment_method_types` ( `pay
 ALTER TABLE `order_payment_confirms` ADD `payment_method_name` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `payment_method_id`;
 
 ALTER TABLE `order_histories` ADD `updated_at` DATETIME on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `created_at`;
+
+ALTER TABLE `order_payment_confirms` CHANGE `confirmed` `confirmed` TINYINT(1) NOT NULL DEFAULT '0';

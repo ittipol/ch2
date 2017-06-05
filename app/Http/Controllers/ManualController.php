@@ -126,7 +126,7 @@ class ManualController extends Controller
         break;
 
       case 'payment-inform':
-          $title = 'การชำระเงิน & การแจ้งการชำระเงิน';
+          $title = 'การแจ้งการชำระเงิน';
         break;
 
       case 'cart-product-edit':

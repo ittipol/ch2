@@ -1,6 +1,9 @@
-  <div>
-    <h4>รีวิวจากลูกค้า</h4>
-    <div class="line"></div>
+  <div class="space-top-50">
+    <h3>
+      <img src="/images/icons/message-blue.png">
+      รีวิวจากลูกค้า
+    </h3>
+    <!-- <div class="line"></div> -->
 
     <div class="row">
       <div class="col-md-6 col-xs-12">

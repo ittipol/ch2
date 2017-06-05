@@ -126,7 +126,7 @@
 
         <div class="nav-group space-bottom-30">
           <a href="{{URL::to('manual/checking-order')}}">ตรวจสอบรายการสั้่งซื้อ</a>
-          <a href="{{URL::to('manual/payment-inform')}}">การชำระเงิน & การแจ้งการชำระเงิน</a>
+          <a href="{{URL::to('manual/payment-inform')}}">การแจ้งการชำระเงิน</a>
         </div>
       </div>
 

@@ -80,12 +80,12 @@
 
               <div class="tile-nav small">
                 <div class="tile-nav-image">
-                  <a href="{{request()->get('shopUrl')}}payment_method">
+                  <a href="{{request()->get('shopUrl')}}manage/payment_method">
                     <img src="/images/common/payment.png">
                   </a>
                 </div>
                 <div class="tile-nav-info">
-                  <a href="{{request()->get('shopUrl')}}payment_method">
+                  <a href="{{request()->get('shopUrl')}}manage/payment_method">
                     <h4 class="tile-nav-title">วิธีการชำระเงิน</h4>
                   </a>
                 </div>
@@ -93,12 +93,12 @@
 
               <div class="tile-nav small">
                 <div class="tile-nav-image">
-                  <a href="{{request()->get('shopUrl')}}shipping_method">
+                  <a href="{{request()->get('shopUrl')}}manage/shipping_method">
                     <img src="/images/common/truck.png">
                   </a>
                 </div>
                 <div class="tile-nav-info">
-                  <a href="{{request()->get('shopUrl')}}shipping_method">
+                  <a href="{{request()->get('shopUrl')}}manage/shipping_method">
                     <h4 class="tile-nav-title">วิธีการจัดส่งสินค้า</h4>
                   </a>
                 </div>
