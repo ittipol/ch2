@@ -24,5 +24,4 @@ class OrderHistory extends Model
     );
   }
 
-  public function setUpdatedAt($value) {}
 }

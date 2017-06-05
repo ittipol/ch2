@@ -9,7 +9,7 @@ class OrderShipping extends Model
   public $timestamps  = false;
 
   public function shippingService() {
-    return $this->hasOne('App\Models\ShippingService','id','shipping_service_id');
+    return $this->hasOne('App\Models\ShippingServiceProvider','id','shipping_service_id');
   }
 
   public function shippingServiceCostType() {

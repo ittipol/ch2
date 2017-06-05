@@ -26,11 +26,19 @@
 
 <div class="detail container">
 
+  @if($orderConfirmed)
+  <div class="secondary-message-box info space-bottom-20">
+    <div class="secondary-message-box-inner">
+      <h4>ยืนยันการชำระเงินแล้ว</h4>
+    </div>
+  </div>
+  @else
   <div class="text-right space-bottom-20">
     <a class="button" data-right-side-panel="1" data-right-side-panel-target="#payment_confirm_panel">
       ยืนยันการชำระเงิน
     </a>
   </div>
+  @endif
 
   @include('pages.order.components.payment_confirm_form')
 
@@ -59,7 +67,7 @@
           </div>
 
           <div class="detail-group-info">
-            <h5 class="title">เวลาชำระเงิน</h5>
+            <h5 class="title">เวลา</h5>
             <p>{{$_modelData['paymentTime']}}</p>
           </div>
 
@@ -82,7 +90,7 @@
 
   </div>
 
-  <h4>รูปภาพ</h4>
+  <h4>รูปภาพหลักฐานการชำระเงิน</h4>
   <div class="line space-bottom-30"></div>
 
   <div class="image-gallery">
@@ -137,7 +145,7 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    imageGallery = new ImageGallery(false);
+    const imageGallery = new ImageGallery(false);
     imageGallery.load({!!$_modelData['Image']!!});
   });
 </script>

@@ -47,11 +47,12 @@ class Shop extends Model
   protected $validation = array(
     'rules' => array(
       'name' => 'required|max:255',
-      'Contact.phone_number' => 'required|regex:/^[0-9+][0-9\-]{3,}[0-9]$/|max:255',
+      'Contact.phone_number' => 'required|regex:/^[0-9+][0-9\-]{3,}[0-9]$/|max:15',
     ),
     'messages' => array(
       'name.required' => 'ชื่อบริษัท ร้านค้าหรือธุรกิจห้ามว่าง',
       'Contact.phone_number.regex' => 'หมายเลขโทรศัพท์ไม่ถูกต้อง',
+      'Contact.phone_number.max' => 'หมายเลขโทรศัพท์ไม่ถูกต้อง',
       'Contact.phone_number.required' => 'หมายเลขโทรศัพท์ห้ามว่าง',
     )
   );

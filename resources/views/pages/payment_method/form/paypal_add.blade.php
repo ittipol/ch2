@@ -21,7 +21,7 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="title">
-          เพิ่มวิธีโอนเงินผ่านธนาคาร
+          เพิ่มวิธีชำระเงินผ่าน PayPal
         </div>
       </div>
     </div>
@@ -30,11 +30,7 @@
   @include('components.form_error') 
 
   <?php 
-    echo Form::model($_formData, [
-      'id' => 'main_form',
-      'method' => 'PATCH',
-      'enctype' => 'multipart/form-data'
-    ]);
+    echo Form::open(['id' => 'main_form','method' => 'post', 'enctype' => 'multipart/form-data']);
   ?>
 
   <?php
@@ -43,32 +39,11 @@
 
   <div class="form-row">
     <?php 
-      echo Form::label('payment_service_provider_id', 'ชื่อธนาคาร', array(
+      echo Form::label('paypal_account', 'บัญชี PayPal', array(
         'class' => 'required'
       ));
-      echo Form::select('payment_service_provider_id', $serviceProviders);
-    ?>
-  </div>
-
-  <div class="form-row">
-    <?php 
-      echo Form::label('branch_name', 'ชื่อสาขา', array(
-        'class' => 'required'
-      ));
-      echo Form::text('branch_name', null, array(
-        'placeholder' => 'ชื่อสาขา',
-        'autocomplete' => 'off'
-      ));
-    ?>
-  </div>
-
-  <div class="form-row">
-    <?php 
-      echo Form::label('account_number', 'เลขที่บัญชี', array(
-        'class' => 'required'
-      ));
-      echo Form::text('account_number', null, array(
-        'placeholder' => 'เลขที่บัญชี',
+      echo Form::text('paypal_account', null, array(
+        'placeholder' => 'บัญชี PayPal',
         'autocomplete' => 'off'
       ));
     ?>

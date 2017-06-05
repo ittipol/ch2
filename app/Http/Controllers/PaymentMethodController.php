@@ -7,9 +7,70 @@ use App\library\service;
 use App\library\messageHelper;
 use App\library\url;
 use Redirect;
+use Input;
 
 class PaymentMethodController extends Controller
 {
+  public function __construct() { 
+    parent::__construct();
+
+    $this->setMetaKeywords('วิธีการชำระเงิน');
+
+  }
+
+  public function listView() {
+
+    $model = Service::loadModel('PaymentMethod');
+
+    $url = new Url;
+
+    // Get Payment method types
+    $paymentMethodTypes = Service::loadModel('PaymentMethodType')->get();
+
+    $_paymentMethods = array();
+    foreach ($paymentMethodTypes as $paymentMethodType) {
+      
+      // Get Payment method
+      $paymentMethods = $model
+      ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $model->getTable().'.id')
+      ->select($model->getTable().'.*')
+      ->where([
+        ['shop_relate_to.model','like',$model->modelName],
+        ['shop_relate_to.shop_id','=',request()->get('shopId')],
+        ['payment_method_type_id','=',$paymentMethodType->id]
+      ]);
+
+      $data = array();
+      if($paymentMethods->exists()) {
+
+        foreach ($paymentMethods->get() as $paymentMethod) {
+          $data[] = $paymentMethod->buildModelData();
+        }
+
+      }
+
+      if(empty($data)) {
+        continue;
+      }
+
+      $_paymentMethods[] = array(
+        'name' => $paymentMethodType->name,
+        'data' => $data
+      );
+
+    }
+
+    $this->setData('paymentMethods',$_paymentMethods);
+
+    $this->setPageTitle('วิธีการชำระเงิน - '.request()->get('shop')->name);
+    $this->setPageDescription('วิธีการชำระเงินของร้าน '.request()->get('shop')->name);
+
+    $this->botAllowed();
+    
+    return $this->view('pages.payment_method.list');
+
+  }
+
   public function detail() {
 
     $model = Service::loadModel('PaymentMethod')->find($this->param['id']);
@@ -51,7 +112,7 @@ class PaymentMethodController extends Controller
         break;
 
       default:
-          return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
+          return Redirect::to(route('shop.payment_method.manage', ['shopSlug' => request()->shopSlug]));
         break;
 
     }
@@ -80,9 +141,9 @@ class PaymentMethodController extends Controller
     $errorMessages = $this->checkFormError($this->param['type'],$request->all());
 
     if($errorMessages === false) {
-      return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
+      return Redirect::to(route('shop.payment_method.manage', ['shopSlug' => request()->shopSlug]));
     }elseif(!empty($errorMessages)) {
-      return Redirect::back()->withErrors([$errorMessages]);
+      return Redirect::back()->withErrors([$errorMessages])->withInput(Input::all());
     }
 
     $model->buildPaymentMethodName($this->param['type'],$request->all());
@@ -91,7 +152,7 @@ class PaymentMethodController extends Controller
 
     if($model->fill($request->all())->save()) {
       MessageHelper::display('วิธีการชำระเงินถูกเพิ่มแล้ว','success');
-      return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
+      return Redirect::to(route('shop.payment_method.manage', ['shopSlug' => request()->shopSlug]));
     }else{
       return Redirect::back();
     }
@@ -122,7 +183,7 @@ class PaymentMethodController extends Controller
         break;
 
       default:
-          return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
+          return Redirect::to(route('shop.payment_method.manage', ['shopSlug' => request()->shopSlug]));
         break;
 
     }
@@ -151,7 +212,7 @@ class PaymentMethodController extends Controller
     $errorMessages = $this->checkFormError($paymentMethodType->alias,$request->all());
 
     if($errorMessages === false) {
-      return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
+      return Redirect::to(route('shop.payment_method.manage', ['shopSlug' => request()->shopSlug]));
     }elseif(!empty($errorMessages)) {
       return Redirect::back()->withErrors([$errorMessages]);
     }
@@ -161,7 +222,7 @@ class PaymentMethodController extends Controller
     if($model->fill($request->all())->save()) {
 
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
+      return Redirect::to(route('shop.payment_method.manage', ['shopSlug' => request()->shopSlug]));
     }else{
       return Redirect::back();
     }
@@ -173,10 +234,10 @@ class PaymentMethodController extends Controller
 
     if($model->delete()) {
       MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
-      return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
+      return Redirect::to(route('shop.payment_method.manage', ['shopSlug' => request()->shopSlug]));
     }else{
       MessageHelper::display('ไม่สามารถลบข้อมูลนี้ได้','error');
-      return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
+      return Redirect::to(route('shop.payment_method.manage', ['shopSlug' => request()->shopSlug]));
     }
 
   }
@@ -200,14 +261,41 @@ class PaymentMethodController extends Controller
       
       case 'promptpay':
 
+        if(empty($value['promptpay_transfer_number']) || empty($value['promptpay_transfer_number_type'])) {
+          $errorMessages[] = 'หมายเลขที่ใช้ในการโอนห้ามว่าง';
+        }else{
+
+          switch ($value['promptpay_transfer_number_type']) {
+            case 'tel-no':
+
+              break;
+            
+            case 'id-card-no':
+
+                if(strlen($value['promptpay_transfer_number']) != 13) {
+                  $errorMessages[] = 'เลขบัตรประชาชนไม่ถูกต้อง';
+                }
+                
+              break;
+
+            default:
+                $errorMessages[] = 'รูปแบบหมายเลขที่ใช้ในการโอนไม่ถูกต้อง';
+              break;
+          }
+
+        }
+
         break;
 
       case 'paypal':
 
+          if(empty($value['paypal_account'])) {
+            $errorMessages[] = 'บัญชี PayPal ห้ามว่าง';
+          }
+
         break;
 
       default:
-          // return Redirect::to(route('shop.payment_method', ['shopSlug' => request()->shopSlug]));
           return false;
         break;
 

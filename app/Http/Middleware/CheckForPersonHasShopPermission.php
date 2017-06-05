@@ -241,7 +241,8 @@ class CheckForPersonHasShopPermission
             'param' => 'product_id'
           )
         ),
-        'shop.payment_method' => array(
+        'shop.payment_method.list' => true,
+        'shop.payment_method.manage' => array(
           'permission' => true
         ),
         'shop.payment_method.detail' => true,
@@ -257,7 +258,7 @@ class CheckForPersonHasShopPermission
           'permission' => 'delete',
           'modelName' => 'PaymentMethod'
         ),
-        'shop.shipping_method' => array(
+        'shop.shipping_method.manage' => array(
           'permission' => true
         ),
         'shop.shipping_method.add' => array(

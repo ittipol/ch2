@@ -10,6 +10,17 @@
       ]);
     ?>
 
+    @if(!$hasOrderPaymentConfirm)
+
+      <div class="secondary-message-box warning space-bottom-30">
+        <div class="secondary-message-box-inner">
+          <h4>ยังไม่มีการแจ้งการชำระเงินจากลูกค้า</h4>
+          <p>โปรดตรวจสอบให้แน่ใจว่าลูกได้แจ้งการชำระเงินแล้วก่อนการเปลี่ยนสถานะการสั่งซื้อ</p>
+        </div>
+      </div>
+
+    @endif
+
     <div class="form-row">
       <h5>สถานะการสั่งซื้อ</h5>
       <?php
@@ -18,7 +29,7 @@
     </div>
 
     <div class="form-row">
-      <h5>ข้อความถึงผู้ซื้อ</h5>
+      <h5>ข้อความ</h5>
       <?php
         echo Form::textarea('message');
       ?>

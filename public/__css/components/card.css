@@ -14,6 +14,11 @@
 	border: 2px solid #ddd;
 }
 
+.card.list {
+	margin-bottom: 10px;
+	border: none;
+}
+
 .card.sm,
 .card.xs {
 	width: auto;
@@ -53,6 +58,10 @@
 	position: relative;
   background-color: #fff;
   padding: 15px 10px;
+}
+
+.card.list .card-info {
+	padding: 10px 0;
 }
 
 .card .image-tile {

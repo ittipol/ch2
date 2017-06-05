@@ -27,17 +27,11 @@
 
       <div class="secondary-message-box info space-bottom-20">
         <div class="secondary-message-box-inner">
-          <h4>ยืนยันการชำระเงินแล้ว โปรดรอการตรวจสอบการชำระเงินจากผู้ขาย</h4>
+          <h4>แจ้งการชำระเงินแล้ว โปรดรอการตรวจสอบการชำระเงินจากผู้ขาย</h4>
         </div>
       </div>
 
     @else
-
-      <!-- <div class="secondary-message-box success">
-        <div class="secondary-message-box-inner">
-          <h4>ผู้ขายยืนยันการสั่งซื้อแล้ว</h4>
-        </div>
-      </div> -->
 
       <div>
         <h3>จำนวนเงินที่ต้องชำระ <strong>{{$orderTotals['total']['value']}}</strong></h3>
@@ -61,42 +55,67 @@
 
           <div class="detail-info-section no-margin">
             <h4>วิธีการชำระเงิน</h4>
-            <div class="line space-bottom-30"></div>
+            <div class="line grey space-bottom-20"></div>
 
-            <div class="row">
-              @foreach($paymentMethods as $paymentMethod)
-                
-                <div class="col-md-12 col-xs-12">
-                  <div class="card sm">
+            @foreach($paymentMethods as $paymentMethod)
 
-                    <div class="card-info">
-                      <a data-right-side-panel="1" data-right-side-panel-target="#payment_method_{{$paymentMethod['id']}}">
-                        <h4 class="no-margin">
-                          <img src="/images/common/payment.png">
-                          {{$paymentMethod['name']}}
-                        </h4>
-                      </a>
+              <h4>{{$paymentMethod['name']}}</h4>
 
-                      <div class="card-sub-info">
-                        {!!$paymentMethod['description']!!}
+              <div class="list-h">
+
+                @foreach($paymentMethod['data'] as $data)
+
+                  <div class="list-h-item no-border clearfix">
+
+                    <a class="list-image pull-left">
+                      <img src="/images/icons/payment-white.png">
+                    </a>
+
+                    <div class="col-md-11 col-xs-10">
+
+                      <div class="row">
+
+                        <div class="col-xs-12 list-content">
+                          <a data-right-side-panel="1" data-right-side-panel-target="#payment_method_{{$data['id']}}">
+                            <h4 class="primary-info single-info">{{$data['name']}}</h4>
+                          </a>
+                        </div>
+
                       </div>
-  
+
+                    </div>
+
+                    <div class="additional-option">
+                      <div class="dot"></div>
+                      <div class="dot"></div>
+                      <div class="dot"></div>
+                      <div class="additional-option-content">
+                        <a href="{{$data['informUrl']}}">แจ้งการชำระเงินด้วยวีธีการนี้</a>
+                      </div>
                     </div>
 
                   </div>
-                </div>
 
-                <div id="payment_method_{{$paymentMethod['id']}}" class="right-size-panel">
-                  <div class="right-size-panel-inner">
-                      <h4>{{$paymentMethod['name']}}</h4>
-                      <div class="line space-bottom-10"></div>
-                      {!!$paymentMethod['description']!!}
-                    <div class="right-size-panel-close-button"></div>
+                  <div id="payment_method_{{$data['id']}}" class="right-size-panel">
+                    <div class="right-size-panel-inner">
+                        <h4>{{$paymentMethod['name']}}</h4>
+                        <h4>{{$data['name']}}</h4>
+                        <div class="line space-bottom-10"></div>
+                        <h5 class="space-top-20">รายละเอียดการชำระเงิน</h5>
+                        @if(empty($data['description']))
+                        -
+                        @else
+                        {!!$data['description']!!}
+                        @endif
+                      <div class="right-size-panel-close-button"></div>
+                    </div>
                   </div>
-                </div>
 
-              @endforeach
-            </div>
+                @endforeach
+
+              </div>
+
+            @endforeach
 
           </div>
 
@@ -250,6 +269,65 @@
   </div>
 
   <div class="line space-top-bottom-80"></div>
+
+  @if(!empty($orderPaymentConfirm))
+
+    <h3>
+      <img src="/images/icons/payment-blue.png">
+      รายละเอียดการชำระเงิน
+    </h3>
+
+    <div class="row">
+
+      <div class="col-md-4 col-sm-12">
+
+        <div class="detail-group">
+          <h4>รายละเอียดการชำระเงิน</h4>
+          <div class="line"></div>
+          <div class="detail-group-info-section">
+
+            <div class="detail-group-info">
+              <h5 class="title">วิธีการชำระเงิน</h5>
+              <p>{{$orderPaymentConfirm['paymentMethodName']}}</p>
+            </div>
+
+            <div class="detail-group-info">
+              <h5 class="title">จำนวนเงิน</h5>
+              <p>{{$orderPaymentConfirm['paymentAmount']}}</p>
+            </div>
+
+            <div class="detail-group-info">
+              <h5 class="title">วันที่ชำระเงิน</h5>
+              <p>{{$orderPaymentConfirm['paymentDate']}}</p>
+            </div>
+
+            <div class="detail-group-info">
+              <h5 class="title">เวลา</h5>
+              <p>{{$orderPaymentConfirm['paymentTime']}}</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-8 col-sm-12">
+
+        <div class="detail-info-section no-margin">
+          <h4>รายละเอียดเพิ่มเติม</h4>
+          <div class="line"></div> 
+          <div class="detail-info">
+            {!!$orderPaymentConfirm['description']!!}
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="line space-top-bottom-80"></div>
+
+  @endif
 
   <h3>
     <img src="/images/icons/tag-blue.png">

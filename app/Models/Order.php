@@ -370,6 +370,13 @@ class Order extends Model
     return OrderPaymentConfirm::where('order_id','=',$this->id)->exists();
   }
 
+  public function orderConfirmed() {
+    return OrderPaymentConfirm::where([
+      ['order_id','=',$this->id],
+      ['confirmed','=',1]
+    ])->exists();
+  }
+
   public function checkAllProductsHaveShippingCost() {
 
     $total = OrderProduct::where([

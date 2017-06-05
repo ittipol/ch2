@@ -389,14 +389,18 @@
     <h4>รายละเอียดค่าจัดส่นสินค้า</h4>
     <p class="notice info">*** ข้อมูลนี้จะไม่แสดงถ้าหากไม่มีการกรอกรายละเอียด</p>
     <?php 
-      echo Form::textarea('shipping_cost_detail');
+      echo Form::textarea('shipping_cost_detail', null, array(
+        'class' => 'sm'
+      ));
     ?>
   </div>
 
   <div class="space-top-30">
-    <h4>ข้อความถึงผู้ซื้อ</h4>
+    <h4>ข้อความ</h4>
     <?php 
-      echo Form::textarea('message');
+      echo Form::textarea('message', null, array(
+        'class' => 'sm'
+      ));
     ?>
   </div>
 

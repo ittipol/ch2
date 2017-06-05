@@ -252,6 +252,9 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('order/payment/inform/{id}', 'OrderController@paymentInform');
   Route::post('order/payment/inform/{id}', 'OrderController@paymentInformSubmit');
 
+  Route::get('order/payment/inform/{id}/method:{payment_method_id}', 'OrderController@paymentInform');
+  Route::post('order/payment/inform/{id}/method:{payment_method_id}', 'OrderController@paymentInformSubmit');
+
 });
 
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
@@ -418,7 +421,10 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
 // Payment Method
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
-  Route::get('shop/{shopSlug}/payment_method','ShopController@paymentMethod')->name('shop.payment_method');
+
+  Route::get('shop/{shopSlug}/payment_method','PaymentMethodController@listView')->name('shop.payment_method.list');
+
+  Route::get('shop/{shopSlug}/manage/payment_method','ShopController@paymentMethod')->name('shop.payment_method.manage');
 
   Route::get('shop/{shopSlug}/payment_method/add/{type}','PaymentMethodController@add')->name('shop.payment_method.add');
   Route::post('shop/{shopSlug}/payment_method/add/{type}','PaymentMethodController@addingSubmit')->name('shop.payment_method.add');
@@ -431,7 +437,7 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
 // Shipping Method
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
-  Route::get('shop/{shopSlug}/shipping_method','ShopController@ShippingMethod')->name('shop.shipping_method');
+  Route::get('shop/{shopSlug}/manage/shipping_method','ShopController@ShippingMethod')->name('shop.shipping_method.manage');
 
   Route::get('shop/{shopSlug}/shipping_method/add','ShippingMethodController@add')->name('shop.shipping_method.add');
   Route::post('shop/{shopSlug}/shipping_method/add','ShippingMethodController@addingSubmit')->name('shop.shipping_method.add');

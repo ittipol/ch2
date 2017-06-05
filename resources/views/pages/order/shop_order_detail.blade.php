@@ -199,7 +199,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6 col-xs-12">
+    <div class="col-md-8 col-xs-12">
       <h4>ข้อความจากผู้ซื้อ</h4>
       <div class="line"></div>
       <div>
@@ -209,6 +209,69 @@
   </div>
 
   <div class="line space-top-bottom-80"></div>
+
+  @if(!empty($orderPaymentConfirm))
+
+    <h3>
+      <img src="/images/icons/payment-blue.png">
+      รายละเอียดการชำระเงิน
+    </h3>
+
+    <div class="space-top-bottom-10">
+      <a href="{{$paymentDetailUrl}}" class="flat-button">แสดงรายละเอียดแจ้งการชำระเงิน</a>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-4 col-sm-12">
+
+        <div class="detail-group">
+          <h4>รายละเอียดการชำระเงิน</h4>
+          <div class="line"></div>
+          <div class="detail-group-info-section">
+
+            <div class="detail-group-info">
+              <h5 class="title">วิธีการชำระเงิน</h5>
+              <p>{{$orderPaymentConfirm['paymentMethodName']}}</p>
+            </div>
+
+            <div class="detail-group-info">
+              <h5 class="title">จำนวนเงิน</h5>
+              <p>{{$orderPaymentConfirm['paymentAmount']}}</p>
+            </div>
+
+            <div class="detail-group-info">
+              <h5 class="title">วันที่ชำระเงิน</h5>
+              <p>{{$orderPaymentConfirm['paymentDate']}}</p>
+            </div>
+
+            <div class="detail-group-info">
+              <h5 class="title">เวลา</h5>
+              <p>{{$orderPaymentConfirm['paymentTime']}}</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-8 col-sm-12">
+
+        <div class="detail-info-section no-margin">
+          <h4>รายละเอียดเพิ่มเติม</h4>
+          <div class="line"></div> 
+          <div class="detail-info">
+            {!!$orderPaymentConfirm['description']!!}
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="line space-top-bottom-80"></div>
+
+  @endif
 
   <h3>
     <img src="/images/icons/tag-blue.png">

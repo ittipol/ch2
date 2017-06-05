@@ -293,7 +293,14 @@ class ShopController extends Controller
     foreach ($paymentMethodTypes as $paymentMethodType) {
       
       // Get Payment method
-      $paymentMethods = $model->where('payment_method_type_id','=',$paymentMethodType->id);
+      $paymentMethods = $model
+      ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $model->getTable().'.id')
+      ->select($model->getTable().'.*')
+      ->where([
+        ['shop_relate_to.model','like',$model->modelName],
+        ['shop_relate_to.shop_id','=',request()->get('shopId')],
+        ['payment_method_type_id','=',$paymentMethodType->id]
+      ]);
 
       $data = array();
       if($paymentMethods->exists()) {
@@ -311,6 +318,7 @@ class ShopController extends Controller
       }
 
       $_paymentMethods[] = array(
+        // 'total' => $paymentMethods->count(),
         'name' => $paymentMethodType->name,
         'addUrl' => request()->get('shopUrl').'payment_method/add/'.$paymentMethodType->alias,
         'data' => $data
@@ -321,12 +329,7 @@ class ShopController extends Controller
     $this->setPageTitle(request()->get('shop')->name);
 
     $this->setData('paymentMethods',$_paymentMethods);
-    $this->setData('hasPaymentMethod',$model
-    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $model->getTable().'.id')
-    ->where([
-      ['shop_relate_to.model','like',$model->modelName],
-      ['shop_relate_to.shop_id','=',request()->get('shopId')]
-    ])->exists());
+    $this->setData('hasPaymentMethod',$model->hasPaymentMethod(request()->get('shopId')));
 
     return $this->view('pages.shop.payment_method');
   }

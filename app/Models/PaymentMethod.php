@@ -5,7 +5,7 @@ namespace App\Models;
 class PaymentMethod extends Model
 {
   public $table = 'payment_methods';
-  protected $fillable = ['payment_method_type_id','name','description','additional_data','created_by'];
+  protected $fillable = ['payment_method_type_id','payment_service_provider_id','name','description','additional_data','created_by'];
   protected $modelRelations = array('ShopRelateTo');
 
   public $formHelper = true;
@@ -16,6 +16,11 @@ class PaymentMethod extends Model
     'photo' => array(
       'limit' => 10
     )
+  );
+
+  public $promptpayTransferNumberType = array(
+    'tel-no' => 'หมายเลขโทรศัพท์',
+    'id-card-no' => 'เลขบัตรประชาชน',
   );
 
   // protected $validation = array(
@@ -29,19 +34,9 @@ class PaymentMethod extends Model
   //   )
   // );
 
-  // public static function boot() {
-
-  //   parent::boot();
-
-  //   PaymentMethod::saving(function($paymentMethod){
-
-  //     dd($paymentMethod->getAttributes());
-
-  //     $this->buildPaymentMethodName($paymentMethod->payment_method_type_id);
-
-  //   });
-
-  // }
+  public function paymentMethodType() {
+    return $this->hasOne('App\Models\PaymentMethodType','id','payment_method_type_id');
+  }
 
   public function getPaymentMethod($shopId) {
     return $this
@@ -49,6 +44,19 @@ class PaymentMethod extends Model
     ->where([
       ['shop_relate_to.model','like',$this->modelName],
       ['shop_relate_to.shop_id','=',$shopId]
+    ])
+    ->select($this->getTable().'.*')
+    ->orderBy($this->getTable().'.name','ASC')
+    ->get();
+  }
+
+  public function getPaymentMethodByPaymentMethodTypeId($shopId,$paymentMethodTypeId) {
+    return $this
+    ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $this->getTable().'.id')
+    ->where([
+      ['shop_relate_to.model','like',$this->modelName],
+      ['shop_relate_to.shop_id','=',$shopId],
+      ['payment_method_type_id','=',$paymentMethodType->id]
     ])
     ->select($this->getTable().'.*')
     ->orderBy($this->getTable().'.name','ASC')
@@ -83,24 +91,20 @@ class PaymentMethod extends Model
       $providerName = PaymentServiceProvider::select('name')->find($this->payment_service_provider_id)->name;
     }
 
+    $data = array(
+      'id' => $this->id,
+      'name' => $this->name,
+      'description' => $this->description,
+      'providerName' => $providerName
+    );
+
     $additionalData = json_decode($this->additional_data,true);
 
     if(empty($additionalData)) {
-      return array(
-        'name' => $this->name,
-        'description' => $this->description,
-        'providerName' => $providerName
-      );
+      return $data;
     }
 
-    return array_merge(
-      array(
-        'name' => $this->name,
-        'description' => $this->description,
-        'providerName' => $providerName
-      ),
-      $additionalData
-    );
+    return array_merge($data,$additionalData);
 
   }
 
@@ -131,7 +135,7 @@ class PaymentMethod extends Model
     switch ($paymentMethodType) {
       case 'bank-transfer':
 
-          $this->name = PaymentServiceProvider::select('name')->find($value['payment_service_provider_id'])->name.' สาขา '.$value['branch_name'];
+          $this->name = PaymentServiceProvider::select('name')->find($value['payment_service_provider_id'])->name.' สาขา '.$value['branch_name'].' เลขที่บัญชี '.$value['account_number'];
           
           $this->additional_data = json_encode(array(
             'branch_name' => $value['branch_name'],
@@ -142,9 +146,22 @@ class PaymentMethod extends Model
       
       case 'promptpay':
 
+          $this->name = 'โอนเงินด้วย'.$this->promptpayTransferNumberType[$value['promptpay_transfer_number_type']].' '.$value['promptpay_transfer_number'];
+
+          $this->additional_data = json_encode(array(
+            'promptpay_transfer_number_type' => $value['promptpay_transfer_number_type'],
+            'promptpay_transfer_number' => $value['promptpay_transfer_number'],
+          ));
+
         break;
 
       case 'paypal':
+
+          $this->name = 'ชำระเงินไปยังบัญชี '.$value['paypal_account'];
+
+          $this->additional_data = json_encode(array(
+            'paypal_account' => $value['paypal_account'],
+          ));
 
         break;
     }

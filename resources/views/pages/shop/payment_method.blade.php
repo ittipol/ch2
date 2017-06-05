@@ -24,9 +24,6 @@
     </div>
   @endif
 
- <!--  <h4>รายการวิธีการชำระเงิน</h4>
-  <div class="line space-bottom-20"></div> -->
-
   @foreach($paymentMethods as $paymentMethod)
 
     <div class="space-bottom-50">
@@ -48,9 +45,6 @@
 
       @if(!empty($paymentMethod['data']))
 
-        <h2>1</h2>
-        <h5>รายการ</h5>
-
         <div class="list-h">
 
           @foreach($paymentMethod['data'] as $data)
@@ -61,14 +55,12 @@
                 <img src="/images/icons/payment-white.png">
               </a>
 
-              <div class="col-md-11 col-xs-8">
+              <div class="col-md-11 col-xs-10">
 
                 <div class="row">
 
-                  <div class="col-md-4 col-xs-12 list-content">
-                    <a href="">
-                      <h4 class="primary-info single-info">{{$data['name']}}</h4>
-                    </a>
+                  <div class="col-xs-12 list-content">
+                    <h4 class="primary-info single-info">{{$data['name']}}</h4>
                   </div>
 
                 </div>

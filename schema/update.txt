@@ -11,7 +11,7 @@ CREATE TABLE `payment_method_types` ( `id` INT(11) UNSIGNED NOT NULL AUTO_INCREM
 ALTER TABLE `payment_method_types` ADD `alias` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `name`;
 
 INSERT INTO `payment_method_types` (`id`, `name`, `alias`) VALUES (NULL, 'โอนเงินผ่านธนาคาร', 'bank-transfer');
-INSERT INTO `payment_method_types` (`id`, `name`, `alias`) VALUES (NULL, 'โอนเงินผ่านระบบพร้อมเพย์', 'promptpay');
+INSERT INTO `payment_method_types` (`id`, `name`, `alias`) VALUES (NULL, 'โอนเงินผ่านบริการพร้อมเพย์', 'promptpay');
 INSERT INTO `payment_method_types` (`id`, `name`, `alias`) VALUES (NULL, 'ชำระเงินผ่าน PayPal', 'paypal');
 
 CREATE TABLE `payment_service_providers` ( `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT , `payment_service_provider_type_id` INT(11) UNSIGNED NOT NULL , `name` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL , `logo` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -41,3 +41,7 @@ INSERT INTO `shipping_service_providers` (`id`, `name`, `sort`) VALUES
 (12, 'บริการขนส่งของทางร้าน', 9);
 
 CREATE TABLE `csquare`.`payment_service_provider_to_payment_method_types` ( `payment_service_provider_id` INT(11) UNSIGNED NOT NULL , `payment_method_type_id` INT(11) UNSIGNED NOT NULL , PRIMARY KEY (`payment_service_provider_id`, `payment_method_type_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `order_payment_confirms` ADD `payment_method_name` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `payment_method_id`;
+
+ALTER TABLE `order_histories` ADD `updated_at` DATETIME on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `created_at`;

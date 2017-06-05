@@ -21,7 +21,7 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="title">
-          เพิ่มวิธีโอนเงินผ่านธนาคาร
+          เพิ่มวิธีโอนเงินผ่านบริการพร้อมเพย์
         </div>
       </div>
     </div>
@@ -30,11 +30,7 @@
   @include('components.form_error') 
 
   <?php 
-    echo Form::model($_formData, [
-      'id' => 'main_form',
-      'method' => 'PATCH',
-      'enctype' => 'multipart/form-data'
-    ]);
+    echo Form::open(['id' => 'main_form','method' => 'post', 'enctype' => 'multipart/form-data']);
   ?>
 
   <?php
@@ -43,32 +39,25 @@
 
   <div class="form-row">
     <?php 
-      echo Form::label('payment_service_provider_id', 'ชื่อธนาคาร', array(
+      echo Form::label('promptpay_transfer_number', 'หมายเลขที่ใช้ในการโอน', array(
         'class' => 'required'
-      ));
-      echo Form::select('payment_service_provider_id', $serviceProviders);
-    ?>
-  </div>
-
-  <div class="form-row">
-    <?php 
-      echo Form::label('branch_name', 'ชื่อสาขา', array(
-        'class' => 'required'
-      ));
-      echo Form::text('branch_name', null, array(
-        'placeholder' => 'ชื่อสาขา',
-        'autocomplete' => 'off'
       ));
     ?>
-  </div>
-
-  <div class="form-row">
-    <?php 
-      echo Form::label('account_number', 'เลขที่บัญชี', array(
-        'class' => 'required'
-      ));
-      echo Form::text('account_number', null, array(
-        'placeholder' => 'เลขที่บัญชี',
+    <label class="choice-box">
+      <?php
+        echo Form::radio('promptpay_transfer_number_type', 'tel-no', true);
+      ?>
+      <div class="inner">หมายเลขโทรศัพท์</div>
+    </label>
+    <label class="choice-box">
+      <?php
+        echo Form::radio('promptpay_transfer_number_type', 'id-card-no', false);
+      ?>
+      <div class="inner">เลขบัตรประชาชน</div>
+    </label>
+    <?php
+      echo Form::text('promptpay_transfer_number', null, array(
+        'placeholder' => 'หมายเลขที่ใช้ในการโอน',
         'autocomplete' => 'off'
       ));
     ?>

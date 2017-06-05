@@ -72,9 +72,7 @@
 
   <div class="form-row">
     <?php 
-      echo Form::label('description', 'รายละเอียดวิธีการชำระเงินเพิ่มเติม', array(
-        'class' => 'required'
-      ));
+      echo Form::label('description', 'รายละเอียดวิธีการชำระเงิน');
       echo Form::textarea('description');
     ?>
   </div>

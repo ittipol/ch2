@@ -1,6 +1,18 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
+<div class="sub-header-nav">
+  <div class="sub-header-nav-fixed-top">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="btn-group pull-right">
+          <a href="{{URL::to('account/order')}}/{{$orderId}}" class="btn btn-secondary">กลับไปยังหน้ารายการสั้งซื้อ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="top-header-wrapper top-header-border">
   <div class="container">
     <div class="top-header">
@@ -27,13 +39,39 @@
   <div class="form-section">
 
     <div class="form-row">
-      <?php 
-        echo Form::label('', 'เลือกวิธีการชำระเงิน', array(
-          'class' => 'required'
-        ));
-        echo Form::select('payment_method_id', $paymentMethods);
-      ?>
+
+      @if(!empty($paymentMethod))
+
+        <h4>{{$paymentMethod['type']}}</h4>
+        <h4>{{$paymentMethod['name']}}</h4>
+
+        <input type="hidden" name="payment_method_id" value="{{$paymentMethod['id']}}">
+
+      @else
+
+        @foreach($paymentMethods as $paymentMethod)
+
+          <h4>{{$paymentMethod['name']}}</h4>
+
+          @foreach($paymentMethod['data'] as $data)
+
+            <label class="choice-box">
+              <?php
+                echo Form::radio('payment_method_id', $data['id'], $data['checked']);
+              ?> 
+              <div class="inner">{{$data['name']}}</div>
+            </label>
+            <br>
+
+          @endforeach
+
+        @endforeach
+
+      @endif
+
     </div>
+
+    <div class="line"></div>
 
     <div class="form-row">
       <div class="select-group">
@@ -57,7 +95,7 @@
     <div class="form-row">
       <div class="select-group">
         <?php 
-          echo Form::label('', 'เวลาชำระเงิน', array(
+          echo Form::label('', 'เวลา', array(
             'class' => 'required'
           ));
           echo Form::select('payment_hour', $hours, null, array(
@@ -93,7 +131,7 @@
     <div class="form-row">
 
       <?php
-        echo Form::label('', 'รูปภาพ');
+        echo Form::label('', 'รูปภาพหลักฐานการชำระเงิน');
       ?>
 
       <div class="form-row">

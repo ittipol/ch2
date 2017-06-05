@@ -44,7 +44,7 @@ class ShippingMethodController extends Controller
 
     if($model->fill($request->all())->save()) {
       MessageHelper::display('วิธีการจัดส่งสินค้าถูกเพิ่มแล้ว','success');
-      return Redirect::to(route('shop.shipping_method', ['shopSlug' => request()->shopSlug]));
+      return Redirect::to(route('shop.shipping_method.manage', ['shopSlug' => request()->shopSlug]));
     }else{
       return Redirect::back();
     }
@@ -109,7 +109,7 @@ class ShippingMethodController extends Controller
 
     if($model->fill($request->all())->save()) {
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to(route('shop.shipping_method', ['shopSlug' => request()->shopSlug]));
+      return Redirect::to(route('shop.shipping_method.manage', ['shopSlug' => request()->shopSlug]));
     }else{
       return Redirect::back();
     }
@@ -125,7 +125,7 @@ class ShippingMethodController extends Controller
       MessageHelper::display('ไม่สามารถลบข้อมูลนี้ได้','error');
     }
 
-    return Redirect::to(route('shop.shipping_method', ['shopSlug' => request()->shopSlug]));
+    return Redirect::to(route('shop.shipping_method.manage', ['shopSlug' => request()->shopSlug]));
 
   }
 
@@ -159,7 +159,7 @@ class ShippingMethodController extends Controller
       MessageHelper::display('ตัวเลือก "รับสินค้าเอง" ถูกเพิ่มแล้ว','error');
     }
 
-    return Redirect::to(route('shop.shipping_method', ['shopSlug' => request()->shopSlug]));
+    return Redirect::to(route('shop.shipping_method.manage', ['shopSlug' => request()->shopSlug]));
 
   }
 
