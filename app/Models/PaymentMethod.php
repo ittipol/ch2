@@ -94,7 +94,7 @@ class PaymentMethod extends Model
     $data = array(
       'id' => $this->id,
       'name' => $this->name,
-      'description' => $this->description,
+      'description' => nl2br($this->description),
       'providerName' => $providerName
     );
 

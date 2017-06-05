@@ -16,6 +16,14 @@ class RightSidePanel {
 
       e.preventDefault();
 
+      if(_this.currentTarget) {
+        $(_this.currentTarget).removeClass('opened');
+        $('.content-wrapper-overlay').removeClass('isvisible');
+        $('body').css('overflow-y','auto');
+
+        _this.currentTarget = null;
+      }
+
       _this.currentTarget = $(this).data('right-side-panel-target');
 
       $(_this.currentTarget).addClass('opened');

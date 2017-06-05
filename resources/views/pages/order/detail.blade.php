@@ -123,7 +123,7 @@
 
       </div>
 
-      <div class="secondary-message-box info space-bottom-30">
+      <div class="secondary-message-box info space-top-20 space-bottom-30">
         <div class="message-box-button-group clearfix">
           <div class="flat-button">
             <a href="{{URL::to($paymentInformUrl)}}" class="button">แจ้งการชำระเงิน</a>

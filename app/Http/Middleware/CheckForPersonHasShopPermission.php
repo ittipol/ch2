@@ -277,6 +277,10 @@ class CheckForPersonHasShopPermission
           'permission' => 'add',
           'modelName' => 'ShippingMethod'
         ),
+        'shop.order.payment.seller_confirm' => array(
+          'permission' => 'edit',
+          'modelName' => 'Order'
+        ),
         'shop.order.payment.confirm' => array(
           'permission' => 'edit',
           'modelName' => 'Order'

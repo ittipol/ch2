@@ -266,6 +266,9 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 
   Route::patch('shop/{shopSlug}/order/cancel/{id}','OrderController@shopOrderCancel')->name('shop.order.cancel');
 
+  Route::get('shop/{shopSlug}/order/payment/seller_confirm/{id}', 'OrderController@sellerPaymentConfirm')->name('shop.order.payment.seller_confirm');
+  Route::post('shop/{shopSlug}/order/payment/seller_confirm/{id}', 'OrderController@sellerPaymentConfirmSubmit')->name('shop.order.payment.seller_confirm');
+
   Route::patch('shop/{shopSlug}/order/payment/confirm/{id}', 'OrderController@paymentConfirm')->name('shop.order.payment.confirm');
 
   Route::get('shop/{shopSlug}/order/payment/detail/{id}', 'OrderController@paymentDetail')->name('shop.order.payment.detail');

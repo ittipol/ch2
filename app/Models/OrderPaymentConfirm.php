@@ -39,17 +39,17 @@ class OrderPaymentConfirm extends Model
     return $this->hasOne('App\Models\PaymentMethod','id','payment_method_id');
   }
 
-  public static function boot() {
+  // public static function boot() {
 
-    parent::boot();
+  //   parent::boot();
 
-    OrderPaymentConfirm::saving(function($orderPaymentConfirm){
-      if($orderPaymentConfirm->state == 'create') {
-        $orderPaymentConfirm->confirmed = 0;
-      }
-    });
+  //   OrderPaymentConfirm::saving(function($orderPaymentConfirm){
+  //     if(($orderPaymentConfirm->state == 'create') && empty($orderPaymentConfirm->confirmed)) {
+  //       $orderPaymentConfirm->confirmed = 0;
+  //     }
+  //   });
 
-  }
+  // }
 
   public function buildModelData() {
 
@@ -61,7 +61,7 @@ class OrderPaymentConfirm extends Model
       'paymentAmount' => $currency->format($this->payment_amount),
       'paymentDate' => $date->covertDateToSting($this->payment_date),
       'paymentTime' => $date->covertTimeToSting($this->payment_date),
-      'description' => !empty($this->description) ? $this->description : '-'
+      'description' => !empty($this->description) ? nl2br($this->description) : '-'
     );
   }
 

@@ -48,9 +48,16 @@ class OrderController extends Controller
 
         $_paymentMethods = array();
         foreach ($paymentMethodTypes as $paymentMethodType) {
-          
+
           // Get Payment method
-          $paymentMethods = $paymentMethodModel->where('payment_method_type_id','=',$paymentMethodType->id);
+          $paymentMethods = $paymentMethodModel
+          ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'payment_methods.id')
+          ->select('payment_methods.*')
+          ->where([
+            ['shop_relate_to.model','like',$paymentMethodModel->modelName],
+            ['shop_relate_to.shop_id','=',$model->shop_id],
+            ['payment_method_type_id','=',$paymentMethodType->id]
+          ]);
 
           $data = array();
           if($paymentMethods->exists()) {
@@ -168,7 +175,14 @@ class OrderController extends Controller
       $checked = true;
       foreach ($paymentMethodTypes as $paymentMethodType) {
         
-        $paymentMethods = $paymentMethodModel->where('payment_method_type_id','=',$paymentMethodType->id);
+        $paymentMethods = $paymentMethodModel
+        ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'payment_methods.id')
+        ->select('payment_methods.*')
+        ->where([
+          ['shop_relate_to.model','like',$paymentMethodModel->modelName],
+          ['shop_relate_to.shop_id','=',$order->shop_id],
+          ['payment_method_type_id','=',$paymentMethodType->id]
+        ]);
 
         $data = array();
         if($paymentMethods->exists()) {
@@ -284,18 +298,19 @@ class OrderController extends Controller
       return $this->error();
     }
 
-    if($order->order_status_id != 2) {
-      MessageHelper::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
-      return Redirect::to('account/order/'.$order->id);
+    if($order->order_status_id == 1) {
+      MessageHelper::display('รายการสั่งซื้อยังไม่ได้ถูกยืนยันจากผู้ขาย','error');
+      return Redirect::to(request()->get('shopUrl').'order/'.$order->id);
+    }elseif($order->hasOrderPaymentConfirm()) {
+      MessageHelper::display('รายการสั่งซื้อได้แจ้งการชำระเงินแล้ว','error');
+      return Redirect::to(request()->get('shopUrl').'order/'.$order->id);
+    }elseif(($order->order_status_id > 2) || ($order->orderConfirmed())) {
+      MessageHelper::display('รายการสั่งซื้อยืนยันการชำระเงินแล้ว','error');
+      return Redirect::to(request()->get('shopUrl').'order/'.$order->id);
     }
 
     $model = Service::loadModel('OrderPaymentConfirm');
     $paymentMethodModel = Service::loadModel('PaymentMethod');
-
-    if($model->where('order_id','=',$order->id)->exists()) {
-      MessageHelper::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
-      return Redirect::to('account/order/'.$order->id);
-    }
 
     if(!$paymentMethodModel->checkPaymentMethodExistById($request->get('payment_method_id'),$order->shop_id)) {
       return Redirect::back()->withErrors(['วิธีการชำระเงินที่เลือกไม่ถูกต้อง'])->withInput(request()->all());
@@ -316,6 +331,7 @@ class OrderController extends Controller
       MessageHelper::display('ยืนยันการชำระเงินเลขที่การสั่งซื้อ '.$order->invoice_number.' แล้ว','success');
       return Redirect::to('account/order/'.$order->id);
     }else{
+      MessageHelper::display('ไม่สามารถแจ้งการชำระเงินได้','error');
       return Redirect::back();
     }
 
@@ -352,6 +368,131 @@ class OrderController extends Controller
 
   }
 
+  public function sellerPaymentConfirm() {
+
+    $order = Service::loadModel('Order')->where([
+      ['id','=',$this->param['id']],
+      ['created_by','=',session()->get('Person.id')]
+    ])->first();
+
+    if(empty($order)) {
+      $this->error = array(
+        'message' => 'ไม่พบข้อมูล'
+      );
+      return $this->error();
+    }
+
+    if($order->order_status_id != Service::loadModel('OrderStatus')->getIdByalias('pending-customer-payment')) {
+      MessageHelper::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
+      return Redirect::to('account/order/'.$order->id);
+    }
+
+    $model = Service::loadModel('OrderPaymentConfirm');
+
+    if($model->where('order_id','=',$order->id)->exists()) {
+      MessageHelper::display('การสั่งซื้อนี้ได้ยืนยันการชำระเงินแล้ว','error');
+      return Redirect::to('account/order/'.$order->id);
+    }
+
+    $paymentMethodModel = Service::loadModel('PaymentMethod');
+ 
+    $paymentMethodTypes = Service::loadModel('PaymentMethodType')->get();
+
+    $_paymentMethods = array();
+    $checked = true;
+    foreach ($paymentMethodTypes as $paymentMethodType) {
+      
+      $paymentMethods = $paymentMethodModel
+      ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'payment_methods.id')
+      ->select('payment_methods.*')
+      ->where([
+        ['shop_relate_to.model','like',$paymentMethodModel->modelName],
+        ['shop_relate_to.shop_id','=',$order->shop_id],
+        ['payment_method_type_id','=',$paymentMethodType->id]
+      ]);
+
+      $data = array();
+      if($paymentMethods->exists()) {
+
+        foreach ($paymentMethods->get() as $paymentMethod) {
+          $data[] = array_merge($paymentMethod->buildPaginationData(),array('checked'=>$checked));
+          $checked = false;
+        }
+
+        $_paymentMethods[] = array(
+          'name' => $paymentMethodType->name,
+          'data' => $data
+        );
+
+      }
+
+    }
+
+    $date = new Date;
+
+    $currentYear = date('Y');
+    
+    $day = array();
+    $month = array();
+    $year = array();
+
+    for ($i=1; $i <= 31; $i++) { 
+      $day[$i] = $i;
+    }
+
+    for ($i=1; $i <= 12; $i++) { 
+      $month[$i] = $date->getMonthName($i);
+    }
+
+    for ($i=$currentYear; $i <= $currentYear + 1; $i++) { 
+      $year[$i] = $i+543;
+    }
+
+    // Time
+    $hours = array();
+    $mins = array();
+
+    for ($i=0; $i <= 23; $i++) { 
+
+      if($i < 10) {
+        $hours['0'.$i] = $i;
+      }else{
+        $hours[$i] = $i;
+      }
+
+    }
+
+    for ($i=0; $i <= 59; $i++) {
+
+      if($i < 10) {
+        $mins['0'.$i] = '0'.$i;
+      }else{
+        $mins[$i] = $i;
+      }
+      
+    }
+
+    $this->data = $model->formHelper->build();
+    $this->setData('orderId',$order->id);
+    $this->setData('invoiceNumber',$order->invoice_number);
+
+    $this->setData('paymentMethods',$_paymentMethods);
+    
+    $this->setData('day',$day);
+    $this->setData('month',$month);
+    $this->setData('year',$year);
+
+    $this->setData('currentDay',date('j'));
+    $this->setData('currentMonth',date('n'));
+    $this->setData('currentYear',$currentYear);
+
+    $this->setData('hours',$hours);
+    $this->setData('mins',$mins);
+    
+    return $this->view('pages.order.seller_payment_inform');
+
+  }
+
   public function paymentConfirm() {
 
     $model = Service::loadModel('Order')->find($this->param['id']);
@@ -359,10 +500,7 @@ class OrderController extends Controller
     if($model->order_status_id == 1) {
       MessageHelper::display('รายการสั่งซื้อยังไม่ได้ถูกยืนยันจากผู้ขาย','error');
       return Redirect::to(request()->get('shopUrl').'order/'.$model->id);
-    }elseif($model->order_status_id == 5) {
-      MessageHelper::display('รายการสั่งซื้อเสร็จสิ้นแล้ว','error');
-      return Redirect::to(request()->get('shopUrl').'order/'.$model->id);
-    }elseif($model->orderConfirmed()) {
+    }elseif(($model->order_status_id > 2) || ($model->orderConfirmed())) {
       MessageHelper::display('รายการสั่งซื้อยืนยันการชำระเงินแล้ว','error');
       return Redirect::to(request()->get('shopUrl').'order/'.$model->id);
     }
@@ -382,29 +520,11 @@ class OrderController extends Controller
       Redirect::to(request()->get('shopUrl').'order/'.$model->id);
     }
 
-    $orderHistoryModel = Service::loadModel('OrderHistory');
-
-    // $_orderHistory = $orderHistoryModel->where([
-    //   ['order_id','=',$model->id],
-    //   ['order_status_id','=',2],
-    // ])->first();
-
-    // $_orderHistory->message = request()->get('message');
-    // $_orderHistory->save();
-
-    // Service::loadModel('OrderStatus')->getIdByalias('pending-customer-payment')
-
-    if($model->order_status_id == 2) {
-      $model->order_status_id = 3;
-    }
+    $model->order_status_id = 3;
     
     if($model->save()) {
 
-      // $_orderHistory = $orderHistoryModel->where([
-      //   ['order_id','=',$model->id],
-      //   ['order_status_id','=',3],
-      // ])->exists();
-
+      $orderHistoryModel = Service::loadModel('OrderHistory');
       $orderHistoryModel->order_id = $model->id;
       $orderHistoryModel->order_status_id = 3;
       $orderHistoryModel->save();
@@ -540,15 +660,8 @@ class OrderController extends Controller
 
       $orderPaymentConfirm = $orderPaymentConfirm->first();
 
-      // $orderPaymentConfirm->modelData->loadData(array(
-      //   'json' => array('Image')
-      // ));
-
       $_orderPaymentConfirm = $orderPaymentConfirm->modelData->build();
       $_orderPaymentConfirm = $_orderPaymentConfirm['_modelData'];
-
-      // confirmed
-      dd($orderPaymentConfirm->getAttrubutes());
 
       if(!$orderPaymentConfirm->confirmed) {
         $this->setData('paymentConfirmUrl',request()->get('shopUrl').'order/payment/confirm/'.$model->id);
@@ -556,11 +669,12 @@ class OrderController extends Controller
 
       $this->setData('paymentDetailUrl',request()->get('shopUrl').'order/payment/detail/'.$model->id);
       $this->setData('hasOrderPaymentConfirm',true);
+      $this->setData('orderConfirmed',$orderPaymentConfirm->confirmed);
 
     }else{
-
+      $this->setData('sellerPaymentConfirmUrl',request()->get('shopUrl').'order/payment/seller_confirm/'.$model->id);
       $this->setData('hasOrderPaymentConfirm',false);
-
+      $this->setData('orderConfirmed',false);
     }
 
     $this->setData('orderShippingMethod',$model->getOrderShippingMethod());
@@ -574,6 +688,57 @@ class OrderController extends Controller
     $this->setData('orderCancelUrl',request()->get('shopUrl').'order/cancel/'.$model->id);
 
     return $this->view('pages.order.shop_order_detail');
+
+  }
+
+  public function sellerPaymentConfirmSubmit(CustomFormRequest $request) {
+
+    $order = Service::loadModel('Order')->where([
+      ['id','=',$this->param['id']],
+      ['created_by','=',session()->get('Person.id')]
+    ])->first();
+
+    if($order->order_status_id == 1) {
+      MessageHelper::display('รายการสั่งซื้อยังไม่ได้ถูกยืนยันจากผู้ขาย','error');
+      return Redirect::to(request()->get('shopUrl').'order/'.$order->id);
+    }elseif($order->hasOrderPaymentConfirm()) {
+      MessageHelper::display('รายการสั่งซื้อได้แจ้งการชำระเงินแล้ว','error');
+      return Redirect::to(request()->get('shopUrl').'order/'.$order->id);
+    }elseif(($order->order_status_id > 2) || ($order->orderConfirmed())) {
+      MessageHelper::display('รายการสั่งซื้อยืนยันการชำระเงินแล้ว','error');
+      return Redirect::to(request()->get('shopUrl').'order/'.$order->id);
+    }
+
+    $model = Service::loadModel('OrderPaymentConfirm');
+    $paymentMethodModel = Service::loadModel('PaymentMethod');
+
+    if(!$paymentMethodModel->checkPaymentMethodExistById($request->get('payment_method_id'),$order->shop_id)) {
+      return Redirect::back()->withErrors(['วิธีการชำระเงินที่เลือกไม่ถูกต้อง'])->withInput(request()->all());
+    }
+
+    $paymentMethod = $paymentMethodModel->select('name')->find($request->get('payment_method_id'));
+
+    $model->order_id = $order->id;
+    $model->payment_method_name = $paymentMethod->name;
+    $model->confirmed = 1;
+
+    if(!$model->fill($request->all())->save()) {
+      MessageHelper::display('ไม่สามารถยืนยันการชำระเงินได้','error');
+      return Redirect::back();
+    }
+
+    // Update to next status
+    $order->order_status_id = 3;
+    $order->save();
+    
+    $orderHistoryModel = Service::loadModel('OrderHistory');
+    $orderHistoryModel->order_id = $order->id;
+    $orderHistoryModel->order_status_id = 3;
+    $orderHistoryModel->save();
+
+    MessageHelper::display('ยืนยันการชำระเงินเรียบร้อยแล้ว','success');
+
+    return Redirect::to(request()->get('shopUrl').'order/'.$order->id);
 
   }
 
@@ -618,8 +783,6 @@ class OrderController extends Controller
 
     $this->setData('hasProductNotSetShippingCost',$model->checkHasProductNotSetShippingCost());
     $this->setData('hasProductHasShippingCost',$model->checkHasProductHasShippingCost());
-
-    // $this->setData('paymentMethods',$_paymentMethods);
 
     return $this->view('pages.order.shop_order_confirm');
 

@@ -19,7 +19,7 @@ class OrderHistory extends Model
 
     return array(
       'orderStatus' => $this->orderStatus->name,
-      'message' => $this->message,
+      'message' => nl2br($this->message),
       'createdDate' => $date->covertDateTimeToSting($this->created_at->format('Y-m-d H:i:s'))
     );
   }

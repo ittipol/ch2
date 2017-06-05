@@ -294,8 +294,8 @@ class ShopController extends Controller
       
       // Get Payment method
       $paymentMethods = $model
-      ->join('shop_relate_to', 'shop_relate_to.model_id', '=', $model->getTable().'.id')
-      ->select($model->getTable().'.*')
+      ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'payment_methods.id')
+      ->select('payment_methods.*')
       ->where([
         ['shop_relate_to.model','like',$model->modelName],
         ['shop_relate_to.shop_id','=',request()->get('shopId')],
