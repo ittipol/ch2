@@ -476,6 +476,9 @@
     const tabs = new Tabs('product_description_tab');
     tabs.load();
 
+    const review = new Review();
+    review.load();
+
   });
 </script>
 

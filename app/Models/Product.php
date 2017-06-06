@@ -12,7 +12,7 @@ class Product extends Model
 {
   protected $table = 'products';
   protected $fillable = ['name','description','product_model','sku','quantity','quantity_available','minimum','product_unit','price','weight','weight_unit_id','length','length_unit_id','width','height','specifications','message_out_of_order','shipping_calculate_from','flag_message_from','flag_message','active','product_selling','created_by'];
-  protected $modelRelations = array('Image','Tagging','ProductToCategory','RelateToBranch','ShopRelateTo','ProductOption','ProductSalePromotion','ProductShipping');
+  protected $modelRelations = array('Image','Tagging','ProductToCategory','RelateToBranch','ShopRelateTo','ProductOption','ProductSalePromotion','ProductShipping','Review');
 
   public $formHelper = true;
   public $modelData = true;
@@ -271,17 +271,6 @@ class Product extends Model
     return $price;
 
   }
-
-  // public function getParentCategory() {
-
-  //   $productToCategory = ProductToCategory::where('product_id','=',$this->id)->select('category_id');
-
-  //   if(!$productToCategory->exists()) {
-  //     return null;
-  //   }
-
-  //   return Category::find($productToCategory->first()->category->parent_id)
-  // }
 
   public function getCategory() {
 
@@ -674,6 +663,18 @@ class Product extends Model
     }
 
     return array_merge($promotion->buildModelData(),$promotion->{lcfirst($promotion->model)}->buildModelData());
+
+  }
+
+  public function getAvgScore() {
+
+    $reivews = Review::where([
+      ['model','like','Product'],
+      ['model_id','=',$this->id]
+    ]);
+
+    // $total = $reivews->count();
+    // sql get AVG (search)
 
   }
 

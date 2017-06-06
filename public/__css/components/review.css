@@ -1,0 +1,60 @@
+.review-score-box {}
+
+label.review-score-box-item {
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+	cursor: pointer;
+	
+}
+
+label.review-score-box-item > .inner {
+	width: 50px;
+	height: 25px;
+	opacity: .75;
+	transition: width .15s ease-out;
+}
+
+label.review-score-box-item > .inner:hover {
+	opacity: 1;
+}
+
+.review-score-box-item .score-label {
+	height: 100%;
+	width: 100%;
+	font-size: 15px;
+	text-align: center;
+}
+
+label.review-score-box-item > input[type="radio"] {
+	display: none;
+}
+
+label.review-score-box-item > input[type="radio"]:checked + .inner {
+	opacity: 1;
+	width: 90px;
+}
+
+label.review-score-box-item > input[type="radio"]:checked + .inner > .score-label {
+	font-weight: bold;
+}
+
+.review-score-box-item.one-score-color > .inner {
+	background-color: #FF8A65;
+}
+
+.review-score-box-item.two-score-color > .inner {
+	background-color: #FFCC80;
+}
+
+.review-score-box-item.three-score-color > .inner {
+	background-color: #FFE082;
+}
+
+.review-score-box-item.four-score-color > .inner {
+	background-color: #C5E1A5;
+}
+
+.review-score-box-item.five-score-color > .inner {
+	background-color: #81C784;
+}

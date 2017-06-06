@@ -558,6 +558,14 @@ class ProductController extends Controller
       }
     }
 
+    // Get Product Review
+    // $reviews = $model->getRelatedData('Review');
+    $model->getAvgScore();
+
+    // Get user review
+    // $model->getUserReview();
+    // check users have to buy product before review
+
     $categoryPaths = $model->getCategoryPaths();
 
     $_keywords = array();

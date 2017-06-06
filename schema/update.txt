@@ -47,3 +47,5 @@ ALTER TABLE `order_payment_confirms` ADD `payment_method_name` VARCHAR(255) CHAR
 ALTER TABLE `order_histories` ADD `updated_at` DATETIME on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `created_at`;
 
 ALTER TABLE `order_payment_confirms` CHANGE `confirmed` `confirmed` TINYINT(1) NOT NULL DEFAULT '0';
+
+CREATE TABLE `reviews` ( `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT , `model` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL , `model_id` INT(11) UNSIGNED NOT NULL , `title` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL , `message` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL , `score` DECIMAL(1,1) NOT NULL , `created_by` INT(11) UNSIGNED NOT NULL , `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , `updated_at` DATETIME on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;

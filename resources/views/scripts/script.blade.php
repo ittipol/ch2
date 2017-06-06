@@ -45,6 +45,7 @@
     '__js/components/filter.js',
     '__js/components/job-applying-message.js',
     '__js/components/carousel.js',
+    '__js/components/review.js',
     '__js/notification/push-notification.js',
   );
 
@@ -111,6 +112,7 @@
     '__css/components/timeline.css',
     '__css/components/user-review.css',
     '__css/components/carousel.css',
+    '__css/components/review.css',
     '__css/pages/home.css',
     '__css/pages/shop.css',
     '__css/pages/account.css',

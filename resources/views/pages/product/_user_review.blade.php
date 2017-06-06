@@ -1,12 +1,29 @@
   <div class="space-top-50">
+
     <h3>
       <img src="/images/icons/message-blue.png">
-      รีวิวจากลูกค้า
+      รีวิวจากผู้ที่ซื้อสินค้านี้
     </h3>
-    <!-- <div class="line"></div> -->
 
-    <div class="row">
-      <div class="col-md-6 col-xs-12">
+    <div class="list-empty-message text-center space-top-20">
+      <img class="not-found-image" src="/images/icons/message-blue.png">
+      <div>
+        <h4>ยังไม่มีรีวิวจากคุณ</h4>
+        <a class="button" data-right-side-panel="1" data-right-side-panel-target="#review_panel">
+          แสดงความคิดเห็นต่อสินค้านี้
+        </a>
+      </div>
+    </div>
+
+    <div id="review_panel" class="right-size-panel form">
+      <div class="right-size-panel-inner">
+
+        <h4>รีวิวสินค้า</h4>
+        <div class="line"></div>
+        
+        <?php 
+          echo Form::open(['id' => 'main_form','method' => 'post', 'enctype' => 'multipart/form-data']);
+        ?>
 
         <div class="form-section">
 
@@ -16,40 +33,56 @@
                 'class' => 'required'
               ));
             ?>
-            <label class="choice-box review-score-box">
-              <?php
-                echo Form::radio('review_score', null);
-              ?>
-              <div class="inner">1</div>
-            </label>
 
-            <label class="choice-box review-score-box">
-              <?php
-                echo Form::radio('review_score', null);
-              ?>
-              <div class="inner">2</div>
-            </label>
+            <div class="review-score-box">
 
-            <label class="choice-box review-score-box">
-              <?php
-                echo Form::radio('review_score', null);
-              ?>
-              <div class="inner">3</div>
-            </label>
+              <label class="review-score-box-item one-score-color">
+                <?php
+                  echo Form::radio('review_score', 1);
+                ?>
+                <div class="inner">
+                  <div class="score-label">1</div>
+                </div>
+              </label>
 
-            <label class="choice-box review-score-box">
-              <?php
-                echo Form::radio('review_score', null);
-              ?>
-              <div class="inner">4</div>
-            </label>
+              <label class="review-score-box-item two-score-color">
+                <?php
+                  echo Form::radio('review_score', 2);
+                ?>
+                <div class="inner">
+                  <div class="score-label">2</div>
+                </div>
+              </label>
 
-            <label class="choice-box review-score-box">
-              <?php
-                echo Form::radio('review_score', null);
-              ?>
-              <div class="inner">5</div>
-            </label>
+              <label class="review-score-box-item three-score-color">
+                <?php
+                  echo Form::radio('review_score', 3);
+                ?>
+                <div class="inner">
+                  <div class="score-label">3</div>
+                </div>
+              </label>
+
+              <label class="review-score-box-item four-score-color">
+                <?php
+                  echo Form::radio('review_score', 4);
+                ?>
+                <div class="inner">
+                  <div class="score-label">4</div>
+                </div>
+              </label>
+
+              <label class="review-score-box-item five-score-color">
+                <?php
+                  echo Form::radio('review_score', 5, true);
+                ?>
+                <div class="inner">
+                  <div class="score-label">5</div>
+                </div>
+              </label>
+
+            </div>
+  
           </div>
 
           <div class="form-row">
@@ -64,21 +97,26 @@
 
           <div class="form-row">
             <?php 
-              echo Form::label('description', 'รายละเอียดรีวิว', array(
+              echo Form::label('message', 'รายละเอียดรีวิว', array(
                 'class' => 'required'
               ));
-              echo Form::textarea('description');
+              echo Form::textarea('message');
             ?>
           </div>
 
           <?php
-            echo Form::submit('ส่งรีวิว', array(
+            echo Form::submit('รีวิว', array(
               'class' => 'button'
             ));
           ?>
 
         </div>
 
+        <?php
+          echo Form::close();
+        ?>
+
+        <div class="right-size-panel-close-button"></div>
       </div>
     </div>
 
