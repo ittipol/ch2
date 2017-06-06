@@ -48,10 +48,31 @@
 
   <div class="form-row">
     <?php 
-      echo Form::label('branch_name', 'ชื่อสาขา', array(
+      echo Form::label('additional_data[account_name]', 'ชื่อบัญชี', array(
         'class' => 'required'
       ));
-      echo Form::text('branch_name', null, array(
+      echo Form::text('additional_data[account_name]', null, array(
+        'placeholder' => 'ชื่อบัญชี',
+        'autocomplete' => 'off'
+      ));
+    ?>
+  </div>
+
+  <div class="form-row">
+    <?php 
+      echo Form::label('additional_data[account_type]', 'ประเภทบัญชี', array(
+        'class' => 'required'
+      ));
+      echo Form::select('additional_data[account_type]', $additionalData['account_type']);
+    ?>
+  </div>
+
+  <div class="form-row">
+    <?php 
+      echo Form::label('additional_data[branch_name]', 'ชื่อสาขา', array(
+        'class' => 'required'
+      ));
+      echo Form::text('additional_data[branch_name]', null, array(
         'placeholder' => 'ชื่อสาขา',
         'autocomplete' => 'off'
       ));
@@ -60,10 +81,10 @@
 
   <div class="form-row">
     <?php 
-      echo Form::label('account_number', 'เลขที่บัญชี', array(
+      echo Form::label('additional_data[account_number]', 'เลขที่บัญชี', array(
         'class' => 'required'
       ));
-      echo Form::text('account_number', null, array(
+      echo Form::text('additional_data[account_number]', null, array(
         'placeholder' => 'เลขที่บัญชี',
         'autocomplete' => 'off'
       ));

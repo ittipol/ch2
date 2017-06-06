@@ -129,6 +129,7 @@ class PaymentMethodController extends Controller
     }
 
     $this->setData('serviceProviders',$_serviceProviders);
+    $this->setData('additionalData',$model->getAdditionalData($this->param['type']));
 
     return $this->view('pages.payment_method.form.'.$page);
   }
@@ -148,6 +149,7 @@ class PaymentMethodController extends Controller
 
     $model->buildPaymentMethodName($this->param['type'],$request->all());
 
+    $request->request->add(['additional_data' => json_encode($request->get('additional_data'))]);
     $request->request->add(['ShopRelateTo' => array('shop_id' => request()->get('shopId'))]);
 
     if($model->fill($request->all())->save()) {
@@ -199,6 +201,7 @@ class PaymentMethodController extends Controller
     }
 
     $this->setData('serviceProviders',$_serviceProviders);
+    $this->setData('additionalData',$model->getAdditionalData($paymentMethodType->alias));
 
     return $this->view('pages.payment_method.form.'.$page);
   }
@@ -218,6 +221,8 @@ class PaymentMethodController extends Controller
     }
 
     $model->buildPaymentMethodName($paymentMethodType->alias,$request->all());
+
+    $request->request->add(['additional_data' => json_encode($request->get('additional_data'))]);
 
     if($model->fill($request->all())->save()) {
 
@@ -243,17 +248,25 @@ class PaymentMethodController extends Controller
   }
 
   private function checkFormError($paymentMethodType,$value) {
-
+// dd($value['additional_data']);
     $errorMessages = array();
 
     switch ($paymentMethodType) {
       case 'bank-transfer':
 
-          if(empty($value['branch_name'])) {
+          if(empty($value['additional_data']['account_name'])) {
+            $errorMessages[] = 'ชื่อบัญชีห้ามว่าง';
+          }
+
+          if(empty($value['additional_data']['account_type'])) {
+            $errorMessages[] = 'ประเภทบัญชีห้ามว่าง';
+          }
+
+          if(empty($value['additional_data']['branch_name'])) {
             $errorMessages[] = 'ชื่อสาขาห้ามว่าง';
           }
 
-          if(empty($value['account_number'])) {
+          if(empty($value['additional_data']['account_number'])) {
             $errorMessages[] = 'เลขที่บัญชีห้ามว่าง';
           }
 
@@ -261,18 +274,18 @@ class PaymentMethodController extends Controller
       
       case 'promptpay':
 
-        if(empty($value['promptpay_transfer_number']) || empty($value['promptpay_transfer_number_type'])) {
+        if(empty($value['additional_data']['promptpay_transfer_number']) || empty($value['additional_data']['promptpay_transfer_number_type'])) {
           $errorMessages[] = 'หมายเลขที่ใช้ในการโอนห้ามว่าง';
         }else{
 
-          switch ($value['promptpay_transfer_number_type']) {
+          switch ($value['additional_data']['promptpay_transfer_number_type']) {
             case 'tel-no':
 
               break;
             
             case 'id-card-no':
 
-                if(strlen($value['promptpay_transfer_number']) != 13) {
+                if(strlen($value['additional_data']['promptpay_transfer_number']) != 13) {
                   $errorMessages[] = 'เลขบัตรประชาชนไม่ถูกต้อง';
                 }
                 
@@ -289,7 +302,7 @@ class PaymentMethodController extends Controller
 
       case 'paypal':
 
-          if(empty($value['paypal_account'])) {
+          if(empty($value['additional_data']['paypal_account'])) {
             $errorMessages[] = 'บัญชี PayPal ห้ามว่าง';
           }
 

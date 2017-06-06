@@ -39,10 +39,10 @@
 
   <div class="form-row">
     <?php 
-      echo Form::label('paypal_account', 'บัญชี PayPal', array(
+      echo Form::label('additional_data[paypal_account]', 'บัญชี PayPal', array(
         'class' => 'required'
       ));
-      echo Form::text('paypal_account', null, array(
+      echo Form::text('additional_data[paypal_account]', null, array(
         'placeholder' => 'บัญชี PayPal',
         'autocomplete' => 'off'
       ));

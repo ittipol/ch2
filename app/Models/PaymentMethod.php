@@ -18,10 +18,32 @@ class PaymentMethod extends Model
     )
   );
 
-  public $promptpayTransferNumberType = array(
-    'tel-no' => 'หมายเลขโทรศัพท์',
-    'id-card-no' => 'เลขบัตรประชาชน',
+  private $additionalData = array(
+    'bank-transfer' => array(
+      'account_type' => array(
+        'saving-deposit-account' => 'ออมทรัพย์',
+        'fixed-deposit-account' => 'ฝากประจำ',
+        'current-account' => 'กระแสรายวัน',
+      )
+    ),
+    'promptpay' => array(
+      'promptpay_transfer_number_type' => array(
+        'tel-no' => 'หมายเลขโทรศัพท์',
+        'id-card-no' => 'เลขบัตรประชาชน',
+      )
+    )
   );
+
+  // public $bankAccountType = array(
+  //   'saving-deposit-account' => 'ออมทรัพย์',
+  //   'fixed-deposit-account' => 'ฝากประจำ',
+  //   'current-account' => 'กระแสรายวัน',
+  // );
+
+  // public $promptpayTransferNumberType = array(
+  //   'tel-no' => 'หมายเลขโทรศัพท์',
+  //   'id-card-no' => 'เลขบัตรประชาชน',
+  // );
 
   // protected $validation = array(
   //   'rules' => array(
@@ -33,6 +55,28 @@ class PaymentMethod extends Model
   //     'description.required' => 'รายละเอียดวิธีการชำระเงินห้ามว่าง',
   //   )
   // );
+
+  public function getAdditionalData($type = null,$index = null) {
+
+    if(empty($type)) {
+      return null;
+    }
+
+    if(empty($this->additionalData[$type])) {
+      return null;
+    }
+
+    if(empty($index)) {
+      return $this->additionalData[$type];
+    }
+
+    if(empty($this->additionalData[$type][$index])) {
+      return null;
+    }
+
+    return $this->additionalData[$type][$index];
+
+  }
 
   public function paymentMethodType() {
     return $this->hasOne('App\Models\PaymentMethodType','id','payment_method_type_id');
@@ -126,7 +170,9 @@ class PaymentMethod extends Model
 
     return array_merge(
       $this->getAttributes(),
-      $additionalData
+      array(
+        'additional_data' => $additionalData
+      )
     );
   }
 
@@ -135,33 +181,21 @@ class PaymentMethod extends Model
     switch ($paymentMethodType) {
       case 'bank-transfer':
 
-          $this->name = PaymentServiceProvider::select('name')->find($value['payment_service_provider_id'])->name.' สาขา '.$value['branch_name'].' เลขที่บัญชี '.$value['account_number'];
-          
-          $this->additional_data = json_encode(array(
-            'branch_name' => $value['branch_name'],
-            'account_number' => $value['account_number'],
-          ));
+          $this->name = PaymentServiceProvider::select('name')->find($value['payment_service_provider_id'])->name.' สาขา '.$value['additional_data']['branch_name'].' เลขที่บัญชี '.$value['additional_data']['account_number'];
 
         break;
       
       case 'promptpay':
 
-          $this->name = 'โอนเงินด้วย'.$this->promptpayTransferNumberType[$value['promptpay_transfer_number_type']].' '.$value['promptpay_transfer_number'];
+          $additionalData = $this->getAdditionalData($paymentMethodType,'promptpay_transfer_number_type');
 
-          $this->additional_data = json_encode(array(
-            'promptpay_transfer_number_type' => $value['promptpay_transfer_number_type'],
-            'promptpay_transfer_number' => $value['promptpay_transfer_number'],
-          ));
+          $this->name = 'โอนเงินด้วย'.$additionalData[$value['additional_data']['promptpay_transfer_number_type']].' '.$value['additional_data']['promptpay_transfer_number'];
 
         break;
 
       case 'paypal':
 
-          $this->name = 'ชำระเงินไปยังบัญชี '.$value['paypal_account'];
-
-          $this->additional_data = json_encode(array(
-            'paypal_account' => $value['paypal_account'],
-          ));
+          $this->name = 'ชำระเงินไปยังบัญชี '.$value['additional_data']['paypal_account'];
 
         break;
     }

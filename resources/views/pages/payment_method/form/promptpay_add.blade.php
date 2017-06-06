@@ -39,24 +39,24 @@
 
   <div class="form-row">
     <?php 
-      echo Form::label('promptpay_transfer_number', 'หมายเลขที่ใช้ในการโอน', array(
+      echo Form::label('additional_data[promptpay_transfer_number]', 'หมายเลขที่ใช้ในการโอน', array(
         'class' => 'required'
       ));
     ?>
     <label class="choice-box">
       <?php
-        echo Form::radio('promptpay_transfer_number_type', 'tel-no', true);
+        echo Form::radio('additional_data[promptpay_transfer_number_type]', 'tel-no', true);
       ?>
       <div class="inner">หมายเลขโทรศัพท์</div>
     </label>
     <label class="choice-box">
       <?php
-        echo Form::radio('promptpay_transfer_number_type', 'id-card-no', false);
+        echo Form::radio('additional_data[promptpay_transfer_number_type]', 'id-card-no', false);
       ?>
       <div class="inner">เลขบัตรประชาชน</div>
     </label>
     <?php
-      echo Form::text('promptpay_transfer_number', null, array(
+      echo Form::text('additional_data[promptpay_transfer_number]', null, array(
         'placeholder' => 'หมายเลขที่ใช้ในการโอน',
         'autocomplete' => 'off'
       ));
