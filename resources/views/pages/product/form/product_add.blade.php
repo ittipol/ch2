@@ -5,11 +5,9 @@
   <div class="sub-header-nav-fixed-top">
     <div class="row">
       <div class="col-xs-12">
-
         <div class="btn-group pull-right">
           <a href="{{request()->get('shopUrl')}}manage/product" class="btn btn-secondary">กลับไปหน้ารายการสินค้า</a>
         </div>
-
       </div>
     </div>
   </div>

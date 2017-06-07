@@ -679,9 +679,14 @@ class Product extends Model
 
   }
 
-  public function getAvgScore() {
+  public function productAvgScore() {
     $review = new Review;
     return $review->getAvgScore($this);
+  }
+
+  public function productScoreList() {
+    $review = new Review;
+    return $review->getScoreList($this);
   }
 
   public function buildLookupData() {

@@ -110,7 +110,6 @@
     '__css/components/tab.css',
     '__css/components/notice.css',
     '__css/components/timeline.css',
-    '__css/components/user-review.css',
     '__css/components/carousel.css',
     '__css/components/review.css',
     '__css/pages/home.css',

@@ -1,4 +1,59 @@
-.review-score-box {}
+.avg-review-score {
+	font-size: 50px;
+	line-height: 50px;
+}
+
+.rating-bar-list {
+	margin-bottom: 5px;
+}
+
+.rating-bar-item {
+	width: 200px;
+	height: 20px;
+	min-width: 5px;
+	margin-left: 10px;
+	background-color: #E0F2F1;
+	display: inline-block;
+}
+
+.rating-bar-box {
+	height: 100%;
+	background-color: #43A047;
+}
+
+.rating-count-text {
+	color: #555;
+	font-size: 14px;
+	font-weight: bold;
+	margin-left: 110%;
+	line-height: 20px;
+}
+
+.review-content {
+	margin-bottom: 30px;
+}
+
+.review-title {
+	font-size: 16px;
+	font-weight: bold;
+	color: #222;
+	margin-right: 20px;
+}
+
+.review-description {
+	font-size: 16px;
+	color: #888;
+}
+
+.review-rating-score {
+	font-size: 16px;
+	color: #222;
+	margin-bottom: 8px
+}
+
+.review-by {
+	font-size: 16px;
+}
 
 label.review-score-box-item {
 	margin: 0;
@@ -22,6 +77,7 @@ label.review-score-box-item > .inner:hover {
 .review-score-box-item .score-label {
 	height: 100%;
 	width: 100%;
+	color: #444;
 	font-size: 15px;
 	text-align: center;
 }
@@ -39,22 +95,52 @@ label.review-score-box-item > input[type="radio"]:checked + .inner > .score-labe
 	font-weight: bold;
 }
 
-.review-score-box-item.one-score-color > .inner {
-	background-color: #FF8A65;
+.color-1-score {
+	/*background-color: #FF8A65 !important;*/
+	background-color: #FF7043 !important;
 }
 
-.review-score-box-item.two-score-color > .inner {
-	background-color: #FFCC80;
+.color-2-score {
+	/*background-color: #FFCC80 !important;*/
+	background-color: #FFB74D !important;
 }
 
-.review-score-box-item.three-score-color > .inner {
-	background-color: #FFE082;
+.color-3-score {
+	/*background-color: #FFE082 !important;*/
+	background-color: #FFD54F !important;
 }
 
-.review-score-box-item.four-score-color > .inner {
-	background-color: #C5E1A5;
+.color-4-score {
+	/*background-color: #C5E1A5 !important;*/
+	background-color: #9CCC65 !important;
 }
 
-.review-score-box-item.five-score-color > .inner {
-	background-color: #81C784;
+.color-5-score {
+	/*background-color: #81C784 !important;*/
+	background-color: #66BB6A !important;
+}
+
+.user-review .additional-option {
+	position: absolute;
+	top: 0;
+	right: 20px;
+	width: 40px;
+}
+
+.user-review-score {
+	font-size: 36px;
+	width: 80px;
+	height: 80px;
+	line-height: 80px;
+	border-radius: 80px;
+	color: #fff;
+	background-color: #ececec;
+	display: inline-block;
+}
+
+@media only screen and (max-width : 480px) {
+	.user-review .review-description {
+		margin-top: 20px;
+		padding: 0 15px; 
+	}
 }

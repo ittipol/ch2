@@ -566,11 +566,21 @@ class ProductController extends Controller
       $productBought = $model->checkProductBought();
 
       if($productBought) {
+
+        $_userReview = Service::loadModel('Review')->getUserReview($model,session()->get('Person.id'));
+
+        $userReview = null;
+        $hasUserReview = false;
+        if(!empty($_userReview)) {
+          $userReview = $_userReview->buildModelData();
+          $hasUserReview = true;
+        }
+
+        $this->setData('hasUserReview',$hasUserReview);
+        $this->setData('userReview',$userReview);
         $this->setData('reviewUrl',$url->url('product/review/post/'.$model->id));
       }
     }
-
-    // Get list of rating
 
     $categoryPaths = $model->getCategoryPaths();
 
@@ -596,7 +606,8 @@ class ProductController extends Controller
     $this->setData('realatedProducts',$_realatedProducts);
 
     $this->setData('productBought',$productBought);
-    $this->setData('avgScore',$model->getAvgScore());
+    $this->setData('avgScore',$model->productAvgScore());
+    $this->setData('scoreList',$model->productScoreList());
 
     $this->setPageTitle($this->data['_modelData']['name'].' - ร้าน '.$shop->name);
     $this->setPageImage($model->getImage('list'));
