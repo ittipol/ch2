@@ -64,19 +64,18 @@
         <h4 class="box-header-title">
           <img class="icon-before-title" src="/images/icons/tag-blue.png">สินค้า
         </h4>
-        <a href="{{request()->get('shopUrl')}}product" class="flat-button">แสดงทั้งหมด</a>
       </div>
 
       @if(!empty($products))
 
-      <div class="box-content padding-15">
+      <div class="box-content padding-left-right-15">
 
         <div class="row">
 
           @foreach($products as $data)
 
-          <div class="col-sm-4 col-xs-6">
-            <div class="card">
+          <div class="col-sm-3 col-xs-6">
+            <div class="card sm">
 
               @if(!empty($data['flag']))
               <div class="flag-wrapper">
@@ -109,19 +108,15 @@
                 </div>
               </div>
 
-              <div class="button-group">
-
-                <a href="{{$data['detailUrl']}}">
-                  <div class="button wide-button">รายละเอียดสินค้า</div>
-                </a>
-              
-              </div>
-
             </div>
           </div>
 
           @endforeach
 
+        </div>
+
+        <div class="text-right space-bottom-20">
+          <a href="{{request()->get('shopUrl')}}product" class="flat-button">แสดงทั้งหมด</a>
         </div>
 
       </div>
@@ -145,20 +140,17 @@
         <h4 class="box-header-title">
           <img class="icon-before-title" src="/images/icons/tag-blue.png">แคตตาล็อกสินค้า
         </h4>
-
-        <a href="{{request()->get('shopUrl')}}product_catalog" class="flat-button">แสดงทั้งหมด</a>
-
       </div>
 
       @if(!empty($productCatalogs))
 
-      <div class="box-content padding-15">
+      <div class="box-content padding-left-right-15">
 
         <div class="row">
 
           @foreach($productCatalogs as $data)
 
-          <div class="col-md-6 col-xs-12">
+          <div class="col-md-3 col-xs-12">
             <div class="card sm">
 
               <div class="image-tile">
@@ -186,6 +178,10 @@
 
           @endforeach
 
+        </div>
+
+        <div class="text-right space-bottom-20">
+          <a href="{{request()->get('shopUrl')}}product_catalog" class="flat-button">แสดงทั้งหมด</a>
         </div>
 
       </div>

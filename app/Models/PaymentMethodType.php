@@ -16,4 +16,14 @@ class PaymentMethodType extends Model
     $providerToType = new PaymentServiceProviderToPaymentMethodType;
     return $providerToType->where('payment_method_type_id','=',$this->id)->exists();
   }
+
+  public function getPaymentMethodTypeImage() {
+
+    if(!empty($this->image)) {
+      return '/images/payment_type/'.$this->image;
+    }
+
+    return '/images/payment_type/bank-transfer.png';
+
+  }
 }

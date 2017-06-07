@@ -10,6 +10,7 @@ use App\library\url;
 use App\library\cache;
 use Redirect;
 use Session;
+use Auth;
 
 use App\library\notificationHelper;
 
@@ -415,6 +416,8 @@ class ProductController extends Controller
       'json' => array('Image')
     ));
 
+    $this->data = $model->modelData->build();
+
     // Get Shop Data
     $shop = $model->getRelatedData('ShopRelateTo',array(
       'first' => true,
@@ -558,13 +561,16 @@ class ProductController extends Controller
       }
     }
 
-    // Get Product Review
-    // $reviews = $model->getRelatedData('Review');
-    $model->getAvgScore();
+    $productBought = false;
+    if(Auth::check()) {
+      $productBought = $model->checkProductBought();
 
-    // Get user review
-    // $model->getUserReview();
-    // check users have to buy product before review
+      if($productBought) {
+        $this->setData('reviewUrl',$url->url('product/review/post/'.$model->id));
+      }
+    }
+
+    // Get list of rating
 
     $categoryPaths = $model->getCategoryPaths();
 
@@ -575,7 +581,6 @@ class ProductController extends Controller
       }
     }
 
-    $this->data = $model->modelData->build();
     $this->setData('shop',$shop->modelData->build(true));
     $this->setData('shopImageUrl',$shop->getProfileImageUrl());
     $this->setData('shopCoverUrl',$shop->getCoverUrl());
@@ -589,6 +594,9 @@ class ProductController extends Controller
 
     $this->setData('shopRealatedProducts',$_shopRealatedProducts);
     $this->setData('realatedProducts',$_realatedProducts);
+
+    $this->setData('productBought',$productBought);
+    $this->setData('avgScore',$model->getAvgScore());
 
     $this->setPageTitle($this->data['_modelData']['name'].' - ร้าน '.$shop->name);
     $this->setPageImage($model->getImage('list'));
@@ -618,102 +626,6 @@ class ProductController extends Controller
     return $this->view('pages.product.detail');
 
   }
-
-  // public function shopProductDetail() {
-
-  //   $url = new Url;
-
-  //   $model = Service::loadModel('Product')->find($this->param['id']);
-
-  //   $model->modelData->loadData(array(
-  //     'json' => array('Image')
-  //   ));
-
-  //   $branchIds = $model->getRelatedData('RelateToBranch',array(
-  //     'list' => 'branch_id',
-  //     'fields' => array('branch_id'),
-  //   ));
-
-  //   $branches = array();
-  //   if(!empty($branchIds)){
-  //     $branches = Service::loadModel('Branch')
-  //     ->select(array('id','name'))
-  //     ->whereIn('id',$branchIds)
-  //     ->get();
-  //   }
-
-  //   $branchLocations = array();
-  //   $hasBranchLocation = false;
-  //   // foreach ($branches as $branch) {
-
-  //   //   $address = $branch->modelData->loadAddress();
-
-  //   //   if(!empty($address)){
-
-  //   //     $hasBranchLocation = true;
-
-  //   //     $graphics = json_decode($address['_geographic'],true);
-        
-  //   //     $branchLocations[] = array(
-  //   //       'id' => $branch->id,
-  //   //       'address' => $branch->name,
-  //   //       'latitude' => $graphics['latitude'],
-  //   //       'longitude' => $graphics['longitude'],
-  //   //       'detailUrl' => $url->setAndParseUrl('shop/{shopSlug}/branch/{id}',array(
-  //   //         'shopSlug' => request()->shopSlug,
-  //   //         'id' => $branch->id
-  //   //       ))
-  //   //     );
-  //   //   }
-  //   // }
-
-  //   $productCatalogs = $model->getProductCatalogs();
-
-  //   $_productCatalogs = array();
-  //   if(!empty($productCatalogs)) {
-  //     foreach ($productCatalogs as $productCatalog) {
-  //       $_productCatalogs[] = array(
-  //         'name' => $productCatalog->name,
-  //         'detailUrl' => $url->url('shop/'.request()->shopSlug.'/product_catalog/'.$productCatalog->id),
-  //       );
-  //     }
-  //   }
-
-  //   $shop = request()->get('shop');
-
-  //   $shippingMethods = Service::loadModel('ShippingMethod')
-  //   ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'shipping_methods.id')
-  //   ->where([
-  //     ['shop_relate_to.model','like','ShippingMethod'],
-  //     ['shop_relate_to.shop_id','=',$shop->id]
-  //   ])
-  //   ->select('shipping_methods.*');
-
-  //   $_shippingMethods = array();
-  //   if($shippingMethods->exists()) {
-  //     foreach ($shippingMethods->get() as $shippingMethod) {
-  //       $_shippingMethods[] = $shippingMethod->buildModelData();
-  //     }
-  //   }
-
-  //   $this->data = $model->modelData->build();
-  //   $this->setData('shop',$shop->modelData->build(true));
-  //   $this->setData('shopImageUrl',$shop->getProfileImageUrl());
-  //   $this->setData('shopCoverUrl',$shop->getCoverUrl());
-  //   // $this->setData('shopUrl',request()->get('shopUrl'));
-  //   $this->setData('categoryPaths',$model->getCategoryPaths());
-  //   $this->setData('productCatalogs',$_productCatalogs);
-  //   $this->setData('productOptionValues',$model->getProductOptionValues());
-  //   $this->setData('branchLocations',json_encode($branchLocations));
-  //   $this->setData('hasBranchLocation',$hasBranchLocation);
-
-  //   $this->setPageTitle($this->data['_modelData']['name'].' - สินค้า @ '.request()->get('shop')->name);
-  //   $this->setPageImage($model->getImage('list'));
-  //   $this->setPageDescription($model->getShortDescription());
-
-  //   return $this->view('pages.product.shop_product_detail');
-
-  // }
 
   public function menu() {
 

@@ -18,32 +18,26 @@ class PaymentMethod extends Model
     )
   );
 
-  private $additionalData = array(
+  private $paymentTypeToAdditionalData = array(
     'bank-transfer' => array(
-      'account_type' => array(
-        'saving-deposit-account' => 'ออมทรัพย์',
-        'fixed-deposit-account' => 'ฝากประจำ',
-        'current-account' => 'กระแสรายวัน',
-      )
+      'account_type'
     ),
     'promptpay' => array(
-      'promptpay_transfer_number_type' => array(
-        'tel-no' => 'หมายเลขโทรศัพท์',
-        'id-card-no' => 'เลขบัตรประชาชน',
-      )
+      'promptpay_transfer_number_type'
     )
   );
 
-  // public $bankAccountType = array(
-  //   'saving-deposit-account' => 'ออมทรัพย์',
-  //   'fixed-deposit-account' => 'ฝากประจำ',
-  //   'current-account' => 'กระแสรายวัน',
-  // );
-
-  // public $promptpayTransferNumberType = array(
-  //   'tel-no' => 'หมายเลขโทรศัพท์',
-  //   'id-card-no' => 'เลขบัตรประชาชน',
-  // );
+  private $additionalData = array(
+    'account_type' => array(
+      'saving-deposit-account' => 'ออมทรัพย์',
+      // 'fixed-deposit-account' => 'ฝากประจำ',
+      // 'current-account' => 'กระแสรายวัน',
+    ),
+    'promptpay_transfer_number_type' => array(
+      'tel-no' => 'หมายเลขโทรศัพท์',
+      'id-card-no' => 'เลขบัตรประชาชน',
+    )
+  );
 
   // protected $validation = array(
   //   'rules' => array(
@@ -56,25 +50,27 @@ class PaymentMethod extends Model
   //   )
   // );
 
-  public function getAdditionalData($type = null,$index = null) {
+  public function getAdditionalDataByPaymentType($type = null) {
 
-    if(empty($type)) {
+    if(empty($type) || empty($this->paymentTypeToAdditionalData[$type])) {
       return null;
     }
 
-    if(empty($this->additionalData[$type])) {
+    $data = array();
+    foreach ($this->paymentTypeToAdditionalData[$type] as $index) {
+      $data[$index] = $this->getAdditionalData($index);
+    }
+
+    return $data;
+  }
+
+  public function getAdditionalData($index = null) {
+
+    if(empty($index) || empty($this->additionalData[$index])) {
       return null;
     }
 
-    if(empty($index)) {
-      return $this->additionalData[$type];
-    }
-
-    if(empty($this->additionalData[$type][$index])) {
-      return null;
-    }
-
-    return $this->additionalData[$type][$index];
+    return $this->additionalData[$index];
 
   }
 
@@ -131,24 +127,54 @@ class PaymentMethod extends Model
   public function buildModelData() {
 
     $providerName = null;
+    $providerLogo = null;
     if(!empty($this->payment_service_provider_id)) {
-      $providerName = PaymentServiceProvider::select('name')->find($this->payment_service_provider_id)->name;
+
+      $provider = PaymentServiceProvider::select('name','logo')->find($this->payment_service_provider_id);
+
+      $providerName = $provider->name;
+
+      if(!empty($provider->logo)) {
+        $providerLogo = '/images/service_provider_logo/'.$provider->logo;
+      }
+
     }
 
     $data = array(
       'id' => $this->id,
       'name' => $this->name,
       'description' => nl2br($this->description),
-      'providerName' => $providerName
+      'providerName' => $providerName,
+      'providerLogo' => $providerLogo
     );
 
-    $additionalData = json_decode($this->additional_data,true);
+    $additionalData = $this->extractAdditionalData();
 
     if(empty($additionalData)) {
       return $data;
     }
 
     return array_merge($data,$additionalData);
+
+  }
+
+  private function extractAdditionalData() {
+
+    if(empty($this->additional_data)) {
+      return null;
+    }
+
+    $additionalData = json_decode($this->additional_data,true);
+
+    foreach ($additionalData as $index => $value) {
+
+      if(!empty($this->additionalData[$index])) {
+        $additionalData[$index] = $this->additionalData[$index][$value];
+      }
+
+    }
+
+    return $additionalData;
 
   }
 
@@ -180,23 +206,16 @@ class PaymentMethod extends Model
 
     switch ($paymentMethodType) {
       case 'bank-transfer':
-
           $this->name = PaymentServiceProvider::select('name')->find($value['payment_service_provider_id'])->name.' สาขา '.$value['additional_data']['branch_name'].' เลขที่บัญชี '.$value['additional_data']['account_number'];
-
         break;
       
       case 'promptpay':
-
           $additionalData = $this->getAdditionalData($paymentMethodType,'promptpay_transfer_number_type');
-
           $this->name = 'โอนเงินด้วย'.$additionalData[$value['additional_data']['promptpay_transfer_number_type']].' '.$value['additional_data']['promptpay_transfer_number'];
-
         break;
 
       case 'paypal':
-
           $this->name = 'ชำระเงินไปยังบัญชี '.$value['additional_data']['paypal_account'];
-
         break;
     }
 

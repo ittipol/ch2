@@ -666,16 +666,22 @@ class Product extends Model
 
   }
 
+  public function checkProductBought() {
+
+    // Service::loadModel('OrderStatus')->getIdByalias('pending-seller-confirmation');
+    return Order::join('order_products', 'order_products.order_id', '=', 'orders.id')
+    ->select('orders.id')
+    ->where([
+      // ['orders.order_status_id','=',],
+      ['order_products.product_id','=',$this->id],
+      ['created_by','=',session()->get('Person.id')]
+    ])->exists();
+
+  }
+
   public function getAvgScore() {
-
-    $reivews = Review::where([
-      ['model','like','Product'],
-      ['model_id','=',$this->id]
-    ]);
-
-    // $total = $reivews->count();
-    // sql get AVG (search)
-
+    $review = new Review;
+    return $review->getAvgScore($this);
   }
 
   public function buildLookupData() {

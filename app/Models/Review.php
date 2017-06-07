@@ -9,4 +9,15 @@ class Review extends Model
   protected $modelRelations = array('Product');
 
   private $fullScore = 5;
+
+  public function getAvgScore($model) {
+
+    $avgScore = Review::where([
+      ['model','like',$model->modelName],
+      ['model_id','=',$model->id]
+    ])->avg('score');
+
+    return number_format($avgScore,1);
+
+  } 
 }

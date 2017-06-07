@@ -319,7 +319,6 @@ label.list-box > input[type="checkbox"] {
 	}
 }
 
-
 @media only screen and (max-width : 480px) {
 
 	.list-h .primary-info.single-info {
@@ -343,6 +342,10 @@ label.list-box > input[type="checkbox"] {
 		width: 100%;
 		margin-top: 40px;
 		margin-left: 0;
+	}
+
+	.payment-method-list .payment-method-item a.button {
+		margin-top: 10px;
 	}
 
 }

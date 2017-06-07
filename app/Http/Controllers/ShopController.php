@@ -61,7 +61,7 @@ class ShopController extends Controller
     ->where('shop_relate_to.model','like','Product')
     ->where('shop_relate_to.shop_id','=',$model->id)
     ->select('products.*')
-    ->take(6)
+    ->take(24)
     ->orderBy('products.created_at','desc')
     ->get();
 

@@ -51,6 +51,10 @@ class User extends Model
 
     }
 
+    public function checkOrder() {
+        dd('sdsx');
+    }
+
     // public function createUserFolder() {
 
     //   $avatarFolder = storage_path($this->profileDirPath).$this->attributes['id'].'/avatar';

@@ -55,6 +55,8 @@ class PaymentMethodController extends Controller
 
       $_paymentMethods[] = array(
         'name' => $paymentMethodType->name,
+        'type' => $paymentMethodType->alias,
+        'image' => $paymentMethodType->getPaymentMethodTypeImage(),
         'data' => $data
       );
 
@@ -129,7 +131,7 @@ class PaymentMethodController extends Controller
     }
 
     $this->setData('serviceProviders',$_serviceProviders);
-    $this->setData('additionalData',$model->getAdditionalData($this->param['type']));
+    $this->setData('additionalData',$model->getAdditionalDataByPaymentType($this->param['type']));
 
     return $this->view('pages.payment_method.form.'.$page);
   }
@@ -201,7 +203,7 @@ class PaymentMethodController extends Controller
     }
 
     $this->setData('serviceProviders',$_serviceProviders);
-    $this->setData('additionalData',$model->getAdditionalData($paymentMethodType->alias));
+    $this->setData('additionalData',$model->getAdditionalDataByPaymentType($paymentMethodType->alias));
 
     return $this->view('pages.payment_method.form.'.$page);
   }
@@ -248,7 +250,7 @@ class PaymentMethodController extends Controller
   }
 
   private function checkFormError($paymentMethodType,$value) {
-// dd($value['additional_data']);
+
     $errorMessages = array();
 
     switch ($paymentMethodType) {

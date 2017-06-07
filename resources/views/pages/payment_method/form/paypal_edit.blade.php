@@ -7,7 +7,7 @@
       <div class="col-xs-12">
 
         <div class="btn-group pull-right">
-          <a href="{{request()->get('shopUrl')}}payment_method" class="btn btn-secondary">กลับไปหน้าวิธีการชำระเงิน</a>
+          <a href="{{request()->get('shopUrl')}}manage/payment_method" class="btn btn-secondary">กลับไปหน้าวิธีการชำระเงิน</a>
         </div>
 
       </div>

@@ -41,9 +41,14 @@ h4 > img {
 
 h5 > img {
 	width: 30px;
-	margin-right: 10px;
+	margin-right: 8px;
 	background-color: #C8E6C9;
 	padding: 5px;
+}
+
+h5 > img.provider-logo {
+	padding: 0;
+	background-color: transparent;
 }
 
 .text-strike {
@@ -167,6 +172,11 @@ h5 > img {
 
 .padding-20 {
 	padding: 20px !important;
+}
+
+.padding-left-right-15 {
+	padding-left: 15px !important;
+	padding-right: 15px !important;
 }
 
 .padding-left-right-15 {
@@ -331,10 +341,13 @@ h5 > img {
 	color: rgb(66,133,244) !important;
 }
 
+.color-blue-2 {
+	color: #0277BD !important;
+}
+
 .border-color-amber {
 	border-color: #FFCA28 !important;
 }
-
 
 .article-content .paragraph {
 	max-width: 760px;

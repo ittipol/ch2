@@ -5,11 +5,9 @@
   <div class="sub-header-nav-fixed-top">
     <div class="row">
       <div class="col-xs-12">
-
         <div class="btn-group pull-right">
           <a href="{{URL::to('product')}}" class="btn btn-secondary">กลับไปหน้าภาพรวมสินค้า</a>
         </div>
-
       </div>
     </div>
   </div>
