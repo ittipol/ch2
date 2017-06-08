@@ -136,7 +136,7 @@ class Review extends Model
 
     return array(
       'title' => $this->title,
-      'description' => !empty($this->description) ? nl2br($this->description) : null,
+      'message' => !empty($this->message) ? nl2br($this->message) : null,
       'score' => $this->scoreFormat(),
       'createdDate' => $date->covertDateTimeToSting($this->created_at->format('Y-m-d H:i:s'))
     );

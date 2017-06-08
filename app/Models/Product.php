@@ -454,106 +454,6 @@ class Product extends Model
     return $productOptions = ProductOption::where('product_id','=',$this->id)->exists();
   }
 
-  public function buildModelData() {
-
-    $currency = new Currency;
-
-    $specifications = array();
-
-    if(!empty($this->product_model)) {
-      $specifications[] = array(
-        'title' => 'โมเดล',
-        'value' => $this->product_model
-      );
-    }
-
-    if(!empty($this->sku)) {
-      $specifications[] = array(
-        'title' => 'SKU',
-        'value' => $this->sku
-      );
-    }
-
-    $_specifications = json_decode($this->specifications,true);
-
-    if(!empty($_specifications)) {
-      foreach ($_specifications as $value) {
-        $specifications[] = array(
-          'title' => $value['title'],
-          'value' => $value['value']
-        );
-      }
-    }
-
-    if(!empty($this->width) && !empty($this->length) && !empty($this->height)) {
-      $specifications[] = array(
-        'title' => 'ขนาดสินค้า (กว้าง x ยาว x สูง)',
-        'value' => round($this->width, 2).' x '.round($this->length, 2).' x '.round($this->height, 2).' '.$this->lengthUnit->name,
-      );
-    }
-
-    if(!empty($this->weight)) {
-      $specifications[] = array(
-        'title' => 'น้ำหนัก',
-        'value' => round($this->weight, 2).' '.$this->weightUnit->name,
-      );
-    }
-
-    $shippingCalculateFrom = 'คำนวนค่าส่งสินค้าด้วยระบบ';
-    if($this->shipping_calculate_from == 1) {
-      $shippingCalculateFrom = 'คำนวนค่าส่งสินค้าจากผู้ขาย';
-    }
-
-    $quantityText = null;
-    if($this->quantity == 0) {
-      $quantityText = $this->message_out_of_order ? $this->message_out_of_order : 'สินค้าหมด';
-    }elseif($this->quantity < 11) {
-      $quantityText = 'เหลือเพียง '.$this->quantity.' '.$this->product_unit;
-    }else{
-      $quantityText = 'มีสินค้า';
-    }
-
-    return array_merge(array(
-      'id' => $this->id,
-      'name' => $this->name,
-      'description' => !empty($this->description) ? nl2br($this->description) : '-',
-      'sku' => $this->sku,
-      '_price' => $currency->format($this->price),
-      'quantityText' => $quantityText,
-      'quantity' => $this->quantity,
-      // 'message_out_of_order' => $this->message_out_of_order ? $this->message_out_of_order : 'สินค้าหมด',
-      'minimum' => $this->minimum,
-      'product_unit' => $this->product_unit,
-      'specifications' => $specifications,
-      'shipping_calculate_from' => $this->shipping_calculate_from,
-      '_shipping_calculate_from' => $shippingCalculateFrom,
-      'active' => $this->active,
-      '_active' => $this->active ? 'เปิดการขายสินค้า' : 'ปิดการขาย',
-      'promotion' => $this->getPromotion(),
-      'flag' => $this->getProductFlag(),
-    ),$this->getShippingCostText());
-
-  }
-
-  public function buildPaginationData() {
-
-    $string = new stringHelper;
-    $currency = new Currency;
-    
-    return array(
-      'id' => $this->id,
-      'name' => $this->name,
-      '_short_name' => $string->truncString($this->name,25),
-      'sku' => !empty($this->sku) ? $this->sku : '-',
-      '_price' => $currency->format($this->price),
-      'quantity' => $this->quantity,
-      '_active' => $this->active ? 'เปิดการขายสินค้า' : 'ปิดการขายสินค้า',
-      'promotion' => $this->getPromotion(),
-      'flag' => $this->getProductFlag()
-    );
-    
-  }
-
   public function getShippingCostText() {
 
     $shipping = $this->getRelatedData('ProductShipping',array(
@@ -667,16 +567,12 @@ class Product extends Model
   }
 
   public function checkProductBought() {
-
-    // Service::loadModel('OrderStatus')->getIdByalias('pending-seller-confirmation');
     return Order::join('order_products', 'order_products.order_id', '=', 'orders.id')
     ->select('orders.id')
     ->where([
-      // ['orders.order_status_id','=',],
       ['order_products.product_id','=',$this->id],
       ['created_by','=',session()->get('Person.id')]
     ])->exists();
-
   }
 
   public function productAvgScore() {
@@ -687,6 +583,106 @@ class Product extends Model
   public function productScoreList() {
     $review = new Review;
     return $review->getScoreList($this);
+  }
+
+  public function buildModelData() {
+
+    $currency = new Currency;
+
+    $specifications = array();
+
+    if(!empty($this->product_model)) {
+      $specifications[] = array(
+        'title' => 'โมเดล',
+        'value' => $this->product_model
+      );
+    }
+
+    if(!empty($this->sku)) {
+      $specifications[] = array(
+        'title' => 'SKU',
+        'value' => $this->sku
+      );
+    }
+
+    $_specifications = json_decode($this->specifications,true);
+
+    if(!empty($_specifications)) {
+      foreach ($_specifications as $value) {
+        $specifications[] = array(
+          'title' => $value['title'],
+          'value' => $value['value']
+        );
+      }
+    }
+
+    if(!empty($this->width) && !empty($this->length) && !empty($this->height)) {
+      $specifications[] = array(
+        'title' => 'ขนาดสินค้า (กว้าง x ยาว x สูง)',
+        'value' => round($this->width, 2).' x '.round($this->length, 2).' x '.round($this->height, 2).' '.$this->lengthUnit->name,
+      );
+    }
+
+    if(!empty($this->weight)) {
+      $specifications[] = array(
+        'title' => 'น้ำหนัก',
+        'value' => round($this->weight, 2).' '.$this->weightUnit->name,
+      );
+    }
+
+    $shippingCalculateFrom = 'คำนวนค่าส่งสินค้าด้วยระบบ';
+    if($this->shipping_calculate_from == 1) {
+      $shippingCalculateFrom = 'คำนวนค่าส่งสินค้าจากผู้ขาย';
+    }
+
+    $quantityText = null;
+    if($this->quantity == 0) {
+      $quantityText = $this->message_out_of_order ? $this->message_out_of_order : 'สินค้าหมด';
+    }elseif($this->quantity < 11) {
+      $quantityText = 'เหลือเพียง '.$this->quantity.' '.$this->product_unit;
+    }else{
+      $quantityText = 'มีสินค้า';
+    }
+
+    return array_merge(array(
+      'id' => $this->id,
+      'name' => $this->name,
+      'description' => !empty($this->description) ? nl2br($this->description) : '-',
+      'sku' => $this->sku,
+      '_price' => $currency->format($this->price),
+      'quantityText' => $quantityText,
+      'quantity' => $this->quantity,
+      // 'message_out_of_order' => $this->message_out_of_order ? $this->message_out_of_order : 'สินค้าหมด',
+      'minimum' => $this->minimum,
+      'product_unit' => $this->product_unit,
+      'specifications' => $specifications,
+      'shipping_calculate_from' => $this->shipping_calculate_from,
+      '_shipping_calculate_from' => $shippingCalculateFrom,
+      'active' => $this->active,
+      '_active' => $this->active ? 'เปิดการขายสินค้า' : 'ปิดการขาย',
+      'promotion' => $this->getPromotion(),
+      'flag' => $this->getProductFlag(),
+    ),$this->getShippingCostText());
+
+  }
+
+  public function buildPaginationData() {
+
+    $string = new stringHelper;
+    $currency = new Currency;
+    
+    return array(
+      'id' => $this->id,
+      'name' => $this->name,
+      '_short_name' => $string->truncString($this->name,25),
+      'sku' => !empty($this->sku) ? $this->sku : '-',
+      '_price' => $currency->format($this->price),
+      'quantity' => $this->quantity,
+      '_active' => $this->active ? 'เปิดการขายสินค้า' : 'ปิดการขายสินค้า',
+      'promotion' => $this->getPromotion(),
+      'flag' => $this->getProductFlag()
+    );
+    
   }
 
   public function buildLookupData() {

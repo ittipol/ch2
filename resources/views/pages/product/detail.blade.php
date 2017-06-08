@@ -424,7 +424,7 @@
 
   @endif
 
-  @include('pages.product.layouts.user_review')
+  @include('pages.product.layouts.user_review_content')
 
 </div>
 

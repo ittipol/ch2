@@ -557,31 +557,59 @@ class ApiController extends Controller
 
     $validator = Validator::make(Input::all(), $validation['rules'],$validation['messages']);
   
-
     if($validator->fails()) {
-      //   return array(
-    //     'success' => false,
-    //     'errorMessage' => $errorMessage // build as html render -> components.form_error
-            // 'html' => view('components.form_error',array(
-            //   'errors' => $validator->getMessageBag()
-            // ))->render()
-    //   );
+        return array(
+        'success' => false,
+        'html' => view('components.form_error',array(
+          'errors' => $validator->getMessageBag()
+        ))->render()
+      );
     }
 
-// dd($validator->getMessageBag()->all());
-    dd($validator->getMessageBag()->getMessages());
+    // find data
+    $modelData = Service::loadModel(Input::get('review_model'))->find(Input::get('review_model_id'));
 
-    dd('ssdsx');
+    // use class MessageBag and set an error message
+    // $messageBag = $validator->getMessageBag();
 
-    // $validation = new Validation;
+    switch ($modelData->modelName) {
+      case 'Product':
+        
+          if($modelData->checkProductBought()) {
 
-    // $xxx = $this->validate($request,array());
+          }
 
-    // dd(Input::all());
-    // $result = array(
-    //   'success' => true,
-    //   'filename' => $filename
-    // );
+        break;
+      
+      default:
+        # code...
+        break;
+    }
+
+    dd($modelData);
+
+    // return success false if has error
+    // if() {
+
+    // }
+
+    // Get exist user review
+    $userReview = $reviewModel->getUserReview($modelData,session()->get('Person.id'))
+
+    if(empty($userReview)) {
+      // new
+      $userReview = $reviewModel;
+      $reviewModel->created_by = session()->get('Person.id');
+    }
+
+    // $reviewModel->title = Input::get('title');
+    // $reviewModel->message = Input::get('message');
+    // $reviewModel->score = Input::get('score');
+    
+
+    // if($reviewModel->save()) {
+
+    // }
 
     return true;
 

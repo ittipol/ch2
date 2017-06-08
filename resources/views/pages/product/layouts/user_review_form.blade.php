@@ -3,6 +3,8 @@
 
     <h4>รีวิวสินค้า</h4>
     <div class="line"></div>
+
+    <div id="user_review_error"></div>
     
     <?php 
       if($hasUserReview) {
@@ -19,6 +21,8 @@
 
     <?php
       echo Form::hidden('_model', 'Review');
+      echo Form::hidden('review_model', 'Product');
+      echo Form::hidden('review_model_id', $_modelData['id']);
     ?>
 
     <div class="form-section">

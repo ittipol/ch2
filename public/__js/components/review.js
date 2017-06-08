@@ -16,8 +16,7 @@ class Review {
 
   		let formData = new FormData();
   		formData.append('_token', $('input[name="_token"]').val());
-  		// formData.append('data', $(this).serialize()); 
-  		formData.append('_model', $(this).find('input[name="_model"]').val());
+  		formData.append('review_model', $(this).find('input[name="review_model"]').val());
   		formData.append('score', $(this).find('input[name="score"]').val());
   		formData.append('title', $(this).find('input[name="title"]').val());
   		formData.append('message', $(this).find('textarea[name="message"]').val());
@@ -35,7 +34,11 @@ class Review {
 
 	    request.done(function (response, textStatus, jqXHR){
 
-	    	console.log('sds');
+	    	if(response.success) {
+
+	    	}else{
+	    		$('#user_review_error').html(response.html);
+	    	}
 	    	
 	    });
 
