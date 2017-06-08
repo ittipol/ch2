@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CustomFormRequest;
 use App\library\service;
 use App\library\messageHelper;
+use App\library\validation;
 use App\library\url;
 use Redirect;
 use Input;
@@ -251,6 +252,8 @@ class PaymentMethodController extends Controller
 
   private function checkFormError($paymentMethodType,$value) {
 
+    $validation = new Validation;
+
     $errorMessages = array();
 
     switch ($paymentMethodType) {
@@ -283,11 +286,17 @@ class PaymentMethodController extends Controller
           switch ($value['additional_data']['promptpay_transfer_number_type']) {
             case 'tel-no':
 
+                if(!$validation->isPhoneNumber($value['additional_data']['promptpay_transfer_number'])) {
+                  $errorMessages[] = 'หมายเลขโทรศัพท์ไม่ถูกต้อง';
+                }
+
               break;
             
             case 'id-card-no':
 
                 if(strlen($value['additional_data']['promptpay_transfer_number']) != 13) {
+                  $errorMessages[] = 'เลขบัตรประชาชนไม่ถูกต้อง';
+                }elseif(!$validation->isNumber($value['additional_data']['promptpay_transfer_number'])) {
                   $errorMessages[] = 'เลขบัตรประชาชนไม่ถูกต้อง';
                 }
                 

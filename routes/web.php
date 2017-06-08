@@ -550,13 +550,13 @@ Route::get('job/apply/{id}','JobController@apply');
 // });
 
 Route::group(['prefix' => 'api/v1', 'middleware' => 'api'], function () {
-  Route::get('get_district/{provinceId}', 'ApiController@GetDistrict');
-  Route::get('get_sub_district/{districtId}', 'ApiController@GetSubDistrict');
+  Route::get('get_district/{provinceId}', 'ApiController@getDistrict');
+  Route::get('get_sub_district/{districtId}', 'ApiController@getSubDistrict');
 });
 
 Route::group(['prefix' => 'api/v1', 'middleware' => ['api','auth']], function () {
-  Route::get('get_shipping_method/{shippingMethodId}', 'ApiController@GetShippingMethodId');
-  Route::get('get_category/{parentId?}', 'ApiController@GetCategory');
+  Route::get('get_shipping_method/{shippingMethodId}', 'ApiController@getShippingMethodId');
+  Route::get('get_category/{parentId?}', 'ApiController@getCategory');
 });
 
 Route::group(['middleware' => ['api','auth']], function () {
@@ -564,11 +564,15 @@ Route::group(['middleware' => ['api','auth']], function () {
   Route::post('upload_profile_image', 'ApiController@uploadProfileImage')->name('api.upload.profile_image');
   Route::post('delete_profile_image', 'ApiController@deleteProfileImage')->name('api.delete.profile_image');
 
-  // Route::post('upload_file_attachment', 'ApiController@uploadAttachedFile');
-  // Route::post('clear_file_attachment', 'ApiController@clearAttachedFile');
+  Route::post('upload_file_attachment', 'ApiController@uploadAttachedFile');
+  Route::post('clear_file_attachment', 'ApiController@clearAttachedFile');
+
+  Route::post('user_review', 'ApiController@userReview');
 
   Route::get('notification_update', 'ApiController@notificationUpdate');
   Route::get('notification_read', 'ApiController@notificationRead');
+
+
 });
 
 Route::group(['middleware' => 'api'], function () {

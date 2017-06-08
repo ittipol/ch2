@@ -11,6 +11,7 @@ class Images {
 		this.defaultImage = '/images/common/image.svg';
 		this.allowedClick = true;
 		this.inputDisable = [];
+		this.form = '#main_form';
 	}
 
 	load(images){
@@ -88,26 +89,6 @@ class Images {
 			  let fileSize = input.files[0].size;
 			  let mimeType = input.files[0].type;
 
-			  // let reader = new FileReader();
-
-			  // reader.onload = function (e) {
-
-			  // 	parent.find('div.preview-image').css('display','none').css('background-image', 'url(' + e.target.result + ')');
-
-			  // 	if(_this.checkImageType(mimeType) && _this.checkImageSize(fileSize)) {
-			  // 		parent.css('borderColor','#E0E0E0');
-			  // 		parent.find('.error-message').css('display','none').text('');
-			  // 	}else{
-			  // 		parent.css('borderColor','red');
-			  // 		parent.find('.error-message').css('display','block').text('ไม่รองรับไฟล์นี้');
-			  // 		parent.find('input[type="hidden"]').remove();
-			  // 		parent.find('input').val('');
-			  // 	}
-
-			  // }
-
-			  // reader.readAsDataURL(input.files[0]);
-
 			  if(!this.checkImageType(mimeType) || !this.checkImageSize(fileSize)) {
 		
 			  	parent.css('borderColor','red');
@@ -141,17 +122,6 @@ class Images {
 
 			  }
 			}
-
-			// if(proceed) {
-			// 	let formData = new FormData();
-			// 	formData.append('_token', $('input[name="_token"]').val());  
-			// 	formData.append('model', $('input[name="_model"]').val());
-			// 	formData.append('imageToken', this.code);
-			// 	formData.append('imageType', this.type);
-			// 	formData.append('image', input.files[0]);
-
-			// 	this.uploadImage(parent,input,formData);
-			// }
 
 		}
 

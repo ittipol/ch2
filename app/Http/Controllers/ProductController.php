@@ -570,15 +570,22 @@ class ProductController extends Controller
         $_userReview = Service::loadModel('Review')->getUserReview($model,session()->get('Person.id'));
 
         $userReview = null;
-        $hasUserReview = false;
+        $userReviewFormData = null;
         if(!empty($_userReview)) {
           $userReview = $_userReview->buildModelData();
+          $userReviewFormData = $_userReview->buildFormData();
+          
+          $reviewUrl = $url->url('product/review/edit/'.$_userReview->id);
           $hasUserReview = true;
+        }else{
+          $reviewUrl = $url->url('product/review/post/'.$model->id);
+          $hasUserReview = false;
         }
 
         $this->setData('hasUserReview',$hasUserReview);
         $this->setData('userReview',$userReview);
-        $this->setData('reviewUrl',$url->url('product/review/post/'.$model->id));
+        $this->setData('userReviewFormData',$userReviewFormData);
+        $this->setData('reviewUrl',$reviewUrl);
       }
     }
 

@@ -6,15 +6,17 @@ use App\library\service;
 use App\library\imageTool;
 use App\library\handleImageFile;
 use App\library\handleAttachedFile;
+// use App\library\validation;
 use Input;
-// use Session;
 use Schema;
-use Cookie;
+use Validator;
+// use Request;
+// use Cookie;
 
 class ApiController extends Controller
 { 
 
-  public function GetDistrict($provinceId = null) {
+  public function getDistrict($provinceId = null) {
 
     if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
       // exit('Error!!!');  //trygetRealPath detect AJAX request, simply exist if no Ajax
@@ -34,7 +36,7 @@ class ApiController extends Controller
     return response()->json($districts);
   }
 
-  public function GetSubDistrict($districtId = null) {
+  public function getSubDistrict($districtId = null) {
 
     if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
       $this->error = array(
@@ -53,7 +55,7 @@ class ApiController extends Controller
     return response()->json($subDistricts);
   }
 
-  public function GetCategory($parentId = null) {
+  public function getCategory($parentId = null) {
 
     if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
       $this->error = array(
@@ -94,7 +96,7 @@ class ApiController extends Controller
     return response()->json($result);
   }
 
-  public function GetShippingMethodId($shippingMethodId) {
+  public function getShippingMethodId($shippingMethodId) {
 
     if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
       $this->error = array(
@@ -536,6 +538,52 @@ class ApiController extends Controller
     }
 
     return response()->json(true); 
+
+  }
+
+  public function userReview() {
+
+    if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+      // exit('Error!!!');  //trygetRealPath detect AJAX request, simply exist if no Ajax
+      $this->error = array(
+        'message' => 'ขออภัย ไม่อนุญาตให้เข้าถึงหน้านี้ได้'
+      );
+      return $this->error();
+    }
+
+    $reviewModel = Service::loadModel('Review');
+
+    $validation = $reviewModel->getValidation();
+
+    $validator = Validator::make(Input::all(), $validation['rules'],$validation['messages']);
+  
+
+    if($validator->fails()) {
+      //   return array(
+    //     'success' => false,
+    //     'errorMessage' => $errorMessage // build as html render -> components.form_error
+            // 'html' => view('components.form_error',array(
+            //   'errors' => $validator->getMessageBag()
+            // ))->render()
+    //   );
+    }
+
+// dd($validator->getMessageBag()->all());
+    dd($validator->getMessageBag()->getMessages());
+
+    dd('ssdsx');
+
+    // $validation = new Validation;
+
+    // $xxx = $this->validate($request,array());
+
+    // dd(Input::all());
+    // $result = array(
+    //   'success' => true,
+    //   'filename' => $filename
+    // );
+
+    return true;
 
   }
 

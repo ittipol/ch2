@@ -20,6 +20,13 @@ class validation
     return false;
   }
 
+  public function isPhoneNumber($phoneNumber) {
+    if(preg_match('/^[0-9+][0-9\-]{3,}[0-9]$/', $phoneNumber)) {
+      return true;
+    }
+    return false;
+  }
+
   public function isNumber($number) {
     if(preg_match('/^[0-9]+$/', $number)) {
       return true;

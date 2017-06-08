@@ -12,8 +12,21 @@ class Review extends Model
 
   private $fullScore = 5;
 
-  public function hasUserReview($model,$personId) {
+  protected $validation = array(
+    'rules' => array(
+      'title' => 'max:255',
+      'message' => 'required',
+      'score' => 'required|numeric',
+    ),
+    'messages' => array(
+      'title.max' => 'หัวข้อรีวิวจำนวนตัวอักษรมากกว่าที่รองรับ',
+      'message.required' => 'รายละเอียดรีวิวห้ามว่าง',
+      'score.required' => 'คะแนนห้ามว่าง',
+      'score.numeric' => 'รูปแบบคะแนนไม่ถูกต้อง',
+    )
+  );
 
+  public function hasUserReview($model,$personId) {
     return $this
     ->select('id')
     ->where([
@@ -21,7 +34,6 @@ class Review extends Model
       ['model_id','=',$model->id],
       ['created_by','=',$personId]
     ])->exists();
-
   }
 
   public function getUserReview($model,$personId) {

@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 use App\library\service;
 use Request;
 use Route;
-// use Session;
 
 class CustomFormRequest extends FormRequest
 {
@@ -14,68 +13,65 @@ class CustomFormRequest extends FormRequest
   private $validation;
   private $hasError = false;
 
-  // Need Chenge
-  // Get Page name from DB
-
-  private $pages = array(
-    'account.profile.edit' => array(
-      'modelName' => 'Person'
-    ),
-    'item.post' => array(
-      'modelName' => 'Item'
-    ),
-    'real_estate.post' => array(
-      'modelName' => 'RealEstate'
-    ),
-    'shop.create' => array(
-      'modelName' => 'Shop'
-    ),
-    'shop.job.add' => array(
-      'modelName' => 'Job'
-    ),
-    'shop.product.add' => array(
-      'modelName' => 'Product'
-    ),
-    'shop.product.edit' => array(
-      'modelName' => 'Product'
-    ),
-    'shop.product_status.edit' => array(
-      'modelName' => 'Product'
-    ),
-    'shop.product_specification.edit' => array(
-      'modelName' => 'Product'
-    ),
-    'shop.product_category.edit' => array(
-      'modelName' => 'Product'
-    ),
-    'shop.product_stock.edit' => array(
-      'modelName' => 'Product'
-    ),
-    'shop.product_minimum.edit' => array(
-      'modelName' => 'Product'
-    ),
-    'shop.product_price.edit' => array(
-      'modelName' => 'Product'
-    ),
-    'shop.product_notification.edit' => array(
-      'modelName' => 'Product'
-    ),
-    'shop.product_shipping.edit' => array(
-      'modelName' => 'ProductShipping'
-    ),
-    'person_experience.internship.add' => array(
-      'modelName' => 'PersonInternship'
-    ),
-    'person_experience.internship.edit' => array(
-      'modelName' => 'PersonInternship'
-    ),
-    'shop.product_discount.add' => array(
-      'modelName' => 'ProductDiscount'
-    ),
-    'shop.product_discount.edit' => array(
-      'modelName' => 'ProductDiscount'
-    )
-  );
+  // private $pages = array(
+  //   'account.profile.edit' => array(
+  //     'modelName' => 'Person'
+  //   ),
+  //   'item.post' => array(
+  //     'modelName' => 'Item'
+  //   ),
+  //   'real_estate.post' => array(
+  //     'modelName' => 'RealEstate'
+  //   ),
+  //   'shop.create' => array(
+  //     'modelName' => 'Shop'
+  //   ),
+  //   'shop.job.add' => array(
+  //     'modelName' => 'Job'
+  //   ),
+  //   'shop.product.add' => array(
+  //     'modelName' => 'Product'
+  //   ),
+  //   'shop.product.edit' => array(
+  //     'modelName' => 'Product'
+  //   ),
+  //   'shop.product_status.edit' => array(
+  //     'modelName' => 'Product'
+  //   ),
+  //   'shop.product_specification.edit' => array(
+  //     'modelName' => 'Product'
+  //   ),
+  //   'shop.product_category.edit' => array(
+  //     'modelName' => 'Product'
+  //   ),
+  //   'shop.product_stock.edit' => array(
+  //     'modelName' => 'Product'
+  //   ),
+  //   'shop.product_minimum.edit' => array(
+  //     'modelName' => 'Product'
+  //   ),
+  //   'shop.product_price.edit' => array(
+  //     'modelName' => 'Product'
+  //   ),
+  //   'shop.product_notification.edit' => array(
+  //     'modelName' => 'Product'
+  //   ),
+  //   'shop.product_shipping.edit' => array(
+  //     'modelName' => 'ProductShipping'
+  //   ),
+  //   'person_experience.internship.add' => array(
+  //     'modelName' => 'PersonInternship'
+  //   ),
+  //   'person_experience.internship.edit' => array(
+  //     'modelName' => 'PersonInternship'
+  //   ),
+  //   'shop.product_discount.add' => array(
+  //     'modelName' => 'ProductDiscount'
+  //   ),
+  //   'shop.product_discount.edit' => array(
+  //     'modelName' => 'ProductDiscount'
+  //   )
+  // );
 
   public function __construct() {
 

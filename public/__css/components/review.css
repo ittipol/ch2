@@ -138,6 +138,12 @@ label.review-score-box-item > input[type="radio"]:checked + .inner > .score-labe
 	display: inline-block;
 }
 
+@media only screen and (max-width : 768px) {
+	.user-review .review-description {
+		margin-top: 20px;
+	}
+}
+
 @media only screen and (max-width : 480px) {
 	.user-review .review-description {
 		margin-top: 20px;
