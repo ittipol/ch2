@@ -19,6 +19,7 @@
 .rating-bar-box {
 	height: 100%;
 	background-color: #43A047;
+	transition: width .5s ease-out;
 }
 
 .rating-count-text {
@@ -29,8 +30,27 @@
 	line-height: 20px;
 }
 
-.review-content {
+.review-comment-item {
 	margin-bottom: 30px;
+	position: relative;
+}
+
+.review-user-avatar {
+	position: absolute;
+	top: 10px;
+	left: 0;
+	width: 30px;
+	height: 30px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: auto 100%;
+	background-color: #ececec;
+	border-radius: 30px;
+}
+
+.review-comment-content {
+	padding-left: 40px;
+	padding-right: 10px;
 }
 
 .review-title {
@@ -48,8 +68,10 @@
 .review-rating-score {
 	font-size: 16px;
 	color: #222;
-	margin-bottom: 8px
+	/*margin-bottom: 8px*/
 }
+
+/*.review-rating-date {}*/
 
 .review-by {
 	font-size: 16px;

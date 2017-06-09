@@ -1,10 +1,15 @@
 class ModelDialog {
 
 	constructor() {
-		this.elem;
-		// this.action;
-		this.allowed = false;
-		this.waiting = false;
+
+		if(!ModelDialog.instance){
+		  this.elem;
+		  this.allowed = false;
+		  this.waiting = false;
+		  ModelDialog.instance = this;
+		}
+
+		return ModelDialog.instance;
 	}
 
 	load() {

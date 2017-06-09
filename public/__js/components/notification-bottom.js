@@ -1,14 +1,20 @@
 class NotificationBottom {
   
   constructor(title = '',desc = '',type = 'info',size = 'small',alwaysVisible = false,allowedClose = true) {
-      this.title = title;
-      this.desc = desc;
-      this.type = type;
-      this.size = size;
-      this.handle = null;
-      this.delay = 5000;
-      this.alwaysVisible = alwaysVisible;
-      this.allowedClose = allowedClose;
+      
+      if(!NotificationBottom.instance){
+        this.title = title;
+        this.desc = desc;
+        this.type = type;
+        this.size = size;
+        this.handle = null;
+        this.delay = 5000;
+        this.alwaysVisible = alwaysVisible;
+        this.allowedClose = allowedClose;
+        NotificationBottom.instance = this;
+      }
+
+      return NotificationBottom.instance;
   }
 
   load() {

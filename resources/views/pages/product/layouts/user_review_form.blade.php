@@ -10,12 +10,12 @@
       if($hasUserReview) {
         echo Form::model($userReviewFormData, [
           'id' => 'user_review_form',
-          'url' => $reviewUrl,
+          // 'url' => $reviewUrl,
           'method' => 'PATCH',
           'enctype' => 'multipart/form-data'
         ]);
       }else{
-        echo Form::open(['id' => 'user_review_form', 'url' => $reviewUrl, 'method' => 'post', 'enctype' => 'multipart/form-data']);
+        echo Form::open(['id' => 'user_review_form', /*'url' => $reviewUrl,*/ 'method' => 'post', 'enctype' => 'multipart/form-data']);
       }
     ?>
 

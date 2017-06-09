@@ -5,7 +5,7 @@
     <div class="col-md-4 col-xs-12">
       <div class="text-center space-top-20">
         <div class="user-review-score color-{{$userReview['score']}}-score">{{$userReview['score']}}</div>
-        <div class="space-top-20"><strong>รีวิวเมื่อ</strong> {{$userReview['createdDate']}}</div>
+        <div class="space-top-20"><strong>รีวิวเมื่อ</strong> {{$userReview['updatedDate']}}</div>
       </div>
 
       <div class="additional-option">

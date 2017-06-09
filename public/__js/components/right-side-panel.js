@@ -1,7 +1,13 @@
 class RightSidePanel {
 
   constructor() {
-    this.currentTarget;
+    // Singleton
+    if(!RightSidePanel.instance){
+      this.currentTarget;
+      RightSidePanel.instance = this;
+    }
+
+    return RightSidePanel.instance;
   }
 
   load() {
@@ -34,13 +40,14 @@ class RightSidePanel {
 
     $('.right-size-panel-close-button').on('click',function(){
       
-      if(_this.currentTarget) {
-        $(_this.currentTarget).removeClass('opened');
-        $('.content-wrapper-overlay').removeClass('isvisible');
-        $('body').css('overflow-y','auto');
+      // if(_this.currentTarget) {
+      //   $(_this.currentTarget).removeClass('opened');
+      //   $('.content-wrapper-overlay').removeClass('isvisible');
+      //   $('body').css('overflow-y','auto');
+      //   _this.currentTarget = null;
+      // }
 
-        _this.currentTarget = null;
-      }
+      _this.close();
 
     });
 
@@ -55,6 +62,17 @@ class RightSidePanel {
       }
 
     });
+
+  }
+
+  close() {
+
+    if(this.currentTarget) {
+      $(this.currentTarget).removeClass('opened');
+      $('.content-wrapper-overlay').removeClass('isvisible');
+      $('body').css('overflow-y','auto');
+      this.currentTarget = null;
+    }
 
   }
 

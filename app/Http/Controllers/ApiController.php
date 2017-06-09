@@ -558,7 +558,7 @@ class ApiController extends Controller
     $validator = Validator::make(Input::all(), $validation['rules'],$validation['messages']);
   
     if($validator->fails()) {
-        return array(
+      return array(
         'success' => false,
         'html' => view('components.form_error',array(
           'errors' => $validator->getMessageBag()
@@ -569,49 +569,82 @@ class ApiController extends Controller
     // find data
     $modelData = Service::loadModel(Input::get('review_model'))->find(Input::get('review_model_id'));
 
-    // use class MessageBag and set an error message
-    // $messageBag = $validator->getMessageBag();
+    $messageBag = $validator->getMessageBag();
 
-    switch ($modelData->modelName) {
-      case 'Product':
+    if(!empty($modelData)) {
+
+      switch ($modelData->modelName) {
+        case 'Product':
+
+            if(!$modelData->checkProductBought()) {
+              $messageBag->add(0,'ยังไม่สามารถรีวิวสินค้านี้ได้จนกว่าคุณจะซื้อสินค้านี้');
+            }
+
+          break;
         
-          if($modelData->checkProductBought()) {
+        default:
+            $messageBag->add(0,'เกิดข้อผิดพลาด');
+          break;
+      }
 
-          }
-
-        break;
-      
-      default:
-        # code...
-        break;
+    }else{
+      $messageBag->add(0,'เกิดข้อผิดพลาด');
     }
 
-    dd($modelData);
-
-    // return success false if has error
-    // if() {
-
-    // }
+    if(!$messageBag->isEmpty()) {
+      return array(
+        'success' => false,
+        'html' => view('components.form_error',array(
+          'errors' => $messageBag
+        ))->render()
+      );
+    }
 
     // Get exist user review
-    $userReview = $reviewModel->getUserReview($modelData,session()->get('Person.id'))
+    $userReview = $reviewModel->getUserReview($modelData,session()->get('Person.id'));
 
     if(empty($userReview)) {
       // new
       $userReview = $reviewModel;
-      $reviewModel->created_by = session()->get('Person.id');
+      $userReview->model = $modelData->modelName;
+      $userReview->model_id = $modelData->id;
+      $userReview->created_by = session()->get('Person.id');
     }
 
-    // $reviewModel->title = Input::get('title');
-    // $reviewModel->message = Input::get('message');
-    // $reviewModel->score = Input::get('score');
+    $userReview->title = Input::get('title');
+    $userReview->message = Input::get('message');
+    $userReview->score = Input::get('score');
     
+    if($userReview->save()) {
 
-    // if($reviewModel->save()) {
+      // dd('saved');
+      // updated score list
+      // update all review message ???
 
-    // }
+    }
 
-    return true;
+    $additionalData = null;
+    switch ($modelData->modelName) {
+      case 'Product':
+        
+          $additionalData = array(
+            'user_review_html' => view('pages.product.layouts.user_review',array(
+              'userReview' => $userReview->buildModelData()
+            ))->render(),
+            'avgScore' => $modelData->productAvgScore(),
+            'scoreList' => $modelData->productScoreList()
+          );
+
+        break;
+    }
+
+    if(empty($additionalData)) {
+      return array(
+        'success' => true
+      );
+    }
+
+    return array_merge(array('success' => true),$additionalData);
 
   }
 

@@ -1,7 +1,13 @@
 class AdditionalOption {
 
   constructor() {
-    this.obj = null;
+    
+    if(!AdditionalOption.instance){
+      this.obj = null;
+      AdditionalOption.instance = this;
+    }
+
+    return AdditionalOption.instance;
   }
 
   load(){
@@ -13,7 +19,7 @@ class AdditionalOption {
     let _this = this;
     let token = new Token();
 
-    $('.additional-option').on('click',function(){
+    $('body').on('click', '.additional-option' ,function(){
 
       _this.closePrevBox();
 
@@ -39,9 +45,6 @@ class AdditionalOption {
       }else{ console.log('z');
         div.style.left = left+'px';
       }
-
-      // div.style.left = (left - (div.offsetWidth - this.offsetWidth))+'px';
-      // div.style.left = left;
 
       setTimeout(function(){
         _this.obj = div;

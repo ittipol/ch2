@@ -66,15 +66,7 @@ class Review extends Model
     ]);
 
     $scoreList = array(
-      1 => array(
-        'percent' => 0,
-        'count' => 0
-      ),
-      2 => array(
-        'percent' => 0,
-        'count' => 0
-      ),
-      3 => array(
+      5 => array(
         'percent' => 0,
         'count' => 0
       ),
@@ -82,7 +74,15 @@ class Review extends Model
         'percent' => 0,
         'count' => 0
       ),
-      5 => array(
+      3 => array(
+        'percent' => 0,
+        'count' => 0
+      ),
+      2 => array(
+        'percent' => 0,
+        'count' => 0
+      ),
+      1 => array(
         'percent' => 0,
         'count' => 0
       )
@@ -120,6 +120,10 @@ class Review extends Model
       $score = $this->score;
     }
 
+    if(!strpos($score, '.')) {
+      return $score;
+    }
+
     list($integer,$point) = explode('.', $score);
 
     if((int)$point == 0) {
@@ -138,7 +142,8 @@ class Review extends Model
       'title' => $this->title,
       'message' => !empty($this->message) ? nl2br($this->message) : null,
       'score' => $this->scoreFormat(),
-      'createdDate' => $date->covertDateTimeToSting($this->created_at->format('Y-m-d H:i:s'))
+      // 'createdDate' => $date->covertDateTimeToSting($this->created_at->format('Y-m-d H:i:s')),
+      'updatedDate' => $date->covertDateTimeToSting($this->updated_at->format('Y-m-d H:i:s'))
     );
 
   }
