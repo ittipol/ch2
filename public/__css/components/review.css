@@ -53,21 +53,22 @@
 	padding-right: 10px;
 }
 
-.review-item .review-content .review-title {
+.review-title {
 	font-size: 16px;
 	font-weight: bold;
-	color: #222;
-	margin-right: 20px;
+	color: #000;
+	margin-right: 10px;
 }
 
 .review-item .review-content .review-description {
 	font-size: 16px;
-	color: #888;
+	color: #555;
+	margin-top: 15px;
 }
 
 .review-item .review-content .review-rating-score {
 	font-size: 16px;
-	color: #222;
+	color: #000;
 }
 
 /*.review-item .review-content .review-rating-date {}*/
@@ -170,5 +171,9 @@ label.review-score-box-item > input[type="radio"]:checked + .inner > .score-labe
 	.user-review .review-description {
 		margin-top: 20px;
 		padding: 0 15px; 
+	}
+
+	.review-item {
+		margin-top: 50px;
 	}
 }

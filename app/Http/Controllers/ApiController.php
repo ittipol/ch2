@@ -678,7 +678,7 @@ class ApiController extends Controller
 
     $total = $reviews->count();
 
-    $perpage = 3;
+    $perpage = 1;
     $offset = (Input::get('page') - 1)  * $perpage;
 
     $reviews->take($perpage)->skip($offset);
@@ -686,7 +686,6 @@ class ApiController extends Controller
     if(!$reviews->exists()) {
       return array(
         'next' => false,
-        'html' => null,
       );
     }
 
@@ -704,7 +703,8 @@ class ApiController extends Controller
     return array(
       'next' => $next,
       'html' => view('pages.product.layouts.review_list_item',array(
-        'reviews' => $_reviews
+        'reviews' => $_reviews,
+        'next' => $next
       ))->render(),
     );
 

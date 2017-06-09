@@ -156,8 +156,13 @@ class Review extends Model
     $person = Person::find($this->created_by);
 
     $personName = null;
-    if(!empty($person)) {
+    if(!empty($person->name)) {
       $personName = $person->name;
+    }
+
+    $personProfileImage = $person->getProfileImageUrl('xs');
+    if(empty($personProfileImage)) {
+      $personProfileImage = '/images/common/avatar.png';
     }
 
     return array(
@@ -165,6 +170,7 @@ class Review extends Model
       'message' => !empty($this->message) ? nl2br($this->message) : null,
       'score' => $this->scoreFormat(),
       'personName' => $personName,
+      'personProfileImage' => $personProfileImage,
       'updatedDate' => $date->calPassedDate($this->updated_at->format('Y-m-d H:i:s'))
     );
 

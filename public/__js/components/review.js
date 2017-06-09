@@ -103,6 +103,10 @@ class Review {
 
   	});
 
+		$('body').on('click','#more_review_btn', function(){
+			
+		});
+
   }
 
   getReview() {
@@ -123,7 +127,9 @@ class Review {
 	  });
 
 	  request.done(function (response, textStatus, jqXHR){
-	  	console.log('axxx');
+	  	
+	  	$('#review_comment_wrapper').append(response.html);
+
 	  });
 
 	  request.fail(function (jqXHR, textStatus, errorThrown){

@@ -60,7 +60,7 @@
 
       <div id="review_comment_wrapper" class="review-list space-top-20">
 
-        
+        <!-- place here -->
 
       </div>
 
