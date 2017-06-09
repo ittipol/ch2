@@ -1,7 +1,7 @@
 class GlobalCart {
 
-	constructor(token = null) {
-		this.token = token;
+	constructor() {
+		this.token = Setting.getCsrfToken();
 		this.allowedInput = true;
 		this.requestUpdateQuantity = false;
 		this.tempQuantity;
@@ -70,9 +70,11 @@ class GlobalCart {
 	  	if(response.hasError) {
 
 	  		setTimeout(function(){
-	  			const notificationBottom = new NotificationBottom(response.errorMessage,'','error');
+	  			const notificationBottom = new NotificationBottom();
+	  			notificationBottom.setTitle(response.errorMessage);
+          notificationBottom.setType('error');
 	  			notificationBottom.setDelay(5000);
-	  			notificationBottom.load();
+	  			notificationBottom.display();
 
 	  			$('#loading_icon').removeClass('display');
 	  		  $('.global-overlay').removeClass('isvisible');
@@ -96,9 +98,11 @@ class GlobalCart {
 	    	parent.find('.total-amount').find('.amount').text(response.summaries.total.value);
 
 	    	setTimeout(function(){
-	    		const notificationBottom = new NotificationBottom('สินค้า '+quantity+' ชิ้น ได้ถูกบันทึกไปยังตะกร้าสินค้าของคุณ','','success');
+	    		const notificationBottom = new NotificationBottom();
+	    		notificationBottom.setTitle('สินค้า '+quantity+' ชิ้น ได้ถูกบันทึกไปยังตะกร้าสินค้าของคุณ');
+	    		notificationBottom.setType('success');
 	    		notificationBottom.setDelay(5000);
-	    		notificationBottom.load();
+	    		notificationBottom.display();
 
 	    		$('#loading_icon').removeClass('display');
 	    	  $('.global-overlay').removeClass('isvisible');
@@ -142,9 +146,11 @@ class GlobalCart {
 			if(response.hasError) {
 
 				setTimeout(function(){
-					const notificationBottom = new NotificationBottom(response.errorMessage,'','error');
+					const notificationBottom = new NotificationBottom();
+					notificationBottom.setTitle(response.errorMessage);
+          notificationBottom.setType('error');
 					notificationBottom.setDelay(5000);
-					notificationBottom.load();
+					notificationBottom.display();
 
 					$('#loading_icon').removeClass('display');
 				  $('.global-overlay').removeClass('isvisible');
@@ -158,9 +164,11 @@ class GlobalCart {
 		  	_this.cartUpdate();
 
 		  	setTimeout(function(){
-		  		const notificationBottom = new NotificationBottom('สินค้า '+quantity+' ชิ้น ได้ถูกเพิ่มเข้าไปยังตะกร้าสินค้าของคุณ','','success');
+		  		const notificationBottom = new NotificationBottom();
+		  		notificationBottom.setTitle('สินค้า '+quantity+' ชิ้น ได้ถูกเพิ่มเข้าไปยังตะกร้าสินค้าของคุณ');
+          notificationBottom.setType('success');
 		  		notificationBottom.setDelay(5000);
-		  		notificationBottom.load();
+		  		notificationBottom.display();
 
 		  		$('#loading_icon').removeClass('display');
 		  	  $('.global-overlay').removeClass('isvisible');
@@ -281,7 +289,8 @@ class GlobalCart {
 
 		let request = $.ajax({
 		  url: "/cart_update",
-		  type: "get",
+		  type: "POST",
+		  data: {'_token':this.token},
 		  dataType:'json',
 		  beforeSend: function( xhr ) {
 		  	$('#global_cart_panel').fadeOut(220);

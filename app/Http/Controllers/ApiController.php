@@ -12,6 +12,7 @@ use Schema;
 use Validator;
 // use Request;
 // use Cookie;
+use Auth;
 
 class ApiController extends Controller
 { 
@@ -560,7 +561,8 @@ class ApiController extends Controller
     if($validator->fails()) {
       return array(
         'success' => false,
-        'html' => view('components.form_error',array(
+        'type' => 'html',
+        'errorMessage' => view('components.form_error',array(
           'errors' => $validator->getMessageBag()
         ))->render()
       );
@@ -594,7 +596,8 @@ class ApiController extends Controller
     if(!$messageBag->isEmpty()) {
       return array(
         'success' => false,
-        'html' => view('components.form_error',array(
+        'type' => 'html',
+        'errorMessage' => view('components.form_error',array(
           'errors' => $messageBag
         ))->render()
       );
@@ -615,12 +618,14 @@ class ApiController extends Controller
     $userReview->message = Input::get('message');
     $userReview->score = Input::get('score');
     
-    if($userReview->save()) {
-
-      // dd('saved');
-      // updated score list
-      // update all review message ???
-
+    if(!$userReview->save()) {
+      return array(
+        'success' => false,
+        'type' => 'popup',
+        'errorMessage' => array(
+          'title' => 'เกิดข้อผิดพลาด ไม่สามารถบันทึกรีวิวได้'
+        )
+      );
     }
 
     $additionalData = null;
@@ -645,6 +650,63 @@ class ApiController extends Controller
     }
 
     return array_merge(array('success' => true),$additionalData);
+
+  }
+
+  public function reviewComment() {
+
+    // if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+    //   // exit('Error!!!');  //trygetRealPath detect AJAX request, simply exist if no Ajax
+    //   $this->error = array(
+    //     'message' => 'ขออภัย ไม่อนุญาตให้เข้าถึงหน้านี้ได้'
+    //   );
+    //   return $this->error();
+    // }
+
+    $reviewModel = Service::loadModel('Review');
+
+    $conditions = array(
+      array('model','=',Input::get('model')),
+      array('model_id','=',Input::get('model_id'))
+    );
+
+    if(Auth::check()) {
+      $conditions[] = array('created_by','!=',session()->get('Person.id'));
+    }
+
+    $reviews = $reviewModel->where($conditions);
+
+    $total = $reviews->count();
+
+    $perpage = 3;
+    $offset = (Input::get('page') - 1)  * $perpage;
+
+    $reviews->take($perpage)->skip($offset);
+
+    if(!$reviews->exists()) {
+      return array(
+        'next' => false,
+        'html' => null,
+      );
+    }
+
+    $_reviews = array();
+    foreach ($reviews->get() as $review) {
+      $_reviews[] = $review->buildPaginationData();
+    }
+
+    // find has more data
+    $next = false;
+    if((Input::get('page') * $perpage) < $total) {
+      $next = true;
+    }
+
+    return array(
+      'next' => $next,
+      'html' => view('pages.product.layouts.review_list_item',array(
+        'reviews' => $_reviews
+      ))->render(),
+    );
 
   }
 

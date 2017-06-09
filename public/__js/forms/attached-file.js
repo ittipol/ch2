@@ -165,7 +165,7 @@ class AttachedFile {
 
     		if(typeof response.message == 'object') {
   				const notificationBottom = new NotificationBottom('เกิดข้อผิดพลาด','','error');
-  				notificationBottom.load();
+  				notificationBottom.display();
     		}
 
     	}

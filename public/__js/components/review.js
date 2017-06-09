@@ -1,7 +1,16 @@
 class Review {
-  constructor() {}
+  constructor(model,modelId) {
+  	this.token = Setting.getCsrfToken();
+  	this.model = model;
+  	this.modelId = modelId;
+  	this.form = '#user_review_form';
+  	this.page = 1;
+  }
 
   load() {
+
+  	this.getReview();
+
     this.bind();
   }
 
@@ -9,12 +18,14 @@ class Review {
 
   bind() {
 
-  	$('#user_review_form').on('submit',function(){
+  	let _this = this;
+
+  	$(this.form).on('submit',function(){
 
   		let formData = new FormData();
-  		formData.append('_token', $('input[name="_token"]').val());
-  		formData.append('review_model', $(this).find('input[name="review_model"]').val());
-  		formData.append('review_model_id', $(this).find('input[name="review_model_id"]').val());
+  		formData.append('_token', _this.token);
+  		formData.append('review_model', _this.model);
+  		formData.append('review_model_id', _this.modelId);
   		formData.append('score', $(this).find('input[name="score"]:checked').val());
   		formData.append('title', $(this).find('input[name="title"]').val());
   		formData.append('message', $(this).find('textarea[name="message"]').val());
@@ -53,12 +64,25 @@ class Review {
 	    			$('#loading_icon').removeClass('display');
 	    			$('.global-overlay').removeClass('isvisible');
 
-	    			const notificationBottom = new NotificationBottom('รีวิวถูกบันทึกแล้ว','','success');
-	    			notificationBottom.load();
+	    			const notificationBottom = new NotificationBottom();
+	    			notificationBottom.setTitle('รีวิวถูกบันทึกแล้ว');
+	    			notificationBottom.setType('success');
+	    			notificationBottom.display();
 	    		},550);
 
 	    	}else{
-	    		$('#user_review_error').html(response.html);
+
+	    		switch (response.type) {
+	    		  case 'html':
+	    		    $('#user_review_error').html(response.errorMessage);
+	    		    break;
+	    		  case 'popup':
+	    		    const notificationBottom = new NotificationBottom();
+	    		    notificationBottom.setTitle(response.errorMessage.title);
+	    		    notificationBottom.setType('error');
+	    		    notificationBottom.display();
+	    		    break;
+	    		}
 
 	    		setTimeout(function(){
 	    			$('#loading_icon').removeClass('display');
@@ -78,6 +102,36 @@ class Review {
   		return false;
 
   	});
+
+  }
+
+  getReview() {
+
+  	// let formData = new FormData();
+  	// formData.append('review_model', this.model);
+  	// formData.append('review_model_id', this.modelId);
+
+		let request = $.ajax({
+	    url: "/review_comment",
+	    type: "get",
+	    data: {
+	      model: this.model,
+	      model_id: this.modelId,
+	      page: this.page
+	    },
+	    dataType: 'json',
+	  });
+
+	  request.done(function (response, textStatus, jqXHR){
+	  	console.log('axxx');
+	  });
+
+	  request.fail(function (jqXHR, textStatus, errorThrown){
+	    console.error(
+	        "The following error occurred: "+
+	        textStatus, errorThrown
+	    );
+	  });
 
   }
 

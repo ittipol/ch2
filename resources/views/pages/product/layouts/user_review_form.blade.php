@@ -20,9 +20,7 @@
     ?>
 
     <?php
-      echo Form::hidden('_model', 'Review');
-      echo Form::hidden('review_model', 'Product');
-      echo Form::hidden('review_model_id', $_modelData['id']);
+      // echo Form::hidden('_model', 'Review');
     ?>
 
     <div class="form-section">

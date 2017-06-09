@@ -12,7 +12,8 @@
   $jsFiles = array(
     '__js/jquery-3.1.1.min.js',
     // '__js/jquery.validate.min.js',
-    '__js/blackbox/blackbox.js',
+    '__js/setting.js',
+    '__js/blackbox/common.js',
     '__js/library/token.js',
     '__js/map/map.js',
     '__js/forms/form.js',
@@ -160,18 +161,6 @@
 @endforeach
 @endif
 
-@if(Session::has('message.title') && Session::has('message.type'))
 <script type="text/javascript">
-  $(document).ready(function(){
-    
-    let desc = '';
-    @if(Session::has('message.desc'))
-      desc = '{{ Session::get("message.desc") }}';
-    @endif
-
-    const notificationBottom = new NotificationBottom('{{ Session::get("message.title") }}',desc,'{{ Session::get("message.type") }}');
-    notificationBottom.load();
-
-  });
+  new Setting('{{ csrf_token() }}');
 </script>
-@endif

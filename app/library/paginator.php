@@ -144,8 +144,6 @@ class Paginator {
 
   }
 
-  // public function filter() {}
-
   public function order($model) {
 
     if(empty($this->criteriaData['order'])) {

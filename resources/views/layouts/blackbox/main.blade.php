@@ -35,8 +35,8 @@
 
     $(document).ready(function(){
 
-      const blackbox = new Blackbox;
-      blackbox.load();
+      const common = new Common();
+      common.load();
 
       const additionalOption = new AdditionalOption();
       additionalOption.load();
@@ -47,11 +47,14 @@
       const modelDialog = new ModelDialog();
       modelDialog.load();
 
-      const globalCart = new GlobalCart('{{ csrf_token() }}');
+      const globalCart = new GlobalCart();
       globalCart.load();
 
       const inputField = new InputField();
       inputField.load();
+
+      const notificationBottom = new NotificationBottom();
+      notificationBottom.load();
 
       @if(Auth::check())
         const pushNotification = new PushNotification({{Session::get("Person.id") }},'{{ Session::get("Person.token") }}')
@@ -61,6 +64,22 @@
       setTimeout(function(){
         $(".nano").nanoScroller();
       },1000);
+
+      @if(Session::has('message.title') && Session::has('message.type'))
+          
+        let _desc = '';
+        @if(Session::has('message.desc'))
+          _desc = '{{ Session::get("message.desc") }}';
+        @endif
+
+        // const notificationBottom = new NotificationBottom();
+        notificationBottom.setTitle('{{ Session::get("message.title") }}');
+        notificationBottom.setDesc('{{ Session::get("message.desc") }}');
+        notificationBottom.setType('{{ Session::get("message.type") }}');
+        notificationBottom.display();
+
+      @endif
+
     });
     
   </script>

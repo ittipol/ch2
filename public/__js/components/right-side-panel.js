@@ -1,7 +1,6 @@
 class RightSidePanel {
 
   constructor() {
-    // Singleton
     if(!RightSidePanel.instance){
       this.currentTarget;
       RightSidePanel.instance = this;

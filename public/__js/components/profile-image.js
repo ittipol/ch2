@@ -91,9 +91,12 @@ class ProfileImage {
 			  		$('#'+_this.code+'_image_panel').addClass('display-preview');
 			  	}else{
 
-			  		const notificationBottom = new NotificationBottom('ขออภัย ไม่รองรับรูปภาพที่คุณกำลังอัพโหลด','รูปภาพอาจจะมีขนาดใหญ่กว่าที่รองรับ กรุณาลองอีกครั้งด้วยรูปภาพอื่นที่มีขนาดเล็กลง','error');
+			  		const notificationBottom = new NotificationBottom();
+			  		notificationBottom.setTitle('ไม่รองรับรูปภาพที่กำลังอัพโหลด');
+			  		notificationBottom.setDesc('รูปภาพอาจจะมีขนาดใหญ่กว่าที่รองรับ');
+			  		notificationBottom.setType('error');
 			  		notificationBottom.setDelay(10000);
-			  		notificationBottom.load();
+			  		notificationBottom.display();
 
 			  		_this.removePreview();
 			  	}
@@ -194,9 +197,11 @@ class ProfileImage {
 
 	  	if(response.success){
 
-	  		const notificationBottom = new NotificationBottom('บันทึกเรียบร้อยแล้ว','','success');
+	  		const notificationBottom = new NotificationBottom();
+	  		notificationBottom.setTitle('บันทึกเรียบร้อยแล้ว');
+	  		notificationBottom.setType('success');
 	  		notificationBottom.setDelay(3000);
-	  		notificationBottom.load();
+	  		notificationBottom.display();
 
 	  		$('.shop-cover-edit-button').fadeIn(280);
 	  		$('.shop-profile-image-edit-button').fadeIn(280);
@@ -205,8 +210,10 @@ class ProfileImage {
 	  	}else{
 
 	  		if(typeof response.message == 'object') {
-					const notificationBottom = new NotificationBottom(response.message.title,'',response.message.type);	
-					notificationBottom.load();
+					const notificationBottom = new NotificationBottom();	
+					notificationBottom.setTitle(response.message.title);
+	  			notificationBottom.setType(response.message.type);
+					notificationBottom.display();
 	  		}
 
 	  	}
@@ -252,15 +259,19 @@ class ProfileImage {
 	  		$('#'+_this.code+'_image_panel').removeClass('display-preview');
 	  		$('#'+_this.code+'_image_panel').css('background-image', '');
 
-	  		const notificationBottom = new NotificationBottom('รูปภาพถูกลบแล้ว','','success');
-	  		notificationBottom.setDelay(3000);
-	  		notificationBottom.load();
+	  		const notificationBottom = new NotificationBottom();
+	  		notificationBottom.setTitle('รูปภาพถูกลบแล้ว');
+	  		notificationBottom.setType('success');
+	  		notificationBottom.setDelay(5000);
+	  		notificationBottom.display();
 
 	  	}else{
 
 	  		if(typeof response.message == 'object') {
 					const notificationBottom = new NotificationBottom(response.message.title,'',response.message.type);	
-					notificationBottom.load();
+					notificationBottom.setTitle(response.message.title);
+					notificationBottom.setType(response.message.type);
+					notificationBottom.display();
 	  		}
 
 	  	}

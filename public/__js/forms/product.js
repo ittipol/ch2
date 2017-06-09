@@ -1,7 +1,6 @@
 class Product {
   
-  constructor(token,productId) {
-    this.token = token;
+  constructor(productId) {
     this.productId = productId;
     this.allowedClick = true;
   }
@@ -29,7 +28,7 @@ class Product {
           productOption = $('.product-option-rdobox:checked').val();
 
         }
-        const cart = new GlobalCart(_this.token);
+        const cart = new GlobalCart();
         cart.cartAdd(_this.productId,$('#product_quantity').val(),productOption);
 
         setTimeout(function(){_this.allowedClick = true},600);

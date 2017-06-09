@@ -30,12 +30,12 @@
 	line-height: 20px;
 }
 
-.review-comment-item {
+.review-item {
 	margin-bottom: 30px;
 	position: relative;
 }
 
-.review-user-avatar {
+.review-item .review-user-avatar {
 	position: absolute;
 	top: 10px;
 	left: 0;
@@ -48,30 +48,29 @@
 	border-radius: 30px;
 }
 
-.review-comment-content {
+.review-item .review-content {
 	padding-left: 40px;
 	padding-right: 10px;
 }
 
-.review-title {
+.review-item .review-content .review-title {
 	font-size: 16px;
 	font-weight: bold;
 	color: #222;
 	margin-right: 20px;
 }
 
-.review-description {
+.review-item .review-content .review-description {
 	font-size: 16px;
 	color: #888;
 }
 
-.review-rating-score {
+.review-item .review-content .review-rating-score {
 	font-size: 16px;
 	color: #222;
-	/*margin-bottom: 8px*/
 }
 
-/*.review-rating-date {}*/
+/*.review-item .review-content .review-rating-date {}*/
 
 .review-by {
 	font-size: 16px;

@@ -571,16 +571,16 @@ Route::group(['middleware' => ['api','auth']], function () {
 
   Route::get('notification_update', 'ApiController@notificationUpdate');
   Route::get('notification_read', 'ApiController@notificationRead');
-
-
 });
 
 Route::group(['middleware' => 'api'], function () {
   Route::post('cart_add', 'ApiController@cartAdd');
   Route::post('cart_delete', 'CartController@cartDelete');
-  Route::get('cart_update', 'ApiController@cartUpdate');
-  Route::get('product_count', 'ApiController@productCount');
+  Route::post('cart_update', 'ApiController@cartUpdate');
   Route::post('update_quantity', 'CartController@cartUpdateQuantity');
+  Route::get('product_count', 'ApiController@productCount');
+
+  Route::get('review_comment', 'ApiController@reviewComment');
 });
 
 // Route::group(['namespace' => 'Admin'], function () {

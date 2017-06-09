@@ -1,4 +1,4 @@
-class Blackbox {
+class Common {
 
   constructor() {}
 

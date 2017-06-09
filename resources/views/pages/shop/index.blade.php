@@ -220,8 +220,11 @@
         let message = document.getElementById('timeline_post_input').value.trim();
 
         if(message.length == 0) {
-          const notificationBottom = new NotificationBottom('ไม่พบข้อความที่ต้องการโพสต์','กรุณากรอกข้อความ','error');
-          notificationBottom.load();
+          const notificationBottom = new NotificationBottom();
+          notificationBottom.setTitle('ไม่พบข้อความที่ต้องการโพสต์');
+          notificationBottom.setDesc('กรุณากรอกข้อความ');
+          notificationBottom.setType('error');
+          notificationBottom.display();
           return false;
         }
 

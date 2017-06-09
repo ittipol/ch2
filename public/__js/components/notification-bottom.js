@@ -1,30 +1,26 @@
 class NotificationBottom {
   
-  constructor(title = '',desc = '',type = 'info',size = 'small',alwaysVisible = false,allowedClose = true) {
-      
-      if(!NotificationBottom.instance){
-        this.title = title;
-        this.desc = desc;
-        this.type = type;
-        this.size = size;
-        this.handle = null;
-        this.delay = 5000;
-        this.alwaysVisible = alwaysVisible;
-        this.allowedClose = allowedClose;
-        NotificationBottom.instance = this;
-      }
+  constructor() {
+    if(!NotificationBottom.instance){
+      this.title = '';
+      this.desc = '';
+      this.type = 'info';
+      this.layout = 'small';
+      this.handle = null;
+      this.delay = 5000;
+      this.alwaysVisible = false;
+      this.allowedClose = true;
+      NotificationBottom.instance = this;
+    }
 
-      return NotificationBottom.instance;
+    return NotificationBottom.instance;
   }
 
   load() {
-    this.init();
     this.bind();
   }
 
-  init() {
-    this.displayNotification()
-  }
+  // init() {}
 
   bind() {
 
@@ -58,7 +54,7 @@ class NotificationBottom {
   createNotification() {
 
     let html = '';
-    html += '<div id="notification_bottom" class="notification-bottom {{type}} {{size}}">';
+    html += '<div id="notification_bottom" class="notification-bottom {{type}} {{layout}}">';
     html += '<div class="notification-bottom-inner">';
     html += '<div class="message">';
     html += '<div class="title">{{title}}</div>';
@@ -73,13 +69,13 @@ class NotificationBottom {
     html = html.replace('{{title}}',this.title);
     html = html.replace('{{desc}}',this.desc);
     html = html.replace('{{type}}',this.type);
-    html = html.replace('{{size}}',this.size);
+    html = html.replace('{{layout}}',this.layout);
 
     return html;
 
   }
 
-  displayNotification() {
+  display() {
 
     $('#notification_bottom').remove(); 
     $('body').append(this.createNotification());
@@ -119,8 +115,24 @@ class NotificationBottom {
 
   }
 
+  setTitle(title) {
+    this.title = title;     
+  }
+
+  setDesc(desc) {
+    this.desc = desc;     
+  }
+
+  setType(type) {
+    this.type = type;     
+  }
+
   setDelay(delay) {
     this.delay = delay;
+  }
+
+  setLayout(layout) {
+    this.layout = layout;
   }
 
   setVisible(visible) {

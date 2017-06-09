@@ -465,7 +465,7 @@
     const imageGallery = new ImageGallery(true);
     imageGallery.load({!!$_modelData['Image']!!});
 
-    const product = new Product('{{ csrf_token() }}',{{$_modelData['id']}});
+    const product = new Product({{$_modelData['id']}});
     product.load();
 
     @if($hasBranchLocation)
@@ -476,7 +476,7 @@
     const tabs = new Tabs('product_description_tab');
     tabs.load();
 
-    const review = new Review();
+    const review = new Review('Product',{{$_modelData['id']}});
     review.load();
 
   });

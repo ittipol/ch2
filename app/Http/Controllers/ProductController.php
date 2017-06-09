@@ -575,17 +575,17 @@ class ProductController extends Controller
           $userReview = $_userReview->buildModelData();
           $userReviewFormData = $_userReview->buildFormData();
           
-          $reviewUrl = $url->url('product/review/edit/'.$_userReview->id);
+          // $reviewUrl = $url->url('product/review/edit/'.$_userReview->id);
           $hasUserReview = true;
         }else{
-          $reviewUrl = $url->url('product/review/post/'.$model->id);
+          // $reviewUrl = $url->url('product/review/post/'.$model->id);
           $hasUserReview = false;
         }
 
         $this->setData('hasUserReview',$hasUserReview);
         $this->setData('userReview',$userReview);
         $this->setData('userReviewFormData',$userReviewFormData);
-        $this->setData('reviewUrl',$reviewUrl);
+        // $this->setData('reviewUrl',$reviewUrl);
       }
     }
 

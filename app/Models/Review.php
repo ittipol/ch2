@@ -148,4 +148,26 @@ class Review extends Model
 
   }
 
+  public function buildPaginationData() {
+
+    $date = new Date;
+
+    // Get Person name & avatar
+    $person = Person::find($this->created_by);
+
+    $personName = null;
+    if(!empty($person)) {
+      $personName = $person->name;
+    }
+
+    return array(
+      'title' => $this->title,
+      'message' => !empty($this->message) ? nl2br($this->message) : null,
+      'score' => $this->scoreFormat(),
+      'personName' => $personName,
+      'updatedDate' => $date->calPassedDate($this->updated_at->format('Y-m-d H:i:s'))
+    );
+
+  }
+
 }

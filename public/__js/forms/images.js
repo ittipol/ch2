@@ -195,8 +195,10 @@ class Images {
 	  	}else{
 
 	  		if(typeof response.message == 'object') {
-					const notificationBottom = new NotificationBottom('เกิดข้อผิดพลาด','','error');
-					notificationBottom.load();
+					const notificationBottom = new NotificationBottom();
+					notificationBottom.setTitle('เกิดข้อผิดพลาด');
+					notificationBottom.setType('error');
+					notificationBottom.display();
 	  		}
 
 	  	}
