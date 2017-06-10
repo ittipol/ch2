@@ -333,9 +333,6 @@
           url: "/api/v1/get_shipping_method/"+shippingMethodId,
           type: "get",
           dataType:'json',
-          // beforeSend: function( xhr ) {
-          //   $('#shipping_method_panel').text('');
-          // }
         });
 
         request.done(function (response, textStatus, jqXHR){
@@ -344,8 +341,6 @@
             obj.find('.shipping-method-detail-panel').html(response.description);
             obj.slideDown(220);
             _this.downloaded[shippingMethodId] = true;
-
-            // $('#shipping_method_panel').html(response.description);
           }
           
         });

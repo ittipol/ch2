@@ -14,9 +14,3 @@
 </div>
 <div class="line space-bottom-20"></div>
 @endforeach
-
-@if($next)
-  <div>
-    <a id="more_review_btn" class="button wide-button">แสดงเพิ่ม</a>
-  </div>
-@endif

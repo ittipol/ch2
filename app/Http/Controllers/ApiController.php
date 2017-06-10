@@ -678,14 +678,18 @@ class ApiController extends Controller
 
     $total = $reviews->count();
 
-    $perpage = 1;
+    $perpage = 10;
     $offset = (Input::get('page') - 1)  * $perpage;
 
-    $reviews->take($perpage)->skip($offset);
+    $reviews
+    ->orderBy('updated_at','desc')
+    ->take($perpage)
+    ->skip($offset);
 
     if(!$reviews->exists()) {
       return array(
-        'next' => false,
+        'hasData' => false,
+        'next' => false
       );
     }
 
@@ -701,10 +705,10 @@ class ApiController extends Controller
     }
 
     return array(
+      'hasData' => true,
       'next' => $next,
       'html' => view('pages.product.layouts.review_list_item',array(
-        'reviews' => $_reviews,
-        'next' => $next
+        'reviews' => $_reviews
       ))->render(),
     );
 

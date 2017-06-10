@@ -59,10 +59,10 @@
     <div class="col-md-7 col-xs-12">
 
       <div id="review_comment_wrapper" class="review-list space-top-20">
-
         <!-- place here -->
-
       </div>
+
+      <a id="more_review_btn" class="button wide-button">แสดงเพิ่ม</a>
 
     </div>
 

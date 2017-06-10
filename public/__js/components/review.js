@@ -4,13 +4,11 @@ class Review {
   	this.model = model;
   	this.modelId = modelId;
   	this.form = '#user_review_form';
+  	this.clickable = true;
   	this.page = 1;
   }
 
   load() {
-
-  	this.getReview();
-
     this.bind();
   }
 
@@ -19,6 +17,17 @@ class Review {
   bind() {
 
   	let _this = this;
+
+  	let target = (40 * document.body.clientHeight) / 100;
+
+  	$(document).scroll(function() {
+
+  		if($(this).scrollTop() > target) {
+  			_this.getReview();
+  			$(this).off('scroll');
+  		}
+
+  	});
 
   	$(this.form).on('submit',function(){
 
@@ -104,16 +113,19 @@ class Review {
   	});
 
 		$('body').on('click','#more_review_btn', function(){
-			
+			console.log(_this.clickable);
+			_this.getReview();
 		});
 
   }
 
   getReview() {
 
-  	// let formData = new FormData();
-  	// formData.append('review_model', this.model);
-  	// formData.append('review_model_id', this.modelId);
+  	if(!this.clickable) {
+  		return false;
+  	}
+
+  	let _this = this;
 
 		let request = $.ajax({
 	    url: "/review_comment",
@@ -124,11 +136,34 @@ class Review {
 	      page: this.page
 	    },
 	    dataType: 'json',
+	    beforeSend: function( xhr ) {
+
+	    	_this.clickable = false;
+
+	    	// $('#review_loading_sign').removeClass('hide-element-imp');
+	    	// $('#more_review_btn').addClass('hide-element-imp');
+
+	    	$('#more_review_btn').text('กำลังโหลด...');
+
+	    }
 	  });
 
 	  request.done(function (response, textStatus, jqXHR){
+
+	  	if(response.hasData) {
+	  		$('#review_comment_wrapper').append(response.html);
+	  		++_this.page;
+	  	}else if(_this.page == 1) {
+	  		$('#review_comment_wrapper').append('<h4 class="text-center space-top-bottom-40">ยังไม่มีรีวิวจากผู้ที่ซื้อสินค้านี้</h4>');
+	  	}
+
+	  	if(response.next) {
+	  		$('#more_review_btn').text('แสดงเพิ่ม');
+	  	}else{
+	  		$('#more_review_btn').remove();
+	  	}
 	  	
-	  	$('#review_comment_wrapper').append(response.html);
+	  	_this.clickable = true;
 
 	  });
 

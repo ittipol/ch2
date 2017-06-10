@@ -313,6 +313,10 @@ h5 > img.provider-logo {
 	display: none;
 }
 
+.hide-element-imp {
+	display: none !important;
+}
+
 .text-line-through {
 	text-decoration: line-through;
 }
