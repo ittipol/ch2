@@ -14,7 +14,7 @@
         <div class="dot"></div>
         <div class="additional-option-content">
           <a data-right-side-panel="1" data-right-side-panel-target="#review_panel">แก้ไข</a>
-          <a href="" data-modal="1" data-modal-title="ต้องการลบรีวิวใช่หรือไม่">ลบ</a>
+          <a data-trigger="click|id|delete_user_review_btn" data-modal="1" data-modal-title="ต้องการลบรีวิวใช่หรือไม่">ลบ</a>
         </div>
       </div>
 

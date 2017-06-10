@@ -370,10 +370,10 @@ class ApiController extends Controller
 
     if(empty($imageModel)) {
       return array(
-      'success' => false,
+        'success' => false,
         'message' => array(
           'type' => 'error',
-          'title' => 'กรุณาอัพโหลดรูปภาพ'
+          'title' => 'ไม่พอรูปภาพที่ต้องการอัพโหลด'
         )
       );
     }
@@ -569,7 +569,7 @@ class ApiController extends Controller
     }
 
     // find data
-    $modelData = Service::loadModel(Input::get('review_model'))->find(Input::get('review_model_id'));
+    $modelData = Service::loadModel(Input::get('model'))->find(Input::get('model_id'));
 
     $messageBag = $validator->getMessageBag();
 
@@ -653,15 +653,15 @@ class ApiController extends Controller
 
   }
 
-  public function reviewComment() {
+  public function reviewList() {
 
-    // if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
-    //   // exit('Error!!!');  //trygetRealPath detect AJAX request, simply exist if no Ajax
-    //   $this->error = array(
-    //     'message' => 'ขออภัย ไม่อนุญาตให้เข้าถึงหน้านี้ได้'
-    //   );
-    //   return $this->error();
-    // }
+    if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+      // exit('Error!!!');  //trygetRealPath detect AJAX request, simply exist if no Ajax
+      $this->error = array(
+        'message' => 'ขออภัย ไม่อนุญาตให้เข้าถึงหน้านี้ได้'
+      );
+      return $this->error();
+    }
 
     $reviewModel = Service::loadModel('Review');
 
@@ -711,6 +711,91 @@ class ApiController extends Controller
         'reviews' => $_reviews
       ))->render(),
     );
+
+  }
+
+  public function userReviewDelete() {
+
+    if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+      // exit('Error!!!');  //trygetRealPath detect AJAX request, simply exist if no Ajax
+      $this->error = array(
+        'message' => 'ขออภัย ไม่อนุญาตให้เข้าถึงหน้านี้ได้'
+      );
+      return $this->error();
+    }
+
+    $reviewModel = Service::loadModel('Review');
+
+    if(!in_array(Input::get('model'),$reviewModel->getModelRelations())) {
+      return array(
+        'success' => false,
+        'message' => array(
+          'type' => 'error',
+          'title' => 'เกิดข้อผิดพลาด'
+        )
+      );   
+    }
+
+    $modelData = Service::loadModel(Input::get('model'))->find(Input::get('model_id'));
+
+    if(empty($modelData)) {
+      return array(
+        'success' => false,
+        'message' => array(
+          'type' => 'error',
+          'title' => 'เกิดข้อผิดพลาด'
+        )
+      );   
+    }
+
+    // Get exist user review
+    $userReview = $reviewModel->getUserReview($modelData,session()->get('Person.id'));
+
+    if(empty($userReview)) {
+      return array(
+        'success' => false,
+        'message' => array(
+          'type' => 'error',
+          'title' => 'ไม่พบรีวิว'
+        )
+      ); 
+    }
+
+    if(!$userReview->delete()) {
+      return array(
+        'success' => false,
+        'message' => array(
+          'type' => 'error',
+          'title' => 'ไม่สามารถลบรีวิวได้'
+        )
+      ); 
+    }
+
+    // return array(
+    //   'success' => true,
+    //   'user_review_html' => view('pages.product.layouts.user_review_not_found')->render()
+    // );
+
+    $additionalData = null;
+    switch ($modelData->modelName) {
+      case 'Product':
+        
+          $additionalData = array(
+            'user_review_html' => view('pages.product.layouts.user_review_not_found')->render(),
+            'avgScore' => $modelData->productAvgScore(),
+            'scoreList' => $modelData->productScoreList()
+          );
+
+        break;
+    }
+
+    if(empty($additionalData)) {
+      return array(
+        'success' => true
+      );
+    }
+
+    return array_merge(array('success' => true),$additionalData);
 
   }
 

@@ -9,24 +9,12 @@
 
     @if($productBought)
 
-      <div id="user_review" class="user-review">
+      <div id="user_review" class="user-review space-top-30">
 
         @if($hasUserReview)
-
           @include('pages.product.layouts.user_review')
-
         @else
-
-          <div class="list-empty-message text-center space-top-20">
-            <img class="not-found-image" src="/images/icons/message-blue.png">
-            <div>
-              <h4>ยังไม่มีรีวิวจากคุณ</h4>
-              <a class="button" data-right-side-panel="1" data-right-side-panel-target="#review_panel">
-                แสดงความคิดเห็นต่อสินค้านี้
-              </a>
-            </div>
-          </div>
-
+          @include('pages.product.layouts.user_review_not_found')
         @endif
 
       </div>

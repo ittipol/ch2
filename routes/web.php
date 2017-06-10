@@ -568,6 +568,7 @@ Route::group(['middleware' => ['api','auth']], function () {
   Route::post('clear_file_attachment', 'ApiController@clearAttachedFile');
 
   Route::post('user_review', 'ApiController@userReview');
+  Route::post('user_review_delete', 'ApiController@userReviewDelete');
 
   Route::get('notification_update', 'ApiController@notificationUpdate');
   Route::get('notification_read', 'ApiController@notificationRead');
@@ -580,7 +581,7 @@ Route::group(['middleware' => 'api'], function () {
   Route::post('update_quantity', 'CartController@cartUpdateQuantity');
   Route::get('product_count', 'ApiController@productCount');
 
-  Route::get('review_comment', 'ApiController@reviewComment');
+  Route::get('review_list', 'ApiController@reviewList');
 });
 
 // Route::group(['namespace' => 'Admin'], function () {
