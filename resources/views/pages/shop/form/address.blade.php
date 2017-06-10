@@ -1,8 +1,6 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
-
 <div class="sub-header-nav">
   <div class="sub-header-nav-fixed-top">
     <div class="row">
@@ -81,21 +79,6 @@
       ?>
     </div>
 
-    <div class="form-row">
-      <?php 
-        echo Form::label('sub_district_id', 'ตำบล');
-        echo Form::select('sub_district_id', array() , null, array(
-          'id' => 'sub_district'
-        ));
-      ?>
-    </div>
-
-    <div class="form-row">
-      <?php echo Form::label('', 'ระบุตำแหน่บนแผนที่'); ?>
-      <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-      <div id="map"></div>
-    </div>
-
   </div>
 
   <?php
@@ -108,16 +91,9 @@
     echo Form::close();
   ?>
 
-<div>
+</div>
 
 <script type="text/javascript">
-  
-  const map = new Map();
-  map.setInputName('latitude','longitude');
-  map.initialize();
-  @if(!empty($_geographic))
-  map.setLocation({!!$_geographic!!});
-  @endif
 
   const address = new Address();
   address.load();

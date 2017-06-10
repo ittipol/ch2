@@ -469,8 +469,8 @@
     product.load();
 
     @if($hasBranchLocation)
-    const map = new Map(false,false,false);
-    map.setLocations({!!$branchLocations!!});
+    // const map = new Map(false,false,false);
+    // map.setLocations({!!$branchLocations!!});
     @endif
 
     const tabs = new Tabs('product_description_tab');

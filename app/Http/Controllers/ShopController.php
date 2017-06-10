@@ -587,7 +587,7 @@ class ShopController extends Controller
 
     if($model->fill(request()->all())->save()) {
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/overview');
+      return Redirect::to('shop/'.request()->shopSlug.'/setting');
     }else{
       return Redirect::back();
     }
@@ -655,7 +655,7 @@ class ShopController extends Controller
 
     if($model->fill(request()->all())->save()) {
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/overview');
+      return Redirect::to('shop/'.request()->shopSlug.'/setting');
     }else{
       return Redirect::back();
     }
@@ -707,7 +707,7 @@ class ShopController extends Controller
 
     if($model->fill(request()->all())->save()) {
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/overview');
+      return Redirect::to('shop/'.request()->shopSlug.'/setting');
     }else{
       return Redirect::back();
     }
@@ -748,7 +748,7 @@ class ShopController extends Controller
 
     if($model->fill(request()->all())->save()) {
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
-      return Redirect::to('shop/'.request()->shopSlug.'/overview');
+      return Redirect::to('shop/'.request()->shopSlug.'/setting');
     }else{
       return Redirect::back();
     }

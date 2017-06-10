@@ -176,7 +176,7 @@
   </div>
 
   @if($hasBranchLocation)
-  <h4 class="article-title">สาขาที่กำลังเปิดรับสมัครงานนี้</h4>
+  <!-- <h4 class="article-title">สาขาที่กำลังเปิดรับสมัครงานนี้</h4>
   <div class="line"></div>
   <div class="row">
     <div class="col-xs-12">
@@ -193,8 +193,7 @@
       </div>
 
     </div> 
-  </div>
-
+  </div> -->
   @endif
 
   <div class="space-top-20"></div>
@@ -274,11 +273,15 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
+
     imageGallery = new ImageGallery(true);
     imageGallery.load({!!$_modelData['Image']!!});
 
-    const map = new Map(false,false,false);
-    map.setLocations({!!$branchLocations!!});
+    @if($hasBranchLocation)
+    // const map = new Map(false,false,false);
+    // map.setLocations({!!$branchLocations!!});
+    @endif
+
   });
 </script>
 

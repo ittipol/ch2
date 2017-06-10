@@ -55,8 +55,8 @@
         <div class="nav-group space-bottom-30">
           <a href="{{URL::to('manual/creating-shop')}}">สร้างร่านค้า</a>
           <a href="{{URL::to('manual/shop-profile-image')}}">รูปภาพโปรไฟล์ร้านค้า & รูปหน้าปก</a>
-          <a href="{{URL::to('manual/adding-shipping-method')}}">เพิ่มตัวเลือกวิธีการจัดส่ง</a>
-          <a href="{{URL::to('manual/adding-payment-method')}}">เพิ่มตัวเลือกการชำระเงิน</a>
+          <a href="{{URL::to('manual/adding-shipping-method')}}">เพิ่มวิธีการจัดส่ง</a>
+          <a href="{{URL::to('manual/adding-payment-method')}}">เพิ่มวิธีการชำระเงิน</a>
           <a href="{{URL::to('manual/shop-setting')}}">ข้อมูลร้านค้า</a>
         </div>
       </div>

@@ -46,15 +46,15 @@ class ManualController extends Controller
         break;
 
       case 'adding-shipping-method':
-          $title = 'เพิ่มตัวเลือกวิธีการจัดส่ง';
+          $title = 'เพิ่มวิธีการจัดส่ง';
+        break;
+
+      case 'adding-payment-method':
+          $title = 'เพิ่มวิธีการชำระเงิน';
         break;
 
       case 'shop-setting':
           $title = 'ข้อมูลร้านค้า';
-        break;
-
-      case 'adding-payment-method':
-          $title = 'เพิ่มตัวเลือกการชำระเงิน';
         break;
 
       case 'shop-profile-image':
