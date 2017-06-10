@@ -532,46 +532,46 @@ dd('end');
   //   return $this->view('pages.home.index');
   // }
 
-  public function addBanks() {
+//   public function addBanks() {
 
-    $banks = array(
-      'ธนาคารกรุงเทพ',
-      'ธนาคารกสิกรไทย',
-      'ธนาคารกรุงไทย',
-      'ธนาคารทหารไทย',
-      'ธนาคารไทยพาณิชย์',
-      'ธนาคารกรุงศรีอยุธยา',
-      'ธนาคารเกียรตินาคิน',
-      'ธนาคารซีไอเอ็มบีไทย',
-      'ธนาคารทิสโก้',
-      'ธนาคารธนชาต',
-      'ธนาคารยูโอบี',
-      'ธนาคารสแตนดาร์ดชาร์เตอร์ด ',
-      'ธนาคารไอซีบีซี (ไทย)',
-      'ธนาคารออมสิน',
-    );
+//     $banks = array(
+//       'ธนาคารกรุงเทพ',
+//       'ธนาคารกสิกรไทย',
+//       'ธนาคารกรุงไทย',
+//       'ธนาคารทหารไทย',
+//       'ธนาคารไทยพาณิชย์',
+//       'ธนาคารกรุงศรีอยุธยา',
+//       'ธนาคารเกียรตินาคิน',
+//       'ธนาคารซีไอเอ็มบีไทย',
+//       'ธนาคารทิสโก้',
+//       'ธนาคารธนชาต',
+//       'ธนาคารยูโอบี',
+//       'ธนาคารสแตนดาร์ดชาร์เตอร์ด ',
+//       'ธนาคารไอซีบีซี (ไทย)',
+//       'ธนาคารออมสิน',
+//     );
 
-    // $model = Service::loadModel('PaymentServiceProvider');
+//     // $model = Service::loadModel('PaymentServiceProvider');
 
-    foreach ($banks as $bank) {
+//     foreach ($banks as $bank) {
       
-      $model = Service::loadModel('PaymentServiceProvider');
+//       $model = Service::loadModel('PaymentServiceProvider');
 
-      $model->payment_service_provider_type_id = 1;
-      $model->name = $bank;
+//       $model->payment_service_provider_type_id = 1;
+//       $model->name = $bank;
 
-      $model->save();
+//       $model->save();
 
-      $_model = Service::loadModel('PaymentServiceProviderToPaymentMethodType');
+//       $_model = Service::loadModel('PaymentServiceProviderToPaymentMethodType');
 
-      $_model->payment_service_provider_id = $model->id;
-      $_model->payment_method_type_id = 1;
+//       $_model->payment_service_provider_id = $model->id;
+//       $_model->payment_method_type_id = 1;
 
-      $_model->save();
+//       $_model->save();
 
-    }
-dd('done');
-  }
+//     }
+// dd('done');
+//   }
 
   public function index() {
 
@@ -580,6 +580,11 @@ dd('done');
 
     $productModel = Service::loadModel('Product');
     $shopModel = Service::loadModel('Shop');
+
+    // get 20 latest product
+    $latestProduct = $productModel
+    ->orderBy('created_at','desc')
+    ->take(20);
 
     // Get Shop id
     // $shopModel->where([

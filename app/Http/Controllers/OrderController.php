@@ -63,13 +63,15 @@ class OrderController extends Controller
           if($paymentMethods->exists()) {
 
             foreach ($paymentMethods->get() as $paymentMethod) {
-              $data[] = array_merge($paymentMethod->buildPaginationData(),array(
+              $data[] = array_merge($paymentMethod->buildModelData(),array(
                 'informUrl' => $url->url('order/payment/inform/'.$model->id.'/method:'.$paymentMethod->id)
               ));
             }
 
             $_paymentMethods[] = array(
               'name' => $paymentMethodType->name,
+              'type' => $paymentMethodType->alias,
+              'image' => $paymentMethodType->getPaymentMethodTypeImage(),
               'data' => $data
             );
 

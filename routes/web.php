@@ -423,10 +423,11 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
 });
 
 // Payment Method
-Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
-
+Route::group(['middleware' => ['shop','person.shop.permission']], function () {
   Route::get('shop/{shopSlug}/payment_method','PaymentMethodController@listView')->name('shop.payment_method.list');
+});
 
+Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
   Route::get('shop/{shopSlug}/manage/payment_method','ShopController@paymentMethod')->name('shop.payment_method.manage');
 
   Route::get('shop/{shopSlug}/payment_method/add/{type}','PaymentMethodController@add')->name('shop.payment_method.add');

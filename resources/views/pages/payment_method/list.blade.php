@@ -14,7 +14,7 @@
 
       <div class="payment-method-list">
         <h4 class="space-bottom-20"><img src="{{$paymentMethod['image']}}">{{$paymentMethod['name']}}</h4>
-        @include('pages.payment_method.display')
+        @include('pages.payment_method.layouts.display')
       </div>
 
       <div class="line grey space-top-bottom-40"></div>

@@ -317,6 +317,14 @@ label.list-box > input[type="checkbox"] {
 	.list .list-content-wrapper .info {
 		width: 60%;
 	}
+
+	.payment-method-list .payment-method-item .card {
+		margin-top: 15px;
+	}
+
+	.payment-method-list .payment-method-item a.button {
+		margin-top: 10px;
+	}
 }
 
 @media only screen and (max-width : 480px) {
@@ -342,10 +350,6 @@ label.list-box > input[type="checkbox"] {
 		width: 100%;
 		margin-top: 40px;
 		margin-left: 0;
-	}
-
-	.payment-method-list .payment-method-item a.button {
-		margin-top: 10px;
 	}
 
 }

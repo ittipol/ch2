@@ -37,19 +37,19 @@
 
 .review-item .review-user-avatar {
 	position: absolute;
-	top: 10px;
+	top: 5px;
 	left: 0;
-	width: 30px;
-	height: 30px;
+	width: 35px;
+	height: 35px;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: auto 100%;
 	background-color: #ececec;
-	border-radius: 30px;
+	border-radius: 35px;
 }
 
 .review-item .review-content {
-	padding-left: 40px;
+	padding-left: 50px;
 	padding-right: 10px;
 }
 
