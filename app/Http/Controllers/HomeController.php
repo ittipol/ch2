@@ -602,14 +602,7 @@ dd('end');
 
     $this->setData('latestProducts',$_latestProducts);
 
-    // Get Shop id
-    // $shopModel->where([
-    //   ['description','!=',null]
-    // ])
-    // ->select('id');
-
-    // $shopIds = array(3,21,24,23);
-    $shopIds = array(3,7,6,8);
+    $shopIds = array(1,2,3,4,5,6,7,8,9,10);
 
     $usedIds = array();
     $len = count($shopIds)-1;

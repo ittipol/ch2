@@ -11,8 +11,6 @@
 |
 */
 
-Route::get('zzzwww','HomeController@addBanks');
-
 // Route::get('aa','HomeController@addC');
 // Route::get('co','HomeController@co');
 
