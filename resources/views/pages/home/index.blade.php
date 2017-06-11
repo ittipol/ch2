@@ -125,10 +125,8 @@
 
                   </div>
 
-                  <div class="row space-bottom-30">
-                    <div class="col-xs-12 text-right">
-                      <a href="{{$data['shop']['shopProductUrl']}}" class="flat-button">ดูสินค้าเพิ่มเติม</a>
-                    </div>
+                  <div class="text-right">
+                    <a href="{{$data['shop']['shopProductUrl']}}" class="flat-button">ดูสินค้าในร้านเพิ่มเติม</a>
                   </div>
 
                 @else
@@ -168,9 +166,12 @@
   </div>
 
   <div class="main-row color-bar">
-    <div class="color-bar-bg" style="background-image:url(/images/test/ss.png);"></div>
     <div class="container">
-      สินค้ามากมายจากร้านค้า
+      <div class="color-bar-bg" style="background-image:url(/images/test/a1.png);"></div>
+      <div class="color-bar-article">
+        <div class="color-bar-title">สินค้ามากมายจากร้านค้า</div>
+        <p>สินค้าจากบริษัทและร้านค้าที่มีมายมากและหลากหลายให้เลือกซื้อ ในราคาที่คุณสามารถเป็นเจ้าของได้</p>
+      </div>
     </div>
   </div>
 
@@ -226,7 +227,7 @@
         </div>
 
         <div class="text-right">
-          <a href="{{URL::to('product')}}">ดูสินค้าเพิ่มเติม</a>
+          <a href="{{URL::to('product')}}" class="flat-button">ดูสินค้าเพิ่มเติม</a>
         </div>
 
       @else

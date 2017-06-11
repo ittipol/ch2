@@ -631,12 +631,16 @@ class ApiController extends Controller
     $additionalData = null;
     switch ($modelData->modelName) {
       case 'Product':
+
+          // update Rating
+          $modelData->rating = $modelData->productAvgScore();
+          $modelData->save();
         
           $additionalData = array(
             'user_review_html' => view('pages.product.layouts.user_review',array(
               'userReview' => $userReview->buildModelData()
             ))->render(),
-            'avgScore' => $modelData->productAvgScore(),
+            'avgScore' => $modelData->rating,
             'scoreList' => $modelData->productScoreList()
           );
 
@@ -771,18 +775,17 @@ class ApiController extends Controller
       ); 
     }
 
-    // return array(
-    //   'success' => true,
-    //   'user_review_html' => view('pages.product.layouts.user_review_not_found')->render()
-    // );
-
     $additionalData = null;
     switch ($modelData->modelName) {
       case 'Product':
+
+          // update Rating
+          $modelData->rating = $modelData->productAvgScore();
+          $modelData->save();
         
           $additionalData = array(
             'user_review_html' => view('pages.product.layouts.user_review_not_found')->render(),
-            'avgScore' => $modelData->productAvgScore(),
+            'avgScore' => $modelData->rating,
             'scoreList' => $modelData->productScoreList()
           );
 

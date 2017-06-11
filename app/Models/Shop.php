@@ -90,9 +90,9 @@ class Shop extends Model
 
     Shop::saving(function($model){
 
-      if($model->state == 'create') {
-        $model->rating = 0;
-      }
+      // if($model->state == 'create') {
+      //   $model->rating = 0;
+      // }
 
       $image = new Image;
 
