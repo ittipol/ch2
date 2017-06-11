@@ -602,21 +602,29 @@ dd('end');
 
     $this->setData('latestProducts',$_latestProducts);
 
-    $shopIds = array(1,2,3,4,5,6,7,8,9,10);
+    $shopIds = array();
 
-    $usedIds = array();
-    $len = count($shopIds)-1;
-    $i = 0;
-    do {
+    foreach ($shopModel->select('id')->get() as $value) {
+      $shopIds[] = $value->id;
+    }
 
-      $ranNumber = rand(0,$len);
-      
-      if(!in_array($shopIds[$ranNumber], $usedIds)) {
-        $usedIds[] = $shopIds[$ranNumber];
-        $i++;
-      }
+    if(count($shopIds) > 1) {
+      $usedIds = array();
+      $len = count($shopIds)-1;
+      $i = 0;
+      do {
 
-    } while ($i < 2);
+        $ranNumber = rand(0,$len);
+        
+        if(!in_array($shopIds[$ranNumber], $usedIds)) {
+          $usedIds[] = $shopIds[$ranNumber];
+          $i++;
+        }
+
+      } while ($i < 2); 
+    }else{
+      $usedIds[] = $shopIds[0];
+    }
 
     // Recommended shop
     $shops = $shopModel
