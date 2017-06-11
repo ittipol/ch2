@@ -289,7 +289,8 @@ class AccountController extends Controller
 
     $model->paginator->criteria(array(
       'conditions' => array(
-        array('created_by','=',session()->get('Person.id'))
+        array('receiver','like','Person'),
+        array('receiver_id','=',session()->get('Person.id'))
       ),
       'order' => array('created_at','desc')
     ));

@@ -603,7 +603,6 @@ dd('end');
     $this->setData('latestProducts',$_latestProducts);
 
     $shopIds = array();
-
     foreach ($shopModel->select('id')->get() as $value) {
       $shopIds[] = $value->id;
     }
