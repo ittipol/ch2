@@ -77,18 +77,22 @@
 	font-size: 16px;
 }
 
+.review-score-box label.review-score-box-item:not(:last-child) {
+	margin-bottom: 4px;
+}
+
 label.review-score-box-item {
 	margin: 0;
 	padding: 0;
-	display: inline-block;
+	display: block;
 	cursor: pointer;
 	
 }
 
 label.review-score-box-item > .inner {
-	width: 50px;
-	height: 30px;
-	line-height: 30px;
+	width: 80px;
+	height: 25px;
+	line-height: 25px;
 	opacity: .75;
 	transition: width .15s ease-out;
 }
@@ -111,7 +115,7 @@ label.review-score-box-item > input[type="radio"] {
 
 label.review-score-box-item > input[type="radio"]:checked + .inner {
 	opacity: 1;
-	width: 90px;
+	width: 200px;
 }
 
 label.review-score-box-item > input[type="radio"]:checked + .inner > .score-label {
