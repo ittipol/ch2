@@ -692,56 +692,51 @@ dd('end');
     }
 
     $this->setData('recommendedShops',$_shops);
-    $this->setData('otherShops',$_otherShops);
+    // $this->setData('otherShops',$_otherShops);
 
     // Get Products
-    $products = array(
-      array(
-        'id' => 79,
-        'label' => 'เสื้อผ้าและเครื่องแต่งกาย'
-      ),
-      array(
-        'id' => 377,
-        'label' => 'สุขภาพและความงาม'
-      ),
-      array(
-        'id' => 651,
-        'label' => 'อิเล็กทรอนิกส์'
-      ),
-      array(
-        'id' => 771,
-        'label' => 'Gaming'
-      ),
-      array(
-        'id' => 1261,
-        'label' => 'ห้องนอน'
-      ),
-      array(
-        'id' => 2452,
-        'label' => 'ขนมขบเคี้ยว'
-      )
-    );
+    // $products = array(
+    //   array(
+    //     'id' => 79,
+    //     'label' => 'เสื้อผ้าและเครื่องแต่งกาย'
+    //   ),
+    //   array(
+    //     'id' => 377,
+    //     'label' => 'สุขภาพและความงาม'
+    //   ),
+    //   array(
+    //     'id' => 651,
+    //     'label' => 'อิเล็กทรอนิกส์'
+    //   ),
+    //   array(
+    //     'id' => 771,
+    //     'label' => 'Gaming'
+    //   ),
+    //   array(
+    //     'id' => 1261,
+    //     'label' => 'ห้องนอน'
+    //   ),
+    //   array(
+    //     'id' => 2452,
+    //     'label' => 'ขนมขบเคี้ยว'
+    //   )
+    // );
 
-    $__products = array();
-    foreach ($products as $product) {
-      $__products[] = array(
-        'label' => $product['label'],
-        'data' => $this->getProductData($product['id'],16),
-        'moreUrl' => $url->url('product/'.$product['id'])
-      );
-    }
+    // $__products = array();
+    // foreach ($products as $product) {
+    //   $__products[] = array(
+    //     'label' => $product['label'],
+    //     'data' => $this->getProductData($product['id'],16),
+    //     'moreUrl' => $url->url('product/'.$product['id'])
+    //   );
+    // }
 
-    $this->setData('recommendedProducts',$__products);
+    // $this->setData('recommendedProducts',$__products);
 
-    $this->setData('shirts',$this->getProductData(80,7));
-    $this->setData('dresses',$this->getProductData(108,16));
-    $this->setData('bags',$this->getProductData(171,16));
-    $this->setData('shoes',$this->getProductData(176,16));
-
-    // $this->setData('shirts',$this->getProductData(771,7));
-    // $this->setData('dresses',$this->getProductData(771,16));
-    // $this->setData('bags',$this->getProductData(771,16));
-    // $this->setData('shoes',$this->getProductData(771,16));
+    // $this->setData('shirts',$this->getProductData(80,7));
+    // $this->setData('dresses',$this->getProductData(108,16));
+    // $this->setData('bags',$this->getProductData(171,16));
+    // $this->setData('shoes',$this->getProductData(176,16));
 
     $this->botAllowed();
 
