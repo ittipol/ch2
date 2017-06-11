@@ -47,6 +47,8 @@ class ProductCategory {
       _this.level++;
       _this.getCategory($(this).data('id'));
 
+      $(document).scrollTop($('#category_selected').position().top - 150);
+
     });
 
     $(document).on('click','.has-end',function(){
@@ -66,6 +68,8 @@ class ProductCategory {
 
       $(this).addClass('selected');
       _this.selectedElem = $(this);
+
+      $(document).scrollTop($('#category_selected').position().top - 150);
       
       setTimeout(function(){
         _this.allowedClick = true;
