@@ -376,8 +376,6 @@ h5 > img.provider-logo {
 
 .inline-flag {
 	color: #222;
-	/*background-color: #D50000;*/
-	/*padding: 5px 10px*/
 	display: inline-block;
 }
 
@@ -392,132 +390,22 @@ h5 > img.provider-logo {
   padding: 5px 10px;
 }
 
-/*.content-footer {
+.main-row.color-bar {
+	height: 80px;
+	line-height: 80px;
+	padding: 0;
+	font-size: 20px;
+	background-color: rgb(34,177,76);
+	position: relative;
+}
+
+.color-bar-bg {
+	position: absolute;
+	top: 0;
+	left: 0;
 	width: 100%;
-	border-bottom: 5px solid #fb8c00;
-}
-
-@media only screen and (max-width : 480px) {
-
-	.product-catalog-banner {
-		height: 120px;
-	}
-
-}
-
-
-
-
-.product-banner {
-}
-
-.product-banner .section-left {
-	width: 225px;
-	background-color: #E91E63;
-	float: left;
-}
-
-.product-banner .section-left-inner {
-	padding: 10px;
-	font-size: 16px;
-	color: #fff;
-}
-
-.product-banner .section-right {
-	width: 75%;
-	float: left;
-	margin-left: 20px;
-}
-
-.product-banner .product-banner-image {
-	width: 150px;
-	height: 150px;
-	background-position: center;
-	background-size: auto 95%;
+	height: 100%;
 	background-repeat: no-repeat;
+	background-size: 20%;
+	background-position: center;
 }
-
-.product-banner .product-banner-content {
-	margin-bottom: 20px;
-	border-bottom: 1px solid #E91E63;
-}*/
-
-/*.product-banner .product-price-section {
-	height: 44px;
-}
-
-.product-banner .product-banner-info {
-	width: 60%;
-	margin-top: 20px;
-	margin-left: 10px;
-}
-
-.product-banner .product-title {
-	font-size: 14px;
-	margin-bottom: 5px;
-}
-
-.product-banner .product-price {
-	color: #EF6C00;
-	font-size: 18px;
-	font-weight: bold;
-}
-
-.product-banner .product-price-discount-tag{
-	padding: 4px 8px;
-  font-size: 18px;
-  white-space: nowrap;
-  background-color: #FFCDD2;
-  color: #D50000;
-}
-
-.product-banner .origin-price {
-	text-decoration: line-through;
-	font-size: 12px;
-	color: #999;
-}
-
-@media only screen and (max-width : 1200px) {
-	.product-banner .section-left {
-		margin-bottom: 10px;
-	}
-}
-
-@media only screen and (max-width : 480px) {
-	.product-banner .section-right {
-		width: auto;
-		float: none;
-		margin-left: 0;
-	}
-
-	.product-banner .product-banner-info {
-		width: 58%;
-	}
-
-	.product-banner .section-left {
-		width: 100%;
-	}
-}
-
-@media only screen and (max-width : 480px) {
-	.product-banner .section-right {
-		width: auto;
-		float: none;
-		margin-left: 0;
-	}
-
-	.product-banner .product-banner-info {
-		width: 58%;
-	}
-
-	.product-banner .section-left {
-		width: 100%;
-	}
-}
-
-
-@media only screen and (max-width : 380px) {
-  .product-banner .product-banner-info {
-  	width: 53%;
-  }
-}*/

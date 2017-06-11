@@ -582,9 +582,25 @@ dd('end');
     $shopModel = Service::loadModel('Shop');
 
     // get 20 latest product
-    $latestProduct = $productModel
+    $latestProducts = $productModel
     ->orderBy('created_at','desc')
     ->take(20);
+
+    $_latestProducts = array();
+    if($latestProducts->exists()) {
+
+      foreach ($latestProducts->get() as $product) {
+
+        $_latestProducts[] = array_merge($product->buildPaginationData(),array(
+          '_imageUrl' => $product->getImage('list'),
+          'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
+        ));
+        
+      }
+
+    }
+
+    $this->setData('latestProducts',$_latestProducts);
 
     // Get Shop id
     // $shopModel->where([
