@@ -19,8 +19,6 @@
 <meta name="keywords" content="สร้างร้านค้า,สร้างร้านค้าออนไลน์,ร้านค้าออนไลน์,ขายของออนไลน์,สินค้า">
 @endif
 
-<!-- <meta name="Search Engines" content="www.google.com, www.google.com.vn, www.altaVista.com, www.aol.com, www.infoseek.com, www.excite.com, www.hotbot.com, www.lycos.com, www.magellan.com, www.looksmart.com, www.cnet.com, www.voila.com, www.yahoo.com, www.alltheweb.com, www.msn.com, www.netscape.com, www.nomade.com"> -->
-
 <!-- Facebook -->
 @if(!empty($_page_url))
 <meta property="og:url" content="{{$_page_url}}" />

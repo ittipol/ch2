@@ -23,6 +23,11 @@ class UserController extends Controller
       'footer' => false,
     );
 
+    $this->setPageTitle('เข้าสู่ระบบ');
+    $this->setMetaKeywords('สร้างร้านค้า,สร้างร้านค้าออนไลน์,ร้านค้าออนไลน์,ขายของออนไลน์,เข้าสู่ระบบ');
+
+    $this->botAllowed();
+
     if(Auth::check()){
       return redirect('/');
     }else{
@@ -144,6 +149,11 @@ class UserController extends Controller
     if(Auth::check()){
       return redirect('/');
     }
+
+    $this->setPageTitle('สมัครสมาชิก');
+    $this->setMetaKeywords('สร้างร้านค้า,สร้างร้านค้าออนไลน์,ร้านค้าออนไลน์,ขายของออนไลน์,สมัครสมาชิก');
+
+    $this->botAllowed();
 
     return $this->view('pages.user.register');
 

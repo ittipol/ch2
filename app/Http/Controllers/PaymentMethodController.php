@@ -25,6 +25,9 @@ class PaymentMethodController extends Controller
 
     $url = new Url;
 
+    $_keywords = array();
+    $_keywords[] = 'วิธีการชำระเงิน';
+
     // Get Payment method types
     $paymentMethodTypes = Service::loadModel('PaymentMethodType')->get();
 
@@ -54,6 +57,8 @@ class PaymentMethodController extends Controller
         continue;
       }
 
+      $_keywords[] = $paymentMethodType->name;
+
       $_paymentMethods[] = array(
         'name' => $paymentMethodType->name,
         'type' => $paymentMethodType->alias,
@@ -67,6 +72,7 @@ class PaymentMethodController extends Controller
 
     $this->setPageTitle('วิธีการชำระเงิน - '.request()->get('shop')->name);
     $this->setPageDescription('วิธีการชำระเงินของร้าน '.request()->get('shop')->name);
+    $this->setMetaKeywords(implode(',', $_keywords));
 
     $this->botAllowed();
     
