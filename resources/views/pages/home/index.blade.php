@@ -161,6 +161,17 @@
 
       @endif
 
+      <div class="line grey space-top-bottom-20"></div>
+
+      <div class="main-row color-bar bg-transparent">
+        <div class="inner">
+          <div class="color-bar-article">
+            <div class="color-bar-title">มีร้านค้ามากมายที่รอให้คุณเยี่ยมชม</div>
+            <a href="{{URL::to('shop')}}">แสดงร้านค้าทั้งหมด</a>
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -169,7 +180,7 @@
     <div class="container">
       <div class="color-bar-bg" style="background-image:url(/images/test/a1.png);"></div>
       <div class="color-bar-article">
-        <div class="color-bar-title">สินค้ามากมายจากร้านค้า</div>
+        <div class="color-bar-title">สินค้ามากมายจากร้านค้าที่พร้อมให้คุณเลือกซื้อ</div>
         <p>สินค้าจากบริษัทและร้านค้าที่มีมายมากและหลากหลายให้เลือกซื้อ ในราคาที่คุณสามารถเป็นเจ้าของได้</p>
       </div>
     </div>

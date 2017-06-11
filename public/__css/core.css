@@ -67,6 +67,10 @@ h5 > img.provider-logo {
 	background-color: rgb(47,97,186);
 }
 
+.bg-transparent {
+	background-color: transparent !important;
+}
+
 .space-top-bottom-10 {
 	margin-top: 10px !important;
 	margin-bottom: 10px !important;
