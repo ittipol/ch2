@@ -607,8 +607,9 @@ dd('end');
       $shopIds[] = $value->id;
     }
 
+    $usedIds = array();
     if(count($shopIds) > 1) {
-      $usedIds = array();
+      
       $len = count($shopIds)-1;
       $i = 0;
       do {
@@ -621,7 +622,7 @@ dd('end');
         }
 
       } while ($i < 2); 
-    }else{
+    }elseif(count($shopIds) == 1) {
       $usedIds[] = $shopIds[0];
     }
 
