@@ -12,7 +12,7 @@ class Shop extends Model
 {
   protected $table = 'shops';
   protected $fillable = ['name','description','brand_story','mission','vision','profile_image_id','cover_image_id','rating','created_by'];
-  protected $modelRelations = array('Image','Address','Contact','OpenHour','order','ShopRelateTo');
+  protected $modelRelations = array('Image','Address','Contact','OpenHour','Order','ShopRelateTo');
   public $errorType;
 
   public $formHelper = true;
