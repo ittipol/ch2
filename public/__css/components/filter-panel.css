@@ -6,7 +6,7 @@
   overflow-y: auto; 
   overflow-x: hidden;
   z-index: 9998;
-	transition: right .2s ease-out;
+	transition: right .4s ease-in-out;
 }
 
 .filter-panel-inner {

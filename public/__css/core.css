@@ -33,10 +33,14 @@ h4 {
 	margin: 0 0 20px 0;
 }
 
-h3 > img,
-h4 > img {
+h3 > img {
 	width: 30px;
 	margin-right: 10px;
+}
+
+h4 > img {
+	width: 25px;
+	margin-right: 8px;
 }
 
 h5 > img {

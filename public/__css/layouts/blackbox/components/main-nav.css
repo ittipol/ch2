@@ -5,15 +5,9 @@
 	z-index: 80;
 	width: 280px;
   height: 100%;
-  /*background-color: #E1F5FE;*/
-  /*border-right: 1px solid #009688;*/
-  /*background-color: #4DB6AC;*/
-  /*background-color: #009688;
-  border-right: 1px solid #26A69A;*/
-  /*background-color: rgb(112,146,190);*/
   background-color: #fff;
   border-right: 1px solid #e0e0e0;
-  transition: left .2s ease-out;
+  transition: left .3s ease-in-out;
 }
 
 .global-nav nav {
@@ -22,8 +16,8 @@
 
 .global-nav .navigation-top {
   width: 100%;
-  /*height: 64px;*/
-  height: 78px;
+  height: 64px;
+  /*height: 78px;*/
   background-color: #009688;
   overflow: hidden;
 }

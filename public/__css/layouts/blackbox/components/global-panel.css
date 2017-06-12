@@ -9,7 +9,7 @@
 	padding: 0;
 	z-index: 90;
 	overflow: hidden;
-	transition: right .2s ease-out;
+	transition: right .4s ease-in-out;
 }
 
 .global-panel.panel-opened {

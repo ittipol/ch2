@@ -1,9 +1,9 @@
 <div class="space-top-50">
 
-  <h3>
+  <h4>
     <img src="/images/icons/message-blue.png">
     รีวิวจากผู้ที่ซื้อสินค้านี้
-  </h3>
+  </h4>
 
   @if(Auth::check())
 

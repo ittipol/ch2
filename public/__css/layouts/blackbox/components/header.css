@@ -139,9 +139,14 @@ header img.icon-header {
 	height: 64px;
 	background-color: #fff;
 	padding: 0 15px;
-	transition: left .2s ease-out;
-	/*border-bottom: 1px solid #aaa;*/
+	transition: left .2s ease-in-out;
+	transition: box-shadow .2s ease-in-out;
+	border-bottom: 1px solid #e0e0e0;
 	/*box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);*/
+}
+
+.header-fixed-top.header-shadow {
+	box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
 }
 
 .global-header .nav-fixed-top {

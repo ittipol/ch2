@@ -19,13 +19,25 @@ class Review {
   	let _this = this;
 
   	let target = (40 * document.body.clientHeight) / 100;
+  	let firstLoaded = false;
+  	// $(document).scroll(function() {
+  	// 	if($(this).scrollTop() > target) {
+  	// 		_this.getReview();
+  	// 		$(this).off('scroll','body',this);
+  	// 	}
+  	// });
 
-  	$(document).scroll(function() {
-  		if($(this).scrollTop() > target) {
+		$(document).on('scroll resize',function(){
+			
+			if(firstLoaded) {
+				return;
+			}
+
+			if($(this).scrollTop() > target) {
   			_this.getReview();
-  			$(this).off('scroll');
+  			firstLoaded = true;
   		}
-  	});
+		});
 
   	$(this.form).on('submit',function(){
   		_this.post();
@@ -262,7 +274,6 @@ class Review {
 	        textStatus, errorThrown
 	    );
 	  });
-
 
   }
 

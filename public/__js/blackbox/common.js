@@ -141,9 +141,16 @@ class Common {
       }
     });
 
-    // $(document).scroll(function() {
-    //   $(this).scrollTop();
-    // });
+    $(document).scroll(function() {
+      // $(this).scrollTop();
+      if($(this).scrollTop() == 0) {
+        $('.header-fixed-top').removeClass('header-shadow');
+        $('.sub-header-nav-fixed-top').removeClass('sub-header-shadow');
+      }else{
+        $('.header-fixed-top').addClass('header-shadow');
+        $('.sub-header-nav-fixed-top').addClass('sub-header-shadow');
+      }
+    });
 
   }
 

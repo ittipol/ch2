@@ -312,16 +312,18 @@
   </div> -->
   @endif
 
-  <h3 class="space-top-50">
+  <div class="line space-top-bottom-40"></div>
+
+  <h4 class="space-top-50 space-bottom-30">
     <img src="/images/icons/tag-blue.png">
     สินค้าอื่นๆที่เกี่ยวข้อง
-  </h3>
-  <div class="line space-bottom-20"></div>
+  </h4>
+  <!-- <div class="line space-bottom-20"></div> -->
 
-  <h4 class="space-bottom-20">จากผู้ขายรายนี้</h4>
+  <h5><strong>จากผู้ขายรายนี้</strong></h5>
   @if(!empty($shopRealatedProducts))
 
-    <div class="realated-products">
+    <div class="realated-products space-top-20">
       @foreach($shopRealatedProducts as $product)
 
         <div class="card xs no-border no-margin">
@@ -364,18 +366,18 @@
 
   @else
 
-    <div class="list-empty-message text-center">
-      <h3>ยังไม่มีสินค้าอื่นๆที่เกี่ยวข้องให้แสดง</h3>
+    <div class="list-empty-message">
+      <h5>ยังไม่มีสินค้าอื่นๆที่เกี่ยวข้องให้แสดง</h5>
     </div>
 
   @endif
 
-  <div class="line space-top-bottom-20"></div>
+  <div class="line only-space space-top-bottom-40"></div>
 
-  <h4 class="space-bottom-20">จากผู้ขายรายอื่น</h4>
+  <h5><strong>จากผู้ขายรายอื่น</strong></h5>
   @if(!empty($realatedProducts))
 
-    <div class="realated-products">
+    <div class="realated-products space-top-20">
       @foreach($realatedProducts as $product)
 
         <div class="card xs no-border no-margin">
@@ -418,11 +420,13 @@
 
   @else
 
-    <div class="list-empty-message text-center">
-      <h3>ยังไม่มีสินค้าอื่นๆที่เกี่ยวข้องให้แสดง</h3>
+    <div class="list-empty-message">
+      <h5>ยังไม่มีสินค้าอื่นๆที่เกี่ยวข้องให้แสดง</h5>
     </div>
 
   @endif
+
+  <div class="line space-top-bottom-40"></div>
 
   @include('pages.product.layouts.review_content')
 
