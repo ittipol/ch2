@@ -458,6 +458,11 @@ class Model extends BaseModel
 
     foreach ($modelRelations as $modelName) {
       $model = Service::loadModel($modelName);
+
+      if(empty($model)) {
+        dd($modelName);
+      }
+
       $model->deleteRelatedData($this);
     }
 
