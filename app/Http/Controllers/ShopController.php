@@ -846,6 +846,11 @@ class ShopController extends Controller
 
     $model = request()->get('shop');
 
+    if(empty($model)) {
+      MessageHelper::display('ไม่พบร้านค้านี้','error');
+      return Redirect::to('/');
+    }
+
     if($model->delete()) {
       MessageHelper::display(request()->get('shop')->name.' ถูกลบแล้ว','success');
     }else{
