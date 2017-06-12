@@ -98,7 +98,7 @@ class PushNotification {
 	}
 
 	popup(title) {
-		const notificationBottom = new NotificationBottom(title);
+		const notificationBottom = new NotificationBottom();
 		notificationBottom.setTitle(title);
 		notificationBottom.setType('info');
 		notificationBottom.display();
