@@ -9,7 +9,7 @@
     <a href="{{URL::to('/')}}"><img src="/images/logo2-55.png"></a>
   </div>
 
-  <div class="login-banner-fixed"></div>
+  <div class="login-banner-fixed" style="background-image: url(/images/banners/login/{{$bannerImage}});"></div>
 
   <div class="login-panel">
     <div class="login-form-box">

@@ -51,6 +51,14 @@ input[type="password"] {
 
 .login-banner-fixed {
 	position: fixed;
+	top: 25%;
+	left: 18%;
+	width: 500px;
+	height: 500px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100%;
+	z-index: 6;
 }
 
 .login-social {
@@ -64,9 +72,9 @@ input[type="password"] {
 	position: fixed;
 	top: 0;
 	right: 0;
-	width: 500px;
+	width: 600px;
 	height: 100%;
-	/*background-color: #fff;*/
+	background-color: #fff;
 	/*box-shadow: 0 8px 10px -5px rgba(0,0,0,0.2), 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12);*/
 	z-index: 7;
 }
@@ -101,6 +109,10 @@ input[type="password"] {
 	.login-panel {
 		width: 100%;
 	}
+
+	.login-banner-fixed {
+		display: none;
+	}
 }
 
 @media only screen and (max-width : 480px) {
@@ -110,5 +122,19 @@ input[type="password"] {
 
 	.login-bl-fixed > span {
 		display: none;
+	}
+}
+
+@media only screen and (max-width : 375px) {
+	.login-panel .login-form-box {
+		width: 320px;
+		margin-left: -160px;
+	}
+}
+
+@media only screen and (max-width : 320px) {
+	.login-panel .login-form-box {
+		width: 300px;
+		margin-left: -150px;
 	}
 }

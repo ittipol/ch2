@@ -18,21 +18,25 @@ class UserController extends Controller
 {
   public function login() {
 
+    if(Auth::check()){
+      return redirect('/');
+    }
+
     $this->data = array(
       'header' => false,
       'footer' => false,
     );
+
+    $bannerImages = array('img1.png','img2.png');
+
+    $this->setData('bannerImage',$bannerImages[rand(0,count($bannerImages)-1)]);
 
     $this->setPageTitle('เข้าสู่ระบบ');
     $this->setMetaKeywords('สร้างร้านค้า,สร้างร้านค้าออนไลน์,ร้านค้าออนไลน์,ขายของออนไลน์,เข้าสู่ระบบ');
 
     $this->botAllowed();
 
-    if(Auth::check()){
-      return redirect('/');
-    }else{
-      return $this->view('pages.user.login');
-    }
+    return $this->view('pages.user.login');
 
   }
 
