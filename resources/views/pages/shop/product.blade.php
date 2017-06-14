@@ -174,8 +174,7 @@
     <div class="list-empty-message text-center space-top-20">
       <img src="/images/common/not-found.png">
       <div>
-        <h3>สินค้า</h3>
-        <p>ยังไม่มีสินค้า</p>
+        <h3>ยังไม่มีสินค้า</h3>
         <a href="{{request()->get('shopUrl')}}product/add" class="button">เพิ่มสินค้า</a>
       </div>
     </div>

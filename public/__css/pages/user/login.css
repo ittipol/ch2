@@ -1,27 +1,3 @@
-.bg-overlay {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(60,60,60,.3);
-	z-index: 5;
-}
-
-.login-bg {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 2;
-}
-
-.button {
-	padding: 10px 30px;
-	background-color: rgb(47,97,186);
-}
-
 form {
 	margin: 0;
 }
@@ -30,58 +6,58 @@ input[type="text"],
 input[type="password"] {
 	padding: 10px;
 	width: 100%;
+	border: 0;
+	border-bottom: 1px solid #777;
 }
 
-.login-form {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -220.5px;
-  margin-left: -190px;
-  padding: 0;
-  width: 380px;
-  z-index: 9;
-}
-
-.login-form .login-form-inner {
-	height: 100%;
-	padding: 20px;
-	background-color: rgba(255,255,255,.7);
-}
-
-.login-form .logo {
-	color: #1565C0;
-	text-align: center;
-	display: block;
-}
-
-.login-form-header {
+.login-bg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: #fff;
 	width: 100%;
-	height: 100px;
-	background-color: #3F51B5;
+	height: 100%;
+	z-index: 1;
 }
 
-.login-form-header-inner {
-	padding: 20px;
+.login-logo {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 55px;
+	/*line-height: 55px;*/
+	padding-left: 15px;
+	/*font-size: 18px;*/
+	background-color: #009688;
+	z-index: 9;
 }
 
-.fb-button {
-	color: #fff !important;
-	text-align: center;
-	background-color: rgb(58,91,155);
-	display: block;
+.login-logo > a {
+	color: #fff;
 }
 
-.fb-button img {
-	width: 50px;
+.login-bl-fixed {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	padding: 15px;
+	z-index: 9;
 }
 
-.text-center {
-	font-size: 16px;
-	margin: 20px 0 0;
-	text-align: center;
-	position: relative;
-	display: block;
+.login-bl-fixed a {
+	margin-left: 10px;
+}
+
+.login-banner-fixed {
+	position: fixed;
+}
+
+.login-social {
+	position: fixed;
+	bottom: 15px;
+	right: 15px;
+	z-index: 9;
 }
 
 .login-panel {
@@ -90,7 +66,9 @@ input[type="password"] {
 	right: 0;
 	width: 500px;
 	height: 100%;
-	background-color: rgb(29, 66, 133);
+	/*background-color: #fff;*/
+	/*box-shadow: 0 8px 10px -5px rgba(0,0,0,0.2), 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12);*/
+	z-index: 7;
 }
 
 .login-panel .login-form-box {
@@ -106,60 +84,31 @@ input[type="password"] {
 
 .login-form-box .text-center,
 .login-form-box label {
-	color: #fff;
+	color: #000;
 }
 
 .login-form-box .logo {
-	color: #fff;
-	font-size: 26px;
-	text-align: center;
+	color: #2979FF;
+	font-size: 20px;
 	display: block;
 }
 
-/* Medium Devices, Desktops */
-@media only screen and (max-width : 992px) {
-	.login-form {
-		position: relative;
-		top: 0;
-		left: 0;
-		margin-top: 0;
-		margin-left: 0;
-		width: auto;
-	}
-
-	.login-form-box .text-center,
-	.login-form-box label {
-		color: #000;
-	}
-
-	.login-form-box .logo {
-		color: #1565C0;
-		font-size: 24px;
-	}
-
-	.login-form .login-form-inner {
-		background-color: #fff;
-	}
-
-	.login-panel .login-form-box {
-		position: relative;
-		top: 0;
-		left: 0;
-		margin-top: 0;
-		margin-left: 0;
-		width: auto;
+@media only screen and (max-width : 1200px) {
+	.login-logo {
+		padding-left: 0;
 	}
 
 	.login-panel {
 		width: 100%;
-		height: 100%;
-		background-color: #fff;
+	}
+}
+
+@media only screen and (max-width : 480px) {
+	.login-bl-fixed {
+		padding-left: 0;
 	}
 
-	.login-panel .login-form-box .login-form-inner {
-		padding: 20px;
-		height: 100%;
-		background-color: #fff;
+	.login-bl-fixed > span {
+		display: none;
 	}
-
 }

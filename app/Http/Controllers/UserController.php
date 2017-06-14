@@ -136,7 +136,7 @@ class UserController extends Controller
       $message = 'อีเมล หรือ รหัสผ่านไม่ถูก';
 
       if(empty(request()->input('email')) && empty(request()->input('password'))) {
-        $message = 'กรุณใส่อีเมล และ รหัสผ่าน';
+        $message = 'กรุณากรอกอีเมล และ รหัสผ่าน';
       }
 
       return Redirect::back()->withErrors([$message]);
