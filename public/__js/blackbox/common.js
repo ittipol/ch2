@@ -1,8 +1,11 @@
 class Common {
 
-  constructor() {}
+  constructor() {
+    this.shadowDisplayed = false;
+  }
 
   load(){
+    this.headerShadowDisplay();
     this.bind();
   }
 
@@ -142,16 +145,21 @@ class Common {
     });
 
     $(document).scroll(function() {
-      // $(this).scrollTop();
-      if($(this).scrollTop() == 0) {
-        $('.header-fixed-top').removeClass('header-shadow');
-        $('.sub-header-nav-fixed-top').removeClass('sub-header-shadow');
-      }else{
-        $('.header-fixed-top').addClass('header-shadow');
-        $('.sub-header-nav-fixed-top').addClass('sub-header-shadow');
-      }
+      _this.headerShadowDisplay();
     });
 
+  }
+
+  headerShadowDisplay() {
+    if(($(document).scrollTop() == 0) && this.shadowDisplayed) {
+      $('.header-fixed-top').removeClass('header-shadow');
+      $('.sub-header-nav-fixed-top').removeClass('sub-header-shadow');
+      this.shadowDisplayed = false;
+    }else if(!this.shadowDisplayed) {
+      $('.header-fixed-top').addClass('header-shadow');
+      $('.sub-header-nav-fixed-top').addClass('sub-header-shadow');
+      this.shadowDisplayed = true;
+    }
   }
 
 }

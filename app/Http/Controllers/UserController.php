@@ -27,7 +27,7 @@ class UserController extends Controller
       'footer' => false,
     );
 
-    $bannerImages = array('img1.png','img2.png');
+    $bannerImages = array('img1.png','img2.png','img3.png','img4.png','img5.png');
 
     $this->setData('bannerImage',$bannerImages[rand(0,count($bannerImages)-1)]);
 
