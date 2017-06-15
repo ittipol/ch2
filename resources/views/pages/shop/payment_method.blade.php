@@ -41,7 +41,7 @@
         <a href="{{$paymentMethod['addUrl']}}" class="tile-nav-title pull-left">เพิ่มวิธี{{$paymentMethod['name']}}</a>
       </div>
 
-      <div class="line grey space-top-20"></div>
+      <!-- <div class="line grey space-top-20"></div> -->
 
       @if(!empty($paymentMethod['data']))
 
@@ -84,9 +84,8 @@
         </div>
 
       @else
-
         <h5 class="text-center space-top-20">ยังไม่มีวิธี{{$paymentMethod['name']}}</h5>
-
+        <div class="line grey space-top-20"></div>
       @endif
 
     </div>

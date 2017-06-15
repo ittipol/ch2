@@ -2,7 +2,7 @@
 
   @foreach($paymentMethod['data'] as $data)
 
-  <div class="col-md-12 col-xs-6">
+  <div class="col-md-12 col-xs-12">
     
     <div class="payment-method-item">
 
@@ -42,7 +42,7 @@
             <div class="button-group">
 
               <a href="{{$data['informUrl']}}">
-                <div class="button wide-button">แจ้งการชำระเงินด้วยวีธีการนี้</div>
+                <div class="button wide-button">แจ้งชำระเงินด้วยวีธีนี้</div>
               </a>
 
               @if(!empty($data['description']))

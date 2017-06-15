@@ -152,6 +152,14 @@
   background-color: #aaa;
 }
 
+.product-shipping-cost-input-section .product-image {
+	width: 80px;
+	height: 80px;
+	background-position: center;
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+}
+
 .shipping-cost-input-box {
 	margin-bottom: 10px;
 	padding: 10px;

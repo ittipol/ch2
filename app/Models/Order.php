@@ -341,6 +341,10 @@ class Order extends Model
 
     $orderhistories = $this->getRelatedData('OrderHistory');
 
+    if(empty($orderhistories)) {
+      return array();
+    }
+
     $_orderhistories = array();
     foreach ($orderhistories as $orderhistory) {
       $_orderhistories[] = $orderhistory->buildModelData();

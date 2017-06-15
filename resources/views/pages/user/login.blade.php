@@ -74,7 +74,6 @@
   </div>
 
   <div class="login-bl-fixed">
-    <!-- <span>เรียนรู้การใช้งาน</span> --> 
     <a href="{{URL::to('manual')}}" class="button">
       <img src="/images/icons/document-header.png">
       วิธีการใช้งาน
