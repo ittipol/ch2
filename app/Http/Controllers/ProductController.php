@@ -433,6 +433,13 @@ class ProductController extends Controller
 
     $shop = $shop->shop;
 
+    // if(empty($shop)) {
+    //   $this->error = array(
+    //     'message' => 'ไม่พบข้อมูล'
+    //   );
+    //   return $this->error();
+    // }
+
     // Get Slug
     $slug = $shop->getRelatedData('Slug',array(
       'first' => true,

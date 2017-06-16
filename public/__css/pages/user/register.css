@@ -3,24 +3,27 @@ body {
 }
 
 .register-wrapper {
-	width: 800px;
-	margin: 0 auto;
 	padding-top: 25px;
 }
 
-.register-wrapper .header-container h3 {
-	display: block;
+.register-wrapper input[type="text"],
+.register-wrapper input[type="password"] {
+	width: 100%;
+	padding: 10px;
+}
+
+.register-wrapper .header-container {
 	text-align: center;
 }
 
 .register-wrapper .header-container a {
 	color: #fff;
+	display: block;
 }
 
 .register-wrapper .header-container p {
-	font-size: 24px;
-	text-align: center;
 	color: #fff;
+	font-size: 24px;
 }
 
 .register-form {
@@ -71,7 +74,6 @@ body {
 	border-top: 0;
 }
 
-/* Medium Devices, Desktops */
 @media only screen and (max-width : 992px) {
 
 	.register-wrapper {
@@ -101,6 +103,10 @@ body {
 
 	.register-wrapper .register-form a {
 		color: #fff;
+	}
+
+	.register-wrapper .header-container p {
+		margin: 0;
 	}
 
 	.register-wrapper .text-center {

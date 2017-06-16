@@ -75,8 +75,6 @@
           <a href="{{URL::to('manual/product-quantity-edit')}}">จำนวนสินค้า</a>
           <a href="{{URL::to('manual/product-price-edit')}}">ราคาสินค้า</a>
           <a href="{{URL::to('manual/product-promotion-edit')}}">โปรโมชั่นการขาย</a>
-          <a href="{{URL::to('manual/product-shipping-edit')}}">การคำนวณขนส่งสินค้า</a>
-          <a href="{{URL::to('manual/product-notification-edit')}}">ข้อความและการแจ้งเตือน</a>
         </div>
       </div>
 

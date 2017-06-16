@@ -3,8 +3,9 @@
 
 <div class="register-wrapper">
 	<div class="header-container">
-		<h3><a class="logo" href="{{URL::to('/')}}">SUNDAY SQUARE</a></h3>
-		<p>สมัครสมาชิก</p>
+		<!-- <h3><a class="logo" href="{{URL::to('/')}}">SUNDAY SQUARE</a></h3> -->
+		<a class="logo space-bottom-20" href="{{URL::to('/')}}"><img src="/images/register_logo.png"></a>
+    <p>สมัครสมาชิก</p>
 	</div>
 
 	<div class="register-form">
@@ -36,7 +37,7 @@
 				));
 			?>
 
-			<h4 class="text-center">เป็นสมาชิกแล้ว <a href="{{URL::to('login')}}">ลงชื่อเข้าใช้</a></h4>
+			<h5 class="text-center space-top-20">เป็นสมาชิกแล้ว <a href="{{URL::to('login')}}">ลงชื่อเข้าใช้</a></h5>
 
 		</div>
 
@@ -45,24 +46,26 @@
 		?>
 
 	</div>
+
+  <div class="login-bl-fixed">
+    <a href="{{URL::to('manual')}}" class="button">
+      <img src="/images/icons/document-header.png">
+      วิธีการใช้งาน
+    </a>
+  </div>
+
+  <div class="login-social">
+    <div class="clearfix">
+      @include('layouts.blackbox.components.footer_social')
+    </div>
+  </div>
+
 </div>
 
 	<script type="text/javascript">
-
-    // class RegisterPage {
-    //   constructor() {}
-
-    //   init() {}
-
-    // }
-
-    $(document).ready(function(){
-      // registerPage = new RegisterPage();
-      // registerPage.init();
-
-      $('body').css('background-color','rgb(29,66,133)');
-
-    });
+    // $(document).ready(function(){
+    //   $('body').css('background-color','rgb(29,66,133)');
+    // });
   </script>
   
 @stop
