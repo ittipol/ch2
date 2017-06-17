@@ -125,14 +125,14 @@
         <div class="detail-group-info-section">
 
           <div class="detail-group-info">
-            <h5 class="title">ชื้อบริษัทหรือร้านค้าที่ขายสินค้า</h5>
+            <h5 class="title">ชื่อบริษัทหรือร้านค้าที่ขายสินค้า</h5>
             <a href="{{URL::to($shopUrl)}}">
               <p>{{$order['shopName']}}</p>
             </a>
           </div>
 
           <div class="detail-group-info">
-            <h5 class="title">ชื้อผู้ซื้อ</h5>
+            <h5 class="title">ชื่อผู้รับสินค้า</h5>
             <p>{{$order['person_name']}}</p>
           </div>
 

@@ -121,6 +121,11 @@
 
                 <div class="checkout-input">
 
+                  <div class="name-input">
+                    <h5 class="required">ชื่อผู้รับสินค้า</h5>
+                    <input type="text" name="shop[{{$value['shop']['id']}}][receiver_name]" value="{{$receiverName}}">
+                  </div>
+
                   <div class="address-input">
                     <h5 class="required">ที่อยู่สำหรับการจัดส่ง</h5>
                     <input type="text" name="shop[{{$value['shop']['id']}}][shipping_address]" value="{{$shippingAddress}}">

@@ -33,6 +33,7 @@ class CheckoutController extends Controller
     }
 
     $this->setData('data',$cartModel->getProductSummary());
+    $this->setData('receiverName',session()->get('Person.name'));
     $this->setData('shippingAddress',$_address);
     $this->setData('shippingMethods',$shippingMethods);
 
@@ -60,6 +61,11 @@ class CheckoutController extends Controller
 
         if(empty($shops[$cartProduct['shopId']]['checkout'])) {
           continue;
+        }
+
+        if(empty($shops[$cartProduct['shopId']]['receiver_name'])) {
+          $this->rollback($checkoutProducts);
+          return Redirect::back()->withErrors(['ชื่อผู้รับสินค้าไม่ได้ถูกกรอก กรุณาตรวจสอบและกรอกชื่อผู้รับสินค้าให้ครบถ้วน']);
         }
 
         if(empty($shops[$cartProduct['shopId']]['shipping_address'])) {
@@ -128,7 +134,7 @@ class CheckoutController extends Controller
     $cartModel->disableCheckingError();
 
     $personId = session()->get('Person.id');
-    $personName = session()->get('Person.name');
+    // $personName = session()->get('Person.name');
     $orderStatusId = Service::loadModel('OrderStatus')->getIdByalias('pending-seller-confirmation');
 
     $orderModel = Service::loadModel('Order');
@@ -169,7 +175,7 @@ class CheckoutController extends Controller
         'invoice_number' => $orderModel->getInvoiceNumber($shopId),
         'shop_id' => $shopId,
         'created_by' => $personId,
-        'person_name' => $personName,
+        'person_name' => $shops[$shopId]['receiver_name'],
         'shipping_address' => $shops[$shopId]['shipping_address'],
         'customer_message' => $shops[$shopId]['message'],
         'order_status_id' => $orderStatusId
