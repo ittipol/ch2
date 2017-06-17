@@ -309,6 +309,9 @@ Route::group(['middleware' => ['auth','shop','person.shop.permission']], functio
   
   Route::get('shop/{shopSlug}/setting','ShopController@setting')->name('shop.setting');
 
+  Route::get('shop/{shopSlug}/shop_name','ShopController@shopNameEdit')->name('shop.edit.shop_name');
+  Route::patch('shop/{shopSlug}/shop_name','ShopController@shopNameEditingSubmit')->name('shop.edit.shop_name');
+
   Route::get('shop/{shopSlug}/description','ShopController@description')->name('shop.edit.description');
   Route::patch('shop/{shopSlug}/description','ShopController@descriptionSubmit')->name('shop.edit.description');
   

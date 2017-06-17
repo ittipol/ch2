@@ -8,7 +8,7 @@ use App\library\cache;
 class Lookup extends Model
 {
   protected $table = 'lookups';
-  protected $fillable = ['model','model_id','name','description','keyword_1','keyword_2','keyword_3','keyword_4','address','tags','active'];
+  protected $fillable = ['model','model_id','shop_id','name','description','keyword_1','keyword_2','keyword_3','keyword_4','address','tags','active'];
 
   public $paginator = true;
 
@@ -163,7 +163,6 @@ class Lookup extends Model
       )
     );
 
-    // $value['active'] =  1;
     if(isset($behavior['active'])) {
       $value['active'] =  $behavior['active'];
     }
@@ -173,6 +172,9 @@ class Lookup extends Model
       ->fill($value)
       ->save();
     }else{
+
+      $value['shop_id'] = $model->getRelatedShopId();
+
       return $this->fill($model->includeModelAndModelId($value))->save();
     }
 
@@ -305,8 +307,6 @@ class Lookup extends Model
       }
 
     }elseif(!empty($options['lookupArrayFormat'])) {
-
-      // $lookup = new Lookup;
 
       $formats = $options['lookupArrayFormat'];
 

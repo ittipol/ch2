@@ -637,4 +637,29 @@ class Model extends BaseModel
     return $string->truncString($description,200,true,true);
   }
 
+  public function getRelatedShopId() {
+
+    if($this->modelName == 'Shop') {
+      return $this->id;
+    }
+
+    // check if has field shop_id
+    if(Schema::hasColumn($this->getTable(), 'shop_id')) {
+      return $this->shop_id;
+    }
+
+    // shop by shop related table
+    $relatedShop = ShopRelateTo::where([
+      ['model','like',$this->modelName],
+      ['model_id','=',$this->id]
+    ]);
+
+    if($relatedShop->exists()) {
+      return $relatedShop->select('shop_id')->first()->shop_id;
+    }
+
+    return null;
+
+  }
+
 }

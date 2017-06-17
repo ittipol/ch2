@@ -40,6 +40,9 @@ class CheckForPersonHasShopPermission
           'permission' => true,
           'role' => 'admin'
         ),
+        'shop.edit.shop_name' => array(
+          'permission' => 'edit'
+        ),
         'shop.edit.description' => array(
           'permission' => 'edit'
         ),

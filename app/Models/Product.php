@@ -69,7 +69,9 @@ class Product extends Model
     // ),
     'Lookup' => array(
       'format' =>  array(
-        'name' => '{{name}}'
+        'name' => '{{name}}',
+        // 'keyword_1' => '{{__Shop|getShopName}}',
+        'keyword_2' => '{{__getCategoryPathNameForLookup}}'
       )
     ),
     'DataAccessPermission' => array(
@@ -311,7 +313,7 @@ class Product extends Model
 
   }
 
-  public function getCategoryPathName() {
+  public function getCategoryPathName($separate = ' / ') {
 
     $paths = $this->getCategoryPaths();
 
@@ -323,12 +325,16 @@ class Product extends Model
         $_path[] = $path['name'];
       }
 
-      $pathName = implode(' / ', $_path);
+      $pathName = implode($separate, $_path);
 
     }
 
     return $pathName;
 
+  }
+
+  public function getCategoryPathNameForLookup() {
+    return $this->getCategoryPathName(' ');
   }
 
   // public function weightToGram($weight = null) {

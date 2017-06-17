@@ -54,6 +54,9 @@ class Shop extends Model
       'Contact.phone_number.regex' => 'หมายเลขโทรศัพท์ไม่ถูกต้อง',
       'Contact.phone_number.max' => 'หมายเลขโทรศัพท์ไม่ถูกต้อง',
       'Contact.phone_number.required' => 'หมายเลขโทรศัพท์ห้ามว่าง',
+    ),
+    'excepts' => array(
+      'shop.edit.shop_name' => array('Contact.phone_number')
     )
   );
 

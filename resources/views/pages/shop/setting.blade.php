@@ -18,6 +18,13 @@
   <div class="list-item-group">
 
     <div class="list-item">
+      <a href="{{request()->get('shopUrl')}}shop_name">
+        <img class="icon" src="/images/common/shop.png" >
+        <h4>แก้ไชชื่อร้านค้า</h4>
+      </a>
+    </div>
+
+    <div class="list-item">
       <a href="{{request()->get('shopUrl')}}description">
         <img class="icon" src="/images/common/pencil.png" >
         <h4>คำอธิบายเกี่ยวกับร้านค้า</h4>

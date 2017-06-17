@@ -142,6 +142,16 @@ class FilterHelper {
       
     }
 
+    // find Shop
+    $shops = Service::loadModel('Shop')->select('id')->where('name','like','%'.$word.'%');
+
+    if($shops->exists()) {
+
+      foreach ($shops->get() as $shop) {
+        array_push($or,array('lookups.shop_id','=',$shop->id));
+      }
+    }
+
     $query = array(); 
 
     if(!empty($and)) {
@@ -215,16 +225,6 @@ class FilterHelper {
           if(!empty($specialFilter['operator'])) {
             $_filters[$key]['operator'] = $specialFilter['operator'];
           }
-
-          // if(is_array(current($specialFilter['value']))) {
-
-          //   foreach ($specialFilter['value'] as $value) {
-          //     $_filters[$key]['value'][] = $value;
-          //   }
-
-          // }else{
-          //   $_filters[$key]['value'][] = $specialFilter['value'];
-          // }
 
           if(is_array(current($specialFilter['value']))) {
 

@@ -559,7 +559,7 @@ class ShopController extends Controller
         'first' => true
       ))->slug;
 
-      MessageHelper::display('บริษัท ร้านค้า หรือธุรกิจถูกเพิ่มเข้าสู่ชุมชนแล้ว','success');
+      MessageHelper::display('บริษัท ร้านค้า หรือธุรกิจถูกเพิ่มแล้ว','success');
       return Redirect::to(route('shop.overview', ['slug' => $slug]));
     }else{
       return Redirect::back();
@@ -569,6 +569,57 @@ class ShopController extends Controller
 
   public function setting() {
     return $this->view('pages.shop.setting');
+  }
+
+  public function shopNameEdit() {
+
+    $model = request()->get('shop');
+
+    $this->data = $model->formHelper->build();
+
+    return $this->view('pages.shop.form.shop_name_edit');
+  }
+
+  public function shopNameEditingSubmit(CustomFormRequest $request) {
+
+    $model = request()->get('shop');
+
+    if($model->name == request()->get('name')) {
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
+      return Redirect::to('shop/'.request()->shopSlug.'/setting');
+    }
+
+    if($model->where([
+        ['name','like',$request->get('name')],
+        ['created_by','=',session()->get('Person.id')]
+      ])
+      ->exists()) {
+
+      $_message = 'คุณได้เพิ่มบริษัทหรือร้านค้าชื่อว่า '.$request->get('name').' ไปแล้ว โปรดใช้ชื่ออื่น';
+      return Redirect::back()->withErrors([$_message]);
+
+    }elseif($model->where([
+        ['name','like',$request->get('name')],
+      ])
+      ->exists()) {
+      
+      $_message = 'มีบริษัทหรือร้านค้าชื่อ '.$request->get('name').' นี้แล้ว';
+      return Redirect::back()->withErrors([$_message]);
+
+    }
+
+    if($model->fill($request->all())->save()) {
+
+      $slug = $model->getRelatedData('Slug',array(
+        'fields' => array('slug'),
+        'first' => true
+      ))->slug;
+
+      MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
+      return Redirect::to('shop/'.request()->shopSlug.'/setting');
+    }else{
+      return Redirect::back();
+    }
   }
 
   public function description() {
