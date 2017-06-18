@@ -3,7 +3,7 @@
 	top: 0;
 	left: 0;
 	z-index: 80;
-	width: 280px;
+	width: 150px;
   height: 100%;
   background-color: #fff;
   border-right: 1px solid #e0e0e0;
@@ -17,9 +17,8 @@
 .global-nav .navigation-top {
   width: 100%;
   height: 64px;
-  /*height: 78px;*/
-  background-color: #009688;
-  overflow: hidden;
+  /*background-color: #009688;*/
+  /*overflow: hidden;*/
 }
 
 .navigation-top a.logo-link {
@@ -89,6 +88,7 @@
 .navigation-primary-menu ul > li {
   padding: 0;
   margin: 0;
+  text-align: center;
   list-style: none;
   position: relative;
 }
@@ -97,17 +97,19 @@
   position: relative;
 }
 
+.navigation-primary-menu ul > li .item-title {
+  margin-top: 4px;
+}
+
 .navigation-primary-menu ul > li a { 
 	position: relative;
-  padding: 10px 0 10px 20px;
+  padding: 10px 20px;
   display: block;
-  /*color: #009688;*/
   color: #212121;
   cursor: pointer;
   text-decoration: none;
   font-weight: 400;
   font-size: 14px;
-  /*transition: all .34s ease-in-out;*/
 }
 
 .navigation-primary-menu ul > li a:hover,

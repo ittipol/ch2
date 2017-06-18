@@ -4,7 +4,7 @@
 
       <div class="logo">
         <a class="logo-link" href="{{URL::to('/')}}">
-          <img src="/images/logo2.png">
+          <img src="/images/logo3.png">
         </a>
       </div>
 
@@ -18,7 +18,7 @@
           <li class="item">
             <a href="{{URL::to('/')}}">
               <img class="icon" src="/images/icons/home-header.png">
-              <span>หน้าแรก</span>
+              <div class="item-title">หน้าแรก</div>
             </a>
           </li>
 
@@ -27,14 +27,14 @@
             <li class="item">
               <a href="{{URL::to('login')}}">
                 <img class="icon" src="/images/icons/secure-header.png">
-                <span>เข้าสู่ระบบ</span>
+                <div class="item-title">เข้าสู่ระบบ</div>
               </a>
             </li>
 
             <li class="item">
               <a href="{{URL::to('register')}}">
                 <img class="icon" src="/images/icons/key-header.png">
-                <span>สมัครสมาชิก</span>
+                <div class="item-title">สมัครสมาชิก</div>
               </a>
             </li>
 
@@ -45,7 +45,7 @@
           <li class="item">
             <a href="{{URL::to('shop')}}">
               <img class="icon" src="/images/icons/building-header.png">
-              <span>บริษัทและร้านค้า</span>
+              <div class="item-title">บริษัทและร้านค้า</div>
             </a>
           </li>
 
@@ -53,7 +53,7 @@
           <li class="item">
             <a href="{{URL::to('account/shop')}}">
               <img class="icon" src="/images/icons/shop-header.png">
-              <span>ร้านค้าของฉัน</span>
+              <div class="item-title">ร้านค้าของฉัน</div>
             </a>
           </li>
           @endif
@@ -61,7 +61,7 @@
           <li class="item">
             <a href="{{URL::to('shop/create')}}">
               <img class="icon" src="/images/icons/plus-header.png">
-              <span>สร้างบริษัทหรือร้านค้า</span>
+              <div class="item-title">สร้างบริษัทหรือร้านค้า</div>
             </a>
           </li>
 
@@ -70,14 +70,14 @@
           <li class="item">
             <a href="{{URL::to('product')}}">
               <img class="icon" src="/images/icons/tag-header.png">
-              <span>สินค้าจากบริษัทและร้านค้า</span>
+              <div class="item-title">สินค้าจากบริษัทและร้านค้า</div>
             </a>
           </li>
 
           <li class="item">
             <a href="{{URL::to('product/category')}}">
               <img class="icon" src="/images/icons/layer-header.png">
-              <span>หมวดสินค้า</span>
+              <div class="item-title">หมวดสินค้า</div>
             </a>
           </li>
 
@@ -86,7 +86,7 @@
           <li class="item">
             <a href="{{URL::to('job')}}">
               <img class="icon" src="/images/icons/document-header.png">
-              <span>งานจากบริษัทและร้านค้า</span>
+              <div class="item-title">งานจากบริษัทและร้านค้า</div>
             </a>
           </li>
 

@@ -1,16 +1,19 @@
-footer {
+/*footer {
 	border-top: 1px solid #bababa;
-}
+}*/
 
-.footer {
-	background-color: #fff;
+.footer-wrapper {
+	position: relative;
+	/*background-color: #fff;*/
+	background-color: rgb(109,140,13);
+	border-top: 10px solid rgb(65,80,13);
 	padding: 20px 20px 10px;
 }
 
-.footer-content {
+/*.footer-content {
 	height: 30px;
 }
-
+*/
 .footer-content > h4 {
 	line-height: 30px;
 	font-size: 14px;
@@ -26,16 +29,32 @@ footer {
 	margin-left: 5px;
 }
 
-.site-map .site-map-content {
+.footer .footer-title {
+	color: #fff;
+	font-weight: bold;
+}
+
+.footer .footer-content {
 	margin-bottom: 20px;
 }
 
-.site-map .site-map-link {
+.footer .footer-link {
 	margin-bottom: 3px;
+}
+
+.footer .footer-link > a {
+	color: #fff;
+}
+
+.footer-wrapper .footer-social {
+	position: absolute;
+	bottom: 15px;
+	right: 15px;
+	z-index: 9;
 }
 
 @media only screen and (min-width : 1367px) {
 	footer {
-		padding-left: 280px;
+		padding-left: 150px;
 	}
 }

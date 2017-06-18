@@ -43,11 +43,11 @@
   }
 
   .content-wrapper.is-main-nav-open {
-    left: 280px;
+    left: 150px;
   }
 
   .header-fixed-top.is-main-nav-open {
-    left: 280px;
+    left: 150px;
   }
 
   .content-wrapper-overlay.isvisible {
@@ -56,7 +56,7 @@
   }
 
   .shop-top-fixed-top.is-main-nav-open {
-    left: 280px;
+    left: 150px;
   }
 }
 
