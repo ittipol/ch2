@@ -71,7 +71,7 @@ class Product extends Model
       'format' =>  array(
         'name' => '{{name}}',
         // 'keyword_1' => '{{__Shop|getShopName}}',
-        'keyword_2' => '{{__getCategoryPathNameForLookup}}'
+        'keyword_1' => '{{__getCategoryPathNameForLookup}}'
       )
     ),
     'DataAccessPermission' => array(

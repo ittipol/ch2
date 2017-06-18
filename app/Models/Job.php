@@ -27,8 +27,7 @@ class Job extends Model
     'Lookup' => array(
       'format' =>  array(
         'name' => '{{name}}',
-        // 'keyword_1' => '{{__Shop|getShopName}}',
-        'keyword_2' => '{{EmploymentType.name|Job.employment_type_id=>EmploymentType.id}}',
+        'keyword_1' => '{{EmploymentType.name|Job.employment_type_id=>EmploymentType.id}}',
         // 'keyword_3' => '{{__getRelatedBranch}}',
         'keyword_4' => '{{wage}}',
       )

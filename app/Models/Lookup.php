@@ -8,7 +8,7 @@ use App\library\cache;
 class Lookup extends Model
 {
   protected $table = 'lookups';
-  protected $fillable = ['model','model_id','shop_id','name','description','keyword_1','keyword_2','keyword_3','keyword_4','address','tags','active'];
+  protected $fillable = ['model','model_id','shop_id','shop_name','name','description','keyword_1','keyword_2','keyword_3','keyword_4','address','tags','active'];
 
   public $paginator = true;
 
@@ -157,11 +157,16 @@ class Lookup extends Model
     }
 
     // Get releated lookup data
-    $lookup = $model->getRelatedData($this->modelName,
-      array(
-        'first' => true
-      )
-    );
+    // $lookup = $this->getRelatedData($model->modelName,
+    //   array(
+    //     'first' => true
+    //   )
+    // );
+
+    $lookup = $this->where([
+      ['model','like',$model->modelName],
+      ['model_id','=',$model->id]
+    ])->first();
 
     if(isset($behavior['active'])) {
       $value['active'] =  $behavior['active'];
@@ -173,7 +178,12 @@ class Lookup extends Model
       ->save();
     }else{
 
-      $value['shop_id'] = $model->getRelatedShopId();
+      $shop = $model->getRelatedShop();
+
+      if(!empty($shop)) {
+        $value['shop_id'] = $shop->id;
+        $value['shop_name'] = $shop->name;
+      }
 
       return $this->fill($model->includeModelAndModelId($value))->save();
     }

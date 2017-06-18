@@ -662,4 +662,35 @@ class Model extends BaseModel
 
   }
 
+  public function getRelatedShop() {
+
+    $shopId = null;
+
+    if($this->modelName == 'Shop') {
+      return null;
+    }
+
+    // check if has field shop_id
+    if(Schema::hasColumn($this->getTable(), 'shop_id')) {
+      $shopId =  $this->shop_id;
+    }
+
+    // shop by shop related table
+    $relatedShop = ShopRelateTo::where([
+      ['model','like',$this->modelName],
+      ['model_id','=',$this->id]
+    ]);
+
+    if($relatedShop->exists()) {
+      $shopId = $relatedShop->select('shop_id')->first()->shop_id;
+    }
+
+    if(!empty($shopId)) {
+      return Shop::find($shopId);
+    }
+
+    return null;
+
+  }
+
 }

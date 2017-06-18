@@ -610,10 +610,8 @@ class ShopController extends Controller
 
     if($model->fill($request->all())->save()) {
 
-      $slug = $model->getRelatedData('Slug',array(
-        'fields' => array('slug'),
-        'first' => true
-      ))->slug;
+      // update shop name in look up
+      Service::loadModel('Lookup')->where('shop_id','=',$model->id)->update(['shop_name' => $model->name]);
 
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('shop/'.request()->shopSlug.'/setting');

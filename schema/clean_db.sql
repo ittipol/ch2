@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2017 at 10:49 AM
+-- Generation Time: Jun 17, 2017 at 06:29 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -12846,6 +12846,7 @@ CREATE TABLE `lookups` (
   `id` int(11) UNSIGNED NOT NULL,
   `model` varchar(255) NOT NULL,
   `model_id` int(11) UNSIGNED NOT NULL,
+  `shop_id` int(11) UNSIGNED DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
   `keyword_1` varchar(255) DEFAULT NULL,
   `keyword_2` varchar(255) DEFAULT NULL,
