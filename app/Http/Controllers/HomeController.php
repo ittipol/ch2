@@ -584,7 +584,7 @@ dd('end');
     // get 20 latest product
     $latestProducts = $productModel
     ->orderBy('created_at','desc')
-    ->take(20);
+    ->take(18);
 
     $_latestProducts = array();
     if($latestProducts->exists()) {

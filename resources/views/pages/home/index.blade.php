@@ -194,41 +194,45 @@
 
       @if(!empty($latestProducts))
 
-        <div class="multiple-product">
+        <div class="row">
 
           @foreach($latestProducts as $product)
 
-            <div class="card xs no-border no-margin">
+            <div class="col-md-2 col-xs-6">
 
-              @if(!empty($product['flag']))
-              <div class="flag-wrapper">
-                <div class="flag sale-promotion">{{$product['flag']}}</div>
-              </div>
-              @endif
-              
-              <div class="image-tile">
-                <a href="{{$product['detailUrl']}}">
-                  <div class="card-image" style="background-image:url({{$product['_imageUrl']}});"></div>
-                </a>
-              </div>
-              
-              <div class="card-info">
-                <a href="{{$product['detailUrl']}}">
-                  <div class="card-title">{{$product['name']}}</div>
-                </a>
-                <div class="card-sub-info">
+              <div class="card sm no-border">
 
-                  <div class="card-sub-info-row product-price-section">
-                    @if(!empty($product['promotion']))
-                      <span class="product-price">{{$product['promotion']['_reduced_price']}}</span>
-                      <span class="product-price-discount-tag">{{$product['promotion']['percentDiscount']}}</span>
-                      <h5 class="origin-price">{{$product['_price']}}</h5>
-                    @else
-                      <span class="product-price">{{$product['_price']}}</span>
-                    @endif
-                  </div>
-
+                @if(!empty($product['flag']))
+                <div class="flag-wrapper">
+                  <div class="flag sale-promotion">{{$product['flag']}}</div>
                 </div>
+                @endif
+                
+                <div class="image-tile">
+                  <a href="{{$product['detailUrl']}}">
+                    <div class="card-image" style="background-image:url({{$product['_imageUrl']}});"></div>
+                  </a>
+                </div>
+                
+                <div class="card-info">
+                  <a href="{{$product['detailUrl']}}">
+                    <div class="card-title">{{$product['name']}}</div>
+                  </a>
+                  <div class="card-sub-info">
+
+                    <div class="card-sub-info-row product-price-section">
+                      @if(!empty($product['promotion']))
+                        <span class="product-price">{{$product['promotion']['_reduced_price']}}</span>
+                        <span class="product-price-discount-tag">{{$product['promotion']['percentDiscount']}}</span>
+                        <h5 class="origin-price">{{$product['_price']}}</h5>
+                      @else
+                        <span class="product-price">{{$product['_price']}}</span>
+                      @endif
+                    </div>
+
+                  </div>
+                </div>
+
               </div>
 
             </div>
@@ -282,44 +286,44 @@
       slidesToScroll: 2
     });
 
-    $('.multiple-product').slick({
-      dots: true,
-      infinite: false,
-      speed: 300,
-      slidesToShow: 5,
-      slidesToScroll: 5,
-      responsive: [
-        {
-          breakpoint: 1200,
-          settings: {
-            slidesToShow: 4,
-            slidesToScroll: 4,
-          }
-        },
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3
-          }
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2
-          }
-        }
-      ]
-    });
+    // $('.multiple-product').slick({
+    //   dots: true,
+    //   infinite: false,
+    //   speed: 300,
+    //   slidesToShow: 5,
+    //   slidesToScroll: 5,
+    //   responsive: [
+    //     {
+    //       breakpoint: 1200,
+    //       settings: {
+    //         slidesToShow: 4,
+    //         slidesToScroll: 4,
+    //       }
+    //     },
+    //     {
+    //       breakpoint: 768,
+    //       settings: {
+    //         slidesToShow: 3,
+    //         slidesToScroll: 3
+    //       }
+    //     },
+    //     {
+    //       breakpoint: 480,
+    //       settings: {
+    //         slidesToShow: 2,
+    //         slidesToScroll: 2
+    //       }
+    //     }
+    //   ]
+    // });
 
-    $('.multiple-product-3').slick({
-      dots: true,
-      infinite: false,
-      speed: 300,
-      slidesToShow: 2,
-      slidesToScroll: 2,
-    });
+    // $('.multiple-product-3').slick({
+    //   dots: true,
+    //   infinite: false,
+    //   speed: 300,
+    //   slidesToShow: 2,
+    //   slidesToScroll: 2,
+    // });
 
   });
 

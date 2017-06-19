@@ -4,34 +4,38 @@
 
     <div class="footer-wrapper">
 
-      <div class="row">
+      <div class="container">
 
-        <div class="footer col-xs-12">
+        <div class="row">
 
-          <div class="row">
+          <div class="footer col-xs-12">
 
-            <div class="col-md-2 col-xs-12">
-              <h4 class="footer-title">บริษัทและร้านค้า</h4>
-              <div class="footer-content">
-                <div class="footer-link">
-                  <a href="{{URL::to('shop/create')}}">สร้างบริษัทหรือร้านค้า</a>
-                </div>
-                <div class="footer-link">
-                  <a href="{{URL::to('product')}}">สินค้า</a>
-                </div>
-                <div class="footer-link">
-                  <a href="{{URL::to('job')}}">งาน</a>
-                </div>
-              </div>
-            </div>
+            <div class="row">
 
-            <div class="col-md-2 col-xs-12">
-              <h4 class="footer-title">การช่วยเหลือ</h4>
-              <div class="footer-content">
-                <div class="footer-link">
-                  <a href="{{URL::to('manual')}}">วิธีการใช้งาน</a>
+              <div class="col-md-2 col-xs-12">
+                <h4 class="footer-title">บริษัทและร้านค้า</h4>
+                <div class="footer-content">
+                  <div class="footer-link">
+                    <a href="{{URL::to('shop/create')}}">สร้างบริษัทหรือร้านค้า</a>
+                  </div>
+                  <div class="footer-link">
+                    <a href="{{URL::to('product')}}">สินค้า</a>
+                  </div>
+                  <div class="footer-link">
+                    <a href="{{URL::to('job')}}">งาน</a>
+                  </div>
                 </div>
               </div>
+
+              <div class="col-md-2 col-xs-12">
+                <h4 class="footer-title">การช่วยเหลือ</h4>
+                <div class="footer-content">
+                  <div class="footer-link">
+                    <a href="{{URL::to('manual')}}">วิธีการใช้งาน</a>
+                  </div>
+                </div>
+              </div>
+
             </div>
 
           </div>
@@ -40,14 +44,18 @@
 
       </div>
 
-      <div class="line white space-top-bottom-30"></div>
+      <div class="line grey space-top-bottom-30"></div>\
 
-      <div class="row">
-        <div class="col-xs-6">
-          <div class="footer-content">
-            <img src="/images/footer-logo-no-margin.png">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-xs-6">
+            <div class="footer-content">
+              <img src="/images/logo3.png">
+            </div>
           </div>
         </div>
+
       </div>
 
       <div class="footer-social">
