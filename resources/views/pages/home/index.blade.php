@@ -21,7 +21,7 @@
     <div class="sub-banner-inner">
       <h3>เลือกซื้อสินค้า</h3>
       <p>สินค้ามากมายโดยตรงจากร้านค้าต่างๆ ที่รอให้คุณเป็นเจ้าของ เพียงหยิบสินค้าลงในตะกร้าและชำระเงิน จากนั้นก็รอรับสินค้าของคุณได้เลย</p>
-      <a href="{{URL::to('product')}}">เลือกดูสินค้า<i class="fa fa-angle-double-right"></i></a>
+      <a href="{{URL::to('product')}}">เลือกดูสินค้า<i class="fa fa-angle-double-right sm"></i></a>
     </div>
   </div>
   <div class="sub-banner-content">
@@ -29,7 +29,7 @@
       <h3>สร้างร้านค้าและเริ่นต้นธุรกิจ</h3>
       <p>สร้างร้านค้า จัดการสินค้าและอื่นๆในแบบที่คุณต้องการ พร้อมระบบต่างๆ
 ที่คอยซัพพอร์ตให้ธุรกิจของคุณ ได้เติบโตอย่างต่อเนื่อง</p>
-      <a href="{{URL::to('shop/create')}}">สร้างร้านค้า<i class="fa fa-angle-double-right"></i></a>
+      <a href="{{URL::to('shop/create')}}">สร้างร้านค้า<i class="fa fa-angle-double-right sm"></i></a>
     </div>
   </div>
 </div>

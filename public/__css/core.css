@@ -23,6 +23,11 @@ i.fa {
 	color: rgb(117,117,117);
 }
 
+i.fa.sm {
+	font-size: 15px;
+	color: #fff;
+}
+
 .line {
 	width: 100%;
 	height: 1px;
