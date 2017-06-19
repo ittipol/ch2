@@ -56,7 +56,7 @@
 
 .sub-banner .sub-banner-content {
 	width: 50%;
-	height: 220px;
+	/*height: 170px;*/
 	color: #fff;
 	float: left;
 }
@@ -70,7 +70,11 @@
 }
 
 .sub-banner .sub-banner-inner {
-	padding: 30px 40px;
+	padding: 60px 40px;
+}
+
+.sub-banner .sub-banner-content h3 {
+	margin-top: 0;
 }
 
 .sub-banner .sub-banner-content a {
@@ -436,7 +440,10 @@
 
 	.sub-banner .sub-banner-content {
 		width: 100%;
-		height: auto;
+	}
+
+	.sub-banner .sub-banner-inner {
+		padding: 30px;
 	}
 
   .slider-banner,
