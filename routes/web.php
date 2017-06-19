@@ -14,22 +14,9 @@
 // Route::get('aa','HomeController@addC');
 // Route::get('co','HomeController@co');
 
-// Route::get('imm', function() {
-//   $model = new App\Models\Image;
-
-//   foreach ($model->get() as $value) {
-
-//     $path = $value->getImagePath();
-
-//     $xxx = $model->getOrientation($path);
-
-//     if(empty($xxx)) {
-//       continue;
-//     }
-
-//     $value->orientation = $xxx;
-//     $value->save();
-//   }
+// Route::get('test', function() {
+//   $model = new App\Models\Notification;
+//   $model->getUnreadNotification();
 
 //   dd('DONE');
 

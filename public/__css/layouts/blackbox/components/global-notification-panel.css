@@ -30,7 +30,11 @@
 	margin-bottom: 15px;
 	background-color: #fff;
 	border: 1px solid #ccc;
-	/*box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);*/
+}
+
+.global-notification-panel .notification-item.unread {
+	background-color: #E1F5FE;
+	border: 1px solid #29B6F6;
 }
 
 .global-notification-panel .notification-image > a {
@@ -57,6 +61,10 @@
 	font-size: 16px;
 	margin: 0 0 5px;
 	line-height: 22px;
+}
+
+.global-notification-panel .notification-item.unread .notification-title {
+	font-weight: bold;
 }
 
 .global-notification-panel .notification-date {

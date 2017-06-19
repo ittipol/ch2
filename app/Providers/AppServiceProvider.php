@@ -40,11 +40,11 @@ class AppServiceProvider extends ServiceProvider
 
       view()->composer('layouts.blackbox.components.global-header', function($view){
 
-        $NotificationModel = Service::loadModel('Notification');
+        $notificationModel = Service::loadModel('Notification');
 
-        $NotificationModel->clearNotify();
+        $notificationModel->clearNotify();
 
-        $view->with('_notification_count',$NotificationModel->countUnreadNotification());
+        $view->with('_notification_count',$notificationModel->countUnreadNotification());
         $view->with('_product_count',Service::loadModel('Cart')->productCount());
 
       });

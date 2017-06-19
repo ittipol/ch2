@@ -59,7 +59,7 @@ class Notification extends Model
   }
 
   public function getUnreadNotification() {
-    $records = $this->select('model','model_id','notification_event_id','title','created_at')
+    $records = $this->select('model','model_id','notification_event_id','title','unread','created_at')
     ->where(function($query){
       $query->where([
         ['receiver','like','Person'],
@@ -193,6 +193,7 @@ class Notification extends Model
       'title' => $this->title,
       'url' => $this->getUrl($this->model,$this->model_id,$this->notificationEvent),
       'createdDate' => $date->calPassedDate($this->created_at->format('Y-m-d H:i:s')),
+      '_unread' => $this->unread ? 'unread' : '',
       'image' => $this->getNorificationIcon($this->model)
     );
   }

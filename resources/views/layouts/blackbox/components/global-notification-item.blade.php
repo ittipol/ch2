@@ -1,4 +1,4 @@
-<div class="notification-item clearfix">
+<div class="notification-item {{$_notification['_unread']}} clearfix">
 
   <div class="notification-image pull-left">
     <a href="{{$_notification['url']}}">
