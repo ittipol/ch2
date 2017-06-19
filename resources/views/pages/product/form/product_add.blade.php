@@ -72,12 +72,7 @@
     <div class="form-row">
       <?php 
         echo Form::label('description', 'รายละเอียดของสินค้า');
-      ?>
-      <div id="editor-container"></div>
-      <?php
-        // echo Form::textarea('description', null, array(
-        //   'id' => 'txt_description'
-        // ));
+        echo Form::textarea('description');
       ?>
     </div>
 
@@ -188,20 +183,6 @@
 <script type="text/javascript">
 
   $(document).ready(function(){
-
-    var toolbarOptions = ['bold', 'italic', 'underline', 'strike','image'];
-
-    const quill = new Quill('#editor-container', {
-      modules: {
-          toolbar: [
-            ['bold', 'italic','underline'],
-            ['link', 'blockquote', 'image'],
-            [{ list: 'ordered' }, { list: 'bullet' }]
-          ]
-        },
-      placeholder: 'รายละเอียด',
-      theme: 'snow'
-    });
 
     const images = new Images('_image_group','photo',10,'description');
     images.load();
