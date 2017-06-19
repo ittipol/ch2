@@ -18,9 +18,9 @@ h4 {
 	line-height: 22px;
 }
 
-.ql-editor {
-	min-height: 180px;
-	max-height: 600px;
+i.fa {
+	font-size: 26px;
+	color: rgb(117,117,117);
 }
 
 .line {
@@ -41,7 +41,17 @@ h4 {
 	background-color: #fff;
 }
 
+.list-empty-message i {
+	font-size: 140px;
+	margin-bottom: 20px;
+	color: rgb(66,133,244);
+}
+
 .list-empty-message h3 {
+	margin: 0 0 20px 0;
+}
+
+.list-empty-message h4 {
 	font-size: 16px;
 	margin: 0 0 20px 0;
 }

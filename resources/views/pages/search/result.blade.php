@@ -11,7 +11,7 @@
     <div class="col-sm-12 space-top-50 search-box-panel">
       <input type="text" name="search_query" value="{{$q}}" placeholder="ค้นหา" autocomplete="off" class="search-box">
       <button class="button-search">
-        <img src="/images/icons/search.png">
+        <i class="fa fa-search"></i>
       </button>
     </div>
   </div>
@@ -168,10 +168,8 @@
 
       <div class="list-empty-message text-center space-top-20">
         <img class="space-bottom-20 not-found-image" src="/images/common/not-found.png">
-        <div>
-          <h3>ไม่พบผลลัพธ์ที่ตรงกับคำค้นหา</h3>
-          <p>โปรดลองค้นหาอีกครั้งด้วยคำค้นหาที่แตกต่างจากคำค้นหานี้</p>
-        </div>
+        <h3>ไม่พบผลลัพธ์ที่ตรงกับคำค้นหา</h3>
+        <p>โปรดลองค้นหาอีกครั้งด้วยคำค้นหาที่แตกต่างจากคำค้นหานี้</p>
       </div>
 
       @endif

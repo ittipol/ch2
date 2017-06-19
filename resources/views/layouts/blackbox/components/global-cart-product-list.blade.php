@@ -60,8 +60,8 @@
 
 @else
   
-  <div class="cart-empty text-center">
-    <img src="/images/icons/bag-blue.png">
+  <div class="list-empty-message cart-empty text-center">
+    <i class="fa fa-shopping-basket"></i>
     <h4>ยังไม่มีสินค้าในตระกร้าสินค้าของคุณ</h4>
     <a href="{{URL::to('product')}}" class="button half-button space-top-20">เลือกซื้อสินค้า</a>
   </div>

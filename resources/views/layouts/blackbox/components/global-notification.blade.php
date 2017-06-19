@@ -25,8 +25,8 @@
 
         @else
 
-          <div class="notification-empty text-center">
-            <img src="/images/icons/bell-blue.png">
+          <div class="list-empty-message  notification-empty text-center">
+            <i class="fa fa-bell"></i>
             <h4>ยังไม่มีการแจ้งเตือน</h4>
           </div>
 

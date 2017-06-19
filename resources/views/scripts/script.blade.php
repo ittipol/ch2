@@ -161,9 +161,6 @@
 @endforeach
 @endif
 
-<link rel="stylesheet" href="{{ URL::asset('css/quill.snow.css') }}" />
-<script type="text/javascript" src="{{ URL::asset('js/quill.min.js') }}"></script>
-
 <link rel="stylesheet" href="{{ URL::asset('css/font-awesome.min.css') }}" />
 
 <script type="text/javascript">

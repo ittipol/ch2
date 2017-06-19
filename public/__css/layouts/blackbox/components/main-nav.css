@@ -17,8 +17,6 @@
 .global-nav .navigation-top {
   width: 100%;
   height: 64px;
-  /*background-color: #009688;*/
-  /*overflow: hidden;*/
 }
 
 .navigation-top a.logo-link {
@@ -115,7 +113,6 @@
 .navigation-primary-menu ul > li a:hover,
 .navigation-primary-menu ul > li a.active { 
   color: rgb(0,148,210);
-  /*background-color: #448AFF;*/
 }
 
 .navigation-primary-menu ul > li a:hover > i,

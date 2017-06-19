@@ -30,13 +30,9 @@ footer {
 	margin-bottom: 3px;
 }
 
-/*.footer .footer-link > a {
-	color: #fff;
-}*/
-
 .footer-wrapper .footer-social {
 	position: absolute;
-	bottom: 15px;
+	bottom: 25px;
 	right: 15px;
 	z-index: 9;
 }

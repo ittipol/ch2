@@ -252,7 +252,8 @@ label.list-box > input[type="checkbox"] {
 .list-h .list-image img {
 	width: 40px;
 	height: 40px;
-	background-color: rgb(66,98,154);
+	/*background-color: rgb(66,98,154);*/
+	background-color: #4CAF50;
 	padding: 8px;
 }
 

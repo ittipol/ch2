@@ -111,6 +111,7 @@ header .notification-button {
 	z-index: 2;
 	width: 50px;
 	line-height: 64px;
+	margin: 0;
 	cursor: pointer;
 }
 
@@ -169,13 +170,27 @@ header img.icon-header {
 	float: left;
 	width: 1px;
 	height: 40px;
-	/*background-color: #448AFF;*/
 	background-color: #fff;
 	margin: 12px 5px;
 }
 
 .global-header .header-button {
 	float: left;
+	text-align: center;
+}
+
+.global-header .header-button > i {
+	font-size: 26px;
+	margin-top: 20px;
+	color: rgb(117,117,117);
+}
+
+.global-header .header-button:hover > i {
+	color: #0D47A1;
+}
+
+.global-header .header-button.active > i {
+	color: #D50000;
 }
 
 .global-header .avatar {

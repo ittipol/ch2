@@ -95,7 +95,7 @@
 
         <div class="list-item">
           <a href="{{URL::to('account/notification')}}">
-            <img class="icon" src="/images/common/information.png" >
+            <img class="icon" src="/images/common/bell.png" >
             <h4>การแจ้งเตือน</h4>
           </a>
         </div>
