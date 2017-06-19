@@ -54,6 +54,29 @@
 	}
 }*/
 
+.sub-banner .sub-banner-content {
+	width: 50%;
+	height: 230px;
+	color: #fff;
+	float: left;
+}
+
+.sub-banner > .sub-banner-content:first-child {
+	background-color: rgb(0,149,211);
+}
+
+.sub-banner > .sub-banner-content:last-child {
+	background-color: rgb(99,163,59);
+}
+
+.sub-banner .sub-banner-inner {
+	padding: 30px 40px;
+}
+
+.sub-banner .sub-banner-content p {
+	font-size: 16px;
+}
+
 .slider-banner {
 	width: 100%;
 	height: 500px;
@@ -99,11 +122,33 @@
 
 .slider-banner .slick-dots {
 	position: absolute;
-	bottom: 15px;
-	right: 15px;
-	width: auto;
-	padding: 0;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+	height: 50px;
+	background-color: rgba(2,2,2,0.75);
+	border-top: 1px solid rgba(255,255,255,0.5);
+	text-align: right;
 	margin: 0;
+	line-height: 40px;
+	padding-right: 20px;
+}
+
+.slider-banner .slick-dots li.slick-active button {
+	box-shadow: 0 0 10px 2px #64DD17;
+}
+
+.slider-banner .slick-dots li {
+	width: auto;
+	height: auto;
+}
+
+.slider-banner .slick-dots li button {
+	width: 20px;
+	height: 6px;
+	padding: 0;
+	border-radius: 0;
+	background-color: #64DD17;
 }
 
 .channel-column {
@@ -384,6 +429,12 @@
 }
 
 @media only screen and (max-width : 480px) {
+
+	.sub-banner .sub-banner-content {
+		width: 100%;
+		height: auto;
+	}
+
   .slider-banner,
   .slider-banner .slider-banner-item {
   	height: 200px;

@@ -115,7 +115,7 @@
 .navigation-primary-menu ul > li a:hover,
 .navigation-primary-menu ul > li a.active { 
   color: #fff;
-  background-color: #4DB6AC;
+  background-color: #448AFF;
 }
 
 .navigation-primary-menu ul > li a.active::before {

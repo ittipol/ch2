@@ -16,6 +16,24 @@
   </div>
 </div>
 
+<div class="sub-banner clearfix">
+    <div class="sub-banner-content">
+  <div class="sub-banner-inner">
+      <h3>เลือกซื้อสินค้า</h3>
+      <p>สินค้ามากมายโดยตรงจากร้านค้าต่างๆ ที่รอให้คุณเป็นเจ้าของ เพียงหยิบสินค้าลงในตะกร้าและชำระเงิน จากนั้นก็รอรับสินค้าของคุณได้เลย</p>
+      <a href="">เลือกดูสินค้า</a>
+    </div>
+  </div>
+    <div class="sub-banner-content">
+  <div class="sub-banner-inner">
+      <h3>สร้างร้านค้าและเริ่นต้นธุรกิจของคุณ</h3>
+      <p>สร้างร้านค้า จัดการสินค้าและอื่นๆในแบบที่คุณต้องการ พร้อมระบบต่างๆ
+ที่คอยซัพพอร์ตให้ธุรกิจของคุณ ได้เติบโตอย่างต่อเนื่อง</p>
+      <a href="">สร้างร้านค้า</a>
+    </div>
+  </div>
+</div>
+
 <div class="main-content">
 
   <div class="main-row">
@@ -278,7 +296,6 @@
     });
 
     $('.shop-product-list').slick({
-
       dots: true,
       infinite: false,
       speed: 300,
