@@ -44,7 +44,7 @@
 
       </div>
 
-      <div class="line grey space-top-bottom-30"></div>\
+      <div class="line grey space-top-bottom-30"></div>
 
       <div class="container">
 

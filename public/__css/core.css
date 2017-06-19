@@ -10,8 +10,17 @@ a.button:visited {
 	color: #fff;
 }
 
+a > i:last-child {
+	margin-left: 5px;
+}
+
 h4 {
 	line-height: 22px;
+}
+
+.ql-editor {
+	min-height: 180px;
+	max-height: 600px;
 }
 
 .line {

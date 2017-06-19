@@ -56,7 +56,7 @@
 
 .sub-banner .sub-banner-content {
 	width: 50%;
-	height: 230px;
+	height: 220px;
 	color: #fff;
 	float: left;
 }
@@ -71,6 +71,10 @@
 
 .sub-banner .sub-banner-inner {
 	padding: 30px 40px;
+}
+
+.sub-banner .sub-banner-content a {
+	color: #fff;
 }
 
 .sub-banner .sub-banner-content p {

@@ -3,8 +3,7 @@
 
 <div class="register-wrapper">
 	<div class="header-container">
-		<!-- <h3><a class="logo" href="{{URL::to('/')}}">SUNDAY SQUARE</a></h3> -->
-		<a class="logo space-bottom-20" href="{{URL::to('/')}}"><img src="/images/register_logo.png"></a>
+		<a class="logo space-bottom-20" href="{{URL::to('/')}}"><img src="/images/ss_logo/logo-register.png"></a>
     <p>สมัครสมาชิก</p>
 	</div>
 

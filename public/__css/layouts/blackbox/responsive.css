@@ -28,8 +28,8 @@
 
 @media only screen and (max-width : 1366px) {
   .global-nav {
-    left: -280px;
-    width: 230px;
+    left: -220px;
+    width: 220px;
     overflow: hidden;
   }
 

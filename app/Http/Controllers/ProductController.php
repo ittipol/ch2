@@ -515,6 +515,7 @@ class ProductController extends Controller
 
     $_realatedProducts = array();
     $_shopRealatedProducts = array();
+    
     if($productToCategory->exists()) {
       $categoryPaths = Service::loadModel('CategoryPath')->where('category_id','=',$productToCategory->first()->category_id);
 
