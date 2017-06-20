@@ -16,4 +16,44 @@ class CategoryPath extends Model
     return $this->hasOne('App\Models\Category','id','path_id');
   }
 
+  public function getPathIdByCategoryIdAndLevel($categoryId,$level = null) {
+
+    if(empty($level)) {
+      return null;
+    }
+
+    $categoryPath = CategoryPath::where([
+      ['category_id','=',$categoryId],
+      ['level','=',$level],
+    ]);
+
+    if($categoryPath->exists()) {
+      return $categoryPath->select('path_id')->first()->path_id;
+    }
+
+    return null;
+
+  }
+
+  public function getPathsByCategoryIdAndLevel($categoryId,$level) {
+
+    $pathId = $this->getPathIdByCategoryIdAndLevel($categoryId,$level);
+
+    if(empty($pathId)) {
+      return null;
+    }
+
+    $categoryPaths = CategoryPath::select('category_id')->where('path_id','=',$pathId);
+
+    $pathIds = array();
+    if($categoryPaths->exists()) {
+      foreach ($categoryPaths->get() as $path) {
+        $pathIds[] = $path->category_id;
+      }
+    }
+
+    return $pathIds;
+
+  }
+
 }

@@ -181,8 +181,6 @@ class ProductController extends Controller
       $this->setPageTitle($categoryName.' - หมวดสินค้า');
     }
 
-    
-    
     if(!empty($categoryName)) {
       $__categories = array();
       $__categories[] = $categoryName;
@@ -517,14 +515,18 @@ class ProductController extends Controller
     $_shopRealatedProducts = array();
     
     if($productToCategory->exists()) {
-      $categoryPaths = Service::loadModel('CategoryPath')->where('category_id','=',$productToCategory->first()->category_id);
 
-      $pathIds = array();
-      if($categoryPaths->exists()) {
-        foreach ($categoryPaths->get() as $path) {
-          $pathIds[] = $path->path_id;
-        }
-      }
+      $pathIds = Service::loadModel('CategoryPath')->getPathsByCategoryIdAndLevel($productToCategory->first()->category_id,1);
+
+      // Old code
+      // $categoryPaths = Service::loadModel('CategoryPath')->where('category_id','=',$productToCategory->first()->category_id);
+
+      // $pathIds = array();
+      // if($categoryPaths->exists()) {
+      //   foreach ($categoryPaths->get() as $path) {
+      //     $pathIds[] = $path->path_id;
+      //   }
+      // }
 
       $relatedProducts = $model
       ->join('product_to_categories', 'product_to_categories.product_id', '=', 'products.id')
@@ -583,17 +585,14 @@ class ProductController extends Controller
           $userReview = $_userReview->buildModelData();
           $userReviewFormData = $_userReview->buildFormData();
           
-          // $reviewUrl = $url->url('product/review/edit/'.$_userReview->id);
           $hasUserReview = true;
         }else{
-          // $reviewUrl = $url->url('product/review/post/'.$model->id);
           $hasUserReview = false;
         }
 
         $this->setData('hasUserReview',$hasUserReview);
         $this->setData('userReview',$userReview);
         $this->setData('userReviewFormData',$userReviewFormData);
-        // $this->setData('reviewUrl',$reviewUrl);
       }
     }
 
