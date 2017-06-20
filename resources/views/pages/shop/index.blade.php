@@ -62,7 +62,8 @@
     <div class="box">
       <div class="box-header">
         <h4 class="box-header-title">
-          <img class="icon-before-title" src="/images/icons/tag-blue.png">สินค้า
+          <img class="icon-before-title" src="/images/icons/tag-blue.png">
+          สินค้า
         </h4>
       </div>
 
@@ -125,8 +126,8 @@
 
       <div class="list-empty-message text-center space-top-bottom-20">
         <img class="sm" src="/images/icons/tag-blue.png">
-        <div>
-          <h3>ยังไม่มีสินค้า</h3>
+        <div class="space-top-20">
+          <h4>ยังไม่มีสินค้า</h4>
         </div>
       </div>
 
@@ -138,7 +139,7 @@
     <div class="box">
       <div class="box-header">
         <h4 class="box-header-title">
-          <img class="icon-before-title" src="/images/icons/tag-blue.png">แคตตาล็อกสินค้า
+          <img class="icon-before-title" src="/images/icons/book-blue.png">แคตตาล็อกสินค้า
         </h4>
       </div>
 
@@ -189,9 +190,9 @@
       @else
 
       <div class="list-empty-message text-center space-top-bottom-20">
-        <img class="sm" src="/images/icons/tag-blue.png">
-        <div>
-          <h3>ยังไม่มีแคตตาล็อกสินค้า</h3>
+        <img class="sm" src="/images/icons/book-blue.png">
+        <div class="space-top-20">
+          <h4>ยังไม่มีแคตตาล็อกสินค้า</h4>
         </div>
       </div>
 
