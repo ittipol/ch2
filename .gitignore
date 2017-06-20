@@ -8,3 +8,5 @@ Homestead.yaml
 .env
 /storage/temporary
 /storage/cache
+/public/images/temp
+/public/images/test
