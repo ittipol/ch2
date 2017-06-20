@@ -22,6 +22,13 @@ class CategoryPath extends Model
       return null;
     }
 
+    // Get Category level
+    $categoryLevel = CategoryPath::where('path_id','=',$categoryId)->select('level')->first()->level;
+
+    if($level > $categoryLevel) {
+      $level = $categoryLevel;
+    }
+
     $categoryPath = CategoryPath::where([
       ['category_id','=',$categoryId],
       ['level','=',$level],
