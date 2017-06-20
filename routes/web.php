@@ -11,9 +11,6 @@
 |
 */
 
-// Route::get('aa','HomeController@addC');
-// Route::get('co','HomeController@co');
-
 // Route::get('test', function() {
 //   $model = new App\Models\Notification;
 //   $model->getUnreadNotification();
@@ -40,16 +37,6 @@
 
 // Route::get('/clear',function(){
 //   Session::flush();
-// });
-
-// Route::get('/debug_notification',function(){
-//   $notification = new App\Models\Notification;
-//   $notification->getUnreadNotification();
-// });
-
-// Route::get('/cc',function(){
-//   $cart = new App\Models\Cart;
-//   $cart->productCount();
 // });
 
 // 

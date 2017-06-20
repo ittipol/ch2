@@ -11,22 +11,19 @@
 
     <div class="global-header-content-right">
 
-      <label class="header-button notification-button" for="notification_panel_trigger">
-        <!-- <img class="icon-header" src="/images/icons/bell-header.png" /> -->
+      <label id="header_notification" class="header-button @if($_notification_count > 0) active @endif notification-button" for="notification_panel_trigger">
         <i class="fa fa-bell"></i>
         <input type="checkbox" id="notification_panel_trigger" class="notification-trigger">
         <span id="notification_count" class="badge badge-default">{{$_notification_count}}</span>
       </label>
 
       <label class="header-button cart-button" for="cart_panel_trigger">
-        <!-- <img class="icon-header" src="/images/icons/bag-header.png" /> -->
         <i class="fa fa-shopping-basket"></i>
         <input type="checkbox" id="cart_panel_trigger" class="cart-trigger">
         <span id="cart_product_count" class="badge badge-default">{{$_product_count}}</span>
       </label>
 
       <label class="header-button search-button" for="search_panel_trigger">
-        <!-- <img class="icon-header" src="/images/icons/search-header.png" /> -->
         <i class="fa fa-search"></i>
         <input type="checkbox" id="search_panel_trigger" class="search-trigger">
       </label>
@@ -39,17 +36,6 @@
         <input type="checkbox" id="account_panel_trigger" class="account-trigger">
       </label>
       @endif
-
-      <!-- <div class="sperate"></div>
-
-      <label class="header-button additional-button" for="additional_nav_panel_trigger">
-        <div class="dot-group">
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-        </div>
-        <input type="checkbox" id="additional_nav_panel_trigger" class="additional-trigger">
-      </label> -->
 
     </div>
 

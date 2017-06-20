@@ -30,6 +30,7 @@ class PushNotification {
 				_this.clearCount = false;
 
 				$('#notification_count').text(0);
+				$('#header_notification').removeClass('active');
 
 				let request = $.ajax({
 				  url: "/notification_read",
