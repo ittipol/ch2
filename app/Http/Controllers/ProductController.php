@@ -528,47 +528,53 @@ class ProductController extends Controller
       //   }
       // }
 
-      $relatedProducts = $model
-      ->join('product_to_categories', 'product_to_categories.product_id', '=', 'products.id')
-      ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
-      ->whereIn('product_to_categories.category_id',$pathIds)
-      ->where([
-        ['shop_relate_to.model','like','Product'],
-        ['shop_relate_to.shop_id','=',$shop->id],
-        ['product_id','!=',$model->id]
-      ])
-      ->select('products.*')
-      ->take(16);
+      $_shopRealatedProducts = array();
+      $_realatedProducts = array();
 
-      if(!empty($relatedProducts)) {
-        foreach ($relatedProducts->get() as $product) {
-          $_shopRealatedProducts[] = array_merge($product->buildPaginationData(),array(
-            '_imageUrl' => $product->getImage('list'),
-            'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
-          ));
-        }
-      }    
+      if(!empty($pathIds)) {
+        $relatedProducts = $model
+        ->join('product_to_categories', 'product_to_categories.product_id', '=', 'products.id')
+        ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
+        ->whereIn('product_to_categories.category_id',$pathIds)
+        ->where([
+          ['shop_relate_to.model','like','Product'],
+          ['shop_relate_to.shop_id','=',$shop->id],
+          ['product_id','!=',$model->id]
+        ])
+        ->select('products.*')
+        ->take(16);
 
-      // Related Product (all shop)
-      $relatedProducts = $model
-      ->join('product_to_categories', 'product_to_categories.product_id', '=', 'products.id')
-      ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
-      ->whereIn('product_to_categories.category_id',$pathIds)
-      ->where([
-        ['shop_relate_to.model','like','Product'],
-        ['shop_relate_to.shop_id','!=',$shop->id]
-      ])
-      ->select('products.*')
-      ->take(16);
+        if(!empty($relatedProducts)) {
+          foreach ($relatedProducts->get() as $product) {
+            $_shopRealatedProducts[] = array_merge($product->buildPaginationData(),array(
+              '_imageUrl' => $product->getImage('list'),
+              'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
+            ));
+          }
+        }    
 
-      if(!empty($relatedProducts)) {
-        foreach ($relatedProducts->get() as $product) {
-          $_realatedProducts[] = array_merge($product->buildPaginationData(),array(
-            '_imageUrl' => $product->getImage('list'),
-            'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
-          ));
+        // Related Product (all shop)
+        $relatedProducts = $model
+        ->join('product_to_categories', 'product_to_categories.product_id', '=', 'products.id')
+        ->join('shop_relate_to', 'shop_relate_to.model_id', '=', 'products.id')
+        ->whereIn('product_to_categories.category_id',$pathIds)
+        ->where([
+          ['shop_relate_to.model','like','Product'],
+          ['shop_relate_to.shop_id','!=',$shop->id]
+        ])
+        ->select('products.*')
+        ->take(16);
+
+        if(!empty($relatedProducts)) {
+          foreach ($relatedProducts->get() as $product) {
+            $_realatedProducts[] = array_merge($product->buildPaginationData(),array(
+              '_imageUrl' => $product->getImage('list'),
+              'detailUrl' => $url->setAndParseUrl('product/detail/{id}',array('id'=>$product->id))
+            ));
+          }
         }
       }
+
     }
 
     $productBought = false;
