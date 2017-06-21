@@ -216,7 +216,7 @@
 
           @foreach($latestProducts as $product)
 
-            <div class="col-md-3 col-xs-6">
+            <div class="col-md-2 col-xs-6">
 
               <div class="card sm no-border">
 

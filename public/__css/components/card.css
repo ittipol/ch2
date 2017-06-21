@@ -90,6 +90,10 @@
 	height: 250px;
 }
 
+.col-md-2 > .card.sm .image-tile .card-image {
+	height: 170px;
+}
+
 .card.xs .image-tile .card-image {
 	height: 165px;
 }
