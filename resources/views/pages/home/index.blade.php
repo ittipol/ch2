@@ -216,7 +216,7 @@
 
           @foreach($latestProducts as $product)
 
-            <div class="col-md-2 col-xs-6">
+            <div class="col-md-3 col-xs-6">
 
               <div class="card sm no-border">
 
@@ -302,45 +302,6 @@
       slidesToShow: 2,
       slidesToScroll: 2
     });
-
-    // $('.multiple-product').slick({
-    //   dots: true,
-    //   infinite: false,
-    //   speed: 300,
-    //   slidesToShow: 5,
-    //   slidesToScroll: 5,
-    //   responsive: [
-    //     {
-    //       breakpoint: 1200,
-    //       settings: {
-    //         slidesToShow: 4,
-    //         slidesToScroll: 4,
-    //       }
-    //     },
-    //     {
-    //       breakpoint: 768,
-    //       settings: {
-    //         slidesToShow: 3,
-    //         slidesToScroll: 3
-    //       }
-    //     },
-    //     {
-    //       breakpoint: 480,
-    //       settings: {
-    //         slidesToShow: 2,
-    //         slidesToScroll: 2
-    //       }
-    //     }
-    //   ]
-    // });
-
-    // $('.multiple-product-3').slick({
-    //   dots: true,
-    //   infinite: false,
-    //   speed: 300,
-    //   slidesToShow: 2,
-    //   slidesToScroll: 2,
-    // });
 
   });
 
