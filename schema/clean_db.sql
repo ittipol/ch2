@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2017 at 01:32 PM
+-- Generation Time: Jun 22, 2017 at 07:15 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -14064,11 +14064,11 @@ INSERT INTO `shipping_service_providers` (`id`, `name`, `sort`) VALUES
 
 CREATE TABLE `shops` (
   `id` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `description` text,
-  `brand_story` text,
-  `mission` text,
-  `vision` text,
+  `name` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+  `description` text CHARACTER SET utf8mb4,
+  `brand_story` text CHARACTER SET utf8mb4,
+  `mission` text CHARACTER SET utf8mb4,
+  `vision` text CHARACTER SET utf8mb4,
   `profile_image_id` int(11) UNSIGNED DEFAULT NULL,
   `cover_image_id` int(11) UNSIGNED DEFAULT NULL,
   `rating` decimal(2,1) NOT NULL DEFAULT '0.0',
