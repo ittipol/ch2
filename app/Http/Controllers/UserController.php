@@ -47,7 +47,9 @@ class UserController extends Controller
       'password'  =>  request()->input('password')
     ];
 
-    if(Auth::attempt($data)){
+    $remember = !empty(request()->input('remember')) ? true : false;
+
+    if(Auth::attempt($data,$remember)){
 
       // Ger person
       $person = Person::select(array('id','name','profile_image_id'))->where('user_id','=',Auth::user()->id)->first();
