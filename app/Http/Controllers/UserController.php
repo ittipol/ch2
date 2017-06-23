@@ -49,6 +49,10 @@ class UserController extends Controller
 
     $remember = !empty(request()->input('remember')) ? true : false;
 
+    if (Auth::viaRemember()) {
+      dd('wew');
+    }
+
     if(Auth::attempt($data,$remember)){
 
       // Ger person
@@ -72,8 +76,6 @@ class UserController extends Controller
         Session::put('Person.profile_image_xs',$person->getProfileImageUrl('xs'));
         Session::put('Person.profile_image',$person->getProfileImageUrl('xsm'));
       }
-
-      // Session::put('Person.pageAccessLevel',{1-4});
 
       // Update cart
       $cartModel = Service::loadModel('Cart');
