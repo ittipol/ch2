@@ -83,7 +83,6 @@ class AccountController extends Controller
     if($model->fill($request->all())->save()) {
 
       Session::put('Person.name',$model->name);
-      // Session::put('Person.theme',$model->theme);
 
       if(empty($model->profile_image_id)) {
         Session::put('Person.profile_image_xs','/images/common/avatar.png');

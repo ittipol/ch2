@@ -42,40 +42,39 @@ class UserController extends Controller
 
   public function auth() { 
 
-    $data = [
-      'email' =>  request()->input('email'),
-      'password'  =>  request()->input('password')
-    ];
+    // $data = [
+    //   'email' =>  request()->input('email'),
+    //   'password'  =>  request()->input('password')
+    // ];
 
     $remember = !empty(request()->input('remember')) ? true : false;
 
-    if (Auth::viaRemember()) {
-      dd('wew');
-    }
-
-    if(Auth::attempt($data,$remember)){
+    if(Auth::attempt([
+      'email' =>  request()->input('email'),
+      'password'  =>  request()->input('password')
+    ],$remember)){
 
       // Ger person
-      $person = Person::select(array('id','name','profile_image_id'))->where('user_id','=',Auth::user()->id)->first();
+      // $person = Person::select('id','name','profile_image_id')->where('user_id','=',Auth::user()->id)->first();
+      $person = Person::select('id')->where('user_id','=',Auth::user()->id)->first();
 
       // Update Token
-      // User for pushing notification
+      // Use for pushing notification
       $person->token = Token::generate();
       $person->save();
       
       // Store data
-      Session::put('Person.id',$person->id);
-      Session::put('Person.name',$person->name);
-      // Session::put('Person.theme',$person->theme);
-      Session::put('Person.token',$person->token);
+      // Session::put('Person.id',$person->id);
+      // Session::put('Person.name',$person->name);
+      // Session::put('Person.token',$person->token);
 
-      if(empty($person->profile_image_id)) {
-        Session::put('Person.profile_image_xs','/images/common/avatar.png');
-        Session::put('Person.profile_image','/images/common/avatar.png');
-      }else{
-        Session::put('Person.profile_image_xs',$person->getProfileImageUrl('xs'));
-        Session::put('Person.profile_image',$person->getProfileImageUrl('xsm'));
-      }
+      // if(empty($person->profile_image_id)) {
+      //   Session::put('Person.profile_image_xs','/images/common/avatar.png');
+      //   Session::put('Person.profile_image','/images/common/avatar.png');
+      // }else{
+      //   Session::put('Person.profile_image_xs',$person->getProfileImageUrl('xs'));
+      //   Session::put('Person.profile_image',$person->getProfileImageUrl('xsm'));
+      // }
 
       // Update cart
       $cartModel = Service::loadModel('Cart');
