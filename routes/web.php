@@ -35,6 +35,14 @@ Route::get('/debug',function(){
   dd(session()->all());
 });
 
+// Route::get('/cp',function(){
+//   session()->forget('Person');
+// });
+
+Route::get('/cl',function(){
+  dd(\Auth::check());
+});
+
 // Route::get('/clear',function(){
 //   Session::flush();
 // });
