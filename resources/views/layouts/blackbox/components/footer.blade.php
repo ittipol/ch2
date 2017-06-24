@@ -19,10 +19,40 @@
                     <a href="{{URL::to('shop/create')}}">สร้างบริษัทหรือร้านค้า</a>
                   </div>
                   <div class="footer-link">
-                    <a href="{{URL::to('product')}}">สินค้า</a>
+                    <a href="{{URL::to('shop')}}">บริษัทหรือร้านค้า</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-2 col-xs-12">
+                <h4 class="footer-title">สินค้า</h4>
+                <div class="footer-content">
+                  <div class="footer-link">
+                    <a href="{{URL::to('product')}}">สินค้าจากบริษัทและร้านค้า</a>
                   </div>
                   <div class="footer-link">
-                    <a href="{{URL::to('job')}}">งาน</a>
+                    <a href="{{URL::to('product/category')}}">หมวดสินค้า</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-2 col-xs-12">
+                <h4 class="footer-title">งาน</h4>
+                <div class="footer-content">
+                  <div class="footer-link">
+                    <a href="{{URL::to('job')}}">งานจากบริษัทและร้านค้า</a>
+                  </div>
+                  <div class="footer-link">
+                    <a href="{{URL::to('resume')}}">เรซูเม่ส่วนตัว</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-2 col-xs-12">
+                <h4 class="footer-title">โฆษณา</h4>
+                <div class="footer-content">
+                  <div class="footer-link">
+                    <a href="{{URL::to('advertising')}}">โฆษณาจากบริษัทและร้านค้า</a>
                   </div>
                 </div>
               </div>

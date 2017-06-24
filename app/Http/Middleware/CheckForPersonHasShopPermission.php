@@ -126,24 +126,24 @@ class CheckForPersonHasShopPermission
           'permission' => 'edit',
           'modelName' => 'Product'
         ),
-        // 'shop.advertising.list' => true,
-        // 'shop.advertising.detail' => array(
-        //   'modelName' => 'Advertising'
-        // ),
-        // 'shop.advertising.manage' => array(
-        //   'permission' => true
-        // ),
-        // 'shop.advertising.add' => array(
-        //   'permission' => 'add'
-        // ),
-        // 'shop.advertising.edit' => array(
-        //   'permission' => 'edit',
-        //   'modelName' => 'Advertising'
-        // ),
-        // 'shop.advertising.delete' => array(
-        //   'permission' => 'delete',
-        //   'modelName' => 'Advertising'
-        // ),
+        'shop.advertising.list' => true,
+        'shop.advertising.detail' => array(
+          'modelName' => 'Advertising'
+        ),
+        'shop.advertising.manage' => array(
+          'permission' => true
+        ),
+        'shop.advertising.add' => array(
+          'permission' => 'add'
+        ),
+        'shop.advertising.edit' => array(
+          'permission' => 'edit',
+          'modelName' => 'Advertising'
+        ),
+        'shop.advertising.delete' => array(
+          'permission' => 'delete',
+          'modelName' => 'Advertising'
+        ),
         'shop.order' => array(
           'permission' => true
         ),

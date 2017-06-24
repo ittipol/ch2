@@ -4,7 +4,9 @@
 <div class="top-header-wrapper top-header-border">
   <div class="container">
     <div class="top-header">
-      <h2>โฆษณา</h2>
+      <div class="detail-title">
+        <h2 class="title">โฆษณาจากบริษัทและร้านค้า</h2>
+      </div>
     </div>
   </div>
 </div>
@@ -15,7 +17,7 @@
 
     <div class="shelf">
 
-      <h3>โฆษณา{{$board['typeName']}}</h3>
+      <h3>{{$board['typeName']}}</h3>
 
       <h2>{{$board['total']}}</h2>
       <h5>รายการโฆษณา</h5>
@@ -32,7 +34,7 @@
 
               <div class="col-lg-3 col-xs-6">
 
-                <div class="card">
+                <div class="card sm">
 
                   <div class="image-tile">
                     <a href="{{$item['detailUrl']}}">
@@ -56,7 +58,7 @@
 
             @if(!empty($board['data']['all']))
               <div class="col-xs-12">
-                <a href="{{$board['itemBoardUrl']}}" class="product-all-tile">
+                <a href="{{$board['advertisingBoardUrl']}}" class="product-all-tile">
                   <span>
                     แสดงประกาศทั้งหมด<br>
                     {{$board['data']['all']['title']}}
@@ -71,7 +73,7 @@
 
             <div class="list-empty-message text-center space-top-20">
               <div>
-                <h4>ยังไม่มีประกาศอสังหาริมทรัพย์ประเภท{{$board['typeName']}}</h4>
+                <h4>ยังไม่มีโฆษณาประเภท{{$board['typeName']}}</h4>
               </div>
             </div>
 

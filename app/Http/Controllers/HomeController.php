@@ -532,53 +532,14 @@ dd('end');
   //   return $this->view('pages.home.index');
   // }
 
-//   public function addBanks() {
-
-//     $banks = array(
-//       'ธนาคารกรุงเทพ',
-//       'ธนาคารกสิกรไทย',
-//       'ธนาคารกรุงไทย',
-//       'ธนาคารทหารไทย',
-//       'ธนาคารไทยพาณิชย์',
-//       'ธนาคารกรุงศรีอยุธยา',
-//       'ธนาคารเกียรตินาคิน',
-//       'ธนาคารซีไอเอ็มบีไทย',
-//       'ธนาคารทิสโก้',
-//       'ธนาคารธนชาต',
-//       'ธนาคารยูโอบี',
-//       'ธนาคารสแตนดาร์ดชาร์เตอร์ด ',
-//       'ธนาคารไอซีบีซี (ไทย)',
-//       'ธนาคารออมสิน',
-//     );
-
-//     // $model = Service::loadModel('PaymentServiceProvider');
-
-//     foreach ($banks as $bank) {
-      
-//       $model = Service::loadModel('PaymentServiceProvider');
-
-//       $model->payment_service_provider_type_id = 1;
-//       $model->name = $bank;
-
-//       $model->save();
-
-//       $_model = Service::loadModel('PaymentServiceProviderToPaymentMethodType');
-
-//       $_model->payment_service_provider_id = $model->id;
-//       $_model->payment_method_type_id = 1;
-
-//       $_model->save();
-
-//     }
-// dd('done');
-//   }
-
   public function index() {
 
     $url = new Url;
     $string = new stringHelper;
 
     $productModel = Service::loadModel('Product');
+    $jobModel = Service::loadModel('Job');
+    $advertisingModel = Service::loadModel('Advertising');
     $shopModel = Service::loadModel('Shop');
 
     // get 20 latest product
@@ -602,6 +563,49 @@ dd('end');
 
     $this->setData('latestProducts',$_latestProducts);
 
+    // get 12 latest jobs
+    $latestJobs = $jobModel
+    ->orderBy('created_at','desc')
+    ->take(12);
+
+    $_latestJobs = array();
+    if($latestJobs->exists()) {
+
+      foreach ($latestJobs->get() as $job) {
+
+        $_latestJobs[] = array_merge($job->buildPaginationData(),array(
+          '_imageUrl' => $job->getImage('list'),
+          'detailUrl' => $url->setAndParseUrl('job/detail/{id}',array('id'=>$job->id))
+        ));
+        
+      }
+
+    }
+
+    $this->setData('latestJobs',$_latestJobs);
+
+    // get 12 latest ads
+    $latestAdvertisings = $advertisingModel
+    ->orderBy('created_at','desc')
+    ->take(12);
+
+    $_latestAdvertisings = array();
+    if($latestAdvertisings->exists()) {
+
+      foreach ($latestAdvertisings->get() as $advertising) {
+
+        $_latestAdvertisings[] = array_merge($advertising->buildPaginationData(),array(
+          '_imageUrl' => $advertising->getImage('list'),
+          'detailUrl' => $url->setAndParseUrl('advertising/detail/{id}',array('id'=>$advertising->id))
+        ));
+        
+      }
+
+    }
+
+    $this->setData('latestAdvertisings',$_latestAdvertisings);
+
+    // Shop
     $shopIds = array();
     foreach ($shopModel->select('id')->get() as $value) {
       $shopIds[] = $value->id;
@@ -670,29 +674,30 @@ dd('end');
 
     }
 
-    // Get Other Shop
-    $shops = $shopModel
-    ->whereNotIn('id',$usedIds)
-    ->take(4)
-    ->get();
-
-    $_otherShops = array();
-    foreach ($shops as $shop) {
-      $slug = $shop->getRelatedData('Slug',array(
-        'first' => true,
-        'fields' => array('slug')
-      ))->slug;
-
-      $_otherShops[] = array(
-        'name' => $shop->name,
-        'description' => $string->truncString($shop->description,80),
-        'profileImage' => $shop->getProfileImageUrl(),
-        'shopUrl' => $url->url('shop/'.$slug)
-      );
-
-    }
-
     $this->setData('recommendedShops',$_shops);
+
+    // Get Other Shop
+    // $shops = $shopModel
+    // ->whereNotIn('id',$usedIds)
+    // ->take(4)
+    // ->get();
+
+    // $_otherShops = array();
+    // foreach ($shops as $shop) {
+    //   $slug = $shop->getRelatedData('Slug',array(
+    //     'first' => true,
+    //     'fields' => array('slug')
+    //   ))->slug;
+
+    //   $_otherShops[] = array(
+    //     'name' => $shop->name,
+    //     'description' => $string->truncString($shop->description,80),
+    //     'profileImage' => $shop->getProfileImageUrl(),
+    //     'shopUrl' => $url->url('shop/'.$slug)
+    //   );
+
+    // }
+
     // $this->setData('otherShops',$_otherShops);
 
     // Get Products

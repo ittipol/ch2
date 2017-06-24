@@ -278,6 +278,24 @@
 
   </div>
 
+  <div class="main-row color-bar">
+    <div class="container">
+      <div class="color-bar-bg" style="background-image:url(/images/banners/home_1.png);"></div>
+      <div class="color-bar-article">
+        <div class="color-bar-title">ตำแหน่งงานส่งตรงจากบริษัทและร้านค้าต่างๆ</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-row color-bar">
+    <div class="container">
+      <div class="color-bar-bg" style="background-image:url(/images/banners/home_1.png);"></div>
+      <div class="color-bar-article">
+        <div class="color-bar-title">โฆษณาที่น่าสนใจจากบริษัทและร้านค้าต่างๆ</div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <script type="text/javascript">

@@ -37,7 +37,7 @@
       @foreach($_pagination['data'] as $data)
 
       <div class="col-lg-3 col-xs-6">
-        <div class="card">
+        <div class="card sm">
           <div class="image-tile">
             <a href="{{$data['detailUrl']}}">
               <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
@@ -47,10 +47,6 @@
             <a href="{{$data['detailUrl']}}">
               <div class="card-title">{{$data['_short_name']}}</div>
             </a>
-            <div class="card-sub-info">
-              <div>ประเภทโฆษณา</div>
-              {{$data['_advertisingType']}}
-            </div>
           </div>
         </div>
       </div>

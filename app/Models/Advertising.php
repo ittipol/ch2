@@ -10,7 +10,7 @@ class Advertising extends Model
 {
   public $table = 'advertisings';
   protected $fillable = ['advertising_type_id','name','description','created_by'];
-  protected $modelRelations = array('Image','Tagging','RelateToBranch','ShopRelateTo');
+  protected $modelRelations = array('Image','Tagging','ShopRelateTo','RelateToBranch');
   protected $directory = true;
 
   public $formHelper = true;
@@ -21,8 +21,7 @@ class Advertising extends Model
     'Lookup' => array(
       'format' =>  array(
         'name' => '{{name}}',
-        'keyword_1' => '{{__Shop|getShopName}}',
-        'keyword_2' => '{{AdvertisingType.name|Advertising.advertising_type_id=>AdvertisingType.id}}',
+        'keyword_1' => '{{AdvertisingType.name|Advertising.advertising_type_id=>AdvertisingType.id}}',
       )
     ),
     'DataAccessPermission' => array(
@@ -116,7 +115,7 @@ class Advertising extends Model
           'value' => $this->advertisingType->name
         )
       ),
-      'detailUrl' => $url->setAndParseUrl('item/detail/{id}',array('id' => $this->id)),
+      'detailUrl' => $url->setAndParseUrl('advertising/detail/{id}',array('id' => $this->id)),
       'image' => $this->getImage('list'),
       'isDataTitle' => 'โฆษณาจากบริษัทและร้านค้า'
     );

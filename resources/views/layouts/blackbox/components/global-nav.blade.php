@@ -17,17 +17,24 @@
 
           <li class="item">
             <a href="{{URL::to('/')}}">
-              <!-- <img class="icon" src="/images/icons/home-header.png"> -->
               <i class="fa fa-home"></i>
               <div class="item-title">หน้าแรก</div>
             </a>
           </li>
 
-          @if (!Auth::check())
+          @if (Auth::check())
+
+            <li class="item">
+              <a href="{{URL::to('account/shop')}}">
+                <i class="fa fa-bookmark"></i>
+                <div class="item-title">ร้านค้าของฉัน</div>
+              </a>
+            </li>
+
+          @else
 
             <li class="item">
               <a href="{{URL::to('login')}}">
-                <!-- <img class="icon" src="/images/icons/secure-header.png"> -->
                 <i class="fa fa-lock"></i>
                 <div class="item-title">เข้าสู่ระบบ</div>
               </a>
@@ -35,7 +42,6 @@
 
             <li class="item">
               <a href="{{URL::to('register')}}">
-                <!-- <img class="icon" src="/images/icons/key-header.png"> -->
                 <i class="fa fa-group"></i>
                 <div class="item-title">สมัครสมาชิก</div>
               </a>
@@ -47,25 +53,13 @@
 
           <li class="item">
             <a href="{{URL::to('shop')}}">
-              <!-- <img class="icon" src="/images/icons/building-header.png"> -->
               <i class="fa fa-building"></i>
               <div class="item-title">บริษัทและร้านค้า</div>
             </a>
           </li>
 
-          @if (Auth::check())
-          <li class="item">
-            <a href="{{URL::to('account/shop')}}">
-              <i class="fa fa-bookmark"></i>
-              <!-- <img class="icon" src="/images/icons/shop-header.png"> -->
-              <div class="item-title">ร้านค้าของฉัน</div>
-            </a>
-          </li>
-          @endif
-
           <li class="item">
             <a href="{{URL::to('shop/create')}}">
-              <!-- <img class="icon" src="/images/icons/plus-header.png"> -->
               <i class="fa fa-plus"></i>
               <div class="item-title">สร้างบริษัทหรือร้านค้า</div>
             </a>
@@ -75,7 +69,6 @@
 
           <li class="item">
             <a href="{{URL::to('product')}}">
-              <!-- <img class="icon" src="/images/icons/tag-header.png"> -->
               <i class="fa fa-tag"></i>
               <div class="item-title">สินค้าจากบริษัทและร้านค้า</div>
             </a>
@@ -83,19 +76,22 @@
 
           <li class="item">
             <a href="{{URL::to('product/category')}}">
-              <!-- <img class="icon" src="/images/icons/layer-header.png"> -->
               <i class="fa fa-cubes"></i>
               <div class="item-title">หมวดสินค้า</div>
             </a>
           </li>
 
-          <li class="line space-top-bottom-10"></li>
-
           <li class="item">
             <a href="{{URL::to('job')}}">
-              <i class="fa fa-file-text"></i>
-              <!-- <img class="icon" src="/images/icons/document-header.png"> -->
+              <i class="fa fa-clipboard"></i>
               <div class="item-title">งานจากบริษัทและร้านค้า</div>
+            </a>
+          </li>
+
+          <li class="item">
+            <a href="{{URL::to('advertising')}}">
+              <i class="fa fa-bullhorn"></i>
+              <div class="item-title">โฆษณาจากบริษัทและร้านค้า</div>
             </a>
           </li>
 

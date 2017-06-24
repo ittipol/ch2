@@ -11,6 +11,7 @@
               <a href="{{request()->get('shopUrl')}}about">เกี่ยวกับ</a>
               <a href="{{request()->get('shopUrl')}}product">สินค้า</a>
               <a href="{{request()->get('shopUrl')}}product_catalog">แคตตาล็อกสินค้า</a>
+              <a href="{{request()->get('shopUrl')}}advertising">โฆษณา</a>
               <a href="{{request()->get('shopUrl')}}job">งาน</a>
             </div>
           </button>

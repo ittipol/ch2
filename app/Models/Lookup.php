@@ -30,13 +30,13 @@ class Lookup extends Model
           'value' => 'model:ProductCatalog'
         ),
         array(
-          'name' => 'ประกาศงาน',
+          'name' => 'งานจากบริษัทและร้านค้า',
           'value' => 'model:Job'
         ),
-        // array(
-        //   'name' => 'โฆษณาจากบริษัทและร้านค้า',
-        //   'value' => 'model:Advertising'
-        // ),
+        array(
+          'name' => 'โฆษณาจากบริษัทและร้านค้า',
+          'value' => 'model:Advertising'
+        ),
         // array(
         //   'name' => 'ประกาศซื้อ-เช่า-ขายสินค้า',
         //   'value' => 'model:Item'

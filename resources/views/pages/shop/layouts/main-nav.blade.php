@@ -8,6 +8,7 @@
           <a href="{{request()->get('shopUrl')}}product" class="nav">สินค้า</a>
           <a href="{{request()->get('shopUrl')}}product_catalog" class="nav">แคตตาล็อกสินค้า</a>
           <a href="{{request()->get('shopUrl')}}job" class="nav">งาน</a>
+          <a href="{{request()->get('shopUrl')}}advertising" class="nav">โฆษณา</a>
           <a href="{{request()->get('shopUrl')}}payment_method" class="nav">วิธีการขำระเงิน</a>
         </div>
       </div>

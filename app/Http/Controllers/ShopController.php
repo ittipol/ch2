@@ -202,17 +202,23 @@ class ShopController extends Controller
       ['model','like','Job']
     ])->count());
 
-    // $this->setData('totalAdvertising',$shopRelateToModel
-    // ->where([
-    //   ['shop_id','=',$model->id],
-    //   ['model','like','Advertising']
-    // ])->count());
+    $this->setData('totalAdvertising',$shopRelateToModel
+    ->where([
+      ['shop_id','=',$model->id],
+      ['model','like','Advertising']
+    ])->count());
 
     // $this->setData('totalBranch',$shopRelateToModel
     // ->where([
     //   ['shop_id','=',$model->id],
     //   ['model','like','Branch']
     // ])->count());
+
+    $this->setData('totalProductCatalog',$shopRelateToModel
+    ->where([
+      ['shop_id','=',$model->id],
+      ['model','like','ProductCatalog']
+    ])->count());
 
     $orderModel = Service::loadModel('Order');
 

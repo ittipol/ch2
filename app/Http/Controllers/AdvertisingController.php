@@ -57,7 +57,7 @@ class AdvertisingController extends Controller
         'typeName' => $type->name,
         'data' => $_advertisings,
         'total' => $total,
-        'itemBoardUrl' => $url->setAndParseUrl('advertising/board/{advertising_type_id}',array('advertising_type_id'=>$type->id)),
+        'advertisingBoardUrl' => $url->setAndParseUrl('advertising/{advertising_type_id}',array('advertising_type_id'=>$type->id)),
       );
 
     }

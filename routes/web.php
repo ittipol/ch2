@@ -280,8 +280,8 @@ Route::group(['middleware' => ['shop','person.shop.permission']], function () {
   Route::get('shop/{shopSlug}/job','JobController@shopJoblistView')->name('shop.job.list');
   Route::get('shop/{shopSlug}/job/{id}','JobController@detail')->name('shop.job.detail');
 
-  // Route::get('shop/{shopSlug}/advertising','AdvertisingController@shopAdvertisinglistView')->name('shop.advertising.list');
-  // Route::get('shop/{shopSlug}/advertising/{id}','AdvertisingController@shopAdvertisingDetail')->name('shop.advertising.detail');
+  Route::get('shop/{shopSlug}/advertising','AdvertisingController@shopAdvertisinglistView')->name('shop.advertising.list');
+  Route::get('shop/{shopSlug}/advertising/{id}','AdvertisingController@shopAdvertisingDetail')->name('shop.advertising.detail');
 
   // Route::get('shop/{shopSlug}/branch','BranchController@listView')->name('shop.branch.list');
   // Route::get('shop/{shopSlug}/branch/{id}','BranchController@detail')->name('shop.branch.detail');
@@ -473,21 +473,21 @@ Route::get('job/apply/{id}','JobController@apply');
 });
 
 // Advertising
-// Route::get('advertising/board','AdvertisingController@board');
-// Route::get('advertising/board/{advertising_type_id}','AdvertisingController@listView')->name('advertising.list');
-// Route::get('advertising/detail/{id}','AdvertisingController@detail')->name('advertising.detail');
+Route::get('advertising','AdvertisingController@board');
+Route::get('advertising/{advertising_type_id}','AdvertisingController@listView')->name('advertising.list');
+Route::get('advertising/detail/{id}','AdvertisingController@detail')->name('advertising.detail');
 
-// Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
-//   Route::get('shop/{shopSlug}/manage/advertising','ShopController@advertising')->name('shop.advertising.manage');
+Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
+  Route::get('shop/{shopSlug}/manage/advertising','ShopController@advertising')->name('shop.advertising.manage');
   
-//   Route::get('shop/{shopSlug}/advertising/add','AdvertisingController@add')->name('shop.advertising.add');
-//   Route::post('shop/{shopSlug}/advertising/add','AdvertisingController@addingSubmit')->name('shop.advertising.add');
+  Route::get('shop/{shopSlug}/advertising/add','AdvertisingController@add')->name('shop.advertising.add');
+  Route::post('shop/{shopSlug}/advertising/add','AdvertisingController@addingSubmit')->name('shop.advertising.add');
 
-//   Route::get('shop/{shopSlug}/advertising/edit/{id}','AdvertisingController@edit')->name('shop.advertising.edit');
-//   Route::patch('shop/{shopSlug}/advertising/edit/{id}','AdvertisingController@editingSubmit')->name('shop.advertising.edit');
+  Route::get('shop/{shopSlug}/advertising/edit/{id}','AdvertisingController@edit')->name('shop.advertising.edit');
+  Route::patch('shop/{shopSlug}/advertising/edit/{id}','AdvertisingController@editingSubmit')->name('shop.advertising.edit');
 
-//   Route::get('shop/{shopSlug}/advertising/delete/{id}','AdvertisingController@delete')->name('shop.advertising.delete');
-// });
+  Route::get('shop/{shopSlug}/advertising/delete/{id}','AdvertisingController@delete')->name('shop.advertising.delete');
+});
 
 // Branch
 // Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
