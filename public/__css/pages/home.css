@@ -419,6 +419,22 @@
   .slider-banner .slider-banner-item {
   	height: 400px;
   }
+
+	.sub-banner .sub-banner-inner {
+		padding: 30px;
+	}
+
+  .sub-banner .sub-banner-content h3 {
+  	font-size: 20px;
+  }
+
+  .sub-banner .sub-banner-content a {
+  	font-size: 12px;
+  }
+
+  .sub-banner .sub-banner-content p {
+  	font-size: 14px;
+  }
 }
 
 @media only screen and (max-width : 992px) {
@@ -433,35 +449,17 @@
   .slider-banner .slider-banner-item {
   	height: 320px;
   }
-
-  .sub-banner .sub-banner-content a {
-  	font-size: 12px;
-  }
-
-  .sub-banner .sub-banner-content p {
-  	font-size: 14px;
-  }
 }
 
 @media only screen and (max-width : 480px) {
-
 	.sub-banner .sub-banner-content {
 		width: 100%;
 	}
 
-	.sub-banner .sub-banner-inner {
-		padding: 30px;
+	.slider-banner,
+	.slider-banner .slider-banner-item {
+		height: 200px;
 	}
-
-  .slider-banner,
-  .slider-banner .slider-banner-item {
-  	height: 200px;
-  }
-
-  .sub-banner .sub-banner-content h3 {
-  	font-size: 20px;
-  }
-
 }
 
 @media only screen and (max-width : 380px) {
