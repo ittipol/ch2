@@ -38,6 +38,14 @@ class AppServiceProvider extends ServiceProvider
 
       });
 
+      view()->composer('layouts.blackbox.components.global-nav', function($view){
+
+        $view->with('_product_count',Service::loadModel('Product')->count());
+        $view->with('_job_count',Service::loadModel('Job')->count());
+        $view->with('_advertising_count',Service::loadModel('Advertising')->count());
+
+      });
+
       view()->composer('layouts.blackbox.components.global-header', function($view){
 
         $notificationModel = Service::loadModel('Notification');
