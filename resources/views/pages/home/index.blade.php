@@ -173,7 +173,7 @@
         <div class="list-empty-message text-center">
           <img class="not-found-image" src="/images/common/not-found.png">
           <div>
-            <h5>ยังไม่มีร้านค้า</h5>
+            <h3>ยังไม่มีร้านค้า</h3>
           </div>
         </div>
 
@@ -386,7 +386,7 @@
         <div class="list-empty-message text-center">
           <img class="not-found-image" src="/images/common/not-found.png">
           <div>
-            <h3>ยังไม่มีโฆษณา</h3>
+            <h5>ยังไม่มีโฆษณา</h5>
           </div>
         </div>
 
