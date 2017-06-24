@@ -69,9 +69,7 @@
 
           <li class="item">
             <a href="{{URL::to('product')}}">
-              <i class="fa fa-tag">
-                <div class="badge">{{$_product_count}}</div>
-              </i>
+              <i class="fa fa-tag"></i>
               <div class="item-title">สินค้าจากบริษัทและร้านค้า</div>
             </a>
           </li>
@@ -85,18 +83,14 @@
 
           <li class="item">
             <a href="{{URL::to('job')}}">
-              <i class="fa fa-clipboard">
-                <div class="badge">{{$_job_count}}</div>
-              </i>
+              <i class="fa fa-clipboard"></i>
               <div class="item-title">งานจากบริษัทและร้านค้า</div>
             </a>
           </li>
 
           <li class="item">
             <a href="{{URL::to('advertising')}}">
-              <i class="fa fa-bullhorn">
-                <div class="badge">{{$_advertising_count}}</div>
-              </i>
+              <i class="fa fa-bullhorn"></i>
               <div class="item-title">โฆษณาจากบริษัทและร้านค้า</div>
             </a>
           </li>
