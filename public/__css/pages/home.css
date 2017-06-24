@@ -361,11 +361,10 @@
 
 .shop-content-section .shop-product {
 	padding: 15px;
-	/*height: 400px;*/
 }
 
 .main-row.color-bar {
-	min-height: 100px;
+	min-height: 50px;
 	padding: 0;
 	font-size: 20px;
 	background-color: rgb(255,185,51);

@@ -60,7 +60,7 @@
               <div class="col-xs-12">
                 <a href="{{$board['advertisingBoardUrl']}}" class="product-all-tile">
                   <span>
-                    แสดงประกาศทั้งหมด<br>
+                    แสดงโฆษณาทั้งหมด<br>
                     {{$board['data']['all']['title']}}
                   </span>
                 </a>

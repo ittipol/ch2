@@ -280,20 +280,120 @@
 
   <div class="main-row color-bar">
     <div class="container">
-      <div class="color-bar-bg" style="background-image:url(/images/banners/home_1.png);"></div>
+      <div class="color-bar-bg" style="background-image:url(/images/banners/home_2.png);"></div>
       <div class="color-bar-article">
-        <div class="color-bar-title">ตำแหน่งงานส่งตรงจากบริษัทและร้านค้าต่างๆ</div>
+        <div class="color-bar-title">ประกาศที่น่าสนใจจากบริษัทและร้านค้า</div>
+        <p>ค้นหาตำแหน่งงานหรือเลือกดูโฆษณาที่น่าสนใจจากบริษัทและร้านค้า</p>
       </div>
     </div>
   </div>
 
-  <div class="main-row color-bar">
+  <div class="main-row">
+
     <div class="container">
-      <div class="color-bar-bg" style="background-image:url(/images/banners/home_1.png);"></div>
-      <div class="color-bar-article">
-        <div class="color-bar-title">โฆษณาที่น่าสนใจจากบริษัทและร้านค้าต่างๆ</div>
-      </div>
+
+      <h3 class="space-bottom-50">ตำแหน่งงานจากบริษัทและร้านค้าต่างๆ</h3>
+
+      @if(!empty($latestJobs))
+
+        <div class="sliding-item">
+
+          @foreach($latestJobs as $data)
+
+            <!-- <div class="col-md-2 col-xs-6"> -->
+
+              <div class="card sm no-border item-slider">
+                <div class="image-tile">
+                  <a href="{{$data['detailUrl']}}">
+                    <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+                  </a>
+                </div>
+                <div class="card-info">
+                  <a href="{{$data['detailUrl']}}">
+                    <div class="card-title">{{$data['_short_name']}}</div>
+                  </a>
+                  <div class="card-sub-info">
+                    <h5>อัตราค่าจ้าง</h5>
+                    <div class="text-emphasize">{{$data['_wage']}}</div>
+                  </div>
+                </div>
+              </div>
+
+            <!-- </div> -->
+
+          @endforeach
+
+        </div>
+
+        <div class="text-right">
+          <a href="{{URL::to('job')}}" class="flat-button">ดูตำแหน่งงานเพิ่มเติม</a>
+        </div>
+
+      @else
+
+        <div class="list-empty-message text-center">
+          <img class="not-found-image" src="/images/common/not-found.png">
+          <div>
+            <h3>ยังไม่มีตำแหน่งงาน</h3>
+          </div>
+        </div>
+
+      @endif
+
     </div>
+
+  </div>
+
+  <div class="main-row">
+
+    <div class="container">
+
+      <h3 class="space-bottom-50">โฆษณาจากบริษัทและร้านค้าต่างๆ</h3>
+
+      @if(!empty($latestAdvertisings))
+
+        <div class="sliding-item">
+
+          @foreach($latestAdvertisings as $data)
+
+            <!-- <div class="col-md-2 col-xs-6"> -->
+
+              <div class="card sm no-border item-slider">
+                <div class="image-tile">
+                  <a href="{{$data['detailUrl']}}">
+                    <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+                  </a>
+                </div>
+                <div class="card-info">
+                  <a href="{{$data['detailUrl']}}">
+                    <div class="card-title">{{$data['_short_name']}}</div>
+                  </a>
+                </div>
+              </div>
+
+            <!-- </div> -->
+
+          @endforeach
+
+        </div>
+
+        <div class="text-right">
+          <a href="{{URL::to('job')}}" class="flat-button">ดูโฆษณาเพิ่มเติม</a>
+        </div>
+
+      @else
+
+        <div class="list-empty-message text-center">
+          <img class="not-found-image" src="/images/common/not-found.png">
+          <div>
+            <h3>ยังไม่มีโฆษณา</h3>
+          </div>
+        </div>
+
+      @endif
+
+    </div>
+
   </div>
 
 </div>
@@ -319,6 +419,37 @@
       speed: 300,
       slidesToShow: 2,
       slidesToScroll: 2
+    });
+
+    $('.sliding-item').slick({
+      dots: true,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 4,
+      slidesToScroll: 4,
+      responsive: [
+        {
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2
+          }
+        }
+      ]
     });
 
   });

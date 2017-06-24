@@ -188,7 +188,6 @@
 }
 
 .card .product-price {
-	/*color: #0071c5;*/
 	color: #EF6C00;
 	font-size: 18px;
 	font-weight: bold;
@@ -252,6 +251,10 @@
 	background-color: #fff;
 }
 
+.card.item-slider {
+	margin-right: 10px;
+}
+
 @media only screen and (max-width : 1200px) {
   .card {
   	width: auto;
@@ -288,7 +291,7 @@
 
 	.card .image-tile .card-image {
 		height: 200px;
-		background-size: 90% auto;
+		/*background-size: 90% auto;*/
 	}
 
 	.card.sm .image-tile .card-image,
