@@ -152,7 +152,7 @@
                   <div class="list-empty-message text-center">
                     <img class="not-found-image" src="/images/common/not-found.png">
                     <div>
-                      <h3>ยังไม่มีสินค้า</h3>
+                      <h4>ยังไม่มีสินค้า</h4>
                     </div>
                   </div>
 
@@ -268,7 +268,7 @@
         <div class="list-empty-message text-center">
           <img class="not-found-image" src="/images/common/not-found.png">
           <div>
-            <h5>ยังไม่มีสินค้า</h5>
+            <h4>ยังไม่มีสินค้า</h4>
           </div>
         </div>
 
@@ -334,7 +334,7 @@
         <div class="list-empty-message text-center">
           <img class="not-found-image" src="/images/common/not-found.png">
           <div>
-            <h5>ยังไม่มีตำแหน่งงาน</h5>
+            <h4>ยังไม่มีตำแหน่งงาน</h4>
           </div>
         </div>
 
@@ -386,7 +386,7 @@
         <div class="list-empty-message text-center">
           <img class="not-found-image" src="/images/common/not-found.png">
           <div>
-            <h5>ยังไม่มีโฆษณา</h5>
+            <h4>ยังไม่มีโฆษณา</h4>
           </div>
         </div>
 
