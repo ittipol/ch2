@@ -1,7 +1,9 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+@if(!empty(request()->get('shop')))
+@include('pages.shop.layouts.fixed_top_nav')
+@endif
 
 <div class="container">
   <h3 class="title">{{$_modelData['name']}}</h3>
@@ -63,6 +65,29 @@
 
   </div>
 
+  <div class="row">
+
+    <div class="col-md-3 col-xs-12 space-top-10">
+      <div class="item-info">
+        <div class="item-info-row">
+          <p>ประเภทโฆษณา</p>
+          <h4>{{$_modelData['_advertisingType']}}</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-9 col-xs-12">
+      <div class="detail-info-section no-margin">
+        <h4>รายละเอียดโฆษณา{{$_modelData['_advertisingType']}}</h4>
+        <div class="line"></div> 
+        <div class="detail-info description">
+          {!!$_modelData['description']!!}
+        </div>
+      </div>
+    </div>
+
+  </div>
+
   <div class="content-box content-box-bg" style="background-image:url({{$shopCoverUrl}})">
     <div class="content-box-inner">
       <div class="row">
@@ -87,26 +112,6 @@
       </div>
     </div>
   </div>
-
-  <div class="row">
-
-    <div class="col-md-3 col-xs-12 space-top-20">
-      <p>ประเภทโฆษณา</p>
-      <h4>{{$_modelData['_advertisingType']}}</h4>
-    </div>
-
-    <div class="col-md-9 col-xs-12">
-      <div class="detail-info-section">
-        <h4>รายละเอียดสินค้า</h4>
-        <div class="line"></div> 
-        <div class="detail-info description">
-          {!!$_modelData['description']!!}
-        </div>
-      </div>
-    </div>
-
-  </div>
-
 
   @if($hasBranchLocation)
     <!-- <h4 class="article-title color-teal">สาขาที่ลงโฆษณานี้</h4> 

@@ -1,8 +1,6 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<!-- <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
- -->
 @if(!empty(request()->get('shop')))
 @include('pages.shop.layouts.fixed_top_nav')
 @endif
