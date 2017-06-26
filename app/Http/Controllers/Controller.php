@@ -26,7 +26,8 @@ class Controller extends BaseController
   protected $metaImage = null;
   protected $metaKeywords = null;
   protected $ogType = 'product';
-  // protected $ogProducts
+  // protected $ogProducts = null;
+  // protected $placeLatLng = null;
 
   protected $botDisallowed = true;
 

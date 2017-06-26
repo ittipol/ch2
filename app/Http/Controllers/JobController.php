@@ -320,7 +320,7 @@ class JobController extends Controller
 
     $this->setData('alreadyApply',$personApplyJob->exists());
 
-    $this->setOgType('place');
+    $this->setOgType('article');
 
     $this->setPageTitle($this->data['_modelData']['name']);
     $this->setPageImage($model->getImage('list'));
