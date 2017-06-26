@@ -252,28 +252,28 @@ class AdvertisingController extends Controller
 
     $branchLocations = array();
     $hasBranchLocation = false;
-    foreach ($branches as $branch) {
+    // foreach ($branches as $branch) {
 
-      $address = $branch->modelData->loadAddress();
+    //   $address = $branch->modelData->loadAddress();
 
-      if(!empty($address)){
+    //   if(!empty($address)){
 
-        $hasBranchLocation = true;
+    //     $hasBranchLocation = true;
 
-        $graphics = json_decode($address['_geographic'],true);
+    //     $graphics = json_decode($address['_geographic'],true);
         
-        $branchLocations[] = array(
-          'id' => $branch->id,
-          'address' => $branch->name,
-          'latitude' => $graphics['latitude'],
-          'longitude' => $graphics['longitude'],
-          'detailUrl' => $url->setAndParseUrl('shop/{shopSlug}/branch/{id}',array(
-            'shopSlug' => $slug,
-            'id' => $branch->id
-          ))
-        );
-      }
-    }
+    //     $branchLocations[] = array(
+    //       'id' => $branch->id,
+    //       'address' => $branch->name,
+    //       'latitude' => $graphics['latitude'],
+    //       'longitude' => $graphics['longitude'],
+    //       'detailUrl' => $url->setAndParseUrl('shop/{shopSlug}/branch/{id}',array(
+    //         'shopSlug' => $slug,
+    //         'id' => $branch->id
+    //       ))
+    //     );
+    //   }
+    // }
 
     $this->data = $model->modelData->build();
     $this->setData('shop',$shop->modelData->build(true));
@@ -283,7 +283,35 @@ class AdvertisingController extends Controller
     $this->setData('branchLocations',json_encode($branchLocations));
     $this->setData('hasBranchLocation',$hasBranchLocation);
 
-    $this->setPageTitle($this->data['_modelData']['name'].'- โฆษณา');
+    $this->setOgType('article');
+
+    $this->setPageTitle($this->data['_modelData']['name']);
+    $this->setPageImage($model->getImage('list'));
+
+    if(empty($model->description)) {
+      $this->setPageDescription($model->name.' โฆษณาจาก '.$shop->name);
+    }else{
+      $this->setPageDescription($model->description);
+    }
+
+    $_keywords = array(
+      'โฆษณา',
+      $this->data['_modelData']['_advertisingType']
+    );
+
+    $taggings = $model->getRelatedData('Tagging',array(
+      'fields' => array('word_id')
+    ));
+
+    if(!empty($taggings)) {
+      foreach ($taggings as $tagging) {
+        $_keywords[] = $tagging->word->word; 
+      }
+    }
+
+    $this->setMetaKeywords(implode(',', $_keywords));
+
+    $this->botAllowed();
 
     return $this->view('pages.advertising.detail');
 

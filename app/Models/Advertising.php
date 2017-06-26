@@ -82,7 +82,7 @@ class Advertising extends Model
       'id' => $this->id,
       'name' => $this->name,
       'description' => !empty($this->description) ? nl2br($this->description) : '-',
-      '_short_name' => $string->truncString($this->name,60),
+      // '_short_name' => $string->truncString($this->name,60),
       '_advertisingType' => AdvertisingType::select(array('name'))->find($this->advertising_type_id)->name
     );
     

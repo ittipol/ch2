@@ -320,6 +320,17 @@ class JobController extends Controller
 
     $this->setData('alreadyApply',$personApplyJob->exists());
 
+    $this->setOgType('place');
+
+    $this->setPageTitle($this->data['_modelData']['name']);
+    $this->setPageImage($model->getImage('list'));
+
+    if(empty($model->description)) {
+      $this->setPageDescription($model->name.' ตำแหน่งงานจาก '.$shop->name);
+    }else{
+      $this->setPageDescription($model->description);
+    }
+
     $_keywords = null;
     if(!empty($taggings)) {
       foreach ($taggings as $tagging) {
@@ -336,9 +347,15 @@ class JobController extends Controller
       $_keywords[] = $this->data['_modelData']['_employmentTypeName'];
     }
 
-    $this->setPageTitle($this->data['_modelData']['name'].' - งาน @ '.$shop->name);
-    $this->setPageImage($model->getImage('list'));
-    $this->setPageDescription($model->description);
+    $taggings = $model->getRelatedData('Tagging',array(
+      'fields' => array('word_id')
+    ));
+
+    if(!empty($taggings)) {
+      foreach ($taggings as $tagging) {
+        $_keywords[] = $tagging->word->word; 
+      }
+    }
 
     if(!empty($_keywords)) {
       $this->setMetaKeywords(implode(',', $_keywords));

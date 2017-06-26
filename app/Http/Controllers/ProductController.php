@@ -650,7 +650,7 @@ class ProductController extends Controller
 
     $this->setOgType('product.item');
 
-    $this->setPageTitle($this->data['_modelData']['name'].' - ร้าน '.$shop->name);
+    $this->setPageTitle($this->data['_modelData']['name']);
     $this->setPageImage($model->getImage('list'));
 
     if(empty($model->description)) {

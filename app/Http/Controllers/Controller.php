@@ -50,7 +50,8 @@ class Controller extends BaseController
     }
 
     if($include) {
-      $pageTitle = $pageTitle.' | Sunday Square';
+      // $pageTitle = $pageTitle.' | Sunday Square';
+      $pageTitle = $pageTitle;
     }
 
     $this->pageTitle = $pageTitle;
