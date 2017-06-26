@@ -56,16 +56,19 @@
 
 <!-- Twitter -->          
 <meta name="twitter:card" content="summary" />
+
 @if(!empty($_page_title))
 <meta name="twitter:title" content="{{$_page_title}}" />
 @else
 <meta name="twitter:title" content="Sunday Square | จุดเริ่มต้นสำหรับคุณ" />
-@endif    
+@endif 
+
 @if(!empty($_page_image))
 <meta name="twitter:image" content="{{Request::root()}}{{$_page_image}}" />
 @else
 <meta name="twitter:image" content="{{Request::root()}}/images/sunday-square.png" />
 @endif
+
 @if(!empty($_page_description))
 <meta name="twitter:description" content="{{$_page_description}}" />
 @endif

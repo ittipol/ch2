@@ -653,7 +653,6 @@ class ProductController extends Controller
     $this->setPageTitle($this->data['_modelData']['name']);
     $this->setPageImage($model->getImage('list'));
     $this->setOgProductDetail(array(
-      // 'price' => $model->getPrice(),
       'price' => $this->data['_modelData']['_price'],
       'currency' => 'THB',
       'availability' => $this->data['_modelData']['_availability']
