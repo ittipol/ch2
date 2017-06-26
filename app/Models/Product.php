@@ -429,13 +429,13 @@ class Product extends Model
           $_quantity = $this->quantity;
         }
 
-        $quantityText = null;
+        $_availability = null;
         if($_quantity == 0) {
-          $quantityText = $this->message_out_of_order ? $this->message_out_of_order : 'สินค้าหมด';
+          $_availability = $this->message_out_of_order ? $this->message_out_of_order : 'สินค้าหมด';
         }elseif($_quantity < 11) {
-          $quantityText = 'เหลือเพียง '.$_quantity.' '.$this->product_unit;
+          $_availability = 'เหลือเพียง '.$_quantity.' '.$this->product_unit;
         }else{
-          $quantityText = 'มีสินค้า';
+          $_availability = 'มีสินค้า';
         }
 
         $data['options'][] = array(
@@ -443,7 +443,7 @@ class Product extends Model
           'name' => $name,
           'imageUrl' => $image,
           'realPrice' => $currency->format($this->price + $option->price),
-          'quantityText' => $quantityText,
+          '_availability' => $_availability,
           'display_type' => $option->display_type
         );
       }
@@ -641,13 +641,13 @@ class Product extends Model
       $shippingCalculateFrom = 'คำนวนค่าส่งสินค้าจากผู้ขาย';
     }
 
-    $quantityText = null;
+    $_availability = null;
     if($this->quantity == 0) {
-      $quantityText = $this->message_out_of_order ? $this->message_out_of_order : 'สินค้าหมด';
+      $_availability = $this->message_out_of_order ? $this->message_out_of_order : 'สินค้าหมด';
     }elseif($this->quantity < 11) {
-      $quantityText = 'เหลือเพียง '.$this->quantity.' '.$this->product_unit;
+      $_availability = 'เหลือเพียง '.$this->quantity.' '.$this->product_unit;
     }else{
-      $quantityText = 'มีสินค้า';
+      $_availability = 'มีสินค้า';
     }
 
     return array_merge(array(
@@ -656,7 +656,7 @@ class Product extends Model
       'description' => !empty($this->description) ? nl2br($this->description) : '-',
       'sku' => $this->sku,
       '_price' => $currency->format($this->price),
-      'quantityText' => $quantityText,
+      '_availability' => $_availability,
       'quantity' => $this->quantity,
       // 'message_out_of_order' => $this->message_out_of_order ? $this->message_out_of_order : 'สินค้าหมด',
       'minimum' => $this->minimum,

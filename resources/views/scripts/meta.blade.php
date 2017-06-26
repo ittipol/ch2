@@ -42,6 +42,18 @@
 <meta property="og:description" content="{{$_page_description}}" />
 @endif
 
+@if(!empty($_og_product_detail['price']))
+<meta property="product:price:amount" content="{{$_og_product_detail['price']}}" /> 
+@endif
+
+@if(!empty($_og_product_detail['currency']))
+<meta property="product:price:currency" content="{{$_og_product_detail['currency']}}" /> 
+@endif
+
+@if(!empty($_og_product_detail['availability']))
+<meta property="product:availability" content="{{$_og_product_detail['availability']}}" /> 
+@endif
+
 <!-- Twitter -->          
 <meta name="twitter:card" content="summary" />
 @if(!empty($_page_title))

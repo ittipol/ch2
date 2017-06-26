@@ -129,7 +129,7 @@
                 echo Form::radio('product-option-value-'.$productOptionValue['id'], $value['id'], null, array(
                   'class' => 'product-option-rdobox',
                   'data-price' => $value['realPrice'],
-                  'data-quantity-text' => $value['quantityText']
+                  'data-quantity-text' => $value['_availability']
                 ));
               ?>
               <div class="product-option-value-box product-option-display-{{$value['display_type']}}">
@@ -151,7 +151,7 @@
       <div class="quantity-box">
       @if($_modelData['active'])
 
-        <h5 id="_quantity_text">{{$_modelData['quantityText']}}</h5>
+        <h5 id="_quantity_text">{{$_modelData['_availability']}}</h5>
         <div class="clearfix">
           <input id="product_quantity" class="quantity-text-input pull-left" type="text" name="quantity" value="{{$_modelData['minimum']}}" autocomplete="off" placeholder="จำนวนสินค้าที่สั่งซื้อ" role="number" />
           <a id="add_to_cart_button" class="button add-to-cart-button pull-right">ใส่ตระกร้า</a>

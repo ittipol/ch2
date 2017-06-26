@@ -26,7 +26,7 @@ class Controller extends BaseController
   protected $metaImage = null;
   protected $metaKeywords = null;
   protected $ogType = 'product';
-  // protected $ogProducts = null;
+  protected $ogProductDetail = null;
   // protected $placeLatLng = null;
 
   protected $botDisallowed = true;
@@ -93,6 +93,14 @@ class Controller extends BaseController
     $this->ogType = $ogType;
   }
 
+  protected function setOgProductDetail($ogProductDetail = null) {
+    if(empty($ogProductDetail)) {
+      return false;
+    }
+
+    $this->ogProductDetail = $ogProductDetail;
+  }
+
   protected function botAllowed() {
     $this->botDisallowed = false;
   }
@@ -114,11 +122,15 @@ class Controller extends BaseController
     //   return $this->error();
     // }
 
+    $this->data['_og_type'] = $this->ogType;
+
     $this->data['_page_title'] = $this->pageTitle;
     $this->data['_page_description'] = $this->metaDescription;
     $this->data['_page_image'] = $this->metaImage;
     $this->data['_meta_keywords'] = $this->metaKeywords;
-    $this->data['_og_type'] = $this->ogType;
+
+    // product detail
+    $this->data['_og_product_detail'] = $this->ogProductDetail;
 
     $this->data['_bot_disallowed'] = $this->botDisallowed;
 
