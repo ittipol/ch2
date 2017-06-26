@@ -23,17 +23,21 @@
 @if(!empty($_page_url))
 <meta property="og:url" content="{{$_page_url}}" />
 @endif
-<meta property="og:type" content="product" />
+
+<meta property="og:type" content="{{$_og_type}}" />
+
 @if(!empty($_page_title))
 <meta property="og:title" content="{{$_page_title}}" />
 @else
 <meta property="og:title" content="Sunday Square | จุดเริ่มต้นสำหรับคุณ" />
-@endif        
+@endif
+
 @if(!empty($_page_image))
 <meta property="og:image" content="{{Request::root()}}{{$_page_image}}" />
 @else
 <meta property="og:image" content="{{Request::root()}}/images/sunday-square.png" />
-@endif  
+@endif
+
 @if(!empty($_page_description))
 <meta property="og:description" content="{{$_page_description}}" />
 @endif

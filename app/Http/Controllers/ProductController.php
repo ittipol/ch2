@@ -648,6 +648,8 @@ class ProductController extends Controller
     $this->setData('avgScore',$model->productAvgScore());
     $this->setData('scoreList',$model->productScoreList());
 
+    $this->setOgType('product.item');
+
     $this->setPageTitle($this->data['_modelData']['name'].' - ร้าน '.$shop->name);
     $this->setPageImage($model->getImage('list'));
 
