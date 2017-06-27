@@ -137,10 +137,12 @@ class Lookup extends Model
       $value['tags'] = implode(' ',$_words);
     }
 
-    $_addresses = $this->__getAddress($model);
-    if(!empty($_addresses)) {
-      $value['address'] = $_addresses;
-    }
+    // $_addresses = $this->__getAddress($model);
+    // if(!empty($_addresses)) {
+    //   $value['address'] = $_addresses;
+    // }
+
+    $value['address'] = $this->__getAddress($model);
 
     $options = array(
       'data' => $data,
@@ -396,7 +398,7 @@ class Lookup extends Model
 
   }
 
-  private function __getAddress($model) {
+  public function __getAddress($model) {
 
     // more than 2 address
     // $addresses = $model->getRelatedData('Address',array(
@@ -429,7 +431,6 @@ class Lookup extends Model
       return null;
     }
 
-
     // village
     // $village = new Village;
     // $villages = $village->getData(array(
@@ -440,35 +441,14 @@ class Lookup extends Model
     //   'fields' => array('name') 
     // ));
 
-    $_address = '';
-
-    if(!empty($address->address)) {
-      $_address .= $address->address;
-    }
-
-    if(!empty($address->subDistrict)) {
-      $_address .= ' '.$address->subDistrict->name;
-    }
-
-    if(!empty($address->district)) {
-      $_address .= ' '.$address->district->name.' '.$address->district->zip_code;
-    }
-
-    if(!empty($address->province)) {
-      $_address .= ' '.$address->province->name;
-    }
-
-    $address = trim($_address);
-
-    // $address = trim($address->address.' '.$address->subDistrict->name.' '.$address->district->name.' '.$address->district->zip_code);
-
     // if(!empty($villages)) {
     //   foreach ($villages as $village) {
     //     $address .= ' '.$village->name;
     //   }
     // }
 
-    return $this->_clean($address);
+    // return $this->_clean($address);
+    return $address->getAddress();
 
   }
 

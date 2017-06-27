@@ -96,6 +96,7 @@
 <script type="text/javascript">
 
   const address = new Address();
+  address.setDistrictId({{$_formData['district_id']}});
   address.load();
 
 </script>

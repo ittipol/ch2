@@ -740,8 +740,8 @@ class ShopController extends Controller
     ));
 
     $this->data = $model->formHelper->build();
-    $this->setData('_geographic',$model->getGeographic());
-
+    // $this->setData('_geographic',$model->getGeographic());
+    
     return $this->view('pages.shop.form.address');
 
   }
@@ -761,6 +761,10 @@ class ShopController extends Controller
     }
 
     if($model->fill(request()->all())->save()) {
+
+      // update lookup table
+      Service::loadModel('Lookup')->where('shop_id','=',$model->id)->update(['address' => $model->getAddress()]);
+
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('shop/'.request()->shopSlug.'/setting');
     }else{

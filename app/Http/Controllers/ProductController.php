@@ -648,15 +648,16 @@ class ProductController extends Controller
     $this->setData('avgScore',$model->productAvgScore());
     $this->setData('scoreList',$model->productScoreList());
 
-    $this->setOgType('article');
+    $this->setOgType('product.item');
 
     $this->setPageTitle($this->data['_modelData']['name']);
     $this->setPageImage($model->getImage('list'));
     // $this->setOgProductDetail(array(
-    //   'price' => $this->data['_modelData']['_price'],
+    //   'id' => $model->id, 
+    //   'price' => $model->getPrice(),
     //   'currency' => 'THB',
     //   'availability' => 'available for order',
-    //   'condition' =>
+    //   'condition' => 'new'
     // ));
 
     if(empty($model->description)) {
