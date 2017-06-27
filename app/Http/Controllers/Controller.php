@@ -25,7 +25,7 @@ class Controller extends BaseController
   protected $metaDescription = null;
   protected $metaImage = null;
   protected $metaKeywords = null;
-  protected $ogType = 'product';
+  protected $ogType = 'article';
   protected $ogProductDetail = null;
   // protected $placeLatLng = null;
 
@@ -93,13 +93,13 @@ class Controller extends BaseController
     $this->ogType = $ogType;
   }
 
-  protected function setOgProductDetail($ogProductDetail = null) {
-    if(empty($ogProductDetail)) {
-      return false;
-    }
+  // protected function setOgProductDetail($ogProductDetail = null) {
+  //   if(empty($ogProductDetail)) {
+  //     return false;
+  //   }
 
-    $this->ogProductDetail = $ogProductDetail;
-  }
+  //   $this->ogProductDetail = $ogProductDetail;
+  // }
 
   protected function botAllowed() {
     $this->botDisallowed = false;
