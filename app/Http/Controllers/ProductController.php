@@ -629,7 +629,7 @@ class ProductController extends Controller
         $_keywords[] = $_category['name'];
       }
     }
-
+dd($this->data);
     $this->setData('shop',$shop->modelData->build(true));
     $this->setData('shopImageUrl',$shop->getProfileImageUrl());
     $this->setData('shopCoverUrl',$shop->getCoverUrl());
@@ -652,16 +652,17 @@ class ProductController extends Controller
 
     $this->setPageTitle($this->data['_modelData']['name']);
     $this->setPageImage($model->getImage('list'));
-    // $this->setOgProductDetail(array(
-    //   'id' => $model->id, 
-    //   'price' => $model->getPrice(),
-    //   'currency' => 'THB',
-    //   'availability' => 'available for order',
-    //   'condition' => 'new'
-    // ));
+    $this->setOgProduct(array(
+      'id' => $model->id, 
+      'price' => $model->getPrice(),
+      'currency' => 'THB',
+      'availability' => 'available for order',
+      'condition' => 'new',
+      'category' => $this->data['_modelData']['category']
+    ));
 
     if(empty($model->description)) {
-      $this->setPageDescription($model->getCategoryName().' '.$model->name.' สินค้าจากร้าน '.$shop->name);
+      $this->setPageDescription$this->data['_modelData']['category'].' '.$model->name.' สินค้าจากร้าน '.$shop->name);
     }else{
       $this->setPageDescription($model->description);
     }

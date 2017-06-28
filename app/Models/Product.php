@@ -668,6 +668,7 @@ class Product extends Model
       '_active' => $this->active ? 'เปิดการขายสินค้า' : 'ปิดการขาย',
       'promotion' => $this->getPromotion(),
       'flag' => $this->getProductFlag(),
+      'category' => $this->getCategoryName(),
     ),$this->getShippingCostText());
 
   }
