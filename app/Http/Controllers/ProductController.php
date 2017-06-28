@@ -658,11 +658,11 @@ dd($this->data);
       'currency' => 'THB',
       'availability' => 'available for order',
       'condition' => 'new',
-      'category' => $model->data['_modelData']['category']
+      'category' => $this->data['_modelData']['category']
     ));
 
     if(empty($model->description)) {
-      $this->setPageDescription$this->data['_modelData']['category'].' '.$model->name.' สินค้าจากร้าน '.$shop->name);
+      $this->setPageDescription($this->data['_modelData']['category'].' '.$model->name.' สินค้าจากร้าน '.$shop->name);
     }else{
       $this->setPageDescription($model->description);
     }
