@@ -16,13 +16,33 @@
   </div>
 </div>
 
+<div class="sub-banner clearfix">
+  <div class="sub-banner-content">
+    <div class="sub-banner-inner">
+      <h3>เลือกซื้อสินค้า</h3>
+      <p>สินค้ามากมายโดยตรงจากร้านค้าต่างๆ ที่รอให้คุณเป็นเจ้าของ เพียงหยิบสินค้าลงในตะกร้าและชำระเงิน จากนั้นก็รอรับสินค้าของคุณได้เลย</p>
+      <a href="{{URL::to('product')}}">เลือกดูสินค้า<i class="fa fa-angle-double-right sm"></i></a>
+    </div>
+  </div>
+  <div class="sub-banner-content">
+    <div class="sub-banner-inner">
+      <h3>สร้างร้านค้าและเริ่นต้นธุรกิจ</h3>
+      <p>สร้างร้านค้า จัดการสินค้าและอื่นๆในแบบที่คุณต้องการ พร้อมระบบต่างๆ
+ที่คอยซัพพอร์ตให้ธุรกิจของคุณ ได้เติบโตอย่างต่อเนื่อง</p>
+      <a href="{{URL::to('shop/create')}}">สร้างร้านค้า<i class="fa fa-angle-double-right sm"></i></a>
+    </div>
+  </div>
+</div>
+
 <div class="main-content">
 
   <div class="main-row">
 
     <div class="container">
-      <h3>ร้านค้าที่น่าสนใจ</h3>
+      <h3 class="space-bottom-50">ร้านค้า</h3>
     
+      @if(!empty($recommendedShops))
+
       <div class="row">
 
         @foreach($recommendedShops as $data)
@@ -123,10 +143,8 @@
 
                   </div>
 
-                  <div class="row space-bottom-30">
-                    <div class="col-xs-12 text-right">
-                      <a href="{{$data['shop']['shopProductUrl']}}" class="flat-button">ดูสินค้าเพิ่มเติม</a>
-                    </div>
+                  <div class="text-right">
+                    <a href="{{$data['shop']['shopProductUrl']}}" class="flat-button">ดูสินค้าในร้านเพิ่มเติม</a>
                   </div>
 
                 @else
@@ -134,7 +152,7 @@
                   <div class="list-empty-message text-center">
                     <img class="not-found-image" src="/images/common/not-found.png">
                     <div>
-                      <h3>ยังไม่มีสินค้า</h3>
+                      <h4>ยังไม่มีสินค้า</h4>
                     </div>
                   </div>
 
@@ -150,93 +168,177 @@
 
       </div>
 
+      @else
+
+        <div class="list-empty-message text-center">
+          <img class="not-found-image" src="/images/common/not-found.png">
+          <div>
+            <h3>ยังไม่มีร้านค้า</h3>
+          </div>
+        </div>
+
+      @endif
+
+      <div class="line grey space-top-bottom-20"></div>
+
+      <div class="main-row color-bar bg-transparent">
+        <div class="inner">
+          <div class="color-bar-article">
+            <div class="color-bar-title">มีร้านค้ามากมายที่รอให้คุณเยี่ยมชม</div>
+            <a href="{{URL::to('shop')}}">แสดงร้านค้าทั้งหมด</a>
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </div>
 
-  <div class="main-row light-teal">
+  <div class="main-row color-bar">
+    <div class="container">
+      <div class="color-bar-bg" style="background-image:url(/images/banners/home_1.png);"></div>
+      <div class="color-bar-article">
+        <div class="color-bar-title">สินค้ามากมายจากร้านค้าที่พร้อมให้คุณเลือกซื้อ</div>
+        <p>สินค้าจากบริษัทและร้านค้าที่มีมายมากและหลากหลายให้เลือกซื้อ ในราคาที่คุณสามารถเป็นเจ้าของได้</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-row">
 
     <div class="container">
 
-      <h3>สินค้า</h3>
+      <h3 class="space-bottom-50">สินค้าล่าสุดจากร้านค้าต่างๆ</h3>
 
-      <div class="row">
+      @if(!empty($latestProducts))
 
-        @foreach($recommendedProducts as $product)
+        <div class="row">
 
-        <div class="col-md-6 col-xs-12">
+          @foreach($latestProducts as $product)
 
-          <div class="multiple-product-box">
+            <div class="col-md-2 col-xs-6">
 
-            <h4 class="space-bottom-20">{{$product['label']}}</h4>
+              <div class="card sm no-border">
 
-            @if(!empty($product['data']))
+                @if(!empty($product['flag']))
+                <div class="flag-wrapper">
+                  <div class="flag sale-promotion">{{$product['flag']}}</div>
+                </div>
+                @endif
+                
+                <div class="image-tile">
+                  <a href="{{$product['detailUrl']}}">
+                    <div class="card-image" style="background-image:url({{$product['_imageUrl']}});"></div>
+                  </a>
+                </div>
+                
+                <div class="card-info">
+                  <a href="{{$product['detailUrl']}}">
+                    <div class="card-title">{{$product['name']}}</div>
+                  </a>
+                  <div class="card-sub-info">
 
-              <div class="multiple-product-3">
-
-                @foreach($product['data'] as $data)
-
-                  <div class="card xs no-border no-margin">
-
-                    @if(!empty($data['flag']))
-                    <div class="flag-wrapper">
-                      <div class="flag sale-promotion">{{$data['flag']}}</div>
-                    </div>
-                    @endif
-                    
-                    <div class="image-tile">
-                      <a href="{{$data['detailUrl']}}">
-                        <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
-                      </a>
-                    </div>
-                    
-                    <div class="card-info">
-                      <a href="{{$data['detailUrl']}}">
-                        <div class="card-title">{{$data['name']}}</div>
-                      </a>
-                      <div class="card-sub-info">
-
-                        <div class="card-sub-info-row product-price-section">
-                          @if(!empty($data['promotion']))
-                            <span class="product-price">{{$data['promotion']['_reduced_price']}}</span>
-                            <span class="product-price-discount-tag">{{$data['promotion']['percentDiscount']}}</span>
-                            <h5 class="origin-price">{{$data['_price']}}</h5>
-                          @else
-                            <span class="product-price">{{$data['_price']}}</span>
-                          @endif
-                        </div>
-
-                      </div>
+                    <div class="card-sub-info-row product-price-section">
+                      @if(!empty($product['promotion']))
+                        <span class="product-price">{{$product['promotion']['_reduced_price']}}</span>
+                        <span class="product-price-discount-tag">{{$product['promotion']['percentDiscount']}}</span>
+                        <h5 class="origin-price">{{$product['_price']}}</h5>
+                      @else
+                        <span class="product-price">{{$product['_price']}}</span>
+                      @endif
                     </div>
 
-                  </div>
-
-                @endforeach
-
-              </div>
-
-              <div class="text-right">
-                <a href="{{$product['moreUrl']}}">ดูสินค้าเพิ่มเติม</a>
-              </div>
-
-              @else
-
-                <div class="list-empty-message text-center">
-                  <img class="not-found-image" src="/images/common/not-found.png">
-                  <div>
-                    <h3>ยังไม่มีสินค้า</h3>
                   </div>
                 </div>
 
-              @endif
+              </div>
 
             </div>
 
+          @endforeach
+
+        </div>
+
+        <div class="text-right">
+          <a href="{{URL::to('product')}}" class="flat-button">ดูสินค้าเพิ่มเติม</a>
+        </div>
+
+      @else
+
+        <div class="list-empty-message text-center">
+          <img class="not-found-image" src="/images/common/not-found.png">
+          <div>
+            <h4>ยังไม่มีสินค้า</h4>
           </div>
+        </div>
 
-        @endforeach
+      @endif
 
+    </div>
+
+  </div>
+
+  <div class="main-row color-bar">
+    <div class="container">
+      <div class="color-bar-bg" style="background-image:url(/images/banners/home_2.png);"></div>
+      <div class="color-bar-article">
+        <div class="color-bar-title">ประกาศที่น่าสนใจจากบริษัทและร้านค้า</div>
+        <p>ค้นหาตำแหน่งงานหรือเลือกดูโฆษณาที่น่าสนใจจากบริษัทและร้านค้า</p>
       </div>
+    </div>
+  </div>
+
+  <div class="main-row">
+
+    <div class="container">
+
+      <h3 class="space-bottom-50">ตำแหน่งงานจากบริษัทและร้านค้าต่างๆ</h3>
+
+      @if(!empty($latestJobs))
+
+        <div class="sliding-item">
+
+          @foreach($latestJobs as $data)
+
+            <!-- <div class="col-md-2 col-xs-6"> -->
+
+              <div class="card sm no-border item-slider">
+                <div class="image-tile">
+                  <a href="{{$data['detailUrl']}}">
+                    <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+                  </a>
+                </div>
+                <div class="card-info">
+                  <a href="{{$data['detailUrl']}}">
+                    <div class="card-title">{{$data['_short_name']}}</div>
+                  </a>
+                  <div class="card-sub-info">
+                    <h5>อัตราค่าจ้าง</h5>
+                    <div class="text-emphasize">{{$data['_wage']}}</div>
+                  </div>
+                </div>
+              </div>
+
+            <!-- </div> -->
+
+          @endforeach
+
+        </div>
+
+        <div class="text-right">
+          <a href="{{URL::to('job')}}" class="flat-button">ดูตำแหน่งงานเพิ่มเติม</a>
+        </div>
+
+      @else
+
+        <div class="list-empty-message text-center">
+          <img class="not-found-image" src="/images/common/not-found.png">
+          <div>
+            <h4>ยังไม่มีตำแหน่งงาน</h4>
+          </div>
+        </div>
+
+      @endif
 
     </div>
 
@@ -246,275 +348,49 @@
 
     <div class="container">
 
-      <h3>สินค้าโปรโมชั่นสำหรับสุภาพสตรี</h3>
+      <h3 class="space-bottom-50">โฆษณาจากบริษัทและร้านค้าต่างๆ</h3>
 
-      <div class="row">
+      @if(!empty($latestAdvertisings))
 
-        <div class="col-xs-12">
+        <div class="sliding-item">
 
-          <div class="channel-column">
+          @foreach($latestAdvertisings as $data)
 
-            <div class="title color-type-1">
-              เสื้อผ้า
-            </div>
+            <!-- <div class="col-md-2 col-xs-6"> -->
 
-            <div class="multiple-product-2 color-type-1">
-
-              @foreach($shirts as $product)
-
-                <div class="card xs no-border no-margin">
-
-                  @if(!empty($product['flag']))
-                  <div class="flag-wrapper">
-                    <div class="flag sale-promotion">{{$product['flag']}}</div>
-                  </div>
-                  @endif
-                  
-                  <div class="image-tile">
-                    <a href="{{$product['detailUrl']}}">
-                      <div class="card-image" style="background-image:url({{$product['_imageUrl']}});"></div>
-                    </a>
-                  </div>
-                  
-                  <div class="card-info">
-                    <a href="{{$product['detailUrl']}}">
-                      <div class="card-title">{{$product['name']}}</div>
-                    </a>
-                    <div class="card-sub-info">
-
-                      <div class="card-sub-info-row product-price-section">
-                        @if(!empty($product['promotion']))
-                          <span class="product-price">{{$product['promotion']['_reduced_price']}}</span>
-                          <span class="product-price-discount-tag">{{$product['promotion']['percentDiscount']}}</span>
-                          <h5 class="origin-price">{{$product['_price']}}</h5>
-                        @else
-                          <span class="product-price">{{$product['_price']}}</span>
-                        @endif
-                      </div>
-
-                    </div>
-                  </div>
-
+              <div class="card sm no-border item-slider">
+                <div class="image-tile">
+                  <a href="{{$data['detailUrl']}}">
+                    <div class="card-image" style="background-image:url({{$data['_imageUrl']}});"></div>
+                  </a>
                 </div>
-
-              @endforeach
-
-            </div>
-            
-          </div>
-
-        </div>
-
-        <div class="col-xs-12">
-
-          <div class="channel-column">
-
-            <div class="title color-type-2">
-              ชุดเดรส
-            </div>
-
-            <div class="multiple-product-2 color-type-2">
-
-              @foreach($dresses as $product)
-
-                <div class="card xs no-border no-margin">
-
-                  @if(!empty($product['flag']))
-                  <div class="flag-wrapper">
-                    <div class="flag sale-promotion">{{$product['flag']}}</div>
-                  </div>
-                  @endif
-                  
-                  <div class="image-tile">
-                    <a href="{{$product['detailUrl']}}">
-                      <div class="card-image" style="background-image:url({{$product['_imageUrl']}});"></div>
-                    </a>
-                  </div>
-                  
-                  <div class="card-info">
-                    <a href="{{$product['detailUrl']}}">
-                      <div class="card-title">{{$product['name']}}</div>
-                    </a>
-                    <div class="card-sub-info">
-
-                      <div class="card-sub-info-row product-price-section">
-                        @if(!empty($product['promotion']))
-                          <span class="product-price">{{$product['promotion']['_reduced_price']}}</span>
-                          <span class="product-price-discount-tag">{{$product['promotion']['percentDiscount']}}</span>
-                          <h5 class="origin-price">{{$product['_price']}}</h5>
-                        @else
-                          <span class="product-price">{{$product['_price']}}</span>
-                        @endif
-                      </div>
-
-                    </div>
-                  </div>
-
+                <div class="card-info">
+                  <a href="{{$data['detailUrl']}}">
+                    <div class="card-title">{{$data['_short_name']}}</div>
+                  </a>
                 </div>
-
-              @endforeach
-
-            </div>
-            
-          </div>
-
-        </div>
-
-        <div class="col-xs-12">
-
-          <div class="channel-column">
-
-            <div class="title color-type-3">
-              กระเป๋า
-            </div>
-
-            <div class="multiple-product-2 color-type-3">
-
-              @foreach($bags as $product)
-
-                <div class="card xs no-border no-margin">
-
-                  @if(!empty($product['flag']))
-                  <div class="flag-wrapper">
-                    <div class="flag sale-promotion">{{$product['flag']}}</div>
-                  </div>
-                  @endif
-                  
-                  <div class="image-tile">
-                    <a href="{{$product['detailUrl']}}">
-                      <div class="card-image" style="background-image:url({{$product['_imageUrl']}});"></div>
-                    </a>
-                  </div>
-                  
-                  <div class="card-info">
-                    <a href="{{$product['detailUrl']}}">
-                      <div class="card-title">{{$product['name']}}</div>
-                    </a>
-                    <div class="card-sub-info">
-
-                      <div class="card-sub-info-row product-price-section">
-                        @if(!empty($product['promotion']))
-                          <span class="product-price">{{$product['promotion']['_reduced_price']}}</span>
-                          <span class="product-price-discount-tag">{{$product['promotion']['percentDiscount']}}</span>
-                          <h5 class="origin-price">{{$product['_price']}}</h5>
-                        @else
-                          <span class="product-price">{{$product['_price']}}</span>
-                        @endif
-                      </div>
-
-                    </div>
-                  </div>
-
-                </div>
-
-              @endforeach
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="col-xs-12">
-
-          <div class="channel-column">
-
-            <div class="title color-type-4">
-              รองเท้า
-            </div>
-
-            <div class="multiple-product-2 color-type-4">
-
-              @foreach($shoes as $product)
-
-                <div class="card xs no-border no-margin">
-
-                  @if(!empty($product['flag']))
-                  <div class="flag-wrapper">
-                    <div class="flag sale-promotion">{{$product['flag']}}</div>
-                  </div>
-                  @endif
-                  
-                  <div class="image-tile">
-                    <a href="{{$product['detailUrl']}}">
-                      <div class="card-image" style="background-image:url({{$product['_imageUrl']}});"></div>
-                    </a>
-                  </div>
-                  
-                  <div class="card-info">
-                    <a href="{{$product['detailUrl']}}">
-                      <div class="card-title">{{$product['name']}}</div>
-                    </a>
-                    <div class="card-sub-info">
-
-                      <div class="card-sub-info-row product-price-section">
-                        @if(!empty($product['promotion']))
-                          <span class="product-price">{{$product['promotion']['_reduced_price']}}</span>
-                          <span class="product-price-discount-tag">{{$product['promotion']['percentDiscount']}}</span>
-                          <h5 class="origin-price">{{$product['_price']}}</h5>
-                        @else
-                          <span class="product-price">{{$product['_price']}}</span>
-                        @endif
-                      </div>
-
-                    </div>
-                  </div>
-
-                </div>
-
-              @endforeach
-
-            </div>
-            
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="main-row amber">
-
-    <div class="container">
-
-      <h3>ร้านค้าอื่นๆ</h3>
-
-      <div class="row">
-
-        @foreach($otherShops as $data)
-
-        <div class="col-sm-3 col-xs-6">
-          <div class="card sm border-color-amber">
-
-            <div class="image-tile">
-              <a href="{{$data['shopUrl']}}">
-                <div class="card-image cover" style="background-image:url({{$data['profileImage']}});"></div>
-              </a>
-            </div>
-            <div class="card-info">
-              <a href="{{$data['shopUrl']}}">
-                <div class="card-title">{{$data['name']}}</div>
-              </a>
-              <div class="card-desciption">
-                {!!$data['description']!!}
               </div>
-            </div>
-            
+
+            <!-- </div> -->
+
+          @endforeach
+
+        </div>
+
+        <div class="text-right">
+          <a href="{{URL::to('job')}}" class="flat-button">ดูโฆษณาเพิ่มเติม</a>
+        </div>
+
+      @else
+
+        <div class="list-empty-message text-center">
+          <img class="not-found-image" src="/images/common/not-found.png">
+          <div>
+            <h4>ยังไม่มีโฆษณา</h4>
           </div>
         </div>
 
-        @endforeach
-
-      </div>
-
-      <div class="row">
-        <div class="col-xs-12 text-right">
-          <a href="{{URL::to('shop')}}">ดูร้านค้าทั้งหมด</a>
-        </div>
-      </div>
+      @endif
 
     </div>
 
@@ -538,7 +414,6 @@
     });
 
     $('.shop-product-list').slick({
-
       dots: true,
       infinite: false,
       speed: 300,
@@ -546,46 +421,28 @@
       slidesToScroll: 2
     });
 
-    $('.multiple-product').slick({
-
+    $('.sliding-item').slick({
       dots: true,
-      infinite: false,
-      speed: 300,
-      slidesToShow: 6,
-      slidesToScroll: 6,
-      responsive: [
-        {
-          breakpoint: 1200,
-          settings: {
-            slidesToShow: 4,
-            slidesToScroll: 4,
-          }
-        },
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 4,
-            slidesToScroll: 4
-          }
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2
-          }
-        }
-      ]
-    });
-
-    $('.multiple-product-2').slick({
-      dots: true,
-      infinite: false,
+      infinite: true,
       speed: 300,
       slidesToShow: 4,
       slidesToScroll: 4,
       responsive: [
         {
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2
+          }
+        },
+        {
           breakpoint: 480,
           settings: {
             slidesToShow: 2,
@@ -593,14 +450,6 @@
           }
         }
       ]
-    });
-
-    $('.multiple-product-3').slick({
-      dots: true,
-      infinite: false,
-      speed: 300,
-      slidesToShow: 2,
-      slidesToScroll: 2,
     });
 
   });
