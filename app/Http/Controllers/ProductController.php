@@ -629,7 +629,7 @@ class ProductController extends Controller
         $_keywords[] = $_category['name'];
       }
     }
-dd($this->data);
+
     $this->setData('shop',$shop->modelData->build(true));
     $this->setData('shopImageUrl',$shop->getProfileImageUrl());
     $this->setData('shopCoverUrl',$shop->getCoverUrl());
