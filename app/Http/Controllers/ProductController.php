@@ -658,7 +658,7 @@ dd($this->data);
       'currency' => 'THB',
       'availability' => 'available for order',
       'condition' => 'new',
-      'category' => $this->data['_modelData']['category']
+      'category' => $model->data['_modelData']['category']
     ));
 
     if(empty($model->description)) {
