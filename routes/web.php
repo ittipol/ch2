@@ -80,6 +80,9 @@ Route::group(['middleware' => 'guest'], function () {
 
   Route::get('identify','UserController@identify');
   Route::post('identify','UserController@identifySubmit');
+
+  Route::get('verify','UserController@verify');
+  Route::post('verify','UserController@verifySubmit');
 });
 
 Route::get('safe_image/{file}', 'StaticFileController@serveImages');

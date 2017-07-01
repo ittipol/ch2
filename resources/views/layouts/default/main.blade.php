@@ -14,10 +14,8 @@
   @include('page_title')
 </head>
 <body>
-	
-	<main>
-		@yield('content')
-  </main>
+
+	@yield('content')
 
   <script type="text/javascript">
 

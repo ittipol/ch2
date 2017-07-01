@@ -63,10 +63,4 @@
 
 </div>
 
-	<script type="text/javascript">
-    // $(document).ready(function(){
-    //   $('body').css('background-color','rgb(29,66,133)');
-    // });
-  </script>
-  
 @stop

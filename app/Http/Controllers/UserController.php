@@ -204,6 +204,11 @@ class UserController extends Controller
       return Redirect::back();
     }
 
+    // Check if token is not expire
+    // display message "email was sent"
+    // display 2 buttons
+    // 2. send again
+
     $email = request()->get('email');
 
     $user = User::where('email','like',$email);
@@ -212,34 +217,48 @@ class UserController extends Controller
 
       $key = bin2hex(random_bytes(32));
 
+      // check if key exist
+
       // save token and expire
       $user = $user->select('id')->first();
       $user->identify_token = $key;
       $user->identify_expire = date('Y-m-d H:i:s',time() + 1800);
 
       if($user->save()) {
-
         $template = new AccountRecovery;
         $template->key = $key;
-
         Mail::to($email)->send($template);
-
       }
 
     }
 
-    // MessageHelper::display('ส่งคำร้องขอไปยังอีเมลที่ของคุณแล้ว','success');
     session()->flash('identify-sent',true);
 
     return Redirect::to('identify');
 
   }
 
-  public function test() {
+  public function verify() {
 
-    $this->setData('total','100');
+    // dd($_GET);
+    dd(request()->key);
+    // request()->has('key');
 
-    return $this->view('emails.account_recovery');
+    // check key if is not exist
+    // then display message "key was not exist"
+
+    // check key if expire
+    // then remove and display message "key was expire
+
+  }
+
+  public function verifySubmit() {
+
+    // Check password and re-enter password must be matched
+
+    // if all ok
+    // save new pw
+    // and return to login page
 
   }
   
