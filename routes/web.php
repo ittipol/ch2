@@ -58,6 +58,7 @@
 // 
 
 // 
+Route::get('/aa','UserController@test');
 
 // 
 Route::get('/','HomeController@index');
@@ -78,6 +79,7 @@ Route::group(['middleware' => 'guest'], function () {
   Route::post('register','UserController@register');
 
   Route::get('identify','UserController@identify');
+  Route::post('identify','UserController@identifySubmit');
 });
 
 Route::get('safe_image/{file}', 'StaticFileController@serveImages');

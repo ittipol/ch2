@@ -3,11 +3,11 @@
 
 <div class="login-bg"></div>
 
-<div id="login" class="login-wrapper">
+<div class="login-logo">
+  <a href="{{URL::to('/')}}"><img src="/images/ss_logo/logo-login.png"></a>
+</div>
 
-  <div class="login-logo">
-    <a href="{{URL::to('/')}}"><img src="/images/ss_logo/logo-login.png"></a>
-  </div>
+<div id="login" class="login-wrapper">
 
   <div class="login-banner-fixed" style="background-image: url(/images/banners/login/{{$bannerImage}});"></div>
 

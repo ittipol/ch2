@@ -11,6 +11,8 @@ class AccountRecovery extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $key;
+
     /**
      * Create a new message instance.
      *
@@ -30,11 +32,16 @@ class AccountRecovery extends Mailable
     {
         $address = 'sundaysquare.help@gmail.com';
         $name = 'Sunday Square Support';
-        $subject = 'Account Recovery';
+        $subject = 'รีเซ็ตรหัสผ่าน';
 
-        return $this->view('emails.account_recovery')
-        ->with('total',111)
+        $data = array(
+            'key' => $this->key
+        );
+
+        return $this->view('emails.account_recovery', $data)
+        // ->with('total',111)
         ->from($address, $name)
+        // ->attach('http://sundaysquare.com/images/logo3.png')
         ->subject($subject);
     }
 }

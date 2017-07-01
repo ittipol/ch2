@@ -9,26 +9,41 @@
   <link rel="stylesheet" href="{{ URL::asset('__css/layouts/default/footer.css') }}" />
   <link rel="stylesheet" href="{{ URL::asset('__css/pages/user/register.css') }}" />
   <link rel="stylesheet" href="{{ URL::asset('__css/pages/user/login.css') }}" />
+  <link rel="stylesheet" href="{{ URL::asset('__css/pages/user/identify.css') }}" />
   <!-- Title  -->
   @include('page_title')
 </head>
 <body>
-
-	<?php if(!empty($header)): ?>
-    <header> 
-		 @include('layouts.default.components.header')
-    </header> 
-	<?php endif; ?>
 	
 	<main>
 		@yield('content')
   </main>
+
+  <script type="text/javascript">
+
+    $(document).ready(function(){
+
+      const notificationBottom = new NotificationBottom();
+      notificationBottom.load();
+
+      @if(Session::has('message.title') && Session::has('message.type'))
   
-	<?php if(!empty($footer)): ?>
-    <footer> 
-		@include('layouts.default.components.footer')
-    </footer> 
-	<?php endif; ?>
+        let _desc = '';
+        @if(Session::has('message.desc'))
+          _desc = '{{ Session::get("message.desc") }}';
+        @endif
+
+        // const notificationBottom = new NotificationBottom();
+        notificationBottom.setTitle('{{ Session::get("message.title") }}');
+        notificationBottom.setDesc('{{ Session::get("message.desc") }}');
+        notificationBottom.setType('{{ Session::get("message.type") }}');
+        notificationBottom.display();
+
+      @endif
+
+    });
+    
+  </script>
 
 </body>
 </html>

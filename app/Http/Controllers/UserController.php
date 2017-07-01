@@ -190,55 +190,56 @@ class UserController extends Controller
 
   public function identify() {
 
-    $user = User::where('email','like','red@mail.com');
-
-    $port = 587;
-    if(!empty($_GET['port'])) {
-      $port = $_GET['port'];
+    if(session()->has('identify-sent')) {
+      return $this->view('pages.user.identify-sent');
     }
-
-    // $mail = new Mail();
-   
-    // $mail->protocol = 'smtp';
-    // $mail->smtp_hostname = 'tls://smtp.gmail.com';
-    // $mail->smtp_username = 'sundaysquare.help@gmail.com';
-    // $mail->smtp_password = 'ittipol1q2w3e';
-    // $mail->smtp_port = $port;
-
-    // $mail->setFrom('sundaysquare.help@gmail.com');
-    // $mail->setTo('ittipol_master@hotmail.com');
-
-    // $mail->setSender('Sunday Square Support');
-
-    // $mail->setSubject('รหัสยืนยันการกู้คืนรหัสผ่าน');
-    // $mail->setHtml('testing HTML');
-
-    // $mail->send();
-
-    Mail::to('ittipol_master@hotmail.com')->send(new AccountRecovery);
-
-dd('sent');
-    if($user->exists()) {
-
-      // save token and expire
-      $user = $user->select('id','email')->first();
-      $user->identify_token = bin2hex(random_bytes(32));
-      $user->identify_expire = date('Y-m-d H:i:s',time() + 1800);
-
-      if($user->save()) {
-
-      }
-      // send email
-
-
-    }
-
-    return Redirect::to('identify');
+// ittipol_master@hotmail.com
+    return $this->view('pages.user.identify');
   }
 
   public function identifySubmit() {
 
-    // return always success message
+    if(empty(request()->get('email'))) {
+      MessageHelper::display('โปรดป้อนอีเมลของคุณเพื่อร้องขอการรีเซ็ตรหัสผ่าน','error');
+      return Redirect::back();
+    }
+
+    $email = request()->get('email');
+
+    $user = User::where('email','like',$email);
+
+    if($user->exists()) {
+
+      $key = bin2hex(random_bytes(32));
+
+      // save token and expire
+      $user = $user->select('id')->first();
+      $user->identify_token = $key;
+      $user->identify_expire = date('Y-m-d H:i:s',time() + 1800);
+
+      if($user->save()) {
+
+        $template = new AccountRecovery;
+        $template->key = $key;
+
+        Mail::to($email)->send($template);
+
+      }
+
+    }
+
+    // MessageHelper::display('ส่งคำร้องขอไปยังอีเมลที่ของคุณแล้ว','success');
+    session()->flash('identify-sent',true);
+
+    return Redirect::to('identify');
+
+  }
+
+  public function test() {
+
+    $this->setData('total','100');
+
+    return $this->view('emails.account_recovery');
 
   }
   
