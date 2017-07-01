@@ -8,7 +8,7 @@ use Hash;
 class User extends Model
 {
     protected $table = 'users';
-    protected $fillable = ['email','password','api_token'];
+    protected $fillable = ['email','password','api_token','identify_token','identify_expire'];
     protected $hidden = ['password','remember_token'];
     protected $modelRelations = array('Person');
     protected $directory = true;
@@ -45,14 +45,14 @@ class User extends Model
     	parent::boot();
 
     	User::saving(function($model){
-        $model->password = Hash::make($model->attributes['password']);
-        $model->api_token = Token::generate();
+
+        if(!$model->exists) {
+          $model->password = Hash::make($model->password);
+          $model->api_token = Token::generate();
+        }
+        
       });
 
-    }
-
-    public function checkOrder() {
-        dd('sdsx');
     }
 
     // public function createUserFolder() {

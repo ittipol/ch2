@@ -45,12 +45,11 @@ class Token
     return $token;
   }
 
+  // public static function cryptographicallySecure(){
+  //   return bin2hex(random_bytes(30));
+  // }
+
   // public static function generatePageIdentity($personId) {
   //   return hash('sha256',Route::getCurrentRoute()->getPath().$personId);
   // }
-
-  // public static function generateFormToken($personId) {
-  //   // return md5($personId).hash('sha256',time()).Token::generateHex(4);
-  //   return md5($personId).Token::generateHex(4);
-  // } 
 }

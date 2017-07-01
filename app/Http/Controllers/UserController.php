@@ -10,6 +10,7 @@ use App\library\messageHelper;
 use App\library\service;
 use App\library\url;
 use App\library\token;
+use App\library\mail;
 use Auth;
 use Session;
 use Redirect;
@@ -153,9 +154,9 @@ class UserController extends Controller
 
   public function registerForm() {
 
-    if(Auth::check()){
-      return redirect('/');
-    }
+    // if(Auth::check()){
+    //   return redirect('/');
+    // }
 
     $this->setPageTitle('สมัครสมาชิก');
     $this->setMetaKeywords('สร้างร้านค้า,สร้างร้านค้าออนไลน์,ร้านค้าออนไลน์,ขายของออนไลน์,สมัครสมาชิก');
@@ -183,6 +184,57 @@ class UserController extends Controller
     }
 
     return Redirect::to('login');
+  }
+
+  public function identify() {
+
+    $user = User::where('email','like','red@mail.com');
+
+    $port = 587;
+    if(!empty($_GET['port'])) {
+      $port = $_GET['port'];
+    }
+
+    $mail = new Mail();
+   
+    $mail->protocol = 'smtp';
+    $mail->smtp_hostname = 'smtp.gmail.com';
+    $mail->smtp_username = 'sundaysquare.help';
+    $mail->smtp_password = 'ittipol1q2w3e';
+    $mail->smtp_port = 587;
+
+    $mail->setFrom('sundaysquare.help@gmail.com');
+    $mail->setTo('ittipol_master@hotmail.com');
+    $mail->setSender('Helper');
+
+    $mail->setSubject('testing subject');
+    $mail->setHtml('testing HTML');
+
+    $mail->send();
+
+dd('sent');
+    if($user->exists()) {
+
+      // save token and expire
+      $user = $user->select('id','email')->first();
+      $user->identify_token = bin2hex(random_bytes(32));
+      $user->identify_expire = date('Y-m-d H:i:s',time() + 7200);
+
+      if($user->save()) {
+
+      }
+      // send email
+
+
+    }
+
+    return Redirect::to('identify');
+  }
+
+  public function identifySubmit() {
+
+    // return always success message
+
   }
   
 }

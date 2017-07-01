@@ -76,6 +76,8 @@ Route::group(['middleware' => 'guest'], function () {
 
   Route::get('register','UserController@registerForm');
   Route::post('register','UserController@register');
+
+  Route::get('identify','UserController@identify');
 });
 
 Route::get('safe_image/{file}', 'StaticFileController@serveImages');
