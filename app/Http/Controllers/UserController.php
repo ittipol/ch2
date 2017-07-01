@@ -201,7 +201,7 @@ class UserController extends Controller
     $mail->smtp_hostname = 'smtp.gmail.com';
     $mail->smtp_username = 'sundaysquare.help';
     $mail->smtp_password = 'ittipol1q2w3e';
-    $mail->smtp_port = 587;
+    $mail->smtp_port = $port;
 
     $mail->setFrom('sundaysquare.help@gmail.com');
     $mail->setTo('ittipol_master@hotmail.com');
