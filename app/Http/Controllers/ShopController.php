@@ -173,6 +173,7 @@ class ShopController extends Controller
     // );
 
     $this->data = $model->paginator->build();
+    $this->data = array();
     $this->setData('searchOptions',$searchOptions);
     // $this->setData('displayingFilters',$displayingFilters);
 
@@ -546,7 +547,7 @@ class ShopController extends Controller
       ->exists()) {
 
       $_message = 'คุณได้เพิ่มบริษัทหรือร้านค้าชื่อว่า '.$request->get('name').' ไปแล้ว โปรดใช้ชื่ออื่น';
-      return Redirect::back()->withErrors([$_message]);
+      return Redirect::back()->withErrors([$_message])->withInput($request->all());
 
     }elseif($model->where([
         ['name','like',$request->get('name')],
@@ -554,7 +555,7 @@ class ShopController extends Controller
       ->exists()) {
       
       $_message = 'มีบริษัทหรือร้านค้าชื่อ '.$request->get('name').' นี้แล้ว';
-      return Redirect::back()->withErrors([$_message]);
+      return Redirect::back()->withErrors([$_message])->withInput($request->all());
 
     }
 
@@ -567,10 +568,9 @@ class ShopController extends Controller
 
       MessageHelper::display('บริษัท ร้านค้า หรือธุรกิจถูกเพิ่มแล้ว','success');
       return Redirect::to(route('shop.overview', ['slug' => $slug]));
-    }else{
-      return Redirect::back();
     }
 
+    return Redirect::back();
   }
 
   public function setting() {

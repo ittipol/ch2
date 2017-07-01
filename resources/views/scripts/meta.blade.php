@@ -24,7 +24,9 @@
 <meta property="og:url" content="{{$_page_url}}" />
 @endif
 
+@if(!empty($_og_type))
 <meta property="og:type" content="{{$_og_type}}" />
+@endif
 
 @if(!empty($_page_title))
 <meta property="og:title" content="{{$_page_title}}" />

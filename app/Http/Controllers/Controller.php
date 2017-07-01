@@ -27,7 +27,6 @@ class Controller extends BaseController
   protected $metaKeywords = null;
   protected $ogType = 'article';
   protected $ogProduct = null;
-  // protected $placeLatLng = null;
 
   protected $botDisallowed = true;
 
@@ -114,13 +113,6 @@ class Controller extends BaseController
   }
 
   protected function view($view = null) {
-
-    // if(empty($view)) {
-    //   $this->error = array(
-    //     'message' => 'ขออภัย หน้านี้ไม่พร้อมใช้งาน'
-    //   );
-    //   return $this->error();
-    // }
 
     $this->data['_og_type'] = $this->ogType;
 

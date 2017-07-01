@@ -61,8 +61,7 @@
   <div class="list-empty-message text-center space-top-20">
     <img class="space-bottom-20" src="/images/common/not-found.png">
     <div>
-      <h3>ไม่พบข้อมูล การประกาศซื้อ-ขายสินค้า</h3>
-      <a href="{{URL::to('item/post')}}" class="button">เพิ่มการประกาศ</a>
+      <h3>ไม่พบแคตตาล็อกสินค้า</h3>
     </div>
   </div>
 
