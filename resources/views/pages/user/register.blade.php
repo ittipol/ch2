@@ -1,6 +1,8 @@
 @extends('layouts.default.main')
 @section('content')
 
+<div class="register-bg"></div>
+
 <div class="register-wrapper">
 	<div class="header-container">
 		<a class="logo space-bottom-20" href="{{URL::to('/')}}"><img src="/images/ss_logo/logo-register.png"></a>
