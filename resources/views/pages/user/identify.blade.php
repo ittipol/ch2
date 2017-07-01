@@ -10,7 +10,7 @@
 <div class="identify-form">
 
   <?php
-    echo Form::open(['method' => 'post', 'id' => 'login_form']);
+    echo Form::open(['method' => 'post', 'id' => 'identify_form']);
   ?>
 
     <h4>ลืมรหัสผ่าน</h4>
@@ -50,7 +50,7 @@
 
     bind() {
 
-      $('form').submit(function(){
+      $('form#identify_form').submit(function(){
 
         if($('#email').val() == '') {
 
