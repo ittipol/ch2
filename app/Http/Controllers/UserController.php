@@ -199,7 +199,7 @@ class UserController extends Controller
    
     $mail->protocol = 'smtp';
     $mail->smtp_hostname = 'smtp.gmail.com';
-    $mail->smtp_username = 'sundaysquare.help';
+    $mail->smtp_username = 'sundaysquare.help@gmail.com';
     $mail->smtp_password = 'ittipol1q2w3e';
     $mail->smtp_port = $port;
 
