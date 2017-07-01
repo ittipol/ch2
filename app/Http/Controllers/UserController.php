@@ -10,10 +10,12 @@ use App\library\messageHelper;
 use App\library\service;
 use App\library\url;
 use App\library\token;
-use App\library\mail;
+// use App\library\mail;
 use Auth;
 use Session;
 use Redirect;
+use App\Mail\AccountRecovery;
+use Mail;
 
 class UserController extends Controller
 {
@@ -195,22 +197,25 @@ class UserController extends Controller
       $port = $_GET['port'];
     }
 
-    $mail = new Mail();
+    // $mail = new Mail();
    
-    $mail->protocol = 'smtp';
-    $mail->smtp_hostname = 'smtp.gmail.com';
-    $mail->smtp_username = 'sundaysquare.help@gmail.com';
-    $mail->smtp_password = 'ittipol1q2w3e';
-    $mail->smtp_port = $port;
+    // $mail->protocol = 'smtp';
+    // $mail->smtp_hostname = 'tls://smtp.gmail.com';
+    // $mail->smtp_username = 'sundaysquare.help@gmail.com';
+    // $mail->smtp_password = 'ittipol1q2w3e';
+    // $mail->smtp_port = $port;
 
-    $mail->setFrom('sundaysquare.help@gmail.com');
-    $mail->setTo('ittipol_master@hotmail.com');
-    $mail->setSender('Helper');
+    // $mail->setFrom('sundaysquare.help@gmail.com');
+    // $mail->setTo('ittipol_master@hotmail.com');
 
-    $mail->setSubject('testing subject');
-    $mail->setHtml('testing HTML');
+    // $mail->setSender('Sunday Square Support');
 
-    $mail->send();
+    // $mail->setSubject('รหัสยืนยันการกู้คืนรหัสผ่าน');
+    // $mail->setHtml('testing HTML');
+
+    // $mail->send();
+
+    Mail::to('ittipol_master@hotmail.com')->send(new AccountRecovery);
 
 dd('sent');
     if($user->exists()) {
@@ -218,7 +223,7 @@ dd('sent');
       // save token and expire
       $user = $user->select('id','email')->first();
       $user->identify_token = bin2hex(random_bytes(32));
-      $user->identify_expire = date('Y-m-d H:i:s',time() + 7200);
+      $user->identify_expire = date('Y-m-d H:i:s',time() + 1800);
 
       if($user->save()) {
 
