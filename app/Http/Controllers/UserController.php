@@ -283,7 +283,7 @@ class UserController extends Controller
     if($user->exists()) {
 
       $user = $user->first();
-      $user->password = Hash::make($model->password);
+      $user->password = Hash::make(request()->password);
       $user->identify_token = null;
       $user->identify_expire = null;
       $user->save();
