@@ -45,9 +45,9 @@ class Token
     return $token;
   }
 
-  // public static function cryptographicallySecure(){
-  //   return bin2hex(random_bytes(30));
-  // }
+  public static function generateSecureKey($length = 64){
+    return bin2hex(random_bytes($length/2));
+  }
 
   // public static function generatePageIdentity($personId) {
   //   return hash('sha256',Route::getCurrentRoute()->getPath().$personId);

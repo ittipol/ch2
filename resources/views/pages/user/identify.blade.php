@@ -7,7 +7,7 @@
   <a href="{{URL::to('/')}}"><img src="/images/ss_logo/logo-login.png"></a>
 </div>
 
-<div class="identify-form">
+<div class="fixed-center-form">
 
   <?php
     echo Form::open(['method' => 'post', 'id' => 'identify_form']);
@@ -30,7 +30,7 @@
       ?>
     </div>
 
-    <h5 class="text-center space-top-20"><a href="{{URL::to('login')}}">เข้าสู่ระบบ</a> | <a href="{{URL::to('register')}}">สมัครสมาชิก</a></h5>
+    <h5 class="text-center space-top-20"><a href="{{URL::to('login')}}">เข้าสู่ระบบ</a></h5>
 
   <?php
     echo Form::close();

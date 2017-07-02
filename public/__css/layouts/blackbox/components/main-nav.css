@@ -112,12 +112,13 @@
 
 .navigation-primary-menu ul > li a:hover,
 .navigation-primary-menu ul > li a.active { 
-  color: rgb(0,148,210);
+  /*color: rgb(0,148,210);*/
+  color: #1565C0;
 }
 
 .navigation-primary-menu ul > li a:hover > i,
 .navigation-primary-menu ul > li a.active > i { 
-  color: rgb(0,148,210);
+  color: #1565C0;
 }
 
 .navigation-primary-menu ul > li a.active::before {

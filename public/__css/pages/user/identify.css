@@ -8,9 +8,9 @@
 	z-index: 1;
 }
 
-.identify-form {
+.fixed-center-form {
 	position: absolute;
-  top: 50%;
+  top: 45%;
   left: 50%;
   width: 350px;
   margin-top: -200px;
@@ -19,7 +19,8 @@
   z-index: 9;
 }
 
-.identify-form input[type="text"] {
+.fixed-center-form input[type="text"],
+.fixed-center-form input[type="password"] {
 	width: 100%;
 	padding: 10px;
 }
@@ -29,14 +30,14 @@
 }
 
 @media only screen and (max-width : 375px) {
-	.identify-form {
+	.fixed-center-form {
 		width: 320px;
 		margin-left: -160px;
 	}
 }
 
 @media only screen and (max-width : 320px) {
-	.identify-form {
+	.fixed-center-form {
 		width: 300px;
 		margin-left: -150px;
 	}

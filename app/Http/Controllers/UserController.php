@@ -25,10 +25,10 @@ class UserController extends Controller
       return redirect('/');
     }
 
-    $this->data = array(
-      'header' => false,
-      'footer' => false,
-    );
+    // $this->data = array(
+    //   'header' => false,
+    //   'footer' => false,
+    // );
 
     $bannerImages = array('img1.png','img2.png','img3.png','img4.png','img5.png');
 
@@ -63,7 +63,7 @@ class UserController extends Controller
 
       // Update Token
       // Use for pushing notification
-      $person->token = Token::generate();
+      $person->token = Token::generateSecureKey();
       $person->save();
       
       // Store data
@@ -204,28 +204,22 @@ class UserController extends Controller
       return Redirect::back();
     }
 
-    // Check if token is not expire
-    // display message "email was sent"
-    // display 2 buttons
-    // 2. send again
-
     $email = request()->get('email');
 
     $user = User::where('email','like',$email);
 
     if($user->exists()) {
 
-      $key = bin2hex(random_bytes(32));
-
-      // check if key exist
+      $key = Token::generateSecureKey();
 
       // save token and expire
       $user = $user->select('id')->first();
       $user->identify_token = $key;
-      $user->identify_expire = date('Y-m-d H:i:s',time() + 1800);
+      $user->identify_expire = date('Y-m-d H:i:s',time() + 2400);
 
       if($user->save()) {
         $template = new AccountRecovery;
+        // $template->email = $email;
         $template->key = $key;
         Mail::to($email)->send($template);
       }
@@ -239,16 +233,29 @@ class UserController extends Controller
   }
 
   public function verify() {
+// http://ch.local/verify?user=ittipol_master@hotmail.com&key=a68751a61862bed26bc3ca034b24b26b111d292514d4052b9fe687e334325e28
+    if(!request()->has('key')) {
+      return redirect('login');
+    }
 
-    // dd($_GET);
-    dd(request()->key);
-    // request()->has('key');
+    $key = request()->key;
 
-    // check key if is not exist
-    // then display message "key was not exist"
+    $now = date('Y-m-d H:i:s');
 
-    // check key if expire
-    // then remove and display message "key was expire
+    $user = User::where([
+      ['identify_token','like',$key],
+      ['identify_expire','>',$now]
+    ]);
+
+    if(!$user->exists()) {
+      MessageHelper::display('คำขอจะหมดอายุ','error');
+      return redirect('login');
+    }
+ 
+    // Get Data
+    // $user = $user->orderBy('identify_expire','desc')->first();
+
+    return $this->view('pages.user.verify');
 
   }
 
