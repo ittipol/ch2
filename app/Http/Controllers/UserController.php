@@ -364,7 +364,7 @@ class UserController extends Controller
 
   public function xxx() {
 
-    $user = User::find(1);
+    $user = User::find(2);
 
     $user->verification_token = Token::generateSecureKey();
     $user->save();
