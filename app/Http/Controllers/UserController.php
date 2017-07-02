@@ -194,7 +194,7 @@ class UserController extends Controller
     if(session()->has('identify-sent')) {
       return $this->view('pages.user.identify-sent');
     }
-// ittipol_master@hotmail.com
+
     return $this->view('pages.user.identify');
   }
 
@@ -238,7 +238,7 @@ class UserController extends Controller
   }
 
   public function recover() {
-// http://ch.local/user/recover?user=ittipol_master@hotmail.com&key=aff7a9c7b1306e8d0234c011961384b73766b24e201b2d275f1fd8f13f83d3dc
+
     if(!request()->has('user') || !request()->has('key')) {
       MessageHelper::display('ไม่พบคำขอหรือคำขออาจหมดอายุแล้ว','error');
       return redirect('login');
@@ -281,7 +281,7 @@ class UserController extends Controller
     ]);
 
     if($user->exists()) {
-      
+
       $user = $user->first();
       $user->password = Hash::make($model->password);
       $user->identify_token = null;
