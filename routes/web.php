@@ -58,7 +58,7 @@
 // 
 
 // 
-Route::get('/aa','UserController@xxx');
+// Route::get('/aa','UserController@xxx');
 
 // 
 Route::get('/','HomeController@index');
