@@ -351,7 +351,7 @@ class UserController extends Controller
     }else {
       MessageHelper::display('ไม่สามารถยืนยันบัญชีของคุณได้','error');
     }
-// cddf733e79dbf118572066d530bfed411ea73e52f38b3c41db11f312bc8a1d42
+
     return redirect('login');
 
   }
@@ -360,6 +360,20 @@ class UserController extends Controller
     Auth::logout();
     Session::flush();
     return redirect('/');
+  }
+
+  public function xxx() {
+
+    $user = User::find(1);
+
+    $user->verification_token = Token::generateSecureKey();
+    $user->save();
+
+    $template = new AccountVarify;
+    $template->email = $user->email;
+    $template->key = $user->verification_token;
+    Mail::to($user->email)->send($template);
+
   }
   
 }
