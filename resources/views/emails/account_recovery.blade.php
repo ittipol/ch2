@@ -17,17 +17,6 @@
   }
 
   .button {
-    color: #fff;
-    text-decoration: none !important;
-    background-color: #2979FF;
-    padding: 8px 10px;
-    border: 0;
-    font-size: 12px;
-    display: inline-block;
-    cursor: pointer;
-  }
-
-  .button {
     font-size: 16px;
     font-family: Helvetica,Helvetica neue,Arial,Verdana,sans-serif;
     font-weight: none;

@@ -307,7 +307,7 @@ class UserController extends Controller
       $user->identify_expire = null;
       $user->save();
 
-      MessageHelper::display('รหัสผ่านของคุณใหม่ของคุณถูกบันทึกแล้ว คุณสามารถใช้รหัสผ่านใหม่เพื่อใช้เข้าสู่ระบบได้แล้ว','success');
+      MessageHelper::display('รหัสผ่านใหม่ของคุณถูกบันทึกแล้ว คุณสามารถเข้าสู่ระบบด้วยรหัสผ่านใหม่ได้แล้ว','success');
     }else{
       MessageHelper::display('ไม่พบคำขอหรือคำขออาจหมดอายุแล้ว','error');
     }
