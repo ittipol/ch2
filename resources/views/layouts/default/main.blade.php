@@ -9,8 +9,7 @@
   <link rel="stylesheet" href="{{ URL::asset('__css/layouts/default/footer.css') }}" />
   <link rel="stylesheet" href="{{ URL::asset('__css/pages/user/register.css') }}" />
   <link rel="stylesheet" href="{{ URL::asset('__css/pages/user/login.css') }}" />
-  <link rel="stylesheet" href="{{ URL::asset('__css/pages/user/identify.css') }}" />
-  <link rel="stylesheet" href="{{ URL::asset('__css/pages/user/verify.css') }}" />
+  <link rel="stylesheet" href="{{ URL::asset('__css/pages/user/core.css') }}" />
   <!-- Title  -->
   @include('page_title')
 </head>

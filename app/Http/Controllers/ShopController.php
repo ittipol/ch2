@@ -173,7 +173,6 @@ class ShopController extends Controller
     // );
 
     $this->data = $model->paginator->build();
-    $this->data = array();
     $this->setData('searchOptions',$searchOptions);
     // $this->setData('displayingFilters',$displayingFilters);
 

@@ -4,17 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use App\Models\User;
 use App\Models\Person;
 use App\library\messageHelper;
 use App\library\service;
 use App\library\url;
 use App\library\token;
-// use App\library\mail;
+use App\Mail\AccountRecovery;
 use Auth;
 use Session;
 use Redirect;
-use App\Mail\AccountRecovery;
+use Hash;
 use Mail;
 
 class UserController extends Controller
@@ -204,13 +205,18 @@ class UserController extends Controller
       return Redirect::back();
     }
 
+    $userModel = new User;
+
     $email = request()->get('email');
 
-    $user = User::where('email','like',$email);
+    $user = $userModel->where('email','like',$email);
 
     if($user->exists()) {
 
-      $key = Token::generateSecureKey();
+      // check dup key
+      do {
+        $key = Token::generateSecureKey();
+      } while ($userModel->where('identify_token','like',$key)->exists());
 
       // save token and expire
       $user = $user->select('id')->first();
@@ -219,7 +225,7 @@ class UserController extends Controller
 
       if($user->save()) {
         $template = new AccountRecovery;
-        // $template->email = $email;
+        $template->email = $email;
         $template->key = $key;
         Mail::to($email)->send($template);
       }
@@ -228,45 +234,68 @@ class UserController extends Controller
 
     session()->flash('identify-sent',true);
 
-    return Redirect::to('identify');
-
+    return Redirect::to('user/identify');
   }
 
-  public function verify() {
-// http://ch.local/verify?user=ittipol_master@hotmail.com&key=a68751a61862bed26bc3ca034b24b26b111d292514d4052b9fe687e334325e28
-    if(!request()->has('key')) {
+  public function recover() {
+// http://ch.local/user/recover?user=ittipol_master@hotmail.com&key=aff7a9c7b1306e8d0234c011961384b73766b24e201b2d275f1fd8f13f83d3dc
+    if(!request()->has('user') || !request()->has('key')) {
+      MessageHelper::display('ไม่พบคำขอหรือคำขออาจหมดอายุแล้ว','error');
       return redirect('login');
     }
 
+    $email = request()->user;
     $key = request()->key;
 
-    $now = date('Y-m-d H:i:s');
-
     $user = User::where([
+      ['email','like',$email],
       ['identify_token','like',$key],
-      ['identify_expire','>',$now]
+      ['identify_expire','>',date('Y-m-d H:i:s')]
     ]);
 
     if(!$user->exists()) {
-      MessageHelper::display('คำขอจะหมดอายุ','error');
+      MessageHelper::display('ไม่พบคำขอหรือคำขออาจหมดอายุแล้ว','error');
       return redirect('login');
     }
- 
-    // Get Data
-    // $user = $user->orderBy('identify_expire','desc')->first();
 
-    return $this->view('pages.user.verify');
+    $this->setData('email',$email);
+    $this->setData('key',$key);
 
+    return $this->view('pages.user.recover');
   }
 
-  public function verifySubmit() {
+  public function recoverSubmit(ResetPasswordRequest $request) {
 
-    // Check password and re-enter password must be matched
+    if(!$request->has('user') || !$request->has('key')) {
+      MessageHelper::display('ไม่พบคำขอหรือคำขออาจหมดอายุแล้ว','error');
+      return redirect('login');
+    }
 
-    // if all ok
-    // save new pw
-    // and return to login page
+    $email = request()->user;
+    $key = request()->key;
 
+    $user = User::where([
+      ['email','like',$email],
+      ['identify_token','like',$key],
+      ['identify_expire','>',date('Y-m-d H:i:s')]
+    ]);
+
+    if($user->exists()) {
+      
+      $user = $user->first();
+      $user->password = Hash::make($model->password);
+      $user->identify_token = null;
+      $user->identify_expire = null;
+      $user->save();
+
+      MessageHelper::display('รหัสผ่านของคุณใหม่ของคุณถูกบันทึกแล้ว คุณสามารถใช้รหัสผ่านใหม่เพื่อใช้เข้าสู่ระได้ได้แล้ว','success');
+    }else{
+      MessageHelper::display('ไม่พบคำขอหรือคำขออาจหมดอายุแล้ว','error');
+    }
+    
+    return redirect('login');
   }
+
+  // public function verify() {}
   
 }

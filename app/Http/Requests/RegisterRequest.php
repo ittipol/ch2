@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Response;
+use Redirect;
 
 class RegisterRequest extends FormRequest
 {
@@ -28,7 +29,7 @@ class RegisterRequest extends FormRequest
         'password.min' => 'รัสผ่านต้องมีอย่างน้อย 4 อักขระ',
         'password.confirmed' => 'รหัสผ่านไม่ตรงกัน',
         // 'password_confirmation.required' => 'กรุณากรอกรหัสผ่านอีกครั้ง',
-        'birth_date.date_format' => 'รูปแบบวันที่ไม่ถูกต้อง'
+        // 'birth_date.date_format' => 'รูปแบบวันที่ไม่ถูกต้อง'
       ];
     }
 
@@ -43,9 +44,8 @@ class RegisterRequest extends FormRequest
         'Person.name' => 'required|max:255',
         'email' => 'required|email|unique:users,email',
         'password' => 'required|min:4|max:255|confirmed',
-        // 'password_confirmation' => 'required',
         // 'avatar' => 'mimes:jpeg,jpg,png|max:1024',
-        'birth_date' => 'date_format:Y-m-d'
+        // 'birth_date' => 'date_format:Y-m-d'
       ];
     }
 
@@ -55,7 +55,7 @@ class RegisterRequest extends FormRequest
     }
 
     public function response(array $errors) {
-      return \Redirect::back()->withErrors($errors)->withInput();
+      return Redirect::back()->withErrors($errors)->withInput();
     }
 
 }

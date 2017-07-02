@@ -60,7 +60,7 @@
             ?>
           </div>
 
-          <h5 class="text-center space-top-20">ไม่ใช่สมาชิก <a href="{{URL::to('register')}}">สมัครสมาชิก</a> | <a href="{{URL::to('identify')}}">ลืมรหัสผ่าน</a></h5>
+          <h5 class="text-center space-top-20">ไม่ใช่สมาชิก <a href="{{URL::to('register')}}">สมัครสมาชิก</a> | <a href="{{URL::to('user/identify')}}">ลืมรหัสผ่าน</a></h5>
 
           <?php
             echo Form::close();
