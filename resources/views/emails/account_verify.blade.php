@@ -17,17 +17,6 @@
   }
 
   .button {
-    color: #fff;
-    text-decoration: none !important;
-    background-color: #2979FF;
-    padding: 8px 10px;
-    border: 0;
-    font-size: 12px;
-    display: inline-block;
-    cursor: pointer;
-  }
-
-  .button {
     font-size: 16px;
     font-family: Helvetica,Helvetica neue,Arial,Verdana,sans-serif;
     font-weight: none;
@@ -50,12 +39,13 @@
   <div class="container">
     <img src="<?php echo $message->embed('http://sundaysquare.com/images/logo3.png'); ?>">
     <div class="content">
-      <p>เราได้รับคำขอการรีเซ็ตรหัสผ่านของคุณ<br>หากต้องการรีเซ็ตรหัสผ่าน โปรดคลิกลิงก์ต่อไปนี้:</p>
+      <p>โปรดยืนยันบัญชีของคุณเพื่อยืนยันว่านี่เป็นบัญชีที่ถูกต้อง<br>หากคุณต้องการดำเนินการต่อ โปรดคลิกลิงก์ต่อไปนี้:
+      </p>
       <br>
-      <a href="{{$link}}" class="button">รีเซ็ตรหัสผ่าน</a>
+      <a href="{{$link}}" class="button">ยืนยันบัญชี</a>
       <br>
       <br>
-      <p>หากคุณไม่ได้ร้องขอคำขอนี้คุณสามารถเพิกเฉยต่อข้อความนี้ได้อย่างปลอดภัย คำขอจะหมดอายุในไม่ช้า</p>
+      <p>หากคุณไม่ได้ร้องขอคำขอนี้คุณสามารถเพิกเฉยต่อข้อความนี้ได้อย่างปลอดภัย</p>
       <br>
       <div>ขอบคุณ<br>Sunday Square</div>
     </div>

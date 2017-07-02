@@ -23,7 +23,7 @@ class RegisterRequest extends FormRequest
       return [
         'Person.name.required' => 'กรุณากรอกชื่อ',
         'email.required' => 'กรุณากรอกอีเมล',
-        'email.email' => 'อีเมลไม่ถูกต้อง',
+        'email.email' => 'รูปแบบอีเมลไม่ถูกต้อง',
         'email.unique' => 'อีเมลถูกใช้งานแล้ว',
         'password.required' => 'กรุณากรอกรหัสผ่าน',
         'password.min' => 'รัสผ่านต้องมีอย่างน้อย 4 อักขระ',

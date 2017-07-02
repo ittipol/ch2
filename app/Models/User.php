@@ -8,7 +8,7 @@ use Hash;
 class User extends Model
 {
     protected $table = 'users';
-    protected $fillable = ['email','password','api_token','identify_token','identify_expire'];
+    protected $fillable = ['email','password','api_token','identify_token','identify_expire','verification_token','verified'];
     protected $hidden = ['password','remember_token'];
     protected $modelRelations = array('Person');
     protected $directory = true;
@@ -49,6 +49,7 @@ class User extends Model
         if(!$model->exists) {
           $model->password = Hash::make($model->password);
           $model->api_token = Token::generate();
+          $model->verification_token = Token::generateSecureKey();
         }
         
       });

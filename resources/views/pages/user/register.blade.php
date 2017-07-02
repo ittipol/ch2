@@ -1,6 +1,8 @@
 @extends('layouts.default.main')
 @section('content')
 
+@include('layouts.blackbox.components.common')
+
 <div class="register-bg"></div>
 
 <div class="register-wrapper">
@@ -14,11 +16,11 @@
 		@include('components.form_error') 
 
 		<?php
-			echo Form::open(['url' => 'register', 'method' => 'post', 'enctype' => 'multipart/form-data']);
+			echo Form::open(['url' => 'register', 'method' => 'post', 'enctype' => 'multipart/form-data', 'id' => 'register_form']);
 		?>
 		
 		<div class="register-form-inner">
-		
+
 			<div class="form-row">
 				<input type="text" name="Person[name]" placeholder="ชื่อ นามสกุล" autocomplete="off">
 			</div>
@@ -62,5 +64,39 @@
   </div>
 
 </div>
+
+<script type="text/javascript">
+
+  class RegisterForm {
+
+    constructor() {}
+
+    load() {
+      this.bind();
+    }
+
+    bind() {
+
+      $('form#register_form').submit(function(){
+
+        $(this).find('input[type="submit"]').prop('disabled','disabled').addClass('disabled');
+
+        $('#loading_icon').addClass('display');
+        $('.global-overlay').addClass('isvisible');
+
+      });
+
+    }
+
+  }
+
+  $(document).ready(function(){
+
+    const registerForm = new RegisterForm();
+    registerForm.load();
+
+  });
+
+</script>
 
 @stop

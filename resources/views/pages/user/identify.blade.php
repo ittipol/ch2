@@ -9,6 +9,8 @@
 
 <div class="fixed-center-form">
 
+  @include('components.form_error')
+
   <?php
     echo Form::open(['method' => 'post', 'id' => 'identify_form']);
   ?>

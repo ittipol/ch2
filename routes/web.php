@@ -78,11 +78,15 @@ Route::group(['middleware' => 'guest'], function () {
   Route::get('register','UserController@registerForm');
   Route::post('register','UserController@register');
 
+  Route::get('register/success','UserController@registerSuccess');
+
   Route::get('user/identify','UserController@identify');
   Route::post('user/identify','UserController@identifySubmit');
 
   Route::get('user/recover','UserController@recover');
   Route::post('user/recover','UserController@recoverSubmit');
+
+  Route::get('user/verify','UserController@verify');
 });
 
 Route::get('safe_image/{file}', 'StaticFileController@serveImages');

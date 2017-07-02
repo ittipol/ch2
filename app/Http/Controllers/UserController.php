@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\EmailValidationRequest;
 use App\Http\Requests\ResetPasswordRequest;
 use App\Models\User;
 use App\Models\Person;
@@ -11,6 +12,7 @@ use App\library\messageHelper;
 use App\library\service;
 use App\library\url;
 use App\library\token;
+use App\Mail\AccountVarify;
 use App\Mail\AccountRecovery;
 use Auth;
 use Session;
@@ -25,11 +27,6 @@ class UserController extends Controller
     if(Auth::check()){
       return redirect('/');
     }
-
-    // $this->data = array(
-    //   'header' => false,
-    //   'footer' => false,
-    // );
 
     $bannerImages = array('img1.png','img2.png','img3.png','img4.png','img5.png');
 
@@ -46,17 +43,15 @@ class UserController extends Controller
 
   public function auth() { 
 
-    // $data = [
-    //   'email' =>  request()->input('email'),
-    //   'password'  =>  request()->input('password')
-    // ];
-
-    $remember = !empty(request()->input('remember')) ? true : false;
+    // $remember = !empty(request()->input('remember')) ? true : false;
 
     if(Auth::attempt([
       'email' =>  request()->input('email'),
       'password'  =>  request()->input('password')
-    ],$remember)){
+    ],!empty(request()->input('remember')) ? true : false)){
+
+      // check account verified
+      dd(Auth::user()->verified);
 
       // Ger person
       // $person = Person::select('id','name','profile_image_id')->where('user_id','=',Auth::user()->id)->first();
@@ -157,10 +152,6 @@ class UserController extends Controller
 
   public function registerForm() {
 
-    // if(Auth::check()){
-    //   return redirect('/');
-    // }
-
     $this->setPageTitle('สมัครสมาชิก');
     $this->setMetaKeywords('สร้างร้านค้า,สร้างร้านค้าออนไลน์,ร้านค้าออนไลน์,ขายของออนไลน์,สมัครสมาชิก');
 
@@ -182,11 +173,33 @@ class UserController extends Controller
         Session::flush();
       }
       
-      $message = new MessageHelper;
-      $message->registerSuccess();
+      // $message = new MessageHelper;
+      // $message->registerSuccess();
+
+      // Send varify email
+      $template = new AccountVarify;
+      $template->email = $user->email;
+      $template->key = $user->verification_token;
+      Mail::to($user->email)->send($template);
+
+      session()->flash('register-success',true);
+
+      return Redirect::to('register/success');
+
+    }else{
+      MessageHelper::display('ไม่สามารถสมัครสมาชิกได้','error');
     }
 
     return Redirect::to('login');
+
+  }
+
+  public function registerSuccess() {
+    if(!session()->has('register-success')) {
+      return Redirect::to('login');
+    }
+
+    return $this->view('pages.user.register-success');
   }
 
   public function identify() {
@@ -198,12 +211,7 @@ class UserController extends Controller
     return $this->view('pages.user.identify');
   }
 
-  public function identifySubmit() {
-
-    if(empty(request()->get('email'))) {
-      MessageHelper::display('โปรดป้อนอีเมลของคุณเพื่อร้องขอการรีเซ็ตรหัสผ่าน','error');
-      return Redirect::back();
-    }
+  public function identifySubmit(EmailValidationRequest $request) {
 
     $userModel = new User;
 
@@ -282,13 +290,13 @@ class UserController extends Controller
 
     if($user->exists()) {
 
-      $user = $user->first();
+      $user = $user->select('id')->first();
       $user->password = Hash::make(request()->password);
       $user->identify_token = null;
       $user->identify_expire = null;
       $user->save();
 
-      MessageHelper::display('รหัสผ่านของคุณใหม่ของคุณถูกบันทึกแล้ว คุณสามารถใช้รหัสผ่านใหม่เพื่อใช้เข้าสู่ระได้ได้แล้ว','success');
+      MessageHelper::display('รหัสผ่านของคุณใหม่ของคุณถูกบันทึกแล้ว คุณสามารถใช้รหัสผ่านใหม่เพื่อใช้เข้าสู่ระบบได้แล้ว','success');
     }else{
       MessageHelper::display('ไม่พบคำขอหรือคำขออาจหมดอายุแล้ว','error');
     }
@@ -296,6 +304,45 @@ class UserController extends Controller
     return redirect('login');
   }
 
-  // public function verify() {}
+  public function verify() {
+
+    if(!request()->has('user') || !request()->has('key')) {
+      MessageHelper::display('ไม่พบคำขอหรือคำขออาจหมดอายุแล้ว','error');
+      return redirect('login');
+    }
+
+    $email = request()->user;
+    $key = request()->key;
+
+    // $user = User::where([
+    //   ['email','like',$email],
+    //   ['verification_token','like',$key]
+    // ]);
+
+    $user = User::where('email','like',$email);
+
+    if(!$user->exists()) {
+      MessageHelper::display('ไม่พบคำขอหรือคำขออาจหมดอายุแล้ว','error');
+      return redirect('login');
+    }
+
+    $user = $user->select('id','verification_token','verified')->first();
+
+    if($user->verified) {
+      MessageHelper::display('บัญชีของคุณถูกยืนยันแล้ว','info');
+    }elseif($key === $user->verification_token) {
+      $user->verification_token = null;
+      $user->verified = 1;
+      $user->save();
+
+      // MessageHelper::display('การยืนยันบัญชีของคุณเรียบร้อยแล้ว บัญชีของคุณสามารถใช้งานได้แล้ว','success');
+      return $this->view('pages.user.verification-success');
+    }else {
+      MessageHelper::display('ไม่สามารถยืนยันบัญชีของคุณได้','error');
+    }
+// cddf733e79dbf118572066d530bfed411ea73e52f38b3c41db11f312bc8a1d42
+    return redirect('login');
+
+  }
   
 }

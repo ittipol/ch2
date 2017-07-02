@@ -464,13 +464,11 @@ class CheckoutController extends Controller
   }
 
   public function success() {
-
     if(!session()->has('checkout-success')) {
       return Redirect::to('account/order');
     }
 
     return $this->view('pages.checkout.success');
-
   }
 
   private function errorMessage($error) {
