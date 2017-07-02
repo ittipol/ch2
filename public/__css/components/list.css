@@ -181,6 +181,10 @@
 	background-color: #0D47A1;
 }
 
+.list-item-group.no-border-end > .list-item:last-child{
+	border-bottom: 0;
+}
+
 label.list-box > input[type="radio"],
 label.list-box > input[type="checkbox"] {
 	display: none;

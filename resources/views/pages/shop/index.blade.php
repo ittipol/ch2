@@ -8,6 +8,42 @@
 
   <div class="container">
 
+    @if(!empty($permission))
+
+      <div class="box">
+
+        <div class="list-item-group no-border-end">
+
+          <h4 class="padding-left-right-15">จัดการ...</h4>
+          <div class="line"></div>
+
+          <div class="list-item">
+            <a href="{{request()->get('shopUrl')}}manage/product">
+              <img class="icon" src="/images/common/tag.png" >
+              <h4>จัดการสินค้า</h4>
+            </a>
+          </div>
+
+          <div class="list-item">
+            <a href="{{request()->get('shopUrl')}}manage/job">
+              <img class="icon" src="/images/common/document.png" >
+              <h4>จัดการงาน</h4>
+            </a>
+          </div>
+
+          <div class="list-item">
+            <a href="{{request()->get('shopUrl')}}manage/advertising">
+              <img class="icon" src="/images/common/megaphone.png" >
+              <h4>จัดการโฆษณา</h4>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+    @endif
+
     @if(!empty($permission['edit']) && $permission['edit'])
     <div class="box">
       <?php 
