@@ -20,8 +20,6 @@ class NotificationBottom {
     this.bind();
   }
 
-  // init() {}
-
   bind() {
 
     let _this = this;

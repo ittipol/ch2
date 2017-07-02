@@ -72,7 +72,6 @@
           _desc = '{{ Session::get("message.desc") }}';
         @endif
 
-        // const notificationBottom = new NotificationBottom();
         notificationBottom.setTitle('{{ Session::get("message.title") }}');
         notificationBottom.setDesc('{{ Session::get("message.desc") }}');
         notificationBottom.setType('{{ Session::get("message.type") }}');

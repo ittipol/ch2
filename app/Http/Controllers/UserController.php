@@ -19,6 +19,7 @@ use Session;
 use Redirect;
 use Hash;
 use Mail;
+use Cookie;
 
 class UserController extends Controller
 {
@@ -51,7 +52,17 @@ class UserController extends Controller
     ],!empty(request()->input('remember')) ? true : false)){
 
       // check account verified
-      dd(Auth::user()->verified);
+      if(!Auth::user()->verified) {
+
+        $cookie = Cookie::forget(Auth::getRecallerName());
+
+        Auth::logout();
+        Session::flush();
+
+        MessageHelper::display('โปรดยืนยันบัญชีของคุณเพื่อยืนยันว่านี่เป็นบัญชีที่ถูกต้อง','error');
+
+        return Redirect::to('login')->withCookie($cookie);
+      }
 
       // Ger person
       // $person = Person::select('id','name','profile_image_id')->where('user_id','=',Auth::user()->id)->first();
@@ -343,6 +354,12 @@ class UserController extends Controller
 // cddf733e79dbf118572066d530bfed411ea73e52f38b3c41db11f312bc8a1d42
     return redirect('login');
 
+  }
+
+  public function logout() {
+    Auth::logout();
+    Session::flush();
+    return redirect('/');
   }
   
 }

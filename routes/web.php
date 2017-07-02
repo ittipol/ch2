@@ -58,15 +58,19 @@
 // 
 
 // 
-Route::get('/aa','UserController@test');
+// Route::get('/aa','UserController@test');
 
 // 
 Route::get('/','HomeController@index');
 Route::get('/home','HomeController@index');
 
 Route::get('logout',function(){
-  Auth::logout();
-  Session::flush();
+
+  if(Auth::check()) {
+    Auth::logout();
+    Session::flush();
+  }
+
   return redirect('/');
 });
 
