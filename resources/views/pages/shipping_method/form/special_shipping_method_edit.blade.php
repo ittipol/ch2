@@ -125,7 +125,7 @@
   </div>
 
   <?php
-    echo Form::submit('เพิ่มวิธีการจัดส่งสินค้า' , array(
+    echo Form::submit('บันทึก' , array(
       'class' => 'button'
     ));
   ?>

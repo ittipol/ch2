@@ -60,6 +60,12 @@
 // 
 // Route::get('/aa','UserController@xxx');
 
+Route::get('/clear', function() {
+    // $exitCode = Artisan::call('cache:clear');
+    $exitCode = Artisan::call('view:clear');
+    // return what you want
+});
+
 // 
 Route::get('/','HomeController@index');
 Route::get('/home','HomeController@index');

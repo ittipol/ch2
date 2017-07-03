@@ -65,26 +65,12 @@ class UserController extends Controller
       }
 
       // Ger person
-      // $person = Person::select('id','name','profile_image_id')->where('user_id','=',Auth::user()->id)->first();
       $person = Person::select('id')->where('user_id','=',Auth::user()->id)->first();
 
       // Update Token
       // Use for pushing notification
       $person->token = Token::generateSecureKey();
       $person->save();
-      
-      // Store data
-      // Session::put('Person.id',$person->id);
-      // Session::put('Person.name',$person->name);
-      // Session::put('Person.token',$person->token);
-
-      // if(empty($person->profile_image_id)) {
-      //   Session::put('Person.profile_image_xs','/images/common/avatar.png');
-      //   Session::put('Person.profile_image','/images/common/avatar.png');
-      // }else{
-      //   Session::put('Person.profile_image_xs',$person->getProfileImageUrl('xs'));
-      //   Session::put('Person.profile_image',$person->getProfileImageUrl('xsm'));
-      // }
 
       // Update cart
       $cartModel = Service::loadModel('Cart');
