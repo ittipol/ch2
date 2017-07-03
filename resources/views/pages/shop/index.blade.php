@@ -34,7 +34,28 @@
           <div class="list-item">
             <a href="{{request()->get('shopUrl')}}manage/advertising">
               <img class="icon" src="/images/common/megaphone.png" >
+              <h4>จัดการ โฆษณา</h4>
+            </a>
+          </div>
+
+          <div class="list-item">
+            <a href="{{request()->get('shopUrl')}}manage/advertising">
+              <img class="icon" src="/images/common/megaphone.png" >
               <h4>จัดการโฆษณา</h4>
+            </a>
+          </div>
+
+          <div class="list-item">
+            <a href="{{request()->get('shopUrl')}}manage/job">
+              <img class="icon" src="/images/common/document.png" >
+              <h4>จัดการโฆษณา</h4>
+            </a>
+          </div>
+
+          <div class="list-item">
+            <a href="{{request()->get('shopUrl')}}manage/advertising">
+              <img class="icon" src="/images/common/megaphone.png" >
+              <h4>จัดการประกาศโฆษณา</h4>
             </a>
           </div>
 
