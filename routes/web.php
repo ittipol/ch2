@@ -58,7 +58,10 @@
 // 
 
 // 
-// Route::get('/aa','UserController@xxx');
+Route::get('/__aa',function(){
+  dd(Request::ip());
+});
+
 
 // Route::get('/clear', function() {
 //     // $exitCode = Artisan::call('cache:clear');

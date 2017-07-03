@@ -129,6 +129,7 @@ class Controller extends BaseController
     $this->data['_page_url'] = Request::fullUrl();
     // Request::fullUrl()
     // Request::url()
+    // Request::ip()
 
   	return view($view,$this->data);
   }
