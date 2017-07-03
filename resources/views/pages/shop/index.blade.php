@@ -38,6 +38,13 @@
             </a>
           </div>
 
+          <div class="list-item">
+            <a href="{{request()->get('shopUrl')}}manage/product_catalog">
+              <img class="icon" src="/images/common/book.png" >
+              <h4>จัดการแคตตาล็อกสินค้า</h4>
+            </a>
+          </div>
+
         </div>
 
       </div>

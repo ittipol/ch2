@@ -101,7 +101,7 @@
     <div>
       <h3>แคตตาล็อกสินค้า</h3>
       <p>ยังไม่มีแคตตาล็อกสินค้า</p>
-      <a href="{{request()->get('shopUrl')}}/product_catalog/add" class="button">สร้างแคตตาล็อกสินค้า</a>
+      <a href="{{request()->get('shopUrl')}}product_catalog/add" class="button">สร้างแคตตาล็อกสินค้า</a>
     </div>
   </div>
 

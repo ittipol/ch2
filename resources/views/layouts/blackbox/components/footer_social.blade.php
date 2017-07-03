@@ -1,5 +1,5 @@
 <div class="footer-content pull-right">
-  <a href="https://www.facebook.com/Sunday-Square-687143291472502/">
+  <a href="https://www.facebook.com/SundaySquareTH">
     <img class="social-logo" src="/images/common/fb-logo.png">
   </a>
   <!-- <a href="">
