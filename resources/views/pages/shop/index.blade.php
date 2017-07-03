@@ -12,58 +12,61 @@
 
       <div class="box">
 
-        <div class="list-item-group no-border-end">
+        <div class="tile-nav-group padding-15 clearfix">
 
           <h4 class="padding-left-right-15">จัดการ...</h4>
           <div class="line"></div>
 
-          <div class="list-item">
-            <a href="{{request()->get('shopUrl')}}manage/product">
-              <img class="icon" src="/images/common/tag.png" >
-              <h4>จัดการสินค้า</h4>
-            </a>
+          <div class="tile-flat">
+            <div class="tile-nav-image">
+              <a href="{{request()->get('shopUrl')}}manage/product">
+                <img src="/images/icons/tag-white.png">
+              </a>
+            </div>
+            <div class="tile-nav-info">
+              <a href="{{request()->get('shopUrl')}}manage/product">
+                <h4 class="tile-nav-title">สินค้า</h4>
+              </a>
+            </div>
           </div>
 
-          <div class="list-item">
-            <a href="{{request()->get('shopUrl')}}manage/job">
-              <img class="icon" src="/images/common/document.png" >
-              <h4>จัดการงาน</h4>
-            </a>
+          <div class="tile-flat">
+            <div class="tile-nav-image">
+              <a href="{{request()->get('shopUrl')}}manage/job">
+                <img src="/images/icons/document-white.png">
+              </a>
+            </div>
+            <div class="tile-nav-info">
+              <a href="{{request()->get('shopUrl')}}manage/job">
+                <h4 class="tile-nav-title">งาน</h4>
+              </a>
+            </div>
           </div>
 
-          <div class="list-item">
-            <a href="{{request()->get('shopUrl')}}manage/advertising">
-              <img class="icon" src="/images/common/megaphone.png" >
-              <h4>จัดการ โฆษณา</h4>
-            </a>
+          <div class="tile-flat">
+            <div class="tile-nav-image">
+              <a href="{{request()->get('shopUrl')}}manage/advertising">
+                <img src="/images/icons/megaphone-white.png">
+              </a>
+            </div>
+            <div class="tile-nav-info">
+              <a href="{{request()->get('shopUrl')}}manage/advertising">
+                <h4 class="tile-nav-title">โฆษณา</h4>
+              </a>
+            </div>
           </div>
 
-          <div class="list-item">
-            <a href="{{request()->get('shopUrl')}}manage/advertising">
-              <img class="icon" src="/images/common/megaphone.png" >
-              <h4>จัดการโฆษณา</h4>
-            </a>
-          </div>
-
-          <div class="list-item">
-            <a href="{{request()->get('shopUrl')}}manage/job">
-              <img class="icon" src="/images/common/document.png" >
-              <h4>จัดการโฆษณา</h4>
-            </a>
-          </div>
-
-          <div class="list-item">
-            <a href="{{request()->get('shopUrl')}}manage/advertising">
-              <img class="icon" src="/images/common/megaphone.png" >
-              <h4>จัดการประกาศโฆษณา</h4>
-            </a>
-          </div>
-
-          <div class="list-item">
-            <a href="{{request()->get('shopUrl')}}manage/product_catalog">
-              <img class="icon" src="/images/common/book.png" >
-              <h4>จัดการแคตตาล็อกสินค้า</h4>
-            </a>
+          <div class="tile-flat">
+            <div class="tile-nav-image">
+              <a href="{{request()->get('shopUrl')}}manage/product_catalog">
+                <img src="/images/icons/book-white.png">
+              </a>
+            </div>
+            <div class="tile-nav-info">
+              <a href="{{request()->get('shopUrl')}}manage/product_catalog">
+                <h4 class="tile-nav-title">แคตตาล็อกสินค้า</h4>
+              </a>
+            </div>
           </div>
 
         </div>
