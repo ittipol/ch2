@@ -17,57 +17,41 @@
           <h4 class="padding-left-right-15">จัดการ...</h4>
           <div class="line"></div>
 
-          <div class="tile-flat">
+          <a href="{{request()->get('shopUrl')}}manage/product" class="tile-flat">
             <div class="tile-nav-image">
-              <a href="{{request()->get('shopUrl')}}manage/product">
-                <img src="/images/icons/tag-white.png">
-              </a>
+              <img src="/images/icons/tag-white.png">
             </div>
             <div class="tile-nav-info">
-              <a href="{{request()->get('shopUrl')}}manage/product">
-                <h4 class="tile-nav-title">สินค้า</h4>
-              </a>
+              <h4 class="tile-nav-title">สินค้า</h4>
             </div>
-          </div>
+          </a>
 
-          <div class="tile-flat">
+          <a href="{{request()->get('shopUrl')}}manage/job" class="tile-flat">
             <div class="tile-nav-image">
-              <a href="{{request()->get('shopUrl')}}manage/job">
-                <img src="/images/icons/document-white.png">
-              </a>
+              <img src="/images/icons/document-white.png">
             </div>
             <div class="tile-nav-info">
-              <a href="{{request()->get('shopUrl')}}manage/job">
-                <h4 class="tile-nav-title">งาน</h4>
-              </a>
+              <h4 class="tile-nav-title">งาน</h4>
             </div>
-          </div>
+          </a>
 
-          <div class="tile-flat">
+          <a href="{{request()->get('shopUrl')}}manage/advertising" class="tile-flat">
             <div class="tile-nav-image">
-              <a href="{{request()->get('shopUrl')}}manage/advertising">
-                <img src="/images/icons/megaphone-white.png">
-              </a>
+              <img src="/images/icons/megaphone-white.png">
             </div>
             <div class="tile-nav-info">
-              <a href="{{request()->get('shopUrl')}}manage/advertising">
-                <h4 class="tile-nav-title">โฆษณา</h4>
-              </a>
+              <h4 class="tile-nav-title">โฆษณา</h4>
             </div>
-          </div>
+          </a>
 
-          <div class="tile-flat">
+          <a href="{{request()->get('shopUrl')}}manage/product_catalog" class="tile-flat">
             <div class="tile-nav-image">
-              <a href="{{request()->get('shopUrl')}}manage/product_catalog">
-                <img src="/images/icons/book-white.png">
-              </a>
+              <img src="/images/icons/book-white.png">
             </div>
             <div class="tile-nav-info">
-              <a href="{{request()->get('shopUrl')}}manage/product_catalog">
-                <h4 class="tile-nav-title">แคตตาล็อกสินค้า</h4>
-              </a>
+              <h4 class="tile-nav-title">แคตตาล็อกสินค้า</h4>
             </div>
-          </div>
+          </a>
 
         </div>
 
