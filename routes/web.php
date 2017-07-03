@@ -61,8 +61,9 @@
 // Route::get('/aa','UserController@xxx');
 
 Route::get('/clear', function() {
-    $exitCode = Artisan::call('cache:clear');
+    // $exitCode = Artisan::call('cache:clear');
     // $exitCode = Artisan::call('view:clear');
+    Artisan::call('config:cache');
     // return what you want
 });
 
