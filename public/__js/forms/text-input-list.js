@@ -74,13 +74,13 @@ class TextInputList {
           $(this).removeClass('input-error');
           $(this).parent().find('p.error-message').text('');
 
-          if(this.value == '') {
+          if((this.value == '') && (dataCount == 1)) {
 
             --dataCount;
             $(this).addClass('input-error');
             hasError = true;
 
-          }else if(typeof _this.regex[_this.checkType] != 'undefined') {
+          }else if((this.value != '') && (typeof _this.regex[_this.checkType] != 'undefined')) {
 
             let patt = new RegExp(_this.regex[_this.checkType]);
 
@@ -97,14 +97,9 @@ class TextInputList {
           
         });
 
-        if(hasError || _this.dataAtLeast > dataCount) {
-          // hasError = true;
+        if(hasError || (_this.dataAtLeast > dataCount)) {
           return false;
         }
-
-        // if(hasError) {
-        //   return false;
-        // }
 
       }
       

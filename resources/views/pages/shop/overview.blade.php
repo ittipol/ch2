@@ -1,7 +1,30 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-@include('pages.shop.layouts.fixed_top_nav_admin')
+<div class="sub-header-nav">
+  <div class="sub-header-nav-fixed-top">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <div class="btn-group pull-right">
+          <a href="{{request()->get('shopUrl')}}" class="btn btn-secondary">หน้าหลักร้านค้า</a>
+          <button class="btn btn-secondary additional-option">
+            จัดการ...
+            <div class="additional-option-content">
+              <a href="{{request()->get('shopUrl')}}manage/product">สินค้า</a>
+              <a href="{{request()->get('shopUrl')}}manage/job">งาน</a>
+              <a href="{{request()->get('shopUrl')}}manage/advertising">โฆษณา</a>
+              <a href="{{request()->get('shopUrl')}}manage/product_catalog">แคตตาล็อกสินค้า</a>
+              <a href="{{request()->get('shopUrl')}}setting">ข้อมูลร้านค้า</a>
+            </div>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 @include('pages.shop.layouts.header') 
 
 <div class="shop-content-wrapper">

@@ -84,6 +84,15 @@
                 -
               @endif
             </div>
+
+            <div>
+              <h5><strong>Line ID</strong></h5>
+              @if(!empty($_modelData['Contact']['line']))
+                {{$_modelData['Contact']['line']}}
+              @else
+                -
+              @endif
+            </div>
           </div>
 
         </div>
