@@ -270,6 +270,39 @@
                 </div>
 
                 <a href="{{$shopUrl}}" class="button wide-button">ไปยังบริษัทหรือร้านค้า</a>
+
+                <div class="line space-top-bottom-20"></div>
+
+                <!-- <h4>ติดต่อบริษัทหรือร้านค้า</h4> -->
+
+                @if(!empty($shop['Contact']['phone_number']))
+                <div>
+                  <h5><strong>หมายเลขโทรศัพท์</strong></h5>
+                  {{$shop['Contact']['phone_number']}}
+                </div>
+                @endif
+
+                @if(!empty($shop['Contact']['email']))
+                <div>
+                  <h5><strong>อีเมล</strong></h5>
+                  {{$shop['Contact']['email']}}
+                </div>
+                @endif
+
+                @if(!empty($shop['Contact']['website']))
+                <div>
+                  <h5><strong>เว็บไซต์</strong></h5>
+                  {{$shop['Contact']['website']}}
+                </div>
+                @endif
+
+                @if(!empty($shop['Contact']['line']))
+                <div>
+                  <h5><strong>Line ID</strong></h5>
+                  {{$shop['Contact']['line']}}
+                </div>
+                @endif
+
               </div>
             </div>
 
@@ -285,7 +318,7 @@
         <div class="list-h-item list-h-sm no-border clearfix">
 
           <a href="{{$data['detailUrl']}}" class="list-image pull-left">
-            <img src="/images/icons/tag-white.png">
+            <img src="/images/icons/book-white.png">
           </a>
 
           <div class="col-md-11 col-xs-8">

@@ -434,6 +434,9 @@ class ProductController extends Controller
     }
 
     $shop = $shop->shop;
+    $shop->modelData->loadData(array(
+      'models' => array('Contact')
+    ));
 
     // Get Slug
     $slug = $shop->getRelatedData('Slug',array(

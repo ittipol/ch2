@@ -10,7 +10,7 @@
 @if(!empty($_page_description))
 <meta name="description" content="{{$_page_description}}">
 @else
-<meta name="description" content="เว็บไซต์ที่เปิดโอกาสให้คุณสามารถสร้างธุรกิจออนไลน์ในแบบของคุณ ด้วยระบบที่ใช้งานง่าย ไม่ซับซ้อน รองรับทุกอุปกรณ์ พร้อมด้วยฟังค์ชั่นมากมายให้คุณทำตลาดและขายสินค้าออนไลน์ได้อย่างอิสระ ตอบทุกโจทย์ของการทำธุรกิจออนไลน์">
+<meta name="description" content="เว็บไซต์ที่เปิดโอกาสให้คุณสามารถสร้าร้านค้าออนไลน์ในแบบของคุณ ด้วยระบบที่ใช้งานง่าย ไม่ซับซ้อน รองรับทุกอุปกรณ์ พร้อมด้วยฟังค์ชั่นมากมายให้คุณทำตลาดและขายสินค้าออนไลน์ได้อย่างอิสระ ตอบทุกโจทย์ของการทำธุรกิจออนไลน์">
 @endif
 
 @if(!empty($_meta_keywords))
@@ -31,7 +31,7 @@
 @if(!empty($_page_title))
 <meta property="og:title" content="{{$_page_title}}" />
 @else
-<meta property="og:title" content="Sunday Square | จุดเริ่มต้นสำหรับคุณ" />
+<meta property="og:title" content="Sunday Square | ชุมชนร้านค้าออนไลน์" />
 @endif
 
 @if(!empty($_page_image))
@@ -59,7 +59,7 @@
 @if(!empty($_page_title))
 <meta name="twitter:title" content="{{$_page_title}}" />
 @else
-<meta name="twitter:title" content="Sunday Square | จุดเริ่มต้นสำหรับคุณ" />
+<meta name="twitter:title" content="Sunday Square | ชุมชนร้านค้าออนไลน์" />
 @endif 
 
 @if(!empty($_page_image))
