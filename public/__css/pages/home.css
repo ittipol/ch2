@@ -62,7 +62,7 @@
 }
 
 .sub-banner > .sub-banner-content:first-child {
-	background-color: #8fa329;
+	background-color: #3fab9b;
 }
 
 .sub-banner > .sub-banner-content:last-child {
@@ -422,11 +422,11 @@
   }
 
 	.sub-banner .sub-banner-inner {
-		padding: 25px;
+		padding: 18px 20px;
 	}
 
   .sub-banner .sub-banner-content h3 {
-  	font-size: 20px;
+  	font-size: 19px;
   }
 
   .sub-banner .sub-banner-content a {

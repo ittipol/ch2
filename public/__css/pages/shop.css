@@ -124,7 +124,7 @@
 }
 
 .shop-top-haeder-wrapper .shop-info .shop-description {
-	margin-top: 10px;
+	margin-top: 20px;
 }
 
 .shop-top-header .cover-accept {
@@ -313,6 +313,10 @@
 
 	.shop-main-nav .nav-group > .nav {
 		width: 100%;
+		text-align: center;
+	}
+
+	.shop-top-haeder-wrapper .shop-info .shop-description {
 		text-align: center;
 	}
 }
