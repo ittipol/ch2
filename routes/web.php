@@ -58,9 +58,11 @@
 // 
 
 // 
-Route::get('/__aa',function(){
-  dd(Request::ip());
-});
+// Route::get('/__aa',function(){
+//   dd(Request::ip());
+// });
+
+Route::get('/__qq','UserController@xxx');
 
 
 // Route::get('/clear', function() {
