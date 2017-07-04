@@ -62,6 +62,9 @@ class UserController extends Controller
         return Redirect::to('login')->withCookie($cookie);
       }
 
+      // add user log
+      Service::addUserLog('User',Auth::user()->id,'login');
+
       // Ger person
       $person = Person::select('id')->where('user_id','=',Auth::user()->id)->first();
 
@@ -341,8 +344,16 @@ class UserController extends Controller
   }
 
   public function logout() {
-    Auth::logout();
-    Session::flush();
+    
+    if(Auth::check()) {
+
+      Service::addUserLog('User',Auth::user()->id,'logout');
+
+      Auth::logout();
+      Session::flush();
+
+    }
+
     return redirect('/');
   }
 

@@ -367,104 +367,6 @@ class JobController extends Controller
 
   }
 
-  // public function shopJobDetail() {
-
-  //   $url = new Url;
-
-  //   $model = Service::loadModel('Job')->find($this->param['id']);
-
-  //   if(empty($model)) {
-  //     $this->error = array(
-  //       'message' => 'ไม่พบประกาศ'
-  //     );
-  //     return $this->error();
-  //   }
-
-  //   $model->modelData->loadData(array(
-  //     'models' => array('Image','Tagging'),
-  //     'json' => array('Image')
-  //   ));
-
-  //   $branchIds = $model->getRelatedData('RelateToBranch',array(
-  //     'list' => 'branch_id',
-  //     'fields' => array('branch_id'),
-  //   ));
-
-  //   $branches = array();
-  //   if(!empty($branchIds)){
-  //     $branches = Service::loadModel('Branch')
-  //     ->select(array('id','name'))
-  //     ->whereIn('id',$branchIds)
-  //     ->get();
-  //   }
-
-  //   $branchLocations = array();
-  //   $hasBranchLocation = false;
-  //   // foreach ($branches as $branch) {
-
-  //   //   $address = $branch->modelData->loadAddress();
-
-  //   //   if(!empty($address)){
-
-  //   //     $hasBranchLocation = true;
-
-  //   //     $graphics = json_decode($address['_geographic'],true);
-        
-  //   //     $branchLocations[] = array(
-  //   //       'id' => $branch->id,
-  //   //       'address' => $branch->name,
-  //   //       'latitude' => $graphics['latitude'],
-  //   //       'longitude' => $graphics['longitude'],
-  //   //       'detailUrl' => $url->setAndParseUrl('shop/{shopSlug}/branch/{id}',array(
-  //   //         'shopSlug' => request()->shopSlug,
-  //   //         'id' => $branch->id
-  //   //       ))
-  //   //     );
-  //   //   }
-
-  //   // }
-
-  //   $shop = request()->get('shop');
-
-  //   $this->data = $model->modelData->build();
-  //   $this->setData('shop',$shop->modelData->build(true));
-  //   $this->setData('shopImageUrl',$shop->getProfileImageUrl());
-  //   $this->setData('shopCoverUrl',$shop->getCoverUrl());
-  //   // $this->setData('shopUrl',request()->get('shopUrl'));
-  //   $this->setData('branchLocations',json_encode($branchLocations));
-  //   $this->setData('hasBranchLocation',$hasBranchLocation);
-
-  //   // Get person apply job
-  //   $personApplyJob = Service::loadModel('PersonApplyJob')->where(array(
-  //     array('created_by','=',session()->get('Person.id')),
-  //     array('job_id','=',$this->param['id'])
-  //   ));
-
-
-  //   if($personApplyJob->exists()) {
-
-  //     $personApplyJob = $personApplyJob->first();
-
-  //     $this->setData('personApplyJob',$personApplyJob->buildModelData());
-
-  //     if(($personApplyJob->job_applying_status_id == 4) || ($personApplyJob->job_applying_status_id == 5)) {
-  //       $this->setData('jobApplyUrl',$url->setAndParseUrl('job/apply/{id}',array('id' => $this->param['id'])));
-  //     }
-
-  //   }else{
-  //     $this->setData('jobApplyUrl',$url->setAndParseUrl('job/apply/{id}',array('id' => $this->param['id'])));
-  //   }
-
-  //   $this->setData('alreadyApply',$personApplyJob->exists());
-
-  //   $this->setPageTitle($this->data['_modelData']['name'].' - งาน @ '.request()->get('shop')->name);
-  //   $this->setPageImage($model->getImage('list'));
-  //   $this->setPageDescription($model->getShortDescription());
-    
-  //   return $this->view('pages.job.shop_job_detail');
-
-  // }
-
   public function add() {
 
     $model = Service::loadModel('Job');
@@ -495,6 +397,9 @@ class JobController extends Controller
     $request->request->add(['ShopRelateTo' => array('shop_id' => request()->get('shopId'))]);
 
     if($model->fill($request->all())->save()) {
+
+      Service::addUserLog('Job',$model->id,'add');
+
       MessageHelper::display('ลงประกาศแล้ว','success');
       return Redirect::to('shop/'.$request->shopSlug.'/manage/job');
     }else{
@@ -550,6 +455,9 @@ class JobController extends Controller
     $model = Service::loadModel('Job')->find($this->param['id']);
 
     if($model->fill($request->all())->save()) {
+
+      Service::addUserLog('Job',$model->id,'edit');
+
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('shop/'.request()->shopSlug.'/manage/job');
     }else{
@@ -1296,6 +1204,9 @@ class JobController extends Controller
     $model = Service::loadModel('Job')->find($this->param['id']);
 
     if($model->delete()) {
+
+      Service::addUserLog('Job',$this->param['id'],'delete');
+
       MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
     }else{
       MessageHelper::display('ไม่สามารถลบข้อมูลนี้ได้','error');

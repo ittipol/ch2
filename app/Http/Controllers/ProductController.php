@@ -28,11 +28,15 @@ class ProductController extends Controller
   private function _save($model,$attributes = array()) {
 
     if($model->fill($attributes)->save()) {
+
+      Service::addUserLog('Product',$model->id,'edit');
+
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('shop/'.request()->shopSlug.'/manage/product/'.$model->id);
-    }else{
-      return Redirect::back();
     }
+
+    MessageHelper::display('ไม่สามารถแก้ไขช้อมูลได้','error');
+    return Redirect::back();
 
   }
 
@@ -724,6 +728,8 @@ class ProductController extends Controller
       // $timelineHelper->setModel($model);
       // $timelineHelper->create('add-new-product');
 
+      Service::addUserLog('Product',$model->id,'add');
+
       session()->flash('product_added', true);
 
       MessageHelper::display('สินค้าถูกเพิ่มแล้ว','success');
@@ -1121,6 +1127,9 @@ class ProductController extends Controller
     $model = Service::loadModel('Product')->find($this->param['id']);
 
     if($model->delete()) {
+
+      Service::addUserLog('Product',$this->param['id'],'delete');
+
       MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
     }else{
       MessageHelper::display('ไม่สามารถลบข้อมูลได้','error');

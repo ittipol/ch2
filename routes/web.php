@@ -74,15 +74,7 @@ Route::get('/__aa',function(){
 Route::get('/','HomeController@index');
 Route::get('/home','HomeController@index');
 
-Route::get('logout',function(){
-
-  if(Auth::check()) {
-    Auth::logout();
-    Session::flush();
-  }
-
-  return redirect('/');
-});
+Route::get('logout','UserController@logout');
 
 // Login & Register
 Route::group(['middleware' => 'guest'], function () {

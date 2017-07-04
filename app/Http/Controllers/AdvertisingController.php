@@ -401,6 +401,9 @@ class AdvertisingController extends Controller
     $request->request->add(['ShopRelateTo' => array('shop_id' => request()->get('shopId'))]);
 
     if($model->fill($request->all())->save()) {
+
+      Service::addUserLog('Advertising',$model->id,'add');
+
       MessageHelper::display('ลงโฆษณาแล้ว','success');
       return Redirect::to('shop/'.$request->shopSlug.'/manage/advertising');
     }else{
@@ -449,6 +452,9 @@ class AdvertisingController extends Controller
     $model = Service::loadModel('Advertising')->find($this->param['id']);
 
     if($model->fill($request->all())->save()) {
+
+      Service::addUserLog('Advertising',$model->id,'edit');
+
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('shop/'.request()->shopSlug.'/manage/advertising');
     }else{
@@ -462,6 +468,9 @@ class AdvertisingController extends Controller
     $model = Service::loadModel('Advertising')->find($this->param['id']);
 
     if($model->delete()) {
+
+      Service::addUserLog('Advertising',$this->param['id'],'edit');
+      
       MessageHelper::display('ข้อมูลถูกลบแล้ว','success');
     }else{
       MessageHelper::display('ไม่สามารถลบข้อมูลนี้ได้','error');

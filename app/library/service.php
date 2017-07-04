@@ -2,7 +2,9 @@
 
 namespace App\library;
 
+use App\Models\UserLog;
 use Request;
+use Auth;
 
 class Service
 {
@@ -35,6 +37,23 @@ class Service
     // return $ipaddress;
 
     return Request::ip();
+
+  }
+
+  public static function addUserLog($modelName,$id,$action) {
+
+    if(!Auth::check()) {
+      return false;
+    }
+
+    $userLogModel = new UserLog;
+    $userLogModel->model = $modelName;
+    $userLogModel->model_id = $id;
+    $userLogModel->action = $action;
+    $userLogModel->ip_address = Request::ip();
+    $userLogModel->user_id = Auth::user()->id;
+
+    return $userLogModel->save();
 
   }
 
