@@ -216,7 +216,7 @@
             @if(empty($shippingMethod['image']))
               <h4 class="space-bottom-20">{{$shippingMethod['name']}}</h4>
             @else
-              <h4 class="space-bottom-20"><img src="{{$shippingMethod['image']}}">{{$shippingMethod['name']}}</h4>
+              <h4 class="space-bottom-20"><img class="lg" src="{{$shippingMethod['image']}}">{{$shippingMethod['name']}}</h4>
             @endif
 
             <table class="table table-striped">

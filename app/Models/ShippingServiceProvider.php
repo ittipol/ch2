@@ -8,13 +8,12 @@ class ShippingServiceProvider extends Model
 
   public function getLogo() {
 
-    $providerLogo = null;
-
     if(!empty($this->logo)) {
-      $providerLogo = '/images/service_provider_logo/'.$this->logo;
+      return '/images/service_provider_logo/'.$this->logo;
     }
 
-    return $providerLogo;
+    // return '/images/common/truck.png';
+    return null;
 
   }
 }

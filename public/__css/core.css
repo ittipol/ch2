@@ -72,6 +72,11 @@ h4 > img {
 	margin-right: 8px;
 }
 
+h4 > img.lg {
+	width: 70px;
+	margin-right: 10px;
+}
+
 h5 > img {
 	width: 30px;
 	margin-right: 8px;
