@@ -62,7 +62,7 @@
 //   dd(Request::ip());
 // });
 
-Route::get('/__qq','UserController@xxx');
+// Route::get('/__qq','UserController@xxx');
 
 
 // Route::get('/clear', function() {

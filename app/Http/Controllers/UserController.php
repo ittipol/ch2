@@ -357,18 +357,18 @@ class UserController extends Controller
     return redirect('/');
   }
 
-  public function xxx() {
+  // public function xxx() {
 
-    $user = User::find(2);
+  //   $user = User::find(2);
 
-    $user->verification_token = Token::generateSecureKey();
-    $user->save();
+  //   $user->verification_token = Token::generateSecureKey();
+  //   $user->save();
 
-    $template = new AccountVarify;
-    $template->email = $user->email;
-    $template->key = $user->verification_token;
-    Mail::to($user->email)->send($template);
+  //   $template = new AccountVarify;
+  //   $template->email = $user->email;
+  //   $template->key = $user->verification_token;
+  //   Mail::to($user->email)->send($template);
 
-  }
+  // }
   
 }
