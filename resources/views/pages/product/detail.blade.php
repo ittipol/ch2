@@ -211,22 +211,34 @@
         
         @if(!empty($shippingMethods))        
         <div class="detail-info description">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>ชื่อวิธีการจัดส่ง</th>
-                <th>ผู้ให้บริการการจัดส่ง</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach($shippingMethods as $shippingMethod)
+          @foreach($shippingMethods as $shippingMethod)
+
+            @if(empty($shippingMethod['image']))
+              <h4 class="space-bottom-20">{{$shippingMethod['name']}}</h4>
+            @else
+              <h4 class="space-bottom-20"><img src="{{$shippingMethod['image']}}">{{$shippingMethod['name']}}</h4>
+            @endif
+
+            <table class="table table-striped">
+              <thead>
                 <tr>
-                  <td>{{$shippingMethod['name']}}</td>
-                  <td>{{$shippingMethod['shippingService']}}</td>
+                  <th>วิธีการจัดส่ง</th>
+                  <th>การคิดค่าจัดส่ง</th>
+                  <th>ค่าบริการ</th>
                 </tr>
-              @endforeach
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                @foreach($shippingMethod['data'] as $data)
+                  <tr>
+                    <td>{{$data['name']}}</td>
+                    <td>{{$data['shippingServiceCostType']}}</td>
+                    <td>{{$data['serviceCostText']}}</td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+
+          @endforeach
         </div>
         @else
           <div class="list-empty-message text-center space-top-20">

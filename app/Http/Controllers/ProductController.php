@@ -435,13 +435,6 @@ class ProductController extends Controller
 
     $shop = $shop->shop;
 
-    // if(empty($shop)) {
-    //   $this->error = array(
-    //     'message' => 'ไม่พบข้อมูล'
-    //   );
-    //   return $this->error();
-    // }
-
     // Get Slug
     $slug = $shop->getRelatedData('Slug',array(
       'first' => true,
@@ -508,8 +501,22 @@ class ProductController extends Controller
     $_shippingMethods = array();
     if($shippingMethods->exists()) {
       foreach ($shippingMethods->get() as $shippingMethod) {
-        $_shippingMethods[] = $shippingMethod->buildModelData();
+        $_shippingMethods[$shippingMethod->shipping_service_id][] = $shippingMethod->buildModelData();
       }
+    }
+
+    $shippingMethods = array();
+    $shippingServiceProviderModel = Service::loadModel('ShippingServiceProvider');
+
+    foreach ($_shippingMethods as $id => $shippingMethod) {
+      $shippingServiceProvider = $shippingServiceProviderModel->select('name','logo')->find($id);
+
+      $shippingMethods[] = array(
+        'name' => $shippingServiceProvider->name,
+        'image' => $shippingServiceProvider->getLogo(),
+        'data' => $shippingMethod
+      );
+
     }
 
     // Related Product (shop)
@@ -643,7 +650,7 @@ class ProductController extends Controller
     $this->setData('productOptionValues',$model->getProductOptionValues());
     $this->setData('branchLocations',json_encode($branchLocations));
     $this->setData('hasBranchLocation',$hasBranchLocation);
-    $this->setData('shippingMethods',$_shippingMethods);
+    $this->setData('shippingMethods',$shippingMethods);
 
     $this->setData('shopRealatedProducts',$_shopRealatedProducts);
     $this->setData('realatedProducts',$_realatedProducts);
