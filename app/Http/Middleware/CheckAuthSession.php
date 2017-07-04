@@ -6,6 +6,7 @@ use Closure;
 use Auth;
 use Session;
 use App\Models\Person;
+use App\library\service;
 use App\library\token;
 
 class CheckAuthSession
@@ -20,6 +21,11 @@ class CheckAuthSession
     public function handle($request, Closure $next)
     {
         if(Auth::check() && !Session::has('Person')) {
+
+            // user update last ip
+            Auth::user()->last_ip = Service::ipAddress();
+            Auth::user()->save();
+
             $person = Person::select('id','name','profile_image_id','token')->where('user_id','=',Auth::user()->id)->first();
             
             // Store data

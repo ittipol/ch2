@@ -44,8 +44,6 @@ class UserController extends Controller
 
   public function auth() { 
 
-    // $remember = !empty(request()->input('remember')) ? true : false;
-
     if(Auth::attempt([
       'email' =>  request()->input('email'),
       'password'  =>  request()->input('password')
