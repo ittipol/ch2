@@ -13,7 +13,7 @@
 
 <div class="container">
 
-  <div class="search sm">
+  <div class="search sm space-bottom-50">
 
     <?php 
       echo Form::open(['url' => 'search', 'id' => 'search_form','method' => 'get', 'enctype' => 'multipart/form-data']);
