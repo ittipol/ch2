@@ -514,6 +514,10 @@ class ProductController extends Controller
     foreach ($_shippingMethods as $id => $shippingMethod) {
       $shippingServiceProvider = $shippingServiceProviderModel->select('name','logo')->find($id);
 
+      if(empty($shippingServiceProvider)) {
+        continue;
+      }
+
       $shippingMethods[] = array(
         'name' => $shippingServiceProvider->name,
         'image' => $shippingServiceProvider->getLogo(),
