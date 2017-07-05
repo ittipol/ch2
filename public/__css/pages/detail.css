@@ -516,6 +516,15 @@
 	background-repeat: no-repeat;
 }
 
+.contact-list > .contact-info:not(:first-child) {
+	margin-top: 10px;
+}
+
+.contact-info > img {
+	width: 25px;
+	margin-right: 10px;
+}
+
 @media only screen and (max-width : 992px) {
 	.quantity-box {
 		margin-top: 20px;

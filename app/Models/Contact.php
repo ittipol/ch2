@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\library\url;
+
 class Contact extends Model
 {
   public $table = 'contacts';
@@ -125,11 +127,12 @@ class Contact extends Model
 
   public function buildModelData() {
 
-    $phoneNumber = '';
-    $fax = '';
-    $email = '';
-    $website = '';
-    $line = '';
+    $phoneNumber = null;
+    $fax = null;
+    $email = null;
+    $website = null;
+    $websiteUrl = null;
+    $line = null;
 
     if(!empty($this->phone_number)) {
       $phoneNumber = implode(', ',json_decode($this->phone_number,true));        
@@ -144,7 +147,19 @@ class Contact extends Model
     }
 
     if(!empty($this->website)) {
-      $website = implode(', ',json_decode($this->website,true));        
+
+      $websites = json_decode($this->website,true);
+
+      $website = implode(', ',$websites);
+
+      $url = new Url;
+
+      foreach ($websites as $_website) {
+        $websiteUrl[] = array(
+          'name' => $_website,
+          'link' => $url->redirect($_website)
+        );
+      }
     }
 
     if(!empty($this->line)) {
@@ -156,6 +171,7 @@ class Contact extends Model
       'fax' => $fax,
       'email' => $email,
       'website' => $website,
+      'websiteUrl' => $websiteUrl,
       'line' => $line
     );
   }

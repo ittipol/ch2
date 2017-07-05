@@ -275,33 +275,51 @@
 
                 <!-- <h4>ติดต่อบริษัทหรือร้านค้า</h4> -->
 
-                @if(!empty($shop['Contact']['phone_number']))
-                <div>
-                  <h5><strong>หมายเลขโทรศัพท์</strong></h5>
-                  {{$shop['Contact']['phone_number']}}
-                </div>
-                @endif
+                <div class="contact-list">
 
-                @if(!empty($shop['Contact']['email']))
-                <div>
-                  <h5><strong>อีเมล</strong></h5>
-                  {{$shop['Contact']['email']}}
-                </div>
-                @endif
+                  @if(!empty($shop['Contact']['phone_number']))
+                  <div class="contact-info">
+                    <!-- <h5><strong>หมายเลขโทรศัพท์</strong></h5> -->
+                    <img src="/images/common/phone.png">
+                    {{$shop['Contact']['phone_number']}}
+                  </div>
+                  @endif
 
-                @if(!empty($shop['Contact']['website']))
-                <div>
-                  <h5><strong>เว็บไซต์</strong></h5>
-                  {{$shop['Contact']['website']}}
-                </div>
-                @endif
+                  @if(!empty($shop['Contact']['fax']))
+                  <div class="contact-info">
+                    <!-- <h5><strong>แฟกซ์</strong></h5> -->
+                    <img src="/images/common/fax.png">
+                    {{$shop['Contact']['fax']}}
+                  </div>
+                  @endif
 
-                @if(!empty($shop['Contact']['line']))
-                <div>
-                  <h5><strong>Line ID</strong></h5>
-                  {{$shop['Contact']['line']}}
+                  @if(!empty($shop['Contact']['email']))
+                  <div class="contact-info">
+                    <!-- <h5><strong>อีเมล</strong></h5> -->
+                    <img src="/images/common/email.png">
+                    {{$shop['Contact']['email']}}
+                  </div>
+                  @endif
+
+                  @if(!empty($shop['Contact']['websiteUrl']))
+                  <div class="contact-info">
+                    <!-- <h5><strong>เว็บไซต์</strong></h5> -->
+                    <img src="/images/common/website.png">
+                    @foreach($shop['Contact']['websiteUrl'] as $website)
+                      <a href="{{$website['link']}}">{{$website['name']}}</a>
+                    @endforeach
+                  </div>
+                  @endif
+
+                  @if(!empty($shop['Contact']['line']))
+                  <div class="contact-info">
+                    <!-- <h5><strong>Line ID</strong></h5> -->
+                     <img src="/images/common/line.png">
+                    {{$shop['Contact']['line']}}
+                  </div>
+                  @endif
+
                 </div>
-                @endif
 
               </div>
             </div>
