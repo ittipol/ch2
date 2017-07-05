@@ -204,7 +204,7 @@
     </div>
   </div>
 
-  <div class="main-row">
+  <!-- <div class="main-row">
 
     <div class="container">
 
@@ -276,7 +276,7 @@
 
     </div>
 
-  </div>
+  </div> -->
 
 </div>
 
