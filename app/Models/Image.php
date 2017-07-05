@@ -15,7 +15,7 @@ class Image extends Model
 {
   protected $table = 'images';
   protected $fillable = ['model','model_id','path','filename','description','image_type_id','created_by'];
-  private $maxFileSizes = 2097152;
+  private $maxFileSizes = 4194304;
   private $acceptedFileTypes = ['image/jpg','image/jpeg','image/png', 'image/pjpeg'];
 
   private $imagePatterns = array(
