@@ -409,7 +409,7 @@ class Shop extends Model
     $cache = new Cache;
     $url = new url;
 
-    $image = Image::select('id','model','model_id','filename','image_type_id')->find($this->cover_image_id);
+    $image = Image::select('id','model','model_id','filename','image_type_id')->find($this->profile_image_id);
 
     $_imageUrl = null;
     if(!empty($image)) {
