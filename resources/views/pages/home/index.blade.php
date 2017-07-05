@@ -200,6 +200,16 @@
       <div class="color-bar-article">
         <div class="color-bar-title">สินค้ามากมายจากร้านค้าที่พร้อมให้คุณเลือกซื้อ</div>
         <p>สินค้าจากบริษัทและร้านค้าที่มีมายมากและหลากหลายให้เลือกซื้อ ในราคาที่คุณสามารถเป็นเจ้าของได้</p>
+        <a href="{{URL::to('product')}}">แสดงสินค้าทั้งหมด</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-row">
+    <div class="container">
+      <div class="main-row color-bar bg-transparent">
+        <div class="inner">
+        </div>
       </div>
     </div>
   </div>
