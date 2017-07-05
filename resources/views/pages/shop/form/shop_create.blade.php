@@ -16,8 +16,6 @@
 
     <div class="line space-top-bottom-30"></div>
       
-    @include('components.form_error') 
-      
     <div class="row">
 
       <div class="col-lg-6 col-xs-12">
@@ -31,6 +29,8 @@
     </div>
 
     <div class="line space-top-bottom-30"></div>
+
+    @include('components.form_error') 
 
     <?php 
       echo Form::open(['id' => 'main_form','method' => 'post', 'enctype' => 'multipart/form-data']);
@@ -73,6 +73,35 @@
           'autocomplete' => 'off'
         ));
       ?>
+      </div>
+
+      <div class="form-row">
+        <label class="choice-box">
+          <?php
+            echo Form::checkbox('term_and_condition_accepted', 1);
+          ?>
+          <div class="inner">ยอมรับเงื่อนไขและข้อตกลง</div>
+          <a data-right-side-panel="1" data-right-side-panel-target="#term_and_condition">แสดงรายละเอียดเงื่อนไขและข้อตกลง</a>
+        </label>
+
+        <div id="term_and_condition" class="right-size-panel form">
+          <div class="right-size-panel-inner">
+            <h4>เงื่อนไขและข้อตกลง</h4>
+            <div class="line space-bottom-30"></div>
+            <p>
+              1.ไม่กระทำผิดตาม พ.ร.บ.ว่าด้วยการกระทำผิดเกี่ยวกับคอมพิวเตอร์<br>
+              2.ห้ามโพส ประกาศ สินค้า ที่สื่อถึง ลามกอนาจาร<br>
+              3.การซื้อขายแลกเปลี่ยน เป็นการตกลงกันเองระหว่างสมาชิก ทางเว็บไซต์ไม่มีส่วนรู้เห็นหรือต้องรับผิดชอบใด ๆ ทั้งสิ้น<br>
+              4.ลงประกาศ สินค้า อาหารเสริม ควรมี อย. กำกับด้วย และระบุส่วนผสมให้ชัดเจน<br>
+              5.ประเภทสินค้าที่ห้ามประกาศตามที่กฏหมายกำหนดห้ามขาย (พบเจอลบทันที)<br>
+              6.ห้ามประกาศงานที่ผิดต่อศิลธรรมทุกประการ<br>
+
+              <br>
+
+              <strong>หมายเหตุ</strong> ข้อตกลงในการลงสินค้าสามารถเปลี่ยนแปลงได้ตลอดเวลา การลงสินค้าหรือประกาศที่ผิดต่อข้อบังคับ ทางเว็บไซต์สามารถลบได้ทันที โดยที่ไม่ต้องแจ้งให้ทราบ ขึ้นอยู่กับดุลพินิจทางเราทั้งหมด
+            </p>
+          </div>
+        </div>
       </div>
 
     </div>

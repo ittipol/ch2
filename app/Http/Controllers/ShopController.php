@@ -539,6 +539,10 @@ class ShopController extends Controller
 
     $model = Service::loadModel('Shop');
 
+    if(empty($request->get('term_and_condition_accepted')) || !$request->get('term_and_condition_accepted')) {
+      return Redirect::back()->withErrors(['ยังไม่ได้ยอมรับเงื่อนไขและข้อตกลง'])->withInput(request()->all());
+    }
+
     if($model->where([
         ['name','like',$request->get('name')],
         ['created_by','=',session()->get('Person.id')]
