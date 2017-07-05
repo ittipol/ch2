@@ -15,7 +15,13 @@ class Word extends Model
     $tagIds = array();
     foreach ($value as $word) {
       $this->checkAndSave($word);
-      $tagIds[] = $this->getDataByWord($word)->id;
+
+      $_word = $this->getDataByWord($word);
+
+      if(!empty($_word)) {
+        $tagIds[] = $_word->id;
+      }
+
     }
     return $tagIds;
   }

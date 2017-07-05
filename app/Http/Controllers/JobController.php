@@ -48,17 +48,17 @@ class JobController extends Controller
 
         foreach ($jobs->get() as $job) {
 
-          $image = $job->getRelatedData('Image',array(
-            'first' => true
-          ));
+          // $image = $job->getRelatedData('Image',array(
+          //   'first' => true
+          // ));
 
-          $imageUrl = '/images/common/no-img.png';
-          if(!empty($image)) {
-            $imageUrl = $cache->getCacheImageUrl($image,'list');
-          }
+          // $imageUrl = '/images/common/no-img.png';
+          // if(!empty($image)) {
+          //   $imageUrl = $cache->getCacheImageUrl($image,'list');
+          // }
 
           $_jobs['items'][] = array_merge($job->buildPaginationData(),array(
-            '_imageUrl' => $imageUrl,
+            '_imageUrl' => $job->getImage('list'),
             'detailUrl' => $url->setAndParseUrl('job/detail/{id}',array('id'=>$job->id))
           ));
           
