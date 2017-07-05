@@ -27,7 +27,7 @@
   <div class="container-header">
     <div class="row">
       <div class="col-lg-6 col-sm-12">
-        <div class="title">การติดต่อบริษัทหรือร้านค้า</div>
+        <div class="title">ข้อมูลการติดต่อ</div>
       </div>
     </div>
   </div>
@@ -96,12 +96,23 @@
 
     <div class="form-row">
       <?php 
+        echo Form::label('Contact[facebook]', 'Facebook page');
+      ?>
+      <div id="facebook_input" class="text-group">
+        <div class="text-group-panel"></div>
+        <a href="javascript:void(0);" class="text-add">เพิ่ม +</a>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <?php 
         echo Form::label('Contact[line]', 'Line ID');
       ?>
       <div id="line_id_input" class="text-group">
         <div class="text-group-panel"></div>
         <a href="javascript:void(0);" class="text-add">เพิ่ม +</a>
       </div>
+    </div>
 
   </div>
 
@@ -150,6 +161,13 @@
       websiteInput.load({!!$_formData['website']!!});
     @else
       websiteInput.load();
+    @endif
+
+    const facebookInput = new TextInputList('facebook_input','facebook','Facebook');
+    @if(!empty($_formData['facebook']))
+      facebookInput.load({!!$_formData['facebook']!!});
+    @else
+      facebookInput.load();
     @endif
 
     const lindIdInput = new TextInputList('line_id_input','line','Line ID');

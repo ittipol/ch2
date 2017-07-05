@@ -94,6 +94,14 @@
               </div>
               @endif
 
+              @if(!empty($_modelData['Contact']['facebook']))
+              <div class="contact-info">
+                <!-- <h5><strong>Line ID</strong></h5> -->
+                 <img src="/images/common/fb-logo.png">
+                {{$_modelData['Contact']['facebook']}}
+              </div>
+              @endif
+
               @if(!empty($_modelData['Contact']['line']))
               <div class="contact-info">
                 <!-- <h5><strong>Line ID</strong></h5> -->

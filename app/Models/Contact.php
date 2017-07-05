@@ -7,7 +7,7 @@ use App\library\url;
 class Contact extends Model
 {
   public $table = 'contacts';
-  protected $fillable = ['model','model_id','phone_number','fax','email','website','line','created_by'];
+  protected $fillable = ['model','model_id','phone_number','fax','email','website','facebook','line','created_by'];
   public $timestamps  = false;
 
   public $formHelper = true;
@@ -84,6 +84,23 @@ class Contact extends Model
 
       }
 
+      if(!empty($attributes['facebook'])) {
+        
+        $facebook = array();
+        foreach ($attributes['facebook'] as $value) {
+          if(empty($value['value'])) {
+            continue;
+          }
+          $facebook[] = trim($value['value']);
+        }
+
+        $attributes['facebook'] = null;
+        if(!empty($facebook)) {
+          $attributes['facebook'] = json_encode($facebook);        
+        }
+
+      }
+
       if(!empty($attributes['line'])) {
         
         $line = array();
@@ -132,6 +149,7 @@ class Contact extends Model
     $email = null;
     $website = null;
     $websiteUrl = null;
+    $facebook = null;
     $line = null;
 
     if(!empty($this->phone_number)) {
@@ -162,6 +180,10 @@ class Contact extends Model
       }
     }
 
+    if(!empty($this->facebook)) {
+      $facebook = implode(', ',json_decode($this->facebook,true));        
+    }
+
     if(!empty($this->line)) {
       $line = implode(', ',json_decode($this->line,true));        
     }
@@ -172,6 +194,7 @@ class Contact extends Model
       'email' => $email,
       'website' => $website,
       'websiteUrl' => $websiteUrl,
+      'facebook' => $facebook,
       'line' => $line
     );
   }

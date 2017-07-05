@@ -145,7 +145,7 @@ class ModelData {
   public function loadContact() {
     $contact = $this->model->getRelatedData('Contact',array(
       'first' => true,
-      'fields' => array('phone_number','fax','email','website','line')
+      'fields' => array('phone_number','fax','email','website','facebook','line')
     ));
 
     if(empty($contact)) {

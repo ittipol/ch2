@@ -277,7 +277,6 @@
 
                   @if(!empty($shop['Contact']['phone_number']))
                   <div class="contact-info">
-                    <!-- <h5><strong>หมายเลขโทรศัพท์</strong></h5> -->
                     <img src="/images/common/phone.png">
                     {{$shop['Contact']['phone_number']}}
                   </div>
@@ -293,7 +292,6 @@
 
                   @if(!empty($shop['Contact']['email']))
                   <div class="contact-info">
-                    <!-- <h5><strong>อีเมล</strong></h5> -->
                     <img src="/images/common/email.png">
                     {{$shop['Contact']['email']}}
                   </div>
@@ -301,7 +299,6 @@
 
                   @if(!empty($shop['Contact']['websiteUrl']))
                   <div class="contact-info">
-                    <!-- <h5><strong>เว็บไซต์</strong></h5> -->
                     <img src="/images/common/website.png">
                     @foreach($shop['Contact']['websiteUrl'] as $website)
                       <a href="{{$website['link']}}">{{$website['name']}}</a>
@@ -309,9 +306,15 @@
                   </div>
                   @endif
 
+                  @if(!empty($shop['Contact']['facebook']))
+                  <div class="contact-info">
+                     <img src="/images/common/fb-logo.png">
+                    {{$shop['Contact']['facebook']}}
+                  </div>
+                  @endif
+
                   @if(!empty($shop['Contact']['line']))
                   <div class="contact-info">
-                    <!-- <h5><strong>Line ID</strong></h5> -->
                      <img src="/images/common/line.png">
                     {{$shop['Contact']['line']}}
                   </div>
