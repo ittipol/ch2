@@ -12,7 +12,9 @@ class Word extends Model
   }
 
   public function saveSpecial($value) {
+
     $tagIds = array();
+
     foreach ($value as $word) {
       $this->checkAndSave($word);
 
@@ -23,6 +25,7 @@ class Word extends Model
       }
 
     }
+    
     return $tagIds;
   }
 
