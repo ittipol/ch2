@@ -7,13 +7,11 @@
     echo Form::open(['id' => 'search_form','method' => 'get', 'enctype' => 'multipart/form-data']);
   ?>
 
-  <div class="row">
-    <div class="col-sm-12 space-top-50 search-box-panel">
-      <input type="text" name="search_query" value="{{$q}}" placeholder="ค้นหา" autocomplete="off" class="search-box">
-      <button class="button-search">
-        <i class="fa fa-search"></i>
-      </button>
-    </div>
+  <div class="space-top-50 search-box-panel">
+    <input type="text" name="search_query" value="{{$q}}" placeholder="ค้นหา" autocomplete="off" class="search-box">
+    <button class="button-search">
+      <i class="fa fa-search"></i>
+    </button>
   </div>
 
   <?php

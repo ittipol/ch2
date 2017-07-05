@@ -22,7 +22,7 @@ class Lookup extends Model
           'value' => 'model:Shop'
         ),
         array(
-          'name' => 'สินค้าจากบริษัทและร้านค้า',
+          'name' => 'สินค้า',
           'value' => 'model:Product'
         ),
         array(
@@ -30,11 +30,11 @@ class Lookup extends Model
           'value' => 'model:ProductCatalog'
         ),
         array(
-          'name' => 'งานจากบริษัทและร้านค้า',
+          'name' => 'งาน',
           'value' => 'model:Job'
         ),
         array(
-          'name' => 'โฆษณาจากบริษัทและร้านค้า',
+          'name' => 'โฆษณา',
           'value' => 'model:Advertising'
         ),
         // array(

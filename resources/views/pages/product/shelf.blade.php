@@ -25,6 +25,28 @@
 
 <div class="container">
 
+  <div class="search sm">
+
+    <?php 
+      echo Form::open(['url' => 'search', 'id' => 'search_form','method' => 'get', 'enctype' => 'multipart/form-data']);
+    ?>
+
+    <div class="search-box-panel">
+      <input type="text" name="search_query" placeholder="ค้นหาสินค้า..." autocomplete="off" class="search-box">
+      <button class="button-search">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+
+    <input type="hidden" name="fq" value="model:Product">
+    <input type="hidden" name="sort" value="name:asc">
+
+    <?php
+      echo Form::close();
+    ?>
+
+  </div>
+
   @foreach($shelfs as $shelf)
     <div class="shelf">
 

@@ -1,7 +1,7 @@
 @extends('layouts.blackbox.main')
 @section('content')
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUdwm6VWiEE-1ZrVgY3bh1sNX21_deHZw&libraries=places" type="text/javascript"></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUdwm6VWiEE-1ZrVgY3bh1sNX21_deHZw&libraries=places" type="text/javascript"></script> -->
 
 @include('pages.shop.layouts.header')
 @include('pages.shop.layouts.main-nav')
@@ -58,40 +58,50 @@
           <div class="line"></div>
 
           <div class="shop-about-content-inner">
-            <div>
-              <h5><strong>หมายเลขโทรศัพท์</strong></h5>
+            <div class="contact-list">
+
               @if(!empty($_modelData['Contact']['phone_number']))
+              <div class="contact-info">
+                <!-- <h5><strong>หมายเลขโทรศัพท์</strong></h5> -->
+                <img src="/images/common/phone2.png">
                 {{$_modelData['Contact']['phone_number']}}
-              @else
-                -
+              </div>
               @endif
-            </div>
 
-            <div>
-              <h5><strong>อีเมล</strong></h5>
+              @if(!empty($_modelData['Contact']['fax']))
+              <div class="contact-info">
+                <!-- <h5><strong>แฟกซ์</strong></h5> -->
+                <img src="/images/common/fax2.png">
+                {{$_modelData['Contact']['fax']}}
+              </div>
+              @endif
+
               @if(!empty($_modelData['Contact']['email']))
+              <div class="contact-info">
+                <!-- <h5><strong>อีเมล</strong></h5> -->
+                <img src="/images/common/email2.png">
                 {{$_modelData['Contact']['email']}}
-              @else
-                -
+              </div>
               @endif
-            </div>
 
-            <div>
-              <h5><strong>เว็บไซต์</strong></h5>
-              @if(!empty($_modelData['Contact']['website']))
-                {{$_modelData['Contact']['website']}}
-              @else
-                -
+              @if(!empty($_modelData['Contact']['websiteUrl']))
+              <div class="contact-info">
+                <!-- <h5><strong>เว็บไซต์</strong></h5> -->
+                <img src="/images/common/website2.png">
+                @foreach($_modelData['Contact']['websiteUrl'] as $website)
+                  <a href="{{$website['link']}}">{{$website['name']}}</a>
+                @endforeach
+              </div>
               @endif
-            </div>
 
-            <div>
-              <h5><strong>Line ID</strong></h5>
               @if(!empty($_modelData['Contact']['line']))
+              <div class="contact-info">
+                <!-- <h5><strong>Line ID</strong></h5> -->
+                 <img src="/images/common/line.png">
                 {{$_modelData['Contact']['line']}}
-              @else
-                -
+              </div>
               @endif
+
             </div>
           </div>
 

@@ -282,6 +282,8 @@
 
 @media only screen and (max-width : 480px) {
 
+
+
 	.shop-top-header {
 		height: 200px;
 	}
@@ -318,5 +320,10 @@
 
 	.shop-top-haeder-wrapper .shop-info .shop-description {
 		text-align: center;
+	}
+
+	.shop-top-header .shop-cover-edit-button {
+		top: 10px;
+		right: 10px;
 	}
 }

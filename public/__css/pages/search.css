@@ -144,3 +144,29 @@
 	color: #0071c5;
 	margin-top: 10px;
 }
+
+.search.sm {
+	padding: 6px;
+	/*background-color: #7b95b6;*/
+	background-color: #2f67b2;
+}
+
+.search.sm input[type="text"].search-box {
+	height: 45px;
+	color: #000;
+	font-size: 14px;
+	border-bottom: 0;
+}
+
+.search.sm .button-search {
+	top: 0;
+	right: -6px;
+	height: 45px;
+	/*background-color: #7b95b6;*/
+	background-color: #2f67b2;
+}
+
+.search.sm .button-search > i {
+	color: #fff;
+	padding: 8px;
+}

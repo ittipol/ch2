@@ -273,8 +273,6 @@
 
                 <div class="line space-top-bottom-20"></div>
 
-                <!-- <h4>ติดต่อบริษัทหรือร้านค้า</h4> -->
-
                 <div class="contact-list">
 
                   @if(!empty($shop['Contact']['phone_number']))

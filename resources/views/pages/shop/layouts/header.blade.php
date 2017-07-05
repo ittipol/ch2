@@ -4,7 +4,7 @@
 
     <div class="shop-top-header shop-default-cover-bg">
 
-      <div class="cover-size-info">1140 x 400</div>
+      <div class="cover-size-info">แนะนำ 1140 × 400</div>
 
       @if(!empty($_shop_cover))
       <div id="shop_cover" class="shop-cover" style="background-image: url({{$_shop_cover}});"></div>
