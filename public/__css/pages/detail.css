@@ -514,6 +514,7 @@
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
+	border: 1px solid #ccc;
 }
 
 .contact-list > .contact-info:not(:first-child) {

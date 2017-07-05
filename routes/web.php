@@ -73,7 +73,7 @@
 //     // return what you want
 // });
 
-Route::get('/__qqwed','HomeController@delP');
+// Route::get('/__qqwed','HomeController@delP');
 
 // 
 Route::get('/','HomeController@index');
