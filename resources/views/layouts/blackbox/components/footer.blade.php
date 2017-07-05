@@ -58,8 +58,11 @@
               </div>
 
               <div class="col-md-2 col-xs-12">
-                <h4 class="footer-title">การช่วยเหลือ</h4>
+                <h4 class="footer-title">เกี่ยวกับ</h4>
                 <div class="footer-content">
+                  <div class="footer-link">
+                    <a href="{{URL::to('term_condition')}}">เงื่อนไขและข้อตกลง</a>
+                  </div>
                   <div class="footer-link">
                     <a href="{{URL::to('manual')}}">วิธีการใช้งาน</a>
                   </div>

@@ -100,6 +100,7 @@ Route::group(['middleware' => 'guest'], function () {
 
 Route::get('safe_image/{file}', 'StaticFileController@serveImages');
 Route::get('redirect', 'UrlController@redirect');
+Route::get('term_condition','HomeController@termCondition');
 
 // Search
 Route::get('search','SearchController@index')->name('search');

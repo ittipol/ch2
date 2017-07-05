@@ -787,4 +787,10 @@ dd('end');
 
   }
 
+  public function termCondition() {
+
+    return $this->view('pages.home.term_condition');
+
+  }
+
 }
