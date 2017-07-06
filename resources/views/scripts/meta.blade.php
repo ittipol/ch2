@@ -19,6 +19,9 @@
 <meta name="keywords" content="สร้างร้านค้า,สร้างร้านค้าออนไลน์,ร้านค้าออนไลน์,ขายของออนไลน์,สินค้า">
 @endif
 
+
+<meta property="og:site_name" content="sundaysquare.com">
+
 <!-- Facebook -->
 @if(!empty($_page_url))
 <meta property="og:url" content="{{$_page_url}}" />
