@@ -123,6 +123,10 @@
 	float: left;
 }
 
+.shop-top-haeder-wrapper .shop-info h3 {
+	color: #000;
+}
+
 .shop-top-haeder-wrapper .shop-info .shop-description {
 	margin-top: 20px;
 }

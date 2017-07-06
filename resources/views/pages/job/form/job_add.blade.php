@@ -158,6 +158,18 @@
   <div class="form-section">
 
     <div class="title">
+      ระบุพื้นที่เป้าหมาย
+    </div>
+
+    <div class="form-row">
+      <a href="">เพิ่มพื้นที่เป้าหมาย</a>
+    </div>
+
+  </div>
+
+  <div class="form-section">
+
+    <div class="title">
       วิธีการสมัครงาน
     </div>
 
@@ -184,14 +196,6 @@
         ));
       ?>
     </div>
-
-    <!-- <div class="form-section">
-
-      <div class="title">
-        ระบุพื้นที่เป้าหมาย
-      </div>
-
-    </div> -->
 
   </div>
 

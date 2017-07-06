@@ -66,7 +66,7 @@
 
         <div class="shop-info">
 
-          <h3>{{$_shop_name}}</h3>
+          <a href="{{request()->get('shopUrl')}}"><h3>{{$_shop_name}}</h3></a>
 
           @if(!empty($_shop_open_hours))
           <div class="shop-open-hours">

@@ -89,6 +89,7 @@
             <h4>เงื่อนไขและข้อตกลง</h4>
             <div class="line space-bottom-30"></div>
             @include('term_condition.term_condition')
+            <div class="right-size-panel-close-button"></div>
           </div>
         </div>
       </div>
