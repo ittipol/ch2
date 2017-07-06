@@ -2,7 +2,7 @@ class Tagging {
 	constructor(panel = '_tags', dataName = 'Tagging', placeholder = 'แท๊ก') {
 		this.tagChipsWidth = 0;
 		this.tagList = [];
-		this.padding = 18;
+		this.padding = 40;
 		this.runningNumber = 0;
 		this.placeholder = placeholder;
 		this.dataName = dataName;

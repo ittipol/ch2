@@ -45,6 +45,9 @@ class RelateToBranch extends Model
 
     //   }
 
+    // need always return true
+    return true;
+
     // }
 
     $shopRelateToModel = new ShopRelateTo;

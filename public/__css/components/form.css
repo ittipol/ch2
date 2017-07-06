@@ -406,6 +406,10 @@ form textarea.person-experience-textarea {
 	height: 500px;
 }
 
+#selected_target_area {
+	min-height: 60px;
+}
+
 @media only screen and (max-width : 1200px) {
 	form .input-addon > span:first-child {
 	  width: 100px; 
