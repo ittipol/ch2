@@ -669,7 +669,7 @@ class ProductController extends Controller
     // $this->setOgType('website');
 
     $this->setPageTitle($this->data['_modelData']['name']);
-    $this->setPageImage($model->getImage('list'));
+    $this->setPageImage($model->getImage());
     // $this->setOgProduct(array(
     //   'id' => $model->id, 
     //   'price' => $model->getPrice(),
