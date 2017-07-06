@@ -283,10 +283,8 @@ class AdvertisingController extends Controller
     $this->setData('branchLocations',json_encode($branchLocations));
     $this->setData('hasBranchLocation',$hasBranchLocation);
 
-    $this->setOgType('article');
-
     $this->setPageTitle($this->data['_modelData']['name']);
-    $this->setPageImage($model->getImage('list'));
+    $this->setPageImage($model->getImage());
 
     if(empty($model->description)) {
       $this->setPageDescription($model->name.' โฆษณาจาก '.$shop->name);
