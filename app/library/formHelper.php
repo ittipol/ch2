@@ -67,6 +67,10 @@ class FormHelper {
       case 'Contact':
         $data = $this->loadContact();
         break;
+
+      case 'TargetArea':
+        $data = $this->loadTargetArea();
+        break;
     }
 
     if($json) {
@@ -148,6 +152,23 @@ class FormHelper {
 
   }
 
+  public function loadTargetArea() {
+    $areas = $this->model->getRelatedData('TargetArea',array(
+      'fields' => array('province_id'/*,'district_area','sub_district_area'*/)
+    ));
+
+    if(empty($areas)) {
+      return array();
+    }
+
+    $targetAreas = array(); 
+    foreach ($areas as $area) {
+      $targetAreas['province_id'][] = $area->province_id;
+    }
+
+    return $targetAreas;
+  }
+
   public function loadFieldData($modelName,$options = array()) {
     $model = Service::loadModel($modelName);
 
@@ -211,6 +232,10 @@ class FormHelper {
 
     if(!empty(Input::old('Tagging'))) {
       $oldInput['Tagging'] = json_encode(Input::old('Tagging'));
+    }
+
+    if(!empty(Input::old('TargetArea'))) {
+      $oldInput['TargetArea'] = json_encode(Input::old('TargetArea'));
     }
 
     if(!empty(Input::old('Contact'))) {

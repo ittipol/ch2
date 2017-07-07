@@ -124,6 +124,7 @@ class FilterHelper {
       if($province->where('name','like',$word)->exists() || $district->where('name','like',$word)->exists() || $subDistrict->where('name','like',$word)->exists()) {
         $isAddress = true;
         array_push($or,array('lookups.address','like','%'.$word.'%'));
+        array_push($or,array('lookups.target_area','like','%'.$word.'%'));
         continue;
       }
 

@@ -13,12 +13,33 @@ class Word extends Model
 
   public function saveSpecial($value) {
 
+    // $tagIds = array();
+
+    // foreach ($value as $word) {
+    //   $this->checkAndSave($word);
+
+    //   $_word = $this->getDataByWord($word);
+
+    //   if(!empty($_word)) {
+    //     $tagIds[] = $_word->id;
+    //   }
+
+    // }
+    
+    // return $tagIds;
+
     $tagIds = array();
 
     foreach ($value as $word) {
-      $this->checkAndSave($word);
+      
+      $_word = $this->select('id')->where('word','like',$word);
 
-      $_word = $this->getDataByWord($word);
+      if($_word->exists()) {
+        $_word = $_word->first();
+      }else{
+        $_word = $this->newInstance();
+        $_word->fill(array('word' => $word))->save();
+      }
 
       if(!empty($_word)) {
         $tagIds[] = $_word->id;

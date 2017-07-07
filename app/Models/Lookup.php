@@ -8,7 +8,7 @@ use App\library\cache;
 class Lookup extends Model
 {
   protected $table = 'lookups';
-  protected $fillable = ['model','model_id','shop_id','shop_name','name','description','keyword_1','keyword_2','keyword_3','keyword_4','address','tags','active'];
+  protected $fillable = ['model','model_id','shop_id','shop_name','name','description','keyword_1','keyword_2','keyword_3','keyword_4','address','target_area','tags','active'];
 
   public $paginator = true;
 
@@ -88,19 +88,19 @@ class Lookup extends Model
   // Call Method
   // 'address' => '{{__getAddress}}'
 
-  public static function boot() {
+  // public static function boot() {
 
-    parent::boot();
+  //   parent::boot();
 
-    Lookup::saving(function($lookup){
+  //   Lookup::saving(function($lookup){
 
-      if(!$lookup->exists && empty($lookup->active)){
-        $lookup->active = 1;
-      }
+  //     if(!$lookup->exists && empty($lookup->active)){
+  //       $lookup->active = 1;
+  //     }
 
-    });
+  //   });
 
-  }
+  // }
 
   public function __saveRelatedData($model,$options = array()) {
 
@@ -137,12 +137,11 @@ class Lookup extends Model
       $value['tags'] = implode(' ',$_words);
     }
 
-    // $_addresses = $this->__getAddress($model);
-    // if(!empty($_addresses)) {
-    //   $value['address'] = $_addresses;
-    // }
-
-    $value['address'] = $this->__getAddress($model);
+    if(!empty($behavior['address']) && $behavior['address']) {
+      $value['address'] = $this->__getAddress($model);
+    }
+    
+    $value['target_area'] = $this->__getTargetArea($model);
 
     $options = array(
       'data' => $data,
@@ -449,7 +448,28 @@ class Lookup extends Model
 
     // return $this->_clean($address);
     return $address->getAddress();
+  }
 
+  public function __getTargetArea($model) {
+
+    $areas = $model->getRelatedData('TargetArea',array(
+      'fields' => array('province_id'/*,'district_area','sub_district_area'*/)
+    ));
+
+    if(empty($areas)) {
+      return null;
+    }
+
+    $targetAreas = null; 
+    foreach ($areas as $area) {
+      $targetAreas[] = Province::select('name')->find($area->province_id)->name;
+    }
+
+    if(!empty($targetAreas)) {
+      $targetAreas = implode(' ', $targetAreas);
+    }
+
+    return $targetAreas;
   }
 
   private function _replace($value,$key1,$key2) {

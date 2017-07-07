@@ -30,10 +30,6 @@ class RelateToBranch extends Model
     //       array('model_id','=',$model->id),
     //     ))->delete();
     //   }
-
-    //   if(empty($options['value']['branch_id'])) {
-    //     return true;
-    //   }
       
     //   foreach ($options['value']['branch_id'] as $branchId) {
         
@@ -45,23 +41,18 @@ class RelateToBranch extends Model
 
     //   }
 
-    // need always return true
-    return true;
-
     // }
 
     $shopRelateToModel = new ShopRelateTo;
 
-    if($model->exists) {
-      $this->where(array(
-        array('model','like',$model->modelName),
-        array('model_id','=',$model->id),
-      ))->delete();
-    }
-
     if(empty($options['value']['branch_id'])) {
       return true;
     }
+
+    $this->where(array(
+      array('model','like',$model->modelName),
+      array('model_id','=',$model->id),
+    ))->delete();
 
     $shopId = $shopRelateToModel
     ->select('shop_id')

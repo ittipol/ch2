@@ -751,22 +751,26 @@ class ShopController extends Controller
 
   public function addressSubmit() {
 
-    $model = request()->get('shop')->getRelatedData('Address',
+    $address = request()->get('shop')->getRelatedData('Address',
       array(
         'first' => true
       )
     );
 
-    if(empty($model)) {
-      $model = Service::loadModel('Address');
-      $model->model = 'Shop';
-      $model->model_id = request()->get('shopId');
+    if(empty($address)) {
+      $address = Service::loadModel('Address');
+      $address->model = 'Shop';
+      $address->model_id = request()->get('shopId');
     }
 
-    if($model->fill(request()->all())->save()) {
+    if($address->fill(request()->all())->save()) {
 
       // update lookup table
-      Service::loadModel('Lookup')->where('shop_id','=',$model->id)->update(['address' => $model->getAddress()]);
+      // Service::loadModel('Lookup')->where('shop_id','=',$address->model_id)->update(['address' => $address->getAddress()]);
+      Service::loadModel('Lookup')->where([
+        ['model','like',$address->model],
+        ['model_id','=',$address->model_id]
+      ])->update(['address' => $address->getAddress()]);
 
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('shop/'.request()->shopSlug.'/setting');

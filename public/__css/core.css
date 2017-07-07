@@ -442,3 +442,7 @@ h5 > img.provider-logo {
   background-color: #D50000;
   padding: 5px 10px;
 }
+
+#selected_target_area {
+	min-height: 60px;
+}

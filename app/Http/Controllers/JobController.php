@@ -323,7 +323,7 @@ class JobController extends Controller
     $this->setOgType('article');
 
     $this->setPageTitle($this->data['_modelData']['name']);
-    $this->setPageImage($model->getImage('list'));
+    $this->setPageImage($model->getImage());
 
     if(empty($model->description)) {
       $this->setPageDescription($model->name.' ตำแหน่งงานจาก '.$shop->name);
@@ -383,9 +383,8 @@ class JobController extends Controller
       'index' => 'careerTypes'
     ));
 
-    $model->formHelper->setData('branches',request()->get('shop')->getRelatedShopData('Branch'));
-
     $this->data = $model->formHelper->build();
+    $this->setData('provinces', Service::loadModel('Province')->getProvinceByRegion());
 
     return $this->view('pages.job.form.job_add');
   }
@@ -413,8 +412,8 @@ class JobController extends Controller
     $model = Service::loadModel('Job')->find($this->param['id']);
 
     $model->formHelper->loadData(array(
-      'models' => array('Image','Tagging'),
-      'json' => array('Image','Tagging')
+      'models' => array('Image','Tagging','TargetArea'),
+      'json' => array('Image','Tagging','TargetArea')
     ));
 
     $model->formHelper->loadFieldData('EmploymentType',array(
@@ -429,23 +428,25 @@ class JobController extends Controller
       'index' => 'careerTypes'
     ));
 
-    $relateToBranch = $model->getRelatedData('RelateToBranch',array(
-      'fields' => array('branch_id')
-    ));
+    // $relateToBranch = $model->getRelatedData('RelateToBranch',array(
+    //   'fields' => array('branch_id')
+    // ));
 
-    $branches = array();
-    if(!empty($relateToBranch)) {
-      foreach ($relateToBranch as $value) {
-        $branches['branch_id'][] = $value->branch->id;
-      }
-    }
+    // $branches = array();
+    // if(!empty($relateToBranch)) {
+    //   foreach ($relateToBranch as $value) {
+    //     $branches['branch_id'][] = $value->branch->id;
+    //   }
+    // }
 
     // Get Selected Branch
-    $model->formHelper->setFormData('RelateToBranch',$branches);
+    // $model->formHelper->setFormData('RelateToBranch',$branches);
+    
     // Get All branches in shop
-    $model->formHelper->setData('branches',request()->get('shop')->getRelatedShopData('Branch'));
+    // $model->formHelper->setData('branches',request()->get('shop')->getRelatedShopData('Branch'));
 
     $this->data = $model->formHelper->build();
+    $this->setData('provinces', Service::loadModel('Province')->getProvinceByRegion());
 
     return $this->view('pages.job.form.job_edit');
   }

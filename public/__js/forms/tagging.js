@@ -33,7 +33,7 @@ class Tagging {
 	setTags(tagJson) {
 		if (typeof tagJson != 'undefined'){
 
-			tagJson = JSON.parse(tagJson);
+			// tagJson = JSON.parse(tagJson);
 
 			for (let i = 0; i < tagJson.length; i++) {
 				this.createTagChip(tagJson[i]);

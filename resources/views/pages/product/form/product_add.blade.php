@@ -193,7 +193,7 @@
     const tagging = new Tagging();
     tagging.load();
     @if(!empty($_oldInput['Tagging']))
-      tagging.setTags('{!!$_oldInput['Tagging']!!}');
+      tagging.setTags({!!$_oldInput['Tagging']!!});
     @endif
 
     const form = new Form();

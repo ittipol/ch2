@@ -10,7 +10,7 @@ class Job extends Model
 {
   public $table = 'jobs';
   protected $fillable = ['employment_type_id','name','description','qualification','benefit','wage','career_type_id','recruitment','recruitment_custom_detail','created_by'];
-  protected $modelRelations = array('Image','Tagging','ShopRelateTo','RelateToBranch');
+  protected $modelRelations = array('Image','Tagging','ShopRelateTo','RelateToBranch','TargetArea');
   protected $directory = true;
 
   public $formHelper = true;

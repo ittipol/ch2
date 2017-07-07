@@ -36,6 +36,7 @@ class Shop extends Model
       'format' =>  array(
         'name' => '{{name}}'
       ),
+      'address' => true,
       'active' => 1
     ),
     'DataAccessPermission' => array(
