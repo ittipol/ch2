@@ -10,8 +10,8 @@ class Advertising extends Model
 {
   public $table = 'advertisings';
   protected $fillable = ['advertising_type_id','name','description','created_by'];
-  protected $modelRelations = array('Image','Tagging','ShopRelateTo','RelateToBranch');
-  protected $directory = true;
+  protected $modelRelations = array('Image','Tagging','ShopRelateTo','RelateToBranch','TargetArea');
+  // protected $directory = true;
 
   public $formHelper = true;
   public $modelData = true;

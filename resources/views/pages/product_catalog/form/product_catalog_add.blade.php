@@ -81,7 +81,7 @@
 
     <div class="form-row">
       <?php 
-        echo Form::label('_tags', 'แท๊กที่เกี่ยวข้องกับสินค้านี้');
+        echo Form::label('_tags', 'คำที่เกี่ยวข้องหรือสื่อถึงงแคตตาล็อกสินค้านี้');
       ?>
       <div id="_tags" class="tag"></div>
     </div>

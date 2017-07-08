@@ -724,6 +724,7 @@ class ProductController extends Controller
     $model = Service::loadModel('Product');
 
     $this->data = $model->formHelper->build();
+    $this->setData('provinces', Service::loadModel('Province')->getProvinceByRegion());
 
     $this->setPageTitle('เพิ่มสินค้า - '.request()->get('shop')->name);
 
@@ -759,10 +760,11 @@ class ProductController extends Controller
     $model = Service::loadModel('Product')->find($this->param['id']);
 
     $model->formHelper->loadData(array(
-      'json' => array('Image','Tagging')
+      'json' => array('Image','Tagging','TargetArea')
     ));
 
     $this->data = $model->formHelper->build();
+    $this->setData('provinces', Service::loadModel('Province')->getProvinceByRegion());
 
     $this->setPageTitle('แก้ไขสินค้า - '.request()->get('shop')->name);
 

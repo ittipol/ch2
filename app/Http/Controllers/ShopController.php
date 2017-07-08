@@ -766,11 +766,11 @@ class ShopController extends Controller
     if($address->fill(request()->all())->save()) {
 
       // update lookup table
-      // Service::loadModel('Lookup')->where('shop_id','=',$address->model_id)->update(['address' => $address->getAddress()]);
-      Service::loadModel('Lookup')->where([
-        ['model','like',$address->model],
-        ['model_id','=',$address->model_id]
-      ])->update(['address' => $address->getAddress()]);
+      Service::loadModel('Lookup')->where('shop_id','=',$address->model_id)->update(['address' => $address->getAddress(true)]);
+      // Service::loadModel('Lookup')->where([
+      //   ['model','like',$address->model],
+      //   ['model_id','=',$address->model_id]
+      // ])->update(['address' => $address->getAddress()]);
 
       MessageHelper::display('ข้อมูลถูกบันทึกแล้ว','success');
       return Redirect::to('shop/'.request()->shopSlug.'/setting');

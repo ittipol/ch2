@@ -44,9 +44,25 @@ class Address extends Model
     
   }
 
-  public function getAddress() {
+  public function getAddress($short = false,$zipCode = true) {
 
     $address = array();
+
+    if($short) {
+      if(!empty($this->subDistrict->name)) {
+        $address[] = $this->subDistrict->name;
+      }
+
+      if(!empty($this->district->name)) {
+        $address[] = $this->district->name;
+      }
+
+      if(!empty($this->province->name)) {
+        $address[] = $this->province->name;
+      }
+
+      return implode(' ', $address);
+    }
 
     if(!empty($this->address)) {
       $address[] = $this->address;
@@ -64,11 +80,47 @@ class Address extends Model
       $address[] = $this->province->name;
     }
 
-    if(!empty($this->district->zip_code)) {
+    if(!empty($this->district->zip_code) && $zipCode) {
       $address[] = $this->district->zip_code;
     }    
 
     return implode(' ', $address);
+
+  }
+
+  public function getProvinceName() {
+    if(empty($this->province->name)) {
+      return null;
+    }
+
+    return $this->province->name;
+  }
+
+  public function getDistrictName() {
+    if(empty($this->district->name)) {
+      return null;
+    }
+
+    return $this->district->name;
+  }
+
+  public function getSubDistrictName() {
+    if(empty($this->subDistrict->name)) {
+      return null;
+    }
+
+    return $this->subDistrict->name;
+  }
+
+  public function getLatLng() {
+
+    $geographic = array();
+    if(!empty($this->latitude) && !empty($this->latitude)) {
+      $geographic['latitude'] = $this->latitude;
+      $geographic['longitude'] = $this->longitude;
+    }
+
+    return $geographic;
 
   }
 
@@ -80,45 +132,28 @@ class Address extends Model
       $geographic['longitude'] = $this->longitude;
     }
 
-    $longAddress = '';
-    $shortAddress = '';
-    $subDistrictName = '';
-    $districtName = '';
-    $provinceName = '';
+    // $subDistrictName = '';
+    // $districtName = '';
+    // $provinceName = '';
 
-    if(!empty($this->address)) {
-      $longAddress = $this->address;
-    }
+    // if(!empty($this->subDistrict->name)) {
+    //   $subDistrictName = $this->subDistrict->name;
+    // }
 
-    if(!empty($this->subDistrict->name)) {
-      $subDistrictName = $this->subDistrict->name;
-      $shortAddress .= ' '.$this->subDistrict->name;
-    }
+    // if(!empty($this->district->name)) {
+    //   $districtName = $this->district->name;
+    // }
 
-    if(!empty($this->district->name)) {
-      $districtName = $this->district->name;
-      $shortAddress .= ' '.$this->district->name;
-    }
-
-    if(!empty($this->province->name)) {
-      $provinceName = $this->province->name;
-      $shortAddress .= ' '.$this->province->name;
-    }
-
-    $longAddress .= $shortAddress;
-
-    // if(!empty($this->address)) {
-    //   $longAddress = $this->address.$shortAddress;
-    // }else{
-    //   $longAddress = $shortAddress;
+    // if(!empty($this->province->name)) {
+    //   $provinceName = $this->province->name;
     // }
 
     return array(
-      '_province_name' => $provinceName,
-      '_district_name' => $districtName,
-      '_sub_district_name' => $subDistrictName,
-      '_short_address' => trim($shortAddress),
-      '_long_address' => trim($longAddress),
+      '_province_name' => $this->getProvinceName(),
+      '_district_name' => $this->getDistrictName(),
+      '_sub_district_name' => $this->getSubDistrictName(),
+      '_short_address' => $this->getAddress(true),
+      '_long_address' => $this->getAddress(),
       '_geographic' => !empty($geographic) ? json_encode($geographic) : ''
     );
     

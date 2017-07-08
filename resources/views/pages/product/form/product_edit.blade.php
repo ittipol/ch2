@@ -79,12 +79,60 @@
   <div class="form-section">
 
     <div class="title">
+      ระบุพื้นที่เป้าหมาย
+    </div>
+
+    <div class="form-row">
+      <a data-right-side-panel="1" data-right-side-panel-target="#target_area_panel"><img class="before-text-icon" src="/images/icons/plus-header.png">เพิ่มพื้นที่เป้าหมาย</a>
+
+      <div id="selected_target_area" class="space-top-20"></div>
+    
+      <div id="target_area_panel" class="right-size-panel">
+        <div class="right-size-panel-inner">
+
+          @foreach($provinces as $province)
+
+            <h4>{{$province['name']}}</h4>
+            <div class="line"></div>
+
+            <div class="row">
+            @foreach($province['data'] as $id => $name)
+              <div class="col-lg-4 col-sm-6 col-xs-12">
+
+                <label class="choice-box">
+                  <?php
+                    echo Form::checkbox('TargetArea[province_id][]', $id, null, array(
+                      'id' => 'province_area_chkbox_'.$id,
+                      'class' => 'target-area-chkbox',
+                      'data-name' => $name
+                    ));
+                  ?>
+                  <div class="inner">{{$name}}</div>
+                </label>
+
+              </div>
+            @endforeach
+            </div>
+
+          @endforeach
+
+          <div class="right-size-panel-close-button"></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="form-section">
+
+    <div class="title">
       แท๊ก
     </div>
 
     <div class="form-row">
       <?php 
-        echo Form::label('_tags', 'แท๊กที่เกี่ยวข้องกับสินค้านี้');
+        echo Form::label('_tags', 'คำที่เกี่ยวข้องหรือสื่อถึงสินค้านี้');
       ?>
       <div id="_tags" class="tag"></div>
     </div>
@@ -112,6 +160,10 @@
 
     const tagging = new Tagging();
     tagging.load({!!$_formData['Tagging']!!});
+
+    const targerArea = new TargetArea();
+    targerArea.load();
+    targerArea.setTags({!!$_formData['TargetArea']!!});
     
     const form = new Form();
     form.load();

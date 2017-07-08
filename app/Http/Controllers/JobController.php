@@ -412,7 +412,7 @@ class JobController extends Controller
     $model = Service::loadModel('Job')->find($this->param['id']);
 
     $model->formHelper->loadData(array(
-      'models' => array('Image','Tagging','TargetArea'),
+      // 'models' => array('Image','Tagging','TargetArea'),
       'json' => array('Image','Tagging','TargetArea')
     ));
 

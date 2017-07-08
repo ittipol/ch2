@@ -385,9 +385,10 @@ class AdvertisingController extends Controller
       'index' => 'advertisingTypes'
     ));
 
-    $model->formHelper->setData('branches',request()->get('shop')->getRelatedShopData('Branch'));
+    // $model->formHelper->setData('branches',request()->get('shop')->getRelatedShopData('Branch'));
 
     $this->data = $model->formHelper->build();
+    $this->setData('provinces', Service::loadModel('Province')->getProvinceByRegion());
 
     return $this->view('pages.advertising.form.advertising_add');
   }
@@ -415,8 +416,8 @@ class AdvertisingController extends Controller
     $model = Service::loadModel('Advertising')->find($this->param['id']);
 
     $model->formHelper->loadData(array(
-      'models' => array('Image','Tagging'),
-      'json' => array('Image','Tagging')
+      // 'models' => array('Image','Tagging'),
+      'json' => array('Image','Tagging','TargetArea')
     ));
 
     $model->formHelper->loadFieldData('AdvertisingType',array(
@@ -425,22 +426,23 @@ class AdvertisingController extends Controller
       'index' => 'advertisingTypes'
     ));
 
-    $relateToBranch = $model->getRelatedData('RelateToBranch',array(
-      'fields' => array('branch_id')
-    ));
+    // $relateToBranch = $model->getRelatedData('RelateToBranch',array(
+    //   'fields' => array('branch_id')
+    // ));
 
-    $branches = array();
-    if(!empty($relateToBranch)) {
-      foreach ($relateToBranch as $value) {
-        $branches['branch_id'][] = $value->branch->id;
-      }
-    }
+    // $branches = array();
+    // if(!empty($relateToBranch)) {
+    //   foreach ($relateToBranch as $value) {
+    //     $branches['branch_id'][] = $value->branch->id;
+    //   }
+    // }
 
-    $model->formHelper->setFormData('RelateToBranch',$branches);
+    // $model->formHelper->setFormData('RelateToBranch',$branches);
 
-    $model->formHelper->setData('branches',request()->get('shop')->getRelatedShopData('Branch'));
+    // $model->formHelper->setData('branches',request()->get('shop')->getRelatedShopData('Branch'));
 
     $this->data = $model->formHelper->build();
+    $this->setData('provinces', Service::loadModel('Province')->getProvinceByRegion());
 
     return $this->view('pages.advertising.form.advertising_edit');
   }

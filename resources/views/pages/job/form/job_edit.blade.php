@@ -140,7 +140,7 @@
 
     <div class="form-row">
       <?php 
-        echo Form::label('_tags', 'แท๊กที่เกี่ยวข้องกับงานนี้');
+        echo Form::label('_tags', 'คำที่เกี่ยวข้องหรือสื่อถึงงานนี้');
       ?>
       <div id="_tags" class="tag"></div>
     </div>
