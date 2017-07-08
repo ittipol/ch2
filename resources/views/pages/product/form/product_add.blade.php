@@ -51,26 +51,6 @@
 
     <div class="form-row">
       <?php 
-        echo Form::label('product_model', 'โมเดล');
-        echo Form::text('product_model', null, array(
-          'placeholder' => 'โมเดล',
-          'autocomplete' => 'off'
-        ));
-      ?>
-    </div>
-
-    <div class="form-row">
-      <?php 
-        echo Form::label('sku', 'SKU');
-        echo Form::text('sku', null, array(
-          'placeholder' => 'SKU',
-          'autocomplete' => 'off'
-        ));
-      ?>
-    </div>
-
-    <div class="form-row">
-      <?php 
         echo Form::label('description', 'รายละเอียดของสินค้า');
         echo Form::textarea('description');
       ?>
