@@ -564,16 +564,41 @@ class ShopController extends Controller
 
     if($model->fill($request->all())->save()) {
 
-      $slug = $model->getRelatedData('Slug',array(
-        'fields' => array('slug'),
-        'first' => true
-      ))->slug;
+      // $slug = $model->getRelatedData('Slug',array(
+      //   'fields' => array('slug'),
+      //   'first' => true
+      // ))->slug;
 
-      MessageHelper::display('บริษัท ร้านค้า หรือธุรกิจถูกเพิ่มแล้ว','success');
-      return Redirect::to(route('shop.overview', ['slug' => $slug]));
+      // MessageHelper::display('บริษัท ร้านค้า หรือธุรกิจถูกเพิ่มแล้ว','success');
+      // return Redirect::to(route('shop.overview', ['slug' => $slug]));
+
+      session()->flash('shop-create-success',$model->id);
+      return Redirect::to('shop/create/success');
     }
 
     return Redirect::back();
+  }
+
+  public function createSuccess() {
+
+    if(!session()->has('shop-create-success')) {
+      return Redirect::to('shop/create');
+    }
+
+    $url = new Url;
+
+    $shop = Service::loadModel('Shop')->find(session()->get('shop-create-success'));
+
+    $slug = $shop->getRelatedData('Slug',array(
+      'fields' => array('slug'),
+      'first' => true
+    ))->slug;
+
+    $this->setData('shopUrl',$url->url('shop/'.$slug));
+    $this->setData('addProductUrl',$url->url('shop/'.$slug.'/product/add'));
+
+    return $this->view('pages.shop.shop_create_success');
+
   }
 
   public function setting() {

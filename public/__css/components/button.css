@@ -61,3 +61,13 @@ a.button:hover {
 .icon-button-round.close-icon {
 	background-image: url(/images/icons/close-red.png);
 }
+
+.button-group > .button {
+	margin-bottom: 5px;
+}
+
+@media only screen and (max-width : 320px) {
+  .button-group > .button {
+  	width: 100%;
+  }
+}

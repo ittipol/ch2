@@ -302,8 +302,6 @@ class CheckoutController extends Controller
     }
 
     session()->flash('checkout-success',true);
-
-    // MessageHelper::display('ลงประกาศเรียบร้อยแล้ว','success');
     return Redirect::to('checkout/success');
 
   }

@@ -5,7 +5,7 @@
 
     <div class="container-header">
       <div class="row">
-        <div class="col-lg-7 col-sm-12">
+        <div class="col-sm-12">
           <div class="title">
             สร้างร้านค้า
           </div>
@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <div class="line space-top-bottom-30"></div>
+    <!-- <div class="line space-top-bottom-30"></div>
       
     <div class="row">
 
@@ -26,9 +26,9 @@
         <h3>ขายสินค้าและกำหนดโปรโมชั่น</h3>
         <p>ขายสินค้าและจัดการสินค้าของคุณ รวมถึงสร้างโปรโมชั่นเพื่อเพิ่มยอดขายของคุณ</p>
       </div>
-    </div>
+    </div> -->
 
-    <div class="line space-top-bottom-30"></div>
+    <!-- <div class="line space-top-bottom-30"></div> -->
 
     @include('components.form_error') 
 

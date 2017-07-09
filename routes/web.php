@@ -288,6 +288,8 @@ Route::get('shop/','ShopController@listView');
 Route::group(['middleware' => 'auth'], function () {
   Route::get('shop/create','ShopController@create')->name('shop.create');
   Route::post('shop/create','ShopController@creatingSubmit')->name('shop.create');
+
+  Route::get('shop/create/success','ShopController@createSuccess')->name('shop.create.success');
 });
 
 Route::group(['middleware' => ['shop','person.shop.permission']], function () {
@@ -311,7 +313,7 @@ Route::group(['middleware' => ['shop','person.shop.permission']], function () {
   // Route::get('shop/{shopSlug}/branch/{id}','BranchController@detail')->name('shop.branch.detail');
 });
 Route::group(['middleware' => ['auth','shop','person.shop.permission']], function () {
-  Route::get('shop/{shopSlug}/overview','ShopController@overview')->name('shop.overview');
+  // Route::get('shop/{shopSlug}/overview','ShopController@overview')->name('shop.overview');
   
   Route::get('shop/{shopSlug}/setting','ShopController@setting')->name('shop.setting');
 

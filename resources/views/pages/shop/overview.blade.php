@@ -25,7 +25,7 @@
   </div>
 </div>
 
-@include('pages.shop.layouts.header') 
+<!-- @include('pages.shop.layouts.header') -->
 
 <div class="shop-content-wrapper">
 
