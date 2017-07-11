@@ -666,18 +666,18 @@ class ProductController extends Controller
     $this->setData('avgScore',$model->productAvgScore());
     $this->setData('scoreList',$model->productScoreList());
 
-    // $this->setOgType('website');
+    $this->setOgType('product.item');
 
     $this->setPageTitle($this->data['_modelData']['name']);
     $this->setPageImage($model->getImage());
-    // $this->setOgProduct(array(
-    //   'id' => $model->id, 
-    //   'price' => $model->getPrice(),
-    //   'currency' => 'THB',
-    //   'availability' => 'available for order',
-    //   'condition' => 'new',
-    //   'category' => $this->data['_modelData']['category']
-    // ));
+    $this->setOgProduct(array(
+      'id' => $model->id, 
+      'price' => $model->getPrice(),
+      'currency' => 'THB',
+      'availability' => 'available for order',
+      'condition' => 'new',
+      'category' => $this->data['_modelData']['category']
+    ));
 
     if(empty($model->description)) {
       $this->setPageDescription($this->data['_modelData']['category'].' '.$model->name.' สินค้าจากร้าน '.$shop->name);
