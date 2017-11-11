@@ -135,7 +135,6 @@ class FormHelper {
     }
 
     return $words;
-
   }
 
   public function loadContact() {

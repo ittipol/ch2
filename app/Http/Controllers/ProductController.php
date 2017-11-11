@@ -520,7 +520,8 @@ class ProductController extends Controller
 
       $shippingMethods[] = array(
         'name' => $shippingServiceProvider->name,
-        'image' => $shippingServiceProvider->getLogo(),
+        // 'image' => $shippingServiceProvider->getLogo(),
+        'image' => null,
         'data' => $shippingMethod
       );
 
